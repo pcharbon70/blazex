@@ -23,6 +23,8 @@ evidence requirements.
 - Numbered planning streams in the order they are introduced.
 - Planning-stream indexes that define scope, status, dependencies, and future
   phase organization.
+- Indexed milestone-plan subdirectories when one planning stream spans multiple
+  roadmap milestones.
 - Future phase documents containing implementation tasks and completion
   evidence.
 - Explicit package, profile, integration-suite, and experiment ownership for
@@ -38,9 +40,9 @@ renumbered.
 
 ### Subdirectories
 
-- [01 — Browser host](01-browser-host/README.md) — scaffold for the first
-  implementation stream, covering the web-browser host described by the
-  current research and milestone synthesis.
+- [01 — Browser host](01-browser-host/README.md) — active first implementation
+  stream, beginning with the phased BH-00 product-boundary, catalog, and
+  acceptance-contract plan.
 
 ### Documents
 

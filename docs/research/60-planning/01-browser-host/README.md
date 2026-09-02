@@ -36,14 +36,15 @@ implementation milestones](../../20-notes/browser-host-implementation-milestones
   inquiries.
 - The eventual browser-stream completion gate.
 
-This directory is currently a scaffold only. No phases, implementation tasks,
-or completion claims have been defined yet.
+BH-00 now has an approved phase decomposition. Later browser milestones remain
+unplanned until their own phase decomposition is explicitly authorized. No
+implementation or completion claim follows from creating a plan.
 
 ## Index
 
 ### Subdirectories
 
-- None yet.
+- [BH-00 — Product Boundary, Catalog, and Acceptance Contract](bh-00-product-boundary-catalog-and-acceptance-contract/README.md) — six-phase plan that freezes vocabulary, product scope, catalog dispositions, quality budgets, and acceptance traceability before BH-01 implementation begins.
 
 ### Documents
 

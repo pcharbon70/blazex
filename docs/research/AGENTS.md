@@ -126,17 +126,21 @@ number.
 Each planning stream uses:
 
 1. a `README.md` with `kind: map` for scope, shared status rules,
-   dependencies, phase index, and the eventual roadmap completion gate;
+   dependencies, milestone or phase index, and the eventual roadmap completion
+   gate;
 2. one `kind: note` document per future phase, normally with
-   `maturity: developing`;
+   `maturity: developing`; a stream that spans multiple named roadmap
+   milestones groups each milestone under its own indexed subdirectory;
 3. links to the research notes and inquiries whose claims the plan tests; and
 4. completion evidence that remains unchecked until reproducible
    implementation evidence exists.
 
-Name planning-stream directories `<NN>-<descriptive-name>` and future phase
-documents `phase-<NN>-<descriptive-name>.md`. Phase numbering restarts within
-each stream. Do not create phase documents merely to populate a new planning
-scaffold; phase decomposition is a separate planning decision.
+Name planning-stream directories `<NN>-<descriptive-name>`. A single-roadmap
+stream may keep `phase-<NN>-<descriptive-name>.md` files directly in the stream.
+A multi-milestone stream uses `<milestone-id>-<descriptive-name>/README.md` plus
+phase files inside that milestone directory. Phase numbering restarts within
+each milestone plan. Do not create phase documents merely to populate a new
+planning scaffold; phase decomposition is a separate planning decision.
 
 When detailed phases are authorized, use a consistent phase, section, task,
 and subtask hierarchy. Every phase must end with an integration gate and a
