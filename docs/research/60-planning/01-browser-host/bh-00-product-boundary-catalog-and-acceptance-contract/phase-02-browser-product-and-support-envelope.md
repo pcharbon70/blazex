@@ -2,7 +2,7 @@
 title: "Phase 2 - Browser Product and Support Envelope"
 kind: note
 created: "2026-09-02"
-maturity: developing
+maturity: stable
 tags:
   - bh-00
   - browser
@@ -16,7 +16,7 @@ aliases:
 
 Back to milestone: [README](README.md)
 
-- [ ] 2 Phase - Browser Product and Support Envelope.
+- [x] 2 Phase - Browser Product and Support Envelope.
 
   Define exactly which browser product BlazeX intends to prove, what each
   rendering and server-integration claim means, and which prerequisites,
@@ -93,29 +93,29 @@ Back to milestone: [README](README.md)
       - [x] 2.3.2.2 Subtask - Define capability detection, incompatible-build, no-JavaScript, unsupported-browser, unavailable-runtime, network-loss, and server-loss fallback categories.
       - [x] 2.3.2.3 Subtask - Require every fallback to preserve bounded content, accessibility, security, diagnostics, retry, cleanup, and truthful support messaging.
 
-  - [ ] 2.4 Section - Phase 2 Integration Tests.
+  - [x] 2.4 Section - Phase 2 Integration Tests.
 
     Prove that support, rendering, profile, trust, deployment, and fallback
     records form one bounded browser-product envelope without claiming BH-01
     feasibility evidence.
 
-    - [ ] 2.4.1 Task - Validate support matrices and cross-record consistency.
+    - [x] 2.4.1 Task - Validate support matrices and cross-record consistency.
 
       Machine checks and scenario review must reject missing cells, contradictory
       mode definitions, adapter conflation, and unsupported implied guarantees.
 
-      - [ ] 2.4.1.1 Subtask - Validate every browser, toolchain, rendering mode, profile, server feature, deployment prerequisite, and fallback status against its declared vocabulary and evidence state.
-      - [ ] 2.4.1.2 Subtask - Exercise paper scenarios for Phoenix, Plug, headless, unsupported browser, missing cross-origin isolation, network loss, incompatible deployment, and no-JavaScript output.
-      - [ ] 2.4.1.3 Subtask - Audit the matrices for accidental native-host, full OTP, general Wasm AOT, WebAssembly Component Model, or .NET compatibility claims.
+      - [x] 2.4.1.1 Subtask - Validate every browser, toolchain, rendering mode, profile, server feature, deployment prerequisite, and fallback status against its declared vocabulary and evidence state.
+      - [x] 2.4.1.2 Subtask - Exercise paper scenarios for Phoenix, Plug, headless, unsupported browser, missing cross-origin isolation, network loss, incompatible deployment, and no-JavaScript output.
+      - [x] 2.4.1.3 Subtask - Audit the matrices for accidental native-host, full OTP, general Wasm AOT, WebAssembly Component Model, or .NET compatibility claims.
 
-    - [ ] 2.4.2 Task - Record completion evidence and deliver the phase.
+    - [x] 2.4.2 Task - Record completion evidence and deliver the phase.
 
       Phase completion requires reviewed product records and explicit unknowns,
       not successful local execution or speculative version recommendations.
 
-      - [ ] 2.4.2.1 Subtask - Record support-envelope revisions, matrix validation output, security review, deployment review, unresolved feasibility risks, and assumptions assigned to BH-01.
-      - [ ] 2.4.2.2 Subtask - Confirm no dependency was selected as supported, no runtime artifact was built, and no browser demonstration was counted as Phase 2 completion evidence.
-      - [ ] 2.4.2.3 Subtask - Complete one commit per coherent section and open the Phase 2 PR without starting the catalog inventory.
+      - [x] 2.4.2.1 Subtask - Record support-envelope revisions, matrix validation output, security review, deployment review, unresolved feasibility risks, and assumptions assigned to BH-01.
+      - [x] 2.4.2.2 Subtask - Confirm no dependency was selected as supported, no runtime artifact was built, and no browser demonstration was counted as Phase 2 completion evidence.
+      - [x] 2.4.2.3 Subtask - Complete one commit per coherent section and open the Phase 2 PR without starting the catalog inventory.
 
 ## Section delivery rule
 

@@ -2,7 +2,7 @@
 title: "Phase 2 Browser Product and Support Envelope Evidence"
 kind: note
 created: "2026-09-02"
-maturity: developing
+maturity: stable
 tags:
   - bh-00
   - browser
@@ -153,9 +153,108 @@ Every Section 2.3 trust, deployment, and fallback obligation is explicit in
 both prose and the machine-readable envelope. The policy fails closed without
 claiming that any production deployment currently satisfies it.
 
-## Remaining Phase 2 evidence
+## Section 2.4 — Integration and phase completion evidence
 
-- Section 2.4 integration and phase completion: pending.
+### Reproducible verification
+
+| Check | Command or method | Result |
+| --- | --- | --- |
+| Complete product-envelope matrix | `python3 validate_browser_product_envelope.py` | Passed: 5 browser configurations, 10 evidence classes, 11 toolchain inputs, 6 BH-01 records, 6 modes, 3 profiles, 12 capabilities, 9 trust boundaries, 12 deployment prerequisites, 7 fallbacks, 8 paper scenarios, and 5 forbidden claims. |
+| Envelope negative-path tests | `python3 -m unittest test_validate_browser_product_envelope.py` | Passed: 17 tests. |
+| Corpus structure and links | `python3 validate_archive.py` | Passed: 80 completed documents, 14 directories, 513 local links, and 28 source notes. |
+| Archive validator tests | `python3 -m unittest test_validate_archive.py` | Passed: 8 tests. |
+| Patch hygiene | `git diff --check` | Passed with no whitespace errors. |
+| Evidence-state audit | `jq` queries over every browser, toolchain, profile, scenario, forbidden claim, and non-evidence flag | Zero premature states or true evidence flags. |
+| Project/runtime absence | Search package, profile, JavaScript, integration, and experiment trees for Mix/JavaScript manifests, Elixir/JavaScript/TypeScript sources, Wasm modules, and BEAM files | Zero matches. |
+
+### Paper scenario review
+
+| Scenario | Expected outcome | Review result |
+| --- | --- | --- |
+| Phoenix browser-local | Browser owns execution; standalone DOM owns the surface; Phoenix revalidates remote commands. | Consistent with profile, mode, trust, and capability records; still unproven. |
+| Plug baseline | Standalone DOM plus Plug HTTP/security hooks; no Phoenix/LiveView closure or Phoenix-only capability. | Consistent; transitive dependency audit remains a BH-20 executable gate. |
+| Headless conformance | Deterministic semantic/event/effect/accessibility/disposal traces without browser/server dependencies. | Consistent; no visual or production support implied. |
+| Unsupported browser | `FB-UNSUPPORTED-BROWSER`; no runtime start, bounded output, honest alternatives, cleanup. | Consistent with unsupported status and fallback obligations. |
+| Missing cross-origin isolation | When the selected build requires it, `FB-CAPABILITY-UNAVAILABLE`; no policy bypass. | Consistent while isolation remains conditional pending BH-01. |
+| Network loss | Safe local behavior may continue; authoritative mutations fail closed or use idempotency-approved policy. | Consistent with command trust and retry boundaries. |
+| Incompatible deployment | `FB-INCOMPATIBLE-BUILD`; never attach mixed output, preserve safe content, bounded coherent reload. | Consistent with integrity, identity, replacement, and cleanup rules. |
+| No JavaScript | `FB-NO-JAVASCRIPT`; static/server output and ordinary host actions remain when declared. | Consistent; no empty mount or browser-local claim. |
+
+All eight scenarios are labeled `paper-reviewed-no-execution`; none is runtime
+or browser evidence.
+
+### Compatibility non-claim audit
+
+The validator requires five records to remain `forbidden`: automatic
+native-host support, full OTP support, general Elixir-to-Wasm AOT, WebAssembly
+Component Model delivery as the UI contract, and .NET compatibility. Text
+searches found these terms only in explicit non-claims, forbidden-claim rows,
+or the integration audit requirement. No matrix status implies them.
+
+### Security and deployment review
+
+The review confirms that all client state and execution remain untrusted at the
+server, every command follows authentication through audit/redacted result,
+and every fallback fails closed for authority and integrity. Every deployment
+prerequisite has one cell for each rendering mode. Cross-origin isolation,
+COOP/COEP, worker, and storage requirements remain conditional until BH-01
+selects and proves a runtime composition.
+
+### Evidence-state and scope audit
+
+Machine queries report:
+
+```text
+non_unsupported_browsers=0
+non_candidate_toolchains=0
+non_unproven_profiles=0
+non_paper_scenarios=0
+non_forbidden_claims=0
+phase_scope_true_values=0
+project_or_runtime_files=0
+```
+
+Phase 2 introduced policy documents, a JSON contract, and validation tooling
+only. No dependency is pinned/tested/supported; no Mix or JavaScript project,
+runtime artifact, component implementation, browser demonstration, or Phase 3
+catalog inventory exists.
+
+### Revision and review record
+
+- Section 2.1 browser/toolchain policy revision: `ce0ecc1`.
+- Section 2.2 rendering/profile revision: `f5c7b33`.
+- Section 2.3 trust/deployment/fallback revision: `e39bdba`.
+- Phase delivery: [PR #5](https://github.com/pcharbon70/blazex/pull/5), containing
+  one final commit for each of Sections 2.1 through 2.4.
+- Implementation, matrix, security, and deployment review: Codex under the
+  repository owner's instruction; the owner authorized one PR and immediate
+  merge for this phase.
+- Independent second-party review remains the Phase 6 BH-00 gate.
+
+### Risks and assumptions assigned to BH-01 or later gates
+
+- Resolve exact Popcorn, AtomVM, Elixir, OTP, Phoenix, LiveView,
+  LocalLiveView, Mix, JavaScript tooling, browser, and OS identities.
+- Determine whether the candidate build can reproduce and boot on the browser
+  rows, including mobile and constrained environments.
+- Inventory and decide every private API dependency and maintenance burden.
+- Resolve whether cross-origin isolation is required and compatible with
+  application assets, embedding, OAuth/payment, and third-party services.
+- Record artifacts, provenance, clean rebuild, security update, runtime subset,
+  payload, startup, memory, event, accessibility, and failure evidence.
+- Defer prerender/activation proof to BH-18 and Plug closure proof to BH-20.
+
+### Section result
+
+All local integration checks and paper scenarios pass. The records form one
+bounded browser-product envelope while preserving every feasibility unknown,
+and the single Phase 2 PR is open without Phase 3 catalog work. Section 2.4 and
+Phase 2 are complete.
+
+## Phase 2 delivery status
+
+- Complete in PR #5; later executable evidence remains assigned to the named
+  BH-01, BH-18, BH-20, and Phase 6 gates.
 
 ## Connections
 

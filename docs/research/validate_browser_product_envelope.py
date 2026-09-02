@@ -180,6 +180,31 @@ FALLBACK_OBLIGATIONS = {
     "cleanup",
     "truthful-support-message",
 }
+PAPER_SCENARIOS = {
+    "SCN-PHOENIX-BROWSER-LOCAL",
+    "SCN-PLUG-BASELINE",
+    "SCN-HEADLESS-CONFORMANCE",
+    "SCN-UNSUPPORTED-BROWSER",
+    "SCN-MISSING-CROSS-ORIGIN-ISOLATION",
+    "SCN-NETWORK-LOSS",
+    "SCN-INCOMPATIBLE-DEPLOYMENT",
+    "SCN-NO-JAVASCRIPT",
+}
+FORBIDDEN_CLAIMS = {
+    "CLAIM-NATIVE-HOST-SUPPORT",
+    "CLAIM-FULL-OTP",
+    "CLAIM-GENERAL-WASM-AOT",
+    "CLAIM-WASM-COMPONENT-MODEL",
+    "CLAIM-DOTNET-COMPATIBILITY",
+}
+PHASE_2_NON_EVIDENCE = {
+    "dependency_selected_as_supported",
+    "runtime_artifact_built",
+    "browser_demonstration_counted",
+    "mix_project_initialized",
+    "javascript_project_initialized",
+    "catalog_inventory_started",
+}
 
 
 def load_contract(path: Path = CONTRACT_PATH) -> dict[str, Any]:
@@ -593,6 +618,63 @@ def validate_section_2_3(contract: dict[str, Any], errors: list[str]) -> None:
         )
 
 
+def validate_section_2_4(contract: dict[str, Any], errors: list[str]) -> None:
+    """Validate integration scenarios, forbidden claims, and phase scope."""
+
+    scenarios = indexed_records(contract, "paper_scenarios", errors)
+    require_exact_ids(set(scenarios), PAPER_SCENARIOS, "paper scenarios", errors)
+    scenario_required = {
+        "id",
+        "profile",
+        "start_mode",
+        "conditions",
+        "expected_mode_or_fallback",
+        "expected_controls",
+        "expected_nonclaims",
+        "evidence_state",
+    }
+    outcomes = RENDERING_MODES | FALLBACK_CATEGORIES
+    for record_id, record in scenarios.items():
+        require_keys(record, scenario_required, record_id, errors)
+        if record.get("profile") not in PROFILES:
+            errors.append(f"{record_id}: profile must reference a declared profile")
+        if record.get("start_mode") not in RENDERING_MODES:
+            errors.append(f"{record_id}: start_mode must reference a rendering mode")
+        if record.get("expected_mode_or_fallback") not in outcomes:
+            errors.append(f"{record_id}: expected outcome must reference a mode or fallback")
+        if record.get("evidence_state") != "paper-reviewed-no-execution":
+            errors.append(f"{record_id}: evidence_state must remain paper-reviewed-no-execution")
+        for field in ("conditions", "expected_controls", "expected_nonclaims"):
+            value = record.get(field)
+            if not isinstance(value, list) or not value:
+                errors.append(f"{record_id}: {field} must be a non-empty array")
+
+    claims = indexed_records(contract, "forbidden_claims", errors)
+    require_exact_ids(set(claims), FORBIDDEN_CLAIMS, "forbidden claims", errors)
+    for record_id, record in claims.items():
+        require_keys(record, {"id", "status", "reason", "future_gate"}, record_id, errors)
+        if record.get("status") != "forbidden":
+            errors.append(f"{record_id}: status must remain forbidden")
+        for field in ("reason", "future_gate"):
+            if not isinstance(record.get(field), str) or not record.get(field):
+                errors.append(f"{record_id}: {field} must be a non-empty string")
+
+    non_evidence = contract.get("phase_2_non_evidence")
+    if not isinstance(non_evidence, dict):
+        errors.append("phase_2_non_evidence: must be an object")
+    else:
+        require_exact_ids(
+            set(non_evidence), PHASE_2_NON_EVIDENCE, "Phase 2 non-evidence", errors
+        )
+        for key, value in non_evidence.items():
+            if value is not False:
+                errors.append(f"phase_2_non_evidence: {key} must remain false")
+
+    risks = contract.get("unresolved_feasibility_risks")
+    if not isinstance(risks, list) or not risks:
+        errors.append("unresolved_feasibility_risks: must be a non-empty array")
+
+
 def validate_contract(contract: dict[str, Any]) -> list[str]:
     """Return deterministic validation errors for the product envelope."""
 
@@ -623,6 +705,8 @@ def validate_contract(contract: dict[str, Any]) -> list[str]:
         validate_section_2_2(contract, errors)
     if stage in STAGES[2:]:
         validate_section_2_3(contract, errors)
+    if stage == "complete":
+        validate_section_2_4(contract, errors)
     return errors
 
 
@@ -649,6 +733,11 @@ def summary(contract: dict[str, Any]) -> str:
             f", {len(contract['trust_boundaries'])} trust boundaries, "
             f"{len(contract['deployment_prerequisites'])} deployment prerequisites, "
             f"and {len(contract['fallback_categories'])} fallback categories"
+        )
+    if stage == "complete":
+        result += (
+            f", {len(contract['paper_scenarios'])} paper scenarios, and "
+            f"{len(contract['forbidden_claims'])} forbidden claims"
         )
     return result + " checked."
 

@@ -98,6 +98,30 @@ class BrowserProductEnvelopeValidatorTests(unittest.TestCase):
         errors = validate_contract(contract)
         self.assertTrue(any("missing fields: security" in item for item in errors))
 
+    def test_missing_paper_scenario_is_rejected(self) -> None:
+        contract = copy.deepcopy(self.contract)
+        contract["paper_scenarios"] = contract["paper_scenarios"][1:]
+        errors = validate_contract(contract)
+        self.assertTrue(any("missing ids: SCN-PHOENIX-BROWSER-LOCAL" in item for item in errors))
+
+    def test_paper_scenario_cannot_claim_execution(self) -> None:
+        contract = copy.deepcopy(self.contract)
+        contract["paper_scenarios"][0]["evidence_state"] = "executed"
+        errors = validate_contract(contract)
+        self.assertTrue(any("must remain paper-reviewed-no-execution" in item for item in errors))
+
+    def test_forbidden_claim_cannot_be_promoted(self) -> None:
+        contract = copy.deepcopy(self.contract)
+        contract["forbidden_claims"][0]["status"] = "supported"
+        errors = validate_contract(contract)
+        self.assertTrue(any("status must remain forbidden" in item for item in errors))
+
+    def test_phase_scope_rejects_runtime_artifact(self) -> None:
+        contract = copy.deepcopy(self.contract)
+        contract["phase_2_non_evidence"]["runtime_artifact_built"] = True
+        errors = validate_contract(contract)
+        self.assertTrue(any("runtime_artifact_built must remain false" in item for item in errors))
+
 
 if __name__ == "__main__":
     unittest.main()

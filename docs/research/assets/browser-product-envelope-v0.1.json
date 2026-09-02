@@ -1,7 +1,7 @@
 {
   "schema_version": "0.1.0",
   "contract_id": "BH00-BROWSER-ENVELOPE-0.1",
-  "completion_stage": "section-2.3",
+  "completion_stage": "complete",
   "evidence_state": "policy-only-unproven",
   "browser_status_vocabulary": [
     {
@@ -601,6 +601,138 @@
     "retry",
     "cleanup",
     "truthful-support-message"
+  ],
+  "paper_scenarios": [
+    {
+      "id": "SCN-PHOENIX-BROWSER-LOCAL",
+      "profile": "PROFILE-BROWSER-PHOENIX",
+      "start_mode": "MODE-BROWSER-LOCAL",
+      "conditions": ["candidate-browser-passes-feature-probes", "coherent-build", "authenticated-phoenix-adapter"],
+      "expected_mode_or_fallback": "MODE-BROWSER-LOCAL",
+      "expected_controls": ["browser-is-execution-host", "standalone-dom-owns-surface", "local-events-stay-local", "remote-commands-revalidated", "phoenix-capabilities-remain-planned-unproven"],
+      "expected_nonclaims": ["phoenix-is-not-execution-host", "liveview-adapter-not-required", "no-support-before-bh01"],
+      "evidence_state": "paper-reviewed-no-execution"
+    },
+    {
+      "id": "SCN-PLUG-BASELINE",
+      "profile": "PROFILE-BROWSER-PLUG",
+      "start_mode": "MODE-BROWSER-LOCAL",
+      "conditions": ["coherent-build", "host-session-csrf-authorization-hooks", "typed-http-command-handler"],
+      "expected_mode_or_fallback": "MODE-BROWSER-LOCAL",
+      "expected_controls": ["standalone-dom-only", "transitive-dependency-audit", "http-command-revalidation", "absent-push-realtime-upload-prerender-activation"],
+      "expected_nonclaims": ["no-phoenix", "no-liveview", "no-local-live-view", "no-inherited-phoenix-capabilities"],
+      "evidence_state": "paper-reviewed-no-execution"
+    },
+    {
+      "id": "SCN-HEADLESS-CONFORMANCE",
+      "profile": "PROFILE-HEADLESS",
+      "start_mode": "MODE-HEADLESS",
+      "conditions": ["portable-fixture", "declared-test-runtime", "deterministic-providers"],
+      "expected_mode_or_fallback": "MODE-HEADLESS",
+      "expected_controls": ["normalized-tree-event-effect-accessibility-disposal-traces", "no-browser-or-server-dependency"],
+      "expected_nonclaims": ["no-visual-browser-support", "no-native-control-support", "no-production-runtime-support"],
+      "evidence_state": "paper-reviewed-no-execution"
+    },
+    {
+      "id": "SCN-UNSUPPORTED-BROWSER",
+      "profile": "PROFILE-BROWSER-PHOENIX",
+      "start_mode": "MODE-BROWSER-LOCAL",
+      "conditions": ["browser-outside-current-matrix-or-required-probe-fails"],
+      "expected_mode_or_fallback": "FB-UNSUPPORTED-BROWSER",
+      "expected_controls": ["do-not-start-runtime", "preserve-bounded-content", "truthful-alternatives", "cleanup-partial-loader"],
+      "expected_nonclaims": ["no-silent-best-effort-boot", "no-false-upgrade-guarantee"],
+      "evidence_state": "paper-reviewed-no-execution"
+    },
+    {
+      "id": "SCN-MISSING-CROSS-ORIGIN-ISOLATION",
+      "profile": "PROFILE-BROWSER-PHOENIX",
+      "start_mode": "MODE-BROWSER-LOCAL",
+      "conditions": ["selected-bh01-build-requires-cross-origin-isolation", "coop-or-coep-missing-or-incompatible"],
+      "expected_mode_or_fallback": "FB-CAPABILITY-UNAVAILABLE",
+      "expected_controls": ["do-not-start-incompatible-runtime", "retain-static-or-separately-supported-mode", "header-and-asset-diagnostics"],
+      "expected_nonclaims": ["cross-origin-isolation-remains-conditional-until-bh01", "no-policy-bypass"],
+      "evidence_state": "paper-reviewed-no-execution"
+    },
+    {
+      "id": "SCN-NETWORK-LOSS",
+      "profile": "PROFILE-BROWSER-PHOENIX",
+      "start_mode": "MODE-BROWSER-LOCAL",
+      "conditions": ["runtime-already-active", "server-or-command-network-interrupted"],
+      "expected_mode_or_fallback": "FB-NETWORK-LOSS",
+      "expected_controls": ["safe-local-events-may-continue", "authoritative-actions-fail-closed", "idempotency-gated-queue", "bounded-reconnect", "accessible-status"],
+      "expected_nonclaims": ["no-automatic-safe-mutation-replay", "no-claim-data-was-saved"],
+      "evidence_state": "paper-reviewed-no-execution"
+    },
+    {
+      "id": "SCN-INCOMPATIBLE-DEPLOYMENT",
+      "profile": "PROFILE-BROWSER-PHOENIX",
+      "start_mode": "MODE-ACTIVATED",
+      "conditions": ["runtime-manifest-schema-asset-root-or-prerender-build-mismatch"],
+      "expected_mode_or_fallback": "FB-INCOMPATIBLE-BUILD",
+      "expected_controls": ["never-attach-mixed-build", "preserve-safe-output", "bounded-coherent-reload", "scoped-cache-cleanup", "diagnostic-build-identities"],
+      "expected_nonclaims": ["replacement-is-not-activation", "no-partial-boot"],
+      "evidence_state": "paper-reviewed-no-execution"
+    },
+    {
+      "id": "SCN-NO-JAVASCRIPT",
+      "profile": "PROFILE-BROWSER-PHOENIX",
+      "start_mode": "MODE-STATIC-FALLBACK",
+      "conditions": ["scripts-disabled-blocked-or-fail-before-loader"],
+      "expected_mode_or_fallback": "FB-NO-JAVASCRIPT",
+      "expected_controls": ["bounded-static-or-server-output", "ordinary-links-or-forms-when-declared", "interaction-limit-explanation"],
+      "expected_nonclaims": ["no-empty-mount", "no-client-retry-assumption", "no-browser-local-interactivity-claim"],
+      "evidence_state": "paper-reviewed-no-execution"
+    }
+  ],
+  "forbidden_claims": [
+    {
+      "id": "CLAIM-NATIVE-HOST-SUPPORT",
+      "status": "forbidden",
+      "reason": "browser profile and headless policy do not prove webview desktop native-process or native-control support",
+      "future_gate": "new-profile-decision-and-host-renderer-conformance-evidence"
+    },
+    {
+      "id": "CLAIM-FULL-OTP",
+      "status": "forbidden",
+      "reason": "AtomVM and browser builds require an explicitly tested BEAM module BIF NIF and port subset",
+      "future_gate": "bh01-supported-runtime-surface-record"
+    },
+    {
+      "id": "CLAIM-GENERAL-WASM-AOT",
+      "status": "forbidden",
+      "reason": "candidate path is AtomVM-in-Wasm executing BEAM artifacts rather than arbitrary Elixir application AOT",
+      "future_gate": "separate-compilation-target-research-and-decision"
+    },
+    {
+      "id": "CLAIM-WASM-COMPONENT-MODEL",
+      "status": "forbidden",
+      "reason": "WebAssembly Component Model packaging is not the BlazeX UI component contract",
+      "future_gate": "separate-packaging-abi-decision-without-ui-semantic-conflation"
+    },
+    {
+      "id": "CLAIM-DOTNET-COMPATIBILITY",
+      "status": "forbidden",
+      "reason": "BlazeX defines Elixir-native contracts and uses MudBlazor only as catalog and UX evidence",
+      "future_gate": "none-outside-product-goal"
+    }
+  ],
+  "phase_2_non_evidence": {
+    "dependency_selected_as_supported": false,
+    "runtime_artifact_built": false,
+    "browser_demonstration_counted": false,
+    "mix_project_initialized": false,
+    "javascript_project_initialized": false,
+    "catalog_inventory_started": false
+  },
+  "unresolved_feasibility_risks": [
+    "exact-popcorn-atomvm-elixir-otp-version-compatibility",
+    "liveview-local-live-view-private-api-maintenance",
+    "actual-browser-and-mobile-runtime-behavior",
+    "cross-origin-isolation-requirement-and-application-compatibility",
+    "payload-startup-memory-and-local-event-performance",
+    "clean-rebuild-and-artifact-reproducibility",
+    "actual-accessibility-platform-mapping",
+    "actual-prerender-activation-identity-and-effect-safety"
   ],
   "unresolved_bh01_inputs": [
     "exact-version-pins",
