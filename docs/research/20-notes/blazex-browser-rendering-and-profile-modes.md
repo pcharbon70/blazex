@@ -282,6 +282,7 @@ and acceptance records atomically.
 ## Connections
 
 - [Browser and toolchain support policy](blazex-browser-and-toolchain-support-policy.md)
+- [Browser trust, deployment, and fallback policy](blazex-browser-trust-deployment-and-fallback-policy.md)
 - [Canonical vocabulary](blazex-canonical-vocabulary.md)
 - [Repository ownership and dependency map](../10-maps/blazex-repository-ownership-and-dependency-map.md)
 - [ADR-0004 — Renderer backend separation](architecture-decisions/adr-0004-renderer-backend-separation.md)

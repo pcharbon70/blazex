@@ -72,6 +72,32 @@ class BrowserProductEnvelopeValidatorTests(unittest.TestCase):
         errors = validate_contract(contract)
         self.assertTrue(any("renderer must be standalone-dom" in item for item in errors))
 
+    def test_missing_trust_boundary_is_rejected(self) -> None:
+        contract = copy.deepcopy(self.contract)
+        contract["trust_boundaries"] = contract["trust_boundaries"][1:]
+        errors = validate_contract(contract)
+        self.assertTrue(any("missing ids: TRUST-PUBLIC-BOOTSTRAP" in item for item in errors))
+
+    def test_deployment_matrix_requires_every_mode(self) -> None:
+        contract = copy.deepcopy(self.contract)
+        del contract["deployment_prerequisites"][0]["mode_values"]["MODE-HEADLESS"]
+        errors = validate_contract(contract)
+        self.assertTrue(any("missing ids: MODE-HEADLESS" in item for item in errors))
+
+    def test_cross_origin_isolation_stays_conditional(self) -> None:
+        contract = copy.deepcopy(self.contract)
+        for prerequisite in contract["deployment_prerequisites"]:
+            if prerequisite["id"] == "DEP-CROSS-ORIGIN-ISOLATION":
+                prerequisite["mode_values"]["MODE-BROWSER-LOCAL"] = "required"
+        errors = validate_contract(contract)
+        self.assertTrue(any("MODE-BROWSER-LOCAL must remain conditional" in item for item in errors))
+
+    def test_fallback_without_security_behavior_is_rejected(self) -> None:
+        contract = copy.deepcopy(self.contract)
+        del contract["fallback_categories"][0]["security"]
+        errors = validate_contract(contract)
+        self.assertTrue(any("missing fields: security" in item for item in errors))
+
 
 if __name__ == "__main__":
     unittest.main()

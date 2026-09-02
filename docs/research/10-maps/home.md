@@ -84,6 +84,10 @@ provider, and remote adapter.
   modes](../20-notes/blazex-browser-rendering-and-profile-modes.md) — the
   observable static, server, prerender, local, activation, and headless
   contracts plus independent Phoenix, Plug, and headless capability matrices.
+- [BlazeX browser trust, deployment, and fallback
+  policy](../20-notes/blazex-browser-trust-deployment-and-fallback-policy.md) —
+  the browser/server authority boundary, command controls, deployment matrix,
+  and accessible fail-closed behavior for seven failure classes.
 - [BlazeX canonical
   vocabulary](../20-notes/blazex-canonical-vocabulary.md) — the BH-00
   normative meanings for architecture dimensions, product terms, rendering

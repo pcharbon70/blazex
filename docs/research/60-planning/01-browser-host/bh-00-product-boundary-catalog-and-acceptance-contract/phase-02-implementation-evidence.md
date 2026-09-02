@@ -105,9 +105,56 @@ Every Section 2.2 mode, profile, adapter, capability, and exclusion has one
 stable prose definition and one machine-validated matrix entry without
 claiming executable behavior.
 
+## Section 2.3 — Trust, deployment, and fallback boundaries
+
+### Delivered artifacts
+
+- [BlazeX browser trust, deployment, and fallback
+  policy](../../../20-notes/blazex-browser-trust-deployment-and-fallback-policy.md)
+  defines nine trust boundaries, the ordered remote-command validation path,
+  capability/origin/CSRF and content-integrity rules, secret exclusion,
+  diagnostic redaction, and absolute authorization non-equivalences.
+- A twelve-row deployment matrix covers HTTPS, MIME, CSP, cross-origin
+  isolation, COOP, COEP, caching, compression, integrity, workers, storage,
+  and transport across all six rendering modes.
+- Seven fallback records cover unavailable capability, incompatible build,
+  no JavaScript, unsupported browser, unavailable runtime, network loss, and
+  server loss. Every record contains bounded content, accessibility, security,
+  diagnostics, retry, cleanup, and truthful-support behavior.
+
+### Security and deployment result
+
+Public bootstrap/authentication projections, local events, local cache,
+capability results, and remote commands are explicitly non-authoritative.
+Server commands authenticate, enforce origin/CSRF, decode under limits,
+allowlist and schema-validate, reload trusted state, authorize, apply
+replay/idempotency policy, execute, audit, and return a public result. Local
+visibility, disabled state, cached state, optimistic state, or successful
+JavaScript/BEAM/Wasm execution can never substitute for that path.
+
+Cross-origin isolation, COOP, COEP, workers, and storage remain conditional
+until the selected runtime/modes prove their need. A missing conditional
+prerequisite selects a declared fallback rather than an unverified partial boot.
+
+### Section validation
+
+```text
+Browser product envelope validation passed: stage section-2.3; 5 browser configurations, 10 evidence classes, 11 toolchain inputs, and 6 BH-01 records, 6 rendering modes, 3 profiles, and 12 profile capabilities, 9 trust boundaries, 12 deployment prerequisites, and 7 fallback categories checked.
+Ran 13 tests ... OK
+```
+
+Negative tests reject a missing trust boundary, an incomplete per-mode
+deployment row, premature conversion of cross-origin isolation from conditional
+to required, and a fallback without security behavior.
+
+### Section result
+
+Every Section 2.3 trust, deployment, and fallback obligation is explicit in
+both prose and the machine-readable envelope. The policy fails closed without
+claiming that any production deployment currently satisfies it.
+
 ## Remaining Phase 2 evidence
 
-- Section 2.3 trust, deployment, and fallback boundaries: pending.
 - Section 2.4 integration and phase completion: pending.
 
 ## Connections

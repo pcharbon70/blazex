@@ -33,6 +33,7 @@ Source summaries belong in `30-sources`; unresolved workbenches belong in
 
 - [BlazeX browser and toolchain support policy](blazex-browser-and-toolchain-support-policy.md) — defines the BH-00 candidate browser windows, evidence classes, support and toolchain states, review cadence, and BH-01 records without claiming a working or supported stack.
 - [BlazeX browser rendering and profile modes](blazex-browser-rendering-and-profile-modes.md) — fixes the six output/activation contracts, three independent profile compositions, adapter ownership, capability matrix, and Plug transitive-dependency gate.
+- [BlazeX browser trust, deployment, and fallback policy](blazex-browser-trust-deployment-and-fallback-policy.md) — defines client/server authority, command revalidation, content and capability security, per-mode deployment prerequisites, and seven fail-closed fallback categories.
 - [BlazeX canonical vocabulary](blazex-canonical-vocabulary.md) — freezes the
   BH-00 meanings of runtime, host, renderer, capabilities, adapters, profiles,
   components, rendering modes, and WebAssembly terms, including forbidden

@@ -70,28 +70,28 @@ Back to milestone: [README](README.md)
       - [x] 2.2.2.2 Subtask - Publish a capability matrix for static delivery, bootstrap, sessions, CSRF, typed commands, pushes, realtime, uploads, navigation, prerender, activation, and telemetry by profile.
       - [x] 2.2.2.3 Subtask - State which Phoenix facilities are absent, optional, or separately replaceable in Plug and require a transitive-dependency audit for the Plug claim.
 
-  - [ ] 2.3 Section - Define trust, deployment, and fallback boundaries.
+  - [x] 2.3 Section - Define trust, deployment, and fallback boundaries.
 
     Product support must include the security and deployment conditions under
     which local browser execution is allowed, denied, or degraded intentionally.
 
-    - [ ] 2.3.1 Task - Establish the browser and server trust contract.
+    - [x] 2.3.1 Task - Establish the browser and server trust contract.
 
       Client code, state, manifests, commands, and capability results remain
       untrusted even when the component logic is authored in Elixir.
 
-      - [ ] 2.3.1.1 Subtask - Define public bootstrap state, trusted server state, local events, remote commands, authentication projection, authorization, validation, audit, and replay or idempotency boundaries.
-      - [ ] 2.3.1.2 Subtask - Define capability grants, origin and CSRF policy, content integrity, secret exclusion, command schema, server revalidation, and safe diagnostic redaction claims.
-      - [ ] 2.3.1.3 Subtask - State that local visibility, disabled state, cached state, or WebAssembly execution never constitutes authorization or trusted mutation evidence.
+      - [x] 2.3.1.1 Subtask - Define public bootstrap state, trusted server state, local events, remote commands, authentication projection, authorization, validation, audit, and replay or idempotency boundaries.
+      - [x] 2.3.1.2 Subtask - Define capability grants, origin and CSRF policy, content integrity, secret exclusion, command schema, server revalidation, and safe diagnostic redaction claims.
+      - [x] 2.3.1.3 Subtask - State that local visibility, disabled state, cached state, or WebAssembly execution never constitutes authorization or trusted mutation evidence.
 
-    - [ ] 2.3.2 Task - Establish deployment prerequisites and fallback policy.
+    - [x] 2.3.2 Task - Establish deployment prerequisites and fallback policy.
 
       Hosts need deterministic behavior when browser, header, transport, asset,
       runtime, or build requirements are unavailable or incompatible.
 
-      - [ ] 2.3.2.1 Subtask - Inventory HTTPS, MIME, CSP, cross-origin isolation, COOP/COEP, caching, compression, integrity, worker, storage, and transport prerequisites by claimed mode.
-      - [ ] 2.3.2.2 Subtask - Define capability detection, incompatible-build, no-JavaScript, unsupported-browser, unavailable-runtime, network-loss, and server-loss fallback categories.
-      - [ ] 2.3.2.3 Subtask - Require every fallback to preserve bounded content, accessibility, security, diagnostics, retry, cleanup, and truthful support messaging.
+      - [x] 2.3.2.1 Subtask - Inventory HTTPS, MIME, CSP, cross-origin isolation, COOP/COEP, caching, compression, integrity, worker, storage, and transport prerequisites by claimed mode.
+      - [x] 2.3.2.2 Subtask - Define capability detection, incompatible-build, no-JavaScript, unsupported-browser, unavailable-runtime, network-loss, and server-loss fallback categories.
+      - [x] 2.3.2.3 Subtask - Require every fallback to preserve bounded content, accessibility, security, diagnostics, retry, cleanup, and truthful support messaging.
 
   - [ ] 2.4 Section - Phase 2 Integration Tests.
 

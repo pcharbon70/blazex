@@ -1,7 +1,7 @@
 {
   "schema_version": "0.1.0",
   "contract_id": "BH00-BROWSER-ENVELOPE-0.1",
-  "completion_stage": "section-2.2",
+  "completion_stage": "section-2.3",
   "evidence_state": "policy-only-unproven",
   "browser_status_vocabulary": [
     {
@@ -419,6 +419,188 @@
     "standard-navigation",
     "telemetry-callback",
     "new-named-adapter-and-profile-for-any-additional-capability"
+  ],
+  "trust_boundaries": [
+    {
+      "id": "TRUST-PUBLIC-BOOTSTRAP",
+      "classification": "server-produced-public-untrusted-after-delivery",
+      "server_trust": "never-authoritative-on-return",
+      "controls": ["public-projection", "schema-build-root-session-binding", "expiry", "size-limit", "integrity-where-security-relevant", "server-revalidation"]
+    },
+    {
+      "id": "TRUST-SERVER-STATE",
+      "classification": "authoritative-server-domain-and-policy-state",
+      "server_trust": "trusted-only-while-held-or-reloaded-by-server",
+      "controls": ["no-implicit-serialization", "minimum-public-projection", "reload-before-mutation"]
+    },
+    {
+      "id": "TRUST-LOCAL-EVENT",
+      "classification": "untrusted-local-input",
+      "server_trust": "none",
+      "controls": ["normalize", "size-and-type-check", "active-generation-binding", "local-transition-or-typed-command-only"]
+    },
+    {
+      "id": "TRUST-REMOTE-COMMAND",
+      "classification": "untrusted-remote-request",
+      "server_trust": "none-until-full-server-validation-and-authorization",
+      "controls": ["authentication", "origin-csrf", "decode-limits", "schema-validation", "trusted-state-reload", "resource-action-authorization", "replay-idempotency", "audit", "public-result"]
+    },
+    {
+      "id": "TRUST-AUTH-PROJECTION",
+      "classification": "presentation-hint",
+      "server_trust": "never-authorization-evidence",
+      "controls": ["minimum-disclosure", "refresh-or-fail-closed", "server-policy-reload"]
+    },
+    {
+      "id": "TRUST-CAPABILITY-GRANT",
+      "classification": "root-generation-scoped-local-authority",
+      "server_trust": "never-server-authority",
+      "controls": ["least-privilege", "input-result-validation", "opaque-resource", "timeout-cancel", "redaction", "disposal"]
+    },
+    {
+      "id": "TRUST-CONTENT-ASSET",
+      "classification": "executable-or-content-supply-chain-input",
+      "server_trust": "trusted-only-after-build-and-integrity-policy",
+      "controls": ["https", "hash-and-build-manifest", "csp", "correct-mime", "version-mix-rejection", "provenance"]
+    },
+    {
+      "id": "TRUST-LOCAL-CACHE",
+      "classification": "attacker-modifiable-stale-potentially-sensitive",
+      "server_trust": "none",
+      "controls": ["field-classification", "secret-exclusion", "schema-version-expiry", "size-limit", "untrusted-restore"]
+    },
+    {
+      "id": "TRUST-DIAGNOSTIC",
+      "classification": "attacker-controlled-and-potentially-sensitive",
+      "server_trust": "none-without-validation",
+      "controls": ["structured-fields", "escaping", "size-rate-limit", "secret-token-pii-redaction", "audience-control", "correlation-id", "no-raw-payload-default"]
+    }
+  ],
+  "security_invariants": [
+    {"id": "SEC-CLIENT-UNTRUSTED", "claim": "browser bridge wasm memory local state events commands capability results and caches are untrusted by the server"},
+    {"id": "SEC-NO-SECRETS", "claim": "client reachability and artifacts contain no server secret or privileged configuration"},
+    {"id": "SEC-LOCAL-UI-NOT-AUTH", "claim": "visibility disabled state cached state validation and optimistic state never authorize"},
+    {"id": "SEC-WASM-NOT-AUTH", "claim": "successful javascript atomvm beam or webassembly execution never authorizes"},
+    {"id": "SEC-SERVER-REVALIDATION", "claim": "server reloads trusted identity resource policy and domain state before authoritative work"},
+    {"id": "SEC-COMMAND-ALLOWLIST", "claim": "client command names map to allowlisted handlers and never arbitrary modules or functions"},
+    {"id": "SEC-CONTENT-INTEGRITY", "claim": "mixed unknown or invalid runtime application and activation builds fail closed"},
+    {"id": "SEC-DIAGNOSTIC-REDACTION", "claim": "diagnostics are bounded escaped audience-scoped and redact secrets tokens pii and raw payloads"}
+  ],
+  "deployment_status_vocabulary": [
+    {"id": "DPS-REQUIRED", "status": "required", "meaning": "production mode cannot be supported without it"},
+    {"id": "DPS-CONDITIONAL", "status": "conditional", "meaning": "selected implementation or later mode evidence decides"},
+    {"id": "DPS-RECOMMENDED", "status": "recommended", "meaning": "performance or defense-in-depth expectation rather than semantic precondition"},
+    {"id": "DPS-TEST-PROVIDED", "status": "test-provided", "meaning": "supplied only by a headless fixture or test adapter"},
+    {"id": "DPS-NOT-APPLICABLE", "status": "not-applicable", "meaning": "no meaningful behavior in the mode"}
+  ],
+  "deployment_prerequisites": [
+    {"id": "DEP-HTTPS", "name": "https-authenticated-transport", "mode_values": {"MODE-STATIC-FALLBACK": "required", "MODE-SERVER-RENDERED": "required", "MODE-PRERENDERED": "required", "MODE-BROWSER-LOCAL": "required", "MODE-ACTIVATED": "required", "MODE-HEADLESS": "not-applicable"}},
+    {"id": "DEP-MIME", "name": "correct-html-javascript-wasm-mime", "mode_values": {"MODE-STATIC-FALLBACK": "required", "MODE-SERVER-RENDERED": "required", "MODE-PRERENDERED": "required", "MODE-BROWSER-LOCAL": "required", "MODE-ACTIVATED": "required", "MODE-HEADLESS": "not-applicable"}},
+    {"id": "DEP-CSP", "name": "content-security-policy", "mode_values": {"MODE-STATIC-FALLBACK": "recommended", "MODE-SERVER-RENDERED": "recommended", "MODE-PRERENDERED": "recommended", "MODE-BROWSER-LOCAL": "required", "MODE-ACTIVATED": "required", "MODE-HEADLESS": "not-applicable"}},
+    {"id": "DEP-CROSS-ORIGIN-ISOLATION", "name": "cross-origin-isolation", "mode_values": {"MODE-STATIC-FALLBACK": "not-applicable", "MODE-SERVER-RENDERED": "not-applicable", "MODE-PRERENDERED": "conditional", "MODE-BROWSER-LOCAL": "conditional", "MODE-ACTIVATED": "conditional", "MODE-HEADLESS": "not-applicable"}},
+    {"id": "DEP-COOP", "name": "cross-origin-opener-policy", "mode_values": {"MODE-STATIC-FALLBACK": "not-applicable", "MODE-SERVER-RENDERED": "not-applicable", "MODE-PRERENDERED": "conditional", "MODE-BROWSER-LOCAL": "conditional", "MODE-ACTIVATED": "conditional", "MODE-HEADLESS": "not-applicable"}},
+    {"id": "DEP-COEP", "name": "cross-origin-embedder-policy", "mode_values": {"MODE-STATIC-FALLBACK": "not-applicable", "MODE-SERVER-RENDERED": "not-applicable", "MODE-PRERENDERED": "conditional", "MODE-BROWSER-LOCAL": "conditional", "MODE-ACTIVATED": "conditional", "MODE-HEADLESS": "not-applicable"}},
+    {"id": "DEP-CACHE", "name": "cache-and-version-policy", "mode_values": {"MODE-STATIC-FALLBACK": "recommended", "MODE-SERVER-RENDERED": "recommended", "MODE-PRERENDERED": "required", "MODE-BROWSER-LOCAL": "required", "MODE-ACTIVATED": "required", "MODE-HEADLESS": "not-applicable"}},
+    {"id": "DEP-COMPRESSION", "name": "compression", "mode_values": {"MODE-STATIC-FALLBACK": "recommended", "MODE-SERVER-RENDERED": "recommended", "MODE-PRERENDERED": "recommended", "MODE-BROWSER-LOCAL": "recommended", "MODE-ACTIVATED": "recommended", "MODE-HEADLESS": "not-applicable"}},
+    {"id": "DEP-INTEGRITY", "name": "integrity-and-build-manifest", "mode_values": {"MODE-STATIC-FALLBACK": "recommended", "MODE-SERVER-RENDERED": "recommended", "MODE-PRERENDERED": "required", "MODE-BROWSER-LOCAL": "required", "MODE-ACTIVATED": "required", "MODE-HEADLESS": "not-applicable"}},
+    {"id": "DEP-WORKER", "name": "worker-availability-and-policy", "mode_values": {"MODE-STATIC-FALLBACK": "not-applicable", "MODE-SERVER-RENDERED": "not-applicable", "MODE-PRERENDERED": "conditional", "MODE-BROWSER-LOCAL": "conditional", "MODE-ACTIVATED": "conditional", "MODE-HEADLESS": "not-applicable"}},
+    {"id": "DEP-STORAGE", "name": "browser-storage", "mode_values": {"MODE-STATIC-FALLBACK": "not-applicable", "MODE-SERVER-RENDERED": "not-applicable", "MODE-PRERENDERED": "conditional", "MODE-BROWSER-LOCAL": "conditional", "MODE-ACTIVATED": "conditional", "MODE-HEADLESS": "not-applicable"}},
+    {"id": "DEP-TRANSPORT", "name": "http-or-realtime-transport", "mode_values": {"MODE-STATIC-FALLBACK": "not-applicable", "MODE-SERVER-RENDERED": "required", "MODE-PRERENDERED": "required", "MODE-BROWSER-LOCAL": "conditional", "MODE-ACTIVATED": "conditional", "MODE-HEADLESS": "test-provided"}}
+  ],
+  "fallback_categories": [
+    {
+      "id": "FB-CAPABILITY-UNAVAILABLE",
+      "trigger": "required capability missing denied revoked or failed probe",
+      "response": "declared alternative bounded disablement or static content",
+      "bounded_content": "preserve unaffected content and finite unavailable state",
+      "accessibility": "announce bounded status and expose operable alternative",
+      "security": "never fabricate or broaden a grant",
+      "diagnostics": "stable capability and failure-class code with redaction",
+      "retry": "user action or capability-change event only",
+      "cleanup": "cancel probes and effects and dispose partial resources",
+      "support_message": "capability unavailable or profile unsupported without implying browser support"
+    },
+    {
+      "id": "FB-INCOMPATIBLE-BUILD",
+      "trigger": "runtime manifest schema asset root or activation build mismatch",
+      "response": "block attach and mixed execution keep static output or request coherent reload",
+      "bounded_content": "preserve safe static or prerendered content",
+      "accessibility": "focusable reload action and nonrepeating status",
+      "security": "fail closed on integrity and identity",
+      "diagnostics": "expected and actual public build identifiers with correlation id",
+      "retry": "bounded coherent reload without loops",
+      "cleanup": "evict scoped incompatible cache and dispose old generation",
+      "support_message": "incompatible deployment build not a transient supported state"
+    },
+    {
+      "id": "FB-NO-JAVASCRIPT",
+      "trigger": "scripts disabled blocked or failed before loader",
+      "response": "serve declared static or server-rendered content and ordinary host actions",
+      "bounded_content": "never a permanently empty mount",
+      "accessibility": "content and action explanation available without script",
+      "security": "no weakened policy request to enable execution",
+      "diagnostics": "server-observable mode without client details",
+      "retry": "no client retry assumption",
+      "cleanup": "not-applicable-before-loader",
+      "support_message": "identify interaction requiring script without blaming user"
+    },
+    {
+      "id": "FB-UNSUPPORTED-BROWSER",
+      "trigger": "outside support matrix or failed required feature probe",
+      "response": "do not boot incompatible runtime preserve bounded content and list truthful alternatives",
+      "bounded_content": "safe static content or finite unavailable state",
+      "accessibility": "readable status and ordinary navigation",
+      "security": "do not bypass feature or policy controls",
+      "diagnostics": "browser row feature class profile and build without fingerprinting excess",
+      "retry": "reload or material environment change only",
+      "cleanup": "remove loader and terminate partial workers or frames",
+      "support_message": "unsupported configuration rather than false upgrade guarantee"
+    },
+    {
+      "id": "FB-RUNTIME-UNAVAILABLE",
+      "trigger": "artifact fetch integrity compile instantiate boot bundle or root start failure",
+      "response": "keep static content or separately supported server mode",
+      "bounded_content": "finite error or existing output",
+      "accessibility": "status and retry control preserve focus and avoid announcement loops",
+      "security": "never execute failed or unknown-integrity artifact",
+      "diagnostics": "stable layer failure code build and correlation id with redaction",
+      "retry": "bounded failure-class-specific backoff or user action",
+      "cleanup": "abort fetches terminate workers frames and partial generations",
+      "support_message": "runtime unavailable without claiming transparent recovery"
+    },
+    {
+      "id": "FB-NETWORK-LOSS",
+      "trigger": "asset or command transport interrupted unavailable or stale",
+      "response": "continue safe local behavior label stale data and fail unsafe commands closed",
+      "bounded_content": "retain current safe local or static surface",
+      "accessibility": "announce connection state changes without repetition",
+      "security": "queue only schema-and-idempotency-approved commands",
+      "diagnostics": "transport class attempt state and correlation id without credentials",
+      "retry": "connectivity-driven bounded backoff with jitter and cancellation",
+      "cleanup": "cancel requests and clear queues on disposal or logout",
+      "support_message": "offline or reconnecting with explicit feature limits"
+    },
+    {
+      "id": "FB-SERVER-LOSS",
+      "trigger": "authenticated session or server transport unavailable expired revoked or incompatible",
+      "response": "preserve safe state stop authoritative actions and require reconnect or authentication",
+      "bounded_content": "retain safe local or static content with disabled authoritative actions",
+      "accessibility": "announce disconnected or expired state and move focus only by policy",
+      "security": "revoke scoped grants tokens and fail mutations closed",
+      "diagnostics": "session-state class endpoint profile build and correlation id with redaction",
+      "retry": "explicit reconnect or authentication without credential loops",
+      "cleanup": "close transports cancel commands and resolve queues",
+      "support_message": "server unavailable or session expired without implying data was saved"
+    }
+  ],
+  "fallback_obligations": [
+    "bounded-content",
+    "accessibility",
+    "security",
+    "diagnostics",
+    "retry",
+    "cleanup",
+    "truthful-support-message"
   ],
   "unresolved_bh01_inputs": [
     "exact-version-pins",

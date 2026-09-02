@@ -120,6 +120,66 @@ PLUG_TRANSITIVE_EXCLUSIONS = {
     "phoenix-or-liveview-package-or-application",
     "local-live-view-package-or-application",
 }
+TRUST_BOUNDARIES = {
+    "TRUST-PUBLIC-BOOTSTRAP",
+    "TRUST-SERVER-STATE",
+    "TRUST-LOCAL-EVENT",
+    "TRUST-REMOTE-COMMAND",
+    "TRUST-AUTH-PROJECTION",
+    "TRUST-CAPABILITY-GRANT",
+    "TRUST-CONTENT-ASSET",
+    "TRUST-LOCAL-CACHE",
+    "TRUST-DIAGNOSTIC",
+}
+SECURITY_INVARIANTS = {
+    "SEC-CLIENT-UNTRUSTED",
+    "SEC-NO-SECRETS",
+    "SEC-LOCAL-UI-NOT-AUTH",
+    "SEC-WASM-NOT-AUTH",
+    "SEC-SERVER-REVALIDATION",
+    "SEC-COMMAND-ALLOWLIST",
+    "SEC-CONTENT-INTEGRITY",
+    "SEC-DIAGNOSTIC-REDACTION",
+}
+DEPLOYMENT_STATUSES = {
+    "DPS-REQUIRED": "required",
+    "DPS-CONDITIONAL": "conditional",
+    "DPS-RECOMMENDED": "recommended",
+    "DPS-TEST-PROVIDED": "test-provided",
+    "DPS-NOT-APPLICABLE": "not-applicable",
+}
+DEPLOYMENT_PREREQUISITES = {
+    "DEP-HTTPS",
+    "DEP-MIME",
+    "DEP-CSP",
+    "DEP-CROSS-ORIGIN-ISOLATION",
+    "DEP-COOP",
+    "DEP-COEP",
+    "DEP-CACHE",
+    "DEP-COMPRESSION",
+    "DEP-INTEGRITY",
+    "DEP-WORKER",
+    "DEP-STORAGE",
+    "DEP-TRANSPORT",
+}
+FALLBACK_CATEGORIES = {
+    "FB-CAPABILITY-UNAVAILABLE",
+    "FB-INCOMPATIBLE-BUILD",
+    "FB-NO-JAVASCRIPT",
+    "FB-UNSUPPORTED-BROWSER",
+    "FB-RUNTIME-UNAVAILABLE",
+    "FB-NETWORK-LOSS",
+    "FB-SERVER-LOSS",
+}
+FALLBACK_OBLIGATIONS = {
+    "bounded-content",
+    "accessibility",
+    "security",
+    "diagnostics",
+    "retry",
+    "cleanup",
+    "truthful-support-message",
+}
 
 
 def load_contract(path: Path = CONTRACT_PATH) -> dict[str, Any]:
@@ -427,6 +487,112 @@ def validate_section_2_2(contract: dict[str, Any], errors: list[str]) -> None:
         errors.append("plug_replaceability_rules: must be a non-empty array")
 
 
+def validate_section_2_3(contract: dict[str, Any], errors: list[str]) -> None:
+    """Validate trust, deployment-prerequisite, and fallback records."""
+
+    trust = indexed_records(contract, "trust_boundaries", errors)
+    require_exact_ids(set(trust), TRUST_BOUNDARIES, "trust boundaries", errors)
+    for record_id, record in trust.items():
+        require_keys(
+            record,
+            {"id", "classification", "server_trust", "controls"},
+            record_id,
+            errors,
+        )
+        for field in ("classification", "server_trust"):
+            if not isinstance(record.get(field), str) or not record.get(field):
+                errors.append(f"{record_id}: {field} must be a non-empty string")
+        if not isinstance(record.get("controls"), list) or not record.get("controls"):
+            errors.append(f"{record_id}: controls must be a non-empty array")
+
+    security = indexed_records(contract, "security_invariants", errors)
+    require_exact_ids(
+        set(security), SECURITY_INVARIANTS, "security invariants", errors
+    )
+    for record_id, record in security.items():
+        require_keys(record, {"id", "claim"}, record_id, errors)
+        if not isinstance(record.get("claim"), str) or not record.get("claim"):
+            errors.append(f"{record_id}: claim must be a non-empty string")
+
+    deployment_statuses = indexed_records(
+        contract, "deployment_status_vocabulary", errors
+    )
+    require_exact_ids(
+        set(deployment_statuses),
+        set(DEPLOYMENT_STATUSES),
+        "deployment statuses",
+        errors,
+    )
+    for record_id, expected_status in DEPLOYMENT_STATUSES.items():
+        record = deployment_statuses.get(record_id)
+        if not record:
+            continue
+        require_keys(record, {"id", "status", "meaning"}, record_id, errors)
+        if record.get("status") != expected_status:
+            errors.append(f"{record_id}: status must be {expected_status}")
+
+    prerequisites = indexed_records(contract, "deployment_prerequisites", errors)
+    require_exact_ids(
+        set(prerequisites),
+        DEPLOYMENT_PREREQUISITES,
+        "deployment prerequisites",
+        errors,
+    )
+    allowed_values = set(DEPLOYMENT_STATUSES.values())
+    for record_id, record in prerequisites.items():
+        require_keys(record, {"id", "name", "mode_values"}, record_id, errors)
+        values = record.get("mode_values")
+        if not isinstance(values, dict):
+            errors.append(f"{record_id}: mode_values must be an object")
+            continue
+        require_exact_ids(
+            set(values), RENDERING_MODES, f"{record_id} mode matrix", errors
+        )
+        for mode_id, value in values.items():
+            if value not in allowed_values:
+                errors.append(f"{record_id}: invalid value {value} for {mode_id}")
+
+    https_values = prerequisites.get("DEP-HTTPS", {}).get("mode_values", {})
+    for mode_id in RENDERING_MODES - {"MODE-HEADLESS"}:
+        if https_values.get(mode_id) != "required":
+            errors.append(f"DEP-HTTPS: {mode_id} must be required")
+    for prerequisite_id in {"DEP-CROSS-ORIGIN-ISOLATION", "DEP-COOP", "DEP-COEP"}:
+        values = prerequisites.get(prerequisite_id, {}).get("mode_values", {})
+        for mode_id in {"MODE-PRERENDERED", "MODE-BROWSER-LOCAL", "MODE-ACTIVATED"}:
+            if values.get(mode_id) != "conditional":
+                errors.append(f"{prerequisite_id}: {mode_id} must remain conditional")
+
+    fallbacks = indexed_records(contract, "fallback_categories", errors)
+    require_exact_ids(
+        set(fallbacks), FALLBACK_CATEGORIES, "fallback categories", errors
+    )
+    fallback_required = {
+        "id",
+        "trigger",
+        "response",
+        "bounded_content",
+        "accessibility",
+        "security",
+        "diagnostics",
+        "retry",
+        "cleanup",
+        "support_message",
+    }
+    for record_id, record in fallbacks.items():
+        require_keys(record, fallback_required, record_id, errors)
+        for field in fallback_required - {"id"}:
+            if not isinstance(record.get(field), str) or not record.get(field):
+                errors.append(f"{record_id}: {field} must be a non-empty string")
+
+    obligations = contract.get("fallback_obligations")
+    if not isinstance(obligations, list):
+        errors.append("fallback_obligations: must be an array")
+    else:
+        require_exact_ids(
+            set(obligations), FALLBACK_OBLIGATIONS, "fallback obligations", errors
+        )
+
+
 def validate_contract(contract: dict[str, Any]) -> list[str]:
     """Return deterministic validation errors for the product envelope."""
 
@@ -455,6 +621,8 @@ def validate_contract(contract: dict[str, Any]) -> list[str]:
     validate_section_2_1(contract, errors)
     if stage in STAGES[1:]:
         validate_section_2_2(contract, errors)
+    if stage in STAGES[2:]:
+        validate_section_2_3(contract, errors)
     return errors
 
 
@@ -475,6 +643,12 @@ def summary(contract: dict[str, Any]) -> str:
             f", {len(contract['rendering_modes'])} rendering modes, "
             f"{len(contract['profiles'])} profiles, and "
             f"{len(contract['profile_capabilities'])} profile capabilities"
+        )
+    if stage in STAGES[2:]:
+        result += (
+            f", {len(contract['trust_boundaries'])} trust boundaries, "
+            f"{len(contract['deployment_prerequisites'])} deployment prerequisites, "
+            f"and {len(contract['fallback_categories'])} fallback categories"
         )
     return result + " checked."
 
