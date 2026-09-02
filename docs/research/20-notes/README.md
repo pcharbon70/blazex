@@ -26,10 +26,15 @@ Source summaries belong in `30-sources`; unresolved workbenches belong in
 
 ### Subdirectories
 
-- None yet.
+- [Architecture decisions](architecture-decisions/README.md) — permanent,
+  impact-reviewed ADRs governing BlazeX product and implementation boundaries.
 
 ### Documents
 
+- [BlazeX canonical vocabulary](blazex-canonical-vocabulary.md) — freezes the
+  BH-00 meanings of runtime, host, renderer, capabilities, adapters, profiles,
+  components, rendering modes, and WebAssembly terms, including forbidden
+  equivalences and usage examples.
 - [Browser host implementation milestones](browser-host-implementation-milestones.md) — consolidates the runtime, renderer, Phoenix/Plug, MudBlazor-inspired
   catalog, resilience, activation, packaging, quality, and release work into
   24 outcome-based milestones for the first production host.

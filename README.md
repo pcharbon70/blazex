@@ -73,4 +73,6 @@ replaceable composition choices rather than core requirements.
 ## Research and planning
 
 The evidence base, architecture maps, design notes, and planning scaffold live
-under [`docs/research`](docs/research/README.md).
+under [`docs/research`](docs/research/README.md). The current package, profile,
+integration, and experiment ownership rules are collected in the
+[`BlazeX repository ownership and dependency map`](docs/research/10-maps/blazex-repository-ownership-and-dependency-map.md).

@@ -584,7 +584,7 @@ performance baseline.
 
 ### N2 — desktop webview middle profile
 
-Package the DOM backend in a Tauri-like shell. Validate native window close,
+Package the DOM renderer backend in a Tauri-like shell. Validate native window close,
 menus, files, clipboard, notifications, application updates, and security
 grants through the same capability protocol. Do not count DOM controls as
 native-control coverage.

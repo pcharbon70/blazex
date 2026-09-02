@@ -583,7 +583,7 @@ results cannot overwrite current state.
 ### 10.3 Charts
 
 Most chart geometry can be calculated in Elixir and represented as a renderer
-scene. The DOM backend can emit SVG; native backends can use vector/scene APIs.
+scene. The DOM renderer backend can emit SVG; native backends can use vector/scene APIs.
 Host effects remain useful for container measurement, pointer coordinates,
 and adaptive relayout. Charts need a separate accessibility strategy: title
 and description, tabular fallback, color-independent encoding,

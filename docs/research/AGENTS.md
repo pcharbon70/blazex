@@ -90,6 +90,7 @@ specified by the validator.
 | Directory index | Any archive directory's `README.md` | `templates/directory-readme.md` |
 | Conceptual map | `10-maps/` | `templates/map.md` |
 | Note | `20-notes/` | `templates/note.md` |
+| Architecture decision | `20-notes/architecture-decisions/` | `templates/architecture-decision.md` |
 | Source note | `30-sources/` | `templates/source.md` |
 | Inquiry | `40-inquiries/` | `templates/inquiry.md` |
 | Journal entry | `50-journal/` | `templates/journal.md` |
@@ -99,6 +100,30 @@ specified by the validator.
 Use lowercase kebab-case filenames, relative local links, subject-based names
 for notes/maps, question-based names for inquiries, date-prefixed names for
 journals, and author/year/short-title names for source notes.
+
+### Architecture decision records
+
+Durable BlazeX architecture decisions live under
+`20-notes/architecture-decisions/` so they remain inside the research corpus
+without adding a new top-level document role. Use `kind: note`; proposed records
+and records under review use `maturity: developing`, while accepted, rejected,
+deprecated, superseded, and archived historical records use `maturity: stable`.
+
+The decision lifecycle states are `proposed`, `under-review`, `accepted`,
+`rejected`, `deprecated`, `superseded`, and `archived`. Review is a visible
+state, not an undocumented interval. Archival removes a non-binding historical
+record from the active register but never deletes it or releases its ID for
+reuse.
+
+Name records `adr-<four-digit-id>-<descriptive-name>.md`. IDs are permanent and
+never reused. The body metadata records decision status, date, owners, scope,
+supersession, and review triggers. Every record names accountable architecture
+and product owner roles plus any specialist owners. Every accepted decision
+includes context, the decision, rationale, consequences, alternatives,
+compatibility, security, accessibility, packaging/dependency, and cross-backend
+impact, evidence basis, unresolved evidence, and change-control rules. Update
+affected roadmaps, catalogs, maps, package/profile boundaries, and acceptance
+records atomically.
 
 ## Producing research
 
@@ -126,17 +151,21 @@ number.
 Each planning stream uses:
 
 1. a `README.md` with `kind: map` for scope, shared status rules,
-   dependencies, phase index, and the eventual roadmap completion gate;
+   dependencies, milestone or phase index, and the eventual roadmap completion
+   gate;
 2. one `kind: note` document per future phase, normally with
-   `maturity: developing`;
+   `maturity: developing`; a stream that spans multiple named roadmap
+   milestones groups each milestone under its own indexed subdirectory;
 3. links to the research notes and inquiries whose claims the plan tests; and
 4. completion evidence that remains unchecked until reproducible
    implementation evidence exists.
 
-Name planning-stream directories `<NN>-<descriptive-name>` and future phase
-documents `phase-<NN>-<descriptive-name>.md`. Phase numbering restarts within
-each stream. Do not create phase documents merely to populate a new planning
-scaffold; phase decomposition is a separate planning decision.
+Name planning-stream directories `<NN>-<descriptive-name>`. A single-roadmap
+stream may keep `phase-<NN>-<descriptive-name>.md` files directly in the stream.
+A multi-milestone stream uses `<milestone-id>-<descriptive-name>/README.md` plus
+phase files inside that milestone directory. Phase numbering restarts within
+each milestone plan. Do not create phase documents merely to populate a new
+planning scaffold; phase decomposition is a separate planning decision.
 
 When detailed phases are authorized, use a consistent phase, section, task,
 and subtask hierarchy. Every phase must end with an integration gate and a

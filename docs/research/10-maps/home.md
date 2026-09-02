@@ -51,6 +51,10 @@ provider, and remote adapter.
 
 ## Topic map
 
+- [BlazeX repository ownership and dependency
+  map](blazex-repository-ownership-and-dependency-map.md) — enumerates all
+  current monorepo owners, allowed dependency directions, profile
+  compositions, invalid edges, and experiment promotion rules.
 - [Host-neutral and native-renderer
   architecture](host-neutral-and-native-renderer-architecture.md) — routes
   through non-web Wasm, embedded runtimes, semantic UI, renderer protocols,
@@ -68,6 +72,14 @@ provider, and remote adapter.
 
 ## Main synthesis
 
+- [Architecture decision
+  register](../20-notes/architecture-decisions/README.md) — the permanent BH-00
+  decision IDs, accepted boundaries, ownership, impact analysis, review
+  triggers, and supersession workflow.
+- [BlazeX canonical
+  vocabulary](../20-notes/blazex-canonical-vocabulary.md) — the BH-00
+  normative meanings for architecture dimensions, product terms, rendering
+  modes, WebAssembly terms, and support language.
 - [Browser host implementation
   milestones](../20-notes/browser-host-implementation-milestones.md) — the
   consolidated BH-00–BH-23 delivery program for the browser profile, spanning

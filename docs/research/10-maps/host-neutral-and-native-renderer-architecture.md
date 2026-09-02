@@ -23,6 +23,18 @@ renderer target, with a webview shell retained as an intermediate profile.
 
 ## Start here
 
+- [Architecture decision
+  register](../20-notes/architecture-decisions/README.md) — records the
+  accepted host-neutral kernel, semantic UI, effects, renderer, server,
+  profile, native-proof, and non-.NET-compatibility boundaries.
+- [BlazeX canonical
+  vocabulary](../20-notes/blazex-canonical-vocabulary.md) — fixes the meanings
+  of runtime, execution host, renderer, capability provider, server adapter,
+  shell, profile, and portable component contract used by this map.
+- [BlazeX repository ownership and dependency
+  map](blazex-repository-ownership-and-dependency-map.md) — maps those
+  dimensions onto the current packages and profiles and records forbidden
+  dependency edges.
 - [Browser host implementation
   milestones](../20-notes/browser-host-implementation-milestones.md) applies
   the host-neutral constraints to the first production host while keeping the

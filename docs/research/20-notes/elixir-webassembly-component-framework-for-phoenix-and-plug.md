@@ -873,7 +873,7 @@ Hologram demonstrates feasibility, but this abandons the explicit Wasm goal and 
 
 **Decision:** do not adopt as BlazeX's core; monitor and learn from it.
 
-### Option E — use JavaScript framework islands hosted by Phoenix
+### Option E — use JavaScript framework islands integrated with Phoenix
 
 LiveVue, LiveSvelte, hooks, and custom elements already solve local state with mature browser ecosystems. This is the lowest technical risk when “Elixir in the browser” is not a hard requirement.
 
@@ -1004,7 +1004,7 @@ flowchart TB
       Bundle --> Manifest
     end
 
-    subgraph Host[Phoenix or Plug host]
+    subgraph ServerAdapter[Phoenix or Plug server adapter]
       Static[Immutable runtime and app assets]
       Boot[Bootstrap props/session token]
       Command[Validated command endpoints]
@@ -1017,7 +1017,7 @@ flowchart TB
       VM[Shared AtomVM.wasm]
       Views[Local view processes]
       Renderer[LiveView renderer adapter]
-      Effects[Browser capability/effect host]
+      Effects[Browser capability provider]
       DOM[DOM]
       Loader --> Frame --> VM --> Views --> Renderer --> DOM
       Views <--> Effects
