@@ -1,2 +1,13 @@
 __pycache__/
 *.py[cod]
+
+# Elixir projects in packages and profiles
+**/_build/
+**/deps/
+**/cover/
+**/doc/
+erl_crash.dump
+
+# JavaScript packages
+**/node_modules/
+**/dist/

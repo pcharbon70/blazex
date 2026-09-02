@@ -52,6 +52,7 @@ frameworks.
 30-sources/     Reading notes and bibliographic records
 40-inquiries/   Active questions and research workbenches
 50-journal/     Dated observations and research-session evidence
+60-planning/    Numbered implementation roadmaps and phase evidence
 90-archive/     Inactive or superseded material worth retaining
 assets/         Images, PDFs, diagrams, datasets, and attachments
 templates/      Starting points for documents and directory indexes
@@ -92,6 +93,8 @@ specified by the validator.
 | Source note | `30-sources/` | `templates/source.md` |
 | Inquiry | `40-inquiries/` | `templates/inquiry.md` |
 | Journal entry | `50-journal/` | `templates/journal.md` |
+| Planning-stream index | `60-planning/<NN>-<name>/README.md` | `templates/directory-readme.md` |
+| Implementation phase | `60-planning/<NN>-<name>/` | `templates/note.md` |
 
 Use lowercase kebab-case filenames, relative local links, subject-based names
 for notes/maps, question-based names for inquiries, date-prefixed names for
@@ -112,6 +115,34 @@ Prefer official specifications, source trees, release notes, and project
 documentation. Record versions, revisions, commands, output, and limitations.
 Do not treat search snippets as evidence for detailed claims. Include negative
 findings, compatibility limits, and unresolved questions.
+
+## Producing implementation plans
+
+Implementation roadmaps live in `60-planning/`. Each planning stream uses the
+next unused two-digit directory prefix so its introduction order remains
+visible. Never renumber an existing stream or reuse an archived stream's
+number.
+
+Each planning stream uses:
+
+1. a `README.md` with `kind: map` for scope, shared status rules,
+   dependencies, phase index, and the eventual roadmap completion gate;
+2. one `kind: note` document per future phase, normally with
+   `maturity: developing`;
+3. links to the research notes and inquiries whose claims the plan tests; and
+4. completion evidence that remains unchecked until reproducible
+   implementation evidence exists.
+
+Name planning-stream directories `<NN>-<descriptive-name>` and future phase
+documents `phase-<NN>-<descriptive-name>.md`. Phase numbering restarts within
+each stream. Do not create phase documents merely to populate a new planning
+scaffold; phase decomposition is a separate planning decision.
+
+When detailed phases are authorized, use a consistent phase, section, task,
+and subtask hierarchy. Every phase must end with an integration gate and a
+completion-evidence checklist. A research conclusion, stub, compilation
+result, or happy-path demonstration is not completed implementation evidence
+unless it satisfies the phase's stated gate.
 
 ## Verification
 

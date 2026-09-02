@@ -68,6 +68,11 @@ provider, and remote adapter.
 
 ## Main synthesis
 
+- [Browser host implementation
+  milestones](../20-notes/browser-host-implementation-milestones.md) — the
+  consolidated BH-00–BH-23 delivery program for the browser profile, spanning
+  feasibility, platform foundations, the MudBlazor-inspired catalog,
+  production hardening, and browser 1.0.
 - [Host-neutral BlazeX architecture and native control
   backends](../20-notes/host-neutral-blazex-architecture-and-native-control-backends.md) —
   the authoritative architecture amendment: semantic render tree, independent
