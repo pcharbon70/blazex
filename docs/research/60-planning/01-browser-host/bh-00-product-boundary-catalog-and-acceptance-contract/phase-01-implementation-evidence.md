@@ -72,9 +72,53 @@ outer compositions, standalone DOM remains independent from LiveView, the Plug
 graph excludes Phoenix/LiveView transitively, and future native or non-browser
 packages remain illustrative.
 
+## Section 1.3 — Durable architecture decision governance
+
+### Delivered artifacts
+
+- The [architecture decision
+  register](../../../20-notes/architecture-decisions/README.md) assigns eight
+  permanent IDs to the BH-00 architecture baseline and records every decision
+  as accepted.
+- [ADR-0001](../../../20-notes/architecture-decisions/adr-0001-host-neutral-semantic-component-kernel.md),
+  [ADR-0002](../../../20-notes/architecture-decisions/adr-0002-versioned-semantic-ui-tree.md),
+  [ADR-0003](../../../20-notes/architecture-decisions/adr-0003-host-neutral-effects-capabilities-and-resources.md),
+  [ADR-0004](../../../20-notes/architecture-decisions/adr-0004-renderer-backend-separation.md),
+  [ADR-0005](../../../20-notes/architecture-decisions/adr-0005-server-adapter-and-trust-boundary.md),
+  [ADR-0006](../../../20-notes/architecture-decisions/adr-0006-profile-composition.md),
+  [ADR-0007](../../../20-notes/architecture-decisions/adr-0007-native-control-portability-gate.md),
+  and [ADR-0008](../../../20-notes/architecture-decisions/adr-0008-no-dotnet-compatibility-contract.md)
+  record scope, owners, status, rationale, consequences, alternatives,
+  compatibility, security, accessibility, packaging, cross-backend impact,
+  unresolved evidence, and supersession metadata.
+- The reusable [ADR
+  template](../../../templates/architecture-decision.md) and corpus governance
+  rules establish one durable location and format for later decisions.
+
+### Governance and review method
+
+Decision IDs are permanent and never reused. Proposed, under-review, accepted,
+rejected, deprecated, superseded, and archived states preserve history.
+Acceptance requires named architecture, product, and specialist role owners,
+linked evidence, the complete impact review, resolved blocking findings, and a
+register update. A material change supersedes an accepted ADR rather than
+silently rewriting it.
+
+Changes to a decision update affected roadmaps, catalog and support records,
+maps, package/profile boundaries, schemas, provenance records, and acceptance
+evidence in the same reviewed change. Review is triggered when executable
+evidence contradicts an assumption, an architecture axis is added, a support
+promise changes, an impact changes, or a forbidden dependency is proposed.
+
+### Section result
+
+Every boundary assumed by later BH-00 phases now has a permanent decision ID,
+accepted status, accountable role owners, explicit impact analysis, unresolved
+proof obligations, and a review/supersession path. The records describe the
+architecture baseline without claiming that runtime or component code exists.
+
 ## Remaining Phase 1 evidence
 
-- Section 1.3 architecture decision governance evidence: pending.
 - Section 1.4 integration and phase completion evidence: pending.
 
 ## Connections

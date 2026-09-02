@@ -30,6 +30,8 @@ are not completed archive documents until copied and filled in.
 
 ### Templates
 
+- [Architecture decision template](architecture-decision.md) — a permanent,
+  impact-reviewed ADR with explicit status and supersession.
 - [Directory README template](directory-readme.md) — an exhaustive local inventory.
 - [Inquiry template](inquiry.md) — an active question and research workbench.
 - [Journal template](journal.md) — a dated research or experiment record.

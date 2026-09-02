@@ -90,6 +90,7 @@ specified by the validator.
 | Directory index | Any archive directory's `README.md` | `templates/directory-readme.md` |
 | Conceptual map | `10-maps/` | `templates/map.md` |
 | Note | `20-notes/` | `templates/note.md` |
+| Architecture decision | `20-notes/architecture-decisions/` | `templates/architecture-decision.md` |
 | Source note | `30-sources/` | `templates/source.md` |
 | Inquiry | `40-inquiries/` | `templates/inquiry.md` |
 | Journal entry | `50-journal/` | `templates/journal.md` |
@@ -99,6 +100,30 @@ specified by the validator.
 Use lowercase kebab-case filenames, relative local links, subject-based names
 for notes/maps, question-based names for inquiries, date-prefixed names for
 journals, and author/year/short-title names for source notes.
+
+### Architecture decision records
+
+Durable BlazeX architecture decisions live under
+`20-notes/architecture-decisions/` so they remain inside the research corpus
+without adding a new top-level document role. Use `kind: note`; proposed records
+and records under review use `maturity: developing`, while accepted, rejected,
+deprecated, superseded, and archived historical records use `maturity: stable`.
+
+The decision lifecycle states are `proposed`, `under-review`, `accepted`,
+`rejected`, `deprecated`, `superseded`, and `archived`. Review is a visible
+state, not an undocumented interval. Archival removes a non-binding historical
+record from the active register but never deletes it or releases its ID for
+reuse.
+
+Name records `adr-<four-digit-id>-<descriptive-name>.md`. IDs are permanent and
+never reused. The body metadata records decision status, date, owners, scope,
+supersession, and review triggers. Every record names accountable architecture
+and product owner roles plus any specialist owners. Every accepted decision
+includes context, the decision, rationale, consequences, alternatives,
+compatibility, security, accessibility, packaging/dependency, and cross-backend
+impact, evidence basis, unresolved evidence, and change-control rules. Update
+affected roadmaps, catalogs, maps, package/profile boundaries, and acceptance
+records atomically.
 
 ## Producing research
 

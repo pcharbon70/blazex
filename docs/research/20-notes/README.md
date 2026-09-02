@@ -26,7 +26,8 @@ Source summaries belong in `30-sources`; unresolved workbenches belong in
 
 ### Subdirectories
 
-- None yet.
+- [Architecture decisions](architecture-decisions/README.md) — permanent,
+  impact-reviewed ADRs governing BlazeX product and implementation boundaries.
 
 ### Documents
 

@@ -213,6 +213,7 @@ do not acquire its implementation types.
 
 ## Connections
 
+- [Architecture decision register](../20-notes/architecture-decisions/README.md) — gives the permanent rationale, ownership, impact analysis, and change control behind this map.
 - [BlazeX canonical vocabulary](../20-notes/blazex-canonical-vocabulary.md) — defines every architecture term used by this map.
 - [Host-neutral BlazeX architecture and native control backends](../20-notes/host-neutral-blazex-architecture-and-native-control-backends.md) — supplies the semantic and cross-renderer rationale.
 - [Browser host implementation milestones](../20-notes/browser-host-implementation-milestones.md) — assigns work to these repository boundaries.

@@ -68,28 +68,28 @@ Back to milestone: [README](README.md)
       - [x] 1.2.2.2 Subtask - Require the Plug profile to exclude Phoenix, LiveView, LocalLiveView, and the LiveView DOM adapter directly and transitively.
       - [x] 1.2.2.3 Subtask - Define experiment promotion, retirement, and evidence-extraction rules using the BH-02 native renderer spike as the first bounded example.
 
-  - [ ] 1.3 Section - Establish durable architecture decision governance.
+  - [x] 1.3 Section - Establish durable architecture decision governance.
 
     Convert accepted research conclusions into identifiable decisions that can
     be reviewed, superseded, and traced without silently rewriting history.
 
-    - [ ] 1.3.1 Task - Inventory and identify the BH-00 decisions.
+    - [x] 1.3.1 Task - Inventory and identify the BH-00 decisions.
 
       The decision set must cover every boundary that later phases assume and
       show where its authoritative rationale and status are recorded.
 
-      - [ ] 1.3.1.1 Subtask - Assign stable decision IDs for host neutrality, semantic UI, effect and capability isolation, renderer separation, server-adapter separation, profile composition, native portability proof, and non-.NET compatibility.
-      - [ ] 1.3.1.2 Subtask - Record each decision's status, rationale, consequences, affected packages, alternatives, unresolved evidence, and supersession relationship.
-      - [ ] 1.3.1.3 Subtask - Resolve the durable decision-record location and format within the approved repository structure before creating normative records.
+      - [x] 1.3.1.1 Subtask - Assign stable decision IDs for host neutrality, semantic UI, effect and capability isolation, renderer separation, server-adapter separation, profile composition, native portability proof, and non-.NET compatibility.
+      - [x] 1.3.1.2 Subtask - Record each decision's status, rationale, consequences, affected packages, alternatives, unresolved evidence, and supersession relationship.
+      - [x] 1.3.1.3 Subtask - Resolve the durable decision-record location and format within the approved repository structure before creating normative records.
 
-    - [ ] 1.3.2 Task - Define decision change control and review ownership.
+    - [x] 1.3.2 Task - Define decision change control and review ownership.
 
       Later evidence may revise a decision, but no implementation shortcut may
       mutate a public boundary without an explicit reviewed record.
 
-      - [ ] 1.3.2.1 Subtask - Define proposal, review, acceptance, rejection, supersession, and archival states with named architecture and product owners.
-      - [ ] 1.3.2.2 Subtask - Require compatibility, security, accessibility, packaging, and cross-backend impact analysis for changes to portable contracts.
-      - [ ] 1.3.2.3 Subtask - Define how roadmap, catalog, support matrix, package indexes, and acceptance records are updated atomically when a decision changes.
+      - [x] 1.3.2.1 Subtask - Define proposal, review, acceptance, rejection, supersession, and archival states with named architecture and product owners.
+      - [x] 1.3.2.2 Subtask - Require compatibility, security, accessibility, packaging, and cross-backend impact analysis for changes to portable contracts.
+      - [x] 1.3.2.3 Subtask - Define how roadmap, catalog, support matrix, package indexes, and acceptance records are updated atomically when a decision changes.
 
   - [ ] 1.4 Section - Phase 1 Integration Tests.
 

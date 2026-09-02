@@ -23,6 +23,10 @@ renderer target, with a webview shell retained as an intermediate profile.
 
 ## Start here
 
+- [Architecture decision
+  register](../20-notes/architecture-decisions/README.md) — records the
+  accepted host-neutral kernel, semantic UI, effects, renderer, server,
+  profile, native-proof, and non-.NET-compatibility boundaries.
 - [BlazeX canonical
   vocabulary](../20-notes/blazex-canonical-vocabulary.md) — fixes the meanings
   of runtime, execution host, renderer, capability provider, server adapter,

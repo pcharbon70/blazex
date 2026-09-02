@@ -72,6 +72,10 @@ provider, and remote adapter.
 
 ## Main synthesis
 
+- [Architecture decision
+  register](../20-notes/architecture-decisions/README.md) — the permanent BH-00
+  decision IDs, accepted boundaries, ownership, impact analysis, review
+  triggers, and supersession workflow.
 - [BlazeX canonical
   vocabulary](../20-notes/blazex-canonical-vocabulary.md) — the BH-00
   normative meanings for architecture dimensions, product terms, rendering
