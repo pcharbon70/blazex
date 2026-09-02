@@ -180,8 +180,11 @@ Before reporting archive work complete:
 1. inspect repository status and preserve unrelated changes;
 2. run `python3 validate_archive.py` from this directory;
 3. run `python3 -m unittest test_validate_archive.py` if validation behavior changed;
-4. verify new external citations against primary sources;
-5. run `git diff --check` from the project root; and
-6. inspect the complete change for stale paths and accidental rewrites.
+4. run `python3 validate_browser_product_envelope.py` and
+   `python3 -m unittest test_validate_browser_product_envelope.py` when the
+   browser product envelope or its validator changes;
+5. verify new external citations against primary sources;
+6. run `git diff --check` from the project root; and
+7. inspect the complete change for stale paths and accidental rewrites.
 
 Do not commit, push, publish, or open a pull request unless the user asks.

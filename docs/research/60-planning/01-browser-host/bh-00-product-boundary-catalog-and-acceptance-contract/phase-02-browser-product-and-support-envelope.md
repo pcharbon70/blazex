@@ -23,29 +23,29 @@ Back to milestone: [README](README.md)
   fallbacks, and trust boundaries constrain those claims before BH-01 selects
   and measures exact dependency builds.
 
-  - [ ] 2.1 Section - Define the initial browser and toolchain support policy.
+  - [x] 2.1 Section - Define the initial browser and toolchain support policy.
 
     Establish a bounded candidate envelope that BH-01 can prove or reject
     without presenting unverified version combinations as supported releases.
 
-    - [ ] 2.1.1 Task - Specify browser and device support claims.
+    - [x] 2.1.1 Task - Specify browser and device support claims.
 
       The product contract must identify browser families, version-policy
       semantics, device classes, and evidence freshness without promising every
       WebAssembly-capable environment.
 
-      - [ ] 2.1.1.1 Subtask - Define candidate Chromium, Firefox, and WebKit support policies using stable release channels, minimum-version rules, and explicit review cadence.
-      - [ ] 2.1.1.2 Subtask - Define representative desktop, mobile, memory, CPU, network, input, zoom, contrast, direction, and assistive-technology evidence classes.
-      - [ ] 2.1.1.3 Subtask - Define unsupported, best-effort, preview, and supported statuses plus the evidence required to promote or remove a browser configuration.
+      - [x] 2.1.1.1 Subtask - Define candidate Chromium, Firefox, and WebKit support policies using stable release channels, minimum-version rules, and explicit review cadence.
+      - [x] 2.1.1.2 Subtask - Define representative desktop, mobile, memory, CPU, network, input, zoom, contrast, direction, and assistive-technology evidence classes.
+      - [x] 2.1.1.3 Subtask - Define unsupported, best-effort, preview, and supported statuses plus the evidence required to promote or remove a browser configuration.
 
-    - [ ] 2.1.2 Task - Specify the candidate toolchain envelope.
+    - [x] 2.1.2 Task - Specify the candidate toolchain envelope.
 
       Toolchain scope must name every moving layer and distinguish a candidate
       range from the exact reproducible pins that BH-01 will establish.
 
-      - [ ] 2.1.2.1 Subtask - Inventory Phoenix, LiveView, LocalLiveView, Popcorn, AtomVM, Elixir, Erlang/OTP, Mix, JavaScript tooling, browser, and operating-system inputs that affect the profile.
-      - [ ] 2.1.2.2 Subtask - Define candidate, pinned, tested, supported, deprecated, and blocked meanings for toolchain combinations and private API dependencies.
-      - [ ] 2.1.2.3 Subtask - Define lockfile, artifact, provenance, rebuild, security-update, and support-matrix records BH-01 must produce before any candidate becomes supported.
+      - [x] 2.1.2.1 Subtask - Inventory Phoenix, LiveView, LocalLiveView, Popcorn, AtomVM, Elixir, Erlang/OTP, Mix, JavaScript tooling, browser, and operating-system inputs that affect the profile.
+      - [x] 2.1.2.2 Subtask - Define candidate, pinned, tested, supported, deprecated, and blocked meanings for toolchain combinations and private API dependencies.
+      - [x] 2.1.2.3 Subtask - Define lockfile, artifact, provenance, rebuild, security-update, and support-matrix records BH-01 must produce before any candidate becomes supported.
 
   - [ ] 2.2 Section - Define rendering and server-integration modes.
 

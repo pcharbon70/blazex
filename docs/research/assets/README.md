@@ -29,7 +29,10 @@ insufficient. Record source, creator, license, provenance, and use.
 
 ### Files
 
-- None yet.
+- [Browser product envelope v0.1](browser-product-envelope-v0.1.json) —
+  machine-readable, BlazeX-authored BH-00 browser/toolchain candidate policy,
+  rendering/profile matrix, trust/deployment boundaries, and fallback/scenario
+  records; validated by the repository support-envelope validator.
 
 ## Maintaining this index
 

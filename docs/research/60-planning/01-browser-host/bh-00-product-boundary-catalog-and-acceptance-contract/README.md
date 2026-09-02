@@ -55,7 +55,7 @@ BH-01 or later milestones and are excluded here.
 | Phase | Status | Delivery | Dependency |
 | --- | --- | --- | --- |
 | [1 — Terminology and Architecture Decision Baseline](phase-01-terminology-and-architecture-decision-baseline.md) | complete | Freeze canonical vocabulary, independent architecture axes, package ownership, and durable decision governance. | Current research corpus and merged monorepo scaffold |
-| [2 — Browser Product and Support Envelope](phase-02-browser-product-and-support-envelope.md) | planned | Define browser, toolchain, rendering-mode, server-integration, trust, deployment, and fallback claims without claiming feasibility. | Phase 1 |
+| [2 — Browser Product and Support Envelope](phase-02-browser-product-and-support-envelope.md) | in progress | Define browser, toolchain, rendering-mode, server-integration, trust, deployment, and fallback claims without claiming feasibility. | Phase 1 |
 | [3 — Catalog Schema and Locked Inventory](phase-03-catalog-schema-and-locked-inventory.md) | planned | Pin the MudBlazor reference, create stable BlazeX family identities, and establish a complete machine-validatable catalog. | Phases 1–2 |
 | [4 — Disposition, Capability, Fallback, and Portability Classification](phase-04-disposition-capability-fallback-and-portability-classification.md) | planned | Assign every family a BlazeX disposition, delivery tier, package owner, capability contract, fallback, and backend-portability status. | Phase 3 |
 | [5 — Quality Budgets and Acceptance Traceability](phase-05-quality-budgets-and-acceptance-traceability.md) | planned | Define measurable quality budgets and map every product and catalog claim to observable acceptance evidence. | Phases 2 and 4 |
@@ -116,6 +116,7 @@ blocked.
 - [Phase 1 — Terminology and Architecture Decision Baseline](phase-01-terminology-and-architecture-decision-baseline.md)
 - [Phase 1 — Implementation Evidence](phase-01-implementation-evidence.md)
 - [Phase 2 — Browser Product and Support Envelope](phase-02-browser-product-and-support-envelope.md)
+- [Phase 2 — Implementation Evidence](phase-02-implementation-evidence.md)
 - [Phase 3 — Catalog Schema and Locked Inventory](phase-03-catalog-schema-and-locked-inventory.md)
 - [Phase 4 — Disposition, Capability, Fallback, and Portability Classification](phase-04-disposition-capability-fallback-and-portability-classification.md)
 - [Phase 5 — Quality Budgets and Acceptance Traceability](phase-05-quality-budgets-and-acceptance-traceability.md)

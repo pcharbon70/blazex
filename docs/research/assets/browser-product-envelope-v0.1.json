@@ -1,0 +1,220 @@
+{
+  "schema_version": "0.1.0",
+  "contract_id": "BH00-BROWSER-ENVELOPE-0.1",
+  "completion_stage": "section-2.1",
+  "evidence_state": "policy-only-unproven",
+  "browser_status_vocabulary": [
+    {
+      "id": "BS-UNSUPPORTED",
+      "status": "unsupported",
+      "binding": "outside, blocked, or not yet proven",
+      "promotion_evidence": []
+    },
+    {
+      "id": "BS-BEST-EFFORT",
+      "status": "best-effort",
+      "binding": "non-release-gating standards-overlap expectation",
+      "promotion_evidence": [
+        "recent-smoke-result",
+        "known-limitations",
+        "triage-owner"
+      ]
+    },
+    {
+      "id": "BS-PREVIEW",
+      "status": "preview",
+      "binding": "versioned evaluation surface with bounded guarantees",
+      "promotion_evidence": [
+        "clean-reproducible-build",
+        "functional-security-accessibility-smoke",
+        "exact-environment-record",
+        "evidence-age-at-most-31-days"
+      ]
+    },
+    {
+      "id": "BS-SUPPORTED",
+      "status": "supported",
+      "binding": "release-gating compatibility contract",
+      "promotion_evidence": [
+        "all-required-evidence-classes",
+        "upgrade-and-fallback-tests",
+        "security-review",
+        "artifacts-and-provenance",
+        "evidence-age-at-most-31-days"
+      ]
+    }
+  ],
+  "browser_configurations": [
+    {
+      "id": "BR-CHROMIUM-DESKTOP",
+      "family": "chromium",
+      "products": ["chrome-desktop", "edge-desktop"],
+      "channel_policy": "stable-only",
+      "minimum_rule": "qualification-cut stable major N and N-1",
+      "device_classes": ["desktop"],
+      "operating_system_classes": ["windows", "macos", "linux"],
+      "current_status": "unsupported",
+      "status_reason": "unproven-before-bh-01",
+      "earliest_target_status": "preview",
+      "review_cadence": ["per-release", "monthly", "event-driven"],
+      "bh01_evidence": ["boot", "local-event", "fallback", "required-evidence-classes"]
+    },
+    {
+      "id": "BR-CHROMIUM-ANDROID",
+      "family": "chromium",
+      "products": ["chrome-android"],
+      "channel_policy": "stable-only",
+      "minimum_rule": "qualification-cut current stable major N; prior major best-effort candidate only",
+      "device_classes": ["phone", "tablet"],
+      "operating_system_classes": ["android-current", "android-previous"],
+      "current_status": "unsupported",
+      "status_reason": "unproven-before-bh-01",
+      "earliest_target_status": "preview",
+      "review_cadence": ["per-release", "monthly", "event-driven"],
+      "bh01_evidence": ["boot", "touch", "virtual-keyboard", "background-resume", "required-evidence-classes"]
+    },
+    {
+      "id": "BR-FIREFOX-DESKTOP",
+      "family": "firefox",
+      "products": ["firefox-desktop"],
+      "channel_policy": "stable-only",
+      "minimum_rule": "qualification-cut stable major N and N-1; ESR separately qualified",
+      "device_classes": ["desktop"],
+      "operating_system_classes": ["windows", "macos", "linux"],
+      "current_status": "unsupported",
+      "status_reason": "unproven-before-bh-01",
+      "earliest_target_status": "preview",
+      "review_cadence": ["per-release", "monthly", "event-driven"],
+      "bh01_evidence": ["boot", "local-event", "fallback", "required-evidence-classes"]
+    },
+    {
+      "id": "BR-WEBKIT-DESKTOP",
+      "family": "webkit",
+      "products": ["safari-macos"],
+      "channel_policy": "stable-only",
+      "minimum_rule": "stable Safari on current and previous vendor-supported macOS major",
+      "device_classes": ["desktop"],
+      "operating_system_classes": ["macos-current", "macos-previous"],
+      "current_status": "unsupported",
+      "status_reason": "unproven-before-bh-01",
+      "earliest_target_status": "preview",
+      "review_cadence": ["per-release", "monthly", "event-driven"],
+      "bh01_evidence": ["boot", "local-event", "fallback", "required-evidence-classes"]
+    },
+    {
+      "id": "BR-WEBKIT-MOBILE",
+      "family": "webkit",
+      "products": ["safari-ios", "safari-ipados"],
+      "channel_policy": "stable-only",
+      "minimum_rule": "current and previous vendor-supported iOS or iPadOS major",
+      "device_classes": ["phone", "tablet"],
+      "operating_system_classes": ["ios-current", "ios-previous", "ipados-current", "ipados-previous"],
+      "current_status": "unsupported",
+      "status_reason": "unproven-before-bh-01",
+      "earliest_target_status": "preview",
+      "review_cadence": ["per-release", "monthly", "event-driven"],
+      "bh01_evidence": ["boot", "touch", "rotation", "virtual-keyboard", "background-resume", "required-evidence-classes"]
+    }
+  ],
+  "evidence_classes": [
+    {
+      "id": "EC-DESKTOP",
+      "name": "desktop-operating-systems-and-architectures",
+      "dimensions": ["browser-build", "os-build", "architecture", "hardware-or-vm"],
+      "required_for": ["supported"]
+    },
+    {
+      "id": "EC-MOBILE",
+      "name": "phone-and-tablet",
+      "dimensions": ["device", "os-build", "rotation", "virtual-keyboard", "background-resume", "touch"],
+      "required_for": ["supported"]
+    },
+    {
+      "id": "EC-MEMORY",
+      "name": "normal-and-constrained-memory",
+      "dimensions": ["startup", "steady-state", "pressure-failure", "cleanup"],
+      "required_for": ["supported"]
+    },
+    {
+      "id": "EC-CPU",
+      "name": "reference-and-constrained-cpu",
+      "dimensions": ["native-speed", "throttled-or-low-power", "startup", "local-events"],
+      "required_for": ["supported"]
+    },
+    {
+      "id": "EC-NETWORK",
+      "name": "delivery-and-connection-quality",
+      "dimensions": ["warm-cache", "cold-cache", "latency", "bandwidth", "loss", "offline", "reconnection", "server-loss"],
+      "required_for": ["supported"]
+    },
+    {
+      "id": "EC-INPUT",
+      "name": "input-modalities",
+      "dimensions": ["keyboard", "pointer", "touch-where-available", "focus-traversal", "modality-switch", "input-method-composition"],
+      "required_for": ["preview", "supported"]
+    },
+    {
+      "id": "EC-ZOOM",
+      "name": "magnification-and-reflow",
+      "dimensions": ["zoom-200", "text-zoom-where-available", "reflow-400-where-applicable", "viewport-resize"],
+      "required_for": ["supported"]
+    },
+    {
+      "id": "EC-CONTRAST",
+      "name": "color-and-motion-preferences",
+      "dimensions": ["light-dark", "high-or-forced-contrast", "reduced-motion", "non-color-state", "visible-focus"],
+      "required_for": ["preview", "supported"]
+    },
+    {
+      "id": "EC-DIRECTION",
+      "name": "language-direction-and-content-stress",
+      "dimensions": ["ltr", "rtl", "long-content", "short-content", "mixed-direction", "localized-content"],
+      "required_for": ["supported"]
+    },
+    {
+      "id": "EC-ASSISTIVE-TECH",
+      "name": "platform-accessibility-integration",
+      "dimensions": ["nvda-pairing", "voiceover-pairing", "talkback-pairing", "role-state-name", "focus", "announcement", "interaction"],
+      "required_for": ["preview", "supported"]
+    }
+  ],
+  "toolchain_status_vocabulary": [
+    {"id": "TS-CANDIDATE", "status": "candidate", "meaning": "inside investigation envelope"},
+    {"id": "TS-PINNED", "status": "pinned", "meaning": "exact identities and checksums locked"},
+    {"id": "TS-TESTED", "status": "tested", "meaning": "pinned combination passed named recorded scenarios"},
+    {"id": "TS-SUPPORTED", "status": "supported", "meaning": "current release evidence and support matrix satisfied"},
+    {"id": "TS-DEPRECATED", "status": "deprecated", "meaning": "bounded transition with migration and removal policy"},
+    {"id": "TS-BLOCKED", "status": "blocked", "meaning": "incompatible, insecure, irreproducible, or unacceptable private dependency"}
+  ],
+  "toolchain_inputs": [
+    {"id": "TC-PHOENIX", "layer": "phoenix", "current_state": "candidate", "private_api_risk": "unassessed", "bh01_resolution": ["exact-revision", "configuration", "dependency-graph"]},
+    {"id": "TC-LIVEVIEW", "layer": "liveview", "current_state": "candidate", "private_api_risk": "requires-audit", "bh01_resolution": ["exact-revision", "public-private-surface-inventory", "adapter-tests"]},
+    {"id": "TC-LOCAL-LIVEVIEW", "layer": "local-live-view", "current_state": "candidate", "private_api_risk": "expected-high", "bh01_resolution": ["exact-revision", "patch-set", "dependency-graph", "maintenance-disposition"]},
+    {"id": "TC-POPCORN", "layer": "popcorn", "current_state": "candidate", "private_api_risk": "unassessed", "bh01_resolution": ["exact-revision", "patches", "build-command", "output-hashes"]},
+    {"id": "TC-ATOMVM", "layer": "atomvm", "current_state": "candidate", "private_api_risk": "unassessed", "bh01_resolution": ["exact-revision", "configuration", "beam-surface", "runtime-artifact"]},
+    {"id": "TC-ELIXIR", "layer": "elixir", "current_state": "candidate", "private_api_risk": "unassessed", "bh01_resolution": ["exact-version", "source", "language-library-subset"]},
+    {"id": "TC-OTP", "layer": "erlang-otp", "current_state": "candidate", "private_api_risk": "unassessed", "bh01_resolution": ["exact-release", "source", "allowed-modules-bifs", "native-exclusions"]},
+    {"id": "TC-MIX", "layer": "mix", "current_state": "candidate", "private_api_risk": "unassessed", "bh01_resolution": ["exact-version", "environment", "commands", "dependency-graph"]},
+    {"id": "TC-JS-TOOLING", "layer": "javascript-runtime-package-manager-bundler", "current_state": "candidate", "private_api_risk": "unassessed", "bh01_resolution": ["exact-tools", "lockfile", "commands", "asset-hashes"]},
+    {"id": "TC-BROWSER", "layer": "browser-product-engine", "current_state": "candidate", "private_api_risk": "not-applicable", "bh01_resolution": ["exact-product-build", "engine-build", "candidate-row"]},
+    {"id": "TC-OPERATING-SYSTEM", "layer": "build-and-test-operating-system", "current_state": "candidate", "private_api_risk": "not-applicable", "bh01_resolution": ["exact-image-build", "architecture", "package-inventory", "clean-machine-recipe"]}
+  ],
+  "bh01_required_records": [
+    {"id": "REC-LOCKS", "name": "lock-and-identity-set", "required_for": ["pinned", "tested", "supported"]},
+    {"id": "REC-ARTIFACTS", "name": "artifact-manifest", "required_for": ["tested", "supported"]},
+    {"id": "REC-PROVENANCE", "name": "provenance-and-dependency-record", "required_for": ["supported"]},
+    {"id": "REC-REBUILD", "name": "clean-rebuild-record", "required_for": ["supported"]},
+    {"id": "REC-SECURITY", "name": "security-update-record", "required_for": ["supported"]},
+    {"id": "REC-SUPPORT-MATRIX", "name": "tested-support-matrix", "required_for": ["supported"]}
+  ],
+  "unresolved_bh01_inputs": [
+    "exact-version-pins",
+    "actual-browser-builds",
+    "actual-operating-system-builds",
+    "runtime-and-library-subset",
+    "private-api-maintenance-disposition",
+    "artifact-sizes-and-hashes",
+    "reproducibility-result",
+    "browser-execution-result"
+  ]
+}

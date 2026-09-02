@@ -92,6 +92,8 @@ From this directory:
 python3 -m pip install -r requirements-validation.txt
 python3 validate_archive.py
 python3 -m unittest test_validate_archive.py
+python3 validate_browser_product_envelope.py
+python3 -m unittest test_validate_browser_product_envelope.py
 ```
 
 The validator checks metadata, placeholders, filenames, local links,
@@ -103,5 +105,7 @@ identifiers.
 - [`AGENTS.md`](AGENTS.md) — research, authoring, and maintenance instructions
 - [`frontmatter.schema.json`](frontmatter.schema.json) — metadata schema
 - [`requirements-validation.txt`](requirements-validation.txt) — validator dependencies
+- [`test_validate_browser_product_envelope.py`](test_validate_browser_product_envelope.py) — focused browser-envelope validator tests
 - [`test_validate_archive.py`](test_validate_archive.py) — focused validator tests
+- [`validate_browser_product_envelope.py`](validate_browser_product_envelope.py) — deterministic BH-00 browser-envelope checks
 - [`validate_archive.py`](validate_archive.py) — deterministic archive checks
