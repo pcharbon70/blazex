@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BlazeX Research frontmatter",
+  "description": "The YAML frontmatter contract for documents in the BlazeX Research archive.",
+  "oneOf": [
+    { "$ref": "#/$defs/note" },
+    { "$ref": "#/$defs/source" },
+    { "$ref": "#/$defs/inquiry" },
+    { "$ref": "#/$defs/map" },
+    { "$ref": "#/$defs/journal" }
+  ],
+  "unevaluatedProperties": false,
+  "$defs": {
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "date": {
+      "type": "string",
+      "format": "date"
+    },
+    "stringList": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true
+    },
+    "tagList": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+      },
+      "uniqueItems": true
+    },
+    "base": {
+      "type": "object",
+      "required": ["title", "kind", "created", "tags", "aliases"],
+      "properties": {
+        "title": { "$ref": "#/$defs/title" },
+        "kind": {
+          "enum": ["note", "source", "inquiry", "map", "journal"]
+        },
+        "created": { "$ref": "#/$defs/date" },
+        "tags": { "$ref": "#/$defs/tagList" },
+        "aliases": { "$ref": "#/$defs/stringList" }
+      }
+    },
+    "note": {
+      "allOf": [
+        { "$ref": "#/$defs/base" },
+        {
+          "type": "object",
+          "required": ["maturity"],
+          "properties": {
+            "kind": { "const": "note" },
+            "maturity": { "enum": ["seed", "developing", "stable"] }
+          }
+        }
+      ]
+    },
+    "source": {
+      "allOf": [
+        { "$ref": "#/$defs/base" },
+        {
+          "type": "object",
+          "properties": {
+            "kind": { "const": "source" },
+            "authors": { "$ref": "#/$defs/stringList" },
+            "published": {
+              "oneOf": [
+                { "type": "integer" },
+                { "type": "string", "minLength": 1 },
+                { "type": "null" }
+              ]
+            },
+            "citation_key": { "type": ["string", "null"], "minLength": 1 },
+            "container": { "type": ["string", "null"], "minLength": 1 },
+            "edition": { "type": ["string", "null"], "minLength": 1 },
+            "isbn": { "type": ["string", "null"], "minLength": 1 },
+            "doi": { "type": ["string", "null"], "minLength": 1 },
+            "url": { "type": ["string", "null"], "format": "uri" },
+            "accessed": {
+              "oneOf": [
+                { "$ref": "#/$defs/date" },
+                { "type": "null" }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "inquiry": {
+      "allOf": [
+        { "$ref": "#/$defs/base" },
+        {
+          "type": "object",
+          "required": ["status"],
+          "properties": {
+            "kind": { "const": "inquiry" },
+            "status": { "enum": ["open", "paused", "resolved"] }
+          }
+        }
+      ]
+    },
+    "map": {
+      "allOf": [
+        { "$ref": "#/$defs/base" },
+        { "type": "object", "properties": { "kind": { "const": "map" } } }
+      ]
+    },
+    "journal": {
+      "allOf": [
+        { "$ref": "#/$defs/base" },
+        { "type": "object", "properties": { "kind": { "const": "journal" } } }
+      ]
+    }
+  }
+}

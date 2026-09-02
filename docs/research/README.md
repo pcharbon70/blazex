@@ -1,0 +1,105 @@
+# BlazeX Research Archive
+
+This archive researches an Elixir-authored, host-neutral component framework
+that can run through WebAssembly and integrates first with Phoenix and, where
+useful, plain Plug. Browser execution through Popcorn/AtomVM is the first
+implementation path, not an architectural limit. Fully native desktop
+controls are the long-term renderer goal; a desktop webview is an optional
+middle profile. The archive separates source evidence, synthesis, active
+questions, and time-bound observations so the architecture can evolve without
+losing provenance.
+
+MudBlazor v9.9.0 is the current target catalog and interaction/design
+reference for the user-facing component library. BlazeX remains a native
+Elixir/Phoenix system: it does not seek .NET, Razor, binary, package, API, or
+renderer compatibility.
+
+Start at the [home map](10-maps/home.md). Archive-wide authoring and
+maintenance conventions are defined in [`AGENTS.md`](AGENTS.md).
+
+## Structure
+
+- [`00-inbox/`](00-inbox/README.md) — unprocessed captures
+- [`10-maps/`](10-maps/README.md) — curated paths through subjects and questions
+- [`20-notes/`](20-notes/README.md) — ideas and syntheses in the author's own words
+- [`30-sources/`](30-sources/README.md) — reading notes and bibliographic records
+- [`40-inquiries/`](40-inquiries/README.md) — active research questions
+- [`50-journal/`](50-journal/README.md) — dated observations and experiments
+- [`90-archive/`](90-archive/README.md) — inactive or superseded material
+- [`assets/`](assets/README.md) — durable research attachments
+- [`templates/`](templates/README.md) — document and directory scaffolds
+
+Folders describe what a document is doing. Links, maps, and tags describe what
+it is about. Directory READMEs are complete local inventories; maps are
+selective conceptual paths.
+
+## Research boundary
+
+The central question is how much of Elixir's programming model can run
+usefully across browser and non-browser hosts without confusing
+runtime-in-Wasm execution with native application AOT compilation. The
+archive covers Blazor, Plug, Phoenix, HEEx, LiveView, browser and non-web
+WebAssembly constraints, AtomVM, Popcorn, LocalLiveView, standalone and
+embedded runtimes, semantic render trees, DOM and native-control backends,
+MudBlazor's catalog and architecture, packaging, state, interop, server
+integration, security, testing, and productization.
+
+Research must distinguish:
+
+- facts supported by primary documentation or inspected source;
+- measurements made during this research;
+- interpretation across sources;
+- proposed BlazeX architecture; and
+- behavior that remains unverified.
+
+## Frontmatter
+
+Every completed knowledge document begins with YAML frontmatter:
+
+```yaml
+---
+title: "A human-readable title"
+kind: note
+created: "2026-09-02"
+maturity: seed
+tags:
+  - webassembly
+aliases: []
+---
+```
+
+[`frontmatter.schema.json`](frontmatter.schema.json) is the authoritative
+metadata contract. Document kinds are `note`, `source`, `inquiry`, `map`, and
+`journal`. Notes require `maturity: seed | developing | stable`; inquiries
+require `status: open | paused | resolved`.
+
+## Working rhythm
+
+1. Capture temporary material in `00-inbox/`.
+2. Promote useful material with the closest template.
+3. Connect every durable document to another document or map.
+4. Preserve a source note for every primary work used substantively.
+5. Record local measurements and repository inspections in the journal.
+6. Update affected indexes and validate in the same change.
+
+## Validation
+
+From this directory:
+
+```bash
+python3 -m pip install -r requirements-validation.txt
+python3 validate_archive.py
+python3 -m unittest test_validate_archive.py
+```
+
+The validator checks metadata, placeholders, filenames, local links,
+directory inventories, conceptual connections, and duplicate source
+identifiers.
+
+## Archive files
+
+- [`AGENTS.md`](AGENTS.md) — research, authoring, and maintenance instructions
+- [`frontmatter.schema.json`](frontmatter.schema.json) — metadata schema
+- [`requirements-validation.txt`](requirements-validation.txt) — validator dependencies
+- [`test_validate_archive.py`](test_validate_archive.py) — focused validator tests
+- [`validate_archive.py`](validate_archive.py) — deterministic archive checks
