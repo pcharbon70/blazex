@@ -234,9 +234,10 @@ Consequently:
 
 Phoenix with LiveView can supply the stock DOM patcher, router coordination,
 Channels, uploads, session/auth hooks, PubSub, and generated asset conventions.
-Plain Plug supplies an HTTP pipeline and adapter boundary. A Plug host can
-serve BlazeX assets, bootstrap state, receive HTTP commands, and set security
-headers, but BlazeX must own or add every richer realtime/browser service.
+Plain Plug supplies an HTTP pipeline and adapter boundary. A Plug server
+integration can serve BlazeX assets, bootstrap state, receive HTTP commands,
+and set security headers, but BlazeX must own or add every richer
+realtime/browser service.
 
 The matrices therefore describe a Phoenix-first target. A feature is
 “portable to Plug” only when its contract does not assume a LiveView channel,

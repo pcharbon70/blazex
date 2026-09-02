@@ -114,6 +114,7 @@ blocked.
 ### Documents
 
 - [Phase 1 — Terminology and Architecture Decision Baseline](phase-01-terminology-and-architecture-decision-baseline.md)
+- [Phase 1 — Implementation Evidence](phase-01-implementation-evidence.md)
 - [Phase 2 — Browser Product and Support Envelope](phase-02-browser-product-and-support-envelope.md)
 - [Phase 3 — Catalog Schema and Locked Inventory](phase-03-catalog-schema-and-locked-inventory.md)
 - [Phase 4 — Disposition, Capability, Fallback, and Portability Classification](phase-04-disposition-capability-fallback-and-portability-classification.md)

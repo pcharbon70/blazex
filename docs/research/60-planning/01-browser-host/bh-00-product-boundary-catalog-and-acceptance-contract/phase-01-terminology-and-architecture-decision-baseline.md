@@ -22,28 +22,28 @@ Back to milestone: [README](README.md)
   assign current monorepo ownership, and establish durable decision governance
   before product claims or catalog rows depend on ambiguous words.
 
-  - [ ] 1.1 Section - Establish the canonical BlazeX vocabulary.
+  - [x] 1.1 Section - Establish the canonical BlazeX vocabulary.
 
     Create a normative language boundary that distinguishes framework concepts
     from overloaded ecosystem terms and can be reused by every later phase.
 
-    - [ ] 1.1.1 Task - Define the independent architecture dimensions.
+    - [x] 1.1.1 Task - Define the independent architecture dimensions.
 
       The glossary must make each dimension testable without treating one
       implementation combination as the definition of BlazeX.
 
-      - [ ] 1.1.1.1 Subtask - Define runtime substrate, execution host, renderer backend, capability provider, server or remote adapter, packaging shell, executable profile, and portable component contract.
-      - [ ] 1.1.1.2 Subtask - Give at least one browser, headless, webview, native-process, and standalone-Wasm example showing how the dimensions compose independently.
-      - [ ] 1.1.1.3 Subtask - Define forbidden equivalences such as Phoenix equals host, Popcorn equals component model, DOM equals renderer contract, or WebAssembly Component Model equals UI component.
+      - [x] 1.1.1.1 Subtask - Define runtime substrate, execution host, renderer backend, capability provider, server or remote adapter, packaging shell, executable profile, and portable component contract.
+      - [x] 1.1.1.2 Subtask - Give at least one browser, headless, webview, native-process, and standalone-Wasm example showing how the dimensions compose independently.
+      - [x] 1.1.1.3 Subtask - Define forbidden equivalences such as Phoenix equals host, Popcorn equals component model, DOM equals renderer contract, or WebAssembly Component Model equals UI component.
 
-    - [ ] 1.1.2 Task - Define overloaded product and rendering terms.
+    - [x] 1.1.2 Task - Define overloaded product and rendering terms.
 
       Common words must carry one BlazeX meaning or be explicitly qualified in
       plans, APIs, catalogs, diagnostics, and support claims.
 
-      - [ ] 1.1.2.1 Subtask - Define component, component family, semantic node, event, effect, resource, capability, backend, adapter, integration, fallback, and visual profile.
-      - [ ] 1.1.2.2 Subtask - Define local, remote, server-rendered, static, prerendered, interactive, activated, headless, portable, renderer-specific, and host-specific.
-      - [ ] 1.1.2.3 Subtask - Publish usage examples and anti-examples that distinguish MudBlazor inspiration from .NET, Razor, API, package, binary, or renderer compatibility.
+      - [x] 1.1.2.1 Subtask - Define component, component family, semantic node, event, effect, resource, capability, backend, adapter, integration, fallback, and visual profile.
+      - [x] 1.1.2.2 Subtask - Define local, remote, server-rendered, static, prerendered, interactive, activated, headless, portable, renderer-specific, and host-specific.
+      - [x] 1.1.2.3 Subtask - Publish usage examples and anti-examples that distinguish MudBlazor inspiration from .NET, Razor, API, package, binary, or renderer compatibility.
 
   - [ ] 1.2 Section - Reconcile architecture axes with repository ownership.
 

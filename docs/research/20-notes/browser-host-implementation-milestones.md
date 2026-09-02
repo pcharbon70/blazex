@@ -158,7 +158,7 @@ portable component code.
 
 ## Horizon 1 — Browser platform
 
-### BH-03 — Browser runtime host and boot lifecycle
+### BH-03 — Browser execution-host and runtime boot lifecycle
 
 **Goal.** Turn the pinned runtime proof into a dependable page-level browser
 host capable of serving multiple component roots.

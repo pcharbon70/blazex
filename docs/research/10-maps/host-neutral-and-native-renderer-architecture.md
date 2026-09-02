@@ -23,6 +23,10 @@ renderer target, with a webview shell retained as an intermediate profile.
 
 ## Start here
 
+- [BlazeX canonical
+  vocabulary](../20-notes/blazex-canonical-vocabulary.md) — fixes the meanings
+  of runtime, execution host, renderer, capability provider, server adapter,
+  shell, profile, and portable component contract used by this map.
 - [Browser host implementation
   milestones](../20-notes/browser-host-implementation-milestones.md) applies
   the host-neutral constraints to the first production host while keeping the

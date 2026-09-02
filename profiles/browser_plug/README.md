@@ -2,7 +2,7 @@
 
 This executable profile will assemble the browser runtime and DOM renderer with
 the Plug adapter. It demonstrates a smaller server footprint and continuously
-proves that the browser component system has no mandatory Phoenix, LiveView, or
+proves that this smaller browser profile has no mandatory Phoenix, LiveView, or
 LocalLiveView dependency. It must not depend on
 `blazex_renderer_dom_liveview` directly or transitively.
 
@@ -11,4 +11,3 @@ Phoenix profile, but component and renderer semantics must remain identical.
 
 Status: directory scaffold only; create the Mix project when its implementation
 milestone begins.
-

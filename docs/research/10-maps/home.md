@@ -68,6 +68,10 @@ provider, and remote adapter.
 
 ## Main synthesis
 
+- [BlazeX canonical
+  vocabulary](../20-notes/blazex-canonical-vocabulary.md) — the BH-00
+  normative meanings for architecture dimensions, product terms, rendering
+  modes, WebAssembly terms, and support language.
 - [Browser host implementation
   milestones](../20-notes/browser-host-implementation-milestones.md) — the
   consolidated BH-00–BH-23 delivery program for the browser profile, spanning
