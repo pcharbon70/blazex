@@ -47,28 +47,28 @@ Back to milestone: [README](README.md)
       - [x] 2.1.2.2 Subtask - Define candidate, pinned, tested, supported, deprecated, and blocked meanings for toolchain combinations and private API dependencies.
       - [x] 2.1.2.3 Subtask - Define lockfile, artifact, provenance, rebuild, security-update, and support-matrix records BH-01 must produce before any candidate becomes supported.
 
-  - [ ] 2.2 Section - Define rendering and server-integration modes.
+  - [x] 2.2 Section - Define rendering and server-integration modes.
 
     Give every output and activation term an observable meaning while keeping
     browser rendering independent from Phoenix, Plug, and LiveView.
 
-    - [ ] 2.2.1 Task - Specify rendering and activation claims.
+    - [x] 2.2.1 Task - Specify rendering and activation claims.
 
       Each mode must state where component logic runs, who owns the rendered
       surface, what output exists before activation, and how failure appears.
 
-      - [ ] 2.2.1.1 Subtask - Define static fallback, server-rendered output, prerendered output, browser-local interactive output, activated output, and headless output.
-      - [ ] 2.2.1.2 Subtask - Specify identity, public state, effects, event ownership, focus, accessibility, mismatch, replacement, and disposal expectations for each mode.
-      - [ ] 2.2.1.3 Subtask - Define which modes are BH-00 vocabulary, which are browser 1.0 commitments, and which remain conditional on later milestone evidence.
+      - [x] 2.2.1.1 Subtask - Define static fallback, server-rendered output, prerendered output, browser-local interactive output, activated output, and headless output.
+      - [x] 2.2.1.2 Subtask - Specify identity, public state, effects, event ownership, focus, accessibility, mismatch, replacement, and disposal expectations for each mode.
+      - [x] 2.2.1.3 Subtask - Define which modes are BH-00 vocabulary, which are browser 1.0 commitments, and which remain conditional on later milestone evidence.
 
-    - [ ] 2.2.2 Task - Specify profile and server-adapter claims.
+    - [x] 2.2.2 Task - Specify profile and server-adapter claims.
 
       Phoenix-first delivery must not redefine the browser as a Phoenix host or
       make the standalone DOM renderer depend on LiveView.
 
-      - [ ] 2.2.2.1 Subtask - Define the browser/Phoenix profile, Phoenix server adapter, optional LiveView DOM adapter, browser/Plug profile, Plug server adapter, and headless profile independently.
-      - [ ] 2.2.2.2 Subtask - Publish a capability matrix for static delivery, bootstrap, sessions, CSRF, typed commands, pushes, realtime, uploads, navigation, prerender, activation, and telemetry by profile.
-      - [ ] 2.2.2.3 Subtask - State which Phoenix facilities are absent, optional, or separately replaceable in Plug and require a transitive-dependency audit for the Plug claim.
+      - [x] 2.2.2.1 Subtask - Define the browser/Phoenix profile, Phoenix server adapter, optional LiveView DOM adapter, browser/Plug profile, Plug server adapter, and headless profile independently.
+      - [x] 2.2.2.2 Subtask - Publish a capability matrix for static delivery, bootstrap, sessions, CSRF, typed commands, pushes, realtime, uploads, navigation, prerender, activation, and telemetry by profile.
+      - [x] 2.2.2.3 Subtask - State which Phoenix facilities are absent, optional, or separately replaceable in Plug and require a transitive-dependency audit for the Plug claim.
 
   - [ ] 2.3 Section - Define trust, deployment, and fallback boundaries.
 

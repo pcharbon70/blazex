@@ -80,6 +80,10 @@ provider, and remote adapter.
   policy](../20-notes/blazex-browser-and-toolchain-support-policy.md) — the
   candidate browser windows, evidence classes, toolchain states, review
   cadence, and BH-01 promotion records; no stack is supported yet.
+- [BlazeX browser rendering and profile
+  modes](../20-notes/blazex-browser-rendering-and-profile-modes.md) — the
+  observable static, server, prerender, local, activation, and headless
+  contracts plus independent Phoenix, Plug, and headless capability matrices.
 - [BlazeX canonical
   vocabulary](../20-notes/blazex-canonical-vocabulary.md) — the BH-00
   normative meanings for architecture dimensions, product terms, rendering

@@ -1,7 +1,7 @@
 {
   "schema_version": "0.1.0",
   "contract_id": "BH00-BROWSER-ENVELOPE-0.1",
-  "completion_stage": "section-2.1",
+  "completion_stage": "section-2.2",
   "evidence_state": "policy-only-unproven",
   "browser_status_vocabulary": [
     {
@@ -206,6 +206,219 @@
     {"id": "REC-REBUILD", "name": "clean-rebuild-record", "required_for": ["supported"]},
     {"id": "REC-SECURITY", "name": "security-update-record", "required_for": ["supported"]},
     {"id": "REC-SUPPORT-MATRIX", "name": "tested-support-matrix", "required_for": ["supported"]}
+  ],
+  "rendering_modes": [
+    {
+      "id": "MODE-STATIC-FALLBACK",
+      "name": "static-fallback",
+      "logic_location": "none-required",
+      "surface_owner": "server-build-or-host-application",
+      "pre_activation_output": "bounded-noninteractive-content",
+      "identity": "stable-content-identity-without-runtime-generation",
+      "public_state": "labels-values-and-fallback-action-only",
+      "effects": "none",
+      "event_owner": "host-links-or-form-submission-only-when-declared",
+      "focus": "document-order-and-visible-focus-for-host-actions",
+      "accessibility": "bounded-content-and-unavailable-interaction-explanation",
+      "mismatch": "not-applicable",
+      "replacement": "optional-explicit-retry-or-later-mode-replacement",
+      "disposal": "remove-loader-and-retry-resources-if-created",
+      "bh00_status": "defined",
+      "browser_1_0_disposition": "committed",
+      "evidence_gate": "BH-18-and-family-acceptance"
+    },
+    {
+      "id": "MODE-SERVER-RENDERED",
+      "name": "server-rendered-output",
+      "logic_location": "server-runtime",
+      "surface_owner": "server-renderer-until-delivery",
+      "pre_activation_output": "complete-server-materialized-output",
+      "identity": "server-output-identity-without-local-ownership",
+      "public_state": "rendered-public-data-without-implicit-activation-state",
+      "effects": "authorized-server-data-work-only-no-browser-effects",
+      "event_owner": "none-unless-separate-server-interactive-contract",
+      "focus": "document-order-no-local-focus-owner",
+      "accessibility": "semantically-complete-for-claimed-purpose",
+      "mismatch": "not-applicable-without-activation-envelope",
+      "replacement": "ordinary-navigation-or-separate-declared-mode",
+      "disposal": "server-request-or-process-boundary",
+      "bh00_status": "defined",
+      "browser_1_0_disposition": "conditional",
+      "evidence_gate": "explicit-family-and-profile-claim"
+    },
+    {
+      "id": "MODE-PRERENDERED",
+      "name": "prerendered-output",
+      "logic_location": "server-or-build-deterministic-render",
+      "surface_owner": "server-output-until-successful-activation",
+      "pre_activation_output": "useful-output-paired-with-later-local-root",
+      "identity": "root-build-schema-and-semantic-identities",
+      "public_state": "minimal-versioned-size-bounded-activation-envelope",
+      "effects": "external-effects-suppressed",
+      "event_owner": "none-before-activation",
+      "focus": "preactivation-document-focus-with-transfer-requirement",
+      "accessibility": "useful-before-activation-with-honest-unavailable-state",
+      "mismatch": "remain-bounded-static-or-use-declared-safe-replacement",
+      "replacement": "never-described-as-activation",
+      "disposal": "dispose-prerender-coordination-after-transfer-or-failure",
+      "bh00_status": "defined",
+      "browser_1_0_disposition": "committed",
+      "evidence_gate": "BH-18-supported-activation-subset"
+    },
+    {
+      "id": "MODE-BROWSER-LOCAL",
+      "name": "browser-local-interactive",
+      "logic_location": "atomvm-in-wasm-browser-runtime",
+      "surface_owner": "standalone-dom-renderer",
+      "pre_activation_output": "optional-loader-or-static-fallback",
+      "identity": "active-browser-component-generation",
+      "public_state": "untrusted-public-props-plus-private-local-state",
+      "effects": "named-browser-capabilities-after-grant",
+      "event_owner": "active-local-component-generation",
+      "focus": "dom-renderer-preserves-semantic-focus-intent",
+      "accessibility": "semantic-intent-lowered-to-browser-platform",
+      "mismatch": "not-applicable-unless-replacing-existing-output",
+      "replacement": "declared-boot-render-or-capability-fallback",
+      "disposal": "cancel-effects-and-release-host-renderer-resources",
+      "bh00_status": "defined",
+      "browser_1_0_disposition": "committed",
+      "evidence_gate": "BH-01-and-browser-platform-release-gates"
+    },
+    {
+      "id": "MODE-ACTIVATED",
+      "name": "activated-output",
+      "logic_location": "atomvm-in-wasm-browser-runtime-after-transfer",
+      "surface_owner": "standalone-dom-renderer-after-successful-claim",
+      "pre_activation_output": "compatible-prerendered-output",
+      "identity": "matched-root-build-schema-and-semantic-identities",
+      "public_state": "validated-versioned-activation-envelope",
+      "effects": "start-once-after-successful-transfer",
+      "event_owner": "new-active-local-generation",
+      "focus": "preserve-focus-selection-and-user-entered-values",
+      "accessibility": "preserve-role-state-relationships-order-and-announcements",
+      "mismatch": "fail-closed-to-static-replacement-or-retry-policy",
+      "replacement": "destructive-replacement-is-not-activation",
+      "disposal": "dispose-superseded-generation-exactly-once",
+      "bh00_status": "defined",
+      "browser_1_0_disposition": "committed",
+      "evidence_gate": "BH-18-supported-activation-subset"
+    },
+    {
+      "id": "MODE-HEADLESS",
+      "name": "headless-output",
+      "logic_location": "declared-test-or-build-runtime",
+      "surface_owner": "normalized-headless-renderer",
+      "pre_activation_output": "not-applicable",
+      "identity": "portable-component-and-semantic-identities",
+      "public_state": "fixture-owned-public-input",
+      "effects": "deterministic-test-provider-and-trace",
+      "event_owner": "test-harness-delivery-to-active-generation",
+      "focus": "semantic-focus-trace",
+      "accessibility": "semantic-invariant-trace-not-platform-mapping",
+      "mismatch": "deterministic-test-failure",
+      "replacement": "generation-trace",
+      "disposal": "deterministic-resource-and-effect-cleanup-trace",
+      "bh00_status": "defined",
+      "browser_1_0_disposition": "conformance-only",
+      "evidence_gate": "BH-02"
+    }
+  ],
+  "profile_capability_status_vocabulary": [
+    {"id": "PCS-REQUIRED", "status": "required", "meaning": "planned profile contract but not proof"},
+    {"id": "PCS-CONDITIONAL", "status": "conditional", "meaning": "requires named later evidence before claim"},
+    {"id": "PCS-HOST-PROVIDED", "status": "host-provided", "meaning": "explicit application integration hook"},
+    {"id": "PCS-TEST-DOUBLE", "status": "test-double", "meaning": "simulated for conformance only"},
+    {"id": "PCS-ABSENT", "status": "absent", "meaning": "not in the profile baseline"},
+    {"id": "PCS-NOT-APPLICABLE", "status": "not-applicable", "meaning": "no meaningful behavior in this profile"}
+  ],
+  "profiles": [
+    {
+      "id": "PROFILE-BROWSER-PHOENIX",
+      "runtime": "atomvm-in-wasm-through-popcorn",
+      "execution_host": "browser",
+      "renderer": "standalone-dom",
+      "capability_provider": "named-browser-web-api-providers",
+      "server_adapter": "phoenix",
+      "shell": "web-deployment",
+      "evidence_state": "planned-unproven",
+      "optional_adapters": ["ADAPTER-LIVEVIEW-DOM"],
+      "forbidden_dependencies": ["native-renderer", "desktop-host-unless-future-profile"]
+    },
+    {
+      "id": "PROFILE-BROWSER-PLUG",
+      "runtime": "atomvm-in-wasm-through-popcorn",
+      "execution_host": "browser",
+      "renderer": "standalone-dom",
+      "capability_provider": "named-browser-web-api-providers",
+      "server_adapter": "plug",
+      "shell": "web-deployment",
+      "evidence_state": "planned-unproven",
+      "optional_adapters": [],
+      "forbidden_dependencies": ["blazex_phoenix", "blazex_renderer_dom_liveview", "phoenix", "liveview", "local-live-view"]
+    },
+    {
+      "id": "PROFILE-HEADLESS",
+      "runtime": "declared-test-runtime",
+      "execution_host": "test-or-build-process",
+      "renderer": "normalized-headless",
+      "capability_provider": "deterministic-test-doubles",
+      "server_adapter": "none-or-test-adapter",
+      "shell": "cli-ci-process",
+      "evidence_state": "planned-unproven",
+      "optional_adapters": [],
+      "forbidden_dependencies": ["browser-host", "dom-renderer", "javascript-bridge", "phoenix", "plug", "native-toolkit"]
+    }
+  ],
+  "adapters": [
+    {
+      "id": "ADAPTER-PHOENIX-SERVER",
+      "category": "server-adapter",
+      "profiles": ["PROFILE-BROWSER-PHOENIX"],
+      "owns": ["bootstrap", "sessions", "trusted-commands", "pushes", "telemetry", "optional-prerender-coordination"],
+      "must_not_own": ["browser-execution", "local-events", "portable-state", "standalone-dom-core"]
+    },
+    {
+      "id": "ADAPTER-PLUG-SERVER",
+      "category": "server-adapter",
+      "profiles": ["PROFILE-BROWSER-PLUG"],
+      "owns": ["static-delivery", "bootstrap", "typed-http-commands", "host-security-hooks", "host-telemetry-hooks"],
+      "must_not_own": ["phoenix", "liveview", "local-live-view", "pushes", "realtime", "uploads", "prerender", "activation"]
+    },
+    {
+      "id": "ADAPTER-LIVEVIEW-DOM",
+      "category": "renderer-adapter",
+      "profiles": ["PROFILE-BROWSER-PHOENIX"],
+      "owns": ["versioned-render-data-lowering", "patch-transport-integration"],
+      "must_not_own": ["portable-renderer-contract", "standalone-dom-core", "plug-profile-dependency"]
+    }
+  ],
+  "profile_capabilities": [
+    {"id": "CAP-STATIC-DELIVERY", "name": "static-delivery", "profile_values": {"PROFILE-BROWSER-PHOENIX": "required", "PROFILE-BROWSER-PLUG": "required", "PROFILE-HEADLESS": "not-applicable"}},
+    {"id": "CAP-BOOTSTRAP", "name": "bootstrap-envelope", "profile_values": {"PROFILE-BROWSER-PHOENIX": "required", "PROFILE-BROWSER-PLUG": "required", "PROFILE-HEADLESS": "test-double"}},
+    {"id": "CAP-SESSIONS", "name": "sessions", "profile_values": {"PROFILE-BROWSER-PHOENIX": "required", "PROFILE-BROWSER-PLUG": "host-provided", "PROFILE-HEADLESS": "not-applicable"}},
+    {"id": "CAP-CSRF", "name": "csrf-origin-protection", "profile_values": {"PROFILE-BROWSER-PHOENIX": "required", "PROFILE-BROWSER-PLUG": "host-provided", "PROFILE-HEADLESS": "not-applicable"}},
+    {"id": "CAP-TYPED-COMMANDS", "name": "typed-remote-commands", "profile_values": {"PROFILE-BROWSER-PHOENIX": "required", "PROFILE-BROWSER-PLUG": "required", "PROFILE-HEADLESS": "test-double"}},
+    {"id": "CAP-PUSHES", "name": "server-pushes", "profile_values": {"PROFILE-BROWSER-PHOENIX": "required", "PROFILE-BROWSER-PLUG": "absent", "PROFILE-HEADLESS": "test-double"}},
+    {"id": "CAP-REALTIME", "name": "realtime-transport", "profile_values": {"PROFILE-BROWSER-PHOENIX": "required", "PROFILE-BROWSER-PLUG": "absent", "PROFILE-HEADLESS": "test-double"}},
+    {"id": "CAP-UPLOADS", "name": "upload-protocol", "profile_values": {"PROFILE-BROWSER-PHOENIX": "conditional", "PROFILE-BROWSER-PLUG": "absent", "PROFILE-HEADLESS": "test-double"}},
+    {"id": "CAP-NAVIGATION", "name": "navigation-integration", "profile_values": {"PROFILE-BROWSER-PHOENIX": "required", "PROFILE-BROWSER-PLUG": "host-provided", "PROFILE-HEADLESS": "test-double"}},
+    {"id": "CAP-PRERENDER", "name": "prerender", "profile_values": {"PROFILE-BROWSER-PHOENIX": "conditional", "PROFILE-BROWSER-PLUG": "absent", "PROFILE-HEADLESS": "test-double"}},
+    {"id": "CAP-ACTIVATION", "name": "activation", "profile_values": {"PROFILE-BROWSER-PHOENIX": "conditional", "PROFILE-BROWSER-PLUG": "absent", "PROFILE-HEADLESS": "test-double"}},
+    {"id": "CAP-TELEMETRY", "name": "telemetry", "profile_values": {"PROFILE-BROWSER-PHOENIX": "required", "PROFILE-BROWSER-PLUG": "host-provided", "PROFILE-HEADLESS": "test-double"}}
+  ],
+  "plug_transitive_exclusions": [
+    "blazex_phoenix",
+    "blazex_renderer_dom_liveview",
+    "phoenix-or-liveview-package-or-application",
+    "local-live-view-package-or-application"
+  ],
+  "plug_replaceability_rules": [
+    "session-projection-through-public-hook",
+    "origin-csrf-through-public-hook",
+    "typed-http-command-handler",
+    "standard-navigation",
+    "telemetry-callback",
+    "new-named-adapter-and-profile-for-any-additional-capability"
   ],
   "unresolved_bh01_inputs": [
     "exact-version-pins",

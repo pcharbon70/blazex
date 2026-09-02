@@ -44,6 +44,34 @@ class BrowserProductEnvelopeValidatorTests(unittest.TestCase):
         errors = validate_contract(contract)
         self.assertTrue(any("must remain candidate before BH-01" in item for item in errors))
 
+    def test_missing_rendering_mode_is_rejected(self) -> None:
+        contract = copy.deepcopy(self.contract)
+        contract["rendering_modes"] = contract["rendering_modes"][1:]
+        errors = validate_contract(contract)
+        self.assertTrue(any("missing ids: MODE-STATIC-FALLBACK" in item for item in errors))
+
+    def test_incomplete_profile_capability_matrix_is_rejected(self) -> None:
+        contract = copy.deepcopy(self.contract)
+        del contract["profile_capabilities"][0]["profile_values"]["PROFILE-HEADLESS"]
+        errors = validate_contract(contract)
+        self.assertTrue(any("missing ids: PROFILE-HEADLESS" in item for item in errors))
+
+    def test_plug_cannot_inherit_realtime(self) -> None:
+        contract = copy.deepcopy(self.contract)
+        for capability in contract["profile_capabilities"]:
+            if capability["id"] == "CAP-REALTIME":
+                capability["profile_values"]["PROFILE-BROWSER-PLUG"] = "required"
+        errors = validate_contract(contract)
+        self.assertTrue(any("browser/Plug baseline must be absent" in item for item in errors))
+
+    def test_plug_renderer_must_remain_standalone(self) -> None:
+        contract = copy.deepcopy(self.contract)
+        for profile in contract["profiles"]:
+            if profile["id"] == "PROFILE-BROWSER-PLUG":
+                profile["renderer"] = "liveview-dom"
+        errors = validate_contract(contract)
+        self.assertTrue(any("renderer must be standalone-dom" in item for item in errors))
+
 
 if __name__ == "__main__":
     unittest.main()

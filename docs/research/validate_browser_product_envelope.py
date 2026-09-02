@@ -67,6 +67,59 @@ BH01_RECORDS = {
     "REC-SECURITY",
     "REC-SUPPORT-MATRIX",
 }
+RENDERING_MODES = {
+    "MODE-STATIC-FALLBACK",
+    "MODE-SERVER-RENDERED",
+    "MODE-PRERENDERED",
+    "MODE-BROWSER-LOCAL",
+    "MODE-ACTIVATED",
+    "MODE-HEADLESS",
+}
+PROFILE_CAPABILITY_STATUSES = {
+    "PCS-REQUIRED": "required",
+    "PCS-CONDITIONAL": "conditional",
+    "PCS-HOST-PROVIDED": "host-provided",
+    "PCS-TEST-DOUBLE": "test-double",
+    "PCS-ABSENT": "absent",
+    "PCS-NOT-APPLICABLE": "not-applicable",
+}
+PROFILES = {
+    "PROFILE-BROWSER-PHOENIX",
+    "PROFILE-BROWSER-PLUG",
+    "PROFILE-HEADLESS",
+}
+ADAPTERS = {
+    "ADAPTER-PHOENIX-SERVER",
+    "ADAPTER-PLUG-SERVER",
+    "ADAPTER-LIVEVIEW-DOM",
+}
+PROFILE_CAPABILITIES = {
+    "CAP-STATIC-DELIVERY",
+    "CAP-BOOTSTRAP",
+    "CAP-SESSIONS",
+    "CAP-CSRF",
+    "CAP-TYPED-COMMANDS",
+    "CAP-PUSHES",
+    "CAP-REALTIME",
+    "CAP-UPLOADS",
+    "CAP-NAVIGATION",
+    "CAP-PRERENDER",
+    "CAP-ACTIVATION",
+    "CAP-TELEMETRY",
+}
+PLUG_ABSENT_CAPABILITIES = {
+    "CAP-PUSHES",
+    "CAP-REALTIME",
+    "CAP-UPLOADS",
+    "CAP-PRERENDER",
+    "CAP-ACTIVATION",
+}
+PLUG_TRANSITIVE_EXCLUSIONS = {
+    "blazex_phoenix",
+    "blazex_renderer_dom_liveview",
+    "phoenix-or-liveview-package-or-application",
+    "local-live-view-package-or-application",
+}
 
 
 def load_contract(path: Path = CONTRACT_PATH) -> dict[str, Any]:
@@ -239,6 +292,141 @@ def validate_section_2_1(contract: dict[str, Any], errors: list[str]) -> None:
         errors.append("unresolved_bh01_inputs: must be a non-empty array")
 
 
+def validate_section_2_2(contract: dict[str, Any], errors: list[str]) -> None:
+    """Validate rendering, profile, adapter, and capability records."""
+
+    modes = indexed_records(contract, "rendering_modes", errors)
+    require_exact_ids(set(modes), RENDERING_MODES, "rendering modes", errors)
+    mode_required = {
+        "id",
+        "name",
+        "logic_location",
+        "surface_owner",
+        "pre_activation_output",
+        "identity",
+        "public_state",
+        "effects",
+        "event_owner",
+        "focus",
+        "accessibility",
+        "mismatch",
+        "replacement",
+        "disposal",
+        "bh00_status",
+        "browser_1_0_disposition",
+        "evidence_gate",
+    }
+    allowed_dispositions = {"committed", "conditional", "conformance-only"}
+    for record_id, record in modes.items():
+        require_keys(record, mode_required, record_id, errors)
+        if record.get("bh00_status") != "defined":
+            errors.append(f"{record_id}: bh00_status must be defined")
+        if record.get("browser_1_0_disposition") not in allowed_dispositions:
+            errors.append(f"{record_id}: invalid browser_1_0_disposition")
+        for field in mode_required - {"id"}:
+            if not isinstance(record.get(field), str) or not record.get(field):
+                errors.append(f"{record_id}: {field} must be a non-empty string")
+
+    capability_statuses = indexed_records(
+        contract, "profile_capability_status_vocabulary", errors
+    )
+    require_exact_ids(
+        set(capability_statuses),
+        set(PROFILE_CAPABILITY_STATUSES),
+        "profile capability statuses",
+        errors,
+    )
+    for record_id, expected_status in PROFILE_CAPABILITY_STATUSES.items():
+        record = capability_statuses.get(record_id)
+        if not record:
+            continue
+        require_keys(record, {"id", "status", "meaning"}, record_id, errors)
+        if record.get("status") != expected_status:
+            errors.append(f"{record_id}: status must be {expected_status}")
+
+    profiles = indexed_records(contract, "profiles", errors)
+    require_exact_ids(set(profiles), PROFILES, "profiles", errors)
+    profile_required = {
+        "id",
+        "runtime",
+        "execution_host",
+        "renderer",
+        "capability_provider",
+        "server_adapter",
+        "shell",
+        "evidence_state",
+        "optional_adapters",
+        "forbidden_dependencies",
+    }
+    for record_id, record in profiles.items():
+        require_keys(record, profile_required, record_id, errors)
+        if record.get("evidence_state") != "planned-unproven":
+            errors.append(f"{record_id}: evidence_state must be planned-unproven")
+        if not isinstance(record.get("optional_adapters"), list):
+            errors.append(f"{record_id}: optional_adapters must be an array")
+        forbidden = record.get("forbidden_dependencies")
+        if not isinstance(forbidden, list) or not forbidden:
+            errors.append(f"{record_id}: forbidden_dependencies must be non-empty")
+
+    plug = profiles.get("PROFILE-BROWSER-PLUG", {})
+    if plug.get("renderer") != "standalone-dom":
+        errors.append("PROFILE-BROWSER-PLUG: renderer must be standalone-dom")
+    if plug.get("optional_adapters"):
+        errors.append("PROFILE-BROWSER-PLUG: optional_adapters must remain empty")
+    phoenix = profiles.get("PROFILE-BROWSER-PHOENIX", {})
+    if phoenix.get("execution_host") != "browser":
+        errors.append("PROFILE-BROWSER-PHOENIX: browser must remain execution host")
+
+    adapters = indexed_records(contract, "adapters", errors)
+    require_exact_ids(set(adapters), ADAPTERS, "adapters", errors)
+    for record_id, record in adapters.items():
+        require_keys(
+            record,
+            {"id", "category", "profiles", "owns", "must_not_own"},
+            record_id,
+            errors,
+        )
+        for field in ("profiles", "owns", "must_not_own"):
+            value = record.get(field)
+            if not isinstance(value, list) or not value:
+                errors.append(f"{record_id}: {field} must be a non-empty array")
+
+    capabilities = indexed_records(contract, "profile_capabilities", errors)
+    require_exact_ids(
+        set(capabilities), PROFILE_CAPABILITIES, "profile capabilities", errors
+    )
+    allowed_values = set(PROFILE_CAPABILITY_STATUSES.values())
+    for record_id, record in capabilities.items():
+        require_keys(record, {"id", "name", "profile_values"}, record_id, errors)
+        values = record.get("profile_values")
+        if not isinstance(values, dict):
+            errors.append(f"{record_id}: profile_values must be an object")
+            continue
+        require_exact_ids(set(values), PROFILES, f"{record_id} profile matrix", errors)
+        for profile_id, value in values.items():
+            if value not in allowed_values:
+                errors.append(f"{record_id}: invalid value {value} for {profile_id}")
+        if (
+            record_id in PLUG_ABSENT_CAPABILITIES
+            and values.get("PROFILE-BROWSER-PLUG") != "absent"
+        ):
+            errors.append(f"{record_id}: browser/Plug baseline must be absent")
+
+    exclusions = contract.get("plug_transitive_exclusions")
+    if not isinstance(exclusions, list):
+        errors.append("plug_transitive_exclusions: must be an array")
+    else:
+        require_exact_ids(
+            set(exclusions),
+            PLUG_TRANSITIVE_EXCLUSIONS,
+            "Plug transitive exclusions",
+            errors,
+        )
+    replaceability = contract.get("plug_replaceability_rules")
+    if not isinstance(replaceability, list) or not replaceability:
+        errors.append("plug_replaceability_rules: must be a non-empty array")
+
+
 def validate_contract(contract: dict[str, Any]) -> list[str]:
     """Return deterministic validation errors for the product envelope."""
 
@@ -265,20 +453,30 @@ def validate_contract(contract: dict[str, Any]) -> list[str]:
         errors.append("contract: evidence_state must remain policy-only-unproven in BH-00")
 
     validate_section_2_1(contract, errors)
+    if stage in STAGES[1:]:
+        validate_section_2_2(contract, errors)
     return errors
 
 
 def summary(contract: dict[str, Any]) -> str:
     """Return a compact successful-validation summary."""
 
-    return (
+    result = (
         "Browser product envelope validation passed: "
         f"stage {contract['completion_stage']}; "
         f"{len(contract['browser_configurations'])} browser configurations, "
         f"{len(contract['evidence_classes'])} evidence classes, "
         f"{len(contract['toolchain_inputs'])} toolchain inputs, and "
-        f"{len(contract['bh01_required_records'])} BH-01 records checked."
+        f"{len(contract['bh01_required_records'])} BH-01 records"
     )
+    stage = contract["completion_stage"]
+    if stage in STAGES[1:]:
+        result += (
+            f", {len(contract['rendering_modes'])} rendering modes, "
+            f"{len(contract['profiles'])} profiles, and "
+            f"{len(contract['profile_capabilities'])} profile capabilities"
+        )
+    return result + " checked."
 
 
 def main() -> int:
