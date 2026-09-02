@@ -29,6 +29,7 @@ should explain why its links belong together rather than merely list files.
 
 ### Documents
 
+- [BlazeX repository ownership and dependency map](blazex-repository-ownership-and-dependency-map.md) — assigns every current package, profile, browser bridge, integration suite, and experiment a primary responsibility and records valid and invalid dependency graphs.
 - [BlazeX Research](home.md) — the selective entry point to the archive.
 - [Blazor framework semantics](blazor-framework-semantics.md) — routes through
   the lower-level renderer, lifecycle, forms, navigation, and host concepts

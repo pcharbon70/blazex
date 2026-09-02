@@ -51,6 +51,10 @@ provider, and remote adapter.
 
 ## Topic map
 
+- [BlazeX repository ownership and dependency
+  map](blazex-repository-ownership-and-dependency-map.md) — enumerates all
+  current monorepo owners, allowed dependency directions, profile
+  compositions, invalid edges, and experiment promotion rules.
 - [Host-neutral and native-renderer
   architecture](host-neutral-and-native-renderer-architecture.md) — routes
   through non-web Wasm, embedded runtimes, semantic UI, renderer protocols,

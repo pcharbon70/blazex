@@ -45,28 +45,28 @@ Back to milestone: [README](README.md)
       - [x] 1.1.2.2 Subtask - Define local, remote, server-rendered, static, prerendered, interactive, activated, headless, portable, renderer-specific, and host-specific.
       - [x] 1.1.2.3 Subtask - Publish usage examples and anti-examples that distinguish MudBlazor inspiration from .NET, Razor, API, package, binary, or renderer compatibility.
 
-  - [ ] 1.2 Section - Reconcile architecture axes with repository ownership.
+  - [x] 1.2 Section - Reconcile architecture axes with repository ownership.
 
     Turn the conceptual decomposition into explicit package, profile,
     integration, JavaScript, and experiment boundaries without activating them.
 
-    - [ ] 1.2.1 Task - Publish the current ownership and dependency map.
+    - [x] 1.2.1 Task - Publish the current ownership and dependency map.
 
       Every architectural responsibility must have one primary repository home
       and an enforceable inward dependency direction.
 
-      - [ ] 1.2.1.1 Subtask - Map component lifecycle, effects, semantic UI, renderer contracts, concrete renderers, runtime adapters, host adapters, server integrations, build tooling, tests, and component families to current directories.
-      - [ ] 1.2.1.2 Subtask - Record allowed dependencies for each package class and forbid profiles, Phoenix, Plug, LiveView, DOM, JavaScript, Popcorn, or native toolkit types from flowing into host-neutral contracts.
-      - [ ] 1.2.1.3 Subtask - Distinguish supported package boundaries from illustrative future desktop, native-renderer, WebView, and non-browser runtime packages.
+      - [x] 1.2.1.1 Subtask - Map component lifecycle, effects, semantic UI, renderer contracts, concrete renderers, runtime adapters, host adapters, server integrations, build tooling, tests, and component families to current directories.
+      - [x] 1.2.1.2 Subtask - Record allowed dependencies for each package class and forbid profiles, Phoenix, Plug, LiveView, DOM, JavaScript, Popcorn, or native toolkit types from flowing into host-neutral contracts.
+      - [x] 1.2.1.3 Subtask - Distinguish supported package boundaries from illustrative future desktop, native-renderer, WebView, and non-browser runtime packages.
 
-    - [ ] 1.2.2 Task - Define profile composition and experiment boundaries.
+    - [x] 1.2.2 Task - Define profile composition and experiment boundaries.
 
       Executable products and bounded proofs must consume reusable contracts
       without becoming hidden framework roots.
 
-      - [ ] 1.2.2.1 Subtask - Define the browser/Phoenix, browser/Plug, and headless profile compositions and identify which shared packages each may consume.
-      - [ ] 1.2.2.2 Subtask - Require the Plug profile to exclude Phoenix, LiveView, LocalLiveView, and the LiveView DOM adapter directly and transitively.
-      - [ ] 1.2.2.3 Subtask - Define experiment promotion, retirement, and evidence-extraction rules using the BH-02 native renderer spike as the first bounded example.
+      - [x] 1.2.2.1 Subtask - Define the browser/Phoenix, browser/Plug, and headless profile compositions and identify which shared packages each may consume.
+      - [x] 1.2.2.2 Subtask - Require the Plug profile to exclude Phoenix, LiveView, LocalLiveView, and the LiveView DOM adapter directly and transitively.
+      - [x] 1.2.2.3 Subtask - Define experiment promotion, retirement, and evidence-extraction rules using the BH-02 native renderer spike as the first bounded example.
 
   - [ ] 1.3 Section - Establish durable architecture decision governance.
 
