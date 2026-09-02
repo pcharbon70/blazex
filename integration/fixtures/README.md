@@ -7,5 +7,7 @@ and benchmarks.
 Fixtures should be small, versioned, and independent of one test runner wherever
 possible so multiple hosts can consume the same behavioral evidence.
 
-Status: directory scaffold only.
+The BH-02 headless, DOM, and native-spike implementations must consume the same
+portable interaction traces from this directory.
 
+Status: directory scaffold only.

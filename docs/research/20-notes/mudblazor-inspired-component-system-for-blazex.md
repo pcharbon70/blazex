@@ -545,7 +545,7 @@ final acceptance regardless of client UI state.
 | `MudTreeView`, item/toggle parts | lazy hierarchical provider and controlled expansion/selection | stable node IDs, async children, cancellation, keyboard tree pattern | F4 |
 | `MudVirtualize` | measured visible-range list with overscan/provider protocol | resize/scroll observer, request generations, anchoring, accessibility | F4 |
 | `MudTimeline`, `MudTimelineItem` | vertical/horizontal ordered event layout | semantic list/time, alternate alignment, responsive/RTL | F1/F2 |
-| `MudChart` and bar/line/pie/donut/radar/rose/heat-map/Sankey/scatter/stacked/time-series families | optional `blazex_ui_charts` renderer package with typed series/options | DOM SVG or native scene, scale/layout, tooltip, legend, resize, accessibility, large data | F4 |
+| `MudChart` and bar/line/pie/donut/radar/rose/heat-map/Sankey/scatter/stacked/time-series families | optional `blazex_charts` package with typed series/options | DOM SVG or native scene, scale/layout, tooltip, legend, resize, accessibility, large data | F4 |
 
 ### 10.1 Table versus DataGrid
 
@@ -654,28 +654,32 @@ that every Phoenix service is silently recreated.
 
 | Package | Responsibility |
 | --- | --- |
-| `blazex_ui_core` | semantic nodes/regions, IDs, controlled state, events, variants, telemetry |
-| `blazex_ui_theme` | renderer-neutral tokens, light/dark/high-contrast, direction, adaptive classes |
-| `blazex_ui_effects` | focus, resize, scroll, key, pointer, surface, measurement, opaque file-resource effects |
-| `blazex_ui_renderer` | renderer behavior, capabilities, resources, generations, diagnostics |
-| `blazex_ui_renderer_headless` | normalized semantic tree/accessibility and event-trace oracle |
-| `blazex_ui_renderer_dom` | HTML/HEEx/LiveView lowering, ARIA, CSS, DOM effects |
-| `blazex_ui_renderer_native` | toolkit-neutral native control/event/resource adapter contract |
-| `blazex_ui_surfaces` | overlay, popover, tooltip, menu, dialog, snackbar, focus trap |
-| `blazex_ui_forms` | form/field state, conversion, validation, inputs, select/autocomplete, pickers |
-| `blazex_ui_layout` | app shell, drawer, app bar, container, grid, stack, navigation, tabs |
-| `blazex_ui_data` | list, table, DataGrid, tree, virtualizer, provider protocols |
-| `blazex_ui_charts` | optional renderer-specific SVG/native-scene charts, scales, legends, tooltip integration |
-| `blazex_ui_icons` | icon manifest, sprite generation, selected icon packs, resolver |
-| `blazex_ui_phoenix` | trusted route/command/upload/data/telemetry and web renderer adapters |
-| `blazex_ui_host_browser` | browser loader and Web API capabilities |
-| `blazex_ui_host_desktop` | native window/event-loop and OS capability protocol |
-| `blazex_ui_test` | cross-runtime/renderer fixtures, accessibility, event, and visual harnesses |
+| `blazex_core` | lifecycle, IDs, controlled state, semantic events, commands, telemetry contracts |
+| `blazex_effects` | host-neutral focus, measurement, pointer, storage, file-resource, ownership, and fallback effects |
+| `blazex_ui_tree` | semantic nodes/regions, layout, tokens, accessibility, and diffs |
+| `blazex_renderer` | renderer behavior, capabilities, generations, and diagnostics |
+| `blazex_renderer_headless` | normalized semantic tree/accessibility and event-trace oracle |
+| `blazex_renderer_dom` | standalone HTML/DOM lowering, ARIA, CSS, focus, and DOM events |
+| `blazex_renderer_dom_liveview` | optional LiveView/LocalLiveView lowering and patch integration |
+| `blazex_ui` | themes, icons, layout, navigation, presentational, and action components |
+| `blazex_surfaces` | overlay, popover, tooltip, menu, dialog, snackbar, and focus scopes |
+| `blazex_forms` | form/field state, conversion, validation, inputs, select/autocomplete, and pickers |
+| `blazex_data` | list, table, DataGrid, tree, virtualizer, and provider protocols |
+| `blazex_charts` | optional chart contracts, interactions, accessibility, and renderer lowering requirements |
+| `blazex_host_browser` | browser loader and concrete Web API capability provider |
+| `blazex_phoenix` | trusted routes, commands, uploads, data, telemetry, SSR, and Phoenix integration |
+| `blazex_plug` | smaller static/bootstrap/HTTP server integration without Phoenix or LiveView |
+| `blazex_build` | reachability, client safety, manifests, assets, and feature bundles |
+| `blazex_test` | cross-runtime/renderer fixtures, accessibility, event, and visual harnesses |
 
-An umbrella `blazex_ui` dependency may select defaults, but every profile must
-retain only reachable modules, renderer assets, effects, and icons. Installing
-a server, browser, or native-renderer package must not leak its implementation
-types into portable components or automatically ship them to another profile.
+The initial component families are grouped into independently meaningful
+packages rather than one package per namespace. A package may split later when
+it needs a distinct release cadence, dependency budget, or support policy.
+Every profile must retain only reachable modules, renderer assets, effects, and
+icons. Installing a server, browser, or renderer package must not leak its
+implementation types into portable components or automatically ship them to
+another profile. The native renderer remains an experiment until BH-02 evidence
+justifies a supported package.
 
 ## 14. Illustrative Elixir APIs and DOM adapter syntax
 

@@ -11,7 +11,6 @@ contracts; reusable behavior moves into packages.
 
 The initial profiles are:
 
-- `browser_phoenix` — canonical first browser host and reference application.
-- `browser_plug` — smaller browser host proving Phoenix independence.
+- `browser_phoenix` — canonical first browser/Phoenix reference application.
+- `browser_plug` — smaller browser host proving Phoenix and LiveView independence.
 - `headless` — deterministic nonvisual composition for conformance and tooling.
-

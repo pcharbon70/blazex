@@ -11,6 +11,7 @@ published independently.
 ## Host-neutral foundation
 
 - `blazex_core` — component model, lifecycle, identity, state, and events.
+- `blazex_effects` — host-neutral effects, capabilities, and resource ownership.
 - `blazex_ui_tree` — versioned semantic UI representation.
 - `blazex_renderer` — renderer contracts shared by all backends.
 - `blazex_renderer_headless` — deterministic nonvisual renderer.
@@ -29,7 +30,8 @@ published independently.
 
 - `blazex_runtime_popcorn` — Popcorn/AtomVM runtime integration.
 - `blazex_host_browser` — browser host capabilities and lifecycle.
-- `blazex_renderer_dom` — DOM renderer backend.
+- `blazex_renderer_dom` — standalone DOM renderer with no Phoenix dependency.
+- `blazex_renderer_dom_liveview` — optional LiveView/LocalLiveView DOM lowering.
 
 ## Server integrations
 
@@ -37,5 +39,6 @@ published independently.
 - `blazex_plug` — smaller framework-independent Plug integration.
 
 Packages must depend toward the host-neutral foundation. No server, runtime, or
-renderer adapter may become part of the public component semantics.
-
+renderer adapter may become part of the public component semantics. The Plug
+profile must not depend on `blazex_renderer_dom_liveview` directly or
+transitively.

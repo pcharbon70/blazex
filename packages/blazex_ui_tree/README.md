@@ -6,8 +6,8 @@ styling tokens, accessibility, resources, identity, and incremental changes.
 
 The representation must describe intent without embedding HTML, CSS, DOM, or
 native-toolkit objects. Renderer-specific lowering belongs in renderer
-packages.
+packages. The tree may refer to opaque resource identities, but effect and
+resource lifecycle belongs to `blazex_effects`.
 
 Status: directory scaffold only; create the Mix project when its implementation
 milestone begins.
-

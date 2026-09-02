@@ -423,11 +423,18 @@ HTTP server adapter (normally Bandit; Cowboy is also supported)
 
 That separation is useful for BlazeX:
 
-- A **Plug-only host** can serve Wasm, JavaScript, `.avm`, manifests, headers, and HTTP endpoints.
-- A **Phoenix host** adds conventional routing, asset integration, sessions, CSRF, verified routes, Channels, PubSub, HEEx components, and LiveView's renderer.
-- A **Phoenix LiveView host** can also prerender local components and bridge server events using existing conventions.
+- A **Plug-only server integration** can serve Wasm, JavaScript, `.avm`,
+  manifests, headers, and HTTP endpoints.
+- A **Phoenix server integration** adds conventional routing, asset integration,
+  sessions, CSRF, verified routes, Channels, PubSub, HEEx components, and
+  optional LiveView integration.
+- A **browser/Phoenix profile with LiveView** can also prerender local
+  components and bridge server events using existing conventions.
 
-Phoenix should be the primary integration because the desired component semantics already overlap heavily with HEEx and LiveView. Plug remains a valid lower-level host, not the lowest-common-denominator API that constrains the whole framework.
+Phoenix should be the primary server integration because the desired component
+semantics already overlap heavily with HEEx and LiveView. Plug remains a valid
+smaller server integration, not the lowest-common-denominator API that
+constrains the whole framework. In both cases the browser is the execution host.
 
 ### 4.2 Plug: the minimal host contract
 
@@ -538,7 +545,9 @@ For BlazeX, Channels are an optional server bridge, not the local component runt
 - connection loss should not terminate purely local state;
 - reconnect should have an explicit resynchronization protocol.
 
-A Plug-only host can implement an equivalent HTTP/WebSocket transport, but it should conform to a small BlazeX protocol rather than recreate every Phoenix Channel feature.
+A Plug-only server integration can implement an equivalent HTTP/WebSocket
+transport, but it should conform to a small BlazeX protocol rather than
+recreate every Phoenix Channel feature.
 
 ### 4.7 LiveView lifecycle and process model
 
@@ -1092,7 +1101,7 @@ defmodule ShopWeb.CartLocal do
 end
 ```
 
-And a Phoenix host:
+And a Phoenix integration inside the browser/Phoenix profile:
 
 ```elixir
 def render(assigns) do
@@ -1645,7 +1654,7 @@ Each test records callback traces, normalized render output, diffs, effects, and
 
 Phoenix:
 
-- controller and LiveView hosts;
+- controller embedding and optional LiveView integration;
 - session/CSRF/bootstrap scope;
 - Channel commands, replies, PubSub pushes, mirror sync, reconnect;
 - deploy/build mismatch and node failover;
@@ -1720,7 +1729,7 @@ Deliverables:
 - explicit prop, event, effect, and server-command schemas;
 - one shared runtime loader and multiple view instances;
 - manifest/build task with compatibility and secret diagnostics;
-- Phoenix host component, static integration, and one Channel command bridge;
+- Phoenix integration component, static delivery, and one Channel command bridge;
 - versioned renderer adapter with golden tests;
 - crash fallback and runtime diagnostics.
 

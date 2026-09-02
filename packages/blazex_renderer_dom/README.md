@@ -1,13 +1,14 @@
 # BlazeX DOM Renderer
 
-Lowers the semantic UI tree into browser DOM operations and maps native browser
-events back into BlazeX semantic events. It will own DOM reconciliation,
-attributes, styles, accessibility mappings, focus, and browser surface effects.
+Lowers the semantic UI tree into server-framework-independent browser DOM
+operations and maps native browser events back into BlazeX semantic events. It
+will own DOM reconciliation, attributes, styles, accessibility mappings, focus,
+and browser surface effects.
 
-Any dependency on LiveView, LocalLiveView, or browser implementation details
-must be explicit and version-pinned here rather than leaking into component or
-renderer contracts.
+This package must not depend on Phoenix, LiveView, LocalLiveView, or Plug. The
+optional LiveView patching integration belongs in
+`blazex_renderer_dom_liveview`, allowing the Plug and future WebView profiles to
+reuse the DOM renderer without inheriting Phoenix dependencies.
 
 Status: directory scaffold only; create the Mix project when its implementation
 milestone begins.
-

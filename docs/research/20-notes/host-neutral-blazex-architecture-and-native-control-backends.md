@@ -252,17 +252,19 @@ minimum contract should cover:
 - expose measurement only through capability effects; and
 - recover or remount after renderer failure.
 
-The first implementation may lower the semantic tree into HEEx/LiveView
-render data. That lowering is inside `blazex_renderer_dom_liveview`; no
-portable component may observe LiveView diff structs or DOM handles.
+The browser implementation first lowers the semantic tree through the
+server-framework-independent `blazex_renderer_dom` contract. Optional lowering
+to HEEx, LiveView, or LocalLiveView render and patch data is isolated in
+`blazex_renderer_dom_liveview`; no portable component or standalone DOM code may
+observe LiveView diff structs or DOM handles.
 
 ### 4.1 Renderer classes
 
 | Renderer | Materialization | Intended role |
 | --- | --- | --- |
 | Headless | normalized semantic tree and event trace | first conformance oracle and tests |
-| DOM/LiveView | HTML nodes, ARIA, CSS, LiveView patching | first browser/Phoenix implementation |
-| DOM standalone | HTML nodes without a server LiveView dependency | later Plug/browser and webview profile |
+| DOM standalone | HTML nodes without a server framework dependency | reusable browser renderer for Phoenix, Plug, and future webview profiles |
+| DOM/LiveView | standalone DOM semantics plus LiveView patching | optional browser/Phoenix integration adapter |
 | Native widget | platform/toolkit controls and native accessibility objects | ultimate desktop control target |
 | Custom scene | retained layout/drawing tree, possibly GPU-backed | optional highly styled or data-visualization backend |
 
@@ -404,29 +406,59 @@ coalescing prevent a fast process from flooding the native UI queue.
 
 ## 8. Revised package boundaries
 
+The current monorepo scaffold makes standalone DOM rendering reusable and
+keeps LiveView coupling optional. These are package boundaries, not merely
+module namespaces:
+
 | Package | Responsibility | Forbidden dependencies |
 | --- | --- | --- |
 | `blazex_core` | lifecycle, state, identity, semantic events, commands | Phoenix, HTML, DOM, native toolkit |
-| `blazex_ui_tree` | versioned semantic nodes, properties, accessibility, diffs | renderer implementations |
-| `blazex_ui_tokens` | semantic color, typography, spacing, shape, motion, density | CSS-only values as canonical state |
-| `blazex_ui_effects` | capability requests, resources, ownership, cancellation | JavaScript or OS object types |
+| `blazex_effects` | capability requests, grants, resources, ownership, cancellation, fallback | JavaScript, DOM, OS, or toolkit object types |
+| `blazex_ui_tree` | versioned semantic nodes, layout, tokens, accessibility, resource identities, diffs | renderer implementations or CSS-only values as canonical state |
 | `blazex_renderer` | renderer behavior, capability negotiation, diagnostics | concrete renderer code |
 | `blazex_renderer_headless` | normalized tree and event oracle | Phoenix/browser/native toolkit |
-| `blazex_renderer_dom_liveview` | semantic-tree lowering to HEEx/LiveView/DOM | native toolkit |
-| `blazex_renderer_dom` | future standalone DOM implementation | Phoenix server internals |
-| `blazex_renderer_native` | native renderer protocol helpers and toolkit-neutral resources | one platform toolkit in core |
+| `blazex_renderer_dom` | standalone DOM operations, events, accessibility, focus, and reconciliation | Phoenix, LiveView, LocalLiveView, Plug |
+| `blazex_renderer_dom_liveview` | optional LiveView/LocalLiveView lowering and patch integration | portable component ownership or use by the Plug profile |
 | `blazex_runtime_popcorn` | browser AtomVM boot and transport | component catalog policy |
-| `blazex_runtime_atomvm_host` | future native/non-browser AtomVM adapter | renderer selection |
 | `blazex_host_browser` | Web API effects and loader | portable component logic |
-| `blazex_host_desktop` | desktop windows/services and native event loop contract | application domain logic |
 | `blazex_phoenix` | trusted commands, auth, uploads, routes, SSR/web integration | renderer-neutral core ownership |
-| `blazex_plug` | static/bootstrap/HTTP transport baseline | Phoenix-only facilities |
-| `blazex_ui_*` | MudBlazor-inspired semantic component families | direct host/runtime APIs |
+| `blazex_plug` | static/bootstrap/HTTP transport baseline | Phoenix, LiveView, or LocalLiveView facilities |
+| `blazex_ui` | design foundation and general MudBlazor-inspired components | direct host/runtime APIs |
+| `blazex_forms` | portable form, field, validation, and input semantics | Phoenix changesets as canonical state |
+| `blazex_surfaces` | portable overlay, menu, dialog, and transient-surface semantics | DOM portals or toolkit windows as canonical state |
+| `blazex_data` | provider, table, grid, tree, and virtualization contracts | direct server or renderer calls |
+| `blazex_charts` | optional chart data, interaction, and accessibility contracts | one drawing backend as canonical state |
+| `blazex_build` | client safety, reachability, bundles, manifests, and diagnostics | runtime-host behavior |
 | `blazex_test` | cross-runtime and cross-renderer contract suites | production-only assumptions |
 
-A toolkit-specific backend belongs in its own package, for example a future
-`blazex_renderer_gtk`, `blazex_renderer_winui`, or another selected
-cross-platform toolkit adapter. Those names are illustrative, not decisions.
+Future production desktop and non-browser runtime adapters are deliberately not
+part of the initial scaffold. A toolkit-specific backend belongs in its own
+package, for example a future `blazex_renderer_gtk`,
+`blazex_renderer_winui`, or another selected cross-platform toolkit adapter.
+Likewise, native/non-browser AtomVM and desktop host adapters would become
+separate packages. Those names are illustrative, not decisions. The BH-02
+native proof remains in `experiments/native_renderer_spike` until its evidence
+justifies a supported package.
+
+### 8.1 Monorepo composition boundaries
+
+The remaining top-level directories compose and verify packages without owning
+portable framework contracts:
+
+| Directory | Responsibility |
+| --- | --- |
+| `js/blazex_runtime` | narrow browser loader, host-import, event, transport, effect, and diagnostic bridge |
+| `profiles/browser_phoenix` | canonical executable browser composition with Phoenix and optional LiveView integration |
+| `profiles/browser_plug` | standalone-DOM browser composition with Plug and no Phoenix or LiveView dependency |
+| `profiles/headless` | nonvisual composition for conformance, snapshots, and tooling |
+| `integration/fixtures` | shared semantic trees, components, events, resources, and expected outcomes |
+| `integration/conformance` | cross-runtime, cross-renderer, and cross-profile contracts |
+| `integration/benchmarks` | payload, startup, memory, event, rendering, and server-boundary measurements |
+| `experiments/native_renderer_spike` | disposable BH-02 native-control portability proof |
+
+Profiles may own lockfiles, configuration, releases, examples, and end-to-end
+tests. They must not become the source of reusable component, renderer, host,
+or server-integration behavior.
 
 ## 9. Component manifest amendment
 
@@ -439,7 +471,8 @@ component_protocol: 1
 runtimes: [beam, atomvm]
 renderers:
   required_semantics: [text_input, label, validation_message]
-  tested: [headless, dom_liveview]
+  tested: [headless, dom]
+  integrations: [dom_liveview]
   planned: [native_widget]
 capabilities:
   required: [ui.focus, ui.keyboard, ui.accessibility]
@@ -521,8 +554,9 @@ Before freezing F0 APIs:
   contracts;
 - build a headless renderer and deterministic golden format;
 - build a DOM lowering for a minimal vertical slice;
-- build a native-renderer spike that creates actual toolkit controls; this
-  proof toolkit need not be the eventual supported production backend;
+- build `experiments/native_renderer_spike` so that it creates actual toolkit
+  controls; this proof toolkit need not be the eventual supported production
+  backend;
 - run the same component state/event traces through both; and
 - prove mount, update, reorder, focus, validation, surface, and disposal
   behavior without DOM types in component code.
@@ -543,9 +577,10 @@ redesigned before catalog expansion.
 
 ### N1 — browser reference backend
 
-Proceed with Popcorn/AtomVM, LocalLiveView, Phoenix commands, DOM rendering,
-and browser effects, but only behind the N0 protocols. This remains the first
-feature-complete implementation and performance baseline.
+Proceed with Popcorn/AtomVM, standalone DOM rendering, optional LocalLiveView
+lowering, Phoenix commands, and browser effects, but only behind the N0
+protocols. This remains the first feature-complete implementation and
+performance baseline.
 
 ### N2 — desktop webview middle profile
 

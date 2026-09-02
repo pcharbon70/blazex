@@ -22,12 +22,13 @@ blazex/
 ├── js/             Browser-side JavaScript runtime packages
 ├── profiles/       Executable compositions of packages
 ├── integration/    Cross-package fixtures, conformance tests, and benchmarks
+├── experiments/    Bounded architecture proofs that are not product packages
 └── docs/research/  Research corpus, architecture notes, and planning
 ```
 
 The reusable packages represent independent architectural axes:
 
-- component semantics and semantic UI trees;
+- component semantics, effects, capabilities, and semantic UI trees;
 - renderer contracts and concrete renderer backends;
 - component families;
 - WebAssembly runtime and host capability adapters; and
@@ -43,9 +44,9 @@ Dependencies should flow from concrete hosts and profiles toward stable,
 host-neutral contracts:
 
 ```text
-component libraries -> core + semantic UI tree
+component libraries -> core + effects + semantic UI tree
 renderer backends   -> renderer contract + semantic UI tree
-host adapters       -> core/runtime contracts
+host adapters       -> effects + core/runtime contracts
 server adapters     -> host-neutral packages + their server framework
 profiles            -> the packages required for one executable composition
 ```
@@ -64,11 +65,12 @@ dependencies. This avoids committing prematurely to a single Mix umbrella and
 lets packages remain independently testable and publishable where useful.
 
 The initial executable target is [`profiles/browser_phoenix`](profiles/browser_phoenix/README.md).
-The Plug and headless profiles establish that Phoenix and the browser are
+Its standalone DOM renderer and LiveView-specific lowering are separate
+packages. The Plug profile uses only the standalone renderer, while the
+headless profile establishes that Phoenix, LiveView, and the browser are
 replaceable composition choices rather than core requirements.
 
 ## Research and planning
 
 The evidence base, architecture maps, design notes, and planning scaffold live
 under [`docs/research`](docs/research/README.md).
-
