@@ -32,6 +32,7 @@ ARCHIVE_DIRECTORIES = {
     "30-sources",
     "40-inquiries",
     "50-journal",
+    "60-planning",
     "90-archive",
     "assets",
     "templates",
@@ -270,7 +271,13 @@ def validate() -> tuple[list[str], dict[str, int]]:
             "journal": "50-journal",
         }
         expected = destinations.get(kind)
-        if top_name not in {"90-archive", "assets"} and expected and top_name != expected:
+        planning_note = kind == "note" and top_name == "60-planning"
+        if (
+            top_name not in {"90-archive", "assets"}
+            and expected
+            and top_name != expected
+            and not planning_note
+        ):
             errors.append(f"{relative(path)}: kind {kind!r} belongs in {expected}/")
 
     for path in sorted(ROOT.rglob("*.md")):

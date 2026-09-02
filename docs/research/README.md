@@ -25,6 +25,8 @@ maintenance conventions are defined in [`AGENTS.md`](AGENTS.md).
 - [`30-sources/`](30-sources/README.md) — reading notes and bibliographic records
 - [`40-inquiries/`](40-inquiries/README.md) — active research questions
 - [`50-journal/`](50-journal/README.md) — dated observations and experiments
+- [`60-planning/`](60-planning/README.md) — numbered implementation roadmaps
+  and completion evidence
 - [`90-archive/`](90-archive/README.md) — inactive or superseded material
 - [`assets/`](assets/README.md) — durable research attachments
 - [`templates/`](templates/README.md) — document and directory scaffolds

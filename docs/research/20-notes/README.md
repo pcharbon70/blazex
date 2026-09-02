@@ -30,6 +30,9 @@ Source summaries belong in `30-sources`; unresolved workbenches belong in
 
 ### Documents
 
+- [Browser host implementation milestones](browser-host-implementation-milestones.md) — consolidates the runtime, renderer, Phoenix/Plug, MudBlazor-inspired
+  catalog, resilience, activation, packaging, quality, and release work into
+  24 outcome-based milestones for the first production host.
 - [Blazor framework semantics beneath BlazeX](blazor-framework-semantics-beneath-blazex.md) — uses Blazor's framework APIs as lower-level design research for
   rendering, identity, forms, lifecycle, effects, and host services; it is not
   the target visual library and defines no .NET compatibility.

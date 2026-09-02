@@ -28,6 +28,10 @@ tests.
 
 ## Start here
 
+- [Browser host implementation
+  milestones](../20-notes/browser-host-implementation-milestones.md) turns the
+  F0–F4 dependency tiers into the consolidated BH-00–BH-23 browser delivery
+  and release program.
 - [MudBlazor-inspired component system for BlazeX](../20-notes/mudblazor-inspired-component-system-for-blazex.md) — complete architecture, exhaustive family disposition,
   native package model, component-by-component matrices, examples, and staged
   delivery plan.

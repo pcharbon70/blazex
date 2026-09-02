@@ -28,6 +28,10 @@ source creates a .NET compatibility objective.
 
 ## Start here
 
+- [The browser-host milestone
+  roadmap](../20-notes/browser-host-implementation-milestones.md) consolidates
+  all current findings into 24 ordered outcome gates from feasibility through
+  browser 1.0.
 - [The main synthesis](../20-notes/elixir-webassembly-component-framework-for-phoenix-and-plug.md)
   develops the complete comparison, recommended architecture, risks, and
   staged implementation plan.

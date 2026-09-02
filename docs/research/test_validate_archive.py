@@ -9,6 +9,7 @@ from pathlib import Path
 import jsonschema
 
 from validate_archive import (
+    ARCHIVE_DIRECTORIES,
     ROOT,
     github_heading_anchors,
     link_destination,
@@ -55,6 +56,11 @@ class FrontmatterSchemaTests(unittest.TestCase):
             "aliases": [],
         }
         self.assertNotEqual([], list(self.validator.iter_errors(metadata)))
+
+
+class ArchiveStructureTests(unittest.TestCase):
+    def test_planning_is_a_canonical_archive_directory(self) -> None:
+        self.assertIn("60-planning", ARCHIVE_DIRECTORIES)
 
 
 class MarkdownTests(unittest.TestCase):

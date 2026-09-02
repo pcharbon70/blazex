@@ -23,6 +23,10 @@ renderer target, with a webview shell retained as an intermediate profile.
 
 ## Start here
 
+- [Browser host implementation
+  milestones](../20-notes/browser-host-implementation-milestones.md) applies
+  the host-neutral constraints to the first production host while keeping the
+  native-control work limited to the early portability gate.
 - [Host-neutral BlazeX architecture and native control
   backends](../20-notes/host-neutral-blazex-architecture-and-native-control-backends.md) — authoritative decomposition, semantic render tree, capability protocol,
   native-control strategies, package boundaries, and N0–N4 gates.
