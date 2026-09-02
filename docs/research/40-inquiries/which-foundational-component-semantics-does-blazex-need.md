@@ -69,7 +69,7 @@ similar component name or static HTML demo is insufficient.
   syntax, or Blazor API names.
 - **H2 — P0 web composition is reusable behind an adapter:** attrs, slots,
   LiveComponents, HEEx keys, forms, and renderer diffs can implement the first
-  DOM backend, but portable composition requires semantic nodes/regions.
+  DOM renderer backend, but portable composition requires semantic nodes/regions.
 - **H3 — forms are the decisive P0 library:** a portable form state and input
   model will expose more real framework-design failures than another counter or
   button example.

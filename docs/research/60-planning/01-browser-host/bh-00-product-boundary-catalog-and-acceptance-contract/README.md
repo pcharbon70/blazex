@@ -52,14 +52,14 @@ BH-01 or later milestones and are excluded here.
 
 ## Ordered phases
 
-| Phase | Delivery | Dependency |
-| --- | --- | --- |
-| [1 — Terminology and Architecture Decision Baseline](phase-01-terminology-and-architecture-decision-baseline.md) | Freeze canonical vocabulary, independent architecture axes, package ownership, and durable decision governance. | Current research corpus and merged monorepo scaffold |
-| [2 — Browser Product and Support Envelope](phase-02-browser-product-and-support-envelope.md) | Define browser, toolchain, rendering-mode, server-integration, trust, deployment, and fallback claims without claiming feasibility. | Phase 1 |
-| [3 — Catalog Schema and Locked Inventory](phase-03-catalog-schema-and-locked-inventory.md) | Pin the MudBlazor reference, create stable BlazeX family identities, and establish a complete machine-validatable catalog. | Phases 1–2 |
-| [4 — Disposition, Capability, Fallback, and Portability Classification](phase-04-disposition-capability-fallback-and-portability-classification.md) | Assign every family a BlazeX disposition, delivery tier, package owner, capability contract, fallback, and backend-portability status. | Phase 3 |
-| [5 — Quality Budgets and Acceptance Traceability](phase-05-quality-budgets-and-acceptance-traceability.md) | Define measurable quality budgets and map every product and catalog claim to observable acceptance evidence. | Phases 2 and 4 |
-| [6 — Governance Review and BH-00 Acceptance](phase-06-governance-review-and-bh-00-acceptance.md) | Reconcile all records, conduct independent review, publish the versioned contract, and authorize or block BH-01 truthfully. | Phase 5 |
+| Phase | Status | Delivery | Dependency |
+| --- | --- | --- | --- |
+| [1 — Terminology and Architecture Decision Baseline](phase-01-terminology-and-architecture-decision-baseline.md) | complete | Freeze canonical vocabulary, independent architecture axes, package ownership, and durable decision governance. | Current research corpus and merged monorepo scaffold |
+| [2 — Browser Product and Support Envelope](phase-02-browser-product-and-support-envelope.md) | planned | Define browser, toolchain, rendering-mode, server-integration, trust, deployment, and fallback claims without claiming feasibility. | Phase 1 |
+| [3 — Catalog Schema and Locked Inventory](phase-03-catalog-schema-and-locked-inventory.md) | planned | Pin the MudBlazor reference, create stable BlazeX family identities, and establish a complete machine-validatable catalog. | Phases 1–2 |
+| [4 — Disposition, Capability, Fallback, and Portability Classification](phase-04-disposition-capability-fallback-and-portability-classification.md) | planned | Assign every family a BlazeX disposition, delivery tier, package owner, capability contract, fallback, and backend-portability status. | Phase 3 |
+| [5 — Quality Budgets and Acceptance Traceability](phase-05-quality-budgets-and-acceptance-traceability.md) | planned | Define measurable quality budgets and map every product and catalog claim to observable acceptance evidence. | Phases 2 and 4 |
+| [6 — Governance Review and BH-00 Acceptance](phase-06-governance-review-and-bh-00-acceptance.md) | planned | Reconcile all records, conduct independent review, publish the versioned contract, and authorize or block BH-01 truthfully. | Phase 5 |
 
 ## Shared conventions and delivery rules
 

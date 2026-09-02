@@ -52,7 +52,7 @@ The completed browser profile should include:
 - reproducible browser execution through a pinned and supported runtime stack;
 - a Phoenix-first server-integration profile with secure commands, server
   pushes, navigation, and deployment integration;
-- a smaller documented Plug hosting profile;
+- a smaller documented Plug server-integration profile;
 - a BlazeX-owned design system and component catalog inspired by MudBlazor;
 - forms, navigation, surfaces, browser capabilities, data components, and
   optional advanced packages;
@@ -555,7 +555,7 @@ browser component without manual asset copying or accidental inclusion of its
 entire server dependency graph. Installation produces an explainable manifest,
 predictable payload, and explicit compatibility result.
 
-### BH-20 — Plug hosting baseline
+### BH-20 — Plug server-integration baseline
 
 **Goal.** Demonstrate that the browser host is not inseparable from the full
 Phoenix stack while keeping the initial Plug promise intentionally smaller.
@@ -564,7 +564,7 @@ Phoenix stack while keeping the initial Plug promise intentionally smaller.
 runtime headers, signed bootstrap data, public props, typed HTTP commands,
 host-provided session and authorization hooks, and clear fallback behavior in
 an ordinary Plug application. Document which Phoenix capabilities—such as
-Channels, PubSub, LiveView hosting, realtime, uploads, and prerender—are absent,
+Channels, PubSub, LiveView integration, realtime, uploads, and prerender—are absent,
 optional, or require separate adapters.
 
 **Repository ownership.** Reusable HTTP and bootstrap integration belongs to

@@ -2,7 +2,7 @@
 title: "Phase 1 - Terminology and Architecture Decision Baseline"
 kind: note
 created: "2026-09-02"
-maturity: developing
+maturity: stable
 tags:
   - bh-00
   - browser
@@ -16,7 +16,7 @@ aliases:
 
 Back to milestone: [README](README.md)
 
-- [ ] 1 Phase - Terminology and Architecture Decision Baseline.
+- [x] 1 Phase - Terminology and Architecture Decision Baseline.
 
   Freeze one canonical vocabulary, preserve the independent architecture axes,
   assign current monorepo ownership, and establish durable decision governance
@@ -91,28 +91,28 @@ Back to milestone: [README](README.md)
       - [x] 1.3.2.2 Subtask - Require compatibility, security, accessibility, packaging, and cross-backend impact analysis for changes to portable contracts.
       - [x] 1.3.2.3 Subtask - Define how roadmap, catalog, support matrix, package indexes, and acceptance records are updated atomically when a decision changes.
 
-  - [ ] 1.4 Section - Phase 1 Integration Tests.
+  - [x] 1.4 Section - Phase 1 Integration Tests.
 
     Prove that terminology, ownership, dependency direction, and decision
     governance describe one architecture before support and catalog work starts.
 
-    - [ ] 1.4.1 Task - Validate terminology and repository consistency.
+    - [x] 1.4.1 Task - Validate terminology and repository consistency.
 
       Automated and reviewed evidence must detect ambiguous terms, stale package
       names, missing ownership, and accidental adapter leakage.
 
-      - [ ] 1.4.1.1 Subtask - Run corpus validation and a terminology audit across research, planning, root, package, profile, integration, JavaScript, and experiment documentation.
-      - [ ] 1.4.1.2 Subtask - Verify every current package and profile is represented exactly once in the ownership map and every referenced repository path exists.
-      - [ ] 1.4.1.3 Subtask - Review representative valid and invalid dependency graphs, including standalone DOM, LiveView DOM, Plug, Phoenix, headless, and future native cases.
+      - [x] 1.4.1.1 Subtask - Run corpus validation and a terminology audit across research, planning, root, package, profile, integration, JavaScript, and experiment documentation.
+      - [x] 1.4.1.2 Subtask - Verify every current package and profile is represented exactly once in the ownership map and every referenced repository path exists.
+      - [x] 1.4.1.3 Subtask - Review representative valid and invalid dependency graphs, including standalone DOM, LiveView DOM, Plug, Phoenix, headless, and future native cases.
 
-    - [ ] 1.4.2 Task - Record completion evidence and deliver the phase.
+    - [x] 1.4.2 Task - Record completion evidence and deliver the phase.
 
       Phase completion requires accepted durable records and reproducible checks,
       not agreement expressed only in discussion or planning prose.
 
-      - [ ] 1.4.2.1 Subtask - Record reviewed glossary and decision revisions, validation commands, outputs, reviewers, unresolved questions, and any accepted terminology exceptions.
-      - [ ] 1.4.2.2 Subtask - Confirm no Mix project, JavaScript project, runtime proof, component implementation, or BH-01 dependency pin was introduced by this phase.
-      - [ ] 1.4.2.3 Subtask - Complete one commit per coherent section and open the Phase 1 PR without beginning Phase 2 product-envelope work.
+      - [x] 1.4.2.1 Subtask - Record reviewed glossary and decision revisions, validation commands, outputs, reviewers, unresolved questions, and any accepted terminology exceptions.
+      - [x] 1.4.2.2 Subtask - Confirm no Mix project, JavaScript project, runtime proof, component implementation, or BH-01 dependency pin was introduced by this phase.
+      - [x] 1.4.2.3 Subtask - Complete one commit per coherent section and open the Phase 1 PR without beginning Phase 2 product-envelope work.
 
 ## Section delivery rule
 

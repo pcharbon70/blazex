@@ -2,7 +2,7 @@
 title: "Phase 1 Terminology and Architecture Decision Baseline Evidence"
 kind: note
 created: "2026-09-02"
-maturity: developing
+maturity: stable
 tags:
   - bh-00
   - implementation-evidence
@@ -117,9 +117,87 @@ accepted status, accountable role owners, explicit impact analysis, unresolved
 proof obligations, and a review/supersession path. The records describe the
 architecture baseline without claiming that runtime or component code exists.
 
-## Remaining Phase 1 evidence
+## Section 1.4 — Integration and phase completion evidence
 
-- Section 1.4 integration and phase completion evidence: pending.
+### Reproducible verification
+
+| Check | Command or method | Result |
+| --- | --- | --- |
+| Corpus structure, metadata, indexes, links, and connections | `cd docs/research && python3 validate_archive.py` | Passed: 76 completed documents, 14 directories, 467 local links, and 28 source notes. |
+| Validator regression suite | `cd docs/research && python3 -m unittest test_validate_archive.py` | Passed: 8 tests. |
+| Patch hygiene | `git diff --check` | Passed with no whitespace errors. |
+| Package inventory | Compare direct `packages/` children with the ownership-table package column | Exact 18-to-18 match; no duplicate or missing package. |
+| Profile inventory | Compare direct `profiles/` children with the ownership-table profile column | Exact 3-to-3 match; no duplicate or missing profile. |
+| Referenced boundary paths | Test every package, profile, bridge, integration, and experiment path named by the ownership map | All 26 paths exist. |
+| ADR register | Count `adr-*.md`, accepted status rows, and stable maturity values | 8 files, 8 accepted statuses, and 8 stable records. |
+| Project/runtime absence | Search package, profile, JavaScript, integration, and experiment trees for Mix/JavaScript manifests, Elixir/JavaScript/TypeScript sources, Wasm modules, and BEAM files | Zero matches. |
+
+### Terminology audit and exceptions
+
+Case-insensitive searches covered `Phoenix host`, `Plug host`, `LiveView host`,
+`reference host`, `runtime host`, `hosted by Phoenix`, `DOM backend`,
+`component model`, and `WebAssembly component` across the root, research,
+planning, package, profile, integration, JavaScript, and experiment Markdown.
+The audit corrected residual positive uses of *Plug hosting*, *LiveView
+hosting*, *runtime host contracts*, and unqualified *DOM backend*.
+
+Remaining matches are accepted only when they are:
+
+- explicit anti-examples or correction-ledger entries in the canonical
+  vocabulary and this evidence record;
+- negative requirements such as “must not redefine the browser as a Phoenix
+  host” in a future plan;
+- qualified references to the WebAssembly Component Model; or
+- historical document titles and upstream terminology retained for traceability.
+
+No positive current-architecture claim collapses Phoenix, Plug, LiveView, a
+runtime, or a renderer into the BlazeX execution-host or component contract.
+
+### Dependency-graph review
+
+The review exercised the browser/Phoenix, browser/Plug, and headless valid
+graphs plus their forbidden reverse edges. Standalone DOM remains independent;
+LiveView lowering remains optional and isolated; Plug excludes Phoenix,
+LiveView, LocalLiveView, and the LiveView DOM adapter; headless excludes browser
+and server frameworks; and the future native proof remains an experiment with
+no production-profile dependency. The future-package gate requires a later ADR,
+owner, dependency analysis, profile, capability policy, and conformance proof.
+
+### Review and revision record
+
+- Section 1.1 glossary revision: `e3d0bf3`.
+- Section 1.2 ownership/dependency revision: `1f7f1f7`.
+- Section 1.3 decision-governance revision: `1cc223d`.
+- Phase delivery: [PR #4](https://github.com/pcharbon70/blazex/pull/4), containing
+  one final commit for each of Sections 1.1 through 1.4.
+- Implementation and consistency review: Codex under the repository owner's
+  instruction; the owner authorized one PR and immediate merge for this phase.
+- Independent second-party review: not requested for Phase 1; the broader BH-00
+  independent-review gate remains in Phase 6.
+
+### Scope confirmation
+
+The phase introduced Markdown research, planning, decisions, templates, maps,
+and evidence only. It introduced no Mix project, Mix lockfile, JavaScript
+project, package-manager lockfile, Elixir/JavaScript/TypeScript implementation,
+Wasm or BEAM artifact, runtime proof, component implementation, or BH-01
+dependency/version pin. Phase 2 product-envelope work has not begun.
+
+### Unresolved proof obligations
+
+- BH-01 must pin and prove the actual browser runtime/toolchain stack.
+- BH-02 must prove the kernel, semantic tree, effects, and renderer contracts
+  through headless, standalone DOM, and actual native controls.
+- Later BH-00 phases must define the support envelope, exhaustive catalog,
+  capability/fallback classifications, quality budgets, and acceptance matrix.
+- Phase 6 must perform the independent contract review and decide whether BH-01
+  entry is authorized or blocked.
+
+### Section result
+
+All local integration checks pass, the Phase 1 artifacts agree on one
+host-neutral architecture, and the single Phase 1 PR is open without Phase 2
+work. Section 1.4 and Phase 1 are complete.
 
 ## Connections
 
