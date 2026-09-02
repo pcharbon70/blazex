@@ -70,17 +70,18 @@ requires reproducible conformance, integration, and browser benchmark suites.
 - **H1 — runtime-in-Wasm is viable:** Popcorn and LocalLiveView demonstrate the
   central event/render loop, making a framework prototype immediately
   practical.
-- **H2 — Phoenix first:** Phoenix/LiveView materially reduces framework work by
-  supplying HEEx, the DOM renderer, Channels, PubSub, sessions, and asset
-  conventions. Plug-only hosting is feasible but requires more BlazeX-owned
-  protocol and renderer code.
+- **H2 — Phoenix first:** Phoenix/LiveView materially reduces server-integration
+  work through HEEx, Channels, PubSub, sessions, assets, and an optional DOM
+  patching adapter. BlazeX still owns a standalone DOM renderer so Plug-only
+  hosting does not inherit Phoenix or LiveView.
 - **H3 — shared runtime:** the viable packaging unit is one shared AtomVM plus
   one or more application bundles, not one Wasm instance per component.
 - **H4 — compatibility dominates:** AtomVM's OTP/NIF subset and Popcorn's exact
   toolchain pins will be a larger adoption barrier than writing the component
   callbacks.
 - **H5 — renderer API is decisive:** production maintainability depends on a
-  supported LiveView renderer boundary or a deliberately owned protocol fork.
+  BlazeX-owned standalone DOM protocol plus a bounded, version-tested adapter
+  wherever LiveView or LocalLiveView patching is used.
 - **H6 — SSR is possible but not free:** server and local execution of the same
   HEEx modules can enable prerendering, but state transfer, deterministic
   initialization, and effect ownership require explicit design.

@@ -28,6 +28,10 @@ implementation milestones](../../20-notes/browser-host-implementation-milestones
 - Future phase documents for browser-host implementation.
 - Shared planning status, dependency, and evidence conventions for those
   phases.
+- The packages, profiles, JavaScript projects, integration suites, and bounded
+  experiments activated or modified by each phase.
+- Dependency guards that keep standalone DOM rendering, LiveView integration,
+  browser capabilities, and server adapters independently replaceable.
 - Traceability from implementation work back to research conclusions and open
   inquiries.
 - The eventual browser-stream completion gate.
@@ -49,6 +53,8 @@ or completion claims have been defined yet.
 
 Add phase documents only after the phase decomposition is explicitly
 approved. When phases are introduced, index every phase here, record their
-dependency order and shared completion rules, and keep all work unchecked
-until reproducible implementation evidence satisfies the stated gates.
-
+dependency order, activated projects, forbidden dependencies, and shared
+completion rules. Keep all work unchecked until reproducible implementation
+evidence satisfies the stated gates. The BH-02 native renderer remains a
+bounded experiment unless a later planning stream explicitly promotes it to a
+supported package.

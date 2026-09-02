@@ -50,8 +50,8 @@ The completed browser profile should include:
 
 - a stable host-neutral component and semantic-rendering contract;
 - reproducible browser execution through a pinned and supported runtime stack;
-- a Phoenix-first host with secure commands, server pushes, navigation, and
-  deployment integration;
+- a Phoenix-first server-integration profile with secure commands, server
+  pushes, navigation, and deployment integration;
 - a smaller documented Plug hosting profile;
 - a BlazeX-owned design system and component catalog inspired by MudBlazor;
 - forms, navigation, surfaces, browser capabilities, data components, and
@@ -95,6 +95,10 @@ BlazeX disposition, delivery tier, capability need, fallback expectation, and
 portability status. Record the initial quality budgets and the decisions that
 must be maintained as architecture records.
 
+**Repository ownership.** This milestone governs `docs/research`, the root
+architecture README, and the package and profile indexes. It activates no Mix
+or JavaScript project.
+
 **Completion signal.** Every planned feature and component claim can be traced
 to a versioned catalog row and an observable acceptance condition. The catalog
 contains no implied .NET compatibility and no ambiguous promise that browser
@@ -112,6 +116,13 @@ events, timers or messages, DOM updates, and one authenticated server command.
 Record emitted artifacts, private dependency risks, runtime limitations,
 browser prerequisites, and cold and warm measurements on representative
 desktop and mobile environments.
+
+**Repository ownership.** Activate `profiles/browser_phoenix`,
+`packages/blazex_runtime_popcorn`, `packages/blazex_host_browser`,
+`packages/blazex_renderer_dom`, `packages/blazex_renderer_dom_liveview`,
+`packages/blazex_phoenix`, and `js/blazex_runtime` for the feasibility
+composition. Put reusable scenarios and measurements in `integration/fixtures`
+and `integration/benchmarks`.
 
 **Completion signal.** The baseline runs repeatably across the initially
 supported browser set, its build inputs and outputs are explainable, and its
@@ -132,6 +143,14 @@ is only a portability test for the public contracts; it is not a desktop-host
 delivery milestone. Add dependency checks and shared behavior traces that
 expose browser-specific leakage before the API grows.
 
+**Repository ownership.** Activate `packages/blazex_core`,
+`packages/blazex_effects`, `packages/blazex_ui_tree`,
+`packages/blazex_renderer`, `packages/blazex_renderer_headless`,
+`packages/blazex_renderer_dom`, and `packages/blazex_test`, together with
+`profiles/headless` and `integration/conformance`. The disposable native proof
+lives only in `experiments/native_renderer_spike`; its shared traces move into
+`integration/fixtures`.
+
 **Completion signal.** The same small interaction set—layout, action, field,
 selection, keyed list, surface, focus, file choice, and disposal—passes the
 headless, DOM, and native-spike contracts without browser or toolkit objects in
@@ -151,6 +170,11 @@ runtime instance, support roots added after initial page load, reject
 incompatible builds, and expose deterministic behavior when browser
 requirements such as cross-origin isolation are not met.
 
+**Repository ownership.** Primary implementation belongs to
+`packages/blazex_runtime_popcorn`, `packages/blazex_host_browser`, and
+`js/blazex_runtime`. `profiles/browser_phoenix` supplies the first executable
+composition without becoming the owner of reusable host behavior.
+
 **Completion signal.** Multiple independent roots can mount, update, move,
 dispose, and remount without duplicate runtimes or leaked ownership. Startup
 failures and unsupported browser configurations produce intentional fallback
@@ -158,20 +182,31 @@ UI and diagnostics rather than partial operation.
 
 ### BH-04 — DOM renderer and interaction transport
 
-**Goal.** Establish the browser's reference renderer as a versioned adapter
-from BlazeX semantics to accessible DOM behavior.
+**Goal.** Establish the browser's reference renderer as a versioned,
+server-framework-independent adapter from BlazeX semantics to accessible DOM
+behavior.
 
 **What needs to be accomplished.** Cover initial rendering, incremental
 updates, keyed identity, event normalization, form value transport, focus and
 selection preservation, effect ordering, stale-message rejection, root
-ownership, and cleanup. Bound the version coupling to LiveView or
-LocalLiveView inside the adapter and define how malformed or incompatible
-renderer traffic fails.
+ownership, and cleanup. Keep the reusable DOM protocol and lowering in
+`blazex_renderer_dom`; isolate all LiveView and LocalLiveView render-data,
+patching, and version coupling in `blazex_renderer_dom_liveview`. Define how
+malformed or incompatible renderer traffic fails in either path.
+
+**Repository ownership.** `packages/blazex_renderer` owns the backend contract,
+`packages/blazex_renderer_dom` owns standalone DOM behavior, and
+`packages/blazex_renderer_dom_liveview` owns only optional LiveView lowering.
+`js/blazex_runtime` executes the required browser bridge, while fixtures and
+cross-backend assertions belong in `integration/fixtures` and
+`integration/conformance`.
 
 **Completion signal.** Deterministic renderer fixtures and browser scenarios
 produce the documented DOM, accessibility, event, focus, and disposal
-outcomes. Application components depend only on BlazeX contracts, while the
-renderer adapter is the sole package coupled to browser patching internals.
+outcomes. Application components depend only on BlazeX contracts. The
+standalone DOM package has no Phoenix, LiveView, LocalLiveView, or Plug
+dependency, and the LiveView adapter is the sole package coupled to LiveView
+patching internals.
 
 ### BH-05 — Component programming model and lifecycle
 
@@ -184,6 +219,12 @@ slot validation, controlled and local state, identity, messages, local events,
 lifecycle, context boundaries, dynamic component registration, errors,
 retries, and deterministic disposal. Clearly separate local events from
 remote commands and public browser state from trusted server state.
+
+**Repository ownership.** The programming model belongs to
+`packages/blazex_core`, with semantic output in `packages/blazex_ui_tree`,
+effects and resource ownership in `packages/blazex_effects`, and shared
+behavioral harnesses in `packages/blazex_test`. Profiles and renderers consume
+these contracts but do not define them.
 
 **Completion signal.** The supported component semantics have matching BEAM
 and browser-AtomVM contract evidence, including ordering, identity, updates,
@@ -203,15 +244,21 @@ code and assets are present and prevent server-only modules, native
 dependencies, secret-bearing configuration, or undeclared dynamic dispatch
 from silently reaching the client.
 
+**Repository ownership.** Build analysis and manifests belong to
+`packages/blazex_build`. Runtime-specific compatibility evidence is supplied by
+`packages/blazex_runtime_popcorn`; executable artifact checks run through
+`profiles/browser_phoenix` and `integration/benchmarks`.
+
 **Completion signal.** Equivalent inputs produce equivalent manifests and
 artifacts, unsupported code fails with actionable diagnostics, and reviewers
 can account for the runtime, application code, assets, licenses, and payload of
 every browser entrypoint.
 
-### BH-07 — Phoenix host and trusted command boundary
+### BH-07 — Phoenix integration and trusted command boundary
 
-**Goal.** Make Phoenix the complete reference host for browser delivery and
-the authoritative boundary for protected data and operations.
+**Goal.** Make the browser/Phoenix composition the complete reference profile
+for browser delivery, with Phoenix acting as the server adapter and
+authoritative boundary for protected data and operations.
 
 **What needs to be accomplished.** Provide application embedding, static asset
 delivery, bootstrap state, sessions, CSRF and origin handling, typed commands,
@@ -219,6 +266,12 @@ replies, server pushes, reconnect, routing ownership, and deployment-version
 coordination. Define how Phoenix controllers and LiveViews host local roots and
 how ordinary application contexts authenticate, validate, authorize, execute,
 and audit client requests.
+
+**Repository ownership.** Reusable Phoenix behavior belongs to
+`packages/blazex_phoenix`, optional LiveView renderer coupling belongs to
+`packages/blazex_renderer_dom_liveview`, and the executable reference
+application belongs to `profiles/browser_phoenix`. Neither package may move
+browser-host, component-kernel, or standalone DOM behavior into the profile.
 
 **Completion signal.** A reference application combines server-rendered and
 browser-local UI, continues local interaction during bounded network loss, and
@@ -240,6 +293,12 @@ focus and keyboard primitives, icon and asset strategy, provider/context
 boundaries, and visual-profile policy. Produce a reference gallery and
 BlazeX-owned visual baselines.
 
+**Repository ownership.** Semantic layout, tokens, and accessibility vocabulary
+belong to `packages/blazex_ui_tree`; portable effects belong to
+`packages/blazex_effects`; the design foundation and general components belong
+to `packages/blazex_ui`. Renderer-specific visual lowering remains in renderer
+packages, with reference scenarios under `profiles/browser_phoenix`.
+
 **Completion signal.** Foundation examples behave consistently under server
 LiveView and browser-local rendering across theme, direction, responsive,
 keyboard, and accessibility states. The foundation has a measured payload and
@@ -256,6 +315,11 @@ toolbar, card, button, icon-action, alert, avatar, badge, chip, progress,
 simple list, link, and basic table experiences selected by the catalog. Define
 states, variants, composition, disabled and busy behavior, accessibility, and
 static fallback for each family.
+
+**Repository ownership.** Components and their shared design primitives belong
+to `packages/blazex_ui`. Renderer snapshots and cross-profile cases belong in
+`packages/blazex_test` and `integration/conformance`; the gallery remains an
+executable concern of `profiles/browser_phoenix`.
 
 **Completion signal.** A documented gallery demonstrates the declared visual
 core under server and browser-local execution, with stable semantic output,
@@ -274,6 +338,11 @@ revision handling. Deliver the catalog's core text, numeric, multiline,
 hidden, checkbox, switch, radio, slider, select, autocomplete, and related
 label, hint, message, and summary experiences.
 
+**Repository ownership.** Form state, conversion, validation, and form
+components belong to `packages/blazex_forms`; host requests use
+`packages/blazex_effects`. Phoenix changeset or server-validation translation
+belongs to `packages/blazex_phoenix`, not the portable forms package.
+
 **Completion signal.** A nontrivial accessible form works in server-live and
 browser-local modes, preserves invalid intermediate input and focus, survives
 reconnect or remount according to policy, and treats all authoritative
@@ -291,6 +360,12 @@ focus after navigation, navigation locks, browser history, and root ownership
 during page changes. Clarify which router remains authoritative in each
 deployment profile.
 
+**Repository ownership.** Portable navigation and composition components belong
+to `packages/blazex_ui`; browser history and document effects are implemented by
+`packages/blazex_host_browser` through `packages/blazex_effects`. Router-specific
+coordination belongs to `packages/blazex_phoenix` or `packages/blazex_plug` and
+is exercised by the corresponding profile.
+
 **Completion signal.** A multi-page reference application handles forward,
 back, replace, patch, full navigation, canceled navigation, root insertion and
 removal, and focus restoration without competing DOM ownership or abandoned
@@ -306,6 +381,11 @@ collision policy, stacking, modality, focus trapping and restoration, outside
 interaction, scroll behavior, escape behavior, queueing, ownership, and
 disposal. Build the selected popover, menu, tooltip, dialog, message box,
 snackbar, overlay, and responsive drawer families on that common system.
+
+**Repository ownership.** Portable surface state and components belong to
+`packages/blazex_surfaces`; focus, measurement, and resource requests use
+`packages/blazex_effects`. Materialization and host behavior remain in the
+selected renderer and host-adapter packages.
 
 **Completion signal.** Nested and concurrent surfaces behave predictably under
 mouse, keyboard, touch, resize, navigation, root removal, process failure, and
@@ -324,6 +404,12 @@ storage, measurement, viewport observation, scrolling, hotkeys, exit prompts,
 drag and drop, gestures, and the selected date, range, time, color, carousel,
 split-panel, and similar host-heavy component families.
 
+**Repository ownership.** Portable capability, effect, resource, and fallback
+contracts belong to `packages/blazex_effects`. Browser implementations belong
+to `packages/blazex_host_browser` and `js/blazex_runtime`; component-facing
+wrappers remain in `packages/blazex_ui`, `packages/blazex_forms`, or
+`packages/blazex_surfaces` according to family.
+
 **Completion signal.** Every supported operation is discoverable, bounded,
 testable, and explicitly unavailable when the host cannot provide it. Custom
 JavaScript extensions are named and declared; arbitrary script execution and
@@ -340,6 +426,12 @@ patterns, server pushes, reconnect/version handling, remote item providers,
 and file upload coordination. Establish conflict and stale-reply behavior so
 late server results cannot overwrite newer local state. Keep identity,
 authorization, persistence, protected data, and final mutations on the server.
+
+**Repository ownership.** Trusted commands, authentication projection, pushes,
+and upload coordination belong to `packages/blazex_phoenix`. Portable form and
+provider contracts remain in `packages/blazex_forms`, `packages/blazex_data`,
+and `packages/blazex_effects`; end-to-end examples live in
+`profiles/browser_phoenix`.
 
 **Completion signal.** Reference scenarios cover changing authentication,
 revoked access, uploads, remote search or paging, server-originated updates,
@@ -360,6 +452,12 @@ root remount, deployment build mismatch, backgrounding, memory pressure, and
 browser lifecycle recovery. Ensure failure scopes and user-visible recovery
 choices are consistent across components.
 
+**Repository ownership.** Shared generation, failure, and disposal semantics
+belong to `packages/blazex_core` and `packages/blazex_effects`. Runtime, browser,
+renderer, and server recovery implementations remain in their respective
+adapter packages, with complete scenarios in `profiles/browser_phoenix` and
+`integration/conformance`.
+
 **Completion signal.** The reference applications have deterministic UI and
 telemetry for component crashes, renderer faults, VM loss, network loss,
 server rejection, stale replies, incompatible deployments, and corrupted or
@@ -376,6 +474,12 @@ stable row identity, local and remote provider contracts, paging, public sort
 and filter identifiers, cancellation, loading and error states, tree views,
 and measured viewport virtualization. Define keyboard, focus, announcement,
 scroll anchoring, and nonvisual access for large or changing collections.
+
+**Repository ownership.** Provider contracts, tables, trees, and virtualization
+belong to `packages/blazex_data`. Shared event and effect contracts remain in
+the host-neutral foundation; renderer and performance evidence belongs in
+`packages/blazex_test`, `integration/conformance`, and
+`integration/benchmarks`.
 
 **Completion signal.** Large local and remote datasets remain responsive under
 the published browser budgets, stale provider replies are rejected, server
@@ -394,6 +498,12 @@ optional chart packages by chart family, data contract, interaction model,
 fallback, and accessibility strategy. Keep both systems independently
 versioned and budgeted.
 
+**Repository ownership.** Advanced grids remain in `packages/blazex_data`, while
+chart contracts and components belong to the independently optional
+`packages/blazex_charts`. Build-time feature selection belongs to
+`packages/blazex_build`, and payload/performance evidence belongs to
+`integration/benchmarks`.
+
 **Completion signal.** Applications opt into only the advanced capabilities
 they use, remote operations remain declarative and authorized, performance
 degrades predictably, and charts expose essential information through a
@@ -409,6 +519,13 @@ equivalent server prerender and then to true activation for the supported
 component profile. Define deterministic rendering, public state envelopes,
 identity and build matching, effect suppression during prerender, mismatch
 recovery, no-JavaScript behavior, and family-specific static fallbacks.
+
+**Repository ownership.** Server rendering, activation envelopes, and Phoenix
+integration belong to `packages/blazex_phoenix`; optional LiveView lowering
+belongs to `packages/blazex_renderer_dom_liveview`; generic DOM activation
+belongs to `packages/blazex_renderer_dom`. Build matching belongs to
+`packages/blazex_build`, and the executable proof belongs to
+`profiles/browser_phoenix`.
 
 **Completion signal.** Supported pages activate without visible subtree
 replacement, duplicated data work or effects, lost form values, broken focus,
@@ -427,6 +544,12 @@ route or feature bundles, lazy loading, prefetch, immutable caching, component
 discovery, package conflicts, and third-party documentation. Define the review
 and support expectations for ecosystem packages.
 
+**Repository ownership.** Package analysis, manifests, asset graphs, and bundle
+selection belong to `packages/blazex_build`; the JavaScript artifact belongs to
+`js/blazex_runtime`. Each library under `packages` owns its public metadata and
+assets, while profiles prove installation and deployment without becoming the
+source of reusable package behavior.
+
 **Completion signal.** A third-party Hex package can contribute a documented
 browser component without manual asset copying or accidental inclusion of its
 entire server dependency graph. Installation produces an explainable manifest,
@@ -444,10 +567,17 @@ an ordinary Plug application. Document which Phoenix capabilities—such as
 Channels, PubSub, LiveView hosting, realtime, uploads, and prerender—are absent,
 optional, or require separate adapters.
 
+**Repository ownership.** Reusable HTTP and bootstrap integration belongs to
+`packages/blazex_plug`; the executable proof belongs to
+`profiles/browser_plug`. It reuses `packages/blazex_runtime_popcorn`,
+`packages/blazex_host_browser`, `packages/blazex_renderer_dom`, and
+`js/blazex_runtime`, but must not depend on `packages/blazex_phoenix` or
+`packages/blazex_renderer_dom_liveview` directly or transitively.
+
 **Completion signal.** A representative browser-local application runs behind
-Plug with secure request boundaries and no Phoenix application dependency.
-The support matrix is explicit, and Plug does not silently inherit claims made
-only for the Phoenix profile.
+Plug with secure request boundaries and no Phoenix, LiveView, or LocalLiveView
+application dependency. The support matrix is explicit, and Plug does not
+silently inherit claims made only for the Phoenix profile.
 
 ## Horizon 4 — Productization
 
@@ -463,6 +593,11 @@ redaction controls, browser and server telemetry correlation, and upgrade
 guidance. Publish a component explorer, task-oriented guides, architecture and
 security explanations, examples for every supported family, and migration
 notes between supported releases.
+
+**Repository ownership.** Reusable diagnostics and setup tooling belong to
+`packages/blazex_build` and `packages/blazex_test`; each package owns its API
+documentation. Executable guides and galleries belong to the relevant profile,
+while cross-layer scenarios and timelines belong under `integration`.
 
 **Completion signal.** A new project can reach a working application from the
 published guide, and a developer can identify whether a failure belongs to
@@ -483,6 +618,11 @@ offline use, multiple tabs, history cache, backgrounding, CSP, cross-origin
 assets, and deployment upgrades. Finalize payload, startup, interaction,
 memory, accessibility, vulnerability-response, and compatibility policies.
 
+**Repository ownership.** Release qualification is orchestrated under
+`integration/conformance` and `integration/benchmarks`, using fixtures from
+`integration/fixtures` and all supported profiles. Package-local unit evidence
+remains with each package; profiles own only composition-specific evidence.
+
 **Completion signal.** Every release-blocking catalog row has current evidence
 for its claimed modes; budgets have measured pass or consciously documented
 exceptions; critical security and accessibility findings are closed; and the
@@ -502,6 +642,12 @@ applications demonstrating Phoenix-first local execution, server trust,
 forms, navigation, surfaces, remote data, resilience, activation, packages,
 and the documented Plug subset. Publish what is intentionally deferred or
 omitted.
+
+**Repository ownership.** Every independently released library under
+`packages`, the browser artifact under `js`, and each supported profile owns its
+release metadata. Repository-wide compatibility and governance remain in
+`docs/research` and `integration`; no profile becomes the framework's package
+root.
 
 **Completion signal.** The browser release can be adopted using only public
 interfaces and documented tooling, all 1.0 claims are generated from or linked
@@ -580,4 +726,3 @@ them browser-release blockers beyond the BH-02 portability proof:
 - [Phoenix LiveView UI foundation surfaces](../30-sources/phoenix-framework-2026-liveview-ui-foundation-surfaces.md)
 - [MudBlazor v9.9.0 source architecture](../30-sources/mudblazor-project-2026-v9-9-source-architecture.md)
 - [MudBlazor component documentation](../30-sources/mudblazor-project-2026-component-documentation.md)
-

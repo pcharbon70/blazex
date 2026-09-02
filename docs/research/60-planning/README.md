@@ -25,6 +25,8 @@ evidence requirements.
   phase organization.
 - Future phase documents containing implementation tasks and completion
   evidence.
+- Explicit package, profile, integration-suite, and experiment ownership for
+  every phase, including forbidden dependency directions.
 - Links back to the research notes and inquiries whose claims implementation
   must test.
 
@@ -48,5 +50,6 @@ renumbered.
 
 Assign the next unused two-digit prefix when a new planning stream is added.
 Link every stream through its README, keep its status current, and move
-obsolete plans to `90-archive` without reusing their sequence numbers.
-
+obsolete plans to `90-archive` without reusing their sequence numbers. Every
+stream must identify the monorepo projects it activates without making an
+executable profile the owner of reusable framework contracts.
