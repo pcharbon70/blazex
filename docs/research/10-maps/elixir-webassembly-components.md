@@ -28,6 +28,18 @@ source creates a .NET compatibility objective.
 
 ## Start here
 
+- [The browser and toolchain support
+  policy](../20-notes/blazex-browser-and-toolchain-support-policy.md) defines
+  the unproven BH-00 candidate envelope and the evidence BH-01 must produce
+  before any browser/profile combination can claim support.
+- [The rendering and profile mode
+  contract](../20-notes/blazex-browser-rendering-and-profile-modes.md) defines
+  surface ownership, activation behavior, adapter separation, profile
+  capabilities, and the Plug transitive-dependency gate.
+- [The browser trust, deployment, and fallback
+  policy](../20-notes/blazex-browser-trust-deployment-and-fallback-policy.md)
+  defines server authority, command validation, deployment prerequisites, and
+  bounded failure behavior.
 - [The browser-host milestone
   roadmap](../20-notes/browser-host-implementation-milestones.md) consolidates
   all current findings into 24 ordered outcome gates from feasibility through
