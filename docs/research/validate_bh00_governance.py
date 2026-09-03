@@ -12,6 +12,8 @@ from typing import Any
 from jsonschema import Draft202012Validator
 from jsonschema.exceptions import SchemaError
 
+import generate_bh00_release as release_generator
+
 
 ROOT = Path(__file__).resolve().parent
 REPO_ROOT = ROOT.parent.parent
@@ -82,6 +84,28 @@ EXPECTED_RISKS = {
     "BX-BH01-RISK-RUNTIME-SEMANTICS",
     "BX-BH01-RISK-TOOLCHAIN-REPRODUCIBILITY",
     "BX-BH01-RISK-WASM-ARTIFACT-ACCOUNTING",
+}
+EXPECTED_BH01_INPUTS = {
+    "BX-BH01-INPUT-ARTIFACTS",
+    "BX-BH01-INPUT-BEHAVIORS",
+    "BX-BH01-INPUT-BROWSERS",
+    "BX-BH01-INPUT-MEASUREMENTS",
+    "BX-BH01-INPUT-PRIVATE-API",
+    "BX-BH01-INPUT-PROFILE-SLICE",
+    "BX-BH01-INPUT-STOP-CONDITIONS",
+    "BX-BH01-INPUT-TOOLCHAIN",
+}
+EXPECTED_BH01_PROOFS = {
+    "BX-BH01-PROOF-ARTIFACT-ACCOUNTING",
+    "BX-BH01-PROOF-AUTHENTICATED-COMMAND",
+    "BX-BH01-PROOF-BROWSER-FALLBACK",
+    "BX-BH01-PROOF-BUILD-REPRODUCIBILITY",
+    "BX-BH01-PROOF-DOM-UPDATE",
+    "BX-BH01-PROOF-FORM-EVENT",
+    "BX-BH01-PROOF-MOBILE-MEASUREMENT",
+    "BX-BH01-PROOF-NESTED-STATE",
+    "BX-BH01-PROOF-RUNTIME-BOOT",
+    "BX-BH01-PROOF-TIMER-MESSAGE",
 }
 
 
@@ -220,6 +244,8 @@ def validate_stage(document: dict[str, Any]) -> None:
                 raise GovernanceValidationError("Section 6.2 cannot pre-empt release or BH-01 entry decisions")
         if stage in {"section-6.3", "complete"}:
             validate_release_and_entry(document)
+            if document["status"] != "accepted-conditionally-ready" or boundary["contract_evidence"] != "accepted":
+                raise GovernanceValidationError("release stage/status evidence combination is invalid")
 
 
 def validate_review(document: dict[str, Any]) -> None:
@@ -261,9 +287,64 @@ def validate_review(document: dict[str, Any]) -> None:
 
 
 def validate_release_and_entry(document: dict[str, Any]) -> None:
-    """Validate Section 6.3+ records; populated in the release section."""
-    if document["release"] is None or document["bh01_entry"] is None:
+    """Validate the versioned baseline and conditional BH-01 handoff."""
+    release = document["release"]
+    entry = document["bh01_entry"]
+    if release is None or entry is None:
         raise GovernanceValidationError("release stage requires a release identity and BH-01 entry decision")
+    manifest_hash = release_generator.source_manifest_sha256(document)
+    if release["source_manifest_sha256"] != manifest_hash:
+        raise GovernanceValidationError("BH-00 release source manifest hash is stale")
+    if release["published_index"] != "assets/bh-00-release/blazex-bh-00-release-index-v0-1-0.md":
+        raise GovernanceValidationError("BH-00 release index path is not canonical")
+    review_evidence = {review["evidence_id"] for review in document["reviews"]}
+    if set(release["review_evidence_ids"]) != review_evidence:
+        raise GovernanceValidationError("release review approvals do not cover all disciplines")
+    release_text, entry_text = release_generator.output_texts()
+    if not release_generator.RELEASE_INDEX_PATH.exists() or release_generator.RELEASE_INDEX_PATH.read_text(encoding="utf-8") != release_text:
+        raise GovernanceValidationError("BH-00 release index is stale")
+    if not release_generator.BH01_MANIFEST_PATH.exists() or release_generator.BH01_MANIFEST_PATH.read_text(encoding="utf-8") != entry_text:
+        raise GovernanceValidationError("BH-01 entry manifest is stale")
+
+    if entry["decision"] != "conditionally-ready":
+        raise GovernanceValidationError("BH-01 entry must remain conditional before its phase plan is approved")
+    if not any(
+        ("phase plan" in condition.lower() or "implementation plan" in condition.lower())
+        and "approved" in condition.lower()
+        for condition in entry["conditions"]
+    ):
+        raise GovernanceValidationError("BH-01 entry lacks the separate approved-plan condition")
+    if _ids(entry["input_manifest"], "BH-01 input") != EXPECTED_BH01_INPUTS:
+        raise GovernanceValidationError("BH-01 input manifest is incomplete")
+    if _ids(entry["proof_obligations"], "BH-01 proof") != EXPECTED_BH01_PROOFS:
+        raise GovernanceValidationError("BH-01 proof obligations are incomplete")
+    source_ids = {record["id"] for record in document["source_bindings"]}
+    for item in entry["input_manifest"]:
+        if not set(item["source_refs"]) <= source_ids or item["state"] != "required-unproven":
+            raise GovernanceValidationError(f"BH-01 input {item['id']} lacks governed unproven sources")
+
+    quality = load_json(QUALITY_PATH)
+    acceptance = load_json(ACCEPTANCE_PATH)
+    known_budgets = {budget["id"] for budget in quality["budgets"]}
+    known_acceptance = {condition["id"] for condition in acceptance["acceptance_conditions"]}
+    support_claims = {
+        requirement["source_id"] for requirement in acceptance["requirements"]
+        if requirement["source_kind"] == "browser-envelope"
+    }
+    for proof in entry["proof_obligations"]:
+        if proof["support_claim_ref"] not in support_claims:
+            raise GovernanceValidationError(f"proof {proof['id']} has no support-envelope claim")
+        if not set(proof["budget_refs"]) <= known_budgets:
+            raise GovernanceValidationError(f"proof {proof['id']} references an unknown budget")
+        if not set(proof["acceptance_refs"]) <= known_acceptance:
+            raise GovernanceValidationError(f"proof {proof['id']} references an unknown acceptance condition")
+        if proof["decision_ref"] not in {f"ADR-{number:04d}" for number in range(1, 9)}:
+            raise GovernanceValidationError(f"proof {proof['id']} references an unknown architecture decision")
+        if not proof["stop_on_failure"]:
+            raise GovernanceValidationError(f"proof {proof['id']} cannot continue after failure")
+    prohibited = " ".join(entry["prohibited_actions"]).lower()
+    if "do not initialize" not in prohibited or "do not claim" not in prohibited:
+        raise GovernanceValidationError("BH-01 prohibited action boundary is incomplete")
 
 
 def validate_contract(document: dict[str, Any], schema: dict[str, Any]) -> dict[str, int]:

@@ -105,6 +105,7 @@ python3 -m unittest test_validate_quality_acceptance.py
 python3 generate_acceptance_registry.py --check
 python3 validate_bh00_governance.py
 python3 -m unittest test_validate_bh00_governance.py
+python3 generate_bh00_release.py --check
 ```
 
 The validator checks metadata, placeholders, filenames, local links,
@@ -117,6 +118,7 @@ identifiers.
 - [`frontmatter.schema.json`](frontmatter.schema.json) — metadata schema
 - [`generate_component_catalog.py`](generate_component_catalog.py) — deterministic Markdown view generation from the canonical component catalog
 - [`generate_component_classification.py`](generate_component_classification.py) — deterministic joined view generation from the locked catalog and Phase 4 classification
+- [`generate_bh00_release.py`](generate_bh00_release.py) — deterministic BH-00 baseline index and conditional BH-01 entry-manifest generator
 - [`requirements-validation.txt`](requirements-validation.txt) — validator dependencies
 - [`generate_acceptance_registry.py`](generate_acceptance_registry.py) — deterministic Phase 5 acceptance registry and coverage-report generator
 - [`test_validate_browser_product_envelope.py`](test_validate_browser_product_envelope.py) — focused browser-envelope validator tests

@@ -2,8 +2,8 @@
   "schema_version": "1.0.0",
   "contract_version": "0.1.0",
   "contract_id": "BX-BH00-GOVERNANCE-0.1",
-  "stage": "section-6.2",
-  "status": "reviewed-pending-release",
+  "stage": "section-6.3",
+  "status": "accepted-conditionally-ready",
   "source_bindings": [
     {"id": "BX-BH00-SOURCE-ACCEPTANCE", "role": "acceptance", "path": "assets/quality-acceptance/blazex-acceptance-registry-v0.1.0.json", "sha256": "43025d17513f068eb1ac0838a381da4c132bf41b74aa602bffdc130e411368ed", "authority": "authoritative"},
     {"id": "BX-BH00-SOURCE-ADR-0001", "role": "architecture-decision", "path": "20-notes/architecture-decisions/adr-0001-host-neutral-semantic-component-kernel.md", "sha256": "b99fb71e09caad0f00f27b8d945f573eca749e2c2f336b21dd9f42de8742f329", "authority": "authoritative"},
@@ -337,11 +337,243 @@
       "status": "open-feasibility-risk"
     }
   ],
-  "release": null,
-  "bh01_entry": null,
+  "release": {
+    "version": "0.1.0",
+    "release_id": "BX-BH00-BASELINE-0.1.0",
+    "status": "accepted-product-contract",
+    "published_index": "assets/bh-00-release/blazex-bh-00-release-index-v0-1-0.md",
+    "source_manifest_sha256": "40ff2ba2304f5d8e1e247f3ec938b783c0f723bff5bda23d361eadf89ab540c0",
+    "generation_commands": [
+      "python3 generate_acceptance_registry.py --check",
+      "python3 generate_bh00_release.py --check",
+      "python3 generate_component_catalog.py --check",
+      "python3 generate_component_classification.py --check"
+    ],
+    "validation_commands": [
+      "python3 validate_archive.py",
+      "python3 validate_bh00_governance.py",
+      "python3 validate_browser_product_envelope.py",
+      "python3 validate_component_catalog.py",
+      "python3 validate_component_classification.py",
+      "python3 validate_quality_acceptance.py"
+    ],
+    "review_evidence_ids": [
+      "BX-BH00-EVIDENCE-REVIEW-ACCESSIBILITY",
+      "BX-BH00-EVIDENCE-REVIEW-ARCHITECTURE",
+      "BX-BH00-EVIDENCE-REVIEW-IMPLEMENTATION",
+      "BX-BH00-EVIDENCE-REVIEW-PACKAGING",
+      "BX-BH00-EVIDENCE-REVIEW-PERFORMANCE-RELIABILITY",
+      "BX-BH00-EVIDENCE-REVIEW-PRODUCT",
+      "BX-BH00-EVIDENCE-REVIEW-PROVENANCE",
+      "BX-BH00-EVIDENCE-REVIEW-SECURITY"
+    ],
+    "change_control": "Change an authoritative source through its owner and decision policy, version the changed contract, regenerate every derivative, rerun affected review and validation, and preserve the prior baseline.",
+    "supersession": "A later baseline must name BX-BH00-BASELINE-0.1.0 as superseded; this identity, source manifest, review, and risk history remain immutable."
+  },
+  "bh01_entry": {
+    "decision": "conditionally-ready",
+    "decision_id": "BX-BH01-ENTRY-0.1",
+    "rationale": "BH-00 has a complete, reconciled, reviewed, versioned product contract with no blocking contract defect, while runtime feasibility, exact dependencies, browser behavior, measurements, and support remain deliberately unproven.",
+    "authorization_scope": "Authorizes preparation and execution of a separately approved BH-01 feasibility plan only; it authorizes no product support, framework abstraction, or release claim.",
+    "conditions": [
+      "The Phase 6 PR is merged into synchronized main with every governance source hash and validation result current.",
+      "A detailed BH-01 phased implementation plan is separately reviewed and explicitly approved before any project activation or dependency installation.",
+      "BH-01 begins on a dedicated feature branch and preserves every stop condition, evidence boundary, package responsibility, and unsupported state in this baseline."
+    ],
+    "stop_conditions": [
+      "Stop if the exact runtime and toolchain inputs cannot produce equivalent explainable artifacts on a clean machine.",
+      "Stop if required component semantics cannot execute without redefining the host-neutral component, renderer, capability, or trust contracts.",
+      "Stop if Phoenix or private LiveView coupling cannot remain isolated from standalone DOM, Plug, core, and portable component packages.",
+      "Stop if representative mobile/browser performance is outside a product-viable range without a bounded mitigation.",
+      "Stop support or packaging claims when artifact origin, reachability, integrity, licensing, security, or payload cannot be explained."
+    ],
+    "input_manifest": [
+      {
+        "id": "BX-BH01-INPUT-ARTIFACTS",
+        "category": "artifact",
+        "description": "Record Wasm, BEAM bytecode, JavaScript, loader, assets, source maps, manifests, integrity, sizes, reachability, provenance, and deployment prerequisites.",
+        "source_refs": ["BX-BH00-SOURCE-ACCEPTANCE", "BX-BH00-SOURCE-QUALITY", "BX-BH00-SOURCE-SUPPORT-ENVELOPE"],
+        "owner": "build-owner",
+        "state": "required-unproven"
+      },
+      {
+        "id": "BX-BH01-INPUT-BEHAVIORS",
+        "category": "behavior",
+        "description": "Exercise boot, local state, nested components, form events, timers/messages, DOM updates, fallback, cleanup, and one authenticated server command.",
+        "source_refs": ["BX-BH00-SOURCE-ACCEPTANCE", "BX-BH00-SOURCE-ADR-0001", "BX-BH00-SOURCE-ROADMAP"],
+        "owner": "bh01-owner",
+        "state": "required-unproven"
+      },
+      {
+        "id": "BX-BH01-INPUT-BROWSERS",
+        "category": "browser",
+        "description": "Use the five candidate desktop/mobile browser configurations and record exact versions, operating systems, prerequisites, fallback, and unsupported outcomes.",
+        "source_refs": ["BX-BH00-SOURCE-ACCEPTANCE", "BX-BH00-SOURCE-SUPPORT-ENVELOPE"],
+        "owner": "browser-profile-owner",
+        "state": "required-unproven"
+      },
+      {
+        "id": "BX-BH01-INPUT-MEASUREMENTS",
+        "category": "measurement",
+        "description": "Calibrate cold/warm startup, instantiate, root readiness, local event-to-paint, server round trip, memory, build, and initial payload metrics.",
+        "source_refs": ["BX-BH00-SOURCE-ACCEPTANCE", "BX-BH00-SOURCE-QUALITY"],
+        "owner": "quality-owner",
+        "state": "required-unproven"
+      },
+      {
+        "id": "BX-BH01-INPUT-PRIVATE-API",
+        "category": "private-api-risk",
+        "description": "Inventory every LocalLiveView, LiveView, Popcorn, AtomVM, browser, and build API with public/private status, version sensitivity, owner, and isolation boundary.",
+        "source_refs": ["BX-BH00-SOURCE-ADR-0004", "BX-BH00-SOURCE-ADR-0006", "BX-BH00-SOURCE-SUPPORT-ENVELOPE"],
+        "owner": "compatibility-owner",
+        "state": "required-unproven"
+      },
+      {
+        "id": "BX-BH01-INPUT-PROFILE-SLICE",
+        "category": "profile-slice",
+        "description": "Activate only the minimal browser/Phoenix feasibility slice while retaining standalone DOM ownership and separately inspectable Plug/headless boundaries.",
+        "source_refs": ["BX-BH00-SOURCE-ADR-0005", "BX-BH00-SOURCE-ADR-0006", "BX-BH00-SOURCE-REPOSITORY-MAP"],
+        "owner": "browser-profile-owner",
+        "state": "required-unproven"
+      },
+      {
+        "id": "BX-BH01-INPUT-STOP-CONDITIONS",
+        "category": "stop-condition",
+        "description": "Apply reproducibility, runtime-semantics, adapter-isolation, security-authority, performance-viability, dependency-access, and artifact-accounting stop rules before abstraction.",
+        "source_refs": ["BX-BH00-SOURCE-ACCEPTANCE", "BX-BH00-SOURCE-ROADMAP", "BX-BH00-SOURCE-SUPPORT-ENVELOPE"],
+        "owner": "architecture-owner",
+        "state": "required-unproven"
+      },
+      {
+        "id": "BX-BH01-INPUT-TOOLCHAIN",
+        "category": "toolchain",
+        "description": "Resolve and pin operating system, OTP, Elixir, Mix, AtomVM, Popcorn, Phoenix, LiveView, LocalLiveView, browser, and JavaScript tool identities.",
+        "source_refs": ["BX-BH00-SOURCE-ACCEPTANCE", "BX-BH00-SOURCE-SUPPORT-ENVELOPE"],
+        "owner": "bh01-owner",
+        "state": "required-unproven"
+      }
+    ],
+    "proof_obligations": [
+      {
+        "id": "BX-BH01-PROOF-ARTIFACT-ACCOUNTING",
+        "statement": "Every emitted runtime, application, JavaScript, asset, map, manifest, and dependency artifact is identified, hashed, sized, and provenance-accounted.",
+        "support_claim_ref": "bh01_required_records:REC-ARTIFACTS",
+        "decision_ref": "ADR-0006",
+        "budget_refs": ["BX-BUD-PAYLOAD-APPLICATION-COMPRESSED-KIB", "BX-BUD-PAYLOAD-RUNTIME-COMPRESSED-KIB"],
+        "acceptance_refs": ["BX-ACC-ENV-BH01-REQUIRED-RECORDS-REC-ARTIFACTS", "BX-ACC-ROADMAP-BH-01"],
+        "repository_owner": "build-owner",
+        "evidence_types": ["automated", "generated", "review"],
+        "stop_on_failure": true
+      },
+      {
+        "id": "BX-BH01-PROOF-AUTHENTICATED-COMMAND",
+        "statement": "One browser-initiated command is authenticated, authorized against current server state, schema-validated, executed, and returned without client authority.",
+        "support_claim_ref": "security_invariants:SEC-SERVER-REVALIDATION",
+        "decision_ref": "ADR-0005",
+        "budget_refs": ["BX-BUD-INTERACTION-SERVER-ROUNDTRIP-MS"],
+        "acceptance_refs": ["BX-ACC-ENV-SECURITY-INVARIANTS-SEC-SERVER-REVALIDATION", "BX-ACC-ROADMAP-BH-01"],
+        "repository_owner": "server-adapter-owner",
+        "evidence_types": ["automated", "browser", "security"],
+        "stop_on_failure": true
+      },
+      {
+        "id": "BX-BH01-PROOF-BROWSER-FALLBACK",
+        "statement": "Missing browser prerequisites and unsupported configurations produce intentional accessible fallback and diagnostics without partial activation.",
+        "support_claim_ref": "paper_scenarios:SCN-MISSING-CROSS-ORIGIN-ISOLATION",
+        "decision_ref": "ADR-0006",
+        "budget_refs": ["BX-BUD-STARTUP-COLD-DESKTOP-MS"],
+        "acceptance_refs": ["BX-ACC-ENV-PAPER-SCENARIOS-SCN-MISSING-CROSS-ORIGIN-ISOLATION", "BX-ACC-ROADMAP-BH-01"],
+        "repository_owner": "browser-host-owner",
+        "evidence_types": ["automated", "browser", "review"],
+        "stop_on_failure": true
+      },
+      {
+        "id": "BX-BH01-PROOF-BUILD-REPRODUCIBILITY",
+        "statement": "Immutable toolchain and dependency inputs plus documented commands reproduce equivalent validated browser artifacts on a clean machine.",
+        "support_claim_ref": "bh01_required_records:REC-REBUILD",
+        "decision_ref": "ADR-0006",
+        "budget_refs": ["BX-BUD-BUILD-RELEASE-SECONDS"],
+        "acceptance_refs": ["BX-ACC-ENV-BH01-REQUIRED-RECORDS-REC-REBUILD", "BX-ACC-ROADMAP-BH-01"],
+        "repository_owner": "bh01-owner",
+        "evidence_types": ["automated", "generated", "review"],
+        "stop_on_failure": true
+      },
+      {
+        "id": "BX-BH01-PROOF-DOM-UPDATE",
+        "statement": "A local state transition produces the expected DOM update through isolated renderer ownership with normalized event and generation behavior.",
+        "support_claim_ref": "rendering_modes:MODE-BROWSER-LOCAL",
+        "decision_ref": "ADR-0004",
+        "budget_refs": ["BX-BUD-INTERACTION-DOM-UPDATE-MS"],
+        "acceptance_refs": ["BX-ACC-ENV-RENDERING-MODES-MODE-BROWSER-LOCAL", "BX-ACC-ROADMAP-BH-01"],
+        "repository_owner": "dom-renderer-owner",
+        "evidence_types": ["automated", "browser"],
+        "stop_on_failure": true
+      },
+      {
+        "id": "BX-BH01-PROOF-FORM-EVENT",
+        "statement": "A representative form field normalizes input, updates local state, exposes validation, and preserves server authority without browser types in component code.",
+        "support_claim_ref": "paper_scenarios:SCN-PHOENIX-BROWSER-LOCAL",
+        "decision_ref": "ADR-0001",
+        "budget_refs": ["BX-BUD-INTERACTION-LOCAL-EVENT-PAINT-MS"],
+        "acceptance_refs": ["BX-ACC-ENV-PAPER-SCENARIOS-SCN-PHOENIX-BROWSER-LOCAL", "BX-ACC-ROADMAP-BH-01"],
+        "repository_owner": "bh01-owner",
+        "evidence_types": ["automated", "browser"],
+        "stop_on_failure": true
+      },
+      {
+        "id": "BX-BH01-PROOF-MOBILE-MEASUREMENT",
+        "statement": "Cold startup, runtime instantiation, root readiness, memory growth, and local interaction are measured on fingerprinted constrained mobile hardware and network.",
+        "support_claim_ref": "browser_configurations:BR-WEBKIT-MOBILE",
+        "decision_ref": "ADR-0006",
+        "budget_refs": ["BX-BUD-RESOURCE-MEMORY-GROWTH-MIB", "BX-BUD-STARTUP-COLD-MOBILE-MS"],
+        "acceptance_refs": ["BX-ACC-BUDGET-BX-BUD-STARTUP-COLD-MOBILE-MS", "BX-ACC-ENV-BROWSER-CONFIGURATIONS-BR-WEBKIT-MOBILE"],
+        "repository_owner": "quality-owner",
+        "evidence_types": ["benchmark", "browser", "review"],
+        "stop_on_failure": true
+      },
+      {
+        "id": "BX-BH01-PROOF-NESTED-STATE",
+        "statement": "Nested stateful components preserve identity, parent-child isolation, deterministic updates, error containment, and disposal in the browser runtime.",
+        "support_claim_ref": "profiles:PROFILE-BROWSER-PHOENIX",
+        "decision_ref": "ADR-0001",
+        "budget_refs": ["BX-BUD-INTERACTION-LOCAL-EVENT-PAINT-MS"],
+        "acceptance_refs": ["BX-ACC-ENV-PROFILES-PROFILE-BROWSER-PHOENIX", "BX-ACC-ROADMAP-BH-01"],
+        "repository_owner": "bh01-owner",
+        "evidence_types": ["automated", "browser"],
+        "stop_on_failure": true
+      },
+      {
+        "id": "BX-BH01-PROOF-RUNTIME-BOOT",
+        "statement": "The pinned AtomVM-in-Wasm and Popcorn candidate boots repeatedly, loads the declared bundle, reports readiness, and fails intentionally when unsupported.",
+        "support_claim_ref": "toolchain_inputs:TC-POPCORN",
+        "decision_ref": "ADR-0006",
+        "budget_refs": ["BX-BUD-PAYLOAD-RUNTIME-COMPRESSED-KIB", "BX-BUD-STARTUP-INSTANTIATE-MS"],
+        "acceptance_refs": ["BX-ACC-ENV-TOOLCHAIN-INPUTS-TC-POPCORN", "BX-ACC-ROADMAP-BH-01"],
+        "repository_owner": "runtime-owner",
+        "evidence_types": ["automated", "browser", "generated"],
+        "stop_on_failure": true
+      },
+      {
+        "id": "BX-BH01-PROOF-TIMER-MESSAGE",
+        "statement": "A representative timer or process message updates state with bounded scheduling, stale-generation rejection, cancellation, error behavior, and cleanup.",
+        "support_claim_ref": "profiles:PROFILE-BROWSER-PHOENIX",
+        "decision_ref": "ADR-0003",
+        "budget_refs": ["BX-BUD-RELIABILITY-PENDING-EFFECTS-COUNT", "BX-BUD-RESOURCE-CLEANUP-MS"],
+        "acceptance_refs": ["BX-ACC-BUDGET-BX-BUD-RESOURCE-CLEANUP-MS", "BX-ACC-ROADMAP-BH-01"],
+        "repository_owner": "runtime-owner",
+        "evidence_types": ["automated", "browser"],
+        "stop_on_failure": true
+      }
+    ],
+    "prohibited_actions": [
+      "Do not initialize Mix, Phoenix, JavaScript, Rust, or other implementation projects or install candidate dependencies until a detailed BH-01 phase plan is explicitly approved.",
+      "Do not claim supported browsers, a working runtime, implemented components, passed budgets, production security/accessibility, native compatibility, or release readiness from BH-00 acceptance."
+    ],
+    "owner_roles": ["architecture-owner", "bh01-owner", "browser-profile-owner", "product-owner", "quality-owner", "security-owner"]
+  },
   "exceptions": [],
   "evidence_boundary": {
-    "contract_evidence": "reviewed",
+    "contract_evidence": "accepted",
     "runtime_implementation": "not-executed",
     "browser_support": "unsupported-unproven",
     "component_implementation": "not-executed",
@@ -356,7 +588,8 @@
       "BX-BH00-EVIDENCE-REVIEW-PERFORMANCE-RELIABILITY",
       "BX-BH00-EVIDENCE-REVIEW-PRODUCT",
       "BX-BH00-EVIDENCE-REVIEW-PROVENANCE",
-      "BX-BH00-EVIDENCE-REVIEW-SECURITY"
+      "BX-BH00-EVIDENCE-REVIEW-SECURITY",
+      "BX-BH00-EVIDENCE-VERSIONED-RELEASE-6-3"
     ]
   }
 }

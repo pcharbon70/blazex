@@ -25,6 +25,7 @@ class GovernanceValidationTests(unittest.TestCase):
         self.assertEqual(counts["reviews"], 8)
         self.assertEqual(counts["findings"], 8)
         self.assertEqual(counts["risks"], 8)
+        self.assertEqual(self.document["bh01_entry"]["decision"], "conditionally-ready")
 
     def test_rejects_stale_source_hash(self) -> None:
         document = copy.deepcopy(self.document)
@@ -137,6 +138,42 @@ class GovernanceValidationTests(unittest.TestCase):
         document = copy.deepcopy(self.document)
         document["bh01_entry"] = {}
         with self.assertRaisesRegex(validator.GovernanceValidationError, "schema violation"):
+            self.validate(document)
+
+    def test_rejects_unconditional_bh01_readiness(self) -> None:
+        document = copy.deepcopy(self.document)
+        document["bh01_entry"]["decision"] = "ready"
+        with self.assertRaisesRegex(validator.GovernanceValidationError, "must remain conditional"):
+            self.validate(document)
+
+    def test_rejects_missing_bh01_input(self) -> None:
+        document = copy.deepcopy(self.document)
+        document["bh01_entry"]["input_manifest"].pop()
+        with self.assertRaisesRegex(validator.GovernanceValidationError, "schema violation|input manifest is incomplete"):
+            self.validate(document)
+
+    def test_rejects_missing_bh01_proof(self) -> None:
+        document = copy.deepcopy(self.document)
+        document["bh01_entry"]["proof_obligations"].pop()
+        with self.assertRaisesRegex(validator.GovernanceValidationError, "proof obligations are incomplete"):
+            self.validate(document)
+
+    def test_rejects_unknown_proof_acceptance(self) -> None:
+        document = copy.deepcopy(self.document)
+        document["bh01_entry"]["proof_obligations"][0]["acceptance_refs"] = ["BX-ACC-NOT-DECLARED"]
+        with self.assertRaisesRegex(validator.GovernanceValidationError, "unknown acceptance condition"):
+            self.validate(document)
+
+    def test_rejects_stale_release_manifest_hash(self) -> None:
+        document = copy.deepcopy(self.document)
+        document["release"]["source_manifest_sha256"] = "0" * 64
+        with self.assertRaisesRegex(validator.GovernanceValidationError, "source manifest hash is stale"):
+            self.validate(document)
+
+    def test_rejects_failed_proof_without_stop(self) -> None:
+        document = copy.deepcopy(self.document)
+        document["bh01_entry"]["proof_obligations"][0]["stop_on_failure"] = False
+        with self.assertRaisesRegex(validator.GovernanceValidationError, "cannot continue after failure"):
             self.validate(document)
 
 

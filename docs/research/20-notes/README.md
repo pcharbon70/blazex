@@ -31,6 +31,7 @@ Source summaries belong in `30-sources`; unresolved workbenches belong in
 
 ### Documents
 
+- [BlazeX BH-00 release and BH-01 entry policy](blazex-bh-00-release-and-bh-01-entry-policy.md) — versions the accepted product-contract baseline, defines material-state and supersession rules, and bounds the conditional BH-01 handoff without claiming implementation or support.
 - [BlazeX BH-00 governance and reconciliation policy](blazex-bh-00-governance-reconciliation-policy.md) — defines source-bound contract closure, reconciliation order, independent axes, package/profile replaceability, conflict handling, compatibility/support boundaries, and staged evidence semantics.
 - [BlazeX acceptance traceability and evidence policy](blazex-acceptance-traceability-and-evidence-policy.md) — defines source-bound requirement and condition IDs, status combinations, evidence classes/freshness, ownership, budget/profile coverage, findings, waivers, and supersession.
 - [BlazeX cross-cutting quality gate policy](blazex-cross-cutting-quality-gate-policy.md) — defines stable accessibility, security, compatibility, and provenance requirements, evidence classes, severity, manual-review, fallback, and non-waivable exception rules.

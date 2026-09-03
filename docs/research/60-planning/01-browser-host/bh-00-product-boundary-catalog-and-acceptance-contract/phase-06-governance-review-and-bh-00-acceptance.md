@@ -70,28 +70,28 @@ Back to milestone: [README](README.md)
       - [x] 6.2.2.2 Subtask - Correct blocking BH-00 defects, rerun affected validation, and record superseded decisions, catalog migrations, budget changes, or acceptance remapping.
       - [x] 6.2.2.3 Subtask - Publish unresolved feasibility assumptions and BH-01 risks without weakening BH-00 definitions or converting unknowns into supported claims.
 
-  - [ ] 6.3 Section - Version the contract and prepare the BH-01 entry decision.
+  - [x] 6.3 Section - Version the contract and prepare the BH-01 entry decision.
 
     Freeze an identifiable BH-00 baseline and provide BH-01 with bounded inputs,
     proof obligations, and stop conditions rather than an informal handoff.
 
-    - [ ] 6.3.1 Task - Publish the versioned BH-00 contract set.
+    - [x] 6.3.1 Task - Publish the versioned BH-00 contract set.
 
       Consumers and later plans need immutable identities for the exact glossary,
       decisions, support matrix, catalog, budgets, and acceptance graph they use.
 
-      - [ ] 6.3.1.1 Subtask - Assign compatible schema and data versions to glossary, decisions, support envelope, catalog, quality budgets, acceptance records, and generated views.
-      - [ ] 6.3.1.2 Subtask - Record source revisions, hashes, generation commands, validation results, review approvals, open risks, change history, and upgrade or supersession procedures.
-      - [ ] 6.3.1.3 Subtask - Publish a navigable BH-00 release index linking authoritative artifacts and clearly labeling generated, historical, proposed, deferred, and unsupported material.
+      - [x] 6.3.1.1 Subtask - Assign compatible schema and data versions to glossary, decisions, support envelope, catalog, quality budgets, acceptance records, and generated views.
+      - [x] 6.3.1.2 Subtask - Record source revisions, hashes, generation commands, validation results, review approvals, open risks, change history, and upgrade or supersession procedures.
+      - [x] 6.3.1.3 Subtask - Publish a navigable BH-00 release index linking authoritative artifacts and clearly labeling generated, historical, proposed, deferred, and unsupported material.
 
-    - [ ] 6.3.2 Task - Make the BH-01 readiness decision.
+    - [x] 6.3.2 Task - Make the BH-01 readiness decision.
 
       BH-01 may begin only with complete inputs and explicit feasibility
       questions; passing BH-00 does not predetermine that the runtime stack works.
 
-      - [ ] 6.3.2.1 Subtask - Produce the BH-01 input manifest covering candidate toolchain layers, required profile slices, representative behaviors, artifacts, browsers, measurements, private API risks, and stop conditions.
-      - [ ] 6.3.2.2 Subtask - Verify every BH-01 proof obligation traces to a BH-00 support claim, decision, budget, acceptance ID, repository owner, and expected evidence type.
-      - [ ] 6.3.2.3 Subtask - Record an authorized ready, conditionally ready, or blocked decision with named conditions and prohibit dependency installation or runtime implementation until the BH-01 phase plan is approved.
+      - [x] 6.3.2.1 Subtask - Produce the BH-01 input manifest covering candidate toolchain layers, required profile slices, representative behaviors, artifacts, browsers, measurements, private API risks, and stop conditions.
+      - [x] 6.3.2.2 Subtask - Verify every BH-01 proof obligation traces to a BH-00 support claim, decision, budget, acceptance ID, repository owner, and expected evidence type.
+      - [x] 6.3.2.3 Subtask - Record an authorized ready, conditionally ready, or blocked decision with named conditions and prohibit dependency installation or runtime implementation until the BH-01 phase plan is approved.
 
   - [ ] 6.4 Section - Phase 6 Integration Tests and BH-00 Acceptance.
 
