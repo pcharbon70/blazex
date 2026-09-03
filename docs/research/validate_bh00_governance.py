@@ -199,11 +199,35 @@ def validate_reconciliation(document: dict[str, Any], source_ids: set[str]) -> N
     disk_packages = {path.name for path in (REPO_ROOT / "packages").iterdir() if path.is_dir()}
     if disk_packages != EXPECTED_PACKAGES:
         raise GovernanceValidationError("repository package directories differ from governance ownership")
-    for package in disk_packages:
-        package_dir = REPO_ROOT / "packages" / package
-        for activation_file in ("mix.exs", "package.json", "Cargo.toml"):
-            if (package_dir / activation_file).exists():
-                raise GovernanceValidationError(f"BH-00 cannot activate package {package}: found {activation_file}")
+    activated_packages = {
+        package
+        for package in disk_packages
+        if any((REPO_ROOT / "packages" / package / name).exists() for name in ("mix.exs", "package.json", "Cargo.toml"))
+    }
+    if activated_packages:
+        authorization_path = ROOT / "assets/bh-01-baseline/blazex-bh-01-authorization-v0.1.0.json"
+        activation_path = ROOT / "assets/bh-01-baseline/blazex-bh-01-repository-activation-v0.1.0.json"
+        if not authorization_path.is_file() or not activation_path.is_file():
+            raise GovernanceValidationError("repository packages were activated without BH-01 authorization records")
+        authorization = load_json(authorization_path)
+        activation = load_json(activation_path)
+        if authorization.get("status") != "approved-phase-1-only":
+            raise GovernanceValidationError("repository packages were activated without approved BH-01 Phase 1 scope")
+        authorized_packages = {
+            Path(record["path"]).name
+            for record in activation.get("boundaries", [])
+            if record.get("kind") == "elixir-package"
+        }
+        if activated_packages != authorized_packages:
+            raise GovernanceValidationError(
+                f"repository package activation differs from approved BH-01 slice: {sorted(activated_packages ^ authorized_packages)}"
+            )
+        for package in activated_packages:
+            package_dir = REPO_ROOT / "packages" / package
+            if not (package_dir / "mix.exs").is_file() or not (package_dir / "blazex.project.json").is_file():
+                raise GovernanceValidationError(f"authorized BH-01 package activation is incomplete: {package}")
+            if any((package_dir / name).exists() for name in ("mix.lock", "deps", "package-lock.json", "node_modules", "Cargo.toml")):
+                raise GovernanceValidationError(f"BH-01 Phase 1 package acquired or locked a dependency: {package}")
     profiles = document["profile_boundaries"]
     if _ids(profiles, "profile boundary") != EXPECTED_PROFILES:
         raise GovernanceValidationError("all three profile boundaries must remain complete")

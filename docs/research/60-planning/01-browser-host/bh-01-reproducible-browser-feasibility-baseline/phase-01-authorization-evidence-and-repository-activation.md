@@ -16,7 +16,7 @@ aliases:
 
 Back to milestone: [README](README.md)
 
-- [ ] 1 Phase - Authorization, Evidence Governance, and Repository Activation.
+- [x] 1 Phase - Authorization, Evidence Governance, and Repository Activation.
 
   Convert the conditional BH-01 handoff into an auditable start, establish
   evidence and stop authority, and activate only the repository boundaries
@@ -99,27 +99,27 @@ Back to milestone: [README](README.md)
       - [x] 1.3.3.3 Subtask - Assert that no new manifest or implementation exists in BH-02 kernel/headless/native boundaries and that fixture code cannot be imported as a production dependency.
       - [x] 1.3.3.4 Subtask - Document the exact nine activated boundaries and the review required to add, merge, or relocate one.
 
-  - [ ] 1.4 Section - Phase 1 Integration Tests and Completion Evidence.
+  - [x] 1.4 Section - Phase 1 Integration Tests and Completion Evidence.
 
     Prove approval, evidence governance, repository ownership, and activation
     limits before dependency acquisition begins.
 
-    - [ ] 1.4.1 Task - Test authorization and evidence fail-closed behavior.
+    - [x] 1.4.1 Task - Test authorization and evidence fail-closed behavior.
 
       Controlled negative cases must demonstrate that stale or unauthorized
       starts cannot partially activate the milestone.
 
-      - [ ] 1.4.1.1 Subtask - Validate plan/archive links, approval identity, BH-00 hashes, input/proof/risk ledgers, evidence schemas, and owner assignments.
-      - [ ] 1.4.1.2 Subtask - Exercise missing approval, stale main, stale BH-00 source, incomplete ledger, unowned blocker, and unreviewed plan-change cases and verify actionable failure with no dependency acquisition.
+      - [x] 1.4.1.1 Subtask - Validate plan/archive links, approval identity, BH-00 hashes, input/proof/risk ledgers, evidence schemas, and owner assignments.
+      - [x] 1.4.1.2 Subtask - Exercise missing approval, stale main, stale BH-00 source, incomplete ledger, unowned blocker, and unreviewed plan-change cases and verify actionable failure with no dependency acquisition.
 
-    - [ ] 1.4.2 Task - Test repository boundaries and publish phase evidence.
+    - [x] 1.4.2 Task - Test repository boundaries and publish phase evidence.
 
       The activated skeleton must exactly match the approved slice and contain
       no hidden framework or support claim.
 
-      - [ ] 1.4.2.1 Subtask - Run package/profile inventory, manifest ownership, dependency graph, forbidden-token, inactive-boundary, fixture-import, and patch hygiene checks.
-      - [ ] 1.4.2.2 Subtask - Confirm only approved manifests/skeletons changed, no dependency was installed or locked, and all browsers/runtime behaviors remain unexecuted.
-      - [ ] 1.4.2.3 Subtask - Publish Phase 1 evidence with revisions, approval, commands, validation output, findings, stop/go result, limitations, and exact authorization for Phase 2.
+      - [x] 1.4.2.1 Subtask - Run package/profile inventory, manifest ownership, dependency graph, forbidden-token, inactive-boundary, fixture-import, and patch hygiene checks.
+      - [x] 1.4.2.2 Subtask - Confirm only approved manifests/skeletons changed, no dependency was installed or locked, and all browsers/runtime behaviors remain unexecuted.
+      - [x] 1.4.2.3 Subtask - Publish Phase 1 evidence with revisions, approval, commands, validation output, findings, stop/go result, limitations, and exact authorization for Phase 2.
 
 ## Section delivery rule
 
@@ -132,6 +132,7 @@ truthful stop decision. Do not acquire candidate dependencies in Phase 1.
 - [BH-01 plan](README.md)
 - [BH-01 entry manifest](../../../assets/bh-00-release/blazex-bh-01-entry-manifest-v0-1-0.md)
 - [Repository ownership map](../../../10-maps/blazex-repository-ownership-and-dependency-map.md)
+- [Phase 1 implementation evidence](phase-01-implementation-evidence.md)
 
 ## Sources
 

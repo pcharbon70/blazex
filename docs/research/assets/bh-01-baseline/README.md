@@ -59,6 +59,12 @@ locations rather than this governance directory.
 - [BH-01 repository activation v0.1.0](blazex-bh-01-repository-activation-v0.1.0.json)
   — the nine approved boundaries, ownership, allowed graph, inactive paths,
   dependency state, and boundary change control.
+- [BH-01 Phase 1 validation log v0.1.0](blazex-bh-01-phase-01-validation-log-v0.1.0.txt)
+  — retained command outcomes, test counts, no-dependency inventory, and
+  execution boundary for the integration gate.
+- [BH-01 Phase 1 completion v0.1.0](blazex-bh-01-phase-01-completion-v0.1.0.json)
+  — schema-valid decision record with input/output hashes, environment,
+  limitations, review, `go` result, and explicit Phase 2 non-authorization.
 
 ## Maintaining this index
 

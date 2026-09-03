@@ -27,6 +27,8 @@ GOVERNANCE_SCHEMA = RESEARCH_ROOT / "assets/bh-01-baseline/blazex-bh-01-governan
 EVIDENCE_GOVERNANCE = RESEARCH_ROOT / "assets/bh-01-baseline/blazex-bh-01-evidence-governance-v0.1.0.json"
 ACTIVATION_SCHEMA = RESEARCH_ROOT / "assets/bh-01-baseline/blazex-bh-01-repository-activation.schema.json"
 REPOSITORY_ACTIVATION = RESEARCH_ROOT / "assets/bh-01-baseline/blazex-bh-01-repository-activation-v0.1.0.json"
+PHASE_1_COMPLETION = RESEARCH_ROOT / "assets/bh-01-baseline/blazex-bh-01-phase-01-completion-v0.1.0.json"
+PHASE_1_PLAN = RESEARCH_ROOT / "60-planning/01-browser-host/bh-01-reproducible-browser-feasibility-baseline/phase-01-authorization-evidence-and-repository-activation.md"
 
 
 class ValidationError(Exception):
@@ -60,6 +62,18 @@ def _git(*args: str) -> str:
     return result.stdout.strip()
 
 
+def _git_blob_sha256(revision: str, path: str) -> str:
+    result = subprocess.run(
+        ["git", "show", f"{revision}:{path}"],
+        cwd=REPO_ROOT,
+        check=False,
+        capture_output=True,
+    )
+    if result.returncode:
+        raise ValidationError(f"approved plan blob is unavailable at {revision}:{path}")
+    return hashlib.sha256(result.stdout).hexdigest()
+
+
 def _require(condition: bool, message: str) -> None:
     if not condition:
         raise ValidationError(message)
@@ -76,10 +90,14 @@ def _validate_authorization(auth: dict[str, Any], governance: dict[str, Any]) ->
     _require(approver.get("identity") and approver.get("role") == "repository-owner", "approval identity is incomplete")
 
     plan = auth.get("approved_plan", {})
-    plan_path = REPO_ROOT / str(plan.get("path", ""))
+    plan_repo_path = str(plan.get("path", ""))
+    plan_path = REPO_ROOT / plan_repo_path
     _require(plan_path.is_file(), "approved plan is missing")
-    _require(_sha256(plan_path) == plan.get("sha256"), "approved plan content is stale")
     _git("cat-file", "-e", f"{plan.get('revision')}^{{commit}}")
+    _require(
+        _git_blob_sha256(str(plan.get("revision", "")), plan_repo_path) == plan.get("sha256"),
+        "approved plan revision/hash is stale",
+    )
 
     activation = auth.get("activation", {})
     base = str(activation.get("base_revision", ""))
@@ -184,10 +202,14 @@ def _validate_ledger(
     _require(boundary.get("budget_state") == "proposed-unmeasured", "a budget was claimed during activation")
 
 
-def _validate_evidence_governance(governance: dict[str, Any], ledger: dict[str, Any]) -> None:
+def _validate_evidence_governance(
+    governance: dict[str, Any],
+    ledger: dict[str, Any],
+    evidence_governance_document: dict[str, Any] | None = None,
+) -> None:
     evidence_schema = _load_json(EVIDENCE_SCHEMA)
     governance_schema = _load_json(GOVERNANCE_SCHEMA)
-    evidence_governance = _load_json(EVIDENCE_GOVERNANCE)
+    evidence_governance = evidence_governance_document or _load_json(EVIDENCE_GOVERNANCE)
     try:
         Draft202012Validator.check_schema(evidence_schema)
         Draft202012Validator.check_schema(governance_schema)
@@ -313,9 +335,12 @@ def _source_files(path: Path) -> list[Path]:
     return result
 
 
-def _validate_repository_activation(ledger: dict[str, Any]) -> None:
+def _validate_repository_activation(
+    ledger: dict[str, Any],
+    activation_document: dict[str, Any] | None = None,
+) -> None:
     activation_schema = _load_json(ACTIVATION_SCHEMA)
-    activation = _load_json(REPOSITORY_ACTIVATION)
+    activation = activation_document or _load_json(REPOSITORY_ACTIVATION)
     try:
         Draft202012Validator.check_schema(activation_schema)
         Draft202012Validator(
@@ -434,6 +459,40 @@ def _validate_repository_activation(ledger: dict[str, Any]) -> None:
     }, "repository activation evidence boundary changed")
 
 
+def _validate_phase_1_completion() -> None:
+    completion = _load_json(PHASE_1_COMPLETION)
+    evidence_schema = _load_json(EVIDENCE_SCHEMA)
+    try:
+        Draft202012Validator(
+            evidence_schema,
+            format_checker=FormatChecker(),
+        ).validate(completion)
+    except JsonSchemaValidationError as exc:
+        raise ValidationError(f"Phase 1 completion evidence schema failure: {exc.message}") from exc
+
+    _require(completion.get("record_id") == "BX-BH01-DECISION-PHASE-01-GO", "Phase 1 completion ID changed")
+    _require(completion.get("record_type") == "decision" and completion.get("state") == "passed", "Phase 1 completion outcome is not a passed decision")
+    source_revision = str(completion.get("source_revision", ""))
+    _git("cat-file", "-e", f"{source_revision}^{{commit}}")
+    ancestry = subprocess.run(
+        ["git", "merge-base", "--is-ancestor", source_revision, "HEAD"],
+        cwd=REPO_ROOT,
+        check=False,
+    )
+    _require(ancestry.returncode == 0, "Phase 1 completion does not cover an ancestor of the current delivery")
+
+    for hash_record in [*completion["input_hashes"], *completion["output_hashes"]]:
+        path = REPO_ROOT / hash_record["path"]
+        _require(path.is_file(), f"Phase 1 completion hash target is missing: {hash_record['path']}")
+        _require(_sha256(path) == hash_record["sha256"], f"Phase 1 completion hash is stale: {hash_record['path']}")
+
+    outcome_text = " ".join(str(value) for value in completion["outcome"].values()).lower()
+    _require("phase 2" in outcome_text and "not authorized" in outcome_text, "Phase 1 completion must not authorize Phase 2")
+    _require(len(completion.get("limitations", [])) >= 3, "Phase 1 completion limitations are incomplete")
+    _require(completion.get("review", {}).get("disposition") == "accepted", "Phase 1 gate lacks accepted review")
+    _require("- [ ]" not in PHASE_1_PLAN.read_text(encoding="utf-8"), "Phase 1 plan still contains open work")
+
+
 def validate() -> None:
     auth = _load_json(AUTHORIZATION)
     ledger = _load_json(LEDGER)
@@ -445,6 +504,7 @@ def validate() -> None:
     _validate_ledger(ledger, governance, quality, acceptance)
     _validate_evidence_governance(governance, ledger)
     _validate_repository_activation(ledger)
+    _validate_phase_1_completion()
 
 
 def main() -> int:
@@ -455,7 +515,7 @@ def main() -> int:
     except ValidationError as exc:
         print(f"BH-01 activation validation failed: {exc}", file=sys.stderr)
         return 1
-    print("BH-01 authorization, inherited ledger, evidence governance, and activation are valid.")
+    print("BH-01 authorization, inherited ledger, evidence governance, activation, and Phase 1 completion are valid.")
     return 0
 
 

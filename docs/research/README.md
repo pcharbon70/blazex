@@ -107,6 +107,7 @@ python3 validate_bh00_governance.py
 python3 -m unittest test_validate_bh00_governance.py
 python3 generate_bh00_release.py --check
 python3 validate_bh01_activation.py
+python3 -m unittest test_validate_bh01_activation.py
 ```
 
 The validator checks metadata, placeholders, filenames, local links,
@@ -126,6 +127,7 @@ identifiers.
 - [`test_validate_component_catalog.py`](test_validate_component_catalog.py) — focused component-catalog validator tests
 - [`test_validate_component_classification.py`](test_validate_component_classification.py) — focused Phase 4 classification validator tests
 - [`test_validate_bh00_governance.py`](test_validate_bh00_governance.py) — focused Phase 6 reconciliation, review, release, and BH-01 entry validator tests
+- [`test_validate_bh01_activation.py`](test_validate_bh01_activation.py) — focused BH-01 approval, evidence-governance, boundary-graph, inactive-slice, and no-dependency fail-closed tests
 - [`test_validate_quality_acceptance.py`](test_validate_quality_acceptance.py) — focused Phase 5 quality-budget and acceptance-traceability validator tests
 - [`test_validate_archive.py`](test_validate_archive.py) — focused validator tests
 - [`validate_browser_product_envelope.py`](validate_browser_product_envelope.py) — deterministic BH-00 browser-envelope checks
