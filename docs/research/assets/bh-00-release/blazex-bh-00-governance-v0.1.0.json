@@ -1,0 +1,596 @@
+{
+  "schema_version": "1.0.0",
+  "contract_version": "0.1.0",
+  "contract_id": "BX-BH00-GOVERNANCE-0.1",
+  "stage": "complete",
+  "status": "accepted-conditionally-ready",
+  "source_bindings": [
+    {"id": "BX-BH00-SOURCE-ACCEPTANCE", "role": "acceptance", "path": "assets/quality-acceptance/blazex-acceptance-registry-v0.1.0.json", "sha256": "43025d17513f068eb1ac0838a381da4c132bf41b74aa602bffdc130e411368ed", "authority": "authoritative"},
+    {"id": "BX-BH00-SOURCE-ADR-0001", "role": "architecture-decision", "path": "20-notes/architecture-decisions/adr-0001-host-neutral-semantic-component-kernel.md", "sha256": "b99fb71e09caad0f00f27b8d945f573eca749e2c2f336b21dd9f42de8742f329", "authority": "authoritative"},
+    {"id": "BX-BH00-SOURCE-ADR-0002", "role": "architecture-decision", "path": "20-notes/architecture-decisions/adr-0002-versioned-semantic-ui-tree.md", "sha256": "9d5fa9d3bae06e93836ad46fff79c2301456ee912263906e613b18f085283745", "authority": "authoritative"},
+    {"id": "BX-BH00-SOURCE-ADR-0003", "role": "architecture-decision", "path": "20-notes/architecture-decisions/adr-0003-host-neutral-effects-capabilities-and-resources.md", "sha256": "2c99891c5f780afddbb85083d4300c2e1b5d453536c5198ff32a88037522df74", "authority": "authoritative"},
+    {"id": "BX-BH00-SOURCE-ADR-0004", "role": "architecture-decision", "path": "20-notes/architecture-decisions/adr-0004-renderer-backend-separation.md", "sha256": "c221548f8c42a4e2560293b66fdaa2ae5d254a433acef11799906e4243d35354", "authority": "authoritative"},
+    {"id": "BX-BH00-SOURCE-ADR-0005", "role": "architecture-decision", "path": "20-notes/architecture-decisions/adr-0005-server-adapter-and-trust-boundary.md", "sha256": "5f2d34113308a36192d5d88bd36850d79d810a95b28d57d2e5a49c6c0f803766", "authority": "authoritative"},
+    {"id": "BX-BH00-SOURCE-ADR-0006", "role": "architecture-decision", "path": "20-notes/architecture-decisions/adr-0006-profile-composition.md", "sha256": "da459efa3ccde1137ecd6b9989ae06a999d8d903e55e4ef3c24bbe049e08c571", "authority": "authoritative"},
+    {"id": "BX-BH00-SOURCE-ADR-0007", "role": "architecture-decision", "path": "20-notes/architecture-decisions/adr-0007-native-control-portability-gate.md", "sha256": "4ebd2feb853a08c258141479726f14a60ed409b98cabdd5f0537ff9f02784343", "authority": "authoritative"},
+    {"id": "BX-BH00-SOURCE-ADR-0008", "role": "architecture-decision", "path": "20-notes/architecture-decisions/adr-0008-no-dotnet-compatibility-contract.md", "sha256": "02a86ccdb315f46003acdbb5ede8e40e4ffd9463ef66c06e6f355424ff6abad7", "authority": "authoritative"},
+    {"id": "BX-BH00-SOURCE-CATALOG", "role": "catalog", "path": "assets/component-catalog/blazex-component-catalog-v0.1.0.json", "sha256": "ec0f413c9968b92878e71c1aae9570286dd68ec538938ad880d8908cf7ea70a3", "authority": "authoritative"},
+    {"id": "BX-BH00-SOURCE-CLASSIFICATION", "role": "classification", "path": "assets/component-catalog/blazex-component-classification-v0.1.0.json", "sha256": "613de39b6dda7512dfb98306bc53594b137cc484e8dcaf33c10eb0f0d3379b58", "authority": "authoritative"},
+    {"id": "BX-BH00-SOURCE-QUALITY", "role": "quality", "path": "assets/quality-acceptance/blazex-quality-contract-v0.1.0.json", "sha256": "21d69d966ed4888ca0f09b957f3a74edfda843af0de23ec4098237ef3d759326", "authority": "authoritative"},
+    {"id": "BX-BH00-SOURCE-REPOSITORY-MAP", "role": "repository-boundary", "path": "10-maps/blazex-repository-ownership-and-dependency-map.md", "sha256": "ec4f93de41f2f7ba059771d5bd4c91ba4de9773a2e738c88e0d5ba833c8b1328", "authority": "authoritative"},
+    {"id": "BX-BH00-SOURCE-REPOSITORY-ROOT", "role": "repository-boundary", "path": "../../README.md", "sha256": "a8458564c9dd2642b2ade6c288d85ceeb1d4518f6dcbe3e01a9964a41621cbaa", "authority": "authoritative-index"},
+    {"id": "BX-BH00-SOURCE-ROADMAP", "role": "roadmap", "path": "20-notes/browser-host-implementation-milestones.md", "sha256": "5c09ad3dd07dc0adadc48ba67e8cdd40c823a9e73d4405808d892315f6894b9a", "authority": "authoritative"},
+    {"id": "BX-BH00-SOURCE-SUPPORT-ENVELOPE", "role": "support-envelope", "path": "assets/browser-product-envelope-v0.1.json", "sha256": "d36c62d1ad1e29688a08e65f8eff56b2a681012e5f2f793346840e5236766f69", "authority": "authoritative"},
+    {"id": "BX-BH00-SOURCE-VOCABULARY", "role": "vocabulary", "path": "20-notes/blazex-canonical-vocabulary.md", "sha256": "17278a7c5df5a049c4b1a5f2de34ce98fc4035fd0fdc64c5a0cbd72ccc055e6c", "authority": "authoritative"}
+  ],
+  "architecture_axes": [
+    {"id": "capability-provider", "meaning": "Implements explicitly granted host facilities behind opaque effect and resource contracts.", "must_not_define": ["component-semantics", "renderer-tree", "server-authority"]},
+    {"id": "execution-host", "meaning": "Owns process and application lifecycle in a browser, native process, test process, or another embedding.", "must_not_define": ["portable-component-api", "renderer-semantics", "server-framework"]},
+    {"id": "profile-composition", "meaning": "Selects one coherent runtime, host, renderer, capability provider, server adapter, and shell composition.", "must_not_define": ["reusable-component-semantics", "shared-renderer-contract", "universal-framework-root"]},
+    {"id": "renderer-backend", "meaning": "Lowers the semantic UI tree to DOM, native controls, a custom scene, or deterministic headless output.", "must_not_define": ["component-state-machine", "server-authority", "runtime-substrate"]},
+    {"id": "runtime-substrate", "meaning": "Executes eligible Elixir or BEAM logic through ERTS, AtomVM, AtomVM-in-Wasm, or another declared runtime.", "must_not_define": ["component-product-model", "renderer-backend", "server-adapter"]},
+    {"id": "server-adapter", "meaning": "Connects portable browser behavior to Phoenix, Plug, another transport, or no remote server.", "must_not_define": ["local-component-events", "portable-state", "standalone-renderer-core"]}
+  ],
+  "package_boundaries": [
+    {"id": "blazex_build", "axis": "build", "owns": ["artifact-manifests", "client-safety", "reachability"], "must_not_own": ["execution-host", "server-framework-behavior"], "activation_status": "scaffold-only"},
+    {"id": "blazex_charts", "axis": "component", "owns": ["chart-families", "chart-semantics", "nonvisual-fallbacks"], "must_not_own": ["concrete-drawing-backend", "dom-or-native-objects"], "activation_status": "scaffold-only"},
+    {"id": "blazex_core", "axis": "kernel", "owns": ["component-contract", "identity", "lifecycle", "state-transitions"], "must_not_own": ["browser-types", "native-toolkit", "phoenix-or-plug"], "activation_status": "scaffold-only"},
+    {"id": "blazex_data", "axis": "component", "owns": ["data-provider-contracts", "data-intensive-families"], "must_not_own": ["charting", "host-specific-data-access"], "activation_status": "scaffold-only"},
+    {"id": "blazex_effects", "axis": "effects", "owns": ["capability-contracts", "effects", "resource-lifecycle"], "must_not_own": ["provider-objects", "renderer-implementation"], "activation_status": "scaffold-only"},
+    {"id": "blazex_forms", "axis": "component", "owns": ["form-semantics", "validation", "form-families"], "must_not_own": ["browser-input-elements", "phoenix-changesets"], "activation_status": "scaffold-only"},
+    {"id": "blazex_host_browser", "axis": "host", "owns": ["browser-capabilities", "browser-lifecycle", "transport-attachment"], "must_not_own": ["phoenix-requirement", "portable-component-semantics"], "activation_status": "scaffold-only"},
+    {"id": "blazex_phoenix", "axis": "server-adapter", "owns": ["phoenix-bootstrap", "server-commands", "sessions"], "must_not_own": ["standalone-dom-renderer", "portable-component-semantics"], "activation_status": "scaffold-only"},
+    {"id": "blazex_plug", "axis": "server-adapter", "owns": ["plug-bootstrap", "http-command-endpoints"], "must_not_own": ["phoenix", "liveview", "local-live-view"], "activation_status": "scaffold-only"},
+    {"id": "blazex_renderer", "axis": "renderer-contract", "owns": ["renderer-behaviour", "renderer-protocol", "generation-and-disposal"], "must_not_own": ["concrete-backend", "server-framework"], "activation_status": "scaffold-only"},
+    {"id": "blazex_renderer_dom", "axis": "renderer-backend", "owns": ["dom-lowering", "browser-event-normalization", "dom-accessibility"], "must_not_own": ["phoenix", "liveview", "plug"], "activation_status": "scaffold-only"},
+    {"id": "blazex_renderer_dom_liveview", "axis": "renderer-backend", "owns": ["liveview-render-data-adaptation", "liveview-patch-coupling"], "must_not_own": ["portable-component-semantics", "standalone-dom-core", "plug-profile"], "activation_status": "scaffold-only"},
+    {"id": "blazex_renderer_headless", "axis": "renderer-backend", "owns": ["deterministic-semantic-output", "conformance-oracle"], "must_not_own": ["browser-host", "server-framework"], "activation_status": "scaffold-only"},
+    {"id": "blazex_runtime_popcorn", "axis": "runtime-adapter", "owns": ["atomvm-wasm-boot", "bundle-loading", "runtime-diagnostics"], "must_not_own": ["component-api", "universal-runtime-contract"], "activation_status": "scaffold-only"},
+    {"id": "blazex_surfaces", "axis": "component", "owns": ["surface-intent", "placement", "stacking"], "must_not_own": ["browser-portals", "native-overlay-primitives"], "activation_status": "scaffold-only"},
+    {"id": "blazex_test", "axis": "test", "owns": ["component-fixtures", "renderer-assertions", "runtime-probes"], "must_not_own": ["product-semantics", "profile-implementation"], "activation_status": "scaffold-only"},
+    {"id": "blazex_ui", "axis": "component", "owns": ["design-foundation", "general-components", "tokens"], "must_not_own": ["dom-nodes", "phoenix-or-plug", "concrete-renderer"], "activation_status": "scaffold-only"},
+    {"id": "blazex_ui_tree", "axis": "kernel", "owns": ["semantic-ui-tree", "layout-intent", "accessibility-intent"], "must_not_own": ["html-css-dom", "native-toolkit-objects", "effect-lifecycle"], "activation_status": "scaffold-only"}
+  ],
+  "profile_boundaries": [
+    {"id": "PROFILE-BROWSER-PHOENIX", "runtime": "blazex_runtime_popcorn", "host": "blazex_host_browser", "renderer": "blazex_renderer_dom with optional blazex_renderer_dom_liveview", "server_adapter": "blazex_phoenix", "forbidden_dependencies": ["native-renderer", "desktop-host"], "support_state": "planned-unproven"},
+    {"id": "PROFILE-BROWSER-PLUG", "runtime": "blazex_runtime_popcorn", "host": "blazex_host_browser", "renderer": "blazex_renderer_dom", "server_adapter": "blazex_plug", "forbidden_dependencies": ["blazex_phoenix", "blazex_renderer_dom_liveview", "liveview", "local-live-view", "phoenix"], "support_state": "planned-unproven"},
+    {"id": "PROFILE-HEADLESS", "runtime": "declared-test-runtime", "host": "test-process", "renderer": "blazex_renderer_headless", "server_adapter": "none-or-test-adapter", "forbidden_dependencies": ["browser-host", "dom-renderer", "native-toolkit", "phoenix", "plug"], "support_state": "planned-unproven"}
+  ],
+  "reconciliation_checks": [
+    {"id": "BX-BH00-REC-ACCEPTANCE", "domain": "acceptance", "assertion": "All 290 source claims retain reciprocal owned acceptance conditions and zero executed evidence.", "source_refs": ["BX-BH00-SOURCE-ACCEPTANCE"], "method": "Run the Phase 5 validator and compare locked source-kind, family, milestone, profile, budget, and gate counts.", "outcome": "passed", "conflicts": [], "resolution": "no-authoritative-conflict-found"},
+    {"id": "BX-BH00-REC-ADAPTER-ISOLATION", "domain": "architecture", "assertion": "Standalone DOM, LiveView DOM adaptation, Phoenix, Plug, headless, browser host, and runtime responsibilities remain separate.", "source_refs": ["BX-BH00-SOURCE-ADR-0004", "BX-BH00-SOURCE-ADR-0005", "BX-BH00-SOURCE-ADR-0006", "BX-BH00-SOURCE-REPOSITORY-MAP"], "method": "Compare ADR ownership tables, repository package indexes, profile compositions, and prohibited dependency statements.", "outcome": "passed", "conflicts": [], "resolution": "no-authoritative-conflict-found"},
+    {"id": "BX-BH00-REC-ARCHITECTURE-AXES", "domain": "terminology", "assertion": "Runtime substrate, execution host, renderer backend, capability provider, server adapter, and profile composition remain independent terms.", "source_refs": ["BX-BH00-SOURCE-VOCABULARY", "BX-BH00-SOURCE-ADR-0001", "BX-BH00-SOURCE-ADR-0006"], "method": "Compare canonical definitions, forbidden equivalences, ADR decisions, roadmap language, and repository root architecture text.", "outcome": "passed", "conflicts": [], "resolution": "no-authoritative-conflict-found"},
+    {"id": "BX-BH00-REC-CAPABILITY-ISOLATION", "domain": "architecture", "assertion": "Portable components use semantic effects and opaque resources without receiving browser, operating-system, or toolkit provider objects.", "source_refs": ["BX-BH00-SOURCE-ADR-0003", "BX-BH00-SOURCE-CLASSIFICATION"], "method": "Inspect capability ownership, forbidden portable tokens, cleanup policy, and all classified capability references.", "outcome": "passed", "conflicts": [], "resolution": "no-authoritative-conflict-found"},
+    {"id": "BX-BH00-REC-CATALOG-COVERAGE", "domain": "catalog", "assertion": "The locked MudBlazor reference maps to exactly 83 normalized BlazeX families and twelve reviewed exception records.", "source_refs": ["BX-BH00-SOURCE-CATALOG", "BX-BH00-SOURCE-CLASSIFICATION"], "method": "Run catalog and classification validators, generators, source-identity closure, and exception coverage checks.", "outcome": "passed", "conflicts": [], "resolution": "no-authoritative-conflict-found"},
+    {"id": "BX-BH00-REC-CLASSIFICATION-COVERAGE", "domain": "catalog", "assertion": "Every family has disposition, tier, package, capability, remote, fallback, portability, native, visual, rationale, and future evidence gates.", "source_refs": ["BX-BH00-SOURCE-CLASSIFICATION"], "method": "Validate all 83 complete classification records, locked counts, dependency graph, fallback matrix, and evidence-state prohibitions.", "outcome": "passed", "conflicts": [], "resolution": "no-authoritative-conflict-found"},
+    {"id": "BX-BH00-REC-GENERATED-FRESHNESS", "domain": "generation", "assertion": "Catalog, classification, and acceptance generated views are deterministic and fresh relative to their authored sources.", "source_refs": ["BX-BH00-SOURCE-CATALOG", "BX-BH00-SOURCE-CLASSIFICATION", "BX-BH00-SOURCE-ACCEPTANCE"], "method": "Run every generator in check mode and perform independent two-output acceptance generation comparison.", "outcome": "passed", "conflicts": [], "resolution": "no-authoritative-conflict-found"},
+    {"id": "BX-BH00-REC-HEADLESS-INDEPENDENCE", "domain": "architecture", "assertion": "The headless profile has no browser, DOM, Phoenix, Plug, or native-toolkit dependency and remains a deterministic conformance composition.", "source_refs": ["BX-BH00-SOURCE-ADR-0004", "BX-BH00-SOURCE-ADR-0006", "BX-BH00-SOURCE-SUPPORT-ENVELOPE"], "method": "Compare profile capability and forbidden-dependency records with package and integration scaffold responsibilities.", "outcome": "passed", "conflicts": [], "resolution": "no-authoritative-conflict-found"},
+    {"id": "BX-BH00-REC-NATIVE-CLAIMS", "domain": "compatibility", "assertion": "Browser and headless planning do not imply desktop, native-host, native-control, WebView, or standalone-Wasm support.", "source_refs": ["BX-BH00-SOURCE-ADR-0007", "BX-BH00-SOURCE-CLASSIFICATION", "BX-BH00-SOURCE-ROADMAP", "BX-BH00-SOURCE-SUPPORT-ENVELOPE"], "method": "Inspect forbidden claims, non-goals, native-spike gate, backend coverage states, and acceptance prohibited results.", "outcome": "passed", "conflicts": [], "resolution": "no-authoritative-conflict-found"},
+    {"id": "BX-BH00-REC-NO-DOTNET-COMPATIBILITY", "domain": "compatibility", "assertion": "No contract promises .NET, Razor, Blazor binary, MudBlazor API, NuGet, package, or renderer compatibility.", "source_refs": ["BX-BH00-SOURCE-ADR-0008", "BX-BH00-SOURCE-CLASSIFICATION", "BX-BH00-SOURCE-ROADMAP", "BX-BH00-SOURCE-SUPPORT-ENVELOPE"], "method": "Inspect explicit non-goals, family prohibited results, compatibility ADR, generated reports, and release language.", "outcome": "passed", "conflicts": [], "resolution": "no-authoritative-conflict-found"},
+    {"id": "BX-BH00-REC-PACKAGE-OWNERSHIP", "domain": "ownership", "assertion": "All eighteen scaffold packages have one bounded responsibility and preserve inward dependency direction toward host-neutral contracts.", "source_refs": ["BX-BH00-SOURCE-REPOSITORY-MAP", "BX-BH00-SOURCE-REPOSITORY-ROOT", "BX-BH00-SOURCE-CLASSIFICATION"], "method": "Compare package directories and README boundaries with the ownership map and classified component package assignments.", "outcome": "passed", "conflicts": [], "resolution": "no-authoritative-conflict-found"},
+    {"id": "BX-BH00-REC-PLUG-INDEPENDENCE", "domain": "ownership", "assertion": "The Plug package/profile excludes Phoenix, LiveView, LocalLiveView, and the LiveView DOM adapter transitively.", "source_refs": ["BX-BH00-SOURCE-ADR-0005", "BX-BH00-SOURCE-ADR-0006", "BX-BH00-SOURCE-REPOSITORY-MAP", "BX-BH00-SOURCE-SUPPORT-ENVELOPE"], "method": "Compare Plug exclusions, profile composition, server adapter ownership, DOM renderer boundary, and acceptance coverage.", "outcome": "passed", "conflicts": [], "resolution": "no-authoritative-conflict-found"},
+    {"id": "BX-BH00-REC-PROVENANCE", "domain": "provenance", "assertion": "Source pins, generated outputs, adapted material, assets, dependencies, notices, and licenses have explicit future blocking gates.", "source_refs": ["BX-BH00-SOURCE-ACCEPTANCE", "BX-BH00-SOURCE-CATALOG", "BX-BH00-SOURCE-QUALITY"], "method": "Inspect source hashes, catalog reference lock linkage, provenance gate requirements, evidence policy, and non-waivable release outcomes.", "outcome": "passed", "conflicts": [], "resolution": "no-authoritative-conflict-found"},
+    {"id": "BX-BH00-REC-QUALITY-BUDGETS", "domain": "quality", "assertion": "Thirty-one budgets, eight failure scenarios, seven blockers, and twenty-one gate requirements remain complete and explicitly unexecuted.", "source_refs": ["BX-BH00-SOURCE-QUALITY", "BX-BH00-SOURCE-ACCEPTANCE"], "method": "Run quality validation and compare dimensions, environments, methods, owners, first milestones, evidence states, and budget acceptance links.", "outcome": "passed", "conflicts": [], "resolution": "no-authoritative-conflict-found"},
+    {"id": "BX-BH00-REC-RENDERER-NEUTRALITY", "domain": "architecture", "assertion": "Portable component and semantic-tree contracts contain no HTML, CSS, DOM, JavaScript, LiveView, Phoenix, or native-toolkit objects.", "source_refs": ["BX-BH00-SOURCE-ADR-0001", "BX-BH00-SOURCE-ADR-0002", "BX-BH00-SOURCE-ADR-0004", "BX-BH00-SOURCE-CLASSIFICATION"], "method": "Compare kernel/tree/renderer decisions and run forbidden portable-token classification validation.", "outcome": "passed", "conflicts": [], "resolution": "no-authoritative-conflict-found"},
+    {"id": "BX-BH00-REC-SERVER-TRUST", "domain": "architecture", "assertion": "Browser code and state remain untrusted while authority-bearing Phoenix and Plug commands require server revalidation and authorization.", "source_refs": ["BX-BH00-SOURCE-ADR-0005", "BX-BH00-SOURCE-QUALITY", "BX-BH00-SOURCE-SUPPORT-ENVELOPE"], "method": "Compare trust boundaries, security invariants, command gate requirements, CSRF/origin policy, and fallback outcomes.", "outcome": "passed", "conflicts": [], "resolution": "no-authoritative-conflict-found"},
+    {"id": "BX-BH00-REC-SUPPORT-TRUTH", "domain": "support", "assertion": "All browser, runtime, toolchain, profile, implementation, measurement, and release support remains candidate or unsupported until later evidence executes.", "source_refs": ["BX-BH00-SOURCE-ACCEPTANCE", "BX-BH00-SOURCE-QUALITY", "BX-BH00-SOURCE-SUPPORT-ENVELOPE"], "method": "Inspect support vocabularies, current browser statuses, evidence states, acceptance status combinations, and prohibited false-support transitions.", "outcome": "passed", "conflicts": [], "resolution": "no-authoritative-conflict-found"}
+  ],
+  "reviews": [
+    {
+      "id": "BX-BH00-REVIEW-ACCESSIBILITY",
+      "discipline": "accessibility",
+      "reviewer_role": "accessibility-contract-reviewer",
+      "independence": "A separate evidence-first accessibility lens challenged source-bound claims after reconciliation and did not treat phase completion as approval.",
+      "scope": ["accessibility-gate", "catalog-fallbacks", "focus-and-keyboard", "native-evidence-boundary", "semantic-contracts"],
+      "outcome": "accepted-with-follow-up",
+      "finding_ids": ["BX-BH00-FIND-ACCESSIBILITY-MANUAL-EVIDENCE"],
+      "evidence_id": "BX-BH00-EVIDENCE-REVIEW-ACCESSIBILITY"
+    },
+    {
+      "id": "BX-BH00-REVIEW-ARCHITECTURE",
+      "discipline": "architecture",
+      "reviewer_role": "host-neutral-architecture-reviewer",
+      "independence": "A separate architecture lens re-derived package, adapter, profile, and backend boundaries from bound sources rather than trusting prior summaries.",
+      "scope": ["architecture-axes", "capability-isolation", "host-neutrality", "native-portability", "package-direction", "profile-composition"],
+      "outcome": "accepted-with-follow-up",
+      "finding_ids": ["BX-BH00-FIND-ARCHITECTURE-NATIVE-PORTABILITY"],
+      "evidence_id": "BX-BH00-EVIDENCE-REVIEW-ARCHITECTURE"
+    },
+    {
+      "id": "BX-BH00-REVIEW-IMPLEMENTATION",
+      "discipline": "implementation",
+      "reviewer_role": "feasibility-implementation-reviewer",
+      "independence": "A separate implementation lens attempted to falsify feasibility assumptions using only current evidence states and scaffold contents, not intended architecture.",
+      "scope": ["browser-runtime", "build-reproducibility", "component-lifecycle", "private-api-risk", "renderer-transport", "scaffold-state"],
+      "outcome": "accepted-with-follow-up",
+      "finding_ids": ["BX-BH00-FIND-IMPLEMENTATION-RUNTIME-FEASIBILITY"],
+      "evidence_id": "BX-BH00-EVIDENCE-REVIEW-IMPLEMENTATION"
+    },
+    {
+      "id": "BX-BH00-REVIEW-PACKAGING",
+      "discipline": "packaging",
+      "reviewer_role": "package-and-build-reviewer",
+      "independence": "A separate packaging lens compared all eighteen package responsibilities and payload ownership to future artifact and dependency obligations.",
+      "scope": ["artifact-manifests", "dependency-direction", "package-ownership", "payload-attribution", "profile-composition", "reachability"],
+      "outcome": "accepted-with-follow-up",
+      "finding_ids": ["BX-BH00-FIND-PACKAGING-REACHABILITY"],
+      "evidence_id": "BX-BH00-EVIDENCE-REVIEW-PACKAGING"
+    },
+    {
+      "id": "BX-BH00-REVIEW-PERFORMANCE-RELIABILITY",
+      "discipline": "performance-reliability",
+      "reviewer_role": "performance-and-resilience-reviewer",
+      "independence": "A separate quantitative lens checked every proposed threshold, method, environment, failure bound, and blocker without interpreting proposals as measurements.",
+      "scope": ["failure-scenarios", "measurement-methods", "payload-boundaries", "reliability-blockers", "representative-environments", "thresholds"],
+      "outcome": "accepted-with-follow-up",
+      "finding_ids": ["BX-BH00-FIND-PERFORMANCE-CALIBRATION"],
+      "evidence_id": "BX-BH00-EVIDENCE-REVIEW-PERFORMANCE-RELIABILITY"
+    },
+    {
+      "id": "BX-BH00-REVIEW-PRODUCT",
+      "discipline": "product",
+      "reviewer_role": "browser-product-contract-reviewer",
+      "independence": "A separate product lens reviewed bounded promises, omissions, family dispositions, fallback language, and support states from a consumer perspective.",
+      "scope": ["catalog-dispositions", "delivery-tiers", "explicit-non-goals", "fallbacks", "naming", "support-language"],
+      "outcome": "accepted-with-follow-up",
+      "finding_ids": ["BX-BH00-FIND-PRODUCT-SUPPORT-QUALIFICATION"],
+      "evidence_id": "BX-BH00-EVIDENCE-REVIEW-PRODUCT"
+    },
+    {
+      "id": "BX-BH00-REVIEW-PROVENANCE",
+      "discipline": "provenance",
+      "reviewer_role": "source-and-license-reviewer",
+      "independence": "A separate provenance lens checked immutable source bindings, generator ownership, licensing boundaries, and future distributed-material gates.",
+      "scope": ["adapted-material", "assets-and-icons", "dependency-notices", "generated-artifacts", "licenses", "source-pins"],
+      "outcome": "accepted-with-follow-up",
+      "finding_ids": ["BX-BH00-FIND-PROVENANCE-RELEASE-MATERIAL"],
+      "evidence_id": "BX-BH00-EVIDENCE-REVIEW-PROVENANCE"
+    },
+    {
+      "id": "BX-BH00-REVIEW-SECURITY",
+      "discipline": "security",
+      "reviewer_role": "browser-trust-boundary-reviewer",
+      "independence": "A separate security lens challenged client trust, command authority, capability grants, request boundaries, deployment controls, and diagnostics.",
+      "scope": ["capability-grants", "client-state", "csrf-and-origin", "dependency-risk", "diagnostic-redaction", "server-commands"],
+      "outcome": "accepted-with-follow-up",
+      "finding_ids": ["BX-BH00-FIND-SECURITY-EXECUTABLE-CONTROLS"],
+      "evidence_id": "BX-BH00-EVIDENCE-REVIEW-SECURITY"
+    }
+  ],
+  "findings": [
+    {
+      "id": "BX-BH00-FIND-ACCESSIBILITY-MANUAL-EVIDENCE",
+      "severity": "high",
+      "category": "accessibility-evidence",
+      "statement": "The semantic and fallback contract is complete, but no browser, assistive-technology, keyboard, touch, forced-color, zoom, reflow, or reduced-motion evidence has executed.",
+      "owner": "accessibility-owner",
+      "affected_source_refs": ["BX-BH00-SOURCE-ACCEPTANCE", "BX-BH00-SOURCE-CLASSIFICATION", "BX-BH00-SOURCE-QUALITY"],
+      "required_action": "Execute renderer-normalized automated checks and bounded manual matrices as each implementation milestone introduces supported behavior.",
+      "due_milestone": "BH-02",
+      "status": "accepted-follow-up",
+      "evidence_ids": ["BX-BH00-EVIDENCE-REVIEW-ACCESSIBILITY"]
+    },
+    {
+      "id": "BX-BH00-FIND-ARCHITECTURE-NATIVE-PORTABILITY",
+      "severity": "medium",
+      "category": "host-neutrality-proof",
+      "statement": "The public design excludes browser objects, but only the BH-02 headless, DOM, and disposable native-control trace can expose implementation-time leakage.",
+      "owner": "architecture-owner",
+      "affected_source_refs": ["BX-BH00-SOURCE-ADR-0001", "BX-BH00-SOURCE-ADR-0004", "BX-BH00-SOURCE-ADR-0007", "BX-BH00-SOURCE-CLASSIFICATION"],
+      "required_action": "Run the same bounded semantic interaction traces across headless, DOM, and actual native controls before stabilizing portable contracts.",
+      "due_milestone": "BH-02",
+      "status": "accepted-follow-up",
+      "evidence_ids": ["BX-BH00-EVIDENCE-REVIEW-ARCHITECTURE"]
+    },
+    {
+      "id": "BX-BH00-FIND-IMPLEMENTATION-RUNTIME-FEASIBILITY",
+      "severity": "high",
+      "category": "runtime-feasibility",
+      "statement": "No clean-machine Popcorn and AtomVM browser build, nested-state behavior, authenticated server command, emitted artifact, or runtime limitation has been reproduced.",
+      "owner": "bh01-owner",
+      "affected_source_refs": ["BX-BH00-SOURCE-ACCEPTANCE", "BX-BH00-SOURCE-ROADMAP", "BX-BH00-SOURCE-SUPPORT-ENVELOPE"],
+      "required_action": "Execute the pinned BH-01 feasibility matrix and stop before framework abstraction if the exact candidate composition cannot reproduce.",
+      "due_milestone": "BH-01",
+      "status": "accepted-follow-up",
+      "evidence_ids": ["BX-BH00-EVIDENCE-REVIEW-IMPLEMENTATION"]
+    },
+    {
+      "id": "BX-BH00-FIND-PACKAGING-REACHABILITY",
+      "severity": "medium",
+      "category": "build-and-packaging",
+      "statement": "Package boundaries and payload ownership are defined, but no dependency graph, client reachability, manifest, integrity, lockfile, or artifact accounting exists.",
+      "owner": "build-owner",
+      "affected_source_refs": ["BX-BH00-SOURCE-CLASSIFICATION", "BX-BH00-SOURCE-QUALITY", "BX-BH00-SOURCE-REPOSITORY-MAP"],
+      "required_action": "Establish deterministic reachability and manifest evidence before client-safe package or production payload claims are made.",
+      "due_milestone": "BH-06",
+      "status": "accepted-follow-up",
+      "evidence_ids": ["BX-BH00-EVIDENCE-REVIEW-PACKAGING"]
+    },
+    {
+      "id": "BX-BH00-FIND-PERFORMANCE-CALIBRATION",
+      "severity": "high",
+      "category": "quality-calibration",
+      "statement": "All 31 thresholds are proposed and method-complete but remain empirically uncalibrated on exact desktop, mobile, browser, network, cache, and power environments.",
+      "owner": "quality-owner",
+      "affected_source_refs": ["BX-BH00-SOURCE-ACCEPTANCE", "BX-BH00-SOURCE-QUALITY"],
+      "required_action": "Measure the BH-01 baseline on fingerprinted environments and propose versioned threshold changes rather than claiming a pass from estimates.",
+      "due_milestone": "BH-01",
+      "status": "accepted-follow-up",
+      "evidence_ids": ["BX-BH00-EVIDENCE-REVIEW-PERFORMANCE-RELIABILITY"]
+    },
+    {
+      "id": "BX-BH00-FIND-PRODUCT-SUPPORT-QUALIFICATION",
+      "severity": "high",
+      "category": "support-qualification",
+      "statement": "The browser, runtime, toolchain, profile, and rendering-mode promises are bounded, but every browser configuration and implementation state remains unsupported or unproven.",
+      "owner": "product-owner",
+      "affected_source_refs": ["BX-BH00-SOURCE-ACCEPTANCE", "BX-BH00-SOURCE-ROADMAP", "BX-BH00-SOURCE-SUPPORT-ENVELOPE"],
+      "required_action": "Qualify exact candidate versions and scenarios in BH-01 and preserve unsupported status for every untested combination.",
+      "due_milestone": "BH-01",
+      "status": "accepted-follow-up",
+      "evidence_ids": ["BX-BH00-EVIDENCE-REVIEW-PRODUCT"]
+    },
+    {
+      "id": "BX-BH00-FIND-PROVENANCE-RELEASE-MATERIAL",
+      "severity": "high",
+      "category": "release-provenance",
+      "statement": "Research source pins are governed, but no future distributed dependency, adapted code, generated code, icon, font, style, example, SBOM, or notice bundle has been audited.",
+      "owner": "provenance-owner",
+      "affected_source_refs": ["BX-BH00-SOURCE-CATALOG", "BX-BH00-SOURCE-QUALITY", "BX-BH00-SOURCE-REPOSITORY-MAP"],
+      "required_action": "Attach complete source, license, notice, integrity, transformation, and reachability records as implementation and packaging artifacts are introduced.",
+      "due_milestone": "BH-06",
+      "status": "accepted-follow-up",
+      "evidence_ids": ["BX-BH00-EVIDENCE-REVIEW-PROVENANCE"]
+    },
+    {
+      "id": "BX-BH00-FIND-SECURITY-EXECUTABLE-CONTROLS",
+      "severity": "high",
+      "category": "security-evidence",
+      "statement": "Trust, authority, capability, CSRF/origin, integrity, CSP, dependency, secret, and redaction requirements are explicit but have no executable implementation evidence.",
+      "owner": "security-owner",
+      "affected_source_refs": ["BX-BH00-SOURCE-ACCEPTANCE", "BX-BH00-SOURCE-ADR-0003", "BX-BH00-SOURCE-ADR-0005", "BX-BH00-SOURCE-QUALITY"],
+      "required_action": "Exercise one authenticated and authorized command boundary in BH-01, then implement the complete security gate in owning milestones.",
+      "due_milestone": "BH-01",
+      "status": "accepted-follow-up",
+      "evidence_ids": ["BX-BH00-EVIDENCE-REVIEW-SECURITY"]
+    }
+  ],
+  "risks": [
+    {
+      "id": "BX-BH01-RISK-AUTHENTICATED-COMMAND",
+      "statement": "The candidate browser runtime may not support a practical authenticated Phoenix command and result path without unsafe coupling or unavailable APIs.",
+      "likelihood": "unknown",
+      "impact": "high",
+      "owner": "server-adapter-owner",
+      "first_milestone": "BH-01",
+      "stop_condition": "Stop if server authority cannot remain independent of client presentation and private renderer state.",
+      "status": "open-feasibility-risk"
+    },
+    {
+      "id": "BX-BH01-RISK-BROWSER-PREREQUISITES",
+      "statement": "Cross-origin isolation, worker, module, memory, or other browser prerequisites may narrow the candidate support window or break fallback behavior.",
+      "likelihood": "medium",
+      "impact": "high",
+      "owner": "browser-host-owner",
+      "first_milestone": "BH-01",
+      "stop_condition": "Stop support promotion when prerequisites cannot be detected and failed with intentional accessible fallback.",
+      "status": "open-feasibility-risk"
+    },
+    {
+      "id": "BX-BH01-RISK-DEPENDENCY-ACCESS",
+      "statement": "The exact Popcorn, LocalLiveView, or related candidate dependency set may be private, unavailable, unlicensed for distribution, or operationally unstable.",
+      "likelihood": "medium",
+      "impact": "critical",
+      "owner": "bh01-owner",
+      "first_milestone": "BH-01",
+      "stop_condition": "Stop if a required dependency cannot be reproducibly acquired and legally/operationally used by a clean environment.",
+      "status": "open-feasibility-risk"
+    },
+    {
+      "id": "BX-BH01-RISK-MOBILE-PERFORMANCE",
+      "statement": "AtomVM-in-Wasm transfer, startup, memory, interaction, and battery behavior may exceed the proposed constrained-mobile quality boundaries.",
+      "likelihood": "unknown",
+      "impact": "high",
+      "owner": "quality-owner",
+      "first_milestone": "BH-01",
+      "stop_condition": "Stop abstraction work if representative mobile results are outside a product-viable range without a bounded mitigation path.",
+      "status": "open-feasibility-risk"
+    },
+    {
+      "id": "BX-BH01-RISK-PRIVATE-API-COUPLING",
+      "statement": "LocalLiveView or LiveView render-data and patch integration may depend on private/version-sensitive APIs too broad to isolate sustainably.",
+      "likelihood": "high",
+      "impact": "high",
+      "owner": "liveview-adapter-owner",
+      "first_milestone": "BH-01",
+      "stop_condition": "Stop the adapter path if coupling escapes the dedicated package or cannot be pinned and characterized precisely.",
+      "status": "open-feasibility-risk"
+    },
+    {
+      "id": "BX-BH01-RISK-RUNTIME-SEMANTICS",
+      "statement": "The candidate AtomVM browser runtime may lack process, timer, message, module, error, or resource semantics needed by representative component behavior.",
+      "likelihood": "unknown",
+      "impact": "critical",
+      "owner": "runtime-owner",
+      "first_milestone": "BH-01",
+      "stop_condition": "Stop when a required semantic cannot be reproduced or safely replaced without redefining the component contract.",
+      "status": "open-feasibility-risk"
+    },
+    {
+      "id": "BX-BH01-RISK-TOOLCHAIN-REPRODUCIBILITY",
+      "statement": "Exact Erlang, Elixir, AtomVM, Popcorn, Phoenix, LiveView, and JavaScript tool versions may not produce a deterministic clean-machine build.",
+      "likelihood": "unknown",
+      "impact": "critical",
+      "owner": "bh01-owner",
+      "first_milestone": "BH-01",
+      "stop_condition": "Stop if immutable inputs and documented commands cannot reproduce equivalent browser artifacts on a clean machine.",
+      "status": "open-feasibility-risk"
+    },
+    {
+      "id": "BX-BH01-RISK-WASM-ARTIFACT-ACCOUNTING",
+      "statement": "The emitted Wasm, bytecode, JavaScript, assets, source maps, and transitive runtime content may be too opaque for payload and provenance accounting.",
+      "likelihood": "medium",
+      "impact": "high",
+      "owner": "build-owner",
+      "first_milestone": "BH-01",
+      "stop_condition": "Stop support or packaging claims when artifact origin, reachability, integrity, licensing, or payload cannot be explained.",
+      "status": "open-feasibility-risk"
+    }
+  ],
+  "release": {
+    "version": "0.1.0",
+    "release_id": "BX-BH00-BASELINE-0.1.0",
+    "status": "accepted-product-contract",
+    "published_index": "assets/bh-00-release/blazex-bh-00-release-index-v0-1-0.md",
+    "source_manifest_sha256": "40ff2ba2304f5d8e1e247f3ec938b783c0f723bff5bda23d361eadf89ab540c0",
+    "generation_commands": [
+      "python3 generate_acceptance_registry.py --check",
+      "python3 generate_bh00_release.py --check",
+      "python3 generate_component_catalog.py --check",
+      "python3 generate_component_classification.py --check"
+    ],
+    "validation_commands": [
+      "python3 validate_archive.py",
+      "python3 validate_bh00_governance.py",
+      "python3 validate_browser_product_envelope.py",
+      "python3 validate_component_catalog.py",
+      "python3 validate_component_classification.py",
+      "python3 validate_quality_acceptance.py"
+    ],
+    "review_evidence_ids": [
+      "BX-BH00-EVIDENCE-REVIEW-ACCESSIBILITY",
+      "BX-BH00-EVIDENCE-REVIEW-ARCHITECTURE",
+      "BX-BH00-EVIDENCE-REVIEW-IMPLEMENTATION",
+      "BX-BH00-EVIDENCE-REVIEW-PACKAGING",
+      "BX-BH00-EVIDENCE-REVIEW-PERFORMANCE-RELIABILITY",
+      "BX-BH00-EVIDENCE-REVIEW-PRODUCT",
+      "BX-BH00-EVIDENCE-REVIEW-PROVENANCE",
+      "BX-BH00-EVIDENCE-REVIEW-SECURITY"
+    ],
+    "change_control": "Change an authoritative source through its owner and decision policy, version the changed contract, regenerate every derivative, rerun affected review and validation, and preserve the prior baseline.",
+    "supersession": "A later baseline must name BX-BH00-BASELINE-0.1.0 as superseded; this identity, source manifest, review, and risk history remain immutable."
+  },
+  "bh01_entry": {
+    "decision": "conditionally-ready",
+    "decision_id": "BX-BH01-ENTRY-0.1",
+    "rationale": "BH-00 has a complete, reconciled, reviewed, versioned product contract with no blocking contract defect, while runtime feasibility, exact dependencies, browser behavior, measurements, and support remain deliberately unproven.",
+    "authorization_scope": "Authorizes preparation and execution of a separately approved BH-01 feasibility plan only; it authorizes no product support, framework abstraction, or release claim.",
+    "conditions": [
+      "The Phase 6 PR is merged into synchronized main with every governance source hash and validation result current.",
+      "A detailed BH-01 phased implementation plan is separately reviewed and explicitly approved before any project activation or dependency installation.",
+      "BH-01 begins on a dedicated feature branch and preserves every stop condition, evidence boundary, package responsibility, and unsupported state in this baseline."
+    ],
+    "stop_conditions": [
+      "Stop if the exact runtime and toolchain inputs cannot produce equivalent explainable artifacts on a clean machine.",
+      "Stop if required component semantics cannot execute without redefining the host-neutral component, renderer, capability, or trust contracts.",
+      "Stop if Phoenix or private LiveView coupling cannot remain isolated from standalone DOM, Plug, core, and portable component packages.",
+      "Stop if representative mobile/browser performance is outside a product-viable range without a bounded mitigation.",
+      "Stop support or packaging claims when artifact origin, reachability, integrity, licensing, security, or payload cannot be explained."
+    ],
+    "input_manifest": [
+      {
+        "id": "BX-BH01-INPUT-ARTIFACTS",
+        "category": "artifact",
+        "description": "Record Wasm, BEAM bytecode, JavaScript, loader, assets, source maps, manifests, integrity, sizes, reachability, provenance, and deployment prerequisites.",
+        "source_refs": ["BX-BH00-SOURCE-ACCEPTANCE", "BX-BH00-SOURCE-QUALITY", "BX-BH00-SOURCE-SUPPORT-ENVELOPE"],
+        "owner": "build-owner",
+        "state": "required-unproven"
+      },
+      {
+        "id": "BX-BH01-INPUT-BEHAVIORS",
+        "category": "behavior",
+        "description": "Exercise boot, local state, nested components, form events, timers/messages, DOM updates, fallback, cleanup, and one authenticated server command.",
+        "source_refs": ["BX-BH00-SOURCE-ACCEPTANCE", "BX-BH00-SOURCE-ADR-0001", "BX-BH00-SOURCE-ROADMAP"],
+        "owner": "bh01-owner",
+        "state": "required-unproven"
+      },
+      {
+        "id": "BX-BH01-INPUT-BROWSERS",
+        "category": "browser",
+        "description": "Use the five candidate desktop/mobile browser configurations and record exact versions, operating systems, prerequisites, fallback, and unsupported outcomes.",
+        "source_refs": ["BX-BH00-SOURCE-ACCEPTANCE", "BX-BH00-SOURCE-SUPPORT-ENVELOPE"],
+        "owner": "browser-profile-owner",
+        "state": "required-unproven"
+      },
+      {
+        "id": "BX-BH01-INPUT-MEASUREMENTS",
+        "category": "measurement",
+        "description": "Calibrate cold/warm startup, instantiate, root readiness, local event-to-paint, server round trip, memory, build, and initial payload metrics.",
+        "source_refs": ["BX-BH00-SOURCE-ACCEPTANCE", "BX-BH00-SOURCE-QUALITY"],
+        "owner": "quality-owner",
+        "state": "required-unproven"
+      },
+      {
+        "id": "BX-BH01-INPUT-PRIVATE-API",
+        "category": "private-api-risk",
+        "description": "Inventory every LocalLiveView, LiveView, Popcorn, AtomVM, browser, and build API with public/private status, version sensitivity, owner, and isolation boundary.",
+        "source_refs": ["BX-BH00-SOURCE-ADR-0004", "BX-BH00-SOURCE-ADR-0006", "BX-BH00-SOURCE-SUPPORT-ENVELOPE"],
+        "owner": "compatibility-owner",
+        "state": "required-unproven"
+      },
+      {
+        "id": "BX-BH01-INPUT-PROFILE-SLICE",
+        "category": "profile-slice",
+        "description": "Activate only the minimal browser/Phoenix feasibility slice while retaining standalone DOM ownership and separately inspectable Plug/headless boundaries.",
+        "source_refs": ["BX-BH00-SOURCE-ADR-0005", "BX-BH00-SOURCE-ADR-0006", "BX-BH00-SOURCE-REPOSITORY-MAP"],
+        "owner": "browser-profile-owner",
+        "state": "required-unproven"
+      },
+      {
+        "id": "BX-BH01-INPUT-STOP-CONDITIONS",
+        "category": "stop-condition",
+        "description": "Apply reproducibility, runtime-semantics, adapter-isolation, security-authority, performance-viability, dependency-access, and artifact-accounting stop rules before abstraction.",
+        "source_refs": ["BX-BH00-SOURCE-ACCEPTANCE", "BX-BH00-SOURCE-ROADMAP", "BX-BH00-SOURCE-SUPPORT-ENVELOPE"],
+        "owner": "architecture-owner",
+        "state": "required-unproven"
+      },
+      {
+        "id": "BX-BH01-INPUT-TOOLCHAIN",
+        "category": "toolchain",
+        "description": "Resolve and pin operating system, OTP, Elixir, Mix, AtomVM, Popcorn, Phoenix, LiveView, LocalLiveView, browser, and JavaScript tool identities.",
+        "source_refs": ["BX-BH00-SOURCE-ACCEPTANCE", "BX-BH00-SOURCE-SUPPORT-ENVELOPE"],
+        "owner": "bh01-owner",
+        "state": "required-unproven"
+      }
+    ],
+    "proof_obligations": [
+      {
+        "id": "BX-BH01-PROOF-ARTIFACT-ACCOUNTING",
+        "statement": "Every emitted runtime, application, JavaScript, asset, map, manifest, and dependency artifact is identified, hashed, sized, and provenance-accounted.",
+        "support_claim_ref": "bh01_required_records:REC-ARTIFACTS",
+        "decision_ref": "ADR-0006",
+        "budget_refs": ["BX-BUD-PAYLOAD-APPLICATION-COMPRESSED-KIB", "BX-BUD-PAYLOAD-RUNTIME-COMPRESSED-KIB"],
+        "acceptance_refs": ["BX-ACC-ENV-BH01-REQUIRED-RECORDS-REC-ARTIFACTS", "BX-ACC-ROADMAP-BH-01"],
+        "repository_owner": "build-owner",
+        "evidence_types": ["automated", "generated", "review"],
+        "stop_on_failure": true
+      },
+      {
+        "id": "BX-BH01-PROOF-AUTHENTICATED-COMMAND",
+        "statement": "One browser-initiated command is authenticated, authorized against current server state, schema-validated, executed, and returned without client authority.",
+        "support_claim_ref": "security_invariants:SEC-SERVER-REVALIDATION",
+        "decision_ref": "ADR-0005",
+        "budget_refs": ["BX-BUD-INTERACTION-SERVER-ROUNDTRIP-MS"],
+        "acceptance_refs": ["BX-ACC-ENV-SECURITY-INVARIANTS-SEC-SERVER-REVALIDATION", "BX-ACC-ROADMAP-BH-01"],
+        "repository_owner": "server-adapter-owner",
+        "evidence_types": ["automated", "browser", "security"],
+        "stop_on_failure": true
+      },
+      {
+        "id": "BX-BH01-PROOF-BROWSER-FALLBACK",
+        "statement": "Missing browser prerequisites and unsupported configurations produce intentional accessible fallback and diagnostics without partial activation.",
+        "support_claim_ref": "paper_scenarios:SCN-MISSING-CROSS-ORIGIN-ISOLATION",
+        "decision_ref": "ADR-0006",
+        "budget_refs": ["BX-BUD-STARTUP-COLD-DESKTOP-MS"],
+        "acceptance_refs": ["BX-ACC-ENV-PAPER-SCENARIOS-SCN-MISSING-CROSS-ORIGIN-ISOLATION", "BX-ACC-ROADMAP-BH-01"],
+        "repository_owner": "browser-host-owner",
+        "evidence_types": ["automated", "browser", "review"],
+        "stop_on_failure": true
+      },
+      {
+        "id": "BX-BH01-PROOF-BUILD-REPRODUCIBILITY",
+        "statement": "Immutable toolchain and dependency inputs plus documented commands reproduce equivalent validated browser artifacts on a clean machine.",
+        "support_claim_ref": "bh01_required_records:REC-REBUILD",
+        "decision_ref": "ADR-0006",
+        "budget_refs": ["BX-BUD-BUILD-RELEASE-SECONDS"],
+        "acceptance_refs": ["BX-ACC-ENV-BH01-REQUIRED-RECORDS-REC-REBUILD", "BX-ACC-ROADMAP-BH-01"],
+        "repository_owner": "bh01-owner",
+        "evidence_types": ["automated", "generated", "review"],
+        "stop_on_failure": true
+      },
+      {
+        "id": "BX-BH01-PROOF-DOM-UPDATE",
+        "statement": "A local state transition produces the expected DOM update through isolated renderer ownership with normalized event and generation behavior.",
+        "support_claim_ref": "rendering_modes:MODE-BROWSER-LOCAL",
+        "decision_ref": "ADR-0004",
+        "budget_refs": ["BX-BUD-INTERACTION-DOM-UPDATE-MS"],
+        "acceptance_refs": ["BX-ACC-ENV-RENDERING-MODES-MODE-BROWSER-LOCAL", "BX-ACC-ROADMAP-BH-01"],
+        "repository_owner": "dom-renderer-owner",
+        "evidence_types": ["automated", "browser"],
+        "stop_on_failure": true
+      },
+      {
+        "id": "BX-BH01-PROOF-FORM-EVENT",
+        "statement": "A representative form field normalizes input, updates local state, exposes validation, and preserves server authority without browser types in component code.",
+        "support_claim_ref": "paper_scenarios:SCN-PHOENIX-BROWSER-LOCAL",
+        "decision_ref": "ADR-0001",
+        "budget_refs": ["BX-BUD-INTERACTION-LOCAL-EVENT-PAINT-MS"],
+        "acceptance_refs": ["BX-ACC-ENV-PAPER-SCENARIOS-SCN-PHOENIX-BROWSER-LOCAL", "BX-ACC-ROADMAP-BH-01"],
+        "repository_owner": "bh01-owner",
+        "evidence_types": ["automated", "browser"],
+        "stop_on_failure": true
+      },
+      {
+        "id": "BX-BH01-PROOF-MOBILE-MEASUREMENT",
+        "statement": "Cold startup, runtime instantiation, root readiness, memory growth, and local interaction are measured on fingerprinted constrained mobile hardware and network.",
+        "support_claim_ref": "browser_configurations:BR-WEBKIT-MOBILE",
+        "decision_ref": "ADR-0006",
+        "budget_refs": ["BX-BUD-RESOURCE-MEMORY-GROWTH-MIB", "BX-BUD-STARTUP-COLD-MOBILE-MS"],
+        "acceptance_refs": ["BX-ACC-BUDGET-BX-BUD-STARTUP-COLD-MOBILE-MS", "BX-ACC-ENV-BROWSER-CONFIGURATIONS-BR-WEBKIT-MOBILE"],
+        "repository_owner": "quality-owner",
+        "evidence_types": ["benchmark", "browser", "review"],
+        "stop_on_failure": true
+      },
+      {
+        "id": "BX-BH01-PROOF-NESTED-STATE",
+        "statement": "Nested stateful components preserve identity, parent-child isolation, deterministic updates, error containment, and disposal in the browser runtime.",
+        "support_claim_ref": "profiles:PROFILE-BROWSER-PHOENIX",
+        "decision_ref": "ADR-0001",
+        "budget_refs": ["BX-BUD-INTERACTION-LOCAL-EVENT-PAINT-MS"],
+        "acceptance_refs": ["BX-ACC-ENV-PROFILES-PROFILE-BROWSER-PHOENIX", "BX-ACC-ROADMAP-BH-01"],
+        "repository_owner": "bh01-owner",
+        "evidence_types": ["automated", "browser"],
+        "stop_on_failure": true
+      },
+      {
+        "id": "BX-BH01-PROOF-RUNTIME-BOOT",
+        "statement": "The pinned AtomVM-in-Wasm and Popcorn candidate boots repeatedly, loads the declared bundle, reports readiness, and fails intentionally when unsupported.",
+        "support_claim_ref": "toolchain_inputs:TC-POPCORN",
+        "decision_ref": "ADR-0006",
+        "budget_refs": ["BX-BUD-PAYLOAD-RUNTIME-COMPRESSED-KIB", "BX-BUD-STARTUP-INSTANTIATE-MS"],
+        "acceptance_refs": ["BX-ACC-ENV-TOOLCHAIN-INPUTS-TC-POPCORN", "BX-ACC-ROADMAP-BH-01"],
+        "repository_owner": "runtime-owner",
+        "evidence_types": ["automated", "browser", "generated"],
+        "stop_on_failure": true
+      },
+      {
+        "id": "BX-BH01-PROOF-TIMER-MESSAGE",
+        "statement": "A representative timer or process message updates state with bounded scheduling, stale-generation rejection, cancellation, error behavior, and cleanup.",
+        "support_claim_ref": "profiles:PROFILE-BROWSER-PHOENIX",
+        "decision_ref": "ADR-0003",
+        "budget_refs": ["BX-BUD-RELIABILITY-PENDING-EFFECTS-COUNT", "BX-BUD-RESOURCE-CLEANUP-MS"],
+        "acceptance_refs": ["BX-ACC-BUDGET-BX-BUD-RESOURCE-CLEANUP-MS", "BX-ACC-ROADMAP-BH-01"],
+        "repository_owner": "runtime-owner",
+        "evidence_types": ["automated", "browser"],
+        "stop_on_failure": true
+      }
+    ],
+    "prohibited_actions": [
+      "Do not initialize Mix, Phoenix, JavaScript, Rust, or other implementation projects or install candidate dependencies until a detailed BH-01 phase plan is explicitly approved.",
+      "Do not claim supported browsers, a working runtime, implemented components, passed budgets, production security/accessibility, native compatibility, or release readiness from BH-00 acceptance."
+    ],
+    "owner_roles": ["architecture-owner", "bh01-owner", "browser-profile-owner", "product-owner", "quality-owner", "security-owner"]
+  },
+  "exceptions": [],
+  "evidence_boundary": {
+    "contract_evidence": "accepted",
+    "runtime_implementation": "not-executed",
+    "browser_support": "unsupported-unproven",
+    "component_implementation": "not-executed",
+    "measurements": "not-executed",
+    "release_support": "not-authorized",
+    "evidence_ids": [
+      "BX-BH00-EVIDENCE-FINAL-ACCEPTANCE-6-4",
+      "BX-BH00-EVIDENCE-RECONCILIATION-6-1",
+      "BX-BH00-EVIDENCE-REVIEW-ACCESSIBILITY",
+      "BX-BH00-EVIDENCE-REVIEW-ARCHITECTURE",
+      "BX-BH00-EVIDENCE-REVIEW-IMPLEMENTATION",
+      "BX-BH00-EVIDENCE-REVIEW-PACKAGING",
+      "BX-BH00-EVIDENCE-REVIEW-PERFORMANCE-RELIABILITY",
+      "BX-BH00-EVIDENCE-REVIEW-PRODUCT",
+      "BX-BH00-EVIDENCE-REVIEW-PROVENANCE",
+      "BX-BH00-EVIDENCE-REVIEW-SECURITY",
+      "BX-BH00-EVIDENCE-VERSIONED-RELEASE-6-3"
+    ]
+  }
+}

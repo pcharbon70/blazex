@@ -198,7 +198,12 @@ Before reporting archive work complete:
    budgets, cross-cutting gates, acceptance conditions, coverage, or generated
    traceability artifacts change;
 8. verify new external citations against primary sources;
-9. run `git diff --check` from the project root; and
-10. inspect the complete change for stale paths and accidental rewrites.
+9. run `python3 validate_bh00_governance.py` and
+   `python3 -m unittest test_validate_bh00_governance.py` plus
+   `python3 generate_bh00_release.py --check` when Phase 6 source bindings,
+   reconciliation, reviews, findings, risks, release records, generated
+   indexes, or BH-01 entry decisions change;
+10. run `git diff --check` from the project root; and
+11. inspect the complete change for stale paths and accidental rewrites.
 
 Do not commit, push, publish, or open a pull request unless the user asks.

@@ -1,0 +1,233 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://blazex.dev/schemas/bh-00-governance/1.0.0",
+  "title": "BlazeX BH-00 Governance Contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "contract_version",
+    "contract_id",
+    "stage",
+    "status",
+    "source_bindings",
+    "architecture_axes",
+    "package_boundaries",
+    "profile_boundaries",
+    "reconciliation_checks",
+    "reviews",
+    "findings",
+    "risks",
+    "release",
+    "bh01_entry",
+    "exceptions",
+    "evidence_boundary"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "contract_version": {"const": "0.1.0"},
+    "contract_id": {"const": "BX-BH00-GOVERNANCE-0.1"},
+    "stage": {"enum": ["section-6.1", "section-6.2", "section-6.3", "complete"]},
+    "status": {"enum": ["reconciled-pending-review", "reviewed-pending-release", "accepted-conditionally-ready"]},
+    "source_bindings": {"type": "array", "minItems": 15, "items": {"$ref": "#/$defs/sourceBinding"}},
+    "architecture_axes": {"type": "array", "minItems": 6, "items": {"$ref": "#/$defs/axis"}},
+    "package_boundaries": {"type": "array", "minItems": 18, "items": {"$ref": "#/$defs/packageBoundary"}},
+    "profile_boundaries": {"type": "array", "minItems": 3, "items": {"$ref": "#/$defs/profileBoundary"}},
+    "reconciliation_checks": {"type": "array", "minItems": 16, "items": {"$ref": "#/$defs/reconciliationCheck"}},
+    "reviews": {"type": "array", "items": {"$ref": "#/$defs/review"}},
+    "findings": {"type": "array", "items": {"$ref": "#/$defs/finding"}},
+    "risks": {"type": "array", "items": {"$ref": "#/$defs/risk"}},
+    "release": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/release"}]},
+    "bh01_entry": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/bh01Entry"}]},
+    "exceptions": {"type": "array", "maxItems": 0},
+    "evidence_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["contract_evidence", "runtime_implementation", "browser_support", "component_implementation", "measurements", "release_support", "evidence_ids"],
+      "properties": {
+        "contract_evidence": {"enum": ["reconciled", "reviewed", "accepted"]},
+        "runtime_implementation": {"const": "not-executed"},
+        "browser_support": {"const": "unsupported-unproven"},
+        "component_implementation": {"const": "not-executed"},
+        "measurements": {"const": "not-executed"},
+        "release_support": {"const": "not-authorized"},
+        "evidence_ids": {"type": "array", "items": {"type": "string", "pattern": "^BX-BH00-EVIDENCE-[A-Z0-9-]+$"}}
+      }
+    }
+  },
+  "$defs": {
+    "sourceBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "role", "path", "sha256", "authority"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^BX-BH00-SOURCE-[A-Z0-9-]+$"},
+        "role": {"enum": ["repository-boundary", "vocabulary", "architecture-decision", "support-envelope", "catalog", "classification", "quality", "acceptance", "roadmap"]},
+        "path": {"type": "string", "minLength": 5},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "authority": {"enum": ["authoritative", "authoritative-index"]}
+      }
+    },
+    "axis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "meaning", "must_not_define"],
+      "properties": {
+        "id": {"enum": ["runtime-substrate", "execution-host", "renderer-backend", "capability-provider", "server-adapter", "profile-composition"]},
+        "meaning": {"type": "string", "minLength": 30},
+        "must_not_define": {"type": "array", "minItems": 2, "uniqueItems": true, "items": {"type": "string", "minLength": 3}}
+      }
+    },
+    "packageBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "axis", "owns", "must_not_own", "activation_status"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^blazex_[a-z0-9_]+$"},
+        "axis": {"enum": ["build", "component", "kernel", "effects", "host", "server-adapter", "renderer-contract", "renderer-backend", "runtime-adapter", "test"]},
+        "owns": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 3}},
+        "must_not_own": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 3}},
+        "activation_status": {"const": "scaffold-only"}
+      }
+    },
+    "profileBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "runtime", "host", "renderer", "server_adapter", "forbidden_dependencies", "support_state"],
+      "properties": {
+        "id": {"enum": ["PROFILE-BROWSER-PHOENIX", "PROFILE-BROWSER-PLUG", "PROFILE-HEADLESS"]},
+        "runtime": {"type": "string", "minLength": 3},
+        "host": {"type": "string", "minLength": 3},
+        "renderer": {"type": "string", "minLength": 3},
+        "server_adapter": {"type": "string", "minLength": 3},
+        "forbidden_dependencies": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 3}},
+        "support_state": {"const": "planned-unproven"}
+      }
+    },
+    "reconciliationCheck": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "domain", "assertion", "source_refs", "method", "outcome", "conflicts", "resolution"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^BX-BH00-REC-[A-Z0-9-]+$"},
+        "domain": {"enum": ["terminology", "architecture", "ownership", "support", "catalog", "quality", "acceptance", "generation", "provenance", "compatibility"]},
+        "assertion": {"type": "string", "minLength": 30},
+        "source_refs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "pattern": "^BX-BH00-SOURCE-[A-Z0-9-]+$"}},
+        "method": {"type": "string", "minLength": 30},
+        "outcome": {"const": "passed"},
+        "conflicts": {"type": "array", "maxItems": 0},
+        "resolution": {"const": "no-authoritative-conflict-found"}
+      }
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "discipline", "reviewer_role", "independence", "scope", "outcome", "finding_ids", "evidence_id"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^BX-BH00-REVIEW-[A-Z0-9-]+$"},
+        "discipline": {"enum": ["product", "architecture", "implementation", "security", "accessibility", "performance-reliability", "packaging", "provenance"]},
+        "reviewer_role": {"type": "string", "minLength": 5},
+        "independence": {"type": "string", "minLength": 40},
+        "scope": {"type": "array", "minItems": 2, "uniqueItems": true, "items": {"type": "string", "minLength": 3}},
+        "outcome": {"enum": ["accepted", "accepted-with-follow-up", "blocking"]},
+        "finding_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^BX-BH00-FIND-[A-Z0-9-]+$"}},
+        "evidence_id": {"type": "string", "pattern": "^BX-BH00-EVIDENCE-[A-Z0-9-]+$"}
+      }
+    },
+    "finding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "severity", "category", "statement", "owner", "affected_source_refs", "required_action", "due_milestone", "status", "evidence_ids"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^BX-BH00-FIND-[A-Z0-9-]+$"},
+        "severity": {"enum": ["blocker", "high", "medium", "low"]},
+        "category": {"type": "string", "minLength": 3},
+        "statement": {"type": "string", "minLength": 30},
+        "owner": {"type": "string", "minLength": 3},
+        "affected_source_refs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "pattern": "^BX-BH00-SOURCE-[A-Z0-9-]+$"}},
+        "required_action": {"type": "string", "minLength": 30},
+        "due_milestone": {"type": "string", "pattern": "^BH-(0[0-9]|1[0-9]|2[0-3])$"},
+        "status": {"enum": ["resolved", "accepted-follow-up", "blocking"]},
+        "evidence_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "pattern": "^BX-BH00-EVIDENCE-[A-Z0-9-]+$"}}
+      }
+    },
+    "risk": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "statement", "likelihood", "impact", "owner", "first_milestone", "stop_condition", "status"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^BX-BH01-RISK-[A-Z0-9-]+$"},
+        "statement": {"type": "string", "minLength": 30},
+        "likelihood": {"enum": ["low", "medium", "high", "unknown"]},
+        "impact": {"enum": ["medium", "high", "critical"]},
+        "owner": {"type": "string", "minLength": 3},
+        "first_milestone": {"const": "BH-01"},
+        "stop_condition": {"type": "string", "minLength": 30},
+        "status": {"const": "open-feasibility-risk"}
+      }
+    },
+    "release": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["version", "release_id", "status", "published_index", "source_manifest_sha256", "generation_commands", "validation_commands", "review_evidence_ids", "change_control", "supersession"],
+      "properties": {
+        "version": {"const": "0.1.0"},
+        "release_id": {"const": "BX-BH00-BASELINE-0.1.0"},
+        "status": {"const": "accepted-product-contract"},
+        "published_index": {"type": "string", "minLength": 5},
+        "source_manifest_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "generation_commands": {"type": "array", "minItems": 3, "uniqueItems": true, "items": {"type": "string", "minLength": 10}},
+        "validation_commands": {"type": "array", "minItems": 5, "uniqueItems": true, "items": {"type": "string", "minLength": 10}},
+        "review_evidence_ids": {"type": "array", "minItems": 8, "uniqueItems": true, "items": {"type": "string", "pattern": "^BX-BH00-EVIDENCE-[A-Z0-9-]+$"}},
+        "change_control": {"type": "string", "minLength": 50},
+        "supersession": {"type": "string", "minLength": 40}
+      }
+    },
+    "bh01Entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["decision", "decision_id", "rationale", "authorization_scope", "conditions", "stop_conditions", "input_manifest", "proof_obligations", "prohibited_actions", "owner_roles"],
+      "properties": {
+        "decision": {"enum": ["ready", "conditionally-ready", "blocked"]},
+        "decision_id": {"const": "BX-BH01-ENTRY-0.1"},
+        "rationale": {"type": "string", "minLength": 50},
+        "authorization_scope": {"type": "string", "minLength": 30},
+        "conditions": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 20}},
+        "stop_conditions": {"type": "array", "minItems": 3, "items": {"type": "string", "minLength": 20}},
+        "input_manifest": {"type": "array", "minItems": 8, "items": {"$ref": "#/$defs/bh01Input"}},
+        "proof_obligations": {"type": "array", "minItems": 8, "items": {"$ref": "#/$defs/proofObligation"}},
+        "prohibited_actions": {"type": "array", "minItems": 2, "items": {"type": "string", "minLength": 20}},
+        "owner_roles": {"type": "array", "minItems": 3, "uniqueItems": true, "items": {"type": "string", "minLength": 3}}
+      }
+    },
+    "bh01Input": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "category", "description", "source_refs", "owner", "state"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^BX-BH01-INPUT-[A-Z0-9-]+$"},
+        "category": {"enum": ["toolchain", "profile-slice", "behavior", "artifact", "browser", "measurement", "private-api-risk", "stop-condition"]},
+        "description": {"type": "string", "minLength": 30},
+        "source_refs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "pattern": "^BX-BH00-SOURCE-[A-Z0-9-]+$"}},
+        "owner": {"type": "string", "minLength": 3},
+        "state": {"const": "required-unproven"}
+      }
+    },
+    "proofObligation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "statement", "support_claim_ref", "decision_ref", "budget_refs", "acceptance_refs", "repository_owner", "evidence_types", "stop_on_failure"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^BX-BH01-PROOF-[A-Z0-9-]+$"},
+        "statement": {"type": "string", "minLength": 30},
+        "support_claim_ref": {"type": "string", "minLength": 3},
+        "decision_ref": {"type": "string", "pattern": "^ADR-[0-9]{4}$"},
+        "budget_refs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "pattern": "^BX-BUD-[A-Z0-9-]+$"}},
+        "acceptance_refs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "pattern": "^BX-ACC-[A-Z0-9-]+$"}},
+        "repository_owner": {"type": "string", "minLength": 3},
+        "evidence_types": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"enum": ["automated", "benchmark", "browser", "generated", "review", "security"]}},
+        "stop_on_failure": {"type": "boolean"}
+      }
+    }
+  }
+}
