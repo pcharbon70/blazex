@@ -42,6 +42,7 @@ notes.
 - [2026-09-02 MudBlazor component-system deep dive](2026-09-02-mudblazor-component-system-deep-dive.md) — records the exact v9.9.0 source checkout,
   component and asset measurements, inspected architecture paths, and evidence
   limits behind the target-catalog study.
+- [2026-09-03 cross-platform native-host deep dive](2026-09-03-cross-platform-native-host-deep-dive.md) — records the shell/rendering, toolkit/accessibility, runtime/packaging, paper/blog, contradiction, and evidence-limit passes behind the native-host recommendation.
 
 ## Maintaining this index
 

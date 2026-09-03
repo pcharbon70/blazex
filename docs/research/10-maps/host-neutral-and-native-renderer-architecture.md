@@ -42,6 +42,11 @@ renderer target, with a webview shell retained as an intermediate profile.
 - [Host-neutral BlazeX architecture and native control
   backends](../20-notes/host-neutral-blazex-architecture-and-native-control-backends.md) — authoritative decomposition, semantic render tree, capability protocol,
   native-control strategies, package boundaries, and N0–N4 gates.
+- [Cross-platform native host and renderer
+  architecture](../20-notes/cross-platform-native-host-and-renderer-architecture.md) —
+  deep comparison of SDL3, winit, Skia, Cairo/Pango, AccessKit, Qt, GTK,
+  wxWidgets, Slint, BEAM integration, platform packaging, and the recommended
+  multi-proof program.
 - [Can one BlazeX component model target DOM and native
   controls?](../40-inquiries/can-one-blazex-component-model-target-dom-and-native-controls.md) — executable criteria for proving that the abstraction is real.
 - [2026-09-02 host-neutral native-renderer design
@@ -96,6 +101,45 @@ and Phoenix sockets are adapter concerns.
 - [Component Model and Jco](../30-sources/bytecode-alliance-2026-webassembly-component-model-and-jco.md)
   provides a possible future host ABI, not a renderer or UI framework.
 
+### Desktop shell and custom-scene trail
+
+- [SDL3 desktop host primitives](../30-sources/libsdl-project-2026-sdl3-desktop-host-primitives.md)
+  establishes a credible C-ABI window, input, IME-transport, and native-handle
+  layer while showing why SDL rendering is not the BlazeX scene contract.
+- [Skia cross-platform 2D graphics](../30-sources/google-2026-skia-2d-graphics-library.md)
+  supports the leading mature scene backend; [Cairo, Pango, and
+  HarfBuzz](../30-sources/cairo-pango-harfbuzz-2026-rendering-and-text-stack.md)
+  support separate pinned raster and text-layout comparisons.
+- [Taffy and Yoga](../30-sources/dioxuslabs-meta-2026-taffy-and-yoga-layout-engines.md)
+  supply embeddable layout-engine candidates, while the
+  [Cassowary paper](../30-sources/badros-borning-stuckey-2001-cassowary-layout-constraints.md)
+  bounds the role of incremental constraints. Scrolling, hit testing, focus,
+  and native-control measurement remain renderer work.
+- [Rust window, GPU, and vector rendering](../30-sources/rust-windowing-gfx-rs-linebender-2026-native-graphics-stack.md)
+  separates winit windowing, wgpu/Dawn GPU substrates, and the experimental
+  Vello 0.9 Classic/CPU/Hybrid renderer family.
+- [AccessKit and platform accessibility
+  bridges](../30-sources/accesskit-platform-vendors-2026-desktop-accessibility-bridges.md)
+  connect one semantic tree to UI Automation, NSAccessibility, and AT-SPI
+  without eliminating platform tests.
+- [ERTS releases, ports, and native
+  integration](../30-sources/erlang-elixir-2026-releases-ports-and-native-integration.md)
+  supports the split-process runtime/host boundary.
+
+### Integrated toolkit and native-control trail
+
+- [Qt](../30-sources/qt-project-2026-desktop-ui-platform.md) is the mature
+  integration oracle, not automatic evidence of OS-owned child controls.
+- [wxWidgets](../30-sources/wxwidgets-project-2026-native-control-toolkit.md)
+  is the leading bounded actual-native-control proof for ADR-0007.
+- [Slint](../30-sources/slint-project-2026-desktop-ui-runtime.md) is the
+  leading lean Rust/custom-scene comparison, while
+  [GTK4](../30-sources/gtk-project-2026-gtk4-desktop-ui-platform.md) is the
+  strongest Linux-first/C-ABI toolkit comparison.
+- [Flutter's embedder architecture](../30-sources/flutter-project-2026-desktop-embedder-architecture.md)
+  provides production precedent for portable engine plus platform-specific
+  surfaces, input, accessibility, event loop, and packaging.
+
 ## Product trails
 
 - [MudBlazor-inspired component system](mudblazor-inspired-component-system.md)
@@ -118,11 +162,39 @@ and Phoenix sockets are adapter concerns.
 - static checks preventing DOM, CSS, JavaScript, Phoenix, and native toolkit
   types from leaking into portable packages.
 
+These bullets are the existing early portability program. ADR-0007 itself
+resolves only when the same representative slice passes deterministic
+headless, standalone DOM, and actual native toolkit-control proofs. The
+custom-scene work below is a separate native-host research program and does
+not silently expand that decision.
+
+## Additional native-host research program (not ADR-0007)
+
+- a split-process native host proving version negotiation, scene sequences,
+  generation-safe resources, backpressure, crash cleanup, and full remount;
+- a renderer-local layout, intrinsic-measurement, scrolling, hit-testing, and
+  focus subsystem;
+- the headless semantic oracle, a pinned Skia Raster/Cairo comparison driven
+  by one already-shaped display list, and a separate
+  SkParagraph/Pango-HarfBuzz text-layout comparison;
+- a GPU-capable renderer driven by the same retained display list, including
+  an explicit SDL–Skia surface/swapchain ownership proof per OS;
+- complex text, IME, accessibility-tree, and screen-reader evidence on each
+  target OS; and
+- signed/installable Windows, macOS, and Linux artifacts under the selected
+  sandbox and capability policies.
+
 ## Open questions
 
 - Which authoring syntax can preserve Phoenix ergonomics while producing a
   renderer-neutral semantic tree?
 - Which native toolkit should prove the protocol first?
+- Does SDL3 + Skia + AccessKit have lower measured total ownership than a Qt
+  full-stack host or a winit/Slint Rust host?
+- Can wxWidgets expose the full F0 native-control slice accessibly on Win32,
+  Cocoa, and GTK without forcing toolkit concepts into portable components?
+- Should the production text path use SkParagraph/SkShaper or direct
+  HarfBuzz/ICU plus platform font services?
 - Can current AtomVM be embedded natively, or should desktop initially use
   ERTS while the browser uses AtomVM?
 - Is a standalone Wasmtime/AtomVM host valuable enough to justify a new import

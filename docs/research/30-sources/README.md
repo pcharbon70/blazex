@@ -30,6 +30,27 @@ Cross-source conclusions belong in `20-notes`.
 
 ### Documents
 
+- [AccessKit and desktop platform accessibility bridges](accesskit-platform-vendors-2026-desktop-accessibility-bridges.md) — connects one semantic tree to Windows UI Automation, macOS NSAccessibility, and Linux AT-SPI while preserving platform-specific proof requirements.
+- [The Cassowary Linear Arithmetic Constraint Solving Algorithm](badros-borning-stuckey-2001-cassowary-layout-constraints.md) — supplies the incremental required/preferred linear-constraint model considered for specialized renderer-local layout relationships.
+- [A Platform Agnostic Remote Desktop System for Screen Reading](billah-et-al-2016-platform-agnostic-screen-reading.md) — demonstrates that semantic accessibility information, unlike pixels alone, can be translated across otherwise incompatible OS screen-reader APIs.
+- [Cairo, Pango, and HarfBuzz rendering and text stack](cairo-pango-harfbuzz-2026-rendering-and-text-stack.md) — separates Cairo's pinned raster comparison/fallback from Pango/HarfBuzz text-layout conformance and the headless semantic oracle.
+- [Desktop packaging, signing, notarization, and sandbox capabilities](desktop-platform-vendors-2026-packaging-signing-and-sandboxing.md) — establishes target-specific macOS, Windows, and Flatpak distribution constraints and their effect on host capabilities.
+- [Taffy and Yoga embeddable UI layout engines](dioxuslabs-meta-2026-taffy-and-yoga-layout-engines.md) — compares reusable Block/Flexbox/Grid and Flexbox geometry engines while preserving BlazeX-owned measurement, scrolling, and hit testing.
+- [ERTS releases, external ports, and native integration](erlang-elixir-2026-releases-ports-and-native-integration.md) — supports a target-specific BEAM release plus a separate native process rather than a main-thread GUI NIF.
+- [Flutter desktop engine and platform embedder architecture](flutter-project-2026-desktop-embedder-architecture.md) — provides production precedent for a portable engine surrounded by platform-specific event-loop, input, accessibility, surface, and packaging adapters.
+- [Skia cross-platform 2D graphics library](google-2026-skia-2d-graphics-library.md) — establishes the leading mature common scene backend and its window/context/text boundaries.
+- [GTK4 cross-platform desktop UI platform](gtk-project-2026-gtk4-desktop-ui-platform.md) — records GDK/GSK, Pango/IME, accessibility, C-ABI, threading, and non-Linux packaging tradeoffs.
+- [Building a UI Framework](hickson-2025-building-a-ui-framework.md) — supplies a system-level design checklist spanning performance, power, input, focus, accessibility, rendering, and adoption.
+- [Fast GPU bounding boxes on tree-structured scenes](levien-2022-gpu-tree-scene-rendering.md) — supports a retained GPU-capable scene model while leaving Vello production maturity as a separate question.
+- [libui-ng portable native GUI library](libui-ng-project-2026-portable-native-gui.md) — records the attractive C/native API and the project's explicit mid-alpha production limitation.
+- [SDL3 desktop host, input, and graphics primitives](libsdl-project-2026-sdl3-desktop-host-primitives.md) — establishes SDL3 as a credible three-OS shell while showing why its render/GPU APIs are not a complete BlazeX renderer.
+- [Developing Accessible Mobile Applications with Cross-Platform Development Frameworks](mascetti-et-al-2021-cross-platform-accessibility.md) — finds that cross-platform frameworks can omit native accessibility capabilities and require platform-specific escape code.
+- [Accessibility of UI Frameworks and Libraries for Programmers with Visual Impairments](pandey-et-al-2022-ui-framework-accessibility.md) — supplies mixed-methods evidence for actual framework, OS, and screen-reader testing.
+- [Qt 6 desktop UI, rendering, input, and accessibility platform](qt-project-2026-desktop-ui-platform.md) — establishes the strongest mature integration oracle while separating native-looking Qt controls from OS-owned controls.
+- [Rust window, GPU, and vector-rendering stack](rust-windowing-gfx-rs-linebender-2026-native-graphics-stack.md) — pins winit 0.30.12, wgpu 30, and Vello 0.9.0 while separating windowing, GPU substrate, and the experimental Classic/CPU/Hybrid renderer family.
+- [Slint desktop UI runtime, backends, renderers, and accessibility](slint-project-2026-desktop-ui-runtime.md) — records the leading lean Rust/custom-scene toolkit comparison and its renderer-dependent text and licensing questions.
+- [wxWidgets cross-platform native-control toolkit](wxwidgets-project-2026-native-control-toolkit.md) — supports the bounded actual Win32/Cocoa/GTK control proof while documenting generic-control and accessibility limits.
+- [Zed GPUI custom GPU rendering and Linux platform engineering](zed-industries-2023-2024-custom-gpu-ui-engineering.md) — documents both the performance opportunity and platform-integration cost of a specialized custom GPU UI.
 - [AtomVM WebAssembly runtime and BEAM execution model](atomvm-project-2026-webassembly-runtime.md) — records the compact VM, browser port, `.avm`
   packaging, process model, and compatibility boundary beneath Popcorn.
 - [Hologram's Elixir-to-JavaScript client component architecture](bartblast-2026-hologram-project.md) — provides a non-Wasm comparison for client-code
