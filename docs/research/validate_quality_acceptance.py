@@ -12,11 +12,16 @@ from typing import Any
 from jsonschema import Draft202012Validator
 from jsonschema.exceptions import SchemaError
 
+import generate_acceptance_registry as acceptance_generator
+
 
 ROOT = Path(__file__).resolve().parent
 ASSET_DIR = ROOT / "assets" / "quality-acceptance"
 QUALITY_SCHEMA_PATH = ASSET_DIR / "blazex-quality-contract.schema.json"
 QUALITY_PATH = ASSET_DIR / "blazex-quality-contract-v0.1.0.json"
+ACCEPTANCE_SCHEMA_PATH = ASSET_DIR / "blazex-acceptance-registry.schema.json"
+ACCEPTANCE_PATH = ASSET_DIR / "blazex-acceptance-registry-v0.1.0.json"
+CLASSIFICATION_PATH = ROOT / "assets" / "component-catalog" / "blazex-component-classification-v0.1.0.json"
 
 EXPECTED_DIMENSIONS = {"payload", "startup", "interaction", "resource", "build", "reliability"}
 EXPECTED_FAILURES = {
@@ -87,6 +92,18 @@ EXPECTED_GATE_DIMENSIONS = {
     "BX-GATE-PROVENANCE": "provenance",
     "BX-GATE-SECURITY": "security",
 }
+EXPECTED_EVIDENCE_CLASSES = {
+    "accessibility",
+    "automated",
+    "benchmark",
+    "browser",
+    "deployment",
+    "generated",
+    "manual",
+    "provenance",
+    "review",
+    "security",
+}
 
 
 class QualityAcceptanceValidationError(ValueError):
@@ -122,6 +139,23 @@ def validate_document_schema(document: dict[str, Any], schema: dict[str, Any]) -
         error = errors[0]
         path = ".".join(str(part) for part in error.absolute_path) or "<root>"
         raise QualityAcceptanceValidationError(f"quality schema violation at {path}: {error.message}")
+
+
+def validate_acceptance_document_schema(document: dict[str, Any], schema: dict[str, Any]) -> None:
+    try:
+        Draft202012Validator.check_schema(schema)
+    except SchemaError as error:
+        raise QualityAcceptanceValidationError(f"acceptance schema is invalid: {error.message}") from error
+    if schema.get("$id") != "https://blazex.dev/schemas/acceptance-registry/1.0.0":
+        raise QualityAcceptanceValidationError("acceptance schema ID must remain version 1.0.0")
+    errors = sorted(
+        Draft202012Validator(schema).iter_errors(document),
+        key=lambda error: [str(part) for part in error.absolute_path],
+    )
+    if errors:
+        error = errors[0]
+        path = ".".join(str(part) for part in error.absolute_path) or "<root>"
+        raise QualityAcceptanceValidationError(f"acceptance schema violation at {path}: {error.message}")
 
 
 def _require_sorted_unique(records: list[dict[str, Any]], label: str) -> set[str]:
@@ -228,13 +262,132 @@ def validate_cross_cutting_gates(gates: list[dict[str, Any]]) -> None:
             raise QualityAcceptanceValidationError(f"essential accessibility requirement {requirement_id} must block")
 
 
-def validate_repository() -> dict[str, int]:
-    return validate_quality_contract(load_json(QUALITY_PATH), load_json(QUALITY_SCHEMA_PATH))
+def _validate_acceptance_state(record: dict[str, Any]) -> None:
+    acceptance_id = record["id"]
+    status = record["status"]
+    implementation = record["implementation_state"]
+    verification = record["verification_state"]
+    evidence = record["evidence_ids"]
+    waiver = record["waiver"]
+    supersedes = record["supersedes"]
+    support = record["support_status"]
+    if status == "planned":
+        if implementation not in {"not-started", "not-applicable"} or verification != "not-executed":
+            raise QualityAcceptanceValidationError(f"planned condition {acceptance_id} has an executed state")
+        if evidence or waiver is not None or supersedes is not None:
+            raise QualityAcceptanceValidationError(f"planned condition {acceptance_id} carries evidence, waiver, or supersession")
+    elif status == "blocked":
+        if implementation == "implemented" or verification == "passed" or waiver is not None:
+            raise QualityAcceptanceValidationError(f"blocked condition {acceptance_id} has an incompatible state")
+    elif status == "implemented":
+        if implementation != "implemented" or verification != "not-executed" or evidence:
+            raise QualityAcceptanceValidationError(f"implemented condition {acceptance_id} must await verification")
+    elif status in {"passed", "failed"}:
+        if implementation != "implemented" or verification != status or not evidence or waiver is not None:
+            raise QualityAcceptanceValidationError(f"{status} condition {acceptance_id} lacks matching implementation and evidence")
+    elif status == "waived":
+        if waiver is None or verification == "passed" or not evidence:
+            raise QualityAcceptanceValidationError(f"waived condition {acceptance_id} lacks failure evidence and waiver")
+    elif status == "superseded":
+        if supersedes is None or waiver is not None:
+            raise QualityAcceptanceValidationError(f"superseded condition {acceptance_id} lacks its replacement")
+    elif status == "unsupported":
+        if support != "unsupported" or implementation != "not-applicable" or verification != "not-applicable":
+            raise QualityAcceptanceValidationError(f"unsupported condition {acceptance_id} has a combinable delivery state")
+    elif status == "not-applicable":
+        if support != "not-applicable" or implementation != "not-applicable" or verification != "not-applicable":
+            raise QualityAcceptanceValidationError(f"not-applicable condition {acceptance_id} has a combinable delivery state")
+
+
+def validate_acceptance_registry(
+    document: dict[str, Any],
+    schema: dict[str, Any],
+    quality: dict[str, Any],
+    classification: dict[str, Any],
+) -> dict[str, int]:
+    validate_acceptance_document_schema(document, schema)
+    requirements = document["requirements"]
+    conditions = document["acceptance_conditions"]
+    requirement_ids = _require_sorted_unique(requirements, "acceptance requirement")
+    condition_ids = _require_sorted_unique(conditions, "acceptance condition")
+    binding_ids = _require_sorted_unique(document["source_bindings"], "acceptance source binding")
+    evidence_ids = _require_sorted_unique(document["evidence_classes"], "evidence class")
+    if evidence_ids != EXPECTED_EVIDENCE_CLASSES:
+        raise QualityAcceptanceValidationError("acceptance registry must define all ten evidence classes")
+    if binding_ids != set(acceptance_generator.SOURCE_BINDINGS):
+        raise QualityAcceptanceValidationError("acceptance registry source bindings are incomplete")
+    for binding in document["source_bindings"]:
+        path = ROOT / binding["path"]
+        if not path.exists() or acceptance_generator.sha256(path) != binding["sha256"]:
+            raise QualityAcceptanceValidationError(f"acceptance source binding is stale: {binding['id']}")
+
+    requirements_by_id = {record["id"]: record for record in requirements}
+    conditions_by_id = {record["id"]: record for record in conditions}
+    source_keys = [(record["source_kind"], record["source_id"]) for record in requirements]
+    if len(source_keys) != len(set(source_keys)):
+        raise QualityAcceptanceValidationError("source claims must map to unique acceptance requirements")
+    for record in requirements:
+        if record["source_binding"] not in binding_ids:
+            raise QualityAcceptanceValidationError(f"requirement {record['id']} references an unknown source binding")
+        for acceptance_id in record["acceptance_ids"]:
+            if acceptance_id not in condition_ids:
+                raise QualityAcceptanceValidationError(f"requirement {record['id']} references missing condition {acceptance_id}")
+            if record["id"] not in conditions_by_id[acceptance_id]["requirement_ids"]:
+                raise QualityAcceptanceValidationError(f"requirement {record['id']} has a non-reciprocal condition link")
+    known_budgets = {budget["id"] for budget in quality["budgets"]}
+    for record in conditions:
+        _validate_acceptance_state(record)
+        for requirement_id in record["requirement_ids"]:
+            if requirement_id not in requirement_ids:
+                raise QualityAcceptanceValidationError(f"condition {record['id']} references missing requirement {requirement_id}")
+            if record["id"] not in requirements_by_id[requirement_id]["acceptance_ids"]:
+                raise QualityAcceptanceValidationError(f"condition {record['id']} has a non-reciprocal requirement link")
+        unknown_budgets = set(record["required_budget_ids"]) - known_budgets
+        if unknown_budgets:
+            raise QualityAcceptanceValidationError(f"condition {record['id']} references unknown budgets")
+
+    family_source_ids = {
+        record["source_id"] for record in requirements if record["source_kind"] == "catalog-family"
+    }
+    if family_source_ids != {family["family_id"] for family in classification["families"]}:
+        raise QualityAcceptanceValidationError("every classified family must have acceptance coverage")
+    budget_source_ids = {
+        record["source_id"] for record in requirements if record["source_kind"] == "quality-budget"
+    }
+    if budget_source_ids != known_budgets:
+        raise QualityAcceptanceValidationError("every quality budget must have acceptance coverage")
+    roadmap_ids = {
+        record["source_id"] for record in requirements if record["source_kind"] == "roadmap-milestone"
+    }
+    if roadmap_ids != {f"BH-{index:02d}" for index in range(24)}:
+        raise QualityAcceptanceValidationError("all BH-00 through BH-23 roadmap outcomes require coverage")
+    covered_profiles = {profile for record in conditions for profile in record["profiles"] if profile.startswith("PROFILE-")}
+    if covered_profiles != set(acceptance_generator.PROFILE_IDS):
+        raise QualityAcceptanceValidationError("all declared profiles require acceptance coverage")
+    if any(document["coverage_findings"].values()):
+        raise QualityAcceptanceValidationError("acceptance registry contains unresolved deterministic coverage findings")
+
+    expected = acceptance_generator.build_registry()
+    if document != expected:
+        raise QualityAcceptanceValidationError("acceptance registry is stale relative to its governed sources and generator")
+    return dict(sorted(Counter(record["source_kind"] for record in requirements).items()))
+
+
+def validate_repository() -> tuple[dict[str, int], dict[str, int]]:
+    quality = load_json(QUALITY_PATH)
+    quality_counts = validate_quality_contract(quality, load_json(QUALITY_SCHEMA_PATH))
+    acceptance_counts = validate_acceptance_registry(
+        load_json(ACCEPTANCE_PATH),
+        load_json(ACCEPTANCE_SCHEMA_PATH),
+        quality,
+        load_json(CLASSIFICATION_PATH),
+    )
+    return quality_counts, acceptance_counts
 
 
 def main() -> int:
     try:
-        counts = validate_repository()
+        counts, acceptance_counts = validate_repository()
     except QualityAcceptanceValidationError as error:
         print(f"Quality/acceptance validation failed: {error}", file=sys.stderr)
         return 1
@@ -245,7 +398,8 @@ def main() -> int:
         f"{len(document['budgets'])} budgets {counts}; "
         f"{len(document['failure_scenarios'])} failure scenarios; "
         f"{len(document['release_blockers'])} unwaivable blockers; "
-        f"{len(document['cross_cutting_gates'])} cross-cutting gates."
+        f"{len(document['cross_cutting_gates'])} cross-cutting gates; "
+        f"{sum(acceptance_counts.values())} acceptance requirements {acceptance_counts}; zero executed evidence."
     )
     return 0
 

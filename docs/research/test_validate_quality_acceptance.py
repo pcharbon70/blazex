@@ -14,9 +14,20 @@ class QualityAcceptanceValidationTests(unittest.TestCase):
     def setUpClass(cls) -> None:
         cls.schema = validator.load_json(validator.QUALITY_SCHEMA_PATH)
         cls.document = validator.load_json(validator.QUALITY_PATH)
+        cls.acceptance_schema = validator.load_json(validator.ACCEPTANCE_SCHEMA_PATH)
+        cls.acceptance = validator.load_json(validator.ACCEPTANCE_PATH)
+        cls.classification = validator.load_json(validator.CLASSIFICATION_PATH)
 
     def validate(self, document: dict) -> dict[str, int]:
         return validator.validate_quality_contract(document, self.schema)
+
+    def validate_acceptance(self, document: dict) -> dict[str, int]:
+        return validator.validate_acceptance_registry(
+            document,
+            self.acceptance_schema,
+            self.document,
+            self.classification,
+        )
 
     def test_repository_contract_passes(self) -> None:
         counts = self.validate(copy.deepcopy(self.document))
@@ -119,6 +130,73 @@ class QualityAcceptanceValidationTests(unittest.TestCase):
         fallback["minimum_severity"] = "high"
         with self.assertRaisesRegex(validator.QualityAcceptanceValidationError, "essential accessibility"):
             self.validate(document)
+
+    def test_repository_acceptance_registry_passes(self) -> None:
+        counts = self.validate_acceptance(copy.deepcopy(self.acceptance))
+        self.assertEqual(counts["catalog-family"], 83)
+        self.assertEqual(counts["roadmap-milestone"], 24)
+
+    def test_rejects_catalog_family_without_acceptance(self) -> None:
+        document = copy.deepcopy(self.acceptance)
+        requirement = next(record for record in document["requirements"] if record["source_kind"] == "catalog-family")
+        acceptance_id = requirement["acceptance_ids"][0]
+        document["requirements"].remove(requirement)
+        document["acceptance_conditions"] = [record for record in document["acceptance_conditions"] if record["id"] != acceptance_id]
+        with self.assertRaisesRegex(validator.QualityAcceptanceValidationError, "every classified family"):
+            self.validate_acceptance(document)
+
+    def test_rejects_acceptance_without_owner(self) -> None:
+        document = copy.deepcopy(self.acceptance)
+        document["acceptance_conditions"][0]["evidence_owner"] = ""
+        with self.assertRaisesRegex(validator.QualityAcceptanceValidationError, "acceptance schema violation"):
+            self.validate_acceptance(document)
+
+    def test_rejects_unknown_acceptance_budget(self) -> None:
+        document = copy.deepcopy(self.acceptance)
+        document["acceptance_conditions"][0]["required_budget_ids"] = ["BX-BUD-NOT-DECLARED"]
+        with self.assertRaisesRegex(validator.QualityAcceptanceValidationError, "unknown budgets"):
+            self.validate_acceptance(document)
+
+    def test_rejects_false_pass_without_evidence(self) -> None:
+        document = copy.deepcopy(self.acceptance)
+        record = document["acceptance_conditions"][0]
+        record["status"] = "passed"
+        record["implementation_state"] = "implemented"
+        record["verification_state"] = "passed"
+        with self.assertRaisesRegex(validator.QualityAcceptanceValidationError, "lacks matching implementation and evidence"):
+            self.validate_acceptance(document)
+
+    def test_rejects_waiver_on_planned_condition(self) -> None:
+        document = copy.deepcopy(self.acceptance)
+        document["acceptance_conditions"][0]["waiver"] = {
+            "id": "BX-WAIVER-TEST",
+            "rationale": "Deliberately invalid waiver on an unexecuted condition.",
+            "owner": "quality-owner",
+            "approved_by": "product-owner",
+            "created_on": "2026-09-03",
+            "expires_on": "2026-10-03",
+            "mitigation": "No mitigation because this record exists only for validation.",
+        }
+        with self.assertRaisesRegex(validator.QualityAcceptanceValidationError, "carries evidence, waiver, or supersession"):
+            self.validate_acceptance(document)
+
+    def test_rejects_stale_source_binding(self) -> None:
+        document = copy.deepcopy(self.acceptance)
+        document["source_bindings"][0]["sha256"] = "0" * 64
+        with self.assertRaisesRegex(validator.QualityAcceptanceValidationError, "source binding is stale"):
+            self.validate_acceptance(document)
+
+    def test_rejects_nonreciprocal_requirement_link(self) -> None:
+        document = copy.deepcopy(self.acceptance)
+        document["requirements"][0]["acceptance_ids"] = [document["acceptance_conditions"][1]["id"]]
+        with self.assertRaisesRegex(validator.QualityAcceptanceValidationError, "non-reciprocal"):
+            self.validate_acceptance(document)
+
+    def test_rejects_stale_generated_registry(self) -> None:
+        document = copy.deepcopy(self.acceptance)
+        document["acceptance_conditions"][0]["normative_statement"] += " Stale edit."
+        with self.assertRaisesRegex(validator.QualityAcceptanceValidationError, "registry is stale"):
+            self.validate_acceptance(document)
 
 
 if __name__ == "__main__":

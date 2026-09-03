@@ -193,9 +193,10 @@ Before reporting archive work complete:
    package, capability, fallback, remote, portability, or generated
    classification artifacts change;
 7. run `python3 validate_quality_acceptance.py` and
-   `python3 -m unittest test_validate_quality_acceptance.py` when Phase 5
-   quality budgets, cross-cutting gates, acceptance conditions, coverage, or
-   generated traceability artifacts change;
+   `python3 -m unittest test_validate_quality_acceptance.py` plus
+   `python3 generate_acceptance_registry.py --check` when Phase 5 quality
+   budgets, cross-cutting gates, acceptance conditions, coverage, or generated
+   traceability artifacts change;
 8. verify new external citations against primary sources;
 9. run `git diff --check` from the project root; and
 10. inspect the complete change for stale paths and accidental rewrites.

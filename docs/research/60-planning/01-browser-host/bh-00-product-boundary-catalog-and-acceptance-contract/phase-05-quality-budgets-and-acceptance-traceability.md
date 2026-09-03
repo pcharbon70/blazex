@@ -69,30 +69,30 @@ Back to milestone: [README](README.md)
       - [x] 5.2.2.2 Subtask - Define runtime, browser, renderer, profile, package, manifest, schema, protocol, asset, and deployment compatibility identifiers plus upgrade and mismatch behavior.
       - [x] 5.2.2.3 Subtask - Define source pin, license, notice, adapted-code, icon, style, example, generated-artifact, and dependency provenance completeness with blocking and exception rules.
 
-  - [ ] 5.3 Section - Define acceptance conditions and end-to-end traceability.
+  - [x] 5.3 Section - Define acceptance conditions and end-to-end traceability.
 
     Give every product statement a stable identity, observable condition,
     evidence owner, and future milestone so completion can be computed rather
     than inferred from prose or demonstrations.
 
-    - [ ] 5.3.1 Task - Define the acceptance-condition schema.
+    - [x] 5.3.1 Task - Define the acceptance-condition schema.
 
       Acceptance records must distinguish planned behavior, required evidence,
       executed evidence, support status, and exceptions across all profiles.
 
-      - [ ] 5.3.1.1 Subtask - Define stable claim ID, subject, normative statement, mode, profile, precondition, action, observable result, prohibited result, evidence type, owner, milestone, and status fields.
-      - [ ] 5.3.1.2 Subtask - Define automated, generated, benchmark, browser, accessibility, security, manual, review, deployment, and provenance evidence classes with freshness and reproducibility requirements.
-      - [ ] 5.3.1.3 Subtask - Define planned, blocked, implemented, passed, failed, waived, superseded, unsupported, and not-applicable states plus waiver expiry and non-combinable status rules.
+      - [x] 5.3.1.1 Subtask - Define stable claim ID, subject, normative statement, mode, profile, precondition, action, observable result, prohibited result, evidence type, owner, milestone, and status fields.
+      - [x] 5.3.1.2 Subtask - Define automated, generated, benchmark, browser, accessibility, security, manual, review, deployment, and provenance evidence classes with freshness and reproducibility requirements.
+      - [x] 5.3.1.3 Subtask - Define planned, blocked, implemented, passed, failed, waived, superseded, unsupported, and not-applicable states plus waiver expiry and non-combinable status rules.
 
-    - [ ] 5.3.2 Task - Build the requirement and evidence coverage model.
+    - [x] 5.3.2 Task - Build the requirement and evidence coverage model.
 
       The coverage graph must connect roadmap outcomes and every catalog row to
       later implementation and verification without marking future evidence as
       complete.
 
-      - [ ] 5.3.2.1 Subtask - Map BH-00 through BH-23 outcomes, cross-cutting obligations, support-envelope claims, catalog classifications, package boundaries, and non-goals to stable acceptance IDs.
-      - [ ] 5.3.2.2 Subtask - Assign each acceptance condition to its first responsible milestone, package or profile owner, integration suite, evidence class, and release gate.
-      - [ ] 5.3.2.3 Subtask - Produce deterministic reports for orphan claims, catalog rows without acceptance, acceptance without owners, unsupported status transitions, stale evidence, missing budgets, and uncovered profiles.
+      - [x] 5.3.2.1 Subtask - Map BH-00 through BH-23 outcomes, cross-cutting obligations, support-envelope claims, catalog classifications, package boundaries, and non-goals to stable acceptance IDs.
+      - [x] 5.3.2.2 Subtask - Assign each acceptance condition to its first responsible milestone, package or profile owner, integration suite, evidence class, and release gate.
+      - [x] 5.3.2.3 Subtask - Produce deterministic reports for orphan claims, catalog rows without acceptance, acceptance without owners, unsupported status transitions, stale evidence, missing budgets, and uncovered profiles.
 
   - [ ] 5.4 Section - Phase 5 Integration Tests.
 

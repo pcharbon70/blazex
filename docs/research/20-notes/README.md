@@ -31,6 +31,7 @@ Source summaries belong in `30-sources`; unresolved workbenches belong in
 
 ### Documents
 
+- [BlazeX acceptance traceability and evidence policy](blazex-acceptance-traceability-and-evidence-policy.md) — defines source-bound requirement and condition IDs, status combinations, evidence classes/freshness, ownership, budget/profile coverage, findings, waivers, and supersession.
 - [BlazeX cross-cutting quality gate policy](blazex-cross-cutting-quality-gate-policy.md) — defines stable accessibility, security, compatibility, and provenance requirements, evidence classes, severity, manual-review, fallback, and non-waivable exception rules.
 - [BlazeX quality budget and measurement policy](blazex-quality-budget-and-measurement-policy.md) — defines proposed payload, startup, interaction, resource, build, resilience, environment, statistical, exception, and evidence boundaries without claiming measurements.
 - [BlazeX component portability, native, and visual-profile policy](blazex-component-portability-native-and-visual-profile-policy.md) — defines bounded portability statuses, semantic dimensions, native-control strategies, platform/Material/hybrid visual implications, and the BH-02/future-backend support gate.

@@ -40,6 +40,14 @@ milestones and must only be referenced here through immutable evidence IDs.
 
 ### Files
 
+- [BlazeX acceptance registry schema](blazex-acceptance-registry.schema.json) —
+  JSON Schema 1.0.0 for source bindings, requirement coverage, observable
+  conditions, evidence classes, ownership, statuses, waivers, and findings.
+- [BlazeX acceptance registry v0.1.0](blazex-acceptance-registry-v0.1.0.json) —
+  deterministic source-bound graph connecting roadmap, product-envelope,
+  catalog, package, quality, failure, blocker, and gate claims to planned
+  acceptance conditions.
+- [BlazeX acceptance registry v0.1.0 generated coverage](blazex-acceptance-registry-v0-1-0-generated.md) — deterministic count, milestone, evidence-demand, source-binding, finding, and representative trace-query report.
 - [BlazeX quality contract schema](blazex-quality-contract.schema.json) — JSON
   Schema 1.0.0 for measurement environments, proposed budgets, reliability
   scenarios, cross-cutting gates, exceptions, and evidence boundaries.
