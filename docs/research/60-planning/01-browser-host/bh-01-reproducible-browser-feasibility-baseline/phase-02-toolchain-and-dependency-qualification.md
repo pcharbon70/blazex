@@ -67,36 +67,36 @@ Back to milestone: [README](README.md)
       - [x] 2.2.2.1 Subtask - Generate source/dependency inventories with origin, version, hash, license, notice obligation, build/runtime reachability, and owner.
       - [x] 2.2.2.2 Subtask - Record known vulnerability/advisory sources, unsupported upstream combinations, fork divergence, patch maintenance, and update-review triggers.
 
-  - [ ] 2.3 Section - Qualify Phoenix, LiveView, and LocalLiveView inputs.
+  - [x] 2.3 Section - Qualify Phoenix, LiveView, and LocalLiveView inputs.
 
     Select exact server and renderer-integration revisions and expose private or
     fork-specific coupling before building the authenticated path.
 
-    - [ ] 2.3.1 Task - Resolve the server dependency graph.
+    - [x] 2.3.1 Task - Resolve the server dependency graph.
 
       Direct and transitive dependencies must produce one explainable lock and
       remain owned by the profile/server adapter rather than portable code.
 
-      - [ ] 2.3.1.1 Subtask - Resolve exact Phoenix, Plug, LiveView, LocalLiveView, telemetry, serialization, transport, asset, and test dependency revisions with sources, hashes, licenses, and compatibility constraints.
-      - [ ] 2.3.1.2 Subtask - Generate Mix/Hex dependency graph and locks under deterministic resolver inputs; record optional/environment-specific edges and rejected alternatives.
-      - [ ] 2.3.1.3 Subtask - Verify the Plug boundary can remain transitively free of Phoenix/LiveView/LocalLiveView and that standalone DOM does not acquire the renderer adapter.
+      - [x] 2.3.1.1 Subtask - Resolve exact Phoenix, Plug, LiveView, LocalLiveView, telemetry, serialization, transport, asset, and test dependency revisions with sources, hashes, licenses, and compatibility constraints.
+      - [x] 2.3.1.2 Subtask - Generate Mix/Hex dependency graph and locks under deterministic resolver inputs; record optional/environment-specific edges and rejected alternatives.
+      - [x] 2.3.1.3 Subtask - Verify the Plug boundary can remain transitively free of Phoenix/LiveView/LocalLiveView and that standalone DOM does not acquire the renderer adapter.
 
-    - [ ] 2.3.2 Task - Build the private and version-sensitive API inventory.
+    - [x] 2.3.2 Task - Build the private and version-sensitive API inventory.
 
       The candidate is acceptable only if unstable coupling is identified,
       pinned, owned, testable, and replaceable or safely disableable.
 
-      - [ ] 2.3.2.1 Subtask - Inspect all anticipated LocalLiveView, LiveView renderer-data/diff/patch, socket/channel, lifecycle, generated, and fork-specific APIs against exact source revisions.
-      - [ ] 2.3.2.2 Subtask - Record public/private status, signature/data shape, owner package, expected call site, pin sensitivity, fallback, compatibility fixture, upgrade trigger, and risk for each API.
-      - [ ] 2.3.2.3 Subtask - Stop the adapter candidate before coding if required coupling cannot be confined to `blazex_renderer_dom_liveview` or requires portable/runtime code to understand LiveView data.
+      - [x] 2.3.2.1 Subtask - Inspect all anticipated LocalLiveView, LiveView renderer-data/diff/patch, socket/channel, lifecycle, generated, and fork-specific APIs against exact source revisions.
+      - [x] 2.3.2.2 Subtask - Record public/private status, signature/data shape, owner package, expected call site, pin sensitivity, fallback, compatibility fixture, upgrade trigger, and risk for each API.
+      - [x] 2.3.2.3 Subtask - Stop the adapter candidate before coding if required coupling cannot be confined to `blazex_renderer_dom_liveview` or requires portable/runtime code to understand LiveView data.
 
-    - [ ] 2.3.3 Task - Qualify browser-facing server prerequisites.
+    - [x] 2.3.3 Task - Qualify browser-facing server prerequisites.
 
       Server delivery assumptions affect Wasm boot, workers, security, and
       fallback and therefore belong in the selected dependency baseline.
 
-      - [ ] 2.3.3.1 Subtask - Record exact Phoenix/Plug support for MIME, compression, cache validation, integrity, CSP, CORS, origin, CSRF, HTTPS, workers, streaming, and cross-origin isolation headers.
-      - [ ] 2.3.3.2 Subtask - Identify any reverse-proxy/CDN/service-worker requirements and define which are profile prerequisites versus later production deployment work.
+      - [x] 2.3.3.1 Subtask - Record exact Phoenix/Plug support for MIME, compression, cache validation, integrity, CSP, CORS, origin, CSRF, HTTPS, workers, streaming, and cross-origin isolation headers.
+      - [x] 2.3.3.2 Subtask - Identify any reverse-proxy/CDN/service-worker requirements and define which are profile prerequisites versus later production deployment work.
 
   - [ ] 2.4 Section - Prove deterministic dependency acquisition.
 

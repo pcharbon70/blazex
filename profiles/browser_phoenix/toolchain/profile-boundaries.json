@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "portable_packages": [
+    "packages/blazex_core",
+    "packages/blazex_ui",
+    "packages/blazex_effects",
+    "packages/blazex_renderer_dom"
+  ],
+  "forbidden_portable_dependencies": [
+    "Phoenix", "Phoenix.LiveView", "LocalLiveView", "Popcorn"
+  ],
+  "private_api_owner": "packages/blazex_renderer_dom_liveview",
+  "phoenix_profile_owner": "profiles/browser_phoenix",
+  "plug_boundary": {
+    "profile": "profiles/browser_plug",
+    "activation_status": "qualified_not_activated",
+    "root": ["plug 1.20.3"],
+    "closure": ["mime 2.0.7", "plug 1.20.3", "plug_crypto 2.2.0", "telemetry 1.4.2"],
+    "forbidden": ["phoenix", "phoenix_live_view", "local_live_view"]
+  },
+  "standalone_dom": {
+    "package": "packages/blazex_renderer_dom",
+    "dependency_count": 0,
+    "must_not_depend_on": ["blazex_renderer_dom_liveview", "phoenix_live_view", "local_live_view"]
+  },
+  "adapter_fallback": "Disable blazex_renderer_dom_liveview and retain standalone DOM/host protocol operation."
+}

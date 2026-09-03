@@ -5,7 +5,7 @@ defmodule BlazeXRuntimePopcorn.MixProject do
     [
       app: :blazex_runtime_popcorn,
       version: "0.0.0-bh01",
-      elixir: ">= 1.18.0",
+      elixir: "== 1.17.3",
       deps: deps()
     ]
   end

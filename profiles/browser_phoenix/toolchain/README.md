@@ -28,3 +28,18 @@ and FissionVM's HTTP Mbed TLS `FetchContent` default with checksum-verified
 local sources. The build contract disables network access during CMake and
 build execution. Packaged LocalLiveView runtime assets are inspection oracles,
 not accepted rebuild provenance.
+
+`server-dependencies.json` and the committed Mix lock select the exact Phoenix
+1.8.13, LiveView 1.2.11, LocalLiveView 0.1.0, Bandit 1.12.5, and supporting
+graph. Igniter is fixed at 0.7.9 because its newer `ex_ast` edge requires
+Elixir 1.18 and conflicts with Popcorn's exact Elixir 1.17.3 requirement.
+`private-api-inventory.json` treats LocalLiveView's direct use of LiveView
+renderer, diff, lifecycle, session, socket, and utility internals as a confined
+high-risk adapter dependency. It must never enter portable BlazeX packages.
+
+Validate the server graph and coupling contract with:
+
+```console
+python3 profiles/browser_phoenix/toolchain/verify_server.py
+python3 -m unittest profiles/browser_phoenix/toolchain/tests/test_server.py
+```
