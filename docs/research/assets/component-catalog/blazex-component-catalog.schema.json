@@ -1,0 +1,388 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://blazex.dev/schemas/component-catalog/1.0.0",
+  "title": "BlazeX component catalog",
+  "description": "Canonical schema for source inventory, product classification, delivery state, and evidence without implying .NET compatibility.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "catalog_version",
+    "catalog_id",
+    "reference_id",
+    "title",
+    "description",
+    "catalog_status",
+    "authored_source",
+    "generated_view",
+    "sort_order",
+    "owner_roles",
+    "families",
+    "exceptions"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0.0" },
+    "catalog_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "catalog_id": { "$ref": "#/$defs/catalogId" },
+    "reference_id": { "const": "mudblazor-v9.9.0" },
+    "title": { "$ref": "#/$defs/nonemptyString" },
+    "description": { "$ref": "#/$defs/nonemptyString" },
+    "catalog_status": {
+      "enum": ["draft", "reviewed", "locked", "superseded"]
+    },
+    "authored_source": { "$ref": "#/$defs/repositoryPath" },
+    "generated_view": { "$ref": "#/$defs/repositoryPath" },
+    "sort_order": { "const": "family-id-unicode-codepoint-ascending" },
+    "owner_roles": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/nonemptyString" },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "families": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/family" },
+      "minItems": 1
+    },
+    "exceptions": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/exception" }
+    }
+  },
+  "$defs": {
+    "nonemptyString": {
+      "type": "string",
+      "minLength": 1
+    },
+    "nullableNonemptyString": {
+      "oneOf": [
+        { "$ref": "#/$defs/nonemptyString" },
+        { "type": "null" }
+      ]
+    },
+    "repositoryPath": {
+      "type": "string",
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))[A-Za-z0-9_.-]+(?:/[A-Za-z0-9_.-]+)*$"
+    },
+    "catalogId": {
+      "type": "string",
+      "pattern": "^BX-CATALOG-[A-Z0-9]+(?:-[A-Z0-9]+)*$"
+    },
+    "familyId": {
+      "type": "string",
+      "pattern": "^BX-FAM-[A-Z0-9]+(?:-[A-Z0-9]+)*$"
+    },
+    "exceptionId": {
+      "type": "string",
+      "pattern": "^BX-EXC-[A-Z0-9]+(?:-[A-Z0-9]+)*$"
+    },
+    "capabilityId": {
+      "type": "string",
+      "pattern": "^BX-CAP-[A-Z0-9]+(?:-[A-Z0-9]+)*$"
+    },
+    "evidenceId": {
+      "type": "string",
+      "pattern": "^BX-EVID-[A-Z0-9]+(?:-[A-Z0-9]+)*$"
+    },
+    "stringSet": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/nonemptyString" },
+      "uniqueItems": true
+    },
+    "familyIdSet": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/familyId" },
+      "uniqueItems": true
+    },
+    "capabilityIdSet": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/capabilityId" },
+      "uniqueItems": true
+    },
+    "deliveryState": {
+      "enum": [
+        "planned",
+        "accepted",
+        "implemented",
+        "evidenced",
+        "supported",
+        "deferred",
+        "omitted",
+        "superseded",
+        "unknown"
+      ]
+    },
+    "lifecycleStatus": {
+      "enum": [
+        "active",
+        "experimental",
+        "obsolete",
+        "superseded",
+        "removed",
+        "unknown"
+      ]
+    },
+    "sourceIdentity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "reference_id",
+        "source_family",
+        "source_paths",
+        "source_identifiers"
+      ],
+      "properties": {
+        "reference_id": { "const": "mudblazor-v9.9.0" },
+        "source_family": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Za-z0-9]*$"
+        },
+        "source_paths": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/repositoryPath" },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "source_identifiers": { "$ref": "#/$defs/stringSet" }
+      }
+    },
+    "relationship": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "target_id", "rationale"],
+      "properties": {
+        "type": {
+          "enum": [
+            "parent-of",
+            "part-of",
+            "alias-of",
+            "split-from",
+            "merged-from",
+            "supersedes",
+            "replaced-by",
+            "depends-on"
+          ]
+        },
+        "target_id": { "$ref": "#/$defs/familyId" },
+        "rationale": { "$ref": "#/$defs/nonemptyString" }
+      }
+    },
+    "classification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "disposition",
+        "rationale",
+        "delivery_tier",
+        "target_package",
+        "prerequisites",
+        "optional_package",
+        "payload_class",
+        "intended_public_identity"
+      ],
+      "properties": {
+        "disposition": {
+          "enum": [
+            "native-component",
+            "composite-component",
+            "framework-primitive",
+            "host-service",
+            "infrastructure",
+            "defer",
+            "omit",
+            "unresolved"
+          ]
+        },
+        "rationale": { "$ref": "#/$defs/nullableNonemptyString" },
+        "delivery_tier": {
+          "enum": ["F0", "F1", "F2", "F3", "F4", "post-1.0", "not-applicable", "unassigned"]
+        },
+        "target_package": { "$ref": "#/$defs/nullableNonemptyString" },
+        "prerequisites": { "$ref": "#/$defs/familyIdSet" },
+        "optional_package": { "type": ["boolean", "null"] },
+        "payload_class": {
+          "enum": ["core", "optional", "asset-heavy", "runtime-heavy", "excluded", "unassigned"]
+        },
+        "intended_public_identity": { "$ref": "#/$defs/nullableNonemptyString" }
+      }
+    },
+    "renderingModeAssessment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "entries", "rationale"],
+      "properties": {
+        "state": { "$ref": "#/$defs/deliveryState" },
+        "entries": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "static-fallback",
+              "server-rendered",
+              "prerendered",
+              "browser-local",
+              "activated",
+              "headless"
+            ]
+          },
+          "uniqueItems": true
+        },
+        "rationale": { "$ref": "#/$defs/nullableNonemptyString" }
+      }
+    },
+    "runtimeEligibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "entries", "rationale"],
+      "properties": {
+        "state": { "$ref": "#/$defs/deliveryState" },
+        "entries": {
+          "type": "array",
+          "items": {
+            "enum": ["erts", "atomvm-native", "atomvm-wasm", "restricted-native-wasm"]
+          },
+          "uniqueItems": true
+        },
+        "rationale": { "$ref": "#/$defs/nullableNonemptyString" }
+      }
+    },
+    "capabilityContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "required_capabilities",
+        "optional_capabilities",
+        "fallback",
+        "rendering_modes",
+        "runtime_eligibility",
+        "backend_portability",
+        "native_strategy",
+        "accessibility_alternative",
+        "renderer_extensions"
+      ],
+      "properties": {
+        "required_capabilities": { "$ref": "#/$defs/capabilityIdSet" },
+        "optional_capabilities": { "$ref": "#/$defs/capabilityIdSet" },
+        "fallback": { "$ref": "#/$defs/nullableNonemptyString" },
+        "rendering_modes": { "$ref": "#/$defs/renderingModeAssessment" },
+        "runtime_eligibility": { "$ref": "#/$defs/runtimeEligibility" },
+        "backend_portability": {
+          "enum": [
+            "portable",
+            "adapter-dependent",
+            "browser-only",
+            "host-service",
+            "renderer-specific",
+            "not-applicable",
+            "unknown"
+          ]
+        },
+        "native_strategy": {
+          "enum": [
+            "native-preferred",
+            "native-composite",
+            "framework-drawn",
+            "host-service",
+            "not-applicable",
+            "unknown"
+          ]
+        },
+        "accessibility_alternative": { "$ref": "#/$defs/nullableNonemptyString" },
+        "renderer_extensions": { "$ref": "#/$defs/stringSet" }
+      }
+    },
+    "implementation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["delivery_state", "implementation_evidence"],
+      "properties": {
+        "delivery_state": { "$ref": "#/$defs/deliveryState" },
+        "implementation_evidence": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/evidenceId" },
+          "uniqueItems": true
+        }
+      }
+    },
+    "family": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "display_name",
+        "category",
+        "source",
+        "aliases",
+        "relationships",
+        "lifecycle_status",
+        "inclusion_reason",
+        "classification",
+        "capability_contract",
+        "implementation"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/familyId" },
+        "display_name": { "$ref": "#/$defs/nonemptyString" },
+        "category": {
+          "enum": [
+            "foundation-provider",
+            "layout-content",
+            "actions-feedback",
+            "navigation-disclosure",
+            "forms-input",
+            "data-visualization",
+            "browser-interaction"
+          ]
+        },
+        "source": { "$ref": "#/$defs/sourceIdentity" },
+        "aliases": { "$ref": "#/$defs/stringSet" },
+        "relationships": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/relationship" }
+        },
+        "lifecycle_status": { "$ref": "#/$defs/lifecycleStatus" },
+        "inclusion_reason": { "$ref": "#/$defs/nonemptyString" },
+        "classification": { "$ref": "#/$defs/classification" },
+        "capability_contract": { "$ref": "#/$defs/capabilityContract" },
+        "implementation": { "$ref": "#/$defs/implementation" }
+      }
+    },
+    "exception": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "classification",
+        "source_entries",
+        "reason",
+        "lifecycle_status",
+        "review_state",
+        "relationships"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/exceptionId" },
+        "classification": {
+          "enum": [
+            "excluded",
+            "obsolete",
+            "experimental",
+            "service-only",
+            "infrastructure-only",
+            "duplicate",
+            "unresolved"
+          ]
+        },
+        "source_entries": { "$ref": "#/$defs/stringSet" },
+        "reason": { "$ref": "#/$defs/nonemptyString" },
+        "lifecycle_status": { "$ref": "#/$defs/lifecycleStatus" },
+        "review_state": { "$ref": "#/$defs/deliveryState" },
+        "relationships": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/relationship" }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,4554 @@
+{
+  "schema_version": "1.0.0",
+  "catalog_version": "0.1.0",
+  "catalog_id": "BX-CATALOG-CORE",
+  "reference_id": "mudblazor-v9.9.0",
+  "title": "BlazeX normalized component-family inventory",
+  "description": "Source-complete MudBlazor v9.9.0 family inventory with all BlazeX product, delivery, capability, fallback, runtime, renderer, portability, native-strategy, and implementation decisions deliberately unassigned.",
+  "catalog_status": "locked",
+  "authored_source": "assets/component-catalog/blazex-component-catalog-v0.1.0.json",
+  "generated_view": "assets/component-catalog/blazex-component-catalog-v0-1-0-generated.md",
+  "sort_order": "family-id-unicode-codepoint-ascending",
+  "owner_roles": [
+    "architecture owner",
+    "catalog owner",
+    "product owner",
+    "provenance and license owner"
+  ],
+  "families": [
+    {
+      "id": "BX-FAM-ALERT",
+      "display_name": "Alert",
+      "category": "actions-feedback",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "Alert",
+        "source_paths": [
+          "src/MudBlazor/Components/Alert"
+        ],
+        "source_identifiers": [
+          "MudAlert"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-APP-BAR",
+      "display_name": "App Bar",
+      "category": "layout-content",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "AppBar",
+        "source_paths": [
+          "src/MudBlazor/Components/AppBar"
+        ],
+        "source_identifiers": [
+          "MudAppBar",
+          "MudContextualActionBar"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-AUTOCOMPLETE",
+      "display_name": "Autocomplete",
+      "category": "forms-input",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "Autocomplete",
+        "source_paths": [
+          "src/MudBlazor/Components/Autocomplete"
+        ],
+        "source_identifiers": [
+          "MudAutocomplete"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-AVATAR",
+      "display_name": "Avatar",
+      "category": "actions-feedback",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "Avatar",
+        "source_paths": [
+          "src/MudBlazor/Components/Avatar"
+        ],
+        "source_identifiers": [
+          "MudAvatar",
+          "MudAvatarGroup"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-BADGE",
+      "display_name": "Badge",
+      "category": "actions-feedback",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "Badge",
+        "source_paths": [
+          "src/MudBlazor/Components/Badge"
+        ],
+        "source_identifiers": [
+          "MudBadge"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-BREADCRUMBS",
+      "display_name": "Breadcrumbs",
+      "category": "navigation-disclosure",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "Breadcrumbs",
+        "source_paths": [
+          "src/MudBlazor/Components/Breadcrumbs"
+        ],
+        "source_identifiers": [
+          "BreadcrumbLink",
+          "BreadcrumbSeparator",
+          "MudBreadcrumbs"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-BREAKPOINT-PROVIDER",
+      "display_name": "Breakpoint Provider",
+      "category": "foundation-provider",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "BreakpointProvider",
+        "source_paths": [
+          "src/MudBlazor/Components/BreakpointProvider"
+        ],
+        "source_identifiers": [
+          "MudBreakpointProvider"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-BUTTON",
+      "display_name": "Button",
+      "category": "actions-feedback",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "Button",
+        "source_paths": [
+          "src/MudBlazor/Components/Button"
+        ],
+        "source_identifiers": [
+          "MudButton",
+          "MudFab",
+          "MudFabMenu",
+          "MudFabMenuItem",
+          "MudIconButton",
+          "MudToggleIconButton"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-BUTTON-GROUP",
+      "display_name": "Button Group",
+      "category": "actions-feedback",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "ButtonGroup",
+        "source_paths": [
+          "src/MudBlazor/Components/ButtonGroup"
+        ],
+        "source_identifiers": [
+          "MudButtonGroup"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-CARD",
+      "display_name": "Card",
+      "category": "layout-content",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "Card",
+        "source_paths": [
+          "src/MudBlazor/Components/Card"
+        ],
+        "source_identifiers": [
+          "MudCard",
+          "MudCardActions",
+          "MudCardContent",
+          "MudCardHeader",
+          "MudCardMedia"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-CAROUSEL",
+      "display_name": "Carousel",
+      "category": "navigation-disclosure",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "Carousel",
+        "source_paths": [
+          "src/MudBlazor/Components/Carousel"
+        ],
+        "source_identifiers": [
+          "MudCarousel",
+          "MudCarouselItem"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-CHART",
+      "display_name": "Chart",
+      "category": "data-visualization",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "Chart",
+        "source_paths": [
+          "src/MudBlazor/Components/Chart"
+        ],
+        "source_identifiers": [
+          "Bar",
+          "BaseAxisChart",
+          "BaseRadialChart",
+          "ChartTooltip",
+          "Donut",
+          "Filters",
+          "HeatMap",
+          "Legend",
+          "Line",
+          "MudChart",
+          "MudHeatMapCell",
+          "Pie",
+          "Radar",
+          "Rose",
+          "Sankey",
+          "ScatterPlot",
+          "StackedBar",
+          "TimeSeries"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-CHECK-BOX",
+      "display_name": "Check Box",
+      "category": "forms-input",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "CheckBox",
+        "source_paths": [
+          "src/MudBlazor/Components/CheckBox"
+        ],
+        "source_identifiers": [
+          "MudCheckBox"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-CHIP",
+      "display_name": "Chip",
+      "category": "actions-feedback",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "Chip",
+        "source_paths": [
+          "src/MudBlazor/Components/Chip"
+        ],
+        "source_identifiers": [
+          "MudChip"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-CHIP-SET",
+      "display_name": "Chip Set",
+      "category": "actions-feedback",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "ChipSet",
+        "source_paths": [
+          "src/MudBlazor/Components/ChipSet"
+        ],
+        "source_identifiers": [
+          "MudChipSet"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-COLLAPSE",
+      "display_name": "Collapse",
+      "category": "navigation-disclosure",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "Collapse",
+        "source_paths": [
+          "src/MudBlazor/Components/Collapse"
+        ],
+        "source_identifiers": [
+          "MudCollapse"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-COLOR-PICKER",
+      "display_name": "Color Picker",
+      "category": "forms-input",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "ColorPicker",
+        "source_paths": [
+          "src/MudBlazor/Components/ColorPicker"
+        ],
+        "source_identifiers": [
+          "MudColorPicker"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-CONTAINER",
+      "display_name": "Container",
+      "category": "layout-content",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "Container",
+        "source_paths": [
+          "src/MudBlazor/Components/Container"
+        ],
+        "source_identifiers": [
+          "MudContainer"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-DATA-GRID",
+      "display_name": "Data Grid",
+      "category": "data-visualization",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "DataGrid",
+        "source_paths": [
+          "src/MudBlazor/Components/DataGrid"
+        ],
+        "source_identifiers": [
+          "Column",
+          "DataGridGroupRow",
+          "DataGridVirtualizeRow",
+          "FilterHeaderCell",
+          "FooterCell",
+          "HeaderCell",
+          "HierarchyColumn",
+          "MudDataGrid",
+          "MudDataGridPager",
+          "SelectColumn"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-DATE-PICKER",
+      "display_name": "Date Picker",
+      "category": "forms-input",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "DatePicker",
+        "source_paths": [
+          "src/MudBlazor/Components/DatePicker"
+        ],
+        "source_identifiers": [
+          "MudBaseDatePicker",
+          "MudDatePicker",
+          "MudDateRangePicker"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-DIALOG",
+      "display_name": "Dialog",
+      "category": "browser-interaction",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "Dialog",
+        "source_paths": [
+          "src/MudBlazor/Components/Dialog"
+        ],
+        "source_identifiers": [
+          "MudDialog",
+          "MudDialogContainer",
+          "MudDialogProvider"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-DIVIDER",
+      "display_name": "Divider",
+      "category": "layout-content",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "Divider",
+        "source_paths": [
+          "src/MudBlazor/Components/Divider"
+        ],
+        "source_identifiers": [
+          "MudDivider"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-DRAWER",
+      "display_name": "Drawer",
+      "category": "layout-content",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "Drawer",
+        "source_paths": [
+          "src/MudBlazor/Components/Drawer"
+        ],
+        "source_identifiers": [
+          "MudDrawer",
+          "MudDrawerContainer",
+          "MudDrawerHeader"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-DROP-ZONE",
+      "display_name": "Drop Zone",
+      "category": "browser-interaction",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "DropZone",
+        "source_paths": [
+          "src/MudBlazor/Components/DropZone"
+        ],
+        "source_identifiers": [
+          "MudDragHandle",
+          "MudDropContainer",
+          "MudDropZone",
+          "MudDynamicDropItem"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-ELEMENT",
+      "display_name": "Element",
+      "category": "foundation-provider",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "Element",
+        "source_paths": [
+          "src/MudBlazor/Components/Element"
+        ],
+        "source_identifiers": [
+          "MudElement"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-EXIT-PROMPT",
+      "display_name": "Exit Prompt",
+      "category": "browser-interaction",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "ExitPrompt",
+        "source_paths": [
+          "src/MudBlazor/Components/ExitPrompt"
+        ],
+        "source_identifiers": [
+          "MudExitPrompt"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-EXPANSION-PANEL",
+      "display_name": "Expansion Panel",
+      "category": "navigation-disclosure",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "ExpansionPanel",
+        "source_paths": [
+          "src/MudBlazor/Components/ExpansionPanel"
+        ],
+        "source_identifiers": [
+          "MudExpansionPanel",
+          "MudExpansionPanels"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-FIELD",
+      "display_name": "Field",
+      "category": "forms-input",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "Field",
+        "source_paths": [
+          "src/MudBlazor/Components/Field"
+        ],
+        "source_identifiers": [
+          "MudField"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-FILE-UPLOAD",
+      "display_name": "File Upload",
+      "category": "forms-input",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "FileUpload",
+        "source_paths": [
+          "src/MudBlazor/Components/FileUpload"
+        ],
+        "source_identifiers": [
+          "MudFileUpload"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-FOCUS-TRAP",
+      "display_name": "Focus Trap",
+      "category": "browser-interaction",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "FocusTrap",
+        "source_paths": [
+          "src/MudBlazor/Components/FocusTrap"
+        ],
+        "source_identifiers": [
+          "MudFocusTrap"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-FORM",
+      "display_name": "Form",
+      "category": "forms-input",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "Form",
+        "source_paths": [
+          "src/MudBlazor/Components/Form"
+        ],
+        "source_identifiers": [
+          "MudForm"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-GRID",
+      "display_name": "Grid",
+      "category": "layout-content",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "Grid",
+        "source_paths": [
+          "src/MudBlazor/Components/Grid"
+        ],
+        "source_identifiers": [
+          "MudFlexBreak",
+          "MudGrid",
+          "MudItem"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-HIDDEN",
+      "display_name": "Hidden",
+      "category": "foundation-provider",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "Hidden",
+        "source_paths": [
+          "src/MudBlazor/Components/Hidden"
+        ],
+        "source_identifiers": [
+          "MudHidden"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-HIGHLIGHTER",
+      "display_name": "Highlighter",
+      "category": "data-visualization",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "Highlighter",
+        "source_paths": [
+          "src/MudBlazor/Components/Highlighter"
+        ],
+        "source_identifiers": [
+          "MudHighlighter"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-HOTKEY",
+      "display_name": "Hotkey",
+      "category": "browser-interaction",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "Hotkey",
+        "source_paths": [
+          "src/MudBlazor/Components/Hotkey"
+        ],
+        "source_identifiers": [
+          "MudHotkey"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-ICON",
+      "display_name": "Icon",
+      "category": "layout-content",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "Icon",
+        "source_paths": [
+          "src/MudBlazor/Components/Icon"
+        ],
+        "source_identifiers": [
+          "MudIcon"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-IMAGE",
+      "display_name": "Image",
+      "category": "layout-content",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "Image",
+        "source_paths": [
+          "src/MudBlazor/Components/Image"
+        ],
+        "source_identifiers": [
+          "MudImage"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-INPUT",
+      "display_name": "Input",
+      "category": "forms-input",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "Input",
+        "source_paths": [
+          "src/MudBlazor/Components/Input"
+        ],
+        "source_identifiers": [
+          "MudInput",
+          "MudInputAdornment",
+          "MudInputLabel",
+          "MudRangeInput"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-INPUT-CONTROL",
+      "display_name": "Input Control",
+      "category": "forms-input",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "InputControl",
+        "source_paths": [
+          "src/MudBlazor/Components/InputControl"
+        ],
+        "source_identifiers": [
+          "MudInputControl"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-LAYOUT",
+      "display_name": "Layout",
+      "category": "layout-content",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "Layout",
+        "source_paths": [
+          "src/MudBlazor/Components/Layout"
+        ],
+        "source_identifiers": [
+          "MudLayout"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-LINK",
+      "display_name": "Link",
+      "category": "navigation-disclosure",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "Link",
+        "source_paths": [
+          "src/MudBlazor/Components/Link"
+        ],
+        "source_identifiers": [
+          "MudLink"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-LIST",
+      "display_name": "List",
+      "category": "data-visualization",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "List",
+        "source_paths": [
+          "src/MudBlazor/Components/List"
+        ],
+        "source_identifiers": [
+          "MudList",
+          "MudListItem",
+          "MudListSubheader"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-MAIN",
+      "display_name": "Main",
+      "category": "layout-content",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "Main",
+        "source_paths": [
+          "src/MudBlazor/Components/Main"
+        ],
+        "source_identifiers": [
+          "MudMainContent"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-MASK",
+      "display_name": "Mask",
+      "category": "forms-input",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "Mask",
+        "source_paths": [
+          "src/MudBlazor/Components/Mask"
+        ],
+        "source_identifiers": [
+          "MudMask"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-MENU",
+      "display_name": "Menu",
+      "category": "navigation-disclosure",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "Menu",
+        "source_paths": [
+          "src/MudBlazor/Components/Menu"
+        ],
+        "source_identifiers": [
+          "MudMenu",
+          "MudMenuItem"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-MESSAGE-BOX",
+      "display_name": "Message Box",
+      "category": "browser-interaction",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "MessageBox",
+        "source_paths": [
+          "src/MudBlazor/Components/MessageBox"
+        ],
+        "source_identifiers": [
+          "MudMessageBox"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-NAV-MENU",
+      "display_name": "Nav Menu",
+      "category": "navigation-disclosure",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "NavMenu",
+        "source_paths": [
+          "src/MudBlazor/Components/NavMenu"
+        ],
+        "source_identifiers": [
+          "MudNavGroup",
+          "MudNavLink",
+          "MudNavMenu"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-NUMERIC-FIELD",
+      "display_name": "Numeric Field",
+      "category": "forms-input",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "NumericField",
+        "source_paths": [
+          "src/MudBlazor/Components/NumericField"
+        ],
+        "source_identifiers": [
+          "MudNumericField"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-OVERLAY",
+      "display_name": "Overlay",
+      "category": "actions-feedback",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "Overlay",
+        "source_paths": [
+          "src/MudBlazor/Components/Overlay"
+        ],
+        "source_identifiers": [
+          "MudOverlay"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-PAGE-CONTENT-NAVIGATION",
+      "display_name": "Page Content Navigation",
+      "category": "navigation-disclosure",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "PageContentNavigation",
+        "source_paths": [
+          "src/MudBlazor/Components/PageContentNavigation"
+        ],
+        "source_identifiers": [
+          "MudPageContentNavigation"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-PAGINATION",
+      "display_name": "Pagination",
+      "category": "navigation-disclosure",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "Pagination",
+        "source_paths": [
+          "src/MudBlazor/Components/Pagination"
+        ],
+        "source_identifiers": [
+          "MudPagination"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-PAPER",
+      "display_name": "Paper",
+      "category": "layout-content",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "Paper",
+        "source_paths": [
+          "src/MudBlazor/Components/Paper"
+        ],
+        "source_identifiers": [
+          "MudPaper"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-PICKER",
+      "display_name": "Picker",
+      "category": "forms-input",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "Picker",
+        "source_paths": [
+          "src/MudBlazor/Components/Picker"
+        ],
+        "source_identifiers": [
+          "MudPicker",
+          "MudPickerContent",
+          "MudPickerToolbar"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-POPOVER",
+      "display_name": "Popover",
+      "category": "browser-interaction",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "Popover",
+        "source_paths": [
+          "src/MudBlazor/Components/Popover"
+        ],
+        "source_identifiers": [
+          "MudPopover",
+          "MudPopoverProvider"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-PROGRESS",
+      "display_name": "Progress",
+      "category": "actions-feedback",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "Progress",
+        "source_paths": [
+          "src/MudBlazor/Components/Progress"
+        ],
+        "source_identifiers": [
+          "MudProgressCircular",
+          "MudProgressLinear"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-RADIO",
+      "display_name": "Radio",
+      "category": "forms-input",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "Radio",
+        "source_paths": [
+          "src/MudBlazor/Components/Radio"
+        ],
+        "source_identifiers": [
+          "MudRadio",
+          "MudRadioGroup"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-RATING",
+      "display_name": "Rating",
+      "category": "actions-feedback",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "Rating",
+        "source_paths": [
+          "src/MudBlazor/Components/Rating"
+        ],
+        "source_identifiers": [
+          "MudRating",
+          "MudRatingItem"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-RENDER",
+      "display_name": "Render",
+      "category": "foundation-provider",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "Render",
+        "source_paths": [
+          "src/MudBlazor/Components/Render"
+        ],
+        "source_identifiers": [
+          "MudRender"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-RTL-PROVIDER",
+      "display_name": "RTL Provider",
+      "category": "foundation-provider",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "RTLProvider",
+        "source_paths": [
+          "src/MudBlazor/Components/RTLProvider"
+        ],
+        "source_identifiers": [
+          "MudRTLProvider"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-SCROLL-TO-TOP",
+      "display_name": "Scroll To Top",
+      "category": "navigation-disclosure",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "ScrollToTop",
+        "source_paths": [
+          "src/MudBlazor/Components/ScrollToTop"
+        ],
+        "source_identifiers": [
+          "MudScrollToTop"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-SELECT",
+      "display_name": "Select",
+      "category": "forms-input",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "Select",
+        "source_paths": [
+          "src/MudBlazor/Components/Select"
+        ],
+        "source_identifiers": [
+          "MudSelect",
+          "MudSelectItem"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-SKELETON",
+      "display_name": "Skeleton",
+      "category": "layout-content",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "Skeleton",
+        "source_paths": [
+          "src/MudBlazor/Components/Skeleton"
+        ],
+        "source_identifiers": [
+          "MudSkeleton"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-SLIDER",
+      "display_name": "Slider",
+      "category": "forms-input",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "Slider",
+        "source_paths": [
+          "src/MudBlazor/Components/Slider"
+        ],
+        "source_identifiers": [
+          "MudSlider"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-SNACKBAR",
+      "display_name": "Snackbar",
+      "category": "actions-feedback",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "Snackbar",
+        "source_paths": [
+          "src/MudBlazor/Components/Snackbar"
+        ],
+        "source_identifiers": [
+          "MudSnackbarElement",
+          "MudSnackbarProvider",
+          "SnackbarMessageMarkupString",
+          "SnackbarMessageRenderFragment",
+          "SnackbarMessageText"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-SPACER",
+      "display_name": "Spacer",
+      "category": "layout-content",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "Spacer",
+        "source_paths": [
+          "src/MudBlazor/Components/Spacer"
+        ],
+        "source_identifiers": [
+          "MudSpacer"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-SPLIT-PANEL",
+      "display_name": "Split Panel",
+      "category": "browser-interaction",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "SplitPanel",
+        "source_paths": [
+          "src/MudBlazor/Components/SplitPanel"
+        ],
+        "source_identifiers": [
+          "MudSplitPanel"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-STACK",
+      "display_name": "Stack",
+      "category": "layout-content",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "Stack",
+        "source_paths": [
+          "src/MudBlazor/Components/Stack"
+        ],
+        "source_identifiers": [
+          "MudStack"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-STEPPER",
+      "display_name": "Stepper",
+      "category": "navigation-disclosure",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "Stepper",
+        "source_paths": [
+          "src/MudBlazor/Components/Stepper"
+        ],
+        "source_identifiers": [
+          "MudStepper"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-SWIPE-AREA",
+      "display_name": "Swipe Area",
+      "category": "browser-interaction",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "SwipeArea",
+        "source_paths": [
+          "src/MudBlazor/Components/SwipeArea"
+        ],
+        "source_identifiers": [
+          "MudSwipeArea"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-SWITCH",
+      "display_name": "Switch",
+      "category": "forms-input",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "Switch",
+        "source_paths": [
+          "src/MudBlazor/Components/Switch"
+        ],
+        "source_identifiers": [
+          "MudSwitch"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-TABLE",
+      "display_name": "Table",
+      "category": "data-visualization",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "Table",
+        "source_paths": [
+          "src/MudBlazor/Components/Table"
+        ],
+        "source_identifiers": [
+          "MudTFootRow",
+          "MudTHeadRow",
+          "MudTable",
+          "MudTableGroupRow",
+          "MudTablePager",
+          "MudTableSortLabel",
+          "MudTd",
+          "MudTh",
+          "MudTr"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-TABLE-SIMPLE",
+      "display_name": "Table Simple",
+      "category": "data-visualization",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "TableSimple",
+        "source_paths": [
+          "src/MudBlazor/Components/TableSimple"
+        ],
+        "source_identifiers": [
+          "MudSimpleTable"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-TABS",
+      "display_name": "Tabs",
+      "category": "navigation-disclosure",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "Tabs",
+        "source_paths": [
+          "src/MudBlazor/Components/Tabs"
+        ],
+        "source_identifiers": [
+          "MudDynamicTabs",
+          "MudTabPanel",
+          "MudTabs"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-TEXT-FIELD",
+      "display_name": "Text Field",
+      "category": "forms-input",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "TextField",
+        "source_paths": [
+          "src/MudBlazor/Components/TextField"
+        ],
+        "source_identifiers": [
+          "MudTextField"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-THEME-PROVIDER",
+      "display_name": "Theme Provider",
+      "category": "foundation-provider",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "ThemeProvider",
+        "source_paths": [
+          "src/MudBlazor/Components/ThemeProvider"
+        ],
+        "source_identifiers": [
+          "MudThemeProvider"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-TIME-PICKER",
+      "display_name": "Time Picker",
+      "category": "forms-input",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "TimePicker",
+        "source_paths": [
+          "src/MudBlazor/Components/TimePicker"
+        ],
+        "source_identifiers": [
+          "MudTimePicker"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-TIMELINE",
+      "display_name": "Timeline",
+      "category": "data-visualization",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "Timeline",
+        "source_paths": [
+          "src/MudBlazor/Components/Timeline"
+        ],
+        "source_identifiers": [
+          "MudTimeline",
+          "MudTimelineItem"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-TOGGLE",
+      "display_name": "Toggle",
+      "category": "actions-feedback",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "Toggle",
+        "source_paths": [
+          "src/MudBlazor/Components/Toggle"
+        ],
+        "source_identifiers": [
+          "MudToggleGroup",
+          "MudToggleItem"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-TOOL-BAR",
+      "display_name": "Tool Bar",
+      "category": "layout-content",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "ToolBar",
+        "source_paths": [
+          "src/MudBlazor/Components/ToolBar"
+        ],
+        "source_identifiers": [
+          "MudToolBar"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-TOOLTIP",
+      "display_name": "Tooltip",
+      "category": "actions-feedback",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "Tooltip",
+        "source_paths": [
+          "src/MudBlazor/Components/Tooltip"
+        ],
+        "source_identifiers": [
+          "MudTooltip"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-TREE-VIEW",
+      "display_name": "Tree View",
+      "category": "data-visualization",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "TreeView",
+        "source_paths": [
+          "src/MudBlazor/Components/TreeView"
+        ],
+        "source_identifiers": [
+          "MudTreeView",
+          "MudTreeViewItem",
+          "MudTreeViewItemToggleButton"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-TYPOGRAPHY",
+      "display_name": "Typography",
+      "category": "layout-content",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "Typography",
+        "source_paths": [
+          "src/MudBlazor/Components/Typography"
+        ],
+        "source_identifiers": [
+          "MudText"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    },
+    {
+      "id": "BX-FAM-VIRTUALIZE",
+      "display_name": "Virtualize",
+      "category": "data-visualization",
+      "source": {
+        "reference_id": "mudblazor-v9.9.0",
+        "source_family": "Virtualize",
+        "source_paths": [
+          "src/MudBlazor/Components/Virtualize"
+        ],
+        "source_identifiers": [
+          "MudVirtualize"
+        ]
+      },
+      "aliases": [],
+      "relationships": [],
+      "lifecycle_status": "active",
+      "inclusion_reason": "First-level component source family in the locked MudBlazor v9.9.0 component-tree closure.",
+      "classification": {
+        "disposition": "unresolved",
+        "rationale": null,
+        "delivery_tier": "unassigned",
+        "target_package": null,
+        "prerequisites": [],
+        "optional_package": null,
+        "payload_class": "unassigned",
+        "intended_public_identity": null
+      },
+      "capability_contract": {
+        "required_capabilities": [],
+        "optional_capabilities": [],
+        "fallback": null,
+        "rendering_modes": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "runtime_eligibility": {
+          "state": "unknown",
+          "entries": [],
+          "rationale": null
+        },
+        "backend_portability": "unknown",
+        "native_strategy": "unknown",
+        "accessibility_alternative": null,
+        "renderer_extensions": []
+      },
+      "implementation": {
+        "delivery_state": "unknown",
+        "implementation_evidence": []
+      }
+    }
+  ],
+  "exceptions": [
+    {
+      "id": "BX-EXC-DOCUMENTATION-EXCLUDED",
+      "classification": "excluded",
+      "source_entries": [
+        "src/MudBlazor.Docs/Pages/Components"
+      ],
+      "reason": "Tagged documentation and examples corroborate names and behavior but are not independent component-family records.",
+      "lifecycle_status": "active",
+      "review_state": "accepted",
+      "relationships": []
+    },
+    {
+      "id": "BX-EXC-DUPLICATE-NONE",
+      "classification": "duplicate",
+      "source_entries": [],
+      "reason": "No duplicate first-level source family remained after normalization; compound files stay inside their owning family.",
+      "lifecycle_status": "unknown",
+      "review_state": "accepted",
+      "relationships": []
+    },
+    {
+      "id": "BX-EXC-EXPERIMENTAL-NONE",
+      "classification": "experimental",
+      "source_entries": [],
+      "reason": "No first-level family in the locked source snapshot was classified as an experimental-only family; later evidence must create an explicit record.",
+      "lifecycle_status": "experimental",
+      "review_state": "accepted",
+      "relationships": []
+    },
+    {
+      "id": "BX-EXC-ICONS-INFRASTRUCTURE",
+      "classification": "infrastructure-only",
+      "source_entries": [
+        "src/MudBlazor/Icons"
+      ],
+      "reason": "Generated and curated glyph constants are asset infrastructure, not one component family per icon; the Icon family remains in the normalized catalog.",
+      "lifecycle_status": "active",
+      "review_state": "accepted",
+      "relationships": []
+    },
+    {
+      "id": "BX-EXC-INTERNAL-HELPERS",
+      "classification": "excluded",
+      "source_entries": [
+        "src/MudBlazor/Base",
+        "src/MudBlazor/State",
+        "src/MudBlazor/Utilities"
+      ],
+      "reason": "Base classes, state containers, and utilities are relationship evidence unless a later review finds a distinct public product obligation.",
+      "lifecycle_status": "active",
+      "review_state": "accepted",
+      "relationships": []
+    },
+    {
+      "id": "BX-EXC-JAVASCRIPT-INFRASTRUCTURE",
+      "classification": "infrastructure-only",
+      "source_entries": [
+        "src/MudBlazor/Interop",
+        "src/MudBlazor/TScripts",
+        "src/MudBlazor/wwwroot"
+      ],
+      "reason": "Browser interop and JavaScript assets express host capabilities and renderer implementation, not portable component-family identity.",
+      "lifecycle_status": "active",
+      "review_state": "accepted",
+      "relationships": []
+    },
+    {
+      "id": "BX-EXC-LOCALIZATION-INFRASTRUCTURE",
+      "classification": "infrastructure-only",
+      "source_entries": [
+        "src/MudBlazor/Resources",
+        "src/MudBlazor/Services/Localization"
+      ],
+      "reason": "Localization resources and services are cross-cutting infrastructure rather than a visual component family.",
+      "lifecycle_status": "active",
+      "review_state": "accepted",
+      "relationships": []
+    },
+    {
+      "id": "BX-EXC-OBSOLETE-NONE",
+      "classification": "obsolete",
+      "source_entries": [],
+      "reason": "No first-level family was removed from the normalized closure as obsolete; obsolete nested types remain source evidence pending record-level need.",
+      "lifecycle_status": "obsolete",
+      "review_state": "accepted",
+      "relationships": []
+    },
+    {
+      "id": "BX-EXC-SERVICES-SERVICE-ONLY",
+      "classification": "service-only",
+      "source_entries": [
+        "src/MudBlazor/Extensions/ServiceCollectionExtensions.cs",
+        "src/MudBlazor/Services"
+      ],
+      "reason": "Registered browser, dialog, localization, popover, resize, scroll, and related services are capability/infrastructure evidence, not extra visual families.",
+      "lifecycle_status": "active",
+      "review_state": "accepted",
+      "relationships": []
+    },
+    {
+      "id": "BX-EXC-TESTS-EXCLUDED",
+      "classification": "excluded",
+      "source_entries": [
+        "src/MudBlazor.UnitTests"
+      ],
+      "reason": "Tests and test-only components provide behavioral evidence but do not create public catalog identities.",
+      "lifecycle_status": "active",
+      "review_state": "accepted",
+      "relationships": []
+    },
+    {
+      "id": "BX-EXC-THEME-STYLE-INFRASTRUCTURE",
+      "classification": "infrastructure-only",
+      "source_entries": [
+        "src/MudBlazor/Styles",
+        "src/MudBlazor/Themes"
+      ],
+      "reason": "Themes, tokens, and styles are shared visual infrastructure; ThemeProvider remains a normalized component family.",
+      "lifecycle_status": "active",
+      "review_state": "accepted",
+      "relationships": []
+    },
+    {
+      "id": "BX-EXC-UNRESOLVED-NONE",
+      "classification": "unresolved",
+      "source_entries": [],
+      "reason": "No source-family coverage question remains unresolved in this version; Phase 4 product dispositions intentionally remain unresolved on family records.",
+      "lifecycle_status": "unknown",
+      "review_state": "accepted",
+      "relationships": []
+    }
+  ]
+}
