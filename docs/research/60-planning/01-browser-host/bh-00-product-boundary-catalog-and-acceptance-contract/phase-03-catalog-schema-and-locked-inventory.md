@@ -22,30 +22,30 @@ Back to milestone: [README](README.md)
   create a stable machine-validatable BlazeX catalog structure before assigning
   final dispositions, capabilities, fallbacks, or portability claims.
 
-  - [ ] 3.1 Section - Lock the reference catalog and extraction boundary.
+  - [x] 3.1 Section - Lock the reference catalog and extraction boundary.
 
     Establish reproducible source identity and inclusion rules so the inventory
     cannot drift with a live documentation site or silently omit difficult
     component families.
 
-    - [ ] 3.1.1 Task - Pin and document the MudBlazor reference truth.
+    - [x] 3.1.1 Task - Pin and document the MudBlazor reference truth.
 
       The catalog input must identify an exact release and distinguish reviewed
       source evidence from generated documentation, examples, and assumptions.
 
-      - [ ] 3.1.1.1 Subtask - Record the MudBlazor v9.9.0 tag or commit, repository URL, relevant source and documentation paths, license identity, review date, and content hashes where practical.
-      - [ ] 3.1.1.2 Subtask - Identify authoritative inputs for public components, supporting types, services, providers, icons, examples, experimental features, obsolete features, and internal-only implementation helpers.
-      - [ ] 3.1.1.3 Subtask - Define a later-reference update process that creates a reviewed catalog diff and never mutates BlazeX dispositions automatically.
+      - [x] 3.1.1.1 Subtask - Record the MudBlazor v9.9.0 tag or commit, repository URL, relevant source and documentation paths, license identity, review date, and content hashes where practical.
+      - [x] 3.1.1.2 Subtask - Identify authoritative inputs for public components, supporting types, services, providers, icons, examples, experimental features, obsolete features, and internal-only implementation helpers.
+      - [x] 3.1.1.3 Subtask - Define a later-reference update process that creates a reviewed catalog diff and never mutates BlazeX dispositions automatically.
 
-    - [ ] 3.1.2 Task - Define inventory inclusion and normalization rules.
+    - [x] 3.1.2 Task - Define inventory inclusion and normalization rules.
 
       Families must be counted consistently even when MudBlazor exposes nested
       parts, aliases, generic variants, service APIs, or documentation-only
       groupings.
 
-      - [ ] 3.1.2.1 Subtask - Define family, component, subcomponent, supporting type, service, provider, utility, experimental, obsolete, and internal classifications.
-      - [ ] 3.1.2.2 Subtask - Define normalization for generic variants, inherited bases, nested parts, aliases, renamed components, duplicate documentation entries, and one family spanning multiple source files.
-      - [ ] 3.1.2.3 Subtask - Record explicit inclusion and exclusion reasons for icons, localization, themes, JavaScript helpers, test components, documentation infrastructure, and non-component services.
+      - [x] 3.1.2.1 Subtask - Define family, component, subcomponent, supporting type, service, provider, utility, experimental, obsolete, and internal classifications.
+      - [x] 3.1.2.2 Subtask - Define normalization for generic variants, inherited bases, nested parts, aliases, renamed components, duplicate documentation entries, and one family spanning multiple source files.
+      - [x] 3.1.2.3 Subtask - Record explicit inclusion and exclusion reasons for icons, localization, themes, JavaScript helpers, test components, documentation infrastructure, and non-component services.
 
   - [ ] 3.2 Section - Define stable catalog identity and metadata schema.
 

@@ -28,6 +28,10 @@ tests.
 
 ## Start here
 
+- [BlazeX MudBlazor reference and inventory
+  policy](../20-notes/blazex-mudblazor-reference-and-inventory-policy.md) locks
+  the exact v9.9.0 source truth and defines how families, compound parts,
+  services, infrastructure, aliases, and later reference updates are counted.
 - [Browser host implementation
   milestones](../20-notes/browser-host-implementation-milestones.md) turns the
   F0–F4 dependency tiers into the consolidated BH-00–BH-23 browser delivery

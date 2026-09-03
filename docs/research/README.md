@@ -94,6 +94,8 @@ python3 validate_archive.py
 python3 -m unittest test_validate_archive.py
 python3 validate_browser_product_envelope.py
 python3 -m unittest test_validate_browser_product_envelope.py
+python3 validate_component_catalog.py
+python3 -m unittest test_validate_component_catalog.py
 ```
 
 The validator checks metadata, placeholders, filenames, local links,
@@ -106,6 +108,8 @@ identifiers.
 - [`frontmatter.schema.json`](frontmatter.schema.json) — metadata schema
 - [`requirements-validation.txt`](requirements-validation.txt) — validator dependencies
 - [`test_validate_browser_product_envelope.py`](test_validate_browser_product_envelope.py) — focused browser-envelope validator tests
+- [`test_validate_component_catalog.py`](test_validate_component_catalog.py) — focused component-catalog validator tests
 - [`test_validate_archive.py`](test_validate_archive.py) — focused validator tests
 - [`validate_browser_product_envelope.py`](validate_browser_product_envelope.py) — deterministic BH-00 browser-envelope checks
+- [`validate_component_catalog.py`](validate_component_catalog.py) — deterministic BH-00 reference and component-catalog checks
 - [`validate_archive.py`](validate_archive.py) — deterministic archive checks

@@ -1,0 +1,94 @@
+{
+  "schema_version": "1.0.0",
+  "reference_id": "mudblazor-v9.9.0",
+  "repository": "https://github.com/MudBlazor/MudBlazor.git",
+  "tag": "v9.9.0",
+  "commit": "3d85eed63a2c886d0a2e37f9f0cad78be655ad1c",
+  "commit_date": "2026-08-23T10:09:30-05:00",
+  "release_date": "2026-08-24",
+  "reviewed_at": "2026-09-02",
+  "license": {
+    "spdx": "MIT",
+    "path": "LICENSE",
+    "git_blob": "b42f9e95acc46da742dc5da1ca1a8864d2dbfae0"
+  },
+  "git_objects": {
+    "root_tree": "9d22822949515751b9c011e588238dcf5787686a",
+    "components_tree": "d3f33e5039ea0974f648f32365242714831f757a",
+    "documentation_components_tree": "90c6b7127c5e3e24681306effb38604bbf631ff2",
+    "project_file_blob": "c9d8509eaf4c135fd4b7728914faff2f5f23dacb"
+  },
+  "principal_paths": [
+    "README.md",
+    "LICENSE",
+    "CONTRIBUTING.md",
+    "src/MudBlazor/MudBlazor.csproj",
+    "src/MudBlazor/Base/",
+    "src/MudBlazor/Components/",
+    "src/MudBlazor/Extensions/ServiceCollectionExtensions.cs",
+    "src/MudBlazor/Icons/",
+    "src/MudBlazor/Services/",
+    "src/MudBlazor/State/",
+    "src/MudBlazor/Styles/",
+    "src/MudBlazor/Themes/",
+    "src/MudBlazor/TScripts/",
+    "src/MudBlazor.Docs/Pages/Components/",
+    "src/MudBlazor.UnitTests/"
+  ],
+  "family_snapshot": {
+    "path": "mudblazor-v9.9.0-source-families.txt",
+    "source_path": "src/MudBlazor/Components/",
+    "extraction": "git ls-tree -d --name-only HEAD:src/MudBlazor/Components",
+    "ordering": "unicode-codepoint-ascending",
+    "entry_count": 83,
+    "sha256": "c6021b2b52b81a3beafb642ac5c114a5cb753c7dfa7561200aaaf988b394b041"
+  },
+  "authoritative_inputs": [
+    {
+      "classification": "public-component-and-compound-part",
+      "paths": ["src/MudBlazor/Components/", "src/MudBlazor/Base/"],
+      "authority": "primary-source",
+      "inventory_role": "include-or-explicitly-exclude"
+    },
+    {
+      "classification": "supporting-type-service-and-provider",
+      "paths": ["src/MudBlazor/Services/", "src/MudBlazor/State/", "src/MudBlazor/Extensions/ServiceCollectionExtensions.cs"],
+      "authority": "primary-source",
+      "inventory_role": "relationship-or-explicit-service-infrastructure-record"
+    },
+    {
+      "classification": "theme-icon-style-and-javascript-infrastructure",
+      "paths": ["src/MudBlazor/Themes/", "src/MudBlazor/Icons/", "src/MudBlazor/Styles/", "src/MudBlazor/TScripts/"],
+      "authority": "primary-source",
+      "inventory_role": "explicit-infrastructure-record-not-automatic-component-family"
+    },
+    {
+      "classification": "documentation-example-and-api-grouping",
+      "paths": ["src/MudBlazor.Docs/Pages/Components/"],
+      "authority": "corroborating-source",
+      "inventory_role": "names-aliases-examples-and-public-intent-not-source-count-truth"
+    },
+    {
+      "classification": "test-evidence",
+      "paths": ["src/MudBlazor.UnitTests/"],
+      "authority": "corroborating-source",
+      "inventory_role": "behavior-and-relationship-evidence-not-public-catalog-entry"
+    }
+  ],
+  "excluded_as_authority": [
+    "moving-dev-branch",
+    "nightly-package",
+    "live-documentation-site-without-tagged-source-corroboration",
+    "third-party-catalog-list",
+    "generated-api-page-count-as-family-count"
+  ],
+  "later_reference_update": {
+    "requires_new_lock": true,
+    "requires_source_tree_diff": true,
+    "requires_normalized_catalog_diff": true,
+    "requires_license_and_provenance_review": true,
+    "requires_human_acceptance": true,
+    "mutates_blazex_dispositions_automatically": false,
+    "preserves_previous_lock_and_catalog": true
+  }
+}

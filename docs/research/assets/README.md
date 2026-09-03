@@ -25,7 +25,8 @@ insufficient. Record source, creator, license, provenance, and use.
 
 ### Subdirectories
 
-- None yet.
+- [Component catalog](component-catalog/README.md) — pinned upstream reference,
+  raw extraction inputs, BlazeX catalog schema/data, and deterministic reports.
 
 ### Files
 

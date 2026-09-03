@@ -183,8 +183,11 @@ Before reporting archive work complete:
 4. run `python3 validate_browser_product_envelope.py` and
    `python3 -m unittest test_validate_browser_product_envelope.py` when the
    browser product envelope or its validator changes;
-5. verify new external citations against primary sources;
-6. run `git diff --check` from the project root; and
-7. inspect the complete change for stale paths and accidental rewrites.
+5. run `python3 validate_component_catalog.py` and
+   `python3 -m unittest test_validate_component_catalog.py` when the catalog
+   lock, schema, authored inventory, generated views, or validator changes;
+6. verify new external citations against primary sources;
+7. run `git diff --check` from the project root; and
+8. inspect the complete change for stale paths and accidental rewrites.
 
 Do not commit, push, publish, or open a pull request unless the user asks.

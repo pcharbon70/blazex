@@ -31,6 +31,7 @@ Source summaries belong in `30-sources`; unresolved workbenches belong in
 
 ### Documents
 
+- [BlazeX MudBlazor reference and inventory policy](blazex-mudblazor-reference-and-inventory-policy.md) — locks MudBlazor v9.9.0 by commit and source hashes and defines the authoritative extraction boundary, classifications, normalization, exclusions, and reviewed-update workflow.
 - [BlazeX browser and toolchain support policy](blazex-browser-and-toolchain-support-policy.md) — defines the BH-00 candidate browser windows, evidence classes, support and toolchain states, review cadence, and BH-01 records without claiming a working or supported stack.
 - [BlazeX browser rendering and profile modes](blazex-browser-rendering-and-profile-modes.md) — fixes the six output/activation contracts, three independent profile compositions, adapter ownership, capability matrix, and Plug transitive-dependency gate.
 - [BlazeX browser trust, deployment, and fallback policy](blazex-browser-trust-deployment-and-fallback-policy.md) — defines client/server authority, command revalidation, content and capability security, per-mode deployment prerequisites, and seven fail-closed fallback categories.
