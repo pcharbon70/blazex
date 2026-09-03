@@ -1,0 +1,90 @@
+{
+  "schema_version": "1.0.0",
+  "record_id": "BX-BH01-DECISION-PHASE-01-GO",
+  "record_type": "decision",
+  "state": "passed",
+  "title": "BH-01 Phase 1 authorization, governance, and activation gate",
+  "owner_role": "bh01-owner",
+  "recorded_at": "2026-09-03T13:45:27Z",
+  "observed_at": "2026-09-03T13:45:27Z",
+  "source_revision": "fa56f345e1cb92df92358325dbee5d60bd95d84e",
+  "environment_refs": [
+    "docs/research/60-planning/01-browser-host/bh-01-reproducible-browser-feasibility-baseline/phase-01-implementation-evidence.md#tool-and-execution-environment"
+  ],
+  "tool_identities": [
+    {"name": "python", "version": "3.12.12", "source": "local validation environment", "sha256": null},
+    {"name": "jsonschema", "version": "4.25.1", "source": "requirements-validation.txt", "sha256": null},
+    {"name": "git", "version": "2.49.0", "source": "local validation environment", "sha256": null},
+    {"name": "erlang-otp", "version": "27/erts-15.2.3", "source": "local validation environment", "sha256": null},
+    {"name": "elixir", "version": "1.18.4", "source": "local validation environment", "sha256": null},
+    {"name": "mix", "version": "1.18.4", "source": "local validation environment", "sha256": null},
+    {"name": "node", "version": "24.3.0", "source": "local validation environment", "sha256": null},
+    {"name": "npm", "version": "11.4.2", "source": "js/blazex_runtime/package.json", "sha256": null}
+  ],
+  "requirement_refs": [
+    "BH-01-PHASE-1",
+    "BX-BH01-INPUT-PROFILE-SLICE",
+    "BX-BH01-INPUT-STOP-CONDITIONS"
+  ],
+  "reciprocal_links": [
+    "docs/research/60-planning/01-browser-host/bh-01-reproducible-browser-feasibility-baseline/phase-01-authorization-evidence-and-repository-activation.md",
+    "docs/research/60-planning/01-browser-host/bh-01-reproducible-browser-feasibility-baseline/phase-01-implementation-evidence.md"
+  ],
+  "command_refs": [
+    "python3 validate_bh01_activation.py",
+    "python3 -m unittest test_validate_bh01_activation.py",
+    "python3 validate_archive.py",
+    "python3 -m unittest test_validate_archive.py",
+    "python3 validate_bh00_governance.py",
+    "python3 -m unittest test_validate_bh00_governance.py",
+    "python3 generate_bh00_release.py --check",
+    "mix test",
+    "mix format --check-formatted",
+    "npm test",
+    "npm run build",
+    "git diff --check"
+  ],
+  "input_hashes": [
+    {"path": "docs/research/assets/bh-01-baseline/blazex-bh-01-authorization-v0.1.0.json", "sha256": "763524f8e62dfecf9058aef80fc2d846dadeeeb0df33e282fc7edcf73355fb27"},
+    {"path": "docs/research/assets/bh-01-baseline/blazex-bh-01-milestone-ledger-v0.1.0.json", "sha256": "2a8a7127fe118184634b656e6b1d15abdeaae3637dd8d1c0c424e7dcb66805bb"},
+    {"path": "docs/research/assets/bh-01-baseline/blazex-bh-01-evidence-governance-v0.1.0.json", "sha256": "0bafb436bb374f7efe472cc5c18c7c9fc4bde7e738b91d62fc73748457538cd8"},
+    {"path": "docs/research/assets/bh-01-baseline/blazex-bh-01-repository-activation-v0.1.0.json", "sha256": "ab8e58431adb2568326ad357b52ece1b835e7ba12934be0cd8abd8ed7c28d065"}
+  ],
+  "output_hashes": [
+    {"path": "docs/research/60-planning/01-browser-host/bh-01-reproducible-browser-feasibility-baseline/phase-01-implementation-evidence.md", "sha256": "7fb8e1f236c541aa24b6f0f1d0ba17552fd58dfef45fc8561b3c7ad73a93e6b9"},
+    {"path": "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-01-validation-log-v0.1.0.txt", "sha256": "54e5a6003d3817d14c67c895b18e7ad99af4b60a7e6000e13167fdbe97b2e0e0"}
+  ],
+  "raw_evidence_refs": [
+    "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-01-validation-log-v0.1.0.txt",
+    "docs/research/60-planning/01-browser-host/bh-01-reproducible-browser-feasibility-baseline/phase-01-implementation-evidence.md"
+  ],
+  "normalization": [
+    {
+      "subject": "validation command output",
+      "method": "Retain command identities, counts, outcomes, versions, revision, and limitations while omitting nondeterministic test seeds and elapsed timings."
+    }
+  ],
+  "limitations": [
+    "This pass covers authorization, governance, schemas, repository boundaries, compilation, and boundary tests only.",
+    "No candidate dependency, runtime, browser, component behavior, DOM operation, authenticated command, measurement, accessibility result, security result, deployment, or support claim was exercised.",
+    "The recorded Erlang, Elixir, Node, and npm versions are the Phase 1 validation environment, not a qualified Phase 2 toolchain."
+  ],
+  "supersedes": [],
+  "invalidates": [],
+  "retention": {
+    "class": "permanent",
+    "minimum_days": null,
+    "immutable_raw_evidence": true
+  },
+  "outcome": {
+    "summary": "Phase 1 gate passed; Phase 2 is eligible but not authorized.",
+    "expected": "Approval, inherited truth, evidence governance, exactly nine dependency-free boundaries, negative fail-closed tests, and completion evidence all validate without product claims.",
+    "observed": "All Phase 1 checks passed with no open blocker, no accepted exception, no acquired dependency or lock, and no executed runtime/browser evidence."
+  },
+  "review": {
+    "required": true,
+    "reviewer_role": "bh01-owner",
+    "reviewed_at": "2026-09-03T13:45:27Z",
+    "disposition": "accepted"
+  }
+}

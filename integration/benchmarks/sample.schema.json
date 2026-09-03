@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://blazex.dev/schemas/bh-01/measurement-sample-1.0.0.json",
+  "title": "BlazeX BH-01 Measurement Sample",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "sample_id", "measurement_id", "environment_ref", "source_revision", "artifact_refs", "captured_at", "metric", "unit", "value", "iteration", "cache_state", "raw_evidence_refs"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "sample_id": {"type": "string", "pattern": "^BX-BH01-SAMPLE-[A-Z0-9.-]+$"},
+    "measurement_id": {"type": "string", "pattern": "^BX-BH01-MEASUREMENT-[A-Z0-9.-]+$"},
+    "environment_ref": {"type": "string", "pattern": "^BX-BH01-ENV-[A-Z0-9.-]+$"},
+    "source_revision": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "artifact_refs": {"type": "array", "minItems": 1, "items": {"type": "string"}, "uniqueItems": true},
+    "captured_at": {"type": "string", "format": "date-time"},
+    "metric": {"type": "string", "minLength": 1},
+    "unit": {"type": "string", "minLength": 1},
+    "value": {"type": "number"},
+    "iteration": {"type": "integer", "minimum": 1},
+    "cache_state": {"enum": ["cold", "warm", "mixed", "not-applicable"]},
+    "raw_evidence_refs": {"type": "array", "minItems": 1, "items": {"type": "string"}, "uniqueItems": true}
+  }
+}

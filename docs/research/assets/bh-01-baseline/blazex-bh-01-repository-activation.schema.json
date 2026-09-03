@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://blazex.dev/schemas/bh-01/repository-activation-1.0.0.json",
+  "title": "BlazeX BH-01 Repository Activation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "activation_version", "activation_id", "status", "authorization_ref", "activated_at", "boundary_count", "boundaries", "inactive_boundaries", "checks", "change_control", "evidence_boundary"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "activation_version": {"const": "0.1.0"},
+    "activation_id": {"const": "BX-BH01-REPOSITORY-ACTIVATION-0.1"},
+    "status": {"const": "phase-1-experimental-skeletons"},
+    "authorization_ref": {"const": "BX-BH01-AUTHORIZATION-0.1"},
+    "activated_at": {"type": "string", "format": "date"},
+    "boundary_count": {"const": 9},
+    "boundaries": {
+      "type": "array",
+      "minItems": 9,
+      "maxItems": 9,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "path", "kind", "owner", "responsibility", "manifest", "ownership_metadata", "source_roots", "test_entrypoints", "allowed_planned_dependencies", "forbidden_dependencies", "dependency_state", "api_state"],
+        "properties": {
+          "id": {"type": "string"},
+          "path": {"type": "string"},
+          "kind": {"enum": ["elixir-package", "javascript-package", "executable-profile", "integration-fixtures", "integration-benchmarks"]},
+          "owner": {"type": "string"},
+          "responsibility": {"type": "string", "minLength": 1},
+          "manifest": {"type": "string", "minLength": 1},
+          "ownership_metadata": {"const": "blazex.project.json"},
+          "source_roots": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+          "test_entrypoints": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+          "allowed_planned_dependencies": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+          "forbidden_dependencies": {"type": "array", "minItems": 1, "items": {"type": "string"}, "uniqueItems": true},
+          "dependency_state": {"const": "none-acquired-or-locked"},
+          "api_state": {"enum": ["experimental-not-stable", "not-production"]}
+        }
+      }
+    },
+    "inactive_boundaries": {"type": "array", "minItems": 8, "items": {"type": "string"}, "uniqueItems": true},
+    "checks": {"type": "array", "minItems": 7, "items": {"type": "string"}, "uniqueItems": true},
+    "change_control": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["approvers", "required_records", "rule"],
+      "properties": {
+        "approvers": {"type": "array", "minItems": 2, "items": {"type": "string"}, "uniqueItems": true},
+        "required_records": {"type": "array", "minItems": 2, "items": {"type": "string"}, "uniqueItems": true},
+        "rule": {"type": "string", "minLength": 1}
+      }
+    },
+    "evidence_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["dependencies", "locks", "runtime", "browser", "measurements", "support"],
+      "properties": {
+        "dependencies": {"const": "none-acquired"},
+        "locks": {"const": "none-created"},
+        "runtime": {"const": "unexecuted"},
+        "browser": {"const": "untested"},
+        "measurements": {"const": "unexecuted"},
+        "support": {"const": "unsupported"}
+      }
+    }
+  }
+}

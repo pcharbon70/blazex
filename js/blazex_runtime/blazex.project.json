@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0.0",
+  "id": "js/blazex_runtime",
+  "path": "js/blazex_runtime",
+  "kind": "javascript-package",
+  "activation_phase": "BH-01 Phase 1",
+  "status": "experimental-skeleton",
+  "owner_role": "browser-host-owner",
+  "module_roots": ["src/index.js"],
+  "manifest": "package.json",
+  "test_entrypoints": ["test/boundary.test.js"],
+  "dependencies": [],
+  "planned_dependencies": [],
+  "must_not_own": ["component-logic", "server-authorization", "generic-dom-rendering", "arbitrary-script-escape"],
+  "forbidden_dependencies": ["phoenix", "live_view", "local_live_view", "integration/fixtures"],
+  "public_api_state": "experimental-not-stable"
+}

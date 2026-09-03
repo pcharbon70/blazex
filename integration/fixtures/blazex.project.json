@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0.0",
+  "id": "integration/fixtures",
+  "path": "integration/fixtures",
+  "kind": "integration-fixtures",
+  "activation_phase": "BH-01 Phase 1",
+  "status": "experimental-skeleton",
+  "owner_role": "quality-owner",
+  "module_roots": [],
+  "manifest": "fixture-index.json",
+  "test_entrypoints": [],
+  "dependencies": [],
+  "planned_dependencies": [],
+  "must_not_own": ["stable-public-api", "production-runtime", "supported-example"],
+  "forbidden_dependencies": ["production-import"],
+  "public_api_state": "not-production"
+}

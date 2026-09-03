@@ -9,6 +9,6 @@ The adapter may be included by the browser/Phoenix profile, but it is forbidden
 from the browser/Plug profile. Portable components and the standalone DOM
 renderer must not depend on it.
 
-Status: directory scaffold only; create the Mix project when its implementation
-milestone begins.
-
+Status: experimental BH-01 optional-adapter Mix skeleton. The project has no
+dependencies and contains no LiveView or LocalLiveView implementation; those
+candidate APIs are qualified later. Its module root is not a stable public API.

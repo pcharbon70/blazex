@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0.0",
+  "id": "blazex_host_browser",
+  "path": "packages/blazex_host_browser",
+  "kind": "elixir-package",
+  "activation_phase": "BH-01 Phase 1",
+  "status": "experimental-skeleton",
+  "owner_role": "browser-host-owner",
+  "module_roots": ["BlazeX.Host.Browser"],
+  "manifest": "mix.exs",
+  "test_entrypoints": ["test"],
+  "dependencies": [],
+  "planned_dependencies": [],
+  "must_not_own": ["portable-component-logic", "renderer-semantics", "server-authorization"],
+  "forbidden_dependencies": ["phoenix", "plug", "live_view", "local_live_view", "blazex_phoenix"],
+  "public_api_state": "experimental-not-stable"
+}

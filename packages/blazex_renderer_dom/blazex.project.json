@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0.0",
+  "id": "blazex_renderer_dom",
+  "path": "packages/blazex_renderer_dom",
+  "kind": "elixir-package",
+  "activation_phase": "BH-01 Phase 1",
+  "status": "experimental-skeleton",
+  "owner_role": "dom-renderer-owner",
+  "module_roots": ["BlazeX.Renderer.DOM"],
+  "manifest": "mix.exs",
+  "test_entrypoints": ["test"],
+  "dependencies": [],
+  "planned_dependencies": [],
+  "must_not_own": ["portable-component-semantics", "server-authority", "liveview-patching"],
+  "forbidden_dependencies": ["phoenix", "plug", "live_view", "local_live_view", "blazex_phoenix", "blazex_renderer_dom_liveview"],
+  "public_api_state": "experimental-not-stable"
+}

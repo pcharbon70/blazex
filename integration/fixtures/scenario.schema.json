@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://blazex.dev/schemas/bh-01/scenario-1.0.0.json",
+  "title": "BlazeX BH-01 Integration Scenario",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "scenario_id", "status", "owner", "requirement_refs", "profiles", "preconditions", "steps", "expected_results", "prohibited_results", "evidence_types"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "scenario_id": {"type": "string", "pattern": "^BX-BH01-SCENARIO-[A-Z0-9.-]+$"},
+    "status": {"enum": ["planned", "ready", "executed", "passed", "failed", "blocked", "superseded", "invalidated"]},
+    "owner": {"type": "string", "minLength": 1},
+    "requirement_refs": {"type": "array", "minItems": 1, "items": {"type": "string"}, "uniqueItems": true},
+    "profiles": {"type": "array", "minItems": 1, "items": {"type": "string"}, "uniqueItems": true},
+    "preconditions": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "steps": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "expected_results": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "prohibited_results": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "evidence_types": {"type": "array", "minItems": 1, "items": {"type": "string"}, "uniqueItems": true}
+  }
+}

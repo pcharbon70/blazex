@@ -9,5 +9,6 @@ own transports and server facilities through separate adapters. It implements
 browser capabilities declared by `blazex_effects` without exposing Web API
 handles to portable components.
 
-Status: directory scaffold only; create the Mix project when its implementation
-milestone begins.
+Status: experimental BH-01 Mix skeleton. The project has no dependencies and
+contains no browser implementation; capability and lifecycle behavior remains
+unexecuted. Its module root is not a stable public API.

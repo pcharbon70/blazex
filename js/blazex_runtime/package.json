@@ -1,0 +1,13 @@
+{
+  "name": "@blazex/runtime-browser-experimental",
+  "version": "0.0.0-bh01",
+  "private": true,
+  "type": "module",
+  "packageManager": "npm@11.4.2",
+  "scripts": {
+    "build": "node --check src/index.js",
+    "test": "node --test test/boundary.test.js"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

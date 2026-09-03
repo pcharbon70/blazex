@@ -36,18 +36,18 @@ implementation milestones](../../20-notes/browser-host-implementation-milestones
   inquiries.
 - The eventual browser-stream completion gate.
 
-BH-00 is complete. BH-01 now has a detailed draft phase decomposition that must
-be reviewed and explicitly approved before project activation or dependency
-installation. Later browser milestones remain unplanned until their own phase
-decomposition is explicitly authorized. No implementation or completion claim
-follows from creating a plan.
+BH-00 is complete. The repository owner approved the BH-01 plan snapshot and
+Phase 1 is complete with nine dependency-free experimental boundaries plus
+governed evidence locations. Phase 2 dependency qualification is eligible but
+not authorized. Later browser milestones remain unplanned until their own phase
+decomposition is explicitly authorized.
 
 ## Index
 
 ### Subdirectories
 
 - [BH-00 — Product Boundary, Catalog, and Acceptance Contract](bh-00-product-boundary-catalog-and-acceptance-contract/README.md) — six-phase plan that freezes vocabulary, product scope, catalog dispositions, quality budgets, and acceptance traceability before BH-01 implementation begins.
-- [BH-01 — Reproducible Browser Feasibility Baseline](bh-01-reproducible-browser-feasibility-baseline/README.md) — need-driven draft plan for controlled activation, toolchain qualification, runtime/browser/behavior proofs, Phoenix trust boundaries, resilience, browser/mobile qualification, clean rebuilds, and the feasibility stop/go decision.
+- [BH-01 — Reproducible Browser Feasibility Baseline](bh-01-reproducible-browser-feasibility-baseline/README.md) — approved need-driven plan; Phase 1 activation is complete, while Phase 2 and all runtime/browser proofs remain unexecuted and unauthorized.
 
 ### Documents
 

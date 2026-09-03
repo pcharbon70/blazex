@@ -204,6 +204,10 @@ Before reporting archive work complete:
    reconciliation, reviews, findings, risks, release records, generated
    indexes, or BH-01 entry decisions change;
 10. run `git diff --check` from the project root; and
-11. inspect the complete change for stale paths and accidental rewrites.
+11. run `python3 validate_bh01_activation.py` and
+    `python3 -m unittest test_validate_bh01_activation.py` when BH-01
+    authorization, evidence governance, activated boundaries, fixture or
+    benchmark indexes, or Phase 1 evidence changes; and
+12. inspect the complete change for stale paths and accidental rewrites.
 
 Do not commit, push, publish, or open a pull request unless the user asks.

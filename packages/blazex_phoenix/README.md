@@ -10,5 +10,6 @@ and renderer contracts must not depend on this package. LiveView render-data and
 patch coupling belongs to `blazex_renderer_dom_liveview`; this package may
 coordinate that adapter but must not absorb the standalone DOM renderer.
 
-Status: directory scaffold only; create the Mix project when its implementation
-milestone begins.
+Status: experimental BH-01 server-adapter Mix skeleton. The project has no
+dependencies and contains no Phoenix implementation or authority-bearing
+command path. Its module root is not a stable public API.

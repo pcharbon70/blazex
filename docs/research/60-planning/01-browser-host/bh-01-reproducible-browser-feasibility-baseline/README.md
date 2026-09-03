@@ -17,7 +17,7 @@ aliases:
 
 ## Purpose
 
-This plan decomposes BH-01 into six ordered implementation phases that test
+This plan decomposes BH-01 into ten ordered implementation phases that test
 whether the selected Phoenix, LiveView, LocalLiveView, Popcorn, AtomVM,
 Elixir, Erlang, JavaScript, and browser stack is reproducible and suitable as
 the first BlazeX execution profile. It produces a stop/go feasibility baseline
@@ -32,11 +32,11 @@ integration tests and completion-evidence gate.
 
 ## Authorization status
 
-The plan is `draft-awaiting-review-and-explicit-approval`. Its creation does
-not authorize project initialization, dependency installation, browser
-execution, or implementation. Phase 1 may begin only after the repository
-owner explicitly approves this complete plan as the separate BH-01 plan
-required by decision `BX-BH01-ENTRY-0.1`.
+The repository owner approved the plan snapshot at revision `d70a965` and
+authorized Phase 1 implementation on 2026-09-03. Phase 1 is complete with a
+governed `go` result for repository activation. Phase 2 is eligible but remains
+`not-authorized`; dependency acquisition, browser execution, and later phase
+implementation require a separate repository-owner request.
 
 BH-00 remains the accepted product contract. BH-01 may produce feasibility
 evidence and may reject the candidate stack; it cannot weaken BH-00
@@ -75,7 +75,8 @@ support promotion, and release hardening belong to BH-02 or later milestones.
 
 ## Planned activation boundary
 
-No path in this table may be activated before explicit plan approval.
+Only the nine Phase 1 paths in this table are activated as dependency-free
+experimental skeletons. No activation implies runtime or product evidence.
 
 | Repository boundary | BH-01 responsibility | Must remain outside that boundary |
 | --- | --- | --- |
@@ -99,7 +100,7 @@ failure in the candidate browser stack.
 
 | Phase | Status | Delivery | Dependency |
 | --- | --- | --- | --- |
-| [1 — Authorization, Evidence Governance, and Repository Activation](phase-01-authorization-evidence-and-repository-activation.md) | planned — not authorized | Record explicit approval, preserve BH-00 truth, establish evidence/stop governance, and activate only the named repository slice. | Merged BH-00 baseline and explicit approval of this plan |
+| [1 — Authorization, Evidence Governance, and Repository Activation](phase-01-authorization-evidence-and-repository-activation.md) | complete — gate passed | Record explicit approval, preserve BH-00 truth, establish evidence/stop governance, and activate only the named repository slice. | Merged BH-00 baseline and explicit approval of this plan |
 | [2 — Toolchain and Dependency Qualification](phase-02-toolchain-and-dependency-qualification.md) | planned — not authorized | Resolve, pin, acquire, license, and verify every host, language, runtime, server, browser, and build input before runtime coding. | Phase 1 |
 | [3 — AtomVM/Popcorn Runtime Build and BEAM Packaging](phase-03-runtime-build-and-beam-packaging.md) | planned — not authorized | Build the pinned Wasm runtime, package a minimal BEAM fixture, probe required runtime semantics, and establish the first artifact manifest. | Phase 2 |
 | [4 — Browser Host Loader, Lifecycle, and Deployment](phase-04-browser-host-loader-lifecycle-and-deployment.md) | planned — not authorized | Implement manifest-driven loading, explicit browser bridges, prerequisite detection, lifecycle/failure behavior, and deployment contracts. | Phase 3 |
@@ -243,6 +244,7 @@ framework API.
 ### Documents
 
 - [Phase 1 — Authorization, Evidence Governance, and Repository Activation](phase-01-authorization-evidence-and-repository-activation.md)
+- [Phase 1 implementation evidence](phase-01-implementation-evidence.md)
 - [Phase 2 — Toolchain and Dependency Qualification](phase-02-toolchain-and-dependency-qualification.md)
 - [Phase 3 — AtomVM/Popcorn Runtime Build and BEAM Packaging](phase-03-runtime-build-and-beam-packaging.md)
 - [Phase 4 — Browser Host Loader, Lifecycle, and Deployment](phase-04-browser-host-loader-lifecycle-and-deployment.md)
