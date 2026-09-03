@@ -28,6 +28,9 @@ insufficient. Record source, creator, license, provenance, and use.
 - [BH-00 release](bh-00-release/README.md) — source-bound governance,
   reconciliation, multidisciplinary review, risk, release-index, and BH-01
   entry-decision artifacts.
+- [BH-01 feasibility baseline](bh-01-baseline/README.md) — explicit
+  authorization, inherited baseline ledger, evidence governance, repository
+  activation, and phase completion records for the browser feasibility work.
 - [Component catalog](component-catalog/README.md) — pinned upstream reference,
   raw extraction inputs, BlazeX catalog schema/data, and deterministic reports.
 - [Quality and acceptance](quality-acceptance/README.md) — versioned quality

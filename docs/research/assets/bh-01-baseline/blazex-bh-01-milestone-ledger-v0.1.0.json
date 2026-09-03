@@ -1,0 +1,153 @@
+{
+  "schema_version": "1.0.0",
+  "ledger_version": "0.1.0",
+  "ledger_id": "BX-BH01-MILESTONE-LEDGER-0.1",
+  "status": "activated-phase-1-unproven",
+  "authorization_ref": "BX-BH01-AUTHORIZATION-0.1",
+  "baseline_ref": "BX-BH00-BASELINE-0.1.0",
+  "entry_decision_ref": "BX-BH01-ENTRY-0.1",
+  "counts": {
+    "inputs": 8,
+    "proof_obligations": 10,
+    "risks": 8,
+    "stop_conditions": 5,
+    "prohibited_actions": 2,
+    "owner_assignments": 13
+  },
+  "inputs": [
+    {"id": "BX-BH01-INPUT-ARTIFACTS", "owner": "build-owner", "state": "required-unproven"},
+    {"id": "BX-BH01-INPUT-BEHAVIORS", "owner": "bh01-owner", "state": "required-unproven"},
+    {"id": "BX-BH01-INPUT-BROWSERS", "owner": "browser-profile-owner", "state": "required-unproven"},
+    {"id": "BX-BH01-INPUT-MEASUREMENTS", "owner": "quality-owner", "state": "required-unproven"},
+    {"id": "BX-BH01-INPUT-PRIVATE-API", "owner": "compatibility-owner", "state": "required-unproven"},
+    {"id": "BX-BH01-INPUT-PROFILE-SLICE", "owner": "browser-profile-owner", "state": "required-unproven"},
+    {"id": "BX-BH01-INPUT-STOP-CONDITIONS", "owner": "architecture-owner", "state": "required-unproven"},
+    {"id": "BX-BH01-INPUT-TOOLCHAIN", "owner": "bh01-owner", "state": "required-unproven"}
+  ],
+  "proof_obligations": [
+    {
+      "id": "BX-BH01-PROOF-ARTIFACT-ACCOUNTING",
+      "owner": "build-owner",
+      "state": "planned-unexecuted",
+      "stop_on_failure": true,
+      "budget_refs": ["BX-BUD-PAYLOAD-APPLICATION-COMPRESSED-KIB", "BX-BUD-PAYLOAD-RUNTIME-COMPRESSED-KIB"],
+      "acceptance_refs": ["BX-ACC-ENV-BH01-REQUIRED-RECORDS-REC-ARTIFACTS", "BX-ACC-ROADMAP-BH-01"]
+    },
+    {
+      "id": "BX-BH01-PROOF-AUTHENTICATED-COMMAND",
+      "owner": "server-adapter-owner",
+      "state": "planned-unexecuted",
+      "stop_on_failure": true,
+      "budget_refs": ["BX-BUD-INTERACTION-SERVER-ROUNDTRIP-MS"],
+      "acceptance_refs": ["BX-ACC-ENV-SECURITY-INVARIANTS-SEC-SERVER-REVALIDATION", "BX-ACC-ROADMAP-BH-01"]
+    },
+    {
+      "id": "BX-BH01-PROOF-BROWSER-FALLBACK",
+      "owner": "browser-host-owner",
+      "state": "planned-unexecuted",
+      "stop_on_failure": true,
+      "budget_refs": ["BX-BUD-STARTUP-COLD-DESKTOP-MS"],
+      "acceptance_refs": ["BX-ACC-ENV-PAPER-SCENARIOS-SCN-MISSING-CROSS-ORIGIN-ISOLATION", "BX-ACC-ROADMAP-BH-01"]
+    },
+    {
+      "id": "BX-BH01-PROOF-BUILD-REPRODUCIBILITY",
+      "owner": "bh01-owner",
+      "state": "planned-unexecuted",
+      "stop_on_failure": true,
+      "budget_refs": ["BX-BUD-BUILD-RELEASE-SECONDS"],
+      "acceptance_refs": ["BX-ACC-ENV-BH01-REQUIRED-RECORDS-REC-REBUILD", "BX-ACC-ROADMAP-BH-01"]
+    },
+    {
+      "id": "BX-BH01-PROOF-DOM-UPDATE",
+      "owner": "dom-renderer-owner",
+      "state": "planned-unexecuted",
+      "stop_on_failure": true,
+      "budget_refs": ["BX-BUD-INTERACTION-DOM-UPDATE-MS"],
+      "acceptance_refs": ["BX-ACC-ENV-RENDERING-MODES-MODE-BROWSER-LOCAL", "BX-ACC-ROADMAP-BH-01"]
+    },
+    {
+      "id": "BX-BH01-PROOF-FORM-EVENT",
+      "owner": "bh01-owner",
+      "state": "planned-unexecuted",
+      "stop_on_failure": true,
+      "budget_refs": ["BX-BUD-INTERACTION-LOCAL-EVENT-PAINT-MS"],
+      "acceptance_refs": ["BX-ACC-ENV-PAPER-SCENARIOS-SCN-PHOENIX-BROWSER-LOCAL", "BX-ACC-ROADMAP-BH-01"]
+    },
+    {
+      "id": "BX-BH01-PROOF-MOBILE-MEASUREMENT",
+      "owner": "quality-owner",
+      "state": "planned-unexecuted",
+      "stop_on_failure": true,
+      "budget_refs": ["BX-BUD-RESOURCE-MEMORY-GROWTH-MIB", "BX-BUD-STARTUP-COLD-MOBILE-MS"],
+      "acceptance_refs": ["BX-ACC-BUDGET-BX-BUD-STARTUP-COLD-MOBILE-MS", "BX-ACC-ENV-BROWSER-CONFIGURATIONS-BR-WEBKIT-MOBILE"]
+    },
+    {
+      "id": "BX-BH01-PROOF-NESTED-STATE",
+      "owner": "bh01-owner",
+      "state": "planned-unexecuted",
+      "stop_on_failure": true,
+      "budget_refs": ["BX-BUD-INTERACTION-LOCAL-EVENT-PAINT-MS"],
+      "acceptance_refs": ["BX-ACC-ENV-PROFILES-PROFILE-BROWSER-PHOENIX", "BX-ACC-ROADMAP-BH-01"]
+    },
+    {
+      "id": "BX-BH01-PROOF-RUNTIME-BOOT",
+      "owner": "runtime-owner",
+      "state": "planned-unexecuted",
+      "stop_on_failure": true,
+      "budget_refs": ["BX-BUD-PAYLOAD-RUNTIME-COMPRESSED-KIB", "BX-BUD-STARTUP-INSTANTIATE-MS"],
+      "acceptance_refs": ["BX-ACC-ENV-TOOLCHAIN-INPUTS-TC-POPCORN", "BX-ACC-ROADMAP-BH-01"]
+    },
+    {
+      "id": "BX-BH01-PROOF-TIMER-MESSAGE",
+      "owner": "runtime-owner",
+      "state": "planned-unexecuted",
+      "stop_on_failure": true,
+      "budget_refs": ["BX-BUD-RELIABILITY-PENDING-EFFECTS-COUNT", "BX-BUD-RESOURCE-CLEANUP-MS"],
+      "acceptance_refs": ["BX-ACC-BUDGET-BX-BUD-RESOURCE-CLEANUP-MS", "BX-ACC-ROADMAP-BH-01"]
+    }
+  ],
+  "risks": [
+    {"id": "BX-BH01-RISK-AUTHENTICATED-COMMAND", "owner": "server-adapter-owner", "status": "open-feasibility-risk"},
+    {"id": "BX-BH01-RISK-BROWSER-PREREQUISITES", "owner": "browser-host-owner", "status": "open-feasibility-risk"},
+    {"id": "BX-BH01-RISK-DEPENDENCY-ACCESS", "owner": "bh01-owner", "status": "open-feasibility-risk"},
+    {"id": "BX-BH01-RISK-MOBILE-PERFORMANCE", "owner": "quality-owner", "status": "open-feasibility-risk"},
+    {"id": "BX-BH01-RISK-PRIVATE-API-COUPLING", "owner": "liveview-adapter-owner", "status": "open-feasibility-risk"},
+    {"id": "BX-BH01-RISK-RUNTIME-SEMANTICS", "owner": "runtime-owner", "status": "open-feasibility-risk"},
+    {"id": "BX-BH01-RISK-TOOLCHAIN-REPRODUCIBILITY", "owner": "bh01-owner", "status": "open-feasibility-risk"},
+    {"id": "BX-BH01-RISK-WASM-ARTIFACT-ACCOUNTING", "owner": "build-owner", "status": "open-feasibility-risk"}
+  ],
+  "stop_conditions": [
+    {"id": "BX-BH01-STOP-REPRODUCIBILITY", "owner": "bh01-owner", "status": "binding", "statement": "Stop if the exact runtime and toolchain inputs cannot produce equivalent explainable artifacts on a clean machine."},
+    {"id": "BX-BH01-STOP-RUNTIME-SEMANTICS", "owner": "architecture-owner", "status": "binding", "statement": "Stop if required component semantics cannot execute without redefining the host-neutral component, renderer, capability, or trust contracts."},
+    {"id": "BX-BH01-STOP-ADAPTER-ISOLATION", "owner": "architecture-owner", "status": "binding", "statement": "Stop if Phoenix or private LiveView coupling cannot remain isolated from standalone DOM, Plug, core, and portable component packages."},
+    {"id": "BX-BH01-STOP-PRODUCT-VIABILITY", "owner": "quality-owner", "status": "binding", "statement": "Stop if representative mobile/browser performance is outside a product-viable range without a bounded mitigation."},
+    {"id": "BX-BH01-STOP-ARTIFACT-ACCOUNTING", "owner": "build-owner", "status": "binding", "statement": "Stop support or packaging claims when artifact origin, reachability, integrity, licensing, security, or payload cannot be explained."}
+  ],
+  "prohibited_actions": [
+    "Do not initialize Mix, Phoenix, JavaScript, Rust, or other implementation projects or install candidate dependencies until a detailed BH-01 phase plan is explicitly approved.",
+    "Do not claim supported browsers, a working runtime, implemented components, passed budgets, production security/accessibility, native compatibility, or release readiness from BH-00 acceptance."
+  ],
+  "owner_assignments": [
+    {"role": "architecture-owner", "identity": "pcharbon70", "phase_1_accountability": "active"},
+    {"role": "bh01-owner", "identity": "pcharbon70", "phase_1_accountability": "active"},
+    {"role": "browser-host-owner", "identity": "pcharbon70", "phase_1_accountability": "acting-until-delegated"},
+    {"role": "browser-profile-owner", "identity": "pcharbon70", "phase_1_accountability": "acting-until-delegated"},
+    {"role": "build-owner", "identity": "pcharbon70", "phase_1_accountability": "acting-until-delegated"},
+    {"role": "compatibility-owner", "identity": "pcharbon70", "phase_1_accountability": "acting-until-delegated"},
+    {"role": "dom-renderer-owner", "identity": "pcharbon70", "phase_1_accountability": "acting-until-delegated"},
+    {"role": "liveview-adapter-owner", "identity": "pcharbon70", "phase_1_accountability": "acting-until-delegated"},
+    {"role": "product-owner", "identity": "pcharbon70", "phase_1_accountability": "active"},
+    {"role": "quality-owner", "identity": "pcharbon70", "phase_1_accountability": "active"},
+    {"role": "runtime-owner", "identity": "pcharbon70", "phase_1_accountability": "acting-until-delegated"},
+    {"role": "security-owner", "identity": "pcharbon70", "phase_1_accountability": "active"},
+    {"role": "server-adapter-owner", "identity": "pcharbon70", "phase_1_accountability": "acting-until-delegated"}
+  ],
+  "evidence_boundary": {
+    "implementation_state": "repository-activation-only",
+    "runtime_state": "unexecuted",
+    "browser_state": "untested",
+    "support_state": "unsupported",
+    "budget_state": "proposed-unmeasured",
+    "framework_api_state": "unstable-not-defined"
+  }
+}

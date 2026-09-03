@@ -106,6 +106,7 @@ python3 generate_acceptance_registry.py --check
 python3 validate_bh00_governance.py
 python3 -m unittest test_validate_bh00_governance.py
 python3 generate_bh00_release.py --check
+python3 validate_bh01_activation.py
 ```
 
 The validator checks metadata, placeholders, filenames, local links,
@@ -131,5 +132,6 @@ identifiers.
 - [`validate_component_catalog.py`](validate_component_catalog.py) — deterministic BH-00 reference and component-catalog checks
 - [`validate_component_classification.py`](validate_component_classification.py) — deterministic BH-00 product/package/capability/portability classification checks
 - [`validate_bh00_governance.py`](validate_bh00_governance.py) — deterministic BH-00 source-binding, reconciliation, review, release, and readiness checks
+- [`validate_bh01_activation.py`](validate_bh01_activation.py) — fail-closed BH-01 approval, inherited-baseline, milestone-ledger, evidence-governance, and repository-activation checks
 - [`validate_quality_acceptance.py`](validate_quality_acceptance.py) — deterministic BH-00 quality-budget and acceptance-traceability checks
 - [`validate_archive.py`](validate_archive.py) — deterministic archive checks

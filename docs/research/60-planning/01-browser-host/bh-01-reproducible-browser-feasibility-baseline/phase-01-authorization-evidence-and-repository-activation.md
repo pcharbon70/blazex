@@ -22,26 +22,26 @@ Back to milestone: [README](README.md)
   evidence and stop authority, and activate only the repository boundaries
   needed for the feasibility baseline without installing dependencies yet.
 
-  - [ ] 1.1 Section - Record authority and inherited contract truth.
+  - [x] 1.1 Section - Record authority and inherited contract truth.
 
     Implementation must start from an explicitly approved plan and the exact
     accepted BH-00 baseline rather than inferring permission from scaffolding.
 
-    - [ ] 1.1.1 Task - Record the separate BH-01 plan approval.
+    - [x] 1.1.1 Task - Record the separate BH-01 plan approval.
 
       The approval record must identify what was reviewed, who may begin, and
       which conditions remain binding.
 
-      - [ ] 1.1.1.1 Subtask - Record repository-owner approval date, approved plan revision, accountable milestone owner, specialist roles, conditions, and authorization scope.
-      - [ ] 1.1.1.2 Subtask - Verify work starts from synchronized `main` on a dedicated branch and that approval does not authorize BH-02, product support, or stable framework APIs.
+      - [x] 1.1.1.1 Subtask - Record repository-owner approval date, approved plan revision, accountable milestone owner, specialist roles, conditions, and authorization scope.
+      - [x] 1.1.1.2 Subtask - Verify work starts from synchronized `main` on a dedicated branch and that approval does not authorize BH-02, product support, or stable framework APIs.
 
-    - [ ] 1.1.2 Task - Snapshot the inherited BH-00 baseline.
+    - [x] 1.1.2 Task - Snapshot the inherited BH-00 baseline.
 
       All later evidence must cite the immutable product contract it tests.
 
-      - [ ] 1.1.2.1 Subtask - Record `BX-BH00-BASELINE-0.1.0`, `BX-BH01-ENTRY-0.1`, source-manifest hash, governance status, and zero accepted exceptions.
-      - [ ] 1.1.2.2 Subtask - Import all eight input groups, ten proof obligations, eight risks, five stop conditions, prohibited actions, owner roles, and linked acceptance/budget IDs into a milestone ledger.
-      - [ ] 1.1.2.3 Subtask - Fail activation when a bound BH-00 source, generated view, main revision, approval record, or entry condition is stale or incomplete.
+      - [x] 1.1.2.1 Subtask - Record `BX-BH00-BASELINE-0.1.0`, `BX-BH01-ENTRY-0.1`, source-manifest hash, governance status, and zero accepted exceptions.
+      - [x] 1.1.2.2 Subtask - Import all eight input groups, ten proof obligations, eight risks, five stop conditions, prohibited actions, owner roles, and linked acceptance/budget IDs into a milestone ledger.
+      - [x] 1.1.2.3 Subtask - Fail activation when a bound BH-00 source, generated view, main revision, approval record, or entry condition is stale or incomplete.
 
   - [ ] 1.2 Section - Establish evidence, finding, and stop/go governance.
 

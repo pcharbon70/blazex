@@ -1,0 +1,77 @@
+{
+  "schema_version": "1.0.0",
+  "authorization_version": "0.1.0",
+  "authorization_id": "BX-BH01-AUTHORIZATION-0.1",
+  "status": "approved-phase-1-only",
+  "approved_at": "2026-09-03",
+  "approved_by": {
+    "identity": "pcharbon70",
+    "name": "Pascal Charbonneau",
+    "role": "repository-owner",
+    "approval_record": "Repository-owner request in the BlazeX Codex task to implement the next BH-01 phase section by section with one commit per section and one merged pull request."
+  },
+  "approved_plan": {
+    "path": "docs/research/60-planning/01-browser-host/bh-01-reproducible-browser-feasibility-baseline/README.md",
+    "revision": "d70a965f089651d9709dfb5c915d830426505888",
+    "sha256": "165c3fa6c279e67f4f1a444727a151cb7cd761e90056265c73a29d41199c38b3"
+  },
+  "activation": {
+    "base_branch": "main",
+    "base_revision": "cb100beed244292de096468027a99b28d4119800",
+    "base_remote_revision": "cb100beed244292de096468027a99b28d4119800",
+    "working_branch": "codex/bh-01-phase-01-activation",
+    "main_synchronized_before_branch": true,
+    "phase": "BH-01 Phase 1",
+    "accountable_owner": "bh01-owner"
+  },
+  "inherited_baseline": {
+    "release_id": "BX-BH00-BASELINE-0.1.0",
+    "entry_decision_id": "BX-BH01-ENTRY-0.1",
+    "governance_contract_id": "BX-BH00-GOVERNANCE-0.1",
+    "governance_status": "accepted-conditionally-ready",
+    "source_manifest_sha256": "40ff2ba2304f5d8e1e247f3ec938b783c0f723bff5bda23d361eadf89ab540c0",
+    "accepted_exceptions": 0,
+    "governance_path": "docs/research/assets/bh-00-release/blazex-bh-00-governance-v0.1.0.json",
+    "governance_sha256": "485f72ee83f1bf2fb2af53a625824f45a84ff1e2113706320bdcf01ed51b3f99",
+    "release_index_path": "docs/research/assets/bh-00-release/blazex-bh-00-release-index-v0-1-0.md",
+    "release_index_sha256": "fac2732f51c98829c61e90001cae390f19fe23fbbbbac6c8d6c6fb5f33630157",
+    "entry_manifest_path": "docs/research/assets/bh-00-release/blazex-bh-01-entry-manifest-v0-1-0.md",
+    "entry_manifest_sha256": "f216aa7e4b65ddf679a4a0c87ad44020d4bad7bfef7fd5365eb2e6419a4659d0"
+  },
+  "authorized_scope": [
+    "Record approval and immutable BH-00 inheritance.",
+    "Establish evidence, finding, risk, exception, and stop/go governance.",
+    "Initialize only the nine Phase 1 repository boundaries without acquiring dependencies.",
+    "Add deterministic validation, negative tests, and Phase 1 completion evidence."
+  ],
+  "binding_conditions": [
+    "Preserve every BH-00 stop condition, evidence boundary, package responsibility, and unsupported state.",
+    "Complete sections in order and commit once per completed section.",
+    "Acquire no candidate dependency and create no dependency lock in Phase 1.",
+    "Stop on an incomplete approval, stale bound source, stale generated view, incomplete ledger, unowned blocker, or unauthorized boundary change.",
+    "Require reviewed reapproval before changing the runtime substrate, server stack, activation boundary, proof method, browser matrix, quality threshold, or stop condition."
+  ],
+  "not_authorized": [
+    "BH-01 Phase 2 dependency qualification or dependency acquisition",
+    "BH-02 semantic-kernel, effects, UI-tree, renderer-contract, or headless activation",
+    "stable or public framework APIs",
+    "production component-family implementation",
+    "browser, runtime, accessibility, security, performance, native-host, or release support claims"
+  ],
+  "specialist_roles": [
+    "architecture-owner",
+    "bh01-owner",
+    "browser-host-owner",
+    "browser-profile-owner",
+    "build-owner",
+    "compatibility-owner",
+    "dom-renderer-owner",
+    "liveview-adapter-owner",
+    "product-owner",
+    "quality-owner",
+    "runtime-owner",
+    "security-owner",
+    "server-adapter-owner"
+  ],
+  "supersedes": null
+}
