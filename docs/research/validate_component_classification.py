@@ -1,0 +1,547 @@
+#!/usr/bin/env python3
+"""Validate the versioned BlazeX component product classification."""
+
+from __future__ import annotations
+
+import hashlib
+import json
+import re
+import sys
+from collections import Counter
+from pathlib import Path
+from typing import Any
+
+from jsonschema import Draft202012Validator
+from jsonschema.exceptions import SchemaError
+
+
+ROOT = Path(__file__).resolve().parent
+ASSET_DIR = ROOT / "assets" / "component-catalog"
+SCHEMA_PATH = ASSET_DIR / "blazex-component-classification.schema.json"
+CLASSIFICATION_PATH = ASSET_DIR / "blazex-component-classification-v0.1.0.json"
+SOURCE_CATALOG_PATH = ASSET_DIR / "blazex-component-catalog-v0.1.0.json"
+GENERATED_PATH = ASSET_DIR / "blazex-component-classification-v0-1-0-generated.md"
+CAPABILITY_REGISTRY_PATH = ASSET_DIR / "blazex-capability-registry-v0.1.0.json"
+
+TIER_RANK = {"F0": 0, "F1": 1, "F2": 2, "F3": 3, "F4": 4, "post-1.0": 5, "not-applicable": 6}
+PACKAGE_DEPENDENCIES = {
+    "blazex_ui_tree": {"blazex_ui_tree"},
+    "blazex_ui": {"blazex_ui_tree", "blazex_ui"},
+    "blazex_surfaces": {"blazex_ui_tree", "blazex_ui", "blazex_surfaces"},
+    "blazex_forms": {"blazex_ui_tree", "blazex_ui", "blazex_surfaces", "blazex_forms"},
+    "blazex_data": {"blazex_ui_tree", "blazex_ui", "blazex_surfaces", "blazex_forms", "blazex_data"},
+    "blazex_charts": {"blazex_ui_tree", "blazex_ui", "blazex_surfaces", "blazex_forms", "blazex_data", "blazex_charts"},
+}
+OPTIONAL_PACKAGES = {"blazex_forms", "blazex_surfaces", "blazex_data", "blazex_charts"}
+EXPECTED_PAYLOAD = {
+    "blazex_ui_tree": "core",
+    "blazex_ui": "core",
+    "blazex_forms": "optional",
+    "blazex_surfaces": "optional",
+    "blazex_data": "runtime-heavy",
+    "blazex_charts": "asset-heavy",
+}
+FORBIDDEN_PORTABLE_TOKENS = re.compile(
+    r"(?:\bdom\b|javascript|js-handle|\bcss\b|selector|phoenix|liveview|socket|native-widget|filesystem|(?:^|[-.])script(?:$|[-.]))",
+    re.IGNORECASE,
+)
+EXPECTED_CAPABILITIES = {
+    "BX-CAP-ACCESSIBILITY",
+    "BX-CAP-CLIPBOARD",
+    "BX-CAP-FILES",
+    "BX-CAP-FOCUS",
+    "BX-CAP-KEYBOARD",
+    "BX-CAP-MEASUREMENT",
+    "BX-CAP-NETWORK",
+    "BX-CAP-NOTIFICATIONS",
+    "BX-CAP-POINTER",
+    "BX-CAP-STORAGE",
+    "BX-CAP-SURFACE",
+    "BX-CAP-SYSTEM-THEME",
+    "BX-CAP-TIME",
+    "BX-CAP-WINDOW",
+}
+EXPECTED_FINAL_COUNTS = {
+    "dispositions": {
+        "adapt-concept": 28,
+        "build-natively": 43,
+        "renderer-specific-extension": 1,
+        "replace-with-platform-pattern": 11,
+    },
+    "tiers": {"F0": 13, "F1": 26, "F2": 21, "F3": 18, "F4": 5},
+    "packages": {
+        "blazex_charts": 1,
+        "blazex_data": 6,
+        "blazex_forms": 18,
+        "blazex_surfaces": 9,
+        "blazex_ui": 47,
+        "blazex_ui_tree": 2,
+    },
+    "remote": {"local-only": 73, "optional-remote": 7, "phoenix-enhanced": 3},
+    "fallbacks": {
+        "alternative-interaction": 30,
+        "explicit-unavailable": 2,
+        "in-app-substitute": 14,
+        "nonvisual-representation": 1,
+        "omission": 1,
+        "server-round-trip": 5,
+        "static-content": 30,
+    },
+    "portability": {
+        "custom-scene": 1,
+        "portable-semantic": 24,
+        "portable-with-capabilities": 57,
+        "renderer-extension": 1,
+    },
+    "native": {
+        "custom-drawn": 2,
+        "native-composite": 58,
+        "native-preferred": 15,
+        "not-applicable": 8,
+    },
+    "visual_profiles": {
+        "blazex-material": 2,
+        "hybrid": 58,
+        "not-applicable": 8,
+        "platform-native": 15,
+    },
+}
+
+
+class ClassificationValidationError(ValueError):
+    """Raised when the classification violates its schema or coherence policy."""
+
+
+def load_json(path: Path) -> dict[str, Any]:
+    try:
+        value = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, json.JSONDecodeError) as error:
+        raise ClassificationValidationError(f"cannot read valid JSON from {path}: {error}") from error
+    if not isinstance(value, dict):
+        raise ClassificationValidationError(f"{path} must contain a JSON object")
+    return value
+
+
+def validate_schema(schema: dict[str, Any]) -> Draft202012Validator:
+    try:
+        Draft202012Validator.check_schema(schema)
+    except SchemaError as error:
+        raise ClassificationValidationError(f"classification schema is invalid: {error.message}") from error
+    if schema.get("$id") != "https://blazex.dev/schemas/component-classification/1.0.0":
+        raise ClassificationValidationError("classification schema ID must remain version 1.0.0")
+    return Draft202012Validator(schema)
+
+
+def validate_document_schema(document: dict[str, Any], schema: dict[str, Any]) -> None:
+    validator = validate_schema(schema)
+    errors = sorted(validator.iter_errors(document), key=lambda error: [str(part) for part in error.absolute_path])
+    if errors:
+        error = errors[0]
+        path = ".".join(str(part) for part in error.absolute_path) or "<root>"
+        raise ClassificationValidationError(f"classification schema violation at {path}: {error.message}")
+
+
+def validate_capability_registry(registry: dict[str, Any]) -> set[str]:
+    expected_header = {
+        "schema_version": "1.0.0",
+        "registry_version": "0.1.0",
+        "registry_id": "BX-CAPABILITY-REGISTRY-CORE",
+        "status": "reviewed",
+        "contract_owner": "blazex_effects",
+    }
+    for key, value in expected_header.items():
+        if registry.get(key) != value:
+            raise ClassificationValidationError(
+                f"capability registry {key} must be {value!r}, found {registry.get(key)!r}"
+            )
+    records = registry.get("capabilities")
+    if not isinstance(records, list):
+        raise ClassificationValidationError("capability registry records must be a list")
+    ids = [record.get("id") for record in records if isinstance(record, dict)]
+    if ids != sorted(ids) or len(ids) != len(set(ids)):
+        raise ClassificationValidationError("capability registry IDs must be sorted and unique")
+    if set(ids) != EXPECTED_CAPABILITIES:
+        raise ClassificationValidationError("capability registry must contain the fourteen governed groups")
+    required_fields = {"id", "name", "purpose", "lifecycle", "security", "unsupported_behavior"}
+    for record in records:
+        if set(record) != required_fields or any(not isinstance(record[field], str) or not record[field] for field in required_fields):
+            raise ClassificationValidationError(f"capability registry record is incomplete: {record.get('id')}")
+    boundary = registry.get("provider_boundary")
+    if not isinstance(boundary, str) or "never receive" not in boundary:
+        raise ClassificationValidationError("capability registry must preserve the opaque provider boundary")
+    return set(ids)
+
+
+def _validate_graph(records: list[dict[str, Any]]) -> None:
+    by_id = {record["family_id"]: record for record in records}
+    visiting: set[str] = set()
+    visited: set[str] = set()
+
+    def visit(family_id: str) -> None:
+        if family_id in visited:
+            return
+        if family_id in visiting:
+            raise ClassificationValidationError(f"classification prerequisite cycle includes {family_id}")
+        visiting.add(family_id)
+        record = by_id[family_id]
+        for prerequisite_id in record["product"]["prerequisites"]:
+            if prerequisite_id not in by_id:
+                raise ClassificationValidationError(
+                    f"family {family_id} prerequisite is absent: {prerequisite_id}"
+                )
+            prerequisite = by_id[prerequisite_id]
+            if TIER_RANK[prerequisite["product"]["delivery_tier"]] > TIER_RANK[record["product"]["delivery_tier"]]:
+                raise ClassificationValidationError(
+                    f"family {family_id} depends on later-tier {prerequisite_id}"
+                )
+            package = record["product"]["target_package"]
+            prerequisite_package = prerequisite["product"]["target_package"]
+            if prerequisite_package not in PACKAGE_DEPENDENCIES[package]:
+                raise ClassificationValidationError(
+                    f"family {family_id} package {package} cannot depend on {prerequisite_package}"
+                )
+            visit(prerequisite_id)
+        visiting.remove(family_id)
+        visited.add(family_id)
+
+    for family_id in by_id:
+        visit(family_id)
+
+
+def _is_unassigned_capability(record: dict[str, Any]) -> bool:
+    capability = record["capability"]
+    remote = record["remote"]
+    fallback = record["fallback"]
+    return (
+        capability["required"] == []
+        and capability["optional"] == []
+        and capability["renderer_semantics"] == []
+        and capability["effect_ownership"] == "unassigned"
+        and capability["resource_lifecycle"] == "unassigned"
+        and capability["cancellation"] == "unassigned"
+        and capability["timeout"] == "unassigned"
+        and capability["cleanup"] == "unassigned"
+        and capability["portable_requirement_tokens"] == []
+        and remote == {"authority": "unassigned", "rationale": None}
+        and fallback["primary"] == "unassigned"
+        and fallback["rationale"] is None
+        and set(fallback["conditions"].values()) == {"unassigned"}
+    )
+
+
+def _is_unassigned_portability(record: dict[str, Any]) -> bool:
+    portability = record["portability"]
+    return (
+        portability["status"] == "unproven"
+        and portability["rationale"] is None
+        and all(not values for values in portability["semantic_contract"].values())
+        and portability["renderer_extensions"] == []
+        and portability["native_strategy"] == "unproven"
+        and portability["visual_profile"] == "unproven"
+        and portability["visual_profile_rationale"] is None
+        and set(portability["future_backend_gate"].values()) == {"unassigned"}
+    )
+
+
+def _validate_portability(record: dict[str, Any]) -> None:
+    family_id = record["family_id"]
+    portability = record["portability"]
+    status = portability["status"]
+    if status == "unproven" or portability["rationale"] is None:
+        raise ClassificationValidationError(f"family {family_id} has unproven portability")
+    semantic = portability["semantic_contract"]
+    for required_dimension in ("nodes", "accessibility", "layout"):
+        if not semantic[required_dimension]:
+            raise ClassificationValidationError(
+                f"family {family_id} portability lacks {required_dimension} semantics"
+            )
+    for dimension, tokens in semantic.items():
+        for token in tokens:
+            if FORBIDDEN_PORTABLE_TOKENS.search(token):
+                raise ClassificationValidationError(
+                    f"family {family_id} {dimension} semantics leak backend token: {token}"
+                )
+    specialized = (
+        set(record["capability"]["required"])
+        | set(record["capability"]["optional"])
+    ) - {"BX-CAP-ACCESSIBILITY"}
+    if status == "portable-semantic" and specialized:
+        raise ClassificationValidationError(
+            f"family {family_id} is portable-semantic but requires specialized capabilities"
+        )
+    if status == "portable-with-capabilities" and not specialized:
+        raise ClassificationValidationError(
+            f"family {family_id} is portable-with-capabilities without a specialized capability"
+        )
+    if status == "renderer-extension":
+        if (
+            record["product"]["disposition"] != "renderer-specific-extension"
+            or not portability["renderer_extensions"]
+            or portability["native_strategy"] != "not-applicable"
+        ):
+            raise ClassificationValidationError(
+                f"family {family_id} renderer-extension classification is incoherent"
+            )
+    elif record["product"]["disposition"] == "renderer-specific-extension":
+        raise ClassificationValidationError(
+            f"family {family_id} product renderer extension lacks matching portability"
+        )
+    if status == "custom-scene":
+        if "scene-drawing" not in portability["renderer_extensions"]:
+            raise ClassificationValidationError(
+                f"family {family_id} custom scene lacks scene-drawing extension"
+            )
+        if record["fallback"]["conditions"]["assistive-technology"] != "nonvisual-representation":
+            raise ClassificationValidationError(
+                f"family {family_id} custom scene lacks nonvisual assistive fallback"
+            )
+    if portability["native_strategy"] == "unproven":
+        raise ClassificationValidationError(f"family {family_id} has unproven native strategy")
+    if portability["visual_profile"] == "unproven" or portability["visual_profile_rationale"] is None:
+        raise ClassificationValidationError(f"family {family_id} has incomplete visual-profile classification")
+    gate = portability["future_backend_gate"]
+    if "unassigned" in gate.values():
+        raise ClassificationValidationError(f"family {family_id} has incomplete future-backend gate")
+    if status == "renderer-extension":
+        if gate["native_spike"] != "not-applicable":
+            raise ClassificationValidationError(
+                f"family {family_id} renderer extension cannot imply cross-backend native proof"
+            )
+    elif gate["native_spike"] != "required-before-portable-claim":
+        raise ClassificationValidationError(
+            f"family {family_id} headless/DOM evidence cannot replace the native-spike gate"
+        )
+    for field in ("headless", "dom", "backend_accessibility", "fallback", "documentation"):
+        if gate[field] != "required":
+            raise ClassificationValidationError(
+                f"family {family_id} future backend gate must require {field} evidence"
+            )
+
+
+def _contains_value(value: Any, forbidden: set[str]) -> bool:
+    if isinstance(value, dict):
+        return any(_contains_value(item, forbidden) for item in value.values())
+    if isinstance(value, list):
+        return any(_contains_value(item, forbidden) for item in value)
+    return isinstance(value, str) and value in forbidden
+
+
+def validate_classification(
+    document: dict[str, Any], source_catalog: dict[str, Any], schema: dict[str, Any]
+) -> dict[str, Any]:
+    validate_document_schema(document, schema)
+    capability_ids = validate_capability_registry(load_json(CAPABILITY_REGISTRY_PATH))
+    source_bytes = SOURCE_CATALOG_PATH.read_bytes()
+    source_hash = hashlib.sha256(source_bytes).hexdigest()
+    if document["source_catalog_sha256"] != source_hash:
+        raise ClassificationValidationError(
+            f"source catalog hash mismatch: expected {source_hash}, found {document['source_catalog_sha256']}"
+        )
+    source_ids = [record["id"] for record in source_catalog["families"]]
+    family_ids = [record["family_id"] for record in document["families"]]
+    if family_ids != sorted(family_ids) or len(family_ids) != len(set(family_ids)):
+        raise ClassificationValidationError("family classifications must have sorted unique IDs")
+    if set(family_ids) != set(source_ids):
+        raise ClassificationValidationError(
+            f"classification/source family mismatch; missing={sorted(set(source_ids)-set(family_ids))} extra={sorted(set(family_ids)-set(source_ids))}"
+        )
+    source_exception_ids = [record["id"] for record in source_catalog["exceptions"]]
+    exception_ids = [record["exception_id"] for record in document["exceptions"]]
+    if exception_ids != sorted(exception_ids) or len(exception_ids) != len(set(exception_ids)):
+        raise ClassificationValidationError("exception classifications must have sorted unique IDs")
+    if set(exception_ids) != set(source_exception_ids):
+        raise ClassificationValidationError("classification/source exception coverage mismatch")
+    if document["owner_roles"] != sorted(document["owner_roles"]):
+        raise ClassificationValidationError("classification owner roles must be sorted")
+
+    public_identities: list[str] = []
+    for record in document["families"]:
+        family_id = record["family_id"]
+        product = record["product"]
+        if product["disposition"] in {"defer", "omit"}:
+            if product["delivery_tier"] != "not-applicable" or product["target_package"] != "none":
+                raise ClassificationValidationError(f"deferred/omitted family {family_id} cannot be tiered or packaged")
+        else:
+            if product["delivery_tier"] not in {"F0", "F1", "F2", "F3", "F4"}:
+                raise ClassificationValidationError(f"planned family {family_id} needs an F0-F4 tier")
+            package = product["target_package"]
+            if package not in PACKAGE_DEPENDENCIES:
+                raise ClassificationValidationError(f"planned family {family_id} has forbidden package {package}")
+            if product["optional_package"] != (package in OPTIONAL_PACKAGES):
+                raise ClassificationValidationError(f"family {family_id} optional-package flag contradicts {package}")
+            if product["payload_class"] != EXPECTED_PAYLOAD[package]:
+                raise ClassificationValidationError(f"family {family_id} payload class contradicts {package}")
+            public_identity = product["intended_public_identity"]
+            if not isinstance(public_identity, str) or not public_identity.startswith("BlazeX."):
+                raise ClassificationValidationError(f"family {family_id} needs a BlazeX public identity")
+            if re.search(r"Mud|Blazor|Razor|\.NET|NuGet", public_identity, re.IGNORECASE):
+                raise ClassificationValidationError(f"family {family_id} public identity implies compatibility")
+            public_identities.append(public_identity)
+        if record["implementation_state"] != "unknown" or record["implementation_evidence"]:
+            raise ClassificationValidationError(f"family {family_id} has a premature implementation/evidence claim")
+    if len(public_identities) != len(set(public_identities)):
+        raise ClassificationValidationError("classification contains duplicate intended public identities")
+
+    _validate_graph(document["families"])
+
+    stage = document["stage"]
+    for record in document["families"]:
+        if stage == "section-4.1" and not _is_unassigned_capability(record):
+            raise ClassificationValidationError(
+                f"section-4.1 family {record['family_id']} must leave capability/remote/fallback unassigned"
+            )
+        if stage in {"section-4.1", "section-4.2"} and not _is_unassigned_portability(record):
+            raise ClassificationValidationError(
+                f"{stage} family {record['family_id']} must leave portability unproven"
+            )
+        if stage in {"section-4.3", "complete"}:
+            _validate_portability(record)
+        if stage != "section-4.1":
+            family_id = record["family_id"]
+            capability = record["capability"]
+            required = set(capability["required"])
+            optional = set(capability["optional"])
+            if not required or "BX-CAP-ACCESSIBILITY" not in required:
+                raise ClassificationValidationError(
+                    f"family {family_id} must require the accessibility contract"
+                )
+            if required & optional:
+                raise ClassificationValidationError(
+                    f"family {family_id} has required/optional capability overlap"
+                )
+            unknown_capabilities = sorted((required | optional) - capability_ids)
+            if unknown_capabilities:
+                raise ClassificationValidationError(
+                    f"family {family_id} cites unknown capabilities: {unknown_capabilities}"
+                )
+            assigned_values = (
+                capability["effect_ownership"],
+                capability["resource_lifecycle"],
+                capability["cancellation"],
+                capability["timeout"],
+                capability["cleanup"],
+            )
+            if "unassigned" in assigned_values or not capability["renderer_semantics"] or not capability["portable_requirement_tokens"]:
+                raise ClassificationValidationError(
+                    f"family {family_id} has incomplete capability lifecycle metadata"
+                )
+            managed = capability["resource_lifecycle"] != "none"
+            if managed and (
+                capability["cancellation"] != "required"
+                or capability["cleanup"] != "idempotent-required"
+                or capability["timeout"] not in {"required", "host-policy"}
+            ):
+                raise ClassificationValidationError(
+                    f"family {family_id} managed capability resource lacks cancellation/timeout/cleanup"
+                )
+            if record["remote"]["authority"] == "unassigned" or record["remote"]["rationale"] is None:
+                raise ClassificationValidationError(
+                    f"family {family_id} has incomplete remote-authority metadata"
+                )
+            fallback = record["fallback"]
+            if fallback["primary"] == "unassigned" or fallback["rationale"] is None or "unassigned" in fallback["conditions"].values():
+                raise ClassificationValidationError(
+                    f"family {family_id} has incomplete fallback metadata"
+                )
+            if required and fallback["conditions"]["missing-capability"] == "not-required":
+                raise ClassificationValidationError(
+                    f"family {family_id} requires capabilities without a missing-capability fallback"
+                )
+            if record["remote"]["authority"] != "local-only" and fallback["conditions"]["no-network"] == "not-required":
+                raise ClassificationValidationError(
+                    f"family {family_id} has remote behavior without a no-network fallback"
+                )
+        for token in record["capability"]["portable_requirement_tokens"]:
+            if FORBIDDEN_PORTABLE_TOKENS.search(token):
+                raise ClassificationValidationError(
+                    f"family {record['family_id']} portable requirement leaks backend token: {token}"
+                )
+
+    summary = {
+        "stage": stage,
+        "families": len(document["families"]),
+        "exceptions": len(document["exceptions"]),
+        "dispositions": dict(sorted(Counter(record["product"]["disposition"] for record in document["families"]).items())),
+        "tiers": dict(sorted(Counter(record["product"]["delivery_tier"] for record in document["families"]).items())),
+        "packages": dict(sorted(Counter(record["product"]["target_package"] for record in document["families"]).items())),
+        "remote": dict(sorted(Counter(record["remote"]["authority"] for record in document["families"]).items())),
+        "fallbacks": dict(sorted(Counter(record["fallback"]["primary"] for record in document["families"]).items())),
+        "required_capability_references": sum(len(record["capability"]["required"]) for record in document["families"]),
+        "optional_capability_references": sum(len(record["capability"]["optional"]) for record in document["families"]),
+        "portability": dict(sorted(Counter(record["portability"]["status"] for record in document["families"]).items())),
+        "native": dict(sorted(Counter(record["portability"]["native_strategy"] for record in document["families"]).items())),
+        "visual_profiles": dict(sorted(Counter(record["portability"]["visual_profile"] for record in document["families"]).items())),
+    }
+    if stage == "complete":
+        if document["status"] != "locked":
+            raise ClassificationValidationError("complete classification must be locked")
+        if _contains_value(document, {"unassigned", "unproven", "unresolved"}):
+            raise ClassificationValidationError(
+                "complete classification contains an unassigned, unproven, or unresolved value"
+            )
+        for key, expected in EXPECTED_FINAL_COUNTS.items():
+            if summary[key] != expected:
+                raise ClassificationValidationError(
+                    f"locked classification {key} counts changed: expected {expected}, found {summary[key]}"
+                )
+        if summary["required_capability_references"] != 204 or summary["optional_capability_references"] != 77:
+            raise ClassificationValidationError("locked capability-reference counts changed")
+        if sum(len(record["product"]["prerequisites"]) for record in document["families"]) != 39:
+            raise ClassificationValidationError("locked prerequisite-edge count changed")
+        if any(record["classification_state"] != "accepted" for record in document["families"]):
+            raise ClassificationValidationError("all final family classifications must be accepted")
+        if any(record["implementation_state"] != "unknown" or record["implementation_evidence"] for record in document["families"]):
+            raise ClassificationValidationError("complete classification contains implementation/evidence claims")
+        exception_counts = dict(sorted(Counter(record["product_disposition"] for record in document["exceptions"]).items()))
+        expected_exception_counts = {
+            "no-entry-confirmed": 4,
+            "omit-from-product": 3,
+            "retain-as-infrastructure": 4,
+            "retain-as-service-evidence": 1,
+        }
+        if exception_counts != expected_exception_counts:
+            raise ClassificationValidationError("locked exception-outcome counts changed")
+    return summary
+
+
+def validate_generated_view(
+    document: dict[str, Any], source_catalog: dict[str, Any], generated_text: str
+) -> None:
+    from generate_component_classification import render_classification
+
+    if generated_text != render_classification(document, source_catalog):
+        raise ClassificationValidationError("generated component-classification view is stale")
+
+
+def validate_repository() -> dict[str, Any]:
+    schema = load_json(SCHEMA_PATH)
+    document = load_json(CLASSIFICATION_PATH)
+    source_catalog = load_json(SOURCE_CATALOG_PATH)
+    summary = validate_classification(document, source_catalog, schema)
+    try:
+        generated = GENERATED_PATH.read_text(encoding="utf-8")
+    except (OSError, UnicodeError) as error:
+        raise ClassificationValidationError(f"cannot read generated classification: {error}") from error
+    validate_generated_view(document, source_catalog, generated)
+    return summary
+
+
+def main() -> int:
+    try:
+        summary = validate_repository()
+    except (ClassificationValidationError, OSError) as error:
+        print(f"Component classification validation failed: {error}", file=sys.stderr)
+        return 1
+    print(
+        "Component classification validation passed: "
+        f"stage {summary['stage']}; {summary['families']} families; {summary['exceptions']} exceptions; "
+        f"dispositions {summary['dispositions']}; tiers {summary['tiers']}; packages {summary['packages']}; "
+        f"remote {summary['remote']}; fallbacks {summary['fallbacks']}; capability references "
+        f"{summary['required_capability_references']} required/{summary['optional_capability_references']} optional; "
+        f"portability {summary['portability']}; native {summary['native']}; visual profiles {summary['visual_profiles']}."
+    )
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

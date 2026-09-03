@@ -97,6 +97,9 @@ python3 -m unittest test_validate_browser_product_envelope.py
 python3 validate_component_catalog.py
 python3 -m unittest test_validate_component_catalog.py
 python3 generate_component_catalog.py --check
+python3 validate_component_classification.py
+python3 -m unittest test_validate_component_classification.py
+python3 generate_component_classification.py --check
 ```
 
 The validator checks metadata, placeholders, filenames, local links,
@@ -108,10 +111,13 @@ identifiers.
 - [`AGENTS.md`](AGENTS.md) — research, authoring, and maintenance instructions
 - [`frontmatter.schema.json`](frontmatter.schema.json) — metadata schema
 - [`generate_component_catalog.py`](generate_component_catalog.py) — deterministic Markdown view generation from the canonical component catalog
+- [`generate_component_classification.py`](generate_component_classification.py) — deterministic joined view generation from the locked catalog and Phase 4 classification
 - [`requirements-validation.txt`](requirements-validation.txt) — validator dependencies
 - [`test_validate_browser_product_envelope.py`](test_validate_browser_product_envelope.py) — focused browser-envelope validator tests
 - [`test_validate_component_catalog.py`](test_validate_component_catalog.py) — focused component-catalog validator tests
+- [`test_validate_component_classification.py`](test_validate_component_classification.py) — focused Phase 4 classification validator tests
 - [`test_validate_archive.py`](test_validate_archive.py) — focused validator tests
 - [`validate_browser_product_envelope.py`](validate_browser_product_envelope.py) — deterministic BH-00 browser-envelope checks
 - [`validate_component_catalog.py`](validate_component_catalog.py) — deterministic BH-00 reference and component-catalog checks
+- [`validate_component_classification.py`](validate_component_classification.py) — deterministic BH-00 product/package/capability/portability classification checks
 - [`validate_archive.py`](validate_archive.py) — deterministic archive checks
