@@ -31,6 +31,7 @@ Source summaries belong in `30-sources`; unresolved workbenches belong in
 
 ### Documents
 
+- [BlazeX BH-00 governance and reconciliation policy](blazex-bh-00-governance-reconciliation-policy.md) — defines source-bound contract closure, reconciliation order, independent axes, package/profile replaceability, conflict handling, compatibility/support boundaries, and staged evidence semantics.
 - [BlazeX acceptance traceability and evidence policy](blazex-acceptance-traceability-and-evidence-policy.md) — defines source-bound requirement and condition IDs, status combinations, evidence classes/freshness, ownership, budget/profile coverage, findings, waivers, and supersession.
 - [BlazeX cross-cutting quality gate policy](blazex-cross-cutting-quality-gate-policy.md) — defines stable accessibility, security, compatibility, and provenance requirements, evidence classes, severity, manual-review, fallback, and non-waivable exception rules.
 - [BlazeX quality budget and measurement policy](blazex-quality-budget-and-measurement-policy.md) — defines proposed payload, startup, interaction, resource, build, resilience, environment, statistical, exception, and evidence boundaries without claiming measurements.

@@ -1,0 +1,104 @@
+#!/usr/bin/env python3
+"""Tests for the BlazeX BH-00 governance validator."""
+
+from __future__ import annotations
+
+import copy
+import unittest
+
+import validate_bh00_governance as validator
+
+
+class GovernanceValidationTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.schema = validator.load_json(validator.SCHEMA_PATH)
+        cls.document = validator.load_json(validator.CONTRACT_PATH)
+
+    def validate(self, document: dict) -> dict[str, int]:
+        return validator.validate_contract(document, self.schema)
+
+    def test_repository_contract_passes(self) -> None:
+        counts = self.validate(copy.deepcopy(self.document))
+        self.assertEqual(counts["packages"], 18)
+        self.assertEqual(counts["reconciliation_checks"], 17)
+
+    def test_rejects_stale_source_hash(self) -> None:
+        document = copy.deepcopy(self.document)
+        document["source_bindings"][0]["sha256"] = "0" * 64
+        with self.assertRaisesRegex(validator.GovernanceValidationError, "source binding is stale"):
+            self.validate(document)
+
+    def test_rejects_missing_adr_binding(self) -> None:
+        document = copy.deepcopy(self.document)
+        document["source_bindings"] = [record for record in document["source_bindings"] if record["id"] != "BX-BH00-SOURCE-ADR-0008"]
+        with self.assertRaisesRegex(validator.GovernanceValidationError, "eight accepted ADRs"):
+            self.validate(document)
+
+    def test_rejects_missing_architecture_axis(self) -> None:
+        document = copy.deepcopy(self.document)
+        document["architecture_axes"].pop()
+        with self.assertRaisesRegex(validator.GovernanceValidationError, "schema violation|six independent"):
+            self.validate(document)
+
+    def test_rejects_missing_package_boundary(self) -> None:
+        document = copy.deepcopy(self.document)
+        document["package_boundaries"].pop()
+        with self.assertRaisesRegex(validator.GovernanceValidationError, "schema violation|eighteen package"):
+            self.validate(document)
+
+    def test_rejects_missing_plug_exclusion(self) -> None:
+        document = copy.deepcopy(self.document)
+        plug = next(record for record in document["profile_boundaries"] if record["id"] == "PROFILE-BROWSER-PLUG")
+        plug["forbidden_dependencies"].remove("phoenix")
+        with self.assertRaisesRegex(validator.GovernanceValidationError, "Plug profile transitive exclusions"):
+            self.validate(document)
+
+    def test_rejects_unresolved_reconciliation_conflict(self) -> None:
+        document = copy.deepcopy(self.document)
+        document["reconciliation_checks"][0]["conflicts"] = ["conflict"]
+        with self.assertRaisesRegex(validator.GovernanceValidationError, "schema violation|unresolved conflict"):
+            self.validate(document)
+
+    def test_rejects_false_runtime_implementation(self) -> None:
+        document = copy.deepcopy(self.document)
+        document["evidence_boundary"]["runtime_implementation"] = "implemented"
+        with self.assertRaisesRegex(validator.GovernanceValidationError, "schema violation|overstates"):
+            self.validate(document)
+
+    def test_rejects_false_browser_support(self) -> None:
+        document = copy.deepcopy(self.document)
+        document["evidence_boundary"]["browser_support"] = "supported"
+        with self.assertRaisesRegex(validator.GovernanceValidationError, "schema violation|overstates"):
+            self.validate(document)
+
+    def test_rejects_premature_review(self) -> None:
+        document = copy.deepcopy(self.document)
+        document["reviews"] = [{
+            "id": "BX-BH00-REVIEW-TEST",
+            "discipline": "product",
+            "reviewer_role": "test-reviewer",
+            "independence": "A deliberately invalid premature review record for validator testing only.",
+            "scope": ["scope-a", "scope-b"],
+            "outcome": "accepted",
+            "finding_ids": [],
+            "evidence_id": "BX-BH00-EVIDENCE-TEST",
+        }]
+        with self.assertRaisesRegex(validator.GovernanceValidationError, "cannot pre-empt"):
+            self.validate(document)
+
+    def test_rejects_premature_release(self) -> None:
+        document = copy.deepcopy(self.document)
+        document["release"] = {}
+        with self.assertRaisesRegex(validator.GovernanceValidationError, "schema violation"):
+            self.validate(document)
+
+    def test_rejects_accepted_exception(self) -> None:
+        document = copy.deepcopy(self.document)
+        document["exceptions"] = ["exception"]
+        with self.assertRaisesRegex(validator.GovernanceValidationError, "schema violation|no accepted exception"):
+            self.validate(document)
+
+
+if __name__ == "__main__":
+    unittest.main()

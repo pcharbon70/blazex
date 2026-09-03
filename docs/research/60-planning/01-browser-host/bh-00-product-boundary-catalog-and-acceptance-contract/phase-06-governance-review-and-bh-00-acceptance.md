@@ -22,28 +22,28 @@ Back to milestone: [README](README.md)
   independent product and architecture review, publish the versioned contract,
   and make a truthful entry decision for BH-01 without performing BH-01 work.
 
-  - [ ] 6.1 Section - Reconcile architecture, product, and catalog truth.
+  - [x] 6.1 Section - Reconcile architecture, product, and catalog truth.
 
     Compare all durable records as one system so terminology, ownership,
     support, catalog, budget, and acceptance views cannot disagree silently.
 
-    - [ ] 6.1.1 Task - Reconcile vocabulary, decisions, and support claims.
+    - [x] 6.1.1 Task - Reconcile vocabulary, decisions, and support claims.
 
       The final product contract must use one meaning for every architecture and
       rendering term and preserve all accepted package and profile boundaries.
 
-      - [ ] 6.1.1.1 Subtask - Compare glossary, architecture decisions, root and package indexes, profiles, browser support envelope, rendering modes, trust boundaries, and roadmap language for conflicting or stale terms.
-      - [ ] 6.1.1.2 Subtask - Verify standalone DOM, LiveView DOM, Phoenix, Plug, headless, capability, runtime, host, renderer, and experiment responsibilities remain independently replaceable.
-      - [ ] 6.1.1.3 Subtask - Resolve every conflict through an updated authoritative record and explicit supersession rather than editing generated views or erasing prior rationale.
+      - [x] 6.1.1.1 Subtask - Compare glossary, architecture decisions, root and package indexes, profiles, browser support envelope, rendering modes, trust boundaries, and roadmap language for conflicting or stale terms.
+      - [x] 6.1.1.2 Subtask - Verify standalone DOM, LiveView DOM, Phoenix, Plug, headless, capability, runtime, host, renderer, and experiment responsibilities remain independently replaceable.
+      - [x] 6.1.1.3 Subtask - Resolve every conflict through an updated authoritative record and explicit supersession rather than editing generated views or erasing prior rationale.
 
-    - [ ] 6.1.2 Task - Reconcile catalog, budgets, and acceptance coverage.
+    - [x] 6.1.2 Task - Reconcile catalog, budgets, and acceptance coverage.
 
       Every product family and quality claim must connect to one coherent set of
       classifications, owners, observable results, and later evidence gates.
 
-      - [ ] 6.1.2.1 Subtask - Re-run complete catalog coverage for source identity, disposition, tier, package, capabilities, remote needs, fallback, portability, native strategy, visual profile, rationale, and evidence status.
-      - [ ] 6.1.2.2 Subtask - Re-run quality-budget and acceptance coverage for every roadmap outcome, support claim, catalog family, profile, package boundary, cross-cutting obligation, and non-goal.
-      - [ ] 6.1.2.3 Subtask - Reconcile summary counts, generated views, machine-readable sources, indexes, maps, links, and milestone status so no derivative report is stale.
+      - [x] 6.1.2.1 Subtask - Re-run complete catalog coverage for source identity, disposition, tier, package, capabilities, remote needs, fallback, portability, native strategy, visual profile, rationale, and evidence status.
+      - [x] 6.1.2.2 Subtask - Re-run quality-budget and acceptance coverage for every roadmap outcome, support claim, catalog family, profile, package boundary, cross-cutting obligation, and non-goal.
+      - [x] 6.1.2.3 Subtask - Reconcile summary counts, generated views, machine-readable sources, indexes, maps, links, and milestone status so no derivative report is stale.
 
   - [ ] 6.2 Section - Conduct independent review and resolve blockers.
 

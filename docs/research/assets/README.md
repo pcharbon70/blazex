@@ -25,6 +25,9 @@ insufficient. Record source, creator, license, provenance, and use.
 
 ### Subdirectories
 
+- [BH-00 release](bh-00-release/README.md) — source-bound governance,
+  reconciliation, multidisciplinary review, risk, release-index, and BH-01
+  entry-decision artifacts.
 - [Component catalog](component-catalog/README.md) — pinned upstream reference,
   raw extraction inputs, BlazeX catalog schema/data, and deterministic reports.
 - [Quality and acceptance](quality-acceptance/README.md) — versioned quality
