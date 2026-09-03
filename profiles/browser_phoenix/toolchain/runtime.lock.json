@@ -1,0 +1,162 @@
+{
+  "schema_version": "1.0.0",
+  "qualification_cut": "2026-09-03",
+  "candidate_status": "pinned_unbuilt",
+  "sources": [
+    {
+      "id": "popcorn-hex",
+      "name": "popcorn",
+      "version": "0.3.3",
+      "origin": "https://repo.hex.pm/tarballs/popcorn-0.3.3.tar",
+      "sha256": "356084a017b3b6e37ad3c947313f7da9031eee083e77d03e1ba1f26b55e04835",
+      "license": "Apache-2.0",
+      "notice": "retain LICENSE and attribution",
+      "reachability": ["build", "runtime"],
+      "owner": "runtime-build"
+    },
+    {
+      "id": "popcorn-source",
+      "name": "software-mansion/popcorn",
+      "version": "0.3.3",
+      "repository": "https://github.com/software-mansion/popcorn.git",
+      "tag": "v0.3.3",
+      "commit": "bcb675badf61e428b2c8466f3fbd2bcb587b2d5d",
+      "origin": "https://codeload.github.com/software-mansion/popcorn/tar.gz/refs/tags/v0.3.3",
+      "sha256": "22f8a23fe8fd1679d0387175aeb03ac4468b7680c31c899920380cf8056d2a28",
+      "submodules": [],
+      "patches": "popcorn-2/elixir/patches and popcorn/patches at the pinned commit",
+      "license": "Apache-2.0",
+      "notice": "retain LICENSE and source notices",
+      "reachability": ["build", "runtime"],
+      "owner": "runtime-build"
+    },
+    {
+      "id": "fissionvm-source",
+      "name": "software-mansion-labs/FissionVM",
+      "version": "0.7.0-beta.0-dev",
+      "repository": "https://github.com/software-mansion-labs/FissionVM.git",
+      "qualified_branch": "swm",
+      "commit": "6c3208c7b3dbc7dacc35a19f8de1fa80b358ac73",
+      "origin": "https://codeload.github.com/software-mansion-labs/FissionVM/tar.gz/6c3208c7b3dbc7dacc35a19f8de1fa80b358ac73",
+      "sha256": "dcf9b3357c8463faa9178b639487d0b4f88050d948c550eaa2cedf4e73d9e33e",
+      "submodules": [],
+      "fork_relationship": "independent repository derived from AtomVM; GitHub does not record a fork parent and the qualified commit is absent from atomvm/AtomVM",
+      "licenses": ["Apache-2.0", "LGPL-2.1-or-later"],
+      "distribution_selection": "Apache-2.0",
+      "notice": "retain LICENSE, LICENSES, REUSE metadata, and file-level notices",
+      "reachability": ["build", "runtime"],
+      "owner": "runtime-build"
+    },
+    {
+      "id": "mbedtls-source",
+      "name": "Mbed-TLS/mbedtls",
+      "version": "3.6.3.1",
+      "repository": "https://github.com/Mbed-TLS/mbedtls.git",
+      "tag": "v3.6.3.1",
+      "tag_object": "b129d8c69e39c1d3c73118345380c29cbde0e21e",
+      "commit": "6fb5120fde4ab889bea402f5ab230c720b0a3b9a",
+      "origin": "https://codeload.github.com/Mbed-TLS/mbedtls/tar.gz/refs/tags/v3.6.3.1",
+      "sha256": "5344d16a64932b9956e2c9422fc5925ce480d570732f4379226888fffc19ed00",
+      "license": "Apache-2.0",
+      "notice": "retain LICENSE and notices",
+      "reachability": ["build", "runtime"],
+      "owner": "runtime-build"
+    },
+    {
+      "id": "emsdk-source",
+      "name": "emscripten-core/emsdk",
+      "version": "4.0.8",
+      "repository": "https://github.com/emscripten-core/emsdk.git",
+      "tag": "4.0.8",
+      "commit": "419021fa040428bc69ef1559b325addb8e10211f",
+      "origin": "https://codeload.github.com/emscripten-core/emsdk/tar.gz/refs/tags/4.0.8",
+      "sha256": "0762712fd336ca0a8bf0c65a5093e41fea96a7cd2953fa986557be41713199a5",
+      "container": "docker.io/emscripten/emsdk@sha256:92c97951b9a6835cb5da9592e9d95226f67e09ecd01a541d817a5b4801f235a4",
+      "license": "MIT",
+      "notice": "retain Emscripten, LLVM, Binaryen, and bundled-tool notices",
+      "reachability": ["build"],
+      "owner": "runtime-build"
+    }
+  ],
+  "packaged_runtime_assets": [
+    {
+      "path": "priv/static/AtomVM.wasm",
+      "source_package": "local_live_view-0.1.0",
+      "sha256": "55658601a27822079eaa8280e1082a7fda1f85436966e56636bb54fb3bcaf03c",
+      "bytes": 4234209,
+      "provenance_status": "source_commit_not_embedded",
+      "owner": "runtime-build"
+    },
+    {
+      "path": "priv/static/AtomVM.mjs",
+      "source_package": "local_live_view-0.1.0",
+      "sha256": "5562f7bca73575cc965d2e8f36bec19ba75b56fb85ff7277713af3ecfb08e409",
+      "bytes": 304708,
+      "provenance_status": "source_commit_not_embedded",
+      "owner": "runtime-build"
+    },
+    {
+      "path": "priv/static/iframe.mjs",
+      "source_package": "local_live_view-0.1.0",
+      "sha256": "e3b881ca30ab2bc1f01b1ff6457912090efc0a5b158bfa83a233dea13ca26233",
+      "bytes": 7265,
+      "provenance_status": "package_hash_only",
+      "owner": "browser-bridge"
+    }
+  ],
+  "build_contract": {
+    "target": "wasm32-unknown-emscripten",
+    "environment": "web",
+    "mode": "release-wasm",
+    "generator": "Ninja 1.12.1",
+    "cmake": "3.22.1",
+    "jobs": 4,
+    "source_argument": "/inputs/fissionvm",
+    "output_argument": "/outputs/runtime",
+    "path_prefixes": ["/opt/ninja", "/emsdk/upstream/bin", "/emsdk/upstream/emscripten"],
+    "cmake_options": {
+      "AVM_BUILD_RUNTIME_ONLY": "1",
+      "AVM_EMSCRIPTEN_ENV": "web",
+      "CMAKE_BUILD_TYPE": "Release",
+      "FETCHCONTENT_FULLY_DISCONNECTED": "ON",
+      "FETCHCONTENT_SOURCE_DIR_MBEDTLS": "/inputs/mbedtls"
+    },
+    "network_during_configure_or_build": false,
+    "expected_outputs": ["AtomVM.wasm", "AtomVM.mjs", "AtomVM.wasm.gz", "AtomVM.mjs.gz"]
+  },
+  "wasm_requirements": {
+    "abi": "emscripten-js-web",
+    "component_model": false,
+    "wasi": false,
+    "shared_memory": true,
+    "imported_memory_pages_min": 256,
+    "imported_memory_pages_max": 256,
+    "atomics": true,
+    "threads": true,
+    "cross_origin_isolation_required": true,
+    "packaged_asset_build_mode_observed": "debug-with-dwarf",
+    "packaged_asset_sections": ["TYPE", "IMPORT", "FUNCTION", "TABLE", "GLOBAL", "EXPORT", "START", "ELEM", "DATACOUNT", "CODE", "DATA", "name", ".debug_loc", ".debug_abbrev", ".debug_info", ".debug_ranges", ".debug_str", ".debug_line", ".debug_aranges"]
+  },
+  "forbidden_defaults": [
+    {
+      "id": "mutable-fissionvm-branch",
+      "observed": "https://github.com/software-mansion-labs/FissionVM.git#swm",
+      "reason": "branch can move",
+      "disposition": "override_with_fissionvm_commit_and_local_source"
+    },
+    {
+      "id": "insecure-mbedtls-fetch",
+      "observed": "http://github.com/mbed-TLS/mbedtls.git at tag v3.6.3.1",
+      "reason": "HTTP origin and tag-only identity allow an implicit configure-time fetch",
+      "disposition": "preacquire_verified_source_and_set_fetchcontent_fully_disconnected"
+    },
+    {
+      "id": "implicit-ninja",
+      "observed": "host PATH",
+      "reason": "the Emscripten image does not include Ninja",
+      "disposition": "mount_sha256_verified_ninja_1.12.1"
+    }
+  ],
+  "manual_steps": [],
+  "private_credentials_required": false
+}

@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "qualification_cut": "2026-09-03",
+  "environment": {
+    "image": "docker.io/hexpm/elixir@sha256:8d03cfb52e3fa3f5d83d749942b7c45c966dda48a7c4ba4f069390379b59fc39",
+    "image_config": "sha256:a2386c21edd5c612b4ed6e2731daba806177dba55baf977ee456c6e194f60d9f",
+    "otp": "26.0.2",
+    "elixir": "1.17.3",
+    "mix": "1.17.3",
+    "hex": "2.5.1",
+    "rebar3": "3.24.0",
+    "node": "26.8.1",
+    "npm": "11.19.0"
+  },
+  "successful_replays": [
+    {
+      "id": "hex-clean-network",
+      "result": "pass",
+      "network": true,
+      "workspace": "fresh temporary copy with deps and _build removed",
+      "cache": "empty isolated MIX_HOME and HEX_HOME",
+      "command": "mix deps.get --check-locked",
+      "duration_seconds": 2,
+      "package_count": 34,
+      "lock_before_sha256": "3a510b25251ad87bf1c4bb4d62c6e42c718fcd885a776ca0301fad6e71d0ca86",
+      "lock_after_sha256": "3a510b25251ad87bf1c4bb4d62c6e42c718fcd885a776ca0301fad6e71d0ca86"
+    },
+    {
+      "id": "hex-offline-cache",
+      "result": "pass",
+      "network": false,
+      "workspace": "second fresh temporary copy with deps and _build removed",
+      "cache": "cache produced by hex-clean-network with HEX_OFFLINE=1",
+      "command": "mix deps.get --check-locked",
+      "duration_seconds": 1,
+      "package_count": 34,
+      "graph_comparison": "byte-identical mix deps.tree --format plain",
+      "lock_before_sha256": "3a510b25251ad87bf1c4bb4d62c6e42c718fcd885a776ca0301fad6e71d0ca86",
+      "lock_after_sha256": "3a510b25251ad87bf1c4bb4d62c6e42c718fcd885a776ca0301fad6e71d0ca86"
+    },
+    {
+      "id": "npm-clean-network",
+      "result": "pass",
+      "network": true,
+      "workspace": "fresh temporary copy without node_modules",
+      "cache": "empty isolated npm cache",
+      "command": "npm ci --ignore-scripts --no-audit --no-fund; node node_modules/esbuild/install.js",
+      "duration_seconds": 1.1,
+      "package_count": 3,
+      "lock_before_sha256": "0ccbfd5ac1486cf1cedb54f27c9890e091f38aac3d6bff046553eff55f1f47de",
+      "lock_after_sha256": "0ccbfd5ac1486cf1cedb54f27c9890e091f38aac3d6bff046553eff55f1f47de"
+    },
+    {
+      "id": "npm-offline-cache",
+      "result": "pass",
+      "network": false,
+      "workspace": "second fresh temporary copy without node_modules",
+      "cache": "cache produced by npm-clean-network",
+      "command": "npm ci --offline --ignore-scripts --no-audit --no-fund; node node_modules/esbuild/install.js",
+      "duration_seconds": 0.224,
+      "package_count": 3,
+      "lock_before_sha256": "0ccbfd5ac1486cf1cedb54f27c9890e091f38aac3d6bff046553eff55f1f47de",
+      "lock_after_sha256": "0ccbfd5ac1486cf1cedb54f27c9890e091f38aac3d6bff046553eff55f1f47de"
+    }
+  ],
+  "source_replays": [
+    {"id": "popcorn-source", "result": "pass", "seconds": 0.953088, "bytes": 5168767, "sha256": "22f8a23fe8fd1679d0387175aeb03ac4468b7680c31c899920380cf8056d2a28"},
+    {"id": "fissionvm-source", "result": "pass", "seconds": 0.497384, "bytes": 2075046, "sha256": "dcf9b3357c8463faa9178b639487d0b4f88050d948c550eaa2cedf4e73d9e33e"},
+    {"id": "mbedtls-source", "result": "pass", "seconds": 1.379849, "bytes": 6368054, "sha256": "5344d16a64932b9956e2c9422fc5925ce480d570732f4379226888fffc19ed00"},
+    {"id": "emsdk-source", "result": "pass", "seconds": 0.192630, "bytes": 199003, "sha256": "0762712fd336ca0a8bf0c65a5093e41fea96a7cd2953fa986557be41713199a5"}
+  ],
+  "independent_clean_comparison": {
+    "result": "pass",
+    "first_environment": "pinned BEAM container with empty mix-home-clean/hex-home-clean plus exact Node with empty npm-cache",
+    "second_environment": "new pinned BEAM container with empty mix-home-second/hex-home-second plus exact Node with independent empty npm-cache-second",
+    "hex": {
+      "second_duration_seconds": 2,
+      "lock_sha256": "3a510b25251ad87bf1c4bb4d62c6e42c718fcd885a776ca0301fad6e71d0ca86",
+      "graph_comparison": "byte-identical mix deps.tree --format plain"
+    },
+    "npm": {
+      "second_duration_seconds": 0.954,
+      "lock_sha256": "0ccbfd5ac1486cf1cedb54f27c9890e091f38aac3d6bff046553eff55f1f47de",
+      "installed_identities": ["@esbuild/linux-x64 0.28.2", "esbuild 0.28.2", "playwright-core 1.62.1"]
+    },
+    "explainable_variance": ["registry latency", "cache population duration", "host scheduling"],
+    "unexplained_variance": []
+  },
+  "binary_input_checks": [
+    {"id": "beam-image", "result": "pass", "identity": "sha256:a2386c21edd5c612b4ed6e2731daba806177dba55baf977ee456c6e194f60d9f"},
+    {"id": "wasm-image", "result": "pass", "identity": "sha256:2a003481ef771a04cc1a7b5c4be03db0b3cb76405aaddac0d27629a5aac322c2"},
+    {"id": "hex", "result": "pass", "sha256": "2eadc51d9300a134db10859cfce41b4754d44f65bd843ebe359e87e3476c6e2b"},
+    {"id": "rebar3", "result": "pass", "sha256": "d2d31cfb98904b8e4917300a75f870de12cb5167cd6214d1043e973a56668a54"},
+    {"id": "node", "result": "pass", "sha256": "3e301118d7df53d563b7e96c1617545f26e2f76f9724be668d6cab65c15dda5d"},
+    {"id": "chrome-for-testing", "result": "pass", "sha256": "a16d36890636bd72251133b27f05825f7f9269c2425b3408fa3a76e10dccd8f1"}
+  ],
+  "failure_replays": [
+    {"id": "empty-cache-offline", "expected": "reject", "observed": "reject", "evidence": "network-disabled Hex run reported nxdomain and unknown locked package"},
+    {"id": "hash-mismatch", "expected": "reject", "observed": "reject", "evidence": "acquisition validator negative test"},
+    {"id": "floating-or-moved-ref", "expected": "reject", "observed": "reject", "evidence": "runtime validator floating-commit negative test"},
+    {"id": "missing-or-unavailable-binary", "expected": "reject", "observed": "reject", "evidence": "environment validator missing-tool negative test"},
+    {"id": "unrecorded-registry-or-private-auth", "expected": "reject", "observed": "reject", "evidence": "acquisition policy validator negative test"},
+    {"id": "revoked-or-missing-ca", "expected": "reject", "observed": "reject", "evidence": "acquisition policy requires pinned CA roots and TLS verification"},
+    {"id": "unapproved-lifecycle-script", "expected": "reject", "observed": "reject", "evidence": "npm installs with ignore-scripts and validator limits the explicit post-step to esbuild 0.28.2"},
+    {"id": "lock-mutation", "expected": "reject", "observed": "reject", "evidence": "before/after lock comparison and stale-lock negative tests"}
+  ],
+  "platform_dependencies": [
+    {"id": "apple-webkit-managed-device", "vendored": false, "policy": "fingerprint every run and reject versions outside browser.lock.json support policy"},
+    {"id": "android-chrome-managed-device", "vendored": false, "policy": "fingerprint browser, WebView and device every run; reject unexplained drift"}
+  ],
+  "manual_steps": [],
+  "private_credentials_used": false
+}

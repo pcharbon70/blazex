@@ -5,7 +5,7 @@ defmodule BlazeXRendererDOM.MixProject do
     [
       app: :blazex_renderer_dom,
       version: "0.0.0-bh01",
-      elixir: ">= 1.18.0",
+      elixir: "== 1.17.3",
       deps: deps()
     ]
   end

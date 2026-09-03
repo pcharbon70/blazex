@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "candidate_status": "pinned_uncompiled",
+  "profile": "profiles/browser_phoenix",
+  "resolver": {
+    "canonical_elixir": "1.17.3",
+    "canonical_otp": "26.0.2",
+    "canonical_mix": "1.17.3",
+    "registry": "https://repo.hex.pm",
+    "lockfile": "profiles/browser_phoenix/mix.lock",
+    "policy": "The committed lock is authoritative; resolution and compilation must run in the environment.lock.json BEAM image with no unlocked update."
+  },
+  "roots": [
+    {"name": "phoenix", "requirement": "== 1.8.13", "owner": "profiles/browser_phoenix"},
+    {"name": "phoenix_live_view", "requirement": "== 1.2.11", "owner": "packages/blazex_renderer_dom_liveview"},
+    {"name": "local_live_view", "requirement": "== 0.1.0", "owner": "packages/blazex_renderer_dom_liveview"},
+    {"name": "bandit", "requirement": "== 1.12.5", "owner": "profiles/browser_phoenix"},
+    {"name": "igniter", "requirement": "== 0.7.9", "owner": "profiles/browser_phoenix", "runtime": false, "override": true}
+  ],
+  "packages": [
+    ["bandit", "1.12.5", "c5684ca062fa407cac115aec3256383f3e2ec9fdced7904d59cf5a7bb7ed6181", "MIT"],
+    ["decimal", "3.1.1", "c5f25f2ced74a0587d03e6023f595db8e924c9d3922c8c8ffd9edfc4498cf1f6", "Apache-2.0"],
+    ["ecto", "3.14.2", "25d60b8c816a07d19d85b80bdf60978bd8b102209dda198d768cd7c6745339a6", "Apache-2.0"],
+    ["file_system", "1.1.1", "7a15ff97dfe526aeefb090a7a9d3d03aa907e100e262a0f8f7746b78f8f87a5d", "Apache-2.0"],
+    ["finch", "0.23.0", "80e58d3f936f57e3fdf404f83a3642897ae6d9fb642934e46da4d8fe761b99d5", "MIT"],
+    ["glob_ex", "0.1.12", "2e2fac83f113514434c7eaf267b4c38af2f91766f1cab2c5db7053b7fc1ee0bb", "MIT"],
+    ["hpax", "1.0.4", "afc7cb142ebcc2d01ce7816190b98ce5dd49e799111b24249f3443d730f377ca", "Apache-2.0"],
+    ["igniter", "0.7.9", "123513d09f3af149db851aad8492b5b49f861d2c466a72031b2a0cbd9f45526f", "MIT"],
+    ["jason", "1.4.5", "b0c823996102bcd0239b3c2444eb00409b72f6a140c1950bc8b457d836b30684", "Apache-2.0"],
+    ["local_live_view", "0.1.0", "3a9906601265f50b197b71bba8baf82484102a358170b58710a0e8bf982ef714", "Apache-2.0"],
+    ["mime", "2.0.7", "6171188e399ee16023ffc5b76ce445eb6d9672e2e241d2df6050f3c771e80ccd", "Apache-2.0"],
+    ["mint", "1.9.3", "5f7c9342480c069dbbc4eeac3490303c9e01870ff01a7f1d29b6107054fc1e74", "Apache-2.0"],
+    ["nimble_options", "1.1.1", "821b2470ca9442c4b6984882fe9bb0389371b8ddec4d45a9504f00a66f650b44", "Apache-2.0"],
+    ["nimble_pool", "1.1.0", "af2e4e6b34197db81f7aad230c1118eac993acc0dae6bc83bac0126d4ae0813a", "Apache-2.0"],
+    ["owl", "0.13.1", "351e768af8f2edc575cdaab1a5a2f6d6381be591758a026c701c703145508a0c", "Apache-2.0"],
+    ["phoenix", "1.8.13", "ad14e24d10e5a52d5f80429053bbe3a5d124311a2868fceb0a01a2e859c44539", "MIT"],
+    ["phoenix_ecto", "4.7.0", "1d75011e4254cb4ddf823e81823a9629559a1be93b4321a6a5f11a5306fbf4cc", "MIT"],
+    ["phoenix_html", "4.3.0", "3eaa290a78bab0f075f791a46a981bbe769d94bc776869f4f3063a14f30497ad", "MIT"],
+    ["phoenix_live_view", "1.2.11", "c4087267cbd4dc4ed7ac36512a97830af8e9c857ca7cb22557f8640fc5f9d306", "MIT"],
+    ["phoenix_pubsub", "2.3.0", "eec7be6e9cf02e2551d389b558402d6c637cd3973796326e7ba4bb03c6b2e91d", "MIT"],
+    ["phoenix_template", "1.0.4", "2c0c81f0e5c6753faf5cca2f229c9709919aba34fab866d3bc05060c9c444206", "MIT"],
+    ["plug", "1.20.3", "be266aee1b8536ef6409d58cf39a3121319f0ec47cfa1b24024485aa0e76ad76", "Apache-2.0"],
+    ["plug_crypto", "2.2.0", "83a95744ab1c75876542b6fab135fcc176280e0f301a111c1f757fddcec95d2c", "Apache-2.0"],
+    ["popcorn", "0.3.3", "356084a017b3b6e37ad3c947313f7da9031eee083e77d03e1ba1f26b55e04835", "Apache-2.0"],
+    ["req", "0.7.4", "4b192d63253e8dcc6221ef992ea9ebef7d3555166e8423aa5b553e86bc3c69a2", "Apache-2.0"],
+    ["rewrite", "1.3.0", "d111ac7ff3a58a802ef4f193bbd1831e00a9c57b33276e5068e8390a212714a5", "MIT"],
+    ["sourceror", "1.12.2", "da37d3da09c5b890528802c7056a8f585a061973820d7656b6e3649c14f0e9cb", "Apache-2.0"],
+    ["spitfire", "0.4.0", "7e5c6d1523c111b59f332f9dc49edc0377111d0c17167a29830f0e98233f5472", "MIT"],
+    ["tailwind", "0.5.1", "c4e26302a59fec72abc5610ecb6ad2116d9aa31f31aab2d4b8eb6e95d25a689c", "MIT"],
+    ["telemetry", "1.4.2", "928f6495066506077862c0d1646609eed891a4326bee3126ba54b60af61febb1", "Apache-2.0"],
+    ["text_diff", "0.1.0", "d1ffaaecab338e49357b6daa82e435f877e0649041ace7755583a0ea3362dbd7", "MIT"],
+    ["thousand_island", "1.5.0", "708923d40523e43cf99041ab37a0d4b0ec426ac6438fa3716ab23d919eaeb412", "MIT"],
+    ["websock", "0.5.3", "6105453d7fac22c712ad66fab1d45abdf049868f253cf719b625151460b8b453", "MIT"],
+    ["websock_adapter", "0.6.0", "50021a85bce8f203b086705d9e0c5415e2c7eb05d319111b0428fe71f9934617", "MIT"]
+  ],
+  "optional_edges_not_selected": [
+    "brotli", "castore", "ezstd", "lazy_html", "nimble_csv", "phx_new",
+    "phoenix_view", "plug_cowboy", "postgrex", "ucwidth"
+  ],
+  "rejected_alternatives": [
+    {
+      "candidate": "igniter 0.8.3 with ex_ast 0.13.1",
+      "reason": "ex_ast requires Elixir 1.18 while Popcorn 0.3.3 fixes this candidate at Elixir 1.17.3",
+      "disposition": "pin igniter 0.7.9 as a compile-only override"
+    },
+    {
+      "candidate": "LocalLiveView repository development lock",
+      "reason": "it records older Phoenix/LiveView/Popcorn selections and is not the released profile graph",
+      "disposition": "resolve from LocalLiveView 0.1.0 package metadata into this profile lock"
+    },
+    {
+      "candidate": "Plug.Cowboy",
+      "reason": "a second optional HTTP server broadens the baseline without testing value",
+      "disposition": "select exact Bandit 1.12.5 only"
+    }
+  ],
+  "license_policy": {
+    "allowed": ["Apache-2.0", "MIT"],
+    "unknown": [],
+    "notice_required": ["Apache-2.0", "MIT"]
+  }
+}

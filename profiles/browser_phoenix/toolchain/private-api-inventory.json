@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "candidate_status": "confined_high_risk",
+  "entry_defaults": {
+    "owner": "packages/blazex_renderer_dom_liveview",
+    "fallback": "Disable the LiveView renderer adapter; portable core, host protocol, and standalone DOM remain usable.",
+    "fixture": "private-api-contract.fixture.json"
+  },
+  "entries": [
+    {
+      "id": "plv-diff-engine",
+      "source": "phoenix_live_view 1.2.11 lib/phoenix_live_view/diff.ex",
+      "visibility": "private module (moduledoc false)",
+      "shape": "new_components/0-1, new_fingerprints/0, render/4, render_private/2, write_component/4, update_component/3, mark_for_deletion_component/2, delete_component/2",
+      "call_site": "local_live_view 0.1.0 lib/local_live_view/server.ex",
+      "pin_sensitivity": "high",
+      "upgrade_trigger": "Any Phoenix LiveView version, diff tuple, component state, or wire-key change",
+      "risk": "LocalLiveView directly owns LiveView's private diff state and deletion/update protocol."
+    },
+    {
+      "id": "plv-renderer",
+      "source": "phoenix_live_view 1.2.11 lib/phoenix_live_view/renderer.ex",
+      "visibility": "private module (moduledoc false)",
+      "shape": "Renderer.__before_compile__/1 and to_rendered/2",
+      "call_site": "local_live_view 0.1.0 lib/local_live_view/local_live_view.ex and server.ex",
+      "pin_sensitivity": "high",
+      "upgrade_trigger": "Renderer macro, rendered structure, template metadata, or callback change",
+      "risk": "Compilation and first render depend on internals rather than a supported extension point."
+    },
+    {
+      "id": "plv-utils-state",
+      "source": "phoenix_live_view 1.2.11 lib/phoenix_live_view/utils.ex",
+      "visibility": "private module (moduledoc false)",
+      "shape": "clear_changed/1, clear_temp/1, changed?/1-2, post_mount_prune/1, normalize_layout/1, clear_flash/1-2, put_reply/2, maybe_call_live_view_mount!/4-5",
+      "call_site": "local_live_view 0.1.0 lib/local_live_view/server.ex and local_live_view.ex",
+      "pin_sensitivity": "high",
+      "upgrade_trigger": "Socket assignment bookkeeping, mount, flash, reply, layout, or temporary-state change",
+      "risk": "The adapter reproduces LiveView process state transitions through private helpers."
+    },
+    {
+      "id": "plv-lifecycle",
+      "source": "phoenix_live_view 1.2.11 lib/phoenix_live_view/lifecycle.ex",
+      "visibility": "private module; build/1 is explicitly doc false",
+      "shape": "build/1 and stage_info/4",
+      "call_site": "local_live_view 0.1.0 lib/local_live_view/local_live_view.ex and server.ex",
+      "pin_sensitivity": "high",
+      "upgrade_trigger": "Lifecycle stage, hook state, callback arity, or return-shape change",
+      "risk": "Local mount and event stages shadow the server LiveView lifecycle."
+    },
+    {
+      "id": "plv-session-struct",
+      "source": "phoenix_live_view 1.2.11 lib/phoenix_live_view/session.ex",
+      "visibility": "private module (moduledoc false)",
+      "shape": "Session struct fields enumerated by the compatibility fixture",
+      "call_site": "local_live_view 0.1.0 lib/local_live_view/dispatcher.ex and server.ex",
+      "pin_sensitivity": "high",
+      "upgrade_trigger": "Session field, verification, root/parent, router, flash, or assign_new change",
+      "risk": "The dispatcher manually constructs a private session with only a view field."
+    },
+    {
+      "id": "plv-socket-struct",
+      "source": "phoenix_live_view 1.2.11 lib/phoenix_live_view/socket.ex",
+      "visibility": "public struct with internal state fields and private invariants",
+      "shape": "Socket fields enumerated by the compatibility fixture; direct writes include id, view, private, assigns, host_uri, redirected",
+      "call_site": "local_live_view 0.1.0 lib/local_live_view/server.ex and component.ex",
+      "pin_sensitivity": "high",
+      "upgrade_trigger": "Struct fields, default private/assign state, redirect tuple, URI, or transport semantics change",
+      "risk": "A stable struct name does not make direct reconstruction of LiveView process state public API."
+    },
+    {
+      "id": "plv-diff-wire-schema",
+      "source": "phoenix_live_view 1.2.11 server diff encoder and priv/static/phoenix_live_view.esm.js",
+      "visibility": "version-sensitive wire implementation",
+      "shape": "Rendered diff maps, component ids, events, replies, redirects, titles, streams, and component pruning consumed by the stock LiveView client",
+      "call_site": "local_live_view 0.1.0 server.ex plus browser channel-shaped transport bridge",
+      "pin_sensitivity": "high",
+      "upgrade_trigger": "Any server/client LiveView pair, diff key, DOM patch, stream, navigation, or upload protocol change",
+      "risk": "The local bridge must keep exact server and browser LiveView implementations paired."
+    },
+    {
+      "id": "llv-popcorn-bridge",
+      "source": "local_live_view 0.1.0 lib/local_live_view/dispatcher.ex and priv/static assets",
+      "visibility": "LocalLiveView implementation protocol",
+      "shape": "Actions enumerated by the compatibility fixture with promise resolve/reject and per-view process routing",
+      "call_site": "LocalLiveView dispatcher and browser JavaScript bridge",
+      "pin_sensitivity": "high",
+      "upgrade_trigger": "LocalLiveView, Popcorn message, promise, iframe, worker, or action payload change",
+      "risk": "This is not a standardized Wasm component interface and must not leak into portable BlazeX packages."
+    }
+  ],
+  "confinement_decision": {
+    "accepted_for_feasibility": true,
+    "conditions": [
+      "All calls stay behind packages/blazex_renderer_dom_liveview.",
+      "The exact Phoenix LiveView and LocalLiveView pair is pinned.",
+      "The fixture and a behavior probe gate every dependency update.",
+      "Portable/runtime packages never parse LiveView diff or session data.",
+      "Failure disables the adapter instead of weakening portable boundaries."
+    ],
+    "stop_condition": "Stop if any private structure must enter blazex_core, blazex_ui, blazex_effects, blazex_renderer_dom, runtime protocol, or a host-neutral package."
+  }
+}

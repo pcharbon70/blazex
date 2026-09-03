@@ -5,7 +5,7 @@ defmodule BlazeXHostBrowser.MixProject do
     [
       app: :blazex_host_browser,
       version: "0.0.0-bh01",
-      elixir: ">= 1.18.0",
+      elixir: "== 1.17.3",
       deps: deps()
     ]
   end

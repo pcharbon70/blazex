@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "profile": "profiles/browser_phoenix",
+  "server": {"package": "bandit", "version": "1.12.5", "transport": "HTTP/1.1 or HTTP/2 over TLS"},
+  "profile_prerequisites": {
+    "content_types": {
+      ".wasm": "application/wasm",
+      ".mjs": "text/javascript",
+      ".avm": "application/octet-stream"
+    },
+    "asset_delivery": [
+      "Support instantiateStreaming by preserving application/wasm.",
+      "Serve content-addressed assets with immutable caching and validators.",
+      "Preserve Content-Encoding and Vary for precompressed artifacts.",
+      "Emit generated Subresource Integrity metadata for executable assets."
+    ],
+    "security": {
+      "https": "Required outside loopback development.",
+      "same_origin_default": true,
+      "csrf": "Phoenix CSRF protection remains required for state-changing HTTP forms; socket/session tokens are verified independently.",
+      "origin": "Endpoint check_origin remains enabled and explicitly configured.",
+      "cors": "No cross-origin runtime or BEAM fetch is required by the baseline.",
+      "csp": "Begin with self-only script/worker sources. Popcorn indirectEval is a tracked unsafe-eval compatibility risk that must be removed or explicitly rejected by later browser tests."
+    },
+    "cross_origin_isolation": {
+      "required": true,
+      "headers": {
+        "Cross-Origin-Opener-Policy": "same-origin",
+        "Cross-Origin-Embedder-Policy": "require-corp",
+        "Cross-Origin-Resource-Policy": "same-origin"
+      },
+      "reason": "The qualified FissionVM artifact imports fixed shared memory and atomics."
+    },
+    "workers": "Workers inherit the same-origin, CSP, MIME, cache, and isolation contract.",
+    "streaming": "Streaming compilation is permitted only with the exact Wasm MIME type; buffered fallback must remain explicit.",
+    "range_requests": "Not required for the first baseline; proxies must not synthesize partial executable assets."
+  },
+  "deployment_work_deferred": [
+    "CDN-specific cache and compression configuration",
+    "reverse-proxy TLS termination and forwarded-header trust",
+    "service-worker lifecycle and offline caching",
+    "cross-origin asset hosting",
+    "production CSP nonce/hash generation"
+  ],
+  "proxy_invariants": [
+    "Preserve WebSocket upgrade and origin headers.",
+    "Preserve COOP, COEP, CORP, CSP, content type, encoding, ETag, and integrity metadata.",
+    "Do not cache authenticated HTML or socket credentials as immutable assets."
+  ],
+  "later_test_gates": [
+    "CSP without unsafe-eval",
+    "crossOriginIsolated is true before runtime startup",
+    "Wasm streaming and buffered fallback",
+    "WebSocket origin and CSRF rejection",
+    "proxy/header preservation"
+  ]
+}

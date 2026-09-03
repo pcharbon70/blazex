@@ -65,6 +65,15 @@ locations rather than this governance directory.
 - [BH-01 Phase 1 completion v0.1.0](blazex-bh-01-phase-01-completion-v0.1.0.json)
   — schema-valid decision record with input/output hashes, environment,
   limitations, review, `go` result, and explicit Phase 2 non-authorization.
+- [BH-01 Phase 2 authorization v0.1.0](blazex-bh-01-phase-02-authorization-v0.1.0.json)
+  — repository-owner approval for input qualification, dependency acquisition,
+  section commits, one immediately merged PR, synchronization, and cleanup.
+- [BH-01 Phase 2 validation log v0.1.0](blazex-bh-01-phase-02-validation-log-v0.1.0.txt)
+  — exact tool fingerprints, validation outcomes, clean/offline/independent
+  acquisition results, timings, negative coverage, and execution boundaries.
+- [BH-01 Phase 2 completion v0.1.0](blazex-bh-01-phase-02-completion-v0.1.0.json)
+  — schema-valid input-qualification decision with hashes, two-clean-
+  environment equivalence, limitations, risk disposition, and a narrow `go`.
 
 ## Maintaining this index
 

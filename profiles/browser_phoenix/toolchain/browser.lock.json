@@ -1,0 +1,66 @@
+{
+  "schema_version": "1.0.0",
+  "qualification_cut": "2026-09-03",
+  "support_status": "unsupported_unproven",
+  "automation_protocol": {
+    "client": "playwright-core",
+    "version": "1.62.1",
+    "implicit_browser_downloads": false
+  },
+  "local_binaries": [
+    {
+      "id": "chrome-for-testing-linux-amd64",
+      "family": "BR-CHROMIUM-DESKTOP",
+      "product_version": "152.0.7977.75",
+      "engine_revision": "1669021",
+      "source_url": "https://storage.googleapis.com/chrome-for-testing-public/152.0.7977.75/linux64/chrome-linux64.zip",
+      "sha256": "a16d36890636bd72251133b27f05825f7f9269c2425b3408fa3a76e10dccd8f1",
+      "archive_bytes": 193990266,
+      "owner": "browser-test"
+    }
+  ],
+  "managed_fingerprint_profiles": [
+    {
+      "id": "chromium-desktop-vendor-images",
+      "family": "BR-CHROMIUM-DESKTOP",
+      "products": ["Chrome", "Edge"],
+      "locally_pinnable": true,
+      "required_per_run": ["product", "product_version", "engine_version", "os_name", "os_build", "architecture", "binary_hash_or_vendor_build", "captured_at"]
+    },
+    {
+      "id": "firefox-desktop-vendor-images",
+      "family": "BR-FIREFOX-DESKTOP",
+      "products": ["Firefox"],
+      "locally_pinnable": true,
+      "required_per_run": ["product", "product_version", "engine_version", "os_name", "os_build", "architecture", "binary_hash_or_vendor_build", "captured_at"]
+    },
+    {
+      "id": "chromium-android-device",
+      "family": "BR-CHROMIUM-ANDROID",
+      "products": ["Chrome for Android"],
+      "locally_pinnable": false,
+      "required_per_run": ["product", "product_version", "engine_version", "os_name", "os_build", "device_model", "device_build", "architecture", "captured_at"]
+    },
+    {
+      "id": "webkit-desktop-device",
+      "family": "BR-WEBKIT-DESKTOP",
+      "products": ["Safari"],
+      "locally_pinnable": false,
+      "required_per_run": ["product", "product_version", "engine_version", "os_name", "os_build", "device_model", "architecture", "captured_at"]
+    },
+    {
+      "id": "webkit-mobile-device",
+      "family": "BR-WEBKIT-MOBILE",
+      "products": ["Safari on iOS", "Safari on iPadOS"],
+      "locally_pinnable": false,
+      "required_per_run": ["product", "product_version", "engine_version", "os_name", "os_build", "device_model", "device_build", "architecture", "captured_at"]
+    }
+  ],
+  "drift_gate": {
+    "reject_missing_fields": true,
+    "reject_version_change_without_requalification": true,
+    "reject_stale_days": 31,
+    "reject_beta_dev_canary_technology_preview": true,
+    "allow_symbolic_versions_in_results": false
+  }
+}
