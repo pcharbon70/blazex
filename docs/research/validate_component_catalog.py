@@ -10,10 +10,14 @@ import sys
 from pathlib import Path
 from typing import Any
 
+from jsonschema import Draft202012Validator
+from jsonschema.exceptions import SchemaError
+
 
 ROOT = Path(__file__).resolve().parent
 CATALOG_DIR = ROOT / "assets" / "component-catalog"
 REFERENCE_LOCK_PATH = CATALOG_DIR / "mudblazor-v9.9.0-reference-lock.json"
+CATALOG_SCHEMA_PATH = CATALOG_DIR / "blazex-component-catalog.schema.json"
 
 EXPECTED_REFERENCE = {
     "schema_version": "1.0.0",
@@ -56,6 +60,17 @@ REQUIRED_UPDATE_FLAGS = {
 SHA1_RE = re.compile(r"^[0-9a-f]{40}$")
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 SOURCE_FAMILY_RE = re.compile(r"^[A-Z][A-Za-z0-9]*$")
+EXPECTED_DELIVERY_STATES = {
+    "planned",
+    "accepted",
+    "implemented",
+    "evidenced",
+    "supported",
+    "deferred",
+    "omitted",
+    "superseded",
+    "unknown",
+}
 
 
 class CatalogValidationError(ValueError):
@@ -190,6 +205,56 @@ def validate_reference(lock: dict[str, Any], snapshot_bytes: bytes) -> list[str]
     return families
 
 
+def validate_catalog_schema(schema: dict[str, Any]) -> Draft202012Validator:
+    """Validate the catalog schema's own structure and governed constants."""
+
+    try:
+        Draft202012Validator.check_schema(schema)
+    except SchemaError as error:
+        raise CatalogValidationError(f"component catalog JSON Schema is invalid: {error.message}") from error
+    _require_exact(
+        schema,
+        {
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "$id": "https://blazex.dev/schemas/component-catalog/1.0.0",
+        },
+        "catalog_schema",
+    )
+    definitions = schema.get("$defs")
+    if not isinstance(definitions, dict):
+        raise CatalogValidationError("catalog_schema.$defs must be an object")
+    required_definitions = {
+        "family",
+        "exception",
+        "sourceIdentity",
+        "relationship",
+        "classification",
+        "capabilityContract",
+        "implementation",
+        "deliveryState",
+    }
+    missing = sorted(required_definitions - set(definitions))
+    if missing:
+        raise CatalogValidationError("catalog schema is missing definitions: " + ", ".join(missing))
+    states = definitions.get("deliveryState", {}).get("enum")
+    if not isinstance(states, list) or set(states) != EXPECTED_DELIVERY_STATES:
+        raise CatalogValidationError("catalog schema deliveryState enum is incomplete or changed")
+    if len(states) != len(set(states)):
+        raise CatalogValidationError("catalog schema deliveryState enum contains duplicates")
+    return Draft202012Validator(schema)
+
+
+def validate_catalog_document(document: dict[str, Any], schema: dict[str, Any]) -> None:
+    """Validate one authored catalog document against the governed JSON Schema."""
+
+    schema_validator = validate_catalog_schema(schema)
+    errors = sorted(schema_validator.iter_errors(document), key=lambda error: list(error.absolute_path))
+    if errors:
+        error = errors[0]
+        path = ".".join(str(part) for part in error.absolute_path) or "<root>"
+        raise CatalogValidationError(f"catalog schema violation at {path}: {error.message}")
+
+
 def validate_repository() -> list[str]:
     lock = load_json(REFERENCE_LOCK_PATH)
     snapshot_path = CATALOG_DIR / str(lock.get("family_snapshot", {}).get("path", ""))
@@ -198,9 +263,12 @@ def validate_repository() -> list[str]:
     except OSError as error:
         raise CatalogValidationError(f"cannot read source-family snapshot {snapshot_path}: {error}") from error
     families = validate_reference(lock, snapshot_bytes)
+    schema = load_json(CATALOG_SCHEMA_PATH)
+    validate_catalog_schema(schema)
     return [
         f"reference {lock['reference_id']}",
         f"{len(families)} locked source families",
+        "catalog schema 1.0.0",
     ]
 
 

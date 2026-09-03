@@ -195,6 +195,7 @@ evidence atomically.
 
 ## Connections
 
+- [Component catalog schema and governance](blazex-component-catalog-schema-and-governance.md)
 - [MudBlazor-inspired component system](mudblazor-inspired-component-system-for-blazex.md)
 - [MudBlazor component-system map](../10-maps/mudblazor-inspired-component-system.md)
 - [ADR-0008 — No .NET compatibility contract](architecture-decisions/adr-0008-no-dotnet-compatibility-contract.md)

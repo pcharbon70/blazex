@@ -47,28 +47,28 @@ Back to milestone: [README](README.md)
       - [x] 3.1.2.2 Subtask - Define normalization for generic variants, inherited bases, nested parts, aliases, renamed components, duplicate documentation entries, and one family spanning multiple source files.
       - [x] 3.1.2.3 Subtask - Record explicit inclusion and exclusion reasons for icons, localization, themes, JavaScript helpers, test components, documentation infrastructure, and non-component services.
 
-  - [ ] 3.2 Section - Define stable catalog identity and metadata schema.
+  - [x] 3.2 Section - Define stable catalog identity and metadata schema.
 
     Create a format that supports human review, deterministic validation, future
     generation, and stable references from roadmaps, phases, tests, and releases.
 
-    - [ ] 3.2.1 Task - Define catalog and family identities.
+    - [x] 3.2.1 Task - Define catalog and family identities.
 
       Stable BlazeX IDs must survive display-name changes while preserving exact
       traceability to the pinned reference family.
 
-      - [ ] 3.2.1.1 Subtask - Define catalog version, schema version, stable family ID, display name, category, source identities, aliases, parent or part relationships, and lifecycle status.
-      - [ ] 3.2.1.2 Subtask - Define uniqueness, casing, ordering, rename, split, merge, deprecation, removal, and reserved-ID rules without deriving runtime atoms from arbitrary catalog data.
-      - [ ] 3.2.1.3 Subtask - Require source paths and reference identifiers to remain evidence links rather than public BlazeX API or compatibility promises.
+      - [x] 3.2.1.1 Subtask - Define catalog version, schema version, stable family ID, display name, category, source identities, aliases, parent or part relationships, and lifecycle status.
+      - [x] 3.2.1.2 Subtask - Define uniqueness, casing, ordering, rename, split, merge, deprecation, removal, and reserved-ID rules without deriving runtime atoms from arbitrary catalog data.
+      - [x] 3.2.1.3 Subtask - Require source paths and reference identifiers to remain evidence links rather than public BlazeX API or compatibility promises.
 
-    - [ ] 3.2.2 Task - Define delivery and ownership metadata.
+    - [x] 3.2.2 Task - Define delivery and ownership metadata.
 
       The schema must reserve every field BH-00 needs while keeping later
       implementation status and evidence separate from planned classification.
 
-      - [ ] 3.2.2.1 Subtask - Define disposition, rationale, delivery tier, target package, prerequisites, optional-package status, payload class, and intended public identity fields.
-      - [ ] 3.2.2.2 Subtask - Define required and optional capabilities, fallback, rendering modes, runtime eligibility, backend portability, native strategy, accessibility alternative, and renderer-specific extension fields.
-      - [ ] 3.2.2.3 Subtask - Define planned, accepted, implemented, evidenced, supported, deferred, omitted, superseded, and unknown states so a completed row cannot imply delivered behavior.
+      - [x] 3.2.2.1 Subtask - Define disposition, rationale, delivery tier, target package, prerequisites, optional-package status, payload class, and intended public identity fields.
+      - [x] 3.2.2.2 Subtask - Define required and optional capabilities, fallback, rendering modes, runtime eligibility, backend portability, native strategy, accessibility alternative, and renderer-specific extension fields.
+      - [x] 3.2.2.3 Subtask - Define planned, accepted, implemented, evidenced, supported, deferred, omitted, superseded, and unknown states so a completed row cannot imply delivered behavior.
 
   - [ ] 3.3 Section - Build the complete normalized inventory artifact.
 

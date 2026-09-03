@@ -80,6 +80,10 @@ provider, and remote adapter.
   policy](../20-notes/blazex-mudblazor-reference-and-inventory-policy.md) — the
   immutable v9.9.0 reference identity, 83-family extraction boundary,
   normalization rules, explicit exclusions, and later-reference diff process.
+- [BlazeX component catalog schema and
+  governance](../20-notes/blazex-component-catalog-schema-and-governance.md) —
+  stable family identities, source relationships, deferred Phase 4 fields,
+  delivery-state semantics, and canonical/generated stewardship.
 - [BlazeX browser and toolchain support
   policy](../20-notes/blazex-browser-and-toolchain-support-policy.md) — the
   candidate browser windows, evidence classes, toolchain states, review

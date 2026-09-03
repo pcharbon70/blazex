@@ -67,10 +67,58 @@ dispositions automatically. This section assigns no BlazeX delivery tier,
 package, capability, fallback, implementation state, support state, renderer
 portability claim, or .NET compatibility promise.
 
+## Section 3.2 — Stable catalog identity and metadata schema
+
+### Delivered artifacts
+
+- [JSON Schema
+  1.0.0](../../../assets/component-catalog/blazex-component-catalog.schema.json)
+  defines the catalog envelope, permanent family/exception IDs, exact source
+  identities, aliases, directed relationships, lifecycle, seven categories,
+  complete Phase 4 classification and capability fields, implementation
+  evidence, and explicit source-closure exceptions. Objects reject unknown
+  fields.
+- [Catalog schema and
+  governance](../../../20-notes/blazex-component-catalog-schema-and-governance.md)
+  defines casing, ordering, uniqueness, rename/split/merge/removal, reserved-ID,
+  static runtime-registry, migration, owner, generated-output, conflict, and
+  review rules.
+- The catalog validator checks Draft 2020-12 schema validity, the exact schema
+  identity, required definitions, and all nine governed delivery states. Its
+  tests validate a complete specimen and reject malformed IDs, arbitrary
+  fields such as a runtime atom, and unsupported delivery states.
+
+### Identity and state result
+
+BlazeX family IDs use `BX-FAM-*` and survive source/display-name changes. Exact
+MudBlazor reference names and paths remain evidence only. Catalog data cannot
+be interned into arbitrary runtime atoms; implementations must use a static
+allowlisted registry. Split/merge/replacement relationships preserve old IDs,
+and no identity may be recycled.
+
+The schema distinguishes catalog integrity status, upstream lifecycle, product
+classification, and component delivery state. The states `planned`,
+`accepted`, `implemented`, `evidenced`, `supported`, `deferred`, `omitted`,
+`superseded`, and `unknown` have separate evidence meanings. Phase 3 rows must
+remain unresolved/unassigned/unknown until Phase 4 decisions exist.
+
+### Section validation
+
+```text
+Component catalog validation passed: reference mudblazor-v9.9.0; 83 locked source families; catalog schema 1.0.0.
+Ran 9 tests ... OK
+```
+
+### Section result
+
+Plans, tests, generated views, and later releases can now cite stable records
+without adopting upstream API identity. The schema reserves every BH-00 field
+while ensuring that source completeness and schema validity alone cannot claim
+implementation, evidence, support, rendering portability, native behavior, or
+.NET compatibility.
+
 ## Remaining Phase 3 work
 
-- Section 3.2 must define stable catalog/family identities and the complete
-  metadata schema.
 - Section 3.3 must author and deterministically render the normalized inventory.
 - Section 3.4 must close source coverage, schema, generation, review, and
   non-claim integration evidence.

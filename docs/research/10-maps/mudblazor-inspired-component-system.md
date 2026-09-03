@@ -32,6 +32,10 @@ tests.
   policy](../20-notes/blazex-mudblazor-reference-and-inventory-policy.md) locks
   the exact v9.9.0 source truth and defines how families, compound parts,
   services, infrastructure, aliases, and later reference updates are counted.
+- [BlazeX component catalog schema and
+  governance](../20-notes/blazex-component-catalog-schema-and-governance.md)
+  separates permanent BlazeX IDs from source evidence and reserves truthful
+  classification, capability, portability, state, and evidence fields.
 - [Browser host implementation
   milestones](../20-notes/browser-host-implementation-milestones.md) turns the
   F0–F4 dependency tiers into the consolidated BH-00–BH-23 browser delivery
