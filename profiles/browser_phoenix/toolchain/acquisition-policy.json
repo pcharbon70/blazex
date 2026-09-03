@@ -1,0 +1,58 @@
+{
+  "schema_version": "1.0.0",
+  "noninteractive": true,
+  "private_credentials_allowed": false,
+  "redirects": {"allowed": true, "record_final_origin": true},
+  "registries": {
+    "hex": "https://repo.hex.pm",
+    "npm": "https://registry.npmjs.org",
+    "container": "https://registry-1.docker.io",
+    "github_api": "https://api.github.com",
+    "github_archive": "https://codeload.github.com"
+  },
+  "mix": {
+    "lockfile_required": true,
+    "install_command": "mix deps.get --check-locked",
+    "build_environment": "prod",
+    "target": "host",
+    "isolated_mix_home": true,
+    "isolated_hex_home": true
+  },
+  "npm": {
+    "lockfile_required": true,
+    "install_command": "npm ci --ignore-scripts --no-audit --no-fund",
+    "lockfile_version": 3,
+    "implicit_browser_downloads": false,
+    "lifecycle_default": "deny",
+    "lifecycle_allowlist": [
+      {
+        "package": "esbuild",
+        "version": "0.28.2",
+        "script": "install.js",
+        "reason": "selects and validates the integrity-locked platform binary"
+      }
+    ]
+  },
+  "cache": {
+    "clean_run_required": true,
+    "cached_run_required": true,
+    "offline_run_required_where_supported": true,
+    "key_fields": ["manager", "lock_sha256", "platform", "architecture", "toolchain_lock_sha256"],
+    "cache_miss_must_not_change_lock": true
+  },
+  "network": {
+    "acquisition_only": true,
+    "tls_verification_required": true,
+    "ca_roots_from_pinned_image": true,
+    "unrecorded_hosts_rejected": true
+  },
+  "failure_policy": {
+    "reject_floating_ref": true,
+    "reject_hash_mismatch": true,
+    "reject_missing_artifact": true,
+    "reject_unapproved_lifecycle_script": true,
+    "reject_private_auth_challenge": true,
+    "reject_lock_mutation": true,
+    "reject_implicit_download": true
+  }
+}

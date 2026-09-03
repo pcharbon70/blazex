@@ -22,28 +22,28 @@ Back to milestone: [README](README.md)
   server, JavaScript, browser, and build input before writing the runtime build
   pipeline, treating dependency unavailability as a valid stop outcome.
 
-  - [ ] 2.1 Section - Qualify host and language tools.
+  - [x] 2.1 Section - Qualify host and language tools.
 
     Reproduction requires immutable environment identities and documented
     acquisition paths rather than broad ranges or workstation defaults.
 
-    - [ ] 2.1.1 Task - Pin the operating and language environment.
+    - [x] 2.1.1 Task - Pin the operating and language environment.
 
       The baseline must define all tools that can affect dependency resolution,
       compilation, packaging, serving, or test behavior.
 
-      - [ ] 2.1.1.1 Subtask - Pin operating-system image/revision, architecture, shell, system packages, CA roots, locale/timezone, environment variables, and resource limits.
-      - [ ] 2.1.1.2 Subtask - Pin OTP, Elixir, Mix, Hex, Rebar, compiler/linker, Wasm inspection, archive/compression, hashing, and certificate tools with immutable sources and checksums.
-      - [ ] 2.1.1.3 Subtask - Implement machine-readable environment verification that rejects missing, drifting, shadowed, or implicitly downloaded tools.
+      - [x] 2.1.1.1 Subtask - Pin operating-system image/revision, architecture, shell, system packages, CA roots, locale/timezone, environment variables, and resource limits.
+      - [x] 2.1.1.2 Subtask - Pin OTP, Elixir, Mix, Hex, Rebar, compiler/linker, Wasm inspection, archive/compression, hashing, and certificate tools with immutable sources and checksums.
+      - [x] 2.1.1.3 Subtask - Implement machine-readable environment verification that rejects missing, drifting, shadowed, or implicitly downloaded tools.
 
-    - [ ] 2.1.2 Task - Pin JavaScript, browser automation, and reporting tools.
+    - [x] 2.1.2 Task - Pin JavaScript, browser automation, and reporting tools.
 
       Client build and measurement tooling must be as reproducible as the BEAM
       and Wasm toolchain.
 
-      - [ ] 2.1.2.1 Subtask - Pin Node.js/runtime, package manager, bundler, test runner, browser driver, protocol client, source-map, license, vulnerability, and report-generation tools.
-      - [ ] 2.1.2.2 Subtask - Define lockfile policy, install flags, lifecycle-script policy, registry/mirror identities, cache behavior, and offline/clean acquisition expectations.
-      - [ ] 2.1.2.3 Subtask - Record which desktop/mobile browser binaries can be pinned locally and which managed-device versions require per-run fingerprints and drift gates.
+      - [x] 2.1.2.1 Subtask - Pin Node.js/runtime, package manager, bundler, test runner, browser driver, protocol client, source-map, license, vulnerability, and report-generation tools.
+      - [x] 2.1.2.2 Subtask - Define lockfile policy, install flags, lifecycle-script policy, registry/mirror identities, cache behavior, and offline/clean acquisition expectations.
+      - [x] 2.1.2.3 Subtask - Record which desktop/mobile browser binaries can be pinned locally and which managed-device versions require per-run fingerprints and drift gates.
 
   - [ ] 2.2 Section - Qualify AtomVM and Popcorn inputs.
 
