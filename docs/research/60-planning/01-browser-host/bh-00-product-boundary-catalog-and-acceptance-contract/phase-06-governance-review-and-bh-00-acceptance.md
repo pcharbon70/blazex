@@ -16,7 +16,7 @@ aliases:
 
 Back to milestone: [README](README.md)
 
-- [ ] 6 Phase - Governance Review and BH-00 Acceptance.
+- [x] 6 Phase - Governance Review and BH-00 Acceptance.
 
   Reconcile every BH-00 artifact, resolve or expose contradictions, complete
   independent product and architecture review, publish the versioned contract,
@@ -93,28 +93,28 @@ Back to milestone: [README](README.md)
       - [x] 6.3.2.2 Subtask - Verify every BH-01 proof obligation traces to a BH-00 support claim, decision, budget, acceptance ID, repository owner, and expected evidence type.
       - [x] 6.3.2.3 Subtask - Record an authorized ready, conditionally ready, or blocked decision with named conditions and prohibit dependency installation or runtime implementation until the BH-01 phase plan is approved.
 
-  - [ ] 6.4 Section - Phase 6 Integration Tests and BH-00 Acceptance.
+  - [x] 6.4 Section - Phase 6 Integration Tests and BH-00 Acceptance.
 
     Execute the complete BH-00 validation matrix and reconcile milestone status
     from actual artifacts and reviewed evidence rather than plan completion.
 
-    - [ ] 6.4.1 Task - Run milestone-wide integration and acceptance tests.
+    - [x] 6.4.1 Task - Run milestone-wide integration and acceptance tests.
 
       Final checks must prove structural validity, complete coverage, dependency
       boundaries, truthful claims, deterministic generation, and review closure.
 
-      - [ ] 6.4.1.1 Subtask - Run research archive validation, front-matter and link checks, catalog and acceptance schemas, deterministic generation, source coverage, matrix completeness, ownership checks, and git diff validation.
-      - [ ] 6.4.1.2 Subtask - Run terminology, forbidden-dependency, Plug-independence, adapter-isolation, no-.NET-compatibility, no-native-parity, no-false-support, provenance, and stale-generated-view audits.
-      - [ ] 6.4.1.3 Subtask - Reconcile every Phase 1–6 task, BH-00 roadmap requirement, review finding, risk, catalog row, budget, acceptance condition, index, and completion-evidence record.
+      - [x] 6.4.1.1 Subtask - Run research archive validation, front-matter and link checks, catalog and acceptance schemas, deterministic generation, source coverage, matrix completeness, ownership checks, and git diff validation.
+      - [x] 6.4.1.2 Subtask - Run terminology, forbidden-dependency, Plug-independence, adapter-isolation, no-.NET-compatibility, no-native-parity, no-false-support, provenance, and stale-generated-view audits.
+      - [x] 6.4.1.3 Subtask - Reconcile every Phase 1–6 task, BH-00 roadmap requirement, review finding, risk, catalog row, budget, acceptance condition, index, and completion-evidence record.
 
-    - [ ] 6.4.2 Task - Record final truth and deliver the milestone phase.
+    - [x] 6.4.2 Task - Record final truth and deliver the milestone phase.
 
       BH-00 is complete only when all mandatory gates pass; otherwise the record
       must name the exact blocker without overstating readiness or implementation.
 
-      - [ ] 6.4.2.1 Subtask - Record exact revisions, commands, tool versions, hashes, generated reports, reviewer approvals, accepted exceptions, open risks, BH-01 decision, and all failed or deferred evidence.
-      - [ ] 6.4.2.2 Subtask - Mark BH-00 complete only if its milestone exit is satisfied; otherwise publish the blocking status and leave affected checkboxes open.
-      - [ ] 6.4.2.3 Subtask - Complete one commit per coherent section and open the Phase 6 PR without initializing projects, installing BH-01 dependencies, or beginning the feasibility baseline.
+      - [x] 6.4.2.1 Subtask - Record exact revisions, commands, tool versions, hashes, generated reports, reviewer approvals, accepted exceptions, open risks, BH-01 decision, and all failed or deferred evidence.
+      - [x] 6.4.2.2 Subtask - Mark BH-00 complete only if its milestone exit is satisfied; otherwise publish the blocking status and leave affected checkboxes open.
+      - [x] 6.4.2.3 Subtask - Complete one commit per coherent section and open the Phase 6 PR without initializing projects, installing BH-01 dependencies, or beginning the feasibility baseline.
 
 ## Section delivery rule
 

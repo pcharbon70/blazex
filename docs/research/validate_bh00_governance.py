@@ -24,6 +24,14 @@ QUALITY_PATH = ROOT / "assets" / "quality-acceptance" / "blazex-quality-contract
 ACCEPTANCE_PATH = ROOT / "assets" / "quality-acceptance" / "blazex-acceptance-registry-v0.1.0.json"
 CATALOG_PATH = ROOT / "assets" / "component-catalog" / "blazex-component-catalog-v0.1.0.json"
 CLASSIFICATION_PATH = ROOT / "assets" / "component-catalog" / "blazex-component-classification-v0.1.0.json"
+FINAL_ACCEPTANCE_PATH = ASSET_DIR / "blazex-bh-00-final-acceptance-v0-1-0.md"
+PHASE_DIR = (
+    ROOT
+    / "60-planning"
+    / "01-browser-host"
+    / "bh-00-product-boundary-catalog-and-acceptance-contract"
+)
+PHASE_EVIDENCE_PATH = PHASE_DIR / "phase-06-implementation-evidence.md"
 
 EXPECTED_AXES = {
     "runtime-substrate",
@@ -106,6 +114,19 @@ EXPECTED_BH01_PROOFS = {
     "BX-BH01-PROOF-NESTED-STATE",
     "BX-BH01-PROOF-RUNTIME-BOOT",
     "BX-BH01-PROOF-TIMER-MESSAGE",
+}
+EXPECTED_COMPLETE_EVIDENCE = {
+    "BX-BH00-EVIDENCE-FINAL-ACCEPTANCE-6-4",
+    "BX-BH00-EVIDENCE-RECONCILIATION-6-1",
+    "BX-BH00-EVIDENCE-REVIEW-ACCESSIBILITY",
+    "BX-BH00-EVIDENCE-REVIEW-ARCHITECTURE",
+    "BX-BH00-EVIDENCE-REVIEW-IMPLEMENTATION",
+    "BX-BH00-EVIDENCE-REVIEW-PACKAGING",
+    "BX-BH00-EVIDENCE-REVIEW-PERFORMANCE-RELIABILITY",
+    "BX-BH00-EVIDENCE-REVIEW-PRODUCT",
+    "BX-BH00-EVIDENCE-REVIEW-PROVENANCE",
+    "BX-BH00-EVIDENCE-REVIEW-SECURITY",
+    "BX-BH00-EVIDENCE-VERSIONED-RELEASE-6-3",
 }
 
 
@@ -246,6 +267,39 @@ def validate_stage(document: dict[str, Any]) -> None:
             validate_release_and_entry(document)
             if document["status"] != "accepted-conditionally-ready" or boundary["contract_evidence"] != "accepted":
                 raise GovernanceValidationError("release stage/status evidence combination is invalid")
+            if stage == "complete":
+                validate_completion(document)
+
+
+def validate_completion(document: dict[str, Any]) -> None:
+    """Validate the final BH-00 acceptance and planning closure records."""
+    evidence_ids = set(document["evidence_boundary"]["evidence_ids"])
+    if evidence_ids != EXPECTED_COMPLETE_EVIDENCE:
+        raise GovernanceValidationError("complete BH-00 evidence identities are incomplete")
+    for path in (FINAL_ACCEPTANCE_PATH, PHASE_EVIDENCE_PATH):
+        if not path.is_file():
+            raise GovernanceValidationError(f"final BH-00 evidence artifact is missing: {path.name}")
+    phase_plans = [
+        path for path in sorted(PHASE_DIR.glob("phase-0[1-6]-*.md"))
+        if not path.name.endswith("-implementation-evidence.md")
+    ]
+    if len(phase_plans) != 6:
+        raise GovernanceValidationError("BH-00 must retain all six phase plans")
+    if any("- [ ]" in path.read_text(encoding="utf-8") for path in phase_plans):
+        raise GovernanceValidationError("a BH-00 phase plan still contains unchecked work")
+    phase_evidence = [PHASE_DIR / f"phase-{number:02d}-implementation-evidence.md" for number in range(1, 7)]
+    if not all(path.is_file() for path in phase_evidence):
+        raise GovernanceValidationError("BH-00 phase implementation evidence is incomplete")
+    acceptance = FINAL_ACCEPTANCE_PATH.read_text(encoding="utf-8")
+    required_truth = (
+        "accepted-conditionally-ready",
+        "unsupported-unproven",
+        "not-executed",
+        "not-authorized",
+        "zero accepted exceptions",
+    )
+    if any(value not in acceptance for value in required_truth):
+        raise GovernanceValidationError("final BH-00 acceptance omits a required evidence boundary")
 
 
 def validate_review(document: dict[str, Any]) -> None:

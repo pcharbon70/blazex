@@ -18,6 +18,7 @@ aliases:
 ## Decision summary
 
 - Release ID: `BX-BH00-BASELINE-0.1.0`
+- Governance stage: `complete`
 - Product-contract status: `accepted-product-contract`
 - BH-01 entry decision: `conditionally-ready`
 - Bound source manifest SHA-256: `40ff2ba2304f5d8e1e247f3ec938b783c0f723bff5bda23d361eadf89ab540c0`
@@ -54,7 +55,9 @@ BH-00 accepts a versioned product and evidence contract. It does not accept an i
 - [Canonical governance contract](blazex-bh-00-governance-v0.1.0.json) — authored reconciliation, review, risk, release, and entry-decision source.
 - [Governance schema](blazex-bh-00-governance.schema.json) — machine structure and state constraints.
 - [Multidisciplinary review](blazex-bh-00-multidisciplinary-review-v0-1-0.md) — eight evidence-first discipline passes, findings, and risk disposition.
+- [Final BH-00 acceptance](blazex-bh-00-final-acceptance-v0-1-0.md) — integration result, milestone decision, evidence boundary, and delivery record.
 - [BH-01 entry manifest](blazex-bh-01-entry-manifest-v0-1-0.md) — generated bounded feasibility inputs and proof obligations.
+- [Phase 6 implementation evidence](../../60-planning/01-browser-host/bh-00-product-boundary-catalog-and-acceptance-contract/phase-06-implementation-evidence.md) — section delivery and reproducible verification record.
 
 ## Material-state legend
 

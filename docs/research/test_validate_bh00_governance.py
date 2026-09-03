@@ -176,6 +176,12 @@ class GovernanceValidationTests(unittest.TestCase):
         with self.assertRaisesRegex(validator.GovernanceValidationError, "cannot continue after failure"):
             self.validate(document)
 
+    def test_rejects_missing_final_acceptance_evidence(self) -> None:
+        document = copy.deepcopy(self.document)
+        document["evidence_boundary"]["evidence_ids"].remove("BX-BH00-EVIDENCE-FINAL-ACCEPTANCE-6-4")
+        with self.assertRaisesRegex(validator.GovernanceValidationError, "complete BH-00 evidence identities"):
+            self.validate(document)
+
 
 if __name__ == "__main__":
     unittest.main()

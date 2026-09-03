@@ -38,6 +38,7 @@ implementations, and BH-01 experiment output do not belong here.
 ### Files
 
 - [BH-00 product contract baseline v0.1.0](blazex-bh-00-release-index-v0-1-0.md) — generated navigable release index for the accepted contract identity, bound source manifest, material states, review closure, commands, and unsupported/deferred scope.
+- [BH-00 final acceptance v0.1.0](blazex-bh-00-final-acceptance-v0-1-0.md) — final integration result, milestone decision, evidence boundary, unresolved risks, conditional BH-01 handoff, and Phase 6 delivery record.
 - [BH-00 multidisciplinary review v0.1.0](blazex-bh-00-multidisciplinary-review-v0-1-0.md) — eight product, architecture, implementation, security, accessibility, performance/reliability, packaging, and provenance review passes with finding disposition and BH-01 risk register.
 - [BH-00 governance schema](blazex-bh-00-governance.schema.json) — JSON Schema
   1.0.0 for source bindings, architecture/package/profile reconciliation,

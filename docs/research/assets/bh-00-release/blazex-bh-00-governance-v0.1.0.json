@@ -2,7 +2,7 @@
   "schema_version": "1.0.0",
   "contract_version": "0.1.0",
   "contract_id": "BX-BH00-GOVERNANCE-0.1",
-  "stage": "section-6.3",
+  "stage": "complete",
   "status": "accepted-conditionally-ready",
   "source_bindings": [
     {"id": "BX-BH00-SOURCE-ACCEPTANCE", "role": "acceptance", "path": "assets/quality-acceptance/blazex-acceptance-registry-v0.1.0.json", "sha256": "43025d17513f068eb1ac0838a381da4c132bf41b74aa602bffdc130e411368ed", "authority": "authoritative"},
@@ -580,6 +580,7 @@
     "measurements": "not-executed",
     "release_support": "not-authorized",
     "evidence_ids": [
+      "BX-BH00-EVIDENCE-FINAL-ACCEPTANCE-6-4",
       "BX-BH00-EVIDENCE-RECONCILIATION-6-1",
       "BX-BH00-EVIDENCE-REVIEW-ACCESSIBILITY",
       "BX-BH00-EVIDENCE-REVIEW-ARCHITECTURE",
