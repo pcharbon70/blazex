@@ -11,3 +11,7 @@ erl_crash.dump
 # JavaScript packages
 **/node_modules/
 **/dist/
+
+# BH-01 reproducible runtime outputs (manifests/evidence remain versioned)
+packages/blazex_runtime_popcorn/runtime/generated/
+integration/fixtures/runtime_smoke/generated/

@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0.0",
+  "classification_id": "BX-BH01-RUNTIME-ADAPTER-0.1",
+  "status": "experimental-replaceable",
+  "surfaces": [
+    {
+      "classification": "upstream-atomvm",
+      "owns": ["BEAM instruction execution", "process scheduling", "mailboxes", "timers", "links and monitors", "AVM bundle loading"],
+      "source": "FissionVM commit 6c3208c7b3dbc7dacc35a19f8de1fa80b358ac73"
+    },
+    {
+      "classification": "upstream-fissionvm",
+      "owns": ["Emscripten platform", "Popcorn NIFs", "tracked-object bridge", "shared-memory runtime build"],
+      "source": "FissionVM commit 6c3208c7b3dbc7dacc35a19f8de1fa80b358ac73"
+    },
+    {
+      "classification": "upstream-popcorn",
+      "owns": ["OTP and Elixir patches", "AVM cooking", "generated boot module", "host-call encoding"],
+      "source": "Popcorn 0.3.3"
+    },
+    {
+      "classification": "blazex-phase3-adaptation",
+      "owns": ["reproducible build orchestration", "binary inspection", "fixture boot/message/dispose hook names", "evidence manifests"],
+      "source": "packages/blazex_runtime_popcorn"
+    },
+    {
+      "classification": "blazex-source-patch",
+      "owns": [],
+      "source": "runtime/patches/manifest.json"
+    },
+    {
+      "classification": "future-browser-host",
+      "owns": ["feature detection", "worker lifecycle", "cross-origin isolation", "asset fetching", "readiness and fallback presentation"],
+      "source": "BH-01 Phase 4; not implemented in Phase 3"
+    }
+  ],
+  "fixture_hooks": ["boot_fixture", "dispatch_fixture_message", "dispose_fixture"],
+  "prohibited_ownership": ["component semantics", "DOM lowering", "server authority", "browser support policy", "stable public API"]
+}

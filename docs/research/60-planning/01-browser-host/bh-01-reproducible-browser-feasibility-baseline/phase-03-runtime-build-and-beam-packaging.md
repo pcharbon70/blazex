@@ -22,38 +22,38 @@ Back to milestone: [README](README.md)
   fixture, directly probe required VM semantics, and establish deterministic
   artifact identities before introducing browser-host behavior.
 
-  - [ ] 3.1 Section - Build the pinned AtomVM WebAssembly runtime.
+  - [x] 3.1 Section - Build the pinned AtomVM WebAssembly runtime.
 
     Turn qualified sources and tools into an explainable Wasm artifact with
     explicit features, imports, exports, memory, patches, and build modes.
 
-    - [ ] 3.1.1 Task - Implement the canonical runtime build recipe.
+    - [x] 3.1.1 Task - Implement the canonical runtime build recipe.
 
       The recipe must expose every transformation and fail when an undeclared
       tool, flag, generated source, or native dependency influences output.
 
-      - [ ] 3.1.1.1 Subtask - Define clean configure/compile/link/package commands from the exact AtomVM source revision and qualified Wasm SDK/sysroot.
-      - [ ] 3.1.1.2 Subtask - Record target/features, optimization/debug flags, memory/table settings, exports/imports, filesystem/network/time/random assumptions, and generated inputs.
-      - [ ] 3.1.1.3 Subtask - Apply BlazeX-required patches as separate hashed files with rationale, upstream status, license impact, compatibility risk, and removal trigger.
-      - [ ] 3.1.1.4 Subtask - Produce debug and release runtime artifacts plus build metadata without accepting an opaque prebuilt runtime as proof.
+      - [x] 3.1.1.1 Subtask - Define clean configure/compile/link/package commands from the exact AtomVM source revision and qualified Wasm SDK/sysroot.
+      - [x] 3.1.1.2 Subtask - Record target/features, optimization/debug flags, memory/table settings, exports/imports, filesystem/network/time/random assumptions, and generated inputs.
+      - [x] 3.1.1.3 Subtask - Apply BlazeX-required patches as separate hashed files with rationale, upstream status, license impact, compatibility risk, and removal trigger.
+      - [x] 3.1.1.4 Subtask - Produce debug and release runtime artifacts plus build metadata without accepting an opaque prebuilt runtime as proof.
 
-    - [ ] 3.1.2 Task - Inspect and validate the Wasm binary contract.
+    - [x] 3.1.2 Task - Inspect and validate the Wasm binary contract.
 
       Binary inspection must confirm that the emitted module matches the
       declared host/deployment assumptions.
 
-      - [ ] 3.1.2.1 Subtask - Validate Wasm format, imports/exports, target features, custom/name/source-map sections, memory/table limits, start behavior, and forbidden capabilities.
-      - [ ] 3.1.2.2 Subtask - Compare debug/release structure, sizes, symbols, and source exposure; fail on undeclared imports, absolute paths, embedded secrets, or unbounded memory settings.
-      - [ ] 3.1.2.3 Subtask - Generate a runtime binary manifest linking every section/import/export to source revision, build command, owning adapter, and later browser prerequisite.
+      - [x] 3.1.2.1 Subtask - Validate Wasm format, imports/exports, target features, custom/name/source-map sections, memory/table limits, start behavior, and forbidden capabilities.
+      - [x] 3.1.2.2 Subtask - Compare debug/release structure, sizes, symbols, and source exposure; fail on undeclared imports, absolute paths, embedded secrets, or unbounded memory settings.
+      - [x] 3.1.2.3 Subtask - Generate a runtime binary manifest linking every section/import/export to source revision, build command, owning adapter, and later browser prerequisite.
 
-    - [ ] 3.1.3 Task - Integrate Popcorn behind the runtime adapter.
+    - [x] 3.1.3 Task - Integrate Popcorn behind the runtime adapter.
 
       Popcorn-specific construction and host shims must remain in
       `blazex_runtime_popcorn` rather than becoming product semantics.
 
-      - [ ] 3.1.3.1 Subtask - Build and package the exact Popcorn integration, classifying behavior as upstream AtomVM, upstream Popcorn, BlazeX adaptation, patch, or future browser host responsibility.
-      - [ ] 3.1.3.2 Subtask - Expose only fixture boot/message/lifecycle hooks needed by BH-01 and mark all adapter APIs experimental and replaceable.
-      - [ ] 3.1.3.3 Subtask - Add source/import guards preventing browser DOM, Phoenix, LiveView, component, or future semantic-tree concerns from entering the runtime adapter.
+      - [x] 3.1.3.1 Subtask - Build and package the exact Popcorn integration, classifying behavior as upstream AtomVM, upstream Popcorn, BlazeX adaptation, patch, or future browser host responsibility.
+      - [x] 3.1.3.2 Subtask - Expose only fixture boot/message/lifecycle hooks needed by BH-01 and mark all adapter APIs experimental and replaceable.
+      - [x] 3.1.3.3 Subtask - Add source/import guards preventing browser DOM, Phoenix, LiveView, component, or future semantic-tree concerns from entering the runtime adapter.
 
   - [ ] 3.2 Section - Build and package the minimal BEAM fixture.
 

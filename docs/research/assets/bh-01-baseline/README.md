@@ -74,6 +74,10 @@ locations rather than this governance directory.
 - [BH-01 Phase 2 completion v0.1.0](blazex-bh-01-phase-02-completion-v0.1.0.json)
   — schema-valid input-qualification decision with hashes, two-clean-
   environment equivalence, limitations, risk disposition, and a narrow `go`.
+- [BH-01 Phase 3 authorization v0.1.0](blazex-bh-01-phase-03-authorization-v0.1.0.json)
+  — repository-owner approval for the pinned runtime build, disposable BEAM
+  fixture, non-browser semantic probes, artifact evidence, section commits,
+  one immediately merged PR, synchronization, and branch cleanup.
 
 ## Maintaining this index
 
