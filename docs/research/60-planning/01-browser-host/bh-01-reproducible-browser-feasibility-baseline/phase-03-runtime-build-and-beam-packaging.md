@@ -16,7 +16,7 @@ aliases:
 
 Back to milestone: [README](README.md)
 
-- [ ] 3 Phase - AtomVM/Popcorn Runtime Build and BEAM Packaging.
+- [x] 3 Phase - AtomVM/Popcorn Runtime Build and BEAM Packaging.
 
   Compile the pinned runtime stack into WebAssembly, package a minimal BEAM
   fixture, directly probe required VM semantics, and establish deterministic
@@ -132,27 +132,27 @@ Back to milestone: [README](README.md)
       - [x] 3.4.2.2 Subtask - Fail on orphaned, duplicate, unhashed, license-unknown, unreachable, unexpectedly mapped, or undeclared artifacts.
       - [x] 3.4.2.3 Subtask - Preserve preliminary build/payload observations without marking proposed budgets passed.
 
-  - [ ] 3.5 Section - Phase 3 Integration Tests and Completion Evidence.
+  - [x] 3.5 Section - Phase 3 Integration Tests and Completion Evidence.
 
     Validate the runtime build, BEAM packaging, semantic probes, and initial
     artifact accounting together before browser loading begins.
 
-    - [ ] 3.5.1 Task - Execute runtime and bundle integration tests.
+    - [x] 3.5.1 Task - Execute runtime and bundle integration tests.
 
       Tests must use the actual generated Wasm and bundle artifacts rather than
       substituting host ERTS results.
 
-      - [ ] 3.5.1.1 Subtask - Run configure/build/inspect/package/smoke/probe/shutdown from clean state in debug and release modes and correlate traces with artifact IDs.
-      - [ ] 3.5.1.2 Subtask - Exercise invalid Wasm, missing import, incompatible feature, corrupt/unknown bundle, missing module, malformed payload, timer race, crash, and cleanup failure paths.
-      - [ ] 3.5.1.3 Subtask - Evaluate runtime-semantics and artifact-accounting risks plus the timer/message proof’s runtime portion; record all limitations before browser work.
+      - [x] 3.5.1.1 Subtask - Run configure/build/inspect/package/smoke/probe/shutdown from clean state in debug and release modes and correlate traces with artifact IDs.
+      - [x] 3.5.1.2 Subtask - Exercise invalid Wasm, missing import, incompatible feature, corrupt/unknown bundle, missing module, malformed payload, timer race, crash, and cleanup failure paths.
+      - [x] 3.5.1.3 Subtask - Evaluate runtime-semantics and artifact-accounting risks plus the timer/message proof’s runtime portion; record all limitations before browser work.
 
-    - [ ] 3.5.2 Task - Verify determinism and publish phase evidence.
+    - [x] 3.5.2 Task - Verify determinism and publish phase evidence.
 
       The phase closes only with reproducible artifacts and a truthful decision
       about whether the browser host is worth attempting.
 
-      - [ ] 3.5.2.1 Subtask - Regenerate artifacts twice, compare hashes/manifests, validate provenance/licenses/source maps/reachability, and run dependency/forbidden-token checks.
-      - [ ] 3.5.2.2 Subtask - Publish Phase 3 evidence with exact tools/sources, commands, binary inspections, bundle inventories, semantic traces, failures, artifact hashes, findings, and stop/go decision.
+      - [x] 3.5.2.1 Subtask - Regenerate artifacts twice, compare hashes/manifests, validate provenance/licenses/source maps/reachability, and run dependency/forbidden-token checks.
+      - [x] 3.5.2.2 Subtask - Publish Phase 3 evidence with exact tools/sources, commands, binary inspections, bundle inventories, semantic traces, failures, artifact hashes, findings, and stop/go decision.
 
 ## Section delivery rule
 

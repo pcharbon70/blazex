@@ -4,7 +4,7 @@
   "path": "packages/blazex_runtime_popcorn",
   "kind": "elixir-package",
   "activation_phase": "BH-01 Phase 1",
-  "status": "experimental-phase3-runtime-adapter",
+  "status": "experimental-phase3-runtime-gate-passed-browser-unproven",
   "owner_role": "runtime-owner",
   "module_roots": ["BlazeX.Runtime.Popcorn"],
   "manifest": "mix.exs",

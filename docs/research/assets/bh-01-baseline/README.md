@@ -82,6 +82,13 @@ locations rather than this governance directory.
   — unified identities, lineage, provenance, ownership, reachability, source-
   map policy, licensing, and two-clean-build comparison for runtime and AVM
   outputs.
+- [BH-01 Phase 3 validation log v0.1.0](blazex-bh-01-phase-03-validation-log-v0.1.0.txt)
+  — exact runtime/bundle build, actual-Wasm semantic, deterministic-repeat,
+  negative-path, test, artifact, limitation, and execution-boundary outcomes.
+- [BH-01 Phase 3 completion v0.1.0](blazex-bh-01-phase-03-completion-v0.1.0.json)
+  — schema-valid runtime/package decision with input/output hashes, observed
+  compatibility limits, accepted risk disposition, narrow `go`, and explicit
+  Phase 4 non-authorization.
 
 ## Maintaining this index
 

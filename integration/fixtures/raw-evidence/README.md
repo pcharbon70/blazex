@@ -10,3 +10,5 @@ is not browser evidence.
 - `bh01-phase3-artifact-reproducibility.json` — 21 byte-identical runtime,
   fixture, metadata, compressed-output, and normalized-build-log comparisons
   across two clean equivalent builds.
+- `bh01-phase3-negative-paths.json` — eight fail-closed actual-runtime,
+  WebAssembly-host-contract, bundle, and evidence-validation probes.

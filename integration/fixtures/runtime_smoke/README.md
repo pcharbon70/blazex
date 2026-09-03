@@ -42,3 +42,13 @@ python3 verify_artifact_accounting.py
 
 The clean-build comparison records exact bytes only. It does not mark a
 proposed payload budget as passed or establish browser deployability.
+
+`run_negative_probes.py` exercises the actual Node-target Wasm and release AVM
+against invalid Wasm, missing imports, incompatible shared memory, corrupt or
+unknown bundles, and a missing module. It also requires the canonical runtime
+to expose malformed capability, timer-race, crash/restart, late-message, and
+cleanup behavior. Retained results are checked without re-execution by:
+
+```console
+python3 verify_negative_probes.py
+```
