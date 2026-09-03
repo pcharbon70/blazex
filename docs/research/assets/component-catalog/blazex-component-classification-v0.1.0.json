@@ -4,7 +4,7 @@
   "classification_id": "BX-CLASSIFICATION-BROWSER-FOUNDATION",
   "source_catalog": "assets/component-catalog/blazex-component-catalog-v0.1.0.json",
   "source_catalog_sha256": "ec0f413c9968b92878e71c1aae9570286dd68ec538938ad880d8908cf7ea70a3",
-  "stage": "section-4.2",
+  "stage": "section-4.3",
   "status": "reviewed",
   "sort_order": "family-id-unicode-codepoint-ascending",
   "owner_roles": [
@@ -72,28 +72,38 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-semantic",
+        "rationale": "Alert is expressed through semantic nodes, tokens, layout, accessibility, and normalized state without a specialized host operation.",
         "semantic_contract": {
-          "nodes": [],
+          "nodes": [
+            "content",
+            "semantic-node"
+          ],
           "events": [],
           "effects": [],
-          "accessibility": [],
-          "layout": [],
+          "accessibility": [
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "logical-direction",
+            "tokenized-size"
+          ],
           "focus": [],
           "resources": []
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "Alert is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -159,28 +169,41 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-semantic",
+        "rationale": "AppBar is expressed through semantic nodes, tokens, layout, accessibility, and normalized state without a specialized host operation.",
         "semantic_contract": {
-          "nodes": [],
+          "nodes": [
+            "content",
+            "layout",
+            "region",
+            "semantic-node"
+          ],
           "events": [],
           "effects": [],
-          "accessibility": [],
-          "layout": [],
+          "accessibility": [
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "layout-intent",
+            "logical-direction",
+            "tokenized-size"
+          ],
           "focus": [],
           "resources": []
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "AppBar is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -272,28 +295,60 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "Autocomplete is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
-          "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
-          "focus": [],
-          "resources": []
+          "nodes": [
+            "content",
+            "field",
+            "input",
+            "semantic-node"
+          ],
+          "events": [
+            "activate",
+            "commit",
+            "value-change"
+          ],
+          "effects": [
+            "request-focus",
+            "request-keyboard",
+            "request-measurement",
+            "request-network",
+            "request-pointer",
+            "request-surface"
+          ],
+          "accessibility": [
+            "description",
+            "error-relationship",
+            "label-relationship",
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "adaptive-measurement",
+            "logical-direction",
+            "tokenized-size"
+          ],
+          "focus": [
+            "focus-order"
+          ],
+          "resources": [
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "Autocomplete is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -357,28 +412,38 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-semantic",
+        "rationale": "Avatar is expressed through semantic nodes, tokens, layout, accessibility, and normalized state without a specialized host operation.",
         "semantic_contract": {
-          "nodes": [],
+          "nodes": [
+            "content",
+            "semantic-node"
+          ],
           "events": [],
           "effects": [],
-          "accessibility": [],
-          "layout": [],
+          "accessibility": [
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "logical-direction",
+            "tokenized-size"
+          ],
           "focus": [],
           "resources": []
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "Avatar is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -442,28 +507,38 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-semantic",
+        "rationale": "Badge is expressed through semantic nodes, tokens, layout, accessibility, and normalized state without a specialized host operation.",
         "semantic_contract": {
-          "nodes": [],
+          "nodes": [
+            "content",
+            "semantic-node"
+          ],
           "events": [],
           "effects": [],
-          "accessibility": [],
-          "layout": [],
+          "accessibility": [
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "logical-direction",
+            "tokenized-size"
+          ],
           "focus": [],
           "resources": []
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "Badge is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -538,28 +613,49 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "Breadcrumbs is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
-          "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
-          "focus": [],
-          "resources": []
+          "nodes": [
+            "content",
+            "semantic-node"
+          ],
+          "events": [
+            "activate"
+          ],
+          "effects": [
+            "request-focus",
+            "request-keyboard",
+            "request-pointer"
+          ],
+          "accessibility": [
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "logical-direction",
+            "tokenized-size"
+          ],
+          "focus": [
+            "focus-order"
+          ],
+          "resources": [
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "Breadcrumbs is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -628,28 +724,46 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "BreakpointProvider is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
+          "nodes": [
+            "content",
+            "framework-context",
+            "semantic-node"
+          ],
           "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
+          "effects": [
+            "request-measurement",
+            "request-window"
+          ],
+          "accessibility": [
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "adaptive-measurement",
+            "logical-direction",
+            "tokenized-size"
+          ],
           "focus": [],
-          "resources": []
+          "resources": [
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "not-applicable",
+        "visual_profile": "not-applicable",
+        "visual_profile_rationale": "BreakpointProvider is context, semantic infrastructure, or a bounded extension rather than a direct native widget mapping.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -724,28 +838,49 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "Button is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
-          "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
-          "focus": [],
-          "resources": []
+          "nodes": [
+            "content",
+            "semantic-node"
+          ],
+          "events": [
+            "activate"
+          ],
+          "effects": [
+            "request-focus",
+            "request-keyboard",
+            "request-pointer"
+          ],
+          "accessibility": [
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "logical-direction",
+            "tokenized-size"
+          ],
+          "focus": [
+            "focus-order"
+          ],
+          "resources": [
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-preferred",
+        "visual_profile": "platform-native",
+        "visual_profile_rationale": "Button should prefer an adequate stock platform control; OS behavior and accessibility take precedence over MudBlazor visual similarity.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -822,28 +957,49 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "ButtonGroup is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
-          "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
-          "focus": [],
-          "resources": []
+          "nodes": [
+            "content",
+            "semantic-node"
+          ],
+          "events": [
+            "activate"
+          ],
+          "effects": [
+            "request-focus",
+            "request-keyboard",
+            "request-pointer"
+          ],
+          "accessibility": [
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "logical-direction",
+            "tokenized-size"
+          ],
+          "focus": [
+            "focus-order"
+          ],
+          "resources": [
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "ButtonGroup is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -907,28 +1063,41 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-semantic",
+        "rationale": "Card is expressed through semantic nodes, tokens, layout, accessibility, and normalized state without a specialized host operation.",
         "semantic_contract": {
-          "nodes": [],
+          "nodes": [
+            "content",
+            "layout",
+            "region",
+            "semantic-node"
+          ],
           "events": [],
           "effects": [],
-          "accessibility": [],
-          "layout": [],
+          "accessibility": [
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "layout-intent",
+            "logical-direction",
+            "tokenized-size"
+          ],
           "focus": [],
           "resources": []
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "Card is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -1005,28 +1174,47 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "Carousel is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
-          "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
+          "nodes": [
+            "content",
+            "semantic-node"
+          ],
+          "events": [
+            "activate"
+          ],
+          "effects": [
+            "request-keyboard",
+            "request-pointer",
+            "request-time"
+          ],
+          "accessibility": [
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "logical-direction",
+            "tokenized-size"
+          ],
           "focus": [],
-          "resources": []
+          "resources": [
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "Carousel is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -1096,28 +1284,54 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "custom-scene",
+        "rationale": "Chart uses backend-neutral scene and data-series semantics with renderer drawing plus a mandatory nonvisual representation.",
         "semantic_contract": {
-          "nodes": [],
-          "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
+          "nodes": [
+            "content",
+            "data-series",
+            "scene",
+            "semantic-node"
+          ],
+          "events": [
+            "inspect-data",
+            "select-series"
+          ],
+          "effects": [
+            "request-measurement"
+          ],
+          "accessibility": [
+            "data-table-alternative",
+            "name",
+            "role",
+            "series-description",
+            "state"
+          ],
+          "layout": [
+            "adaptive-measurement",
+            "logical-direction",
+            "tokenized-size"
+          ],
           "focus": [],
-          "resources": []
+          "resources": [
+            "asset-resource",
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
-        "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "renderer_extensions": [
+          "scene-drawing"
+        ],
+        "native_strategy": "custom-drawn",
+        "visual_profile": "blazex-material",
+        "visual_profile_rationale": "Chart uses BlazeX-owned tokens and drawing semantics while exposing platform accessibility and reduced-motion/forced-color alternatives.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -1198,28 +1412,56 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "CheckBox is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
-          "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
-          "focus": [],
-          "resources": []
+          "nodes": [
+            "content",
+            "field",
+            "input",
+            "semantic-node"
+          ],
+          "events": [
+            "activate",
+            "commit",
+            "value-change"
+          ],
+          "effects": [
+            "request-focus",
+            "request-keyboard",
+            "request-pointer"
+          ],
+          "accessibility": [
+            "description",
+            "error-relationship",
+            "label-relationship",
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "logical-direction",
+            "tokenized-size"
+          ],
+          "focus": [
+            "focus-order"
+          ],
+          "resources": [
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-preferred",
+        "visual_profile": "platform-native",
+        "visual_profile_rationale": "CheckBox should prefer an adequate stock platform control; OS behavior and accessibility take precedence over MudBlazor visual similarity.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -1294,28 +1536,49 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "Chip is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
-          "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
-          "focus": [],
-          "resources": []
+          "nodes": [
+            "content",
+            "semantic-node"
+          ],
+          "events": [
+            "activate"
+          ],
+          "effects": [
+            "request-focus",
+            "request-keyboard",
+            "request-pointer"
+          ],
+          "accessibility": [
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "logical-direction",
+            "tokenized-size"
+          ],
+          "focus": [
+            "focus-order"
+          ],
+          "resources": [
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "Chip is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -1392,28 +1655,49 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "ChipSet is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
-          "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
-          "focus": [],
-          "resources": []
+          "nodes": [
+            "content",
+            "semantic-node"
+          ],
+          "events": [
+            "activate"
+          ],
+          "effects": [
+            "request-focus",
+            "request-keyboard",
+            "request-pointer"
+          ],
+          "accessibility": [
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "logical-direction",
+            "tokenized-size"
+          ],
+          "focus": [
+            "focus-order"
+          ],
+          "resources": [
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "ChipSet is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -1486,28 +1770,46 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "Collapse is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
-          "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
+          "nodes": [
+            "content",
+            "semantic-node"
+          ],
+          "events": [
+            "activate"
+          ],
+          "effects": [
+            "request-keyboard",
+            "request-pointer"
+          ],
+          "accessibility": [
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "logical-direction",
+            "tokenized-size"
+          ],
           "focus": [],
-          "resources": []
+          "resources": [
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "Collapse is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -1594,28 +1896,57 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "ColorPicker is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
-          "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
-          "focus": [],
-          "resources": []
+          "nodes": [
+            "content",
+            "field",
+            "input",
+            "semantic-node"
+          ],
+          "events": [
+            "activate",
+            "commit",
+            "value-change"
+          ],
+          "effects": [
+            "request-focus",
+            "request-keyboard",
+            "request-pointer",
+            "request-surface"
+          ],
+          "accessibility": [
+            "description",
+            "error-relationship",
+            "label-relationship",
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "logical-direction",
+            "tokenized-size"
+          ],
+          "focus": [
+            "focus-order"
+          ],
+          "resources": [
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-preferred",
+        "visual_profile": "platform-native",
+        "visual_profile_rationale": "ColorPicker should prefer an adequate stock platform control; OS behavior and accessibility take precedence over MudBlazor visual similarity.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -1679,28 +2010,41 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-semantic",
+        "rationale": "Container is expressed through semantic nodes, tokens, layout, accessibility, and normalized state without a specialized host operation.",
         "semantic_contract": {
-          "nodes": [],
+          "nodes": [
+            "content",
+            "layout",
+            "region",
+            "semantic-node"
+          ],
           "events": [],
           "effects": [],
-          "accessibility": [],
-          "layout": [],
+          "accessibility": [
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "layout-intent",
+            "logical-direction",
+            "tokenized-size"
+          ],
           "focus": [],
           "resources": []
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "Container is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -1788,28 +2132,59 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "DataGrid is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
-          "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
-          "focus": [],
-          "resources": []
+          "nodes": [
+            "collection",
+            "content",
+            "item",
+            "semantic-node"
+          ],
+          "events": [
+            "activate",
+            "navigate",
+            "select"
+          ],
+          "effects": [
+            "request-clipboard",
+            "request-focus",
+            "request-keyboard",
+            "request-measurement",
+            "request-network",
+            "request-pointer"
+          ],
+          "accessibility": [
+            "collection-position",
+            "name",
+            "role",
+            "selection-state",
+            "state"
+          ],
+          "layout": [
+            "adaptive-measurement",
+            "logical-direction",
+            "tokenized-size"
+          ],
+          "focus": [
+            "focus-order"
+          ],
+          "resources": [
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "DataGrid is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -1896,28 +2271,57 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "DatePicker is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
-          "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
-          "focus": [],
-          "resources": []
+          "nodes": [
+            "content",
+            "field",
+            "input",
+            "semantic-node"
+          ],
+          "events": [
+            "activate",
+            "commit",
+            "value-change"
+          ],
+          "effects": [
+            "request-focus",
+            "request-keyboard",
+            "request-pointer",
+            "request-surface"
+          ],
+          "accessibility": [
+            "description",
+            "error-relationship",
+            "label-relationship",
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "logical-direction",
+            "tokenized-size"
+          ],
+          "focus": [
+            "focus-order"
+          ],
+          "resources": [
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-preferred",
+        "visual_profile": "platform-native",
+        "visual_profile_rationale": "DatePicker should prefer an adequate stock platform control; OS behavior and accessibility take precedence over MudBlazor visual similarity.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -2003,28 +2407,60 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "Dialog is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
-          "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
-          "focus": [],
-          "resources": []
+          "nodes": [
+            "content",
+            "semantic-node",
+            "surface",
+            "surface-content"
+          ],
+          "events": [
+            "activate",
+            "dismiss",
+            "open"
+          ],
+          "effects": [
+            "request-focus",
+            "request-keyboard",
+            "request-measurement",
+            "request-pointer",
+            "request-surface"
+          ],
+          "accessibility": [
+            "dismiss-action",
+            "focus-order",
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "adaptive-measurement",
+            "logical-direction",
+            "tokenized-size"
+          ],
+          "focus": [
+            "focus-order",
+            "focus-restore",
+            "focus-scope"
+          ],
+          "resources": [
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "Dialog is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -2088,28 +2524,41 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-semantic",
+        "rationale": "Divider is expressed through semantic nodes, tokens, layout, accessibility, and normalized state without a specialized host operation.",
         "semantic_contract": {
-          "nodes": [],
+          "nodes": [
+            "content",
+            "layout",
+            "region",
+            "semantic-node"
+          ],
           "events": [],
           "effects": [],
-          "accessibility": [],
-          "layout": [],
+          "accessibility": [
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "layout-intent",
+            "logical-direction",
+            "tokenized-size"
+          ],
           "focus": [],
           "resources": []
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "Divider is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -2196,28 +2645,64 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "Drawer is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
-          "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
-          "focus": [],
-          "resources": []
+          "nodes": [
+            "content",
+            "layout",
+            "region",
+            "semantic-node",
+            "surface",
+            "surface-content"
+          ],
+          "events": [
+            "activate",
+            "dismiss",
+            "open"
+          ],
+          "effects": [
+            "request-focus",
+            "request-keyboard",
+            "request-measurement",
+            "request-pointer",
+            "request-surface",
+            "request-window"
+          ],
+          "accessibility": [
+            "dismiss-action",
+            "focus-order",
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "adaptive-measurement",
+            "layout-intent",
+            "logical-direction",
+            "tokenized-size"
+          ],
+          "focus": [
+            "focus-order",
+            "focus-restore",
+            "focus-scope"
+          ],
+          "resources": [
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "Drawer is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -2289,28 +2774,46 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "DropZone is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
-          "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
+          "nodes": [
+            "content",
+            "semantic-node"
+          ],
+          "events": [
+            "activate"
+          ],
+          "effects": [
+            "request-keyboard",
+            "request-pointer"
+          ],
+          "accessibility": [
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "logical-direction",
+            "tokenized-size"
+          ],
           "focus": [],
-          "resources": []
+          "resources": [
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "DropZone is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -2376,28 +2879,40 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "renderer-extension",
+        "rationale": "This bounded allowlisted extension is intentionally renderer-specific; portable components use semantic node kinds and the omission fallback.",
         "semantic_contract": {
-          "nodes": [],
+          "nodes": [
+            "content",
+            "semantic-node"
+          ],
           "events": [],
           "effects": [],
-          "accessibility": [],
-          "layout": [],
+          "accessibility": [
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "logical-direction",
+            "tokenized-size"
+          ],
           "focus": [],
           "resources": []
         },
-        "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "renderer_extensions": [
+          "allowlisted-element-extension"
+        ],
+        "native_strategy": "not-applicable",
+        "visual_profile": "not-applicable",
+        "visual_profile_rationale": "Element is context, semantic infrastructure, or a bounded extension rather than a direct native widget mapping.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "not-applicable",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -2463,28 +2978,43 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "ExitPrompt is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
+          "nodes": [
+            "content",
+            "semantic-node"
+          ],
           "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
+          "effects": [
+            "request-window"
+          ],
+          "accessibility": [
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "logical-direction",
+            "tokenized-size"
+          ],
           "focus": [],
-          "resources": []
+          "resources": [
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "ExitPrompt is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -2561,28 +3091,49 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "ExpansionPanel is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
-          "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
-          "focus": [],
-          "resources": []
+          "nodes": [
+            "content",
+            "semantic-node"
+          ],
+          "events": [
+            "activate"
+          ],
+          "effects": [
+            "request-focus",
+            "request-keyboard",
+            "request-pointer"
+          ],
+          "accessibility": [
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "logical-direction",
+            "tokenized-size"
+          ],
+          "focus": [
+            "focus-order"
+          ],
+          "resources": [
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "ExpansionPanel is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -2652,28 +3203,46 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-semantic",
+        "rationale": "Field is expressed through semantic nodes, tokens, layout, accessibility, and normalized state without a specialized host operation.",
         "semantic_contract": {
-          "nodes": [],
-          "events": [],
+          "nodes": [
+            "content",
+            "field",
+            "input",
+            "semantic-node"
+          ],
+          "events": [
+            "commit",
+            "value-change"
+          ],
           "effects": [],
-          "accessibility": [],
-          "layout": [],
+          "accessibility": [
+            "description",
+            "error-relationship",
+            "label-relationship",
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "logical-direction",
+            "tokenized-size"
+          ],
           "focus": [],
           "resources": []
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "Field is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -2758,28 +3327,59 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "FileUpload is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
-          "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
-          "focus": [],
-          "resources": []
+          "nodes": [
+            "content",
+            "field",
+            "input",
+            "semantic-node"
+          ],
+          "events": [
+            "activate",
+            "commit",
+            "value-change"
+          ],
+          "effects": [
+            "request-files",
+            "request-focus",
+            "request-keyboard",
+            "request-network",
+            "request-pointer"
+          ],
+          "accessibility": [
+            "description",
+            "error-relationship",
+            "label-relationship",
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "logical-direction",
+            "tokenized-size"
+          ],
+          "focus": [
+            "focus-order"
+          ],
+          "resources": [
+            "generation-disposal",
+            "opaque-file-resource",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-preferred",
+        "visual_profile": "platform-native",
+        "visual_profile_rationale": "FileUpload should prefer an adequate stock platform control; OS behavior and accessibility take precedence over MudBlazor visual similarity.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -2858,28 +3458,58 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "FocusTrap is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
-          "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
-          "focus": [],
-          "resources": []
+          "nodes": [
+            "content",
+            "framework-context",
+            "semantic-node",
+            "surface",
+            "surface-content"
+          ],
+          "events": [
+            "activate",
+            "dismiss",
+            "open"
+          ],
+          "effects": [
+            "request-focus",
+            "request-keyboard",
+            "request-pointer"
+          ],
+          "accessibility": [
+            "dismiss-action",
+            "focus-order",
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "logical-direction",
+            "tokenized-size"
+          ],
+          "focus": [
+            "focus-order",
+            "focus-restore",
+            "focus-scope"
+          ],
+          "resources": [
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "FocusTrap is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -2958,28 +3588,54 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "Form is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
-          "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
+          "nodes": [
+            "content",
+            "field",
+            "input",
+            "semantic-node"
+          ],
+          "events": [
+            "activate",
+            "commit",
+            "value-change"
+          ],
+          "effects": [
+            "request-keyboard",
+            "request-network",
+            "request-pointer"
+          ],
+          "accessibility": [
+            "description",
+            "error-relationship",
+            "label-relationship",
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "logical-direction",
+            "tokenized-size"
+          ],
           "focus": [],
-          "resources": []
+          "resources": [
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "not-applicable",
+        "visual_profile": "not-applicable",
+        "visual_profile_rationale": "Form is context, semantic infrastructure, or a bounded extension rather than a direct native widget mapping.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -3043,28 +3699,41 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-semantic",
+        "rationale": "Grid is expressed through semantic nodes, tokens, layout, accessibility, and normalized state without a specialized host operation.",
         "semantic_contract": {
-          "nodes": [],
+          "nodes": [
+            "content",
+            "layout",
+            "region",
+            "semantic-node"
+          ],
           "events": [],
           "effects": [],
-          "accessibility": [],
-          "layout": [],
+          "accessibility": [
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "layout-intent",
+            "logical-direction",
+            "tokenized-size"
+          ],
           "focus": [],
           "resources": []
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "Grid is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -3128,28 +3797,38 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-semantic",
+        "rationale": "Hidden is expressed through semantic nodes, tokens, layout, accessibility, and normalized state without a specialized host operation.",
         "semantic_contract": {
-          "nodes": [],
+          "nodes": [
+            "content",
+            "semantic-node"
+          ],
           "events": [],
           "effects": [],
-          "accessibility": [],
-          "layout": [],
+          "accessibility": [
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "logical-direction",
+            "tokenized-size"
+          ],
           "focus": [],
           "resources": []
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "Hidden is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -3213,28 +3892,38 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-semantic",
+        "rationale": "Highlighter is expressed through semantic nodes, tokens, layout, accessibility, and normalized state without a specialized host operation.",
         "semantic_contract": {
-          "nodes": [],
+          "nodes": [
+            "content",
+            "semantic-node"
+          ],
           "events": [],
           "effects": [],
-          "accessibility": [],
-          "layout": [],
+          "accessibility": [
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "logical-direction",
+            "tokenized-size"
+          ],
           "focus": [],
           "resources": []
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "Highlighter is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -3309,28 +3998,47 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "Hotkey is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
-          "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
+          "nodes": [
+            "content",
+            "semantic-node"
+          ],
+          "events": [
+            "activate"
+          ],
+          "effects": [
+            "request-keyboard",
+            "request-pointer",
+            "request-window"
+          ],
+          "accessibility": [
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "logical-direction",
+            "tokenized-size"
+          ],
           "focus": [],
-          "resources": []
+          "resources": [
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "Hotkey is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -3394,28 +4102,43 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-semantic",
+        "rationale": "Icon is expressed through semantic nodes, tokens, layout, accessibility, and normalized state without a specialized host operation.",
         "semantic_contract": {
-          "nodes": [],
+          "nodes": [
+            "content",
+            "layout",
+            "region",
+            "semantic-node"
+          ],
           "events": [],
           "effects": [],
-          "accessibility": [],
-          "layout": [],
+          "accessibility": [
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "layout-intent",
+            "logical-direction",
+            "tokenized-size"
+          ],
           "focus": [],
-          "resources": []
+          "resources": [
+            "asset-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "Icon is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -3479,28 +4202,43 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-semantic",
+        "rationale": "Image is expressed through semantic nodes, tokens, layout, accessibility, and normalized state without a specialized host operation.",
         "semantic_contract": {
-          "nodes": [],
+          "nodes": [
+            "content",
+            "layout",
+            "region",
+            "semantic-node"
+          ],
           "events": [],
           "effects": [],
-          "accessibility": [],
-          "layout": [],
+          "accessibility": [
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "layout-intent",
+            "logical-direction",
+            "tokenized-size"
+          ],
           "focus": [],
-          "resources": []
+          "resources": [
+            "asset-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-preferred",
+        "visual_profile": "platform-native",
+        "visual_profile_rationale": "Image should prefer an adequate stock platform control; OS behavior and accessibility take precedence over MudBlazor visual similarity.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -3571,28 +4309,49 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "Input is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
-          "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
+          "nodes": [
+            "content",
+            "field",
+            "framework-context",
+            "input",
+            "semantic-node"
+          ],
+          "events": [
+            "commit",
+            "value-change"
+          ],
+          "effects": [
+            "request-clipboard"
+          ],
+          "accessibility": [
+            "description",
+            "error-relationship",
+            "label-relationship",
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "logical-direction",
+            "tokenized-size"
+          ],
           "focus": [],
           "resources": []
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "not-applicable",
+        "visual_profile": "not-applicable",
+        "visual_profile_rationale": "Input is context, semantic infrastructure, or a bounded extension rather than a direct native widget mapping.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -3662,28 +4421,47 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-semantic",
+        "rationale": "InputControl is expressed through semantic nodes, tokens, layout, accessibility, and normalized state without a specialized host operation.",
         "semantic_contract": {
-          "nodes": [],
-          "events": [],
+          "nodes": [
+            "content",
+            "field",
+            "framework-context",
+            "input",
+            "semantic-node"
+          ],
+          "events": [
+            "commit",
+            "value-change"
+          ],
           "effects": [],
-          "accessibility": [],
-          "layout": [],
+          "accessibility": [
+            "description",
+            "error-relationship",
+            "label-relationship",
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "logical-direction",
+            "tokenized-size"
+          ],
           "focus": [],
           "resources": []
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "not-applicable",
+        "visual_profile": "not-applicable",
+        "visual_profile_rationale": "InputControl is context, semantic infrastructure, or a bounded extension rather than a direct native widget mapping.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -3750,28 +4528,46 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "Layout is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
+          "nodes": [
+            "content",
+            "layout",
+            "region",
+            "semantic-node"
+          ],
           "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
+          "effects": [
+            "request-window"
+          ],
+          "accessibility": [
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "layout-intent",
+            "logical-direction",
+            "tokenized-size"
+          ],
           "focus": [],
-          "resources": []
+          "resources": [
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "Layout is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -3846,28 +4642,49 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "Link is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
-          "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
-          "focus": [],
-          "resources": []
+          "nodes": [
+            "content",
+            "semantic-node"
+          ],
+          "events": [
+            "activate"
+          ],
+          "effects": [
+            "request-focus",
+            "request-keyboard",
+            "request-pointer"
+          ],
+          "accessibility": [
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "logical-direction",
+            "tokenized-size"
+          ],
+          "focus": [
+            "focus-order"
+          ],
+          "resources": [
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-preferred",
+        "visual_profile": "platform-native",
+        "visual_profile_rationale": "Link should prefer an adequate stock platform control; OS behavior and accessibility take precedence over MudBlazor visual similarity.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -3948,28 +4765,56 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "List is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
-          "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
-          "focus": [],
-          "resources": []
+          "nodes": [
+            "collection",
+            "content",
+            "item",
+            "semantic-node"
+          ],
+          "events": [
+            "activate",
+            "navigate",
+            "select"
+          ],
+          "effects": [
+            "request-focus",
+            "request-keyboard",
+            "request-network",
+            "request-pointer"
+          ],
+          "accessibility": [
+            "collection-position",
+            "name",
+            "role",
+            "selection-state",
+            "state"
+          ],
+          "layout": [
+            "logical-direction",
+            "tokenized-size"
+          ],
+          "focus": [
+            "focus-order"
+          ],
+          "resources": [
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "List is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -4033,28 +4878,41 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-semantic",
+        "rationale": "Main is expressed through semantic nodes, tokens, layout, accessibility, and normalized state without a specialized host operation.",
         "semantic_contract": {
-          "nodes": [],
+          "nodes": [
+            "content",
+            "layout",
+            "region",
+            "semantic-node"
+          ],
           "events": [],
           "effects": [],
-          "accessibility": [],
-          "layout": [],
+          "accessibility": [
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "layout-intent",
+            "logical-direction",
+            "tokenized-size"
+          ],
           "focus": [],
           "resources": []
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "Main is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -4137,28 +4995,57 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "Mask is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
-          "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
-          "focus": [],
-          "resources": []
+          "nodes": [
+            "content",
+            "field",
+            "input",
+            "semantic-node"
+          ],
+          "events": [
+            "activate",
+            "commit",
+            "value-change"
+          ],
+          "effects": [
+            "request-clipboard",
+            "request-focus",
+            "request-keyboard",
+            "request-pointer"
+          ],
+          "accessibility": [
+            "description",
+            "error-relationship",
+            "label-relationship",
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "logical-direction",
+            "tokenized-size"
+          ],
+          "focus": [
+            "focus-order"
+          ],
+          "resources": [
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "Mask is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -4244,28 +5131,60 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "Menu is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
-          "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
-          "focus": [],
-          "resources": []
+          "nodes": [
+            "content",
+            "semantic-node",
+            "surface",
+            "surface-content"
+          ],
+          "events": [
+            "activate",
+            "dismiss",
+            "open"
+          ],
+          "effects": [
+            "request-focus",
+            "request-keyboard",
+            "request-measurement",
+            "request-pointer",
+            "request-surface"
+          ],
+          "accessibility": [
+            "dismiss-action",
+            "focus-order",
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "adaptive-measurement",
+            "logical-direction",
+            "tokenized-size"
+          ],
+          "focus": [
+            "focus-order",
+            "focus-restore",
+            "focus-scope"
+          ],
+          "resources": [
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "Menu is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -4348,28 +5267,58 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "MessageBox is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
-          "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
-          "focus": [],
-          "resources": []
+          "nodes": [
+            "content",
+            "semantic-node",
+            "surface",
+            "surface-content"
+          ],
+          "events": [
+            "activate",
+            "dismiss",
+            "open"
+          ],
+          "effects": [
+            "request-focus",
+            "request-keyboard",
+            "request-pointer",
+            "request-surface"
+          ],
+          "accessibility": [
+            "dismiss-action",
+            "focus-order",
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "logical-direction",
+            "tokenized-size"
+          ],
+          "focus": [
+            "focus-order",
+            "focus-restore",
+            "focus-scope"
+          ],
+          "resources": [
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "MessageBox is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -4446,28 +5395,49 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "NavMenu is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
-          "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
-          "focus": [],
-          "resources": []
+          "nodes": [
+            "content",
+            "semantic-node"
+          ],
+          "events": [
+            "activate"
+          ],
+          "effects": [
+            "request-focus",
+            "request-keyboard",
+            "request-pointer"
+          ],
+          "accessibility": [
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "logical-direction",
+            "tokenized-size"
+          ],
+          "focus": [
+            "focus-order"
+          ],
+          "resources": [
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "NavMenu is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -4550,28 +5520,57 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "NumericField is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
-          "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
-          "focus": [],
-          "resources": []
+          "nodes": [
+            "content",
+            "field",
+            "input",
+            "semantic-node"
+          ],
+          "events": [
+            "activate",
+            "commit",
+            "value-change"
+          ],
+          "effects": [
+            "request-clipboard",
+            "request-focus",
+            "request-keyboard",
+            "request-pointer"
+          ],
+          "accessibility": [
+            "description",
+            "error-relationship",
+            "label-relationship",
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "logical-direction",
+            "tokenized-size"
+          ],
+          "focus": [
+            "focus-order"
+          ],
+          "resources": [
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-preferred",
+        "visual_profile": "platform-native",
+        "visual_profile_rationale": "NumericField should prefer an adequate stock platform control; OS behavior and accessibility take precedence over MudBlazor visual similarity.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -4641,28 +5640,54 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "Overlay is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
-          "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
-          "focus": [],
-          "resources": []
+          "nodes": [
+            "content",
+            "framework-context",
+            "semantic-node",
+            "surface",
+            "surface-content"
+          ],
+          "events": [
+            "dismiss",
+            "open"
+          ],
+          "effects": [
+            "request-surface"
+          ],
+          "accessibility": [
+            "dismiss-action",
+            "focus-order",
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "logical-direction",
+            "tokenized-size"
+          ],
+          "focus": [
+            "focus-restore",
+            "focus-scope"
+          ],
+          "resources": [
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "Overlay is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -4741,28 +5766,52 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "PageContentNavigation is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
-          "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
-          "focus": [],
-          "resources": []
+          "nodes": [
+            "content",
+            "semantic-node"
+          ],
+          "events": [
+            "activate"
+          ],
+          "effects": [
+            "request-focus",
+            "request-keyboard",
+            "request-measurement",
+            "request-pointer",
+            "request-window"
+          ],
+          "accessibility": [
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "adaptive-measurement",
+            "logical-direction",
+            "tokenized-size"
+          ],
+          "focus": [
+            "focus-order"
+          ],
+          "resources": [
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "PageContentNavigation is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -4837,28 +5886,49 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "Pagination is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
-          "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
-          "focus": [],
-          "resources": []
+          "nodes": [
+            "content",
+            "semantic-node"
+          ],
+          "events": [
+            "activate"
+          ],
+          "effects": [
+            "request-focus",
+            "request-keyboard",
+            "request-pointer"
+          ],
+          "accessibility": [
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "logical-direction",
+            "tokenized-size"
+          ],
+          "focus": [
+            "focus-order"
+          ],
+          "resources": [
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "Pagination is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -4922,28 +5992,41 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-semantic",
+        "rationale": "Paper is expressed through semantic nodes, tokens, layout, accessibility, and normalized state without a specialized host operation.",
         "semantic_contract": {
-          "nodes": [],
+          "nodes": [
+            "content",
+            "layout",
+            "region",
+            "semantic-node"
+          ],
           "events": [],
           "effects": [],
-          "accessibility": [],
-          "layout": [],
+          "accessibility": [
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "layout-intent",
+            "logical-direction",
+            "tokenized-size"
+          ],
           "focus": [],
           "resources": []
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "Paper is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -5031,28 +6114,58 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "Picker is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
-          "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
-          "focus": [],
-          "resources": []
+          "nodes": [
+            "content",
+            "field",
+            "framework-context",
+            "input",
+            "semantic-node"
+          ],
+          "events": [
+            "activate",
+            "commit",
+            "value-change"
+          ],
+          "effects": [
+            "request-focus",
+            "request-keyboard",
+            "request-pointer",
+            "request-surface"
+          ],
+          "accessibility": [
+            "description",
+            "error-relationship",
+            "label-relationship",
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "logical-direction",
+            "tokenized-size"
+          ],
+          "focus": [
+            "focus-order"
+          ],
+          "resources": [
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "Picker is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -5126,28 +6239,55 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "Popover is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
-          "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
-          "focus": [],
-          "resources": []
+          "nodes": [
+            "content",
+            "semantic-node",
+            "surface",
+            "surface-content"
+          ],
+          "events": [
+            "dismiss",
+            "open"
+          ],
+          "effects": [
+            "request-measurement",
+            "request-surface"
+          ],
+          "accessibility": [
+            "dismiss-action",
+            "focus-order",
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "adaptive-measurement",
+            "logical-direction",
+            "tokenized-size"
+          ],
+          "focus": [
+            "focus-restore",
+            "focus-scope"
+          ],
+          "resources": [
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "Popover is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -5214,28 +6354,43 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "Progress is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
+          "nodes": [
+            "content",
+            "semantic-node"
+          ],
           "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
+          "effects": [
+            "request-time"
+          ],
+          "accessibility": [
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "logical-direction",
+            "tokenized-size"
+          ],
           "focus": [],
-          "resources": []
+          "resources": [
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-preferred",
+        "visual_profile": "platform-native",
+        "visual_profile_rationale": "Progress should prefer an adequate stock platform control; OS behavior and accessibility take precedence over MudBlazor visual similarity.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -5316,28 +6471,56 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "Radio is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
-          "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
-          "focus": [],
-          "resources": []
+          "nodes": [
+            "content",
+            "field",
+            "input",
+            "semantic-node"
+          ],
+          "events": [
+            "activate",
+            "commit",
+            "value-change"
+          ],
+          "effects": [
+            "request-focus",
+            "request-keyboard",
+            "request-pointer"
+          ],
+          "accessibility": [
+            "description",
+            "error-relationship",
+            "label-relationship",
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "logical-direction",
+            "tokenized-size"
+          ],
+          "focus": [
+            "focus-order"
+          ],
+          "resources": [
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-preferred",
+        "visual_profile": "platform-native",
+        "visual_profile_rationale": "Radio should prefer an adequate stock platform control; OS behavior and accessibility take precedence over MudBlazor visual similarity.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -5412,28 +6595,49 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "Rating is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
-          "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
-          "focus": [],
-          "resources": []
+          "nodes": [
+            "content",
+            "semantic-node"
+          ],
+          "events": [
+            "activate"
+          ],
+          "effects": [
+            "request-focus",
+            "request-keyboard",
+            "request-pointer"
+          ],
+          "accessibility": [
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "logical-direction",
+            "tokenized-size"
+          ],
+          "focus": [
+            "focus-order"
+          ],
+          "resources": [
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "Rating is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -5497,28 +6701,39 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-semantic",
+        "rationale": "Render is expressed through semantic nodes, tokens, layout, accessibility, and normalized state without a specialized host operation.",
         "semantic_contract": {
-          "nodes": [],
+          "nodes": [
+            "content",
+            "framework-context",
+            "semantic-node"
+          ],
           "events": [],
           "effects": [],
-          "accessibility": [],
-          "layout": [],
+          "accessibility": [
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "logical-direction",
+            "tokenized-size"
+          ],
           "focus": [],
           "resources": []
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "not-applicable",
+        "visual_profile": "not-applicable",
+        "visual_profile_rationale": "Render is context, semantic infrastructure, or a bounded extension rather than a direct native widget mapping.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -5582,28 +6797,39 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-semantic",
+        "rationale": "RTLProvider is expressed through semantic nodes, tokens, layout, accessibility, and normalized state without a specialized host operation.",
         "semantic_contract": {
-          "nodes": [],
+          "nodes": [
+            "content",
+            "framework-context",
+            "semantic-node"
+          ],
           "events": [],
           "effects": [],
-          "accessibility": [],
-          "layout": [],
+          "accessibility": [
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "logical-direction",
+            "tokenized-size"
+          ],
           "focus": [],
           "resources": []
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "not-applicable",
+        "visual_profile": "not-applicable",
+        "visual_profile_rationale": "RTLProvider is context, semantic infrastructure, or a bounded extension rather than a direct native widget mapping.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -5682,28 +6908,52 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "ScrollToTop is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
-          "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
-          "focus": [],
-          "resources": []
+          "nodes": [
+            "content",
+            "semantic-node"
+          ],
+          "events": [
+            "activate"
+          ],
+          "effects": [
+            "request-focus",
+            "request-keyboard",
+            "request-measurement",
+            "request-pointer",
+            "request-window"
+          ],
+          "accessibility": [
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "adaptive-measurement",
+            "logical-direction",
+            "tokenized-size"
+          ],
+          "focus": [
+            "focus-order"
+          ],
+          "resources": [
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "ScrollToTop is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -5795,28 +7045,60 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "Select is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
-          "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
-          "focus": [],
-          "resources": []
+          "nodes": [
+            "content",
+            "field",
+            "input",
+            "semantic-node"
+          ],
+          "events": [
+            "activate",
+            "commit",
+            "value-change"
+          ],
+          "effects": [
+            "request-focus",
+            "request-keyboard",
+            "request-measurement",
+            "request-network",
+            "request-pointer",
+            "request-surface"
+          ],
+          "accessibility": [
+            "description",
+            "error-relationship",
+            "label-relationship",
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "adaptive-measurement",
+            "logical-direction",
+            "tokenized-size"
+          ],
+          "focus": [
+            "focus-order"
+          ],
+          "resources": [
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-preferred",
+        "visual_profile": "platform-native",
+        "visual_profile_rationale": "Select should prefer an adequate stock platform control; OS behavior and accessibility take precedence over MudBlazor visual similarity.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -5883,28 +7165,46 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "Skeleton is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
+          "nodes": [
+            "content",
+            "layout",
+            "region",
+            "semantic-node"
+          ],
           "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
+          "effects": [
+            "request-time"
+          ],
+          "accessibility": [
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "layout-intent",
+            "logical-direction",
+            "tokenized-size"
+          ],
           "focus": [],
-          "resources": []
+          "resources": [
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "custom-drawn",
+        "visual_profile": "blazex-material",
+        "visual_profile_rationale": "Skeleton uses BlazeX-owned tokens and drawing semantics while exposing platform accessibility and reduced-motion/forced-color alternatives.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -5985,28 +7285,56 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "Slider is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
-          "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
-          "focus": [],
-          "resources": []
+          "nodes": [
+            "content",
+            "field",
+            "input",
+            "semantic-node"
+          ],
+          "events": [
+            "activate",
+            "commit",
+            "value-change"
+          ],
+          "effects": [
+            "request-focus",
+            "request-keyboard",
+            "request-pointer"
+          ],
+          "accessibility": [
+            "description",
+            "error-relationship",
+            "label-relationship",
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "logical-direction",
+            "tokenized-size"
+          ],
+          "focus": [
+            "focus-order"
+          ],
+          "resources": [
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-preferred",
+        "visual_profile": "platform-native",
+        "visual_profile_rationale": "Slider should prefer an adequate stock platform control; OS behavior and accessibility take precedence over MudBlazor visual similarity.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -6093,28 +7421,59 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "Snackbar is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
-          "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
-          "focus": [],
-          "resources": []
+          "nodes": [
+            "content",
+            "semantic-node",
+            "surface",
+            "surface-content"
+          ],
+          "events": [
+            "activate",
+            "dismiss",
+            "open"
+          ],
+          "effects": [
+            "request-keyboard",
+            "request-network",
+            "request-notifications",
+            "request-pointer",
+            "request-surface",
+            "request-time"
+          ],
+          "accessibility": [
+            "dismiss-action",
+            "focus-order",
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "logical-direction",
+            "tokenized-size"
+          ],
+          "focus": [
+            "focus-restore",
+            "focus-scope"
+          ],
+          "resources": [
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "Snackbar is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -6178,28 +7537,41 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-semantic",
+        "rationale": "Spacer is expressed through semantic nodes, tokens, layout, accessibility, and normalized state without a specialized host operation.",
         "semantic_contract": {
-          "nodes": [],
+          "nodes": [
+            "content",
+            "layout",
+            "region",
+            "semantic-node"
+          ],
           "events": [],
           "effects": [],
-          "accessibility": [],
-          "layout": [],
+          "accessibility": [
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "layout-intent",
+            "logical-direction",
+            "tokenized-size"
+          ],
           "focus": [],
           "resources": []
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "Spacer is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -6275,28 +7647,51 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "SplitPanel is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
-          "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
-          "focus": [],
-          "resources": []
+          "nodes": [
+            "content",
+            "semantic-node"
+          ],
+          "events": [
+            "activate"
+          ],
+          "effects": [
+            "request-focus",
+            "request-keyboard",
+            "request-measurement",
+            "request-pointer"
+          ],
+          "accessibility": [
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "adaptive-measurement",
+            "logical-direction",
+            "tokenized-size"
+          ],
+          "focus": [
+            "focus-order"
+          ],
+          "resources": [
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "SplitPanel is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -6360,28 +7755,41 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-semantic",
+        "rationale": "Stack is expressed through semantic nodes, tokens, layout, accessibility, and normalized state without a specialized host operation.",
         "semantic_contract": {
-          "nodes": [],
+          "nodes": [
+            "content",
+            "layout",
+            "region",
+            "semantic-node"
+          ],
           "events": [],
           "effects": [],
-          "accessibility": [],
-          "layout": [],
+          "accessibility": [
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "layout-intent",
+            "logical-direction",
+            "tokenized-size"
+          ],
           "focus": [],
           "resources": []
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "Stack is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -6458,28 +7866,49 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "Stepper is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
-          "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
-          "focus": [],
-          "resources": []
+          "nodes": [
+            "content",
+            "semantic-node"
+          ],
+          "events": [
+            "activate"
+          ],
+          "effects": [
+            "request-focus",
+            "request-keyboard",
+            "request-pointer"
+          ],
+          "accessibility": [
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "logical-direction",
+            "tokenized-size"
+          ],
+          "focus": [
+            "focus-order"
+          ],
+          "resources": [
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "Stepper is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -6551,28 +7980,46 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "SwipeArea is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
-          "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
+          "nodes": [
+            "content",
+            "semantic-node"
+          ],
+          "events": [
+            "activate"
+          ],
+          "effects": [
+            "request-keyboard",
+            "request-pointer"
+          ],
+          "accessibility": [
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "logical-direction",
+            "tokenized-size"
+          ],
           "focus": [],
-          "resources": []
+          "resources": [
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "SwipeArea is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -6653,28 +8100,56 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "Switch is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
-          "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
-          "focus": [],
-          "resources": []
+          "nodes": [
+            "content",
+            "field",
+            "input",
+            "semantic-node"
+          ],
+          "events": [
+            "activate",
+            "commit",
+            "value-change"
+          ],
+          "effects": [
+            "request-focus",
+            "request-keyboard",
+            "request-pointer"
+          ],
+          "accessibility": [
+            "description",
+            "error-relationship",
+            "label-relationship",
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "logical-direction",
+            "tokenized-size"
+          ],
+          "focus": [
+            "focus-order"
+          ],
+          "resources": [
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-preferred",
+        "visual_profile": "platform-native",
+        "visual_profile_rationale": "Switch should prefer an adequate stock platform control; OS behavior and accessibility take precedence over MudBlazor visual similarity.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -6761,28 +8236,59 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "Table is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
-          "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
-          "focus": [],
-          "resources": []
+          "nodes": [
+            "collection",
+            "content",
+            "item",
+            "semantic-node"
+          ],
+          "events": [
+            "activate",
+            "navigate",
+            "select"
+          ],
+          "effects": [
+            "request-clipboard",
+            "request-focus",
+            "request-keyboard",
+            "request-measurement",
+            "request-network",
+            "request-pointer"
+          ],
+          "accessibility": [
+            "collection-position",
+            "name",
+            "role",
+            "selection-state",
+            "state"
+          ],
+          "layout": [
+            "adaptive-measurement",
+            "logical-direction",
+            "tokenized-size"
+          ],
+          "focus": [
+            "focus-order"
+          ],
+          "resources": [
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "Table is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -6850,28 +8356,45 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-semantic",
+        "rationale": "TableSimple is expressed through semantic nodes, tokens, layout, accessibility, and normalized state without a specialized host operation.",
         "semantic_contract": {
-          "nodes": [],
-          "events": [],
+          "nodes": [
+            "collection",
+            "content",
+            "item",
+            "semantic-node"
+          ],
+          "events": [
+            "navigate",
+            "select"
+          ],
           "effects": [],
-          "accessibility": [],
-          "layout": [],
+          "accessibility": [
+            "collection-position",
+            "name",
+            "role",
+            "selection-state",
+            "state"
+          ],
+          "layout": [
+            "logical-direction",
+            "tokenized-size"
+          ],
           "focus": [],
           "resources": []
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "TableSimple is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -6946,28 +8469,49 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "Tabs is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
-          "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
-          "focus": [],
-          "resources": []
+          "nodes": [
+            "content",
+            "semantic-node"
+          ],
+          "events": [
+            "activate"
+          ],
+          "effects": [
+            "request-focus",
+            "request-keyboard",
+            "request-pointer"
+          ],
+          "accessibility": [
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "logical-direction",
+            "tokenized-size"
+          ],
+          "focus": [
+            "focus-order"
+          ],
+          "resources": [
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "Tabs is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -7050,28 +8594,57 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "TextField is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
-          "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
-          "focus": [],
-          "resources": []
+          "nodes": [
+            "content",
+            "field",
+            "input",
+            "semantic-node"
+          ],
+          "events": [
+            "activate",
+            "commit",
+            "value-change"
+          ],
+          "effects": [
+            "request-clipboard",
+            "request-focus",
+            "request-keyboard",
+            "request-pointer"
+          ],
+          "accessibility": [
+            "description",
+            "error-relationship",
+            "label-relationship",
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "logical-direction",
+            "tokenized-size"
+          ],
+          "focus": [
+            "focus-order"
+          ],
+          "resources": [
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-preferred",
+        "visual_profile": "platform-native",
+        "visual_profile_rationale": "TextField should prefer an adequate stock platform control; OS behavior and accessibility take precedence over MudBlazor visual similarity.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -7140,28 +8713,45 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "ThemeProvider is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
+          "nodes": [
+            "content",
+            "framework-context",
+            "semantic-node"
+          ],
           "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
+          "effects": [
+            "request-storage",
+            "request-system-theme"
+          ],
+          "accessibility": [
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "logical-direction",
+            "tokenized-size"
+          ],
           "focus": [],
-          "resources": []
+          "resources": [
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "not-applicable",
+        "visual_profile": "not-applicable",
+        "visual_profile_rationale": "ThemeProvider is context, semantic infrastructure, or a bounded extension rather than a direct native widget mapping.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -7248,28 +8838,57 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "TimePicker is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
-          "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
-          "focus": [],
-          "resources": []
+          "nodes": [
+            "content",
+            "field",
+            "input",
+            "semantic-node"
+          ],
+          "events": [
+            "activate",
+            "commit",
+            "value-change"
+          ],
+          "effects": [
+            "request-focus",
+            "request-keyboard",
+            "request-pointer",
+            "request-surface"
+          ],
+          "accessibility": [
+            "description",
+            "error-relationship",
+            "label-relationship",
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "logical-direction",
+            "tokenized-size"
+          ],
+          "focus": [
+            "focus-order"
+          ],
+          "resources": [
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-preferred",
+        "visual_profile": "platform-native",
+        "visual_profile_rationale": "TimePicker should prefer an adequate stock platform control; OS behavior and accessibility take precedence over MudBlazor visual similarity.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -7333,28 +8952,38 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-semantic",
+        "rationale": "Timeline is expressed through semantic nodes, tokens, layout, accessibility, and normalized state without a specialized host operation.",
         "semantic_contract": {
-          "nodes": [],
+          "nodes": [
+            "content",
+            "semantic-node"
+          ],
           "events": [],
           "effects": [],
-          "accessibility": [],
-          "layout": [],
+          "accessibility": [
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "logical-direction",
+            "tokenized-size"
+          ],
           "focus": [],
           "resources": []
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "Timeline is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -7429,28 +9058,49 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "Toggle is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
-          "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
-          "focus": [],
-          "resources": []
+          "nodes": [
+            "content",
+            "semantic-node"
+          ],
+          "events": [
+            "activate"
+          ],
+          "effects": [
+            "request-focus",
+            "request-keyboard",
+            "request-pointer"
+          ],
+          "accessibility": [
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "logical-direction",
+            "tokenized-size"
+          ],
+          "focus": [
+            "focus-order"
+          ],
+          "resources": [
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "Toggle is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -7514,28 +9164,41 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-semantic",
+        "rationale": "ToolBar is expressed through semantic nodes, tokens, layout, accessibility, and normalized state without a specialized host operation.",
         "semantic_contract": {
-          "nodes": [],
+          "nodes": [
+            "content",
+            "layout",
+            "region",
+            "semantic-node"
+          ],
           "events": [],
           "effects": [],
-          "accessibility": [],
-          "layout": [],
+          "accessibility": [
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "layout-intent",
+            "logical-direction",
+            "tokenized-size"
+          ],
           "focus": [],
           "resources": []
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "ToolBar is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -7622,28 +9285,61 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "Tooltip is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
-          "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
-          "focus": [],
-          "resources": []
+          "nodes": [
+            "content",
+            "semantic-node",
+            "surface",
+            "surface-content"
+          ],
+          "events": [
+            "activate",
+            "dismiss",
+            "open"
+          ],
+          "effects": [
+            "request-focus",
+            "request-keyboard",
+            "request-measurement",
+            "request-pointer",
+            "request-surface",
+            "request-time"
+          ],
+          "accessibility": [
+            "dismiss-action",
+            "focus-order",
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "adaptive-measurement",
+            "logical-direction",
+            "tokenized-size"
+          ],
+          "focus": [
+            "focus-order",
+            "focus-restore",
+            "focus-scope"
+          ],
+          "resources": [
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "Tooltip is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -7728,28 +9424,58 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "TreeView is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
-          "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
-          "focus": [],
-          "resources": []
+          "nodes": [
+            "collection",
+            "content",
+            "item",
+            "semantic-node"
+          ],
+          "events": [
+            "activate",
+            "navigate",
+            "select"
+          ],
+          "effects": [
+            "request-focus",
+            "request-keyboard",
+            "request-measurement",
+            "request-network",
+            "request-pointer"
+          ],
+          "accessibility": [
+            "collection-position",
+            "name",
+            "role",
+            "selection-state",
+            "state"
+          ],
+          "layout": [
+            "adaptive-measurement",
+            "logical-direction",
+            "tokenized-size"
+          ],
+          "focus": [
+            "focus-order"
+          ],
+          "resources": [
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "TreeView is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -7813,28 +9539,41 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-semantic",
+        "rationale": "Typography is expressed through semantic nodes, tokens, layout, accessibility, and normalized state without a specialized host operation.",
         "semantic_contract": {
-          "nodes": [],
+          "nodes": [
+            "content",
+            "layout",
+            "region",
+            "semantic-node"
+          ],
           "events": [],
           "effects": [],
-          "accessibility": [],
-          "layout": [],
+          "accessibility": [
+            "name",
+            "role",
+            "state"
+          ],
+          "layout": [
+            "layout-intent",
+            "logical-direction",
+            "tokenized-size"
+          ],
           "focus": [],
           "resources": []
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "Typography is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",
@@ -7915,28 +9654,55 @@
         }
       },
       "portability": {
-        "status": "unproven",
-        "rationale": null,
+        "status": "portable-with-capabilities",
+        "rationale": "Virtualize is backend-neutral at the component boundary but full behavior requires the named semantic host/renderer capability contracts and declared fallbacks.",
         "semantic_contract": {
-          "nodes": [],
-          "events": [],
-          "effects": [],
-          "accessibility": [],
-          "layout": [],
+          "nodes": [
+            "collection",
+            "content",
+            "item",
+            "semantic-node"
+          ],
+          "events": [
+            "activate",
+            "navigate",
+            "select"
+          ],
+          "effects": [
+            "request-keyboard",
+            "request-measurement",
+            "request-network",
+            "request-pointer"
+          ],
+          "accessibility": [
+            "collection-position",
+            "name",
+            "role",
+            "selection-state",
+            "state"
+          ],
+          "layout": [
+            "adaptive-measurement",
+            "logical-direction",
+            "tokenized-size"
+          ],
           "focus": [],
-          "resources": []
+          "resources": [
+            "generation-disposal",
+            "owned-resource"
+          ]
         },
         "renderer_extensions": [],
-        "native_strategy": "unproven",
-        "visual_profile": "unproven",
-        "visual_profile_rationale": null,
+        "native_strategy": "native-composite",
+        "visual_profile": "hybrid",
+        "visual_profile_rationale": "Virtualize is expected to combine platform controls and BlazeX tokenized composition; exact cross-platform or MudBlazor visual parity is not promised.",
         "future_backend_gate": {
-          "headless": "unassigned",
-          "dom": "unassigned",
-          "native_spike": "unassigned",
-          "backend_accessibility": "unassigned",
-          "fallback": "unassigned",
-          "documentation": "unassigned"
+          "headless": "required",
+          "dom": "required",
+          "native_spike": "required-before-portable-claim",
+          "backend_accessibility": "required",
+          "fallback": "required",
+          "documentation": "required"
         }
       },
       "classification_state": "accepted",

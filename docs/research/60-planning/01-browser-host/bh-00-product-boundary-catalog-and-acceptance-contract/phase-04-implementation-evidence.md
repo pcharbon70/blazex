@@ -141,10 +141,66 @@ authority, missing required-capability fallback, and backend-specific portable
 tokens. Product/package results remain unchanged and all portability/native
 fields remain unproven for Section 4.3.
 
+## Section 4.3 — Renderer portability and native strategy
+
+### Delivered artifacts
+
+- The [portability, native, and visual-profile
+  policy](../../../20-notes/blazex-component-portability-native-and-visual-profile-policy.md)
+  defines eight portability states, seven semantic dimensions, six native
+  strategies, four visual profiles, platform-versus-BlazeX visual conflicts,
+  and the future backend support gate.
+- Every family now records semantic nodes, events, capability effects,
+  accessibility, layout, focus, resources, renderer extensions, portability
+  rationale, native strategy, visual-profile rationale, and six backend-gate
+  requirements.
+
+### Portability and native result
+
+| Dimension | Counts |
+| --- | --- |
+| Portability | 24 `portable-semantic`; 57 `portable-with-capabilities`; 1 `renderer-extension`; 1 `custom-scene` |
+| Native strategy | 15 `native-preferred`; 58 `native-composite`; 2 `custom-drawn`; 8 `not-applicable` |
+| Visual profile | 15 `platform-native`; 58 `hybrid`; 2 `blazex-material`; 8 `not-applicable` |
+
+No family is classified DOM/WebView-only, native-only, unsupported, or
+unproven. `Element` is the bounded renderer extension with an omission
+fallback, not a portable arbitrary-tag API. `Chart` is the custom scene and
+requires scene drawing plus a nonvisual assistive-technology representation.
+Skeleton is the second intended custom-drawn native strategy but remains a
+portable semantic family.
+
+Standard form/action/media controls with credible stock equivalents are
+native-preferred and prioritize OS semantics/accessibility over MudBlazor
+appearance. Compound families are native-composite and use a hybrid visual
+profile. Contexts, semantic internals, and the bounded renderer extension have
+no direct widget mapping.
+
+### Future backend gate
+
+Every non-extension family requires headless traces, DOM evidence, the BH-02
+native spike before a portable/native claim, backend accessibility, fallback,
+and documentation. The renderer extension requires per-backend evidence but
+cannot imply cross-backend native proof. Thus headless plus DOM success is
+machine-insufficient for native support.
+
+The gate records obligations only. No renderer coverage cell is marked passed,
+no toolkit is selected, and no native/platform support state is created.
+
+### Section validation
+
+```text
+Component classification validation passed: stage section-4.3; 83 families; 12 exceptions; dispositions {'adapt-concept': 28, 'build-natively': 43, 'renderer-specific-extension': 1, 'replace-with-platform-pattern': 11}; tiers {'F0': 13, 'F1': 26, 'F2': 21, 'F3': 18, 'F4': 5}; packages {'blazex_charts': 1, 'blazex_data': 6, 'blazex_forms': 18, 'blazex_surfaces': 9, 'blazex_ui': 47, 'blazex_ui_tree': 2}; remote {'local-only': 73, 'optional-remote': 7, 'phoenix-enhanced': 3}; fallbacks {'alternative-interaction': 30, 'explicit-unavailable': 2, 'in-app-substitute': 14, 'nonvisual-representation': 1, 'omission': 1, 'server-round-trip': 5, 'static-content': 30}; capability references 204 required/77 optional; portability {'custom-scene': 1, 'portable-semantic': 24, 'portable-with-capabilities': 57, 'renderer-extension': 1}; native {'custom-drawn': 2, 'native-composite': 58, 'native-preferred': 15, 'not-applicable': 8}; visual profiles {'blazex-material': 2, 'hybrid': 58, 'not-applicable': 8, 'platform-native': 15}.
+Ran 17 tests ... OK
+```
+
+Additional negative tests reject unproven status, portable-semantic rows with
+specialized capabilities, an extension without its allowlisted extension ID,
+backend-specific semantic tokens, and any attempt to let headless/DOM coverage
+skip the native-spike gate.
+
 ## Remaining Phase 4 work
 
-- Section 4.3 must assign renderer portability, semantic obligations, native
-  strategy, visual profile, and future-backend gates.
 - Section 4.4 must close coherence, independent high-risk review, determinism,
   nonclaim evidence, and PR delivery.
 

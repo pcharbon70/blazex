@@ -74,7 +74,11 @@ class ComponentClassificationValidatorTests(unittest.TestCase):
 
     def test_unknown_capability_is_rejected(self) -> None:
         changed = copy.deepcopy(self.document)
-        changed["families"][0]["capability"]["optional"].append("BX-CAP-NOT-REGISTERED")
+        target = next(
+            record for record in changed["families"]
+            if record["portability"]["status"] == "portable-with-capabilities"
+        )
+        target["capability"]["optional"].append("BX-CAP-NOT-REGISTERED")
         with self.assertRaisesRegex(validator.ClassificationValidationError, "unknown capabilities"):
             self.validate(changed)
 
@@ -88,6 +92,42 @@ class ComponentClassificationValidatorTests(unittest.TestCase):
         changed = copy.deepcopy(self.document)
         changed["families"][0]["capability"]["portable_requirement_tokens"].append("javascript.handle")
         with self.assertRaisesRegex(validator.ClassificationValidationError, "leaks backend token"):
+            self.validate(changed)
+
+    def test_unproven_portability_is_rejected_after_section_4_2(self) -> None:
+        changed = copy.deepcopy(self.document)
+        changed["families"][0]["portability"]["status"] = "unproven"
+        with self.assertRaisesRegex(validator.ClassificationValidationError, "unproven portability"):
+            self.validate(changed)
+
+    def test_portable_semantic_with_specialized_capability_is_rejected(self) -> None:
+        changed = copy.deepcopy(self.document)
+        target = next(
+            record for record in changed["families"]
+            if record["portability"]["status"] == "portable-with-capabilities"
+        )
+        target["portability"]["status"] = "portable-semantic"
+        with self.assertRaisesRegex(validator.ClassificationValidationError, "specialized capabilities"):
+            self.validate(changed)
+
+    def test_renderer_extension_without_extension_id_is_rejected(self) -> None:
+        changed = copy.deepcopy(self.document)
+        target = next(
+            record for record in changed["families"]
+            if record["portability"]["status"] == "renderer-extension"
+        )
+        target["portability"]["renderer_extensions"] = []
+        with self.assertRaisesRegex(validator.ClassificationValidationError, "renderer-extension classification"):
+            self.validate(changed)
+
+    def test_headless_and_dom_cannot_skip_native_spike_gate(self) -> None:
+        changed = copy.deepcopy(self.document)
+        target = next(
+            record for record in changed["families"]
+            if record["portability"]["status"] != "renderer-extension"
+        )
+        target["portability"]["future_backend_gate"]["native_spike"] = "not-applicable"
+        with self.assertRaisesRegex(validator.ClassificationValidationError, "native-spike gate"):
             self.validate(changed)
 
     def test_stale_generated_view_is_rejected(self) -> None:

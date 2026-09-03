@@ -42,7 +42,7 @@ EXPECTED_PAYLOAD = {
     "blazex_charts": "asset-heavy",
 }
 FORBIDDEN_PORTABLE_TOKENS = re.compile(
-    r"(?:dom|javascript|js-handle|css|selector|phoenix|liveview|socket|native-widget|filesystem|script)",
+    r"(?:\bdom\b|javascript|js-handle|\bcss\b|selector|phoenix|liveview|socket|native-widget|filesystem|(?:^|[-.])script(?:$|[-.]))",
     re.IGNORECASE,
 )
 EXPECTED_CAPABILITIES = {
@@ -198,6 +198,81 @@ def _is_unassigned_portability(record: dict[str, Any]) -> bool:
     )
 
 
+def _validate_portability(record: dict[str, Any]) -> None:
+    family_id = record["family_id"]
+    portability = record["portability"]
+    status = portability["status"]
+    if status == "unproven" or portability["rationale"] is None:
+        raise ClassificationValidationError(f"family {family_id} has unproven portability")
+    semantic = portability["semantic_contract"]
+    for required_dimension in ("nodes", "accessibility", "layout"):
+        if not semantic[required_dimension]:
+            raise ClassificationValidationError(
+                f"family {family_id} portability lacks {required_dimension} semantics"
+            )
+    for dimension, tokens in semantic.items():
+        for token in tokens:
+            if FORBIDDEN_PORTABLE_TOKENS.search(token):
+                raise ClassificationValidationError(
+                    f"family {family_id} {dimension} semantics leak backend token: {token}"
+                )
+    specialized = (
+        set(record["capability"]["required"])
+        | set(record["capability"]["optional"])
+    ) - {"BX-CAP-ACCESSIBILITY"}
+    if status == "portable-semantic" and specialized:
+        raise ClassificationValidationError(
+            f"family {family_id} is portable-semantic but requires specialized capabilities"
+        )
+    if status == "portable-with-capabilities" and not specialized:
+        raise ClassificationValidationError(
+            f"family {family_id} is portable-with-capabilities without a specialized capability"
+        )
+    if status == "renderer-extension":
+        if (
+            record["product"]["disposition"] != "renderer-specific-extension"
+            or not portability["renderer_extensions"]
+            or portability["native_strategy"] != "not-applicable"
+        ):
+            raise ClassificationValidationError(
+                f"family {family_id} renderer-extension classification is incoherent"
+            )
+    elif record["product"]["disposition"] == "renderer-specific-extension":
+        raise ClassificationValidationError(
+            f"family {family_id} product renderer extension lacks matching portability"
+        )
+    if status == "custom-scene":
+        if "scene-drawing" not in portability["renderer_extensions"]:
+            raise ClassificationValidationError(
+                f"family {family_id} custom scene lacks scene-drawing extension"
+            )
+        if record["fallback"]["conditions"]["assistive-technology"] != "nonvisual-representation":
+            raise ClassificationValidationError(
+                f"family {family_id} custom scene lacks nonvisual assistive fallback"
+            )
+    if portability["native_strategy"] == "unproven":
+        raise ClassificationValidationError(f"family {family_id} has unproven native strategy")
+    if portability["visual_profile"] == "unproven" or portability["visual_profile_rationale"] is None:
+        raise ClassificationValidationError(f"family {family_id} has incomplete visual-profile classification")
+    gate = portability["future_backend_gate"]
+    if "unassigned" in gate.values():
+        raise ClassificationValidationError(f"family {family_id} has incomplete future-backend gate")
+    if status == "renderer-extension":
+        if gate["native_spike"] != "not-applicable":
+            raise ClassificationValidationError(
+                f"family {family_id} renderer extension cannot imply cross-backend native proof"
+            )
+    elif gate["native_spike"] != "required-before-portable-claim":
+        raise ClassificationValidationError(
+            f"family {family_id} headless/DOM evidence cannot replace the native-spike gate"
+        )
+    for field in ("headless", "dom", "backend_accessibility", "fallback", "documentation"):
+        if gate[field] != "required":
+            raise ClassificationValidationError(
+                f"family {family_id} future backend gate must require {field} evidence"
+            )
+
+
 def validate_classification(
     document: dict[str, Any], source_catalog: dict[str, Any], schema: dict[str, Any]
 ) -> dict[str, Any]:
@@ -266,6 +341,8 @@ def validate_classification(
             raise ClassificationValidationError(
                 f"{stage} family {record['family_id']} must leave portability unproven"
             )
+        if stage in {"section-4.3", "complete"}:
+            _validate_portability(record)
         if stage != "section-4.1":
             family_id = record["family_id"]
             capability = record["capability"]
@@ -338,6 +415,9 @@ def validate_classification(
         "fallbacks": dict(sorted(Counter(record["fallback"]["primary"] for record in document["families"]).items())),
         "required_capability_references": sum(len(record["capability"]["required"]) for record in document["families"]),
         "optional_capability_references": sum(len(record["capability"]["optional"]) for record in document["families"]),
+        "portability": dict(sorted(Counter(record["portability"]["status"] for record in document["families"]).items())),
+        "native": dict(sorted(Counter(record["portability"]["native_strategy"] for record in document["families"]).items())),
+        "visual_profiles": dict(sorted(Counter(record["portability"]["visual_profile"] for record in document["families"]).items())),
     }
 
 
@@ -374,7 +454,8 @@ def main() -> int:
         f"stage {summary['stage']}; {summary['families']} families; {summary['exceptions']} exceptions; "
         f"dispositions {summary['dispositions']}; tiers {summary['tiers']}; packages {summary['packages']}; "
         f"remote {summary['remote']}; fallbacks {summary['fallbacks']}; capability references "
-        f"{summary['required_capability_references']} required/{summary['optional_capability_references']} optional."
+        f"{summary['required_capability_references']} required/{summary['optional_capability_references']} optional; "
+        f"portability {summary['portability']}; native {summary['native']}; visual profiles {summary['visual_profiles']}."
     )
     return 0
 

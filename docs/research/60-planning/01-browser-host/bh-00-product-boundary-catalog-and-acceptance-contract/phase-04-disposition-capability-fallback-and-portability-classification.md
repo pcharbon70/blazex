@@ -69,28 +69,28 @@ Back to milestone: [README](README.md)
       - [x] 4.2.2.2 Subtask - Define and assign fallback values for static content, alternative interaction, server round trip, in-app substitute, nonvisual representation, explicit unavailable state, or omission.
       - [x] 4.2.2.3 Subtask - Require fallback semantics for no JavaScript, no network, denied permission, missing capability, unsupported renderer, failed resource, reduced motion, forced colors, and assistive-technology access where applicable.
 
-  - [ ] 4.3 Section - Classify renderer portability and native strategy.
+  - [x] 4.3 Section - Classify renderer portability and native strategy.
 
     Preserve a semantic system that can target DOM and future native controls
     while naming families whose design necessarily depends on one backend.
 
-    - [ ] 4.3.1 Task - Assign portable and renderer-specific status.
+    - [x] 4.3.1 Task - Assign portable and renderer-specific status.
 
       Portability must be a bounded claim tied to semantic requirements and
       evidence expectations rather than an assumption derived from abstraction.
 
-      - [ ] 4.3.1.1 Subtask - Define portable-semantic, portable-with-capabilities, renderer-extension, DOM-specific, native-specific, custom-scene, unsupported, and unproven statuses.
-      - [ ] 4.3.1.2 Subtask - Assign required semantic nodes, events, effects, accessibility, layout, focus, resource, and renderer-extension needs to every planned family.
-      - [ ] 4.3.1.3 Subtask - State that headless plus DOM evidence is insufficient for native-widget support and connect portable claims to the later BH-02 native-spike gate.
+      - [x] 4.3.1.1 Subtask - Define portable-semantic, portable-with-capabilities, renderer-extension, DOM-specific, native-specific, custom-scene, unsupported, and unproven statuses.
+      - [x] 4.3.1.2 Subtask - Assign required semantic nodes, events, effects, accessibility, layout, focus, resource, and renderer-extension needs to every planned family.
+      - [x] 4.3.1.3 Subtask - State that headless plus DOM evidence is insufficient for native-widget support and connect portable claims to the later BH-02 native-spike gate.
 
-    - [ ] 4.3.2 Task - Assign native-control and visual-profile strategy.
+    - [x] 4.3.2 Task - Assign native-control and visual-profile strategy.
 
       Future native backends need an explicit intended mapping without selecting
       a production toolkit or promising exact Material fidelity.
 
-      - [ ] 4.3.2.1 Subtask - Assign native-preferred, native-composite, custom-drawn, DOM/WebView-only, not-applicable, or unproven strategy to every planned family.
-      - [ ] 4.3.2.2 Subtask - Record expected platform-native, BlazeX Material, or hybrid visual-profile implications and identify conflicts between OS-native behavior and MudBlazor-inspired appearance.
-      - [ ] 4.3.2.3 Subtask - Define renderer coverage, fallback, accessibility, and documentation requirements that a future backend must meet before claiming support for a family.
+      - [x] 4.3.2.1 Subtask - Assign native-preferred, native-composite, custom-drawn, DOM/WebView-only, not-applicable, or unproven strategy to every planned family.
+      - [x] 4.3.2.2 Subtask - Record expected platform-native, BlazeX Material, or hybrid visual-profile implications and identify conflicts between OS-native behavior and MudBlazor-inspired appearance.
+      - [x] 4.3.2.3 Subtask - Define renderer coverage, fallback, accessibility, and documentation requirements that a future backend must meet before claiming support for a family.
 
   - [ ] 4.4 Section - Phase 4 Integration Tests.
 

@@ -136,6 +136,7 @@ adapter, and deployment profile at later milestone gates.
 
 ## Connections
 
+- [Portability, native, and visual-profile policy](blazex-component-portability-native-and-visual-profile-policy.md)
 - [Disposition, tier, and package policy](blazex-component-disposition-tier-and-package-policy.md)
 - [Browser trust, deployment, and fallback policy](blazex-browser-trust-deployment-and-fallback-policy.md)
 - [Host-neutral architecture](host-neutral-blazex-architecture-and-native-control-backends.md)
