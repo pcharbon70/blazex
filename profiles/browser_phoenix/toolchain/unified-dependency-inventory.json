@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "status": "qualified_inputs_unbuilt",
+  "canonical_records": [
+    {"path": "profiles/browser_phoenix/toolchain/environment.lock.json", "sha256": "6c47a839eb00ea3ceb8f97998c18dffc85a5cb27ccad73fc839912208d674255", "scope": "host, language, native, JavaScript and reporting tools"},
+    {"path": "profiles/browser_phoenix/toolchain/browser.lock.json", "sha256": "b4f7a2997ec1b31e596dea0498bfde41fe69c1e25ec5ebeecdbc723366188c01", "scope": "browser binaries and managed-device fingerprints"},
+    {"path": "profiles/browser_phoenix/toolchain/runtime.lock.json", "sha256": "23aec7018a4c47c372dc1be4727cda14558bae9054fc8940e759926b520a1129", "scope": "Popcorn, FissionVM, Mbed TLS and Emscripten inputs"},
+    {"path": "profiles/browser_phoenix/toolchain/server-dependencies.json", "sha256": "b7b88e8df33da70aa18038ac8254590c8f7fa9123d475192f62fd3d3a55b02ef", "scope": "Phoenix profile graph, licenses and rejected alternatives"},
+    {"path": "profiles/browser_phoenix/toolchain/private-api-inventory.json", "sha256": "41018726088771ff33e602f46ade3d955b08c55d81f8220225912ce07a10973b", "scope": "private and version-sensitive adapter APIs"},
+    {"path": "profiles/browser_phoenix/mix.lock", "sha256": "3a510b25251ad87bf1c4bb4d62c6e42c718fcd885a776ca0301fad6e71d0ca86", "scope": "34 exact Hex package identities"},
+    {"path": "js/blazex_runtime/package-lock.json", "sha256": "0ccbfd5ac1486cf1cedb54f27c9890e091f38aac3d6bff046553eff55f1f47de", "scope": "3 exact npm package identities"}
+  ],
+  "graph_summary": {
+    "system_packages": 8,
+    "governed_tools": 18,
+    "runtime_sources": 5,
+    "hex_packages": 34,
+    "npm_packages_excluding_root": 3,
+    "packaged_runtime_oracle_assets": 3,
+    "private_api_surfaces": 8
+  },
+  "owners": ["browser-bridge", "browser-test", "dependency-governance", "packages/blazex_renderer_dom_liveview", "profiles/browser_phoenix", "runtime-build"],
+  "licenses": {
+    "allowed": ["Apache-2.0", "BSD-2-Clause", "LGPL-2.1-or-later", "MIT", "MPL-2.0", "Python-2.0"],
+    "unknown": [],
+    "notice_policy": "Retain package licenses, notices, REUSE metadata, toolchain notices, and generated attribution with distributed artifacts."
+  },
+  "reachability": {
+    "build_only": ["emsdk-source", "igniter", "ninja", "node-test-runner", "python", "reporting-tools"],
+    "runtime": ["phoenix-profile-graph", "popcorn-hex", "fissionvm-source", "mbedtls-source", "browser-runtime-packages"],
+    "inspection_only": ["LocalLiveView packaged AtomVM.wasm", "LocalLiveView packaged AtomVM.mjs"]
+  },
+  "vulnerability_inputs": [
+    "GitHub Security Advisories for Popcorn, FissionVM/AtomVM, Mbed TLS, Emscripten, Phoenix, LiveView and LocalLiveView",
+    "Hex package retirement/advisory metadata",
+    "npm audit --omit=dev --json",
+    "container digest rescanning",
+    "browser vendor security release channels"
+  ],
+  "forbidden_input_classes": ["floating ref", "mutable tag without commit/hash", "hashless artifact", "unknown license", "private credential", "implicit download", "unapproved lifecycle script", "ownerless input"],
+  "claims_not_made": ["runtime builds", "BEAM compiles", "browser boots", "private APIs behave correctly"]
+}

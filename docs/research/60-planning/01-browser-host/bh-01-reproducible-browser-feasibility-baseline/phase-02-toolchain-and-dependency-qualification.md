@@ -98,28 +98,28 @@ Back to milestone: [README](README.md)
       - [x] 2.3.3.1 Subtask - Record exact Phoenix/Plug support for MIME, compression, cache validation, integrity, CSP, CORS, origin, CSRF, HTTPS, workers, streaming, and cross-origin isolation headers.
       - [x] 2.3.3.2 Subtask - Identify any reverse-proxy/CDN/service-worker requirements and define which are profile prerequisites versus later production deployment work.
 
-  - [ ] 2.4 Section - Prove deterministic dependency acquisition.
+  - [x] 2.4 Section - Prove deterministic dependency acquisition.
 
     Build the immutable lock/provenance baseline and test clean acquisition
     before runtime compilation obscures dependency failures.
 
-    - [ ] 2.4.1 Task - Generate and review canonical lock/provenance records.
+    - [x] 2.4.1 Task - Generate and review canonical lock/provenance records.
 
       All direct/transitive source and binary inputs must reconcile across
       package managers and native build systems.
 
-      - [ ] 2.4.1.1 Subtask - Commit deterministic lockfiles/manifests for Hex, JavaScript, runtime source/submodules, native/Wasm SDKs, system-image inputs, and test tools.
-      - [ ] 2.4.1.2 Subtask - Generate unified dependency, license, notice, origin, checksum, reachability, vulnerability-input, and private-API reports with stable identities.
-      - [ ] 2.4.1.3 Subtask - Reject orphaned, floating, mutable, unavailable, hashless, license-unknown, implicitly downloaded, or ownerless inputs.
+      - [x] 2.4.1.1 Subtask - Commit deterministic lockfiles/manifests for Hex, JavaScript, runtime source/submodules, native/Wasm SDKs, system-image inputs, and test tools.
+      - [x] 2.4.1.2 Subtask - Generate unified dependency, license, notice, origin, checksum, reachability, vulnerability-input, and private-API reports with stable identities.
+      - [x] 2.4.1.3 Subtask - Reject orphaned, floating, mutable, unavailable, hashless, license-unknown, implicitly downloaded, or ownerless inputs.
 
-    - [ ] 2.4.2 Task - Exercise clean, cached, and failure acquisition paths.
+    - [x] 2.4.2 Task - Exercise clean, cached, and failure acquisition paths.
 
       Reproduction must not rely on a warm developer cache or silently replace
       a missing source with a different artifact.
 
-      - [ ] 2.4.2.1 Subtask - Acquire every dependency in a clean environment, capture network/source logs and durations, and compare locks, graphs, checksums, and reports with the canonical baseline.
-      - [ ] 2.4.2.2 Subtask - Repeat with controlled caches/offline inputs where supported and test missing registry, moved tag, hash mismatch, revoked certificate, unavailable binary, private credential, and lifecycle-script failures.
-      - [ ] 2.4.2.3 Subtask - Record any platform/device dependencies that cannot be vendored or fully automated and define their run-time fingerprint and stop policy.
+      - [x] 2.4.2.1 Subtask - Acquire every dependency in a clean environment, capture network/source logs and durations, and compare locks, graphs, checksums, and reports with the canonical baseline.
+      - [x] 2.4.2.2 Subtask - Repeat with controlled caches/offline inputs where supported and test missing registry, moved tag, hash mismatch, revoked certificate, unavailable binary, private credential, and lifecycle-script failures.
+      - [x] 2.4.2.3 Subtask - Record any platform/device dependencies that cannot be vendored or fully automated and define their run-time fingerprint and stop policy.
 
   - [ ] 2.5 Section - Phase 2 Integration Tests and Completion Evidence.
 

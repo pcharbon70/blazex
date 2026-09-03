@@ -21,6 +21,8 @@
   "npm": {
     "lockfile_required": true,
     "install_command": "npm ci --ignore-scripts --no-audit --no-fund",
+    "offline_install_command": "npm ci --offline --ignore-scripts --no-audit --no-fund",
+    "post_install_command": "node node_modules/esbuild/install.js",
     "lockfile_version": 3,
     "implicit_browser_downloads": false,
     "lifecycle_default": "deny",
@@ -40,6 +42,7 @@
     "key_fields": ["manager", "lock_sha256", "platform", "architecture", "toolchain_lock_sha256"],
     "cache_miss_must_not_change_lock": true
   },
+  "clean_copy_excludes": ["deps", "_build", "node_modules", "coverage", "reports"],
   "network": {
     "acquisition_only": true,
     "tls_verification_required": true,

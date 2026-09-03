@@ -43,3 +43,17 @@ Validate the server graph and coupling contract with:
 python3 profiles/browser_phoenix/toolchain/verify_server.py
 python3 -m unittest profiles/browser_phoenix/toolchain/tests/test_server.py
 ```
+
+`unified-dependency-inventory.json` binds the canonical locks and reports by
+digest. `acquisition-evidence.json` records true clean and network-disabled
+cache replays for Hex and npm, immutable runtime-source replay timings, binary
+input checks, and expected failure dispositions. Clean profile copies exclude
+ignored `deps`, `_build`, and `node_modules` directories so a warm checkout
+cannot masquerade as acquisition evidence.
+
+Validate acquisition evidence and its negative cases with:
+
+```console
+python3 profiles/browser_phoenix/toolchain/verify_acquisition.py
+python3 -m unittest profiles/browser_phoenix/toolchain/tests/test_acquisition.py
+```
