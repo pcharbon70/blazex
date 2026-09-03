@@ -43,28 +43,28 @@ Back to milestone: [README](README.md)
       - [x] 1.1.2.2 Subtask - Import all eight input groups, ten proof obligations, eight risks, five stop conditions, prohibited actions, owner roles, and linked acceptance/budget IDs into a milestone ledger.
       - [x] 1.1.2.3 Subtask - Fail activation when a bound BH-00 source, generated view, main revision, approval record, or entry condition is stale or incomplete.
 
-  - [ ] 1.2 Section - Establish evidence, finding, and stop/go governance.
+  - [x] 1.2 Section - Establish evidence, finding, and stop/go governance.
 
     Define how executable facts are captured, reviewed, invalidated, and used
     to stop the baseline before implementation produces ambiguous claims.
 
-    - [ ] 1.2.1 Task - Define canonical evidence records.
+    - [x] 1.2.1 Task - Define canonical evidence records.
 
       Every result needs stable provenance from requirement to environment,
       command, artifact, observation, review, and outcome.
 
-      - [ ] 1.2.1.1 Subtask - Define evidence IDs and schemas for environment fingerprints, commands, logs, artifacts, scenarios, traces, measurements, reviews, findings, risks, exceptions, and decisions.
-      - [ ] 1.2.1.2 Subtask - Require source revision, owner, timestamp, tool identity, input/output hashes, raw evidence, normalization, limitation, supersession, retention, and reciprocal requirement links.
-      - [ ] 1.2.1.3 Subtask - Distinguish planned, observed, passed, failed, blocked, conditional, unsupported, untested, superseded, and invalidated states without allowing plan completion to count as product evidence.
+      - [x] 1.2.1.1 Subtask - Define evidence IDs and schemas for environment fingerprints, commands, logs, artifacts, scenarios, traces, measurements, reviews, findings, risks, exceptions, and decisions.
+      - [x] 1.2.1.2 Subtask - Require source revision, owner, timestamp, tool identity, input/output hashes, raw evidence, normalization, limitation, supersession, retention, and reciprocal requirement links.
+      - [x] 1.2.1.3 Subtask - Distinguish planned, observed, passed, failed, blocked, conditional, unsupported, untested, superseded, and invalidated states without allowing plan completion to count as product evidence.
 
-    - [ ] 1.2.2 Task - Assign finding and stop authority.
+    - [x] 1.2.2 Task - Assign finding and stop authority.
 
       Critical failures must halt downstream phases unless a reviewed plan
       amendment explicitly changes the candidate or affected proof.
 
-      - [ ] 1.2.2.1 Subtask - Assign owners and escalation paths for dependency access, reproducibility, runtime semantics, artifacts, private APIs, browser prerequisites, authenticated commands, and mobile viability.
-      - [ ] 1.2.2.2 Subtask - Define finding severity, blocker rules, stop records, affected evidence invalidation, bounded mitigation review, and prohibition on silently weakening thresholds or scenarios.
-      - [ ] 1.2.2.3 Subtask - Require explicit reapproval for changes to runtime substrate, server stack, activation boundary, proof method, browser matrix, quality threshold, or stop condition.
+      - [x] 1.2.2.1 Subtask - Assign owners and escalation paths for dependency access, reproducibility, runtime semantics, artifacts, private APIs, browser prerequisites, authenticated commands, and mobile viability.
+      - [x] 1.2.2.2 Subtask - Define finding severity, blocker rules, stop records, affected evidence invalidation, bounded mitigation review, and prohibition on silently weakening thresholds or scenarios.
+      - [x] 1.2.2.3 Subtask - Require explicit reapproval for changes to runtime substrate, server stack, activation boundary, proof method, browser matrix, quality threshold, or stop condition.
 
   - [ ] 1.3 Section - Activate the minimal repository slice.
 

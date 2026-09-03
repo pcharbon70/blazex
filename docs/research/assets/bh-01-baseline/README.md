@@ -45,6 +45,15 @@ locations rather than this governance directory.
 - [BH-01 milestone ledger v0.1.0](blazex-bh-01-milestone-ledger-v0.1.0.json) —
   imported BH-00 entry inputs, proof obligations, risks, stop conditions,
   prohibited actions, owner assignments, and acceptance/budget links.
+- [BH-01 evidence record schema](blazex-bh-01-evidence-record.schema.json) —
+  strict common provenance and lifecycle contract for twelve record types and
+  ten non-collapsing evidence states.
+- [BH-01 governance schema](blazex-bh-01-governance.schema.json) — structure
+  for evidence classes, authority, finding severity, stopping, invalidation,
+  mitigation, and reapproval.
+- [BH-01 evidence governance v0.1.0](blazex-bh-01-evidence-governance-v0.1.0.json)
+  — active owners, escalation paths, blocker rules, and change control for the
+  feasibility baseline.
 
 ## Maintaining this index
 

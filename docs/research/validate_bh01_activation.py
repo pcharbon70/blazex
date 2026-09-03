@@ -11,6 +11,9 @@ import sys
 from pathlib import Path
 from typing import Any
 
+from jsonschema import Draft202012Validator, FormatChecker
+from jsonschema.exceptions import SchemaError, ValidationError as JsonSchemaValidationError
+
 
 RESEARCH_ROOT = Path(__file__).resolve().parent
 REPO_ROOT = RESEARCH_ROOT.parent.parent
@@ -19,6 +22,9 @@ QUALITY_CONTRACT = RESEARCH_ROOT / "assets/quality-acceptance/blazex-quality-con
 ACCEPTANCE_REGISTRY = RESEARCH_ROOT / "assets/quality-acceptance/blazex-acceptance-registry-v0.1.0.json"
 AUTHORIZATION = RESEARCH_ROOT / "assets/bh-01-baseline/blazex-bh-01-authorization-v0.1.0.json"
 LEDGER = RESEARCH_ROOT / "assets/bh-01-baseline/blazex-bh-01-milestone-ledger-v0.1.0.json"
+EVIDENCE_SCHEMA = RESEARCH_ROOT / "assets/bh-01-baseline/blazex-bh-01-evidence-record.schema.json"
+GOVERNANCE_SCHEMA = RESEARCH_ROOT / "assets/bh-01-baseline/blazex-bh-01-governance.schema.json"
+EVIDENCE_GOVERNANCE = RESEARCH_ROOT / "assets/bh-01-baseline/blazex-bh-01-evidence-governance-v0.1.0.json"
 
 
 class ValidationError(Exception):
@@ -176,6 +182,126 @@ def _validate_ledger(
     _require(boundary.get("budget_state") == "proposed-unmeasured", "a budget was claimed during activation")
 
 
+def _validate_evidence_governance(governance: dict[str, Any], ledger: dict[str, Any]) -> None:
+    evidence_schema = _load_json(EVIDENCE_SCHEMA)
+    governance_schema = _load_json(GOVERNANCE_SCHEMA)
+    evidence_governance = _load_json(EVIDENCE_GOVERNANCE)
+    try:
+        Draft202012Validator.check_schema(evidence_schema)
+        Draft202012Validator.check_schema(governance_schema)
+        Draft202012Validator(
+            governance_schema,
+            format_checker=FormatChecker(),
+        ).validate(evidence_governance)
+    except (SchemaError, JsonSchemaValidationError) as exc:
+        raise ValidationError(f"BH-01 evidence governance schema failure: {exc.message}") from exc
+
+    expected_types = {
+        "environment-fingerprint",
+        "command",
+        "log",
+        "artifact",
+        "scenario",
+        "trace",
+        "measurement",
+        "review",
+        "finding",
+        "risk",
+        "exception",
+        "decision",
+    }
+    expected_states = {
+        "planned",
+        "observed",
+        "passed",
+        "failed",
+        "blocked",
+        "conditional",
+        "unsupported",
+        "untested",
+        "superseded",
+        "invalidated",
+    }
+    configured_types = {record["type"] for record in evidence_governance["evidence_types"]}
+    _require(configured_types == expected_types, "evidence governance must cover exactly twelve canonical record types")
+    _require(set(evidence_governance["state_vocabulary"]) == expected_states, "evidence states are incomplete or collapsed")
+    schema_types = set(evidence_schema["properties"]["record_type"]["enum"])
+    schema_states = set(evidence_schema["properties"]["state"]["enum"])
+    _require(schema_types == expected_types and schema_states == expected_states, "evidence schema and governance vocabulary diverge")
+
+    prefix_by_type = {record["type"]: record["id_prefix"] for record in evidence_governance["evidence_types"]}
+    sample_sha = "0" * 64
+    sample_revision = "0" * 40
+    validator = Draft202012Validator(evidence_schema, format_checker=FormatChecker())
+    for record_type in sorted(expected_types):
+        sample = {
+            "schema_version": "1.0.0",
+            "record_id": f"{prefix_by_type[record_type]}SCHEMA-PROBE",
+            "record_type": record_type,
+            "state": "planned",
+            "title": f"Schema probe for {record_type}",
+            "owner_role": "bh01-owner",
+            "recorded_at": "2026-09-03T12:00:00Z",
+            "observed_at": None,
+            "source_revision": sample_revision,
+            "environment_refs": [],
+            "tool_identities": [{"name": "schema-validator", "version": "1.0.0", "source": "repository", "sha256": sample_sha}],
+            "requirement_refs": ["BX-BH01-PHASE-1"],
+            "reciprocal_links": ["phase-01-authorization-evidence-and-repository-activation.md"],
+            "command_refs": [],
+            "input_hashes": [],
+            "output_hashes": [],
+            "raw_evidence_refs": [],
+            "normalization": [],
+            "limitations": ["Schema-only probe; not product evidence."],
+            "supersedes": [],
+            "invalidates": [],
+            "retention": {"class": "phase", "minimum_days": 30, "immutable_raw_evidence": True},
+            "outcome": {"summary": "Schema-only probe", "expected": "Schema accepts planned record", "observed": None},
+            "review": {"required": False, "reviewer_role": None, "reviewed_at": None, "disposition": "not-required"},
+        }
+        errors = sorted(validator.iter_errors(sample), key=lambda error: list(error.path))
+        _require(not errors, f"evidence schema rejects {record_type}: {errors[0].message if errors else ''}")
+
+    expected_domains = {
+        "dependency-access",
+        "reproducibility",
+        "runtime-semantics",
+        "artifacts",
+        "private-apis",
+        "browser-prerequisites",
+        "authenticated-commands",
+        "mobile-viability",
+    }
+    assignments = evidence_governance["authority_assignments"]
+    _require({record["domain"] for record in assignments} == expected_domains, "finding/stop authority domains are incomplete")
+    ledger_owners = {record["role"] for record in ledger["owner_assignments"]}
+    for assignment in assignments:
+        referenced = {assignment["owner"], *assignment["escalates_to"], *assignment["stop_authority"]}
+        _require(referenced <= ledger_owners, f"governance references unassigned owner in {assignment['domain']}")
+
+    severities = {record["severity"]: record for record in evidence_governance["finding_severities"]}
+    _require(severities.get("critical", {}).get("phase_effect") == "stop", "critical findings must stop the phase")
+    _require(severities.get("high", {}).get("phase_effect") == "conditional-stop", "high findings require conditional stop review")
+    _require(len(evidence_governance["blocker_rules"]) >= 4, "blocker rules are incomplete")
+
+    expected_changes = {
+        "runtime substrate",
+        "server stack",
+        "activation boundary",
+        "proof method",
+        "browser matrix",
+        "quality threshold",
+        "stop condition",
+    }
+    triggers = evidence_governance["reapproval_triggers"]
+    _require({record["change"] for record in triggers} == expected_changes, "explicit reapproval triggers are incomplete")
+    _require(all(record["invalidation_required"] for record in triggers), "reapproval must invalidate dependent evidence")
+    prohibited = " ".join(evidence_governance["prohibited_governance_actions"]).lower()
+    for term in ("threshold", "scenario", "planned", "delete", "downstream"):
+        _require(term in prohibited, f"governance prohibition is missing: {term}")
+
+
 def validate() -> None:
     auth = _load_json(AUTHORIZATION)
     ledger = _load_json(LEDGER)
@@ -185,6 +311,7 @@ def validate() -> None:
     _validate_authorization(auth, governance)
     _validate_bound_sources(governance)
     _validate_ledger(ledger, governance, quality, acceptance)
+    _validate_evidence_governance(governance, ledger)
 
 
 def main() -> int:
@@ -195,7 +322,7 @@ def main() -> int:
     except ValidationError as exc:
         print(f"BH-01 activation validation failed: {exc}", file=sys.stderr)
         return 1
-    print("BH-01 activation authorization and inherited ledger are valid.")
+    print("BH-01 authorization, inherited ledger, evidence governance, and activation are valid.")
     return 0
 
 

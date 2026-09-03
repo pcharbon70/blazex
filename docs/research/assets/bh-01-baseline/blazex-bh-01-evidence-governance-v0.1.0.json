@@ -1,0 +1,99 @@
+{
+  "schema_version": "1.0.0",
+  "governance_version": "0.1.0",
+  "governance_id": "BX-BH01-EVIDENCE-GOVERNANCE-0.1",
+  "status": "active-phase-1",
+  "evidence_record_schema": "blazex-bh-01-evidence-record.schema.json",
+  "state_vocabulary": [
+    "planned",
+    "observed",
+    "passed",
+    "failed",
+    "blocked",
+    "conditional",
+    "unsupported",
+    "untested",
+    "superseded",
+    "invalidated"
+  ],
+  "evidence_types": [
+    {"type": "environment-fingerprint", "id_prefix": "BX-BH01-ENV-", "default_owner": "bh01-owner", "retention_class": "milestone"},
+    {"type": "command", "id_prefix": "BX-BH01-COMMAND-", "default_owner": "bh01-owner", "retention_class": "milestone"},
+    {"type": "log", "id_prefix": "BX-BH01-LOG-", "default_owner": "bh01-owner", "retention_class": "milestone"},
+    {"type": "artifact", "id_prefix": "BX-BH01-ARTIFACT-", "default_owner": "build-owner", "retention_class": "release"},
+    {"type": "scenario", "id_prefix": "BX-BH01-SCENARIO-", "default_owner": "quality-owner", "retention_class": "release"},
+    {"type": "trace", "id_prefix": "BX-BH01-TRACE-", "default_owner": "quality-owner", "retention_class": "milestone"},
+    {"type": "measurement", "id_prefix": "BX-BH01-MEASUREMENT-", "default_owner": "quality-owner", "retention_class": "release"},
+    {"type": "review", "id_prefix": "BX-BH01-REVIEW-", "default_owner": "bh01-owner", "retention_class": "permanent"},
+    {"type": "finding", "id_prefix": "BX-BH01-FINDING-", "default_owner": "bh01-owner", "retention_class": "permanent"},
+    {"type": "risk", "id_prefix": "BX-BH01-RISK-", "default_owner": "bh01-owner", "retention_class": "permanent"},
+    {"type": "exception", "id_prefix": "BX-BH01-EXCEPTION-", "default_owner": "product-owner", "retention_class": "permanent"},
+    {"type": "decision", "id_prefix": "BX-BH01-DECISION-", "default_owner": "product-owner", "retention_class": "permanent"}
+  ],
+  "authority_assignments": [
+    {"domain": "dependency-access", "owner": "bh01-owner", "escalates_to": ["architecture-owner", "product-owner"], "stop_authority": ["bh01-owner", "architecture-owner"]},
+    {"domain": "reproducibility", "owner": "bh01-owner", "escalates_to": ["architecture-owner", "quality-owner"], "stop_authority": ["bh01-owner", "quality-owner"]},
+    {"domain": "runtime-semantics", "owner": "runtime-owner", "escalates_to": ["architecture-owner", "bh01-owner"], "stop_authority": ["runtime-owner", "architecture-owner"]},
+    {"domain": "artifacts", "owner": "build-owner", "escalates_to": ["security-owner", "bh01-owner"], "stop_authority": ["build-owner", "security-owner"]},
+    {"domain": "private-apis", "owner": "compatibility-owner", "escalates_to": ["liveview-adapter-owner", "architecture-owner"], "stop_authority": ["compatibility-owner", "architecture-owner"]},
+    {"domain": "browser-prerequisites", "owner": "browser-host-owner", "escalates_to": ["browser-profile-owner", "quality-owner"], "stop_authority": ["browser-host-owner", "quality-owner"]},
+    {"domain": "authenticated-commands", "owner": "server-adapter-owner", "escalates_to": ["security-owner", "architecture-owner"], "stop_authority": ["server-adapter-owner", "security-owner"]},
+    {"domain": "mobile-viability", "owner": "quality-owner", "escalates_to": ["product-owner", "bh01-owner"], "stop_authority": ["quality-owner", "product-owner"]}
+  ],
+  "finding_severities": [
+    {"severity": "informational", "phase_effect": "record", "review_required": false},
+    {"severity": "low", "phase_effect": "track", "review_required": false},
+    {"severity": "medium", "phase_effect": "mitigate", "review_required": true},
+    {"severity": "high", "phase_effect": "conditional-stop", "review_required": true},
+    {"severity": "critical", "phase_effect": "stop", "review_required": true}
+  ],
+  "blocker_rules": [
+    "A critical finding stops the current phase and prevents downstream phase activation.",
+    "A failed stop-bound proof or a triggered BH-00 stop condition is blocking regardless of finding severity.",
+    "An unowned finding, missing raw evidence, broken reciprocal link, or unexplained artifact is blocking until corrected.",
+    "A high finding blocks unless an authorized bounded mitigation is accepted before the phase gate."
+  ],
+  "stop_go_policy": {
+    "owner": "bh01-owner",
+    "required_record_types": ["finding", "risk", "decision", "review"],
+    "rules": [
+      "A stop record names the trigger, affected proofs, risks, evidence, phases, and prohibited continuation.",
+      "Only the named stop authority may issue go, conditional-go, revise-and-repeat, or blocked disposition after required review.",
+      "Downstream work remains unauthorized while a stop record lacks an accepted decision."
+    ]
+  },
+  "invalidation_policy": {
+    "owner": "quality-owner",
+    "required_record_types": ["finding", "decision"],
+    "rules": [
+      "Changed inputs invalidate every dependent record through reciprocal links; raw evidence remains immutable.",
+      "Invalidation records name cause, affected IDs, replacement plan, and the exact proof or scenario to repeat.",
+      "Superseded and invalidated records remain queryable and cannot be deleted from milestone history."
+    ]
+  },
+  "bounded_mitigation_policy": {
+    "owner": "architecture-owner",
+    "required_record_types": ["finding", "risk", "review", "decision"],
+    "rules": [
+      "A mitigation names scope, owner, expiry or review trigger, residual risk, affected profiles, and verification evidence.",
+      "A mitigation cannot weaken a threshold, omit a scenario, relabel unsupported behavior, or broaden an adapter boundary.",
+      "Critical findings and reproducibility failures cannot be waived by a bounded mitigation."
+    ]
+  },
+  "reapproval_triggers": [
+    {"id": "BX-BH01-REAPPROVAL-RUNTIME-SUBSTRATE", "change": "runtime substrate", "approvers": ["architecture-owner", "bh01-owner"], "invalidation_required": true},
+    {"id": "BX-BH01-REAPPROVAL-SERVER-STACK", "change": "server stack", "approvers": ["architecture-owner", "security-owner"], "invalidation_required": true},
+    {"id": "BX-BH01-REAPPROVAL-ACTIVATION-BOUNDARY", "change": "activation boundary", "approvers": ["architecture-owner", "product-owner"], "invalidation_required": true},
+    {"id": "BX-BH01-REAPPROVAL-PROOF-METHOD", "change": "proof method", "approvers": ["quality-owner", "bh01-owner"], "invalidation_required": true},
+    {"id": "BX-BH01-REAPPROVAL-BROWSER-MATRIX", "change": "browser matrix", "approvers": ["browser-profile-owner", "product-owner"], "invalidation_required": true},
+    {"id": "BX-BH01-REAPPROVAL-QUALITY-THRESHOLD", "change": "quality threshold", "approvers": ["quality-owner", "product-owner"], "invalidation_required": true},
+    {"id": "BX-BH01-REAPPROVAL-STOP-CONDITION", "change": "stop condition", "approvers": ["architecture-owner", "product-owner", "bh01-owner"], "invalidation_required": true}
+  ],
+  "prohibited_governance_actions": [
+    "Do not silently weaken, remove, or reinterpret a quality threshold.",
+    "Do not omit, narrow, or relabel a required scenario to manufacture a passing result.",
+    "Do not convert planned or observed evidence into a pass without its declared review and proof method.",
+    "Do not delete failed, superseded, invalidated, unsupported, or blocked evidence.",
+    "Do not continue a downstream phase while a blocking stop record is unresolved."
+  ]
+}
