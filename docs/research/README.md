@@ -100,6 +100,8 @@ python3 generate_component_catalog.py --check
 python3 validate_component_classification.py
 python3 -m unittest test_validate_component_classification.py
 python3 generate_component_classification.py --check
+python3 validate_quality_acceptance.py
+python3 -m unittest test_validate_quality_acceptance.py
 ```
 
 The validator checks metadata, placeholders, filenames, local links,
@@ -116,8 +118,10 @@ identifiers.
 - [`test_validate_browser_product_envelope.py`](test_validate_browser_product_envelope.py) — focused browser-envelope validator tests
 - [`test_validate_component_catalog.py`](test_validate_component_catalog.py) — focused component-catalog validator tests
 - [`test_validate_component_classification.py`](test_validate_component_classification.py) — focused Phase 4 classification validator tests
+- [`test_validate_quality_acceptance.py`](test_validate_quality_acceptance.py) — focused Phase 5 quality-budget and acceptance-traceability validator tests
 - [`test_validate_archive.py`](test_validate_archive.py) — focused validator tests
 - [`validate_browser_product_envelope.py`](validate_browser_product_envelope.py) — deterministic BH-00 browser-envelope checks
 - [`validate_component_catalog.py`](validate_component_catalog.py) — deterministic BH-00 reference and component-catalog checks
 - [`validate_component_classification.py`](validate_component_classification.py) — deterministic BH-00 product/package/capability/portability classification checks
+- [`validate_quality_acceptance.py`](validate_quality_acceptance.py) — deterministic BH-00 quality-budget and acceptance-traceability checks
 - [`validate_archive.py`](validate_archive.py) — deterministic archive checks

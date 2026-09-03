@@ -22,29 +22,29 @@ Back to milestone: [README](README.md)
   every roadmap and catalog claim to observable evidence, while keeping proposed
   thresholds distinct from measurements that only later milestones can produce.
 
-  - [ ] 5.1 Section - Establish performance, payload, and reliability budgets.
+  - [x] 5.1 Section - Establish performance, payload, and reliability budgets.
 
     Convert broad quality intent into bounded metrics, environments, statistical
     rules, and failure policies that BH-01 and later phases can test consistently.
 
-    - [ ] 5.1.1 Task - Define payload, startup, and interaction budgets.
+    - [x] 5.1.1 Task - Define payload, startup, and interaction budgets.
 
       Budgets must separate runtime, shared foundation, application, feature,
       asset, and server costs and identify the devices and networks on which they
       apply.
 
-      - [ ] 5.1.1.1 Subtask - Define compressed and uncompressed budgets for loader, runtime, base application, shared UI, component-family bundles, optional data or chart packages, fonts, icons, and source maps.
-      - [ ] 5.1.1.2 Subtask - Define cold and warm startup, parse or instantiate, root readiness, local event-to-paint, DOM update, server-command round trip, memory, and build-time metrics.
-      - [ ] 5.1.1.3 Subtask - Define representative hardware, browser, network, cache, power, sample-size, percentile, variance, regression, and exception rules without inventing passing measurements.
+      - [x] 5.1.1.1 Subtask - Define compressed and uncompressed budgets for loader, runtime, base application, shared UI, component-family bundles, optional data or chart packages, fonts, icons, and source maps.
+      - [x] 5.1.1.2 Subtask - Define cold and warm startup, parse or instantiate, root readiness, local event-to-paint, DOM update, server-command round trip, memory, and build-time metrics.
+      - [x] 5.1.1.3 Subtask - Define representative hardware, browser, network, cache, power, sample-size, percentile, variance, regression, and exception rules without inventing passing measurements.
 
-    - [ ] 5.1.2 Task - Define resilience and resource-lifecycle budgets.
+    - [x] 5.1.2 Task - Define resilience and resource-lifecycle budgets.
 
       Reliability claims need bounded recovery, queue, retry, ownership, and
       cleanup expectations rather than an undefined promise of robustness.
 
-      - [ ] 5.1.2.1 Subtask - Define budgets for root count, process growth, renderer queue depth, pending effects, resource count, event backlog, retry count, restart intensity, reconnect, and stale-generation rejection.
-      - [ ] 5.1.2.2 Subtask - Define required outcomes and time bounds for component failure, renderer failure, runtime loss, network loss, deployment mismatch, denied capability, corrupted persisted state, and cleanup.
-      - [ ] 5.1.2.3 Subtask - Define leak, runaway loop, silent data loss, unauthorized retry, unbounded queue, unrecoverable focus loss, and abandoned resource conditions as release blockers.
+      - [x] 5.1.2.1 Subtask - Define budgets for root count, process growth, renderer queue depth, pending effects, resource count, event backlog, retry count, restart intensity, reconnect, and stale-generation rejection.
+      - [x] 5.1.2.2 Subtask - Define required outcomes and time bounds for component failure, renderer failure, runtime loss, network loss, deployment mismatch, denied capability, corrupted persisted state, and cleanup.
+      - [x] 5.1.2.3 Subtask - Define leak, runaway loop, silent data loss, unauthorized retry, unbounded queue, unrecoverable focus loss, and abandoned resource conditions as release blockers.
 
   - [ ] 5.2 Section - Establish accessibility, security, compatibility, and provenance gates.
 

@@ -31,6 +31,7 @@ Source summaries belong in `30-sources`; unresolved workbenches belong in
 
 ### Documents
 
+- [BlazeX quality budget and measurement policy](blazex-quality-budget-and-measurement-policy.md) — defines proposed payload, startup, interaction, resource, build, resilience, environment, statistical, exception, and evidence boundaries without claiming measurements.
 - [BlazeX component portability, native, and visual-profile policy](blazex-component-portability-native-and-visual-profile-policy.md) — defines bounded portability statuses, semantic dimensions, native-control strategies, platform/Material/hybrid visual implications, and the BH-02/future-backend support gate.
 - [BlazeX component capability, remote, and fallback policy](blazex-component-capability-remote-and-fallback-policy.md) — defines fourteen portable capability groups, effect/resource ownership, remote-authority states, nine mandatory fallback conditions, server trust, and forbidden backend metadata.
 - [BlazeX component disposition, tier, and package policy](blazex-component-disposition-tier-and-package-policy.md) — defines explicit native/adapt/replace/renderer/defer/omit outcomes, F0–F4 meanings, package ownership/layering, payload boundaries, extraction triggers, and compatibility nonclaims.
