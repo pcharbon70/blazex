@@ -78,37 +78,37 @@ Back to milestone: [README](README.md)
       - [x] 3.2.2.2 Subtask - Reject undeclared modules, dynamic code loading, environment-dependent resources, non-reproducible archives, and host-only modules unavailable in AtomVM.
       - [x] 3.2.2.3 Subtask - Produce debug/release bundles and compare module inventories, source paths, hashes, compressed/uncompressed sizes, and reviewed nondeterministic fields.
 
-  - [ ] 3.3 Section - Probe required runtime semantics outside the browser.
+  - [x] 3.3 Section - Probe required runtime semantics outside the browser.
 
     Isolate VM limitations early by exercising representative behavior through
     the Wasm runtime in the simplest available harness before adding browser
     loader and DOM variables.
 
-    - [ ] 3.3.1 Task - Probe process, mailbox, and supervision behavior.
+    - [x] 3.3.1 Task - Probe process, mailbox, and supervision behavior.
 
       BlazeX feasibility depends on bounded process/message semantics and
       observable failures, even though BH-01 does not define framework APIs.
 
-      - [ ] 3.3.1.1 Subtask - Exercise spawn, send/receive, ordering assumptions, selective receive if used, links/monitors, process exit, supervisor restart, and repeated teardown.
-      - [ ] 3.3.1.2 Subtask - Record unsupported OTP/BEAM operations, semantic deviations, scheduler assumptions, mailbox growth, crash propagation, diagnostics, and bounded replacement options.
+      - [x] 3.3.1.1 Subtask - Exercise spawn, send/receive, ordering assumptions, selective receive if used, links/monitors, process exit, supervisor restart, and repeated teardown.
+      - [x] 3.3.1.2 Subtask - Record unsupported OTP/BEAM operations, semantic deviations, scheduler assumptions, mailbox growth, crash propagation, diagnostics, and bounded replacement options.
 
-    - [ ] 3.3.2 Task - Probe timers, cancellation, generations, and cleanup.
+    - [x] 3.3.2 Task - Probe timers, cancellation, generations, and cleanup.
 
       Asynchronous work must be cancellable and reject late results before UI
       scenarios depend on it.
 
-      - [ ] 3.3.2.1 Subtask - Exercise one-shot/repeated timers, cancellation races, stale generation, timeout, late message, crash/restart, monotonic-time assumptions, and shutdown.
-      - [ ] 3.3.2.2 Subtask - Instrument process, mailbox, timer, pending-message, memory-page, and cleanup convergence across repeated runs.
-      - [ ] 3.3.2.3 Subtask - Stop if required semantics are absent and a safe bounded adapter cannot preserve BH-00 component/resource/trust boundaries.
+      - [x] 3.3.2.1 Subtask - Exercise one-shot/repeated timers, cancellation races, stale generation, timeout, late message, crash/restart, monotonic-time assumptions, and shutdown.
+      - [x] 3.3.2.2 Subtask - Instrument process, mailbox, timer, pending-message, memory-page, and cleanup convergence across repeated runs.
+      - [x] 3.3.2.3 Subtask - Stop if required semantics are absent and a safe bounded adapter cannot preserve BH-00 component/resource/trust boundaries.
 
-    - [ ] 3.3.3 Task - Probe serialization and host-call boundaries.
+    - [x] 3.3.3 Task - Probe serialization and host-call boundaries.
 
       Runtime/host data exchange must be bounded and explicit before it carries
       browser events or server commands.
 
-      - [ ] 3.3.3.1 Subtask - Define and test allowed scalar/structured fixture payloads, encoding/version, size/depth limits, malformed values, unknown tags, and schema mismatch.
-      - [ ] 3.3.3.2 Subtask - Exercise request/response identity, timeout, cancellation, duplicate/stale reply, host error, runtime error, and post-disposal traffic.
-      - [ ] 3.3.3.3 Subtask - Reject arbitrary JavaScript object, DOM handle, code evaluation, filesystem path, secret, or unbounded binary transfer from the runtime contract.
+      - [x] 3.3.3.1 Subtask - Define and test allowed scalar/structured fixture payloads, encoding/version, size/depth limits, malformed values, unknown tags, and schema mismatch.
+      - [x] 3.3.3.2 Subtask - Exercise request/response identity, timeout, cancellation, duplicate/stale reply, host error, runtime error, and post-disposal traffic.
+      - [x] 3.3.3.3 Subtask - Reject arbitrary JavaScript object, DOM handle, code evaluation, filesystem path, secret, or unbounded binary transfer from the runtime contract.
 
   - [ ] 3.4 Section - Establish the initial artifact manifest.
 

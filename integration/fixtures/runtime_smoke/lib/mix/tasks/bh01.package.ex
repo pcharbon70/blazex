@@ -49,18 +49,31 @@ defmodule Mix.Tasks.Bh01.Package do
 
     contents =
       quote location: :keep do
-        @compile autoload: false, no_warn_undefined: [Popcorn.Init]
+        @compile autoload: false
 
         def start do
-          Popcorn.Init.init(%{
-            app: unquote(app),
-            start_module: unquote(@fixture_module),
-            apps_specs: unquote(Macro.escape(specs))
-          })
+          specs = unquote(Macro.escape(specs))
+
+          {:ok, _controller} =
+            :application_controller.start({:application, :kernel, specs[:kernel]})
+
+          for {application, spec} <- specs, application != :kernel do
+            :ok = :application.load({:application, application, spec})
+          end
+
+          :ok = :application.start_boot(:kernel, :permanent)
+          :ok = :application.start_boot(:stdlib, :permanent)
+          {:ok, _applications} = :application.ensure_all_started(unquote(app), :permanent)
+          unquote(@fixture_module).start()
         end
       end
 
-    environment = %{__ENV__ | file: "/workspace/generated/blazex_bh01_runtime_smoke_boot.ex", line: 1}
+    environment = %{
+      __ENV__
+      | file: "/workspace/generated/blazex_bh01_runtime_smoke_boot.ex",
+        line: 1
+    }
+
     {:module, @start_module, binary, _} = Module.create(@start_module, contents, environment)
     path = Path.join(out_dir, "Elixir.BlazeX.BH01.RuntimeSmoke.Boot.beam")
     File.write!(path, binary)
@@ -74,7 +87,9 @@ defmodule Mix.Tasks.Bh01.Package do
     builtin_beams =
       [:erts, :popcorn_lib | Enum.filter(Map.keys(specs), &MapSet.member?(builtin, &1))]
       |> Enum.uniq()
-      |> Enum.flat_map(fn app -> Path.wildcard(Path.join(Popcorn.Build.patched_ebin_dir(app), "*.beam")) end)
+      |> Enum.flat_map(fn app ->
+        Path.wildcard(Path.join(Popcorn.Build.patched_ebin_dir(app), "*.beam"))
+      end)
 
     fixture_beams =
       Mix.Project.compile_path()
@@ -88,7 +103,12 @@ defmodule Mix.Tasks.Bh01.Package do
       |> Enum.reject(&(&1 in [:non_existing, :preloaded]))
       |> Enum.map(&List.to_string/1)
 
-    [boot_beam | builtin_beams ++ fixture_beams ++ popcorn_api_beams]
+    json_bridge_beams =
+      :jason
+      |> Application.app_dir("ebin/*.beam")
+      |> Path.wildcard()
+
+    [boot_beam | builtin_beams ++ fixture_beams ++ popcorn_api_beams ++ json_bridge_beams]
     |> Enum.uniq_by(&Path.basename/1)
     |> Enum.sort_by(fn path -> {path != boot_beam, Path.basename(path)} end)
   end
@@ -115,7 +135,10 @@ defmodule Mix.Tasks.Bh01.Package do
       modules: modules
     }
 
-    File.write!(Path.join(out_dir, "module-inventory.json"), Jason.encode_to_iodata!(inventory, pretty: true))
+    File.write!(
+      Path.join(out_dir, "module-inventory.json"),
+      Jason.encode_to_iodata!(inventory, pretty: true)
+    )
   end
 
   defp gather_app_specs([], specs), do: specs

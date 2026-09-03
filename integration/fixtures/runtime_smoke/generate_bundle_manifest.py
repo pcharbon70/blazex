@@ -28,6 +28,7 @@ def source_inputs() -> list[dict[str, Any]]:
         HERE / "mix.lock",
         HERE / "config/config.exs",
         HERE / "lib/blazex/bh01/runtime_smoke.ex",
+        HERE / "lib/blazex/bh01/runtime_smoke/protocol.ex",
         HERE / "lib/blazex/bh01/runtime_smoke/worker.ex",
         HERE / "lib/mix/tasks/bh01.package.ex",
     ]

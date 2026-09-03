@@ -2,11 +2,11 @@
   "schema_version": "1.0.0",
   "manifest_id": "BX-BH01-RUNTIME-SMOKE-BUNDLES-0.1",
   "status": "observed-packaged",
-  "build_contract_sha256": "14cf6058a4bd920df13f3090ca3dcbf6f6b7c18d9f3320f2ab0e5351b9335cf8",
+  "build_contract_sha256": "08ce775a839c55e0604175b5c2bad2e389b7ef38fcafeba5fe30b40b43969f62",
   "source_inputs": [
     {
       "path": "mix.exs",
-      "sha256": "eced0509cfb05106e2dec35fbf8c718e4036623fd1fa2a6261b9681faa6ab8a0"
+      "sha256": "b033f77656b3c24ed1f0da75c78c39e4d68b04386dbd5fd553eecf2f68b9acb3"
     },
     {
       "path": "mix.lock",
@@ -18,7 +18,11 @@
     },
     {
       "path": "lib/blazex/bh01/runtime_smoke.ex",
-      "sha256": "da961038f3bedc9fd0e1bfca74cc18852ac1625c0397b43820ea7a44f1310de3"
+      "sha256": "0fc07951c0cf81f85c60e9ff38a2fcfdeb3640833db429740d9cd11f16deb490"
+    },
+    {
+      "path": "lib/blazex/bh01/runtime_smoke/protocol.ex",
+      "sha256": "4ae7914d4bea8bc93235859fe63257d2a92e4d59575b66e4fe2994383366c897"
     },
     {
       "path": "lib/blazex/bh01/runtime_smoke/worker.ex",
@@ -26,7 +30,7 @@
     },
     {
       "path": "lib/mix/tasks/bh01.package.ex",
-      "sha256": "a5cb6e56bb29eaed0f27125b162405f8b9de767041b494a3ad83ab2f2f5425f9"
+      "sha256": "fe5f1d61e26775461feecf6c8e9b2b75315b66c3549039570fae16326e8fe4d5"
     }
   ],
   "artifacts": [
@@ -35,8 +39,8 @@
       "mode": "debug",
       "kind": "avm",
       "path": "generated/debug/bundle.avm",
-      "sha256": "21eea8d9150d9c781183a3e681ecbb0804b861e2cd05c05ea7ea600ecf21a168",
-      "bytes": 6846900,
+      "sha256": "1e70ff26f9cb130ddaa973faa08240293427b5aff597ddf7ee3b3c906ef127c9",
+      "bytes": 6987416,
       "retained": false,
       "owner": "integration/fixtures/runtime_smoke",
       "reachability_root": "Elixir.BlazeX.BH01.RuntimeSmoke.Boot"
@@ -46,8 +50,8 @@
       "mode": "debug",
       "kind": "avm-gzip",
       "path": "generated/debug/bundle.avm.gz",
-      "sha256": "4a2f9147b0c0cf6c607c82795e682236fcfdb7474e645fa305458ec8a3594174",
-      "bytes": 3302246,
+      "sha256": "da0ca512eabe09a0223c8f8b3f57f3daa9146ec40ef98c6de3bc8360fa4033a1",
+      "bytes": 3346502,
       "retained": false,
       "owner": "integration/fixtures/runtime_smoke",
       "reachability_root": "Elixir.BlazeX.BH01.RuntimeSmoke.Boot"
@@ -57,8 +61,8 @@
       "mode": "debug",
       "kind": "module-inventory",
       "path": "generated/debug/module-inventory.json",
-      "sha256": "b64f0b08cf72d3ab43ceb3fc12bdd50e3d66b37cd0c1cac520b93fa58f036349",
-      "bytes": 13117,
+      "sha256": "22f17d3ff2214d51f9ed300e6a9aa5be9f98dd9ec0c9f2671b29ca6a1bfd98b2",
+      "bytes": 14063,
       "retained": false,
       "owner": "integration/fixtures/runtime_smoke",
       "reachability_root": "Elixir.BlazeX.BH01.RuntimeSmoke.Boot"
@@ -68,8 +72,8 @@
       "mode": "release",
       "kind": "avm",
       "path": "generated/release/bundle.avm",
-      "sha256": "e380a1603915532a6a2f904ed88d2695207d4b062f5b9fdbd52fc06d4276d142",
-      "bytes": 6406264,
+      "sha256": "82a1d00bc8220c176a20287a65953eb8569b1353f8cbb1fe3e562e89a5a8f8cc",
+      "bytes": 6541768,
       "retained": false,
       "owner": "integration/fixtures/runtime_smoke",
       "reachability_root": "Elixir.BlazeX.BH01.RuntimeSmoke.Boot"
@@ -79,8 +83,8 @@
       "mode": "release",
       "kind": "avm-gzip",
       "path": "generated/release/bundle.avm.gz",
-      "sha256": "a404837900e9d190315179b5e1405195d5186d4e22dddfc641ad2bea3d6cf1e4",
-      "bytes": 3004445,
+      "sha256": "49ccf9fee7e5b89592d9b427fe93c967df52e4394d0c84e4396481a211c2cd05",
+      "bytes": 3045793,
       "retained": false,
       "owner": "integration/fixtures/runtime_smoke",
       "reachability_root": "Elixir.BlazeX.BH01.RuntimeSmoke.Boot"
@@ -90,8 +94,8 @@
       "mode": "release",
       "kind": "module-inventory",
       "path": "generated/release/module-inventory.json",
-      "sha256": "e27a7433a4012975c9922ecee0388d3eba93f323ad5820480dd5a6653c7159d1",
-      "bytes": 13120,
+      "sha256": "cc0d294b1694c49158af12d3bf78cedd8e445e8e46046dce860af91f0679184e",
+      "bytes": 14066,
       "retained": false,
       "owner": "integration/fixtures/runtime_smoke",
       "reachability_root": "Elixir.BlazeX.BH01.RuntimeSmoke.Boot"
@@ -100,12 +104,12 @@
   "module_inventories": [
     {
       "mode": "debug",
-      "module_count": 556,
-      "modules_sha256": "ea235a0c9625967d1263a89f42dc2aefb18d001ca1d6b498682df062acdc4845",
+      "module_count": 584,
+      "modules_sha256": "3eaaeeb185dcb6a6e2ed32a01fb684ab1b10b8526fa4244ed7c7a66ed9786b95",
       "include_lines": true,
       "resource_count": 0,
       "embedded_path_markers": {
-        "/workspace": 0,
+        "/workspace": 7,
         "/home/runner": 376,
         "/tmp": 2,
         "/home/ducky": 0
@@ -113,12 +117,12 @@
     },
     {
       "mode": "release",
-      "module_count": 556,
-      "modules_sha256": "ea235a0c9625967d1263a89f42dc2aefb18d001ca1d6b498682df062acdc4845",
+      "module_count": 584,
+      "modules_sha256": "3eaaeeb185dcb6a6e2ed32a01fb684ab1b10b8526fa4244ed7c7a66ed9786b95",
       "include_lines": false,
       "resource_count": 0,
       "embedded_path_markers": {
-        "/workspace": 0,
+        "/workspace": 7,
         "/home/runner": 372,
         "/tmp": 2,
         "/home/ducky": 0

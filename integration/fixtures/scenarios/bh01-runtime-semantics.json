@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0.0",
+  "scenario_id": "BX-BH01-SCENARIO-RUNTIME-SEMANTICS-NODE",
+  "status": "passed",
+  "owner": "quality-owner",
+  "requirement_refs": [
+    "BH-01-PHASE-3",
+    "BH-01-3.3.1",
+    "BH-01-3.3.2",
+    "BH-01-3.3.3"
+  ],
+  "profiles": ["pinned-node-26.8.1", "fissionvm-node-probe", "release-avm-fixture"],
+  "preconditions": [
+    "The FissionVM runtime is built from the Phase 3 checksum-qualified inputs.",
+    "The release AVM fixture is packaged in the exact OTP 26.0.2 and Elixir 1.17.3 environment.",
+    "Node 26.8.1, the runtime module, and the AVM bundle match their retained identities."
+  ],
+  "steps": [
+    "Instantiate the release-node-probe WebAssembly runtime with fixed 256-page shared memory.",
+    "Boot the disposable release AVM fixture and execute process, mailbox, supervision, timer, generation, and cleanup probes.",
+    "Execute bounded protocol acceptance and rejection cases inside the Wasm runtime.",
+    "Capture and validate contiguous structured traces, final mailbox length, return value, and host memory pages."
+  ],
+  "expected_results": [
+    "The supervised worker exchanges a message, crashes controllably, and restarts.",
+    "Selective receive, ordering, one-shot/repeated timers, timeout, stale generation, and late-result drainage behave as bounded by the contract.",
+    "Request identity, duplicate/stale/cancelled replies, failure classes, prohibited capabilities, and post-disposal traffic are handled explicitly.",
+    "A repeated process tree teardown leaves zero messages and the fixture returns ok with cleanup complete."
+  ],
+  "prohibited_results": [
+    "A failed trace, nonzero runtime exit, missing sequence, growing final mailbox, memory growth, or unbounded wait.",
+    "Acceptance of code evaluation, a DOM handle, filesystem path, secret, arbitrary object, or unbounded binary.",
+    "A claim that the Node CLI proves browser loading or direct worker-separated host calls."
+  ],
+  "evidence_types": ["structured-runtime-trace", "artifact-identity", "compatibility-finding", "cleanup-observation"]
+}

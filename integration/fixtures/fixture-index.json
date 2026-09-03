@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
   "index_id": "BX-BH01-FIXTURE-INDEX-0.1",
-  "status": "phase3-runtime-smoke-packaged-no-scenarios-executed",
+  "status": "phase3-runtime-semantics-probed",
   "scenario_schema": "scenario.schema.json",
   "scenario_location": "scenarios",
   "raw_evidence_location": "raw-evidence",
@@ -9,11 +9,18 @@
     {
       "id": "BX-BH01-FIXTURE-RUNTIME-SMOKE",
       "path": "runtime_smoke",
-      "status": "packaged-not-yet-probed",
+      "status": "node-semantics-passed-browser-unproven",
       "public_api": false,
       "manifest": "runtime_smoke/bundle-manifest.json"
     }
   ],
-  "scenarios": [],
+  "scenarios": [
+    {
+      "scenario_id": "BX-BH01-SCENARIO-RUNTIME-SEMANTICS-NODE",
+      "path": "scenarios/bh01-runtime-semantics.json",
+      "status": "passed",
+      "evidence": "raw-evidence/bh01-phase3-runtime-semantics.json"
+    }
+  ],
   "production_import_allowed": false
 }

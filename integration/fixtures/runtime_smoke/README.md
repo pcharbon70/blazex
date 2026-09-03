@@ -12,6 +12,12 @@ timers, emits a readiness record, and shuts the process tree down. Every trace
 contains generation, scenario, process, sequence, result, error, and cleanup
 fields.
 
+The fixed boot module performs Popcorn-equivalent OTP/application startup but
+omits Popcorn's browser readiness event. The Node probe has no browser window,
+and the upstream generated glue currently rejects that event's function-valued
+JavaScript expression. The limitation is retained as probe evidence rather
+than hidden in product code.
+
 Build and validate from the exact Phase 2 BEAM environment:
 
 ```console

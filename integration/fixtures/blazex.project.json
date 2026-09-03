@@ -8,7 +8,7 @@
   "owner_role": "quality-owner",
   "module_roots": [],
   "manifest": "fixture-index.json",
-  "test_entrypoints": ["runtime_smoke/test", "runtime_smoke/tests", "runtime_smoke/verify_fixture.py"],
+  "test_entrypoints": ["runtime_smoke/test", "runtime_smoke/tests", "runtime_smoke/verify_fixture.py", "runtime_smoke/verify_semantics.py"],
   "dependencies": [],
   "planned_dependencies": [],
   "must_not_own": ["stable-public-api", "production-runtime", "supported-example"],

@@ -17,6 +17,7 @@ HERE = Path(__file__).resolve().parent
 SHA256 = re.compile(r"^[0-9a-f]{64}$")
 EXPECTED_SOURCES = {
     "lib/blazex/bh01/runtime_smoke.ex",
+    "lib/blazex/bh01/runtime_smoke/protocol.ex",
     "lib/blazex/bh01/runtime_smoke/worker.ex",
     "lib/mix/tasks/bh01.package.ex",
 }

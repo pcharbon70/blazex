@@ -7,7 +7,7 @@ defmodule BlazeX.BH01.RuntimeSmoke.MixProject do
       version: "0.0.0-bh01",
       elixir: "== 1.17.3",
       start_permanent: false,
-      deps: [{:popcorn, "== 0.3.3"}]
+      deps: [{:popcorn, "== 0.3.3", runtime: false}]
     ]
   end
 
