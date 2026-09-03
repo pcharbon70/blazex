@@ -114,7 +114,7 @@ This means the planned coverage graph is complete. It does **not** mean implemen
 | `BX-SOURCE-BROWSER-ENVELOPE` | `assets/browser-product-envelope-v0.1.json` | `d36c62d1ad1e29688a08e65f8eff56b2a681012e5f2f793346840e5236766f69` |
 | `BX-SOURCE-BROWSER-ROADMAP` | `20-notes/browser-host-implementation-milestones.md` | `5c09ad3dd07dc0adadc48ba67e8cdd40c823a9e73d4405808d892315f6894b9a` |
 | `BX-SOURCE-COMPONENT-CLASSIFICATION` | `assets/component-catalog/blazex-component-classification-v0.1.0.json` | `613de39b6dda7512dfb98306bc53594b137cc484e8dcaf33c10eb0f0d3379b58` |
-| `BX-SOURCE-QUALITY-CONTRACT` | `assets/quality-acceptance/blazex-quality-contract-v0.1.0.json` | `94fb36f24b08229c01e1f407121190f8b58a759beba77e71bed0ca319909e62c` |
+| `BX-SOURCE-QUALITY-CONTRACT` | `assets/quality-acceptance/blazex-quality-contract-v0.1.0.json` | `21d69d966ed4888ca0f09b957f3a74edfda843af0de23ec4098237ef3d759326` |
 
 ## Evidence boundary
 

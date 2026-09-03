@@ -31,7 +31,8 @@ class QualityAcceptanceValidationTests(unittest.TestCase):
 
     def test_repository_contract_passes(self) -> None:
         counts = self.validate(copy.deepcopy(self.document))
-        self.assertEqual(set(counts), validator.EXPECTED_DIMENSIONS)
+        self.assertEqual(counts, validator.EXPECTED_BUDGET_COUNTS)
+        self.assertEqual(self.document["stage"], "complete")
 
     def test_rejects_duplicate_budget_id(self) -> None:
         document = copy.deepcopy(self.document)
@@ -133,8 +134,8 @@ class QualityAcceptanceValidationTests(unittest.TestCase):
 
     def test_repository_acceptance_registry_passes(self) -> None:
         counts = self.validate_acceptance(copy.deepcopy(self.acceptance))
-        self.assertEqual(counts["catalog-family"], 83)
-        self.assertEqual(counts["roadmap-milestone"], 24)
+        self.assertEqual(counts, validator.EXPECTED_ACCEPTANCE_COUNTS)
+        self.assertEqual(self.acceptance["stage"], "complete")
 
     def test_rejects_catalog_family_without_acceptance(self) -> None:
         document = copy.deepcopy(self.acceptance)
@@ -196,6 +197,15 @@ class QualityAcceptanceValidationTests(unittest.TestCase):
         document = copy.deepcopy(self.acceptance)
         document["acceptance_conditions"][0]["normative_statement"] += " Stale edit."
         with self.assertRaisesRegex(validator.QualityAcceptanceValidationError, "registry is stale"):
+            self.validate_acceptance(document)
+
+    def test_rejects_missing_representative_trace(self) -> None:
+        document = copy.deepcopy(self.acceptance)
+        requirement = next(record for record in document["requirements"] if record["source_id"] == "BX-FAIL-RENDERER")
+        acceptance_id = requirement["acceptance_ids"][0]
+        document["requirements"].remove(requirement)
+        document["acceptance_conditions"] = [record for record in document["acceptance_conditions"] if record["id"] != acceptance_id]
+        with self.assertRaisesRegex(validator.QualityAcceptanceValidationError, "representative end-to-end"):
             self.validate_acceptance(document)
 
 

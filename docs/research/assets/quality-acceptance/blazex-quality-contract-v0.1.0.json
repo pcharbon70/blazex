@@ -2,7 +2,7 @@
   "schema_version": "1.0.0",
   "contract_version": "0.1.0",
   "contract_id": "BX-QUALITY-CONTRACT-BROWSER-0.1",
-  "stage": "section-5.2",
+  "stage": "complete",
   "status": "reviewed-proposed-unmeasured",
   "owner_roles": [
     "architecture-owner",

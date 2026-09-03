@@ -585,7 +585,7 @@ def build_registry() -> dict[str, Any]:
         "schema_version": "1.0.0",
         "registry_version": "0.1.0",
         "registry_id": "BX-ACCEPTANCE-REGISTRY-BROWSER-0.1",
-        "stage": "section-5.3",
+        "stage": "complete",
         "status": "reviewed-planned-unexecuted",
         "generated_by": "generate_acceptance_registry.py",
         "source_bindings": source_bindings,

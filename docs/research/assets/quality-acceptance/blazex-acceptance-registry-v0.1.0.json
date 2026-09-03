@@ -2,7 +2,7 @@
   "schema_version": "1.0.0",
   "registry_version": "0.1.0",
   "registry_id": "BX-ACCEPTANCE-REGISTRY-BROWSER-0.1",
-  "stage": "section-5.3",
+  "stage": "complete",
   "status": "reviewed-planned-unexecuted",
   "generated_by": "generate_acceptance_registry.py",
   "source_bindings": [
@@ -24,7 +24,7 @@
     {
       "id": "BX-SOURCE-QUALITY-CONTRACT",
       "path": "assets/quality-acceptance/blazex-quality-contract-v0.1.0.json",
-      "sha256": "94fb36f24b08229c01e1f407121190f8b58a759beba77e71bed0ca319909e62c"
+      "sha256": "21d69d966ed4888ca0f09b957f3a74edfda843af0de23ec4098237ef3d759326"
     }
   ],
   "status_vocabulary": [

@@ -48,6 +48,7 @@ milestones and must only be referenced here through immutable evidence IDs.
   catalog, package, quality, failure, blocker, and gate claims to planned
   acceptance conditions.
 - [BlazeX acceptance registry v0.1.0 generated coverage](blazex-acceptance-registry-v0-1-0-generated.md) — deterministic count, milestone, evidence-demand, source-binding, finding, and representative trace-query report.
+- [BlazeX quality and acceptance v0.1.0 review](blazex-quality-and-acceptance-v0-1-0-review.md) — locked identity, budget, gate, category, representative trace, status/waiver, architecture, compatibility, risk, and review-independence audit.
 - [BlazeX quality contract schema](blazex-quality-contract.schema.json) — JSON
   Schema 1.0.0 for measurement environments, proposed budgets, reliability
   scenarios, cross-cutting gates, exceptions, and evidence boundaries.

@@ -104,6 +104,40 @@ EXPECTED_EVIDENCE_CLASSES = {
     "review",
     "security",
 }
+EXPECTED_BUDGET_COUNTS = {
+    "build": 1,
+    "interaction": 3,
+    "payload": 10,
+    "reliability": 9,
+    "resource": 3,
+    "startup": 5,
+}
+EXPECTED_ACCEPTANCE_COUNTS = {
+    "browser-envelope": 95,
+    "catalog-family": 83,
+    "cross-cutting-obligation": 7,
+    "non-goal": 8,
+    "package-boundary": 6,
+    "quality-budget": 31,
+    "quality-failure": 8,
+    "quality-gate": 21,
+    "quality-release-blocker": 7,
+    "roadmap-milestone": 24,
+}
+REPRESENTATIVE_TRACE_SOURCES = {
+    ("catalog-family", "BX-FAM-FORM"),
+    ("roadmap-milestone", "BH-03"),
+    ("roadmap-milestone", "BH-04"),
+    ("quality-gate", "BX-GREQ-SEC-CAPABILITY-GRANTS"),
+    ("browser-envelope", "profiles:PROFILE-BROWSER-PHOENIX"),
+    ("browser-envelope", "profiles:PROFILE-BROWSER-PLUG"),
+    ("browser-envelope", "profiles:PROFILE-HEADLESS"),
+    ("quality-gate", "BX-GREQ-A11Y-SEMANTICS"),
+    ("quality-gate", "BX-GREQ-SEC-SERVER-COMMAND"),
+    ("quality-failure", "BX-FAIL-RENDERER"),
+    ("quality-budget", "BX-BUD-PAYLOAD-RUNTIME-COMPRESSED-KIB"),
+    ("quality-gate", "BX-GREQ-PROV-SOURCE-LICENSE"),
+}
 
 
 class QualityAcceptanceValidationError(ValueError):
@@ -221,6 +255,11 @@ def validate_quality_contract(document: dict[str, Any], schema: dict[str, Any]) 
         raise QualityAcceptanceValidationError("Section 5.1 must not pre-empt Section 5.2 cross-cutting gates")
     if stage in {"section-5.2", "complete"}:
         validate_cross_cutting_gates(gates)
+    if stage == "complete":
+        if dict(sorted(dimensions.items())) != EXPECTED_BUDGET_COUNTS:
+            raise QualityAcceptanceValidationError("completed quality contract budget counts are locked")
+        if sum(len(gate["requirements"]) for gate in gates) != 21:
+            raise QualityAcceptanceValidationError("completed quality contract must preserve 21 gate requirements")
 
     return dict(sorted(dimensions.items()))
 
@@ -367,10 +406,17 @@ def validate_acceptance_registry(
     if any(document["coverage_findings"].values()):
         raise QualityAcceptanceValidationError("acceptance registry contains unresolved deterministic coverage findings")
 
+    source_key_set = set(source_keys)
+    if not REPRESENTATIVE_TRACE_SOURCES <= source_key_set:
+        raise QualityAcceptanceValidationError("representative end-to-end acceptance trace coverage is incomplete")
+    counts = dict(sorted(Counter(record["source_kind"] for record in requirements).items()))
+    if document["stage"] == "complete" and counts != EXPECTED_ACCEPTANCE_COUNTS:
+        raise QualityAcceptanceValidationError("completed acceptance source-kind counts are locked")
+
     expected = acceptance_generator.build_registry()
     if document != expected:
         raise QualityAcceptanceValidationError("acceptance registry is stale relative to its governed sources and generator")
-    return dict(sorted(Counter(record["source_kind"] for record in requirements).items()))
+    return counts
 
 
 def validate_repository() -> tuple[dict[str, int], dict[str, int]]:

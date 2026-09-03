@@ -16,7 +16,7 @@ aliases:
 
 Back to milestone: [README](README.md)
 
-- [ ] 5 Phase - Quality Budgets and Acceptance Traceability.
+- [x] 5 Phase - Quality Budgets and Acceptance Traceability.
 
   Define measurable browser-product budgets and an acceptance model that maps
   every roadmap and catalog claim to observable evidence, while keeping proposed
@@ -94,28 +94,28 @@ Back to milestone: [README](README.md)
       - [x] 5.3.2.2 Subtask - Assign each acceptance condition to its first responsible milestone, package or profile owner, integration suite, evidence class, and release gate.
       - [x] 5.3.2.3 Subtask - Produce deterministic reports for orphan claims, catalog rows without acceptance, acceptance without owners, unsupported status transitions, stale evidence, missing budgets, and uncovered profiles.
 
-  - [ ] 5.4 Section - Phase 5 Integration Tests.
+  - [x] 5.4 Section - Phase 5 Integration Tests.
 
     Prove that budgets and acceptance records cover the complete BH-00 product
     contract and remain distinguishable from future measured evidence.
 
-    - [ ] 5.4.1 Task - Validate budget and traceability completeness.
+    - [x] 5.4.1 Task - Validate budget and traceability completeness.
 
       Automated checks and independent scenario review must reject undefined
       metrics, unowned claims, circular evidence, and false completion states.
 
-      - [ ] 5.4.1.1 Subtask - Validate all budget dimensions, units, environments, thresholds, severity, exception, owner, and review fields and reject thresholds without a future measurement method.
-      - [ ] 5.4.1.2 Subtask - Require every roadmap claim and planned catalog family to reach at least one observable acceptance condition and every acceptance condition to reach a milestone and evidence owner.
-      - [ ] 5.4.1.3 Subtask - Exercise representative component, runtime, renderer, capability, Phoenix, Plug, headless, accessibility, security, failure, payload, and provenance trace queries end to end.
+      - [x] 5.4.1.1 Subtask - Validate all budget dimensions, units, environments, thresholds, severity, exception, owner, and review fields and reject thresholds without a future measurement method.
+      - [x] 5.4.1.2 Subtask - Require every roadmap claim and planned catalog family to reach at least one observable acceptance condition and every acceptance condition to reach a milestone and evidence owner.
+      - [x] 5.4.1.3 Subtask - Exercise representative component, runtime, renderer, capability, Phoenix, Plug, headless, accessibility, security, failure, payload, and provenance trace queries end to end.
 
-    - [ ] 5.4.2 Task - Record completion evidence and deliver the phase.
+    - [x] 5.4.2 Task - Record completion evidence and deliver the phase.
 
       Phase completion means the quality and acceptance system is complete and
       reviewed, not that later runtime, component, or browser gates have passed.
 
-      - [ ] 5.4.2.1 Subtask - Record budget and acceptance schema revisions, coverage reports, validation commands, reviewer findings, unresolved thresholds, waivers, and risks assigned to later milestones.
-      - [ ] 5.4.2.2 Subtask - Confirm all implementation, benchmark, browser, accessibility, security, deployment, and release evidence remains unchecked unless it was genuinely executed within an authorized prior scope.
-      - [ ] 5.4.2.3 Subtask - Complete one commit per coherent section and open the Phase 5 PR without beginning final BH-00 acceptance reconciliation.
+      - [x] 5.4.2.1 Subtask - Record budget and acceptance schema revisions, coverage reports, validation commands, reviewer findings, unresolved thresholds, waivers, and risks assigned to later milestones.
+      - [x] 5.4.2.2 Subtask - Confirm all implementation, benchmark, browser, accessibility, security, deployment, and release evidence remains unchecked unless it was genuinely executed within an authorized prior scope.
+      - [x] 5.4.2.3 Subtask - Complete one commit per coherent section and open the Phase 5 PR without beginning final BH-00 acceptance reconciliation.
 
 ## Section delivery rule
 
