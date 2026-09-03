@@ -181,10 +181,117 @@ disposition, unassigned tier/package/payload, empty capability/evidence lists,
 unknown mode/runtime/portability/native assessments, and unknown delivery
 state. No source identity is a BlazeX API or .NET compatibility promise.
 
-## Remaining Phase 3 work
+## Section 3.4 — Integration and phase completion evidence
 
-- Section 3.4 must close source coverage, schema, generation, review, and
-  non-claim integration evidence.
+### Reproducible verification
+
+| Check | Command or method | Result |
+| --- | --- | --- |
+| Exact reference, schema, source closure, semantics, and generated freshness | `python3 validate_component_catalog.py` | Passed: v9.9.0 lock, 83 families, schema 1.0.0, 7 categories, 12 exceptions, 168 source identifiers, 15 exception paths, 83 unresolved dispositions, fresh view. |
+| Negative and positive catalog paths | `python3 -m unittest test_validate_component_catalog.py` | Passed: 17 tests. |
+| Committed generation freshness | `python3 generate_component_catalog.py --check` | Passed: 83 families and 12 exceptions. |
+| Clean deterministic generation | Generate independently to two `/tmp` paths and `cmp -s` | Byte-identical; both SHA-256 `bfacb74da57eef9e543d262cec8993665f534504148cd335d82b6b353051bb39`. |
+| Network-independence inspection | Import/command scan of generator and validator | No socket, HTTP client, subprocess, curl, or wget dependency; generation reads only local canonical/schema files. |
+| Locked source-family set | Sorted catalog source names compared with raw snapshot | 83 exact matches; zero missing or extra. |
+| Source-identifier closure | Resolve every recorded identifier to `.razor` or `.cs` below its locked family path | 168/168 resolved; zero misses. |
+| Exception-path closure | Check every nonempty exception source entry in exact checkout | 15/15 exist; zero misses. |
+| Existing synthesis reconciliation | Compare Appendix A source names with canonical source names | 83/83 exact source-name matches; no addition, omission, merge, or split. |
+| Browser-envelope regression | Browser-envelope validator and 17 tests | Passed; Phase 3 did not alter the browser support contract. |
+| Corpus structure and links | Archive validator and 8 tests | Passed. |
+| Patch hygiene | `git diff --check` | Passed with no whitespace errors. |
+
+### Independent category and nested-part review
+
+The exact checkout at
+`3d85eed63a2c886d0a2e37f9f0cad78be655ad1c` was used as the independent review
+surface. One representative from every category plus compound-heavy entries
+was checked directly:
+
+| Category | Reviewed family/source evidence | Finding |
+| --- | --- | --- |
+| `foundation-provider` | `BreakpointProvider/MudBreakpointProvider.razor` | Family, source name/path, and provider identifier agree. |
+| `layout-content` | `AppBar/MudAppBar.razor` and `MudContextualActionBar.razor` | Compound identifiers remain one family. |
+| `actions-feedback` | `Button/MudButton.razor` and `MudFabMenuItem.razor` | Button/FAB parts remain one family without product-tier assignment. |
+| `navigation-disclosure` | `Breadcrumbs/MudBreadcrumbs.razor` plus link/separator parts | Compound identities remain under Breadcrumbs. |
+| `forms-input` | `DatePicker/MudDateRangePicker.razor` and `MudDatePicker.cs` | Razor and C# renderable identities resolve under one family. |
+| `data-visualization` | `DataGrid/MudDataGrid.razor`, `Column.razor`, `Chart/Charts/Sankey.razor`, and `Table/MudTd.razor` | Complex/nested parts resolve without adding family rows. |
+| `browser-interaction` | `Dialog/MudDialogProvider.razor` and `MudDialogContainer.razor` | Provider/container remain source identities; no host-capability claim was copied. |
+
+The exhaustive identifier check then generalized these samples to all 168
+recorded names.
+
+### Exception, alias, and unresolved review
+
+| Review class | Finding |
+| --- | --- |
+| Exclusions | Tagged docs, unit tests, and Base/State/Utilities paths all exist and remain evidence rather than extra family rows. |
+| Infrastructure | Icons, Interop/TScripts/wwwroot, Resources/Localization, and Styles/Themes paths all exist; Icon and ThemeProvider families remain distinct from their shared assets. |
+| Services | Services and `ServiceCollectionExtensions.cs` exist and are recorded as service-only capability/infrastructure evidence. |
+| Experimental | No first-level source family was excluded as experimental-only; the zero finding is explicit. |
+| Obsolete | No first-level source family was removed as obsolete; nested obsolete evidence can be added later without changing this finding. |
+| Duplicate | Zero normalized duplicate families; compound files remain under one primary owner. |
+| Aliases/relationships | Zero aliases and zero cross-family relationships were required for this exact initial normalization; both zero sets are validated. |
+| Unresolved | Zero source-coverage questions; all 83 product dispositions remain separately unresolved for Phase 4. |
+
+### Locked counts and nonclaim audit
+
+The locked catalog records 6 foundation/provider, 16 layout/content, 13
+actions/feedback, 12 navigation/disclosure, 18 forms/input, 9
+data/visualization, and 9 browser-interaction families. All 83 upstream
+lifecycle values are `active`. Exception counts are 3 excluded, 4
+infrastructure-only, and one each service-only, experimental, obsolete,
+duplicate, and unresolved.
+
+Every family has:
+
+- `disposition: unresolved`, `delivery_tier: unassigned`, null package/public
+  identity/rationale/optional-package values, and no prerequisites;
+- empty required/optional capability lists, null fallback, unknown rendering
+  mode/runtime assessments, unknown portability/native strategy, null
+  accessibility alternative, and no renderer extensions; and
+- `delivery_state: unknown` with no implementation evidence.
+
+Therefore no row is presented as planned, accepted, implemented, evidenced,
+supported, portable, native-capable, browser-capable, packaged, publicly named,
+or compatible. The catalog contains no .NET, Razor, NuGet, binary, source, or
+API compatibility contract and performs no Phase 4 disposition assignment.
+
+### Revision and review record
+
+- Section 3.1 reference/extraction revision: `9b428d4`.
+- Section 3.2 schema/governance revision: `2ddd1e0`.
+- Section 3.3 normalized inventory revision: `39a943f`.
+- Schema version: `1.0.0`; catalog/generation version: `0.1.0`.
+- Source snapshot SHA-256:
+  `c6021b2b52b81a3beafb642ac5c114a5cb753c7dfa7561200aaaf988b394b041`.
+- Locked generated-view SHA-256:
+  `bfacb74da57eef9e543d262cec8993665f534504148cd335d82b6b353051bb39`.
+- Catalog/source/provenance/implementation review: Codex under the repository
+  owner's instruction; independent second-party review remains the Phase 6
+  BH-00 gate.
+- Phase delivery: [PR #6](https://github.com/pcharbon70/blazex/pull/6),
+  containing one final commit for each of Sections 3.1 through 3.4.
+- The repository owner authorized creation and immediate merge of the single
+  Phase 3 PR, followed by main synchronization and feature-branch deletion.
+
+### Unresolved normalization and later work
+
+No source-family coverage, duplicate, alias, split, merge, or first-level
+lifecycle question remains unresolved in catalog v0.1.0. Phase 4 must decide
+all product dispositions and reserved metadata without automatically adopting
+the provisional tiers or targets in prior synthesis. Later executable gates
+must supply implementation, renderer, runtime, accessibility, security,
+payload, performance, and support evidence.
+
+### Section result
+
+All local Phase 3 integration gates pass, the catalog is locked, and PR #6
+contains exactly four coherent section commits. No Phase 4 work has begun.
+
+## Phase 3 delivery status
+
+- Complete in PR #6; later product classification and executable evidence
+  remain assigned to Phase 4 and the named implementation/support gates.
 
 ## Connections
 

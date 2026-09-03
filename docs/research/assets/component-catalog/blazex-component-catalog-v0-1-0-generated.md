@@ -24,7 +24,7 @@ aliases:
 | Catalog version | `0.1.0` |
 | Schema version | `1.0.0` |
 | Reference | `mudblazor-v9.9.0` |
-| Catalog status | `reviewed` |
+| Catalog status | `locked` |
 | Canonical source | `assets/component-catalog/blazex-component-catalog-v0.1.0.json` |
 | Sort order | `family-id-unicode-codepoint-ascending` |
 | Family count | 83 |
@@ -160,6 +160,9 @@ strategy, implementation state, and evidence link remains explicitly unassigned.
 | Exception classes | `duplicate` 1, `excluded` 3, `experimental` 1, `infrastructure-only` 4, `obsolete` 1, `service-only` 1, `unresolved` 1 |
 | Product dispositions | `unresolved` 83 |
 | Delivery states | `unknown` 83 |
+| Reviewed source identifiers | 168 |
+| Distinct inclusion reasons | 1 |
+| Aliases / family relationships | 0 / 0 |
 | Families with implementation evidence | 0 |
 
 ## Nonclaims

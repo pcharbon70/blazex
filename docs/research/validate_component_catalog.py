@@ -82,6 +82,15 @@ EXPECTED_CATEGORIES = {
     "data-visualization",
     "browser-interaction",
 }
+EXPECTED_CATEGORY_COUNTS = {
+    "foundation-provider": 6,
+    "layout-content": 16,
+    "actions-feedback": 13,
+    "navigation-disclosure": 12,
+    "forms-input": 18,
+    "data-visualization": 9,
+    "browser-interaction": 9,
+}
 EXPECTED_EXCEPTION_CLASSES = {
     "excluded",
     "obsolete",
@@ -90,6 +99,15 @@ EXPECTED_EXCEPTION_CLASSES = {
     "infrastructure-only",
     "duplicate",
     "unresolved",
+}
+EXPECTED_EXCEPTION_COUNTS = {
+    "excluded": 3,
+    "obsolete": 1,
+    "experimental": 1,
+    "service-only": 1,
+    "infrastructure-only": 4,
+    "duplicate": 1,
+    "unresolved": 1,
 }
 
 
@@ -299,8 +317,8 @@ def validate_catalog_semantics(document: dict[str, Any], locked_families: list[s
         },
         "catalog",
     )
-    if document.get("catalog_status") not in {"reviewed", "locked"}:
-        raise CatalogValidationError("catalog.catalog_status must be reviewed or locked in Phase 3")
+    if document.get("catalog_status") != "locked":
+        raise CatalogValidationError("catalog.catalog_status must be locked after Phase 3 review")
     owner_roles = document.get("owner_roles", [])
     if owner_roles != sorted(owner_roles) or len(owner_roles) != len(set(owner_roles)):
         raise CatalogValidationError("catalog.owner_roles must be sorted and unique")
@@ -385,9 +403,10 @@ def validate_catalog_semantics(document: dict[str, Any], locked_families: list[s
     category_counts = {category: 0 for category in EXPECTED_CATEGORIES}
     for record in records:
         category_counts[record["category"]] += 1
-    missing_categories = sorted(category for category, count in category_counts.items() if count == 0)
-    if missing_categories:
-        raise CatalogValidationError("catalog has empty required categories: " + ", ".join(missing_categories))
+    if category_counts != EXPECTED_CATEGORY_COUNTS:
+        raise CatalogValidationError(
+            f"catalog category counts changed: expected {EXPECTED_CATEGORY_COUNTS}, found {category_counts}"
+        )
 
     record_ids = set(ids)
     for record in records:
@@ -419,6 +438,41 @@ def validate_catalog_semantics(document: dict[str, Any], locked_families: list[s
         if record["review_state"] != "accepted":
             raise CatalogValidationError(f"exception {record['id']} must have accepted source-review state")
 
+    exception_counts = {
+        classification: sum(record["classification"] == classification for record in exceptions)
+        for classification in EXPECTED_EXCEPTION_CLASSES
+    }
+    if exception_counts != EXPECTED_EXCEPTION_COUNTS:
+        raise CatalogValidationError(
+            f"catalog exception counts changed: expected {EXPECTED_EXCEPTION_COUNTS}, found {exception_counts}"
+        )
+    source_identifier_count = sum(
+        len(record["source"]["source_identifiers"]) for record in records
+    )
+    alias_count = sum(len(record["aliases"]) for record in records)
+    relationship_count = sum(len(record["relationships"]) for record in records)
+    exception_source_count = sum(len(record["source_entries"]) for record in exceptions)
+    if source_identifier_count != 168:
+        raise CatalogValidationError(
+            f"catalog must preserve 168 reviewed source identifiers, found {source_identifier_count}"
+        )
+    if alias_count != 0 or relationship_count != 0:
+        raise CatalogValidationError(
+            "catalog v0.1.0 must preserve the reviewed zero-alias and zero-relationship findings"
+        )
+    if exception_source_count != 15:
+        raise CatalogValidationError(
+            f"catalog must preserve 15 reviewed exception source entries, found {exception_source_count}"
+        )
+    lifecycle_counts = {
+        lifecycle: sum(record["lifecycle_status"] == lifecycle for record in records)
+        for lifecycle in {record["lifecycle_status"] for record in records}
+    }
+    if lifecycle_counts != {"active": 83}:
+        raise CatalogValidationError(
+            f"catalog family lifecycle review changed: expected 83 active, found {lifecycle_counts}"
+        )
+
     return {
         "families": len(records),
         "categories": len(category_counts),
@@ -426,6 +480,8 @@ def validate_catalog_semantics(document: dict[str, Any], locked_families: list[s
         "unresolved_dispositions": sum(
             record["classification"]["disposition"] == "unresolved" for record in records
         ),
+        "source_identifiers": source_identifier_count,
+        "exception_source_entries": exception_source_count,
     }
 
 
@@ -462,6 +518,8 @@ def validate_repository() -> list[str]:
         "catalog schema 1.0.0",
         f"{summary['families']} normalized families in {summary['categories']} categories",
         f"{summary['exceptions']} source-closure exceptions",
+        f"{summary['source_identifiers']} reviewed source identifiers",
+        f"{summary['exception_source_entries']} reviewed exception paths",
         f"{summary['unresolved_dispositions']} unresolved product dispositions",
         "fresh generated view",
     ]

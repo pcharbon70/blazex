@@ -133,7 +133,14 @@ class ComponentCatalogValidatorTests(unittest.TestCase):
     def test_complete_catalog_semantics_are_valid(self) -> None:
         summary = validator.validate_catalog_semantics(self.catalog, self.locked_families)
         self.assertEqual(
-            {"families": 83, "categories": 7, "exceptions": 12, "unresolved_dispositions": 83},
+            {
+                "families": 83,
+                "categories": 7,
+                "exceptions": 12,
+                "unresolved_dispositions": 83,
+                "source_identifiers": 168,
+                "exception_source_entries": 15,
+            },
             summary,
         )
 
@@ -166,6 +173,22 @@ class ComponentCatalogValidatorTests(unittest.TestCase):
     def test_stale_generated_view_is_rejected(self) -> None:
         with self.assertRaisesRegex(validator.CatalogValidationError, "generated component-catalog view is stale"):
             validator.validate_generated_view(self.catalog, "stale\n")
+
+    def test_fresh_generated_view_is_valid(self) -> None:
+        generated = validator.GENERATED_CATALOG_PATH.read_text(encoding="utf-8")
+        validator.validate_generated_view(self.catalog, generated)
+
+    def test_missing_relationship_target_is_rejected(self) -> None:
+        changed = copy.deepcopy(self.catalog)
+        changed["families"][0]["relationships"] = [
+            {
+                "type": "depends-on",
+                "target_id": "BX-FAM-NOT-PRESENT",
+                "rationale": "Negative-path test.",
+            }
+        ]
+        with self.assertRaisesRegex(validator.CatalogValidationError, "target does not exist"):
+            validator.validate_catalog_semantics(changed, self.locked_families)
 
 
 if __name__ == "__main__":

@@ -16,7 +16,7 @@ aliases:
 
 Back to milestone: [README](README.md)
 
-- [ ] 3 Phase - Catalog Schema and Locked Inventory.
+- [x] 3 Phase - Catalog Schema and Locked Inventory.
 
   Pin the MudBlazor catalog reference, inventory every relevant family, and
   create a stable machine-validatable BlazeX catalog structure before assigning
@@ -94,28 +94,28 @@ Back to milestone: [README](README.md)
       - [x] 3.3.2.2 Subtask - Define reviewer ownership, change rationale, source-diff report, schema migration, generated-file update, and conflict-resolution procedures.
       - [x] 3.3.2.3 Subtask - Define queries and summary counts for category, lifecycle, inclusion reason, unresolved status, source coverage, and later disposition completeness.
 
-  - [ ] 3.4 Section - Phase 3 Integration Tests.
+  - [x] 3.4 Section - Phase 3 Integration Tests.
 
     Prove that the pinned source, normalization policy, schema, and inventory
     produce one complete deterministic catalog before classifications are added.
 
-    - [ ] 3.4.1 Task - Validate source coverage and catalog determinism.
+    - [x] 3.4.1 Task - Validate source coverage and catalog determinism.
 
       Automated checks and independent review must reject missing source
       families, duplicate identities, stale generation, and unreviewed drift.
 
-      - [ ] 3.4.1.1 Subtask - Validate front matter, schema, stable IDs, enums, relationships, source references, ordering, uniqueness, required fields, and generated-view freshness.
-      - [ ] 3.4.1.2 Subtask - Run two clean catalog generations and require byte-identical outputs, stable counts, and no network dependency after the reference input is pinned.
-      - [ ] 3.4.1.3 Subtask - Independently sample every category plus all exclusions, obsolete entries, experimental entries, services, nested parts, aliases, and unresolved rows against the pinned source.
+      - [x] 3.4.1.1 Subtask - Validate front matter, schema, stable IDs, enums, relationships, source references, ordering, uniqueness, required fields, and generated-view freshness.
+      - [x] 3.4.1.2 Subtask - Run two clean catalog generations and require byte-identical outputs, stable counts, and no network dependency after the reference input is pinned.
+      - [x] 3.4.1.3 Subtask - Independently sample every category plus all exclusions, obsolete entries, experimental entries, services, nested parts, aliases, and unresolved rows against the pinned source.
 
-    - [ ] 3.4.2 Task - Record completion evidence and deliver the phase.
+    - [x] 3.4.2 Task - Record completion evidence and deliver the phase.
 
       Phase completion requires a complete source inventory and valid schema,
       while disposition and support fields may remain deliberately unassigned.
 
-      - [ ] 3.4.2.1 Subtask - Record source revision, extraction inputs, hashes, inventory counts, schema and generation versions, commands, reviewer findings, and unresolved normalization questions.
-      - [ ] 3.4.2.2 Subtask - Confirm no catalog row is presented as implemented, supported, portable, or compatible merely because its identity and source relationship are complete.
-      - [ ] 3.4.2.3 Subtask - Complete one commit per coherent section and open the Phase 3 PR without beginning Phase 4 disposition assignment.
+      - [x] 3.4.2.1 Subtask - Record source revision, extraction inputs, hashes, inventory counts, schema and generation versions, commands, reviewer findings, and unresolved normalization questions.
+      - [x] 3.4.2.2 Subtask - Confirm no catalog row is presented as implemented, supported, portable, or compatible merely because its identity and source relationship are complete.
+      - [x] 3.4.2.3 Subtask - Complete one commit per coherent section and open the Phase 3 PR without beginning Phase 4 disposition assignment.
 
 ## Section delivery rule
 

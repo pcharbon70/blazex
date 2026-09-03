@@ -5,7 +5,7 @@
   "reference_id": "mudblazor-v9.9.0",
   "title": "BlazeX normalized component-family inventory",
   "description": "Source-complete MudBlazor v9.9.0 family inventory with all BlazeX product, delivery, capability, fallback, runtime, renderer, portability, native-strategy, and implementation decisions deliberately unassigned.",
-  "catalog_status": "reviewed",
+  "catalog_status": "locked",
   "authored_source": "assets/component-catalog/blazex-component-catalog-v0.1.0.json",
   "generated_view": "assets/component-catalog/blazex-component-catalog-v0-1-0-generated.md",
   "sort_order": "family-id-unicode-codepoint-ascending",
