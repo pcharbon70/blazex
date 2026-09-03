@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0.0",
+  "index_id": "BX-BH01-BENCHMARK-INDEX-0.1",
+  "status": "initialized-no-measurements-executed",
+  "environment_schema": "environment-fingerprint.schema.json",
+  "sample_schema": "sample.schema.json",
+  "locations": {
+    "environments": "environments",
+    "samples": "samples",
+    "raw_evidence": "raw-evidence",
+    "generated_reports": "reports"
+  },
+  "environments": [],
+  "measurements": [],
+  "samples": [],
+  "reports": [],
+  "budget_state": "proposed-unmeasured"
+}

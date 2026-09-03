@@ -14,3 +14,7 @@ The initial profiles are:
 - `browser_phoenix` — canonical first browser/Phoenix reference application.
 - `browser_plug` — smaller browser host proving Phoenix and LiveView independence.
 - `headless` — deterministic nonvisual composition for conformance and tooling.
+
+BH-01 Phase 1 activates only `browser_phoenix` as a dependency-free
+experimental skeleton. `browser_plug` and `headless` remain README-only
+boundaries so their exclusions stay independently inspectable.

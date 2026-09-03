@@ -8,6 +8,6 @@ This adapter must not define the component API or assume that every future host
 uses Popcorn. Other Elixir runtimes can implement the same host-neutral
 contracts independently.
 
-Status: directory scaffold only; create the Mix project when its implementation
-milestone begins.
-
+Status: experimental BH-01 Mix skeleton. The project has no dependencies and
+contains no runtime implementation; toolchain and candidate-runtime
+qualification begins in Phase 2. Its module root is not a stable public API.

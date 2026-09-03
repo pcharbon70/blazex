@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0.0",
+  "id": "integration/benchmarks",
+  "path": "integration/benchmarks",
+  "kind": "integration-benchmarks",
+  "activation_phase": "BH-01 Phase 1",
+  "status": "experimental-skeleton",
+  "owner_role": "quality-owner",
+  "module_roots": [],
+  "manifest": "benchmark-index.json",
+  "test_entrypoints": [],
+  "dependencies": [],
+  "planned_dependencies": [],
+  "must_not_own": ["unreviewed-performance-claim", "product-runtime", "support-policy"],
+  "forbidden_dependencies": ["production-import"],
+  "public_api_state": "not-production"
+}

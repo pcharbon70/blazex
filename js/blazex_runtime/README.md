@@ -8,6 +8,6 @@ It must not become a second component framework. Component state and semantic
 behavior remain in Elixir; DOM lowering belongs to the DOM renderer contract and
 its bridge.
 
-Status: directory scaffold only; initialize the JavaScript package when its
-implementation milestone begins.
-
+Status: experimental BH-01 JavaScript skeleton using the pinned package-manager
+declaration `npm@11.4.2`. It has no dependencies, lockfile, Wasm loader, browser
+bridge implementation, component logic, or stable public API.

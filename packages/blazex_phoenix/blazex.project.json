@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0.0",
+  "id": "blazex_phoenix",
+  "path": "packages/blazex_phoenix",
+  "kind": "elixir-package",
+  "activation_phase": "BH-01 Phase 1",
+  "status": "experimental-skeleton",
+  "owner_role": "server-adapter-owner",
+  "module_roots": ["BlazeX.Phoenix"],
+  "manifest": "mix.exs",
+  "test_entrypoints": ["test"],
+  "dependencies": [],
+  "planned_dependencies": ["blazex_renderer_dom_liveview"],
+  "must_not_own": ["portable-component-semantics", "standalone-dom-core", "client-presentation-authority"],
+  "forbidden_dependencies": ["blazex_core", "blazex_effects", "blazex_ui_tree", "integration/fixtures"],
+  "public_api_state": "experimental-not-stable"
+}

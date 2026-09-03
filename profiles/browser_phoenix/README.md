@@ -11,5 +11,7 @@ It is the leading supported composition, not the universal container for BlazeX.
 Shared browser, renderer, and component behavior must remain in reusable
 packages rather than this profile.
 
-Status: directory scaffold only; create the Phoenix/Mix project when its
-implementation milestone begins.
+Status: experimental BH-01 dependency-free Mix skeleton. Composition,
+endpoint, assets, environment configuration, release, and teardown locations
+exist, but Phoenix and every candidate dependency remain uninstalled and all
+runtime/browser behavior remains unexecuted. No profile module is a stable API.

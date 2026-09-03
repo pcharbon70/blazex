@@ -54,6 +54,11 @@ locations rather than this governance directory.
 - [BH-01 evidence governance v0.1.0](blazex-bh-01-evidence-governance-v0.1.0.json)
   — active owners, escalation paths, blocker rules, and change control for the
   feasibility baseline.
+- [BH-01 repository activation schema](blazex-bh-01-repository-activation.schema.json)
+  — exact structure and evidence boundary for Phase 1 activation.
+- [BH-01 repository activation v0.1.0](blazex-bh-01-repository-activation-v0.1.0.json)
+  — the nine approved boundaries, ownership, allowed graph, inactive paths,
+  dependency state, and boundary change control.
 
 ## Maintaining this index
 

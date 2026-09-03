@@ -66,38 +66,38 @@ Back to milestone: [README](README.md)
       - [x] 1.2.2.2 Subtask - Define finding severity, blocker rules, stop records, affected evidence invalidation, bounded mitigation review, and prohibition on silently weakening thresholds or scenarios.
       - [x] 1.2.2.3 Subtask - Require explicit reapproval for changes to runtime substrate, server stack, activation boundary, proof method, browser matrix, quality threshold, or stop condition.
 
-  - [ ] 1.3 Section - Activate the minimal repository slice.
+  - [x] 1.3 Section - Activate the minimal repository slice.
 
     Initialize project boundaries and test harness locations only after approval,
     preserving dependency direction and keeping feasibility code disposable.
 
-    - [ ] 1.3.1 Task - Activate owned runtime, host, renderer, and server packages.
+    - [x] 1.3.1 Task - Activate owned runtime, host, renderer, and server packages.
 
       Each package receives one narrow responsibility and no placeholder public
       component or semantic-kernel contract.
 
-      - [ ] 1.3.1.1 Subtask - Initialize manifests, module roots, ownership metadata, and test entry points for `blazex_runtime_popcorn`, `blazex_host_browser`, and `blazex_renderer_dom`.
-      - [ ] 1.3.1.2 Subtask - Initialize `blazex_renderer_dom_liveview` and `blazex_phoenix` with their optional-adapter and server-authority boundaries explicit.
-      - [ ] 1.3.1.3 Subtask - Mark every new module/API experimental and prohibit imports from inactive BH-02 core, effects, UI-tree, renderer-contract, headless, component-family, or native packages.
+      - [x] 1.3.1.1 Subtask - Initialize manifests, module roots, ownership metadata, and test entry points for `blazex_runtime_popcorn`, `blazex_host_browser`, and `blazex_renderer_dom`.
+      - [x] 1.3.1.2 Subtask - Initialize `blazex_renderer_dom_liveview` and `blazex_phoenix` with their optional-adapter and server-authority boundaries explicit.
+      - [x] 1.3.1.3 Subtask - Mark every new module/API experimental and prohibit imports from inactive BH-02 core, effects, UI-tree, renderer-contract, headless, component-family, or native packages.
 
-    - [ ] 1.3.2 Task - Activate the browser loader and executable profile.
+    - [x] 1.3.2 Task - Activate the browser loader and executable profile.
 
       JavaScript and the Phoenix profile are outer adapters, not containers for
       reusable component behavior.
 
-      - [ ] 1.3.2.1 Subtask - Initialize `js/blazex_runtime` with a pinned package-manager choice, module/build/test entry points, and explicit browser-bridge-only scope.
-      - [ ] 1.3.2.2 Subtask - Initialize `profiles/browser_phoenix` with composition, endpoint, asset, development/test/release, and teardown boundaries but no candidate dependencies installed.
-      - [ ] 1.3.2.3 Subtask - Prohibit component logic, server authorization, arbitrary script escape, or generic DOM ownership in the JavaScript loader and prohibit reusable runtime/renderer behavior in the profile.
+      - [x] 1.3.2.1 Subtask - Initialize `js/blazex_runtime` with a pinned package-manager choice, module/build/test entry points, and explicit browser-bridge-only scope.
+      - [x] 1.3.2.2 Subtask - Initialize `profiles/browser_phoenix` with composition, endpoint, asset, development/test/release, and teardown boundaries but no candidate dependencies installed.
+      - [x] 1.3.2.3 Subtask - Prohibit component logic, server authorization, arbitrary script escape, or generic DOM ownership in the JavaScript loader and prohibit reusable runtime/renderer behavior in the profile.
 
-    - [ ] 1.3.3 Task - Activate integration evidence locations and dependency guards.
+    - [x] 1.3.3 Task - Activate integration evidence locations and dependency guards.
 
       Scenarios and measurements need durable homes while future portable
       packages remain inactive and independently inspectable.
 
-      - [ ] 1.3.3.1 Subtask - Initialize schemas and indexes under `integration/fixtures` and `integration/benchmarks` for scenarios, raw evidence, environment fingerprints, samples, and generated reports.
-      - [ ] 1.3.3.2 Subtask - Add manifest/source graph checks for allowed edges, forbidden reverse dependencies, package ownership, standalone DOM independence, and Plug/headless exclusions.
-      - [ ] 1.3.3.3 Subtask - Assert that no new manifest or implementation exists in BH-02 kernel/headless/native boundaries and that fixture code cannot be imported as a production dependency.
-      - [ ] 1.3.3.4 Subtask - Document the exact nine activated boundaries and the review required to add, merge, or relocate one.
+      - [x] 1.3.3.1 Subtask - Initialize schemas and indexes under `integration/fixtures` and `integration/benchmarks` for scenarios, raw evidence, environment fingerprints, samples, and generated reports.
+      - [x] 1.3.3.2 Subtask - Add manifest/source graph checks for allowed edges, forbidden reverse dependencies, package ownership, standalone DOM independence, and Plug/headless exclusions.
+      - [x] 1.3.3.3 Subtask - Assert that no new manifest or implementation exists in BH-02 kernel/headless/native boundaries and that fixture code cannot be imported as a production dependency.
+      - [x] 1.3.3.4 Subtask - Document the exact nine activated boundaries and the review required to add, merge, or relocate one.
 
   - [ ] 1.4 Section - Phase 1 Integration Tests and Completion Evidence.
 

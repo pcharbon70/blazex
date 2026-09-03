@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0.0",
+  "id": "blazex_runtime_popcorn",
+  "path": "packages/blazex_runtime_popcorn",
+  "kind": "elixir-package",
+  "activation_phase": "BH-01 Phase 1",
+  "status": "experimental-skeleton",
+  "owner_role": "runtime-owner",
+  "module_roots": ["BlazeX.Runtime.Popcorn"],
+  "manifest": "mix.exs",
+  "test_entrypoints": ["test"],
+  "dependencies": [],
+  "planned_dependencies": [],
+  "must_not_own": ["component-semantics", "renderer-selection", "server-authority"],
+  "forbidden_dependencies": ["phoenix", "plug", "live_view", "local_live_view", "blazex_ui"],
+  "public_api_state": "experimental-not-stable"
+}

@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.0.0",
+  "index_id": "BX-BH01-FIXTURE-INDEX-0.1",
+  "status": "initialized-no-scenarios-executed",
+  "scenario_schema": "scenario.schema.json",
+  "scenario_location": "scenarios",
+  "raw_evidence_location": "raw-evidence",
+  "scenarios": [],
+  "production_import_allowed": false
+}

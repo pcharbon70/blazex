@@ -3,10 +3,15 @@
 This directory contains reusable Elixir libraries. Each child directory marks
 an intended package boundary, not merely a source-code namespace.
 
-When implementation begins, packages should normally become independent Mix
-projects with explicit dependency declarations and tests. They may use path
+Activated packages are independent Mix projects with explicit dependency
+declarations and tests. They may use path
 dependencies inside this monorepo while retaining the option to be versioned or
 published independently.
+
+BH-01 Phase 1 activates only `blazex_runtime_popcorn`, `blazex_host_browser`,
+`blazex_renderer_dom`, `blazex_renderer_dom_liveview`, and `blazex_phoenix` as
+dependency-free experimental skeletons. All other packages remain inactive;
+the activated module roots are ownership markers rather than stable APIs.
 
 ## Host-neutral foundation
 

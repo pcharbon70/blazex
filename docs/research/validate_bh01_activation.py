@@ -25,6 +25,8 @@ LEDGER = RESEARCH_ROOT / "assets/bh-01-baseline/blazex-bh-01-milestone-ledger-v0
 EVIDENCE_SCHEMA = RESEARCH_ROOT / "assets/bh-01-baseline/blazex-bh-01-evidence-record.schema.json"
 GOVERNANCE_SCHEMA = RESEARCH_ROOT / "assets/bh-01-baseline/blazex-bh-01-governance.schema.json"
 EVIDENCE_GOVERNANCE = RESEARCH_ROOT / "assets/bh-01-baseline/blazex-bh-01-evidence-governance-v0.1.0.json"
+ACTIVATION_SCHEMA = RESEARCH_ROOT / "assets/bh-01-baseline/blazex-bh-01-repository-activation.schema.json"
+REPOSITORY_ACTIVATION = RESEARCH_ROOT / "assets/bh-01-baseline/blazex-bh-01-repository-activation-v0.1.0.json"
 
 
 class ValidationError(Exception):
@@ -302,6 +304,136 @@ def _validate_evidence_governance(governance: dict[str, Any], ledger: dict[str, 
         _require(term in prohibited, f"governance prohibition is missing: {term}")
 
 
+def _source_files(path: Path) -> list[Path]:
+    result: list[Path] = []
+    for root_name in ("lib", "src", "config"):
+        root = path / root_name
+        if root.is_dir():
+            result.extend(file for file in root.rglob("*") if file.is_file())
+    return result
+
+
+def _validate_repository_activation(ledger: dict[str, Any]) -> None:
+    activation_schema = _load_json(ACTIVATION_SCHEMA)
+    activation = _load_json(REPOSITORY_ACTIVATION)
+    try:
+        Draft202012Validator.check_schema(activation_schema)
+        Draft202012Validator(
+            activation_schema,
+            format_checker=FormatChecker(),
+        ).validate(activation)
+    except (SchemaError, JsonSchemaValidationError) as exc:
+        raise ValidationError(f"BH-01 repository activation schema failure: {exc.message}") from exc
+
+    expected_paths = {
+        "packages/blazex_runtime_popcorn",
+        "packages/blazex_host_browser",
+        "packages/blazex_renderer_dom",
+        "packages/blazex_renderer_dom_liveview",
+        "packages/blazex_phoenix",
+        "js/blazex_runtime",
+        "profiles/browser_phoenix",
+        "integration/fixtures",
+        "integration/benchmarks",
+    }
+    boundaries = activation["boundaries"]
+    by_path = {record["path"]: record for record in boundaries}
+    _require(set(by_path) == expected_paths and len(boundaries) == 9, "repository activation must contain exactly the approved nine boundaries")
+
+    owner_roles = {record["role"] for record in ledger["owner_assignments"]}
+    active_ids = {record["id"] for record in boundaries}
+    for record in boundaries:
+        boundary = REPO_ROOT / record["path"]
+        _require(boundary.is_dir(), f"activated boundary is missing: {record['path']}")
+        _require(record["owner"] in owner_roles, f"activated boundary has unassigned owner: {record['path']}")
+        manifest = boundary / record["manifest"]
+        metadata_path = boundary / record["ownership_metadata"]
+        _require(manifest.is_file(), f"activated manifest is missing: {manifest.relative_to(REPO_ROOT)}")
+        _require(metadata_path.is_file(), f"ownership metadata is missing: {metadata_path.relative_to(REPO_ROOT)}")
+        metadata = _load_json(metadata_path)
+        _require(metadata.get("schema_version") == "1.0.0", f"ownership metadata schema is stale: {record['path']}")
+        _require(metadata.get("id") == record["id"] and metadata.get("path") == record["path"], f"ownership identity mismatch: {record['path']}")
+        _require(metadata.get("kind") == record["kind"] and metadata.get("owner_role") == record["owner"], f"ownership kind/owner mismatch: {record['path']}")
+        _require(metadata.get("manifest") == record["manifest"], f"ownership manifest mismatch: {record['path']}")
+        _require(metadata.get("dependencies") == [], f"Phase 1 acquired a dependency: {record['path']}")
+        _require(metadata.get("planned_dependencies") == record["allowed_planned_dependencies"], f"planned dependency graph changed: {record['path']}")
+        _require(metadata.get("public_api_state") == record["api_state"], f"API state changed: {record['path']}")
+        _require(set(metadata.get("planned_dependencies", [])) <= active_ids, f"planned edge leaves activated slice: {record['path']}")
+        for source_root in record["source_roots"]:
+            _require((boundary / source_root).exists(), f"source/evidence root is missing: {record['path']}/{source_root}")
+        for test_entrypoint in record["test_entrypoints"]:
+            _require((boundary / test_entrypoint).exists(), f"test entrypoint is missing: {record['path']}/{test_entrypoint}")
+
+        prohibited_outputs = [
+            boundary / "mix.lock",
+            boundary / "package-lock.json",
+            boundary / "yarn.lock",
+            boundary / "pnpm-lock.yaml",
+            boundary / "deps",
+            boundary / "node_modules",
+        ]
+        _require(not any(path.exists() for path in prohibited_outputs), f"dependency or lock output exists in {record['path']}")
+
+        if record["kind"] in {"elixir-package", "executable-profile"}:
+            manifest_text = manifest.read_text(encoding="utf-8")
+            _require("defp deps, do: []" in manifest_text, f"Mix dependency list is not explicitly empty: {record['path']}")
+            _require("{:" not in manifest_text, f"Mix manifest contains a dependency tuple: {record['path']}")
+        if record["kind"] == "javascript-package":
+            package = _load_json(manifest)
+            _require(package.get("packageManager") == "npm@11.4.2", "JavaScript package-manager choice is not pinned")
+            _require(package.get("dependencies") == {} and package.get("devDependencies") == {}, "JavaScript dependencies must remain empty")
+
+    standalone = REPO_ROOT / "packages/blazex_renderer_dom"
+    standalone_text = "\n".join(path.read_text(encoding="utf-8") for path in _source_files(standalone))
+    for token in ("Phoenix", "Plug", "LiveView", "LocalLiveView"):
+        _require(token not in standalone_text, f"standalone DOM source contains forbidden coupling: {token}")
+
+    inactive_import_tokens = (
+        "BlazeX.Core",
+        "BlazeX.Effects",
+        "BlazeX.UITree",
+        "BlazeX.Renderer behaviour",
+        "integration/fixtures",
+    )
+    production_boundaries = [record for record in boundaries if record["kind"] not in {"integration-fixtures", "integration-benchmarks"}]
+    for record in production_boundaries:
+        for source in _source_files(REPO_ROOT / record["path"]):
+            text = source.read_text(encoding="utf-8")
+            for token in inactive_import_tokens:
+                _require(token not in text, f"forbidden inactive/fixture import {token!r} in {source.relative_to(REPO_ROOT)}")
+
+    for inactive in activation["inactive_boundaries"]:
+        boundary = REPO_ROOT / inactive
+        _require(boundary.is_dir(), f"declared inactive boundary is missing: {inactive}")
+        for forbidden in ("mix.exs", "package.json", "blazex.project.json", "lib", "src"):
+            _require(not (boundary / forbidden).exists(), f"inactive boundary was activated: {inactive}/{forbidden}")
+
+    fixture_index = _load_json(REPO_ROOT / "integration/fixtures/fixture-index.json")
+    benchmark_index = _load_json(REPO_ROOT / "integration/benchmarks/benchmark-index.json")
+    for schema_path in (
+        REPO_ROOT / "integration/fixtures/scenario.schema.json",
+        REPO_ROOT / "integration/benchmarks/environment-fingerprint.schema.json",
+        REPO_ROOT / "integration/benchmarks/sample.schema.json",
+    ):
+        try:
+            Draft202012Validator.check_schema(_load_json(schema_path))
+        except SchemaError as exc:
+            raise ValidationError(f"integration schema failure in {schema_path.relative_to(REPO_ROOT)}: {exc.message}") from exc
+    _require(fixture_index.get("scenarios") == [] and fixture_index.get("production_import_allowed") is False, "fixture index overclaims or permits production import")
+    _require(benchmark_index.get("environments") == [] and benchmark_index.get("measurements") == [] and benchmark_index.get("samples") == [] and benchmark_index.get("reports") == [], "benchmark index contains Phase 1 execution evidence")
+    _require(benchmark_index.get("budget_state") == "proposed-unmeasured", "benchmark index claims a passed budget")
+
+    evidence_boundary = activation["evidence_boundary"]
+    _require(evidence_boundary == {
+        "dependencies": "none-acquired",
+        "locks": "none-created",
+        "runtime": "unexecuted",
+        "browser": "untested",
+        "measurements": "unexecuted",
+        "support": "unsupported",
+    }, "repository activation evidence boundary changed")
+
+
 def validate() -> None:
     auth = _load_json(AUTHORIZATION)
     ledger = _load_json(LEDGER)
@@ -312,6 +444,7 @@ def validate() -> None:
     _validate_bound_sources(governance)
     _validate_ledger(ledger, governance, quality, acceptance)
     _validate_evidence_governance(governance, ledger)
+    _validate_repository_activation(ledger)
 
 
 def main() -> int:
