@@ -40,6 +40,10 @@ tests.
   inventory](../assets/component-catalog/blazex-component-catalog-v0-1-0-generated.md)
   presents all 83 source-complete families and explicit exception classes while
   preserving every Phase 4 product decision as unresolved.
+- [Generated product
+  classification](../assets/component-catalog/blazex-component-classification-v0-1-0-generated.md)
+  layers accepted BlazeX dispositions, F0–F4 tiers, package ownership, and
+  prerequisites over that immutable source catalog.
 - [Browser host implementation
   milestones](../20-notes/browser-host-implementation-milestones.md) turns the
   F0–F4 dependency tiers into the consolidated BH-00–BH-23 browser delivery

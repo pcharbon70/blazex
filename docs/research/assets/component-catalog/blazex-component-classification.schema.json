@@ -1,0 +1,330 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://blazex.dev/schemas/component-classification/1.0.0",
+  "title": "BlazeX component classification",
+  "description": "Product, package, capability, fallback, remote-authority, portability, native-strategy, and evidence classifications layered over a locked component inventory.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "classification_version",
+    "classification_id",
+    "source_catalog",
+    "source_catalog_sha256",
+    "stage",
+    "status",
+    "sort_order",
+    "owner_roles",
+    "families",
+    "exceptions"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0.0" },
+    "classification_version": { "const": "0.1.0" },
+    "classification_id": { "const": "BX-CLASSIFICATION-BROWSER-FOUNDATION" },
+    "source_catalog": { "const": "assets/component-catalog/blazex-component-catalog-v0.1.0.json" },
+    "source_catalog_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "stage": { "enum": ["section-4.1", "section-4.2", "section-4.3", "complete"] },
+    "status": { "enum": ["draft", "reviewed", "locked", "superseded"] },
+    "sort_order": { "const": "family-id-unicode-codepoint-ascending" },
+    "owner_roles": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/nonemptyString" },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "families": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/familyClassification" },
+      "minItems": 1
+    },
+    "exceptions": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/exceptionClassification" },
+      "minItems": 1
+    }
+  },
+  "$defs": {
+    "nonemptyString": { "type": "string", "minLength": 1 },
+    "nullableString": {
+      "oneOf": [
+        { "$ref": "#/$defs/nonemptyString" },
+        { "type": "null" }
+      ]
+    },
+    "familyId": {
+      "type": "string",
+      "pattern": "^BX-FAM-[A-Z0-9]+(?:-[A-Z0-9]+)*$"
+    },
+    "exceptionId": {
+      "type": "string",
+      "pattern": "^BX-EXC-[A-Z0-9]+(?:-[A-Z0-9]+)*$"
+    },
+    "capabilityId": {
+      "type": "string",
+      "pattern": "^BX-CAP-[A-Z0-9]+(?:-[A-Z0-9]+)*$"
+    },
+    "stringSet": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/nonemptyString" },
+      "uniqueItems": true
+    },
+    "familyIdSet": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/familyId" },
+      "uniqueItems": true
+    },
+    "capabilityIdSet": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/capabilityId" },
+      "uniqueItems": true
+    },
+    "product": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "disposition",
+        "rationale",
+        "behavior_basis",
+        "composition",
+        "visual_intent",
+        "delivery_tier",
+        "target_package",
+        "prerequisites",
+        "optional_package",
+        "payload_class",
+        "intended_public_identity",
+        "extraction_trigger"
+      ],
+      "properties": {
+        "disposition": {
+          "enum": [
+            "build-natively",
+            "adapt-concept",
+            "replace-with-platform-pattern",
+            "renderer-specific-extension",
+            "defer",
+            "omit"
+          ]
+        },
+        "rationale": { "$ref": "#/$defs/nonemptyString" },
+        "behavior_basis": {
+          "enum": ["blazex-product-requirement", "user-observable-semantics", "platform-pattern", "renderer-extension"]
+        },
+        "composition": {
+          "enum": ["standalone-family", "compound-family", "framework-primitive", "recipe-or-mode", "renderer-extension"]
+        },
+        "visual_intent": {
+          "enum": ["blazex-owned", "platform-adaptive", "profile-dependent", "not-applicable"]
+        },
+        "delivery_tier": { "enum": ["F0", "F1", "F2", "F3", "F4", "post-1.0", "not-applicable"] },
+        "target_package": {
+          "enum": [
+            "blazex_ui_tree",
+            "blazex_ui",
+            "blazex_forms",
+            "blazex_surfaces",
+            "blazex_data",
+            "blazex_charts",
+            "none"
+          ]
+        },
+        "prerequisites": { "$ref": "#/$defs/familyIdSet" },
+        "optional_package": { "type": "boolean" },
+        "payload_class": { "enum": ["core", "optional", "asset-heavy", "runtime-heavy", "excluded"] },
+        "intended_public_identity": { "$ref": "#/$defs/nullableString" },
+        "extraction_trigger": { "$ref": "#/$defs/nullableString" }
+      }
+    },
+    "capability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "required",
+        "optional",
+        "renderer_semantics",
+        "effect_ownership",
+        "resource_lifecycle",
+        "cancellation",
+        "timeout",
+        "cleanup",
+        "portable_requirement_tokens"
+      ],
+      "properties": {
+        "required": { "$ref": "#/$defs/capabilityIdSet" },
+        "optional": { "$ref": "#/$defs/capabilityIdSet" },
+        "renderer_semantics": { "$ref": "#/$defs/stringSet" },
+        "effect_ownership": { "enum": ["none", "component", "shared-service", "renderer", "host-adapter", "unassigned"] },
+        "resource_lifecycle": { "enum": ["none", "scoped", "leased", "subscription", "unassigned"] },
+        "cancellation": { "enum": ["required", "not-applicable", "unassigned"] },
+        "timeout": { "enum": ["required", "host-policy", "not-applicable", "unassigned"] },
+        "cleanup": { "enum": ["required", "idempotent-required", "not-applicable", "unassigned"] },
+        "portable_requirement_tokens": { "$ref": "#/$defs/stringSet" }
+      }
+    },
+    "remote": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["authority", "rationale"],
+      "properties": {
+        "authority": {
+          "enum": ["local-only", "optional-remote", "required-remote", "phoenix-enhanced", "unavailable-in-plug", "unassigned"]
+        },
+        "rationale": { "$ref": "#/$defs/nullableString" }
+      }
+    },
+    "fallbackConditions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "no-javascript",
+        "no-network",
+        "denied-permission",
+        "missing-capability",
+        "unsupported-renderer",
+        "failed-resource",
+        "reduced-motion",
+        "forced-colors",
+        "assistive-technology"
+      ],
+      "properties": {
+        "no-javascript": { "$ref": "#/$defs/fallbackValue" },
+        "no-network": { "$ref": "#/$defs/fallbackValue" },
+        "denied-permission": { "$ref": "#/$defs/fallbackValue" },
+        "missing-capability": { "$ref": "#/$defs/fallbackValue" },
+        "unsupported-renderer": { "$ref": "#/$defs/fallbackValue" },
+        "failed-resource": { "$ref": "#/$defs/fallbackValue" },
+        "reduced-motion": { "$ref": "#/$defs/fallbackValue" },
+        "forced-colors": { "$ref": "#/$defs/fallbackValue" },
+        "assistive-technology": { "$ref": "#/$defs/fallbackValue" }
+      }
+    },
+    "fallbackValue": {
+      "enum": [
+        "static-content",
+        "alternative-interaction",
+        "server-round-trip",
+        "in-app-substitute",
+        "nonvisual-representation",
+        "explicit-unavailable",
+        "omission",
+        "not-required",
+        "unassigned"
+      ]
+    },
+    "fallback": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["primary", "rationale", "conditions"],
+      "properties": {
+        "primary": { "$ref": "#/$defs/fallbackValue" },
+        "rationale": { "$ref": "#/$defs/nullableString" },
+        "conditions": { "$ref": "#/$defs/fallbackConditions" }
+      }
+    },
+    "semanticContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["nodes", "events", "effects", "accessibility", "layout", "focus", "resources"],
+      "properties": {
+        "nodes": { "$ref": "#/$defs/stringSet" },
+        "events": { "$ref": "#/$defs/stringSet" },
+        "effects": { "$ref": "#/$defs/stringSet" },
+        "accessibility": { "$ref": "#/$defs/stringSet" },
+        "layout": { "$ref": "#/$defs/stringSet" },
+        "focus": { "$ref": "#/$defs/stringSet" },
+        "resources": { "$ref": "#/$defs/stringSet" }
+      }
+    },
+    "backendGate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["headless", "dom", "native_spike", "backend_accessibility", "fallback", "documentation"],
+      "properties": {
+        "headless": { "enum": ["required", "not-applicable", "unassigned"] },
+        "dom": { "enum": ["required", "not-applicable", "unassigned"] },
+        "native_spike": { "enum": ["required-before-portable-claim", "not-applicable", "unassigned"] },
+        "backend_accessibility": { "enum": ["required", "not-applicable", "unassigned"] },
+        "fallback": { "enum": ["required", "not-applicable", "unassigned"] },
+        "documentation": { "enum": ["required", "not-applicable", "unassigned"] }
+      }
+    },
+    "portability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "rationale",
+        "semantic_contract",
+        "renderer_extensions",
+        "native_strategy",
+        "visual_profile",
+        "visual_profile_rationale",
+        "future_backend_gate"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "portable-semantic",
+            "portable-with-capabilities",
+            "renderer-extension",
+            "dom-specific",
+            "native-specific",
+            "custom-scene",
+            "unsupported",
+            "unproven"
+          ]
+        },
+        "rationale": { "$ref": "#/$defs/nullableString" },
+        "semantic_contract": { "$ref": "#/$defs/semanticContract" },
+        "renderer_extensions": { "$ref": "#/$defs/stringSet" },
+        "native_strategy": {
+          "enum": ["native-preferred", "native-composite", "custom-drawn", "dom-webview-only", "not-applicable", "unproven"]
+        },
+        "visual_profile": { "enum": ["platform-native", "blazex-material", "hybrid", "not-applicable", "unproven"] },
+        "visual_profile_rationale": { "$ref": "#/$defs/nullableString" },
+        "future_backend_gate": { "$ref": "#/$defs/backendGate" }
+      }
+    },
+    "familyClassification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "family_id",
+        "product",
+        "capability",
+        "remote",
+        "fallback",
+        "portability",
+        "classification_state",
+        "implementation_state",
+        "implementation_evidence"
+      ],
+      "properties": {
+        "family_id": { "$ref": "#/$defs/familyId" },
+        "product": { "$ref": "#/$defs/product" },
+        "capability": { "$ref": "#/$defs/capability" },
+        "remote": { "$ref": "#/$defs/remote" },
+        "fallback": { "$ref": "#/$defs/fallback" },
+        "portability": { "$ref": "#/$defs/portability" },
+        "classification_state": { "const": "accepted" },
+        "implementation_state": { "const": "unknown" },
+        "implementation_evidence": { "type": "array", "maxItems": 0 }
+      }
+    },
+    "exceptionClassification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["exception_id", "product_disposition", "rationale", "classification_state", "implementation_state"],
+      "properties": {
+        "exception_id": { "$ref": "#/$defs/exceptionId" },
+        "product_disposition": {
+          "enum": ["omit-from-product", "retain-as-infrastructure", "retain-as-service-evidence", "no-entry-confirmed", "defer-review"]
+        },
+        "rationale": { "$ref": "#/$defs/nonemptyString" },
+        "classification_state": { "const": "accepted" },
+        "implementation_state": { "enum": ["unknown", "omitted", "deferred"] }
+      }
+    }
+  }
+}

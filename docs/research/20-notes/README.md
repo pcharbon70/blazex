@@ -31,6 +31,7 @@ Source summaries belong in `30-sources`; unresolved workbenches belong in
 
 ### Documents
 
+- [BlazeX component disposition, tier, and package policy](blazex-component-disposition-tier-and-package-policy.md) — defines explicit native/adapt/replace/renderer/defer/omit outcomes, F0–F4 meanings, package ownership/layering, payload boundaries, extraction triggers, and compatibility nonclaims.
 - [BlazeX component catalog schema and governance](blazex-component-catalog-schema-and-governance.md) — defines permanent catalog/family/exception identities, complete source and Phase 4 metadata, truthful delivery-state semantics, runtime-atom prohibition, canonical/generated ownership, and migration/review rules.
 - [BlazeX MudBlazor reference and inventory policy](blazex-mudblazor-reference-and-inventory-policy.md) — locks MudBlazor v9.9.0 by commit and source hashes and defines the authoritative extraction boundary, classifications, normalization, exclusions, and reviewed-update workflow.
 - [BlazeX browser and toolchain support policy](blazex-browser-and-toolchain-support-policy.md) — defines the BH-00 candidate browser windows, evidence classes, support and toolchain states, review cadence, and BH-01 records without claiming a working or supported stack.

@@ -1,0 +1,75 @@
+#!/usr/bin/env python3
+"""Focused tests for the Phase 4 component-classification validator."""
+
+from __future__ import annotations
+
+import copy
+import unittest
+
+import validate_component_classification as validator
+
+
+class ComponentClassificationValidatorTests(unittest.TestCase):
+    def setUp(self) -> None:
+        self.schema = validator.load_json(validator.SCHEMA_PATH)
+        self.document = validator.load_json(validator.CLASSIFICATION_PATH)
+        self.source = validator.load_json(validator.SOURCE_CATALOG_PATH)
+
+    def validate(self, document: dict) -> dict:
+        return validator.validate_classification(document, self.source, self.schema)
+
+    def test_repository_classification_is_valid(self) -> None:
+        summary = self.validate(self.document)
+        self.assertEqual(83, summary["families"])
+        self.assertEqual(12, summary["exceptions"])
+
+    def test_source_hash_drift_is_rejected(self) -> None:
+        changed = copy.deepcopy(self.document)
+        changed["source_catalog_sha256"] = "0" * 64
+        with self.assertRaisesRegex(validator.ClassificationValidationError, "source catalog hash mismatch"):
+            self.validate(changed)
+
+    def test_missing_family_is_rejected(self) -> None:
+        changed = copy.deepcopy(self.document)
+        changed["families"] = changed["families"][1:]
+        with self.assertRaisesRegex(validator.ClassificationValidationError, "family mismatch"):
+            self.validate(changed)
+
+    def test_duplicate_public_identity_is_rejected(self) -> None:
+        changed = copy.deepcopy(self.document)
+        changed["families"][1]["product"]["intended_public_identity"] = changed["families"][0]["product"]["intended_public_identity"]
+        with self.assertRaisesRegex(validator.ClassificationValidationError, "duplicate intended public identities"):
+            self.validate(changed)
+
+    def test_later_tier_prerequisite_is_rejected(self) -> None:
+        changed = copy.deepcopy(self.document)
+        changed["families"][0]["product"]["prerequisites"] = ["BX-FAM-CHART"]
+        with self.assertRaisesRegex(validator.ClassificationValidationError, "later-tier"):
+            self.validate(changed)
+
+    def test_forbidden_package_layer_is_rejected(self) -> None:
+        changed = copy.deepcopy(self.document)
+        alert = next(record for record in changed["families"] if record["family_id"] == "BX-FAM-ALERT")
+        alert["product"]["prerequisites"] = ["BX-FAM-OVERLAY"]
+        with self.assertRaisesRegex(validator.ClassificationValidationError, "cannot depend"):
+            self.validate(changed)
+
+    def test_premature_implementation_claim_is_rejected(self) -> None:
+        changed = copy.deepcopy(self.document)
+        changed["families"][0]["implementation_state"] = "implemented"
+        with self.assertRaisesRegex(validator.ClassificationValidationError, "schema violation"):
+            self.validate(changed)
+
+    def test_section_4_1_rejects_capability_assignment(self) -> None:
+        changed = copy.deepcopy(self.document)
+        changed["families"][0]["capability"]["effect_ownership"] = "component"
+        with self.assertRaisesRegex(validator.ClassificationValidationError, "leave capability"):
+            self.validate(changed)
+
+    def test_stale_generated_view_is_rejected(self) -> None:
+        with self.assertRaisesRegex(validator.ClassificationValidationError, "stale"):
+            validator.validate_generated_view(self.document, self.source, "stale\n")
+
+
+if __name__ == "__main__":
+    unittest.main()

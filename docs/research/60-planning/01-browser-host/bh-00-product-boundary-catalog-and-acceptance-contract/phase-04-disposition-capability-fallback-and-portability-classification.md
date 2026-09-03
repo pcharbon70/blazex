@@ -22,29 +22,29 @@ Back to milestone: [README](README.md)
   package ownership, capability requirements, fallback behavior, and renderer
   portability without implying implementation or MudBlazor compatibility.
 
-  - [ ] 4.1 Section - Assign BlazeX dispositions and delivery tiers.
+  - [x] 4.1 Section - Assign BlazeX dispositions and delivery tiers.
 
     Turn the source inventory into a bounded product catalog where every family
     has an explicit outcome, rationale, dependency position, and release shape.
 
-    - [ ] 4.1.1 Task - Define and apply the disposition policy.
+    - [x] 4.1.1 Task - Define and apply the disposition policy.
 
       Dispositions must distinguish native BlazeX design from adaptation,
       deferral, omission, and renderer-specific work without an ambiguous
       backlog state.
 
-      - [ ] 4.1.1.1 Subtask - Define accepted disposition values such as build natively, adapt concept, replace with platform pattern, renderer-specific extension, defer, omit, or unresolved, including required rationale for each.
-      - [ ] 4.1.1.2 Subtask - Assign one disposition to every included, excluded, service, infrastructure, obsolete, and experimental inventory row and prohibit silent default values.
-      - [ ] 4.1.1.3 Subtask - Review naming, behavior, composition, and visual differences so “inspired by MudBlazor” never implies API, Razor, package, binary, renderer, or visual compatibility.
+      - [x] 4.1.1.1 Subtask - Define accepted disposition values such as build natively, adapt concept, replace with platform pattern, renderer-specific extension, defer, omit, or unresolved, including required rationale for each.
+      - [x] 4.1.1.2 Subtask - Assign one disposition to every included, excluded, service, infrastructure, obsolete, and experimental inventory row and prohibit silent default values.
+      - [x] 4.1.1.3 Subtask - Review naming, behavior, composition, and visual differences so “inspired by MudBlazor” never implies API, Razor, package, binary, renderer, or visual compatibility.
 
-    - [ ] 4.1.2 Task - Assign delivery tier and package ownership.
+    - [x] 4.1.2 Task - Assign delivery tier and package ownership.
 
       Delivery order must follow semantic dependencies and optional payload
       boundaries rather than the reference project's source layout.
 
-      - [ ] 4.1.2.1 Subtask - Define and apply F0–F4 or successor tier meanings for kernel proof, foundation, application core, advanced interaction, and optional data or visualization systems.
-      - [ ] 4.1.2.2 Subtask - Assign each planned family to `blazex_ui`, `blazex_forms`, `blazex_surfaces`, `blazex_data`, `blazex_charts`, another approved package, or no package, with prerequisites and extraction triggers.
-      - [ ] 4.1.2.3 Subtask - Validate package layering, optional feature boundaries, payload expectations, and shared foundation placement without moving component behavior into profiles or adapters.
+      - [x] 4.1.2.1 Subtask - Define and apply F0–F4 or successor tier meanings for kernel proof, foundation, application core, advanced interaction, and optional data or visualization systems.
+      - [x] 4.1.2.2 Subtask - Assign each planned family to `blazex_ui`, `blazex_forms`, `blazex_surfaces`, `blazex_data`, `blazex_charts`, another approved package, or no package, with prerequisites and extraction triggers.
+      - [x] 4.1.2.3 Subtask - Validate package layering, optional feature boundaries, payload expectations, and shared foundation placement without moving component behavior into profiles or adapters.
 
   - [ ] 4.2 Section - Classify capabilities, remote needs, and fallbacks.
 

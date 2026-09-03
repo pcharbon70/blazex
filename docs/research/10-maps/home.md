@@ -84,6 +84,10 @@ provider, and remote adapter.
   governance](../20-notes/blazex-component-catalog-schema-and-governance.md) —
   stable family identities, source relationships, deferred Phase 4 fields,
   delivery-state semantics, and canonical/generated stewardship.
+- [BlazeX component disposition, tier, and package
+  policy](../20-notes/blazex-component-disposition-tier-and-package-policy.md) —
+  explicit product outcomes, F0–F4 dependency order, package ownership,
+  payload boundaries, and native-Elixir compatibility nonclaims.
 - [BlazeX browser and toolchain support
   policy](../20-notes/blazex-browser-and-toolchain-support-policy.md) — the
   candidate browser windows, evidence classes, toolchain states, review

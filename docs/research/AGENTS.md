@@ -187,8 +187,13 @@ Before reporting archive work complete:
    `python3 -m unittest test_validate_component_catalog.py` plus
    `python3 generate_component_catalog.py --check` when the catalog lock,
    schema, authored inventory, generated views, generator, or validator changes;
-6. verify new external citations against primary sources;
-7. run `git diff --check` from the project root; and
-8. inspect the complete change for stale paths and accidental rewrites.
+6. run `python3 validate_component_classification.py`,
+   `python3 -m unittest test_validate_component_classification.py`, and
+   `python3 generate_component_classification.py --check` when Phase 4 product,
+   package, capability, fallback, remote, portability, or generated
+   classification artifacts change;
+7. verify new external citations against primary sources;
+8. run `git diff --check` from the project root; and
+9. inspect the complete change for stale paths and accidental rewrites.
 
 Do not commit, push, publish, or open a pull request unless the user asks.
