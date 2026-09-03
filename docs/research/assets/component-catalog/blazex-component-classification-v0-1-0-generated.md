@@ -22,7 +22,7 @@ aliases:
 | --- | --- |
 | Classification ID | `BX-CLASSIFICATION-BROWSER-FOUNDATION` |
 | Classification/schema version | `0.1.0` / `1.0.0` |
-| Stage / status | `section-4.3` / `reviewed` |
+| Stage / status | `complete` / `locked` |
 | Source catalog | `assets/component-catalog/blazex-component-catalog-v0.1.0.json` |
 | Source catalog SHA-256 | `ec0f413c9968b92878e71c1aae9570286dd68ec538938ad880d8908cf7ea70a3` |
 | Families / exceptions | 83 / 12 |

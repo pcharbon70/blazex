@@ -199,10 +199,116 @@ specialized capabilities, an extension without its allowlisted extension ID,
 backend-specific semantic tokens, and any attempt to let headless/DOM coverage
 skip the native-spike gate.
 
-## Remaining Phase 4 work
+## Section 4.4 — Integration and phase completion evidence
 
-- Section 4.4 must close coherence, independent high-risk review, determinism,
-  nonclaim evidence, and PR delivery.
+### Reproducible verification
+
+| Check | Command or method | Result |
+| --- | --- | --- |
+| Complete classification/schema/source join | `python3 validate_component_classification.py` | Passed: 83 families, 12 exceptions, all locked product/capability/fallback/portability counts. |
+| Classification positive/negative paths | `python3 -m unittest test_validate_component_classification.py` | Passed: 21 tests. |
+| Generated view freshness | `python3 generate_component_classification.py --check` | Passed: stage complete, 83 families, 12 exceptions. |
+| Clean deterministic generation | Generate to two `/tmp` outputs and `cmp -s` | Byte-identical; both SHA-256 `297fbf6946cf340675064a78efcdc4791f18e60d8ba85042217e4908001039e8`. |
+| Phase 3 source/catalog regression | Catalog validator and 17 tests | Passed: exact lock, 83 families, 168 identifiers, 15 exception paths, fresh source-catalog view. |
+| Browser envelope regression | Browser-envelope validator and 17 tests | Passed; classification did not alter browser/profile/trust policy. |
+| Corpus structure and links | Archive validator and 8 tests | Passed: 92 completed documents, 15 directories, 604 links, 28 source notes. |
+| Patch hygiene | `git diff --check` | Passed with no whitespace errors. |
+
+### Locked classification invariants
+
+| Invariant | Locked result |
+| --- | --- |
+| Source binding | Phase 3 catalog SHA-256 `ec0f413c9968b92878e71c1aae9570286dd68ec538938ad880d8908cf7ea70a3` |
+| Classification artifact | SHA-256 `613de39b6dda7512dfb98306bc53594b137cc484e8dcaf33c10eb0f0d3379b58` |
+| Stable coverage | 83/83 family IDs; 12/12 exception IDs; no missing, extra, or duplicate records |
+| Product graph | 39 prerequisite edges; acyclic, same/earlier tier, legal package direction |
+| Capability/fallback | 204 required + 77 optional references; 747/747 condition cells assigned |
+| Completion values | Zero `unassigned`, `unproven`, or `unresolved` values |
+| Evidence states | 83 accepted classifications; 83 unknown implementations; zero implementation evidence IDs |
+
+The locked count tables remain those recorded in Sections 4.1 through 4.3.
+Validation now rejects any drift in disposition, tier, package, remote,
+fallback, capability-reference, portability, native, visual-profile,
+prerequisite-edge, or exception-outcome totals unless a future version updates
+the reviewed contract deliberately.
+
+### Independent category and high-risk review
+
+The [classification review
+report](../../../assets/component-catalog/blazex-component-classification-v0-1-0-review.md)
+checks every source category and the high-risk family set: Form, Autocomplete,
+FileUpload, TextField, Picker, Dialog, NavMenu, PageContentNavigation,
+ExitPrompt, DropZone, SplitPanel, SwipeArea, DataGrid, Table, Virtualize, Chart,
+and Element.
+
+Principal decisions confirmed:
+
+- file selection uses opaque file capabilities and no filesystem/browser
+  object; upload commands remain server-authoritative;
+- surfaces explicitly own focus, measurement, stacking, dismissal, resources,
+  cleanup, and inline/in-app alternatives;
+- navigation/window behavior uses semantic intents and window capability, not
+  DOM events or Phoenix routing types;
+- drag, split, and swipe retain keyboard/direct-action alternatives;
+- DataGrid/Virtualize remain F4 optional/runtime-heavy with optional remote
+  providers and server-round-trip/nonvirtualized fallbacks;
+- Chart remains a separate asset-heavy custom scene with nonvisual data; and
+- Element remains a bounded renderer extension with omission fallback rather
+  than a portable escape hatch.
+
+The report also records all twelve accepted exception outcomes and the exact
+changes from prior tier ranges/descriptive targets to one tier, package,
+disposition, capability, fallback, and portability contract per family.
+
+### Contradiction and compatibility audit
+
+The schema and validator reject omitted-but-tiered/package rows, missing
+rationales, duplicate identities, dependency cycles, illegal package edges,
+backend tokens in portable requirements, required capabilities without
+fallback, remote needs without no-network behavior, unmanaged resource
+lifecycle, renderer-extension mismatch, inaccessible custom scenes, and
+portable/native intent without the native-spike gate.
+
+No family is intrinsically unavailable in Plug, carries a LiveView/Phoenix
+socket requirement, or puts component behavior in an adapter/profile. No row
+is DOM-only, native-only, unsupported, implemented, evidenced, supported,
+native-compatible, MudBlazor-compatible, or .NET/API-compatible. Accepted
+classification is not delivery evidence.
+
+### Revision and review record
+
+- Section 4.1 disposition/tier/package revision: `f3393f2`.
+- Section 4.2 capability/remote/fallback revision: `5cba122`.
+- Section 4.3 portability/native/visual revision: `344fd75`.
+- Classification/schema/capability-registry versions: `0.1.0` / `1.0.0` /
+  `0.1.0`.
+- Product, package, capability, fallback, portability, native, visual-profile,
+  accessibility/security-boundary, and integration review: Codex under the
+  repository owner's instruction.
+- Independent second-party review remains the Phase 6 BH-00 acceptance gate.
+- Phase delivery: [PR #7](https://github.com/pcharbon70/blazex/pull/7),
+  containing one final commit for each of Sections 4.1 through 4.4.
+- The repository owner authorized creation and immediate merge of the single
+  Phase 4 PR, followed by main synchronization and feature-branch deletion.
+
+### Scope boundary
+
+Phase 4 changed research policy, machine classifications, deterministic views,
+validation, and review evidence only. It created no Mix/JavaScript project,
+runtime, renderer, component implementation, native toolkit selection,
+quality budget, acceptance threshold, browser support record, or Phase 5 work.
+
+### Section result
+
+All local Phase 4 integration gates pass and classification v0.1.0 is locked.
+PR #7 contains exactly four coherent section commits, and no Phase 5 work has
+begun.
+
+## Phase 4 delivery status
+
+- Complete in PR #7; quality budgets, acceptance traceability, executable
+  evidence, and independent BH-00 acceptance remain assigned to later phases
+  and milestones.
 
 ## Connections
 

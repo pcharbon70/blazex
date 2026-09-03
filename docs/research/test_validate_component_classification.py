@@ -130,6 +130,39 @@ class ComponentClassificationValidatorTests(unittest.TestCase):
         with self.assertRaisesRegex(validator.ClassificationValidationError, "native-spike gate"):
             self.validate(changed)
 
+    def test_complete_classification_must_be_locked(self) -> None:
+        changed = copy.deepcopy(self.document)
+        changed["status"] = "reviewed"
+        with self.assertRaisesRegex(validator.ClassificationValidationError, "must be locked"):
+            self.validate(changed)
+
+    def test_locked_summary_count_drift_is_rejected(self) -> None:
+        changed = copy.deepcopy(self.document)
+        target = next(
+            record for record in changed["families"]
+            if record["product"]["disposition"] == "build-natively"
+        )
+        target["product"]["disposition"] = "adapt-concept"
+        target["product"]["behavior_basis"] = "user-observable-semantics"
+        with self.assertRaisesRegex(validator.ClassificationValidationError, "dispositions counts changed"):
+            self.validate(changed)
+
+    def test_prerequisite_cycle_is_rejected(self) -> None:
+        changed = copy.deepcopy(self.document)
+        alert = next(record for record in changed["families"] if record["family_id"] == "BX-FAM-ALERT")
+        badge = next(record for record in changed["families"] if record["family_id"] == "BX-FAM-BADGE")
+        alert["product"]["prerequisites"] = ["BX-FAM-BADGE"]
+        badge["product"]["prerequisites"] = ["BX-FAM-ALERT"]
+        with self.assertRaisesRegex(validator.ClassificationValidationError, "prerequisite cycle"):
+            self.validate(changed)
+
+    def test_locked_exception_outcome_drift_is_rejected(self) -> None:
+        changed = copy.deepcopy(self.document)
+        changed["exceptions"][0]["product_disposition"] = "defer-review"
+        changed["exceptions"][0]["implementation_state"] = "deferred"
+        with self.assertRaisesRegex(validator.ClassificationValidationError, "exception-outcome counts changed"):
+            self.validate(changed)
+
     def test_stale_generated_view_is_rejected(self) -> None:
         with self.assertRaisesRegex(validator.ClassificationValidationError, "stale"):
             validator.validate_generated_view(self.document, self.source, "stale\n")

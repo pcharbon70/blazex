@@ -4,8 +4,8 @@
   "classification_id": "BX-CLASSIFICATION-BROWSER-FOUNDATION",
   "source_catalog": "assets/component-catalog/blazex-component-catalog-v0.1.0.json",
   "source_catalog_sha256": "ec0f413c9968b92878e71c1aae9570286dd68ec538938ad880d8908cf7ea70a3",
-  "stage": "section-4.3",
-  "status": "reviewed",
+  "stage": "complete",
+  "status": "locked",
   "sort_order": "family-id-unicode-codepoint-ascending",
   "owner_roles": [
     "architecture owner",

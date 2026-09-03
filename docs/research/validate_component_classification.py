@@ -61,6 +61,51 @@ EXPECTED_CAPABILITIES = {
     "BX-CAP-TIME",
     "BX-CAP-WINDOW",
 }
+EXPECTED_FINAL_COUNTS = {
+    "dispositions": {
+        "adapt-concept": 28,
+        "build-natively": 43,
+        "renderer-specific-extension": 1,
+        "replace-with-platform-pattern": 11,
+    },
+    "tiers": {"F0": 13, "F1": 26, "F2": 21, "F3": 18, "F4": 5},
+    "packages": {
+        "blazex_charts": 1,
+        "blazex_data": 6,
+        "blazex_forms": 18,
+        "blazex_surfaces": 9,
+        "blazex_ui": 47,
+        "blazex_ui_tree": 2,
+    },
+    "remote": {"local-only": 73, "optional-remote": 7, "phoenix-enhanced": 3},
+    "fallbacks": {
+        "alternative-interaction": 30,
+        "explicit-unavailable": 2,
+        "in-app-substitute": 14,
+        "nonvisual-representation": 1,
+        "omission": 1,
+        "server-round-trip": 5,
+        "static-content": 30,
+    },
+    "portability": {
+        "custom-scene": 1,
+        "portable-semantic": 24,
+        "portable-with-capabilities": 57,
+        "renderer-extension": 1,
+    },
+    "native": {
+        "custom-drawn": 2,
+        "native-composite": 58,
+        "native-preferred": 15,
+        "not-applicable": 8,
+    },
+    "visual_profiles": {
+        "blazex-material": 2,
+        "hybrid": 58,
+        "not-applicable": 8,
+        "platform-native": 15,
+    },
+}
 
 
 class ClassificationValidationError(ValueError):
@@ -273,6 +318,14 @@ def _validate_portability(record: dict[str, Any]) -> None:
             )
 
 
+def _contains_value(value: Any, forbidden: set[str]) -> bool:
+    if isinstance(value, dict):
+        return any(_contains_value(item, forbidden) for item in value.values())
+    if isinstance(value, list):
+        return any(_contains_value(item, forbidden) for item in value)
+    return isinstance(value, str) and value in forbidden
+
+
 def validate_classification(
     document: dict[str, Any], source_catalog: dict[str, Any], schema: dict[str, Any]
 ) -> dict[str, Any]:
@@ -404,7 +457,7 @@ def validate_classification(
                     f"family {record['family_id']} portable requirement leaks backend token: {token}"
                 )
 
-    return {
+    summary = {
         "stage": stage,
         "families": len(document["families"]),
         "exceptions": len(document["exceptions"]),
@@ -419,6 +472,36 @@ def validate_classification(
         "native": dict(sorted(Counter(record["portability"]["native_strategy"] for record in document["families"]).items())),
         "visual_profiles": dict(sorted(Counter(record["portability"]["visual_profile"] for record in document["families"]).items())),
     }
+    if stage == "complete":
+        if document["status"] != "locked":
+            raise ClassificationValidationError("complete classification must be locked")
+        if _contains_value(document, {"unassigned", "unproven", "unresolved"}):
+            raise ClassificationValidationError(
+                "complete classification contains an unassigned, unproven, or unresolved value"
+            )
+        for key, expected in EXPECTED_FINAL_COUNTS.items():
+            if summary[key] != expected:
+                raise ClassificationValidationError(
+                    f"locked classification {key} counts changed: expected {expected}, found {summary[key]}"
+                )
+        if summary["required_capability_references"] != 204 or summary["optional_capability_references"] != 77:
+            raise ClassificationValidationError("locked capability-reference counts changed")
+        if sum(len(record["product"]["prerequisites"]) for record in document["families"]) != 39:
+            raise ClassificationValidationError("locked prerequisite-edge count changed")
+        if any(record["classification_state"] != "accepted" for record in document["families"]):
+            raise ClassificationValidationError("all final family classifications must be accepted")
+        if any(record["implementation_state"] != "unknown" or record["implementation_evidence"] for record in document["families"]):
+            raise ClassificationValidationError("complete classification contains implementation/evidence claims")
+        exception_counts = dict(sorted(Counter(record["product_disposition"] for record in document["exceptions"]).items()))
+        expected_exception_counts = {
+            "no-entry-confirmed": 4,
+            "omit-from-product": 3,
+            "retain-as-infrastructure": 4,
+            "retain-as-service-evidence": 1,
+        }
+        if exception_counts != expected_exception_counts:
+            raise ClassificationValidationError("locked exception-outcome counts changed")
+    return summary
 
 
 def validate_generated_view(

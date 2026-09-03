@@ -16,7 +16,7 @@ aliases:
 
 Back to milestone: [README](README.md)
 
-- [ ] 4 Phase - Disposition, Capability, Fallback, and Portability Classification.
+- [x] 4 Phase - Disposition, Capability, Fallback, and Portability Classification.
 
   Classify every locked catalog family by BlazeX product intent, delivery order,
   package ownership, capability requirements, fallback behavior, and renderer
@@ -92,29 +92,29 @@ Back to milestone: [README](README.md)
       - [x] 4.3.2.2 Subtask - Record expected platform-native, BlazeX Material, or hybrid visual-profile implications and identify conflicts between OS-native behavior and MudBlazor-inspired appearance.
       - [x] 4.3.2.3 Subtask - Define renderer coverage, fallback, accessibility, and documentation requirements that a future backend must meet before claiming support for a family.
 
-  - [ ] 4.4 Section - Phase 4 Integration Tests.
+  - [x] 4.4 Section - Phase 4 Integration Tests.
 
     Prove that every catalog row has a coherent product, package, capability,
     fallback, and portability classification with no unsupported compatibility
     claim or hidden browser dependency.
 
-    - [ ] 4.4.1 Task - Validate classification completeness and coherence.
+    - [x] 4.4.1 Task - Validate classification completeness and coherence.
 
       Machine rules and independent category review must reject missing fields,
       invalid combinations, dependency cycles, and misleading support language.
 
-      - [ ] 4.4.1.1 Subtask - Validate every catalog row against disposition, tier, package, capability, remote, fallback, portability, native-strategy, visual-profile, rationale, and evidence-state requirements.
-      - [ ] 4.4.1.2 Subtask - Reject contradictions such as omitted-but-tiered, portable-with-DOM-types, Plug-with-LiveView, required-capability-without-fallback, or native-supported-without native evidence.
-      - [ ] 4.4.1.3 Subtask - Independently review every category and all high-risk forms, surfaces, navigation, file, upload, grid, chart, virtualization, and browser-capability families.
+      - [x] 4.4.1.1 Subtask - Validate every catalog row against disposition, tier, package, capability, remote, fallback, portability, native-strategy, visual-profile, rationale, and evidence-state requirements.
+      - [x] 4.4.1.2 Subtask - Reject contradictions such as omitted-but-tiered, portable-with-DOM-types, Plug-with-LiveView, required-capability-without-fallback, or native-supported-without native evidence.
+      - [x] 4.4.1.3 Subtask - Independently review every category and all high-risk forms, surfaces, navigation, file, upload, grid, chart, virtualization, and browser-capability families.
 
-    - [ ] 4.4.2 Task - Record completion evidence and deliver the phase.
+    - [x] 4.4.2 Task - Record completion evidence and deliver the phase.
 
       Phase completion requires every family to have an explicit reviewed
       classification while all implementation and support states remain honest.
 
-      - [ ] 4.4.2.1 Subtask - Record catalog revision, classification summaries, validation output, reviewer decisions, unresolved rows, accepted exceptions, and package or tier changes from prior research.
-      - [ ] 4.4.2.2 Subtask - Confirm no row is marked implemented, evidenced, supported, native-compatible, or API-compatible solely because its product classification is accepted.
-      - [ ] 4.4.2.3 Subtask - Complete one commit per coherent section and open the Phase 4 PR without beginning quality-budget or acceptance-threshold work.
+      - [x] 4.4.2.1 Subtask - Record catalog revision, classification summaries, validation output, reviewer decisions, unresolved rows, accepted exceptions, and package or tier changes from prior research.
+      - [x] 4.4.2.2 Subtask - Confirm no row is marked implemented, evidenced, supported, native-compatible, or API-compatible solely because its product classification is accepted.
+      - [x] 4.4.2.3 Subtask - Complete one commit per coherent section and open the Phase 4 PR without beginning quality-budget or acceptance-threshold work.
 
 ## Section delivery rule
 
