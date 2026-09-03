@@ -633,7 +633,7 @@ spike prevents obvious leakage before API freeze.
 | Main-thread/native callback complexity | deadlocks, queue floods, stale updates | Renderer-owned scheduling, generations, batching, backpressure, disposal. |
 | Popcorn APIs leak into core | non-browser runtime becomes impractical | Static dependency checks and runtime adapter isolation. |
 | WASI assumed to provide GUI | architecture waits on a nonexistent widget standard | Own renderer/capability protocols; treat future WASI graphics as optional. |
-| Custom-drawn backend scope | layout, text, IME, accessibility become enormous | Prefer native widgets first; isolate custom scenes to justified families. |
+| Custom-drawn backend scope | layout, text, IME, accessibility become enormous | Keep the scene renderer separate from the actual-control profile, require a mature drawing/text stack, and preserve the F0 native-control proof. |
 | Native host has broad authority | local component compromise reaches OS resources | capability grants, opaque resources, least authority, audit manifest. |
 
 ## 16. Decisions to record as ADRs
@@ -693,6 +693,17 @@ original design expected. That cost is necessary. Deferring it until after a
 large HEEx component catalog exists would make native controls a rewrite,
 not an adapter.
 
+The [2026-09-03 cross-platform native-host deep
+dive](cross-platform-native-host-and-renderer-architecture.md) develops the
+desktop side of this decision. It recommends a split-process ERTS/native
+shell, SDL3 plus Skia as the leading custom-scene spike hypothesis,
+renderer-local layout and hit testing, the existing headless renderer as the
+semantic oracle, pinned Skia Raster/Cairo comparisons, separate
+SkParagraph/Pango-HarfBuzz text-layout comparisons, explicit accessibility
+subsystems, and a wxWidgets actual-control proof. These are research
+candidates, not accepted production dependencies; the custom-scene program
+does not expand ADR-0007's resolution requirements.
+
 ## Connections
 
 - [Elixir WebAssembly component framework for Phoenix and Plug](elixir-webassembly-component-framework-for-phoenix-and-plug.md) — parent runtime, Phoenix, Plug, security, and delivery study amended by this host-neutral boundary.
@@ -700,6 +711,7 @@ not an adapter.
 - [Host-neutral and native-renderer map](../10-maps/host-neutral-and-native-renderer-architecture.md) — curated route through evidence and decisions.
 - [Can one BlazeX component model target DOM and native controls?](../40-inquiries/can-one-blazex-component-model-target-dom-and-native-controls.md) — executable portability and native-control gates.
 - [2026-09-02 host-neutral design revision](../50-journal/2026-09-02-host-neutral-native-renderer-design-revision.md) — rationale and evidence boundaries for the correction.
+- [Cross-platform native host and renderer architecture](cross-platform-native-host-and-renderer-architecture.md) — detailed shell, drawing, text, accessibility, runtime, toolkit, packaging, and proof comparison.
 
 ## Sources
 
