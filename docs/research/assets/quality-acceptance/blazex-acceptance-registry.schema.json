@@ -1,0 +1,197 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://blazex.dev/schemas/acceptance-registry/1.0.0",
+  "title": "BlazeX Acceptance Registry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "registry_version",
+    "registry_id",
+    "stage",
+    "status",
+    "generated_by",
+    "source_bindings",
+    "status_vocabulary",
+    "evidence_classes",
+    "requirements",
+    "acceptance_conditions",
+    "coverage_findings",
+    "summary"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "registry_version": {"const": "0.1.0"},
+    "registry_id": {"const": "BX-ACCEPTANCE-REGISTRY-BROWSER-0.1"},
+    "stage": {"enum": ["section-5.3", "complete"]},
+    "status": {"const": "reviewed-planned-unexecuted"},
+    "generated_by": {"const": "generate_acceptance_registry.py"},
+    "source_bindings": {
+      "type": "array",
+      "minItems": 4,
+      "items": {"$ref": "#/$defs/sourceBinding"}
+    },
+    "status_vocabulary": {
+      "type": "array",
+      "minItems": 9,
+      "uniqueItems": true,
+      "items": {"enum": ["planned", "blocked", "implemented", "passed", "failed", "waived", "superseded", "unsupported", "not-applicable"]}
+    },
+    "evidence_classes": {
+      "type": "array",
+      "minItems": 10,
+      "items": {"$ref": "#/$defs/evidencePolicy"}
+    },
+    "requirements": {
+      "type": "array",
+      "minItems": 200,
+      "items": {"$ref": "#/$defs/requirement"}
+    },
+    "acceptance_conditions": {
+      "type": "array",
+      "minItems": 200,
+      "items": {"$ref": "#/$defs/acceptanceCondition"}
+    },
+    "coverage_findings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["orphan_claims", "catalog_without_acceptance", "acceptance_without_owner", "unsupported_transitions", "stale_evidence", "missing_budgets", "uncovered_profiles"],
+      "properties": {
+        "orphan_claims": {"type": "array", "maxItems": 0},
+        "catalog_without_acceptance": {"type": "array", "maxItems": 0},
+        "acceptance_without_owner": {"type": "array", "maxItems": 0},
+        "unsupported_transitions": {"type": "array", "maxItems": 0},
+        "stale_evidence": {"type": "array", "maxItems": 0},
+        "missing_budgets": {"type": "array", "maxItems": 0},
+        "uncovered_profiles": {"type": "array", "maxItems": 0}
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["requirements", "acceptance_conditions", "by_source_kind", "by_milestone", "by_evidence_class", "catalog_families", "profiles", "budgets", "gate_requirements", "executed_evidence"],
+      "properties": {
+        "requirements": {"type": "integer", "minimum": 200},
+        "acceptance_conditions": {"type": "integer", "minimum": 200},
+        "by_source_kind": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 1}},
+        "by_milestone": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 1}},
+        "by_evidence_class": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 1}},
+        "catalog_families": {"const": 83},
+        "profiles": {"const": 3},
+        "budgets": {"type": "integer", "minimum": 20},
+        "gate_requirements": {"type": "integer", "minimum": 16},
+        "executed_evidence": {"const": 0}
+      }
+    }
+  },
+  "$defs": {
+    "sourceBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "path", "sha256"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^BX-SOURCE-[A-Z0-9-]+$"},
+        "path": {"type": "string", "minLength": 5},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "evidencePolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "freshness_days", "reproducibility", "required_identity", "permitted_verification_states"],
+      "properties": {
+        "id": {"$ref": "#/$defs/evidenceClass"},
+        "freshness_days": {"type": ["integer", "null"], "minimum": 1},
+        "reproducibility": {"type": "string", "minLength": 30},
+        "required_identity": {"type": "array", "minItems": 4, "uniqueItems": true, "items": {"type": "string", "minLength": 3}},
+        "permitted_verification_states": {"type": "array", "minItems": 2, "uniqueItems": true, "items": {"enum": ["not-executed", "passed", "failed", "not-applicable"]}}
+      }
+    },
+    "evidenceClass": {
+      "enum": ["accessibility", "automated", "benchmark", "browser", "deployment", "generated", "manual", "provenance", "review", "security"]
+    },
+    "requirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "source_kind", "source_id", "source_binding", "normative_summary", "acceptance_ids"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^BX-REQ-[A-Z0-9-]+$"},
+        "source_kind": {"enum": ["roadmap-milestone", "cross-cutting-obligation", "browser-envelope", "catalog-family", "package-boundary", "non-goal", "quality-budget", "quality-failure", "quality-gate", "quality-release-blocker"]},
+        "source_id": {"type": "string", "minLength": 3},
+        "source_binding": {"type": "string", "pattern": "^BX-SOURCE-[A-Z0-9-]+$"},
+        "normative_summary": {"type": "string", "minLength": 20},
+        "acceptance_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "pattern": "^BX-ACC-[A-Z0-9-]+$"}}
+      }
+    },
+    "acceptanceCondition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "requirement_ids",
+        "subject",
+        "normative_statement",
+        "mode",
+        "profiles",
+        "preconditions",
+        "action",
+        "observable_results",
+        "prohibited_results",
+        "evidence_types",
+        "evidence_owner",
+        "owner_package_or_profile",
+        "responsible_milestone",
+        "integration_suite",
+        "release_gate",
+        "required_budget_ids",
+        "status",
+        "support_status",
+        "implementation_state",
+        "verification_state",
+        "evidence_ids",
+        "waiver",
+        "supersedes"
+      ],
+      "properties": {
+        "id": {"type": "string", "pattern": "^BX-ACC-[A-Z0-9-]+$"},
+        "requirement_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "pattern": "^BX-REQ-[A-Z0-9-]+$"}},
+        "subject": {"type": "string", "minLength": 3},
+        "normative_statement": {"type": "string", "minLength": 20},
+        "mode": {"type": "string", "minLength": 3},
+        "profiles": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "pattern": "^(PROFILE-[A-Z0-9-]+|all-declared-profiles|not-applicable)$"}},
+        "preconditions": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 10}},
+        "action": {"type": "string", "minLength": 20},
+        "observable_results": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 20}},
+        "prohibited_results": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 20}},
+        "evidence_types": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/evidenceClass"}},
+        "evidence_owner": {"type": "string", "minLength": 3},
+        "owner_package_or_profile": {"type": "string", "minLength": 3},
+        "responsible_milestone": {"type": "string", "pattern": "^BH-(0[0-9]|1[0-9]|2[0-3])$"},
+        "integration_suite": {"type": "string", "minLength": 5},
+        "release_gate": {"type": "string", "minLength": 5},
+        "required_budget_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^BX-BUD-[A-Z0-9-]+$"}},
+        "status": {"enum": ["planned", "blocked", "implemented", "passed", "failed", "waived", "superseded", "unsupported", "not-applicable"]},
+        "support_status": {"enum": ["candidate", "unsupported", "not-applicable"]},
+        "implementation_state": {"enum": ["not-started", "implemented", "not-applicable"]},
+        "verification_state": {"enum": ["not-executed", "passed", "failed", "not-applicable"]},
+        "evidence_ids": {"type": "array", "items": {"type": "string", "pattern": "^BX-EVIDENCE-[A-Z0-9-]+$"}},
+        "waiver": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/waiver"}]},
+        "supersedes": {"type": ["string", "null"], "pattern": "^BX-ACC-[A-Z0-9-]+$"}
+      }
+    },
+    "waiver": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "rationale", "owner", "approved_by", "created_on", "expires_on", "mitigation"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^BX-WAIVER-[A-Z0-9-]+$"},
+        "rationale": {"type": "string", "minLength": 20},
+        "owner": {"type": "string", "minLength": 3},
+        "approved_by": {"type": "string", "minLength": 3},
+        "created_on": {"type": "string", "format": "date"},
+        "expires_on": {"type": "string", "format": "date"},
+        "mitigation": {"type": "string", "minLength": 20}
+      }
+    }
+  }
+}

@@ -27,6 +27,9 @@ insufficient. Record source, creator, license, provenance, and use.
 
 - [Component catalog](component-catalog/README.md) — pinned upstream reference,
   raw extraction inputs, BlazeX catalog schema/data, and deterministic reports.
+- [Quality and acceptance](quality-acceptance/README.md) — versioned quality
+  budgets, cross-cutting gates, acceptance conditions, coverage records, and
+  deterministic traceability reports.
 
 ### Files
 

@@ -1,0 +1,266 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://blazex.dev/schemas/quality-contract/1.0.0",
+  "title": "BlazeX Quality Contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "contract_version",
+    "contract_id",
+    "stage",
+    "status",
+    "owner_roles",
+    "measurement_policy",
+    "environments",
+    "budgets",
+    "failure_scenarios",
+    "release_blockers",
+    "cross_cutting_gates",
+    "exceptions",
+    "evidence_state"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "contract_version": {"const": "0.1.0"},
+    "contract_id": {"const": "BX-QUALITY-CONTRACT-BROWSER-0.1"},
+    "stage": {"enum": ["section-5.1", "section-5.2", "complete"]},
+    "status": {"const": "reviewed-proposed-unmeasured"},
+    "owner_roles": {
+      "type": "array",
+      "minItems": 2,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "measurement_policy": {"$ref": "#/$defs/measurementPolicy"},
+    "environments": {
+      "type": "array",
+      "minItems": 5,
+      "items": {"$ref": "#/$defs/environment"}
+    },
+    "budgets": {
+      "type": "array",
+      "minItems": 20,
+      "items": {"$ref": "#/$defs/budget"}
+    },
+    "failure_scenarios": {
+      "type": "array",
+      "minItems": 8,
+      "items": {"$ref": "#/$defs/failureScenario"}
+    },
+    "release_blockers": {
+      "type": "array",
+      "minItems": 7,
+      "items": {"$ref": "#/$defs/releaseBlocker"}
+    },
+    "cross_cutting_gates": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/gate"}
+    },
+    "exceptions": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/exception"}
+    },
+    "evidence_state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["implementation", "measurements", "release_gates", "evidence_ids"],
+      "properties": {
+        "implementation": {"const": "not-executed"},
+        "measurements": {"const": "not-executed"},
+        "release_gates": {"const": "not-executed"},
+        "evidence_ids": {"type": "array", "maxItems": 0}
+      }
+    }
+  },
+  "$defs": {
+    "measurementPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "threshold_semantics",
+        "statistics",
+        "sample_policy",
+        "variance_policy",
+        "regression_policy",
+        "exception_policy",
+        "freshness_policy"
+      ],
+      "properties": {
+        "threshold_semantics": {"const": "proposed-release-boundary-not-a-measurement"},
+        "statistics": {"type": "array", "minItems": 3, "uniqueItems": true, "items": {"enum": ["exact", "maximum", "median", "p95", "p99", "rate"]}},
+        "sample_policy": {"type": "string", "minLength": 40},
+        "variance_policy": {"type": "string", "minLength": 40},
+        "regression_policy": {"type": "string", "minLength": 40},
+        "exception_policy": {"type": "string", "minLength": 40},
+        "freshness_policy": {"type": "string", "minLength": 40}
+      }
+    },
+    "environment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "class", "hardware", "browser", "network", "cache", "power", "use"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^BX-ENV-[A-Z0-9-]+$"},
+        "class": {"enum": ["desktop", "mobile", "ci", "asset-build"]},
+        "hardware": {"type": "string", "minLength": 10},
+        "browser": {"type": "string", "minLength": 5},
+        "network": {"type": "string", "minLength": 5},
+        "cache": {"enum": ["cold", "warm", "not-applicable"]},
+        "power": {"enum": ["mains", "battery-normal", "not-applicable"]},
+        "use": {"type": "string", "minLength": 20}
+      }
+    },
+    "budget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "dimension",
+        "subject",
+        "unit",
+        "statistic",
+        "direction",
+        "proposed_threshold",
+        "environment_refs",
+        "minimum_samples",
+        "measurement_method",
+        "severity",
+        "exception_policy",
+        "owner",
+        "first_measurement_milestone",
+        "measurement_state",
+        "evidence_ids"
+      ],
+      "properties": {
+        "id": {"type": "string", "pattern": "^BX-BUD-[A-Z0-9-]+$"},
+        "dimension": {"enum": ["payload", "startup", "interaction", "resource", "build", "reliability"]},
+        "subject": {"type": "string", "minLength": 5},
+        "unit": {"enum": ["kibibytes", "milliseconds", "mebibytes", "seconds", "count", "percent"]},
+        "statistic": {"enum": ["exact", "maximum", "median", "p95", "p99", "rate"]},
+        "direction": {"enum": ["at-most", "at-least", "exactly"]},
+        "proposed_threshold": {"type": "number", "minimum": 0},
+        "environment_refs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "pattern": "^BX-ENV-[A-Z0-9-]+$"}},
+        "minimum_samples": {"type": "integer", "minimum": 1},
+        "measurement_method": {"type": "string", "minLength": 30},
+        "severity": {"enum": ["release-blocking", "release-review", "diagnostic"]},
+        "exception_policy": {"enum": ["no-waiver", "time-bounded-waiver", "profile-specific-waiver"]},
+        "owner": {"type": "string", "minLength": 3},
+        "first_measurement_milestone": {"type": "string", "pattern": "^BH-(0[1-9]|1[0-9]|2[0-3])$"},
+        "measurement_state": {"const": "proposed-unmeasured"},
+        "evidence_ids": {"type": "array", "maxItems": 0}
+      }
+    },
+    "failureScenario": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "trigger", "required_outcome", "time_bound_ms", "owner", "first_test_milestone", "evidence_state"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^BX-FAIL-[A-Z0-9-]+$"},
+        "trigger": {"type": "string", "minLength": 5},
+        "required_outcome": {"type": "string", "minLength": 30},
+        "time_bound_ms": {"type": "integer", "minimum": 0},
+        "owner": {"type": "string", "minLength": 3},
+        "first_test_milestone": {"type": "string", "pattern": "^BH-(0[1-9]|1[0-9]|2[0-3])$"},
+        "evidence_state": {"const": "planned-not-executed"}
+      }
+    },
+    "releaseBlocker": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "condition", "detection", "owner", "waiver"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^BX-BLOCK-[A-Z0-9-]+$"},
+        "condition": {"type": "string", "minLength": 10},
+        "detection": {"type": "string", "minLength": 20},
+        "owner": {"type": "string", "minLength": 3},
+        "waiver": {"const": "prohibited"}
+      }
+    },
+    "gate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "dimension",
+        "status",
+        "owner",
+        "scope_statement",
+        "requirements",
+        "evidence_classes",
+        "test_contexts",
+        "severity_rules",
+        "exception_policy",
+        "first_execution_milestone",
+        "evidence_state",
+        "evidence_ids"
+      ],
+      "properties": {
+        "id": {"type": "string", "pattern": "^BX-GATE-[A-Z0-9-]+$"},
+        "dimension": {"enum": ["accessibility", "security", "compatibility", "provenance"]},
+        "status": {"const": "reviewed-planned"},
+        "owner": {"type": "string", "minLength": 3},
+        "scope_statement": {"type": "string", "minLength": 40},
+        "requirements": {"type": "array", "minItems": 4, "items": {"$ref": "#/$defs/gateRequirement"}},
+        "evidence_classes": {"type": "array", "minItems": 2, "uniqueItems": true, "items": {"$ref": "#/$defs/evidenceClass"}},
+        "test_contexts": {"type": "array", "minItems": 2, "uniqueItems": true, "items": {"type": "string", "minLength": 5}},
+        "severity_rules": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["blocker", "high", "medium", "low"],
+          "properties": {
+            "blocker": {"type": "string", "minLength": 20},
+            "high": {"type": "string", "minLength": 20},
+            "medium": {"type": "string", "minLength": 20},
+            "low": {"type": "string", "minLength": 20}
+          }
+        },
+        "exception_policy": {"type": "string", "minLength": 50},
+        "first_execution_milestone": {"type": "string", "pattern": "^BH-(0[1-9]|1[0-9]|2[0-3])$"},
+        "evidence_state": {"const": "planned-not-executed"},
+        "evidence_ids": {"type": "array", "maxItems": 0}
+      }
+    },
+    "gateRequirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "normative_statement", "applies_to", "evidence_types", "manual_review", "fallback_or_failure", "minimum_severity"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^BX-GREQ-[A-Z0-9-]+$"},
+        "normative_statement": {"type": "string", "minLength": 40},
+        "applies_to": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 3}},
+        "evidence_types": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/evidenceClass"}},
+        "manual_review": {"enum": ["required", "conditional", "not-required"]},
+        "fallback_or_failure": {"type": "string", "minLength": 30},
+        "minimum_severity": {"enum": ["blocker", "high", "medium", "low"]}
+      }
+    },
+    "evidenceClass": {
+      "enum": [
+        "automated",
+        "accessibility",
+        "browser",
+        "deployment",
+        "generated",
+        "manual",
+        "provenance",
+        "review",
+        "security"
+      ]
+    },
+    "exception": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "scope", "rationale", "owner", "approved_by", "expires_on", "status"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^BX-EXC-[A-Z0-9-]+$"},
+        "scope": {"type": "string", "minLength": 5},
+        "rationale": {"type": "string", "minLength": 20},
+        "owner": {"type": "string", "minLength": 3},
+        "approved_by": {"type": "string", "minLength": 3},
+        "expires_on": {"type": "string", "format": "date"},
+        "status": {"enum": ["proposed", "approved", "expired", "revoked"]}
+      }
+    }
+  }
+}
