@@ -62,8 +62,32 @@ class ComponentClassificationValidatorTests(unittest.TestCase):
 
     def test_section_4_1_rejects_capability_assignment(self) -> None:
         changed = copy.deepcopy(self.document)
-        changed["families"][0]["capability"]["effect_ownership"] = "component"
+        changed["stage"] = "section-4.1"
         with self.assertRaisesRegex(validator.ClassificationValidationError, "leave capability"):
+            self.validate(changed)
+
+    def test_section_4_2_rejects_unassigned_remote_authority(self) -> None:
+        changed = copy.deepcopy(self.document)
+        changed["families"][0]["remote"] = {"authority": "unassigned", "rationale": None}
+        with self.assertRaisesRegex(validator.ClassificationValidationError, "remote-authority"):
+            self.validate(changed)
+
+    def test_unknown_capability_is_rejected(self) -> None:
+        changed = copy.deepcopy(self.document)
+        changed["families"][0]["capability"]["optional"].append("BX-CAP-NOT-REGISTERED")
+        with self.assertRaisesRegex(validator.ClassificationValidationError, "unknown capabilities"):
+            self.validate(changed)
+
+    def test_required_capability_without_fallback_is_rejected(self) -> None:
+        changed = copy.deepcopy(self.document)
+        changed["families"][0]["fallback"]["conditions"]["missing-capability"] = "not-required"
+        with self.assertRaisesRegex(validator.ClassificationValidationError, "missing-capability fallback"):
+            self.validate(changed)
+
+    def test_backend_specific_portable_requirement_is_rejected(self) -> None:
+        changed = copy.deepcopy(self.document)
+        changed["families"][0]["capability"]["portable_requirement_tokens"].append("javascript.handle")
+        with self.assertRaisesRegex(validator.ClassificationValidationError, "leaks backend token"):
             self.validate(changed)
 
     def test_stale_generated_view_is_rejected(self) -> None:

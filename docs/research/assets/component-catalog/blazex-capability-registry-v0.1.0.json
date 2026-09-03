@@ -1,0 +1,122 @@
+{
+  "schema_version": "1.0.0",
+  "registry_version": "0.1.0",
+  "registry_id": "BX-CAPABILITY-REGISTRY-CORE",
+  "status": "reviewed",
+  "contract_owner": "blazex_effects",
+  "provider_boundary": "Host and renderer adapters implement grants and return semantic results or opaque resource IDs; portable components never receive browser, JavaScript, operating-system, or toolkit objects.",
+  "capabilities": [
+    {
+      "id": "BX-CAP-ACCESSIBILITY",
+      "name": "accessibility",
+      "purpose": "Expose semantic roles, names, states, relationships, announcements, and backend accessibility mapping.",
+      "lifecycle": "renderer-contract",
+      "security": "Reject untrusted markup or backend objects; announcements contain bounded public text.",
+      "unsupported_behavior": "Use the family accessibility alternative or declare the renderer unsupported."
+    },
+    {
+      "id": "BX-CAP-CLIPBOARD",
+      "name": "clipboard",
+      "purpose": "Request bounded copy or paste operations through host policy and user gesture requirements.",
+      "lifecycle": "request",
+      "security": "Permission, origin, gesture, size, and content policy are host-owned.",
+      "unsupported_behavior": "Keep ordinary text entry and selection; omit clipboard enhancements."
+    },
+    {
+      "id": "BX-CAP-FILES",
+      "name": "files",
+      "purpose": "Request user-mediated file selection and opaque file resources with bounded metadata and reads.",
+      "lifecycle": "leased-resource",
+      "security": "No filesystem path crosses the contract; grants are user-mediated, bounded, revocable, and scoped.",
+      "unsupported_behavior": "Provide an ordinary host upload/action alternative or an explicit unavailable state."
+    },
+    {
+      "id": "BX-CAP-FOCUS",
+      "name": "focus",
+      "purpose": "Move, restore, contain, and inspect semantic focus through renderer-owned identities.",
+      "lifecycle": "renderer-contract",
+      "security": "Targets are component-owned semantic IDs, never CSS selectors or backend nodes.",
+      "unsupported_behavior": "Use document order and inline interaction or reject support for focus-critical families."
+    },
+    {
+      "id": "BX-CAP-KEYBOARD",
+      "name": "keyboard",
+      "purpose": "Receive normalized semantic key intents and shortcuts within an owned scope.",
+      "lifecycle": "subscription",
+      "security": "No raw global keylogger or unrestricted event object; scope, repeat, composition, and cleanup are explicit.",
+      "unsupported_behavior": "Expose equivalent ordinary actions and pointer-independent navigation where possible."
+    },
+    {
+      "id": "BX-CAP-MEASUREMENT",
+      "name": "measurement",
+      "purpose": "Observe bounded semantic geometry, viewport class, and placement constraints.",
+      "lifecycle": "subscription",
+      "security": "Results are normalized measurements for owned identities, not backend node handles.",
+      "unsupported_behavior": "Use inline, fixed-layout, or nonvirtualized alternatives."
+    },
+    {
+      "id": "BX-CAP-NETWORK",
+      "name": "network",
+      "purpose": "Attach optional remote providers or commands through an authenticated server-adapter contract.",
+      "lifecycle": "request",
+      "security": "Presentation is never authorization; servers authenticate, validate, reload trusted state, authorize, bound, and audit commands.",
+      "unsupported_behavior": "Use local/static data, cached bounded state, retry policy, or explicit unavailable behavior."
+    },
+    {
+      "id": "BX-CAP-NOTIFICATIONS",
+      "name": "notifications",
+      "purpose": "Request host notification delivery beyond the in-application feedback surface.",
+      "lifecycle": "request",
+      "security": "Permission, visibility, rate, content, and origin policy remain host-owned.",
+      "unsupported_behavior": "Retain the accessible in-application notification surface."
+    },
+    {
+      "id": "BX-CAP-POINTER",
+      "name": "pointer",
+      "purpose": "Receive normalized activation, drag, resize, and gesture intents with capture ownership.",
+      "lifecycle": "scoped-resource",
+      "security": "No raw backend event or pointer object crosses the contract; capture is scoped and disposable.",
+      "unsupported_behavior": "Provide keyboard, form, or direct-action alternatives."
+    },
+    {
+      "id": "BX-CAP-STORAGE",
+      "name": "storage",
+      "purpose": "Persist bounded nonsecret preferences or drafts under explicit namespace, quota, and expiry policy.",
+      "lifecycle": "leased-resource",
+      "security": "No secrets or authoritative state; values are versioned, bounded, untrusted, and clearable.",
+      "unsupported_behavior": "Use in-memory state and document loss across restart."
+    },
+    {
+      "id": "BX-CAP-SURFACE",
+      "name": "surface",
+      "purpose": "Create, place, stack, dismiss, and dispose transient semantic surfaces.",
+      "lifecycle": "leased-resource",
+      "security": "Surface content remains component-owned semantic UI; no portal or window object is exposed.",
+      "unsupported_behavior": "Render inline disclosure, navigate to a dedicated view, or declare unavailable."
+    },
+    {
+      "id": "BX-CAP-SYSTEM-THEME",
+      "name": "system-theme",
+      "purpose": "Observe normalized system color-scheme, contrast, and motion preferences.",
+      "lifecycle": "subscription",
+      "security": "Expose only bounded preference categories and dispose observation with the owner.",
+      "unsupported_behavior": "Use the application-selected BlazeX theme and accessible defaults."
+    },
+    {
+      "id": "BX-CAP-TIME",
+      "name": "time",
+      "purpose": "Schedule bounded delays, animation intents, and periodic work under host lifecycle policy.",
+      "lifecycle": "leased-resource",
+      "security": "Timers are owner-scoped, cancellable, rate-limited, and invalid after generation disposal.",
+      "unsupported_behavior": "Disable automatic progression/animation and preserve manual interaction."
+    },
+    {
+      "id": "BX-CAP-WINDOW",
+      "name": "window",
+      "purpose": "Observe and request normalized navigation, visibility, viewport, scroll, and close lifecycle operations.",
+      "lifecycle": "subscription",
+      "security": "No global object or unrestricted navigation; origin, user intent, scope, and cleanup are host-owned.",
+      "unsupported_behavior": "Use ordinary navigation/actions and omit lifecycle enhancements."
+    }
+  ]
+}

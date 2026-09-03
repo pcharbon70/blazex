@@ -30,6 +30,16 @@ def render_classification(classification: dict[str, Any], source_catalog: dict[s
     fallback_counts = Counter(record["fallback"]["primary"] for record in classification["families"])
     portability_counts = Counter(record["portability"]["status"] for record in classification["families"])
     native_counts = Counter(record["portability"]["native_strategy"] for record in classification["families"])
+    required_capability_counts = Counter(
+        capability
+        for record in classification["families"]
+        for capability in record["capability"]["required"]
+    )
+    optional_capability_counts = Counter(
+        capability
+        for record in classification["families"]
+        for capability in record["capability"]["optional"]
+    )
 
     lines = [
         "---",
@@ -72,23 +82,29 @@ def render_classification(classification: dict[str, Any], source_catalog: dict[s
         f"| Primary fallback | {', '.join(f'`{key}` {value}' for key, value in sorted(fallback_counts.items()))} |",
         f"| Portability | {', '.join(f'`{key}` {value}' for key, value in sorted(portability_counts.items()))} |",
         f"| Native strategy | {', '.join(f'`{key}` {value}' for key, value in sorted(native_counts.items()))} |",
+        f"| Required capability references | {', '.join(f'`{key}` {value}' for key, value in sorted(required_capability_counts.items())) or 'None assigned'} |",
+        f"| Optional capability references | {', '.join(f'`{key}` {value}' for key, value in sorted(optional_capability_counts.items())) or 'None assigned'} |",
         "",
         "## Families",
         "",
-        "| Stable ID | Source family | Disposition | Tier | Package | Prerequisites | Remote | Fallback | Portability | Native strategy | Classification / implementation |",
-        "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
+        "| Stable ID | Source family | Disposition | Tier | Package | Prerequisites | Required / optional capabilities | Remote | Fallback | Portability | Native strategy | Classification / implementation |",
+        "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
     ]
     for record in classification["families"]:
         source = source_by_id[record["family_id"]]
         prerequisites = ", ".join(f"`{value}`" for value in record["product"]["prerequisites"]) or "—"
+        required = ", ".join(f"`{value}`" for value in record["capability"]["required"]) or "—"
+        optional = ", ".join(f"`{value}`" for value in record["capability"]["optional"]) or "—"
         lines.append(
-            "| `{family_id}` | `{source}` | `{disposition}` | `{tier}` | `{package}` | {prerequisites} | `{remote}` | `{fallback}` | `{portability}` | `{native}` | `{classification_state}` / `{implementation_state}` |".format(
+            "| `{family_id}` | `{source}` | `{disposition}` | `{tier}` | `{package}` | {prerequisites} | R: {required}<br>O: {optional} | `{remote}` | `{fallback}` | `{portability}` | `{native}` | `{classification_state}` / `{implementation_state}` |".format(
                 family_id=_escape(record["family_id"]),
                 source=_escape(source["source"]["source_family"]),
                 disposition=_escape(record["product"]["disposition"]),
                 tier=_escape(record["product"]["delivery_tier"]),
                 package=_escape(record["product"]["target_package"]),
                 prerequisites=prerequisites,
+                required=required,
+                optional=optional,
                 remote=_escape(record["remote"]["authority"]),
                 fallback=_escape(record["fallback"]["primary"]),
                 portability=_escape(record["portability"]["status"]),

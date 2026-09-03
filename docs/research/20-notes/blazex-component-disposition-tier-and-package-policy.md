@@ -131,6 +131,7 @@ metadata is a payload boundary, not proof of tree shaking or measured size.
 
 ## Connections
 
+- [Capability, remote, and fallback policy](blazex-component-capability-remote-and-fallback-policy.md)
 - [Component catalog schema and governance](blazex-component-catalog-schema-and-governance.md)
 - [MudBlazor reference and inventory policy](blazex-mudblazor-reference-and-inventory-policy.md)
 - [MudBlazor-inspired component system](mudblazor-inspired-component-system-for-blazex.md)

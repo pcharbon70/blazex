@@ -21,6 +21,7 @@ SCHEMA_PATH = ASSET_DIR / "blazex-component-classification.schema.json"
 CLASSIFICATION_PATH = ASSET_DIR / "blazex-component-classification-v0.1.0.json"
 SOURCE_CATALOG_PATH = ASSET_DIR / "blazex-component-catalog-v0.1.0.json"
 GENERATED_PATH = ASSET_DIR / "blazex-component-classification-v0-1-0-generated.md"
+CAPABILITY_REGISTRY_PATH = ASSET_DIR / "blazex-capability-registry-v0.1.0.json"
 
 TIER_RANK = {"F0": 0, "F1": 1, "F2": 2, "F3": 3, "F4": 4, "post-1.0": 5, "not-applicable": 6}
 PACKAGE_DEPENDENCIES = {
@@ -44,6 +45,22 @@ FORBIDDEN_PORTABLE_TOKENS = re.compile(
     r"(?:dom|javascript|js-handle|css|selector|phoenix|liveview|socket|native-widget|filesystem|script)",
     re.IGNORECASE,
 )
+EXPECTED_CAPABILITIES = {
+    "BX-CAP-ACCESSIBILITY",
+    "BX-CAP-CLIPBOARD",
+    "BX-CAP-FILES",
+    "BX-CAP-FOCUS",
+    "BX-CAP-KEYBOARD",
+    "BX-CAP-MEASUREMENT",
+    "BX-CAP-NETWORK",
+    "BX-CAP-NOTIFICATIONS",
+    "BX-CAP-POINTER",
+    "BX-CAP-STORAGE",
+    "BX-CAP-SURFACE",
+    "BX-CAP-SYSTEM-THEME",
+    "BX-CAP-TIME",
+    "BX-CAP-WINDOW",
+}
 
 
 class ClassificationValidationError(ValueError):
@@ -77,6 +94,37 @@ def validate_document_schema(document: dict[str, Any], schema: dict[str, Any]) -
         error = errors[0]
         path = ".".join(str(part) for part in error.absolute_path) or "<root>"
         raise ClassificationValidationError(f"classification schema violation at {path}: {error.message}")
+
+
+def validate_capability_registry(registry: dict[str, Any]) -> set[str]:
+    expected_header = {
+        "schema_version": "1.0.0",
+        "registry_version": "0.1.0",
+        "registry_id": "BX-CAPABILITY-REGISTRY-CORE",
+        "status": "reviewed",
+        "contract_owner": "blazex_effects",
+    }
+    for key, value in expected_header.items():
+        if registry.get(key) != value:
+            raise ClassificationValidationError(
+                f"capability registry {key} must be {value!r}, found {registry.get(key)!r}"
+            )
+    records = registry.get("capabilities")
+    if not isinstance(records, list):
+        raise ClassificationValidationError("capability registry records must be a list")
+    ids = [record.get("id") for record in records if isinstance(record, dict)]
+    if ids != sorted(ids) or len(ids) != len(set(ids)):
+        raise ClassificationValidationError("capability registry IDs must be sorted and unique")
+    if set(ids) != EXPECTED_CAPABILITIES:
+        raise ClassificationValidationError("capability registry must contain the fourteen governed groups")
+    required_fields = {"id", "name", "purpose", "lifecycle", "security", "unsupported_behavior"}
+    for record in records:
+        if set(record) != required_fields or any(not isinstance(record[field], str) or not record[field] for field in required_fields):
+            raise ClassificationValidationError(f"capability registry record is incomplete: {record.get('id')}")
+    boundary = registry.get("provider_boundary")
+    if not isinstance(boundary, str) or "never receive" not in boundary:
+        raise ClassificationValidationError("capability registry must preserve the opaque provider boundary")
+    return set(ids)
 
 
 def _validate_graph(records: list[dict[str, Any]]) -> None:
@@ -154,6 +202,7 @@ def validate_classification(
     document: dict[str, Any], source_catalog: dict[str, Any], schema: dict[str, Any]
 ) -> dict[str, Any]:
     validate_document_schema(document, schema)
+    capability_ids = validate_capability_registry(load_json(CAPABILITY_REGISTRY_PATH))
     source_bytes = SOURCE_CATALOG_PATH.read_bytes()
     source_hash = hashlib.sha256(source_bytes).hexdigest()
     if document["source_catalog_sha256"] != source_hash:
@@ -217,6 +266,61 @@ def validate_classification(
             raise ClassificationValidationError(
                 f"{stage} family {record['family_id']} must leave portability unproven"
             )
+        if stage != "section-4.1":
+            family_id = record["family_id"]
+            capability = record["capability"]
+            required = set(capability["required"])
+            optional = set(capability["optional"])
+            if not required or "BX-CAP-ACCESSIBILITY" not in required:
+                raise ClassificationValidationError(
+                    f"family {family_id} must require the accessibility contract"
+                )
+            if required & optional:
+                raise ClassificationValidationError(
+                    f"family {family_id} has required/optional capability overlap"
+                )
+            unknown_capabilities = sorted((required | optional) - capability_ids)
+            if unknown_capabilities:
+                raise ClassificationValidationError(
+                    f"family {family_id} cites unknown capabilities: {unknown_capabilities}"
+                )
+            assigned_values = (
+                capability["effect_ownership"],
+                capability["resource_lifecycle"],
+                capability["cancellation"],
+                capability["timeout"],
+                capability["cleanup"],
+            )
+            if "unassigned" in assigned_values or not capability["renderer_semantics"] or not capability["portable_requirement_tokens"]:
+                raise ClassificationValidationError(
+                    f"family {family_id} has incomplete capability lifecycle metadata"
+                )
+            managed = capability["resource_lifecycle"] != "none"
+            if managed and (
+                capability["cancellation"] != "required"
+                or capability["cleanup"] != "idempotent-required"
+                or capability["timeout"] not in {"required", "host-policy"}
+            ):
+                raise ClassificationValidationError(
+                    f"family {family_id} managed capability resource lacks cancellation/timeout/cleanup"
+                )
+            if record["remote"]["authority"] == "unassigned" or record["remote"]["rationale"] is None:
+                raise ClassificationValidationError(
+                    f"family {family_id} has incomplete remote-authority metadata"
+                )
+            fallback = record["fallback"]
+            if fallback["primary"] == "unassigned" or fallback["rationale"] is None or "unassigned" in fallback["conditions"].values():
+                raise ClassificationValidationError(
+                    f"family {family_id} has incomplete fallback metadata"
+                )
+            if required and fallback["conditions"]["missing-capability"] == "not-required":
+                raise ClassificationValidationError(
+                    f"family {family_id} requires capabilities without a missing-capability fallback"
+                )
+            if record["remote"]["authority"] != "local-only" and fallback["conditions"]["no-network"] == "not-required":
+                raise ClassificationValidationError(
+                    f"family {family_id} has remote behavior without a no-network fallback"
+                )
         for token in record["capability"]["portable_requirement_tokens"]:
             if FORBIDDEN_PORTABLE_TOKENS.search(token):
                 raise ClassificationValidationError(
@@ -230,6 +334,10 @@ def validate_classification(
         "dispositions": dict(sorted(Counter(record["product"]["disposition"] for record in document["families"]).items())),
         "tiers": dict(sorted(Counter(record["product"]["delivery_tier"] for record in document["families"]).items())),
         "packages": dict(sorted(Counter(record["product"]["target_package"] for record in document["families"]).items())),
+        "remote": dict(sorted(Counter(record["remote"]["authority"] for record in document["families"]).items())),
+        "fallbacks": dict(sorted(Counter(record["fallback"]["primary"] for record in document["families"]).items())),
+        "required_capability_references": sum(len(record["capability"]["required"]) for record in document["families"]),
+        "optional_capability_references": sum(len(record["capability"]["optional"]) for record in document["families"]),
     }
 
 
@@ -264,7 +372,9 @@ def main() -> int:
     print(
         "Component classification validation passed: "
         f"stage {summary['stage']}; {summary['families']} families; {summary['exceptions']} exceptions; "
-        f"dispositions {summary['dispositions']}; tiers {summary['tiers']}; packages {summary['packages']}."
+        f"dispositions {summary['dispositions']}; tiers {summary['tiers']}; packages {summary['packages']}; "
+        f"remote {summary['remote']}; fallbacks {summary['fallbacks']}; capability references "
+        f"{summary['required_capability_references']} required/{summary['optional_capability_references']} optional."
     )
     return 0
 

@@ -88,6 +88,10 @@ provider, and remote adapter.
   policy](../20-notes/blazex-component-disposition-tier-and-package-policy.md) —
   explicit product outcomes, F0–F4 dependency order, package ownership,
   payload boundaries, and native-Elixir compatibility nonclaims.
+- [BlazeX component capability, remote, and fallback
+  policy](../20-notes/blazex-component-capability-remote-and-fallback-policy.md) —
+  portable host/renderer capabilities, lifecycle ownership, remote authority,
+  trust boundaries, and nine explicit degradation conditions.
 - [BlazeX browser and toolchain support
   policy](../20-notes/blazex-browser-and-toolchain-support-policy.md) — the
   candidate browser windows, evidence classes, toolchain states, review

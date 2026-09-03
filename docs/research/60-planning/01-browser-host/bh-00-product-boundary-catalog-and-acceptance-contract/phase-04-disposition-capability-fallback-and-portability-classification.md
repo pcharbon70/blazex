@@ -46,28 +46,28 @@ Back to milestone: [README](README.md)
       - [x] 4.1.2.2 Subtask - Assign each planned family to `blazex_ui`, `blazex_forms`, `blazex_surfaces`, `blazex_data`, `blazex_charts`, another approved package, or no package, with prerequisites and extraction triggers.
       - [x] 4.1.2.3 Subtask - Validate package layering, optional feature boundaries, payload expectations, and shared foundation placement without moving component behavior into profiles or adapters.
 
-  - [ ] 4.2 Section - Classify capabilities, remote needs, and fallbacks.
+  - [x] 4.2 Section - Classify capabilities, remote needs, and fallbacks.
 
     Express host-heavy and server-heavy behavior through portable contracts and
     explicit degradation rather than direct browser, JavaScript, or Phoenix use.
 
-    - [ ] 4.2.1 Task - Assign host and renderer capability requirements.
+    - [x] 4.2.1 Task - Assign host and renderer capability requirements.
 
       Every operation outside pure semantic rendering must identify a named
       capability, its necessity, ownership, lifecycle, and unsupported behavior.
 
-      - [ ] 4.2.1.1 Subtask - Finalize catalog-facing capability groups for focus, measurement, pointer, keyboard, clipboard, files, window, surface, notifications, storage, system theme, accessibility, time, and network.
-      - [ ] 4.2.1.2 Subtask - Assign required and optional host capabilities, renderer semantics, effect ownership, opaque resources, cancellation, timeout, and cleanup needs to every relevant family.
-      - [ ] 4.2.1.3 Subtask - Reject catalog metadata containing DOM event names, JavaScript handles, CSS selectors, Phoenix sockets, native widget objects, filesystem paths, or unrestricted script escape hatches as portable requirements.
+      - [x] 4.2.1.1 Subtask - Finalize catalog-facing capability groups for focus, measurement, pointer, keyboard, clipboard, files, window, surface, notifications, storage, system theme, accessibility, time, and network.
+      - [x] 4.2.1.2 Subtask - Assign required and optional host capabilities, renderer semantics, effect ownership, opaque resources, cancellation, timeout, and cleanup needs to every relevant family.
+      - [x] 4.2.1.3 Subtask - Reject catalog metadata containing DOM event names, JavaScript handles, CSS selectors, Phoenix sockets, native widget objects, filesystem paths, or unrestricted script escape hatches as portable requirements.
 
-    - [ ] 4.2.2 Task - Assign remote-authority and fallback behavior.
+    - [x] 4.2.2 Task - Assign remote-authority and fallback behavior.
 
       Components must remain honest when server services, host capabilities,
       interaction modes, or accessible visual output are unavailable.
 
-      - [ ] 4.2.2.1 Subtask - Assign local-only, optional-remote, required-remote, Phoenix-enhanced, and unavailable-in-Plug service needs without treating presentation as authorization.
-      - [ ] 4.2.2.2 Subtask - Define and assign fallback values for static content, alternative interaction, server round trip, in-app substitute, nonvisual representation, explicit unavailable state, or omission.
-      - [ ] 4.2.2.3 Subtask - Require fallback semantics for no JavaScript, no network, denied permission, missing capability, unsupported renderer, failed resource, reduced motion, forced colors, and assistive-technology access where applicable.
+      - [x] 4.2.2.1 Subtask - Assign local-only, optional-remote, required-remote, Phoenix-enhanced, and unavailable-in-Plug service needs without treating presentation as authorization.
+      - [x] 4.2.2.2 Subtask - Define and assign fallback values for static content, alternative interaction, server round trip, in-app substitute, nonvisual representation, explicit unavailable state, or omission.
+      - [x] 4.2.2.3 Subtask - Require fallback semantics for no JavaScript, no network, denied permission, missing capability, unsupported renderer, failed resource, reduced motion, forced colors, and assistive-technology access where applicable.
 
   - [ ] 4.3 Section - Classify renderer portability and native strategy.
 

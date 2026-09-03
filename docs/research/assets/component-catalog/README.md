@@ -37,6 +37,7 @@ and live upstream downloads do not belong here.
 
 ### Files
 
+- [BlazeX capability registry v0.1.0](blazex-capability-registry-v0.1.0.json) — fourteen catalog-facing focus, measurement, pointer, keyboard, clipboard, files, window, surface, notification, storage, theme, accessibility, time, and network contracts with lifecycle/security/fallback boundaries.
 - [BlazeX component classification schema](blazex-component-classification.schema.json) — JSON Schema 1.0.0 for the versioned Phase 4 product, package, capability, remote, fallback, portability, native-strategy, exception, and evidence layer.
 - [BlazeX component classification v0.1.0](blazex-component-classification-v0.1.0.json) — canonical classification overlay for all 83 families and twelve source exceptions, cryptographically bound to the locked Phase 3 catalog.
 - [BlazeX component classification v0.1.0 generated view](blazex-component-classification-v0-1-0-generated.md) — deterministic joined human view of source family, disposition, tier, package, dependencies, and later Phase 4 dimensions.
