@@ -22,3 +22,9 @@ Dependency acquisition must use isolated homes/caches, exact locks,
 noninteractive commands, TLS verification, and the lifecycle allowlist. The
 Emscripten and browser archives must never be fetched implicitly by a package
 post-install hook.
+
+`runtime.lock.json` additionally replaces Popcorn's mutable FissionVM branch
+and FissionVM's HTTP Mbed TLS `FetchContent` default with checksum-verified
+local sources. The build contract disables network access during CMake and
+build execution. Packaged LocalLiveView runtime assets are inspection oracles,
+not accepted rebuild provenance.

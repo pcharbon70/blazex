@@ -97,7 +97,35 @@
       "provided_by": "wasm-build",
       "source_url": "https://codeload.github.com/emscripten-core/emsdk/tar.gz/refs/tags/4.0.8",
       "sha256": "0762712fd336ca0a8bf0c65a5093e41fea96a7cd2953fa986557be41713199a5",
-      "includes": ["clang", "lld", "llvm-objdump", "wasm-dis", "cmake", "ninja", "python3"],
+      "path_entries": ["/emsdk/upstream/emscripten", "/emsdk/upstream/bin"],
+      "includes": ["emcc", "emcmake", "emmake", "clang", "lld", "llvm-objdump", "wasm-dis"],
+      "owner": "runtime-build"
+    },
+    {
+      "id": "clang-llvm",
+      "version": "21.0.0git-23e3cbb2e82b62586266116c8ab77ce68e412cf8",
+      "provided_by": "wasm-build",
+      "executable": "/emsdk/upstream/bin/clang",
+      "owner": "runtime-build"
+    },
+    {
+      "id": "binaryen",
+      "version": "123-106-gefb987b9b",
+      "provided_by": "wasm-build",
+      "executable": "/emsdk/upstream/bin/wasm-dis",
+      "owner": "runtime-build"
+    },
+    {
+      "id": "cmake",
+      "version": "3.22.1-1ubuntu1.22.04.2",
+      "provided_by": "wasm-build",
+      "owner": "runtime-build"
+    },
+    {
+      "id": "ninja",
+      "version": "1.12.1",
+      "source_url": "https://github.com/ninja-build/ninja/releases/download/v1.12.1/ninja-linux.zip",
+      "sha256": "6f98805688d19672bd699fbbfa2c2cf0fc054ac3df1f0e6a47664d963d530255",
       "owner": "runtime-build"
     },
     {

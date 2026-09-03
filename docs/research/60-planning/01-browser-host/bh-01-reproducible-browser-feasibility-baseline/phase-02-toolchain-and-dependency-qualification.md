@@ -45,27 +45,27 @@ Back to milestone: [README](README.md)
       - [x] 2.1.2.2 Subtask - Define lockfile policy, install flags, lifecycle-script policy, registry/mirror identities, cache behavior, and offline/clean acquisition expectations.
       - [x] 2.1.2.3 Subtask - Record which desktop/mobile browser binaries can be pinned locally and which managed-device versions require per-run fingerprints and drift gates.
 
-  - [ ] 2.2 Section - Qualify AtomVM and Popcorn inputs.
+  - [x] 2.2 Section - Qualify AtomVM and Popcorn inputs.
 
     The selected runtime path must be obtainable, buildable in principle, and
     legally/provenance-accountable before implementation depends on it.
 
-    - [ ] 2.2.1 Task - Resolve exact runtime sources and build prerequisites.
+    - [x] 2.2.1 Task - Resolve exact runtime sources and build prerequisites.
 
       Every runtime source, patch, submodule, binary tool, and generated input
       needs an immutable identity.
 
-      - [ ] 2.2.1.1 Subtask - Resolve exact AtomVM and Popcorn releases/revisions, repositories, submodules, forks, patches, licenses, checksums, release assets, and documented build prerequisites.
-      - [ ] 2.2.1.2 Subtask - Inventory Emscripten/WASI/LLVM or other actual Wasm toolchain inputs, target features, SDK/sysroot, build generator, native utilities, and platform-specific requirements.
-      - [ ] 2.2.1.3 Subtask - Verify sources and build tools can be acquired from clean environments without private credentials, mutable branches, missing artifacts, incompatible licenses, or undocumented manual steps.
+      - [x] 2.2.1.1 Subtask - Resolve exact AtomVM and Popcorn releases/revisions, repositories, submodules, forks, patches, licenses, checksums, release assets, and documented build prerequisites.
+      - [x] 2.2.1.2 Subtask - Inventory Emscripten/WASI/LLVM or other actual Wasm toolchain inputs, target features, SDK/sysroot, build generator, native utilities, and platform-specific requirements.
+      - [x] 2.2.1.3 Subtask - Verify sources and build tools can be acquired from clean environments without private credentials, mutable branches, missing artifacts, incompatible licenses, or undocumented manual steps.
 
-    - [ ] 2.2.2 Task - Establish runtime provenance and vulnerability inputs.
+    - [x] 2.2.2 Task - Establish runtime provenance and vulnerability inputs.
 
       Future artifact accounting starts with source and dependency provenance,
       not with the produced `.wasm` file.
 
-      - [ ] 2.2.2.1 Subtask - Generate source/dependency inventories with origin, version, hash, license, notice obligation, build/runtime reachability, and owner.
-      - [ ] 2.2.2.2 Subtask - Record known vulnerability/advisory sources, unsupported upstream combinations, fork divergence, patch maintenance, and update-review triggers.
+      - [x] 2.2.2.1 Subtask - Generate source/dependency inventories with origin, version, hash, license, notice obligation, build/runtime reachability, and owner.
+      - [x] 2.2.2.2 Subtask - Record known vulnerability/advisory sources, unsupported upstream combinations, fork divergence, patch maintenance, and update-review triggers.
 
   - [ ] 2.3 Section - Qualify Phoenix, LiveView, and LocalLiveView inputs.
 

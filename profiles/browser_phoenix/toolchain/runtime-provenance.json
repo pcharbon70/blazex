@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0.0",
+  "qualification_cut": "2026-09-03",
+  "owners": {
+    "runtime-build": "BlazeX runtime maintainers",
+    "dependency-governance": "BlazeX security and release maintainers",
+    "browser-bridge": "BlazeX browser host maintainers"
+  },
+  "license_disposition": {
+    "status": "compatible_for_feasibility",
+    "distribution_obligations": [
+      "retain upstream licenses and notices",
+      "include Apache-2.0 attribution for Popcorn, FissionVM selection, and Mbed TLS",
+      "include Emscripten, LLVM, Binaryen, and bundled-tool notices",
+      "preserve REUSE and file-level notices when redistributing FissionVM source"
+    ],
+    "unknown_licenses": []
+  },
+  "advisory_inputs": [
+    {"id": "popcorn-github", "url": "https://github.com/software-mansion/popcorn/security", "owner": "runtime-build", "review_trigger": "release-or-advisory"},
+    {"id": "fissionvm-github", "url": "https://github.com/software-mansion-labs/FissionVM/security", "owner": "runtime-build", "review_trigger": "commit-change-or-advisory"},
+    {"id": "atomvm-github", "url": "https://github.com/atomvm/AtomVM/security", "owner": "runtime-build", "review_trigger": "upstream-security-change"},
+    {"id": "mbedtls-advisories", "url": "https://mbed-tls.readthedocs.io/en/latest/security-advisories/", "owner": "dependency-governance", "review_trigger": "new-advisory"},
+    {"id": "emscripten-github", "url": "https://github.com/emscripten-core/emscripten/security", "owner": "dependency-governance", "review_trigger": "toolchain-advisory"},
+    {"id": "github-advisory-database", "url": "https://github.com/advisories", "owner": "dependency-governance", "review_trigger": "weekly-and-release"}
+  ],
+  "risks": [
+    {
+      "id": "RUNTIME-FORK-DIVERGENCE",
+      "severity": "high",
+      "finding": "FissionVM is not registered as a GitHub fork and its qualified commit is not present in atomvm/AtomVM.",
+      "mitigation": "Treat the exact FissionVM commit as an independent maintained input; review upstream AtomVM changes manually before every pin update.",
+      "stop_condition": "No accountable maintainer or no rebuildable immutable source remains available.",
+      "owner": "runtime-build"
+    },
+    {
+      "id": "RUNTIME-PREBUILT-PROVENANCE",
+      "severity": "high",
+      "finding": "LocalLiveView packages AtomVM assets without embedding the FissionVM source commit or a signed provenance statement.",
+      "mitigation": "Use the packaged asset only as a Phase 2 inspection oracle; Phase 3 must rebuild from the selected lock and compare behavior and structure.",
+      "stop_condition": "A clean rebuild cannot account for the required runtime behavior or license notices.",
+      "owner": "runtime-build"
+    },
+    {
+      "id": "RUNTIME-THREAD-ISOLATION",
+      "severity": "medium",
+      "finding": "The packaged runtime imports fixed shared memory and atomic instructions, requiring browser cross-origin isolation.",
+      "mitigation": "Qualify COOP/COEP delivery in the Phoenix profile and provide an explicit unsupported/fallback result when isolation is absent.",
+      "stop_condition": "The selected browser profile cannot safely provide SharedArrayBuffer isolation.",
+      "owner": "browser-bridge"
+    }
+  ],
+  "update_triggers": [
+    "Popcorn, LocalLiveView, FissionVM, AtomVM, Mbed TLS, or Emscripten release or security advisory",
+    "movement or deletion of the upstream swm branch or any selected artifact",
+    "change to Popcorn patch directories, release Dockerfiles, pnpm lock, or runtime build script",
+    "new divergence from AtomVM or loss of FissionVM maintenance",
+    "change in Wasm threads, atomics, shared-memory, CSP, COOP, or COEP browser requirements",
+    "hash, license, notice, vulnerability, or clean-acquisition mismatch"
+  ]
+}
