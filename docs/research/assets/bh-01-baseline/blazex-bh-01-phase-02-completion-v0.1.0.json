@@ -1,0 +1,113 @@
+{
+  "schema_version": "1.0.0",
+  "record_id": "BX-BH01-DECISION-PHASE-02-GO",
+  "record_type": "decision",
+  "state": "passed",
+  "title": "BH-01 Phase 2 toolchain and dependency qualification gate",
+  "owner_role": "bh01-owner",
+  "recorded_at": "2026-09-03T16:51:36Z",
+  "observed_at": "2026-09-03T16:51:36Z",
+  "source_revision": "448fb0b4b8b96c585c6a8fa519c15fdc26adb44c",
+  "environment_refs": [
+    "profiles/browser_phoenix/toolchain/environment.lock.json",
+    "profiles/browser_phoenix/toolchain/browser.lock.json",
+    "profiles/browser_phoenix/toolchain/acquisition-evidence.json"
+  ],
+  "tool_identities": [
+    {"name": "beam-build-image", "version": "sha256:8d03cfb52e3fa3f5d83d749942b7c45c966dda48a7c4ba4f069390379b59fc39", "source": "docker.io/hexpm/elixir", "sha256": "a2386c21edd5c612b4ed6e2731daba806177dba55baf977ee456c6e194f60d9f"},
+    {"name": "wasm-build-image", "version": "sha256:92c97951b9a6835cb5da9592e9d95226f67e09ecd01a541d817a5b4801f235a4", "source": "docker.io/emscripten/emsdk", "sha256": "2a003481ef771a04cc1a7b5c4be03db0b3cb76405aaddac0d27629a5aac322c2"},
+    {"name": "erlang-otp", "version": "26.0.2/erts-14.0.2", "source": "beam-build-image", "sha256": "47853ea9230643a0a31004433f07a71c1b92d6e0094534f629e3b75dbc62f193"},
+    {"name": "elixir-mix", "version": "1.17.3", "source": "beam-build-image", "sha256": "a64260dcc39d21350ebcfa58c633b6535aba2be5ece9523f80d5b4bd7c725f30"},
+    {"name": "hex", "version": "2.5.1", "source": "repo.hex.pm", "sha256": "2eadc51d9300a134db10859cfce41b4754d44f65bd843ebe359e87e3476c6e2b"},
+    {"name": "rebar3", "version": "3.24.0", "source": "github.com/erlang/rebar3", "sha256": "d2d31cfb98904b8e4917300a75f870de12cb5167cd6214d1043e973a56668a54"},
+    {"name": "node", "version": "26.8.1", "source": "nodejs.org", "sha256": "3e301118d7df53d563b7e96c1617545f26e2f76f9724be668d6cab65c15dda5d"},
+    {"name": "npm", "version": "11.19.0", "source": "node 26.8.1 archive", "sha256": null},
+    {"name": "python", "version": "3.12.12", "source": "local policy environment", "sha256": "fb85a13414b028c49ba18bbd523c2d055a30b56b18b92ce454ea2c51edc656c4"},
+    {"name": "jsonschema", "version": "4.25.1", "source": "docs/research/requirements-validation.txt", "sha256": null}
+  ],
+  "requirement_refs": [
+    "BH-01-PHASE-2",
+    "BX-BH01-INPUT-TOOLCHAIN",
+    "BX-BH01-INPUT-PRIVATE-API",
+    "BX-BH01-INPUT-BROWSERS",
+    "BX-BH01-INPUT-STOP-CONDITIONS",
+    "BX-BH01-RISK-DEPENDENCY-ACCESS",
+    "BX-BH01-RISK-TOOLCHAIN-REPRODUCIBILITY",
+    "BX-BH01-RISK-PRIVATE-API-COUPLING",
+    "BX-BH01-RISK-BROWSER-PREREQUISITES"
+  ],
+  "reciprocal_links": [
+    "docs/research/60-planning/01-browser-host/bh-01-reproducible-browser-feasibility-baseline/phase-02-toolchain-and-dependency-qualification.md",
+    "docs/research/60-planning/01-browser-host/bh-01-reproducible-browser-feasibility-baseline/phase-02-implementation-evidence.md",
+    "profiles/browser_phoenix/toolchain/unified-dependency-inventory.json"
+  ],
+  "command_refs": [
+    "python3 profiles/browser_phoenix/toolchain/verify_environment.py",
+    "python3 profiles/browser_phoenix/toolchain/verify_runtime.py",
+    "python3 profiles/browser_phoenix/toolchain/verify_server.py",
+    "python3 profiles/browser_phoenix/toolchain/verify_acquisition.py",
+    "python3 -m unittest discover -s profiles/browser_phoenix/toolchain/tests -p test_*.py",
+    "mix deps.get --check-locked",
+    "HEX_OFFLINE=1 mix deps.get --check-locked",
+    "npm ci --ignore-scripts --no-audit --no-fund",
+    "npm ci --offline --ignore-scripts --no-audit --no-fund",
+    "node node_modules/esbuild/install.js",
+    "npm test",
+    "npm run build",
+    "python3 docs/research/validate_archive.py",
+    "python3 -m unittest test_validate_archive.py from docs/research",
+    "git diff --check"
+  ],
+  "input_hashes": [
+    {"path": "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-02-authorization-v0.1.0.json", "sha256": "c5b6650e22e4d88cab3b8fda22d9cf95200163d9fd336cb21f69aeb30a6d763e"},
+    {"path": "profiles/browser_phoenix/toolchain/environment.lock.json", "sha256": "6c47a839eb00ea3ceb8f97998c18dffc85a5cb27ccad73fc839912208d674255"},
+    {"path": "profiles/browser_phoenix/toolchain/browser.lock.json", "sha256": "b4f7a2997ec1b31e596dea0498bfde41fe69c1e25ec5ebeecdbc723366188c01"},
+    {"path": "profiles/browser_phoenix/toolchain/runtime.lock.json", "sha256": "23aec7018a4c47c372dc1be4727cda14558bae9054fc8940e759926b520a1129"},
+    {"path": "profiles/browser_phoenix/toolchain/server-dependencies.json", "sha256": "b7b88e8df33da70aa18038ac8254590c8f7fa9123d475192f62fd3d3a55b02ef"},
+    {"path": "profiles/browser_phoenix/toolchain/acquisition-policy.json", "sha256": "eb46d3171b150ec3cee7d44a57f105f09707104cec6eb366feaf0cc0a671d07e"},
+    {"path": "profiles/browser_phoenix/toolchain/acquisition-evidence.json", "sha256": "4b7dfcb96c43c5138d3c5b4da0de3c3d83715bf55b11f7a9c6474a47b3de81dd"},
+    {"path": "profiles/browser_phoenix/toolchain/unified-dependency-inventory.json", "sha256": "78ccc8e8dd1a7a5ae25c70d2488b883aec42f8a0ed9a4c4fd528c01cec9ad912"},
+    {"path": "profiles/browser_phoenix/mix.lock", "sha256": "3a510b25251ad87bf1c4bb4d62c6e42c718fcd885a776ca0301fad6e71d0ca86"},
+    {"path": "js/blazex_runtime/package-lock.json", "sha256": "0ccbfd5ac1486cf1cedb54f27c9890e091f38aac3d6bff046553eff55f1f47de"}
+  ],
+  "output_hashes": [
+    {"path": "docs/research/60-planning/01-browser-host/bh-01-reproducible-browser-feasibility-baseline/phase-02-implementation-evidence.md", "sha256": "94764220f3d7485651663de870b0f2f00c336d88b0cfa66e7df63cada4ec5fa8"},
+    {"path": "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-02-validation-log-v0.1.0.txt", "sha256": "cf322a6f35d1ac3b1527fc3e92e2c3421662fe01ec7d88389cdb97a03d867e8b"}
+  ],
+  "raw_evidence_refs": [
+    "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-02-validation-log-v0.1.0.txt",
+    "profiles/browser_phoenix/toolchain/acquisition-evidence.json",
+    "profiles/browser_phoenix/toolchain/private-api-inventory.json",
+    "profiles/browser_phoenix/toolchain/unified-dependency-inventory.json"
+  ],
+  "normalization": [
+    {
+      "subject": "acquisition and validation output",
+      "method": "Retain exact input identities, commands, counts, run classes, normalized durations, outcomes, failure dispositions and limitations while omitting transfer progress, temporary paths and host scheduling noise."
+    }
+  ],
+  "limitations": [
+    "The selected runtime source and dependency inputs were acquired and inspected but not configured, compiled, linked, packaged or booted.",
+    "Private LiveView API qualification proves inventory, pinning and ownership only; it does not prove behavior compatibility.",
+    "Server and browser prerequisites are documented but have not been exercised through Phoenix, a proxy or a browser.",
+    "All browsers remain unsupported and all runtime, behavior, security, mobile and quality-budget evidence remains unexecuted."
+  ],
+  "supersedes": [],
+  "invalidates": [],
+  "retention": {
+    "class": "permanent",
+    "minimum_days": null,
+    "immutable_raw_evidence": true
+  },
+  "outcome": {
+    "summary": "Phase 2 input-qualification gate passed; Phase 3 is eligible but not authorized.",
+    "expected": "All selected inputs have immutable identities, provenance, licenses, owners, boundaries, prerequisites, clean and cached acquisition evidence, negative failure behavior and a two-clean-environment comparison.",
+    "observed": "All Phase 2 validators and 36 tests passed; two independent empty manager caches reproduced identical locks and graphs without private credentials or unexplained variance; private LiveView coupling remains confined high risk."
+  },
+  "review": {
+    "required": true,
+    "reviewer_role": "bh01-owner",
+    "reviewed_at": "2026-09-03T16:51:36Z",
+    "disposition": "accepted"
+  }
+}

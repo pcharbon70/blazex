@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0.0",
+  "record_id": "BX-BH01-AUTHORIZATION-PHASE-02-0.1",
+  "status": "approved-phase-2-only",
+  "authorized_at": "2026-09-03",
+  "request": "Implement the next phase of BH-01 section by section with a commit per section and one immediately merged PR, then synchronize main and delete the feature branch.",
+  "base_revision": "1a80856",
+  "branch": "codex/bh-01-phase-02-toolchain",
+  "authorized_scope": [
+    "qualify and pin host, language, JavaScript, browser, runtime, server and build inputs",
+    "acquire candidate dependencies in isolated clean and cached environments",
+    "record provenance, licenses, private APIs, prerequisites, failures and completion evidence",
+    "commit once per completed Phase 2 section",
+    "create and immediately merge one Phase 2 pull request",
+    "synchronize main and delete the local and remote feature branch"
+  ],
+  "not_authorized": [
+    "Phase 3 runtime build or BEAM packaging",
+    "browser runtime execution",
+    "BH-02 framework API work",
+    "browser support or production-readiness claims"
+  ],
+  "owner": "repository-owner"
+}

@@ -106,6 +106,16 @@ def validate(
     if len(offline) != 2 or any(run.get("network") is not False for run in offline):
         errors.append("offline manager replay evidence is not network-independent")
 
+    comparison = evidence.get("independent_clean_comparison", {})
+    if comparison.get("result") != "pass" or comparison.get("unexplained_variance") != []:
+        errors.append("two-clean-environment comparison did not pass without unexplained variance")
+    if comparison.get("hex", {}).get("lock_sha256") != successes[0].get("lock_before_sha256"):
+        errors.append("second clean Hex lock differs from the canonical replay")
+    if comparison.get("npm", {}).get("lock_sha256") != successes[2].get("lock_before_sha256"):
+        errors.append("second clean npm lock differs from the canonical replay")
+    if not comparison.get("hex", {}).get("graph_comparison") or len(comparison.get("npm", {}).get("installed_identities", [])) != 3:
+        errors.append("second clean manager graph comparison is incomplete")
+
     runtime_hashes = {item.get("id"): item.get("sha256") for item in runtime.get("sources", [])}
     source_replays = evidence.get("source_replays", [])
     expected_source_ids = {"popcorn-source", "fissionvm-source", "mbedtls-source", "emsdk-source"}

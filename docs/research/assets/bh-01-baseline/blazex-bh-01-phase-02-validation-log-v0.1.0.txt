@@ -1,0 +1,91 @@
+BlazeX BH-01 Phase 2 validation log v0.1.0
+recorded-at: 2026-09-03T16:51:36Z
+source-revision: 448fb0b4b8b96c585c6a8fa519c15fdc26adb44c
+scope: toolchain, dependency, acquisition, provenance, boundary and prerequisite qualification
+
+python3 profiles/browser_phoenix/toolchain/verify_environment.py
+  PASS - immutable environment, tool, browser and acquisition-policy inputs
+
+python3 profiles/browser_phoenix/toolchain/verify_runtime.py
+  PASS - Popcorn, FissionVM, Mbed TLS, Emscripten, runtime provenance and Wasm requirements
+
+python3 profiles/browser_phoenix/toolchain/verify_server.py
+  PASS - exact 34-package Hex graph, licenses, Plug/DOM isolation, private APIs and server prerequisites
+
+python3 profiles/browser_phoenix/toolchain/verify_acquisition.py
+  PASS - canonical hashes, clean/cached/offline replays, source replays, failures and unified inventory
+
+python3 -m unittest discover -s profiles/browser_phoenix/toolchain/tests -p 'test_*.py'
+  PASS - 36 tests, 0 failures
+  Negative cases cover missing/drifting tools, floating source revisions,
+  networked FetchContent, missing hashes, Wasm feature drift, unknown licenses,
+  stale/changed locks, forbidden Plug and portable edges, private-API ownership,
+  missing isolation headers, private credentials, unapproved lifecycle scripts,
+  insecure registries, missing failure evidence and unexplained clean-run variance.
+  Completion negatives additionally cover missing Phase 2 authorization,
+  evidence-hash drift, open plan work, Phase 3 over-authorization, and browser
+  support overclaim.
+
+pinned BEAM container fingerprint
+  PASS - image config sha256:a2386c21edd5c612b4ed6e2731daba806177dba55baf977ee456c6e194f60d9f
+  PASS - OTP 26.0.2, Elixir/Mix 1.17.3, Hex 2.5.1, Rebar 3.24.0
+
+first clean Hex acquisition
+  PASS - isolated empty MIX_HOME/HEX_HOME; ignored deps/_build removed
+  PASS - 34 packages acquired in 2 seconds; lock unchanged
+
+offline Hex cache replay
+  PASS - second fresh profile, network disabled, HEX_OFFLINE=1
+  PASS - 34 packages acquired in 1 second; lock and dependency tree identical
+
+second independent clean Hex acquisition
+  PASS - new pinned container process and separate empty MIX_HOME/HEX_HOME
+  PASS - 34 packages acquired in 2 seconds; lock and dependency tree identical
+
+first clean npm acquisition
+  PASS - exact Node 26.8.1/npm 11.19.0 and empty isolated npm cache
+  PASS - 3 packages acquired with scripts disabled in 1.1 seconds; lock unchanged
+  PASS - only esbuild 0.28.2 install.js then ran as an explicit allowlisted validation
+
+offline npm cache replay
+  PASS - second fresh package directory and npm --offline
+  PASS - 3 packages acquired in 0.224 seconds; lock unchanged
+
+second independent clean npm acquisition
+  PASS - independent empty npm cache; 3 packages acquired in 0.954 seconds
+  PASS - same package identities and lock; only allowlisted esbuild validation ran
+
+immutable runtime source replay
+  PASS - Popcorn v0.3.3 source: 5,168,767 bytes, 0.953088 seconds, SHA-256 matched
+  PASS - FissionVM 6c3208c7: 2,075,046 bytes, 0.497384 seconds, SHA-256 matched
+  PASS - Mbed TLS v3.6.3.1: 6,368,054 bytes, 1.379849 seconds, SHA-256 matched
+  PASS - emsdk 4.0.8: 199,003 bytes, 0.192630 seconds, SHA-256 matched
+
+binary input checks
+  PASS - exact BEAM and Wasm container image configs are locally available
+  PASS - Hex, Rebar, Node and Chrome for Testing archive SHA-256 identities matched
+
+JavaScript boundary integration
+  PASS - exact Node/npm: npm test (1 test, 0 failures)
+  PASS - exact Node/npm: npm run build (syntax-only, no emitted artifact)
+
+research archive integration
+  PASS - 144 completed documents, 19 directories, 1,016 local links and 49 source notes
+  PASS - 8 archive-validator tests, 0 failures
+
+git diff --check
+  PASS - no whitespace errors
+
+execution boundary
+  dependency-inputs: qualified
+  dependency-access-risk: closed for the selected inputs
+  private-api-coupling: accepted only as confined high risk
+  preliminary-input-reproducibility: passed in two clean environments
+  runtime-build: unexecuted
+  runtime-boot: unexecuted
+  browser-support: unsupported
+  phase-3: eligible but not authorized
+
+Normalization note: exact lock and source identities, run classes, durations,
+counts, failure dispositions and limitations are retained. Registry transfer
+progress, temporary paths and nondeterministic host scheduling are omitted.

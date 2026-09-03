@@ -37,6 +37,11 @@ class AcquisitionQualificationTest(unittest.TestCase):
         evidence["successful_replays"][0]["lock_after_sha256"] = "0" * 64
         self.assertTrue(self.validate(1, evidence))
 
+    def test_second_environment_variance_fails(self):
+        evidence = copy.deepcopy(self.values[1])
+        evidence["independent_clean_comparison"]["unexplained_variance"].append("graph drift")
+        self.assertTrue(self.validate(1, evidence))
+
     def test_private_credentials_fail(self):
         policy = copy.deepcopy(self.values[0])
         policy["private_credentials_allowed"] = True

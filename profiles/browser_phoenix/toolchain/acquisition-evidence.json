@@ -69,6 +69,23 @@
     {"id": "mbedtls-source", "result": "pass", "seconds": 1.379849, "bytes": 6368054, "sha256": "5344d16a64932b9956e2c9422fc5925ce480d570732f4379226888fffc19ed00"},
     {"id": "emsdk-source", "result": "pass", "seconds": 0.192630, "bytes": 199003, "sha256": "0762712fd336ca0a8bf0c65a5093e41fea96a7cd2953fa986557be41713199a5"}
   ],
+  "independent_clean_comparison": {
+    "result": "pass",
+    "first_environment": "pinned BEAM container with empty mix-home-clean/hex-home-clean plus exact Node with empty npm-cache",
+    "second_environment": "new pinned BEAM container with empty mix-home-second/hex-home-second plus exact Node with independent empty npm-cache-second",
+    "hex": {
+      "second_duration_seconds": 2,
+      "lock_sha256": "3a510b25251ad87bf1c4bb4d62c6e42c718fcd885a776ca0301fad6e71d0ca86",
+      "graph_comparison": "byte-identical mix deps.tree --format plain"
+    },
+    "npm": {
+      "second_duration_seconds": 0.954,
+      "lock_sha256": "0ccbfd5ac1486cf1cedb54f27c9890e091f38aac3d6bff046553eff55f1f47de",
+      "installed_identities": ["@esbuild/linux-x64 0.28.2", "esbuild 0.28.2", "playwright-core 1.62.1"]
+    },
+    "explainable_variance": ["registry latency", "cache population duration", "host scheduling"],
+    "unexplained_variance": []
+  },
   "binary_input_checks": [
     {"id": "beam-image", "result": "pass", "identity": "sha256:a2386c21edd5c612b4ed6e2731daba806177dba55baf977ee456c6e194f60d9f"},
     {"id": "wasm-image", "result": "pass", "identity": "sha256:2a003481ef771a04cc1a7b5c4be03db0b3cb76405aaddac0d27629a5aac322c2"},

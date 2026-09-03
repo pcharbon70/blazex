@@ -16,7 +16,7 @@ aliases:
 
 Back to milestone: [README](README.md)
 
-- [ ] 2 Phase - Toolchain and Dependency Qualification.
+- [x] 2 Phase - Toolchain and Dependency Qualification.
 
   Resolve, pin, acquire, license, and verify every host, language, runtime,
   server, JavaScript, browser, and build input before writing the runtime build
@@ -121,27 +121,27 @@ Back to milestone: [README](README.md)
       - [x] 2.4.2.2 Subtask - Repeat with controlled caches/offline inputs where supported and test missing registry, moved tag, hash mismatch, revoked certificate, unavailable binary, private credential, and lifecycle-script failures.
       - [x] 2.4.2.3 Subtask - Record any platform/device dependencies that cannot be vendored or fully automated and define their run-time fingerprint and stop policy.
 
-  - [ ] 2.5 Section - Phase 2 Integration Tests and Completion Evidence.
+  - [x] 2.5 Section - Phase 2 Integration Tests and Completion Evidence.
 
     Validate exact inputs, acquisition, provenance, compatibility ownership, and
     failure behavior before the runtime build phase begins.
 
-    - [ ] 2.5.1 Task - Run cross-toolchain consistency and policy tests.
+    - [x] 2.5.1 Task - Run cross-toolchain consistency and policy tests.
 
       Independent managers and reports must describe one coherent candidate
       graph without hidden transitive or private inputs.
 
-      - [ ] 2.5.1.1 Subtask - Validate versions/hashes, locks, source origins, dependency graphs, licenses/notices, vulnerability inputs, browser/tool fingerprints, and private-API inventory completeness.
-      - [ ] 2.5.1.2 Subtask - Run forbidden-edge, Plug/standalone isolation, mutable-input, implicit-download, missing-license, stale-lock, and unavailable-dependency negative tests.
+      - [x] 2.5.1.1 Subtask - Validate versions/hashes, locks, source origins, dependency graphs, licenses/notices, vulnerability inputs, browser/tool fingerprints, and private-API inventory completeness.
+      - [x] 2.5.1.2 Subtask - Run forbidden-edge, Plug/standalone isolation, mutable-input, implicit-download, missing-license, stale-lock, and unavailable-dependency negative tests.
 
-    - [ ] 2.5.2 Task - Prove acquisition reproducibility and publish phase evidence.
+    - [x] 2.5.2 Task - Prove acquisition reproducibility and publish phase evidence.
 
       Phase 2 closes only when another clean environment can obtain exactly the
       same governed input graph or a stop record rejects the candidate.
 
-      - [ ] 2.5.2.1 Subtask - Repeat noninteractive acquisition from a second clean environment and compare locks, sources, dependency/provenance reports, and explainable platform variance.
-      - [ ] 2.5.2.2 Subtask - Evaluate `BX-BH01-INPUT-TOOLCHAIN`, dependency-access and private-coupling risks, and the preliminary build-reproducibility proof without claiming build success.
-      - [ ] 2.5.2.3 Subtask - Publish Phase 2 evidence with exact inputs, commands, environments, hashes, acquisition results, findings, stop/go decision, and approved runtime-build inputs.
+      - [x] 2.5.2.1 Subtask - Repeat noninteractive acquisition from a second clean environment and compare locks, sources, dependency/provenance reports, and explainable platform variance.
+      - [x] 2.5.2.2 Subtask - Evaluate `BX-BH01-INPUT-TOOLCHAIN`, dependency-access and private-coupling risks, and the preliminary build-reproducibility proof without claiming build success.
+      - [x] 2.5.2.3 Subtask - Publish Phase 2 evidence with exact inputs, commands, environments, hashes, acquisition results, findings, stop/go decision, and approved runtime-build inputs.
 
 ## Section delivery rule
 
@@ -159,3 +159,5 @@ dependency access, provenance, or private-coupling blockers.
 ## Sources
 
 - [BH-01 entry manifest](../../../assets/bh-00-release/blazex-bh-01-entry-manifest-v0-1-0.md)
+- [Phase 2 implementation evidence](phase-02-implementation-evidence.md)
+- [Phase 2 completion record](../../../assets/bh-01-baseline/blazex-bh-01-phase-02-completion-v0.1.0.json)
