@@ -18,6 +18,8 @@ ROOT = Path(__file__).resolve().parent
 CATALOG_DIR = ROOT / "assets" / "component-catalog"
 REFERENCE_LOCK_PATH = CATALOG_DIR / "mudblazor-v9.9.0-reference-lock.json"
 CATALOG_SCHEMA_PATH = CATALOG_DIR / "blazex-component-catalog.schema.json"
+CATALOG_PATH = CATALOG_DIR / "blazex-component-catalog-v0.1.0.json"
+GENERATED_CATALOG_PATH = CATALOG_DIR / "blazex-component-catalog-v0-1-0-generated.md"
 
 EXPECTED_REFERENCE = {
     "schema_version": "1.0.0",
@@ -70,6 +72,24 @@ EXPECTED_DELIVERY_STATES = {
     "omitted",
     "superseded",
     "unknown",
+}
+EXPECTED_CATEGORIES = {
+    "foundation-provider",
+    "layout-content",
+    "actions-feedback",
+    "navigation-disclosure",
+    "forms-input",
+    "data-visualization",
+    "browser-interaction",
+}
+EXPECTED_EXCEPTION_CLASSES = {
+    "excluded",
+    "obsolete",
+    "experimental",
+    "service-only",
+    "infrastructure-only",
+    "duplicate",
+    "unresolved",
 }
 
 
@@ -255,6 +275,168 @@ def validate_catalog_document(document: dict[str, Any], schema: dict[str, Any]) 
         raise CatalogValidationError(f"catalog schema violation at {path}: {error.message}")
 
 
+def stable_family_id(source_family: str) -> str:
+    words = re.sub(r"([A-Z]+)([A-Z][a-z])", r"\1-\2", source_family)
+    words = re.sub(r"([a-z0-9])([A-Z])", r"\1-\2", words)
+    return "BX-FAM-" + words.upper()
+
+
+def validate_catalog_semantics(document: dict[str, Any], locked_families: list[str]) -> dict[str, int]:
+    """Validate source closure, deterministic identity, and Phase 3 nonclaims."""
+
+    schema = load_json(CATALOG_SCHEMA_PATH)
+    validate_catalog_document(document, schema)
+    _require_exact(
+        document,
+        {
+            "schema_version": "1.0.0",
+            "catalog_version": "0.1.0",
+            "catalog_id": "BX-CATALOG-CORE",
+            "reference_id": "mudblazor-v9.9.0",
+            "authored_source": "assets/component-catalog/blazex-component-catalog-v0.1.0.json",
+            "generated_view": "assets/component-catalog/blazex-component-catalog-v0-1-0-generated.md",
+            "sort_order": "family-id-unicode-codepoint-ascending",
+        },
+        "catalog",
+    )
+    if document.get("catalog_status") not in {"reviewed", "locked"}:
+        raise CatalogValidationError("catalog.catalog_status must be reviewed or locked in Phase 3")
+    owner_roles = document.get("owner_roles", [])
+    if owner_roles != sorted(owner_roles) or len(owner_roles) != len(set(owner_roles)):
+        raise CatalogValidationError("catalog.owner_roles must be sorted and unique")
+
+    records = document["families"]
+    ids = [record["id"] for record in records]
+    source_names = [record["source"]["source_family"] for record in records]
+    if ids != sorted(ids):
+        raise CatalogValidationError("catalog families must be sorted by stable family ID")
+    if len(ids) != len(set(ids)):
+        raise CatalogValidationError("catalog contains duplicate stable family IDs")
+    if len(source_names) != len(set(source_names)):
+        raise CatalogValidationError("catalog contains duplicate source-family identities")
+    missing_sources = sorted(set(locked_families) - set(source_names))
+    unexpected_sources = sorted(set(source_names) - set(locked_families))
+    if missing_sources or unexpected_sources:
+        raise CatalogValidationError(
+            "catalog source coverage mismatch; missing={} unexpected={}".format(
+                missing_sources, unexpected_sources
+            )
+        )
+
+    for record in records:
+        source = record["source"]
+        source_family = source["source_family"]
+        expected_id = stable_family_id(source_family)
+        if record["id"] != expected_id:
+            raise CatalogValidationError(
+                f"family {source_family} must use stable ID {expected_id}, found {record['id']}"
+            )
+        expected_path = f"src/MudBlazor/Components/{source_family}"
+        if source["source_paths"] != [expected_path]:
+            raise CatalogValidationError(
+                f"family {record['id']} must cite exact source path {expected_path}"
+            )
+        source_identifiers = source["source_identifiers"]
+        if not source_identifiers:
+            raise CatalogValidationError(f"family {record['id']} needs at least one source identifier")
+        if source_identifiers != sorted(source_identifiers):
+            raise CatalogValidationError(f"family {record['id']} source identifiers must be sorted")
+        if record["aliases"] != sorted(record["aliases"]):
+            raise CatalogValidationError(f"family {record['id']} aliases must be sorted")
+        classification = record["classification"]
+        expected_classification = {
+            "disposition": "unresolved",
+            "rationale": None,
+            "delivery_tier": "unassigned",
+            "target_package": None,
+            "prerequisites": [],
+            "optional_package": None,
+            "payload_class": "unassigned",
+            "intended_public_identity": None,
+        }
+        if classification != expected_classification:
+            raise CatalogValidationError(
+                f"family {record['id']} contains a premature Phase 4 classification"
+            )
+        capability = record["capability_contract"]
+        expected_capability = {
+            "required_capabilities": [],
+            "optional_capabilities": [],
+            "fallback": None,
+            "rendering_modes": {"state": "unknown", "entries": [], "rationale": None},
+            "runtime_eligibility": {"state": "unknown", "entries": [], "rationale": None},
+            "backend_portability": "unknown",
+            "native_strategy": "unknown",
+            "accessibility_alternative": None,
+            "renderer_extensions": [],
+        }
+        if capability != expected_capability:
+            raise CatalogValidationError(
+                f"family {record['id']} contains a premature capability or portability claim"
+            )
+        if record["implementation"] != {
+            "delivery_state": "unknown",
+            "implementation_evidence": [],
+        }:
+            raise CatalogValidationError(
+                f"family {record['id']} contains a premature implementation or support claim"
+            )
+
+    category_counts = {category: 0 for category in EXPECTED_CATEGORIES}
+    for record in records:
+        category_counts[record["category"]] += 1
+    missing_categories = sorted(category for category, count in category_counts.items() if count == 0)
+    if missing_categories:
+        raise CatalogValidationError("catalog has empty required categories: " + ", ".join(missing_categories))
+
+    record_ids = set(ids)
+    for record in records:
+        seen_relationships: set[tuple[str, str]] = set()
+        for relationship in record["relationships"]:
+            edge = (relationship["type"], relationship["target_id"])
+            if edge in seen_relationships:
+                raise CatalogValidationError(f"family {record['id']} has duplicate relationship {edge}")
+            seen_relationships.add(edge)
+            if relationship["target_id"] not in record_ids:
+                raise CatalogValidationError(
+                    f"family {record['id']} relationship target does not exist: {relationship['target_id']}"
+                )
+
+    exceptions = document["exceptions"]
+    exception_ids = [record["id"] for record in exceptions]
+    if exception_ids != sorted(exception_ids) or len(exception_ids) != len(set(exception_ids)):
+        raise CatalogValidationError("catalog exceptions must have sorted unique IDs")
+    present_classes = {record["classification"] for record in exceptions}
+    missing_exception_classes = sorted(EXPECTED_EXCEPTION_CLASSES - present_classes)
+    if missing_exception_classes:
+        raise CatalogValidationError(
+            "catalog is missing exception classifications: " + ", ".join(missing_exception_classes)
+        )
+    for record in exceptions:
+        entries = record["source_entries"]
+        if entries != sorted(entries) or len(entries) != len(set(entries)):
+            raise CatalogValidationError(f"exception {record['id']} source entries must be sorted and unique")
+        if record["review_state"] != "accepted":
+            raise CatalogValidationError(f"exception {record['id']} must have accepted source-review state")
+
+    return {
+        "families": len(records),
+        "categories": len(category_counts),
+        "exceptions": len(exceptions),
+        "unresolved_dispositions": sum(
+            record["classification"]["disposition"] == "unresolved" for record in records
+        ),
+    }
+
+
+def validate_generated_view(document: dict[str, Any], generated_text: str) -> None:
+    from generate_component_catalog import render_catalog
+
+    expected = render_catalog(document)
+    if generated_text != expected:
+        raise CatalogValidationError("generated component-catalog view is stale")
+
+
 def validate_repository() -> list[str]:
     lock = load_json(REFERENCE_LOCK_PATH)
     snapshot_path = CATALOG_DIR / str(lock.get("family_snapshot", {}).get("path", ""))
@@ -265,10 +447,23 @@ def validate_repository() -> list[str]:
     families = validate_reference(lock, snapshot_bytes)
     schema = load_json(CATALOG_SCHEMA_PATH)
     validate_catalog_schema(schema)
+    catalog = load_json(CATALOG_PATH)
+    summary = validate_catalog_semantics(catalog, families)
+    try:
+        generated_text = GENERATED_CATALOG_PATH.read_text(encoding="utf-8")
+    except (OSError, UnicodeError) as error:
+        raise CatalogValidationError(
+            f"cannot read generated component-catalog view {GENERATED_CATALOG_PATH}: {error}"
+        ) from error
+    validate_generated_view(catalog, generated_text)
     return [
         f"reference {lock['reference_id']}",
         f"{len(families)} locked source families",
         "catalog schema 1.0.0",
+        f"{summary['families']} normalized families in {summary['categories']} categories",
+        f"{summary['exceptions']} source-closure exceptions",
+        f"{summary['unresolved_dispositions']} unresolved product dispositions",
+        "fresh generated view",
     ]
 
 

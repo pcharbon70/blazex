@@ -186,6 +186,8 @@ native strategy, delivery state, and evidence completeness.
 
 ## Connections
 
+- [Canonical component catalog v0.1.0](../assets/component-catalog/blazex-component-catalog-v0.1.0.json)
+- [Generated catalog view](../assets/component-catalog/blazex-component-catalog-v0-1-0-generated.md)
 - [Reference and inventory policy](blazex-mudblazor-reference-and-inventory-policy.md)
 - [MudBlazor-inspired component system](mudblazor-inspired-component-system-for-blazex.md)
 - [BH-00 Phase 3 plan](../60-planning/01-browser-host/bh-00-product-boundary-catalog-and-acceptance-contract/phase-03-catalog-schema-and-locked-inventory.md)

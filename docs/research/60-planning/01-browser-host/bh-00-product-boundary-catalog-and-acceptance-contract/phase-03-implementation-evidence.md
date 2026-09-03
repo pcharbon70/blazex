@@ -117,9 +117,72 @@ while ensuring that source completeness and schema validity alone cannot claim
 implementation, evidence, support, rendering portability, native behavior, or
 .NET compatibility.
 
+## Section 3.3 — Complete normalized inventory artifact
+
+### Delivered artifacts
+
+- The canonical [component catalog
+  v0.1.0](../../../assets/component-catalog/blazex-component-catalog-v0.1.0.json)
+  contains one stable record for every locked first-level source family, exact
+  source paths, reviewed source/compound identifiers, seven source-facing
+  categories, lifecycle/inclusion data, and the complete unassigned Phase 4
+  field set.
+- Twelve exception records explicitly cover excluded documentation/tests and
+  helpers, service-only registrations, infrastructure-only icons/themes/
+  localization/JavaScript, and zero findings for experimental, obsolete,
+  duplicate, and unresolved source rows.
+- `generate_component_catalog.py` creates the [human-readable generated
+  view](../../../assets/component-catalog/blazex-component-catalog-v0-1-0-generated.md)
+  in stable family-ID order and supports a nonwriting `--check` freshness gate.
+- The [inventory reconciliation
+  report](../../../assets/component-catalog/mudblazor-v9-9-0-inventory-reconciliation.md)
+  records an exact 83-to-83 match to both the raw source snapshot and Appendix
+  A of the prior synthesis, zero additions/omissions, category regrouping,
+  naming rules, exception closure, ownership, conflict handling, and deferred
+  decisions.
+
+### Inventory result
+
+| Measure | Result |
+| --- | ---: |
+| Locked source families | 83 |
+| Normalized families | 83 |
+| Missing / unexpected source families | 0 / 0 |
+| Stable unique IDs | 83 |
+| Categories | 7 |
+| Exception records | 12 |
+| Product dispositions still unresolved | 83 |
+| Rows with implementation evidence | 0 |
+
+Compound source identities stay under their owning family, so Button/FAB,
+Card parts, Chart variants, DataGrid columns/cells, Dialog provider/container,
+DropZone parts, inputs, Snackbar provider/elements, Table parts, Tabs/panels,
+and TreeView items do not inflate the family count. There were no source-family
+splits, merges, renames, aliases, or unresolved coverage questions.
+
+### Deterministic validation
+
+```text
+Component catalog validation passed: reference mudblazor-v9.9.0; 83 locked source families; catalog schema 1.0.0; 83 normalized families in 7 categories; 12 source-closure exceptions; 83 unresolved product dispositions; fresh generated view.
+Ran 15 tests ... OK
+Component catalog generation matches ...: 83 families, 12 exceptions.
+```
+
+Negative tests reject missing locked families, duplicate IDs, missing exception
+classes, premature product dispositions, and stale generated output in addition
+to the lock/schema failures from earlier sections.
+
+### Section result
+
+The authored and generated artifacts now form one deterministic,
+source-complete inventory. Canonical JSON remains the sole data truth;
+generated Markdown is review output. All 83 families still have unresolved
+disposition, unassigned tier/package/payload, empty capability/evidence lists,
+unknown mode/runtime/portability/native assessments, and unknown delivery
+state. No source identity is a BlazeX API or .NET compatibility promise.
+
 ## Remaining Phase 3 work
 
-- Section 3.3 must author and deterministically render the normalized inventory.
 - Section 3.4 must close source coverage, schema, generation, review, and
   non-claim integration evidence.
 

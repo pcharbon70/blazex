@@ -72,6 +72,8 @@ class ComponentCatalogValidatorTests(unittest.TestCase):
         snapshot_name = self.lock["family_snapshot"]["path"]
         self.snapshot = (validator.CATALOG_DIR / snapshot_name).read_bytes()
         self.schema = validator.load_json(validator.CATALOG_SCHEMA_PATH)
+        self.catalog = validator.load_json(validator.CATALOG_PATH)
+        self.locked_families = self.snapshot.decode("utf-8").splitlines()
 
     def test_repository_reference_is_valid(self) -> None:
         families = validator.validate_reference(self.lock, self.snapshot)
@@ -127,6 +129,43 @@ class ComponentCatalogValidatorTests(unittest.TestCase):
         changed["families"][0]["implementation"]["delivery_state"] = "done"
         with self.assertRaisesRegex(validator.CatalogValidationError, "catalog schema violation"):
             validator.validate_catalog_document(changed, self.schema)
+
+    def test_complete_catalog_semantics_are_valid(self) -> None:
+        summary = validator.validate_catalog_semantics(self.catalog, self.locked_families)
+        self.assertEqual(
+            {"families": 83, "categories": 7, "exceptions": 12, "unresolved_dispositions": 83},
+            summary,
+        )
+
+    def test_missing_locked_source_family_is_rejected(self) -> None:
+        changed = copy.deepcopy(self.catalog)
+        changed["families"] = changed["families"][1:]
+        with self.assertRaisesRegex(validator.CatalogValidationError, "source coverage mismatch"):
+            validator.validate_catalog_semantics(changed, self.locked_families)
+
+    def test_duplicate_stable_id_is_rejected(self) -> None:
+        changed = copy.deepcopy(self.catalog)
+        changed["families"][1]["id"] = changed["families"][0]["id"]
+        with self.assertRaisesRegex(validator.CatalogValidationError, "duplicate stable family IDs"):
+            validator.validate_catalog_semantics(changed, self.locked_families)
+
+    def test_premature_product_disposition_is_rejected(self) -> None:
+        changed = copy.deepcopy(self.catalog)
+        changed["families"][0]["classification"]["disposition"] = "native-component"
+        with self.assertRaisesRegex(validator.CatalogValidationError, "premature Phase 4"):
+            validator.validate_catalog_semantics(changed, self.locked_families)
+
+    def test_missing_exception_class_is_rejected(self) -> None:
+        changed = copy.deepcopy(self.catalog)
+        changed["exceptions"] = [
+            record for record in changed["exceptions"] if record["classification"] != "obsolete"
+        ]
+        with self.assertRaisesRegex(validator.CatalogValidationError, "missing exception classifications"):
+            validator.validate_catalog_semantics(changed, self.locked_families)
+
+    def test_stale_generated_view_is_rejected(self) -> None:
+        with self.assertRaisesRegex(validator.CatalogValidationError, "generated component-catalog view is stale"):
+            validator.validate_generated_view(self.catalog, "stale\n")
 
 
 if __name__ == "__main__":

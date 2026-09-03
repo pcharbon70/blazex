@@ -70,29 +70,29 @@ Back to milestone: [README](README.md)
       - [x] 3.2.2.2 Subtask - Define required and optional capabilities, fallback, rendering modes, runtime eligibility, backend portability, native strategy, accessibility alternative, and renderer-specific extension fields.
       - [x] 3.2.2.3 Subtask - Define planned, accepted, implemented, evidenced, supported, deferred, omitted, superseded, and unknown states so a completed row cannot imply delivered behavior.
 
-  - [ ] 3.3 Section - Build the complete normalized inventory artifact.
+  - [x] 3.3 Section - Build the complete normalized inventory artifact.
 
     Populate the source-facing portion of the catalog and produce deterministic
     human and machine views without making Phase 4 classification decisions
     implicitly.
 
-    - [ ] 3.3.1 Task - Enumerate and normalize every catalog family.
+    - [x] 3.3.1 Task - Enumerate and normalize every catalog family.
 
       The inventory must close over the pinned source and expose uncertainty or
       exceptional groupings rather than hiding them in prose.
 
-      - [ ] 3.3.1.1 Subtask - Extract all included public families and supporting entries from the pinned source into stable IDs with categories, source identities, and relationship metadata.
-      - [ ] 3.3.1.2 Subtask - Create explicit records for excluded, obsolete, experimental, service-only, infrastructure-only, duplicate, and unresolved entries with reasons.
-      - [ ] 3.3.1.3 Subtask - Reconcile the normalized inventory against the existing MudBlazor research note and document every addition, omission, regrouping, or naming difference.
+      - [x] 3.3.1.1 Subtask - Extract all included public families and supporting entries from the pinned source into stable IDs with categories, source identities, and relationship metadata.
+      - [x] 3.3.1.2 Subtask - Create explicit records for excluded, obsolete, experimental, service-only, infrastructure-only, duplicate, and unresolved entries with reasons.
+      - [x] 3.3.1.3 Subtask - Reconcile the normalized inventory against the existing MudBlazor research note and document every addition, omission, regrouping, or naming difference.
 
-    - [ ] 3.3.2 Task - Establish deterministic catalog stewardship.
+    - [x] 3.3.2 Task - Establish deterministic catalog stewardship.
 
       Authored source, generated views, validation, and review reports must have
       clear ownership so generated output cannot become a competing truth.
 
-      - [ ] 3.3.2.1 Subtask - Select the canonical authored format, schema location, generated human-readable view, validation command, and deterministic sort order within the approved repository structure.
-      - [ ] 3.3.2.2 Subtask - Define reviewer ownership, change rationale, source-diff report, schema migration, generated-file update, and conflict-resolution procedures.
-      - [ ] 3.3.2.3 Subtask - Define queries and summary counts for category, lifecycle, inclusion reason, unresolved status, source coverage, and later disposition completeness.
+      - [x] 3.3.2.1 Subtask - Select the canonical authored format, schema location, generated human-readable view, validation command, and deterministic sort order within the approved repository structure.
+      - [x] 3.3.2.2 Subtask - Define reviewer ownership, change rationale, source-diff report, schema migration, generated-file update, and conflict-resolution procedures.
+      - [x] 3.3.2.3 Subtask - Define queries and summary counts for category, lifecycle, inclusion reason, unresolved status, source coverage, and later disposition completeness.
 
   - [ ] 3.4 Section - Phase 3 Integration Tests.
 
