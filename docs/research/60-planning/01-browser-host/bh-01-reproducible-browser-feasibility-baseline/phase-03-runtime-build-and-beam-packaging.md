@@ -55,28 +55,28 @@ Back to milestone: [README](README.md)
       - [x] 3.1.3.2 Subtask - Expose only fixture boot/message/lifecycle hooks needed by BH-01 and mark all adapter APIs experimental and replaceable.
       - [x] 3.1.3.3 Subtask - Add source/import guards preventing browser DOM, Phoenix, LiveView, component, or future semantic-tree concerns from entering the runtime adapter.
 
-  - [ ] 3.2 Section - Build and package the minimal BEAM fixture.
+  - [x] 3.2 Section - Build and package the minimal BEAM fixture.
 
     A disposable program should prove bundle loading and runtime observability
     without prefiguring the public component framework.
 
-    - [ ] 3.2.1 Task - Implement the runtime smoke fixture.
+    - [x] 3.2.1 Task - Implement the runtime smoke fixture.
 
       The fixture needs enough behavior to expose identity, process, message,
       timer, crash, and shutdown semantics before DOM integration.
 
-      - [ ] 3.2.1.1 Subtask - Implement deterministic startup, runtime/application identity, one supervisor/process tree, bounded message exchange, timer, readiness record, controlled crash, and graceful shutdown.
-      - [ ] 3.2.1.2 Subtask - Keep all names/protocols under integration fixtures, exclude inactive BH-02 packages, and label the code non-public and disposable.
-      - [ ] 3.2.1.3 Subtask - Emit structured traces through the narrow runtime adapter with generation, scenario, process, sequence, result, error, and cleanup fields.
+      - [x] 3.2.1.1 Subtask - Implement deterministic startup, runtime/application identity, one supervisor/process tree, bounded message exchange, timer, readiness record, controlled crash, and graceful shutdown.
+      - [x] 3.2.1.2 Subtask - Keep all names/protocols under integration fixtures, exclude inactive BH-02 packages, and label the code non-public and disposable.
+      - [x] 3.2.1.3 Subtask - Emit structured traces through the narrow runtime adapter with generation, scenario, process, sequence, result, error, and cleanup fields.
 
-    - [ ] 3.2.2 Task - Define deterministic BEAM/AVM bundle construction.
+    - [x] 3.2.2 Task - Define deterministic BEAM/AVM bundle construction.
 
       Module and resource reachability must be explicit so payload and
       provenance can be attributed correctly.
 
-      - [ ] 3.2.2.1 Subtask - Define module roots, transitive reachability, resource inclusion, startup arguments, bundle order, compression, and integrity metadata.
-      - [ ] 3.2.2.2 Subtask - Reject undeclared modules, dynamic code loading, environment-dependent resources, non-reproducible archives, and host-only modules unavailable in AtomVM.
-      - [ ] 3.2.2.3 Subtask - Produce debug/release bundles and compare module inventories, source paths, hashes, compressed/uncompressed sizes, and reviewed nondeterministic fields.
+      - [x] 3.2.2.1 Subtask - Define module roots, transitive reachability, resource inclusion, startup arguments, bundle order, compression, and integrity metadata.
+      - [x] 3.2.2.2 Subtask - Reject undeclared modules, dynamic code loading, environment-dependent resources, non-reproducible archives, and host-only modules unavailable in AtomVM.
+      - [x] 3.2.2.3 Subtask - Produce debug/release bundles and compare module inventories, source paths, hashes, compressed/uncompressed sizes, and reviewed nondeterministic fields.
 
   - [ ] 3.3 Section - Probe required runtime semantics outside the browser.
 

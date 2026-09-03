@@ -1,0 +1,145 @@
+{
+  "schema_version": "1.0.0",
+  "manifest_id": "BX-BH01-RUNTIME-SMOKE-BUNDLES-0.1",
+  "status": "observed-packaged",
+  "build_contract_sha256": "14cf6058a4bd920df13f3090ca3dcbf6f6b7c18d9f3320f2ab0e5351b9335cf8",
+  "source_inputs": [
+    {
+      "path": "mix.exs",
+      "sha256": "eced0509cfb05106e2dec35fbf8c718e4036623fd1fa2a6261b9681faa6ab8a0"
+    },
+    {
+      "path": "mix.lock",
+      "sha256": "22269a9764b2b7ec4a93aaa007040313f4a924b3031e91c72494dd19f9084c98"
+    },
+    {
+      "path": "config/config.exs",
+      "sha256": "709ac4e0ce33cfa4330409e7799758675634e32ece291dfac0cd7650d9140d69"
+    },
+    {
+      "path": "lib/blazex/bh01/runtime_smoke.ex",
+      "sha256": "da961038f3bedc9fd0e1bfca74cc18852ac1625c0397b43820ea7a44f1310de3"
+    },
+    {
+      "path": "lib/blazex/bh01/runtime_smoke/worker.ex",
+      "sha256": "385aa37a2c099dd0537707c5922038749c558e6927d2f3f9b82895b814e39016"
+    },
+    {
+      "path": "lib/mix/tasks/bh01.package.ex",
+      "sha256": "a5cb6e56bb29eaed0f27125b162405f8b9de767041b494a3ad83ab2f2f5425f9"
+    }
+  ],
+  "artifacts": [
+    {
+      "artifact_id": "BX-BH01-FIXTURE-DEBUG-AVM",
+      "mode": "debug",
+      "kind": "avm",
+      "path": "generated/debug/bundle.avm",
+      "sha256": "21eea8d9150d9c781183a3e681ecbb0804b861e2cd05c05ea7ea600ecf21a168",
+      "bytes": 6846900,
+      "retained": false,
+      "owner": "integration/fixtures/runtime_smoke",
+      "reachability_root": "Elixir.BlazeX.BH01.RuntimeSmoke.Boot"
+    },
+    {
+      "artifact_id": "BX-BH01-FIXTURE-DEBUG-AVM-GZIP",
+      "mode": "debug",
+      "kind": "avm-gzip",
+      "path": "generated/debug/bundle.avm.gz",
+      "sha256": "4a2f9147b0c0cf6c607c82795e682236fcfdb7474e645fa305458ec8a3594174",
+      "bytes": 3302246,
+      "retained": false,
+      "owner": "integration/fixtures/runtime_smoke",
+      "reachability_root": "Elixir.BlazeX.BH01.RuntimeSmoke.Boot"
+    },
+    {
+      "artifact_id": "BX-BH01-FIXTURE-DEBUG-MODULE-INVENTORY",
+      "mode": "debug",
+      "kind": "module-inventory",
+      "path": "generated/debug/module-inventory.json",
+      "sha256": "b64f0b08cf72d3ab43ceb3fc12bdd50e3d66b37cd0c1cac520b93fa58f036349",
+      "bytes": 13117,
+      "retained": false,
+      "owner": "integration/fixtures/runtime_smoke",
+      "reachability_root": "Elixir.BlazeX.BH01.RuntimeSmoke.Boot"
+    },
+    {
+      "artifact_id": "BX-BH01-FIXTURE-RELEASE-AVM",
+      "mode": "release",
+      "kind": "avm",
+      "path": "generated/release/bundle.avm",
+      "sha256": "e380a1603915532a6a2f904ed88d2695207d4b062f5b9fdbd52fc06d4276d142",
+      "bytes": 6406264,
+      "retained": false,
+      "owner": "integration/fixtures/runtime_smoke",
+      "reachability_root": "Elixir.BlazeX.BH01.RuntimeSmoke.Boot"
+    },
+    {
+      "artifact_id": "BX-BH01-FIXTURE-RELEASE-AVM-GZIP",
+      "mode": "release",
+      "kind": "avm-gzip",
+      "path": "generated/release/bundle.avm.gz",
+      "sha256": "a404837900e9d190315179b5e1405195d5186d4e22dddfc641ad2bea3d6cf1e4",
+      "bytes": 3004445,
+      "retained": false,
+      "owner": "integration/fixtures/runtime_smoke",
+      "reachability_root": "Elixir.BlazeX.BH01.RuntimeSmoke.Boot"
+    },
+    {
+      "artifact_id": "BX-BH01-FIXTURE-RELEASE-MODULE-INVENTORY",
+      "mode": "release",
+      "kind": "module-inventory",
+      "path": "generated/release/module-inventory.json",
+      "sha256": "e27a7433a4012975c9922ecee0388d3eba93f323ad5820480dd5a6653c7159d1",
+      "bytes": 13120,
+      "retained": false,
+      "owner": "integration/fixtures/runtime_smoke",
+      "reachability_root": "Elixir.BlazeX.BH01.RuntimeSmoke.Boot"
+    }
+  ],
+  "module_inventories": [
+    {
+      "mode": "debug",
+      "module_count": 556,
+      "modules_sha256": "ea235a0c9625967d1263a89f42dc2aefb18d001ca1d6b498682df062acdc4845",
+      "include_lines": true,
+      "resource_count": 0,
+      "embedded_path_markers": {
+        "/workspace": 0,
+        "/home/runner": 376,
+        "/tmp": 2,
+        "/home/ducky": 0
+      }
+    },
+    {
+      "mode": "release",
+      "module_count": 556,
+      "modules_sha256": "ea235a0c9625967d1263a89f42dc2aefb18d001ca1d6b498682df062acdc4845",
+      "include_lines": false,
+      "resource_count": 0,
+      "embedded_path_markers": {
+        "/workspace": 0,
+        "/home/runner": 372,
+        "/tmp": 2,
+        "/home/ducky": 0
+      }
+    }
+  ],
+  "reviewed_nondeterministic_fields": [],
+  "normalization": [
+    "A fixed generated boot-module name replaces Popcorn.cook's unique boot name.",
+    "Bundle inputs are sorted by unique BEAM basename with the entrypoint first.",
+    "The gzip writer emits an all-zero MTIME field.",
+    "The container mount and generated boot source paths are fixed at /workspace."
+  ],
+  "source_exposure": {
+    "debug": "line information retained; pinned upstream BEAM source paths remain visible",
+    "release": "line chunks removed by packbeam; compile metadata in pinned upstream BEAMs can remain visible",
+    "secret_scan": "no /home/ducky marker; no credential material is an input"
+  },
+  "limitations": [
+    "Release packaging drops line chunks but does not scrub compile metadata inherited from upstream BEAM files.",
+    "The unpruned bundle establishes a correctness baseline; payload reduction is deferred until reachability can be proven.",
+    "Browser boot and host-call behavior are outside Section 3.2."
+  ]
+}
