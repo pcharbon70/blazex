@@ -110,27 +110,27 @@ Back to milestone: [README](README.md)
       - [x] 3.3.3.2 Subtask - Exercise request/response identity, timeout, cancellation, duplicate/stale reply, host error, runtime error, and post-disposal traffic.
       - [x] 3.3.3.3 Subtask - Reject arbitrary JavaScript object, DOM handle, code evaluation, filesystem path, secret, or unbounded binary transfer from the runtime contract.
 
-  - [ ] 3.4 Section - Establish the initial artifact manifest.
+  - [x] 3.4 Section - Establish the initial artifact manifest.
 
     Account for runtime and application artifacts before browser tooling adds
     more outputs and deployment paths.
 
-    - [ ] 3.4.1 Task - Inventory build inputs and outputs.
+    - [x] 3.4.1 Task - Inventory build inputs and outputs.
 
       Every runtime/bundle byte must have origin, owner, build lineage,
       integrity, size, and reachability information.
 
-      - [ ] 3.4.1.1 Subtask - Assign stable artifact IDs to runtime Wasm, debug symbols/maps, BEAM/AVM bundles, generated metadata, build logs, patches, licenses, and notices.
-      - [ ] 3.4.1.2 Subtask - Record input sources, command, hash, compressed/uncompressed size, MIME expectation, owner, reachability root, build mode, source-map policy, and provenance for each artifact.
+      - [x] 3.4.1.1 Subtask - Assign stable artifact IDs to runtime Wasm, debug symbols/maps, BEAM/AVM bundles, generated metadata, build logs, patches, licenses, and notices.
+      - [x] 3.4.1.2 Subtask - Record input sources, command, hash, compressed/uncompressed size, MIME expectation, owner, reachability root, build mode, source-map policy, and provenance for each artifact.
 
-    - [ ] 3.4.2 Task - Test deterministic artifact production.
+    - [x] 3.4.2 Task - Test deterministic artifact production.
 
       Clean equivalent inputs should produce byte-identical or fully explained
       normalized outputs.
 
-      - [ ] 3.4.2.1 Subtask - Build runtime and bundles at least twice from cleaned state, compare bytes/manifests, and investigate timestamps, paths, ordering, random IDs, or tool variance.
-      - [ ] 3.4.2.2 Subtask - Fail on orphaned, duplicate, unhashed, license-unknown, unreachable, unexpectedly mapped, or undeclared artifacts.
-      - [ ] 3.4.2.3 Subtask - Preserve preliminary build/payload observations without marking proposed budgets passed.
+      - [x] 3.4.2.1 Subtask - Build runtime and bundles at least twice from cleaned state, compare bytes/manifests, and investigate timestamps, paths, ordering, random IDs, or tool variance.
+      - [x] 3.4.2.2 Subtask - Fail on orphaned, duplicate, unhashed, license-unknown, unreachable, unexpectedly mapped, or undeclared artifacts.
+      - [x] 3.4.2.3 Subtask - Preserve preliminary build/payload observations without marking proposed budgets passed.
 
   - [ ] 3.5 Section - Phase 3 Integration Tests and Completion Evidence.
 

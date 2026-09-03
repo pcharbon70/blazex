@@ -15,12 +15,22 @@
       "content_encoding": null,
       "deployable": true,
       "kind": "wasm",
+      "license_record_ids": [
+        "BX-BH01-LICENSE-FISSIONVM",
+        "BX-BH01-LICENSE-MBEDTLS",
+        "BX-BH01-LICENSE-EMSCRIPTEN",
+        "BX-BH01-LICENSE-NINJA",
+        "BX-BH01-LICENSE-GPERF",
+        "BX-BH01-LICENSE-ZLIB"
+      ],
       "mime": "application/wasm",
       "mode": "debug-web",
-      "owner": "runtime-build",
+      "owner": "packages/blazex_runtime_popcorn/runtime",
       "path": "generated/debug-web/artifacts/AtomVM.wasm",
+      "provenance": "checksum-qualified FissionVM/Mbed TLS sources built in the digest-pinned Emscripten image with networking disabled",
       "reachability_root": "browser-runtime",
-      "sha256": "e6025168933b62dec3650d9b9f78eb9f613e4eb21407ad837cb0dce9f1a55768"
+      "sha256": "e6025168933b62dec3650d9b9f78eb9f613e4eb21407ad837cb0dce9f1a55768",
+      "source_map_policy": "debug-web"
     },
     {
       "artifact_id": "BX-BH01-RUNTIME-DEBUG-WEB-ATOMVM-MJS",
@@ -29,12 +39,22 @@
       "content_encoding": null,
       "deployable": true,
       "kind": "javascript",
+      "license_record_ids": [
+        "BX-BH01-LICENSE-FISSIONVM",
+        "BX-BH01-LICENSE-MBEDTLS",
+        "BX-BH01-LICENSE-EMSCRIPTEN",
+        "BX-BH01-LICENSE-NINJA",
+        "BX-BH01-LICENSE-GPERF",
+        "BX-BH01-LICENSE-ZLIB"
+      ],
       "mime": "text/javascript",
       "mode": "debug-web",
-      "owner": "runtime-build",
+      "owner": "packages/blazex_runtime_popcorn/runtime",
       "path": "generated/debug-web/artifacts/AtomVM.mjs",
+      "provenance": "checksum-qualified FissionVM/Mbed TLS sources built in the digest-pinned Emscripten image with networking disabled",
       "reachability_root": "browser-runtime",
-      "sha256": "5379574ca20bf49d71649545182ec3d17f1e324be0766e0aae208c50d255cfc7"
+      "sha256": "5379574ca20bf49d71649545182ec3d17f1e324be0766e0aae208c50d255cfc7",
+      "source_map_policy": "debug-web"
     },
     {
       "artifact_id": "BX-BH01-RUNTIME-DEBUG-WEB-ATOMVM-WASM-GZ",
@@ -43,12 +63,24 @@
       "content_encoding": "gzip",
       "deployable": true,
       "kind": "compressed",
+      "license_record_ids": [
+        "BX-BH01-LICENSE-FISSIONVM",
+        "BX-BH01-LICENSE-MBEDTLS",
+        "BX-BH01-LICENSE-EMSCRIPTEN",
+        "BX-BH01-LICENSE-NINJA",
+        "BX-BH01-LICENSE-GPERF",
+        "BX-BH01-LICENSE-ZLIB"
+      ],
       "mime": "application/wasm",
       "mode": "debug-web",
-      "owner": "runtime-build",
+      "owner": "packages/blazex_runtime_popcorn/runtime",
       "path": "generated/debug-web/artifacts/AtomVM.wasm.gz",
+      "provenance": "checksum-qualified FissionVM/Mbed TLS sources built in the digest-pinned Emscripten image with networking disabled",
       "reachability_root": "browser-runtime",
-      "sha256": "1e7c41c0b23247f77235d0ec82778085e2182cb46a749cec47cafdfbecd3ec08"
+      "sha256": "1e7c41c0b23247f77235d0ec82778085e2182cb46a749cec47cafdfbecd3ec08",
+      "source_map_policy": "debug-web",
+      "uncompressed_artifact_id": "BX-BH01-RUNTIME-DEBUG-WEB-ATOMVM-WASM",
+      "uncompressed_bytes": 4210633
     },
     {
       "artifact_id": "BX-BH01-RUNTIME-DEBUG-WEB-ATOMVM-MJS-GZ",
@@ -57,12 +89,48 @@
       "content_encoding": "gzip",
       "deployable": true,
       "kind": "compressed",
+      "license_record_ids": [
+        "BX-BH01-LICENSE-FISSIONVM",
+        "BX-BH01-LICENSE-MBEDTLS",
+        "BX-BH01-LICENSE-EMSCRIPTEN",
+        "BX-BH01-LICENSE-NINJA",
+        "BX-BH01-LICENSE-GPERF",
+        "BX-BH01-LICENSE-ZLIB"
+      ],
       "mime": "text/javascript",
       "mode": "debug-web",
-      "owner": "runtime-build",
+      "owner": "packages/blazex_runtime_popcorn/runtime",
       "path": "generated/debug-web/artifacts/AtomVM.mjs.gz",
+      "provenance": "checksum-qualified FissionVM/Mbed TLS sources built in the digest-pinned Emscripten image with networking disabled",
       "reachability_root": "browser-runtime",
-      "sha256": "c5afccc5b1efbddc35d8d241f0a6cccb955c0f2a4a1af21dc637e146ba2b315b"
+      "sha256": "c5afccc5b1efbddc35d8d241f0a6cccb955c0f2a4a1af21dc637e146ba2b315b",
+      "source_map_policy": "debug-web",
+      "uncompressed_artifact_id": "BX-BH01-RUNTIME-DEBUG-WEB-ATOMVM-MJS",
+      "uncompressed_bytes": 309205
+    },
+    {
+      "artifact_id": "BX-BH01-RUNTIME-DEBUG-WEB-BUILD-LOG",
+      "build_lineage": "BX-BH01-RUNTIME-BUILD-0.1",
+      "bytes": 23009,
+      "content_encoding": null,
+      "deployable": false,
+      "kind": "build-log",
+      "license_record_ids": [
+        "BX-BH01-LICENSE-FISSIONVM",
+        "BX-BH01-LICENSE-MBEDTLS",
+        "BX-BH01-LICENSE-EMSCRIPTEN",
+        "BX-BH01-LICENSE-NINJA",
+        "BX-BH01-LICENSE-GPERF",
+        "BX-BH01-LICENSE-ZLIB"
+      ],
+      "mime": "text/plain",
+      "mode": "debug-web",
+      "owner": "packages/blazex_runtime_popcorn/runtime",
+      "path": "generated/debug-web/build.log",
+      "provenance": "checksum-qualified FissionVM/Mbed TLS sources built in the digest-pinned Emscripten image with networking disabled",
+      "reachability_root": "build-evidence",
+      "sha256": "fe83c25bde09e26edccef5e3705808ff72c29588aa4de237f17c5338f39a2fb6",
+      "source_map_policy": "not-applicable build log"
     },
     {
       "artifact_id": "BX-BH01-RUNTIME-RELEASE-WEB-ATOMVM-WASM",
@@ -71,12 +139,22 @@
       "content_encoding": null,
       "deployable": true,
       "kind": "wasm",
+      "license_record_ids": [
+        "BX-BH01-LICENSE-FISSIONVM",
+        "BX-BH01-LICENSE-MBEDTLS",
+        "BX-BH01-LICENSE-EMSCRIPTEN",
+        "BX-BH01-LICENSE-NINJA",
+        "BX-BH01-LICENSE-GPERF",
+        "BX-BH01-LICENSE-ZLIB"
+      ],
       "mime": "application/wasm",
       "mode": "release-web",
-      "owner": "runtime-build",
+      "owner": "packages/blazex_runtime_popcorn/runtime",
       "path": "generated/release-web/artifacts/AtomVM.wasm",
+      "provenance": "checksum-qualified FissionVM/Mbed TLS sources built in the digest-pinned Emscripten image with networking disabled",
       "reachability_root": "browser-runtime",
-      "sha256": "d20c491e75936dc8189910c8d0740093b7813d8dcc1cf966a87c011799ade9d8"
+      "sha256": "d20c491e75936dc8189910c8d0740093b7813d8dcc1cf966a87c011799ade9d8",
+      "source_map_policy": "release-web"
     },
     {
       "artifact_id": "BX-BH01-RUNTIME-RELEASE-WEB-ATOMVM-MJS",
@@ -85,12 +163,22 @@
       "content_encoding": null,
       "deployable": true,
       "kind": "javascript",
+      "license_record_ids": [
+        "BX-BH01-LICENSE-FISSIONVM",
+        "BX-BH01-LICENSE-MBEDTLS",
+        "BX-BH01-LICENSE-EMSCRIPTEN",
+        "BX-BH01-LICENSE-NINJA",
+        "BX-BH01-LICENSE-GPERF",
+        "BX-BH01-LICENSE-ZLIB"
+      ],
       "mime": "text/javascript",
       "mode": "release-web",
-      "owner": "runtime-build",
+      "owner": "packages/blazex_runtime_popcorn/runtime",
       "path": "generated/release-web/artifacts/AtomVM.mjs",
+      "provenance": "checksum-qualified FissionVM/Mbed TLS sources built in the digest-pinned Emscripten image with networking disabled",
       "reachability_root": "browser-runtime",
-      "sha256": "43cbf6ec34cd4745777b4ce70aa23844a6bb8af44c301c86a5dd02c0165bef64"
+      "sha256": "43cbf6ec34cd4745777b4ce70aa23844a6bb8af44c301c86a5dd02c0165bef64",
+      "source_map_policy": "release-web"
     },
     {
       "artifact_id": "BX-BH01-RUNTIME-RELEASE-WEB-ATOMVM-WASM-GZ",
@@ -99,12 +187,24 @@
       "content_encoding": "gzip",
       "deployable": true,
       "kind": "compressed",
+      "license_record_ids": [
+        "BX-BH01-LICENSE-FISSIONVM",
+        "BX-BH01-LICENSE-MBEDTLS",
+        "BX-BH01-LICENSE-EMSCRIPTEN",
+        "BX-BH01-LICENSE-NINJA",
+        "BX-BH01-LICENSE-GPERF",
+        "BX-BH01-LICENSE-ZLIB"
+      ],
       "mime": "application/wasm",
       "mode": "release-web",
-      "owner": "runtime-build",
+      "owner": "packages/blazex_runtime_popcorn/runtime",
       "path": "generated/release-web/artifacts/AtomVM.wasm.gz",
+      "provenance": "checksum-qualified FissionVM/Mbed TLS sources built in the digest-pinned Emscripten image with networking disabled",
       "reachability_root": "browser-runtime",
-      "sha256": "b36f65b490c041ab9f1845f0f59ea27021d5078c2533a9c1c860fb0b5ae05d96"
+      "sha256": "b36f65b490c041ab9f1845f0f59ea27021d5078c2533a9c1c860fb0b5ae05d96",
+      "source_map_policy": "release-web",
+      "uncompressed_artifact_id": "BX-BH01-RUNTIME-RELEASE-WEB-ATOMVM-WASM",
+      "uncompressed_bytes": 986537
     },
     {
       "artifact_id": "BX-BH01-RUNTIME-RELEASE-WEB-ATOMVM-MJS-GZ",
@@ -113,12 +213,48 @@
       "content_encoding": "gzip",
       "deployable": true,
       "kind": "compressed",
+      "license_record_ids": [
+        "BX-BH01-LICENSE-FISSIONVM",
+        "BX-BH01-LICENSE-MBEDTLS",
+        "BX-BH01-LICENSE-EMSCRIPTEN",
+        "BX-BH01-LICENSE-NINJA",
+        "BX-BH01-LICENSE-GPERF",
+        "BX-BH01-LICENSE-ZLIB"
+      ],
       "mime": "text/javascript",
       "mode": "release-web",
-      "owner": "runtime-build",
+      "owner": "packages/blazex_runtime_popcorn/runtime",
       "path": "generated/release-web/artifacts/AtomVM.mjs.gz",
+      "provenance": "checksum-qualified FissionVM/Mbed TLS sources built in the digest-pinned Emscripten image with networking disabled",
       "reachability_root": "browser-runtime",
-      "sha256": "da51cfd3b69ae2e56553b4c7728fa190c0a702592338d15080de21fde95410cd"
+      "sha256": "da51cfd3b69ae2e56553b4c7728fa190c0a702592338d15080de21fde95410cd",
+      "source_map_policy": "release-web",
+      "uncompressed_artifact_id": "BX-BH01-RUNTIME-RELEASE-WEB-ATOMVM-MJS",
+      "uncompressed_bytes": 156421
+    },
+    {
+      "artifact_id": "BX-BH01-RUNTIME-RELEASE-WEB-BUILD-LOG",
+      "build_lineage": "BX-BH01-RUNTIME-BUILD-0.1",
+      "bytes": 28093,
+      "content_encoding": null,
+      "deployable": false,
+      "kind": "build-log",
+      "license_record_ids": [
+        "BX-BH01-LICENSE-FISSIONVM",
+        "BX-BH01-LICENSE-MBEDTLS",
+        "BX-BH01-LICENSE-EMSCRIPTEN",
+        "BX-BH01-LICENSE-NINJA",
+        "BX-BH01-LICENSE-GPERF",
+        "BX-BH01-LICENSE-ZLIB"
+      ],
+      "mime": "text/plain",
+      "mode": "release-web",
+      "owner": "packages/blazex_runtime_popcorn/runtime",
+      "path": "generated/release-web/build.log",
+      "provenance": "checksum-qualified FissionVM/Mbed TLS sources built in the digest-pinned Emscripten image with networking disabled",
+      "reachability_root": "build-evidence",
+      "sha256": "c5d2afbe3587e072f2746555b515eb77edde624a29a98eaf54c8436e528c7c1f",
+      "source_map_policy": "not-applicable build log"
     },
     {
       "artifact_id": "BX-BH01-RUNTIME-RELEASE-NODE-PROBE-ATOMVM-WASM",
@@ -127,12 +263,22 @@
       "content_encoding": null,
       "deployable": false,
       "kind": "wasm",
+      "license_record_ids": [
+        "BX-BH01-LICENSE-FISSIONVM",
+        "BX-BH01-LICENSE-MBEDTLS",
+        "BX-BH01-LICENSE-EMSCRIPTEN",
+        "BX-BH01-LICENSE-NINJA",
+        "BX-BH01-LICENSE-GPERF",
+        "BX-BH01-LICENSE-ZLIB"
+      ],
       "mime": "application/wasm",
       "mode": "release-node-probe",
-      "owner": "runtime-build",
+      "owner": "packages/blazex_runtime_popcorn/runtime",
       "path": "generated/release-node-probe/artifacts/AtomVM.wasm",
+      "provenance": "checksum-qualified FissionVM/Mbed TLS sources built in the digest-pinned Emscripten image with networking disabled",
       "reachability_root": "phase3-node-probe",
-      "sha256": "7c31ad202adad7e8dca83f0da3a3ac7578c0ee7ea33d51ddc0e44f50e7df6814"
+      "sha256": "7c31ad202adad7e8dca83f0da3a3ac7578c0ee7ea33d51ddc0e44f50e7df6814",
+      "source_map_policy": "release-node-probe"
     },
     {
       "artifact_id": "BX-BH01-RUNTIME-RELEASE-NODE-PROBE-ATOMVM-MJS",
@@ -141,12 +287,22 @@
       "content_encoding": null,
       "deployable": false,
       "kind": "javascript",
+      "license_record_ids": [
+        "BX-BH01-LICENSE-FISSIONVM",
+        "BX-BH01-LICENSE-MBEDTLS",
+        "BX-BH01-LICENSE-EMSCRIPTEN",
+        "BX-BH01-LICENSE-NINJA",
+        "BX-BH01-LICENSE-GPERF",
+        "BX-BH01-LICENSE-ZLIB"
+      ],
       "mime": "text/javascript",
       "mode": "release-node-probe",
-      "owner": "runtime-build",
+      "owner": "packages/blazex_runtime_popcorn/runtime",
       "path": "generated/release-node-probe/artifacts/AtomVM.mjs",
+      "provenance": "checksum-qualified FissionVM/Mbed TLS sources built in the digest-pinned Emscripten image with networking disabled",
       "reachability_root": "phase3-node-probe",
-      "sha256": "54ca927247809e78338738d97f7cfa05349c7cdd8a96ca63021a8e218747c8fe"
+      "sha256": "54ca927247809e78338738d97f7cfa05349c7cdd8a96ca63021a8e218747c8fe",
+      "source_map_policy": "release-node-probe"
     },
     {
       "artifact_id": "BX-BH01-RUNTIME-RELEASE-NODE-PROBE-ATOMVM-WASM-GZ",
@@ -155,12 +311,24 @@
       "content_encoding": "gzip",
       "deployable": false,
       "kind": "compressed",
+      "license_record_ids": [
+        "BX-BH01-LICENSE-FISSIONVM",
+        "BX-BH01-LICENSE-MBEDTLS",
+        "BX-BH01-LICENSE-EMSCRIPTEN",
+        "BX-BH01-LICENSE-NINJA",
+        "BX-BH01-LICENSE-GPERF",
+        "BX-BH01-LICENSE-ZLIB"
+      ],
       "mime": "application/wasm",
       "mode": "release-node-probe",
-      "owner": "runtime-build",
+      "owner": "packages/blazex_runtime_popcorn/runtime",
       "path": "generated/release-node-probe/artifacts/AtomVM.wasm.gz",
+      "provenance": "checksum-qualified FissionVM/Mbed TLS sources built in the digest-pinned Emscripten image with networking disabled",
       "reachability_root": "phase3-node-probe",
-      "sha256": "b7a2f6e6f58e60b7d5318ab767094768dcc1f895fd66712c7e9ae91930c6589d"
+      "sha256": "b7a2f6e6f58e60b7d5318ab767094768dcc1f895fd66712c7e9ae91930c6589d",
+      "source_map_policy": "release-node-probe",
+      "uncompressed_artifact_id": "BX-BH01-RUNTIME-RELEASE-NODE-PROBE-ATOMVM-WASM",
+      "uncompressed_bytes": 986130
     },
     {
       "artifact_id": "BX-BH01-RUNTIME-RELEASE-NODE-PROBE-ATOMVM-MJS-GZ",
@@ -169,16 +337,70 @@
       "content_encoding": "gzip",
       "deployable": false,
       "kind": "compressed",
+      "license_record_ids": [
+        "BX-BH01-LICENSE-FISSIONVM",
+        "BX-BH01-LICENSE-MBEDTLS",
+        "BX-BH01-LICENSE-EMSCRIPTEN",
+        "BX-BH01-LICENSE-NINJA",
+        "BX-BH01-LICENSE-GPERF",
+        "BX-BH01-LICENSE-ZLIB"
+      ],
       "mime": "text/javascript",
       "mode": "release-node-probe",
-      "owner": "runtime-build",
+      "owner": "packages/blazex_runtime_popcorn/runtime",
       "path": "generated/release-node-probe/artifacts/AtomVM.mjs.gz",
+      "provenance": "checksum-qualified FissionVM/Mbed TLS sources built in the digest-pinned Emscripten image with networking disabled",
       "reachability_root": "phase3-node-probe",
-      "sha256": "1d74d0de10d2f5bd55dc78bca7a8575d91dd8b3ceed8e0777e7486f46bcdb3c6"
+      "sha256": "1d74d0de10d2f5bd55dc78bca7a8575d91dd8b3ceed8e0777e7486f46bcdb3c6",
+      "source_map_policy": "release-node-probe",
+      "uncompressed_artifact_id": "BX-BH01-RUNTIME-RELEASE-NODE-PROBE-ATOMVM-MJS",
+      "uncompressed_bytes": 165299
+    },
+    {
+      "artifact_id": "BX-BH01-RUNTIME-RELEASE-NODE-PROBE-BUILD-LOG",
+      "build_lineage": "BX-BH01-RUNTIME-BUILD-0.1",
+      "bytes": 28094,
+      "content_encoding": null,
+      "deployable": false,
+      "kind": "build-log",
+      "license_record_ids": [
+        "BX-BH01-LICENSE-FISSIONVM",
+        "BX-BH01-LICENSE-MBEDTLS",
+        "BX-BH01-LICENSE-EMSCRIPTEN",
+        "BX-BH01-LICENSE-NINJA",
+        "BX-BH01-LICENSE-GPERF",
+        "BX-BH01-LICENSE-ZLIB"
+      ],
+      "mime": "text/plain",
+      "mode": "release-node-probe",
+      "owner": "packages/blazex_runtime_popcorn/runtime",
+      "path": "generated/release-node-probe/build.log",
+      "provenance": "checksum-qualified FissionVM/Mbed TLS sources built in the digest-pinned Emscripten image with networking disabled",
+      "reachability_root": "build-evidence",
+      "sha256": "c5a15538c520e368a16c22a550d0a19b9ddf3162f073e6dd1458cc0509493283",
+      "source_map_policy": "not-applicable build log"
     }
   ],
   "build_contract": "build-contract.json",
-  "build_contract_sha256": "1df618141200d9c3f4f194fa7ed994c2c76f81aa087f7a3ec35da7afee918c33",
+  "build_contract_sha256": "ae2f87845d612ac3ba9b23517389df5ddee4d1bda7f99bb9c024c47fea366980",
+  "embedded_artifacts": [
+    {
+      "artifact_id": "BX-BH01-RUNTIME-DEBUG-WEB-EMBEDDED-DEBUG-SECTIONS",
+      "carrier_artifact_id": "BX-BH01-RUNTIME-DEBUG-WEB-ATOMVM-WASM",
+      "kind": "embedded-debug-symbols",
+      "sections": [
+        "name",
+        ".debug_loc",
+        ".debug_abbrev",
+        ".debug_info",
+        ".debug_ranges",
+        ".debug_str",
+        ".debug_line",
+        ".debug_aranges"
+      ],
+      "source_map_policy": "embedded DWARF/name sections only; no external source map"
+    }
+  ],
   "javascript_inspections": [
     {
       "bytes": 309205,
@@ -225,6 +447,18 @@
     "Payload observations are preliminary and do not pass any proposed budget."
   ],
   "manifest_id": "BX-BH01-RUNTIME-BINARY-MANIFEST-0.1",
+  "omission_records": [
+    {
+      "applies_to_modes": [
+        "debug-web",
+        "release-web",
+        "release-node-probe"
+      ],
+      "artifact_id": "BX-BH01-RUNTIME-EXTERNAL-SOURCE-MAPS-NOT-EMITTED",
+      "kind": "source-map-omission",
+      "reason": "The pinned Emscripten commands emit no external source map; debug information is embedded only in debug-web."
+    }
+  ],
   "schema_version": "1.0.0",
   "source_map_policy": {
     "debug-web": "DWARF custom sections and names are embedded with canonical relative prefixes; no external map is emitted.",

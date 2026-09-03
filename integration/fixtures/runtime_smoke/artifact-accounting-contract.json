@@ -1,0 +1,87 @@
+{
+  "schema_version": "1.0.0",
+  "contract_id": "BX-BH01-PHASE3-ARTIFACT-ACCOUNTING-0.1",
+  "status": "phase3-executed",
+  "build_lineages": [
+    {
+      "id": "BX-BH01-RUNTIME-BUILD-0.1",
+      "owner": "packages/blazex_runtime_popcorn/runtime",
+      "command": "python3 packages/blazex_runtime_popcorn/runtime/build_runtime.py --fissionvm <qualified> --mbedtls <qualified> --ninja <qualified> --gperf <qualified> --zlib <qualified> --output <clean-output>",
+      "contract": "packages/blazex_runtime_popcorn/runtime/build-contract.json",
+      "producers": ["packages/blazex_runtime_popcorn/runtime/build_runtime.py", "packages/blazex_runtime_popcorn/runtime/generate_manifest.py"]
+    },
+    {
+      "id": "BX-BH01-FIXTURE-BUILD-0.1",
+      "owner": "integration/fixtures/runtime_smoke",
+      "command": "MIX_ENV=prod mix compile; MIX_ENV=prod mix bh01.package --mode <debug|release> --out-dir <clean-output>/<mode>",
+      "contract": "integration/fixtures/runtime_smoke/build-contract.json",
+      "producers": ["integration/fixtures/runtime_smoke/lib/mix/tasks/bh01.package.ex", "integration/fixtures/runtime_smoke/generate_bundle_manifest.py"]
+    },
+    {
+      "id": "BX-BH01-PHASE3-ACCOUNTING-0.1",
+      "owner": "integration/fixtures/runtime_smoke",
+      "command": "python3 integration/fixtures/runtime_smoke/generate_artifact_accounting.py --runtime-repeat <clean-runtime-output> --fixture-repeat <clean-fixture-output>",
+      "contract": "integration/fixtures/runtime_smoke/artifact-accounting-contract.json",
+      "producers": ["integration/fixtures/runtime_smoke/generate_artifact_accounting.py", "integration/fixtures/runtime_smoke/verify_artifact_accounting.py"]
+    }
+  ],
+  "output_roots": {
+    "runtime": {
+      "modes": ["debug-web", "release-web", "release-node-probe"],
+      "declared_files": [
+        "artifacts/AtomVM.wasm",
+        "artifacts/AtomVM.mjs",
+        "artifacts/AtomVM.wasm.gz",
+        "artifacts/AtomVM.mjs.gz",
+        "build.log"
+      ],
+      "excluded_intermediates": ["cmake/**"],
+      "exclusion_reason": "CMake/Ninja object trees are clean-build intermediates, never copied to a runtime or evidence distribution."
+    },
+    "fixture": {
+      "modes": ["debug", "release"],
+      "declared_files": ["bundle.avm", "bundle.avm.gz", "module-inventory.json"],
+      "excluded_intermediates": [],
+      "exclusion_reason": null
+    }
+  },
+  "required_artifact_fields": [
+    "artifact_id",
+    "build_lineage",
+    "bytes",
+    "kind",
+    "license_record_ids",
+    "mime",
+    "mode",
+    "owner",
+    "path",
+    "provenance",
+    "reachability_root",
+    "sha256",
+    "source_map_policy"
+  ],
+  "required_license_inputs": [
+    "fissionvm",
+    "mbedtls",
+    "emscripten",
+    "ninja",
+    "gperf",
+    "zlib",
+    "popcorn",
+    "jason"
+  ],
+  "reproducibility": {
+    "runs": 2,
+    "comparison": "byte-for-byte SHA-256 and size equality from clean equivalent inputs",
+    "allowed_nondeterministic_outputs": [],
+    "gzip_mtime": 0
+  },
+  "source_map_policy": {
+    "debug-web": "embedded DWARF/name custom sections; no external map",
+    "release-web": "debug/name sections stripped; no external map",
+    "release-node-probe": "debug/name sections stripped; no external map; non-deployable",
+    "fixture-debug": "BEAM line chunks retained inside AVM; no external map",
+    "fixture-release": "BEAM line chunks removed inside AVM; no external map"
+  },
+  "preliminary_budget_policy": "Record exact bytes, but do not mark any proposed runtime or payload budget passed in BH-01."
+}

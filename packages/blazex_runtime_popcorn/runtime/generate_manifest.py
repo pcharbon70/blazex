@@ -27,24 +27,50 @@ def digest(path: Path) -> str:
 
 
 def artifact(mode: dict[str, Any], root: Path, name: str) -> dict[str, Any]:
-    path = root / mode["id"] / "artifacts" / name
+    is_log = name == "build.log"
+    path = root / mode["id"] / (name if is_log else f"artifacts/{name}")
     suffix = ".wasm" if ".wasm" in name else ".mjs"
-    kind = "wasm" if name == "AtomVM.wasm" else "javascript" if name == "AtomVM.mjs" else "compressed"
-    mime = "application/wasm" if suffix == ".wasm" else "text/javascript"
-    return {
+    kind = (
+        "build-log"
+        if is_log
+        else "wasm"
+        if name == "AtomVM.wasm"
+        else "javascript"
+        if name == "AtomVM.mjs"
+        else "compressed"
+    )
+    mime = "text/plain" if is_log else "application/wasm" if suffix == ".wasm" else "text/javascript"
+    item = {
         "artifact_id": f"BX-BH01-RUNTIME-{mode['id'].upper()}-{name.upper().replace('.', '-')}",
         "mode": mode["id"],
         "kind": kind,
-        "path": f"generated/{mode['id']}/artifacts/{name}",
+        "path": f"generated/{mode['id']}/{name if is_log else f'artifacts/{name}'}",
         "sha256": digest(path),
         "bytes": path.stat().st_size,
         "mime": mime,
         "content_encoding": "gzip" if name.endswith(".gz") else None,
-        "owner": "runtime-build",
-        "reachability_root": "browser-runtime" if mode["deployable"] else "phase3-node-probe",
-        "deployable": mode["deployable"],
+        "owner": "packages/blazex_runtime_popcorn/runtime",
+        "reachability_root": "build-evidence" if is_log else "browser-runtime" if mode["deployable"] else "phase3-node-probe",
+        "deployable": mode["deployable"] and not is_log,
         "build_lineage": "BX-BH01-RUNTIME-BUILD-0.1",
+        "provenance": "checksum-qualified FissionVM/Mbed TLS sources built in the digest-pinned Emscripten image with networking disabled",
+        "source_map_policy": "not-applicable build log" if is_log else mode["id"],
+        "license_record_ids": [
+            "BX-BH01-LICENSE-FISSIONVM",
+            "BX-BH01-LICENSE-MBEDTLS",
+            "BX-BH01-LICENSE-EMSCRIPTEN",
+            "BX-BH01-LICENSE-NINJA",
+            "BX-BH01-LICENSE-GPERF",
+            "BX-BH01-LICENSE-ZLIB",
+        ],
     }
+    if name.endswith(".gz"):
+        raw_name = name[:-3]
+        item["uncompressed_artifact_id"] = (
+            f"BX-BH01-RUNTIME-{mode['id'].upper()}-{raw_name.upper().replace('.', '-')}"
+        )
+        item["uncompressed_bytes"] = (path.parent / raw_name).stat().st_size
+    return item
 
 
 def main() -> int:
@@ -59,7 +85,10 @@ def main() -> int:
     inspections = []
     glue = []
     for mode in contract["modes"]:
-        artifacts.extend(artifact(mode, root, name) for name in ("AtomVM.wasm", "AtomVM.mjs", "AtomVM.wasm.gz", "AtomVM.mjs.gz"))
+        artifacts.extend(
+            artifact(mode, root, name)
+            for name in ("AtomVM.wasm", "AtomVM.mjs", "AtomVM.wasm.gz", "AtomVM.mjs.gz", "build.log")
+        )
         wasm = root / mode["id"] / "artifacts/AtomVM.wasm"
         wasm_inspection = inspect(wasm)
         wasm_inspection["mode"] = mode["id"]
@@ -85,6 +114,23 @@ def main() -> int:
         "build_contract_sha256": digest(contract_path),
         "source_revision": contract["inputs"]["fissionvm"]["commit"],
         "artifacts": artifacts,
+        "embedded_artifacts": [
+            {
+                "artifact_id": "BX-BH01-RUNTIME-DEBUG-WEB-EMBEDDED-DEBUG-SECTIONS",
+                "kind": "embedded-debug-symbols",
+                "carrier_artifact_id": "BX-BH01-RUNTIME-DEBUG-WEB-ATOMVM-WASM",
+                "sections": ["name", ".debug_loc", ".debug_abbrev", ".debug_info", ".debug_ranges", ".debug_str", ".debug_line", ".debug_aranges"],
+                "source_map_policy": "embedded DWARF/name sections only; no external source map",
+            }
+        ],
+        "omission_records": [
+            {
+                "artifact_id": "BX-BH01-RUNTIME-EXTERNAL-SOURCE-MAPS-NOT-EMITTED",
+                "kind": "source-map-omission",
+                "applies_to_modes": [mode["id"] for mode in contract["modes"]],
+                "reason": "The pinned Emscripten commands emit no external source map; debug information is embedded only in debug-web.",
+            }
+        ],
         "wasm_inspections": inspections,
         "javascript_inspections": glue,
         "source_map_policy": {

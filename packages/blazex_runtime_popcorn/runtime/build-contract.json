@@ -54,6 +54,7 @@
     "python_hash_seed": "0",
     "network_during_cache_seed_configure_compile_link_package": false,
     "jobs": 4,
+    "build_log_normalization": "replace Ninja completion indices and bytewise-sort all transcript lines to remove parallel scheduling order",
     "container_paths": {
       "fissionvm": "/inputs/fissionvm",
       "mbedtls": "/inputs/mbedtls",

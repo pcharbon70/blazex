@@ -17,7 +17,7 @@
     },
     {
       "name": "bundle.avm",
-      "sha256": "82a1d00bc8220c176a20287a65953eb8569b1353f8cbb1fe3e562e89a5a8f8cc"
+      "sha256": "4f4b7adf6b138df2c232cb03a390674b07f6b51d015722cc0654bd25c4a66a22"
     }
   ],
   "required_results": [
@@ -90,7 +90,7 @@
     "{bxtrace,[{generation,1},{scenario,runtime_smoke},{process,entry},{sequence,15},{result,current_generation_accepted},{error,none},{cleanup,pending}]}",
     "{bxtrace,[{generation,1},{scenario,runtime_smoke},{process,entry},{sequence,16},{result,late_result_timed_out},{error,none},{cleanup,pending}]}",
     "{bxtrace,[{generation,1},{scenario,runtime_smoke},{process,entry},{sequence,17},{result,late_result_drained},{error,none},{cleanup,pending}]}",
-    "{bxobservation,[{monotonic_elapsed_ms,10}]}",
+    "{bxobservation,[{monotonic_elapsed_ms,22}]}",
     "{bxtrace,[{generation,1},{scenario,runtime_smoke},{process,protocol},{sequence,18},{result,request_response_matched},{error,none},{cleanup,pending}]}",
     "{bxtrace,[{generation,1},{scenario,runtime_smoke},{process,protocol},{sequence,19},{result,duplicate_request_rejected},{error,none},{cleanup,pending}]}",
     "{bxtrace,[{generation,1},{scenario,runtime_smoke},{process,protocol},{sequence,20},{result,duplicate_reply_rejected},{error,none},{cleanup,pending}]}",

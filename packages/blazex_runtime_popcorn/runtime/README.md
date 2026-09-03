@@ -27,9 +27,15 @@ python3 packages/blazex_runtime_popcorn/runtime/build_runtime.py \
 The command rejects wrong hashes, undeclared modes, dirty output directories,
 missing Docker, implicit network access, and missing generated outputs. It
 uses canonical source-prefix maps and deterministic gzip headers. Generated
-binaries and logs are ignored; their hashes, sizes, binary contract, input
+binaries and logs are ignored. Ninja progress indices and transcript lines are
+normalized to remove parallel completion order; their hashes, sizes, binary contract, input
 lineage, source-map policy, and limitations are retained in
 `runtime-binary-manifest.json`.
+
+`THIRD_PARTY_NOTICES.md` assigns stable license records to every direct build
+input. The unified Phase 3 artifact manifest also records the empty BlazeX
+source-patch set, embedded debug-section carrier, external source-map omission,
+output reachability, and clean-repeat identities.
 
 `adapter-classification.json` separates upstream VM behavior, FissionVM's
 Emscripten platform, Popcorn packaging/bridges, BlazeX's Phase 3 adaptation,

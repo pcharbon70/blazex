@@ -39,7 +39,8 @@ def source_inputs() -> list[dict[str, Any]]:
 
 
 def artifact(mode: str, kind: str, path: Path) -> dict[str, Any]:
-    return {
+    mime = "application/vnd.atomvm.avm" if kind in {"avm", "avm-gzip"} else "application/json"
+    item = {
         "artifact_id": f"BX-BH01-FIXTURE-{mode.upper()}-{kind.upper()}",
         "mode": mode,
         "kind": kind,
@@ -49,7 +50,17 @@ def artifact(mode: str, kind: str, path: Path) -> dict[str, Any]:
         "retained": False,
         "owner": "integration/fixtures/runtime_smoke",
         "reachability_root": "Elixir.BlazeX.BH01.RuntimeSmoke.Boot",
+        "mime": mime,
+        "content_encoding": "gzip" if kind == "avm-gzip" else None,
+        "build_lineage": "BX-BH01-FIXTURE-BUILD-0.1",
+        "provenance": "exact locked Elixir/OTP container build with deterministic module ordering and fixed boot identity",
+        "source_map_policy": f"fixture-{mode}",
+        "license_record_ids": ["BX-BH01-LICENSE-POPCORN", "BX-BH01-LICENSE-JASON"],
     }
+    if kind == "avm-gzip":
+        item["uncompressed_artifact_id"] = f"BX-BH01-FIXTURE-{mode.upper()}-AVM"
+        item["uncompressed_bytes"] = path.with_suffix("").stat().st_size
+    return item
 
 
 def generate(generated: Path) -> dict[str, Any]:
@@ -95,6 +106,7 @@ def generate(generated: Path) -> dict[str, Any]:
         "reviewed_nondeterministic_fields": [],
         "normalization": [
             "A fixed generated boot-module name replaces Popcorn.cook's unique boot name.",
+            "The temporary generated boot BEAM is deleted after it is embedded and is not a deployable output.",
             "Bundle inputs are sorted by unique BEAM basename with the entrypoint first.",
             "The gzip writer emits an all-zero MTIME field.",
             "The container mount and generated boot source paths are fixed at /workspace.",
@@ -117,7 +129,7 @@ def main() -> int:
     parser.add_argument("--generated", type=Path, required=True)
     parser.add_argument("--output", type=Path, default=HERE / "bundle-manifest.json")
     args = parser.parse_args()
-    args.output.write_text(json.dumps(generate(args.generated.resolve()), indent=2) + "\n", encoding="utf-8")
+    args.output.write_text(json.dumps(generate(args.generated.resolve()), indent=2, sort_keys=True) + "\n", encoding="utf-8")
     return 0
 
 

@@ -30,3 +30,15 @@ python3 verify_fixture.py
 
 Generated bundles are ignored. `bundle-manifest.json` retains their identities,
 module inventories, sizes, source policy, and package lineage.
+
+`artifact-accounting-contract.json` joins those bundle identities to the
+runtime outputs, input provenance, patch record, third-party notices, debug
+symbol/source-map dispositions, and normalized build logs. The retained Phase
+3 artifact manifest and repeat evidence are validated with:
+
+```console
+python3 verify_artifact_accounting.py
+```
+
+The clean-build comparison records exact bytes only. It does not mark a
+proposed payload budget as passed or establish browser deployability.

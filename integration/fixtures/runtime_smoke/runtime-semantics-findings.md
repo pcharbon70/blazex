@@ -82,6 +82,6 @@ bounded request/reply, cancellation, and disposal behavior.
 - Contract: `semantics-contract.json`
 - Scenario: `../scenarios/bh01-runtime-semantics.json`
 - Normalized raw observation: `../raw-evidence/bh01-phase3-runtime-semantics.json`
-- Release fixture: SHA-256 `82a1d00bc8220c176a20287a65953eb8569b1353f8cbb1fe3e562e89a5a8f8cc`, 6,541,768 bytes
-- Debug fixture: SHA-256 `1e70ff26f9cb130ddaa973faa08240293427b5aff597ddf7ee3b3c906ef127c9`, 6,987,416 bytes
+- Release fixture: SHA-256 `4f4b7adf6b138df2c232cb03a390674b07f6b51d015722cc0654bd25c4a66a22`, 6,541,768 bytes
+- Debug fixture: SHA-256 `8fc4e73c4afc8945c745d23492b8ae4a355948f44e9092aad7f0d9d49178e72a`, 6,987,416 bytes
 - Shared module inventory: 584 modules

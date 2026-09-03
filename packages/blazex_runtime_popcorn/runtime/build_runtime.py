@@ -8,6 +8,7 @@ import gzip
 import hashlib
 import json
 import os
+import re
 import shutil
 import subprocess
 import tarfile
@@ -89,6 +90,13 @@ def deterministic_gzip(source: Path, target: Path) -> None:
     with source.open("rb") as input_stream, target.open("wb") as output_stream:
         with gzip.GzipFile(filename="", mode="wb", compresslevel=9, fileobj=output_stream, mtime=0) as zipped:
             shutil.copyfileobj(input_stream, zipped)
+
+
+def normalize_build_log(path: Path) -> None:
+    """Remove parallel scheduling order while retaining the complete transcript."""
+    lines = path.read_text(encoding="utf-8").splitlines()
+    normalized = [re.sub(r"^\[\d+/(\d+)\]", r"[*/\1]", line) for line in lines]
+    path.write_text("\n".join(sorted(normalized)) + "\n", encoding="utf-8")
 
 
 def prepare_cache(contract: dict[str, Any], workspace: Path, zlib_archive: Path) -> Path:
@@ -175,7 +183,9 @@ def build_mode(
         "-v", f"{destination}:/outputs",
         image, "bash", "-lc", shell,
     ]
-    run(command, destination / "build.log")
+    build_log = destination / "build.log"
+    run(command, build_log)
+    normalize_build_log(build_log)
     for name in ("AtomVM.wasm", "AtomVM.mjs"):
         artifact = destination / "artifacts" / name
         if not artifact.is_file():

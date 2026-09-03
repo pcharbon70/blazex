@@ -40,6 +40,7 @@ defmodule Mix.Tasks.Bh01.Package do
     gzip = File.read!(bundle_path) |> :zlib.gzip()
     File.write!(bundle_path <> ".gz", gzip)
     write_inventory(out_dir, mode, inputs)
+    File.rm!(boot_beam)
   end
 
   defp create_boot_module(out_dir) do
@@ -148,7 +149,7 @@ defmodule Mix.Tasks.Bh01.Package do
 
     new_specs =
       for app <- new_apps, spec = Application.spec(app), spec != nil, into: %{} do
-        {app, [env: Application.get_all_env(app)] ++ spec}
+        {app, [env: Application.get_all_env(app) |> Enum.sort()] ++ spec}
       end
 
     dependencies =

@@ -78,6 +78,10 @@ locations rather than this governance directory.
   — repository-owner approval for the pinned runtime build, disposable BEAM
   fixture, non-browser semantic probes, artifact evidence, section commits,
   one immediately merged PR, synchronization, and branch cleanup.
+- [BH-01 Phase 3 artifact manifest v0.1.0](blazex-bh-01-phase-03-artifact-manifest-v0.1.0.json)
+  — unified identities, lineage, provenance, ownership, reachability, source-
+  map policy, licensing, and two-clean-build comparison for runtime and AVM
+  outputs.
 
 ## Maintaining this index
 
