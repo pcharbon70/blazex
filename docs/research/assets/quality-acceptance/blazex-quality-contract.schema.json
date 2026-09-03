@@ -179,13 +179,74 @@
     },
     "gate": {
       "type": "object",
-      "additionalProperties": true,
-      "required": ["id", "dimension", "status"],
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "dimension",
+        "status",
+        "owner",
+        "scope_statement",
+        "requirements",
+        "evidence_classes",
+        "test_contexts",
+        "severity_rules",
+        "exception_policy",
+        "first_execution_milestone",
+        "evidence_state",
+        "evidence_ids"
+      ],
       "properties": {
         "id": {"type": "string", "pattern": "^BX-GATE-[A-Z0-9-]+$"},
         "dimension": {"enum": ["accessibility", "security", "compatibility", "provenance"]},
-        "status": {"enum": ["unassigned", "reviewed-planned"]}
+        "status": {"const": "reviewed-planned"},
+        "owner": {"type": "string", "minLength": 3},
+        "scope_statement": {"type": "string", "minLength": 40},
+        "requirements": {"type": "array", "minItems": 4, "items": {"$ref": "#/$defs/gateRequirement"}},
+        "evidence_classes": {"type": "array", "minItems": 2, "uniqueItems": true, "items": {"$ref": "#/$defs/evidenceClass"}},
+        "test_contexts": {"type": "array", "minItems": 2, "uniqueItems": true, "items": {"type": "string", "minLength": 5}},
+        "severity_rules": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["blocker", "high", "medium", "low"],
+          "properties": {
+            "blocker": {"type": "string", "minLength": 20},
+            "high": {"type": "string", "minLength": 20},
+            "medium": {"type": "string", "minLength": 20},
+            "low": {"type": "string", "minLength": 20}
+          }
+        },
+        "exception_policy": {"type": "string", "minLength": 50},
+        "first_execution_milestone": {"type": "string", "pattern": "^BH-(0[1-9]|1[0-9]|2[0-3])$"},
+        "evidence_state": {"const": "planned-not-executed"},
+        "evidence_ids": {"type": "array", "maxItems": 0}
       }
+    },
+    "gateRequirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "normative_statement", "applies_to", "evidence_types", "manual_review", "fallback_or_failure", "minimum_severity"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^BX-GREQ-[A-Z0-9-]+$"},
+        "normative_statement": {"type": "string", "minLength": 40},
+        "applies_to": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 3}},
+        "evidence_types": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/evidenceClass"}},
+        "manual_review": {"enum": ["required", "conditional", "not-required"]},
+        "fallback_or_failure": {"type": "string", "minLength": 30},
+        "minimum_severity": {"enum": ["blocker", "high", "medium", "low"]}
+      }
+    },
+    "evidenceClass": {
+      "enum": [
+        "automated",
+        "accessibility",
+        "browser",
+        "deployment",
+        "generated",
+        "manual",
+        "provenance",
+        "review",
+        "security"
+      ]
     },
     "exception": {
       "type": "object",

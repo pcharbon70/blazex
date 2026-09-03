@@ -50,6 +50,43 @@ REQUIRED_PAYLOAD_SUBJECTS = {
     "default fonts and icons compressed transfer",
     "publicly deployable production source maps",
 }
+EXPECTED_GATE_REQUIREMENTS = {
+    "BX-GATE-ACCESSIBILITY": {
+        "BX-GREQ-A11Y-ANNOUNCEMENT",
+        "BX-GREQ-A11Y-FALLBACK",
+        "BX-GREQ-A11Y-INPUT-MODES",
+        "BX-GREQ-A11Y-KEYBOARD-FOCUS",
+        "BX-GREQ-A11Y-SEMANTICS",
+        "BX-GREQ-A11Y-VISUAL-ADAPTATION",
+    },
+    "BX-GATE-COMPATIBILITY": {
+        "BX-GREQ-COMPAT-IDENTITIES",
+        "BX-GREQ-COMPAT-MISMATCH",
+        "BX-GREQ-COMPAT-SUPPORT-MATRIX",
+        "BX-GREQ-COMPAT-UPGRADE",
+    },
+    "BX-GATE-PROVENANCE": {
+        "BX-GREQ-PROV-ADAPTED-CODE",
+        "BX-GREQ-PROV-ASSETS",
+        "BX-GREQ-PROV-DEPENDENCIES",
+        "BX-GREQ-PROV-GENERATED",
+        "BX-GREQ-PROV-SOURCE-LICENSE",
+    },
+    "BX-GATE-SECURITY": {
+        "BX-GREQ-SEC-CAPABILITY-GRANTS",
+        "BX-GREQ-SEC-CLIENT-STATE",
+        "BX-GREQ-SEC-CSRF-ORIGIN",
+        "BX-GREQ-SEC-DEPENDENCY-DIAGNOSTICS",
+        "BX-GREQ-SEC-SECRETS-INTEGRITY-CSP",
+        "BX-GREQ-SEC-SERVER-COMMAND",
+    },
+}
+EXPECTED_GATE_DIMENSIONS = {
+    "BX-GATE-ACCESSIBILITY": "accessibility",
+    "BX-GATE-COMPATIBILITY": "compatibility",
+    "BX-GATE-PROVENANCE": "provenance",
+    "BX-GATE-SECURITY": "security",
+}
 
 
 class QualityAcceptanceValidationError(ValueError):
@@ -157,12 +194,38 @@ def validate_quality_contract(document: dict[str, Any], schema: dict[str, Any]) 
 def validate_cross_cutting_gates(gates: list[dict[str, Any]]) -> None:
     """Validate gates once Section 5.2 advances the contract stage."""
 
-    _require_sorted_unique(gates, "cross-cutting gate")
+    gate_ids = _require_sorted_unique(gates, "cross-cutting gate")
+    if gate_ids != set(EXPECTED_GATE_REQUIREMENTS):
+        raise QualityAcceptanceValidationError("cross-cutting gate identities must remain complete")
     dimensions = Counter(gate["dimension"] for gate in gates)
     if set(dimensions) != {"accessibility", "security", "compatibility", "provenance"}:
         raise QualityAcceptanceValidationError("cross-cutting gates must cover four governed dimensions")
     if any(gate["status"] != "reviewed-planned" for gate in gates):
         raise QualityAcceptanceValidationError("cross-cutting gates must be reviewed but not executed")
+    all_requirement_ids: list[str] = []
+    for gate in gates:
+        gate_id = gate["id"]
+        if gate["dimension"] != EXPECTED_GATE_DIMENSIONS[gate_id]:
+            raise QualityAcceptanceValidationError(f"gate {gate_id} has the wrong dimension")
+        requirement_ids = _require_sorted_unique(gate["requirements"], f"{gate_id} requirement")
+        if requirement_ids != EXPECTED_GATE_REQUIREMENTS[gate_id]:
+            raise QualityAcceptanceValidationError(f"gate {gate_id} requirement coverage is incomplete")
+        all_requirement_ids.extend(requirement_ids)
+        if gate["evidence_state"] != "planned-not-executed" or gate["evidence_ids"]:
+            raise QualityAcceptanceValidationError(f"gate {gate_id} falsely claims executed evidence")
+        if "review" not in gate["evidence_classes"]:
+            raise QualityAcceptanceValidationError(f"gate {gate_id} must retain independent review evidence")
+    if len(all_requirement_ids) != len(set(all_requirement_ids)):
+        raise QualityAcceptanceValidationError("gate requirement IDs must be globally unique")
+
+    security = next(gate for gate in gates if gate["id"] == "BX-GATE-SECURITY")
+    if any(requirement["minimum_severity"] != "blocker" for requirement in security["requirements"]):
+        raise QualityAcceptanceValidationError("all governed security requirements are release blockers")
+    accessibility = next(gate for gate in gates if gate["id"] == "BX-GATE-ACCESSIBILITY")
+    a11y_by_id = {requirement["id"]: requirement for requirement in accessibility["requirements"]}
+    for requirement_id in {"BX-GREQ-A11Y-FALLBACK", "BX-GREQ-A11Y-KEYBOARD-FOCUS", "BX-GREQ-A11Y-SEMANTICS"}:
+        if a11y_by_id[requirement_id]["minimum_severity"] != "blocker":
+            raise QualityAcceptanceValidationError(f"essential accessibility requirement {requirement_id} must block")
 
 
 def validate_repository() -> dict[str, int]:

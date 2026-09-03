@@ -46,28 +46,28 @@ Back to milestone: [README](README.md)
       - [x] 5.1.2.2 Subtask - Define required outcomes and time bounds for component failure, renderer failure, runtime loss, network loss, deployment mismatch, denied capability, corrupted persisted state, and cleanup.
       - [x] 5.1.2.3 Subtask - Define leak, runaway loop, silent data loss, unauthorized retry, unbounded queue, unrecoverable focus loss, and abandoned resource conditions as release blockers.
 
-  - [ ] 5.2 Section - Establish accessibility, security, compatibility, and provenance gates.
+  - [x] 5.2 Section - Establish accessibility, security, compatibility, and provenance gates.
 
     Quality dimensions that cannot be reduced to one performance number still
     need explicit environments, severity rules, evidence, and exception policy.
 
-    - [ ] 5.2.1 Task - Define accessibility and interaction acceptance.
+    - [x] 5.2.1 Task - Define accessibility and interaction acceptance.
 
       Every family and profile must preserve semantic, keyboard, visual, and
       nonvisual access according to its claimed modes and fallback strategy.
 
-      - [ ] 5.2.1.1 Subtask - Define role, name, relationship, state, keyboard, focus order, focus restoration, announcement, direction, zoom, reflow, forced-color, reduced-motion, touch, and nonvisual requirements.
-      - [ ] 5.2.1.2 Subtask - Define automated checks, renderer-normalized assertions, exact browser scenarios, bounded manual assistive-technology reviews, severity, and supported exception records.
-      - [ ] 5.2.1.3 Subtask - Require an accessible fallback or explicit unsupported state for every visual, permission-dependent, pointer-heavy, timed, virtualized, or chart interaction claim.
+      - [x] 5.2.1.1 Subtask - Define role, name, relationship, state, keyboard, focus order, focus restoration, announcement, direction, zoom, reflow, forced-color, reduced-motion, touch, and nonvisual requirements.
+      - [x] 5.2.1.2 Subtask - Define automated checks, renderer-normalized assertions, exact browser scenarios, bounded manual assistive-technology reviews, severity, and supported exception records.
+      - [x] 5.2.1.3 Subtask - Require an accessible fallback or explicit unsupported state for every visual, permission-dependent, pointer-heavy, timed, virtualized, or chart interaction claim.
 
-    - [ ] 5.2.2 Task - Define security, compatibility, and provenance acceptance.
+    - [x] 5.2.2 Task - Define security, compatibility, and provenance acceptance.
 
       Browser execution and third-party inspiration require auditable trust,
       dependency, source, licensing, and support evidence at every release gate.
 
-      - [ ] 5.2.2.1 Subtask - Define gates for untrusted client state, command authorization, CSRF and origin policy, capability grants, secret exclusion, content integrity, CSP, dependency risk, and diagnostic redaction.
-      - [ ] 5.2.2.2 Subtask - Define runtime, browser, renderer, profile, package, manifest, schema, protocol, asset, and deployment compatibility identifiers plus upgrade and mismatch behavior.
-      - [ ] 5.2.2.3 Subtask - Define source pin, license, notice, adapted-code, icon, style, example, generated-artifact, and dependency provenance completeness with blocking and exception rules.
+      - [x] 5.2.2.1 Subtask - Define gates for untrusted client state, command authorization, CSRF and origin policy, capability grants, secret exclusion, content integrity, CSP, dependency risk, and diagnostic redaction.
+      - [x] 5.2.2.2 Subtask - Define runtime, browser, renderer, profile, package, manifest, schema, protocol, asset, and deployment compatibility identifiers plus upgrade and mismatch behavior.
+      - [x] 5.2.2.3 Subtask - Define source pin, license, notice, adapted-code, icon, style, example, generated-artifact, and dependency provenance completeness with blocking and exception rules.
 
   - [ ] 5.3 Section - Define acceptance conditions and end-to-end traceability.
 

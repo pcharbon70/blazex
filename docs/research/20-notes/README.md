@@ -31,6 +31,7 @@ Source summaries belong in `30-sources`; unresolved workbenches belong in
 
 ### Documents
 
+- [BlazeX cross-cutting quality gate policy](blazex-cross-cutting-quality-gate-policy.md) — defines stable accessibility, security, compatibility, and provenance requirements, evidence classes, severity, manual-review, fallback, and non-waivable exception rules.
 - [BlazeX quality budget and measurement policy](blazex-quality-budget-and-measurement-policy.md) — defines proposed payload, startup, interaction, resource, build, resilience, environment, statistical, exception, and evidence boundaries without claiming measurements.
 - [BlazeX component portability, native, and visual-profile policy](blazex-component-portability-native-and-visual-profile-policy.md) — defines bounded portability statuses, semantic dimensions, native-control strategies, platform/Material/hybrid visual implications, and the BH-02/future-backend support gate.
 - [BlazeX component capability, remote, and fallback policy](blazex-component-capability-remote-and-fallback-policy.md) — defines fourteen portable capability groups, effect/resource ownership, remote-authority states, nine mandatory fallback conditions, server trust, and forbidden backend metadata.

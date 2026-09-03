@@ -2,7 +2,7 @@
   "schema_version": "1.0.0",
   "contract_version": "0.1.0",
   "contract_id": "BX-QUALITY-CONTRACT-BROWSER-0.1",
-  "stage": "section-5.1",
+  "stage": "section-5.2",
   "status": "reviewed-proposed-unmeasured",
   "owner_roles": [
     "architecture-owner",
@@ -725,7 +725,281 @@
     {"id": "BX-BLOCK-UNAUTHORIZED-RETRY", "condition": "a non-idempotent or unauthorized operation is retried automatically", "detection": "Command traces show repeated authority-bearing execution without explicit policy and idempotency identity.", "owner": "security-owner", "waiver": "prohibited"},
     {"id": "BX-BLOCK-UNBOUNDED-QUEUE", "condition": "event, renderer, command, effect, diagnostic, or resource queues can grow without a declared bound", "detection": "Overload fixtures exceed declared admission limits without coalescing, backpressure, rejection, or failure.", "owner": "quality-owner", "waiver": "prohibited"}
   ],
-  "cross_cutting_gates": [],
+  "cross_cutting_gates": [
+    {
+      "id": "BX-GATE-ACCESSIBILITY",
+      "dimension": "accessibility",
+      "status": "reviewed-planned",
+      "owner": "accessibility-owner",
+      "scope_statement": "Every supported family, renderer, profile, rendering mode, fallback, and interaction path must preserve the claimed semantic and operable outcome.",
+      "requirements": [
+        {
+          "id": "BX-GREQ-A11Y-ANNOUNCEMENT",
+          "normative_statement": "Status, validation, loading, progress, route, surface, and asynchronous changes expose bounded announcements with no duplicate or stale generation output.",
+          "applies_to": ["all-asynchronous-families", "all-renderers", "all-supported-profiles"],
+          "evidence_types": ["accessibility", "automated", "manual"],
+          "manual_review": "required",
+          "fallback_or_failure": "A visible and programmatically determinable status remains available when live announcement is unsupported.",
+          "minimum_severity": "high"
+        },
+        {
+          "id": "BX-GREQ-A11Y-FALLBACK",
+          "normative_statement": "Every visual, permission-dependent, pointer-heavy, timed, virtualized, custom-scene, and chart claim provides an accessible fallback or an explicit unsupported state.",
+          "applies_to": ["all-classified-families", "all-fallbacks", "all-supported-profiles"],
+          "evidence_types": ["accessibility", "automated", "browser", "manual"],
+          "manual_review": "required",
+          "fallback_or_failure": "Absence of a usable fallback for a supported claim is a blocker and cannot be waived.",
+          "minimum_severity": "blocker"
+        },
+        {
+          "id": "BX-GREQ-A11Y-INPUT-MODES",
+          "normative_statement": "Pointer, touch, keyboard, direct-action, and nonvisual paths expose equivalent outcomes wherever the component claims those interaction modes.",
+          "applies_to": ["interactive-families", "pointer-heavy-families", "touch-capable-profiles"],
+          "evidence_types": ["accessibility", "browser", "manual"],
+          "manual_review": "required",
+          "fallback_or_failure": "Unsupported input modes are disclosed and an equivalent supported action remains reachable without pointer precision.",
+          "minimum_severity": "high"
+        },
+        {
+          "id": "BX-GREQ-A11Y-KEYBOARD-FOCUS",
+          "normative_statement": "Keyboard operation, logical focus order, visible focus, trapping, restoration, and failure redirection follow the normalized semantic contract for every interactive path.",
+          "applies_to": ["all-interactive-families", "all-renderers", "all-surface-families"],
+          "evidence_types": ["accessibility", "automated", "browser", "manual"],
+          "manual_review": "required",
+          "fallback_or_failure": "Unrecoverable focus loss or an unreachable supported action is a blocker and cannot be waived.",
+          "minimum_severity": "blocker"
+        },
+        {
+          "id": "BX-GREQ-A11Y-SEMANTICS",
+          "normative_statement": "Role, accessible name, description, relationships, value, state, set position, hierarchy, errors, and required or disabled status match renderer-normalized assertions.",
+          "applies_to": ["all-classified-families", "all-renderers", "all-supported-profiles"],
+          "evidence_types": ["accessibility", "automated", "browser", "manual"],
+          "manual_review": "conditional",
+          "fallback_or_failure": "A supported family without a programmatically determinable name, role, or required state fails its gate.",
+          "minimum_severity": "blocker"
+        },
+        {
+          "id": "BX-GREQ-A11Y-VISUAL-ADAPTATION",
+          "normative_statement": "Content remains perceivable and operable under logical direction changes, two-hundred-percent zoom, reflow, forced colors, reduced motion, and text spacing variation.",
+          "applies_to": ["all-visual-families", "browser-profile", "dom-renderer"],
+          "evidence_types": ["accessibility", "automated", "browser", "manual"],
+          "manual_review": "required",
+          "fallback_or_failure": "The classified static, nonanimated, high-contrast, or alternative-interaction fallback is applied without hiding required content.",
+          "minimum_severity": "high"
+        }
+      ],
+      "evidence_classes": ["accessibility", "automated", "browser", "manual", "review"],
+      "test_contexts": ["assistive-technology-matrix", "browser-support-matrix", "forced-colors", "keyboard-only", "logical-directions", "reduced-motion", "touch", "zoom-and-reflow"],
+      "severity_rules": {
+        "blocker": "No supported path, inaccessible authority-bearing action, unrecoverable focus, or missing essential semantics.",
+        "high": "Major task is materially harder or fallback loses an interaction mode, announcement, or visual adaptation.",
+        "medium": "Task remains possible but semantic, ordering, instruction, or adaptation quality is degraded.",
+        "low": "Nonessential polish issue with no semantic ambiguity, lost content, blocked task, or repeated burden."
+      },
+      "exception_policy": "Blockers cannot be waived; lesser exceptions require one scoped family/profile, an accessible fallback, owner, mitigation, review, and expiry within one release.",
+      "first_execution_milestone": "BH-02",
+      "evidence_state": "planned-not-executed",
+      "evidence_ids": []
+    },
+    {
+      "id": "BX-GATE-COMPATIBILITY",
+      "dimension": "compatibility",
+      "status": "reviewed-planned",
+      "owner": "compatibility-owner",
+      "scope_statement": "Every runtime, browser, renderer, profile, package, manifest, schema, protocol, asset, and deployment combination must be identified and fail coherently when incompatible.",
+      "requirements": [
+        {
+          "id": "BX-GREQ-COMPAT-IDENTITIES",
+          "normative_statement": "Runtime, host, renderer, profile, package, manifest, schema, protocol, asset, and deployment revisions carry independently inspectable compatibility identities.",
+          "applies_to": ["all-artifacts", "all-packages", "all-profiles"],
+          "evidence_types": ["automated", "deployment", "generated", "review"],
+          "manual_review": "conditional",
+          "fallback_or_failure": "A missing required identity makes the composition unvalidated and prevents activation or release.",
+          "minimum_severity": "blocker"
+        },
+        {
+          "id": "BX-GREQ-COMPAT-MISMATCH",
+          "normative_statement": "Every incompatible identity pair refuses partial activation before mutation and preserves intentional server, static, unsupported, or upgrade-required fallback content.",
+          "applies_to": ["browser-host", "deployment", "renderer-protocol", "server-adapters"],
+          "evidence_types": ["automated", "browser", "deployment"],
+          "manual_review": "conditional",
+          "fallback_or_failure": "Mismatch produces a bounded diagnostic and no mixed-version state mutation, retry loop, or blank page.",
+          "minimum_severity": "blocker"
+        },
+        {
+          "id": "BX-GREQ-COMPAT-SUPPORT-MATRIX",
+          "normative_statement": "Each release publishes exact tested browser windows, runtime and toolchain inputs, profile compositions, package ranges, known exclusions, and evidence freshness.",
+          "applies_to": ["browser-support", "packages", "profiles", "releases"],
+          "evidence_types": ["browser", "generated", "review"],
+          "manual_review": "required",
+          "fallback_or_failure": "Untested or expired combinations remain candidate or unsupported and cannot inherit support from another profile.",
+          "minimum_severity": "high"
+        },
+        {
+          "id": "BX-GREQ-COMPAT-UPGRADE",
+          "normative_statement": "Supported upgrade and rollback paths declare state, manifest, asset-cache, protocol, and package migration behavior with recovery from interrupted deployment.",
+          "applies_to": ["deployment", "persisted-state", "profiles", "releases"],
+          "evidence_types": ["automated", "deployment", "manual"],
+          "manual_review": "required",
+          "fallback_or_failure": "Unsafe migration is refused before destructive state change and directs the operator or user to a bounded recovery path.",
+          "minimum_severity": "high"
+        }
+      ],
+      "evidence_classes": ["automated", "browser", "deployment", "generated", "review"],
+      "test_contexts": ["candidate-browser-matrix", "clean-deployment", "mixed-version-deployment", "offline-asset-cache", "package-upgrade", "rollback"],
+      "severity_rules": {
+        "blocker": "Composition can corrupt state, execute incompatible traffic, partially activate, or misstate supported compatibility.",
+        "high": "Supported upgrade, rollback, browser, package, or profile path fails safely but cannot complete its documented outcome.",
+        "medium": "Supported path completes with manual recovery, excess cache disruption, or incomplete compatibility diagnostics.",
+        "low": "Compatibility metadata presentation issue that cannot alter resolution, activation, support, or recovery behavior."
+      },
+      "exception_policy": "No exception may permit mixed incompatible execution; candidate support exceptions require an explicit unsupported state, owner, mitigation, review, and expiry.",
+      "first_execution_milestone": "BH-03",
+      "evidence_state": "planned-not-executed",
+      "evidence_ids": []
+    },
+    {
+      "id": "BX-GATE-PROVENANCE",
+      "dimension": "provenance",
+      "status": "reviewed-planned",
+      "owner": "provenance-owner",
+      "scope_statement": "Every source pin, adapted implementation, license, notice, icon, style, example, generated artifact, and dependency entering a release must have complete auditable provenance.",
+      "requirements": [
+        {
+          "id": "BX-GREQ-PROV-ADAPTED-CODE",
+          "normative_statement": "Adapted or translated code records source revision, exact file or range, license, transformation, author, review, and whether the result enters a distributed artifact.",
+          "applies_to": ["adapted-code", "generated-code", "vendored-code"],
+          "evidence_types": ["generated", "provenance", "review"],
+          "manual_review": "required",
+          "fallback_or_failure": "Untraceable adapted code is excluded from the release until provenance and license review are complete.",
+          "minimum_severity": "blocker"
+        },
+        {
+          "id": "BX-GREQ-PROV-ASSETS",
+          "normative_statement": "Icons, fonts, styles, examples, images, and other assets record creator, source, version, license, modification, attribution, and redistribution requirements.",
+          "applies_to": ["assets", "examples", "styles"],
+          "evidence_types": ["generated", "provenance", "review"],
+          "manual_review": "required",
+          "fallback_or_failure": "An asset with incomplete or incompatible rights is omitted or replaced before packaging.",
+          "minimum_severity": "blocker"
+        },
+        {
+          "id": "BX-GREQ-PROV-DEPENDENCIES",
+          "normative_statement": "Every direct and transitive dependency records resolved version, source, integrity, license, notice obligation, known risk disposition, and artifact reachability.",
+          "applies_to": ["build-dependencies", "client-dependencies", "runtime-dependencies", "server-dependencies"],
+          "evidence_types": ["automated", "generated", "provenance", "security"],
+          "manual_review": "conditional",
+          "fallback_or_failure": "Unknown, unlicensed, disallowed, or critically vulnerable reachable dependencies block the owning package or release.",
+          "minimum_severity": "blocker"
+        },
+        {
+          "id": "BX-GREQ-PROV-GENERATED",
+          "normative_statement": "Generated artifacts identify generator revision, complete inputs, deterministic command, environment, output hash, ownership, and whether regeneration is byte-stable.",
+          "applies_to": ["generated-assets", "generated-code", "generated-documents", "manifests"],
+          "evidence_types": ["automated", "generated", "provenance"],
+          "manual_review": "conditional",
+          "fallback_or_failure": "Stale or irreproducible generated output is rejected and cannot substitute for its authored source.",
+          "minimum_severity": "high"
+        },
+        {
+          "id": "BX-GREQ-PROV-SOURCE-LICENSE",
+          "normative_statement": "Every source inspiration or incorporated work records repository or publication identity, immutable revision, access date, license, notices, and approved use boundary.",
+          "applies_to": ["research-sources", "source-pins", "third-party-material"],
+          "evidence_types": ["provenance", "review"],
+          "manual_review": "required",
+          "fallback_or_failure": "Missing source or license identity blocks incorporation and leaves conceptual inspiration explicitly non-copying.",
+          "minimum_severity": "blocker"
+        }
+      ],
+      "evidence_classes": ["automated", "generated", "provenance", "review", "security"],
+      "test_contexts": ["client-artifact-sbom", "generated-output-rebuild", "license-notice-audit", "package-artifact-sbom", "source-pin-review"],
+      "severity_rules": {
+        "blocker": "Release contains material with missing, incompatible, or prohibited rights, source, integrity, or critical risk disposition.",
+        "high": "Required provenance is present but generated output, notice assembly, or dependency reachability is stale or irreproducible.",
+        "medium": "Non-distributed evidence or metadata is incomplete without obscuring release rights, integrity, dependencies, or notices.",
+        "low": "Presentation issue in otherwise complete provenance with no impact on attribution, rights, integrity, or reproducibility."
+      },
+      "exception_policy": "No exception may authorize unknown or incompatible rights; non-release metadata exceptions require owner, explicit exclusion, mitigation, review, and expiry.",
+      "first_execution_milestone": "BH-06",
+      "evidence_state": "planned-not-executed",
+      "evidence_ids": []
+    },
+    {
+      "id": "BX-GATE-SECURITY",
+      "dimension": "security",
+      "status": "reviewed-planned",
+      "owner": "security-owner",
+      "scope_statement": "Browser state and capability results remain untrusted; every authority-bearing command, artifact, dependency, origin, and diagnostic path must fail closed and remain auditable.",
+      "requirements": [
+        {
+          "id": "BX-GREQ-SEC-CAPABILITY-GRANTS",
+          "normative_statement": "Capability grants are least-privilege, purpose-bound, owner-bound, cancellable, time-bounded where appropriate, opaque to portable code, and revocable on generation change.",
+          "applies_to": ["all-capabilities", "all-profiles", "effects-system"],
+          "evidence_types": ["automated", "security"],
+          "manual_review": "conditional",
+          "fallback_or_failure": "Denied or revoked grants use the classified fallback, expose no provider object, and release provisional resources.",
+          "minimum_severity": "blocker"
+        },
+        {
+          "id": "BX-GREQ-SEC-CLIENT-STATE",
+          "normative_statement": "All browser state, component messages, renderer traffic, persisted values, capability results, and presentation authorization are validated as untrusted inputs.",
+          "applies_to": ["browser-host", "component-runtime", "renderers", "server-adapters"],
+          "evidence_types": ["automated", "security"],
+          "manual_review": "conditional",
+          "fallback_or_failure": "Malformed or unauthorized input is rejected before trusted mutation with bounded redacted diagnostics.",
+          "minimum_severity": "blocker"
+        },
+        {
+          "id": "BX-GREQ-SEC-CSRF-ORIGIN",
+          "normative_statement": "State-changing server requests enforce authenticated session, authorization, anti-CSRF policy, allowed origin, content type, replay policy, and bounded request size.",
+          "applies_to": ["phoenix-adapter", "plug-adapter", "server-commands"],
+          "evidence_types": ["automated", "deployment", "security"],
+          "manual_review": "conditional",
+          "fallback_or_failure": "A failed boundary check performs no command and returns a non-sensitive intentional error.",
+          "minimum_severity": "blocker"
+        },
+        {
+          "id": "BX-GREQ-SEC-DEPENDENCY-DIAGNOSTICS",
+          "normative_statement": "Reachable dependencies pass governed risk policy and diagnostics redact secrets, tokens, personal data, file contents, opaque handles, and sensitive server responses.",
+          "applies_to": ["client-artifacts", "diagnostics", "packages", "server-artifacts"],
+          "evidence_types": ["automated", "generated", "security"],
+          "manual_review": "required",
+          "fallback_or_failure": "Critical reachable risk or sensitive diagnostic disclosure blocks release until removed, mitigated, or explicitly excluded from reachability.",
+          "minimum_severity": "blocker"
+        },
+        {
+          "id": "BX-GREQ-SEC-SECRETS-INTEGRITY-CSP",
+          "normative_statement": "Client reachability excludes secrets and server-only configuration while deployed code and assets use content integrity, restrictive CSP, safe content handling, and authenticated update metadata.",
+          "applies_to": ["browser-build", "deployment", "public-assets"],
+          "evidence_types": ["automated", "deployment", "generated", "security"],
+          "manual_review": "required",
+          "fallback_or_failure": "A secret-bearing, integrity-unknown, policy-bypassing, or unsafe-content artifact is excluded and activation fails closed.",
+          "minimum_severity": "blocker"
+        },
+        {
+          "id": "BX-GREQ-SEC-SERVER-COMMAND",
+          "normative_statement": "Every authority-bearing command is authenticated, authorized against current server state, schema-validated, idempotency-classified, audited, and independent of client presentation state.",
+          "applies_to": ["phoenix-adapter", "plug-adapter", "remote-providers", "server-commands"],
+          "evidence_types": ["automated", "security"],
+          "manual_review": "required",
+          "fallback_or_failure": "Unauthorized, stale, malformed, or replayed commands perform no authority-bearing mutation and expose a bounded failure.",
+          "minimum_severity": "blocker"
+        }
+      ],
+      "evidence_classes": ["automated", "deployment", "generated", "review", "security"],
+      "test_contexts": ["capability-denial", "client-tampering", "csp-and-integrity", "dependency-reachability", "diagnostic-redaction", "phoenix-command", "plug-command", "secret-scan"],
+      "severity_rules": {
+        "blocker": "Authority, confidentiality, integrity, isolation, command validation, secret exclusion, or fail-closed behavior can be bypassed.",
+        "high": "Defense-in-depth, auditability, revocation, dependency, or redaction control is materially incomplete without demonstrated exploitation.",
+        "medium": "Security control works but diagnostics, policy coverage, or operational response is incomplete or fragile.",
+        "low": "Security documentation or non-sensitive diagnostic quality issue with no control, authority, or disclosure impact."
+      },
+      "exception_policy": "No exception may bypass authentication, authorization, origin/CSRF, secret exclusion, command validation, integrity, or critical dependency policy; lesser exceptions expire within one release.",
+      "first_execution_milestone": "BH-06",
+      "evidence_state": "planned-not-executed",
+      "evidence_ids": []
+    }
+  ],
   "exceptions": [],
   "evidence_state": {
     "implementation": "not-executed",

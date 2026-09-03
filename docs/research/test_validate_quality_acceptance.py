@@ -69,9 +69,7 @@ class QualityAcceptanceValidationTests(unittest.TestCase):
 
     def test_rejects_section_5_2_gate_in_section_5_1(self) -> None:
         document = copy.deepcopy(self.document)
-        document["cross_cutting_gates"] = [
-            {"id": "BX-GATE-ACCESSIBILITY", "dimension": "accessibility", "status": "unassigned"}
-        ]
+        document["stage"] = "section-5.1"
         with self.assertRaisesRegex(validator.QualityAcceptanceValidationError, "pre-empt"):
             self.validate(document)
 
@@ -87,6 +85,39 @@ class QualityAcceptanceValidationTests(unittest.TestCase):
             "status": "approved",
         }]
         with self.assertRaisesRegex(validator.QualityAcceptanceValidationError, "no approved"):
+            self.validate(document)
+
+    def test_rejects_missing_cross_cutting_gate(self) -> None:
+        document = copy.deepcopy(self.document)
+        document["cross_cutting_gates"].pop()
+        with self.assertRaisesRegex(validator.QualityAcceptanceValidationError, "identities"):
+            self.validate(document)
+
+    def test_rejects_missing_gate_requirement(self) -> None:
+        document = copy.deepcopy(self.document)
+        document["cross_cutting_gates"][0]["requirements"].pop()
+        with self.assertRaisesRegex(validator.QualityAcceptanceValidationError, "coverage is incomplete"):
+            self.validate(document)
+
+    def test_rejects_executed_gate_evidence(self) -> None:
+        document = copy.deepcopy(self.document)
+        document["cross_cutting_gates"][0]["evidence_ids"] = ["BX-EVIDENCE-FABRICATED"]
+        with self.assertRaisesRegex(validator.QualityAcceptanceValidationError, "schema violation|falsely claims"):
+            self.validate(document)
+
+    def test_rejects_downgraded_security_requirement(self) -> None:
+        document = copy.deepcopy(self.document)
+        security = next(gate for gate in document["cross_cutting_gates"] if gate["id"] == "BX-GATE-SECURITY")
+        security["requirements"][0]["minimum_severity"] = "high"
+        with self.assertRaisesRegex(validator.QualityAcceptanceValidationError, "security requirements"):
+            self.validate(document)
+
+    def test_rejects_downgraded_essential_accessibility_requirement(self) -> None:
+        document = copy.deepcopy(self.document)
+        accessibility = next(gate for gate in document["cross_cutting_gates"] if gate["id"] == "BX-GATE-ACCESSIBILITY")
+        fallback = next(req for req in accessibility["requirements"] if req["id"] == "BX-GREQ-A11Y-FALLBACK")
+        fallback["minimum_severity"] = "high"
+        with self.assertRaisesRegex(validator.QualityAcceptanceValidationError, "essential accessibility"):
             self.validate(document)
 
 
