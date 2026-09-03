@@ -37,6 +37,7 @@ implementations, and BH-01 experiment output do not belong here.
 
 ### Files
 
+- [BH-00 multidisciplinary review v0.1.0](blazex-bh-00-multidisciplinary-review-v0-1-0.md) — eight product, architecture, implementation, security, accessibility, performance/reliability, packaging, and provenance review passes with finding disposition and BH-01 risk register.
 - [BH-00 governance schema](blazex-bh-00-governance.schema.json) — JSON Schema
   1.0.0 for source bindings, architecture/package/profile reconciliation,
   reviews, findings, risks, release identity, and BH-01 entry decisions.

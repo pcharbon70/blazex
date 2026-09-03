@@ -45,30 +45,30 @@ Back to milestone: [README](README.md)
       - [x] 6.1.2.2 Subtask - Re-run quality-budget and acceptance coverage for every roadmap outcome, support claim, catalog family, profile, package boundary, cross-cutting obligation, and non-goal.
       - [x] 6.1.2.3 Subtask - Reconcile summary counts, generated views, machine-readable sources, indexes, maps, links, and milestone status so no derivative report is stale.
 
-  - [ ] 6.2 Section - Conduct independent review and resolve blockers.
+  - [x] 6.2 Section - Conduct independent review and resolve blockers.
 
     Product-boundary acceptance requires review from the disciplines affected by
     the contract and a visible disposition for every blocking concern.
 
-    - [ ] 6.2.1 Task - Execute multidisciplinary contract review.
+    - [x] 6.2.1 Task - Execute multidisciplinary contract review.
 
       Reviewers must challenge the contract from product, architecture,
       implementation, security, accessibility, performance, packaging, and
       provenance perspectives before it governs BH-01.
 
-      - [ ] 6.2.1.1 Subtask - Review product scope, catalog dispositions, delivery tiers, naming, support language, fallback expectations, and explicit omissions for usability and bounded promises.
-      - [ ] 6.2.1.2 Subtask - Review host neutrality, backend separation, capability isolation, trust boundaries, Plug independence, future native feasibility, and package dependency direction.
-      - [ ] 6.2.1.3 Subtask - Review accessibility, security, performance, reliability, compatibility, provenance, licensing, validation, and evidence policies for missing release blockers.
+      - [x] 6.2.1.1 Subtask - Review product scope, catalog dispositions, delivery tiers, naming, support language, fallback expectations, and explicit omissions for usability and bounded promises.
+      - [x] 6.2.1.2 Subtask - Review host neutrality, backend separation, capability isolation, trust boundaries, Plug independence, future native feasibility, and package dependency direction.
+      - [x] 6.2.1.3 Subtask - Review accessibility, security, performance, reliability, compatibility, provenance, licensing, validation, and evidence policies for missing release blockers.
 
-    - [ ] 6.2.2 Task - Resolve findings and publish the risk register.
+    - [x] 6.2.2 Task - Resolve findings and publish the risk register.
 
       Every review result must become an accepted correction, a bounded
       follow-up, an explicit assumption, or a blocker rather than disappearing
       into meeting notes.
 
-      - [ ] 6.2.2.1 Subtask - Assign stable finding IDs, severity, owner, affected records, required action, due milestone, status, and evidence for every review issue.
-      - [ ] 6.2.2.2 Subtask - Correct blocking BH-00 defects, rerun affected validation, and record superseded decisions, catalog migrations, budget changes, or acceptance remapping.
-      - [ ] 6.2.2.3 Subtask - Publish unresolved feasibility assumptions and BH-01 risks without weakening BH-00 definitions or converting unknowns into supported claims.
+      - [x] 6.2.2.1 Subtask - Assign stable finding IDs, severity, owner, affected records, required action, due milestone, status, and evidence for every review issue.
+      - [x] 6.2.2.2 Subtask - Correct blocking BH-00 defects, rerun affected validation, and record superseded decisions, catalog migrations, budget changes, or acceptance remapping.
+      - [x] 6.2.2.3 Subtask - Publish unresolved feasibility assumptions and BH-01 risks without weakening BH-00 definitions or converting unknowns into supported claims.
 
   - [ ] 6.3 Section - Version the contract and prepare the BH-01 entry decision.
 

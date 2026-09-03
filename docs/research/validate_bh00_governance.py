@@ -59,6 +59,30 @@ EXPECTED_RECONCILIATION = {
     "BX-BH00-REC-SUPPORT-TRUTH",
 }
 EXPECTED_ADR_BINDINGS = {f"BX-BH00-SOURCE-ADR-{number:04d}" for number in range(1, 9)}
+EXPECTED_REVIEW_DISCIPLINES = {
+    "product", "architecture", "implementation", "security", "accessibility",
+    "performance-reliability", "packaging", "provenance",
+}
+EXPECTED_FINDINGS = {
+    "BX-BH00-FIND-ACCESSIBILITY-MANUAL-EVIDENCE",
+    "BX-BH00-FIND-ARCHITECTURE-NATIVE-PORTABILITY",
+    "BX-BH00-FIND-IMPLEMENTATION-RUNTIME-FEASIBILITY",
+    "BX-BH00-FIND-PACKAGING-REACHABILITY",
+    "BX-BH00-FIND-PERFORMANCE-CALIBRATION",
+    "BX-BH00-FIND-PRODUCT-SUPPORT-QUALIFICATION",
+    "BX-BH00-FIND-PROVENANCE-RELEASE-MATERIAL",
+    "BX-BH00-FIND-SECURITY-EXECUTABLE-CONTROLS",
+}
+EXPECTED_RISKS = {
+    "BX-BH01-RISK-AUTHENTICATED-COMMAND",
+    "BX-BH01-RISK-BROWSER-PREREQUISITES",
+    "BX-BH01-RISK-DEPENDENCY-ACCESS",
+    "BX-BH01-RISK-MOBILE-PERFORMANCE",
+    "BX-BH01-RISK-PRIVATE-API-COUPLING",
+    "BX-BH01-RISK-RUNTIME-SEMANTICS",
+    "BX-BH01-RISK-TOOLCHAIN-REPRODUCIBILITY",
+    "BX-BH01-RISK-WASM-ARTIFACT-ACCOUNTING",
+}
 
 
 class GovernanceValidationError(ValueError):
@@ -189,14 +213,51 @@ def validate_stage(document: dict[str, Any]) -> None:
             raise GovernanceValidationError("Section 6.1 cannot pre-empt review, release, risk, or BH-01 decisions")
     elif stage in {"section-6.2", "section-6.3", "complete"}:
         validate_review(document)
+        if stage == "section-6.2":
+            if document["status"] != "reviewed-pending-release" or boundary["contract_evidence"] != "reviewed":
+                raise GovernanceValidationError("Section 6.2 stage/status evidence combination is invalid")
+            if document["release"] is not None or document["bh01_entry"] is not None:
+                raise GovernanceValidationError("Section 6.2 cannot pre-empt release or BH-01 entry decisions")
         if stage in {"section-6.3", "complete"}:
             validate_release_and_entry(document)
 
 
 def validate_review(document: dict[str, Any]) -> None:
-    """Validate Section 6.2+ records; populated in the next section."""
-    if not document["reviews"]:
-        raise GovernanceValidationError("review stage requires multidisciplinary reviews")
+    """Validate multidisciplinary reviews, findings, and BH-01 risk transfer."""
+    reviews = document["reviews"]
+    findings = document["findings"]
+    risks = document["risks"]
+    _ids(reviews, "review")
+    finding_ids = _ids(findings, "finding")
+    risk_ids = _ids(risks, "risk")
+    if {review["discipline"] for review in reviews} != EXPECTED_REVIEW_DISCIPLINES or len(reviews) != 8:
+        raise GovernanceValidationError("all eight independent discipline reviews are required")
+    if finding_ids != EXPECTED_FINDINGS:
+        raise GovernanceValidationError("multidisciplinary finding coverage is incomplete")
+    if risk_ids != EXPECTED_RISKS:
+        raise GovernanceValidationError("BH-01 feasibility risk register is incomplete")
+    source_ids = {record["id"] for record in document["source_bindings"]}
+    evidence_ids = set(document["evidence_boundary"]["evidence_ids"])
+    referenced_findings: list[str] = []
+    for review in reviews:
+        if review["outcome"] == "blocking":
+            raise GovernanceValidationError(f"review {review['id']} remains blocking")
+        if review["evidence_id"] not in evidence_ids:
+            raise GovernanceValidationError(f"review {review['id']} lacks governance evidence identity")
+        if not set(review["finding_ids"]) <= finding_ids:
+            raise GovernanceValidationError(f"review {review['id']} references an unknown finding")
+        referenced_findings.extend(review["finding_ids"])
+    if sorted(referenced_findings) != sorted(finding_ids):
+        raise GovernanceValidationError("every finding must be owned by exactly one discipline review")
+    for finding in findings:
+        if finding["severity"] == "blocker" or finding["status"] == "blocking":
+            raise GovernanceValidationError(f"BH-00 review finding remains blocking: {finding['id']}")
+        if not set(finding["affected_source_refs"]) <= source_ids:
+            raise GovernanceValidationError(f"finding {finding['id']} references an unknown source")
+        if not set(finding["evidence_ids"]) <= evidence_ids:
+            raise GovernanceValidationError(f"finding {finding['id']} lacks review evidence")
+    if any(risk["first_milestone"] != "BH-01" or risk["status"] != "open-feasibility-risk" for risk in risks):
+        raise GovernanceValidationError("all unresolved feasibility risks must transfer visibly to BH-01")
 
 
 def validate_release_and_entry(document: dict[str, Any]) -> None:

@@ -22,6 +22,9 @@ class GovernanceValidationTests(unittest.TestCase):
         counts = self.validate(copy.deepcopy(self.document))
         self.assertEqual(counts["packages"], 18)
         self.assertEqual(counts["reconciliation_checks"], 17)
+        self.assertEqual(counts["reviews"], 8)
+        self.assertEqual(counts["findings"], 8)
+        self.assertEqual(counts["risks"], 8)
 
     def test_rejects_stale_source_hash(self) -> None:
         document = copy.deepcopy(self.document)
@@ -74,6 +77,12 @@ class GovernanceValidationTests(unittest.TestCase):
 
     def test_rejects_premature_review(self) -> None:
         document = copy.deepcopy(self.document)
+        document["stage"] = "section-6.1"
+        document["status"] = "reconciled-pending-review"
+        document["findings"] = []
+        document["risks"] = []
+        document["evidence_boundary"]["contract_evidence"] = "reconciled"
+        document["evidence_boundary"]["evidence_ids"] = ["BX-BH00-EVIDENCE-RECONCILIATION-6-1"]
         document["reviews"] = [{
             "id": "BX-BH00-REVIEW-TEST",
             "discipline": "product",
@@ -97,6 +106,37 @@ class GovernanceValidationTests(unittest.TestCase):
         document = copy.deepcopy(self.document)
         document["exceptions"] = ["exception"]
         with self.assertRaisesRegex(validator.GovernanceValidationError, "schema violation|no accepted exception"):
+            self.validate(document)
+
+    def test_rejects_missing_discipline_review(self) -> None:
+        document = copy.deepcopy(self.document)
+        document["reviews"].pop()
+        with self.assertRaisesRegex(validator.GovernanceValidationError, "eight independent"):
+            self.validate(document)
+
+    def test_rejects_blocking_review_finding(self) -> None:
+        document = copy.deepcopy(self.document)
+        document["findings"][0]["severity"] = "blocker"
+        document["findings"][0]["status"] = "blocking"
+        with self.assertRaisesRegex(validator.GovernanceValidationError, "remains blocking"):
+            self.validate(document)
+
+    def test_rejects_unknown_review_finding(self) -> None:
+        document = copy.deepcopy(self.document)
+        document["reviews"][0]["finding_ids"] = ["BX-BH00-FIND-NOT-DECLARED"]
+        with self.assertRaisesRegex(validator.GovernanceValidationError, "unknown finding"):
+            self.validate(document)
+
+    def test_rejects_missing_bh01_risk(self) -> None:
+        document = copy.deepcopy(self.document)
+        document["risks"].pop()
+        with self.assertRaisesRegex(validator.GovernanceValidationError, "risk register is incomplete"):
+            self.validate(document)
+
+    def test_rejects_premature_entry_decision(self) -> None:
+        document = copy.deepcopy(self.document)
+        document["bh01_entry"] = {}
+        with self.assertRaisesRegex(validator.GovernanceValidationError, "schema violation"):
             self.validate(document)
 
 
