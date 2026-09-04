@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
   "contract_id": "BX-BH01-BROWSER-HOST-BUNDLE-0.1",
-  "status": "phase5-complete",
+  "status": "phase6-command-path",
   "classification": "disposable-non-public-fixture",
   "beam_image": "docker.io/hexpm/elixir@sha256:8d03cfb52e3fa3f5d83d749942b7c45c966dda48a7c4ba4f069390379b59fc39",
   "language": {"otp": "26.0.2", "elixir": "1.17.3"},
@@ -21,5 +21,5 @@
   },
   "public_api": false,
   "fixture_protocol": "blazex.bh01.fixture-effect/0.1",
-  "claims_not_made": ["public component API", "general DOM rendering", "Phoenix authority", "browser support"]
+  "claims_not_made": ["public component API", "general DOM rendering", "production identity or persistence", "browser support"]
 }

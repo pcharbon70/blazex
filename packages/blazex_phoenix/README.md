@@ -15,3 +15,8 @@ deterministic identity, session, current-state, authorization, idempotency, and
 audit test state without depending on Phoenix or browser presentation. The
 Phoenix profile supplies transport/session composition. This fixture is not a
 stable public API or production identity/persistence implementation.
+
+The disposable counter command contract is recorded in
+`fixtures/server-command-contract.json`. Authentication, authorization,
+current-state validation, idempotency, mutation, and redacted audit remain
+server-owned.

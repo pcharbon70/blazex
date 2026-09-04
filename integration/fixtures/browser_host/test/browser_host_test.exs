@@ -423,6 +423,95 @@ defmodule BlazeX.BH01.BrowserHostTest do
            }
   end
 
+  test "server action emits only a typed intent and accepts a correlated public result" do
+    LocalBehavior.initialize(31)
+    assert {:ok, mount, _} = LocalBehavior.command(31, %{"command" => "mount"})
+    assert Enum.any?(mount["operations"], &(&1["id"] == "bx-server-action"))
+
+    assert {:ok, pending, %{"result" => %{"command" => command}}} =
+             LocalBehavior.event(31, action_event(31, "bx-server-action"))
+
+    assert command == %{
+             "protocol" => "blazex.bh01.server-command/0.1",
+             "command" => "counter.increment",
+             "correlation_id" => "browser-31-2",
+             "idempotency_key" => "request-31-2",
+             "resource_id" => "counter",
+             "expected_version" => 0,
+             "payload" => %{"amount" => 1}
+           }
+
+    refute inspect(command) =~ "role"
+    refute inspect(command) =~ "csrf"
+    refute inspect(command) =~ "session"
+    assert [%{"text" => "Command pending"}] = pending["operations"]
+
+    result = %{
+      "protocol" => "blazex.bh01.server-result/0.1",
+      "status" => "ok",
+      "correlation_id" => command["correlation_id"],
+      "result" => %{
+        "resource_id" => "counter",
+        "value" => 1,
+        "version" => 1,
+        "replayed" => false
+      }
+    }
+
+    assert {:ok, accepted, %{"result" => %{"accepted" => true}}} =
+             LocalBehavior.command(31, %{"command" => "server.result", "result" => result})
+
+    assert [%{"text" => "Server counter: 1 (version 1)"}] = accepted["operations"]
+    assert LocalBehavior.snapshot(31)["server"]["value"] == 1
+  end
+
+  test "server result rejects stale, duplicate, malformed, and post-disposal delivery" do
+    LocalBehavior.initialize(33)
+    assert {:ok, _, _} = LocalBehavior.command(33, %{"command" => "mount"})
+
+    assert {:ok, _, %{"result" => %{"accepted" => false, "reason" => "server-result-unexpected"}}} =
+             LocalBehavior.command(33, %{
+               "command" => "server.result",
+               "result" => server_error("unexpected", "server-unavailable")
+             })
+
+    assert {:ok, _, %{"result" => %{"command" => command}}} =
+             LocalBehavior.command(33, %{
+               "command" => "server.prepare",
+               "correlation_id" => "expected",
+               "idempotency_key" => "retryable"
+             })
+
+    assert {:ok, stale, %{"result" => %{"reason" => "server-result-stale"}}} =
+             LocalBehavior.command(33, %{
+               "command" => "server.result",
+               "result" => server_error("different", "server-unavailable")
+             })
+
+    assert stale["operations"] == []
+
+    assert {:ok, _, %{"result" => %{"accepted" => false, "code" => "server-unavailable"}}} =
+             LocalBehavior.command(33, %{
+               "command" => "server.result",
+               "result" => server_error(command["correlation_id"], "server-unavailable")
+             })
+
+    assert {:ok, duplicate, %{"result" => %{"reason" => "server-result-unexpected"}}} =
+             LocalBehavior.command(33, %{
+               "command" => "server.result",
+               "result" => server_error(command["correlation_id"], "server-unavailable")
+             })
+
+    assert duplicate["operations"] == []
+    assert {:ok, _, _} = LocalBehavior.command(33, %{"command" => "dispose"})
+
+    assert {:error, %{"code" => "fixture-command-unknown"}} =
+             LocalBehavior.command(33, %{
+               "command" => "server.result",
+               "result" => server_error(command["correlation_id"], "server-unavailable")
+             })
+  end
+
   defp field_event(generation, event, payload) do
     %{
       "protocol" => "blazex.bh01.fixture-event/0.1",
@@ -433,6 +522,28 @@ defmodule BlazeX.BH01.BrowserHostTest do
       "node_id" => "bx-field",
       "event" => event,
       "payload" => payload
+    }
+  end
+
+  defp action_event(generation, node_id) do
+    %{
+      "protocol" => "blazex.bh01.fixture-event/0.1",
+      "record_type" => "event",
+      "scenario_id" => "BX-BH01-SCENARIO-LOCAL-BROWSER",
+      "generation" => generation,
+      "sequence" => 1,
+      "node_id" => node_id,
+      "event" => "action",
+      "payload" => %{"key" => "", "detail" => 1}
+    }
+  end
+
+  defp server_error(correlation_id, code) do
+    %{
+      "protocol" => "blazex.bh01.server-result/0.1",
+      "status" => "error",
+      "correlation_id" => correlation_id,
+      "error" => %{"code" => code, "retryable" => true}
     }
   end
 end

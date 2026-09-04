@@ -53,6 +53,23 @@ defmodule BlazeXBrowserPhoenix.ControlPlug do
     end
   end
 
+  def call(%Plug.Conn{method: "POST", request_path: "/bh01/test/expire"} = conn, _options) do
+    conn = fetch_session(conn)
+
+    if test_control?(conn) and same_origin?(conn) do
+      case get_session(conn, :bh01_session_id) do
+        session_id when is_binary(session_id) ->
+          FixtureAuthority.expire_session(session_id)
+          respond(conn, 200, %{"status" => "expired"})
+
+        _ ->
+          respond(conn, 401, error("authentication-required"))
+      end
+    else
+      respond(conn, 404, error("not-found"))
+    end
+  end
+
   def call(%Plug.Conn{method: "GET", request_path: "/bh01/test/state"} = conn, _options) do
     if test_control?(conn) do
       respond(conn, 200, FixtureAuthority.snapshot())

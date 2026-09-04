@@ -44,36 +44,36 @@ Back to milestone: [README](README.md)
       - [x] 6.1.2.1 Subtask - Define deterministic authenticated/anonymous identities, roles, resources, current-state versions, allowed/denied actions, session lifecycle, and test reset.
       - [x] 6.1.2.2 Subtask - Keep credentials, role assignment, authorization data, and authoritative state out of browser/runtime fixture state and emitted artifacts.
 
-  - [ ] 6.2 Section - Implement one authenticated and authorized command.
+  - [x] 6.2 Section - Implement one authenticated and authorized command.
 
     Cross the actual browser/runtime/transport/server boundary while repeating
     every authority-bearing decision against current server state.
 
-    - [ ] 6.2.1 Task - Define the command and result contracts.
+    - [x] 6.2.1 Task - Define the command and result contracts.
 
       Schemas and limits should be narrow enough to test trust without becoming
       a general application protocol.
 
-      - [ ] 6.2.1.1 Subtask - Define version, correlation/idempotency identity, allowed fields, size/depth/rate/time limits, state/version reference, and client-visible error/result schema.
-      - [ ] 6.2.1.2 Subtask - Define authentication context, current-state lookup, authorization rule, validation order, side effect, transaction/idempotency behavior, audit event, and diagnostic redaction.
+      - [x] 6.2.1.1 Subtask - Define version, correlation/idempotency identity, allowed fields, size/depth/rate/time limits, state/version reference, and client-visible error/result schema.
+      - [x] 6.2.1.2 Subtask - Define authentication context, current-state lookup, authorization rule, validation order, side effect, transaction/idempotency behavior, audit event, and diagnostic redaction.
 
-    - [ ] 6.2.2 Task - Implement the complete command path.
+    - [x] 6.2.2 Task - Implement the complete command path.
 
       One correlation identity should connect browser action to server audit and
       bounded rendered result.
 
-      - [ ] 6.2.2.1 Subtask - Route a fixture action through normalized DOM event, runtime, bridge, transport, and `blazex_phoenix` without client authority hints becoming trusted inputs.
-      - [ ] 6.2.2.2 Subtask - Authenticate session, validate origin/CSRF as applicable, parse/schema-check, load current state, authorize, execute exactly once, audit, and return a bounded result.
-      - [ ] 6.2.2.3 Subtask - Correlate client/runtime/transport/server/state/audit/result traces while excluding secrets and internal authorization details.
+      - [x] 6.2.2.1 Subtask - Route a fixture action through normalized DOM event, runtime, bridge, transport, and `blazex_phoenix` without client authority hints becoming trusted inputs.
+      - [x] 6.2.2.2 Subtask - Authenticate session, validate origin/CSRF as applicable, parse/schema-check, load current state, authorize, execute exactly once, audit, and return a bounded result.
+      - [x] 6.2.2.3 Subtask - Correlate client/runtime/transport/server/state/audit/result traces while excluding secrets and internal authorization details.
 
-    - [ ] 6.2.3 Task - Exercise command denial and failure paths.
+    - [x] 6.2.3 Task - Exercise command denial and failure paths.
 
       Trust is demonstrated by safe rejection and no unauthorized effect, not
       only by the successful request.
 
-      - [ ] 6.2.3.1 Subtask - Test anonymous, expired, malformed, oversized, unknown, duplicate, replayed, stale-state, unauthorized, cross-origin, CSRF-invalid, and rate-limited requests.
-      - [ ] 6.2.3.2 Subtask - Test disconnect, timeout, server error/restart, transaction failure, stale/duplicate result, retry, and browser/runtime disposal during command.
-      - [ ] 6.2.3.3 Subtask - Assert no unauthorized side effect, bounded pending work, deterministic idempotency, redacted diagnostics, intentional client outcome, and cleanup.
+      - [x] 6.2.3.1 Subtask - Test anonymous, expired, malformed, oversized, unknown, duplicate, replayed, stale-state, unauthorized, cross-origin, CSRF-invalid, and rate-limited requests.
+      - [x] 6.2.3.2 Subtask - Test disconnect, timeout, server error/restart, transaction failure, stale/duplicate result, retry, and browser/runtime disposal during command.
+      - [x] 6.2.3.3 Subtask - Assert no unauthorized side effect, bounded pending work, deterministic idempotency, redacted diagnostics, intentional client outcome, and cleanup.
 
   - [ ] 6.3 Section - Isolate LiveView and LocalLiveView integration.
 

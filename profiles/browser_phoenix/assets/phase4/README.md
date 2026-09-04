@@ -2,9 +2,9 @@
 
 This directory owns the feasibility-only browser runtime frame and its governed
 manifest template. `build_profile.py` copies the declared runtime artifacts,
-runtime loader, and replaceable Phase 5 DOM fixture adapter; computes byte counts
+runtime loader, and replaceable Phase 6 DOM fixture adapter; computes byte counts
 and SHA-256 digests; and writes a no-store runtime manifest. It performs no
-network acquisition. The historical `phase4` path remains in place so Phase 5
+network acquisition. The historical `phase4` path remains in place so later phases
 extends the already-proven profile rather than creating a second host.
 
 ## Ownership and replacement boundaries
@@ -20,7 +20,8 @@ extends the already-proven profile rather than creating a second host.
 | Elixir requests | Popcorn `call`/`cast` carrying JSON values | `BrowserHostBridge`; timeout, cancel, or stop settles ownership | Ready runtime and `blazex.host-bridge/1` | Portable host command port |
 
 The loader does not own component semantics, Phoenix authorization, LiveView
-data, arbitrary script execution, or general browser fetch. The frame hosts the
+data, or arbitrary script execution. Its one allowlisted server-command fetch
+is a disposable Phase 6 trust-boundary fixture. The frame hosts the
 declared Popcorn runtime, transfers the verified AVM, and emits typed lifecycle
 observations. Phase 5 adds only a closed, test-only DOM operation adapter; it is
 not a public renderer contract.

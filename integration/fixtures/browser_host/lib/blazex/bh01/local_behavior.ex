@@ -39,6 +39,9 @@ defmodule BlazeX.BH01.LocalBehavior do
       node_id == "bx-field-reset" ->
         command(generation, %{"command" => "field.reset"})
 
+      node_id == "bx-server-action" ->
+        command(generation, %{"command" => "server.prepare"})
+
       String.starts_with?(node_id, "bx-child-") and String.ends_with?(node_id, "-action") ->
         key =
           node_id
@@ -107,6 +110,7 @@ defmodule BlazeX.BH01.LocalBehavior do
       children: [child("alpha", 1), child("beta", 1)],
       field: initial_field(),
       async: initial_async(),
+      server: initial_server(),
       stale_drops: 0,
       failures: 0
     }
@@ -140,6 +144,17 @@ defmodule BlazeX.BH01.LocalBehavior do
       seen_message_ids: [],
       duplicate_drops: 0,
       last_result: "Idle"
+    }
+  end
+
+  defp initial_server do
+    %{
+      status: "idle",
+      value: 0,
+      version: 0,
+      pending_correlation_id: nil,
+      last_correlation_id: nil,
+      failures: 0
     }
   end
 
@@ -434,6 +449,79 @@ defmodule BlazeX.BH01.LocalBehavior do
     end
   end
 
+  defp transition("server.prepare", payload, %{mounted: true, disposed: false} = state) do
+    suffix = "#{state.generation}-#{state.sequence + 1}"
+    correlation_id = Map.get(payload, "correlation_id", "browser-#{suffix}")
+    idempotency_key = Map.get(payload, "idempotency_key", "request-#{suffix}")
+    expected_version = Map.get(payload, "expected_version", state.server.version)
+
+    with true <- valid_server_identifier?(correlation_id),
+         true <- valid_server_identifier?(idempotency_key),
+         true <- is_integer(expected_version) and expected_version >= 0 do
+      server = %{state.server | status: "pending", pending_correlation_id: correlation_id}
+
+      command = %{
+        "protocol" => "blazex.bh01.server-command/0.1",
+        "command" => "counter.increment",
+        "correlation_id" => correlation_id,
+        "idempotency_key" => idempotency_key,
+        "resource_id" => "counter",
+        "expected_version" => expected_version,
+        "payload" => %{"amount" => 1}
+      }
+
+      next = %{state | server: server}
+      {:ok, next, [text("bx-server-status", "Command pending")], %{"command" => command}}
+    else
+      _ -> {:error, "fixture-server-command-invalid", "The server command identity is invalid"}
+    end
+  end
+
+  defp transition(
+         "server.result",
+         %{"result" => result},
+         %{mounted: true, disposed: false} = state
+       ) do
+    case validate_server_result(result, state.server.pending_correlation_id) do
+      {:ok, :accepted, public} ->
+        server = %{
+          state.server
+          | status: "accepted",
+            value: public["value"],
+            version: public["version"],
+            pending_correlation_id: nil,
+            last_correlation_id: result["correlation_id"]
+        }
+
+        next = %{state | server: server}
+
+        {:ok, next, [text("bx-server-status", server_text(server))],
+         %{"accepted" => true, "correlation_id" => result["correlation_id"]}}
+
+      {:ok, :rejected, error_code} ->
+        server = %{
+          state.server
+          | status: "rejected:#{error_code}",
+            pending_correlation_id: nil,
+            last_correlation_id: result["correlation_id"],
+            failures: state.server.failures + 1
+        }
+
+        next = %{state | server: server}
+
+        {:ok, next, [text("bx-server-status", "Command failed: #{error_code}")],
+         %{
+           "accepted" => false,
+           "correlation_id" => result["correlation_id"],
+           "code" => error_code
+         }}
+
+      {:error, reason} ->
+        next = %{state | stale_drops: state.stale_drops + 1}
+        {:ok, next, [], %{"accepted" => false, "reason" => reason}}
+    end
+  end
+
   defp transition("dispose", _payload, state) do
     cancel_timer(state.async.timer_ref)
 
@@ -445,7 +533,8 @@ defmodule BlazeX.BH01.LocalBehavior do
         last_result: "Disposed"
     }
 
-    next = %{state | mounted: false, disposed: true, children: [], async: async}
+    server = %{state.server | status: "disposed", pending_correlation_id: nil}
+    next = %{state | mounted: false, disposed: true, children: [], async: async, server: server}
     {:ok, next, [root_dispose()], %{"disposed" => true}}
   end
 
@@ -679,7 +768,8 @@ defmodule BlazeX.BH01.LocalBehavior do
       upsert("bx-child-list", "bx-parent", "list", nil, "bx-test-child-list")
     ] ++
       Enum.flat_map(state.children, &child_operations/1) ++
-      form_operations(state.field) ++ async_operations(state.async)
+      form_operations(state.field) ++
+      async_operations(state.async) ++ server_operations(state.server)
   end
 
   defp child_operations(item) do
@@ -752,6 +842,97 @@ defmodule BlazeX.BH01.LocalBehavior do
       )
     ]
   end
+
+  defp server_operations(server) do
+    [
+      upsert("bx-server", "bx-fixture-root", "group", nil, "bx-test-server"),
+      upsert(
+        "bx-server-action",
+        "bx-server",
+        "action",
+        "Increment server counter",
+        "bx-test-server-action"
+      ),
+      upsert(
+        "bx-server-status",
+        "bx-server",
+        "status",
+        server_text(server),
+        "bx-test-server-status"
+      ),
+      listener("bx-server-action", "action")
+    ]
+  end
+
+  defp server_text(%{status: "idle"}), do: "Server counter: 0 (idle)"
+  defp server_text(%{status: "pending", value: value}), do: "Server counter: #{value} (pending)"
+
+  defp server_text(%{status: "accepted", value: value, version: version}),
+    do: "Server counter: #{value} (version #{version})"
+
+  defp server_text(%{status: "disposed"}), do: "Server command disposed"
+  defp server_text(%{status: status}), do: "Server command #{status}"
+
+  defp validate_server_result(
+         %{
+           "protocol" => "blazex.bh01.server-result/0.1",
+           "status" => "ok",
+           "correlation_id" => correlation_id,
+           "result" => %{
+             "resource_id" => "counter",
+             "value" => value,
+             "version" => version,
+             "replayed" => replayed
+           }
+         } = result,
+         correlation_id
+       )
+       when is_integer(value) and value >= 0 and is_integer(version) and version >= 0 and
+              is_boolean(replayed) do
+    if Enum.sort(Map.keys(result)) == ~w(correlation_id protocol result status) and
+         Enum.sort(Map.keys(result["result"])) == ~w(replayed resource_id value version) do
+      {:ok, :accepted, result["result"]}
+    else
+      {:error, "server-result-invalid"}
+    end
+  end
+
+  defp validate_server_result(
+         %{
+           "protocol" => "blazex.bh01.server-result/0.1",
+           "status" => "error",
+           "correlation_id" => correlation_id,
+           "error" => %{"code" => code, "retryable" => retryable}
+         } = result,
+         correlation_id
+       )
+       when is_boolean(retryable) do
+    if Enum.sort(Map.keys(result)) == ~w(correlation_id error protocol status) and
+         Enum.sort(Map.keys(result["error"])) == ~w(code retryable) and
+         valid_error_code?(code) do
+      {:ok, :rejected, code}
+    else
+      {:error, "server-result-invalid"}
+    end
+  end
+
+  defp validate_server_result(%{"correlation_id" => _}, nil),
+    do: {:error, "server-result-unexpected"}
+
+  defp validate_server_result(%{"correlation_id" => _}, _pending),
+    do: {:error, "server-result-stale"}
+
+  defp validate_server_result(_result, _pending), do: {:error, "server-result-invalid"}
+
+  defp valid_server_identifier?(value) when is_binary(value) and byte_size(value) in 1..64,
+    do: String.match?(value, ~r/^[A-Za-z0-9][A-Za-z0-9._:-]*$/)
+
+  defp valid_server_identifier?(_value), do: false
+
+  defp valid_error_code?(value) when is_binary(value) and byte_size(value) in 1..64,
+    do: String.match?(value, ~r/^[a-z][a-z0-9-]*$/)
+
+  defp valid_error_code?(_value), do: false
 
   defp root,
     do: %{
@@ -852,6 +1033,14 @@ defmodule BlazeX.BH01.LocalBehavior do
         "pending_messages" => state.async.pending_messages,
         "duplicate_drops" => state.async.duplicate_drops,
         "last_result" => state.async.last_result
+      },
+      "server" => %{
+        "status" => state.server.status,
+        "value" => state.server.value,
+        "version" => state.server.version,
+        "pending" => state.server.pending_correlation_id != nil,
+        "last_correlation_id" => state.server.last_correlation_id,
+        "failures" => state.server.failures
       },
       "resources" => %{
         "processes" => if(state.disposed, do: 0, else: 1),
