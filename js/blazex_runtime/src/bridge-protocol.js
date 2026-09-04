@@ -8,12 +8,14 @@ export const BRIDGE_LIMITS = Object.freeze({
   max_string_bytes: 2_048,
   max_timeout_ms: 10_000,
   max_concurrency: 16,
+  max_abs_number: 1_000_000_000,
 });
 export const BRIDGE_OPERATIONS = Object.freeze(["runtime.echo", "runtime.shutdown", "fixture.command", "fixture.event", "fixture.snapshot"]);
 export const BRIDGE_SIGNAL_TYPES = Object.freeze(["event", "error", "readiness", "shutdown", "diagnostic"]);
 
 const ID = /^[A-Za-z0-9][A-Za-z0-9._:-]{0,95}$/;
 const FORBIDDEN_KEY = /authorization|cookie|credential|password|secret|token/i;
+const PROTOTYPE_KEYS = new Set(["__proto__", "constructor", "prototype"]);
 
 export function createBridgeRequest({ scenarioId, generation, correlationId, sequence, operation, payload, timeoutMs }) {
   const envelope = {
@@ -93,7 +95,7 @@ export function validateBridgeResponse(value, request) {
 export function assertBoundedValue(value, depth = 0, budget = { items: 0 }) {
   if (depth > BRIDGE_LIMITS.max_depth) throw new BlazeXHostError("bridge-payload-depth-exceeded", "Bridge payload nesting is too deep");
   if (value === null || typeof value === "boolean" || typeof value === "number") {
-    if (typeof value === "number" && !Number.isFinite(value)) throw new BlazeXHostError("bridge-payload-number-invalid", "Bridge numbers must be finite");
+    if (typeof value === "number" && (!Number.isFinite(value) || Math.abs(value) > BRIDGE_LIMITS.max_abs_number)) throw new BlazeXHostError("bridge-payload-number-invalid", "Bridge numbers must be finite and bounded");
     return;
   }
   if (typeof value === "string") {
@@ -112,7 +114,7 @@ export function assertBoundedValue(value, depth = 0, budget = { items: 0 }) {
   const entries = Object.entries(value);
   addItems(budget, entries.length);
   for (const [key, item] of entries) {
-    if (!ID.test(key) || FORBIDDEN_KEY.test(key)) throw new BlazeXHostError("bridge-payload-key-forbidden", "A bridge payload key is invalid or sensitive");
+    if (!ID.test(key) || FORBIDDEN_KEY.test(key) || PROTOTYPE_KEYS.has(key)) throw new BlazeXHostError("bridge-payload-key-forbidden", "A bridge payload key is invalid or sensitive");
     assertBoundedValue(item, depth + 1, budget);
   }
 }

@@ -75,37 +75,37 @@ Back to milestone: [README](README.md)
       - [x] 7.2.3.1 Subtask - Capture heap/memory/process/listener/socket evidence for growth and isolate runtime, browser, adapter, fixture, server, or test-harness ownership.
       - [x] 7.2.3.2 Subtask - Record bounded mitigation, upstream issue, replacement path, measurement caveat, or blocker for every unexplained retained resource.
 
-  - [ ] 7.3 Section - Execute the adversarial security matrix.
+  - [x] 7.3 Section - Execute the adversarial security matrix.
 
     Challenge all untrusted browser/runtime inputs, artifact boundaries, host
     operations, renderer messages, and server commands beyond Phase 6’s command
     cases.
 
-    - [ ] 7.3.1 Task - Fuzz and mutate boundary payloads.
+    - [x] 7.3.1 Task - Fuzz and mutate boundary payloads.
 
       Schemas must fail safely under malformed, hostile, oversized, stale, and
       surprising data at each transition.
 
-      - [ ] 7.3.1.1 Subtask - Generate malformed/unknown/deep/large/duplicate/out-of-order runtime, bridge, DOM, adapter, transport, command, result, patch, and diagnostic payloads.
-      - [ ] 7.3.1.2 Subtask - Test Unicode/encoding, numeric bounds, atom/key growth, binary size, decompression, path/URL, header, origin, event target, and correlation/idempotency edge cases.
-      - [ ] 7.3.1.3 Subtask - Assert bounded parsing, no code/script/HTML injection, no secret exposure, no unbounded allocation/atom creation, no unauthorized effect, and recoverable or terminal cleanup.
+      - [x] 7.3.1.1 Subtask - Generate malformed/unknown/deep/large/duplicate/out-of-order runtime, bridge, DOM, adapter, transport, command, result, patch, and diagnostic payloads.
+      - [x] 7.3.1.2 Subtask - Test Unicode/encoding, numeric bounds, atom/key growth, binary size, decompression, path/URL, header, origin, event target, and correlation/idempotency edge cases.
+      - [x] 7.3.1.3 Subtask - Assert bounded parsing, no code/script/HTML injection, no secret exposure, no unbounded allocation/atom creation, no unauthorized effect, and recoverable or terminal cleanup.
 
-    - [ ] 7.3.2 Task - Test artifact and browser policy defenses.
+    - [x] 7.3.2 Task - Test artifact and browser policy defenses.
 
       Runtime delivery must reject tampering and incompatible policy rather than
       continuing with partially trusted code.
 
-      - [ ] 7.3.2.1 Subtask - Test modified Wasm/BEAM/JavaScript/manifest/map, wrong MIME/compression, redirect/origin, stale cache, missing integrity, CSP/CORS/isolation conflict, and downgrade attempts.
-      - [ ] 7.3.2.2 Subtask - Verify fail-before-execute behavior, cache eviction/rollback, static/unavailable fallback, correlation, and no sensitive diagnostic content.
+      - [x] 7.3.2.1 Subtask - Test modified Wasm/BEAM/JavaScript/manifest/map, wrong MIME/compression, redirect/origin, stale cache, missing integrity, CSP/CORS/isolation conflict, and downgrade attempts.
+      - [x] 7.3.2.2 Subtask - Verify fail-before-execute behavior, cache eviction/rollback, static/unavailable fallback, correlation, and no sensitive diagnostic content.
 
-    - [ ] 7.3.3 Task - Review server authority and capability exposure.
+    - [x] 7.3.3 Task - Review server authority and capability exposure.
 
       Browser presentation and host facilities must remain explicitly bounded
       even under compromised-client assumptions.
 
-      - [ ] 7.3.3.1 Subtask - Attempt command forgery/replay/race, role/resource/state substitution, direct transport use, adapter bypass, host-operation abuse, and result/DOM target manipulation.
-      - [ ] 7.3.3.2 Subtask - Verify current-state authorization, origin/CSRF/session controls, schema/rate/time/idempotency bounds, audit completeness, and least host-operation exposure.
-      - [ ] 7.3.3.3 Subtask - Record specialist findings, residual attack assumptions, production controls not yet implemented, and security stop conditions without claiming audit certification.
+      - [x] 7.3.3.1 Subtask - Attempt command forgery/replay/race, role/resource/state substitution, direct transport use, adapter bypass, host-operation abuse, and result/DOM target manipulation.
+      - [x] 7.3.3.2 Subtask - Verify current-state authorization, origin/CSRF/session controls, schema/rate/time/idempotency bounds, audit completeness, and least host-operation exposure.
+      - [x] 7.3.3.3 Subtask - Record specialist findings, residual attack assumptions, production controls not yet implemented, and security stop conditions without claiming audit certification.
 
   - [ ] 7.4 Section - Standardize diagnostics and operational evidence.
 

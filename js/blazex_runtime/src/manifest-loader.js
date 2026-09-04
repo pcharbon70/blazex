@@ -75,8 +75,8 @@ export function validateRuntimeManifest(value, manifestUrl) {
       throw new BlazeXHostError("artifact-mime-declaration-invalid", "Artifact MIME is not valid for its role", { id: artifact.id });
     }
     const url = new URL(artifact.path, base);
-    if (url.origin !== base.origin || url.username || url.password || url.hash) {
-      throw new BlazeXHostError("artifact-url-forbidden", "Artifact URLs must be same-origin values without credentials or fragments", { id: artifact.id });
+    if (url.origin !== base.origin || !url.href.startsWith(base.href) || url.username || url.password || url.hash) {
+      throw new BlazeXHostError("artifact-url-forbidden", "Artifact URLs must remain same-origin below the manifest directory without credentials or fragments", { id: artifact.id });
     }
     return Object.freeze({ ...artifact, url: url.href });
   });
@@ -175,6 +175,8 @@ function validateResponse(response, expectedUrl, acceptedMime, expectedBytes) {
   }
   const mime = String(response.headers?.get("content-type") ?? "").split(";", 1)[0].trim().toLowerCase();
   if (!acceptedMime.includes(mime)) throw new BlazeXHostError("fetch-mime-invalid", "Artifact response MIME does not match its declaration", { mime });
+  const encoding = String(response.headers?.get("content-encoding") ?? "").trim().toLowerCase();
+  if (encoding && encoding !== "identity") throw new BlazeXHostError("fetch-encoding-forbidden", "Artifact response encoding is not the declared identity representation", { encoding });
   const length = response.headers?.get("content-length");
   if (expectedBytes !== null && length !== null && Number(length) !== expectedBytes) {
     throw new BlazeXHostError("fetch-length-invalid", "Artifact response length does not match its declaration");
