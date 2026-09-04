@@ -10,7 +10,7 @@ defmodule BlazeXPhoenix.MixProject do
     ]
   end
 
-  def application, do: []
+  def application, do: [extra_applications: [:crypto]]
 
   defp deps, do: []
 end

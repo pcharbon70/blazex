@@ -22,27 +22,27 @@ Back to milestone: [README](README.md)
   version-sensitive LiveView/LocalLiveView renderer integration, and preserve
   standalone DOM, Plug, and server-authority boundaries.
 
-  - [ ] 6.1 Section - Compose the minimal Phoenix feasibility profile.
+  - [x] 6.1 Section - Compose the minimal Phoenix feasibility profile.
 
     Provide only the endpoint, identity fixture, transport, assets, and
     security boundaries required by the governed scenarios.
 
-    - [ ] 6.1.1 Task - Configure profile delivery and connection behavior.
+    - [x] 6.1.1 Task - Configure profile delivery and connection behavior.
 
       The executable profile composes owned packages but does not absorb their
       reusable implementation.
 
-      - [ ] 6.1.1.1 Subtask - Configure endpoint/routes, session, socket/transport, runtime assets, readiness, security headers, CSRF/origin policy, and development/test/release settings.
-      - [ ] 6.1.1.2 Subtask - Verify runtime/browser/DOM assets retain their package owners and profile code contains no portable behavior or authorization shortcut.
-      - [ ] 6.1.1.3 Subtask - Define startup, health, test reset, teardown, deterministic data, and server/browser trace correlation.
+      - [x] 6.1.1.1 Subtask - Configure endpoint/routes, session, socket/transport, runtime assets, readiness, security headers, CSRF/origin policy, and development/test/release settings.
+      - [x] 6.1.1.2 Subtask - Verify runtime/browser/DOM assets retain their package owners and profile code contains no portable behavior or authorization shortcut.
+      - [x] 6.1.1.3 Subtask - Define startup, health, test reset, teardown, deterministic data, and server/browser trace correlation.
 
-    - [ ] 6.1.2 Task - Define authenticated test identities and current server state.
+    - [x] 6.1.2 Task - Define authenticated test identities and current server state.
 
       The command proof needs controlled identity/role/resource fixtures whose
       authority lives only on the server.
 
-      - [ ] 6.1.2.1 Subtask - Define deterministic authenticated/anonymous identities, roles, resources, current-state versions, allowed/denied actions, session lifecycle, and test reset.
-      - [ ] 6.1.2.2 Subtask - Keep credentials, role assignment, authorization data, and authoritative state out of browser/runtime fixture state and emitted artifacts.
+      - [x] 6.1.2.1 Subtask - Define deterministic authenticated/anonymous identities, roles, resources, current-state versions, allowed/denied actions, session lifecycle, and test reset.
+      - [x] 6.1.2.2 Subtask - Keep credentials, role assignment, authorization data, and authoritative state out of browser/runtime fixture state and emitted artifacts.
 
   - [ ] 6.2 Section - Implement one authenticated and authorized command.
 

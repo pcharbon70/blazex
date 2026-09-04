@@ -4,7 +4,7 @@
   "path": "packages/blazex_phoenix",
   "kind": "elixir-package",
   "activation_phase": "BH-01 Phase 1",
-  "status": "experimental-skeleton",
+  "status": "experimental-phase6-authority-fixture",
   "owner_role": "server-adapter-owner",
   "module_roots": ["BlazeX.Phoenix"],
   "manifest": "mix.exs",

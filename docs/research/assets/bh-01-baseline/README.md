@@ -114,6 +114,11 @@ locations rather than this governance directory.
   — schema-valid local browser behavior decision with retained repeatability,
   failure, cleanup, artifact, accessibility, and proof evidence, narrow `go`,
   and explicit Phase 6 non-authorization.
+- [BH-01 Phase 6 authorization v0.1.0](blazex-bh-01-phase-06-authorization-v0.1.0.json)
+  — repository-owner approval for the Phoenix trust-boundary command,
+  LiveView/LocalLiveView adapter isolation, standalone DOM/Plug/headless
+  separation, section commits, one immediately merged PR, synchronization,
+  and branch cleanup.
 
 ## Maintaining this index
 

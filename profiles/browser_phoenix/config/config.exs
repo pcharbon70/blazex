@@ -1,7 +1,7 @@
 import Config
 
 config :blazex_browser_phoenix,
-  activation_state: :bh01_phase5,
+  activation_state: :bh01_phase6,
   endpoint_state: :feasibility_static_delivery,
   runtime_state: :experimental
 
