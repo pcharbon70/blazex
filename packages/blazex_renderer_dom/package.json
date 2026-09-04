@@ -1,0 +1,11 @@
+{
+  "name": "@blazex/renderer-dom-experimental",
+  "version": "0.0.0-bh01",
+  "private": true,
+  "type": "module",
+  "packageManager": "npm@11.19.0",
+  "scripts": {
+    "build": "node --check js/fixture-dom-protocol.js && node --check js/fixture-dom-renderer.js",
+    "test": "node --test js/test/*.test.js"
+  }
+}

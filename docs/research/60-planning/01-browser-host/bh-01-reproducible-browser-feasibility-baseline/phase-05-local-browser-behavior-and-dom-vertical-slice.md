@@ -44,28 +44,28 @@ Back to milestone: [README](README.md)
       - [x] 5.1.2.1 Subtask - Capture runtime messages, fixture transitions, bridge operations, DOM/accessibility observations, errors, resource counts, and owned generations.
       - [x] 5.1.2.2 Subtask - Define reviewed normalization for timestamps/opaque process IDs while preserving sequence, causality, state values, semantic identity, failures, and unexplained output.
 
-  - [ ] 5.2 Section - Implement bounded DOM fixture operations.
+  - [x] 5.2 Section - Implement bounded DOM fixture operations.
 
     Build only the closed operation set needed by BH-01 and keep all concrete
     document mutation and listener ownership in `blazex_renderer_dom`.
 
-    - [ ] 5.2.1 Task - Define the allowlisted DOM operation boundary.
+    - [x] 5.2.1 Task - Define the allowlisted DOM operation boundary.
 
       The feasibility adapter must not become a generic arbitrary-tag or script
       escape interface.
 
-      - [ ] 5.2.1.1 Subtask - Define fixture root, text/state/property, field, relationship, event-listener, focus-observation, and removal operations using opaque fixture IDs.
-      - [ ] 5.2.1.2 Subtask - Reject arbitrary HTML/script, CSS selector/style injection, JavaScript object/function, undeclared attribute/property/event, global mutation, and code execution.
-      - [ ] 5.2.1.3 Subtask - Version the operation protocol and handle mismatch, unknown operation, stale generation, malformed/oversized payload, duplicate listener, missing target, and post-disposal traffic.
+      - [x] 5.2.1.1 Subtask - Define fixture root, text/state/property, field, relationship, event-listener, focus-observation, and removal operations using opaque fixture IDs.
+      - [x] 5.2.1.2 Subtask - Reject arbitrary HTML/script, CSS selector/style injection, JavaScript object/function, undeclared attribute/property/event, global mutation, and code execution.
+      - [x] 5.2.1.3 Subtask - Version the operation protocol and handle mismatch, unknown operation, stale generation, malformed/oversized payload, duplicate listener, missing target, and post-disposal traffic.
 
-    - [ ] 5.2.2 Task - Implement renderer ownership and event normalization.
+    - [x] 5.2.2 Task - Implement renderer ownership and event normalization.
 
       Browser events should become bounded values before runtime delivery and
       all listeners/roots need explicit generations and cleanup owners.
 
-      - [ ] 5.2.2.1 Subtask - Implement document creation/mutation/listener ownership in the DOM package and browser scheduling/lifecycle ownership in the browser-host package.
-      - [ ] 5.2.2.2 Subtask - Normalize allowed input/change/blur/focus/action events to versioned scalar/structured payloads with size, sequence, target, and generation checks.
-      - [ ] 5.2.2.3 Subtask - Trace every operation/event and assert no undeclared mutation, listener, global, network request, or server round trip.
+      - [x] 5.2.2.1 Subtask - Implement document creation/mutation/listener ownership in the DOM package and browser scheduling/lifecycle ownership in the browser-host package.
+      - [x] 5.2.2.2 Subtask - Normalize allowed input/change/blur/focus/action events to versioned scalar/structured payloads with size, sequence, target, and generation checks.
+      - [x] 5.2.2.3 Subtask - Trace every operation/event and assert no undeclared mutation, listener, global, network request, or server round trip.
 
   - [ ] 5.3 Section - Prove local and nested state identity.
 
