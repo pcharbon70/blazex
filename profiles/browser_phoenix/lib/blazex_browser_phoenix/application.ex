@@ -4,7 +4,12 @@ defmodule BlazeXBrowserPhoenix.Application do
 
   @impl true
   def start(_type, _args) do
-    Supervisor.start_link([BlazeXBrowserPhoenix.Endpoint],
+    children = [
+      BlazeX.Phoenix.BH01.FixtureAuthority,
+      BlazeXBrowserPhoenix.Endpoint
+    ]
+
+    Supervisor.start_link(children,
       strategy: :one_for_one,
       name: BlazeXBrowserPhoenix.Supervisor
     )

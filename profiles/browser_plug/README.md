@@ -10,4 +10,6 @@ Its supported server features may be intentionally narrower than the canonical
 Phoenix profile, but component and renderer semantics must remain identical.
 
 Status: directory scaffold only; create the Mix project when its implementation
-milestone begins.
+milestone begins. `dependency-contract.json` records the Phase 6 qualified
+candidate Plug closure and explicitly limits the result to a static boundary,
+not an executable-profile claim.

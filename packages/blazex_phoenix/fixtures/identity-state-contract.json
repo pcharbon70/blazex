@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0.0",
+  "contract_id": "BX-BH01-PHASE-06-IDENTITY-STATE-0.1",
+  "status": "experimental-non-public",
+  "owner": "packages/blazex_phoenix",
+  "identities": [
+    {"id": "operator", "role": "operator", "enabled": true, "allowed_actions": ["counter.increment"]},
+    {"id": "viewer", "role": "viewer", "enabled": true, "allowed_actions": []},
+    {"id": "disabled", "role": "operator", "enabled": false, "allowed_actions": []}
+  ],
+  "anonymous": {"authenticated": false, "allowed_actions": []},
+  "resource": {"id": "counter", "initial_value": 0, "initial_version": 0},
+  "session": {
+    "server_record": ["session identity", "expiry", "CSRF digest", "revocation state"],
+    "browser_cookie": ["opaque session identity only"],
+    "client_visible": ["public identity ID", "expiry", "one session-scoped CSRF value"],
+    "never_client_visible": ["role assignment", "authorization policy", "authoritative resource record", "CSRF digest", "audit internals"]
+  },
+  "test_control": {
+    "availability": "MIX_ENV=test and loopback endpoint only",
+    "operations": ["issue named fixture identity", "expire current session", "reset deterministic state", "read redacted snapshot"],
+    "production_identity_claim": false
+  },
+  "claims_not_made": [
+    "production authentication",
+    "persistent storage",
+    "stable BlazeX server API",
+    "client-held authority"
+  ]
+}

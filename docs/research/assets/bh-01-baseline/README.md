@@ -114,6 +114,18 @@ locations rather than this governance directory.
   — schema-valid local browser behavior decision with retained repeatability,
   failure, cleanup, artifact, accessibility, and proof evidence, narrow `go`,
   and explicit Phase 6 non-authorization.
+- [BH-01 Phase 6 authorization v0.1.0](blazex-bh-01-phase-06-authorization-v0.1.0.json)
+  — repository-owner approval for the Phoenix trust-boundary command,
+  LiveView/LocalLiveView adapter isolation, standalone DOM/Plug/headless
+  separation, section commits, one immediately merged PR, synchronization,
+  and branch cleanup.
+- [BH-01 Phase 6 validation log v0.1.0](blazex-bh-01-phase-06-validation-log-v0.1.0.txt)
+  — exact actual-browser, Elixir, JavaScript, Phoenix, adapter, standalone,
+  dependency, evidence-verifier, negative-path, and cleanup outcomes.
+- [BH-01 Phase 6 completion v0.1.0](blazex-bh-01-phase-06-completion-v0.1.0.json)
+  — schema-valid server-authority and adapter-isolation decision with retained
+  security, failure, audit, cleanup, private-API, dependency, and limitation
+  evidence, a narrow `go`, and explicit Phase 7 non-authorization.
 
 ## Maintaining this index
 

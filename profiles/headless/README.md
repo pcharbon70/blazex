@@ -8,4 +8,5 @@ It will support deterministic conformance runs, component snapshots, build-time
 inspection, and CI environments where no visual host is available.
 
 Status: directory scaffold only; create the Mix project when its implementation
-milestone begins.
+milestone begins. `dependency-contract.json` records the Phase 6 inward-only
+dependency boundary and does not activate or claim a headless implementation.

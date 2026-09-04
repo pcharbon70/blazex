@@ -1,0 +1,24 @@
+{
+  "contract": "blazex.bh01.headless-dependencies/0.1",
+  "status": "boundary-only-not-activated",
+  "proof_limit": "intended dependency direction; no executable headless profile is claimed",
+  "allowed_local_dependencies": [
+    "blazex_core",
+    "blazex_effects",
+    "blazex_ui_tree",
+    "blazex_renderer",
+    "blazex_renderer_headless",
+    "blazex_test"
+  ],
+  "forbidden_direct_or_transitive": [
+    "blazex_host_browser",
+    "blazex_runtime_popcorn",
+    "blazex_renderer_dom",
+    "blazex_renderer_dom_liveview",
+    "blazex_phoenix",
+    "blazex_plug",
+    "phoenix",
+    "plug",
+    "local_live_view"
+  ]
+}

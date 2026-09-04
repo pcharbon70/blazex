@@ -1,0 +1,219 @@
+{
+  "schema_version": "1.0.0",
+  "record_id": "BX-BH01-DECISION-PHASE-06-GO",
+  "record_type": "decision",
+  "state": "passed",
+  "title": "BH-01 Phase 6 Phoenix trust boundary and LiveView adapter isolation gate",
+  "owner_role": "bh01-owner",
+  "recorded_at": "2026-09-04T12:53:17.348Z",
+  "observed_at": "2026-09-04T12:53:17.348Z",
+  "source_revision": "1dbcbfde5e7c76b39ccd2a999f0dd07a88c411e6",
+  "environment_refs": [
+    "profiles/browser_phoenix/toolchain/environment.lock.json",
+    "profiles/browser_phoenix/toolchain/browser.lock.json",
+    "profiles/browser_phoenix/toolchain/runtime.lock.json",
+    "profiles/browser_phoenix/toolchain/server-dependencies.json",
+    "profiles/browser_phoenix/toolchain/private-api-inventory.json",
+    "profiles/browser_phoenix/assets/phase4/deployment-contract.json",
+    "integration/fixtures/browser_host/standalone-boundary.json",
+    "profiles/browser_plug/dependency-contract.json",
+    "profiles/headless/dependency-contract.json"
+  ],
+  "tool_identities": [
+    {
+      "name": "beam-test-image",
+      "version": "sha256:8d03cfb52e3fa3f5d83d749942b7c45c966dda48a7c4ba4f069390379b59fc39",
+      "source": "docker.io/hexpm/elixir",
+      "sha256": "a2386c21edd5c612b4ed6e2731daba806177dba55baf977ee456c6e194f60d9f"
+    },
+    {
+      "name": "node",
+      "version": "26.8.1",
+      "source": "nodejs.org",
+      "sha256": "3e301118d7df53d563b7e96c1617545f26e2f76f9724be668d6cab65c15dda5d"
+    },
+    {
+      "name": "playwright-core",
+      "version": "1.62.1",
+      "source": "registry.npmjs.org",
+      "sha256": null
+    },
+    {
+      "name": "chrome-for-testing",
+      "version": "152.0.7977.75",
+      "source": "storage.googleapis.com/chrome-for-testing-public",
+      "sha256": "a16d36890636bd72251133b27f05825f7f9269c2425b3408fa3a76e10dccd8f1"
+    },
+    {
+      "name": "phoenix",
+      "version": "1.8.13",
+      "source": "repo.hex.pm",
+      "sha256": null
+    },
+    {
+      "name": "phoenix-live-view",
+      "version": "1.2.11",
+      "source": "repo.hex.pm",
+      "sha256": "c4087267cbd4dc4ed7ac36512a97830af8e9c857ca7cb22557f8640fc5f9d306"
+    },
+    {
+      "name": "local-live-view",
+      "version": "0.1.0",
+      "source": "repo.hex.pm",
+      "sha256": "3a9906601265f50b197b71bba8baf82484102a358170b58710a0e8bf982ef714"
+    },
+    {
+      "name": "popcorn",
+      "version": "0.3.3",
+      "source": "repo.hex.pm",
+      "sha256": null
+    },
+    {
+      "name": "python",
+      "version": "3.12.12",
+      "source": "local policy environment",
+      "sha256": "fb85a13414b028c49ba18bbd523c2d055a30b56b18b92ce454ea2c51edc656c4"
+    }
+  ],
+  "requirement_refs": [
+    "BH-01-PHASE-6",
+    "BX-BH01-INPUT-PROFILE-SLICE",
+    "BX-BH01-INPUT-BEHAVIORS",
+    "BX-BH01-INPUT-MEASUREMENTS",
+    "BX-BH01-INPUT-STOP-CONDITIONS",
+    "BX-BH01-PROOF-AUTHENTICATED-COMMAND",
+    "BX-BH01-PROOF-FORM-EVENT",
+    "BX-BH01-RISK-PRIVATE-LIVEVIEW-COUPLING",
+    "BX-BH01-RISK-RUNTIME-SEMANTICS",
+    "BX-BH01-RISK-WASM-ARTIFACT-ACCOUNTING"
+  ],
+  "reciprocal_links": [
+    "docs/research/60-planning/01-browser-host/bh-01-reproducible-browser-feasibility-baseline/phase-06-phoenix-trust-boundary-and-liveview-isolation.md",
+    "docs/research/60-planning/01-browser-host/bh-01-reproducible-browser-feasibility-baseline/phase-06-implementation-evidence.md",
+    "integration/fixtures/scenarios/bh01-phase6-trust-boundary.json",
+    "integration/fixtures/raw-evidence/bh01-phase6-trust-and-isolation.json",
+    "profiles/browser_phoenix/toolchain/private-api-inventory.json",
+    "integration/fixtures/browser_host/standalone-boundary.json",
+    "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-06-authorization-v0.1.0.json"
+  ],
+  "command_refs": [
+    "docker run --rm --network none <pinned-elixir> mix bh01.browser_package --out-dir generated",
+    "python3 integration/fixtures/browser_host/generate_manifest.py --generated integration/fixtures/browser_host/generated",
+    "python3 profiles/browser_phoenix/assets/phase4/build_profile.py --output profiles/browser_phoenix/priv/static/bh01",
+    "PHX_SERVER=true PORT=4199 mix run --no-halt",
+    "BLAZEX_BASE_URL=http://127.0.0.1:4199/bh01/ BLAZEX_CHROME_PATH=<qualified-chrome> BLAZEX_REVISION=1dbcbfde5e7c76b39ccd2a999f0dd07a88c411e6 node test/browser/phase6.integration.mjs",
+    "npm test",
+    "npm run build",
+    "mix test",
+    "python3 -m unittest discover -s integration/fixtures/local_browser/tests -p test_*.py",
+    "python3 -m unittest discover -s profiles/browser_phoenix/toolchain/tests -p test_*.py",
+    "python3 integration/fixtures/local_browser/verify_contracts.py",
+    "python3 integration/fixtures/browser_host/verify_fixture.py --generated integration/fixtures/browser_host/generated",
+    "python3 profiles/browser_phoenix/assets/phase4/verify_profile.py profiles/browser_phoenix/priv/static/bh01",
+    "python3 profiles/browser_phoenix/toolchain/verify_phase6_boundaries.py",
+    "python3 profiles/browser_phoenix/toolchain/verify_phase6.py",
+    "python3 docs/research/validate_archive.py",
+    "git diff --check"
+  ],
+  "input_hashes": [
+    {
+      "path": "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-06-authorization-v0.1.0.json",
+      "sha256": "8df367ea1f7692d3e9856c5c29668c720f4e0f0a07bf945e5c3d9eab023b377b"
+    },
+    {
+      "path": "packages/blazex_phoenix/fixtures/server-command-contract.json",
+      "sha256": "3c60b2516307d740f5f90aa21f40f9ca37ed5343ace6471a806ca221a0e824f7"
+    },
+    {
+      "path": "packages/blazex_phoenix/fixtures/identity-state-contract.json",
+      "sha256": "09a70290ccd6e909a3f80bc802c33e3a69d6d76c8ad7b18d96a306adc815338a"
+    },
+    {
+      "path": "profiles/browser_phoenix/toolchain/private-api-inventory.json",
+      "sha256": "78d18bf12be733429263754ced9cb021e490e5ce0933d6d949daf548969fe11a"
+    },
+    {
+      "path": "profiles/browser_phoenix/toolchain/private-api-contract.fixture.json",
+      "sha256": "6580be1fa189e2a5ac97ffee2331b5535a65e0854f275b5c573bf250286894ff"
+    },
+    {
+      "path": "integration/fixtures/browser_host/standalone-boundary.json",
+      "sha256": "b5aa9b6e76e7ebb5a68e6c75ab0b23db920801909fe2a4e3e18a8a788c490dc8"
+    },
+    {
+      "path": "profiles/browser_plug/dependency-contract.json",
+      "sha256": "d85041ad1df999067d7ad375a80592e2ebe5fba619e47aa25da2b391fa2446ff"
+    },
+    {
+      "path": "profiles/headless/dependency-contract.json",
+      "sha256": "a49fe51f9f609380504aad20c778d3b4861a5756f0e6460fff5e80d7884baed9"
+    },
+    {
+      "path": "integration/fixtures/scenarios/bh01-phase6-trust-boundary.json",
+      "sha256": "be0493b606328b33d2f24e68bde6eb3d236d682089092f15b92a090dae42e1b3"
+    },
+    {
+      "path": "integration/fixtures/raw-evidence/bh01-phase6-trust-and-isolation.json",
+      "sha256": "e2c46faea7741042855ecdae9604a17ff364c69a1ea3d92ee3ad24c2cedb9cbb"
+    },
+    {
+      "path": "integration/fixtures/fixture-index.json",
+      "sha256": "f86526e5cf17394a72459c4bdfdca11b705734c151003a340d0762801c037b6e"
+    }
+  ],
+  "output_hashes": [
+    {
+      "path": "docs/research/60-planning/01-browser-host/bh-01-reproducible-browser-feasibility-baseline/phase-06-implementation-evidence.md",
+      "sha256": "721df71a89179aaf8da84bbf82f348702fc35209aa35a65d156b822fed96c8c0"
+    },
+    {
+      "path": "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-06-validation-log-v0.1.0.txt",
+      "sha256": "1e52f42400fea44ab9fe42b44b8137276ee9d0caf04fd34191052cdecf6e7be0"
+    }
+  ],
+  "raw_evidence_refs": [
+    "integration/fixtures/raw-evidence/bh01-phase6-trust-and-isolation.json",
+    "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-06-validation-log-v0.1.0.txt"
+  ],
+  "normalization": [
+    {
+      "subject": "server audit and command identity",
+      "method": "Retain ordered bounded correlation ids, command names, outcomes, effect flags, resource versions, and truncated one-way idempotency digests; exclude cookies, opaque sessions, CSRF values, credentials, role rules, and internal diagnostics."
+    },
+    {
+      "subject": "browser transport failures",
+      "method": "Map only controlled same-origin test responses, network interruption, timeout, retry, and disposal to the closed fixture result vocabulary while retaining whether any result was delivered or effect was applied."
+    },
+    {
+      "subject": "timing and resource observations",
+      "method": "Retain exact lifecycle and bridge counters but do not use elapsed cleanup timing as a semantic pass criterion; preserve unavailable worker observation as null rather than zero."
+    }
+  ],
+  "limitations": [
+    "Only one exact headless Chrome for Testing 152/Linux x86-64 environment was executed; all browsers remain unsupported.",
+    "The command, identity store, counter, test-control routes, adapter descriptor, and patch protocol are disposable BH-01 fixtures rather than production or public BlazeX APIs.",
+    "LiveView and LocalLiveView private surfaces were inventoried, compatibility-probed, and isolated; actual LiveView rendering or channel transport was not adopted as BlazeX semantics.",
+    "Plug-only and headless results are static dependency boundaries, not executable profiles.",
+    "Production authentication, persistence, multi-node consistency, HTTPS/proxy deployment, security stress, performance, accessibility conformance, mobile, and cross-browser behavior remain unverified.",
+    "Popcorn 0.3.3 still requires CSP unsafe-eval and the unpruned AVM still lacks accepted payload, startup, memory, CPU, and reliability budgets.",
+    "Parent-frame worker count and runtime-wide process inventory remain unavailable and were not represented as zero."
+  ],
+  "supersedes": [],
+  "invalidates": [],
+  "retention": {
+    "class": "permanent",
+    "minimum_days": null,
+    "immutable_raw_evidence": true
+  },
+  "outcome": {
+    "summary": "Phase 6 Phoenix trust boundary and LiveView adapter isolation gate passed narrowly; Phase 7 is eligible but not authorized.",
+    "expected": "One normalized browser action reaches server-owned authentication, current-state authorization, exactly-once side effect, redacted audit, bounded result, and DOM update; denial and transport failures apply no unauthorized effect; private LiveView coupling remains removable and absent from standalone DOM, runtime, authority, Plug, and headless boundaries.",
+    "observed": "The pinned browser applied two authorized counter effects across the rendered and explicit commands, replayed the second without another effect, rejected the complete governed failure matrix, delivered no disposed result, cleaned all known owned resources, retained no secret-bearing evidence, reported only exact-pin LiveView adapter eligibility with standalone fallback, and passed standalone/Plug/headless dependency isolation checks."
+  },
+  "review": {
+    "required": true,
+    "reviewer_role": "bh01-owner",
+    "reviewed_at": "2026-09-04T12:53:17.348Z",
+    "disposition": "accepted"
+  }
+}

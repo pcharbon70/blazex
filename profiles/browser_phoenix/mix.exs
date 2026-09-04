@@ -20,6 +20,8 @@ defmodule BlazeXBrowserPhoenix.MixProject do
 
   defp deps do
     [
+      {:blazex_phoenix, path: "../../packages/blazex_phoenix"},
+      {:blazex_renderer_dom_liveview, path: "../../packages/blazex_renderer_dom_liveview"},
       {:phoenix, "== 1.8.13"},
       {:phoenix_live_view, "== 1.2.11"},
       {:local_live_view, "== 0.1.0"},

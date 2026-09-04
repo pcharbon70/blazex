@@ -34,7 +34,7 @@ class Phase2CompletionTest(unittest.TestCase):
     def test_evidence_hash_drift_fails(self):
         hashes = copy.deepcopy(self.values[5])
         first = next(iter(hashes))
-        hashes[first] = "0" * 64
+        hashes[first] = {"0" * 64}
         self.assertTrue(self.validate(5, hashes))
 
     def test_open_plan_item_fails(self):

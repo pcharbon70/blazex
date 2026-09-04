@@ -1,0 +1,62 @@
+{
+  "contract": "blazex.bh01.server-command-contract/0.1",
+  "status": "disposable-bh01-fixture",
+  "request": {
+    "protocol": "blazex.bh01.server-command/0.1",
+    "route": "/bh01/commands/counter-increment",
+    "method": "POST",
+    "content_type": "application/json",
+    "max_body_bytes": 2048,
+    "max_depth": 2,
+    "exact_fields": [
+      "protocol",
+      "command",
+      "correlation_id",
+      "idempotency_key",
+      "resource_id",
+      "expected_version",
+      "payload"
+    ],
+    "command": "counter.increment",
+    "resource_id": "counter",
+    "payload": {"amount": 1},
+    "identifier_max_bytes": 64,
+    "rate_limit_per_session_and_reset": 3,
+    "browser_timeout_ms": 1500
+  },
+  "authority_order": [
+    "same-origin transport",
+    "cookie session authentication",
+    "CSRF verification",
+    "bounded JSON and exact schema",
+    "current server resource lookup",
+    "server-owned identity authorization",
+    "idempotency and rate checks",
+    "version precondition",
+    "transactional side effect",
+    "redacted audit",
+    "bounded public result"
+  ],
+  "result": {
+    "protocol": "blazex.bh01.server-result/0.1",
+    "success_fields": ["resource_id", "value", "version", "replayed"],
+    "error_fields": ["code", "retryable"],
+    "forbidden_fields": [
+      "session_id",
+      "csrf_token",
+      "role",
+      "allowed_actions",
+      "authorization_rule",
+      "stacktrace"
+    ]
+  },
+  "idempotency": {
+    "scope": "opaque server session and idempotency key",
+    "same_request": "return the original outcome with replayed=true and do not repeat the effect",
+    "different_request": "reject with idempotency-conflict and do not apply an effect"
+  },
+  "failure_controls": {
+    "scope": "test profile only; never accepted from the command body",
+    "modes": ["server-error", "transaction-error"]
+  }
+}

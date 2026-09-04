@@ -11,8 +11,8 @@ It is the leading supported composition, not the universal container for BlazeX.
 Shared browser, renderer, and component behavior must remain in reusable
 packages rather than this profile.
 
-Status: experimental BH-01 Phase 5 feasibility profile with the Phase 5 gate
-complete. It provides a
+Status: experimental BH-01 Phase 6 feasibility profile with the Phase 5 gate
+complete and the Phase 6 server trust proof in progress. It provides a
 manifest-driven browser loader, isolated Popcorn/AtomVM frame, bounded
 Elixir/browser bridge, lifecycle and prerequisite checks, deterministic static
 profile build, a replaceable fixture-only DOM adapter, and a Phoenix/Bandit
@@ -21,6 +21,13 @@ asset endpoint. Run
 endpoint. The DOM operation protocol and local behavior are test fixtures, not
 a component model, production renderer, deployment support claim, or stable
 API.
+
+The Phase 6 profile adds one disposable authenticated counter command. The
+browser runtime emits only a typed intent; the profile owns same-origin and
+CSRF transport checks, while `blazex_phoenix` owns current session identity,
+authorization, state/version checks, idempotency, the effect, and redacted
+audit. Test identity and failure controls are loopback-only and active only in
+the test environment.
 
 The current fixture additionally records bounded timer/message state, bridge
 and lifecycle metrics, DOM ownership counts, the fixed Wasm memory-page

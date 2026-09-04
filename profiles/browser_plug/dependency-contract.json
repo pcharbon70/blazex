@@ -1,0 +1,25 @@
+{
+  "contract": "blazex.bh01.browser-plug-dependencies/0.1",
+  "status": "qualified-not-activated",
+  "proof_limit": "static candidate closure; no executable Plug profile is claimed",
+  "intended_local_dependencies": [
+    "blazex_host_browser",
+    "blazex_renderer_dom",
+    "blazex_plug"
+  ],
+  "root": ["plug 1.20.3"],
+  "closure": [
+    "mime 2.0.7",
+    "plug 1.20.3",
+    "plug_crypto 2.2.0",
+    "telemetry 1.4.2"
+  ],
+  "forbidden_direct_or_transitive": [
+    "phoenix",
+    "phoenix_live_view",
+    "local_live_view",
+    "blazex_phoenix",
+    "blazex_renderer_dom_liveview"
+  ],
+  "source": "BH-01 Phase 2 qualified dependency resolution"
+}

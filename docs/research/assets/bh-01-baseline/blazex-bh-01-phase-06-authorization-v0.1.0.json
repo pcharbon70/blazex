@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0.0",
+  "record_id": "BX-BH01-AUTHORIZATION-PHASE-06-0.1",
+  "status": "approved-phase-6-only",
+  "authorized_at": "2026-09-04",
+  "request": "Implement the next phase of BH-01 section by section with a commit per section and one immediately merged PR, then synchronize main and delete the feature branch.",
+  "base_revision": "a5547155b751db9bb75ede62c19b81db5e07fa92",
+  "branch": "codex/bh-01-phase-06-phoenix-trust-boundary",
+  "authorized_scope": [
+    "compose the minimal Phase 6 Phoenix feasibility profile and deterministic server identity/state fixtures",
+    "implement and test one authenticated and authorized browser command through the real runtime and server boundary",
+    "confine pinned LiveView and LocalLiveView compatibility handling to blazex_renderer_dom_liveview",
+    "prove optional-adapter disable/fallback plus standalone DOM, Plug, and headless dependency separation",
+    "record actual-browser Phase 6 trust-boundary and adapter-isolation evidence",
+    "commit once per completed Phase 6 section",
+    "create and immediately merge one Phase 6 pull request",
+    "synchronize main and delete the local and remote feature branch"
+  ],
+  "not_authorized": [
+    "Phase 7 resilience, security stress, or production-hardening work",
+    "BH-02 semantic tree, component, effect, capability, renderer, or stable command contracts",
+    "production authentication, identity-provider, persistence, or deployment implementation",
+    "browser support, accessibility conformance, security certification, performance-budget, or production-readiness claims"
+  ],
+  "owner": "repository-owner"
+}

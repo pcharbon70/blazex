@@ -115,7 +115,7 @@ def validate(
     if {entry.get("id") for entry in entries} != expected_ids:
         errors.append("private/version-sensitive API inventory is incomplete")
     for entry in entries:
-        for field in ("source", "visibility", "shape", "call_site", "pin_sensitivity", "upgrade_trigger", "risk"):
+        for field in ("source", "source_revision", "source_lines", "visibility", "shape", "call_site", "pin_sensitivity", "upgrade_trigger", "risk"):
             if not entry.get(field):
                 errors.append(f"private API {entry.get('id')} lacks {field}")
     decision = inventory.get("confinement_decision", {})

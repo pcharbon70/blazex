@@ -4,7 +4,7 @@
   "path": "packages/blazex_renderer_dom_liveview",
   "kind": "elixir-package",
   "activation_phase": "BH-01 Phase 1",
-  "status": "experimental-skeleton",
+  "status": "experimental-phase6-compatibility-adapter",
   "owner_role": "liveview-adapter-owner",
   "module_roots": ["BlazeX.Renderer.DOM.LiveView"],
   "manifest": "mix.exs",

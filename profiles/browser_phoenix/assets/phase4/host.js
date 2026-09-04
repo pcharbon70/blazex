@@ -8,6 +8,8 @@ const fixtureEffects = [];
 const domTraces = [];
 const timingObservations = [];
 const runtimeResources = { memory_pages: null, workers: null };
+const pendingServerRequests = new Set();
+const serverSession = { csrf: null, identity_id: null };
 let renderer = null;
 let fixtureQueue = Promise.resolve();
 const record = (event) => {
@@ -107,12 +109,55 @@ function enqueueFixtureEvent(event) {
 }
 
 function fixtureApi(activation) {
+  let disposed = false;
+
+  const command = async (commandName, payload = {}) => {
+    return observeRequest(activation, "command", commandName, () => activation.bridge.request("fixture.command", { command: commandName, ...payload }));
+  };
+
+  const completeServerCommand = async (intent, options = {}) => {
+    const result = await sendServerCommand(intent, options);
+    if (disposed) return { intent, result, delivered: false };
+    const rendered = await command("server.result", { result });
+    return { intent, result, rendered, delivered: true };
+  };
+
   return Object.freeze({
-    command: async (command, payload = {}) => {
-      return observeRequest(activation, "command", command, () => activation.bridge.request("fixture.command", { command, ...payload }));
-    },
+    command,
     event: async (event) => {
-      return observeRequest(activation, "event", event.event, () => activation.bridge.request("fixture.event", event));
+      const observed = await observeRequest(activation, "event", event.event, () => activation.bridge.request("fixture.event", event));
+      const intent = observed?.ack?.result?.command;
+      return intent ? { ...observed, server: await completeServerCommand(intent) } : observed;
+    },
+    establishSession: async (identityId = "operator") => {
+      const response = await fetch("/bh01/test/session", {
+        method: "POST",
+        credentials: "same-origin",
+        headers: { "content-type": "application/json", "x-bh01-test-control": "enabled" },
+        body: JSON.stringify({ identity_id: identityId }),
+      });
+      const body = await response.json();
+      if (!response.ok || typeof body.csrf_token !== "string") throw new Error("BH-01 test session was rejected");
+      serverSession.csrf = body.csrf_token;
+      serverSession.identity_id = body.identity_id;
+      record({ protocol: "blazex.bh01.server-trace/0.1", stage: "session-established", identity_id: body.identity_id });
+      return Object.freeze({ identity_id: body.identity_id, expires_at_ms: body.expires_at_ms });
+    },
+    expireSession: async () => {
+      const response = await fetch("/bh01/test/expire", {
+        method: "POST",
+        credentials: "same-origin",
+        headers: { "x-bh01-test-control": "enabled" },
+      });
+      return Object.freeze({ status: response.status, expired: response.ok });
+    },
+    serverCommand: async (options = {}) => {
+      const prepared = await command("server.prepare", {
+        ...(options.correlationId ? { correlation_id: options.correlationId } : {}),
+        ...(options.idempotencyKey ? { idempotency_key: options.idempotencyKey } : {}),
+        ...(Number.isSafeInteger(options.expectedVersion) ? { expected_version: options.expectedVersion } : {}),
+      });
+      return completeServerCommand(prepared.ack.result.command, options);
     },
     snapshot: async () => ({ runtime: await activation.bridge.request("fixture.snapshot", {}), dom: renderer.snapshot(), host: hostResources(activation) }),
     settle: async () => {
@@ -120,10 +165,62 @@ function fixtureApi(activation) {
       return { runtime: await activation.bridge.request("fixture.snapshot", {}), dom: renderer.snapshot(), host: hostResources(activation) };
     },
     dispose: async () => {
+      disposed = true;
+      for (const controller of pendingServerRequests) controller.abort("fixture-dispose");
+      serverSession.csrf = null;
+      serverSession.identity_id = null;
       try { return await activation.bridge.request("fixture.command", { command: "dispose" }); }
       finally { renderer?.dispose("fixture-dispose"); }
     },
   });
+}
+
+async function sendServerCommand(intent, options = {}) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort("server-timeout"), 1_500);
+  pendingServerRequests.add(controller);
+  try {
+    const headers = {
+      "content-type": "application/json",
+      "x-bh01-csrf": serverSession.csrf ?? "",
+    };
+    if (options.failureMode) {
+      headers["x-bh01-test-control"] = "enabled";
+      headers["x-bh01-failure-mode"] = options.failureMode;
+    }
+    const response = await fetch("/bh01/commands/counter-increment", {
+      method: "POST",
+      credentials: "same-origin",
+      headers,
+      body: JSON.stringify(intent),
+      signal: controller.signal,
+    });
+    const text = await response.text();
+    if (new TextEncoder().encode(text).byteLength > 2_048) throw new Error("server-result-oversized");
+    const result = JSON.parse(text);
+    record({
+      protocol: "blazex.bh01.server-trace/0.1",
+      stage: "transport-result",
+      correlation_id: intent.correlation_id,
+      http_status: response.status,
+      outcome: result?.status ?? "invalid",
+      code: result?.error?.code ?? null,
+    });
+    return result;
+  } catch (error) {
+    const timedOut = controller.signal.aborted && controller.signal.reason === "server-timeout";
+    const code = timedOut ? "transport-timeout" : "transport-unavailable";
+    record({ protocol: "blazex.bh01.server-trace/0.1", stage: "transport-failed", correlation_id: intent.correlation_id, code });
+    return {
+      protocol: "blazex.bh01.server-result/0.1",
+      status: "error",
+      correlation_id: intent.correlation_id,
+      error: { code, retryable: true },
+    };
+  } finally {
+    clearTimeout(timeout);
+    pendingServerRequests.delete(controller);
+  }
 }
 
 async function observeRequest(activation, kind, name, request) {
@@ -157,6 +254,7 @@ function hostResources(activation) {
     worker_observation: "not exposed at the parent-frame boundary",
     bridge: activation?.bridge?.metrics?.() ?? null,
     lifecycle: loader?.lifecycle?.() ?? null,
+    server: { pending: pendingServerRequests.size, session_configured: serverSession.csrf !== null },
     dom: dom ? { roots: dom.root_count, listeners: dom.listener_count, nodes: dom.node_count } : { roots: 0, listeners: 0, nodes: 0 },
   });
 }
