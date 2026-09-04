@@ -66,7 +66,7 @@ test("waits for application readiness and converges resources on stop", async ()
     cancel() {},
     stop() { stopped += 1; },
   });
-  const loader = new BrowserRuntimeLoader({ onEvent: (event) => events.push(event), frameFactory, eventTarget });
+  const loader = new BrowserRuntimeLoader({ onEvent: (event) => events.push(event), frameFactory, eventTarget, prerequisiteCheck: supported });
   const activation = await loader.start({
     manifestUrl: "https://example.test/bh01/manifest.json",
     frameUrl: "https://example.test/bh01/runtime-frame.html",
@@ -104,6 +104,7 @@ test("contains runtime failure and startup cancellation", async () => {
   };
   const failedLoader = new BrowserRuntimeLoader({
     eventTarget: new EventTarget(),
+    prerequisiteCheck: supported,
     frameFactory: ({ onEvent }) => ({
       async attach() {},
       start({ generation }) { queueMicrotask(() => onEvent({ type: "runtime-failed", generation, code: "worker-crash", reason: "test" })); },
@@ -117,6 +118,7 @@ test("contains runtime failure and startup cancellation", async () => {
 
   const cancelledLoader = new BrowserRuntimeLoader({
     eventTarget: new EventTarget(),
+    prerequisiteCheck: supported,
     frameFactory: () => ({ async attach() {}, start() {}, request() {}, cancel() {}, stop() {} }),
   });
   const pending = cancelledLoader.start({ manifestUrl: "https://example.test/manifest.json", frameUrl: "https://example.test/frame", fetchImpl, cryptoImpl: webcrypto, timeoutMs: 100 });
@@ -125,3 +127,7 @@ test("contains runtime failure and startup cancellation", async () => {
   await assert.rejects(pending, (error) => error.code === "startup-cancelled");
   assert.equal(cancelledLoader.lifecycle().state, "stopped");
 });
+
+function supported() {
+  return { decision: "proceed", message: "test prerequisites" };
+}

@@ -105,27 +105,27 @@ Back to milestone: [README](README.md)
       - [x] 4.3.3.2 Subtask - Exercise explicit stop, page navigation/unload, profile restart, runtime crash, startup cancellation, and repeated mount/unmount.
       - [x] 4.3.3.3 Subtask - Assert idempotence, bounded completion time, late-result rejection, and resource convergence.
 
-  - [ ] 4.4 Section - Define prerequisites, fallback, and deployment contracts.
+  - [x] 4.4 Section - Define prerequisites, fallback, and deployment contracts.
 
     Browser and server assumptions must be detected and recorded before boot so
     unsupported environments fail intentionally rather than partially.
 
-    - [ ] 4.4.1 Task - Detect browser prerequisites before activation.
+    - [x] 4.4.1 Task - Detect browser prerequisites before activation.
 
       Capability checks should identify exact missing facilities and avoid
       conflating one failed prerequisite with a supported browser claim.
 
-      - [ ] 4.4.1.1 Subtask - Detect WebAssembly/features, workers, modules, memory/isolation, streaming, integrity, JavaScript availability, secure context, and required policies.
-      - [ ] 4.4.1.2 Subtask - Map each prerequisite outcome to proceed, alternate loading, static/server fallback, explicit unavailability, or unsupported result with accessible messaging.
+      - [x] 4.4.1.1 Subtask - Detect WebAssembly/features, workers, modules, memory/isolation, streaming, integrity, JavaScript availability, secure context, and required policies.
+      - [x] 4.4.1.2 Subtask - Map each prerequisite outcome to proceed, alternate loading, static/server fallback, explicit unavailability, or unsupported result with accessible messaging.
 
-    - [ ] 4.4.2 Task - Specify the feasibility deployment contract.
+    - [x] 4.4.2 Task - Specify the feasibility deployment contract.
 
       Hosting inputs need exact requirements even though production deployment
       support remains later work.
 
-      - [ ] 4.4.2.1 Subtask - Record content types, compression, caching/validation, streaming/range, CSP, CORS, origin, worker, HTTPS, cross-origin isolation, integrity, source-map, and rollback requirements.
-      - [ ] 4.4.2.2 Subtask - Implement profile-local verification of headers, asset reachability, manifest/artifact consistency, and stale-cache behavior before activation.
-      - [ ] 4.4.2.3 Subtask - Distinguish development/test/release, direct Phoenix, reverse-proxy/CDN, unsupported hosting, and browser-managed cache differences.
+      - [x] 4.4.2.1 Subtask - Record content types, compression, caching/validation, streaming/range, CSP, CORS, origin, worker, HTTPS, cross-origin isolation, integrity, source-map, and rollback requirements.
+      - [x] 4.4.2.2 Subtask - Implement profile-local verification of headers, asset reachability, manifest/artifact consistency, and stale-cache behavior before activation.
+      - [x] 4.4.2.3 Subtask - Distinguish development/test/release, direct Phoenix, reverse-proxy/CDN, unsupported hosting, and browser-managed cache differences.
 
   - [ ] 4.5 Section - Phase 4 Integration Tests and Completion Evidence.
 

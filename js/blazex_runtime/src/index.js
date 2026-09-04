@@ -21,6 +21,7 @@ export {
 } from "./bridge-protocol.js";
 export { BrowserHostBridge } from "./host-bridge.js";
 export { BrowserRuntimeLifecycle, LIFECYCLE_STATES, classifyLifecycleFailure } from "./lifecycle.js";
+export { detectBrowserPrerequisites, mayActivate } from "./prerequisites.js";
 
 export const __bh01BoundaryProbe = Object.freeze({
   scope: "browser-host-loader-only",

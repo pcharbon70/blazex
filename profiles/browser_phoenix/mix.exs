@@ -11,7 +11,12 @@ defmodule BlazeXBrowserPhoenix.MixProject do
     ]
   end
 
-  def application, do: []
+  def application do
+    [
+      mod: {BlazeXBrowserPhoenix.Application, []},
+      extra_applications: [:logger, :crypto]
+    ]
+  end
 
   defp deps do
     [
