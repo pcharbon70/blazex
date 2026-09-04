@@ -115,6 +115,10 @@ function fixtureApi(activation) {
       return observeRequest(activation, "event", event.event, () => activation.bridge.request("fixture.event", event));
     },
     snapshot: async () => ({ runtime: await activation.bridge.request("fixture.snapshot", {}), dom: renderer.snapshot(), host: hostResources(activation) }),
+    settle: async () => {
+      await fixtureQueue;
+      return { runtime: await activation.bridge.request("fixture.snapshot", {}), dom: renderer.snapshot(), host: hostResources(activation) };
+    },
     dispose: async () => {
       try { return await activation.bridge.request("fixture.command", { command: "dispose" }); }
       finally { renderer?.dispose("fixture-dispose"); }

@@ -1,22 +1,22 @@
 {
   "artifacts": [
     {
-      "bytes": 6572020,
+      "bytes": 6571908,
       "content_encoding": null,
       "id": "BX-BH01-BROWSER-HOST-AVM",
       "kind": "avm",
       "mime": "application/vnd.atomvm.avm",
       "path": "generated/bundle.avm",
-      "sha256": "b1bec4cb3815f91997f631123a723c6be468108b3450d8b0b973f1c6b9e84c67"
+      "sha256": "b6d7aafe844474cd5d64debe5d6c7124acf3b7f444b5d0600d93e30a1e740189"
     },
     {
-      "bytes": 3059809,
+      "bytes": 3059844,
       "content_encoding": "gzip",
       "id": "BX-BH01-BROWSER-HOST-AVM-GZIP",
       "kind": "avm-gzip",
       "mime": "application/vnd.atomvm.avm",
       "path": "generated/bundle.avm.gz",
-      "sha256": "53dd0d2c11c5110a4cf57826d5ebdc44b7a978c226155d750df0f69055a4ba1d"
+      "sha256": "a99682dffb0069bc2bfab1a6b1d8af2ba6dc54412e257d79ca7e46b4b1673eee"
     },
     {
       "bytes": 14031,
@@ -25,10 +25,10 @@
       "kind": "module-inventory",
       "mime": "application/json",
       "path": "generated/module-inventory.json",
-      "sha256": "4939fd34b1fe872ef682e0b9314ed18231ce148e9b8913f602fd9947a1ca38fd"
+      "sha256": "46bf522fce45707b68180f3e4d77f3761476ce1419db6373a71ade3ecc0899cf"
     }
   ],
-  "build_contract_sha256": "c685dfd3df2b5325142f7160918c02b688b95e59dd3f4d0e0c260d2ba31b0c9a",
+  "build_contract_sha256": "d2ee3c9f0304ff1b2f469d256196e73cb744ae0a1b3f6158f817f13b139fc204",
   "limitations": [
     "Phase 5 behavior is a disposable fixture, not a public component contract",
     "unpruned AVM size is not a passed budget"
@@ -51,11 +51,11 @@
     },
     {
       "path": "lib/blazex/bh01/browser_host.ex",
-      "sha256": "361585f39d5984f899485d4e5db6ff32602f1d9cf335c9c33472822de8eb9a8b"
+      "sha256": "16c7c12186b5d9a0259ad78279ecc55faaf4709dc02516bd5d171b3771a71f3b"
     },
     {
       "path": "lib/blazex/bh01/local_behavior.ex",
-      "sha256": "e0006ce0f49248f125e92180e757523370064539f74e1c6d1187c2e26de748a8"
+      "sha256": "5f808b5615f146671cf98149d7c7110da835dd75497c03a89b9d81a4eb20b3ce"
     },
     {
       "path": "lib/mix/tasks/bh01.browser_package.ex",

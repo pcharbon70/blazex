@@ -11,7 +11,8 @@ It is the leading supported composition, not the universal container for BlazeX.
 Shared browser, renderer, and component behavior must remain in reusable
 packages rather than this profile.
 
-Status: experimental BH-01 Phase 5 feasibility profile. It provides a
+Status: experimental BH-01 Phase 5 feasibility profile with the Phase 5 gate
+complete. It provides a
 manifest-driven browser loader, isolated Popcorn/AtomVM frame, bounded
 Elixir/browser bridge, lifecycle and prerequisite checks, deterministic static
 profile build, a replaceable fixture-only DOM adapter, and a Phoenix/Bandit

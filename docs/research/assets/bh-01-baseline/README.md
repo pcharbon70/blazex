@@ -107,6 +107,13 @@ locations rather than this governance directory.
   — repository-owner approval for disposable local behavior, bounded DOM,
   nested state, form, timer/message, accessibility/resource observations,
   section commits, one immediately merged PR, synchronization, and cleanup.
+- [BH-01 Phase 5 validation log v0.1.0](blazex-bh-01-phase-05-validation-log-v0.1.0.txt)
+  — exact actual-browser, Elixir, JavaScript, DOM adapter, profile, evidence-
+  verifier, leakage, and archive test outcomes plus integration defects.
+- [BH-01 Phase 5 completion v0.1.0](blazex-bh-01-phase-05-completion-v0.1.0.json)
+  — schema-valid local browser behavior decision with retained repeatability,
+  failure, cleanup, artifact, accessibility, and proof evidence, narrow `go`,
+  and explicit Phase 6 non-authorization.
 
 ## Maintaining this index
 

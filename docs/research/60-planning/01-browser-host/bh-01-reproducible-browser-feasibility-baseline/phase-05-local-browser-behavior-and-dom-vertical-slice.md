@@ -16,7 +16,7 @@ aliases:
 
 Back to milestone: [README](README.md)
 
-- [ ] 5 Phase - Local Browser Behavior and DOM Vertical Slice.
+- [x] 5 Phase - Local Browser Behavior and DOM Vertical Slice.
 
   Exercise disposable local state, nested identity, form input, timers/messages,
   DOM updates, accessibility observations, and cleanup through the real browser
@@ -142,27 +142,27 @@ Back to milestone: [README](README.md)
       - [x] 5.5.3.1 Subtask - Instrument processes, mailboxes, timers, pending messages/requests, Wasm memory/pages, listeners, workers, owned roots, and cleanup time per scenario generation.
       - [x] 5.5.3.2 Subtask - Record accessible names, roles/states/relationships, focus order/visibility, validation announcement observations, keyboard operation, and intentional limitations without claiming compliance.
 
-  - [ ] 5.6 Section - Phase 5 Integration Tests and Completion Evidence.
+  - [x] 5.6 Section - Phase 5 Integration Tests and Completion Evidence.
 
     Run the full local vertical slice through real runtime/browser/DOM
     boundaries and audit fixture leakage before server integration begins.
 
-    - [ ] 5.6.1 Task - Execute complete local behavior scenarios.
+    - [x] 5.6.1 Task - Execute complete local behavior scenarios.
 
       Integration combines boot, state, nesting, forms, async work, DOM output,
       failures, accessibility observations, and disposal.
 
-      - [ ] 5.6.1.1 Subtask - Run boot-to-ready, state/nesting, field/validation, timer/message, DOM update, error, retry, and teardown scenarios repeatedly and compare normalized traces.
-      - [ ] 5.6.1.2 Subtask - Run malformed/oversized/stale/rapid/missing-target/crash/disposal-race cases and verify bounded fail-closed outcomes and resource convergence.
-      - [ ] 5.6.1.3 Subtask - Evaluate nested-state, form-event, timer-message, and DOM-update proofs provisionally; stop if behavior requires browser objects in runtime code or BH-00 redefinition.
+      - [x] 5.6.1.1 Subtask - Run boot-to-ready, state/nesting, field/validation, timer/message, DOM update, error, retry, and teardown scenarios repeatedly and compare normalized traces.
+      - [x] 5.6.1.2 Subtask - Run malformed/oversized/stale/rapid/missing-target/crash/disposal-race cases and verify bounded fail-closed outcomes and resource convergence.
+      - [x] 5.6.1.3 Subtask - Evaluate nested-state, form-event, timer-message, and DOM-update proofs provisionally; stop if behavior requires browser objects in runtime code or BH-00 redefinition.
 
-    - [ ] 5.6.2 Task - Audit abstraction leakage and publish phase evidence.
+    - [x] 5.6.2 Task - Audit abstraction leakage and publish phase evidence.
 
       Passing fixtures are evidence about feasibility, not accepted framework
       design.
 
-      - [ ] 5.6.2.1 Subtask - Scan dependencies, modules, schemas, operations, and docs for accidental semantic-tree, component, capability/effect, LiveView, Phoenix, or stable renderer commitments.
-      - [ ] 5.6.2.2 Subtask - Publish Phase 5 evidence with revisions, commands, scenario/trace hashes, observations, proof outcomes, limitations, resource/accessibility findings, stop/go decision, and replaceable fixture inventory.
+      - [x] 5.6.2.1 Subtask - Scan dependencies, modules, schemas, operations, and docs for accidental semantic-tree, component, capability/effect, LiveView, Phoenix, or stable renderer commitments.
+      - [x] 5.6.2.2 Subtask - Publish Phase 5 evidence with revisions, commands, scenario/trace hashes, observations, proof outcomes, limitations, resource/accessibility findings, stop/go decision, and replaceable fixture inventory.
 
 ## Section delivery rule
 

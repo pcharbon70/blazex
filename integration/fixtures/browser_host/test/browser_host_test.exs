@@ -113,6 +113,26 @@ defmodule BlazeX.BH01.BrowserHostTest do
              LocalBehavior.command(11, %{"command" => "parent.increment"})
   end
 
+  test "parent restart preserves sibling form and async ownership" do
+    LocalBehavior.initialize(12)
+    assert {:ok, _, _} = LocalBehavior.command(12, %{"command" => "mount"})
+    assert {:ok, _, _} = LocalBehavior.command(12, %{"command" => "field.set", "value" => "Ada"})
+
+    assert {:ok, _, _} =
+             LocalBehavior.command(12, %{
+               "command" => "timer.start",
+               "delay_ms" => 100,
+               "ticks" => 1
+             })
+
+    assert {:ok, _, _} = LocalBehavior.command(12, %{"command" => "parent.crash"})
+    snapshot = LocalBehavior.snapshot(12)
+    assert snapshot["parent_restarts"] == 1
+    assert snapshot["field"]["value"] == "Ada"
+    assert snapshot["resources"]["timers"] == 1
+    assert {:ok, _, _} = LocalBehavior.command(12, %{"command" => "timer.cancel"})
+  end
+
   test "form events keep only normalized values and deterministic validation state" do
     LocalBehavior.initialize(13)
     assert {:ok, mount, _} = LocalBehavior.command(13, %{"command" => "mount"})
@@ -355,6 +375,18 @@ defmodule BlazeX.BH01.BrowserHostTest do
     assert snapshot["async"]["duplicate_drops"] == 1
     assert snapshot["resources"]["pending_messages"] == 0
     assert snapshot["stale_drops"] == 2
+  end
+
+  test "host-dispatched stale messages cannot replace the active generation" do
+    LocalBehavior.initialize(27)
+    assert {:ok, _, _} = LocalBehavior.command(28, %{"command" => "mount"})
+
+    assert {:ok, _, %{"result" => %{"accepted" => false}}} =
+             LocalBehavior.async({:bh01_fixture_message, 999, "stale", "late"})
+
+    snapshot = LocalBehavior.snapshot(28)
+    assert snapshot["generation"] == 28
+    assert snapshot["stale_drops"] == 1
   end
 
   test "disposal cancels timers and rejects pending async work" do

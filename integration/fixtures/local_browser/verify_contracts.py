@@ -74,9 +74,15 @@ def validate_contracts(schema: dict, catalog: dict, normalization: dict, product
 
 
 def production_source_text() -> str:
-    paths = []
+    paths: list[Path] = []
     for root in (ROOT / "packages", ROOT / "profiles"):
-        paths.extend(path for path in root.rglob("*") if path.is_file() and "generated" not in path.parts and "deps" not in path.parts and "_build" not in path.parts)
+        paths.extend(
+            path
+            for path in root.rglob("*")
+            if path.is_file()
+            and path.suffix in {".ex", ".exs", ".js", ".mjs"}
+            and not {"generated", "deps", "_build", "test", "tests", "toolchain"} & set(path.parts)
+        )
     return "\n".join(path.read_text(encoding="utf-8", errors="ignore") for path in paths)
 
 

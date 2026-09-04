@@ -39,7 +39,7 @@ defmodule BlazeX.BH01.BrowserHost do
   end
 
   defp publish_async(message) do
-    case LocalBehavior.async(@generation, message) do
+    case LocalBehavior.async(message) do
       {:ok, effect, _result} -> Popcorn.Wasm.send_event("bh01_fixture_effect", effect)
       {:error, error} -> Popcorn.Wasm.send_event("bh01_fixture_async_error", error)
     end

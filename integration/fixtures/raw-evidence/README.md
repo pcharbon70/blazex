@@ -12,3 +12,8 @@ is not browser evidence.
   across two clean equivalent builds.
 - `bh01-phase3-negative-paths.json` — eight fail-closed actual-runtime,
   WebAssembly-host-contract, bundle, and evidence-validation probes.
+- `bh01-phase4-browser.json` — normalized actual-browser loader, bridge,
+  lifecycle, fallback, deployment, artifact, and network observations.
+- `bh01-phase5-local-browser.json` — two complete actual-browser local-
+  behavior runs, one canonical 29-checkpoint semantic trace, negative paths,
+  preliminary timings/accessibility observations, and terminal resource state.

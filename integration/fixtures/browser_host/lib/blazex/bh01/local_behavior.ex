@@ -75,6 +75,14 @@ defmodule BlazeX.BH01.LocalBehavior do
 
   def snapshot(generation), do: current(generation) |> external_snapshot()
 
+  def async(message) do
+    state = Process.get(@state_key) || initial(1)
+
+    message
+    |> async_transition(state)
+    |> publish_event()
+  end
+
   def async(generation, message) do
     message
     |> async_transition(current(generation))
@@ -245,9 +253,10 @@ defmodule BlazeX.BH01.LocalBehavior do
 
   defp transition("parent.crash", _payload, %{mounted: true, disposed: false} = state) do
     next = %{
-      initial(state.generation)
-      | mounted: true,
+      state
+      | parent_count: 0,
         parent_restarts: state.parent_restarts + 1,
+        children: [child("alpha", 1), child("beta", 1)],
         failures: state.failures + 1
     }
 
@@ -325,7 +334,7 @@ defmodule BlazeX.BH01.LocalBehavior do
          %{"delay_ms" => delay_ms, "ticks" => ticks},
          %{mounted: true, disposed: false} = state
        )
-       when is_integer(delay_ms) and delay_ms >= 5 and delay_ms <= 1_000 and
+       when is_integer(delay_ms) and delay_ms >= 5 and delay_ms <= 5_000 and
               is_integer(ticks) and ticks >= 1 and ticks <= 5 do
     cancel_timer(state.async.timer_ref)
     token = state.async.timer_token + 1

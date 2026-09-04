@@ -1,0 +1,81 @@
+BH-01 Phase 5 validation log v0.1.0
+Observed: 2026-09-04T11:43:03.154Z
+Implementation parent: 7332b2e2ec6933eadd424f2948f2297767b06b79
+
+ACTUAL BROWSER EXECUTION
+Command: BLAZEX_BASE_URL=http://127.0.0.1:4198/bh01/ BLAZEX_CHROME_PATH=/tmp/blazex-bh01-chrome-152.0.7977.75/chrome-linux64/chrome BLAZEX_EVIDENCE_PATH=integration/fixtures/raw-evidence/bh01-phase5-local-browser.json BLAZEX_REVISION=7332b2e2ec6933eadd424f2948f2297767b06b79 <qualified-node-26.8.1>/bin/node test/browser/phase5.integration.mjs
+Working directory: js/blazex_runtime
+Endpoint: exact Phoenix profile at http://127.0.0.1:4198/bh01/
+Result: PASS; status=observed-pass; support=unsupported-provisional-feasibility
+Toolchain: Node v26.8.1; Playwright Core 1.62.1; Chrome for Testing 152.0.7977.75; Linux 6.8.0-51-generic x64
+Browser archive SHA-256: a16d36890636bd72251133b27f05825f7f9269c2425b3408fa3a76e10dccd8f1
+Runs: repeat-1=passed; repeat-2=passed
+Repeatability: PASS; 29 normalized semantic checkpoints per run; byte-identical trace SHA-256=f1a45a5c94e07551892194c1481657f10e4932edab25ad4dda3f3d4304e78cf6
+Coverage: boot/readiness; parent and keyed child state; insert/reorder/remove/replace; child/parent crash; local field input/change/focus/blur/composition-like/validation/reset; timer completion/cancel/crash/retry; duplicate/late messages; DOM update; accessibility observation; stop; generation-2 restart
+Behavior-time network: 0 requests in each run
+Page errors: 0 in each run
+Deployment: 20 governed files; no source maps; exact bytes/SHA-256/MIME/cache; no undeclared network path
+Retained evidence SHA-256: cbdcbab0c81df97163428fc988a8fa91f5d94849bb7db44362d09862b2367eaa
+
+NEGATIVE AND CLEANUP RESULTS
+Behavior errors: fixture-child-duplicate; fixture-child-missing; fixture-field-disabled; fixture-field-read-only; fixture-field-event-invalid; bridge-payload-string-exceeded; bridge-stopped
+Renderer errors: fixture-listener-duplicate; fixture-target-missing; fixture-value-exceeded; fixture-renderer-disposed; fixture-generation-stale
+Atomic batch: PASS; first node remained text=before when the second operation targeted a missing node
+Original stop: state=stopped; DOM roots/listeners/nodes=0/0/0; bridge pending=0/stopped=true; lifecycle resources={}; fixture processes/timers/pending_messages=0/0/0
+Replacement stop: state=stopped with the same zero-owned-resource invariants
+Generation replacement: PASS; generation 2 completed a timer without accepting generation-1 ownership
+Accessibility observations: textbox name=Name; alert roles=1; help/error relationships present; field/reset keyboard-reachable; assistive technology not exercised
+Measurements: preliminary observations only; fixed Wasm memory=256 pages; no budget passed
+
+EXACT ELIXIR FIXTURE AND PHOENIX PROFILE
+Command: docker run --rm --network none ... <digest-pinned-hexpm-elixir> sh -lc 'mix archive.install /tmp/hex.ez --force && mix test'
+Working directory: integration/fixtures/browser_host
+Result: PASS; 14 tests, 0 failures
+Command: docker run --rm --network none ... <digest-pinned-hexpm-elixir> sh -lc 'mix archive.install /tmp/hex.ez --force && mix test'
+Working directory: profiles/browser_phoenix
+Result: PASS; 4 tests, 0 failures
+
+JAVASCRIPT RUNTIME AND DOM ADAPTER
+Command: PATH=<qualified-node-26.8.1>:$PATH npm test
+Working directory: js/blazex_runtime
+Result: PASS; 6 tests, 0 failures, 0 skipped
+Command: PATH=<qualified-node-26.8.1>:$PATH npm run build
+Result: PASS; runtime, profile host/frame, and Phase 5 browser-harness syntax checks passed
+Command: PATH=<qualified-node-26.8.1>:$PATH npm test
+Working directory: packages/blazex_renderer_dom
+Result: PASS; 1 test file, 0 failures, 0 skipped
+Command: PATH=<qualified-node-26.8.1>:$PATH npm run build
+Result: PASS; closed DOM protocol and renderer syntax checks passed
+
+CONTRACT, PROFILE, AND EVIDENCE VERIFICATION
+Command: python3 -m unittest discover -s integration/fixtures/local_browser/tests -p 'test_*.py'
+Result: PASS; 6 tests, 0 failures
+Command: python3 integration/fixtures/local_browser/verify_contracts.py
+Result: PASS; fixture records, scenario/proof coverage, normalization, and production-source leakage guards passed
+Command: python3 -m unittest discover -s profiles/browser_phoenix/toolchain/tests -p 'test_*.py'
+Result: PASS; 53 tests, 0 failures
+Phase 5 mutation coverage: trace mismatch, behavior network traffic, retained timer, partial DOM commit, and proof promotion
+Command: python3 integration/fixtures/browser_host/verify_fixture.py --generated integration/fixtures/browser_host/generated
+Result: PASS
+Command: python3 profiles/browser_phoenix/assets/phase4/verify_profile.py profiles/browser_phoenix/priv/static/bh01
+Result: PASS; 20 governed files
+Command: python3 profiles/browser_phoenix/toolchain/verify_phase5.py
+Result: PASS; Phase 4 chain, activation, contracts, completion schema/hashes, browser evidence, plan, and claim boundaries passed
+Command: python3 docs/research/validate_archive.py
+Result: PASS
+Command: git diff --check
+Result: PASS
+
+INTEGRATION FINDINGS
+1. A simulated parent crash reconstructed the whole fixture and erased independently owned field/timer state; fixed by restarting only the parent subtree and covered by an Elixir regression test.
+2. Host-dispatched async messages used the compile-time generation and could replace active state after browser restart; fixed by reading process-owned active state and covered by a stale-generation regression test.
+3. Cancelled timers near their due edge introduced scheduler-dependent traces; cancellation scenarios now use a bounded two-second delay and immediately cancel, while timer completion retains short deterministic delays.
+4. Historical Phase 4 validation treated the evolving browser fixture contract as forever equal to its old working-tree bytes; the verifier now accepts the retained hash from its exact source revision without modifying Phase 4 evidence.
+
+FINAL GATE
+Phase 5 result: PASS, narrow go to make Phase 6 eligible.
+Proofs: nested-state, form-event, timer-message, and DOM-update=provisional-pass; later closure phases remain recorded.
+Support result: unsupported-provisional-feasibility; no browser support, accessibility compliance, or quality budget promoted.
+Contract result: fixture protocols and DOM operations remain disposable/non-public; no BH-02 component, tree, renderer, capability, effect, or forms API established.
+Server result: static governed asset delivery only; no authenticated command, LiveView/LocalLiveView behavior, or server authority established.
+Authorization: Phase 6 is eligible but not authorized.
