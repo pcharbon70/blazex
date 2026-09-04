@@ -89,6 +89,20 @@ locations rather than this governance directory.
   — schema-valid runtime/package decision with input/output hashes, observed
   compatibility limits, accepted risk disposition, narrow `go`, and explicit
   Phase 4 non-authorization.
+- [BH-01 Phase 4 authorization v0.1.0](blazex-bh-01-phase-04-authorization-v0.1.0.json)
+  — repository-owner approval for browser loader, bridge, lifecycle,
+  deployment, actual-browser evidence, section commits, one immediately merged
+  PR, synchronization, and branch cleanup.
+- [BH-01 Phase 4 lifecycle policy v0.1.0](blazex-bh-01-phase-04-lifecycle-policy-v0.1.0.json)
+  — experimental state, generation, readiness, retry, resource, late-result,
+  navigation, and teardown contract exercised by the browser host.
+- [BH-01 Phase 4 validation log v0.1.0](blazex-bh-01-phase-04-validation-log-v0.1.0.txt)
+  — exact actual-browser, JavaScript, Python, profile, fixture, and Phoenix test
+  outcomes plus observed integration defects and claim boundaries.
+- [BH-01 Phase 4 completion v0.1.0](blazex-bh-01-phase-04-completion-v0.1.0.json)
+  — schema-valid browser-host decision with retained artifact/network/lifecycle
+  evidence, accepted risk disposition, narrow `go`, and explicit Phase 5
+  non-authorization.
 
 ## Maintaining this index
 

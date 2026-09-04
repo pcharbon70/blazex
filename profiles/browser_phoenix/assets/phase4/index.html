@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BlazeX BH-01 browser feasibility profile</title>
+  </head>
+  <body>
+    <main>
+      <h1>BlazeX browser feasibility profile</h1>
+      <p data-bh01-status data-state="server-fallback" role="status" aria-live="polite">Server-rendered fallback available</p>
+      <p data-bh01-detail>This page remains usable when the experimental WebAssembly runtime cannot start.</p>
+      <noscript>The experimental runtime requires JavaScript. This server-rendered status page remains available.</noscript>
+    </main>
+    <script type="module" src="./host.js"></script>
+  </body>
+</html>

@@ -1,5 +1,6 @@
 defmodule BlazeXBrowserPhoenix.EndpointBoundary do
   @moduledoc """
-  Marks the future profile endpoint location without implementing a server.
+  Marks profile-only Phoenix endpoint composition. Reusable host and renderer
+  behavior remains forbidden here.
   """
 end

@@ -1,0 +1,177 @@
+{
+  "schema_version": "1.0.0",
+  "record_id": "BX-BH01-DECISION-PHASE-04-GO",
+  "record_type": "decision",
+  "state": "passed",
+  "title": "BH-01 Phase 4 browser host loader, lifecycle, and deployment gate",
+  "owner_role": "bh01-owner",
+  "recorded_at": "2026-09-04T09:43:57Z",
+  "observed_at": "2026-09-04T09:43:57Z",
+  "source_revision": "6924c2d03e90a1785ac57e8a25841742acb6c98e",
+  "environment_refs": [
+    "profiles/browser_phoenix/toolchain/environment.lock.json",
+    "profiles/browser_phoenix/toolchain/browser.lock.json",
+    "profiles/browser_phoenix/toolchain/runtime.lock.json",
+    "profiles/browser_phoenix/assets/phase4/deployment-contract.json",
+    "integration/fixtures/browser_host/build-contract.json"
+  ],
+  "tool_identities": [
+    {
+      "name": "beam-test-image",
+      "version": "sha256:8d03cfb52e3fa3f5d83d749942b7c45c966dda48a7c4ba4f069390379b59fc39",
+      "source": "docker.io/hexpm/elixir",
+      "sha256": "a2386c21edd5c612b4ed6e2731daba806177dba55baf977ee456c6e194f60d9f"
+    },
+    {
+      "name": "node",
+      "version": "26.8.1",
+      "source": "nodejs.org",
+      "sha256": "3e301118d7df53d563b7e96c1617545f26e2f76f9724be668d6cab65c15dda5d"
+    },
+    {
+      "name": "playwright-core",
+      "version": "1.62.1",
+      "source": "registry.npmjs.org",
+      "sha256": null
+    },
+    {
+      "name": "chrome-for-testing",
+      "version": "152.0.7977.75",
+      "source": "storage.googleapis.com/chrome-for-testing-public",
+      "sha256": "a16d36890636bd72251133b27f05825f7f9269c2425b3408fa3a76e10dccd8f1"
+    },
+    {
+      "name": "phoenix",
+      "version": "1.8.13",
+      "source": "repo.hex.pm",
+      "sha256": null
+    },
+    {
+      "name": "python",
+      "version": "3.12.12",
+      "source": "local policy environment",
+      "sha256": "fb85a13414b028c49ba18bbd523c2d055a30b56b18b92ce454ea2c51edc656c4"
+    }
+  ],
+  "requirement_refs": [
+    "BH-01-PHASE-4",
+    "BX-BH01-INPUT-PROFILE-SLICE",
+    "BX-BH01-INPUT-ARTIFACTS",
+    "BX-BH01-INPUT-BEHAVIORS",
+    "BX-BH01-INPUT-BROWSERS",
+    "BX-BH01-INPUT-STOP-CONDITIONS",
+    "BX-BH01-PROOF-RUNTIME-BOOT",
+    "BX-BH01-PROOF-ARTIFACT-ACCOUNTING",
+    "BX-BH01-PROOF-BROWSER-FALLBACK",
+    "BX-BH01-RISK-RUNTIME-SEMANTICS",
+    "BX-BH01-RISK-WASM-ARTIFACT-ACCOUNTING",
+    "BX-BH01-RISK-BROWSER-PREREQUISITES"
+  ],
+  "reciprocal_links": [
+    "docs/research/60-planning/01-browser-host/bh-01-reproducible-browser-feasibility-baseline/phase-04-browser-host-loader-lifecycle-and-deployment.md",
+    "docs/research/60-planning/01-browser-host/bh-01-reproducible-browser-feasibility-baseline/phase-04-implementation-evidence.md",
+    "integration/fixtures/raw-evidence/bh01-phase4-browser.json",
+    "profiles/browser_phoenix/assets/phase4/deployment-contract.json",
+    "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-04-lifecycle-policy-v0.1.0.json"
+  ],
+  "command_refs": [
+    "python3 profiles/browser_phoenix/assets/phase4/build_profile.py --output profiles/browser_phoenix/priv/static/bh01",
+    "PHX_SERVER=true PORT=4197 mix run --no-halt",
+    "BLAZEX_BASE_URL=http://127.0.0.1:4197/bh01/ BLAZEX_CHROME_PATH=<qualified-chrome> BLAZEX_REVISION=6924c2d03e90a1785ac57e8a25841742acb6c98e node test/browser/phase4.integration.mjs",
+    "npm test",
+    "npm run build",
+    "python3 -m unittest discover -s profiles/browser_phoenix/toolchain/tests -p test_*.py",
+    "python3 profiles/browser_phoenix/assets/phase4/verify_profile.py profiles/browser_phoenix/priv/static/bh01",
+    "python3 integration/fixtures/browser_host/verify_fixture.py --generated integration/fixtures/browser_host/generated",
+    "mix test",
+    "python3 profiles/browser_phoenix/toolchain/verify_phase4.py",
+    "python3 docs/research/validate_archive.py",
+    "git diff --check"
+  ],
+  "input_hashes": [
+    {
+      "path": "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-04-authorization-v0.1.0.json",
+      "sha256": "bb06b8f0bfae40cd7862b8f72db118f88514d7ac739a66c8b2ea0457b3ab1c9d"
+    },
+    {
+      "path": "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-04-lifecycle-policy-v0.1.0.json",
+      "sha256": "80a2bbfef2a12295114f6a5726bc0cf576e9aea70d9c43c470f6f231f190225e"
+    },
+    {
+      "path": "profiles/browser_phoenix/assets/phase4/deployment-contract.json",
+      "sha256": "58c08767d8b3df044dd61982e81a1b38c4087883ed6cc6d148ad86ba047f85b6"
+    },
+    {
+      "path": "profiles/browser_phoenix/assets/phase4/runtime-manifest.template.json",
+      "sha256": "4a0b3ee821f49577f1e15a7985ff9c909f38b759df231bb1d6279fb5784a964f"
+    },
+    {
+      "path": "integration/fixtures/browser_host/build-contract.json",
+      "sha256": "512a72747e5451a887b3ae379c2737bc84ca5ec735a2f1802a1a8f0d8bbd9838"
+    },
+    {
+      "path": "js/blazex_runtime/package-lock.json",
+      "sha256": "0ccbfd5ac1486cf1cedb54f27c9890e091f38aac3d6bff046553eff55f1f47de"
+    },
+    {
+      "path": "integration/fixtures/raw-evidence/bh01-phase4-browser.json",
+      "sha256": "d8abdef07eb4b70981dc2a94d280c80b0d7862ef9514f31ff774430c6232bd7d"
+    }
+  ],
+  "output_hashes": [
+    {
+      "path": "docs/research/60-planning/01-browser-host/bh-01-reproducible-browser-feasibility-baseline/phase-04-implementation-evidence.md",
+      "sha256": "b6baa98f04451bd096f22c6ef7126b8c277cbb8af3418aab550478b09e9d2ac4"
+    },
+    {
+      "path": "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-04-validation-log-v0.1.0.txt",
+      "sha256": "75c3fd75b132aba31834b43f102a36670546dc442f27843eefe30b68fa2a9d20"
+    }
+  ],
+  "raw_evidence_refs": [
+    "integration/fixtures/raw-evidence/bh01-phase4-browser.json",
+    "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-04-validation-log-v0.1.0.txt"
+  ],
+  "normalization": [
+    {
+      "subject": "actual-browser network capture",
+      "method": "Replace random browser-generated blob UUIDs with one typed runtime-worker identity and deduplicate exact repeated request/response observations while preserving path, method, status, MIME, and cache policy."
+    },
+    {
+      "subject": "browser lifecycle capture",
+      "method": "Remove nondeterministic cleanup duration and cumulative duplicate event histories while preserving outcomes, generations, resource counts, failure counts, canonical transition sequences, source-capture hash, and source byte size."
+    },
+    {
+      "subject": "profile artifact observations",
+      "method": "Join observed response byte counts and cache policy to the already verified profile manifest's exact SHA-256, MIME, and profile owner; no artifact bytes are normalized."
+    }
+  ],
+  "limitations": [
+    "Only one exact headless Chromium 152/Linux x86-64 environment was executed; all browsers remain unsupported.",
+    "No DOM, component, form, renderer, accessibility, LiveView, LocalLiveView, authenticated command, or server-authority behavior is established.",
+    "Popcorn 0.3.3 requires CSP unsafe-eval for tracked JavaScript execution; no production security disposition exists.",
+    "The unpruned AVM and runtime artifacts have not passed payload, startup, memory, CPU, interaction, reliability, or mobile budgets.",
+    "Reverse proxy, CDN, precompression, service worker, production HTTPS, deployment rollback, and non-local origins remain unverified.",
+    "Browser process termination cannot emit an in-page terminal cleanup record; explicit stop, pagehide/reload, failure, and context closure are covered.",
+    "The JavaScript bridge and browser profile remain experimental implementation boundaries, not stable BlazeX host or component APIs.",
+    "Cross-browser fallback, accessible messaging, constrained mobile behavior, stress, and final independent reconstruction remain later BH-01 work."
+  ],
+  "supersedes": [],
+  "invalidates": [],
+  "retention": {
+    "class": "permanent",
+    "minimum_days": null,
+    "immutable_raw_evidence": true
+  },
+  "outcome": {
+    "summary": "Phase 4 browser-host gate passed narrowly; Phase 5 is eligible but not authorized.",
+    "expected": "The governed Phoenix profile loads the exact runtime and AVM in the qualified browser, reaches observable application readiness, crosses a bounded Elixir bridge, repeats and tears down deterministically, fails intentionally for missing prerequisites and corrupt/network inputs, and accounts for every browser artifact and request without promoting support.",
+    "observed": "Chrome for Testing 152 reached ready for cold, generations 2 and 3, and warm-navigation activations; each ready activation completed the Elixir echo; four stops converged to zero owned resources; missing isolation selected unsupported fallback; network and digest failures stopped intentionally; 18 files, ETag, range, MIME, cache, hash, source-map, and network-path checks passed."
+  },
+  "review": {
+    "required": true,
+    "reviewer_role": "bh01-owner",
+    "reviewed_at": "2026-09-04T09:43:57Z",
+    "disposition": "accepted"
+  }
+}

@@ -1,0 +1,908 @@
+{
+  "schema_version": "1.0.0",
+  "evidence_id": "BX-BH01-PHASE-04-BROWSER-EVIDENCE-0.1",
+  "captured_at": "2026-09-04T09:43:57.993Z",
+  "implementation_parent_revision": "6924c2d03e90a1785ac57e8a25841742acb6c98e",
+  "status": "observed-pass",
+  "support_status": "unsupported-provisional-feasibility",
+  "source_capture": {
+    "sha256": "18478b48d73bad4b34da214df34dbe5095a2c29190c57bcd2d87e7d89dbabce0",
+    "bytes": 149336,
+    "normalization": [
+      "Replace random blob-worker URLs with blob:<runtime-worker-module>.",
+      "Deduplicate repeated network observations while retaining method, status, MIME, and cache policy.",
+      "Remove nondeterministic cleanup duration while retaining transition, failure, stale-drop, and cleanup-failure counts.",
+      "Retain scenario outcomes and canonical cold/start-stop event sequences instead of cumulative duplicate event histories.",
+      "Enrich deployment observations with declared SHA-256, MIME, and owner from the verified profile asset manifest."
+    ]
+  },
+  "toolchain": {
+    "node": "v26.8.1",
+    "playwright_core": "1.62.1",
+    "browser_product": "Chrome for Testing",
+    "browser_version": "152.0.7977.75",
+    "browser_archive_sha256": "a16d36890636bd72251133b27f05825f7f9269c2425b3408fa3a76e10dccd8f1",
+    "os": "linux 6.8.0-51-generic",
+    "architecture": "x64"
+  },
+  "deployment": {
+    "profile_manifest_id": "BX-BH01-PHASE-04-PROFILE-ASSETS-0.1",
+    "governed_files": 18,
+    "source_maps": [],
+    "range_status": 206,
+    "etag_status": 304,
+    "observed": [
+      {
+        "path": "artifacts/AtomVM.mjs",
+        "bytes": 156421,
+        "status": 200,
+        "cache_control": "public, max-age=31536000, immutable",
+        "sha256": "43cbf6ec34cd4745777b4ce70aa23844a6bb8af44c301c86a5dd02c0165bef64",
+        "mime": "text/javascript",
+        "owner": "profiles/browser_phoenix"
+      },
+      {
+        "path": "artifacts/AtomVM.wasm",
+        "bytes": 986537,
+        "status": 200,
+        "cache_control": "public, max-age=31536000, immutable",
+        "sha256": "d20c491e75936dc8189910c8d0740093b7813d8dcc1cf966a87c011799ade9d8",
+        "mime": "application/wasm",
+        "owner": "profiles/browser_phoenix"
+      },
+      {
+        "path": "artifacts/bundle.avm",
+        "bytes": 6532472,
+        "status": 200,
+        "cache_control": "public, max-age=31536000, immutable",
+        "sha256": "c9cefe8220bef517032bf006b40925418dcd230e07017a1125a449907312a796",
+        "mime": "application/vnd.atomvm.avm",
+        "owner": "profiles/browser_phoenix"
+      },
+      {
+        "path": "deployment-contract.json",
+        "bytes": 2604,
+        "status": 200,
+        "cache_control": "public, max-age=31536000, immutable",
+        "sha256": "58c08767d8b3df044dd61982e81a1b38c4087883ed6cc6d148ad86ba047f85b6",
+        "mime": "application/json",
+        "owner": "profiles/browser_phoenix"
+      },
+      {
+        "path": "host.js",
+        "bytes": 2627,
+        "status": 200,
+        "cache_control": "public, max-age=31536000, immutable",
+        "sha256": "e020e1109203a87ac83c2740a2f16e317cf9bdb3d684d6d81953c66f1ed4b6d8",
+        "mime": "text/javascript",
+        "owner": "profiles/browser_phoenix"
+      },
+      {
+        "path": "index.html",
+        "bytes": 727,
+        "status": 200,
+        "cache_control": "no-store",
+        "sha256": "f8e72264891822196d6b045570d0ade97903c41e82d63b243512d92c28d6f154",
+        "mime": "text/html",
+        "owner": "profiles/browser_phoenix"
+      },
+      {
+        "path": "js/bridge-protocol.js",
+        "bytes": 6241,
+        "status": 200,
+        "cache_control": "public, max-age=31536000, immutable",
+        "sha256": "c6a2ac175eb797109046cd383aff68ce07f805400a64e0781a92bb96cfabbb2b",
+        "mime": "text/javascript",
+        "owner": "profiles/browser_phoenix"
+      },
+      {
+        "path": "js/host-bridge.js",
+        "bytes": 5011,
+        "status": 200,
+        "cache_control": "public, max-age=31536000, immutable",
+        "sha256": "d1e287676bd4f324eea4b1e28fe8caccbed07a46797a8dd0ebd13835e4ac0478",
+        "mime": "text/javascript",
+        "owner": "profiles/browser_phoenix"
+      },
+      {
+        "path": "js/index.js",
+        "bytes": 963,
+        "status": 200,
+        "cache_control": "public, max-age=31536000, immutable",
+        "sha256": "0e7560a2ac64c8da18e95dc0d496e97f2f8416c0c190e4425c5e960eb86480e3",
+        "mime": "text/javascript",
+        "owner": "profiles/browser_phoenix"
+      },
+      {
+        "path": "js/internal/errors.js",
+        "bytes": 1170,
+        "status": 200,
+        "cache_control": "public, max-age=31536000, immutable",
+        "sha256": "c4df39c1a24c9aceda03345d4eab6f27f357fcbaae96c6b9ba4df3fd3282956e",
+        "mime": "text/javascript",
+        "owner": "profiles/browser_phoenix"
+      },
+      {
+        "path": "js/lifecycle.js",
+        "bytes": 5505,
+        "status": 200,
+        "cache_control": "public, max-age=31536000, immutable",
+        "sha256": "ad8b73603f8fbe8f788a60e4461a879f885e681add79cc7f14965c7dec67441e",
+        "mime": "text/javascript",
+        "owner": "profiles/browser_phoenix"
+      },
+      {
+        "path": "js/manifest-loader.js",
+        "bytes": 11194,
+        "status": 200,
+        "cache_control": "public, max-age=31536000, immutable",
+        "sha256": "4e92a2afb02088336886f981752983e997905b06748a875bb784eeb438d255d7",
+        "mime": "text/javascript",
+        "owner": "profiles/browser_phoenix"
+      },
+      {
+        "path": "js/prerequisites.js",
+        "bytes": 3190,
+        "status": 200,
+        "cache_control": "public, max-age=31536000, immutable",
+        "sha256": "748e011f2af5e3b1112a420e464ce716f4c9235f90557672cce7df0281b907fa",
+        "mime": "text/javascript",
+        "owner": "profiles/browser_phoenix"
+      },
+      {
+        "path": "js/runtime-frame-port.js",
+        "bytes": 5422,
+        "status": 200,
+        "cache_control": "public, max-age=31536000, immutable",
+        "sha256": "d2935978d645e7528913980ccd64f2c65e9149b47499814f74b9a19a0c324f8e",
+        "mime": "text/javascript",
+        "owner": "profiles/browser_phoenix"
+      },
+      {
+        "path": "js/runtime-loader.js",
+        "bytes": 6767,
+        "status": 200,
+        "cache_control": "public, max-age=31536000, immutable",
+        "sha256": "d23445f72dd73533db3957390f4d869abdf81e0b29655c1a7c9f9e2069b2460f",
+        "mime": "text/javascript",
+        "owner": "profiles/browser_phoenix"
+      },
+      {
+        "path": "runtime-frame.html",
+        "bytes": 186,
+        "status": 200,
+        "cache_control": "public, max-age=31536000, immutable",
+        "sha256": "d526a4953a314b099696bef4023903f8d8df6617a11d17e25e67f56bd1b58a4f",
+        "mime": "text/html",
+        "owner": "profiles/browser_phoenix"
+      },
+      {
+        "path": "runtime-frame.js",
+        "bytes": 6293,
+        "status": 200,
+        "cache_control": "public, max-age=31536000, immutable",
+        "sha256": "8dac47fcb1bf635cbca26d2b2be4c5b26fe5f412563d8ab0cc17a339b4487b35",
+        "mime": "text/javascript",
+        "owner": "profiles/browser_phoenix"
+      },
+      {
+        "path": "runtime-manifest.json",
+        "bytes": 1328,
+        "status": 200,
+        "cache_control": "no-store",
+        "sha256": "a3047cd00a0f5cdda491d8e3b5111936cad14059dc52fe66ff33660f25548211",
+        "mime": "application/json",
+        "owner": "profiles/browser_phoenix"
+      }
+    ]
+  },
+  "positive_scenarios": [
+    {
+      "scenario": "cold",
+      "state": "ready",
+      "prerequisite_decision": "proceed",
+      "missing_prerequisites": [],
+      "activation_generation": 1,
+      "manifest_generation": 1,
+      "echo": {
+        "generation": 1,
+        "message": "bh01-browser-roundtrip"
+      },
+      "error": null,
+      "lifecycle": {
+        "protocol": "blazex.lifecycle/1",
+        "state": "ready",
+        "generation": 1,
+        "attempt": 1,
+        "failure": null,
+        "resources": {
+          "abort-controller": 1,
+          "host-bridge": 1,
+          "pagehide-listener": 1,
+          "runtime-frame": 1
+        },
+        "metrics": {
+          "transitions": 6,
+          "failures": 0,
+          "stale_drops": 0,
+          "cleanup_failures": 0
+        }
+      },
+      "frame_count": 2,
+      "event_count": 21,
+      "environment": {
+        "cross_origin_isolated": true,
+        "secure_context": true,
+        "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/152.0.0.0 Safari/537.36",
+        "hardware_concurrency": 20
+      },
+      "prerequisites": {
+        "protocol": "blazex.browser-prerequisites/1",
+        "decision": "proceed",
+        "reason": "all-required-capabilities-observed",
+        "missing": [],
+        "capabilities": {
+          "webassembly": true,
+          "workers": true,
+          "modules": true,
+          "shared-memory": true,
+          "atomics": true,
+          "fetch": true,
+          "subtle-crypto": true,
+          "secure-context": true,
+          "cross-origin-isolation": true,
+          "wasm-streaming": true
+        },
+        "message": "The experimental BlazeX browser runtime can start."
+      }
+    },
+    {
+      "scenario": "stop-1",
+      "state": "stopped",
+      "prerequisite_decision": "proceed",
+      "missing_prerequisites": [],
+      "activation_generation": null,
+      "manifest_generation": null,
+      "echo": {
+        "generation": 1,
+        "message": "bh01-browser-roundtrip"
+      },
+      "error": null,
+      "lifecycle": {
+        "protocol": "blazex.lifecycle/1",
+        "state": "stopped",
+        "generation": 1,
+        "attempt": 1,
+        "failure": null,
+        "resources": {},
+        "metrics": {
+          "transitions": 8,
+          "failures": 0,
+          "stale_drops": 0,
+          "cleanup_failures": 0
+        }
+      },
+      "frame_count": 1,
+      "event_count": 27
+    },
+    {
+      "scenario": "restart-1",
+      "state": "ready",
+      "prerequisite_decision": "proceed",
+      "missing_prerequisites": [],
+      "activation_generation": 2,
+      "manifest_generation": 1,
+      "echo": {
+        "generation": 2,
+        "message": "bh01-browser-roundtrip"
+      },
+      "error": null,
+      "lifecycle": {
+        "protocol": "blazex.lifecycle/1",
+        "state": "ready",
+        "generation": 2,
+        "attempt": 1,
+        "failure": null,
+        "resources": {
+          "abort-controller": 1,
+          "host-bridge": 1,
+          "pagehide-listener": 1,
+          "runtime-frame": 1
+        },
+        "metrics": {
+          "transitions": 14,
+          "failures": 0,
+          "stale_drops": 0,
+          "cleanup_failures": 0
+        }
+      },
+      "frame_count": 2,
+      "event_count": 48
+    },
+    {
+      "scenario": "stop-2",
+      "state": "stopped",
+      "prerequisite_decision": "proceed",
+      "missing_prerequisites": [],
+      "activation_generation": null,
+      "manifest_generation": null,
+      "echo": {
+        "generation": 2,
+        "message": "bh01-browser-roundtrip"
+      },
+      "error": null,
+      "lifecycle": {
+        "protocol": "blazex.lifecycle/1",
+        "state": "stopped",
+        "generation": 2,
+        "attempt": 1,
+        "failure": null,
+        "resources": {},
+        "metrics": {
+          "transitions": 16,
+          "failures": 0,
+          "stale_drops": 0,
+          "cleanup_failures": 0
+        }
+      },
+      "frame_count": 1,
+      "event_count": 54
+    },
+    {
+      "scenario": "restart-2",
+      "state": "ready",
+      "prerequisite_decision": "proceed",
+      "missing_prerequisites": [],
+      "activation_generation": 3,
+      "manifest_generation": 1,
+      "echo": {
+        "generation": 3,
+        "message": "bh01-browser-roundtrip"
+      },
+      "error": null,
+      "lifecycle": {
+        "protocol": "blazex.lifecycle/1",
+        "state": "ready",
+        "generation": 3,
+        "attempt": 1,
+        "failure": null,
+        "resources": {
+          "abort-controller": 1,
+          "host-bridge": 1,
+          "pagehide-listener": 1,
+          "runtime-frame": 1
+        },
+        "metrics": {
+          "transitions": 22,
+          "failures": 0,
+          "stale_drops": 0,
+          "cleanup_failures": 0
+        }
+      },
+      "frame_count": 2,
+      "event_count": 75
+    },
+    {
+      "scenario": "stop-3",
+      "state": "stopped",
+      "prerequisite_decision": "proceed",
+      "missing_prerequisites": [],
+      "activation_generation": null,
+      "manifest_generation": null,
+      "echo": {
+        "generation": 3,
+        "message": "bh01-browser-roundtrip"
+      },
+      "error": null,
+      "lifecycle": {
+        "protocol": "blazex.lifecycle/1",
+        "state": "stopped",
+        "generation": 3,
+        "attempt": 1,
+        "failure": null,
+        "resources": {},
+        "metrics": {
+          "transitions": 24,
+          "failures": 0,
+          "stale_drops": 0,
+          "cleanup_failures": 0
+        }
+      },
+      "frame_count": 1,
+      "event_count": 81
+    },
+    {
+      "scenario": "warm-navigation",
+      "state": "ready",
+      "prerequisite_decision": "proceed",
+      "missing_prerequisites": [],
+      "activation_generation": 1,
+      "manifest_generation": 1,
+      "echo": {
+        "generation": 1,
+        "message": "bh01-browser-roundtrip"
+      },
+      "error": null,
+      "lifecycle": {
+        "protocol": "blazex.lifecycle/1",
+        "state": "ready",
+        "generation": 1,
+        "attempt": 1,
+        "failure": null,
+        "resources": {
+          "abort-controller": 1,
+          "host-bridge": 1,
+          "pagehide-listener": 1,
+          "runtime-frame": 1
+        },
+        "metrics": {
+          "transitions": 6,
+          "failures": 0,
+          "stale_drops": 0,
+          "cleanup_failures": 0
+        }
+      },
+      "frame_count": 2,
+      "event_count": 21
+    },
+    {
+      "scenario": "warm-stop",
+      "state": "stopped",
+      "prerequisite_decision": "proceed",
+      "missing_prerequisites": [],
+      "activation_generation": null,
+      "manifest_generation": null,
+      "echo": {
+        "generation": 1,
+        "message": "bh01-browser-roundtrip"
+      },
+      "error": null,
+      "lifecycle": {
+        "protocol": "blazex.lifecycle/1",
+        "state": "stopped",
+        "generation": 1,
+        "attempt": 1,
+        "failure": null,
+        "resources": {},
+        "metrics": {
+          "transitions": 8,
+          "failures": 0,
+          "stale_drops": 0,
+          "cleanup_failures": 0
+        }
+      },
+      "frame_count": 1,
+      "event_count": 27
+    }
+  ],
+  "negative_scenarios": [
+    {
+      "scenario": "missing-isolation-policy",
+      "state": "fallback",
+      "prerequisite_decision": "unsupported",
+      "missing_prerequisites": [
+        "shared-memory",
+        "atomics",
+        "cross-origin-isolation"
+      ],
+      "activation_generation": null,
+      "manifest_generation": null,
+      "echo": null,
+      "error": null,
+      "lifecycle": null,
+      "frame_count": 1,
+      "event_count": 0,
+      "environment": {
+        "cross_origin_isolated": false,
+        "secure_context": true,
+        "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/152.0.0.0 Safari/537.36",
+        "hardware_concurrency": 20
+      },
+      "prerequisites": {
+        "protocol": "blazex.browser-prerequisites/1",
+        "decision": "unsupported",
+        "reason": "deployment-policy-missing",
+        "missing": [
+          "shared-memory",
+          "atomics",
+          "cross-origin-isolation"
+        ],
+        "capabilities": {
+          "webassembly": true,
+          "workers": true,
+          "modules": true,
+          "shared-memory": false,
+          "atomics": false,
+          "fetch": true,
+          "subtle-crypto": true,
+          "secure-context": true,
+          "cross-origin-isolation": false,
+          "wasm-streaming": true
+        },
+        "message": "This deployment cannot start the experimental runtime because required isolation or secure-context policy is missing: shared-memory, atomics, cross-origin-isolation."
+      }
+    },
+    {
+      "scenario": "manifest-network-failure",
+      "state": "failed",
+      "prerequisite_decision": "proceed",
+      "missing_prerequisites": [],
+      "activation_generation": null,
+      "manifest_generation": null,
+      "echo": null,
+      "error": {
+        "code": "fetch-failed",
+        "message": "Artifact fetch failed"
+      },
+      "lifecycle": {
+        "protocol": "blazex.lifecycle/1",
+        "state": "stopped",
+        "generation": 1,
+        "attempt": 1,
+        "failure": {
+          "code": "fetch-failed",
+          "message": "Artifact fetch failed",
+          "details": {
+            "url": "http://127.0.0.1:4197/bh01/runtime-manifest.json",
+            "cause": "TypeError"
+          },
+          "retryable": true,
+          "action": "reset-and-backoff"
+        },
+        "resources": {},
+        "metrics": {
+          "transitions": 5,
+          "failures": 1,
+          "stale_drops": 0,
+          "cleanup_failures": 0
+        }
+      },
+      "frame_count": 1,
+      "event_count": 8
+    },
+    {
+      "scenario": "manifest-digest-integrity-failure",
+      "state": "failed",
+      "prerequisite_decision": "proceed",
+      "missing_prerequisites": [],
+      "activation_generation": null,
+      "manifest_generation": null,
+      "echo": null,
+      "error": {
+        "code": "artifact-integrity-mismatch",
+        "message": "Fetched artifact digest does not match its declaration"
+      },
+      "lifecycle": {
+        "protocol": "blazex.lifecycle/1",
+        "state": "stopped",
+        "generation": 1,
+        "attempt": 1,
+        "failure": {
+          "code": "artifact-integrity-mismatch",
+          "message": "Fetched artifact digest does not match its declaration",
+          "details": {
+            "id": "BX-BH01-BROWSER-RUNTIME-WASM",
+            "expected": "0000000000000000000000000000000000000000000000000000000000000000",
+            "observed": "d20c491e75936dc8189910c8d0740093b7813d8dcc1cf966a87c011799ade9d8"
+          },
+          "retryable": false,
+          "action": "user-or-deployment-action"
+        },
+        "resources": {},
+        "metrics": {
+          "transitions": 5,
+          "failures": 1,
+          "stale_drops": 0,
+          "cleanup_failures": 0
+        }
+      },
+      "frame_count": 1,
+      "event_count": 9
+    }
+  ],
+  "canonical_event_sequences": {
+    "cold_generation_1": [
+      "not-started->checking",
+      "prerequisites-checked",
+      "checking->fetching",
+      "manifest-fetching",
+      "manifest-verified",
+      "artifacts-verified",
+      "fetching->instantiating",
+      "instantiating->loading",
+      "frame-attached",
+      "loading->starting",
+      "instantiating",
+      "runtime-ready",
+      "stdout",
+      "runtime-event",
+      "application-ready",
+      "starting->ready",
+      "root-ready",
+      "blazex.bridge.trace/1",
+      "bridge-response"
+    ],
+    "stop_generation_1": [
+      "not-started->checking",
+      "prerequisites-checked",
+      "checking->fetching",
+      "manifest-fetching",
+      "manifest-verified",
+      "artifacts-verified",
+      "fetching->instantiating",
+      "instantiating->loading",
+      "frame-attached",
+      "loading->starting",
+      "instantiating",
+      "runtime-ready",
+      "stdout",
+      "runtime-event",
+      "application-ready",
+      "starting->ready",
+      "root-ready",
+      "blazex.bridge.trace/1",
+      "bridge-response",
+      "ready->stopping",
+      "stopping->stopped"
+    ]
+  },
+  "network": [
+    {
+      "phase": "positive",
+      "type": "response",
+      "path": "/bh01/runtime-manifest.json",
+      "status": 200,
+      "mime": "application/json; charset=utf-8",
+      "cache_control": "no-store"
+    },
+    {
+      "phase": "positive",
+      "type": "response",
+      "path": "/bh01/",
+      "status": 200,
+      "mime": "text/html; charset=utf-8",
+      "cache_control": "no-store"
+    },
+    {
+      "phase": "positive",
+      "type": "response",
+      "path": "/bh01/artifacts/bundle.avm",
+      "status": 200,
+      "mime": "application/vnd.atomvm.avm",
+      "cache_control": "public, max-age=31536000, immutable"
+    },
+    {
+      "phase": "positive",
+      "type": "response",
+      "path": "/bh01/artifacts/AtomVM.wasm",
+      "status": 200,
+      "mime": "application/wasm",
+      "cache_control": "public, max-age=31536000, immutable"
+    },
+    {
+      "phase": "positive",
+      "type": "response",
+      "path": "/bh01/runtime-frame.html",
+      "status": 200,
+      "mime": "text/html; charset=utf-8",
+      "cache_control": "public, max-age=31536000, immutable"
+    },
+    {
+      "phase": "positive",
+      "type": "response",
+      "path": "/bh01/artifacts/AtomVM.mjs",
+      "status": 200,
+      "mime": "text/javascript; charset=utf-8",
+      "cache_control": "public, max-age=31536000, immutable"
+    },
+    {
+      "phase": "positive",
+      "type": "response",
+      "path": "/bh01/host.js",
+      "status": 200,
+      "mime": "text/javascript; charset=utf-8",
+      "cache_control": "public, max-age=31536000, immutable"
+    },
+    {
+      "phase": "positive",
+      "type": "response",
+      "path": "/bh01/js/bridge-protocol.js",
+      "status": 200,
+      "mime": "text/javascript; charset=utf-8",
+      "cache_control": "public, max-age=31536000, immutable"
+    },
+    {
+      "phase": "positive",
+      "type": "response",
+      "path": "/bh01/js/host-bridge.js",
+      "status": 200,
+      "mime": "text/javascript; charset=utf-8",
+      "cache_control": "public, max-age=31536000, immutable"
+    },
+    {
+      "phase": "positive",
+      "type": "response",
+      "path": "/bh01/js/index.js",
+      "status": 200,
+      "mime": "text/javascript; charset=utf-8",
+      "cache_control": "public, max-age=31536000, immutable"
+    },
+    {
+      "phase": "positive",
+      "type": "response",
+      "path": "/bh01/js/internal/errors.js",
+      "status": 200,
+      "mime": "text/javascript; charset=utf-8",
+      "cache_control": "public, max-age=31536000, immutable"
+    },
+    {
+      "phase": "positive",
+      "type": "response",
+      "path": "/bh01/js/lifecycle.js",
+      "status": 200,
+      "mime": "text/javascript; charset=utf-8",
+      "cache_control": "public, max-age=31536000, immutable"
+    },
+    {
+      "phase": "positive",
+      "type": "response",
+      "path": "/bh01/js/manifest-loader.js",
+      "status": 200,
+      "mime": "text/javascript; charset=utf-8",
+      "cache_control": "public, max-age=31536000, immutable"
+    },
+    {
+      "phase": "positive",
+      "type": "response",
+      "path": "/bh01/js/prerequisites.js",
+      "status": 200,
+      "mime": "text/javascript; charset=utf-8",
+      "cache_control": "public, max-age=31536000, immutable"
+    },
+    {
+      "phase": "positive",
+      "type": "response",
+      "path": "/bh01/js/runtime-frame-port.js",
+      "status": 200,
+      "mime": "text/javascript; charset=utf-8",
+      "cache_control": "public, max-age=31536000, immutable"
+    },
+    {
+      "phase": "positive",
+      "type": "response",
+      "path": "/bh01/js/runtime-loader.js",
+      "status": 200,
+      "mime": "text/javascript; charset=utf-8",
+      "cache_control": "public, max-age=31536000, immutable"
+    },
+    {
+      "phase": "positive",
+      "type": "response",
+      "path": "/bh01/runtime-frame.js",
+      "status": 200,
+      "mime": "text/javascript; charset=utf-8",
+      "cache_control": "public, max-age=31536000, immutable"
+    },
+    {
+      "phase": "positive",
+      "type": "request",
+      "path": "/bh01/",
+      "method": "GET"
+    },
+    {
+      "phase": "positive",
+      "type": "request",
+      "path": "/bh01/artifacts/AtomVM.mjs",
+      "method": "GET"
+    },
+    {
+      "phase": "positive",
+      "type": "request",
+      "path": "/bh01/artifacts/AtomVM.wasm",
+      "method": "GET"
+    },
+    {
+      "phase": "positive",
+      "type": "request",
+      "path": "/bh01/artifacts/bundle.avm",
+      "method": "GET"
+    },
+    {
+      "phase": "positive",
+      "type": "request",
+      "path": "/bh01/host.js",
+      "method": "GET"
+    },
+    {
+      "phase": "positive",
+      "type": "request",
+      "path": "/bh01/js/bridge-protocol.js",
+      "method": "GET"
+    },
+    {
+      "phase": "positive",
+      "type": "request",
+      "path": "/bh01/js/host-bridge.js",
+      "method": "GET"
+    },
+    {
+      "phase": "positive",
+      "type": "request",
+      "path": "/bh01/js/index.js",
+      "method": "GET"
+    },
+    {
+      "phase": "positive",
+      "type": "request",
+      "path": "/bh01/js/internal/errors.js",
+      "method": "GET"
+    },
+    {
+      "phase": "positive",
+      "type": "request",
+      "path": "/bh01/js/lifecycle.js",
+      "method": "GET"
+    },
+    {
+      "phase": "positive",
+      "type": "request",
+      "path": "/bh01/js/manifest-loader.js",
+      "method": "GET"
+    },
+    {
+      "phase": "positive",
+      "type": "request",
+      "path": "/bh01/js/prerequisites.js",
+      "method": "GET"
+    },
+    {
+      "phase": "positive",
+      "type": "request",
+      "path": "/bh01/js/runtime-frame-port.js",
+      "method": "GET"
+    },
+    {
+      "phase": "positive",
+      "type": "request",
+      "path": "/bh01/js/runtime-loader.js",
+      "method": "GET"
+    },
+    {
+      "phase": "positive",
+      "type": "request",
+      "path": "/bh01/runtime-frame.html",
+      "method": "GET"
+    },
+    {
+      "phase": "positive",
+      "type": "request",
+      "path": "/bh01/runtime-frame.js",
+      "method": "GET"
+    },
+    {
+      "phase": "positive",
+      "type": "request",
+      "path": "/bh01/runtime-manifest.json",
+      "method": "GET"
+    },
+    {
+      "phase": "positive",
+      "type": "request",
+      "path": "blob:<runtime-worker-module>",
+      "method": "GET"
+    },
+    {
+      "phase": "positive",
+      "type": "response",
+      "path": "blob:<runtime-worker-module>",
+      "status": 200,
+      "mime": "text/javascript"
+    }
+  ],
+  "findings": [
+    "The pinned Chromium host reached application readiness through the Phoenix profile, Popcorn/AtomVM Wasm runtime, governed AVM, and Elixir echo bridge.",
+    "Three same-page activation generations and one warm navigation converged to zero lifecycle-owned resources after stop.",
+    "Missing cross-origin isolation, manifest network failure, and Wasm integrity drift failed intentionally without promoting browser support.",
+    "Popcorn 0.3.3 requires unsafe-eval for its current bridge implementation; this remains explicit feasibility security debt."
+  ]
+}
