@@ -2,7 +2,7 @@
   "schema_version": "1.0.0",
   "matrix_id": "BX-BH01-PHASE8-COMPATIBILITY-MATRIX-0.1",
   "status": "executed-partial-environment-blocked-exact-pins-only",
-  "source_revision": "b14cb8f9d5af2084f491e7c744a92e11247af7d3",
+  "source_revision": "b84aaeb83c192617062b3b607c986821a09464a5",
   "authoritative_baseline": {
     "runtime_manifest": "1.0.0",
     "runtime_manifest_id": "BX-BH01-BROWSER-RUNTIME-MANIFEST-0.1",
@@ -27,7 +27,7 @@
       "status": "passed",
       "compatibility_scope": "exact-pins-only",
       "evidence": "../raw-evidence/bh01-phase8-compatibility-chromium.json",
-      "evidence_sha256": "0f3c0de6e03ac70a138309e6062deab36e2853256e1270fa1319ec9104aca5eb"
+      "evidence_sha256": "0ee3097ae21df6bcc9119c4023895677c88f1bdcd5c3a839d14506cb53779c65"
     },
     {"configuration_id": "BR-FIREFOX-DESKTOP", "status": "environment-blocked", "blocker_ref": "environment-catalog.json#BR-FIREFOX-DESKTOP"},
     {"configuration_id": "BR-CHROMIUM-ANDROID", "status": "environment-blocked", "blocker_ref": "environment-catalog.json#BR-CHROMIUM-ANDROID"},
@@ -41,7 +41,7 @@
       "compatibility_scope": "same-client-mismatch-suite-unqualified-engine",
       "required_row_credit": false,
       "evidence": "../raw-evidence/bh01-phase8-compatibility-firefox-probe.json",
-      "evidence_sha256": "bff6309618f96cab70778154d2924d654831c2f510c5dcaf021a1ef4c8635f02"
+      "evidence_sha256": "51b97650a167984c5871824f72ae182a5d51ec0c2b81a1d9048cb787ad0297b4"
     },
     {
       "probe_id": "PROBE-WEBKIT-PLAYWRIGHT-26.5-LINUX",
@@ -49,7 +49,7 @@
       "compatibility_scope": "same-client-mismatch-suite-unqualified-engine-not-safari",
       "required_row_credit": false,
       "evidence": "../raw-evidence/bh01-phase8-compatibility-webkit-probe.json",
-      "evidence_sha256": "c1087938b74516358032273c0bfa62e08ba671611d6ed06469f0e7a316e87b7c"
+      "evidence_sha256": "ac10f11249eb31489747321abfa1e9e6f77e9f38513d228f677986a88fc18a7b"
     }
   ],
   "adjacent_dependency_probes": [

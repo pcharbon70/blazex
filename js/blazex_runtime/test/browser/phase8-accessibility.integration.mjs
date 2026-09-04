@@ -25,6 +25,7 @@ const evidence = {
   support_status: "unsupported",
   browser: { type: browserName, version: browser.version(), os: `${os.platform()} ${os.release()}`, architecture: os.arch() },
   status: "running",
+  profile: {},
   fallback: {},
   keyboard_focus: {},
   field_input: {},
@@ -39,6 +40,7 @@ try {
   page.on("pageerror", (error) => evidence.page_errors.push(error.message));
   await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
   await terminal(page);
+  evidence.profile = await profileIdentity(page);
   assert.equal(await page.evaluate(() => globalThis.__blazexBH01.state), "ready");
 
   const initial = await page.evaluate(() => ({
@@ -125,7 +127,7 @@ try {
   await context.close();
   assert.deepEqual(evidence.page_errors, []);
   evidence.status = "observed";
-  evidence.evidence_sha256 = createHash("sha256").update(JSON.stringify({ fallback: evidence.fallback, keyboard_focus: evidence.keyboard_focus, field_input: evidence.field_input, user_preferences: evidence.user_preferences, manual_evidence: evidence.manual_evidence })).digest("hex");
+  evidence.evidence_sha256 = createHash("sha256").update(JSON.stringify({ profile: evidence.profile, fallback: evidence.fallback, keyboard_focus: evidence.keyboard_focus, field_input: evidence.field_input, user_preferences: evidence.user_preferences, manual_evidence: evidence.manual_evidence })).digest("hex");
 } catch (error) {
   evidence.status = "observed-fail";
   evidence.error = error instanceof Error ? `${error.name}: ${error.message}` : String(error);
@@ -138,6 +140,15 @@ try {
 console.log(`BH-01 Phase 8 accessibility/input probe (${browserName}): ${evidence.status.toUpperCase()}`);
 
 async function terminal(page) { await page.waitForFunction(() => ["ready", "failed", "fallback"].includes(globalThis.__blazexBH01?.state), null, { timeout: 30_000 }); }
+async function profileIdentity(page) {
+  return page.evaluate(async () => {
+    const response = await fetch("./profile-assets-manifest.json", { cache: "no-store" });
+    const bytes = new Uint8Array(await response.arrayBuffer());
+    const manifest = JSON.parse(new TextDecoder().decode(bytes));
+    const digest = await crypto.subtle.digest("SHA-256", bytes);
+    return { manifest_id: manifest.manifest_id, manifest_sha256: [...new Uint8Array(digest)].map((byte) => byte.toString(16).padStart(2, "0")).join(""), governed_files: manifest.artifacts.length };
+  });
+}
 async function snapshot(page) { return page.evaluate(() => globalThis.blazexBh01Fixture.snapshot()); }
 async function command(page, name, payload = {}) { return page.evaluate(({ name, payload }) => globalThis.blazexBh01Fixture.command(name, payload), { name, payload }); }
 async function poll(page, predicate) {

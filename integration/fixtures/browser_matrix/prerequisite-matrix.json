@@ -2,7 +2,7 @@
   "schema_version": "1.0.0",
   "matrix_id": "BX-BH01-PHASE8-PREREQUISITE-MATRIX-0.1",
   "status": "executed-partial-environment-blocked",
-  "source_revision": "24f695847f4113c876106f9352f4d192ea25c9ec",
+  "source_revision": "b84aaeb83c192617062b3b607c986821a09464a5",
   "required_scenarios": [
     "webassembly-memory-table",
     "workers-modules-structured-transfer-timers",
@@ -23,7 +23,7 @@
       "fallbacks": ["static-server-fallback", "alternate-loading", "unsupported"],
       "partial_activation": false,
       "evidence": "../raw-evidence/bh01-phase8-prerequisites-chromium.json",
-      "evidence_sha256": "27e20014112945319961eb4ff04e2dd23cef9a98fa10b9d00a0f56d32d11b8ae"
+      "evidence_sha256": "153b7d9b7a30a25b4c3c5f27119730813d44827a4f13321e24325ce124e0ac4f"
     },
     {
       "configuration_id": "BR-FIREFOX-DESKTOP",
@@ -61,7 +61,7 @@
       "activation": "ready",
       "required_row_credit": false,
       "evidence": "../raw-evidence/bh01-phase8-prerequisites-firefox-probe.json",
-      "evidence_sha256": "29ab8c4aafbcbfda7315bef05c4e5b5bfbf4ff878c96af228413dde1b5bd9b0f"
+      "evidence_sha256": "a8eff52329fabd5b249290fabecd69d70f2dd562023146cb90a05f4945069752"
     },
     {
       "probe_id": "PROBE-WEBKIT-PLAYWRIGHT-26.5-LINUX",
@@ -69,7 +69,7 @@
       "activation": "ready",
       "required_row_credit": false,
       "evidence": "../raw-evidence/bh01-phase8-prerequisites-webkit-probe.json",
-      "evidence_sha256": "32e367a862042ce6ced096c8b49a661ac2bd033868c3fe1896ccd7af34a23cf2"
+      "evidence_sha256": "52cf44c147ea842aed1a3e4abdbd1b0105322790c4b54e422361fa7ee8912673"
     }
   ],
   "outcome_vocabulary": {

@@ -16,7 +16,9 @@ and reserved scenario/raw-evidence locations. Phase 3 adds only the disposable
 the disposable `browser_host` AVM, local browser behavior contracts, retained
 browser evidence, and a machine-checked standalone dependency boundary. Phase
 8 adds the governed `browser_matrix` without treating emulation as a device.
-Production projects remain forbidden from importing this directory.
+Its completed gate is blocked by four unavailable required browser rows and
+required manual accessibility evidence. Production projects remain forbidden
+from importing this directory.
 
 ## Phase 1 index
 

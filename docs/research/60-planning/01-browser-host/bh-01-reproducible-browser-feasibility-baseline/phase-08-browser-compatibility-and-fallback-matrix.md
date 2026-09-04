@@ -16,7 +16,7 @@ aliases:
 
 Back to milestone: [README](README.md)
 
-- [ ] 8 Phase - Browser Compatibility and Accessible Fallback Matrix.
+- [x] 8 Phase - Browser Compatibility and Accessible Fallback Matrix.
 
   Execute the complete pinned scenario suite across candidate desktop and
   mobile browsers, verify prerequisite and compatibility failures, and produce
@@ -141,27 +141,27 @@ Back to milestone: [README](README.md)
       - [x] 8.5.2.2 Subtask - Update private-API inventory with breakage, required pins, fallback success, replacement options, upgrade triggers, and risk/stop implications.
       - [x] 8.5.2.3 Subtask - Keep the exact pinned baseline authoritative and label all probe outcomes experimental/unqualified.
 
-  - [ ] 8.6 Section - Phase 8 Integration Tests and Completion Evidence.
+  - [x] 8.6 Section - Phase 8 Integration Tests and Completion Evidence.
 
     Reconcile prerequisite, behavior, trust, resilience, fallback,
     accessibility, and compatibility results as one complete browser matrix.
 
-    - [ ] 8.6.1 Task - Run the immutable full-matrix gate.
+    - [x] 8.6.1 Task - Run the immutable full-matrix gate.
 
       Required environments and scenarios must execute from verified artifacts
       with no silent omission or stale evidence.
 
-      - [ ] 8.6.1.1 Subtask - Execute all applicable scenarios, verify environment/artifact fingerprints, and fail on missing required rows, stale inputs, incomplete traces, or unreviewed retries/quarantine.
-      - [ ] 8.6.1.2 Subtask - Reconcile runtime-boot, nested-state, form-event, timer-message, DOM-update, authenticated-command, and browser-fallback proofs across the matrix.
-      - [ ] 8.6.1.3 Subtask - Stop if prerequisites cannot fail intentionally/accessibly, required semantics diverge without bounded mitigation, or private coupling escapes its adapter.
+      - [x] 8.6.1.1 Subtask - Execute all applicable scenarios, verify environment/artifact fingerprints, and fail on missing required rows, stale inputs, incomplete traces, or unreviewed retries/quarantine.
+      - [x] 8.6.1.2 Subtask - Reconcile runtime-boot, nested-state, form-event, timer-message, DOM-update, authenticated-command, and browser-fallback proofs across the matrix.
+      - [x] 8.6.1.3 Subtask - Stop if prerequisites cannot fail intentionally/accessibly, required semantics diverge without bounded mitigation, or private coupling escapes its adapter.
 
-    - [ ] 8.6.2 Task - Review matrix findings and publish phase evidence.
+    - [x] 8.6.2 Task - Review matrix findings and publish phase evidence.
 
       The result should identify a precise candidate compatibility envelope while
       all browser configurations remain unsupported until final decision.
 
-      - [ ] 8.6.2.1 Subtask - Review divergences, failures, fallbacks, accessibility observations, manual gaps, private pins, resource behavior, and browser-prerequisite risk with responsible owners.
-      - [ ] 8.6.2.2 Subtask - Publish Phase 8 evidence with exact environments, artifact/scenario hashes, raw traces, screenshots/video where governed, matrix report, proof/risk outcomes, limitations, and stop/go decision.
+      - [x] 8.6.2.1 Subtask - Review divergences, failures, fallbacks, accessibility observations, manual gaps, private pins, resource behavior, and browser-prerequisite risk with responsible owners.
+      - [x] 8.6.2.2 Subtask - Publish Phase 8 evidence with exact environments, artifact/scenario hashes, raw traces, screenshots/video where governed, matrix report, proof/risk outcomes, limitations, and stop/go decision.
 
 ## Section delivery rule
 

@@ -25,6 +25,7 @@ const evidence = {
   support_status: "unsupported",
   browser: { type: browserName, version: browser.version(), os: `${os.platform()} ${os.release()}`, architecture: os.arch() },
   status: "running",
+  profile: {},
   semantic_trace: [],
   trust: {},
   adapter: {},
@@ -41,6 +42,7 @@ try {
   page.on("pageerror", (error) => evidence.page_errors.push(error.message));
   await page.goto(baseUrl, { waitUntil: "networkidle" });
   await ready(page);
+  evidence.profile = await profileIdentity(page);
 
   evidence.semantic_trace.push(normalize("mounted", await snapshot(page)));
   await command(page, "parent.increment");
@@ -150,7 +152,7 @@ try {
   evidence.diagnostics = { count: diagnostics.count, correlated_transport_failure: true, redaction: "passed", console_only: 0 };
   evidence.status = "observed";
   assert.deepEqual(evidence.page_errors, []);
-  evidence.evidence_sha256 = createHash("sha256").update(JSON.stringify({ semantic_trace: evidence.semantic_trace, trust: evidence.trust, adapter: evidence.adapter, resilience: evidence.resilience, cleanup: evidence.cleanup, diagnostics: evidence.diagnostics })).digest("hex");
+  evidence.evidence_sha256 = createHash("sha256").update(JSON.stringify({ profile: evidence.profile, semantic_trace: evidence.semantic_trace, trust: evidence.trust, adapter: evidence.adapter, resilience: evidence.resilience, cleanup: evidence.cleanup, diagnostics: evidence.diagnostics })).digest("hex");
   await context.close();
 } catch (error) {
   evidence.status = "observed-fail";
@@ -198,4 +200,13 @@ function normalize(label, value) {
     resources: value.runtime.resources,
     dom: { root_count: value.dom.root_count, listener_count: value.dom.listener_count, node_count: value.dom.nodes.length },
   };
+}
+async function profileIdentity(page) {
+  return page.evaluate(async () => {
+    const response = await fetch("./profile-assets-manifest.json", { cache: "no-store" });
+    const bytes = new Uint8Array(await response.arrayBuffer());
+    const manifest = JSON.parse(new TextDecoder().decode(bytes));
+    const digest = await crypto.subtle.digest("SHA-256", bytes);
+    return { manifest_id: manifest.manifest_id, manifest_sha256: [...new Uint8Array(digest)].map((byte) => byte.toString(16).padStart(2, "0")).join(""), governed_files: manifest.artifacts.length };
+  });
 }

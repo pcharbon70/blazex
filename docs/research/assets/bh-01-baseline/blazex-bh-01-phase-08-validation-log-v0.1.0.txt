@@ -1,0 +1,112 @@
+BH-01 Phase 8 validation log v0.1.0
+Observed: 2026-09-04T15:28:11.366Z
+Implementation parent: b84aaeb83c192617062b3b607c986821a09464a5
+
+IMMUTABLE BROWSER-MATRIX EXECUTION
+Endpoint: exact Phoenix profile at http://127.0.0.1:4199/bh01/
+Profile manifest SHA-256: 818ac7b967db6519c766f9d1fff80455cc92d205e3f188252e6da27258ee4aad
+Scenario families: prerequisites, behavior/trust, accessibility/input, compatibility
+Execution: 12 final runs; 4 required Chrome/Linux runs and 8 explicitly unqualified engine-probe runs
+Retries: 0 automatic; quarantines: 0
+Required Chrome environment: Chrome for Testing 152.0.7977.75; Linux 6.8.0-51-generic x64; Node v26.8.1; Playwright Core 1.62.1
+Firefox probe: Playwright patched Firefox 153.0 revision 1538 on Linux; experimental-unqualified; not stable Firefox evidence
+WebKit probe: Playwright WebKit MiniBrowser 26.5 revision 2336 on Linux; experimental-unqualified-not-safari
+Result: all automated scenarios passed in the three executable environments; probes grant no required-row or support credit
+Immutable-rerun finding: the accessible fallback revision changed the generated profile after initial runs; the final gate rejected the stale identity, rebuilt the profile, and reran all 12 combinations against the profile hash above
+
+REQUIRED ENVIRONMENT AND MANUAL EVIDENCE OUTCOMES
+BR-CHROMIUM-DESKTOP: automated suites passed; required screen-reader/physical-keyboard review unavailable; blocked-manual-evidence
+BR-FIREFOX-DESKTOP: stable Firefox and qualified automation protocol unavailable; environment-blocked
+BR-CHROMIUM-ANDROID: exact device/emulator, browser build, and authorized automation endpoint unavailable; environment-blocked
+BR-WEBKIT-DESKTOP: macOS Safari host and safaridriver unavailable; environment-blocked
+BR-WEBKIT-MOBILE: iPhone/iPad device or simulator, Xcode host, and Mobile Safari build unavailable; environment-blocked
+Assistive technology: no required browser/AT pairing executed; automation was not substituted for manual evidence
+Required matrix: 5 rows retained; 1 locally executable; 4 environment-blocked; 0 fully passed
+
+AUTOMATED BEHAVIOR AND FAILURE PROOFS
+Prerequisites: WebAssembly, memory/table, shared memory, workers, modules, streaming/buffered loading, transfer, timers, secure context, isolation, deployment, offline/online, restart/navigation, and cleanup observations passed in executable environments
+Fallback: missing WebAssembly/worker capability and isolation failed without partial activation; missing streaming used alternate loading; no-JavaScript retained bounded static content
+Semantics: normalized trace SHA-256 6933d006d378292a34b542d8fdc8c2a0fa0d10ee48388a0a9b42fc2224b39bbc matched in all executable environments
+Trust: authorized/replayed/stale/denied/forged/disconnected/recovered outcomes matched; unauthorized effects=0
+Resources: three lifecycle generations per executable environment converged DOM, bridge, and server pending resources to zero; retained Phase 7 stress evidence remained valid
+Accessibility automation: fallback status/name/description/recheck, keyboard/focus, fields/validation, reduced motion, and forced colors passed; manual screen-reader/touch/mobile observations remain blocked
+Compatibility: seven mismatch categories failed closed; exact Phoenix 1.8.13, Phoenix LiveView 1.2.11, and LocalLiveView 0.1.0 pins only; adjacent packages were not installed or executed
+
+RAW EVIDENCE FILE SHA-256
+153b7d9b7a30a25b4c3c5f27119730813d44827a4f13321e24325ce124e0ac4f  bh01-phase8-prerequisites-chromium.json
+a8eff52329fabd5b249290fabecd69d70f2dd562023146cb90a05f4945069752  bh01-phase8-prerequisites-firefox-probe.json
+52cf44c147ea842aed1a3e4abdbd1b0105322790c4b54e422361fa7ee8912673  bh01-phase8-prerequisites-webkit-probe.json
+121ec34f4a31a0512204e508bb2dcd2bc0a5aabd3b7bfcaedca3cdebc43f77ad  bh01-phase8-behavior-chromium.json
+fc8195ea2ad9acc28386d46a1e1eecc89ce968715870a72f82a3c24bf1063698  bh01-phase8-behavior-firefox-probe.json
+dd622e50948b4ccf1a8be53a14e34e264913a1322ee878b98865aee3ffb05a92  bh01-phase8-behavior-webkit-probe.json
+500e277ed14ac68d37a8547beb7d1374ee8d6a51f40784f24db73b7c6fb9c76a  bh01-phase8-accessibility-chromium.json
+7bbae8544792634b771a48c0c8eb0bc15ef647daecd12d4221217386ad0e371c  bh01-phase8-accessibility-firefox-probe.json
+b6361c151fe00f5868c81dace376e649d538588b95f0308bfe281ac0aac36e42  bh01-phase8-accessibility-webkit-probe.json
+0ee3097ae21df6bcc9119c4023895677c88f1bdcd5c3a839d14506cb53779c65  bh01-phase8-compatibility-chromium.json
+51b97650a167984c5871824f72ae182a5d51ec0c2b81a1d9048cb787ad0297b4  bh01-phase8-compatibility-firefox-probe.json
+ac10f11249eb31489747321abfa1e9e6f77e9f38513d228f677986a88fc18a7b  bh01-phase8-compatibility-webkit-probe.json
+Aggregate evidence self-hash: 2ce0ff9c7df0e5118fc521b9ba2aa10bcc12d4a16f07442319cb98e3db83066a
+
+EXACT ELIXIR PACKAGE, FIXTURE, AND PROFILE TESTS
+Command: docker run --rm --network none ... <digest-pinned-hexpm-elixir> sh -lc 'mix archive.install /tmp/hex.ez --force && mix test'
+Working directory: packages/blazex_phoenix
+Result: PASS; 10 tests, 0 failures
+Command: docker run --rm --network none ... <digest-pinned-hexpm-elixir> sh -lc 'mix archive.install /tmp/hex.ez --force && mix test'
+Working directory: packages/blazex_renderer_dom_liveview
+Result: PASS; 4 tests, 0 failures
+Command: docker run --rm --network none ... <digest-pinned-hexpm-elixir> sh -lc 'mix archive.install /tmp/hex.ez --force && mix test'
+Working directory: integration/fixtures/browser_host
+Result: PASS; 16 tests, 0 failures
+Command: docker run --rm --network none ... <digest-pinned-hexpm-elixir> sh -lc 'mix archive.install /tmp/hex.ez --force && mix test'
+Working directory: profiles/browser_phoenix
+Result: PASS; 12 tests, 0 failures
+
+JAVASCRIPT RUNTIME AND DOM ADAPTER
+Command: PATH=<qualified-node-26.8.1>:$PATH npm test
+Working directory: js/blazex_runtime
+Result: PASS; 10 tests, 0 failures, 0 skipped
+Command: PATH=<qualified-node-26.8.1>:$PATH npm run build
+Result: PASS; runtime, host/frame, and Phase 5-8 browser-harness syntax checks passed
+Command: PATH=<qualified-node-26.8.1>:$PATH npm test
+Working directory: packages/blazex_renderer_dom
+Result: PASS; 1 test, 0 failures, 0 skipped
+Command: PATH=<qualified-node-26.8.1>:$PATH npm run build
+Result: PASS; closed DOM protocol and renderer syntax checks passed
+
+CONTRACT, PROFILE, AND EVIDENCE VERIFICATION
+Command: python3 -m unittest discover -s integration/fixtures/browser_matrix/tests -p 'test_*.py'
+Result: PASS; 34 tests, 0 failures
+Command: python3 -m unittest discover -s integration/fixtures/local_browser/tests -p 'test_*.py'
+Result: PASS; 6 tests, 0 failures
+Command: python3 -m unittest discover -s integration/fixtures/resilience/tests -p 'test_*.py'
+Result: PASS; 21 tests, 0 failures
+Command: python3 -m unittest discover -s profiles/browser_phoenix/toolchain/tests -p 'test_*.py'
+Result: PASS; 87 tests, 0 failures
+Phase 8 mutation coverage: missing required row, probe substitution, Phase 9 over-authorization, raw-evidence hash drift, generated-profile drift, scenario/completion pass overclaim, open plan work, browser-support overclaim, matrix policy and semantic/fallback/compatibility drift
+Command: python3 integration/fixtures/browser_matrix/verify_environments.py
+Result: PASS; 1 available required row, 4 environment-blocked required rows, 2 non-substituting probes
+Command: python3 integration/fixtures/browser_matrix/verify_prerequisites.py
+Result: PASS
+Command: python3 integration/fixtures/browser_matrix/verify_behavior_trust.py
+Result: PASS
+Command: python3 integration/fixtures/browser_matrix/verify_accessibility_input.py
+Result: PASS; automation passed while required browser/AT evidence remains blocked
+Command: python3 integration/fixtures/browser_matrix/verify_compatibility.py
+Result: PASS; exact pins only, adjacent package versions untested
+Command: python3 profiles/browser_phoenix/assets/phase4/verify_profile.py profiles/browser_phoenix/priv/static/bh01
+Result: PASS; 23 governed files and hashes match
+Command: python3 profiles/browser_phoenix/toolchain/verify_phase8.py
+Result: BLOCKED as designed; retained Phase 7 gate, five matrix verifiers, schemas, hashes, required rows, raw records, profile identity, plan, report, and claim boundaries are internally valid
+Command: python3 docs/research/validate_archive.py
+Result: PASS
+Command: git diff --check
+Result: PASS
+
+FINAL GATE
+Phase 8 governed-work result: COMPLETE.
+Phase 8 product gate: BLOCKED by four unavailable required browser/device environments and unavailable required manual accessibility pairings.
+Required matrix result: 0 of 5 rows fully passed; no row was omitted, substituted, retried, quarantined, or promoted to browser support.
+Engine probes: useful experimental evidence only; patched Firefox is not stable Firefox, and Linux WebKit MiniBrowser is not Safari.
+Compatibility result: exact candidate dependency set only; no adjacent package compatibility range established.
+Support result: all browsers remain unsupported; no accessibility conformance, mobile compatibility, production readiness, performance, security, or deployment claim promoted.
+Authorization: Phase 9 is not eligible and is not authorized.

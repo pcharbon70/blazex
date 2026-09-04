@@ -228,7 +228,9 @@ def validate(
         errors.append("Phase 7 plan still contains open work")
     if "| complete — gate passed | Stress failures, retries, adversarial inputs" not in milestone_text:
         errors.append("BH-01 milestone does not record the passed Phase 7 gate")
-    if not re.search(r"Phase\s+8 is eligible but not authorized", milestone_text):
+    phase8_pending = re.search(r"Phase\s+8 is eligible but not authorized", milestone_text)
+    phase8_blocked = "| complete — gate blocked | Run the complete scenario set" in milestone_text
+    if not (phase8_pending or phase8_blocked):
         errors.append("BH-01 milestone does not preserve the Phase 8 authorization boundary")
     for revision in ("8f980b2", "875af9d", "afb75fc", "0c26d65"):
         if revision not in report_text:

@@ -2,7 +2,7 @@
   "schema_version": "1.0.0",
   "matrix_id": "BX-BH01-PHASE8-ACCESSIBILITY-INPUT-MATRIX-0.1",
   "status": "executed-partial-environment-blocked-manual-review-required",
-  "source_revision": "083c587c33405d80b3e960115fb2ddad9301406c",
+  "source_revision": "b84aaeb83c192617062b3b607c986821a09464a5",
   "fallback_values": [
     {"value": "static-content", "status": "passed", "application": "Missing browser prerequisites and no-JavaScript delivery retain a bounded server-rendered status surface."},
     {"value": "alternative-interaction", "status": "not-applicable", "application": "The disposable fixture has no pointer-only or capability-exclusive interaction."},
@@ -21,7 +21,7 @@
       "field_input": "passed-automated-headless",
       "assistive_technology": "environment-blocked",
       "evidence": "../raw-evidence/bh01-phase8-accessibility-chromium.json",
-      "evidence_sha256": "4d65369357e7f715d742e0f6d3a671f20ad33e7b2e7e14841dafab651ee2ff61"
+      "evidence_sha256": "500e277ed14ac68d37a8547beb7d1374ee8d6a51f40784f24db73b7c6fb9c76a"
     },
     {"configuration_id": "BR-FIREFOX-DESKTOP", "status": "environment-blocked", "blocker_ref": "environment-catalog.json#BR-FIREFOX-DESKTOP"},
     {"configuration_id": "BR-CHROMIUM-ANDROID", "status": "environment-blocked", "blocker_ref": "environment-catalog.json#BR-CHROMIUM-ANDROID"},
@@ -34,14 +34,14 @@
       "status": "passed-experimental-manual-unqualified",
       "required_row_credit": false,
       "evidence": "../raw-evidence/bh01-phase8-accessibility-firefox-probe.json",
-      "evidence_sha256": "0eba3d12d9c3346023ec1879ae5abc9736d8e20e54ad2e158384d56bfaf3a0f4"
+      "evidence_sha256": "7bbae8544792634b771a48c0c8eb0bc15ef647daecd12d4221217386ad0e371c"
     },
     {
       "probe_id": "PROBE-WEBKIT-PLAYWRIGHT-26.5-LINUX",
       "status": "passed-experimental-manual-unqualified",
       "required_row_credit": false,
       "evidence": "../raw-evidence/bh01-phase8-accessibility-webkit-probe.json",
-      "evidence_sha256": "8e345ca7fce1e1a7a64c6843faa94570873f032b4c1ecba494611d4ba2e35ac3"
+      "evidence_sha256": "b6361c151fe00f5868c81dace376e649d538588b95f0308bfe281ac0aac36e42"
     }
   ],
   "divergences": [

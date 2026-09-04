@@ -21,7 +21,7 @@
   "required_result_fields": ["configuration_id", "environment_id", "scenario_set_sha256", "profile_manifest_sha256", "status", "attempt", "started_at", "completed_at", "raw_evidence_refs", "limitations", "review"],
   "staleness_days": 31,
   "artifact_policy": {
-    "profile_manifest_sha256": "84b0b91484f08357d350452b2c7ed3a17de4ad98d51cd3ff3f2115b655e4c768",
+    "profile_manifest_sha256": "818ac7b967db6519c766f9d1fff80455cc92d205e3f188252e6da27258ee4aad",
     "reject_stale_or_changed_artifact": true,
     "partial_trace_allowed": false
   },

@@ -27,3 +27,5 @@ engine emulation and non-vendor builds never substitute for a required row.
   non-substituting engine probes, and unexecuted adjacent-package boundaries.
 - `verify_compatibility.py` and `tests/test_compatibility.py` — fail-closed,
   cache/rollback, private-API confinement, and no-version-range checks.
+- `matrix-report.json` — final five-row reconciliation, findings, evidence
+  capture disposition, and blocked Phase 8/Phase 9 decision.

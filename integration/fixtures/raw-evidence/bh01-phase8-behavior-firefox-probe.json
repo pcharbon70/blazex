@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0.0",
   "evidence_id": "BX-BH01-PHASE8-BEHAVIOR-FIREFOX-0.1",
-  "captured_at": "2026-09-04T14:53:38.264Z",
-  "implementation_revision": "e7c5f8809b369e28501e1115fac285fc7d6c41ac",
+  "captured_at": "2026-09-04T15:17:08.840Z",
+  "implementation_revision": "b84aaeb83c192617062b3b607c986821a09464a5",
   "authority": "experimental-unqualified",
   "support_status": "unsupported",
   "browser": {
@@ -12,6 +12,11 @@
     "architecture": "x64"
   },
   "status": "observed",
+  "profile": {
+    "manifest_id": "BX-BH01-PHASE-05-PROFILE-ASSETS-0.1",
+    "manifest_sha256": "818ac7b967db6519c766f9d1fff80455cc92d205e3f188252e6da27258ee4aad",
+    "governed_files": 23
+  },
   "semantic_trace": [
     {
       "label": "mounted",
@@ -282,5 +287,5 @@
   },
   "page_errors": [],
   "semantic_trace_sha256": "6933d006d378292a34b542d8fdc8c2a0fa0d10ee48388a0a9b42fc2224b39bbc",
-  "evidence_sha256": "8402d0ec154b304b57d939e52e2bd24b38fbfedada2f97c99191e5c1c04fc287"
+  "evidence_sha256": "23847219b978e6f577018b4b4960d9d4852fe38147dae0be02f7eafb2da04032"
 }

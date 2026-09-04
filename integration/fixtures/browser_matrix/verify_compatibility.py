@@ -82,6 +82,8 @@ def validate(matrix: dict[str, Any], policy: dict[str, Any], private_api: dict[s
         baseline = value.get("exact_baseline", {})
         if baseline.get("state") != "ready" or baseline.get("manifest_id") != "BX-BH01-BROWSER-RUNTIME-MANIFEST-0.1" or baseline.get("manifest_cache_control") != "no-store":
             errors.append(f"{browser_name} exact baseline drifted")
+        if baseline.get("profile_manifest_sha256") != policy.get("artifact_policy", {}).get("profile_manifest_sha256"):
+            errors.append(f"{browser_name} compatibility profile identity drifted")
         scenarios = value.get("mismatch_scenarios", {})
         for name, code in (("loader_manifest", "manifest-schema-unsupported"), ("runtime_bundle", "artifact-integrity-mismatch"), ("artifact_cache", "artifact-integrity-mismatch")):
             item = scenarios.get(name, {})

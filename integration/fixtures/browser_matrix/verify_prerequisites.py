@@ -39,7 +39,7 @@ def file_sha256(path: Path) -> str:
 
 
 def evidence_self_hash(evidence: dict[str, Any]) -> str:
-    value = {key: evidence.get(key) for key in ("capabilities", "deployment", "initial", "negative_scenarios", "lifecycle_changes")}
+    value = {key: evidence.get(key) for key in ("profile", "capabilities", "deployment", "initial", "negative_scenarios", "lifecycle_changes")}
     return hashlib.sha256(json.dumps(value, ensure_ascii=False, separators=(",", ":")).encode()).hexdigest()
 
 
@@ -70,6 +70,8 @@ def validate(matrix: dict[str, Any], catalog: dict[str, Any], policy: dict[str, 
         errors.append("prerequisite probe inventory drifted")
 
     for browser_name, value in evidence.items():
+        if value.get("profile", {}).get("manifest_sha256") != policy.get("artifact_policy", {}).get("profile_manifest_sha256"):
+            errors.append(f"{browser_name} prerequisite profile identity drifted")
         if value.get("status") != "observed" or value.get("support_status") != "unsupported":
             errors.append(f"{browser_name} prerequisite evidence overclaims its result")
         expected_authority = "required-row" if browser_name == "chromium" else "experimental-unqualified"

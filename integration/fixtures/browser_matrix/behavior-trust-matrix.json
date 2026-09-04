@@ -2,7 +2,7 @@
   "schema_version": "1.0.0",
   "matrix_id": "BX-BH01-PHASE8-BEHAVIOR-TRUST-MATRIX-0.1",
   "status": "executed-partial-environment-blocked",
-  "source_revision": "e7c5f8809b369e28501e1115fac285fc7d6c41ac",
+  "source_revision": "b84aaeb83c192617062b3b607c986821a09464a5",
   "semantic_trace_sha256": "6933d006d378292a34b542d8fdc8c2a0fa0d10ee48388a0a9b42fc2224b39bbc",
   "scenario_set": [
     "boot-readiness-and-mount",
@@ -22,7 +22,7 @@
       "trust_boundary": "passed",
       "resource_convergence": "passed",
       "evidence": "../raw-evidence/bh01-phase8-behavior-chromium.json",
-      "evidence_sha256": "cb76612dbe53acf5a67d38a4997ce9d4122b7f49b8aa1178b550800747b89e47"
+      "evidence_sha256": "121ec34f4a31a0512204e508bb2dcd2bc0a5aabd3b7bfcaedca3cdebc43f77ad"
     },
     {
       "configuration_id": "BR-FIREFOX-DESKTOP",
@@ -56,7 +56,7 @@
       "semantic_equivalence": "matched-canonical",
       "required_row_credit": false,
       "evidence": "../raw-evidence/bh01-phase8-behavior-firefox-probe.json",
-      "evidence_sha256": "f4c321f2605d81ec3b78988a38e707d6c5ab7d84af2287d3b9bb8177cabd152c"
+      "evidence_sha256": "fc8195ea2ad9acc28386d46a1e1eecc89ce968715870a72f82a3c24bf1063698"
     },
     {
       "probe_id": "PROBE-WEBKIT-PLAYWRIGHT-26.5-LINUX",
@@ -64,7 +64,7 @@
       "semantic_equivalence": "matched-canonical",
       "required_row_credit": false,
       "evidence": "../raw-evidence/bh01-phase8-behavior-webkit-probe.json",
-      "evidence_sha256": "2b779a15126ec5fb2723259f43c345727bcb55b31653fb9019a1409256ef5675"
+      "evidence_sha256": "dd622e50948b4ccf1a8be53a14e34e264913a1322ee878b98865aee3ffb05a92"
     }
   ],
   "retained_evidence": {

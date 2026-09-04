@@ -47,3 +47,5 @@ is not browser evidence.
   execution of the same client compatibility scenarios.
 - `bh01-phase8-compatibility-webkit-probe.json` — unqualified Linux WebKit
   execution of the same client compatibility scenarios; not Safari evidence.
+- `bh01-phase8-browser-matrix.json` — aggregate immutable-profile execution
+  counts, raw record hashes, proof outcomes, blockers, and final decision.

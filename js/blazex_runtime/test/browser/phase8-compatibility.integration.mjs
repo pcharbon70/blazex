@@ -85,6 +85,10 @@ async function baselineObservation() {
   await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
   await terminal(page);
   const value = await page.evaluate(async () => {
+    const profileResponse = await fetch("./profile-assets-manifest.json", { cache: "no-store" });
+    const profileBytes = new Uint8Array(await profileResponse.arrayBuffer());
+    const profile = JSON.parse(new TextDecoder().decode(profileBytes));
+    const profileDigest = await crypto.subtle.digest("SHA-256", profileBytes);
     const manifestResponse = await fetch("./runtime-manifest.json", { cache: "no-store" });
     const manifest = await manifestResponse.clone().json();
     const wasm = manifest.artifacts.find((item) => item.role === "runtime-wasm");
@@ -95,6 +99,9 @@ async function baselineObservation() {
       manifest_id: globalThis.__blazexBH01.activation.manifest_id,
       manifest_generation: globalThis.__blazexBH01.activation.manifest_generation,
       activation_generation: globalThis.__blazexBH01.activation.generation,
+      profile_manifest_id: profile.manifest_id,
+      profile_manifest_sha256: [...new Uint8Array(profileDigest)].map((byte) => byte.toString(16).padStart(2, "0")).join(""),
+      profile_governed_files: profile.artifacts.length,
       manifest_cache_control: manifestResponse.headers.get("cache-control"),
       artifact_cache_control: artifactResponse.headers.get("cache-control"),
       semantic_state: { parent_count: snapshot.runtime.parent_count, children: snapshot.runtime.children.map(({ key, count }) => ({ key, count })), field: { value: snapshot.runtime.field.value, valid: snapshot.runtime.field.valid }, dom: { roots: snapshot.dom.root_count, nodes: snapshot.dom.node_count, listeners: snapshot.dom.listener_count } },

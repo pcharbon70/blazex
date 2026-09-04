@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0.0",
   "evidence_id": "BX-BH01-PHASE8-PREREQUISITES-CHROMIUM-0.1",
-  "captured_at": "2026-09-04T14:37:32.125Z",
-  "implementation_revision": "24f695847f4113c876106f9352f4d192ea25c9ec",
+  "captured_at": "2026-09-04T15:16:41.205Z",
+  "implementation_revision": "b84aaeb83c192617062b3b607c986821a09464a5",
   "authority": "required-row",
   "support_status": "unsupported",
   "browser": {
@@ -12,6 +12,11 @@
     "architecture": "x64"
   },
   "status": "observed",
+  "profile": {
+    "manifest_id": "BX-BH01-PHASE-05-PROFILE-ASSETS-0.1",
+    "manifest_sha256": "818ac7b967db6519c766f9d1fff80455cc92d205e3f188252e6da27258ee4aad",
+    "governed_files": 23
+  },
   "capabilities": {
     "webassembly_validate": true,
     "memory": true,
@@ -225,5 +230,5 @@
     "generation": 1,
     "runtime_ready": true
   },
-  "evidence_sha256": "0d7aa8b1b01e4fac0dcc4b6a4809e073d25448b80275a4ad9e2d52fefe1616ce"
+  "evidence_sha256": "f8c2a185be91811b4aac859576581114c7de30be5c0018ea5a2ca1fd9a4a2753"
 }

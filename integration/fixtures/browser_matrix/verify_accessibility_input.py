@@ -34,7 +34,7 @@ def file_sha256(path: Path) -> str:
 
 
 def evidence_self_hash(evidence: dict[str, Any]) -> str:
-    keys = ("fallback", "keyboard_focus", "field_input", "user_preferences", "manual_evidence")
+    keys = ("profile", "fallback", "keyboard_focus", "field_input", "user_preferences", "manual_evidence")
     value = {key: evidence.get(key) for key in keys}
     payload = json.dumps(value, ensure_ascii=False, separators=(",", ":"))
     return hashlib.sha256(payload.encode()).hexdigest()
@@ -67,6 +67,8 @@ def validate(matrix: dict[str, Any], policy: dict[str, Any], evidence: dict[str,
         errors.append("missing accessibility evidence does not block Phase 8")
 
     for browser_name, value in evidence.items():
+        if value.get("profile", {}).get("manifest_sha256") != policy.get("artifact_policy", {}).get("profile_manifest_sha256"):
+            errors.append(f"{browser_name} accessibility profile identity drifted")
         if value.get("status") != "observed" or value.get("support_status") != "unsupported":
             errors.append(f"{browser_name} accessibility evidence overclaims its result")
         expected_authority = "required-row" if browser_name == "chromium" else "experimental-unqualified"

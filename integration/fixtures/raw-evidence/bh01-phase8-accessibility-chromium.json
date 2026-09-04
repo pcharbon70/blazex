@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0.0",
   "evidence_id": "BX-BH01-PHASE8-ACCESSIBILITY-CHROMIUM-0.1",
-  "captured_at": "2026-09-04T15:02:17.854Z",
-  "implementation_revision": "083c587c33405d80b3e960115fb2ddad9301406c",
+  "captured_at": "2026-09-04T15:17:27.212Z",
+  "implementation_revision": "b84aaeb83c192617062b3b607c986821a09464a5",
   "authority": "required-row",
   "support_status": "unsupported",
   "browser": {
@@ -12,6 +12,11 @@
     "architecture": "x64"
   },
   "status": "observed",
+  "profile": {
+    "manifest_id": "BX-BH01-PHASE-05-PROFILE-ASSETS-0.1",
+    "manifest_sha256": "818ac7b967db6519c766f9d1fff80455cc92d205e3f188252e6da27258ee4aad",
+    "governed_files": 23
+  },
   "fallback": {
     "capability_unavailable": {
       "before_retry": {
@@ -154,5 +159,5 @@
     "touch_and_virtual_keyboard": "not-applicable-to-desktop-probe"
   },
   "page_errors": [],
-  "evidence_sha256": "ef7a36294f066769c4b9cb16ff7ee0620c5c7028074e415a984f76c9e64099ee"
+  "evidence_sha256": "1f91963d6e3ac4d9ecb853a9a01495fe7d4bdb4c18a4f651fc55a30fac38b815"
 }
