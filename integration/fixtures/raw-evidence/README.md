@@ -23,3 +23,9 @@ is not browser evidence.
 - `bh01-phase7-resilience-security-resource.json` — twenty actual-browser
   lifecycle generations, four coordinated disconnect recoveries, artifact and
   authority attacks, redacted diagnostics, and resource convergence evidence.
+- `bh01-phase8-prerequisites-chromium.json` — qualified Chrome/Linux
+  prerequisite, policy-failure, alternate-loading, and lifecycle observations.
+- `bh01-phase8-prerequisites-firefox-probe.json` — explicitly unqualified
+  Playwright Firefox/Linux engine probe; grants no required-row credit.
+- `bh01-phase8-prerequisites-webkit-probe.json` — explicitly unqualified
+  Playwright WebKit/Linux MiniBrowser probe; it is not Safari evidence.

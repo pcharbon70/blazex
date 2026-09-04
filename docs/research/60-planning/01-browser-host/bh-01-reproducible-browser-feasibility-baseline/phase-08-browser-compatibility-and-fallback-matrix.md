@@ -44,27 +44,27 @@ Back to milestone: [README](README.md)
       - [x] 8.1.2.1 Subtask - Define scheduling, environment verification, scenario selection, retry limit, quarantine, raw evidence, artifact identity, and result schema.
       - [x] 8.1.2.2 Subtask - Fail the required run on drift, missing browser/device, stale artifact, silent retry, incomplete trace, or unreviewed quarantine and distinguish environment-blocked from product-failed.
 
-  - [ ] 8.2 Section - Execute the prerequisite matrix.
+  - [x] 8.2 Section - Execute the prerequisite matrix.
 
     Determine which browser facilities the actual loader/runtime needs and how
     each missing or restricted facility fails before activation.
 
-    - [ ] 8.2.1 Task - Test WebAssembly and execution prerequisites.
+    - [x] 8.2.1 Task - Test WebAssembly and execution prerequisites.
 
       Requirements should be observed per browser rather than inferred from
       engine documentation alone.
 
-      - [ ] 8.2.1.1 Subtask - Test WebAssembly/features, memory/table behavior, workers, JavaScript modules, streaming/buffered instantiate, structured transfer, timers, and secure-context assumptions.
-      - [ ] 8.2.1.2 Subtask - Test isolation, CSP, CORS, origin, HTTPS, MIME, compression, integrity, redirects, cache validation, storage/service-worker interaction, and network restrictions.
-      - [ ] 8.2.1.3 Subtask - Record proceed/alternate-loading/fallback/unsupported/not-applicable outcomes with exact detection and no partial activation.
+      - [x] 8.2.1.1 Subtask - Test WebAssembly/features, memory/table behavior, workers, JavaScript modules, streaming/buffered instantiate, structured transfer, timers, and secure-context assumptions.
+      - [x] 8.2.1.2 Subtask - Test isolation, CSP, CORS, origin, HTTPS, MIME, compression, integrity, redirects, cache validation, storage/service-worker interaction, and network restrictions.
+      - [x] 8.2.1.3 Subtask - Record proceed/alternate-loading/fallback/unsupported/not-applicable outcomes with exact detection and no partial activation.
 
-    - [ ] 8.2.2 Task - Test policy and capability changes after readiness.
+    - [x] 8.2.2 Task - Test policy and capability changes after readiness.
 
       Revoked or changing conditions should not leave the runtime half-active or
       silently inconsistent.
 
-      - [ ] 8.2.2.1 Subtask - Exercise offline/online changes, cache eviction, page visibility/navigation, worker termination, memory pressure where observable, session expiry, and server restart.
-      - [ ] 8.2.2.2 Subtask - Verify intentional recovery/fallback/stop, generation replacement, resource cleanup, and bounded diagnostics.
+      - [x] 8.2.2.1 Subtask - Exercise offline/online changes, cache eviction, page visibility/navigation, worker termination, memory pressure where observable, session expiry, and server restart.
+      - [x] 8.2.2.2 Subtask - Verify intentional recovery/fallback/stop, generation replacement, resource cleanup, and bounded diagnostics.
 
   - [ ] 8.3 Section - Execute behavior and trust scenarios across browsers.
 

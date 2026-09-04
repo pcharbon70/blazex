@@ -11,3 +11,7 @@ engine emulation and non-vendor builds never substitute for a required row.
   governance.
 - `verify_environments.py` and `tests/test_environments.py` — static and
   mutation validation for Section 8.1.
+- `prerequisite-matrix.json` — required-row and non-substituting engine-probe
+  prerequisite/lifecycle outcomes.
+- `verify_prerequisites.py` and `tests/test_prerequisites.py` — retained raw-
+  evidence, no-partial-activation, and mutation checks for Section 8.2.
