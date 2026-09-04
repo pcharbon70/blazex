@@ -12,8 +12,10 @@ portable interaction traces from this directory.
 
 Phase 1 activation added a governed empty scenario index, a scenario schema,
 and reserved scenario/raw-evidence locations. Phase 3 adds only the disposable
-`runtime_smoke` project used to package and probe the pinned VM. Production
-projects remain forbidden from importing this directory.
+`runtime_smoke` project used to package and probe the pinned VM. Phases 4-6 add
+the disposable `browser_host` AVM, local browser behavior contracts, retained
+browser evidence, and a machine-checked standalone dependency boundary.
+Production projects remain forbidden from importing this directory.
 
 ## Phase 1 index
 
@@ -22,3 +24,4 @@ projects remain forbidden from importing this directory.
 - `scenarios/` — future disposable representative behavior records.
 - `raw-evidence/` — future immutable fixture execution evidence.
 - `runtime_smoke/` — non-public Elixir/AVM packaging and runtime-semantics fixture.
+- `browser_host/` — non-public local behavior AVM and standalone-boundary manifest.

@@ -1,0 +1,24 @@
+{
+  "contract": "blazex.bh01.standalone-browser-boundary/0.1",
+  "status": "phase6-verified",
+  "fixture_dependencies": ["popcorn"],
+  "standalone_dom_dependencies": [],
+  "forbidden_imports": [
+    "BlazeX.Renderer.DOM.LiveView",
+    "Phoenix.LiveView",
+    "LocalLiveView"
+  ],
+  "phase5_fixture_proofs_retained": [
+    "BX-BH01-PROOF-NESTED-STATE",
+    "BX-BH01-PROOF-FORM-EVENT",
+    "BX-BH01-PROOF-TIMER-MESSAGE",
+    "BX-BH01-PROOF-DOM-UPDATE"
+  ],
+  "phase6_server_enhancement": ["authenticated-counter-command"],
+  "comparison_rule": "Phase 5 local scenarios remain server-independent; only the declared Phase 6 server action uses transport.",
+  "claims_not_made": [
+    "executable Plug profile",
+    "executable headless profile",
+    "public component or renderer API"
+  ]
+}

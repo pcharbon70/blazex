@@ -97,26 +97,26 @@ Back to milestone: [README](README.md)
       - [x] 6.3.2.1 Subtask - Detect pin/protocol/data mismatch before partial adapter activation and select intentional disable, local DOM, server fallback, or explicit unavailable outcome.
       - [x] 6.3.2.2 Subtask - Record adapter activation/version in artifacts and traces and reject hidden fallback that changes semantics or support claims.
 
-  - [ ] 6.4 Section - Prove standalone DOM, Plug, and dependency separation.
+  - [x] 6.4 Section - Prove standalone DOM, Plug, and dependency separation.
 
     The Phoenix/LiveView success path is acceptable only when local browser
     rendering remains independently usable and future profiles remain clean.
 
-    - [ ] 6.4.1 Task - Run the local slice with LiveView absent.
+    - [x] 6.4.1 Task - Run the local slice with LiveView absent.
 
       Phase 5 behavior should not require renderer-data or Phoenix coupling.
 
-      - [ ] 6.4.1.1 Subtask - Remove/disable the LiveView adapter from the runtime graph and run local state, forms, timers/messages, DOM, failure, and disposal scenarios.
-      - [ ] 6.4.1.2 Subtask - Compare fixture-level traces/outcomes and assert that only explicitly server-enhanced scenarios differ.
-      - [ ] 6.4.1.3 Subtask - Reject direct adapter imports from runtime, browser host, standalone DOM, fixture behavior, and command-authority code.
+      - [x] 6.4.1.1 Subtask - Remove/disable the LiveView adapter from the runtime graph and run local state, forms, timers/messages, DOM, failure, and disposal scenarios.
+      - [x] 6.4.1.2 Subtask - Compare fixture-level traces/outcomes and assert that only explicitly server-enhanced scenarios differ.
+      - [x] 6.4.1.3 Subtask - Reject direct adapter imports from runtime, browser host, standalone DOM, fixture behavior, and command-authority code.
 
-    - [ ] 6.4.2 Task - Verify Plug and headless boundary contracts.
+    - [x] 6.4.2 Task - Verify Plug and headless boundary contracts.
 
       BH-01 need not activate those profiles to prove its dependency choices do
       not make them impossible.
 
-      - [ ] 6.4.2.1 Subtask - Inspect/generate dependency manifests showing Plug excludes Phoenix/LiveView/LocalLiveView and the LiveView DOM adapter transitively.
-      - [ ] 6.4.2.2 Subtask - Verify inactive headless/core/renderer-contract boundaries have no dependency on browser/runtime/server packages and no feasibility fixture is treated as their API.
+      - [x] 6.4.2.1 Subtask - Inspect/generate dependency manifests showing Plug excludes Phoenix/LiveView/LocalLiveView and the LiveView DOM adapter transitively.
+      - [x] 6.4.2.2 Subtask - Verify inactive headless/core/renderer-contract boundaries have no dependency on browser/runtime/server packages and no feasibility fixture is treated as their API.
 
   - [ ] 6.5 Section - Phase 6 Integration Tests and Completion Evidence.
 

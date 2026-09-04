@@ -44,6 +44,16 @@ python3 profiles/browser_phoenix/toolchain/verify_server.py
 python3 -m unittest profiles/browser_phoenix/toolchain/tests/test_server.py
 ```
 
+Phase 6 adds explicit standalone DOM, qualified Plug, and inactive headless
+dependency manifests. Their verifier scans the actual local fixture and adapter
+sources for forbidden imports and rejects graph drift without claiming that the
+scaffold-only profiles are executable:
+
+```console
+python3 profiles/browser_phoenix/toolchain/verify_phase6_boundaries.py
+python3 -m unittest profiles/browser_phoenix/toolchain/tests/test_phase6_boundaries.py
+```
+
 `unified-dependency-inventory.json` binds the canonical locks and reports by
 digest. `acquisition-evidence.json` records true clean and network-disabled
 cache replays for Hex and npm, immutable runtime-source replay timings, binary
