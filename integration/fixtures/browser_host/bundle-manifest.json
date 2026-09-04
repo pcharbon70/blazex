@@ -1,22 +1,22 @@
 {
   "artifacts": [
     {
-      "bytes": 6552928,
+      "bytes": 6561368,
       "content_encoding": null,
       "id": "BX-BH01-BROWSER-HOST-AVM",
       "kind": "avm",
       "mime": "application/vnd.atomvm.avm",
       "path": "generated/bundle.avm",
-      "sha256": "53c1756a25023cd84a8f9221f770445c53b033681df99cebe68c770f009ec65d"
+      "sha256": "9f68ae7b65ae6c83871214c00592d76d81ff3275d405569b4d440034b1a63aef"
     },
     {
-      "bytes": 3050921,
+      "bytes": 3054723,
       "content_encoding": "gzip",
       "id": "BX-BH01-BROWSER-HOST-AVM-GZIP",
       "kind": "avm-gzip",
       "mime": "application/vnd.atomvm.avm",
       "path": "generated/bundle.avm.gz",
-      "sha256": "d1cb878b914c37ad4101180105eb24c225607c9cc2b8573d9c094da3df9412b5"
+      "sha256": "28c7044596892349b3a22c0e0a76dc56439008cb26464dcfab4a9ad46b9e7e92"
     },
     {
       "bytes": 14031,
@@ -25,10 +25,10 @@
       "kind": "module-inventory",
       "mime": "application/json",
       "path": "generated/module-inventory.json",
-      "sha256": "5cf1c43c9077a23b854214f77857782e83c0e60103bd54994e1dd9566eb016fa"
+      "sha256": "4939fd34b1fe872ef682e0b9314ed18231ce148e9b8913f602fd9947a1ca38fd"
     }
   ],
-  "build_contract_sha256": "8e572438e6dfd3e93bce9fa502c7af72449ce4f86b313e7b8264d41b20de34f3",
+  "build_contract_sha256": "3b9d2d4b791c4f4c219590e3095ed7a1e60aed63bb41905b04b8aef2cfff876d",
   "limitations": [
     "Phase 5 behavior is a disposable fixture, not a public component contract",
     "unpruned AVM size is not a passed budget"
@@ -55,7 +55,7 @@
     },
     {
       "path": "lib/blazex/bh01/local_behavior.ex",
-      "sha256": "fb4fd987f4373337fd29aa6c5e93aa5ee38f34c2fa1f38ead4027064d7b86f86"
+      "sha256": "d89314c5f1741e356a83c97f7b8d7ec6e77cdcff6dd2703867cde2932dd7951f"
     },
     {
       "path": "lib/mix/tasks/bh01.browser_package.ex",

@@ -6,7 +6,7 @@ export const FIXTURE_DOM_LIMITS = Object.freeze({
   max_operations: 96,
   max_nodes: 48,
   max_text_bytes: 2_048,
-  max_value_bytes: 4_096,
+  max_value_bytes: 2_048,
   max_id_bytes: 64,
 });
 

@@ -29,11 +29,15 @@ defmodule BlazeX.BH01.LocalBehavior do
         "protocol" => "blazex.bh01.fixture-event/0.1",
         "generation" => generation,
         "node_id" => node_id,
-        "event" => "action"
+        "event" => "action",
+        "payload" => _payload
       }) do
     cond do
       node_id == "bx-parent-action" ->
         command(generation, %{"command" => "parent.increment"})
+
+      node_id == "bx-field-reset" ->
+        command(generation, %{"command" => "field.reset"})
 
       String.starts_with?(node_id, "bx-child-") and String.ends_with?(node_id, "-action") ->
         key =
@@ -51,6 +55,17 @@ defmodule BlazeX.BH01.LocalBehavior do
            current(generation)
          )}
     end
+  end
+
+  def event(generation, %{
+        "protocol" => "blazex.bh01.fixture-event/0.1",
+        "generation" => generation,
+        "node_id" => "bx-field",
+        "event" => event,
+        "payload" => payload
+      })
+      when event in ["input", "change", "focus", "blur"] do
+    field_event(event, payload, current(generation)) |> publish_event()
   end
 
   def event(generation, _event),
@@ -76,12 +91,27 @@ defmodule BlazeX.BH01.LocalBehavior do
       parent_count: 0,
       parent_restarts: 0,
       children: [child("alpha", 1), child("beta", 1)],
+      field: initial_field(),
       stale_drops: 0,
       failures: 0
     }
   end
 
   defp child(key, instance), do: %{key: key, count: 0, instance: instance, restarts: 0}
+
+  defp initial_field do
+    %{
+      value: "",
+      touched: false,
+      valid: false,
+      error: "Name is required",
+      disabled: false,
+      read_only: false,
+      focused: false,
+      composing: false,
+      validation_revision: 0
+    }
+  end
 
   defp transition("mount", _payload, %{disposed: false} = state) do
     next = %{state | mounted: true}
@@ -217,6 +247,57 @@ defmodule BlazeX.BH01.LocalBehavior do
     end
   end
 
+  defp transition("field.set", %{"value" => value}, %{mounted: true, disposed: false} = state)
+       when is_binary(value) and byte_size(value) <= 2_048 do
+    update_field_value(state, value, false, "programmatic")
+  end
+
+  defp transition("field.reset", _payload, %{mounted: true, disposed: false} = state) do
+    field = %{initial_field() | validation_revision: state.field.validation_revision + 1}
+    next = %{state | field: field}
+    {:ok, next, field_operations(field), %{"reset" => true}}
+  end
+
+  defp transition(
+         "field.disabled",
+         %{"value" => value},
+         %{mounted: true, disposed: false} = state
+       )
+       when is_boolean(value) do
+    field = %{state.field | disabled: value}
+    next = %{state | field: field}
+
+    {:ok, next, [property("bx-field", "disabled", value)], %{"disabled" => value}}
+  end
+
+  defp transition(
+         "field.read-only",
+         %{"value" => value},
+         %{mounted: true, disposed: false} = state
+       )
+       when is_boolean(value) do
+    field = %{state.field | read_only: value}
+    next = %{state | field: field}
+
+    {:ok, next, [property("bx-field", "read_only", value)], %{"read_only" => value}}
+  end
+
+  defp transition(
+         "field.validation-result",
+         %{"revision" => revision, "value" => value},
+         %{mounted: true, disposed: false} = state
+       )
+       when is_integer(revision) and is_binary(value) and byte_size(value) <= 2_048 do
+    if revision == state.field.validation_revision and value == state.field.value do
+      field = validate_field(state.field)
+      next = %{state | field: field}
+      {:ok, next, field_validation_operations(field), %{"accepted" => true}}
+    else
+      next = %{state | stale_drops: state.stale_drops + 1}
+      {:ok, next, [], %{"accepted" => false, "reason" => "stale-validation"}}
+    end
+  end
+
   defp transition("dispose", _payload, state) do
     next = %{state | mounted: false, disposed: true, children: []}
     {:ok, next, [root_dispose()], %{"disposed" => true}}
@@ -228,6 +309,86 @@ defmodule BlazeX.BH01.LocalBehavior do
     do:
       {:error, "fixture-command-unknown",
        "The fixture command is not allowlisted or is illegal in the current state"}
+
+  defp field_event(event, payload, %{mounted: true, disposed: false} = state)
+       when event in ["input", "change"] do
+    with %{"value" => value, "is_composing" => composing} <- payload,
+         true <- is_binary(value) and byte_size(value) <= 2_048,
+         true <- is_boolean(composing) do
+      cond do
+        state.field.disabled ->
+          {:error, error("fixture-field-disabled", "The disabled field rejects input", state)}
+
+        state.field.read_only ->
+          {:error, error("fixture-field-read-only", "The read-only field rejects input", state)}
+
+        true ->
+          update_field_value(state, value, event == "input" and composing, event)
+      end
+    else
+      _ -> {:error, error("fixture-field-event-invalid", "The field event is malformed", state)}
+    end
+  end
+
+  defp field_event(
+         "focus",
+         %{"related_target" => related},
+         %{mounted: true, disposed: false} = state
+       )
+       when related in ["none", "present"] do
+    field = %{state.field | focused: true}
+    next = %{state | field: field}
+    {:ok, next, [], %{"focused" => true}}
+  end
+
+  defp field_event(
+         "blur",
+         %{"related_target" => related},
+         %{mounted: true, disposed: false} = state
+       )
+       when related in ["none", "present"] do
+    field =
+      state.field
+      |> Map.merge(%{focused: false, touched: true, composing: false})
+      |> validate_field()
+
+    next = %{state | field: field}
+    {:ok, next, field_validation_operations(field), %{"focused" => false, "touched" => true}}
+  end
+
+  defp field_event(_event, _payload, state),
+    do: {:error, error("fixture-field-event-invalid", "The field event is malformed", state)}
+
+  defp publish_event({:ok, state, operations, result}),
+    do: publish(state, operations, result)
+
+  defp publish_event({:error, error}), do: {:error, error}
+
+  defp update_field_value(state, value, composing, source) do
+    revision = state.field.validation_revision + 1
+    changed = %{state.field | value: value, composing: composing, validation_revision: revision}
+    field = if composing, do: changed, else: validate_field(changed)
+    next = %{state | field: field}
+
+    operations =
+      [property("bx-field", "value", value)] ++
+        if(composing, do: [], else: field_validation_operations(field))
+
+    {:ok, next, operations,
+     %{"source" => source, "value" => value, "validation_revision" => revision}}
+  end
+
+  defp validate_field(field) do
+    {valid, message} =
+      cond do
+        byte_size(field.value) == 0 -> {false, "Name is required"}
+        byte_size(field.value) < 2 -> {false, "Use at least 2 bytes"}
+        byte_size(field.value) > 64 -> {false, "Use at most 64 bytes"}
+        true -> {true, ""}
+      end
+
+    %{field | valid: valid, error: message, composing: false}
+  end
 
   defp publish(state, operations, result) do
     next = %{state | sequence: state.sequence + 1}
@@ -281,7 +442,7 @@ defmodule BlazeX.BH01.LocalBehavior do
       ),
       listener("bx-parent-action", "action"),
       upsert("bx-child-list", "bx-parent", "list", nil, "bx-test-child-list")
-    ] ++ Enum.flat_map(state.children, &child_operations/1)
+    ] ++ Enum.flat_map(state.children, &child_operations/1) ++ form_operations(state.field)
   end
 
   defp child_operations(item) do
@@ -298,6 +459,49 @@ defmodule BlazeX.BH01.LocalBehavior do
   defp child_text(item), do: "#{item.key}: #{item.count} (instance #{item.instance})"
   defp child_group_id(key), do: "bx-child-#{key}"
   defp child_count_id(key), do: "bx-child-#{key}-count"
+
+  defp form_operations(field) do
+    [
+      upsert("bx-form", "bx-fixture-root", "group", nil, "bx-test-form"),
+      upsert("bx-field-label", "bx-form", "label", "Name", "bx-test-field-label"),
+      upsert(
+        "bx-field-help",
+        "bx-form",
+        "help",
+        "Enter 2 to 64 bytes",
+        "bx-test-field-help"
+      ),
+      upsert("bx-field-error", "bx-form", "error", field.error, "bx-test-field-error"),
+      upsert("bx-field", "bx-form", "field", nil, "bx-test-field"),
+      upsert("bx-field-reset", "bx-form", "action", "Reset name", "bx-test-field-reset"),
+      relationship("bx-field-label", "label_for", ["bx-field"]),
+      relationship("bx-field", "described_by", ["bx-field-help", "bx-field-error"]),
+      relationship("bx-field", "error_message", ["bx-field-error"])
+    ] ++
+      field_operations(field) ++
+      [
+        listener("bx-field", "input"),
+        listener("bx-field", "change"),
+        listener("bx-field", "focus"),
+        listener("bx-field", "blur"),
+        listener("bx-field-reset", "action")
+      ]
+  end
+
+  defp field_operations(field) do
+    [
+      property("bx-field", "value", field.value),
+      property("bx-field", "disabled", field.disabled),
+      property("bx-field", "read_only", field.read_only)
+    ] ++ field_validation_operations(field)
+  end
+
+  defp field_validation_operations(field) do
+    [
+      property("bx-field", "invalid", not field.valid),
+      text("bx-field-error", field.error)
+    ]
+  end
 
   defp root,
     do: %{
@@ -327,6 +531,24 @@ defmodule BlazeX.BH01.LocalBehavior do
 
   defp listener(id, event),
     do: %{"protocol" => @dom_protocol, "op" => "listener.bind", "id" => id, "event" => event}
+
+  defp property(id, name, value),
+    do: %{
+      "protocol" => @dom_protocol,
+      "op" => "node.property",
+      "id" => id,
+      "name" => name,
+      "value" => value
+    }
+
+  defp relationship(id, name, target_ids),
+    do: %{
+      "protocol" => @dom_protocol,
+      "op" => "node.relationship",
+      "id" => id,
+      "name" => name,
+      "target_ids" => target_ids
+    }
 
   defp move(id, parent),
     do: %{
@@ -360,6 +582,17 @@ defmodule BlazeX.BH01.LocalBehavior do
             "restarts" => item.restarts
           }
         end),
+      "field" => %{
+        "value" => state.field.value,
+        "touched" => state.field.touched,
+        "valid" => state.field.valid,
+        "error" => state.field.error,
+        "disabled" => state.field.disabled,
+        "read_only" => state.field.read_only,
+        "focused" => state.field.focused,
+        "composing" => state.field.composing,
+        "validation_revision" => state.field.validation_revision
+      },
       "resources" => %{
         "processes" => if(state.disposed, do: 0, else: 1),
         "timers" => 0,

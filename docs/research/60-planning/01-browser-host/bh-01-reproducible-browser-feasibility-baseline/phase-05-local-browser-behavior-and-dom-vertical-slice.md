@@ -89,27 +89,27 @@ Back to milestone: [README](README.md)
       - [x] 5.3.2.2 Subtask - Test duplicate/missing identity, parent crash, child crash, retry, late child output, stale generation, and partial DOM failure.
       - [x] 5.3.2.3 Subtask - Record process/message ownership, ordering assumptions, mailbox growth, restart behavior, orphan detection, retained identity, and `BX-BH01-PROOF-NESTED-STATE` observations.
 
-  - [ ] 5.4 Section - Prove form input and validation behavior.
+  - [x] 5.4 Section - Prove form input and validation behavior.
 
     One representative field must normalize browser input, update local state,
     expose validation and accessible relationships, and retain future server
     authority boundaries.
 
-    - [ ] 5.4.1 Task - Implement the representative field scenario.
+    - [x] 5.4.1 Task - Implement the representative field scenario.
 
       The field is a feasibility fixture, not a BlazeX forms API.
 
-      - [ ] 5.4.1.1 Subtask - Implement label/help/error relationships, normalized input/change/blur, local value state, deterministic validation, disabled/read-only state, and disposal.
-      - [ ] 5.4.1.2 Subtask - Keep browser element/event objects out of runtime fixture state and keep Phoenix changesets/server validation outside the local field contract.
+      - [x] 5.4.1.1 Subtask - Implement label/help/error relationships, normalized input/change/blur, local value state, deterministic validation, disabled/read-only state, and disposal.
+      - [x] 5.4.1.2 Subtask - Keep browser element/event objects out of runtime fixture state and keep Phoenix changesets/server validation outside the local field contract.
 
-    - [ ] 5.4.2 Task - Exercise input, validation, and focus edge cases.
+    - [x] 5.4.2 Task - Exercise input, validation, and focus edge cases.
 
       Rapid and invalid transitions should preserve identity, bounded messages,
       and accessible observable state.
 
-      - [ ] 5.4.2.1 Subtask - Test valid, invalid, empty, rapid, repeated, composition-like, disabled, read-only, and programmatic-reset input sequences.
-      - [ ] 5.4.2.2 Subtask - Test focus/blur ordering, stale validation, disposal during input, remount, malformed event, oversized value, and generation replacement.
-      - [ ] 5.4.2.3 Subtask - Correlate normalized events, runtime state, DOM value/state, label/help/error observations, diagnostics, and `BX-BH01-PROOF-FORM-EVENT` evidence.
+      - [x] 5.4.2.1 Subtask - Test valid, invalid, empty, rapid, repeated, composition-like, disabled, read-only, and programmatic-reset input sequences.
+      - [x] 5.4.2.2 Subtask - Test focus/blur ordering, stale validation, disposal during input, remount, malformed event, oversized value, and generation replacement.
+      - [x] 5.4.2.3 Subtask - Correlate normalized events, runtime state, DOM value/state, label/help/error observations, diagnostics, and `BX-BH01-PROOF-FORM-EVENT` evidence.
 
   - [ ] 5.5 Section - Prove timers, messages, DOM updates, and preliminary resources.
 

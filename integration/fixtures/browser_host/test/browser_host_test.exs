@@ -111,4 +111,156 @@ defmodule BlazeX.BH01.BrowserHostTest do
     assert {:error, %{"code" => "fixture-command-unknown"}} =
              LocalBehavior.command(11, %{"command" => "parent.increment"})
   end
+
+  test "form events keep only normalized values and deterministic validation state" do
+    LocalBehavior.initialize(13)
+    assert {:ok, mount, _} = LocalBehavior.command(13, %{"command" => "mount"})
+    assert Enum.any?(mount["operations"], &(&1["id"] == "bx-field"))
+
+    assert {:ok, composing, _} =
+             LocalBehavior.event(
+               13,
+               field_event(13, "input", %{
+                 "value" => "A",
+                 "is_composing" => true,
+                 "input_type" => "insertText"
+               })
+             )
+
+    assert Enum.map(composing["operations"], & &1["op"]) == ["node.property"]
+    assert LocalBehavior.snapshot(13)["field"]["composing"]
+
+    assert {:ok, changed, _} =
+             LocalBehavior.event(
+               13,
+               field_event(13, "change", %{
+                 "value" => "Ada",
+                 "is_composing" => false,
+                 "input_type" => "unknown"
+               })
+             )
+
+    assert Enum.map(changed["operations"], & &1["op"]) == [
+             "node.property",
+             "node.property",
+             "node.text"
+           ]
+
+    assert LocalBehavior.snapshot(13)["field"] |> Map.take(["value", "valid", "error"]) == %{
+             "value" => "Ada",
+             "valid" => true,
+             "error" => ""
+           }
+
+    assert {:ok, _, _} =
+             LocalBehavior.event(13, field_event(13, "focus", %{"related_target" => "none"}))
+
+    assert LocalBehavior.snapshot(13)["field"]["focused"]
+
+    assert {:ok, _, _} =
+             LocalBehavior.event(13, field_event(13, "blur", %{"related_target" => "present"}))
+
+    snapshot = LocalBehavior.snapshot(13)["field"]
+    assert snapshot["touched"]
+    refute snapshot["focused"]
+  end
+
+  test "form rejects immutable, malformed, oversized, and stale transitions" do
+    LocalBehavior.initialize(15)
+    assert {:ok, _, _} = LocalBehavior.command(15, %{"command" => "mount"})
+
+    assert {:ok, _, _} =
+             LocalBehavior.command(15, %{"command" => "field.set", "value" => "Grace"})
+
+    revision = LocalBehavior.snapshot(15)["field"]["validation_revision"]
+
+    assert {:ok, stale, %{"result" => %{"accepted" => false}}} =
+             LocalBehavior.command(15, %{
+               "command" => "field.validation-result",
+               "revision" => revision - 1,
+               "value" => "Grace"
+             })
+
+    assert stale["operations"] == []
+    assert LocalBehavior.snapshot(15)["stale_drops"] == 1
+
+    assert {:ok, _, _} =
+             LocalBehavior.command(15, %{"command" => "field.disabled", "value" => true})
+
+    assert {:error, %{"code" => "fixture-field-disabled"}} =
+             LocalBehavior.event(
+               15,
+               field_event(15, "input", %{
+                 "value" => "blocked",
+                 "is_composing" => false,
+                 "input_type" => "insertText"
+               })
+             )
+
+    assert {:ok, _, _} =
+             LocalBehavior.command(15, %{"command" => "field.disabled", "value" => false})
+
+    assert {:ok, _, _} =
+             LocalBehavior.command(15, %{"command" => "field.read-only", "value" => true})
+
+    assert {:error, %{"code" => "fixture-field-read-only"}} =
+             LocalBehavior.event(
+               15,
+               field_event(15, "change", %{
+                 "value" => "blocked",
+                 "is_composing" => false,
+                 "input_type" => "unknown"
+               })
+             )
+
+    assert {:error, %{"code" => "fixture-field-event-invalid"}} =
+             LocalBehavior.event(15, field_event(15, "input", %{"value" => "missing flags"}))
+
+    assert {:error, %{"code" => "fixture-field-event-invalid"}} =
+             LocalBehavior.event(
+               15,
+               field_event(15, "input", %{
+                 "value" => String.duplicate("x", 2_049),
+                 "is_composing" => false
+               })
+             )
+
+    assert {:ok, _, _} = LocalBehavior.command(15, %{"command" => "field.reset"})
+    assert LocalBehavior.snapshot(15)["field"]["value"] == ""
+  end
+
+  test "form disposal rejects late input and a new generation remounts cleanly" do
+    LocalBehavior.initialize(17)
+    assert {:ok, _, _} = LocalBehavior.command(17, %{"command" => "mount"})
+    assert {:ok, _, _} = LocalBehavior.command(17, %{"command" => "dispose"})
+
+    assert {:error, %{"code" => "fixture-field-event-invalid"}} =
+             LocalBehavior.event(
+               17,
+               field_event(17, "input", %{
+                 "value" => "late",
+                 "is_composing" => false,
+                 "input_type" => "insertText"
+               })
+             )
+
+    assert {:ok, _, _} = LocalBehavior.command(18, %{"command" => "mount"})
+    snapshot = LocalBehavior.snapshot(18)
+    assert snapshot["generation"] == 18
+    assert snapshot["field"]["value"] == ""
+    refute snapshot["disposed"]
+  end
+
+  defp field_event(generation, event, payload) do
+    %{
+      "protocol" => "blazex.bh01.fixture-event/0.1",
+      "record_type" => "event",
+      "scenario_id" => "BX-BH01-SCENARIO-LOCAL-BROWSER",
+      "generation" => generation,
+      "sequence" => 1,
+      "node_id" => "bx-field",
+      "event" => event,
+      "payload" => payload
+    }
+  end
 end

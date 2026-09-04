@@ -39,6 +39,24 @@ test("applies the closed node, relationship, property, move, and removal operati
   assert.equal(view.node_count, 3);
 });
 
+test("applies field validity, mutability, and accessible error relationships", () => {
+  const { renderer } = mounted();
+  const view = renderer.apply(effect([
+    op("node.upsert", { id: "bx-error", parent_id: "bx-fixture-root", kind: "error", text: "Name is required" }),
+    op("node.relationship", { id: "bx-field", name: "described_by", target_ids: ["bx-help", "bx-error"] }),
+    op("node.relationship", { id: "bx-field", name: "error_message", target_ids: ["bx-error"] }),
+    op("node.property", { id: "bx-field", name: "disabled", value: true }),
+    op("node.property", { id: "bx-field", name: "read_only", value: true }),
+    op("node.property", { id: "bx-field", name: "invalid", value: true }),
+  ], 2));
+  const field = view.nodes.find((item) => item.id === "bx-field");
+  assert.equal(field.disabled, true);
+  assert.equal(field.read_only, true);
+  assert.equal(field.invalid, "true");
+  assert.equal(field.described_by, "bx-help bx-error");
+  assert.equal(field.error_message, "bx-error");
+});
+
 test("normalizes events to bounded value records without retaining the event object", () => {
   const events = [];
   const { renderer } = mounted({ onEvent: (event) => events.push(event) });
@@ -74,7 +92,7 @@ test("rejects missing targets, duplicate listeners, oversized values, and stale 
   const { renderer } = mounted();
   assert.throws(() => renderer.apply(effect([op("node.text", { id: "bx-missing", text: "x" })], 2)), { code: "fixture-target-missing" });
   assert.throws(() => renderer.apply(effect([op("listener.bind", { id: "bx-field", event: "input" })], 2)), { code: "fixture-listener-duplicate" });
-  assert.throws(() => renderer.apply(effect([op("node.property", { id: "bx-field", name: "value", value: "x".repeat(4_097) })], 2)), { code: "fixture-value-exceeded" });
+  assert.throws(() => renderer.apply(effect([op("node.property", { id: "bx-field", name: "value", value: "x".repeat(2_049) })], 2)), { code: "fixture-value-exceeded" });
   assert.throws(() => renderer.apply(effect([], 1)), { code: "fixture-sequence-stale" });
 });
 
