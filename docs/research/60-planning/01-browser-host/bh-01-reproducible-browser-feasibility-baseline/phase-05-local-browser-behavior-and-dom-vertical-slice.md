@@ -111,36 +111,36 @@ Back to milestone: [README](README.md)
       - [x] 5.4.2.2 Subtask - Test focus/blur ordering, stale validation, disposal during input, remount, malformed event, oversized value, and generation replacement.
       - [x] 5.4.2.3 Subtask - Correlate normalized events, runtime state, DOM value/state, label/help/error observations, diagnostics, and `BX-BH01-PROOF-FORM-EVENT` evidence.
 
-  - [ ] 5.5 Section - Prove timers, messages, DOM updates, and preliminary resources.
+  - [x] 5.5 Section - Prove timers, messages, DOM updates, and preliminary resources.
 
     Validate asynchronous transitions and document effects together while
     collecting the first interaction/resource observations.
 
-    - [ ] 5.5.1 Task - Exercise timer and process-message behavior.
+    - [x] 5.5.1 Task - Exercise timer and process-message behavior.
 
       Async work must reject stale results and clean up across crash, retry, and
       disposal.
 
-      - [ ] 5.5.1.1 Subtask - Implement one-shot/repeated timers and representative messages that update fixture state and visible output.
-      - [ ] 5.5.1.2 Subtask - Test ordering, cancellation, timeout, rapid ticks, duplicate/late messages, stale generation, crash/restart, disposal, and pending-work bounds.
-      - [ ] 5.5.1.3 Subtask - Correlate runtime scheduling, bridge traffic, DOM effect, resource counts, cleanup, and `BX-BH01-PROOF-TIMER-MESSAGE` evidence.
+      - [x] 5.5.1.1 Subtask - Implement one-shot/repeated timers and representative messages that update fixture state and visible output.
+      - [x] 5.5.1.2 Subtask - Test ordering, cancellation, timeout, rapid ticks, duplicate/late messages, stale generation, crash/restart, disposal, and pending-work bounds.
+      - [x] 5.5.1.3 Subtask - Correlate runtime scheduling, bridge traffic, DOM effect, resource counts, cleanup, and `BX-BH01-PROOF-TIMER-MESSAGE` evidence.
 
-    - [ ] 5.5.2 Task - Verify renderer-owned DOM updates.
+    - [x] 5.5.2 Task - Verify renderer-owned DOM updates.
 
       A state transition must yield exactly the expected observable change
       through the isolated DOM adapter.
 
-      - [ ] 5.5.2.1 Subtask - Correlate fixture transition, normalized operation, DOM text/state/relationship change, and next-paint observation by generation.
-      - [ ] 5.5.2.2 Subtask - Test no-op, burst, detached target, duplicate event, stale update, adapter error, runtime error, retry, and disposal cases.
-      - [ ] 5.5.2.3 Subtask - Record preliminary event-receipt, runtime-transition, bridge, DOM-update, and paint timings as observations without passing budgets.
+      - [x] 5.5.2.1 Subtask - Correlate fixture transition, normalized operation, DOM text/state/relationship change, and next-paint observation by generation.
+      - [x] 5.5.2.2 Subtask - Test no-op, burst, detached target, duplicate event, stale update, adapter error, runtime error, retry, and disposal cases.
+      - [x] 5.5.2.3 Subtask - Record preliminary event-receipt, runtime-transition, bridge, DOM-update, and paint timings as observations without passing budgets.
 
-    - [ ] 5.5.3 Task - Establish preliminary resource and accessibility observations.
+    - [x] 5.5.3 Task - Establish preliminary resource and accessibility observations.
 
       Later stress and matrix phases need baseline instrumentation and expected
       accessible output from the local slice.
 
-      - [ ] 5.5.3.1 Subtask - Instrument processes, mailboxes, timers, pending messages/requests, Wasm memory/pages, listeners, workers, owned roots, and cleanup time per scenario generation.
-      - [ ] 5.5.3.2 Subtask - Record accessible names, roles/states/relationships, focus order/visibility, validation announcement observations, keyboard operation, and intentional limitations without claiming compliance.
+      - [x] 5.5.3.1 Subtask - Instrument processes, mailboxes, timers, pending messages/requests, Wasm memory/pages, listeners, workers, owned roots, and cleanup time per scenario generation.
+      - [x] 5.5.3.2 Subtask - Record accessible names, roles/states/relationships, focus order/visibility, validation announcement observations, keyboard operation, and intentional limitations without claiming compliance.
 
   - [ ] 5.6 Section - Phase 5 Integration Tests and Completion Evidence.
 

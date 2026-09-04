@@ -55,6 +55,9 @@ test("applies field validity, mutability, and accessible error relationships", (
   assert.equal(field.invalid, "true");
   assert.equal(field.described_by, "bx-help bx-error");
   assert.equal(field.error_message, "bx-error");
+  assert.equal(field.role, "textbox");
+  assert.equal(field.accessible_name, "Name");
+  assert.equal(view.nodes.find((item) => item.id === "bx-error").role, "alert");
 });
 
 test("normalizes events to bounded value records without retaining the event object", () => {
@@ -80,6 +83,29 @@ test("normalizes events to bounded value records without retaining the event obj
   assert.equal(Object.hasOwn(captured[0], "nativeEvent"), false);
 });
 
+test("normalizes focus, blur, change, and action events in listener order", () => {
+  const documentImpl = new FakeDocument();
+  const captured = [];
+  const renderer = new FixtureDOMRenderer({ target: documentImpl.body, documentImpl, generation: 1, onEvent: (event) => captured.push(event) });
+  renderer.apply(effect([
+    op("root.mount", { id: "bx-fixture-root", test_id: "bx-test-root" }),
+    op("node.upsert", { id: "bx-field", parent_id: "bx-fixture-root", kind: "field" }),
+    op("node.upsert", { id: "bx-action", parent_id: "bx-fixture-root", kind: "action", text: "Apply" }),
+    op("listener.bind", { id: "bx-field", event: "focus" }),
+    op("listener.bind", { id: "bx-field", event: "change" }),
+    op("listener.bind", { id: "bx-field", event: "blur" }),
+    op("listener.bind", { id: "bx-action", event: "action" }),
+  ]));
+  const [field, action] = documentImpl.body.children[0].children;
+  field.dispatch("focus");
+  field.value = "Ada";
+  field.dispatch("change", { inputType: "unknown", isComposing: false });
+  field.dispatch("blur", { relatedTarget: action });
+  action.dispatch("click", { detail: 1 });
+  assert.deepEqual(captured.map(({ event }) => event), ["focus", "change", "blur", "action"]);
+  assert.deepEqual(captured.map(({ sequence }) => sequence), [1, 2, 3, 4]);
+});
+
 test("rejects unknown operations, arbitrary kinds, undeclared fields, and stale generations", () => {
   assert.throws(() => validateFixtureOperation(op("html.inject", { id: "bx-field", html: "<script>" })), { code: "fixture-operation-unknown" });
   assert.throws(() => validateFixtureOperation(op("node.upsert", { id: "bx-field", parent_id: "bx-fixture-root", kind: "iframe" })), { code: "fixture-node-kind-forbidden" });
@@ -94,6 +120,27 @@ test("rejects missing targets, duplicate listeners, oversized values, and stale 
   assert.throws(() => renderer.apply(effect([op("listener.bind", { id: "bx-field", event: "input" })], 2)), { code: "fixture-listener-duplicate" });
   assert.throws(() => renderer.apply(effect([op("node.property", { id: "bx-field", name: "value", value: "x".repeat(2_049) })], 2)), { code: "fixture-value-exceeded" });
   assert.throws(() => renderer.apply(effect([], 1)), { code: "fixture-sequence-stale" });
+});
+
+test("preflights a whole batch before mutation and supports bounded no-op and burst updates", () => {
+  const { renderer } = mounted();
+  const before = renderer.snapshot();
+  assert.throws(() => renderer.apply(effect([
+    op("node.text", { id: "bx-help", text: "must not commit" }),
+    op("node.remove", { id: "bx-help" }),
+    op("node.text", { id: "bx-help", text: "detached" }),
+  ], 2)), { code: "fixture-target-missing" });
+  assert.equal(renderer.snapshot().nodes.find(({ id }) => id === "bx-help").text, "Enter a name");
+  assert.equal(renderer.snapshot().sequence, before.sequence);
+
+  const noOp = renderer.apply(effect([], 2));
+  assert.equal(noOp.metrics.mutations, before.metrics.mutations);
+  const burst = renderer.apply(effect([
+    op("node.text", { id: "bx-help", text: "one" }),
+    op("node.text", { id: "bx-help", text: "two" }),
+    op("node.text", { id: "bx-help", text: "three" }),
+  ], 3));
+  assert.equal(burst.nodes.find(({ id }) => id === "bx-help").text, "three");
 });
 
 test("disposal removes roots/listeners and rejects post-disposal traffic idempotently", () => {

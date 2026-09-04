@@ -75,6 +75,12 @@ defmodule BlazeX.BH01.LocalBehavior do
 
   def snapshot(generation), do: current(generation) |> external_snapshot()
 
+  def async(generation, message) do
+    message
+    |> async_transition(current(generation))
+    |> publish_event()
+  end
+
   defp current(generation) do
     case Process.get(@state_key) do
       %{generation: ^generation} = state -> state
@@ -92,6 +98,7 @@ defmodule BlazeX.BH01.LocalBehavior do
       parent_restarts: 0,
       children: [child("alpha", 1), child("beta", 1)],
       field: initial_field(),
+      async: initial_async(),
       stale_drops: 0,
       failures: 0
     }
@@ -110,6 +117,21 @@ defmodule BlazeX.BH01.LocalBehavior do
       focused: false,
       composing: false,
       validation_revision: 0
+    }
+  end
+
+  defp initial_async do
+    %{
+      timer_ref: nil,
+      timer_token: 0,
+      timer_ticks: 0,
+      timer_limit: 0,
+      timer_delay_ms: 0,
+      messages: 0,
+      pending_messages: 0,
+      seen_message_ids: [],
+      duplicate_drops: 0,
+      last_result: "Idle"
     }
   end
 
@@ -298,8 +320,123 @@ defmodule BlazeX.BH01.LocalBehavior do
     end
   end
 
+  defp transition(
+         "timer.start",
+         %{"delay_ms" => delay_ms, "ticks" => ticks},
+         %{mounted: true, disposed: false} = state
+       )
+       when is_integer(delay_ms) and delay_ms >= 5 and delay_ms <= 1_000 and
+              is_integer(ticks) and ticks >= 1 and ticks <= 5 do
+    cancel_timer(state.async.timer_ref)
+    token = state.async.timer_token + 1
+    timer_ref = schedule_timer(state.generation, token, delay_ms)
+
+    async = %{
+      state.async
+      | timer_ref: timer_ref,
+        timer_token: token,
+        timer_ticks: 0,
+        timer_limit: ticks,
+        timer_delay_ms: delay_ms,
+        last_result: "Timer pending"
+    }
+
+    next = %{state | async: async}
+
+    {:ok, next, [text("bx-async-status", async.last_result)],
+     %{"timer_epoch" => token, "ticks" => ticks, "delay_ms" => delay_ms}}
+  end
+
+  defp transition("timer.cancel", _payload, %{mounted: true, disposed: false} = state) do
+    cancel_timer(state.async.timer_ref)
+
+    async = %{
+      state.async
+      | timer_ref: nil,
+        timer_token: state.async.timer_token + 1,
+        last_result: "Timer cancelled"
+    }
+
+    next = %{state | async: async}
+    {:ok, next, [text("bx-async-status", async.last_result)], %{"cancelled" => true}}
+  end
+
+  defp transition("timer.crash", _payload, %{mounted: true, disposed: false} = state) do
+    cancel_timer(state.async.timer_ref)
+
+    async = %{
+      state.async
+      | timer_ref: nil,
+        timer_token: state.async.timer_token + 1,
+        last_result: "Timer crashed; restart required"
+    }
+
+    next = %{state | async: async, failures: state.failures + 1}
+    {:ok, next, [text("bx-async-status", async.last_result)], %{"crashed" => true}}
+  end
+
+  defp transition(
+         "message.send",
+         %{"message_id" => message_id, "value" => value},
+         %{mounted: true, disposed: false} = state
+       )
+       when is_binary(value) and byte_size(value) <= 128 do
+    if valid_key?(message_id) do
+      send(self(), {:bh01_fixture_message, state.generation, message_id, value})
+      async = %{state.async | pending_messages: state.async.pending_messages + 1}
+      next = %{state | async: async}
+      {:ok, next, [], %{"queued" => true, "message_id" => message_id}}
+    else
+      {:error, "fixture-message-invalid", "The fixture message identity is invalid"}
+    end
+  end
+
+  defp transition(
+         "message.duplicate",
+         %{"message_id" => message_id, "value" => value},
+         %{mounted: true, disposed: false} = state
+       )
+       when is_binary(value) and byte_size(value) <= 128 do
+    if valid_key?(message_id) do
+      message = {:bh01_fixture_message, state.generation, message_id, value}
+      send(self(), message)
+      send(self(), message)
+      async = %{state.async | pending_messages: state.async.pending_messages + 2}
+      next = %{state | async: async}
+      {:ok, next, [], %{"queued" => 2, "message_id" => message_id}}
+    else
+      {:error, "fixture-message-invalid", "The fixture message identity is invalid"}
+    end
+  end
+
+  defp transition(
+         "message.late",
+         %{"message_id" => message_id, "value" => value, "generation" => generation},
+         %{mounted: true, disposed: false} = state
+       )
+       when is_binary(value) and byte_size(value) <= 128 and is_integer(generation) do
+    if valid_key?(message_id) do
+      send(self(), {:bh01_fixture_message, generation, message_id, value})
+      async = %{state.async | pending_messages: state.async.pending_messages + 1}
+      next = %{state | async: async}
+      {:ok, next, [], %{"queued" => true, "message_id" => message_id}}
+    else
+      {:error, "fixture-message-invalid", "The fixture message identity is invalid"}
+    end
+  end
+
   defp transition("dispose", _payload, state) do
-    next = %{state | mounted: false, disposed: true, children: []}
+    cancel_timer(state.async.timer_ref)
+
+    async = %{
+      state.async
+      | timer_ref: nil,
+        timer_token: state.async.timer_token + 1,
+        pending_messages: 0,
+        last_result: "Disposed"
+    }
+
+    next = %{state | mounted: false, disposed: true, children: [], async: async}
     {:ok, next, [root_dispose()], %{"disposed" => true}}
   end
 
@@ -390,6 +527,95 @@ defmodule BlazeX.BH01.LocalBehavior do
     %{field | valid: valid, error: message, composing: false}
   end
 
+  defp async_transition(
+         {:bh01_fixture_timer, generation, token},
+         %{generation: generation, disposed: false} = state
+       ) do
+    if state.async.timer_ref != nil and token == state.async.timer_token do
+      ticks = state.async.timer_ticks + 1
+
+      timer_ref =
+        if ticks < state.async.timer_limit do
+          schedule_timer(state.generation, token, state.async.timer_delay_ms)
+        else
+          nil
+        end
+
+      result = "Timer tick #{ticks}/#{state.async.timer_limit}"
+
+      async = %{
+        state.async
+        | timer_ref: timer_ref,
+          timer_ticks: ticks,
+          last_result: result
+      }
+
+      next = %{state | async: async}
+      {:ok, next, [text("bx-async-status", result)], %{"timer_tick" => ticks}}
+    else
+      drop_async(state, "stale-timer")
+    end
+  end
+
+  defp async_transition(
+         {:bh01_fixture_message, generation, message_id, value},
+         %{generation: generation, disposed: false} = state
+       ) do
+    pending = decrement(state.async.pending_messages)
+
+    if message_id in state.async.seen_message_ids do
+      async = %{
+        state.async
+        | pending_messages: pending,
+          duplicate_drops: state.async.duplicate_drops + 1
+      }
+
+      drop_async(%{state | async: async}, "duplicate-message")
+    else
+      result = "Message #{message_id}: #{value}"
+
+      async = %{
+        state.async
+        | messages: state.async.messages + 1,
+          pending_messages: pending,
+          seen_message_ids: retain_message_id(state.async.seen_message_ids, message_id),
+          last_result: result
+      }
+
+      next = %{state | async: async}
+      {:ok, next, [text("bx-async-status", result)], %{"message_id" => message_id}}
+    end
+  end
+
+  defp async_transition({:bh01_fixture_message, _generation, _message_id, _value}, state) do
+    async = %{state.async | pending_messages: decrement(state.async.pending_messages)}
+    drop_async(%{state | async: async}, "stale-message")
+  end
+
+  defp async_transition(_message, state),
+    do: {:error, error("fixture-async-message-invalid", "The async message is malformed", state)}
+
+  defp drop_async(state, reason) do
+    next = %{state | stale_drops: state.stale_drops + 1}
+    {:ok, next, [], %{"accepted" => false, "reason" => reason}}
+  end
+
+  defp schedule_timer(generation, token, delay_ms),
+    do: Process.send_after(self(), {:bh01_fixture_timer, generation, token}, delay_ms)
+
+  defp cancel_timer(nil), do: :ok
+
+  defp cancel_timer(timer_ref) do
+    Process.cancel_timer(timer_ref)
+    :ok
+  end
+
+  defp decrement(value) when value > 0, do: value - 1
+  defp decrement(_value), do: 0
+
+  defp retain_message_id(ids, id) when length(ids) < 16, do: ids ++ [id]
+  defp retain_message_id([_oldest | rest], id), do: rest ++ [id]
+
   defp publish(state, operations, result) do
     next = %{state | sequence: state.sequence + 1}
     Process.put(@state_key, next)
@@ -442,7 +668,9 @@ defmodule BlazeX.BH01.LocalBehavior do
       ),
       listener("bx-parent-action", "action"),
       upsert("bx-child-list", "bx-parent", "list", nil, "bx-test-child-list")
-    ] ++ Enum.flat_map(state.children, &child_operations/1) ++ form_operations(state.field)
+    ] ++
+      Enum.flat_map(state.children, &child_operations/1) ++
+      form_operations(state.field) ++ async_operations(state.async)
   end
 
   defp child_operations(item) do
@@ -500,6 +728,19 @@ defmodule BlazeX.BH01.LocalBehavior do
     [
       property("bx-field", "invalid", not field.valid),
       text("bx-field-error", field.error)
+    ]
+  end
+
+  defp async_operations(async) do
+    [
+      upsert("bx-async", "bx-fixture-root", "group", nil, "bx-test-async"),
+      upsert(
+        "bx-async-status",
+        "bx-async",
+        "status",
+        async.last_result,
+        "bx-test-async-status"
+      )
     ]
   end
 
@@ -593,10 +834,21 @@ defmodule BlazeX.BH01.LocalBehavior do
         "composing" => state.field.composing,
         "validation_revision" => state.field.validation_revision
       },
+      "async" => %{
+        "timer_active" => state.async.timer_ref != nil,
+        "timer_epoch" => state.async.timer_token,
+        "timer_ticks" => state.async.timer_ticks,
+        "timer_limit" => state.async.timer_limit,
+        "messages" => state.async.messages,
+        "pending_messages" => state.async.pending_messages,
+        "duplicate_drops" => state.async.duplicate_drops,
+        "last_result" => state.async.last_result
+      },
       "resources" => %{
         "processes" => if(state.disposed, do: 0, else: 1),
-        "timers" => 0,
-        "pending_messages" => 0
+        "timers" => if(state.async.timer_ref == nil, do: 0, else: 1),
+        "pending_messages" => state.async.pending_messages,
+        "mailbox_messages" => mailbox_length()
       },
       "stale_drops" => state.stale_drops,
       "failures" => state.failures
@@ -627,4 +879,11 @@ defmodule BlazeX.BH01.LocalBehavior do
 
   defp valid_key?(_), do: false
   defp valid_key_byte?(byte), do: byte in ?a..?z or byte in ?0..?9 or byte == ?-
+
+  defp mailbox_length do
+    case :erlang.process_info(self(), :message_queue_len) do
+      {:message_queue_len, count} when is_integer(count) and count >= 0 -> count
+      _ -> 0
+    end
+  end
 end

@@ -103,6 +103,7 @@ defmodule BlazeX.BH01.BrowserHostTest do
     assert [%{"op" => "root.dispose"}] = dispose["operations"]
 
     assert LocalBehavior.snapshot(11)["resources"] == %{
+             "mailbox_messages" => 0,
              "pending_messages" => 0,
              "processes" => 0,
              "timers" => 0
@@ -249,6 +250,145 @@ defmodule BlazeX.BH01.BrowserHostTest do
     assert snapshot["generation"] == 18
     assert snapshot["field"]["value"] == ""
     refute snapshot["disposed"]
+  end
+
+  test "bounded repeated timers update visible state and converge" do
+    LocalBehavior.initialize(19)
+    assert {:ok, _, _} = LocalBehavior.command(19, %{"command" => "mount"})
+
+    assert {:ok, _, %{"result" => %{"timer_epoch" => token}}} =
+             LocalBehavior.command(19, %{
+               "command" => "timer.start",
+               "delay_ms" => 5,
+               "ticks" => 2
+             })
+
+    assert LocalBehavior.snapshot(19)["resources"]["timers"] == 1
+    assert_receive {:bh01_fixture_timer, 19, ^token} = first, 100
+    assert {:ok, first_effect, _} = LocalBehavior.async(19, first)
+    assert [%{"text" => "Timer tick 1/2"}] = first_effect["operations"]
+    assert LocalBehavior.snapshot(19)["resources"]["timers"] == 1
+
+    assert_receive {:bh01_fixture_timer, 19, ^token} = second, 100
+    assert {:ok, second_effect, _} = LocalBehavior.async(19, second)
+    assert [%{"text" => "Timer tick 2/2"}] = second_effect["operations"]
+
+    snapshot = LocalBehavior.snapshot(19)
+    assert snapshot["async"]["timer_ticks"] == 2
+    assert snapshot["resources"]["timers"] == 0
+  end
+
+  test "timer cancellation and crash invalidate late ticks before retry" do
+    LocalBehavior.initialize(21)
+    assert {:ok, _, _} = LocalBehavior.command(21, %{"command" => "mount"})
+
+    assert {:ok, _, %{"result" => %{"timer_epoch" => old_token}}} =
+             LocalBehavior.command(21, %{
+               "command" => "timer.start",
+               "delay_ms" => 100,
+               "ticks" => 1
+             })
+
+    assert {:ok, _, _} = LocalBehavior.command(21, %{"command" => "timer.cancel"})
+
+    assert {:ok, stale, %{"result" => %{"accepted" => false}}} =
+             LocalBehavior.async(21, {:bh01_fixture_timer, 21, old_token})
+
+    assert stale["operations"] == []
+
+    assert {:ok, _, _} =
+             LocalBehavior.command(21, %{
+               "command" => "timer.start",
+               "delay_ms" => 100,
+               "ticks" => 1
+             })
+
+    assert {:ok, _, _} = LocalBehavior.command(21, %{"command" => "timer.crash"})
+    assert LocalBehavior.snapshot(21)["failures"] == 1
+    assert LocalBehavior.snapshot(21)["resources"]["timers"] == 0
+
+    assert {:ok, _, _} =
+             LocalBehavior.command(21, %{
+               "command" => "timer.start",
+               "delay_ms" => 100,
+               "ticks" => 1
+             })
+
+    assert LocalBehavior.snapshot(21)["resources"]["timers"] == 1
+    assert {:ok, _, _} = LocalBehavior.command(21, %{"command" => "timer.cancel"})
+  end
+
+  test "messages preserve order, reject duplicates and stale generations, and drain" do
+    LocalBehavior.initialize(23)
+    assert {:ok, _, _} = LocalBehavior.command(23, %{"command" => "mount"})
+
+    assert {:ok, _, _} =
+             LocalBehavior.command(23, %{
+               "command" => "message.duplicate",
+               "message_id" => "message-one",
+               "value" => "hello"
+             })
+
+    assert_receive {:bh01_fixture_message, 23, "message-one", "hello"} = first, 100
+    assert_receive {:bh01_fixture_message, 23, "message-one", "hello"} = duplicate, 100
+    assert {:ok, accepted, _} = LocalBehavior.async(23, first)
+    assert [%{"text" => "Message message-one: hello"}] = accepted["operations"]
+
+    assert {:ok, dropped, %{"result" => %{"accepted" => false}}} =
+             LocalBehavior.async(23, duplicate)
+
+    assert dropped["operations"] == []
+
+    assert {:ok, _, _} =
+             LocalBehavior.command(23, %{
+               "command" => "message.late",
+               "message_id" => "message-late",
+               "value" => "late",
+               "generation" => 22
+             })
+
+    assert_receive {:bh01_fixture_message, 22, "message-late", "late"} = late, 100
+    assert {:ok, _, %{"result" => %{"accepted" => false}}} = LocalBehavior.async(23, late)
+
+    snapshot = LocalBehavior.snapshot(23)
+    assert snapshot["async"]["messages"] == 1
+    assert snapshot["async"]["duplicate_drops"] == 1
+    assert snapshot["resources"]["pending_messages"] == 0
+    assert snapshot["stale_drops"] == 2
+  end
+
+  test "disposal cancels timers and rejects pending async work" do
+    LocalBehavior.initialize(25)
+    assert {:ok, _, _} = LocalBehavior.command(25, %{"command" => "mount"})
+
+    assert {:ok, _, _} =
+             LocalBehavior.command(25, %{
+               "command" => "timer.start",
+               "delay_ms" => 100,
+               "ticks" => 2
+             })
+
+    assert {:ok, _, _} =
+             LocalBehavior.command(25, %{
+               "command" => "message.send",
+               "message_id" => "pending",
+               "value" => "late"
+             })
+
+    assert_receive {:bh01_fixture_message, 25, "pending", "late"} = pending, 100
+    assert {:ok, _, _} = LocalBehavior.command(25, %{"command" => "dispose"})
+
+    assert {:ok, late, %{"result" => %{"accepted" => false}}} =
+             LocalBehavior.async(25, pending)
+
+    assert late["operations"] == []
+
+    assert LocalBehavior.snapshot(25)["resources"] == %{
+             "mailbox_messages" => 0,
+             "pending_messages" => 0,
+             "processes" => 0,
+             "timers" => 0
+           }
   end
 
   defp field_event(generation, event, payload) do

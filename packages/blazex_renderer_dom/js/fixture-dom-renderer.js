@@ -74,6 +74,8 @@ export class FixtureDOMRenderer {
       invalid: entry.node.getAttribute?.("aria-invalid") ?? null,
       described_by: entry.node.getAttribute?.("aria-describedby") ?? null,
       error_message: entry.node.getAttribute?.("aria-errormessage") ?? null,
+      role: entry.node.getAttribute?.("role") ?? implicitRole(entry.kind),
+      accessible_name: this.#accessibleName(id, entry),
       parent_id: entry.parentId,
     }));
     return Object.freeze({
@@ -107,22 +109,48 @@ export class FixtureDOMRenderer {
       throw new FixtureDOMError("fixture-node-count-exceeded", "The fixture node limit is exceeded");
     }
     const available = new Set(this.#nodes.keys());
+    const kinds = new Map([...this.#nodes].map(([id, entry]) => [id, entry.kind]));
+    const parents = new Map([...this.#nodes].map(([id, entry]) => [id, entry.parentId]));
+    const listeners = new Set(this.#listeners.keys());
     if (this.#root) available.add("bx-fixture-root");
     for (const operation of operations) {
       if (operation.generation !== this.#generation) throw new FixtureDOMError("fixture-generation-stale", "An operation belongs to another generation");
-      if (operation.op === "root.mount") available.add(operation.id);
+      if (operation.op === "root.mount") {
+        available.add(operation.id);
+        kinds.set(operation.id, "root");
+        parents.set(operation.id, null);
+      }
       else if (operation.op === "node.upsert") {
         if (!available.has(operation.parent_id)) throw new FixtureDOMError("fixture-parent-missing", "The fixture parent is missing", { id: operation.parent_id });
+        if (kinds.has(operation.id) && kinds.get(operation.id) !== operation.kind) throw new FixtureDOMError("fixture-node-kind-mismatch", "An existing fixture node cannot change kind");
+        if (parents.has(operation.id) && parents.get(operation.id) !== operation.parent_id) throw new FixtureDOMError("fixture-node-parent-mismatch", "An existing fixture node must move explicitly");
         available.add(operation.id);
+        kinds.set(operation.id, operation.kind);
+        parents.set(operation.id, operation.parent_id);
       } else if (operation.op === "node.move") {
         if (!available.has(operation.id) || !available.has(operation.parent_id) || (operation.before_id && !available.has(operation.before_id))) throw new FixtureDOMError("fixture-target-missing", "A fixture move target is missing");
+        if (operation.id === "bx-fixture-root" || operation.id === operation.parent_id || descendant(operation.parent_id, operation.id, parents)) throw new FixtureDOMError("fixture-move-cycle", "A fixture move cannot create a cycle");
+        if (operation.before_id && (operation.before_id === operation.id || parents.get(operation.before_id) !== operation.parent_id)) throw new FixtureDOMError("fixture-before-target-invalid", "A fixture move anchor must be a sibling");
+        parents.set(operation.id, operation.parent_id);
       } else if (operation.op !== "root.dispose" && !available.has(operation.id)) {
         throw new FixtureDOMError("fixture-target-missing", "The fixture operation target is missing", { id: operation.id });
       }
       if (operation.op === "node.relationship" && operation.target_ids.some((id) => !available.has(id))) throw new FixtureDOMError("fixture-relationship-target-missing", "A relationship target is missing");
-      if (operation.op === "listener.bind" && this.#listeners.has(`${operation.id}:${operation.event}`)) throw new FixtureDOMError("fixture-listener-duplicate", "The fixture listener is already bound");
-      if (operation.op === "node.remove") available.delete(operation.id);
-      if (operation.op === "root.dispose") available.clear();
+      if (operation.op === "listener.bind") {
+        const listener = `${operation.id}:${operation.event}`;
+        if (listeners.has(listener)) throw new FixtureDOMError("fixture-listener-duplicate", "The fixture listener is already bound");
+        listeners.add(listener);
+      }
+      if (operation.op === "node.remove") {
+        if (operation.id === "bx-fixture-root") throw new FixtureDOMError("fixture-root-remove-forbidden", "The fixture root requires root disposal");
+        removeSimulated(operation.id, available, kinds, parents, listeners);
+      }
+      if (operation.op === "root.dispose") {
+        available.clear();
+        kinds.clear();
+        parents.clear();
+        listeners.clear();
+      }
     }
   }
 
@@ -147,7 +175,14 @@ export class FixtureDOMRenderer {
       if (!current) {
         entry.node.id = operation.id;
         if (operation.test_id) entry.node.setAttribute("data-bh01-test-id", operation.test_id);
-        if (operation.kind === "status" || operation.kind === "error") entry.node.setAttribute("aria-live", "polite");
+        if (operation.kind === "status") {
+          entry.node.setAttribute("role", "status");
+          entry.node.setAttribute("aria-live", "polite");
+        }
+        if (operation.kind === "error") {
+          entry.node.setAttribute("role", "alert");
+          entry.node.setAttribute("aria-live", "polite");
+        }
         if (operation.kind === "action") entry.node.type = "button";
         parent.append(entry.node);
         this.#nodes.set(operation.id, entry);
@@ -217,7 +252,42 @@ export class FixtureDOMRenderer {
     return null;
   }
 
+  #accessibleName(id, entry) {
+    if (entry.kind === "field") {
+      const label = [...this.#nodes.values()].find((candidate) => candidate.kind === "label" && candidate.node.getAttribute?.("for") === id);
+      return label?.node.textContent ?? "";
+    }
+    if (["action", "heading"].includes(entry.kind)) return entry.node.textContent;
+    return "";
+  }
+
   #trace(stage, details) {
     this.#onTrace(Object.freeze({ protocol: "blazex.bh01.dom-trace/0.1", generation: this.#generation, stage, ...details, metrics: Object.freeze({ ...this.#metrics }) }));
+  }
+}
+
+function implicitRole(kind) {
+  return ({ action: "button", field: "textbox", heading: "heading", list: "list", item: "listitem" })[kind] ?? null;
+}
+
+function descendant(candidate, ancestor, parents) {
+  let current = candidate;
+  while (current !== null && current !== undefined) {
+    if (current === ancestor) return true;
+    current = parents.get(current);
+  }
+  return false;
+}
+
+function removeSimulated(id, available, kinds, parents, listeners) {
+  const removed = [id];
+  for (let index = 0; index < removed.length; index += 1) {
+    for (const [candidate, parent] of parents) if (parent === removed[index]) removed.push(candidate);
+  }
+  for (const removedId of removed) {
+    available.delete(removedId);
+    kinds.delete(removedId);
+    parents.delete(removedId);
+    for (const listener of [...listeners]) if (listener.startsWith(`${removedId}:`)) listeners.delete(listener);
   }
 }
