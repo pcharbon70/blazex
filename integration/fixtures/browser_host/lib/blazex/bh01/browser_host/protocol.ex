@@ -22,7 +22,8 @@ defmodule BlazeX.BH01.BrowserHost.Protocol do
           "retry" => 0
         } = request
       )
-      when is_binary(scenario) and byte_size(scenario) <= 96 and generation == 1 and
+      when is_binary(scenario) and byte_size(scenario) <= 96 and is_integer(generation) and
+             generation > 0 and
              is_binary(correlation) and byte_size(correlation) <= 96 and
              is_integer(sequence) and sequence > 0 and operation in @operations and
              is_integer(timeout) and timeout > 0 and timeout <= 10_000 do

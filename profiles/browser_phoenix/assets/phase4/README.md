@@ -29,3 +29,11 @@ Both JavaScript and Elixir enforce finite JSON values, an 8 KiB envelope, depth
 and item limits, bounded timeout/concurrency, no retry, and rejection of
 sensitive keys. Browser objects, functions, credentials, arbitrary URLs, and
 arbitrary operations are not representable through this boundary.
+
+Activation uses a ten-state monotonic lifecycle with a distinct activation
+generation. Every abort controller, page listener, runtime frame, bridge,
+request timer, and correlation is owned by one activation. Explicit stop,
+startup failure, runtime failure, and `pagehide` converge through the same
+idempotent reverse-order cleanup path. Integrity and contract failures require
+operator/deployment action; transient startup failures allow at most one retry
+after reset, backoff, and a new generation.

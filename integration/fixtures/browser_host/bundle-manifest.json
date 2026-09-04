@@ -1,22 +1,22 @@
 {
   "artifacts": [
     {
-      "bytes": 6532468,
+      "bytes": 6532472,
       "content_encoding": null,
       "id": "BX-BH01-BROWSER-HOST-AVM",
       "kind": "avm",
       "mime": "application/vnd.atomvm.avm",
       "path": "generated/bundle.avm",
-      "sha256": "d955621e5de89a8460ac8ecf3fede7093ffc5690ef01f68b97b0cd6aaf5e2706"
+      "sha256": "c9cefe8220bef517032bf006b40925418dcd230e07017a1125a449907312a796"
     },
     {
-      "bytes": 3042289,
+      "bytes": 3042297,
       "content_encoding": "gzip",
       "id": "BX-BH01-BROWSER-HOST-AVM-GZIP",
       "kind": "avm-gzip",
       "mime": "application/vnd.atomvm.avm",
       "path": "generated/bundle.avm.gz",
-      "sha256": "f7911f699a767f81e90c17ce952730330464177c52f334ae97047008d9f42155"
+      "sha256": "e872557f449fdc18e92d0bd148ca6f87ad1bf2b205557a4604b63c4196a8a2b3"
     },
     {
       "bytes": 13991,
@@ -47,7 +47,7 @@
     },
     {
       "path": "lib/blazex/bh01/browser_host/protocol.ex",
-      "sha256": "a398b686eb3c77171e33777e304ad297da732e894e446f03851c37e294c72ff4"
+      "sha256": "dc182c5a1e18097643d663e489b93eb69f6a60ca2ac49607625c28028fee1eee"
     },
     {
       "path": "lib/blazex/bh01/browser_host.ex",

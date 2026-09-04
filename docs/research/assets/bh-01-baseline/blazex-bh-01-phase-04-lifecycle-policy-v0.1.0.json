@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0.0",
+  "policy_id": "BX-BH01-PHASE-04-LIFECYCLE-POLICY-0.1",
+  "status": "implemented-experimental",
+  "states": [
+    "not-started",
+    "checking",
+    "fetching",
+    "instantiating",
+    "loading",
+    "starting",
+    "ready",
+    "failed",
+    "stopping",
+    "stopped"
+  ],
+  "generation": "monotonic per BrowserRuntimeLifecycle instance; artifact manifest generation remains a separate identity",
+  "readiness": "exactly one popcorn_app_ready event while the activation is in starting state",
+  "terminal_cleanup": "all owned resources are released in reverse ownership order before stopped is emitted",
+  "owned_resources": [
+    "abort-controller",
+    "pagehide-listener",
+    "runtime-frame",
+    "host-bridge"
+  ],
+  "retry": {
+    "max_attempts": 2,
+    "backoff_ms": [250],
+    "requires_new_generation": true,
+    "artifact_cache": "no retained host cache; acquisition uses fetch cache=no-store",
+    "retryable_examples": [
+      "fetch-failed",
+      "fetch-timeout",
+      "frame-load-failed",
+      "runtime-failed"
+    ],
+    "non_retryable": [
+      "artifact-integrity-mismatch",
+      "artifact-url-forbidden",
+      "manifest-schema-unsupported",
+      "manifest-startup-invalid",
+      "wasm-import-contract-mismatch",
+      "wasm-export-contract-mismatch",
+      "prerequisite-missing"
+    ]
+  },
+  "late_completion": "generation mismatch or stopped/stopping state increments stale_drops and cannot become ready",
+  "navigation": "pagehide invokes the same idempotent stop path as explicit disposal",
+  "limitations": [
+    "browser process termination is owned by the browser and cannot emit completion evidence",
+    "support and production retry policy remain unclaimed"
+  ]
+}

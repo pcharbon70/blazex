@@ -75,35 +75,35 @@ Back to milestone: [README](README.md)
       - [x] 4.2.2.1 Subtask - Implement correlation, timeout, cancel acknowledgement, generation invalidation, idempotent cleanup, bounded queues, and redacted traces on both sides.
       - [x] 4.2.2.2 Subtask - Instrument pending requests, bytes/messages, listeners, workers, timers, failures, retries, stale drops, and cleanup convergence per generation.
 
-  - [ ] 4.3 Section - Define browser-host lifecycle, failure, and teardown.
+  - [x] 4.3 Section - Define browser-host lifecycle, failure, and teardown.
 
     Repeated start/stop and failure recovery must not leave hidden browser or VM
     state that makes later scenarios irreproducible.
 
-    - [ ] 4.3.1 Task - Implement a monotonic lifecycle state machine.
+    - [x] 4.3.1 Task - Implement a monotonic lifecycle state machine.
 
       Activation transitions and legal retries need one source of truth.
 
-      - [ ] 4.3.1.1 Subtask - Define not-started, checking, fetching, instantiating, loading, starting, ready, failed, stopping, and stopped states with legal transitions.
-      - [ ] 4.3.1.2 Subtask - Assign monotonic generations, owned artifacts/resources, readiness/failure reason, retry eligibility, and observable transition traces.
+      - [x] 4.3.1.1 Subtask - Define not-started, checking, fetching, instantiating, loading, starting, ready, failed, stopping, and stopped states with legal transitions.
+      - [x] 4.3.1.2 Subtask - Assign monotonic generations, owned artifacts/resources, readiness/failure reason, retry eligibility, and observable transition traces.
 
-    - [ ] 4.3.2 Task - Implement failure containment and retry.
+    - [x] 4.3.2 Task - Implement failure containment and retry.
 
       A partial activation must converge to stopped or a reviewed retry state,
       never a half-ready application.
 
-      - [ ] 4.3.2.1 Subtask - Handle fetch/integrity/instantiate/bundle/startup/worker/bridge/runtime/application failures with one terminal outcome and bounded diagnostics.
-      - [ ] 4.3.2.2 Subtask - Define which failures are retryable, required backoff/reset, cache eviction, generation change, user action, and attempt limits.
-      - [ ] 4.3.2.3 Subtask - Verify stale workers/listeners/messages/artifacts cannot reanimate a stopped or replaced generation.
+      - [x] 4.3.2.1 Subtask - Handle fetch/integrity/instantiate/bundle/startup/worker/bridge/runtime/application failures with one terminal outcome and bounded diagnostics.
+      - [x] 4.3.2.2 Subtask - Define which failures are retryable, required backoff/reset, cache eviction, generation change, user action, and attempt limits.
+      - [x] 4.3.2.3 Subtask - Verify stale workers/listeners/messages/artifacts cannot reanimate a stopped or replaced generation.
 
-    - [ ] 4.3.3 Task - Implement complete teardown.
+    - [x] 4.3.3 Task - Implement complete teardown.
 
       Disposal must release browser and runtime resources even during failure or
       navigation.
 
-      - [ ] 4.3.3.1 Subtask - Cancel pending fetches/requests/timers, detach listeners/observers, terminate workers/runtime, invalidate generations, remove owned roots, and release references.
-      - [ ] 4.3.3.2 Subtask - Exercise explicit stop, page navigation/unload, profile restart, runtime crash, startup cancellation, and repeated mount/unmount.
-      - [ ] 4.3.3.3 Subtask - Assert idempotence, bounded completion time, late-result rejection, and resource convergence.
+      - [x] 4.3.3.1 Subtask - Cancel pending fetches/requests/timers, detach listeners/observers, terminate workers/runtime, invalidate generations, remove owned roots, and release references.
+      - [x] 4.3.3.2 Subtask - Exercise explicit stop, page navigation/unload, profile restart, runtime crash, startup cancellation, and repeated mount/unmount.
+      - [x] 4.3.3.3 Subtask - Assert idempotence, bounded completion time, late-result rejection, and resource convergence.
 
   - [ ] 4.4 Section - Define prerequisites, fallback, and deployment contracts.
 

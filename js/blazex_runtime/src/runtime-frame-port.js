@@ -47,7 +47,7 @@ export class BrowserRuntimeFrame {
     await loaded;
   }
 
-  start({ manifest, artifacts }) {
+  start({ manifest, artifacts, generation = manifest.generation }) {
     if (this.#stopped || !this.#frame.contentWindow) throw new BlazeXHostError("frame-not-attached", "The runtime frame is unavailable");
     const runtimeModule = artifacts["runtime-module"].bytes.slice().buffer;
     const runtimeWasm = artifacts["runtime-wasm"].bytes.slice().buffer;
@@ -56,7 +56,8 @@ export class BrowserRuntimeFrame {
       protocol: FRAME_PROTOCOL,
       type: "start",
       channel: this.#channel,
-      generation: manifest.generation,
+      generation,
+      manifest_generation: manifest.generation,
       manifest_id: manifest.manifest_id,
       startup: manifest.startup,
       runtimeModule,

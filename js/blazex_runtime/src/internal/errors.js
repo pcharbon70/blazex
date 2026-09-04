@@ -21,7 +21,7 @@ export function errorRecord(error) {
     return Object.freeze({ code: error.code, message: error.message, details: error.details });
   }
   return Object.freeze({
-    code: "unexpected-host-error",
+    code: typeof error?.code === "string" ? error.code.slice(0, 96) : "unexpected-host-error",
     message: error instanceof Error ? error.message : String(error),
     details: {},
   });

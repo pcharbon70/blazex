@@ -22,7 +22,7 @@ addEventListener("message", async (event) => {
 
   const objectUrls = [];
   const dispose = () => objectUrls.splice(0).forEach((url) => URL.revokeObjectURL(url));
-  active = { channel: message.channel, generation: message.generation, dispose };
+  active = { channel: message.channel, generation: message.generation, manifest_generation: message.manifest_generation, dispose };
   try {
     post(message, "instantiating");
     const runtimeSource = new TextDecoder("utf-8", { fatal: true }).decode(message.runtimeModule);
@@ -63,7 +63,14 @@ addEventListener("message", async (event) => {
 });
 
 function post(message, type, details = {}) {
-  parent.postMessage({ protocol: PROTOCOL, channel: message.channel, generation: message.generation, type, ...details }, location.origin);
+  parent.postMessage({
+    protocol: PROTOCOL,
+    channel: message.channel,
+    generation: message.generation,
+    manifest_generation: message.manifest_generation ?? active?.manifest_generation,
+    type,
+    ...details,
+  }, location.origin);
 }
 
 async function bridgeRequest(message) {
