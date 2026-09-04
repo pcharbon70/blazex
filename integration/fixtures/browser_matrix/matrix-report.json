@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0.0",
+  "report_id": "BX-BH01-PHASE8-BROWSER-MATRIX-REPORT-0.1",
+  "status": "blocked",
+  "source_revision": "b84aaeb83c192617062b3b607c986821a09464a5",
+  "generated_at": "2026-09-04T15:19:26.000Z",
+  "scenario": "../scenarios/bh01-phase8-browser-matrix.json",
+  "profile_manifest_sha256": "818ac7b967db6519c766f9d1fff80455cc92d205e3f188252e6da27258ee4aad",
+  "matrix_inputs": [
+    {"path": "environment-catalog.json", "sha256": "fa94c78979e2e6b8af81ec794ef99442bd960e32121b1214f5e249c490e82ec4"},
+    {"path": "matrix-policy.json", "sha256": "6550a2f28e2e1d3d736efdc89a8d1ab378eef19dd8aa447a1a24b33a519feccc"},
+    {"path": "prerequisite-matrix.json", "sha256": "a7c30eda5466ccda388ffd03667cd350798139f0b0d514953e943788a649d8fb"},
+    {"path": "behavior-trust-matrix.json", "sha256": "a84a3e3972e5fa6095b7994b59793db37f3b45534d0a6ecccddedf156fd38b7f"},
+    {"path": "accessibility-input-matrix.json", "sha256": "5babb6a9202a9f756a5da4bc09f64583b54d9043279f785e8ffa58d4210ca8c5"},
+    {"path": "compatibility-matrix.json", "sha256": "8d799f7119612d2cddf62469f29bd995274a7e02cb791ca64b1fbe5c20970f3c"}
+  ],
+  "required_rows": [
+    {"configuration_id": "BR-CHROMIUM-DESKTOP", "environment": "available", "prerequisites": "passed", "behavior_trust": "passed", "accessibility_input": "automated-pass-manual-evidence-blocked", "compatibility": "passed-exact-pins-only", "overall": "blocked-manual-evidence"},
+    {"configuration_id": "BR-FIREFOX-DESKTOP", "environment": "environment-blocked", "prerequisites": "not-executed", "behavior_trust": "not-executed", "accessibility_input": "not-executed", "compatibility": "not-executed", "overall": "environment-blocked"},
+    {"configuration_id": "BR-CHROMIUM-ANDROID", "environment": "environment-blocked", "prerequisites": "not-executed", "behavior_trust": "not-executed", "accessibility_input": "not-executed", "compatibility": "not-executed", "overall": "environment-blocked"},
+    {"configuration_id": "BR-WEBKIT-DESKTOP", "environment": "environment-blocked", "prerequisites": "not-executed", "behavior_trust": "not-executed", "accessibility_input": "not-executed", "compatibility": "not-executed", "overall": "environment-blocked"},
+    {"configuration_id": "BR-WEBKIT-MOBILE", "environment": "environment-blocked", "prerequisites": "not-executed", "behavior_trust": "not-executed", "accessibility_input": "not-executed", "compatibility": "not-executed", "overall": "environment-blocked"}
+  ],
+  "non_substituting_probes": [
+    {"probe_id": "PROBE-FIREFOX-PLAYWRIGHT-153-LINUX", "result": "all-automated-suites-passed-experimental", "required_row_credit": false, "limitations": ["patched Playwright engine", "not stable Firefox evidence", "no assistive technology"]},
+    {"probe_id": "PROBE-WEBKIT-PLAYWRIGHT-26.5-LINUX", "result": "all-automated-suites-passed-experimental", "required_row_credit": false, "limitations": ["Linux MiniBrowser", "not macOS or mobile Safari", "no VoiceOver"]}
+  ],
+  "reconciled_proofs": {
+    "runtime_boot": "passed in one required row and two unqualified probes",
+    "nested_state_and_dom_update": "one normalized semantic trace across all executed environments",
+    "form_event": "input/change/blur, rapid/composition-like, validation, disabled, and read-only automation passed",
+    "timer_message": "timer completion and duplicate-message drain matched",
+    "authenticated_command": "accepted/replayed/stale/denied/forged/disconnected/recovered results matched with zero unauthorized effects",
+    "browser_fallback": "missing capability, missing isolation, and no-JavaScript paths retained bounded accessible content without partial activation",
+    "resource_and_diagnostics": "three-generation matrix subset converged; retained Phase 7 complete taxonomy remained valid",
+    "private_api": "exact pins only; mismatch disables optional adapter to standalone DOM; no adjacent package range established"
+  },
+  "findings": [
+    {"id": "BX-BH01-PHASE8-FINDING-REQUIRED-ENVIRONMENTS", "severity": "blocker", "owner": "browser-matrix-owner", "result": "Four of five required browser environments could not execute."},
+    {"id": "BX-BH01-PHASE8-FINDING-MANUAL-ACCESSIBILITY", "severity": "blocker", "owner": "accessibility-owner", "result": "No required browser/assistive-technology pairing or physical/mobile input review executed."},
+    {"id": "BX-BH01-PHASE8-FINDING-EXACT-PINS", "severity": "high", "owner": "liveview-adapter-owner", "result": "Only the exact Phoenix 1.8.13, Phoenix LiveView 1.2.11, and LocalLiveView 0.1.0 set is qualified; adjacent packages were unavailable."},
+    {"id": "BX-BH01-PHASE8-FINDING-PROBES", "severity": "informational", "owner": "browser-matrix-owner", "result": "Unqualified Firefox and Linux WebKit probes matched automated semantics and fail-closed behavior but grant no support credit."}
+  ],
+  "capture_policy": {"screenshots": "not-required-for-machine-semantic-scenarios-and-not-captured", "video": "not-required-and-not-captured", "raw_json_traces": "retained", "automatic_retries": 0, "quarantines": []},
+  "decision": {"result": "blocked", "reason": "Four required browser environments and all required assistive-technology pairings are unavailable; a partial matrix cannot pass.", "phase9_eligible": false, "phase9_authorized": false, "browser_support": "unsupported"}
+}

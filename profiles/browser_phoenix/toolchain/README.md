@@ -73,6 +73,22 @@ python3 profiles/browser_phoenix/toolchain/verify_phase7.py
 python3 -m unittest profiles/browser_phoenix/toolchain/tests/test_phase7.py
 ```
 
+Phase 8 retains every required browser/device row, separates environment and
+manual-evidence blockers from product failures, and prevents the two locally
+available engine probes from substituting for stable Firefox or Safari. Its
+final verifier composes the retained Phase 7 gate, five browser-matrix
+verifiers, one immutable profile identity, raw-record hashes, completion
+schemas, and downstream authorization boundaries:
+
+```console
+python3 profiles/browser_phoenix/toolchain/verify_phase8.py
+python3 -m unittest profiles/browser_phoenix/toolchain/tests/test_phase8.py
+```
+
+A successful verifier invocation confirms that the evidence is internally
+valid. The governed Phase 8 product decision remains blocked, all browsers
+remain unsupported, and Phase 9 remains ineligible and unauthorized.
+
 `unified-dependency-inventory.json` binds the canonical locks and reports by
 digest. `acquisition-evidence.json` records true clean and network-disabled
 cache replays for Hex and npm, immutable runtime-source replay timings, binary

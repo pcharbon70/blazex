@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0.0",
+  "record_id": "BX-BH01-AUTHORIZATION-PHASE-08-0.1",
+  "status": "approved-phase-8-only",
+  "authorized_at": "2026-09-04",
+  "request": "Implement the next phase of BH-01 section by section with a commit per section and one immediately merged PR, then synchronize main and delete the feature branch.",
+  "base_revision": "1d1daad31a90cfdb9bd6870cde7c40b2f36ad449",
+  "branch": "codex/bh-01-phase-08-browser-matrix",
+  "authorized_scope": [
+    "materialize and govern all five Phase 8 browser configuration rows without substituting emulation for required devices",
+    "execute prerequisite, lifecycle, behavior, trust, resilience, fallback, input, and compatibility scenarios wherever the exact environment is available",
+    "record unavailable required environments as environment-blocked with exact missing authority or infrastructure",
+    "perform explicitly non-authoritative adjacent engine and version probes when locally available",
+    "publish the complete matrix, retained evidence, limitations, and a truthful pass, conditional, blocked, or stop decision",
+    "commit once per completed Phase 8 section",
+    "create and immediately merge one Phase 8 pull request",
+    "synchronize main and delete the local and remote feature branch"
+  ],
+  "not_authorized": [
+    "purchasing, enrolling, or mutating external browser-device services or vendor accounts",
+    "representing Chromium device emulation as Chrome Android or Linux WebKit as Safari",
+    "Phase 9 measurement, mobile viability, or artifact economics work",
+    "BH-02 semantic tree, component, effect, capability, renderer, or stable error contracts",
+    "browser support, accessibility conformance, production readiness, or security certification claims"
+  ],
+  "owner": "repository-owner"
+}

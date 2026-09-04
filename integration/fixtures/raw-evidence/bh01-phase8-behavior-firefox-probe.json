@@ -1,0 +1,291 @@
+{
+  "schema_version": "1.0.0",
+  "evidence_id": "BX-BH01-PHASE8-BEHAVIOR-FIREFOX-0.1",
+  "captured_at": "2026-09-04T15:17:08.840Z",
+  "implementation_revision": "b84aaeb83c192617062b3b607c986821a09464a5",
+  "authority": "experimental-unqualified",
+  "support_status": "unsupported",
+  "browser": {
+    "type": "firefox",
+    "version": "153.0",
+    "os": "linux 6.8.0-51-generic",
+    "architecture": "x64"
+  },
+  "status": "observed",
+  "profile": {
+    "manifest_id": "BX-BH01-PHASE-05-PROFILE-ASSETS-0.1",
+    "manifest_sha256": "818ac7b967db6519c766f9d1fff80455cc92d205e3f188252e6da27258ee4aad",
+    "governed_files": 23
+  },
+  "semantic_trace": [
+    {
+      "label": "mounted",
+      "parent_count": 0,
+      "children": [
+        {
+          "count": 0,
+          "instance": 1,
+          "key": "alpha",
+          "restarts": 0
+        },
+        {
+          "count": 0,
+          "instance": 1,
+          "key": "beta",
+          "restarts": 0
+        }
+      ],
+      "field": {
+        "value": "",
+        "valid": false,
+        "touched": false
+      },
+      "async": {
+        "timer_ticks": 0,
+        "duplicate_drops": 0
+      },
+      "resources": {
+        "mailbox_messages": 0,
+        "pending_messages": 0,
+        "processes": 1,
+        "timers": 0
+      },
+      "dom": {
+        "root_count": 1,
+        "listener_count": 9,
+        "node_count": 23
+      }
+    },
+    {
+      "label": "nested-state",
+      "parent_count": 1,
+      "children": [
+        {
+          "count": 0,
+          "instance": 1,
+          "key": "beta",
+          "restarts": 0
+        },
+        {
+          "count": 1,
+          "instance": 1,
+          "key": "alpha",
+          "restarts": 0
+        }
+      ],
+      "field": {
+        "value": "",
+        "valid": false,
+        "touched": false
+      },
+      "async": {
+        "timer_ticks": 0,
+        "duplicate_drops": 0
+      },
+      "resources": {
+        "mailbox_messages": 0,
+        "pending_messages": 0,
+        "processes": 1,
+        "timers": 0
+      },
+      "dom": {
+        "root_count": 1,
+        "listener_count": 9,
+        "node_count": 23
+      }
+    },
+    {
+      "label": "field-valid",
+      "parent_count": 1,
+      "children": [
+        {
+          "count": 0,
+          "instance": 1,
+          "key": "beta",
+          "restarts": 0
+        },
+        {
+          "count": 1,
+          "instance": 1,
+          "key": "alpha",
+          "restarts": 0
+        }
+      ],
+      "field": {
+        "value": "Ada",
+        "valid": true,
+        "touched": true
+      },
+      "async": {
+        "timer_ticks": 0,
+        "duplicate_drops": 0
+      },
+      "resources": {
+        "mailbox_messages": 0,
+        "pending_messages": 0,
+        "processes": 1,
+        "timers": 0
+      },
+      "dom": {
+        "root_count": 1,
+        "listener_count": 9,
+        "node_count": 23
+      }
+    },
+    {
+      "label": "async-drained",
+      "parent_count": 1,
+      "children": [
+        {
+          "count": 0,
+          "instance": 1,
+          "key": "beta",
+          "restarts": 0
+        },
+        {
+          "count": 1,
+          "instance": 1,
+          "key": "alpha",
+          "restarts": 0
+        }
+      ],
+      "field": {
+        "value": "Ada",
+        "valid": true,
+        "touched": true
+      },
+      "async": {
+        "timer_ticks": 1,
+        "duplicate_drops": 1
+      },
+      "resources": {
+        "mailbox_messages": 0,
+        "pending_messages": 0,
+        "processes": 1,
+        "timers": 0
+      },
+      "dom": {
+        "root_count": 1,
+        "listener_count": 9,
+        "node_count": 23
+      }
+    },
+    {
+      "label": "disposed",
+      "resources": {
+        "dom": {
+          "roots": 0,
+          "listeners": 0,
+          "nodes": 0
+        },
+        "bridge_pending": 0,
+        "server_pending": 0
+      }
+    }
+  ],
+  "trust": {
+    "accepted": {
+      "value": 1,
+      "replayed": false
+    },
+    "exact_replay": {
+      "value": 1,
+      "replayed": true
+    },
+    "stale": "state-stale",
+    "audit_outcomes": [
+      "accepted",
+      "replayed",
+      "state-stale"
+    ],
+    "audit_effects": [
+      true,
+      false,
+      false
+    ],
+    "denied": "authorization-denied",
+    "forged": {
+      "http_status": 403,
+      "code": "csrf-invalid"
+    },
+    "disconnected": "transport-unavailable",
+    "recovered": "ok",
+    "authoritative_value_after_recovery": 1,
+    "unauthorized_effects": 0,
+    "client_role_trusted": false
+  },
+  "adapter": {
+    "adapter": "blazex-renderer-dom-liveview/bh01-0.1",
+    "fallback": "standalone-dom",
+    "protocol": "blazex.bh01.liveview-capability/0.1",
+    "status": "eligible",
+    "versions": {
+      "local_live_view": "0.1.0",
+      "phoenix_live_view": "1.2.11"
+    },
+    "activation": "not-adopted",
+    "standalone_dom": "executed",
+    "mismatch_fallback": "covered-by-isolated-phase6-fixture",
+    "private_data_outside_adapter": false
+  },
+  "resilience": {
+    "lifecycle_iterations": [
+      {
+        "iteration": 1,
+        "generation": 1,
+        "dom": {
+          "roots": 0,
+          "listeners": 0,
+          "nodes": 0
+        },
+        "bridge_pending": 0,
+        "server_pending": 0
+      },
+      {
+        "iteration": 2,
+        "generation": 2,
+        "dom": {
+          "roots": 0,
+          "listeners": 0,
+          "nodes": 0
+        },
+        "bridge_pending": 0,
+        "server_pending": 0
+      },
+      {
+        "iteration": 3,
+        "generation": 3,
+        "dom": {
+          "roots": 0,
+          "listeners": 0,
+          "nodes": 0
+        },
+        "bridge_pending": 0,
+        "server_pending": 0
+      }
+    ],
+    "oversized_boundary": "bridge-payload-string-exceeded",
+    "stale_generation_policy": "drop",
+    "malformed_subset": "passed"
+  },
+  "cleanup": {
+    "iteration": 3,
+    "generation": 3,
+    "dom": {
+      "roots": 0,
+      "listeners": 0,
+      "nodes": 0
+    },
+    "bridge_pending": 0,
+    "server_pending": 0
+  },
+  "diagnostics": {
+    "count": 3,
+    "correlated_transport_failure": true,
+    "redaction": "passed",
+    "console_only": 0
+  },
+  "page_errors": [],
+  "semantic_trace_sha256": "6933d006d378292a34b542d8fdc8c2a0fa0d10ee48388a0a9b42fc2224b39bbc",
+  "evidence_sha256": "23847219b978e6f577018b4b4960d9d4852fe38147dae0be02f7eafb2da04032"
+}

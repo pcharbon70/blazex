@@ -137,6 +137,17 @@ locations rather than this governance directory.
   — schema-valid resilience/security/resource decision with retained browser
   traces, convergence, redaction and adversarial findings, a narrow `go`, and
   explicit Phase 8 non-authorization.
+- [BH-01 Phase 8 authorization v0.1.0](blazex-bh-01-phase-08-authorization-v0.1.0.json)
+  — repository-owner approval for the complete five-row browser matrix,
+  non-substituting engine probes, truthful environment blockers, section
+  commits, one immediately merged PR, synchronization, and branch cleanup.
+- [BH-01 Phase 8 validation log v0.1.0](blazex-bh-01-phase-08-validation-log-v0.1.0.txt)
+  — exact required-row and probe outcomes, immutable browser runs, profile and
+  raw-evidence hashes, automated test results, limitations, and blocked gate.
+- [BH-01 Phase 8 completion v0.1.0](blazex-bh-01-phase-08-completion-v0.1.0.json)
+  — schema-valid browser-matrix decision retaining all five required rows,
+  non-substituting probes, exact-pin scope, accepted blocked disposition, and
+  explicit Phase 9 ineligibility and non-authorization.
 
 ## Maintaining this index
 

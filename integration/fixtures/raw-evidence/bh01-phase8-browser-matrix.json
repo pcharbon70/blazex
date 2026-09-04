@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0.0",
+  "evidence_id": "BX-BH01-PHASE8-BROWSER-MATRIX-0.1",
+  "captured_at": "2026-09-04T15:19:26.000Z",
+  "implementation_revision": "b84aaeb83c192617062b3b607c986821a09464a5",
+  "status": "observed-blocked",
+  "support_status": "unsupported",
+  "profile_manifest_sha256": "818ac7b967db6519c766f9d1fff80455cc92d205e3f188252e6da27258ee4aad",
+  "required_matrix": {"total": 5, "available": 1, "environment_blocked": 4, "fully_passed": 0, "manual_evidence_blocked": 1},
+  "executed": {"required_browser_runs": 4, "unqualified_engine_probe_runs": 8, "scenario_families_per_environment": 4, "automatic_retries": 0, "quarantines": 0},
+  "raw_evidence_sha256": {
+    "bh01-phase8-prerequisites-chromium.json": "153b7d9b7a30a25b4c3c5f27119730813d44827a4f13321e24325ce124e0ac4f",
+    "bh01-phase8-prerequisites-firefox-probe.json": "a8eff52329fabd5b249290fabecd69d70f2dd562023146cb90a05f4945069752",
+    "bh01-phase8-prerequisites-webkit-probe.json": "52cf44c147ea842aed1a3e4abdbd1b0105322790c4b54e422361fa7ee8912673",
+    "bh01-phase8-behavior-chromium.json": "121ec34f4a31a0512204e508bb2dcd2bc0a5aabd3b7bfcaedca3cdebc43f77ad",
+    "bh01-phase8-behavior-firefox-probe.json": "fc8195ea2ad9acc28386d46a1e1eecc89ce968715870a72f82a3c24bf1063698",
+    "bh01-phase8-behavior-webkit-probe.json": "dd622e50948b4ccf1a8be53a14e34e264913a1322ee878b98865aee3ffb05a92",
+    "bh01-phase8-accessibility-chromium.json": "500e277ed14ac68d37a8547beb7d1374ee8d6a51f40784f24db73b7c6fb9c76a",
+    "bh01-phase8-accessibility-firefox-probe.json": "7bbae8544792634b771a48c0c8eb0bc15ef647daecd12d4221217386ad0e371c",
+    "bh01-phase8-accessibility-webkit-probe.json": "b6361c151fe00f5868c81dace376e649d538588b95f0308bfe281ac0aac36e42",
+    "bh01-phase8-compatibility-chromium.json": "0ee3097ae21df6bcc9119c4023895677c88f1bdcd5c3a839d14506cb53779c65",
+    "bh01-phase8-compatibility-firefox-probe.json": "51b97650a167984c5871824f72ae182a5d51ec0c2b81a1d9048cb787ad0297b4",
+    "bh01-phase8-compatibility-webkit-probe.json": "ac10f11249eb31489747321abfa1e9e6f77e9f38513d228f677986a88fc18a7b"
+  },
+  "outcomes": {
+    "required_chromium": "automated scenarios passed; manual accessibility evidence blocked",
+    "required_firefox": "environment-blocked",
+    "required_chrome_android": "environment-blocked",
+    "required_safari_macos": "environment-blocked",
+    "required_safari_ios_ipados": "environment-blocked",
+    "firefox_engine_probe": "passed-experimental-no-required-credit",
+    "webkit_engine_probe": "passed-experimental-no-required-credit"
+  },
+  "proofs": {"semantic_trace_equivalence": "passed-executed-environments", "trust_boundary": "passed-executed-environments", "accessible_fallback_automation": "passed-executed-environments", "resource_convergence_subset": "passed-executed-environments", "compatibility_fail_closed": "passed-executed-environments", "required_browser_matrix": "blocked", "assistive_technology": "blocked"},
+  "decision": {"result": "blocked", "phase9_eligible": false, "phase9_authorized": false, "all_browsers": "unsupported"},
+  "evidence_sha256": "2ce0ff9c7df0e5118fc521b9ba2aa10bcc12d4a16f07442319cb98e3db83066a"
+}

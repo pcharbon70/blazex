@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
   "index_id": "BX-BH01-FIXTURE-INDEX-0.1",
-  "status": "phase7-resilience-security-resource-observed-pass",
+  "status": "phase8-complete-gate-blocked",
   "scenario_schema": "scenario.schema.json",
   "scenario_location": "scenarios",
   "raw_evidence_location": "raw-evidence",
@@ -19,6 +19,13 @@
       "status": "phase5-browser-behavior-observed-pass",
       "public_api": false,
       "manifest": "local_browser/scenario-catalog.json"
+    },
+    {
+      "id": "BX-BH01-FIXTURE-BROWSER-MATRIX",
+      "path": "browser_matrix",
+      "status": "phase8-complete-gate-blocked",
+      "public_api": false,
+      "manifest": "browser_matrix/matrix-policy.json"
     }
   ],
   "scenarios": [
@@ -45,6 +52,12 @@
       "path": "scenarios/bh01-phase7-resilience-security-resource.json",
       "status": "passed",
       "evidence": "raw-evidence/bh01-phase7-resilience-security-resource.json"
+    },
+    {
+      "scenario_id": "BX-BH01-SCENARIO-PHASE8-BROWSER-MATRIX",
+      "path": "scenarios/bh01-phase8-browser-matrix.json",
+      "status": "blocked",
+      "evidence": "raw-evidence/bh01-phase8-browser-matrix.json"
     }
   ],
   "production_import_allowed": false

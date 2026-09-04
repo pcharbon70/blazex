@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0.0",
+  "matrix_id": "BX-BH01-PHASE8-ACCESSIBILITY-INPUT-MATRIX-0.1",
+  "status": "executed-partial-environment-blocked-manual-review-required",
+  "source_revision": "b84aaeb83c192617062b3b607c986821a09464a5",
+  "fallback_values": [
+    {"value": "static-content", "status": "passed", "application": "Missing browser prerequisites and no-JavaScript delivery retain a bounded server-rendered status surface."},
+    {"value": "alternative-interaction", "status": "not-applicable", "application": "The disposable fixture has no pointer-only or capability-exclusive interaction."},
+    {"value": "in-app-substitute", "status": "not-applicable", "application": "BH-01 defines no substitute implementation for a missing host capability."},
+    {"value": "server-round-trip", "status": "not-applicable", "application": "The runtime-unavailable fallback is static; no separately supported server-interactive mode is claimed."},
+    {"value": "explicit-unavailability", "status": "passed", "application": "Unsupported isolation and missing WebAssembly produce a finite announced unavailable/fallback state before activation."},
+    {"value": "nonvisual-representation", "status": "not-applicable", "application": "The BH-01 fixture contains no chart, custom scene, or visual-only information."},
+    {"value": "omission", "status": "not-applicable", "application": "The BH-01 fixture contains no optional decorative component whose omission is its declared fallback."}
+  ],
+  "required_results": [
+    {
+      "configuration_id": "BR-CHROMIUM-DESKTOP",
+      "status": "automated-pass-manual-evidence-blocked",
+      "fallback_accessibility": "passed-automated",
+      "keyboard_focus": "passed-automated-headless",
+      "field_input": "passed-automated-headless",
+      "assistive_technology": "environment-blocked",
+      "evidence": "../raw-evidence/bh01-phase8-accessibility-chromium.json",
+      "evidence_sha256": "500e277ed14ac68d37a8547beb7d1374ee8d6a51f40784f24db73b7c6fb9c76a"
+    },
+    {"configuration_id": "BR-FIREFOX-DESKTOP", "status": "environment-blocked", "blocker_ref": "environment-catalog.json#BR-FIREFOX-DESKTOP"},
+    {"configuration_id": "BR-CHROMIUM-ANDROID", "status": "environment-blocked", "blocker_ref": "environment-catalog.json#BR-CHROMIUM-ANDROID"},
+    {"configuration_id": "BR-WEBKIT-DESKTOP", "status": "environment-blocked", "blocker_ref": "environment-catalog.json#BR-WEBKIT-DESKTOP"},
+    {"configuration_id": "BR-WEBKIT-MOBILE", "status": "environment-blocked", "blocker_ref": "environment-catalog.json#BR-WEBKIT-MOBILE"}
+  ],
+  "non_substituting_probe_results": [
+    {
+      "probe_id": "PROBE-FIREFOX-PLAYWRIGHT-153-LINUX",
+      "status": "passed-experimental-manual-unqualified",
+      "required_row_credit": false,
+      "evidence": "../raw-evidence/bh01-phase8-accessibility-firefox-probe.json",
+      "evidence_sha256": "7bbae8544792634b771a48c0c8eb0bc15ef647daecd12d4221217386ad0e371c"
+    },
+    {
+      "probe_id": "PROBE-WEBKIT-PLAYWRIGHT-26.5-LINUX",
+      "status": "passed-experimental-manual-unqualified",
+      "required_row_credit": false,
+      "evidence": "../raw-evidence/bh01-phase8-accessibility-webkit-probe.json",
+      "evidence_sha256": "b6361c151fe00f5868c81dace376e649d538588b95f0308bfe281ac0aac36e42"
+    }
+  ],
+  "divergences": [
+    {
+      "id": "BX-BH01-PHASE8-DIVERGENCE-FIREFOX-TAB-WRAP",
+      "owner": "browser-automation-environment",
+      "severity": "informational",
+      "observation": "The patched headless Firefox probe did not wrap Tab from the last fixture control to body within the bounded trace; required relative control order and reachability matched.",
+      "support_consequence": "none; the probe is unqualified and physical keyboard review remains required"
+    },
+    {
+      "id": "BX-BH01-PHASE8-DIVERGENCE-WEBKIT-FOCUS-WIDTH",
+      "owner": "browser-default-style",
+      "severity": "informational",
+      "observation": "The Linux WebKit probe reported a 3px default focus outline while Chromium and Firefox reported 1px; all matched :focus-visible with a non-none outline.",
+      "support_consequence": "none; exact styling is browser-owned and the probe is not Safari evidence"
+    }
+  ],
+  "manual_review_required": [
+    "qualified browser plus screen-reader pairing",
+    "physical keyboard focus and announcement review",
+    "mobile touch virtual-keyboard rotation background-resume and memory-pressure review"
+  ],
+  "phase_effect": "blocked-until-required-browser-and-assistive-technology-evidence-executes",
+  "claims_not_made": ["WCAG conformance", "assistive-technology compatibility", "mobile input compatibility", "browser support"]
+}

@@ -23,3 +23,29 @@ is not browser evidence.
 - `bh01-phase7-resilience-security-resource.json` — twenty actual-browser
   lifecycle generations, four coordinated disconnect recoveries, artifact and
   authority attacks, redacted diagnostics, and resource convergence evidence.
+- `bh01-phase8-prerequisites-chromium.json` — qualified Chrome/Linux
+  prerequisite, policy-failure, alternate-loading, and lifecycle observations.
+- `bh01-phase8-prerequisites-firefox-probe.json` — explicitly unqualified
+  Playwright Firefox/Linux engine probe; grants no required-row credit.
+- `bh01-phase8-prerequisites-webkit-probe.json` — explicitly unqualified
+  Playwright WebKit/Linux MiniBrowser probe; it is not Safari evidence.
+- `bh01-phase8-behavior-chromium.json` — qualified Chrome/Linux normalized
+  behavior, trust-boundary, resilience, diagnostics, and cleanup observations.
+- `bh01-phase8-behavior-firefox-probe.json` — explicitly unqualified Firefox
+  engine behavior probe; it grants no required-row credit.
+- `bh01-phase8-behavior-webkit-probe.json` — explicitly unqualified WebKit
+  MiniBrowser behavior probe; it is not macOS or mobile Safari evidence.
+- `bh01-phase8-accessibility-chromium.json` — qualified Chrome/Linux automated
+  fallback, keyboard, focus, field, reduced-motion, and forced-color evidence.
+- `bh01-phase8-accessibility-firefox-probe.json` — unqualified Firefox engine
+  accessibility/input automation; no stable Firefox or AT claim follows.
+- `bh01-phase8-accessibility-webkit-probe.json` — unqualified Linux WebKit
+  accessibility/input automation; no Safari or VoiceOver claim follows.
+- `bh01-phase8-compatibility-chromium.json` — qualified Chrome/Linux actual-
+  browser manifest, artifact, feature, renderer, and generation mismatch runs.
+- `bh01-phase8-compatibility-firefox-probe.json` — unqualified Firefox engine
+  execution of the same client compatibility scenarios.
+- `bh01-phase8-compatibility-webkit-probe.json` — unqualified Linux WebKit
+  execution of the same client compatibility scenarios; not Safari evidence.
+- `bh01-phase8-browser-matrix.json` — aggregate immutable-profile execution
+  counts, raw record hashes, proof outcomes, blockers, and final decision.

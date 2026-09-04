@@ -1,0 +1,82 @@
+{
+  "schema_version": "1.0.0",
+  "inventory_id": "BX-BH01-PHASE8-ENVIRONMENT-INVENTORY-0.1",
+  "captured_at": "2026-09-04T14:30:01Z",
+  "source_revision": "1d1daad31a90cfdb9bd6870cde7c40b2f36ad449",
+  "host": {
+    "operating_system": "Linux Mint 22.1 (Xia)",
+    "kernel": "Linux 6.8.0-51-generic",
+    "architecture": "x86_64",
+    "cpu": "12th Gen Intel(R) Core(TM) i7-12700F",
+    "logical_cpus": 20,
+    "memory_bytes": 67194294272,
+    "power_thermal_state": "unavailable",
+    "display_input": "headless-automation-keyboard-pointer",
+    "secure_context": "loopback-http-browser-secure-context-exception",
+    "network": "loopback-unshaped"
+  },
+  "automation": {
+    "node": "26.8.1",
+    "playwright_core": "1.62.1",
+    "protocol": "playwright-pipe",
+    "server_location": "same-linux-host-loopback",
+    "cache_states": ["fresh-context", "warm-profile-assets", "route-controlled-failure"],
+    "network_shaping": "none-in-environment-inventory",
+    "captures": ["structured-json", "console", "page-errors", "request-failures", "screenshot-available", "trace-available", "video-available"]
+  },
+  "local_binaries": [
+    {
+      "id": "chrome-for-testing-152-linux64",
+      "product": "Chrome for Testing",
+      "product_version": "152.0.7977.75",
+      "engine_revision": "1669021",
+      "channel": "stable-qualified-input",
+      "executable_sha256": "3c84cfdbadd0b5b9d1943568b67faea54cf818d20ca32a337fd8a68a0d61ac76",
+      "archive_sha256": "a16d36890636bd72251133b27f05825f7f9269c2425b3408fa3a76e10dccd8f1",
+      "launch": "passed"
+    },
+    {
+      "id": "system-firefox-134-linux",
+      "product": "Mozilla Firefox",
+      "product_version": "134.0",
+      "channel": "system-stable-stale-unqualified",
+      "executable_sha256": "4041a726e650722cfd0d6e289cdb3bbb556ab94539c491679570179da3aad3c3",
+      "launch": "failed-pinned-playwright-juggler-unavailable"
+    },
+    {
+      "id": "playwright-firefox-153-linux",
+      "product": "Playwright Firefox",
+      "product_version": "153.0",
+      "revision": "1538",
+      "channel": "patched-automation-build-unqualified-probe",
+      "executable_sha256": "26e4198abe0dfb93c339239297008b1319711575d8cbae8e2d5122d2017b29a1",
+      "launch": "passed"
+    },
+    {
+      "id": "playwright-webkit-26.5-linux",
+      "product": "Playwright WebKit MiniBrowser",
+      "product_version": "26.5",
+      "revision": "2336",
+      "channel": "linux-minibrowser-unqualified-probe-not-safari",
+      "launcher_sha256": "a85baad3d8c07173ac387a59b41500c382b21ed692afe0964d29aac247ccc63b",
+      "executable_sha256": "08c862489c02f251f1a3e5b760ddbff16e4b474cce62886d2deb6909d86d51af",
+      "launch": "passed"
+    }
+  ],
+  "required_environment_outcomes": {
+    "BR-CHROMIUM-DESKTOP": "available",
+    "BR-FIREFOX-DESKTOP": "environment-blocked",
+    "BR-CHROMIUM-ANDROID": "environment-blocked",
+    "BR-WEBKIT-DESKTOP": "environment-blocked",
+    "BR-WEBKIT-MOBILE": "environment-blocked"
+  },
+  "unavailable_controls": [
+    "stable current Firefox binary compatible with the pinned automation protocol",
+    "physical or vendor-emulated Android device and Chrome Android build",
+    "macOS host with stable Safari and safaridriver",
+    "physical or vendor-simulated iOS/iPadOS device with stable Mobile Safari",
+    "assistive-technology pairings",
+    "power and thermal control",
+    "mobile background, rotation, virtual-keyboard, and memory-pressure control"
+  ]
+}

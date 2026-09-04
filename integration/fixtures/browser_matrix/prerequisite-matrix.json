@@ -1,0 +1,85 @@
+{
+  "schema_version": "1.0.0",
+  "matrix_id": "BX-BH01-PHASE8-PREREQUISITE-MATRIX-0.1",
+  "status": "executed-partial-environment-blocked",
+  "source_revision": "b84aaeb83c192617062b3b607c986821a09464a5",
+  "required_scenarios": [
+    "webassembly-memory-table",
+    "workers-modules-structured-transfer-timers",
+    "streaming-and-buffered-loading",
+    "secure-context-and-cross-origin-isolation",
+    "mime-compression-integrity-origin-redirect-cache",
+    "offline-online",
+    "stop-restart-navigation",
+    "session-expiry-and-server-restart-retained-phase6",
+    "visibility-and-memory-pressure-observability"
+  ],
+  "required_results": [
+    {
+      "configuration_id": "BR-CHROMIUM-DESKTOP",
+      "status": "passed",
+      "activation": "ready",
+      "prerequisite_decision": "proceed",
+      "fallbacks": ["static-server-fallback", "alternate-loading", "unsupported"],
+      "partial_activation": false,
+      "evidence": "../raw-evidence/bh01-phase8-prerequisites-chromium.json",
+      "evidence_sha256": "153b7d9b7a30a25b4c3c5f27119730813d44827a4f13321e24325ce124e0ac4f"
+    },
+    {
+      "configuration_id": "BR-FIREFOX-DESKTOP",
+      "status": "environment-blocked",
+      "activation": "not-executed",
+      "partial_activation": false,
+      "blocker_ref": "environment-catalog.json#BR-FIREFOX-DESKTOP"
+    },
+    {
+      "configuration_id": "BR-CHROMIUM-ANDROID",
+      "status": "environment-blocked",
+      "activation": "not-executed",
+      "partial_activation": false,
+      "blocker_ref": "environment-catalog.json#BR-CHROMIUM-ANDROID"
+    },
+    {
+      "configuration_id": "BR-WEBKIT-DESKTOP",
+      "status": "environment-blocked",
+      "activation": "not-executed",
+      "partial_activation": false,
+      "blocker_ref": "environment-catalog.json#BR-WEBKIT-DESKTOP"
+    },
+    {
+      "configuration_id": "BR-WEBKIT-MOBILE",
+      "status": "environment-blocked",
+      "activation": "not-executed",
+      "partial_activation": false,
+      "blocker_ref": "environment-catalog.json#BR-WEBKIT-MOBILE"
+    }
+  ],
+  "non_substituting_probe_results": [
+    {
+      "probe_id": "PROBE-FIREFOX-PLAYWRIGHT-153-LINUX",
+      "status": "passed-experimental",
+      "activation": "ready",
+      "required_row_credit": false,
+      "evidence": "../raw-evidence/bh01-phase8-prerequisites-firefox-probe.json",
+      "evidence_sha256": "a8eff52329fabd5b249290fabecd69d70f2dd562023146cb90a05f4945069752"
+    },
+    {
+      "probe_id": "PROBE-WEBKIT-PLAYWRIGHT-26.5-LINUX",
+      "status": "passed-experimental",
+      "activation": "ready",
+      "required_row_credit": false,
+      "evidence": "../raw-evidence/bh01-phase8-prerequisites-webkit-probe.json",
+      "evidence_sha256": "52cf44c147ea842aed1a3e4abdbd1b0105322790c4b54e422361fa7ee8912673"
+    }
+  ],
+  "outcome_vocabulary": {
+    "all-required-capabilities": "proceed",
+    "missing-streaming-only": "alternate-loading",
+    "missing-browser-capability": "static-server-fallback",
+    "missing-secure-context-or-isolation": "unsupported",
+    "missing-required-environment": "environment-blocked"
+  },
+  "unobservable": ["memory-pressure", "authoritative-page-visibility", "service-worker-interference", "mobile-background-resume"],
+  "phase_effect": "blocked-until-four-required-environments-execute",
+  "claims_not_made": ["Firefox support", "Safari support", "Chrome Android support", "engine-probe equivalence", "browser support"]
+}

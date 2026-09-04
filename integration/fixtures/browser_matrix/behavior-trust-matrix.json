@@ -1,0 +1,90 @@
+{
+  "schema_version": "1.0.0",
+  "matrix_id": "BX-BH01-PHASE8-BEHAVIOR-TRUST-MATRIX-0.1",
+  "status": "executed-partial-environment-blocked",
+  "source_revision": "b84aaeb83c192617062b3b607c986821a09464a5",
+  "semantic_trace_sha256": "6933d006d378292a34b542d8fdc8c2a0fa0d10ee48388a0a9b42fc2224b39bbc",
+  "scenario_set": [
+    "boot-readiness-and-mount",
+    "nested-keyed-state-and-reorder",
+    "field-input-change-blur-and-validation",
+    "timer-and-duplicate-message-drain",
+    "authorized-replayed-stale-denied-and-forged-command",
+    "disconnect-and-idempotent-recovery",
+    "oversized-bridge-rejection-and-correlated-diagnostic",
+    "three-generation-disposal-and-resource-convergence"
+  ],
+  "required_results": [
+    {
+      "configuration_id": "BR-CHROMIUM-DESKTOP",
+      "status": "passed",
+      "semantic_equivalence": "canonical",
+      "trust_boundary": "passed",
+      "resource_convergence": "passed",
+      "evidence": "../raw-evidence/bh01-phase8-behavior-chromium.json",
+      "evidence_sha256": "121ec34f4a31a0512204e508bb2dcd2bc0a5aabd3b7bfcaedca3cdebc43f77ad"
+    },
+    {
+      "configuration_id": "BR-FIREFOX-DESKTOP",
+      "status": "environment-blocked",
+      "semantic_equivalence": "not-executed",
+      "blocker_ref": "environment-catalog.json#BR-FIREFOX-DESKTOP"
+    },
+    {
+      "configuration_id": "BR-CHROMIUM-ANDROID",
+      "status": "environment-blocked",
+      "semantic_equivalence": "not-executed",
+      "blocker_ref": "environment-catalog.json#BR-CHROMIUM-ANDROID"
+    },
+    {
+      "configuration_id": "BR-WEBKIT-DESKTOP",
+      "status": "environment-blocked",
+      "semantic_equivalence": "not-executed",
+      "blocker_ref": "environment-catalog.json#BR-WEBKIT-DESKTOP"
+    },
+    {
+      "configuration_id": "BR-WEBKIT-MOBILE",
+      "status": "environment-blocked",
+      "semantic_equivalence": "not-executed",
+      "blocker_ref": "environment-catalog.json#BR-WEBKIT-MOBILE"
+    }
+  ],
+  "non_substituting_probe_results": [
+    {
+      "probe_id": "PROBE-FIREFOX-PLAYWRIGHT-153-LINUX",
+      "status": "passed-experimental",
+      "semantic_equivalence": "matched-canonical",
+      "required_row_credit": false,
+      "evidence": "../raw-evidence/bh01-phase8-behavior-firefox-probe.json",
+      "evidence_sha256": "fc8195ea2ad9acc28386d46a1e1eecc89ce968715870a72f82a3c24bf1063698"
+    },
+    {
+      "probe_id": "PROBE-WEBKIT-PLAYWRIGHT-26.5-LINUX",
+      "status": "passed-experimental",
+      "semantic_equivalence": "matched-canonical",
+      "required_row_credit": false,
+      "evidence": "../raw-evidence/bh01-phase8-behavior-webkit-probe.json",
+      "evidence_sha256": "dd622e50948b4ccf1a8be53a14e34e264913a1322ee878b98865aee3ffb05a92"
+    }
+  ],
+  "retained_evidence": {
+    "complete_local_semantic_trace": "../raw-evidence/bh01-phase5-local-browser.json",
+    "trust_and_adapter_failure_matrix": "../raw-evidence/bh01-phase6-trust-and-isolation.json",
+    "complete_failure_resource_and_diagnostic_matrix": "../raw-evidence/bh01-phase7-resilience-security-resource.json"
+  },
+  "divergences": [],
+  "unobservable": [
+    "qualified-firefox-runtime-behavior",
+    "android-touch-keyboard-background-and-memory-pressure",
+    "macos-safari-and-voiceover-behavior",
+    "ios-ipados-safari-touch-background-and-voiceover-behavior"
+  ],
+  "phase_effect": "blocked-until-four-required-environments-execute",
+  "claims_not_made": [
+    "Firefox support",
+    "Safari support",
+    "Chrome Android support",
+    "engine-probe equivalence to vendor browsers",
+    "browser support"
+  ]
+}
