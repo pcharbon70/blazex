@@ -1,0 +1,191 @@
+{
+  "schema_version": "1.0.0",
+  "evidence_id": "BX-BH01-PHASE-06-TRUST-AND-ISOLATION-EVIDENCE-0.1",
+  "captured_at": "2026-09-04T12:53:17.348Z",
+  "implementation_parent_revision": "1dbcbfde5e7c76b39ccd2a999f0dd07a88c411e6",
+  "observed_patch_scope": "Phase 6 integration harness, evidence, and AtomVM compatibility fix are committed together after this parent.",
+  "status": "observed-pass",
+  "support_status": "unsupported-provisional-feasibility",
+  "toolchain": {
+    "node": "v26.8.1",
+    "playwright_core": "1.62.1",
+    "browser_product": "Chrome for Testing",
+    "browser_version": "152.0.7977.75",
+    "browser_archive_sha256": "a16d36890636bd72251133b27f05825f7f9269c2425b3408fa3a76e10dccd8f1",
+    "os": "linux 6.8.0-51-generic",
+    "architecture": "x64"
+  },
+  "adapter_capability": {
+    "adapter": "blazex-renderer-dom-liveview/bh01-0.1",
+    "fallback": "standalone-dom",
+    "protocol": "blazex.bh01.liveview-capability/0.1",
+    "status": "eligible",
+    "versions": {
+      "local_live_view": "0.1.0",
+      "phoenix_live_view": "1.2.11"
+    }
+  },
+  "command_path": {
+    "normalized_dom_action": true,
+    "runtime_projection": {
+      "failures": 0,
+      "last_correlation_id": "browser-1-2",
+      "pending": false,
+      "status": "accepted",
+      "value": 1,
+      "version": 1
+    },
+    "rendered_status": "Server counter: 1 (version 1)",
+    "accepted": {
+      "status": "ok",
+      "correlation_id": "phase6-accepted",
+      "result": {
+        "replayed": false,
+        "resource_id": "counter",
+        "value": 2,
+        "version": 2
+      }
+    },
+    "replayed": {
+      "status": "ok",
+      "correlation_id": "phase6-accepted",
+      "result": {
+        "replayed": true,
+        "resource_id": "counter",
+        "value": 2,
+        "version": 2
+      }
+    },
+    "authoritative_resource": {
+      "id": "counter",
+      "value": 2,
+      "version": 2
+    },
+    "correlated_audit": [
+      {
+        "sequence": 1,
+        "identity_id": "operator",
+        "correlation_id": "browser-1-2",
+        "command": "counter.increment",
+        "outcome": "accepted",
+        "effect_applied": true,
+        "resource_version": 1,
+        "idempotency_digest": "624c531b83e1403d"
+      },
+      {
+        "sequence": 2,
+        "identity_id": "operator",
+        "correlation_id": "phase6-accepted",
+        "command": "counter.increment",
+        "outcome": "accepted",
+        "effect_applied": true,
+        "resource_version": 2,
+        "idempotency_digest": "4342776013ca8083"
+      },
+      {
+        "sequence": 3,
+        "identity_id": "operator",
+        "correlation_id": "phase6-accepted",
+        "command": "counter.increment",
+        "outcome": "replayed",
+        "effect_applied": false,
+        "resource_version": 2,
+        "idempotency_digest": "4342776013ca8083"
+      },
+      {
+        "sequence": 4,
+        "identity_id": "operator",
+        "correlation_id": "phase6-stale",
+        "command": "counter.increment",
+        "outcome": "state-stale",
+        "effect_applied": false,
+        "resource_version": 2,
+        "idempotency_digest": "7900556af932efb7"
+      },
+      {
+        "sequence": 5,
+        "identity_id": "operator",
+        "correlation_id": "phase6-limited",
+        "command": "counter.increment",
+        "outcome": "rate-limited",
+        "effect_applied": false,
+        "resource_version": 2,
+        "idempotency_digest": "3b7ad708acc2ee78"
+      }
+    ],
+    "server_request_count": 5
+  },
+  "failure_matrix": {
+    "unauthorized": "authorization-denied",
+    "expired": "session-invalid",
+    "stale": "state-stale",
+    "rate_limited": "rate-limited",
+    "transaction": "transaction-failed",
+    "server_error": "server-unavailable",
+    "disconnect": "transport-unavailable",
+    "retry_after_disconnect": "ok",
+    "timeout": "transport-timeout",
+    "disposal_delivery": false,
+    "unauthorized_effects": 0
+  },
+  "cleanup": {
+    "memory_pages": 256,
+    "workers": null,
+    "worker_observation": "not exposed at the parent-frame boundary",
+    "bridge": {
+      "requests": 12,
+      "responses": 12,
+      "failures": 0,
+      "cancellations": 0,
+      "timeouts": 0,
+      "stale_drops": 0,
+      "bytes_sent": 3273,
+      "bytes_received": 6564,
+      "pending": 0,
+      "generation": 6,
+      "stopped": true,
+      "timers": 0,
+      "retries": 0
+    },
+    "lifecycle": {
+      "protocol": "blazex.lifecycle/1",
+      "state": "stopped",
+      "generation": 5,
+      "attempt": 1,
+      "failure": null,
+      "resources": {},
+      "metrics": {
+        "transitions": 40,
+        "failures": 0,
+        "stale_drops": 0,
+        "cleanup_failures": 0,
+        "cleanup_ms": 3.005000114440918
+      }
+    },
+    "server": {
+      "pending": 0,
+      "session_configured": false
+    },
+    "dom": {
+      "roots": 0,
+      "listeners": 0,
+      "nodes": 0
+    }
+  },
+  "audit": [],
+  "findings": [
+    "The first browser run exposed the unavailable Erlang re NIF behind Regex.match?/2 in AtomVM; byte-level identifier validation replaced it and a source guard now prevents regression.",
+    "A normalized DOM action crossed the Elixir runtime, bridge, same-origin transport, Phoenix endpoint, server authority, audit, and DOM result path.",
+    "Server-owned session identity, authorization, current resource version, idempotency, rate, and side effect remained outside browser runtime state.",
+    "Mismatch and failure outcomes were bounded; disconnect retry applied once and disposal aborted pending transport without delivering a late runtime result.",
+    "The optional LiveView compatibility adapter reported only exact pinned eligibility and retained standalone-dom as its explicit fallback."
+  ],
+  "limitations": [
+    "Only Chrome for Testing 152.0.7977.75 on this Linux x86-64 host was executed; every browser remains unsupported.",
+    "The counter, identity store, adapter descriptor, patch protocol, and test controls are disposable BH-01 fixtures, not production or public APIs.",
+    "LiveView/LocalLiveView private renderer behavior was compatibility-probed and isolated, not adopted as the BlazeX component or standalone DOM model.",
+    "The Plug and headless results are static dependency boundaries; neither scaffold is an executable profile in BH-01.",
+    "No performance, accessibility, production security, persistence, multi-node, proxy, or cross-browser claim is made."
+  ],
+  "evidence_sha256": "00a236b5a404dd9e8c6f75268f07cc4f0162757fadc358e59a1af11e7dd1f21e"
+}

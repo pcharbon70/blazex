@@ -924,15 +924,35 @@ defmodule BlazeX.BH01.LocalBehavior do
 
   defp validate_server_result(_result, _pending), do: {:error, "server-result-invalid"}
 
-  defp valid_server_identifier?(value) when is_binary(value) and byte_size(value) in 1..64,
-    do: String.match?(value, ~r/^[A-Za-z0-9][A-Za-z0-9._:-]*$/)
+  defp valid_server_identifier?(value) when is_binary(value) and byte_size(value) in 1..64 do
+    case :erlang.binary_to_list(value) do
+      [first | rest] ->
+        server_alphanumeric?(first) and Enum.all?(rest, &server_identifier_byte?/1)
+
+      _ ->
+        false
+    end
+  end
 
   defp valid_server_identifier?(_value), do: false
 
-  defp valid_error_code?(value) when is_binary(value) and byte_size(value) in 1..64,
-    do: String.match?(value, ~r/^[a-z][a-z0-9-]*$/)
+  defp valid_error_code?(value) when is_binary(value) and byte_size(value) in 1..64 do
+    case :erlang.binary_to_list(value) do
+      [first | rest] when first in ?a..?z ->
+        Enum.all?(rest, fn byte -> byte in ?a..?z or byte in ?0..?9 or byte == ?- end)
+
+      _ ->
+        false
+    end
+  end
 
   defp valid_error_code?(_value), do: false
+
+  defp server_alphanumeric?(byte),
+    do: byte in ?a..?z or byte in ?A..?Z or byte in ?0..?9
+
+  defp server_identifier_byte?(byte),
+    do: server_alphanumeric?(byte) or byte in [?-, ?_, ?., ?:]
 
   defp root,
     do: %{

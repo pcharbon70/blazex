@@ -8,6 +8,7 @@
     "Phoenix.LiveView",
     "LocalLiveView"
   ],
+  "forbidden_atomvm_runtime_apis": ["Regex", "~r/"],
   "phase5_fixture_proofs_retained": [
     "BX-BH01-PROOF-NESTED-STATE",
     "BX-BH01-PROOF-FORM-EVENT",

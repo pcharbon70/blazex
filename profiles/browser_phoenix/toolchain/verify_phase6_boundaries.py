@@ -69,6 +69,10 @@ def validate(
         for token in forbidden_imports:
             if token in text:
                 errors.append(f"standalone source imports optional adapter surface: {path}: {token}")
+        if path.endswith("local_behavior.ex"):
+            for token in standalone.get("forbidden_atomvm_runtime_apis", []):
+                if token in text:
+                    errors.append(f"AtomVM fixture uses an unavailable runtime API: {path}: {token}")
     for path, text in authority_sources.items():
         if "BlazeX.Renderer.DOM.LiveView" in text:
             errors.append(f"server authority imports optional renderer adapter: {path}")

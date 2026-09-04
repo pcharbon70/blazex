@@ -16,7 +16,7 @@ aliases:
 
 Back to milestone: [README](README.md)
 
-- [ ] 6 Phase - Phoenix Trust Boundary and LiveView Adapter Isolation.
+- [x] 6 Phase - Phoenix Trust Boundary and LiveView Adapter Isolation.
 
   Prove one real authenticated and authorized browser command, isolate all
   version-sensitive LiveView/LocalLiveView renderer integration, and preserve
@@ -118,27 +118,27 @@ Back to milestone: [README](README.md)
       - [x] 6.4.2.1 Subtask - Inspect/generate dependency manifests showing Plug excludes Phoenix/LiveView/LocalLiveView and the LiveView DOM adapter transitively.
       - [x] 6.4.2.2 Subtask - Verify inactive headless/core/renderer-contract boundaries have no dependency on browser/runtime/server packages and no feasibility fixture is treated as their API.
 
-  - [ ] 6.5 Section - Phase 6 Integration Tests and Completion Evidence.
+  - [x] 6.5 Section - Phase 6 Integration Tests and Completion Evidence.
 
     Execute the authenticated command and optional renderer path end to end,
     then prove security and package boundaries under negative scenarios.
 
-    - [ ] 6.5.1 Task - Run command trust-boundary integration tests.
+    - [x] 6.5.1 Task - Run command trust-boundary integration tests.
 
       Evidence must cross browser, runtime, transport, Phoenix, current state,
       side effect, audit, and rendered result.
 
-      - [ ] 6.5.1.1 Subtask - Run repeated authorized requests and verify exactly one allowed effect, current-state authorization, bounded result, correlated audit, and cleanup.
-      - [ ] 6.5.1.2 Subtask - Run the complete tampering/expiry/replay/origin/CSRF/rate/disconnect/error matrix and prove no unauthorized effect or secret leakage.
-      - [ ] 6.5.1.3 Subtask - Evaluate the authenticated-command proof and form-event authority requirement; stop if authority depends on client presentation or private renderer state.
+      - [x] 6.5.1.1 Subtask - Run repeated authorized requests and verify exactly one allowed effect, current-state authorization, bounded result, correlated audit, and cleanup.
+      - [x] 6.5.1.2 Subtask - Run the complete tampering/expiry/replay/origin/CSRF/rate/disconnect/error matrix and prove no unauthorized effect or secret leakage.
+      - [x] 6.5.1.3 Subtask - Evaluate the authenticated-command proof and form-event authority requirement; stop if authority depends on client presentation or private renderer state.
 
-    - [ ] 6.5.2 Task - Run adapter-isolation tests and publish phase evidence.
+    - [x] 6.5.2 Task - Run adapter-isolation tests and publish phase evidence.
 
       The adapter must be removable and version mismatch must be bounded.
 
-      - [ ] 6.5.2.1 Subtask - Run standalone DOM absent-adapter, adapter-enabled, mismatch/fallback, reconnect, stale patch, and teardown suites with graph/import/artifact checks.
-      - [ ] 6.5.2.2 Subtask - Review every private API, shim, pin, compatibility fixture, fallback, upgrade trigger, and finding against the private-coupling risk.
-      - [ ] 6.5.2.3 Subtask - Publish Phase 6 evidence with revisions, commands, traces, security review, private-API inventory, isolation results, proof/risk outcomes, and stop/go decision.
+      - [x] 6.5.2.1 Subtask - Run standalone DOM absent-adapter, adapter-enabled, mismatch/fallback, reconnect, stale patch, and teardown suites with graph/import/artifact checks.
+      - [x] 6.5.2.2 Subtask - Review every private API, shim, pin, compatibility fixture, fallback, upgrade trigger, and finding against the private-coupling risk.
+      - [x] 6.5.2.3 Subtask - Publish Phase 6 evidence with revisions, commands, traces, security review, private-API inventory, isolation results, proof/risk outcomes, and stop/go decision.
 
 ## Section delivery rule
 

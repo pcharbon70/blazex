@@ -219,6 +219,23 @@ defmodule BlazeXBrowserPhoenix.ControlPlugTest do
     refute inspect(snapshot) =~ session.cookie
   end
 
+  test "authority restart invalidates prior sessions and resets authoritative effects" do
+    session = establish("operator")
+    assert command_request(session, command("before-restart", "before-restart", 0)).status == 200
+
+    original = Process.whereis(FixtureAuthority)
+    monitor = Process.monitor(original)
+    Process.exit(original, :kill)
+    assert_receive {:DOWN, ^monitor, :process, ^original, :killed}, 1_000
+    restarted = await_restart(original, 100)
+    assert is_pid(restarted)
+
+    rejected = command_request(session, command("after-restart", "after-restart", 1))
+    assert rejected.status == 401
+    assert code(rejected) == "session-invalid"
+    assert FixtureAuthority.snapshot()["resource"]["value"] == 0
+  end
+
   defp request(method, path, headers \\ [], body \\ "") do
     headers
     |> Enum.reduce(conn(method, path, body), fn {name, value}, acc ->
@@ -278,5 +295,18 @@ defmodule BlazeXBrowserPhoenix.ControlPlugTest do
       "expected_version" => expected_version,
       "payload" => %{"amount" => 1}
     }
+  end
+
+  defp await_restart(_original, 0), do: nil
+
+  defp await_restart(original, attempts) do
+    case Process.whereis(FixtureAuthority) do
+      pid when is_pid(pid) and pid != original ->
+        pid
+
+      _ ->
+        Process.sleep(10)
+        await_restart(original, attempts - 1)
+    end
   end
 end

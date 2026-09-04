@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0.0",
+  "scenario_id": "BX-BH01-SCENARIO-PHASE6-TRUST-BOUNDARY",
+  "status": "passed",
+  "owner": "quality-owner",
+  "requirement_refs": [
+    "BH-01-PHASE-6",
+    "BX-BH01-PROOF-FORM-EVENT",
+    "BX-BH01-RISK-PRIVATE-LIVEVIEW-COUPLING"
+  ],
+  "profiles": [
+    "browser-phoenix-phase6",
+    "chrome-for-testing-152.0.7977.75",
+    "atomvm-popcorn-browser-fixture"
+  ],
+  "preconditions": [
+    "The Phase 6 authorization, command contract, exact server graph, runtime bundle, and governed profile are present.",
+    "Test identity controls are active only for loopback requests in the test environment.",
+    "The optional LiveView adapter compatibility descriptor matches the pinned candidate versions."
+  ],
+  "steps": [
+    "Drive the server action through normalized DOM event, Elixir runtime intent, browser transport, Phoenix, server authority, audit, public result, and DOM update.",
+    "Repeat an identical idempotency request and exercise stale, rate, unauthorized, expired, transaction, server, disconnect, timeout, retry, and disposal outcomes.",
+    "Exercise exact/mismatched adapter descriptors, full/diff patch ordering, reconnect, stale/duplicate data, and explicit fallback.",
+    "Run standalone browser fixture, DOM adapter, Plug closure, headless boundary, import, cleanup, and evidence checks."
+  ],
+  "expected_results": [
+    "Only server-owned identity, authorization, current state, and idempotency can permit one effect.",
+    "Denied and failed commands produce no unauthorized effect or secret-bearing diagnostic.",
+    "Adapter mismatch disables the optional path and preserves standalone DOM.",
+    "Final browser/runtime/transport/DOM ownership is bounded and the Phase 6 evidence remains unsupported feasibility."
+  ],
+  "prohibited_results": [
+    "Client role, presentation, or private renderer data grants authority.",
+    "A replay, stale request, failure, late result, or disposal repeats or applies an unauthorized effect.",
+    "LiveView coupling enters the standalone DOM, runtime fixture, server authority, Plug profile, headless profile, or portable package.",
+    "The result is represented as production identity, persistence, browser support, or a stable component/renderer contract."
+  ],
+  "evidence_types": [
+    "actual-browser-observation",
+    "server-audit-observation",
+    "negative-path-result",
+    "adapter-compatibility-result",
+    "dependency-and-import-boundary",
+    "resource-cleanup-observation"
+  ]
+}

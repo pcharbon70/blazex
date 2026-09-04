@@ -1,0 +1,85 @@
+BH-01 Phase 6 validation log v0.1.0
+Observed: 2026-09-04T12:53:17.348Z
+Implementation parent: 1dbcbfde5e7c76b39ccd2a999f0dd07a88c411e6
+
+ACTUAL BROWSER TRUST-BOUNDARY EXECUTION
+Command: BLAZEX_BASE_URL=http://127.0.0.1:4199/bh01/ BLAZEX_CHROME_PATH=/tmp/blazex-bh01-chrome-152.0.7977.75/chrome-linux64/chrome BLAZEX_EVIDENCE_PATH=integration/fixtures/raw-evidence/bh01-phase6-trust-and-isolation.json BLAZEX_REVISION=1dbcbfde5e7c76b39ccd2a999f0dd07a88c411e6 <qualified-node-26.8.1>/bin/node test/browser/phase6.integration.mjs
+Working directory: js/blazex_runtime
+Endpoint: exact Phoenix profile at http://127.0.0.1:4199/bh01/
+Result: PASS; status=observed-pass; support=unsupported-provisional-feasibility
+Toolchain: Node v26.8.1; Playwright Core 1.62.1; Chrome for Testing 152.0.7977.75; Linux 6.8.0-51-generic x64
+Browser archive SHA-256: a16d36890636bd72251133b27f05825f7f9269c2425b3408fa3a76e10dccd8f1
+Action path: normalized DOM event -> Elixir runtime -> bridge -> same-origin fetch -> Phoenix -> server authority -> redacted audit -> bounded result -> DOM
+Rendered action: accepted; counter value/version=1/1; rendered status="Server counter: 1 (version 1)"
+Explicit action: accepted once to value/version=2/2; exact replay returned replayed=true and retained value/version=2/2
+Audit: 5 correlated records; outcomes=accepted,accepted,replayed,state-stale,rate-limited; authorized effects=2
+Failures: authorization-denied; session-invalid; state-stale; rate-limited; transaction-failed; server-unavailable; transport-unavailable; transport-timeout
+Disconnect retry: PASS; one retry returned ok without duplicate effect
+Disposal delivery: false; the pending result was not delivered to the stopped runtime
+Unauthorized effects: 0
+Cleanup: bridge pending/timers=0/0 and stopped=true; server pending=0 and session_configured=false; lifecycle resources={}; DOM roots/listeners/nodes=0/0/0
+Adapter capability: eligible only for LocalLiveView 0.1.0/Phoenix LiveView 1.2.11; fallback=standalone-dom
+Retained evidence SHA-256: e2c46faea7741042855ecdae9604a17ff364c69a1ea3d92ee3ad24c2cedb9cbb
+
+EXACT ELIXIR PACKAGE, FIXTURE, AND PROFILE TESTS
+Command: docker run --rm --network none ... <digest-pinned-hexpm-elixir> sh -lc 'mix archive.install /tmp/hex.ez --force && mix test'
+Working directory: packages/blazex_phoenix
+Result: PASS; 8 tests, 0 failures
+Command: docker run --rm --network none ... <digest-pinned-hexpm-elixir> sh -lc 'mix archive.install /tmp/hex.ez --force && mix test'
+Working directory: packages/blazex_renderer_dom_liveview
+Result: PASS; 4 tests, 0 failures
+Command: docker run --rm --network none ... <digest-pinned-hexpm-elixir> sh -lc 'mix archive.install /tmp/hex.ez --force && mix test'
+Working directory: integration/fixtures/browser_host
+Result: PASS; 16 tests, 0 failures
+Command: docker run --rm --network none ... <digest-pinned-hexpm-elixir> sh -lc 'mix archive.install /tmp/hex.ez --force && mix test'
+Working directory: profiles/browser_phoenix
+Result: PASS; 12 tests, 0 failures
+Coverage: deterministic identities/state; command parsing; authentication; CSRF/origin; authorization; current version; idempotency; rate; transaction/server failure; audit redaction; supervisor restart; adapter compatibility and patch lifecycle
+
+JAVASCRIPT RUNTIME AND DOM ADAPTER
+Command: PATH=<qualified-node-26.8.1>:$PATH npm test
+Working directory: js/blazex_runtime
+Result: PASS; 6 tests, 0 failures, 0 skipped
+Command: PATH=<qualified-node-26.8.1>:$PATH npm run build
+Result: PASS; runtime, profile host/frame, Phase 5, and Phase 6 browser-harness syntax checks passed
+Command: PATH=<qualified-node-26.8.1>:$PATH npm test
+Working directory: packages/blazex_renderer_dom
+Result: PASS; 1 test file, 0 failures, 0 skipped
+Command: PATH=<qualified-node-26.8.1>:$PATH npm run build
+Result: PASS; closed DOM protocol and renderer syntax checks passed
+
+CONTRACT, PROFILE, AND EVIDENCE VERIFICATION
+Command: python3 -m unittest discover -s integration/fixtures/local_browser/tests -p 'test_*.py'
+Result: PASS; 6 tests, 0 failures
+Command: python3 integration/fixtures/local_browser/verify_contracts.py
+Result: PASS; fixture records, scenario/proof coverage, normalization, and production-source leakage guards passed
+Command: python3 -m unittest discover -s profiles/browser_phoenix/toolchain/tests -p 'test_*.py'
+Result: PASS; 68 tests, 0 failures
+Phase 6 mutation coverage: unauthorized effect, secret-bearing evidence, hidden adapter fallback, retained server request, open plan work, completion hash drift, dependency/import drift, and unavailable AtomVM regex API
+Command: python3 integration/fixtures/browser_host/verify_fixture.py --generated integration/fixtures/browser_host/generated
+Result: PASS
+Command: python3 profiles/browser_phoenix/assets/phase4/verify_profile.py profiles/browser_phoenix/priv/static/bh01
+Result: PASS; governed profile manifest and artifact hashes match
+Command: python3 profiles/browser_phoenix/toolchain/verify_phase6_boundaries.py
+Result: PASS; standalone DOM, Plug, inactive headless, source-import, package-manifest, and AtomVM API boundaries passed
+Command: python3 profiles/browser_phoenix/toolchain/verify_phase6.py
+Result: PASS; retained Phase 5 chain, server/fixture/boundary checks, completion schema/hashes, browser evidence, private inventory, plan, and claim boundaries passed
+Command: python3 docs/research/validate_archive.py
+Result: PASS
+Command: git diff --check
+Result: PASS
+
+INTEGRATION FINDINGS
+1. The first browser attempt reached Regex.match?/2 in the AtomVM fixture and failed because the Erlang re NIF is unavailable. Identifier and result-code checks now use bounded byte predicates; the source verifier rejects Regex or ~r/ in that fixture.
+2. The exact private-API inventory changed when Phase 6 added source revisions and line spans. The unified dependency inventory now binds its new digest, while the Phase 2 gate verifies immutable Phase 2 hashes from the recorded source revision.
+3. LiveView/LocalLiveView candidate compatibility is an exact-version eligibility result, not activation or a claim that private renderer behavior defines BlazeX semantics.
+
+FINAL GATE
+Phase 6 result: PASS, narrow go to make Phase 7 eligible.
+Command trust result: PASS; the server reconstructs identity, authorization, current state, idempotency, and side-effect authority; client presentation and renderer data are not trusted.
+Form-event authority result: provisional server-authority requirement passed for the disposable counter command; Phase 8 cross-browser input/validation evidence remains open.
+Isolation result: PASS; optional LiveView coupling is confined to blazex_renderer_dom_liveview, exact-pin mismatch selects standalone DOM, and standalone DOM remains independently usable.
+Profile result: Plug and headless are static boundary contracts, not executable profiles.
+Support result: unsupported-provisional-feasibility; no browser, production security, persistence, deployment, performance, accessibility, or cross-browser support claim promoted.
+Contract result: command, identity, counter, adapter descriptor, and patch protocol remain disposable BH-01 fixtures and do not establish BH-02 public contracts.
+Authorization: Phase 7 is eligible but not authorized.

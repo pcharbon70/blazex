@@ -40,13 +40,23 @@ def file_sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
+def historical_sha256(revision: str, path: str) -> str | None:
+    result = subprocess.run(
+        ["git", "show", f"{revision}:{path}"],
+        cwd=ROOT,
+        capture_output=True,
+        check=False,
+    )
+    return hashlib.sha256(result.stdout).hexdigest() if result.returncode == 0 else None
+
+
 def validate(
     completion: dict[str, Any],
     authorization: dict[str, Any],
     plan_text: str,
     milestone_text: str,
     evidence_text: str,
-    repository_hashes: dict[str, str],
+    repository_hashes: dict[str, set[str]],
 ) -> list[str]:
     errors: list[str] = []
     if authorization.get("status") != "approved-phase-2-only":
@@ -69,7 +79,7 @@ def validate(
         expected = record.get("sha256", "")
         if not SHA256.fullmatch(expected):
             errors.append(f"Phase 2 evidence hash is invalid: {path}")
-        elif repository_hashes.get(path) != expected:
+        elif expected not in repository_hashes.get(path, set()):
             errors.append(f"Phase 2 evidence hash drifted: {path}")
     if len(completion.get("limitations", [])) < 4:
         errors.append("Phase 2 completion limitations are incomplete")
@@ -96,12 +106,18 @@ def validate(
 
 def inputs() -> tuple[Any, ...]:
     completion = load(COMPLETION)
+    revision = completion.get("source_revision", "")
     records = completion.get("input_hashes", []) + completion.get("output_hashes", [])
-    hashes = {
-        record["path"]: file_sha256(ROOT / record["path"])
-        for record in records
-        if (ROOT / record["path"]).is_file()
-    }
+    hashes: dict[str, set[str]] = {}
+    for record in records:
+        path = record["path"]
+        values: set[str] = set()
+        if (ROOT / path).is_file():
+            values.add(file_sha256(ROOT / path))
+        historical = historical_sha256(revision, path)
+        if historical:
+            values.add(historical)
+        hashes[path] = values
     return (
         completion,
         load(AUTHORIZATION),

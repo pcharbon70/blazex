@@ -36,6 +36,11 @@ class Phase6BoundaryTest(unittest.TestCase):
         sources["fixture.ex"] = "alias Phoenix.LiveView.Socket"
         self.assertTrue(self.validate(4, sources))
 
+    def test_atomvm_unavailable_regex_fails(self):
+        sources = copy.deepcopy(self.values[4])
+        sources["integration/fixtures/browser_host/lib/local_behavior.ex"] = "Regex.match?(~r/a/, value)"
+        self.assertTrue(self.validate(4, sources))
+
     def test_server_authority_adapter_import_fails(self):
         sources = copy.deepcopy(self.values[5])
         sources["authority.ex"] = "alias BlazeX.Renderer.DOM.LiveView"

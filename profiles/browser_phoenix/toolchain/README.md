@@ -54,6 +54,15 @@ python3 profiles/browser_phoenix/toolchain/verify_phase6_boundaries.py
 python3 -m unittest profiles/browser_phoenix/toolchain/tests/test_phase6_boundaries.py
 ```
 
+After the actual-browser command matrix has been captured, the complete Phase
+6 gate composes the retained Phase 5 gate with server, fixture, dependency,
+secret-leakage, adapter-fallback, evidence-hash, and completion-schema checks:
+
+```console
+python3 profiles/browser_phoenix/toolchain/verify_phase6.py
+python3 -m unittest profiles/browser_phoenix/toolchain/tests/test_phase6.py
+```
+
 `unified-dependency-inventory.json` binds the canonical locks and reports by
 digest. `acquisition-evidence.json` records true clean and network-disabled
 cache replays for Hex and npm, immutable runtime-source replay timings, binary
