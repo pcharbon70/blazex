@@ -22,27 +22,27 @@ Back to milestone: [README](README.md)
   mobile browsers, verify prerequisite and compatibility failures, and produce
   intentional accessible fallbacks without promoting browser support.
 
-  - [ ] 8.1 Section - Materialize and govern browser environments.
+  - [x] 8.1 Section - Materialize and govern browser environments.
 
     Each result must identify the engine/version, operating system, device,
     policies, automation limits, network, and artifacts that produced it.
 
-    - [ ] 8.1.1 Task - Provision the five candidate configurations.
+    - [x] 8.1.1 Task - Provision the five candidate configurations.
 
       Use the browser-envelope identities for Chromium desktop/Android, Firefox
       desktop, Safari macOS, and Safari iOS/iPadOS.
 
-      - [ ] 8.1.1.1 Subtask - Pin exact browser/OS/device revisions where controlled and define per-run fingerprint/drift gates for externally managed mobile browsers.
-      - [ ] 8.1.1.2 Subtask - Record CPU, memory, architecture, power/thermal state, display/input, secure context, policy/header configuration, and unavailable controls.
-      - [ ] 8.1.1.3 Subtask - Record automation driver/protocol, server location, network shaping, cache state, screenshots/video/trace capability, and manual evidence requirements.
+      - [x] 8.1.1.1 Subtask - Pin exact browser/OS/device revisions where controlled and define per-run fingerprint/drift gates for externally managed mobile browsers.
+      - [x] 8.1.1.2 Subtask - Record CPU, memory, architecture, power/thermal state, display/input, secure context, policy/header configuration, and unavailable controls.
+      - [x] 8.1.1.3 Subtask - Record automation driver/protocol, server location, network shaping, cache state, screenshots/video/trace capability, and manual evidence requirements.
 
-    - [ ] 8.1.2 Task - Implement matrix scheduling and result governance.
+    - [x] 8.1.2 Task - Implement matrix scheduling and result governance.
 
       Missing environments or retries must be explicit instead of silently
       shrinking the matrix.
 
-      - [ ] 8.1.2.1 Subtask - Define scheduling, environment verification, scenario selection, retry limit, quarantine, raw evidence, artifact identity, and result schema.
-      - [ ] 8.1.2.2 Subtask - Fail the required run on drift, missing browser/device, stale artifact, silent retry, incomplete trace, or unreviewed quarantine and distinguish environment-blocked from product-failed.
+      - [x] 8.1.2.1 Subtask - Define scheduling, environment verification, scenario selection, retry limit, quarantine, raw evidence, artifact identity, and result schema.
+      - [x] 8.1.2.2 Subtask - Fail the required run on drift, missing browser/device, stale artifact, silent retry, incomplete trace, or unreviewed quarantine and distinguish environment-blocked from product-failed.
 
   - [ ] 8.2 Section - Execute the prerequisite matrix.
 

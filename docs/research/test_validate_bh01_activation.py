@@ -94,7 +94,7 @@ class BH01ActivationValidationTests(unittest.TestCase):
                 boundary_record["allowed_planned_dependencies"],
             )
 
-    def test_fixture_evidence_is_nonproduction_and_benchmarks_remain_unexecuted(self) -> None:
+    def test_fixture_evidence_is_nonproduction_and_budgets_remain_unmeasured(self) -> None:
         fixtures = validator._load_json(validator.REPO_ROOT / "integration/fixtures/fixture-index.json")
         benchmarks = validator._load_json(
             validator.REPO_ROOT / "integration/benchmarks/benchmark-index.json"
@@ -108,7 +108,14 @@ class BH01ActivationValidationTests(unittest.TestCase):
             self.assertTrue(
                 (validator.REPO_ROOT / "integration/fixtures" / scenario["evidence"]).is_file()
             )
-        self.assertEqual(benchmarks["environments"], [])
+        self.assertGreaterEqual(len(benchmarks["environments"]), 1)
+        for environment in benchmarks["environments"]:
+            self.assertTrue(
+                (validator.REPO_ROOT / "integration/benchmarks" / environment["path"]).is_file()
+            )
+            self.assertTrue(
+                (validator.REPO_ROOT / "integration/benchmarks" / environment["raw_evidence"]).is_file()
+            )
         self.assertEqual(benchmarks["measurements"], [])
         self.assertEqual(benchmarks["samples"], [])
         self.assertEqual(benchmarks["reports"], [])

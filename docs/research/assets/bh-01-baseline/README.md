@@ -137,6 +137,10 @@ locations rather than this governance directory.
   — schema-valid resilience/security/resource decision with retained browser
   traces, convergence, redaction and adversarial findings, a narrow `go`, and
   explicit Phase 8 non-authorization.
+- [BH-01 Phase 8 authorization v0.1.0](blazex-bh-01-phase-08-authorization-v0.1.0.json)
+  — repository-owner approval for the complete five-row browser matrix,
+  non-substituting engine probes, truthful environment blockers, section
+  commits, one immediately merged PR, synchronization, and branch cleanup.
 
 ## Maintaining this index
 

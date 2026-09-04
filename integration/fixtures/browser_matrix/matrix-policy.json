@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0.0",
+  "policy_id": "BX-BH01-PHASE8-MATRIX-POLICY-0.1",
+  "status": "phase8-governed",
+  "required_configuration_ids": ["BR-CHROMIUM-DESKTOP", "BR-CHROMIUM-ANDROID", "BR-FIREFOX-DESKTOP", "BR-WEBKIT-DESKTOP", "BR-WEBKIT-MOBILE"],
+  "result_statuses": ["passed", "failed", "environment-blocked", "flaky", "not-applicable"],
+  "environment_blocked_is_product_pass": false,
+  "environment_blocked_is_product_failure": false,
+  "required_row_may_be_omitted": false,
+  "probe_may_substitute_required_row": false,
+  "scheduling": {
+    "verify_environment_before_run": true,
+    "verify_artifacts_before_run": true,
+    "scenario_set": "immutable-phase8-scenario-set",
+    "maximum_automatic_retries": 0,
+    "reviewed_rerun_limit": 1,
+    "silent_retry_allowed": false,
+    "quarantine_requires": ["owner", "reason", "expiry", "review", "retained-first-result"],
+    "missing_required_row_result": "environment-blocked"
+  },
+  "required_result_fields": ["configuration_id", "environment_id", "scenario_set_sha256", "profile_manifest_sha256", "status", "attempt", "started_at", "completed_at", "raw_evidence_refs", "limitations", "review"],
+  "staleness_days": 31,
+  "artifact_policy": {
+    "profile_manifest_sha256": "84b0b91484f08357d350452b2c7ed3a17de4ad98d51cd3ff3f2115b655e4c768",
+    "reject_stale_or_changed_artifact": true,
+    "partial_trace_allowed": false
+  },
+  "phase_gate": {
+    "missing_or_blocked_required_rows": "blocked",
+    "product_failure": "failed",
+    "unreviewed_flaky_or_quarantine": "blocked",
+    "all_required_rows_passed": "eligible-for-phase9-review"
+  },
+  "claims_not_made": ["browser support", "emulation equivalence", "accessibility conformance", "production readiness"]
+}

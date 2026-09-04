@@ -442,7 +442,22 @@ def _validate_repository_activation(
             Draft202012Validator(_load_json(REPO_ROOT / "integration/fixtures/scenario.schema.json")).validate(_load_json(scenario_path))
         except JsonSchemaValidationError as exc:
             raise ValidationError(f"fixture scenario schema failure in {scenario_path.relative_to(REPO_ROOT)}: {exc.message}") from exc
-    _require(benchmark_index.get("environments") == [] and benchmark_index.get("measurements") == [] and benchmark_index.get("samples") == [] and benchmark_index.get("reports") == [], "benchmark index contains Phase 1 execution evidence")
+    environment_schema = _load_json(REPO_ROOT / "integration/benchmarks/environment-fingerprint.schema.json")
+    for environment in benchmark_index.get("environments", []):
+        environment_path = REPO_ROOT / "integration/benchmarks" / str(environment.get("path", ""))
+        raw_path = REPO_ROOT / "integration/benchmarks" / str(environment.get("raw_evidence", ""))
+        _require(environment_path.is_file(), f"benchmark environment is missing: {environment.get('environment_id')}")
+        _require(raw_path.is_file(), f"benchmark environment raw evidence is missing: {environment.get('environment_id')}")
+        try:
+            Draft202012Validator(environment_schema, format_checker=FormatChecker()).validate(_load_json(environment_path))
+        except JsonSchemaValidationError as exc:
+            raise ValidationError(f"benchmark environment schema failure in {environment_path.relative_to(REPO_ROOT)}: {exc.message}") from exc
+    _require(
+        benchmark_index.get("measurements") == []
+        and benchmark_index.get("samples") == []
+        and benchmark_index.get("reports") == [],
+        "benchmark index contains measurement evidence before its authorized phase",
+    )
     _require(benchmark_index.get("budget_state") == "proposed-unmeasured", "benchmark index claims a passed budget")
 
     evidence_boundary = activation["evidence_boundary"]
