@@ -8,6 +8,7 @@ export class BrowserRuntimeFrame {
   #frame;
   #listener;
   #onEvent;
+  #pending = new Map();
   #stopped = false;
 
   constructor({ frameUrl, documentImpl = globalThis.document, onEvent = () => {} }) {
@@ -30,6 +31,14 @@ export class BrowserRuntimeFrame {
       if (event.source !== this.#frame.contentWindow) return;
       const message = event.data;
       if (message?.protocol !== FRAME_PROTOCOL || message.channel !== this.#channel) return;
+      if (message.type === "bridge-response") {
+        const correlationId = message.envelope?.correlation_id;
+        const pending = this.#pending.get(correlationId);
+        if (pending) {
+          this.#pending.delete(correlationId);
+          pending.resolve(message.envelope);
+        }
+      }
       this.#onEvent(Object.freeze({ ...message }));
     };
     globalThis.addEventListener("message", this.#listener);
@@ -56,15 +65,39 @@ export class BrowserRuntimeFrame {
     }, new URL(this.#frame.src).origin, [runtimeModule, runtimeWasm, applicationBundle]);
   }
 
+  request(envelope) {
+    if (this.#stopped || !this.#frame.contentWindow) return Promise.reject(new BlazeXHostError("frame-not-attached", "The runtime frame is unavailable"));
+    if (this.#pending.has(envelope.correlation_id)) return Promise.reject(new BlazeXHostError("frame-correlation-duplicate", "The frame already owns this correlation ID"));
+    return new Promise((resolve, reject) => {
+      this.#pending.set(envelope.correlation_id, { resolve, reject });
+      this.#post({ type: "bridge-request", generation: envelope.generation, envelope });
+    });
+  }
+
+  cancel(envelope) {
+    const pending = this.#pending.get(envelope.correlation_id);
+    if (pending) {
+      this.#pending.delete(envelope.correlation_id);
+      pending.reject(new BlazeXHostError("frame-request-cancelled", "The frame request was cancelled"));
+    }
+    if (!this.#stopped && this.#frame.contentWindow) this.#post({ type: "bridge-cancel", generation: envelope.generation, envelope });
+  }
+
   stop(reason = "requested") {
     if (this.#stopped) return;
     this.#stopped = true;
     if (this.#frame.contentWindow) {
       this.#frame.contentWindow.postMessage({ protocol: FRAME_PROTOCOL, type: "stop", channel: this.#channel, reason }, new URL(this.#frame.src).origin);
     }
+    for (const { reject } of this.#pending.values()) reject(new BlazeXHostError("frame-stopped", "The runtime frame stopped"));
+    this.#pending.clear();
     this.#frame.remove();
     if (this.#listener) globalThis.removeEventListener("message", this.#listener);
     this.#listener = null;
+  }
+
+  #post(message) {
+    this.#frame.contentWindow.postMessage({ protocol: FRAME_PROTOCOL, channel: this.#channel, ...message }, new URL(this.#frame.src).origin);
   }
 }
 

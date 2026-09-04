@@ -10,6 +10,14 @@ addEventListener("message", async (event) => {
     post(message, "stopped", { reason: message.reason });
     return;
   }
+  if (message.type === "bridge-request") {
+    await bridgeRequest(message);
+    return;
+  }
+  if (message.type === "bridge-cancel") {
+    bridgeCancel(message);
+    return;
+  }
   if (message.type !== "start" || active) return;
 
   const objectUrls = [];
@@ -56,4 +64,38 @@ addEventListener("message", async (event) => {
 
 function post(message, type, details = {}) {
   parent.postMessage({ protocol: PROTOCOL, channel: message.channel, generation: message.generation, type, ...details }, location.origin);
+}
+
+async function bridgeRequest(message) {
+  const envelope = message.envelope;
+  if (!active?.runtime || active.channel !== message.channel || envelope?.generation !== active.generation || envelope?.protocol !== "blazex.host-bridge/1") {
+    post(message, "bridge-rejected", { code: "bridge-generation-invalid", correlation_id: envelope?.correlation_id });
+    return;
+  }
+  try {
+    const raw = await active.runtime.call("main", JSON.stringify(envelope));
+    const response = typeof raw === "string" ? JSON.parse(raw) : raw;
+    post(message, "bridge-response", { envelope: response });
+  } catch (error) {
+    post(message, "bridge-response", {
+      envelope: {
+        protocol: "blazex.host-bridge/1",
+        type: "response",
+        scenario_id: envelope.scenario_id,
+        generation: envelope.generation,
+        correlation_id: envelope.correlation_id,
+        sequence: envelope.sequence,
+        status: "error",
+        error: { code: "runtime-call-failed", message: error instanceof Error ? error.message.slice(0, 256) : "Runtime call failed" },
+      },
+    });
+  }
+}
+
+function bridgeCancel(message) {
+  const envelope = message.envelope;
+  if (active?.runtime && active.channel === message.channel && envelope?.generation === active.generation) {
+    active.runtime.cast("main", JSON.stringify(envelope));
+  }
+  post(message, "bridge-cancelled", { correlation_id: envelope?.correlation_id });
 }

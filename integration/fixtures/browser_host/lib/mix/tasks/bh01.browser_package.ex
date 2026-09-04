@@ -40,7 +40,9 @@ defmodule Mix.Tasks.Bh01.BrowserPackage do
 
         def start do
           specs = unquote(Macro.escape(specs))
-          {:ok, _controller} = :application_controller.start({:application, :kernel, specs[:kernel]})
+
+          {:ok, _controller} =
+            :application_controller.start({:application, :kernel, specs[:kernel]})
 
           for {application, spec} <- specs, application != :kernel do
             :ok = :application.load({:application, application, spec})
@@ -53,7 +55,12 @@ defmodule Mix.Tasks.Bh01.BrowserPackage do
         end
       end
 
-    environment = %{__ENV__ | file: "/workspace/generated/blazex_bh01_browser_host_boot.ex", line: 1}
+    environment = %{
+      __ENV__
+      | file: "/workspace/generated/blazex_bh01_browser_host_boot.ex",
+        line: 1
+    }
+
     {:module, @start_module, binary, _} = Module.create(@start_module, contents, environment)
     path = Path.join(out_dir, "Elixir.BlazeX.BH01.BrowserHost.Boot.beam")
     File.write!(path, binary)
@@ -67,7 +74,9 @@ defmodule Mix.Tasks.Bh01.BrowserPackage do
     builtin_beams =
       [:erts, :popcorn_lib | Enum.filter(Map.keys(specs), &MapSet.member?(builtin, &1))]
       |> Enum.uniq()
-      |> Enum.flat_map(fn app -> Path.wildcard(Path.join(Popcorn.Build.patched_ebin_dir(app), "*.beam")) end)
+      |> Enum.flat_map(fn app ->
+        Path.wildcard(Path.join(Popcorn.Build.patched_ebin_dir(app), "*.beam"))
+      end)
 
     fixture_beams =
       Mix.Project.compile_path()
@@ -89,7 +98,11 @@ defmodule Mix.Tasks.Bh01.BrowserPackage do
   end
 
   defp reject_duplicates!(paths) do
-    duplicates = paths |> Enum.group_by(&Path.basename/1) |> Enum.filter(fn {_name, members} -> length(members) > 1 end)
+    duplicates =
+      paths
+      |> Enum.group_by(&Path.basename/1)
+      |> Enum.filter(fn {_name, members} -> length(members) > 1 end)
+
     if duplicates != [], do: Mix.raise("duplicate bundle modules: #{inspect(duplicates)}")
   end
 
@@ -103,7 +116,10 @@ defmodule Mix.Tasks.Bh01.BrowserPackage do
       modules: Enum.map(paths, &Path.basename(&1, ".beam"))
     }
 
-    File.write!(Path.join(out_dir, "module-inventory.json"), Jason.encode_to_iodata!(inventory, pretty: true))
+    File.write!(
+      Path.join(out_dir, "module-inventory.json"),
+      Jason.encode_to_iodata!(inventory, pretty: true)
+    )
   end
 
   defp gather_app_specs([], specs), do: specs
@@ -116,7 +132,9 @@ defmodule Mix.Tasks.Bh01.BrowserPackage do
         {app, [env: Application.get_all_env(app) |> Enum.sort()] ++ spec}
       end
 
-    dependencies = new_specs |> Enum.flat_map(fn {_app, spec} -> spec[:applications] || [] end) |> Enum.uniq()
+    dependencies =
+      new_specs |> Enum.flat_map(fn {_app, spec} -> spec[:applications] || [] end) |> Enum.uniq()
+
     gather_app_specs(dependencies, Map.merge(specs, new_specs))
   end
 end

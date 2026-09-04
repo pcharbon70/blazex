@@ -1,34 +1,34 @@
 {
   "artifacts": [
     {
-      "bytes": 6528588,
+      "bytes": 6532468,
       "content_encoding": null,
       "id": "BX-BH01-BROWSER-HOST-AVM",
       "kind": "avm",
       "mime": "application/vnd.atomvm.avm",
       "path": "generated/bundle.avm",
-      "sha256": "cb03f91ca2eb39c325c4b4da67fe439a8687ea6d3ad90d5316f99d75a8a353cd"
+      "sha256": "d955621e5de89a8460ac8ecf3fede7093ffc5690ef01f68b97b0cd6aaf5e2706"
     },
     {
-      "bytes": 3040600,
+      "bytes": 3042289,
       "content_encoding": "gzip",
       "id": "BX-BH01-BROWSER-HOST-AVM-GZIP",
       "kind": "avm-gzip",
       "mime": "application/vnd.atomvm.avm",
       "path": "generated/bundle.avm.gz",
-      "sha256": "6895016b72dc6598be9d07afde71da025b2ef1cdedc8cb9aa2ed22ea6ebbf147"
+      "sha256": "f7911f699a767f81e90c17ce952730330464177c52f334ae97047008d9f42155"
     },
     {
-      "bytes": 13944,
+      "bytes": 13991,
       "content_encoding": null,
       "id": "BX-BH01-BROWSER-HOST-MODULE-INVENTORY",
       "kind": "module-inventory",
       "mime": "application/json",
       "path": "generated/module-inventory.json",
-      "sha256": "8d1b0a491dc4c7a455617b8f88c074d76676b9eebaf56c98bb5ee3275d919dc2"
+      "sha256": "53aa7cb4c655685580c54aca10d478188761f409c30e8e01b2dd4298debf3489"
     }
   ],
-  "build_contract_sha256": "e460e49d64386d092170aa6fa03e01e4232d23b818945c48ff39bb10d8087c56",
+  "build_contract_sha256": "512a72747e5451a887b3ae379c2737bc84ca5ec735a2f1802a1a8f0d8bbd9838",
   "limitations": [
     "browser-only readiness is not evidence of DOM behavior",
     "unpruned AVM size is not a passed budget"
@@ -46,12 +46,16 @@
       "sha256": "30a1b27a48366f8e0ea4e0fc996709822d61025229ac38234277c427b37b30b6"
     },
     {
+      "path": "lib/blazex/bh01/browser_host/protocol.ex",
+      "sha256": "a398b686eb3c77171e33777e304ad297da732e894e446f03851c37e294c72ff4"
+    },
+    {
       "path": "lib/blazex/bh01/browser_host.ex",
-      "sha256": "00d6a1af36ca72e648cd705cb5835edf6c7acf127472dabf9ce226238a2fe289"
+      "sha256": "086258aafbb2d4fa77826ccc4f29e88449ab2929253c0258d64d7b4f276b61e5"
     },
     {
       "path": "lib/mix/tasks/bh01.browser_package.ex",
-      "sha256": "8624a4b5b9cfc45f286a649b796a368ee449ca9fa1a426ba72a83e9debaf9b5e"
+      "sha256": "3e2b8092a2515584bcd51f8b84bc4194612c822cfa8cfc0aa6de11f87bacbb76"
     },
     {
       "path": "mix.exs",

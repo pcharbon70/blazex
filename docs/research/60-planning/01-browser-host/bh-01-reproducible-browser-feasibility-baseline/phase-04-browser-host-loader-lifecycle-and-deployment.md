@@ -53,27 +53,27 @@ Back to milestone: [README](README.md)
       - [x] 4.1.3.1 Subtask - Add source/API guards against component state, DOM mutation, Phoenix authorization, LiveView data, arbitrary script execution, and unbounded host calls.
       - [x] 4.1.3.2 Subtask - Document each JavaScript operation, artifact, global/listener/worker, browser API, cleanup owner, capability prerequisite, and future replacement boundary.
 
-  - [ ] 4.2 Section - Implement the explicit browser-host bridge.
+  - [x] 4.2 Section - Implement the explicit browser-host bridge.
 
     Browser facilities and runtime messages need schemas, generations, bounds,
     cancellation, and disposal before UI events use them.
 
-    - [ ] 4.2.1 Task - Define host request/event protocols.
+    - [x] 4.2.1 Task - Define host request/event protocols.
 
       Only the minimal BH-01 operations should cross the boundary, using
       values rather than browser object references.
 
-      - [ ] 4.2.1.1 Subtask - Define versioned request, response, event, error, cancel, readiness, shutdown, and diagnostic envelopes with scenario/generation/correlation identity.
-      - [ ] 4.2.1.2 Subtask - Bound operation allowlists, payload schema/size/depth, timeout, concurrency, sequence, backpressure, retry, and diagnostic fields.
-      - [ ] 4.2.1.3 Subtask - Reject DOM/JavaScript object handles, functions/code, arbitrary URL/fetch, credentials/secrets, unknown operations, stale generations, malformed values, and late results.
+      - [x] 4.2.1.1 Subtask - Define versioned request, response, event, error, cancel, readiness, shutdown, and diagnostic envelopes with scenario/generation/correlation identity.
+      - [x] 4.2.1.2 Subtask - Bound operation allowlists, payload schema/size/depth, timeout, concurrency, sequence, backpressure, retry, and diagnostic fields.
+      - [x] 4.2.1.3 Subtask - Reject DOM/JavaScript object handles, functions/code, arbitrary URL/fetch, credentials/secrets, unknown operations, stale generations, malformed values, and late results.
 
-    - [ ] 4.2.2 Task - Implement bridge lifecycle and observability.
+    - [x] 4.2.2 Task - Implement bridge lifecycle and observability.
 
       Requests and subscriptions must have deterministic ownership from start
       through cancellation, error, or disposal.
 
-      - [ ] 4.2.2.1 Subtask - Implement correlation, timeout, cancel acknowledgement, generation invalidation, idempotent cleanup, bounded queues, and redacted traces on both sides.
-      - [ ] 4.2.2.2 Subtask - Instrument pending requests, bytes/messages, listeners, workers, timers, failures, retries, stale drops, and cleanup convergence per generation.
+      - [x] 4.2.2.1 Subtask - Implement correlation, timeout, cancel acknowledgement, generation invalidation, idempotent cleanup, bounded queues, and redacted traces on both sides.
+      - [x] 4.2.2.2 Subtask - Instrument pending requests, bytes/messages, listeners, workers, timers, failures, retries, stale drops, and cleanup convergence per generation.
 
   - [ ] 4.3 Section - Define browser-host lifecycle, failure, and teardown.
 

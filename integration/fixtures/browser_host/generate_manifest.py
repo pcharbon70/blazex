@@ -35,7 +35,14 @@ def main() -> int:
       "artifacts": records,
       "source_inputs": [
         {"path": str(path.relative_to(HERE)), "sha256": sha(path)}
-        for path in sorted([HERE / "mix.exs", HERE / "mix.lock", HERE / "config/config.exs", HERE / "lib/blazex/bh01/browser_host.ex", HERE / "lib/mix/tasks/bh01.browser_package.ex"])
+        for path in sorted([
+          HERE / "mix.exs",
+          HERE / "mix.lock",
+          HERE / "config/config.exs",
+          HERE / "lib/blazex/bh01/browser_host.ex",
+          HERE / "lib/blazex/bh01/browser_host/protocol.ex",
+          HERE / "lib/mix/tasks/bh01.browser_package.ex",
+        ])
       ],
       "normalization": ["fixed boot module identity", "sorted unique BEAM basenames", "zero gzip MTIME"],
       "limitations": ["browser-only readiness is not evidence of DOM behavior", "unpruned AVM size is not a passed budget"]
