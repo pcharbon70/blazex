@@ -107,27 +107,27 @@ Back to milestone: [README](README.md)
       - [x] 7.3.3.2 Subtask - Verify current-state authorization, origin/CSRF/session controls, schema/rate/time/idempotency bounds, audit completeness, and least host-operation exposure.
       - [x] 7.3.3.3 Subtask - Record specialist findings, residual attack assumptions, production controls not yet implemented, and security stop conditions without claiming audit certification.
 
-  - [ ] 7.4 Section - Standardize diagnostics and operational evidence.
+  - [x] 7.4 Section - Standardize diagnostics and operational evidence.
 
     Failures must be explainable across layers without exposing secrets or
     depending on a developer console alone.
 
-    - [ ] 7.4.1 Task - Implement correlated structured diagnostics.
+    - [x] 7.4.1 Task - Implement correlated structured diagnostics.
 
       One scenario/generation/correlation chain should connect browser, runtime,
       bridge, renderer, transport, server, audit, and cleanup events.
 
-      - [ ] 7.4.1.1 Subtask - Define stable diagnostic categories, severity, owner, safe user message, internal fields, sampling/retention, and clock/source identities.
-      - [ ] 7.4.1.2 Subtask - Implement redaction tests for credentials, cookies/tokens, private state, paths, source snippets, stack traces, query/body fields, and authorization details.
-      - [ ] 7.4.1.3 Subtask - Preserve raw evidence securely while generating bounded developer and user-facing summaries.
+      - [x] 7.4.1.1 Subtask - Define stable diagnostic categories, severity, owner, safe user message, internal fields, sampling/retention, and clock/source identities.
+      - [x] 7.4.1.2 Subtask - Implement redaction tests for credentials, cookies/tokens, private state, paths, source snippets, stack traces, query/body fields, and authorization details.
+      - [x] 7.4.1.3 Subtask - Preserve raw evidence securely while generating bounded developer and user-facing summaries.
 
-    - [ ] 7.4.2 Task - Validate failure observability and evidence completeness.
+    - [x] 7.4.2 Task - Validate failure observability and evidence completeness.
 
       Every injected failure should be discoverable and attributable without
       requiring an undocumented manual debugging step.
 
-      - [ ] 7.4.2.1 Subtask - Assert each failure scenario emits expected layer/category/correlation, terminal/fallback result, cleanup evidence, and affected proof/risk link.
-      - [ ] 7.4.2.2 Subtask - Detect silent console-only errors, uncaught exceptions/rejections, missing server audit, orphan traces, duplicate diagnostics, and redaction failures.
+      - [x] 7.4.2.1 Subtask - Assert each failure scenario emits expected layer/category/correlation, terminal/fallback result, cleanup evidence, and affected proof/risk link.
+      - [x] 7.4.2.2 Subtask - Detect silent console-only errors, uncaught exceptions/rejections, missing server audit, orphan traces, duplicate diagnostics, and redaction failures.
 
   - [ ] 7.5 Section - Phase 7 Integration Tests and Completion Evidence.
 

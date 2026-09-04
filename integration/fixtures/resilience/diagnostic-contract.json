@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0.0",
+  "contract_id": "BX-BH01-PHASE7-DIAGNOSTICS-0.1",
+  "status": "phase7-fixture-contract",
+  "protocol": "blazex.bh01.diagnostic/0.1",
+  "required_identity": ["scenario_id", "generation", "correlation_id", "sequence", "source", "clock_id"],
+  "categories": {
+    "supply-chain": {"owner":"toolchain-owner","severity":"blocker","user_message":"Required build input is unavailable."},
+    "integrity": {"owner":"browser-host-owner","severity":"blocker","user_message":"The application could not be verified."},
+    "transport": {"owner":"browser-host-owner","severity":"error","user_message":"The operation could not reach the server."},
+    "compatibility": {"owner":"browser-host-owner","severity":"warning","user_message":"This runtime path is unavailable."},
+    "activation": {"owner":"browser-host-owner","severity":"error","user_message":"The experimental runtime did not start."},
+    "runtime-contract": {"owner":"runtime-owner","severity":"blocker","user_message":"The runtime contract is incompatible."},
+    "runtime": {"owner":"runtime-owner","severity":"error","user_message":"The experimental runtime stopped unexpectedly."},
+    "bridge": {"owner":"browser-host-owner","severity":"error","user_message":"The runtime operation failed."},
+    "render": {"owner":"standalone-dom-owner","severity":"error","user_message":"The interface could not be updated."},
+    "identity": {"owner":"server-authority-owner","severity":"warning","user_message":"Authentication is required."},
+    "authority": {"owner":"server-authority-owner","severity":"warning","user_message":"The operation is not permitted."},
+    "concurrency": {"owner":"server-authority-owner","severity":"warning","user_message":"The displayed state is stale."},
+    "server": {"owner":"server-authority-owner","severity":"error","user_message":"The server could not complete the operation."},
+    "resource-lifecycle": {"owner":"lifecycle-owner","severity":"blocker","user_message":"The runtime could not stop cleanly."}
+  },
+  "severities": ["debug", "info", "warning", "error", "blocker"],
+  "redacted_key_fragments": ["authorization", "body", "cookie", "credential", "csrf", "password", "private", "query", "secret", "session", "source_snippet", "stack", "token"],
+  "redacted_value_classes": ["bearer-credential", "cookie-pair", "sensitive-query", "absolute-local-path", "stack-frame"],
+  "retention": {
+    "in_memory_events": 256,
+    "duplicate_policy": "drop-identical-and-count",
+    "raw_evidence": "sanitized-governed-artifact-only",
+    "developer_summary_fields": ["sequence", "layer", "category", "severity", "owner", "code", "correlation_id", "internal"],
+    "user_summary_fields": ["severity", "code", "message", "correlation_id"]
+  },
+  "failure_observability": {
+    "console_only_allowed": false,
+    "uncaught_allowed": false,
+    "orphan_correlation_allowed": false,
+    "server_audit_required_for_authority": true,
+    "cleanup_evidence_required": true
+  },
+  "claims_not_made": ["production telemetry API", "production retention policy", "incident response certification"]
+}
