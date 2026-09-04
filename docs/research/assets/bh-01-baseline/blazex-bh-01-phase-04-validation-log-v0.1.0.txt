@@ -1,0 +1,48 @@
+BH-01 Phase 4 validation log v0.1.0
+Observed: 2026-09-04T09:43:57Z
+Implementation parent: 6924c2d03e90a1785ac57e8a25841742acb6c98e
+
+ACTUAL BROWSER EXECUTION
+Command: BLAZEX_BASE_URL=http://127.0.0.1:4197/bh01/ BLAZEX_CHROME_PATH=/tmp/blazex-bh01-chrome-152.0.7977.75/chrome-linux64/chrome BLAZEX_EVIDENCE_PATH=/tmp/blazex-bh01-phase4-browser-evidence.json BLAZEX_REVISION=6924c2d03e90a1785ac57e8a25841742acb6c98e /tmp/blazex-bh01-acquisition.i8r3gB/node-v26.8.1-linux-x64/bin/node test/browser/phase4.integration.mjs
+Working directory: js/blazex_runtime
+Endpoint: exact Phoenix profile at http://127.0.0.1:4197/bh01/
+Result: PASS; status=observed-pass
+Toolchain: Node v26.8.1; Playwright Core 1.62.1; Chrome for Testing 152.0.7977.75; Linux 6.8.0-51-generic x64
+Browser archive SHA-256: a16d36890636bd72251133b27f05825f7f9269c2425b3408fa3a76e10dccd8f1
+Positive scenarios: cold ready generation 1; restart ready generations 2 and 3; warm-navigation ready generation 1; four stops converged with resources={}; Elixir echo passed on every ready activation
+Negative scenarios: missing-isolation-policy=fallback/unsupported; manifest-network-failure=failed/fetch-failed/stopped; manifest-digest-integrity-failure=failed/artifact-integrity-mismatch/stopped
+Deployment: 18 governed files; no source maps; range=206; ETag revalidation=304; artifact identity/MIME/cache checks passed; no undeclared network path
+Retained normalized evidence: integration/fixtures/raw-evidence/bh01-phase4-browser.json
+
+JAVASCRIPT TEST AND STATIC BUILD
+Command: PATH=<qualified-node-26.8.1>:$PATH npm test
+Working directory: js/blazex_runtime
+Result: PASS; 6 tests, 0 failures, 0 skipped
+Coverage: loader boundaries, manifest and artifact failure, bridge bounds/cancellation/generation, lifecycle retry/disposal, prerequisites/fallback, runtime-frame startup/error/cleanup
+Command: PATH=<qualified-node-26.8.1>:$PATH npm run build
+Result: PASS; syntax checks passed for nine runtime modules plus host.js and runtime-frame.js
+
+PYTHON CONTRACT AND MUTATION TESTS
+Command: python3 -m unittest discover -s profiles/browser_phoenix/toolchain/tests -p 'test_*.py'
+Result: PASS; 47 tests, 0 failures
+Phase 4 mutation coverage: support promotion, teardown leak, integrity-code drift, hidden network path
+Command: python3 profiles/browser_phoenix/assets/phase4/verify_profile.py profiles/browser_phoenix/priv/static/bh01
+Result: PASS; 18 governed files
+Command: python3 integration/fixtures/browser_host/verify_fixture.py --generated integration/fixtures/browser_host/generated
+Result: PASS
+
+EXACT PHOENIX PROFILE
+Command: docker run --rm --network none -e MIX_ENV=test -v <repository>:/workspace -v <hex-2.5.1.ez>:/tmp/hex.ez:ro -w /workspace/profiles/browser_phoenix docker.io/hexpm/elixir@sha256:8d03cfb52e3fa3f5d83d749942b7c45c966dda48a7c4ba4f069390379b59fc39 sh -lc 'mix archive.install /tmp/hex.ez --force && mix test'
+Result: PASS; 4 tests, 0 failures
+Network: disabled
+
+INTEGRATION FINDINGS
+1. Actual Emscripten blob-module boot required explicit locateFile even though verified wasmBinary was supplied; fixed in runtime-frame.js.
+2. Actual Popcorn AVM boot required bridge initialization before main; fixed through onRuntimeInitialized.
+3. Stable browser state and explicit restart were required for truthful stopped snapshots and monotonic generation assertions; fixed in host.js.
+4. Popcorn 0.3.3 still requires unsafe-eval for tracked JavaScript execution; retained as feasibility-only security debt.
+
+FINAL GATE
+Phase 4 result: PASS, narrow go to make Phase 5 eligible.
+Support result: unsupported-provisional-feasibility; no browser support promoted.
+Authorization: Phase 5 is eligible but not authorized.

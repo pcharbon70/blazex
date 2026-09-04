@@ -5,7 +5,7 @@ const detail = document.querySelector("[data-bh01-detail]");
 const events = [];
 const record = (event) => {
   if (events.length < 256) events.push(event);
-  globalThis.__blazexBH01 = { ...(globalThis.__blazexBH01 ?? {}), events };
+  if (globalThis.__blazexBH01) globalThis.__blazexBH01.events = events;
 };
 const show = (state, message) => {
   status.dataset.state = state;
@@ -15,14 +15,18 @@ const show = (state, message) => {
 const prerequisites = detectBrowserPrerequisites();
 globalThis.__blazexBH01 = { prerequisites, events, state: "checked" };
 detail.textContent = prerequisites.message;
+const loader = mayActivate(prerequisites) ? new BrowserRuntimeLoader({ onEvent: record }) : null;
 
 if (!mayActivate(prerequisites)) {
   show("fallback", prerequisites.decision === "unsupported" ? "Experimental runtime unavailable" : "Server-rendered fallback active");
   globalThis.__blazexBH01.state = "fallback";
 } else {
+  await start();
+}
+
+async function start() {
   show("starting", "Starting experimental Elixir WebAssembly runtime…");
-  const loader = new BrowserRuntimeLoader({ onEvent: record });
-  globalThis.__blazexBH01.loader = loader;
+  Object.assign(globalThis.__blazexBH01, { loader, state: "starting" });
   try {
     const activation = await loader.start({
       manifestUrl: "./runtime-manifest.json",
@@ -41,13 +45,17 @@ if (!mayActivate(prerequisites)) {
   }
 }
 
+globalThis.blazexBh01Start = start;
 globalThis.blazexBh01Stop = async () => {
   const state = globalThis.__blazexBH01;
   try {
     if (state?.activation?.bridge) await state.activation.bridge.request("runtime.shutdown", {}, { timeoutMs: 2_000 });
   } finally {
     state?.loader?.stop("explicit-browser-stop");
-    if (state) state.state = "stopped";
+    if (state) {
+      globalThis.__blazexBH01.state = "stopped";
+      globalThis.__blazexBH01.activation = null;
+    }
     show("stopped", "Experimental runtime stopped");
   }
 };

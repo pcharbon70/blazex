@@ -16,7 +16,7 @@ aliases:
 
 Back to milestone: [README](README.md)
 
-- [ ] 4 Phase - Browser Host Loader, Lifecycle, and Deployment.
+- [x] 4 Phase - Browser Host Loader, Lifecycle, and Deployment.
 
   Load the governed runtime/bundle artifacts in a real browser, define explicit
   browser-host messaging and lifecycle behavior, detect prerequisites before
@@ -127,27 +127,27 @@ Back to milestone: [README](README.md)
       - [x] 4.4.2.2 Subtask - Implement profile-local verification of headers, asset reachability, manifest/artifact consistency, and stale-cache behavior before activation.
       - [x] 4.4.2.3 Subtask - Distinguish development/test/release, direct Phoenix, reverse-proxy/CDN, unsupported hosting, and browser-managed cache differences.
 
-  - [ ] 4.5 Section - Phase 4 Integration Tests and Completion Evidence.
+  - [x] 4.5 Section - Phase 4 Integration Tests and Completion Evidence.
 
     Prove repeated real-browser boot, intentional unsupported failure, lifecycle
     cleanup, and deployment checks before DOM behavior is added.
 
-    - [ ] 4.5.1 Task - Execute boot, lifecycle, and fallback tests.
+    - [x] 4.5.1 Task - Execute boot, lifecycle, and fallback tests.
 
       Integration must traverse the actual profile, loader, Wasm, bundle,
       runtime, bridge, and browser state machine.
 
-      - [ ] 4.5.1.1 Subtask - Run cold/warm/repeated boot-to-ready and stop loops in the controlled browser, verifying identities, transitions, messages, resource counts, and timing observations.
-      - [ ] 4.5.1.2 Subtask - Run missing prerequisite, policy/header, network, integrity, cache, instantiate, startup, bridge, crash, navigation, retry, and disposal negative scenarios.
-      - [ ] 4.5.1.3 Subtask - Evaluate the runtime-boot proof provisionally and the initial browser-fallback proof without promoting support.
+      - [x] 4.5.1.1 Subtask - Run cold/warm/repeated boot-to-ready and stop loops in the controlled browser, verifying identities, transitions, messages, resource counts, and timing observations.
+      - [x] 4.5.1.2 Subtask - Run missing prerequisite, policy/header, network, integrity, cache, instantiate, startup, bridge, crash, navigation, retry, and disposal negative scenarios.
+      - [x] 4.5.1.3 Subtask - Evaluate the runtime-boot proof provisionally and the initial browser-fallback proof without promoting support.
 
-    - [ ] 4.5.2 Task - Validate artifacts and publish phase evidence.
+    - [x] 4.5.2 Task - Validate artifacts and publish phase evidence.
 
       Browser-added artifacts and deployment requirements must join the
       canonical manifest with no unexplained output or hidden fetch.
 
-      - [ ] 4.5.2.1 Subtask - Validate loader/worker/JavaScript/maps/manifests/licenses, artifact hashes/sizes/reachability, network logs, headers, caches, and deterministic generation.
-      - [ ] 4.5.2.2 Subtask - Publish Phase 4 evidence with revisions, commands, browser/profile fingerprint, lifecycle/fallback traces, deployment contract, artifacts, findings, risks, and stop/go decision.
+      - [x] 4.5.2.1 Subtask - Validate loader/worker/JavaScript/maps/manifests/licenses, artifact hashes/sizes/reachability, network logs, headers, caches, and deterministic generation.
+      - [x] 4.5.2.2 Subtask - Publish Phase 4 evidence with revisions, commands, browser/profile fingerprint, lifecycle/fallback traces, deployment contract, artifacts, findings, risks, and stop/go decision.
 
 ## Section delivery rule
 

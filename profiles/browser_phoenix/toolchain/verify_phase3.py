@@ -80,8 +80,10 @@ def validate(
     required_milestone = "| complete — gate passed | Build the pinned Wasm runtime"
     if required_milestone not in milestone_text:
         errors.append("BH-01 milestone no longer records the passed Phase 3 gate")
-    if "planned — eligible, not authorized" not in milestone_text:
-        errors.append("BH-01 milestone does not preserve Phase 4 authorization boundary")
+    phase4_planned = "| planned — eligible, not authorized | Implement manifest-driven loading" in milestone_text
+    phase4_complete = "| complete — gate passed | Implement manifest-driven loading" in milestone_text
+    if not (phase4_planned or phase4_complete):
+        errors.append("BH-01 milestone loses the Phase 4 progression record")
     for revision in ("93fb260", "5371a15", "7893ac6", "dd6b827"):
         if revision not in evidence_text:
             errors.append(f"Phase 3 evidence omits section revision {revision}")

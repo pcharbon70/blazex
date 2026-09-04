@@ -34,8 +34,9 @@ addEventListener("message", async (event) => {
 
     const wasmMemory = new WebAssembly.Memory({ initial: 256, maximum: 256, shared: true });
     let observedAbort = null;
-    const runtime = await createRuntime({
+    const moduleOptions = {
       arguments: ["/bundle.avm"],
+      locateFile: (path) => new URL(path, location.href).href,
       mainScriptUrlOrBlob: runtimeBlob,
       wasmBinary: new Uint8Array(message.runtimeWasm),
       wasmMemory,
@@ -47,11 +48,9 @@ addEventListener("message", async (event) => {
         post(message, "runtime-failed", { code: "runtime-abort", reason: observedAbort });
       },
       onExit: (status) => post(message, "runtime-exited", { status }),
-      sendEvent: (name, payload) => {
-        post(message, "runtime-event", { name, payload });
-        if (name === message.startup.readiness_event) post(message, "application-ready", { name });
-      },
-    });
+      onRuntimeInitialized: () => configurePopcornBridge(moduleOptions, message),
+    };
+    const runtime = await createRuntime(moduleOptions);
     if (observedAbort !== null) throw new Error(`Runtime aborted: ${observedAbort}`);
     active.runtime = runtime;
     post(message, "runtime-ready", { memory_pages: wasmMemory.buffer.byteLength / 65_536 });
@@ -80,8 +79,8 @@ async function bridgeRequest(message) {
     return;
   }
   try {
-    const raw = await active.runtime.call("main", JSON.stringify(envelope));
-    const response = typeof raw === "string" ? JSON.parse(raw) : raw;
+    const raw = await active.runtime.call("main", envelope);
+    const response = typeof raw === "string" ? active.runtime.deserialize(raw) : raw;
     post(message, "bridge-response", { envelope: response });
   } catch (error) {
     post(message, "bridge-response", {
@@ -102,7 +101,48 @@ async function bridgeRequest(message) {
 function bridgeCancel(message) {
   const envelope = message.envelope;
   if (active?.runtime && active.channel === message.channel && envelope?.generation === active.generation) {
-    active.runtime.cast("main", JSON.stringify(envelope));
+    active.runtime.cast("main", envelope);
   }
   post(message, "bridge-cancelled", { correlation_id: envelope?.correlation_id });
+}
+
+function configurePopcornBridge(runtime, message) {
+  runtime.serialize = JSON.stringify;
+  runtime.deserialize = (raw) => JSON.parse(raw, (_key, value) => {
+    if (value && typeof value === "object" && Object.hasOwn(value, "popcorn_ref") && Object.keys(value).length === 1) {
+      return runtime.trackedObjectsMap.get(value.popcorn_ref);
+    }
+    return value;
+  });
+  runtime.cleanupFunctions = new Map();
+  runtime.onTrackedObjectDelete = (key) => {
+    const cleanup = runtime.cleanupFunctions.get(key);
+    runtime.cleanupFunctions.delete(key);
+    try { cleanup?.(); } finally { runtime.trackedObjectsMap.delete(key); }
+  };
+  const originalCast = runtime.cast;
+  const originalCall = runtime.call;
+  runtime.cast = (process, value) => originalCast(process, runtime.serialize(value));
+  runtime.call = (process, value) => originalCall(process, runtime.serialize(value));
+  runtime.onRunTrackedJs = (source) => {
+    try {
+      const indirectEval = eval;
+      const fn = indirectEval(source);
+      const result = fn(runtime);
+      if (result !== undefined && !Array.isArray(result)) throw new TypeError("Tracked script must return an array or undefined");
+      return (result ?? []).map((value) => {
+        const key = runtime.nextTrackedObjectKey();
+        runtime.trackedObjectsMap.set(key, value);
+        return key;
+      });
+    } catch (error) {
+      post(message, "runtime-failed", { code: "runtime-script-failed", reason: error instanceof Error ? error.message : String(error) });
+      return null;
+    }
+  };
+  runtime.onGetTrackedObjects = (keys) => keys.map((key) => runtime.serialize(runtime.trackedObjectsMap.get(key)));
+  runtime.sendEvent = (name, payload) => {
+    post(message, "runtime-event", { name, payload });
+    if (name === message.startup.readiness_event) post(message, "application-ready", { name });
+  };
 }
