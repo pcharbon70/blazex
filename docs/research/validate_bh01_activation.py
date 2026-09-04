@@ -389,24 +389,12 @@ def _validate_repository_activation(
         for test_entrypoint in record["test_entrypoints"]:
             _require((boundary / test_entrypoint).exists(), f"test entrypoint is missing: {record['path']}/{test_entrypoint}")
 
-        prohibited_outputs = [
-            boundary / "mix.lock",
-            boundary / "package-lock.json",
-            boundary / "yarn.lock",
-            boundary / "pnpm-lock.yaml",
-            boundary / "deps",
-            boundary / "node_modules",
-        ]
-        _require(not any(path.exists() for path in prohibited_outputs), f"dependency or lock output exists in {record['path']}")
-
-        if record["kind"] in {"elixir-package", "executable-profile"}:
-            manifest_text = manifest.read_text(encoding="utf-8")
-            _require("defp deps, do: []" in manifest_text, f"Mix dependency list is not explicitly empty: {record['path']}")
-            _require("{:" not in manifest_text, f"Mix manifest contains a dependency tuple: {record['path']}")
-        if record["kind"] == "javascript-package":
-            package = _load_json(manifest)
-            _require(package.get("packageManager") == "npm@11.4.2", "JavaScript package-manager choice is not pinned")
-            _require(package.get("dependencies") == {} and package.get("devDependencies") == {}, "JavaScript dependencies must remain empty")
+        # Dependency-free activation is historical evidence bound by the Phase 1
+        # completion record and its source revision. Later, separately authorized
+        # phases may add locks, local dependency trees, and manifest entries. The
+        # persistent activation check is ownership, boundary, graph, API, and
+        # source/test isolation rather than an assertion that the repository is
+        # forever frozen at its Phase 1 filesystem state.
 
     standalone = REPO_ROOT / "packages/blazex_renderer_dom"
     standalone_text = "\n".join(path.read_text(encoding="utf-8") for path in _source_files(standalone))
@@ -444,7 +432,16 @@ def _validate_repository_activation(
             Draft202012Validator.check_schema(_load_json(schema_path))
         except SchemaError as exc:
             raise ValidationError(f"integration schema failure in {schema_path.relative_to(REPO_ROOT)}: {exc.message}") from exc
-    _require(fixture_index.get("scenarios") == [] and fixture_index.get("production_import_allowed") is False, "fixture index overclaims or permits production import")
+    _require(fixture_index.get("production_import_allowed") is False, "fixture index permits production import")
+    for scenario in fixture_index.get("scenarios", []):
+        scenario_path = REPO_ROOT / "integration/fixtures" / str(scenario.get("path", ""))
+        evidence_path = REPO_ROOT / "integration/fixtures" / str(scenario.get("evidence", ""))
+        _require(scenario_path.is_file(), f"fixture scenario is missing: {scenario.get('scenario_id')}")
+        _require(evidence_path.is_file(), f"fixture scenario evidence is missing: {scenario.get('scenario_id')}")
+        try:
+            Draft202012Validator(_load_json(REPO_ROOT / "integration/fixtures/scenario.schema.json")).validate(_load_json(scenario_path))
+        except JsonSchemaValidationError as exc:
+            raise ValidationError(f"fixture scenario schema failure in {scenario_path.relative_to(REPO_ROOT)}: {exc.message}") from exc
     _require(benchmark_index.get("environments") == [] and benchmark_index.get("measurements") == [] and benchmark_index.get("samples") == [] and benchmark_index.get("reports") == [], "benchmark index contains Phase 1 execution evidence")
     _require(benchmark_index.get("budget_state") == "proposed-unmeasured", "benchmark index claims a passed budget")
 

@@ -1,10 +1,26 @@
 {
   "schema_version": "1.0.0",
   "index_id": "BX-BH01-FIXTURE-INDEX-0.1",
-  "status": "initialized-no-scenarios-executed",
+  "status": "phase3-gate-passed-browser-unproven",
   "scenario_schema": "scenario.schema.json",
   "scenario_location": "scenarios",
   "raw_evidence_location": "raw-evidence",
-  "scenarios": [],
+  "fixture_projects": [
+    {
+      "id": "BX-BH01-FIXTURE-RUNTIME-SMOKE",
+      "path": "runtime_smoke",
+      "status": "node-semantics-and-artifact-accounting-passed-browser-unproven",
+      "public_api": false,
+      "manifest": "runtime_smoke/bundle-manifest.json"
+    }
+  ],
+  "scenarios": [
+    {
+      "scenario_id": "BX-BH01-SCENARIO-RUNTIME-SEMANTICS-NODE",
+      "path": "scenarios/bh01-runtime-semantics.json",
+      "status": "passed",
+      "evidence": "raw-evidence/bh01-phase3-runtime-semantics.json"
+    }
+  ],
   "production_import_allowed": false
 }

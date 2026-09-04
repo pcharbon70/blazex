@@ -76,8 +76,15 @@ def validate(
 
     if "- [ ]" in plan_text:
         errors.append("Phase 2 plan still contains open work")
-    if "complete — gate passed" not in milestone_text or "planned — eligible, not authorized" not in milestone_text:
-        errors.append("BH-01 milestone status is not synchronized with the Phase 2 gate")
+    if "[2 — Toolchain and Dependency Qualification]" not in milestone_text or "| complete — gate passed |" not in milestone_text:
+        errors.append("BH-01 milestone no longer records the passed Phase 2 gate")
+    allowed_phase3_states = (
+        "planned — eligible, not authorized",
+        "in progress — authorized",
+        "complete — gate passed",
+    )
+    if not any(state in milestone_text for state in allowed_phase3_states):
+        errors.append("BH-01 milestone has no valid post-Phase-2 state")
     required_revisions = {"6c1cc4f", "d1ec81c", "679acf8", "448fb0b"}
     if any(revision not in evidence_text for revision in required_revisions):
         errors.append("Phase 2 section delivery revisions are incomplete")

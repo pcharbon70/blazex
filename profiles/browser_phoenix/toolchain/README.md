@@ -57,3 +57,12 @@ Validate acquisition evidence and its negative cases with:
 python3 profiles/browser_phoenix/toolchain/verify_acquisition.py
 python3 -m unittest profiles/browser_phoenix/toolchain/tests/test_acquisition.py
 ```
+
+After generated runtime and fixture outputs are present, the complete Phase 3
+gate composes the frozen Phase 2 checks with runtime-binary, AVM, actual-Wasm
+semantics, artifact-accounting, negative-path, activation, completion-schema,
+and evidence-hash validation:
+
+```console
+python3 profiles/browser_phoenix/toolchain/verify_phase3.py
+```

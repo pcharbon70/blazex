@@ -1,0 +1,83 @@
+{
+  "bundle": {
+    "path": "integration/fixtures/runtime_smoke/generated/release/bundle.avm",
+    "sha256": "4f4b7adf6b138df2c232cb03a390674b07f6b51d015722cc0654bd25c4a66a22"
+  },
+  "evidence_id": "BX-BH01-PHASE3-NEGATIVE-PATHS-0.1",
+  "limitations": [
+    "The Node harness is a non-browser host and does not prove browser loader failure UX.",
+    "Malformed protocol/capability, timer race, crash/restart, and late-message behavior execute inside the canonical Wasm fixture.",
+    "Cleanup-evidence corruption is a validator negative because a deliberately leaking guest is not retained as a product fixture."
+  ],
+  "results": [
+    {
+      "case_id": "canonical-runtime-control",
+      "expected": "actual Wasm runtime executes crash, timer race, malformed capability, and cleanup paths",
+      "observed": "all-required-runtime-traces",
+      "passed": true,
+      "returncode": 0
+    },
+    {
+      "case_id": "missing-import",
+      "expected": "WebAssembly host contract rejects input",
+      "observed": "expected-rejection",
+      "passed": true,
+      "returncode": 0
+    },
+    {
+      "case_id": "incompatible-memory-contract",
+      "expected": "WebAssembly host contract rejects input",
+      "observed": "expected-rejection",
+      "passed": true,
+      "returncode": 0
+    },
+    {
+      "case_id": "invalid-wasm",
+      "expected": "runtime rejects input",
+      "observed": "nonzero-runtime-rejection",
+      "passed": true,
+      "returncode_nonzero": true
+    },
+    {
+      "case_id": "corrupt-bundle",
+      "expected": "runtime rejects bundle before clean completion",
+      "observed": "nonzero-no-clean-completion",
+      "passed": true,
+      "returncode_nonzero": true
+    },
+    {
+      "case_id": "unknown-bundle",
+      "expected": "runtime rejects bundle before clean completion",
+      "observed": "nonzero-no-clean-completion",
+      "passed": true,
+      "returncode_nonzero": true
+    },
+    {
+      "case_id": "missing-module",
+      "expected": "runtime rejects bundle before clean completion",
+      "observed": "nonzero-no-clean-completion",
+      "passed": true,
+      "returncode_nonzero": true
+    },
+    {
+      "case_id": "cleanup-evidence-failure",
+      "expected": "retained-evidence validator rejects incomplete cleanup",
+      "observed": "validator-rejected",
+      "passed": true
+    }
+  ],
+  "runtime": {
+    "path": "packages/blazex_runtime_popcorn/runtime/generated/release-node-probe/artifacts/AtomVM.mjs",
+    "sha256": "54ca927247809e78338738d97f7cfa05349c7cdd8a96ca63021a8e218747c8fe"
+  },
+  "schema_version": "1.0.0",
+  "status": "passed",
+  "summary": {
+    "cases": 8,
+    "passed": 8
+  },
+  "wasm": {
+    "path": "packages/blazex_runtime_popcorn/runtime/generated/release-node-probe/artifacts/AtomVM.wasm",
+    "sha256": "7c31ad202adad7e8dca83f0da3a3ac7578c0ee7ea33d51ddc0e44f50e7df6814"
+  }
+}

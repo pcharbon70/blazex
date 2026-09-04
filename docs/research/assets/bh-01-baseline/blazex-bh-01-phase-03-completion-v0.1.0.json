@@ -1,0 +1,199 @@
+{
+  "schema_version": "1.0.0",
+  "record_id": "BX-BH01-DECISION-PHASE-03-GO",
+  "record_type": "decision",
+  "state": "passed",
+  "title": "BH-01 Phase 3 runtime build and BEAM packaging gate",
+  "owner_role": "bh01-owner",
+  "recorded_at": "2026-09-03T18:58:24Z",
+  "observed_at": "2026-09-03T18:58:24Z",
+  "source_revision": "dd6b8276f750de9e050f777749f2a13dd5f9526d",
+  "environment_refs": [
+    "profiles/browser_phoenix/toolchain/environment.lock.json",
+    "profiles/browser_phoenix/toolchain/runtime.lock.json",
+    "packages/blazex_runtime_popcorn/runtime/build-contract.json",
+    "integration/fixtures/runtime_smoke/build-contract.json",
+    "integration/fixtures/runtime_smoke/artifact-accounting-contract.json"
+  ],
+  "tool_identities": [
+    {
+      "name": "beam-build-image",
+      "version": "sha256:8d03cfb52e3fa3f5d83d749942b7c45c966dda48a7c4ba4f069390379b59fc39",
+      "source": "docker.io/hexpm/elixir",
+      "sha256": "a2386c21edd5c612b4ed6e2731daba806177dba55baf977ee456c6e194f60d9f"
+    },
+    {
+      "name": "wasm-build-image",
+      "version": "sha256:92c97951b9a6835cb5da9592e9d95226f67e09ecd01a541d817a5b4801f235a4",
+      "source": "docker.io/emscripten/emsdk",
+      "sha256": "2a003481ef771a04cc1a7b5c4be03db0b3cb76405aaddac0d27629a5aac322c2"
+    },
+    {
+      "name": "fissionvm",
+      "version": "6c3208c7b3dbc7dacc35a19f8de1fa80b358ac73",
+      "source": "github.com/software-mansion-labs/FissionVM",
+      "sha256": "dcf9b3357c8463faa9178b639487d0b4f88050d948c550eaa2cedf4e73d9e33e"
+    },
+    {
+      "name": "mbedtls",
+      "version": "3.6.3.1",
+      "source": "github.com/Mbed-TLS/mbedtls",
+      "sha256": "5344d16a64932b9956e2c9422fc5925ce480d570732f4379226888fffc19ed00"
+    },
+    {
+      "name": "node",
+      "version": "26.8.1",
+      "source": "nodejs.org",
+      "sha256": "3e301118d7df53d563b7e96c1617545f26e2f76f9724be668d6cab65c15dda5d"
+    },
+    {
+      "name": "python",
+      "version": "3.12.12",
+      "source": "local policy environment",
+      "sha256": "fb85a13414b028c49ba18bbd523c2d055a30b56b18b92ce454ea2c51edc656c4"
+    },
+    {
+      "name": "jsonschema",
+      "version": "4.25.1",
+      "source": "docs/research/requirements-validation.txt",
+      "sha256": null
+    }
+  ],
+  "requirement_refs": [
+    "BH-01-PHASE-3",
+    "BX-BH01-INPUT-ARTIFACTS",
+    "BX-BH01-INPUT-BEHAVIORS",
+    "BX-BH01-INPUT-STOP-CONDITIONS",
+    "BX-BH01-PROOF-RUNTIME-BOOT",
+    "BX-BH01-PROOF-ARTIFACT-ACCOUNTING",
+    "BX-BH01-PROOF-TIMER-MESSAGE",
+    "BX-BH01-RISK-TOOLCHAIN-REPRODUCIBILITY",
+    "BX-BH01-RISK-RUNTIME-SEMANTICS",
+    "BX-BH01-RISK-WASM-ARTIFACT-ACCOUNTING"
+  ],
+  "reciprocal_links": [
+    "docs/research/60-planning/01-browser-host/bh-01-reproducible-browser-feasibility-baseline/phase-03-runtime-build-and-beam-packaging.md",
+    "docs/research/60-planning/01-browser-host/bh-01-reproducible-browser-feasibility-baseline/phase-03-implementation-evidence.md",
+    "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-03-artifact-manifest-v0.1.0.json",
+    "integration/fixtures/runtime_smoke/runtime-semantics-findings.md",
+    "integration/fixtures/runtime_smoke/artifact-accounting-findings.md"
+  ],
+  "command_refs": [
+    "python3 packages/blazex_runtime_popcorn/runtime/build_runtime.py --fissionvm <qualified> --mbedtls <qualified> --ninja <qualified> --gperf <qualified> --zlib <qualified> --output <clean-output>",
+    "MIX_ENV=prod mix compile",
+    "MIX_ENV=prod mix bh01.package --mode debug --out-dir generated/debug",
+    "MIX_ENV=prod mix bh01.package --mode release --out-dir generated/release",
+    "python3 integration/fixtures/runtime_smoke/run_probe.py --node <qualified-node> --runtime <node-runtime> --bundle <release-avm> --output <evidence>",
+    "python3 integration/fixtures/runtime_smoke/run_negative_probes.py --node <qualified-node> --runtime <node-runtime> --bundle <release-avm> --output <evidence>",
+    "python3 integration/fixtures/runtime_smoke/generate_artifact_accounting.py --runtime-repeat <clean-runtime-output> --fixture-repeat <clean-fixture-output>",
+    "python3 profiles/browser_phoenix/toolchain/verify_phase3.py",
+    "python3 docs/research/validate_archive.py",
+    "git diff --check"
+  ],
+  "input_hashes": [
+    {
+      "path": "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-03-authorization-v0.1.0.json",
+      "sha256": "4d6dbd0bf65ce6a5faf61e4523fdd545207ffd5a5e91a8cb90afc45aa89a1054"
+    },
+    {
+      "path": "packages/blazex_runtime_popcorn/runtime/build-contract.json",
+      "sha256": "ae2f87845d612ac3ba9b23517389df5ddee4d1bda7f99bb9c024c47fea366980"
+    },
+    {
+      "path": "packages/blazex_runtime_popcorn/runtime/runtime-binary-manifest.json",
+      "sha256": "8db2038a7eb98aeaa772460101776b6b60c9114a88701c9cb1067ca3609b6c11"
+    },
+    {
+      "path": "integration/fixtures/runtime_smoke/build-contract.json",
+      "sha256": "08ce775a839c55e0604175b5c2bad2e389b7ef38fcafeba5fe30b40b43969f62"
+    },
+    {
+      "path": "integration/fixtures/runtime_smoke/bundle-manifest.json",
+      "sha256": "3277d59da5e6ac3352c4bff44f768212bb3729dd2811e0ed22c816f187891137"
+    },
+    {
+      "path": "integration/fixtures/runtime_smoke/semantics-contract.json",
+      "sha256": "c190381623165181ffa08f2626a8e7690d9275a94c8e83dd5add05db843cfd72"
+    },
+    {
+      "path": "integration/fixtures/raw-evidence/bh01-phase3-runtime-semantics.json",
+      "sha256": "4500797409c0468149b4dc8ed88dd0cbdb31c327eb3ef9d4dde514b0703777d3"
+    },
+    {
+      "path": "integration/fixtures/runtime_smoke/artifact-accounting-contract.json",
+      "sha256": "27c077ddc3b89d45ad0c87a7503cb56762153bbbea0f07a961571f4f10544e3a"
+    },
+    {
+      "path": "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-03-artifact-manifest-v0.1.0.json",
+      "sha256": "2754e44f54e8c36d5ffd47bbcb4ad217c504600e9f28830b0fcde0b1ad5427a9"
+    },
+    {
+      "path": "integration/fixtures/raw-evidence/bh01-phase3-artifact-reproducibility.json",
+      "sha256": "c49f3e899039a3c78711db6c78706bf4ba81cb276e1ba7c839f0c036b431c995"
+    },
+    {
+      "path": "integration/fixtures/raw-evidence/bh01-phase3-negative-paths.json",
+      "sha256": "fe1e8a9bb9ba642c6f9a0030111892808cfc7ffed48fb99f95e10ce9dffb4098"
+    }
+  ],
+  "output_hashes": [
+    {
+      "path": "docs/research/60-planning/01-browser-host/bh-01-reproducible-browser-feasibility-baseline/phase-03-implementation-evidence.md",
+      "sha256": "a090d0f8b40d5fa40e31b19e4b01914767748d12bdc7240dd2e8074cc6b68e99"
+    },
+    {
+      "path": "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-03-validation-log-v0.1.0.txt",
+      "sha256": "3c4dc763d031ae95b78f12f5169e8bb28b6c6809afb58b3db160e7f1d79ceb9d"
+    }
+  ],
+  "raw_evidence_refs": [
+    "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-03-validation-log-v0.1.0.txt",
+    "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-03-artifact-manifest-v0.1.0.json",
+    "integration/fixtures/raw-evidence/bh01-phase3-runtime-semantics.json",
+    "integration/fixtures/raw-evidence/bh01-phase3-artifact-reproducibility.json",
+    "integration/fixtures/raw-evidence/bh01-phase3-negative-paths.json"
+  ],
+  "normalization": [
+    {
+      "subject": "parallel runtime build transcripts",
+      "method": "Replace Ninja completion indices and bytewise-sort the complete transcript; compiled runtime bytes are compared without normalization."
+    },
+    {
+      "subject": "fixture boot application environment",
+      "method": "Sort Application.get_all_env/1 keyword entries before compiling the fixed boot module; AVM and gzip bytes are compared without normalization."
+    },
+    {
+      "subject": "runtime and negative evidence",
+      "method": "Retain ordered semantic identities, stable categories and artifact hashes while excluding temporary roots, engine-specific stack text, container IDs and nondeterministic elapsed timer values."
+    }
+  ],
+  "limitations": [
+    "No browser has loaded the runtime or fixture artifacts, and all browsers remain unsupported.",
+    "Direct JavaScript-to-guest calls remain unproven until a worker-separated browser host can progress independently of the VM event loop.",
+    "AtomVM reports OTP 27 while the pinned Popcorn fixture build uses OTP 26.0.2; both identities must remain distinct.",
+    "AtomVM Process.cancel_timer/1 returned false despite bounded non-delivery, so correctness depends on generation checks and cleanup observation.",
+    "The unpruned 584-module AVM bundles are correctness baselines and have not passed any proposed payload budget.",
+    "Release AVM line chunks are removed, but upstream compile metadata and paths remain for later source-exposure review.",
+    "Emscripten glue retains indirect-eval, shared-memory/thread and cross-origin-isolation assumptions that have not been browser-tested.",
+    "Runtime behavior was tested only at small bounded scale; stress, fairness, memory growth and repeated browser lifecycle remain open.",
+    "No DOM, component, Phoenix, Plug, LiveView, authenticated-command, fallback, accessibility, mobile or performance result is established."
+  ],
+  "supersedes": [],
+  "invalidates": [],
+  "retention": {
+    "class": "permanent",
+    "minimum_days": null,
+    "immutable_raw_evidence": true
+  },
+  "outcome": {
+    "summary": "Phase 3 runtime/package gate passed; Phase 4 is eligible but not authorized.",
+    "expected": "Pinned sources produce inspected debug/release Wasm and deterministic debug/release AVM artifacts; the actual Wasm VM executes required bounded semantics and fails closed for declared invalid inputs; every generated artifact has identity, lineage, provenance, licensing, ownership and reachability.",
+    "observed": "All Phase 3 validators and negative tests passed; actual Node-hosted Wasm emitted 33 ordered traces and converged cleanup; eight fail-closed cases passed; two clean equivalent builds produced 21 byte-identical outputs after two documented determinism fixes."
+  },
+  "review": {
+    "required": true,
+    "reviewer_role": "bh01-owner",
+    "reviewed_at": "2026-09-03T18:58:24Z",
+    "disposition": "accepted"
+  }
+}

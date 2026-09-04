@@ -1,0 +1,208 @@
+{
+  "artifacts": [
+    {
+      "artifact_id": "BX-BH01-FIXTURE-DEBUG-AVM",
+      "build_lineage": "BX-BH01-FIXTURE-BUILD-0.1",
+      "bytes": 6987416,
+      "content_encoding": null,
+      "kind": "avm",
+      "license_record_ids": [
+        "BX-BH01-LICENSE-POPCORN",
+        "BX-BH01-LICENSE-JASON"
+      ],
+      "mime": "application/vnd.atomvm.avm",
+      "mode": "debug",
+      "owner": "integration/fixtures/runtime_smoke",
+      "path": "generated/debug/bundle.avm",
+      "provenance": "exact locked Elixir/OTP container build with deterministic module ordering and fixed boot identity",
+      "reachability_root": "Elixir.BlazeX.BH01.RuntimeSmoke.Boot",
+      "retained": false,
+      "sha256": "8fc4e73c4afc8945c745d23492b8ae4a355948f44e9092aad7f0d9d49178e72a",
+      "source_map_policy": "fixture-debug"
+    },
+    {
+      "artifact_id": "BX-BH01-FIXTURE-DEBUG-AVM-GZIP",
+      "build_lineage": "BX-BH01-FIXTURE-BUILD-0.1",
+      "bytes": 3346502,
+      "content_encoding": "gzip",
+      "kind": "avm-gzip",
+      "license_record_ids": [
+        "BX-BH01-LICENSE-POPCORN",
+        "BX-BH01-LICENSE-JASON"
+      ],
+      "mime": "application/vnd.atomvm.avm",
+      "mode": "debug",
+      "owner": "integration/fixtures/runtime_smoke",
+      "path": "generated/debug/bundle.avm.gz",
+      "provenance": "exact locked Elixir/OTP container build with deterministic module ordering and fixed boot identity",
+      "reachability_root": "Elixir.BlazeX.BH01.RuntimeSmoke.Boot",
+      "retained": false,
+      "sha256": "0b5bd7aa64ce55964860bf07b6a0e13538e04fefefca25e6ab393d403289c89f",
+      "source_map_policy": "fixture-debug",
+      "uncompressed_artifact_id": "BX-BH01-FIXTURE-DEBUG-AVM",
+      "uncompressed_bytes": 6987416
+    },
+    {
+      "artifact_id": "BX-BH01-FIXTURE-DEBUG-MODULE-INVENTORY",
+      "build_lineage": "BX-BH01-FIXTURE-BUILD-0.1",
+      "bytes": 14063,
+      "content_encoding": null,
+      "kind": "module-inventory",
+      "license_record_ids": [
+        "BX-BH01-LICENSE-POPCORN",
+        "BX-BH01-LICENSE-JASON"
+      ],
+      "mime": "application/json",
+      "mode": "debug",
+      "owner": "integration/fixtures/runtime_smoke",
+      "path": "generated/debug/module-inventory.json",
+      "provenance": "exact locked Elixir/OTP container build with deterministic module ordering and fixed boot identity",
+      "reachability_root": "Elixir.BlazeX.BH01.RuntimeSmoke.Boot",
+      "retained": false,
+      "sha256": "22f17d3ff2214d51f9ed300e6a9aa5be9f98dd9ec0c9f2671b29ca6a1bfd98b2",
+      "source_map_policy": "fixture-debug"
+    },
+    {
+      "artifact_id": "BX-BH01-FIXTURE-RELEASE-AVM",
+      "build_lineage": "BX-BH01-FIXTURE-BUILD-0.1",
+      "bytes": 6541768,
+      "content_encoding": null,
+      "kind": "avm",
+      "license_record_ids": [
+        "BX-BH01-LICENSE-POPCORN",
+        "BX-BH01-LICENSE-JASON"
+      ],
+      "mime": "application/vnd.atomvm.avm",
+      "mode": "release",
+      "owner": "integration/fixtures/runtime_smoke",
+      "path": "generated/release/bundle.avm",
+      "provenance": "exact locked Elixir/OTP container build with deterministic module ordering and fixed boot identity",
+      "reachability_root": "Elixir.BlazeX.BH01.RuntimeSmoke.Boot",
+      "retained": false,
+      "sha256": "4f4b7adf6b138df2c232cb03a390674b07f6b51d015722cc0654bd25c4a66a22",
+      "source_map_policy": "fixture-release"
+    },
+    {
+      "artifact_id": "BX-BH01-FIXTURE-RELEASE-AVM-GZIP",
+      "build_lineage": "BX-BH01-FIXTURE-BUILD-0.1",
+      "bytes": 3045787,
+      "content_encoding": "gzip",
+      "kind": "avm-gzip",
+      "license_record_ids": [
+        "BX-BH01-LICENSE-POPCORN",
+        "BX-BH01-LICENSE-JASON"
+      ],
+      "mime": "application/vnd.atomvm.avm",
+      "mode": "release",
+      "owner": "integration/fixtures/runtime_smoke",
+      "path": "generated/release/bundle.avm.gz",
+      "provenance": "exact locked Elixir/OTP container build with deterministic module ordering and fixed boot identity",
+      "reachability_root": "Elixir.BlazeX.BH01.RuntimeSmoke.Boot",
+      "retained": false,
+      "sha256": "b29ce68858436019cc5138196b0dc1934fe02d6ee79e97f857e87bb1ef5d336e",
+      "source_map_policy": "fixture-release",
+      "uncompressed_artifact_id": "BX-BH01-FIXTURE-RELEASE-AVM",
+      "uncompressed_bytes": 6541768
+    },
+    {
+      "artifact_id": "BX-BH01-FIXTURE-RELEASE-MODULE-INVENTORY",
+      "build_lineage": "BX-BH01-FIXTURE-BUILD-0.1",
+      "bytes": 14066,
+      "content_encoding": null,
+      "kind": "module-inventory",
+      "license_record_ids": [
+        "BX-BH01-LICENSE-POPCORN",
+        "BX-BH01-LICENSE-JASON"
+      ],
+      "mime": "application/json",
+      "mode": "release",
+      "owner": "integration/fixtures/runtime_smoke",
+      "path": "generated/release/module-inventory.json",
+      "provenance": "exact locked Elixir/OTP container build with deterministic module ordering and fixed boot identity",
+      "reachability_root": "Elixir.BlazeX.BH01.RuntimeSmoke.Boot",
+      "retained": false,
+      "sha256": "cc0d294b1694c49158af12d3bf78cedd8e445e8e46046dce860af91f0679184e",
+      "source_map_policy": "fixture-release"
+    }
+  ],
+  "build_contract_sha256": "08ce775a839c55e0604175b5c2bad2e389b7ef38fcafeba5fe30b40b43969f62",
+  "limitations": [
+    "Release packaging drops line chunks but does not scrub compile metadata inherited from upstream BEAM files.",
+    "The unpruned bundle establishes a correctness baseline; payload reduction is deferred until reachability can be proven.",
+    "Browser boot and host-call behavior are outside Section 3.2."
+  ],
+  "manifest_id": "BX-BH01-RUNTIME-SMOKE-BUNDLES-0.1",
+  "module_inventories": [
+    {
+      "embedded_path_markers": {
+        "/home/ducky": 0,
+        "/home/runner": 376,
+        "/tmp": 2,
+        "/workspace": 7
+      },
+      "include_lines": true,
+      "mode": "debug",
+      "module_count": 584,
+      "modules_sha256": "3eaaeeb185dcb6a6e2ed32a01fb684ab1b10b8526fa4244ed7c7a66ed9786b95",
+      "resource_count": 0
+    },
+    {
+      "embedded_path_markers": {
+        "/home/ducky": 0,
+        "/home/runner": 372,
+        "/tmp": 2,
+        "/workspace": 7
+      },
+      "include_lines": false,
+      "mode": "release",
+      "module_count": 584,
+      "modules_sha256": "3eaaeeb185dcb6a6e2ed32a01fb684ab1b10b8526fa4244ed7c7a66ed9786b95",
+      "resource_count": 0
+    }
+  ],
+  "normalization": [
+    "A fixed generated boot-module name replaces Popcorn.cook's unique boot name.",
+    "The temporary generated boot BEAM is deleted after it is embedded and is not a deployable output.",
+    "Bundle inputs are sorted by unique BEAM basename with the entrypoint first.",
+    "The gzip writer emits an all-zero MTIME field.",
+    "The container mount and generated boot source paths are fixed at /workspace."
+  ],
+  "reviewed_nondeterministic_fields": [],
+  "schema_version": "1.0.0",
+  "source_exposure": {
+    "debug": "line information retained; pinned upstream BEAM source paths remain visible",
+    "release": "line chunks removed by packbeam; compile metadata in pinned upstream BEAMs can remain visible",
+    "secret_scan": "no /home/ducky marker; no credential material is an input"
+  },
+  "source_inputs": [
+    {
+      "path": "mix.exs",
+      "sha256": "b033f77656b3c24ed1f0da75c78c39e4d68b04386dbd5fd553eecf2f68b9acb3"
+    },
+    {
+      "path": "mix.lock",
+      "sha256": "22269a9764b2b7ec4a93aaa007040313f4a924b3031e91c72494dd19f9084c98"
+    },
+    {
+      "path": "config/config.exs",
+      "sha256": "709ac4e0ce33cfa4330409e7799758675634e32ece291dfac0cd7650d9140d69"
+    },
+    {
+      "path": "lib/blazex/bh01/runtime_smoke.ex",
+      "sha256": "0fc07951c0cf81f85c60e9ff38a2fcfdeb3640833db429740d9cd11f16deb490"
+    },
+    {
+      "path": "lib/blazex/bh01/runtime_smoke/protocol.ex",
+      "sha256": "4ae7914d4bea8bc93235859fe63257d2a92e4d59575b66e4fe2994383366c897"
+    },
+    {
+      "path": "lib/blazex/bh01/runtime_smoke/worker.ex",
+      "sha256": "385aa37a2c099dd0537707c5922038749c558e6927d2f3f9b82895b814e39016"
+    },
+    {
+      "path": "lib/mix/tasks/bh01.package.ex",
+      "sha256": "f6be0d40b8e4d337bdd473fe16719b21c5d7f4529f940cb94018e216fc84a1ca"
+    }
+  ],
+  "status": "observed-packaged"
+}

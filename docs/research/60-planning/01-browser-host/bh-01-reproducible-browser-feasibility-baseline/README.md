@@ -37,9 +37,11 @@ authorized Phase 1 implementation on 2026-09-03. Phase 1 is complete with a
 governed `go` result for repository activation. The repository owner then
 explicitly authorized Phase 2 implementation, dependency acquisition, its
 section commits, and immediate PR delivery. Phase 2 is complete with a narrow
-`go` result for the selected inputs. Phase 3 is eligible but remains
-`not-authorized`; runtime building and later implementation require another
-repository-owner request.
+`go` result for the selected inputs. The repository owner then explicitly
+authorized Phase 3 implementation, its section commits, and immediate PR
+delivery. Phase 3 is complete with a narrow runtime/package feasibility `go`
+result. Phase 4 is eligible but not authorized; Phase 4 and later work remain
+outside the current authorization.
 
 BH-00 remains the accepted product contract. BH-01 may produce feasibility
 evidence and may reject the candidate stack; it cannot weaken BH-00
@@ -105,8 +107,8 @@ failure in the candidate browser stack.
 | --- | --- | --- | --- |
 | [1 — Authorization, Evidence Governance, and Repository Activation](phase-01-authorization-evidence-and-repository-activation.md) | complete — gate passed | Record explicit approval, preserve BH-00 truth, establish evidence/stop governance, and activate only the named repository slice. | Merged BH-00 baseline and explicit approval of this plan |
 | [2 — Toolchain and Dependency Qualification](phase-02-toolchain-and-dependency-qualification.md) | complete — gate passed | Resolve, pin, acquire, license, and verify every host, language, runtime, server, browser, and build input before runtime coding. | Phase 1 |
-| [3 — AtomVM/Popcorn Runtime Build and BEAM Packaging](phase-03-runtime-build-and-beam-packaging.md) | planned — eligible, not authorized | Build the pinned Wasm runtime, package a minimal BEAM fixture, probe required runtime semantics, and establish the first artifact manifest. | Phase 2 |
-| [4 — Browser Host Loader, Lifecycle, and Deployment](phase-04-browser-host-loader-lifecycle-and-deployment.md) | planned — not authorized | Implement manifest-driven loading, explicit browser bridges, prerequisite detection, lifecycle/failure behavior, and deployment contracts. | Phase 3 |
+| [3 — AtomVM/Popcorn Runtime Build and BEAM Packaging](phase-03-runtime-build-and-beam-packaging.md) | complete — gate passed | Build the pinned Wasm runtime, package a minimal BEAM fixture, probe required runtime semantics, and establish the first artifact manifest. | Phase 2 |
+| [4 — Browser Host Loader, Lifecycle, and Deployment](phase-04-browser-host-loader-lifecycle-and-deployment.md) | planned — eligible, not authorized | Implement manifest-driven loading, explicit browser bridges, prerequisite detection, lifecycle/failure behavior, and deployment contracts. | Phase 3 |
 | [5 — Local Browser Behavior and DOM Vertical Slice](phase-05-local-browser-behavior-and-dom-vertical-slice.md) | planned — not authorized | Exercise disposable state, identity, forms, timers/messages, DOM updates, accessibility observations, and cleanup. | Phase 4 |
 | [6 — Phoenix Trust Boundary and LiveView Adapter Isolation](phase-06-phoenix-trust-boundary-and-liveview-isolation.md) | planned — not authorized | Prove one authenticated command, isolate version-sensitive renderer integration, and preserve standalone DOM, Plug, and server authority boundaries. | Phase 5 |
 | [7 — Resilience, Security, and Resource Lifecycle](phase-07-resilience-security-and-resource-lifecycle.md) | planned — not authorized | Stress failures, retries, adversarial inputs, diagnostics, cancellation, disposal, and bounded resource behavior across the vertical slice. | Phases 5–6 |
@@ -251,6 +253,7 @@ framework API.
 - [Phase 2 — Toolchain and Dependency Qualification](phase-02-toolchain-and-dependency-qualification.md)
 - [Phase 2 implementation evidence](phase-02-implementation-evidence.md)
 - [Phase 3 — AtomVM/Popcorn Runtime Build and BEAM Packaging](phase-03-runtime-build-and-beam-packaging.md)
+- [Phase 3 implementation evidence](phase-03-implementation-evidence.md)
 - [Phase 4 — Browser Host Loader, Lifecycle, and Deployment](phase-04-browser-host-loader-lifecycle-and-deployment.md)
 - [Phase 5 — Local Browser Behavior and DOM Vertical Slice](phase-05-local-browser-behavior-and-dom-vertical-slice.md)
 - [Phase 6 — Phoenix Trust Boundary and LiveView Adapter Isolation](phase-06-phoenix-trust-boundary-and-liveview-isolation.md)

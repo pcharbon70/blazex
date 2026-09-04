@@ -1,0 +1,68 @@
+{
+  "schema_version": "1.0.0",
+  "contract_id": "BX-BH01-RUNTIME-SEMANTICS-0.1",
+  "status": "phase3-executed",
+  "harness": "pinned-node-cli",
+  "required_results": [
+    "initial_worker",
+    "message_round_trip",
+    "controlled_crash",
+    "worker_exit_observed",
+    "worker_restarted",
+    "timer_fired",
+    "timer_cancelled",
+    "selective_receive",
+    "mailbox_order_preserved",
+    "repeated_timer_tick_1",
+    "repeated_timer_tick_2",
+    "bounded_timeout",
+    "stale_generation_rejected",
+    "current_generation_accepted",
+    "late_result_timed_out",
+    "late_result_drained",
+    "request_response_matched",
+    "duplicate_request_rejected",
+    "duplicate_reply_rejected",
+    "stale_reply_rejected",
+    "unknown_tag_rejected",
+    "forbidden_capability_rejected",
+    "cancellation_recorded",
+    "cancelled_reply_rejected",
+    "host_error_classified",
+    "runtime_error_classified",
+    "post_disposal_rejected",
+    "node_direct_call_deferred",
+    "repeat_tree_started",
+    "repeat_teardown",
+    "shutdown"
+  ],
+  "required_observations": {
+    "machine": "ATOM",
+    "memory_pages": 256,
+    "message_queue_len": 0,
+    "cleanup": "complete",
+    "return_value": "ok"
+  },
+  "payload_limits": {
+    "schema_version": 1,
+    "maximum_depth": 4,
+    "maximum_collection_items": 16,
+    "maximum_binary_bytes": 256,
+    "maximum_payload_units": 1024,
+    "allowed_tags": ["echo", "cancel"]
+  },
+  "prohibited_payloads": [
+    "arbitrary JavaScript object",
+    "DOM handle",
+    "code evaluation",
+    "filesystem path",
+    "secret",
+    "unbounded binary"
+  ],
+  "expected_deviations": [
+    "AtomVM reports OTP release 27 while Popcorn packaging requires OTP 26.0.2 BEAM inputs.",
+    "Process.cancel_timer/1 returns false even though non-delivery proves cancellation in this probe.",
+    "Direct asynchronous Module.call cannot be driven from the single-thread Node CLI harness while the VM owns its event loop; worker-separated browser proof is deferred to Phase 4."
+  ],
+  "stop_disposition": "continue only with bounded protocol adapter and Phase 4 worker-separated host proof"
+}

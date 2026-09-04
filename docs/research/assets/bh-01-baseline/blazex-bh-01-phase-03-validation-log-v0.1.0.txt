@@ -1,0 +1,102 @@
+BlazeX BH-01 Phase 3 validation log v0.1.0
+recorded-at: 2026-09-03T18:58:24Z
+source-revision: dd6b8276f750de9e050f777749f2a13dd5f9526d
+scope: pinned FissionVM Wasm build, disposable BEAM/AVM packaging, runtime semantics, artifact accounting and fail-closed integration
+
+python3 packages/blazex_runtime_popcorn/runtime/verify_runtime_build.py
+  PASS - digest-pinned offline build inputs, modes, adapter ownership, Wasm inspections, imports, fixed shared memory, source-map policy and claim limits
+
+python3 integration/fixtures/runtime_smoke/verify_fixture.py --generated integration/fixtures/runtime_smoke/generated
+  PASS - exact disposable source set, debug/release modes, 584-module inventories, fixed entrypoint, no resources, deterministic gzip and artifact identities
+
+python3 integration/fixtures/runtime_smoke/verify_semantics.py
+  PASS - retained actual-Wasm identity, 33 contiguous traces, process/supervision behavior, timer/generation behavior, bounded protocol and converged cleanup
+
+python3 integration/fixtures/runtime_smoke/verify_artifact_accounting.py
+  PASS - 27 accounted files/metadata records, 8 licensed inputs, 6 producer identities, embedded-symbol/source-map dispositions, output reachability and no unresolved findings
+
+python3 integration/fixtures/runtime_smoke/verify_negative_probes.py
+  PASS - 8/8 retained fail-closed cases
+
+python3 profiles/browser_phoenix/toolchain/verify_phase2.py
+  PASS - all frozen Phase 2 environment, runtime-input, server/dependency and acquisition gates remain valid
+
+python3 docs/research/validate_bh01_activation.py
+  PASS - inherited BH-00 truth, authorization, governance, historical Phase 1 completion and persistent repository boundaries remain valid
+
+clean runtime build A/B
+  PASS - two new/equivalent output roots using FissionVM commit 6c3208c7b3dbc7dacc35a19f8de1fa80b358ac73 and Emscripten 4.0.8 with network disabled
+  PASS - debug-web, release-web and release-node-probe each configured, compiled, linked and packaged
+  PASS - 12 Wasm/JavaScript/gzip outputs were byte-identical
+  PASS - 3 normalized complete build transcripts were byte-identical
+  OBSERVED - raw Ninja transcript order varied under four-way parallel compilation; progress indices and lines are normalized without changing binaries
+
+clean fixture build A/B
+  PASS - exact Elixir 1.17.3/OTP 26.0.2 image, Popcorn 0.3.3 and Jason 1.4.5, no network, clean build roots
+  PASS - debug/release AVM, gzip and module-inventory outputs were byte-identical (6/6)
+  OBSERVED/FIXED - Application.get_all_env/1 keyword order changed the generated boot literal; sorted capture removed the variance
+
+actual Wasm runtime execution
+  PASS - release-node-probe AtomVM.mjs/AtomVM.wasm loaded the release AVM under exact Node 26.8.1
+  PASS - 33 contiguous traces, controlled crash/restart, selective receive, ordering, one-shot/repeated timer, cancelled non-delivery, stale/current generation, late-result drain and repeated teardown
+  PASS - return value ok, message_queue_len=0, cleanup=complete and fixed 256 memory pages
+  OBSERVED - AtomVM reports OTP 27 while bundle build uses OTP 26.0.2
+  OBSERVED - Process.cancel_timer/1 returned false while bounded observation proved non-delivery
+  DEFERRED - direct asynchronous Module.call requires worker-separated browser execution in Phase 4
+
+actual runtime and host-contract negative paths
+  PASS - invalid Wasm rejected
+  PASS - missing import object rejected
+  PASS - incompatible 128-page shared-memory import rejected by the actual module
+  PASS - corrupt AVM rejected without clean completion
+  PASS - unknown AVM rejected without clean completion
+  PASS - renamed/missing worker module rejected without clean completion
+  PASS - malformed/forbidden protocol capability, timer race, crash/restart and late traffic observed inside canonical Wasm execution
+  PASS - mutated incomplete-cleanup evidence rejected by the retained-evidence validator
+
+python3 -m unittest discover -s packages/blazex_runtime_popcorn/runtime/tests -p 'test_*.py'
+  PASS - 9 tests, 0 failures
+
+python3 -m unittest discover -s integration/fixtures/runtime_smoke/tests -p 'test_*.py'
+  PASS - 25 tests, 0 failures
+
+python3 -m unittest discover -s profiles/browser_phoenix/toolchain/tests -p 'test_*.py'
+  PASS - 42 tests, 0 failures, including 6 Phase 3 completion-record negatives
+
+python3 -m unittest test_validate_bh01_activation.py test_validate_archive.py from docs/research
+  PASS - 20 tests, 0 failures
+
+python3 docs/research/validate_archive.py
+  PASS - 145 completed documents, 19 directories, 1028 local links and 49 source notes
+
+pinned Elixir 1.17.3 runtime-adapter and fixture tests
+  PASS - packages/blazex_runtime_popcorn: format check and 2 tests, 0 failures
+  PASS - integration/fixtures/runtime_smoke: 2 tests, 0 failures; host ERTS output is reference-only and does not replace Wasm evidence
+
+exact Node 26.8.1 JavaScript boundary
+  PASS - npm test: 1 test, 0 failures
+  PASS - npm run build: syntax-only check, no emitted artifact
+
+artifact identities
+  debug-web AtomVM.wasm: e6025168933b62dec3650d9b9f78eb9f613e4eb21407ad837cb0dce9f1a55768, 4210633 bytes
+  release-web AtomVM.wasm: d20c491e75936dc8189910c8d0740093b7813d8dcc1cf966a87c011799ade9d8, 986537 bytes
+  release-node-probe AtomVM.wasm: 7c31ad202adad7e8dca83f0da3a3ac7578c0ee7ea33d51ddc0e44f50e7df6814, 986130 bytes
+  debug bundle.avm: 8fc4e73c4afc8945c745d23492b8ae4a355948f44e9092aad7f0d9d49178e72a, 6987416 bytes
+  release bundle.avm: 4f4b7adf6b138df2c232cb03a390674b07f6b51d015722cc0654bd25c4a66a22, 6541768 bytes
+
+execution boundary
+  runtime-build: passed for exact Phase 3 modes
+  runtime-semantics: passed at bounded non-browser fixture scale with recorded deviations
+  artifact-accounting: initial manifest and two-clean-build proof passed
+  timer-message-proof: runtime portion passed; browser/DOM portions unexecuted
+  payload-budget: proposed and unmeasured; exact sizes are observations only
+  browser-runtime: untested
+  browser-support: unsupported
+  phase-4: eligible but not authorized
+
+Normalization note: runtime build transcripts remove only parallel Ninja
+completion ordering. Runtime traces preserve semantic order and identities but
+do not treat elapsed timer values as deterministic. Temporary roots, container
+IDs and host scheduling noise are not retained. Negative evidence records only
+the stable expected category/outcome and input hashes, not temporary paths or
+engine-specific stack text.

@@ -1,0 +1,189 @@
+{
+  "comparisons": [
+    {
+      "artifact_id": "BX-BH01-RUNTIME-DEBUG-WEB-ATOMVM-WASM",
+      "byte_identical": true,
+      "primary_bytes": 4210633,
+      "primary_sha256": "e6025168933b62dec3650d9b9f78eb9f613e4eb21407ad837cb0dce9f1a55768",
+      "repeat_bytes": 4210633,
+      "repeat_sha256": "e6025168933b62dec3650d9b9f78eb9f613e4eb21407ad837cb0dce9f1a55768"
+    },
+    {
+      "artifact_id": "BX-BH01-RUNTIME-DEBUG-WEB-ATOMVM-MJS",
+      "byte_identical": true,
+      "primary_bytes": 309205,
+      "primary_sha256": "5379574ca20bf49d71649545182ec3d17f1e324be0766e0aae208c50d255cfc7",
+      "repeat_bytes": 309205,
+      "repeat_sha256": "5379574ca20bf49d71649545182ec3d17f1e324be0766e0aae208c50d255cfc7"
+    },
+    {
+      "artifact_id": "BX-BH01-RUNTIME-DEBUG-WEB-ATOMVM-WASM-GZ",
+      "byte_identical": true,
+      "primary_bytes": 1415022,
+      "primary_sha256": "1e7c41c0b23247f77235d0ec82778085e2182cb46a749cec47cafdfbecd3ec08",
+      "repeat_bytes": 1415022,
+      "repeat_sha256": "1e7c41c0b23247f77235d0ec82778085e2182cb46a749cec47cafdfbecd3ec08"
+    },
+    {
+      "artifact_id": "BX-BH01-RUNTIME-DEBUG-WEB-ATOMVM-MJS-GZ",
+      "byte_identical": true,
+      "primary_bytes": 74796,
+      "primary_sha256": "c5afccc5b1efbddc35d8d241f0a6cccb955c0f2a4a1af21dc637e146ba2b315b",
+      "repeat_bytes": 74796,
+      "repeat_sha256": "c5afccc5b1efbddc35d8d241f0a6cccb955c0f2a4a1af21dc637e146ba2b315b"
+    },
+    {
+      "artifact_id": "BX-BH01-RUNTIME-DEBUG-WEB-BUILD-LOG",
+      "byte_identical": true,
+      "primary_bytes": 23009,
+      "primary_sha256": "fe83c25bde09e26edccef5e3705808ff72c29588aa4de237f17c5338f39a2fb6",
+      "repeat_bytes": 23009,
+      "repeat_sha256": "fe83c25bde09e26edccef5e3705808ff72c29588aa4de237f17c5338f39a2fb6"
+    },
+    {
+      "artifact_id": "BX-BH01-RUNTIME-RELEASE-WEB-ATOMVM-WASM",
+      "byte_identical": true,
+      "primary_bytes": 986537,
+      "primary_sha256": "d20c491e75936dc8189910c8d0740093b7813d8dcc1cf966a87c011799ade9d8",
+      "repeat_bytes": 986537,
+      "repeat_sha256": "d20c491e75936dc8189910c8d0740093b7813d8dcc1cf966a87c011799ade9d8"
+    },
+    {
+      "artifact_id": "BX-BH01-RUNTIME-RELEASE-WEB-ATOMVM-MJS",
+      "byte_identical": true,
+      "primary_bytes": 156421,
+      "primary_sha256": "43cbf6ec34cd4745777b4ce70aa23844a6bb8af44c301c86a5dd02c0165bef64",
+      "repeat_bytes": 156421,
+      "repeat_sha256": "43cbf6ec34cd4745777b4ce70aa23844a6bb8af44c301c86a5dd02c0165bef64"
+    },
+    {
+      "artifact_id": "BX-BH01-RUNTIME-RELEASE-WEB-ATOMVM-WASM-GZ",
+      "byte_identical": true,
+      "primary_bytes": 317970,
+      "primary_sha256": "b36f65b490c041ab9f1845f0f59ea27021d5078c2533a9c1c860fb0b5ae05d96",
+      "repeat_bytes": 317970,
+      "repeat_sha256": "b36f65b490c041ab9f1845f0f59ea27021d5078c2533a9c1c860fb0b5ae05d96"
+    },
+    {
+      "artifact_id": "BX-BH01-RUNTIME-RELEASE-WEB-ATOMVM-MJS-GZ",
+      "byte_identical": true,
+      "primary_bytes": 35461,
+      "primary_sha256": "da51cfd3b69ae2e56553b4c7728fa190c0a702592338d15080de21fde95410cd",
+      "repeat_bytes": 35461,
+      "repeat_sha256": "da51cfd3b69ae2e56553b4c7728fa190c0a702592338d15080de21fde95410cd"
+    },
+    {
+      "artifact_id": "BX-BH01-RUNTIME-RELEASE-WEB-BUILD-LOG",
+      "byte_identical": true,
+      "primary_bytes": 28093,
+      "primary_sha256": "c5d2afbe3587e072f2746555b515eb77edde624a29a98eaf54c8436e528c7c1f",
+      "repeat_bytes": 28093,
+      "repeat_sha256": "c5d2afbe3587e072f2746555b515eb77edde624a29a98eaf54c8436e528c7c1f"
+    },
+    {
+      "artifact_id": "BX-BH01-RUNTIME-RELEASE-NODE-PROBE-ATOMVM-WASM",
+      "byte_identical": true,
+      "primary_bytes": 986130,
+      "primary_sha256": "7c31ad202adad7e8dca83f0da3a3ac7578c0ee7ea33d51ddc0e44f50e7df6814",
+      "repeat_bytes": 986130,
+      "repeat_sha256": "7c31ad202adad7e8dca83f0da3a3ac7578c0ee7ea33d51ddc0e44f50e7df6814"
+    },
+    {
+      "artifact_id": "BX-BH01-RUNTIME-RELEASE-NODE-PROBE-ATOMVM-MJS",
+      "byte_identical": true,
+      "primary_bytes": 165299,
+      "primary_sha256": "54ca927247809e78338738d97f7cfa05349c7cdd8a96ca63021a8e218747c8fe",
+      "repeat_bytes": 165299,
+      "repeat_sha256": "54ca927247809e78338738d97f7cfa05349c7cdd8a96ca63021a8e218747c8fe"
+    },
+    {
+      "artifact_id": "BX-BH01-RUNTIME-RELEASE-NODE-PROBE-ATOMVM-WASM-GZ",
+      "byte_identical": true,
+      "primary_bytes": 317953,
+      "primary_sha256": "b7a2f6e6f58e60b7d5318ab767094768dcc1f895fd66712c7e9ae91930c6589d",
+      "repeat_bytes": 317953,
+      "repeat_sha256": "b7a2f6e6f58e60b7d5318ab767094768dcc1f895fd66712c7e9ae91930c6589d"
+    },
+    {
+      "artifact_id": "BX-BH01-RUNTIME-RELEASE-NODE-PROBE-ATOMVM-MJS-GZ",
+      "byte_identical": true,
+      "primary_bytes": 37994,
+      "primary_sha256": "1d74d0de10d2f5bd55dc78bca7a8575d91dd8b3ceed8e0777e7486f46bcdb3c6",
+      "repeat_bytes": 37994,
+      "repeat_sha256": "1d74d0de10d2f5bd55dc78bca7a8575d91dd8b3ceed8e0777e7486f46bcdb3c6"
+    },
+    {
+      "artifact_id": "BX-BH01-RUNTIME-RELEASE-NODE-PROBE-BUILD-LOG",
+      "byte_identical": true,
+      "primary_bytes": 28094,
+      "primary_sha256": "c5a15538c520e368a16c22a550d0a19b9ddf3162f073e6dd1458cc0509493283",
+      "repeat_bytes": 28094,
+      "repeat_sha256": "c5a15538c520e368a16c22a550d0a19b9ddf3162f073e6dd1458cc0509493283"
+    },
+    {
+      "artifact_id": "BX-BH01-FIXTURE-DEBUG-AVM",
+      "byte_identical": true,
+      "primary_bytes": 6987416,
+      "primary_sha256": "8fc4e73c4afc8945c745d23492b8ae4a355948f44e9092aad7f0d9d49178e72a",
+      "repeat_bytes": 6987416,
+      "repeat_sha256": "8fc4e73c4afc8945c745d23492b8ae4a355948f44e9092aad7f0d9d49178e72a"
+    },
+    {
+      "artifact_id": "BX-BH01-FIXTURE-DEBUG-AVM-GZIP",
+      "byte_identical": true,
+      "primary_bytes": 3346502,
+      "primary_sha256": "0b5bd7aa64ce55964860bf07b6a0e13538e04fefefca25e6ab393d403289c89f",
+      "repeat_bytes": 3346502,
+      "repeat_sha256": "0b5bd7aa64ce55964860bf07b6a0e13538e04fefefca25e6ab393d403289c89f"
+    },
+    {
+      "artifact_id": "BX-BH01-FIXTURE-DEBUG-MODULE-INVENTORY",
+      "byte_identical": true,
+      "primary_bytes": 14063,
+      "primary_sha256": "22f17d3ff2214d51f9ed300e6a9aa5be9f98dd9ec0c9f2671b29ca6a1bfd98b2",
+      "repeat_bytes": 14063,
+      "repeat_sha256": "22f17d3ff2214d51f9ed300e6a9aa5be9f98dd9ec0c9f2671b29ca6a1bfd98b2"
+    },
+    {
+      "artifact_id": "BX-BH01-FIXTURE-RELEASE-AVM",
+      "byte_identical": true,
+      "primary_bytes": 6541768,
+      "primary_sha256": "4f4b7adf6b138df2c232cb03a390674b07f6b51d015722cc0654bd25c4a66a22",
+      "repeat_bytes": 6541768,
+      "repeat_sha256": "4f4b7adf6b138df2c232cb03a390674b07f6b51d015722cc0654bd25c4a66a22"
+    },
+    {
+      "artifact_id": "BX-BH01-FIXTURE-RELEASE-AVM-GZIP",
+      "byte_identical": true,
+      "primary_bytes": 3045787,
+      "primary_sha256": "b29ce68858436019cc5138196b0dc1934fe02d6ee79e97f857e87bb1ef5d336e",
+      "repeat_bytes": 3045787,
+      "repeat_sha256": "b29ce68858436019cc5138196b0dc1934fe02d6ee79e97f857e87bb1ef5d336e"
+    },
+    {
+      "artifact_id": "BX-BH01-FIXTURE-RELEASE-MODULE-INVENTORY",
+      "byte_identical": true,
+      "primary_bytes": 14066,
+      "primary_sha256": "cc0d294b1694c49158af12d3bf78cedd8e445e8e46046dce860af91f0679184e",
+      "repeat_bytes": 14066,
+      "repeat_sha256": "cc0d294b1694c49158af12d3bf78cedd8e445e8e46046dce860af91f0679184e"
+    }
+  ],
+  "evidence_id": "BX-BH01-PHASE3-ARTIFACT-REPRODUCIBILITY-0.1",
+  "excluded_intermediates": [
+    {
+      "path": "packages/blazex_runtime_popcorn/runtime/generated/<mode>/cmake/**",
+      "reason": "CMake/Ninja object trees are clean-build intermediates and are not copied to an artifact or evidence distribution."
+    }
+  ],
+  "method": "Two builds from clean equivalent source/output roots using exact pinned images, locks, source archives, fixed paths, offline inputs, and deterministic gzip metadata.",
+  "run_count": 2,
+  "schema_version": "1.0.0",
+  "status": "passed",
+  "summary": {
+    "byte_identical_artifacts": 21,
+    "compared_artifacts": 21,
+    "normalized_only_artifacts": 0,
+    "unexplained_differences": 0
+  }
+}

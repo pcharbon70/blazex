@@ -1,0 +1,96 @@
+{
+  "schema_version": "1.0.0",
+  "contract_id": "BX-BH01-RUNTIME-BUILD-0.1",
+  "status": "phase3-executed",
+  "image": {
+    "reference": "docker.io/emscripten/emsdk@sha256:92c97951b9a6835cb5da9592e9d95226f67e09ecd01a541d817a5b4801f235a4",
+    "config_sha256": "2a003481ef771a04cc1a7b5c4be03db0b3cb76405aaddac0d27629a5aac322c2",
+    "architecture": "linux/amd64"
+  },
+  "inputs": {
+    "fissionvm": {
+      "filename": "fissionvm-6c3208c7.tar.gz",
+      "version": "0.7.0-beta.0-dev",
+      "commit": "6c3208c7b3dbc7dacc35a19f8de1fa80b358ac73",
+      "sha256": "dcf9b3357c8463faa9178b639487d0b4f88050d948c550eaa2cedf4e73d9e33e",
+      "license": "Apache-2.0 selected from Apache-2.0 OR LGPL-2.1-or-later"
+    },
+    "mbedtls": {
+      "filename": "mbedtls-v3.6.3.1.tar.gz",
+      "version": "3.6.3.1",
+      "sha256": "5344d16a64932b9956e2c9422fc5925ce480d570732f4379226888fffc19ed00",
+      "license": "Apache-2.0"
+    },
+    "ninja": {
+      "filename": "ninja-linux-v1.12.1.zip",
+      "version": "1.12.1",
+      "sha256": "6f98805688d19672bd699fbbfa2c2cf0fc054ac3df1f0e6a47664d963d530255",
+      "binary_sha256": "cf10a35d13a384fed866bcd4989c7761e8556209d195cc6d2a7c0f11cc73804c",
+      "license": "Apache-2.0"
+    },
+    "gperf": {
+      "filename": "gperf_3.1-1build1_amd64.deb",
+      "version": "3.1-1build1",
+      "origin": "https://archive.ubuntu.com/ubuntu/pool/universe/g/gperf/gperf_3.1-1build1_amd64.deb",
+      "sha256": "f6701027304592fe819d219a5ee00d8b56ba4b2a05a7623dd923f1884d595042",
+      "binary_sha256": "32bb03d8f3d79434c0ac001ad8c530c405c6aef763d4aeb4033c7e21131bc6ca",
+      "license": "GPL-3.0-or-later",
+      "reachability": "build-only generated BIF tables"
+    },
+    "zlib": {
+      "filename": "zlib-1.3.1.tar.gz",
+      "version": "1.3.1",
+      "origin": "https://github.com/madler/zlib/archive/refs/tags/v1.3.1.tar.gz",
+      "sha256": "17e88863f3600672ab49182f217281b6fc4d3c762bde361935e436a95214d05c",
+      "sha512": "8c9642495bafd6fad4ab9fb67f09b268c69ff9af0f4f20cf15dfc18852ff1f312bd8ca41de761b3f8d8e90e77d79f2ccacd3d4c5b19e475ecf09d021fdfe9088",
+      "license": "Zlib",
+      "reachability": "linked runtime port"
+    }
+  },
+  "environment": {
+    "source_date_epoch": "0",
+    "timezone": "UTC",
+    "locale": "C",
+    "python_hash_seed": "0",
+    "network_during_cache_seed_configure_compile_link_package": false,
+    "jobs": 4,
+    "build_log_normalization": "replace Ninja completion indices and bytewise-sort all transcript lines to remove parallel scheduling order",
+    "container_paths": {
+      "fissionvm": "/inputs/fissionvm",
+      "mbedtls": "/inputs/mbedtls",
+      "output": "/outputs",
+      "ninja": "/opt/ninja",
+      "gperf": "/opt/gperf"
+    }
+  },
+  "cmake": {
+    "generator": "Ninja",
+    "version": "3.22.1",
+    "common_options": {
+      "AVM_BUILD_RUNTIME_ONLY": "1",
+      "FETCHCONTENT_FULLY_DISCONNECTED": "ON",
+      "FETCHCONTENT_SOURCE_DIR_MBEDTLS": "/inputs/mbedtls"
+    },
+    "prefix_maps": [
+      "-ffile-prefix-map=/inputs/fissionvm=fissionvm",
+      "-ffile-prefix-map=/inputs/mbedtls=mbedtls",
+      "-ffile-prefix-map=/outputs/cmake=build",
+      "-fdebug-prefix-map=/inputs/fissionvm=fissionvm",
+      "-fdebug-prefix-map=/inputs/mbedtls=mbedtls",
+      "-fdebug-prefix-map=/outputs/cmake=build"
+    ]
+  },
+  "modes": [
+    {"id": "debug-web", "cmake_build_type": "Debug", "emscripten_environment": "web", "deployable": true},
+    {"id": "release-web", "cmake_build_type": "Release", "emscripten_environment": "web", "deployable": true},
+    {"id": "release-node-probe", "cmake_build_type": "Release", "emscripten_environment": "node", "deployable": false}
+  ],
+  "expected_outputs_per_mode": ["AtomVM.wasm", "AtomVM.mjs", "AtomVM.wasm.gz", "AtomVM.mjs.gz", "build.log"],
+  "allowed_import_modules_by_mode": {
+    "debug-web": ["env", "wasi_snapshot_preview1"],
+    "release-web": ["a"],
+    "release-node-probe": ["a"]
+  },
+  "patch_manifest": "patches/manifest.json",
+  "claims_not_made": ["browser boot", "browser support", "WASI target", "WebAssembly Component Model", "stable runtime API"]
+}

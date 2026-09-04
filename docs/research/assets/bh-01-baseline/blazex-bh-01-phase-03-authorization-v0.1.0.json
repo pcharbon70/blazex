@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0.0",
+  "record_id": "BX-BH01-AUTHORIZATION-PHASE-03-0.1",
+  "status": "approved-phase-3-only",
+  "authorized_at": "2026-09-03",
+  "request": "Implement the next phase of BH-01 section by section with a commit per section and one immediately merged PR, then synchronize main and delete the feature branch.",
+  "base_revision": "46f0e73dd6811321367617c91d7e2c6d44669ea9",
+  "branch": "codex/bh-01-phase-03-runtime-build",
+  "authorized_scope": [
+    "build debug and release FissionVM/AtomVM WebAssembly artifacts from the Phase 2 pins",
+    "package and execute the disposable runtime smoke fixture",
+    "probe required runtime semantics outside the browser using actual Wasm",
+    "record deterministic artifact manifests, failures, limitations, and completion evidence",
+    "commit once per completed Phase 3 section",
+    "create and immediately merge one Phase 3 pull request",
+    "synchronize main and delete the local and remote feature branch"
+  ],
+  "not_authorized": [
+    "Phase 4 browser host loader or deployment implementation",
+    "DOM or product component implementation",
+    "BH-02 framework API work",
+    "browser support or production-readiness claims"
+  ],
+  "owner": "repository-owner"
+}

@@ -74,6 +74,21 @@ locations rather than this governance directory.
 - [BH-01 Phase 2 completion v0.1.0](blazex-bh-01-phase-02-completion-v0.1.0.json)
   — schema-valid input-qualification decision with hashes, two-clean-
   environment equivalence, limitations, risk disposition, and a narrow `go`.
+- [BH-01 Phase 3 authorization v0.1.0](blazex-bh-01-phase-03-authorization-v0.1.0.json)
+  — repository-owner approval for the pinned runtime build, disposable BEAM
+  fixture, non-browser semantic probes, artifact evidence, section commits,
+  one immediately merged PR, synchronization, and branch cleanup.
+- [BH-01 Phase 3 artifact manifest v0.1.0](blazex-bh-01-phase-03-artifact-manifest-v0.1.0.json)
+  — unified identities, lineage, provenance, ownership, reachability, source-
+  map policy, licensing, and two-clean-build comparison for runtime and AVM
+  outputs.
+- [BH-01 Phase 3 validation log v0.1.0](blazex-bh-01-phase-03-validation-log-v0.1.0.txt)
+  — exact runtime/bundle build, actual-Wasm semantic, deterministic-repeat,
+  negative-path, test, artifact, limitation, and execution-boundary outcomes.
+- [BH-01 Phase 3 completion v0.1.0](blazex-bh-01-phase-03-completion-v0.1.0.json)
+  — schema-valid runtime/package decision with input/output hashes, observed
+  compatibility limits, accepted risk disposition, narrow `go`, and explicit
+  Phase 4 non-authorization.
 
 ## Maintaining this index
 

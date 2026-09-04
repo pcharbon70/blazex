@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0.0",
+  "contract_id": "BX-BH01-RUNTIME-SMOKE-BUNDLE-0.1",
+  "status": "phase3-section-3.2",
+  "classification": "disposable-non-public-fixture",
+  "beam_image": "docker.io/hexpm/elixir@sha256:8d03cfb52e3fa3f5d83d749942b7c45c966dda48a7c4ba4f069390379b59fc39",
+  "language": {"otp": "26.0.2", "elixir": "1.17.3"},
+  "dependencies": [
+    {"id": "popcorn", "version": "0.3.3", "lock": "mix.lock", "reachability": "build/package plus selected Popcorn.Wasm bridge modules"},
+    {"id": "jason", "version": "1.4.5", "lock": "mix.lock", "reachability": "selected Popcorn.Wasm host-call encoding bridge"}
+  ],
+  "entrypoint": "Elixir.BlazeX.BH01.RuntimeSmoke.Boot",
+  "fixture_module_roots": [
+    "Elixir.BlazeX.BH01.RuntimeSmoke",
+    "Elixir.BlazeX.BH01.RuntimeSmoke.Protocol",
+    "Elixir.BlazeX.BH01.RuntimeSmoke.Worker"
+  ],
+  "modes": [
+    {"id": "debug", "include_lines": true, "treeshake": false},
+    {"id": "release", "include_lines": false, "treeshake": false}
+  ],
+  "ordering": "entrypoint first, then unique BEAM basenames in bytewise ascending order",
+  "boot_adaptation": "fixed-name Popcorn-equivalent OTP/application startup without the browser-only readiness event",
+  "resources": [],
+  "startup_arguments": [],
+  "compression": {"format": "gzip", "expected_mtime": 0},
+  "rejected_inputs": [
+    "undeclared module",
+    "dynamic code loading",
+    "environment-dependent resource",
+    "host-only fixture module",
+    "inactive BH-02 package",
+    "product package import"
+  ],
+  "trace_fields": ["generation", "scenario", "process", "sequence", "result", "error", "cleanup"],
+  "host_call": {
+    "node_probe": "stdout trace boundary plus in-runtime request/reply state machine",
+    "direct_module_call": "observed timeout because the Node CLI VM occupies its event loop",
+    "next_probe": "worker-separated browser host in Phase 4"
+  },
+  "public_api": false
+}

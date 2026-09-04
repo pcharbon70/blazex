@@ -20,22 +20,6 @@ class BH01ActivationValidationTests(unittest.TestCase):
         cls.evidence_governance = validator._load_json(validator.EVIDENCE_GOVERNANCE)
         cls.activation = validator._load_json(validator.REPOSITORY_ACTIVATION)
 
-    def tearDown(self) -> None:
-        for boundary_record in self.activation["boundaries"]:
-            boundary = validator.REPO_ROOT / boundary_record["path"]
-            for prohibited in (
-                "mix.lock",
-                "package-lock.json",
-                "yarn.lock",
-                "pnpm-lock.yaml",
-                "deps",
-                "node_modules",
-            ):
-                self.assertFalse(
-                    (boundary / prohibited).exists(),
-                    f"negative test acquired dependency output: {boundary_record['path']}/{prohibited}",
-                )
-
     def test_repository_activation_passes(self) -> None:
         validator.validate()
 
@@ -99,7 +83,7 @@ class BH01ActivationValidationTests(unittest.TestCase):
         with self.assertRaisesRegex(validator.ValidationError, "planned dependency graph changed"):
             validator._validate_repository_activation(self.ledger, activation)
 
-    def test_exact_project_metadata_has_no_acquired_dependency(self) -> None:
+    def test_exact_project_metadata_preserves_approved_graph(self) -> None:
         for boundary_record in self.activation["boundaries"]:
             metadata = validator._load_json(
                 validator.REPO_ROOT / boundary_record["path"] / "blazex.project.json"
@@ -110,13 +94,20 @@ class BH01ActivationValidationTests(unittest.TestCase):
                 boundary_record["allowed_planned_dependencies"],
             )
 
-    def test_fixture_and_benchmark_indexes_remain_unexecuted(self) -> None:
+    def test_fixture_evidence_is_nonproduction_and_benchmarks_remain_unexecuted(self) -> None:
         fixtures = validator._load_json(validator.REPO_ROOT / "integration/fixtures/fixture-index.json")
         benchmarks = validator._load_json(
             validator.REPO_ROOT / "integration/benchmarks/benchmark-index.json"
         )
-        self.assertEqual(fixtures["scenarios"], [])
         self.assertFalse(fixtures["production_import_allowed"])
+        self.assertGreaterEqual(len(fixtures["scenarios"]), 1)
+        for scenario in fixtures["scenarios"]:
+            self.assertTrue(
+                (validator.REPO_ROOT / "integration/fixtures" / scenario["path"]).is_file()
+            )
+            self.assertTrue(
+                (validator.REPO_ROOT / "integration/fixtures" / scenario["evidence"]).is_file()
+            )
         self.assertEqual(benchmarks["environments"], [])
         self.assertEqual(benchmarks["measurements"], [])
         self.assertEqual(benchmarks["samples"], [])
