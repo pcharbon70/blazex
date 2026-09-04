@@ -2,7 +2,13 @@ defmodule BlazeX.BH01.BrowserHost.Protocol do
   @moduledoc false
 
   @protocol "blazex.host-bridge/1"
-  @operations ["runtime.echo", "runtime.shutdown"]
+  @operations [
+    "runtime.echo",
+    "runtime.shutdown",
+    "fixture.command",
+    "fixture.event",
+    "fixture.snapshot"
+  ]
   @max_depth 6
   @max_items 64
   @max_string_bytes 2_048
@@ -29,8 +35,7 @@ defmodule BlazeX.BH01.BrowserHost.Protocol do
              is_integer(timeout) and timeout > 0 and timeout <= 10_000 do
     with {:ok, _items} <- bounded(payload, 0, 0),
          true <- byte_size(Jason.encode!(request)) <= 8_192 do
-      result = if operation == "runtime.echo", do: payload, else: %{"accepted" => true}
-      {:ok, response(request, "ok", %{"result" => result}), operation}
+      execute(request, operation, payload)
     else
       _ ->
         {:error,
@@ -50,6 +55,43 @@ defmodule BlazeX.BH01.BrowserHost.Protocol do
   end
 
   def handle(_), do: {:error, fallback_error()}
+
+  defp execute(request, "runtime.echo", payload),
+    do: {:ok, response(request, "ok", %{"result" => payload}), "runtime.echo"}
+
+  defp execute(request, "runtime.shutdown", _payload),
+    do: {:ok, response(request, "ok", %{"result" => %{"accepted" => true}}), "runtime.shutdown"}
+
+  defp execute(request, "fixture.snapshot", _payload),
+    do:
+      {:ok,
+       response(request, "ok", %{
+         "result" => BlazeX.BH01.LocalBehavior.snapshot(Map.fetch!(request, "generation"))
+       }), "fixture.snapshot"}
+
+  defp execute(request, "fixture.command", payload),
+    do:
+      fixture_result(
+        request,
+        BlazeX.BH01.LocalBehavior.command(Map.fetch!(request, "generation"), payload),
+        "fixture.command"
+      )
+
+  defp execute(request, "fixture.event", payload),
+    do:
+      fixture_result(
+        request,
+        BlazeX.BH01.LocalBehavior.event(Map.fetch!(request, "generation"), payload),
+        "fixture.event"
+      )
+
+  defp fixture_result(request, {:ok, effect, result}, operation) do
+    :ok = Popcorn.Wasm.send_event("bh01_fixture_effect", effect)
+    {:ok, response(request, "ok", %{"result" => result}), operation}
+  end
+
+  defp fixture_result(request, {:error, error}, _operation),
+    do: {:error, response(request, "error", %{"error" => error})}
 
   defp response(request, status, content) do
     Map.merge(

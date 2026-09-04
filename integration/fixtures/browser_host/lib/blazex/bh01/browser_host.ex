@@ -4,10 +4,12 @@ defmodule BlazeX.BH01.BrowserHost do
 
   @generation 1
   @scenario :browser_host_boot
+  alias BlazeX.BH01.LocalBehavior
   alias BlazeX.BH01.BrowserHost.Protocol
 
   def start do
     trace(1, :entry, :starting, :pending)
+    LocalBehavior.initialize(@generation)
     :ok = Popcorn.Wasm.ready(:main)
     trace(2, :host_boundary, :application_ready, :pending)
 

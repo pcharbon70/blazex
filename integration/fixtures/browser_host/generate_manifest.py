@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate the retained identity for the ignored Phase 4 browser AVM."""
+"""Generate the retained identity for the ignored current browser AVM."""
 
 from __future__ import annotations
 
@@ -41,11 +41,12 @@ def main() -> int:
           HERE / "config/config.exs",
           HERE / "lib/blazex/bh01/browser_host.ex",
           HERE / "lib/blazex/bh01/browser_host/protocol.ex",
+          HERE / "lib/blazex/bh01/local_behavior.ex",
           HERE / "lib/mix/tasks/bh01.browser_package.ex",
         ])
       ],
       "normalization": ["fixed boot module identity", "sorted unique BEAM basenames", "zero gzip MTIME"],
-      "limitations": ["browser-only readiness is not evidence of DOM behavior", "unpruned AVM size is not a passed budget"]
+      "limitations": ["Phase 5 behavior is a disposable fixture, not a public component contract", "unpruned AVM size is not a passed budget"]
     }
     args.output.write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     return 0

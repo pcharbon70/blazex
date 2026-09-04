@@ -11,13 +11,15 @@ It is the leading supported composition, not the universal container for BlazeX.
 Shared browser, renderer, and component behavior must remain in reusable
 packages rather than this profile.
 
-Status: experimental BH-01 Phase 4 feasibility profile. It now provides a
+Status: experimental BH-01 Phase 5 feasibility profile. It provides a
 manifest-driven browser loader, isolated Popcorn/AtomVM frame, bounded
 Elixir/browser bridge, lifecycle and prerequisite checks, deterministic static
-profile build, and a Phoenix/Bandit asset endpoint. Run
+profile build, a replaceable fixture-only DOM adapter, and a Phoenix/Bandit
+asset endpoint. Run
 `assets/phase4/build_profile.py --output priv/static/bh01` before starting the
-endpoint. This is not a component renderer, production deployment, support
-claim, or stable API.
+endpoint. The DOM operation protocol and local behavior are test fixtures, not
+a component model, production renderer, deployment support claim, or stable
+API.
 
 The generated profile is served at `/bh01/`. `PHX_SERVER=true` enables the
 endpoint, and `PORT` selects its localhost port (default 4101). The endpoint

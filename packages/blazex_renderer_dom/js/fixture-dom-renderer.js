@@ -198,6 +198,8 @@ export class FixtureDOMRenderer {
   }
 
   #remove(id) {
+    const children = [...this.#nodes.entries()].filter(([_childId, entry]) => entry.parentId === id).map(([childId]) => childId);
+    for (const childId of children) this.#remove(childId);
     const prefix = `${id}:`;
     for (const [key, listener] of [...this.#listeners]) {
       if (key.startsWith(prefix)) {

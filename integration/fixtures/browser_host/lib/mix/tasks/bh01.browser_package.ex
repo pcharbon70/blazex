@@ -42,7 +42,7 @@ defmodule Mix.Tasks.Bh01.BrowserPackage do
           specs = unquote(Macro.escape(specs))
 
           {:ok, _controller} =
-            :application_controller.start({:application, :kernel, specs[:kernel]})
+            :application_controller.start({:application, :kernel, Map.fetch!(specs, :kernel)})
 
           for {application, spec} <- specs, application != :kernel do
             :ok = :application.load({:application, application, spec})
@@ -75,7 +75,7 @@ defmodule Mix.Tasks.Bh01.BrowserPackage do
       [:erts, :popcorn_lib | Enum.filter(Map.keys(specs), &MapSet.member?(builtin, &1))]
       |> Enum.uniq()
       |> Enum.flat_map(fn app ->
-        Path.wildcard(Path.join(Popcorn.Build.patched_ebin_dir(app), "*.beam"))
+        Path.wildcard(Path.join(patched_ebin_dir(app), "*.beam"))
       end)
 
     fixture_beams =
@@ -104,6 +104,21 @@ defmodule Mix.Tasks.Bh01.BrowserPackage do
       |> Enum.filter(fn {_name, members} -> length(members) > 1 end)
 
     if duplicates != [], do: Mix.raise("duplicate bundle modules: #{inspect(duplicates)}")
+  end
+
+  # Popcorn.Build embeds the build root used to compile the dependency. The
+  # fixture may be moved into an equivalent clean workspace afterwards, so its
+  # package task resolves patched runtime applications from the active Mix
+  # build path rather than that stale compile-time absolute path.
+  defp patched_ebin_dir(app) do
+    Path.join([
+      Mix.Project.build_path(),
+      "lib",
+      "popcorn",
+      "popcorn_patches",
+      to_string(app),
+      "ebin"
+    ])
   end
 
   defp write_inventory(out_dir, paths) do

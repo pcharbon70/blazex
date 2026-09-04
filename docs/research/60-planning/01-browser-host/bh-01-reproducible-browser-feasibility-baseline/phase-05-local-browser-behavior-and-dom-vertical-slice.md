@@ -67,27 +67,27 @@ Back to milestone: [README](README.md)
       - [x] 5.2.2.2 Subtask - Normalize allowed input/change/blur/focus/action events to versioned scalar/structured payloads with size, sequence, target, and generation checks.
       - [x] 5.2.2.3 Subtask - Trace every operation/event and assert no undeclared mutation, listener, global, network request, or server round trip.
 
-  - [ ] 5.3 Section - Prove local and nested state identity.
+  - [x] 5.3 Section - Prove local and nested state identity.
 
     Nested behavior must preserve deterministic ownership and failure isolation
     across updates, reordering, removal, and restart.
 
-    - [ ] 5.3.1 Task - Implement disposable parent and child fixtures.
+    - [x] 5.3.1 Task - Implement disposable parent and child fixtures.
 
       The fixture needs enough composition to test identity without creating a
       public component lifecycle.
 
-      - [ ] 5.3.1.1 Subtask - Implement a parent with independent keyed children, local counters/state, parent inputs, child outputs, explicit generations, and deterministic initial/update traces.
-      - [ ] 5.3.1.2 Subtask - Keep process ownership, fixture data, and DOM IDs internal to the scenario harness and prohibit public module/API reuse.
+      - [x] 5.3.1.1 Subtask - Implement a parent with independent keyed children, local counters/state, parent inputs, child outputs, explicit generations, and deterministic initial/update traces.
+      - [x] 5.3.1.2 Subtask - Keep process ownership, fixture data, and DOM IDs internal to the scenario harness and prohibit public module/API reuse.
 
-    - [ ] 5.3.2 Task - Exercise nested identity and isolation transitions.
+    - [x] 5.3.2 Task - Exercise nested identity and isolation transitions.
 
       Correctness needs insertion, movement, independent updates, failures, and
       disposal—not merely rendering the initial tree.
 
-      - [ ] 5.3.2.1 Subtask - Test child insertion, keyed reorder, parent update, independent child update, removal, replacement, and full subtree teardown.
-      - [ ] 5.3.2.2 Subtask - Test duplicate/missing identity, parent crash, child crash, retry, late child output, stale generation, and partial DOM failure.
-      - [ ] 5.3.2.3 Subtask - Record process/message ownership, ordering assumptions, mailbox growth, restart behavior, orphan detection, retained identity, and `BX-BH01-PROOF-NESTED-STATE` observations.
+      - [x] 5.3.2.1 Subtask - Test child insertion, keyed reorder, parent update, independent child update, removal, replacement, and full subtree teardown.
+      - [x] 5.3.2.2 Subtask - Test duplicate/missing identity, parent crash, child crash, retry, late child output, stale generation, and partial DOM failure.
+      - [x] 5.3.2.3 Subtask - Record process/message ownership, ordering assumptions, mailbox growth, restart behavior, orphan detection, retained identity, and `BX-BH01-PROOF-NESTED-STATE` observations.
 
   - [ ] 5.4 Section - Prove form input and validation behavior.
 

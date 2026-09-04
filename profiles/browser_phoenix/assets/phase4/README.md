@@ -1,9 +1,11 @@
-# BH-01 Phase 4 Browser Loader Assets
+# BH-01 Current Browser Profile Assets
 
 This directory owns the feasibility-only browser runtime frame and its governed
-manifest template. `build_profile.py` copies only the three declared artifacts,
-computes their byte counts and SHA-256 digests, and writes a no-store runtime
-manifest. It performs no network acquisition.
+manifest template. `build_profile.py` copies the declared runtime artifacts,
+runtime loader, and replaceable Phase 5 DOM fixture adapter; computes byte counts
+and SHA-256 digests; and writes a no-store runtime manifest. It performs no
+network acquisition. The historical `phase4` path remains in place so Phase 5
+extends the already-proven profile rather than creating a second host.
 
 ## Ownership and replacement boundaries
 
@@ -17,14 +19,15 @@ manifest. It performs no network acquisition.
 | Parent/frame events | `postMessage` with random channel and exact origin | Frame port; detach listener on stop | Structured clone and same origin | Versioned host bridge |
 | Elixir requests | Popcorn `call`/`cast` carrying JSON values | `BrowserHostBridge`; timeout, cancel, or stop settles ownership | Ready runtime and `blazex.host-bridge/1` | Portable host command port |
 
-The loader does not own component state, DOM rendering, Phoenix authorization,
-LiveView data, arbitrary script execution, or general browser fetch. The frame's
-only Phase 4 purpose is to host the declared Popcorn runtime, transfer the
-verified AVM, and emit typed lifecycle observations. Product DOM behavior starts
-in a later phase.
+The loader does not own component semantics, Phoenix authorization, LiveView
+data, arbitrary script execution, or general browser fetch. The frame hosts the
+declared Popcorn runtime, transfers the verified AVM, and emits typed lifecycle
+observations. Phase 5 adds only a closed, test-only DOM operation adapter; it is
+not a public renderer contract.
 
-The bridge allows only `runtime.echo` and `runtime.shutdown`. Every envelope is
-versioned and carries scenario, generation, correlation, and sequence identity.
+The bridge allows only `runtime.echo`, `runtime.shutdown`, `fixture.command`,
+`fixture.event`, and `fixture.snapshot`. Every envelope is versioned and carries
+scenario, generation, correlation, and sequence identity.
 Both JavaScript and Elixir enforce finite JSON values, an 8 KiB envelope, depth
 and item limits, bounded timeout/concurrency, no retry, and rejection of
 sensitive keys. Browser objects, functions, credentials, arbitrary URLs, and

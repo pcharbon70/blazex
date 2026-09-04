@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the deterministic BH-01 Phase 4 static browser profile."""
+"""Build the current deterministic BH-01 static browser profile."""
 
 from __future__ import annotations
 
@@ -40,6 +40,7 @@ def main() -> int:
     for name in ("index.html", "host.js", "deployment-contract.json"):
         shutil.copyfile(HERE / name, output / name)
     shutil.copytree(ROOT / "js/blazex_runtime/src", output / "js")
+    shutil.copytree(ROOT / "packages/blazex_renderer_dom/js", output / "dom", ignore=shutil.ignore_patterns("test"))
     records = []
     for path in sorted(item for item in output.rglob("*") if item.is_file()):
         relative = path.relative_to(output).as_posix()
@@ -57,13 +58,13 @@ def main() -> int:
         })
     profile_manifest = {
         "schema_version": "1.0.0",
-        "manifest_id": "BX-BH01-PHASE-04-PROFILE-ASSETS-0.1",
+        "manifest_id": "BX-BH01-PHASE-05-PROFILE-ASSETS-0.1",
         "artifacts": records,
         "source_maps": [],
         "network_policy": "same-origin declared profile assets only",
     }
     (output / "profile-assets-manifest.json").write_text(json.dumps(profile_manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-    print(f"BH-01 Phase 4 browser profile: PASS ({len(records)} governed files; {len(template['artifacts'])} runtime artifacts)")
+    print(f"BH-01 current browser profile: PASS ({len(records)} governed files; {len(template['artifacts'])} runtime artifacts)")
     return 0
 
 if __name__ == "__main__":
