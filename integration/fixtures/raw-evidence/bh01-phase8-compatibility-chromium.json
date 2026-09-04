@@ -1,0 +1,134 @@
+{
+  "schema_version": "1.0.0",
+  "evidence_id": "BX-BH01-PHASE8-COMPATIBILITY-CHROMIUM-0.1",
+  "captured_at": "2026-09-04T15:09:29.645Z",
+  "implementation_revision": "b14cb8f9d5af2084f491e7c744a92e11247af7d3",
+  "authority": "required-row",
+  "support_status": "unsupported",
+  "browser": {
+    "type": "chromium",
+    "version": "152.0.7977.75",
+    "os": "linux 6.8.0-51-generic",
+    "architecture": "x64"
+  },
+  "status": "observed",
+  "exact_baseline": {
+    "state": "ready",
+    "manifest_id": "BX-BH01-BROWSER-RUNTIME-MANIFEST-0.1",
+    "manifest_generation": 1,
+    "activation_generation": 1,
+    "manifest_cache_control": "no-store",
+    "artifact_cache_control": "public, max-age=31536000, immutable",
+    "semantic_state": {
+      "parent_count": 0,
+      "children": [
+        {
+          "key": "alpha",
+          "count": 0
+        },
+        {
+          "key": "beta",
+          "count": 0
+        }
+      ],
+      "field": {
+        "value": "",
+        "valid": false
+      },
+      "dom": {
+        "roots": 1,
+        "nodes": 23,
+        "listeners": 9
+      }
+    }
+  },
+  "mismatch_scenarios": {
+    "loader_manifest": {
+      "name": "loader-manifest",
+      "expected_code": "manifest-schema-unsupported",
+      "state": "failed",
+      "code": "manifest-schema-unsupported",
+      "runtime_ready": false,
+      "loader_stopped": true,
+      "status_code": "manifest-schema-unsupported",
+      "status_correlation": "runtime-activation",
+      "retry_visible": true,
+      "fixture_children": 0,
+      "detected_before_runtime_ready": true,
+      "partial_activation": false
+    },
+    "runtime_bundle": {
+      "name": "runtime-bundle",
+      "expected_code": "artifact-integrity-mismatch",
+      "state": "failed",
+      "code": "artifact-integrity-mismatch",
+      "runtime_ready": false,
+      "loader_stopped": true,
+      "status_code": "artifact-integrity-mismatch",
+      "status_correlation": "runtime-activation",
+      "retry_visible": true,
+      "fixture_children": 0,
+      "detected_before_runtime_ready": true,
+      "partial_activation": false
+    },
+    "artifact_cache": {
+      "name": "artifact-cache",
+      "expected_code": "artifact-integrity-mismatch",
+      "state": "failed",
+      "code": "artifact-integrity-mismatch",
+      "runtime_ready": false,
+      "loader_stopped": true,
+      "status_code": "artifact-integrity-mismatch",
+      "status_correlation": "runtime-activation",
+      "retry_visible": true,
+      "fixture_children": 0,
+      "detected_before_runtime_ready": true,
+      "partial_activation": false
+    },
+    "browser_feature": {
+      "state": "fallback",
+      "decision": "static-server-fallback",
+      "code": "browser-capability-missing",
+      "runtime_ready": false,
+      "retry_visible": true,
+      "fixture_children": 0,
+      "detected_before_runtime_ready": true,
+      "partial_activation": false
+    },
+    "renderer_data": {
+      "code": "fixture-target-missing",
+      "stale_generation": "fixture-generation-stale",
+      "partial_text_after_failure": "before",
+      "final_roots": 0,
+      "partial_activation": false
+    },
+    "server_client_generation": {
+      "code": "bridge-response-identity-mismatch",
+      "failures": 1,
+      "responses": 0,
+      "pending": 0,
+      "partial_activation": false
+    }
+  },
+  "retained_server_adapter_evidence": {
+    "phoenix": "1.8.13",
+    "phoenix_live_view": "1.2.11",
+    "local_live_view": "0.1.0",
+    "descriptor_mismatch": "covered-by-current-exunit-boundary-suite",
+    "adapter_disable": "standalone-dom",
+    "private_data_confinement": "packages/blazex_renderer_dom_liveview",
+    "adjacent_dependency_package_probe": "not-executed-no-locally-available-adjacent-package"
+  },
+  "cache_and_rollback": {
+    "manifest_cache_control": "no-store",
+    "artifact_cache_control": "public, max-age=31536000, immutable",
+    "loader_fetch_policy": "no-store-manifest-and-artifacts",
+    "scoped_client_cache_owner": "none",
+    "cache_invalidation": "not-applicable-no-service-worker-or-client-cache",
+    "retry": "user-controlled-coherent-page-reload",
+    "fresh_baseline_after_mismatches": true,
+    "hidden_semantic_change": false
+  },
+  "page_errors": [],
+  "evidence_sha256": "c094ba1093d1be746a8ca960f407e06a3adf7c60c2c872491d913c2d11395151"
+}

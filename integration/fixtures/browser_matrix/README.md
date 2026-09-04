@@ -23,3 +23,7 @@ engine emulation and non-vendor builds never substitute for a required row.
   accessibility/input outcomes, divergences, and required manual evidence.
 - `verify_accessibility_input.py` and `tests/test_accessibility_input.py` —
   fallback, keyboard, focus, field, preference, and no-overclaim checks.
+- `compatibility-matrix.json` — exact-pin baseline, seven mismatch categories,
+  non-substituting engine probes, and unexecuted adjacent-package boundaries.
+- `verify_compatibility.py` and `tests/test_compatibility.py` — fail-closed,
+  cache/rollback, private-API confinement, and no-version-range checks.

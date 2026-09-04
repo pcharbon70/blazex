@@ -114,6 +114,29 @@
       "risk": "This is not a standardized Wasm component interface and must not leak into portable BlazeX packages."
     }
   ],
+  "phase8_compatibility": {
+    "authoritative_versions": {
+      "phoenix": "1.8.13",
+      "phoenix_live_view": "1.2.11",
+      "local_live_view": "0.1.0"
+    },
+    "observed_breakage": "A simulated phoenix_live_view 1.2.12 descriptor is rejected before activation; no adjacent package was installed or executed.",
+    "required_pins": "The Phoenix, Phoenix LiveView, LocalLiveView, server diff/client asset, compatibility descriptor, and private API fixture remain an exact coherent set.",
+    "fallback_success": "standalone-dom",
+    "replacement_options": [
+      "retain the standalone DOM renderer",
+      "adopt an upstream public LocalLiveView compatibility surface",
+      "replace the adapter-owned integration instead of exporting private diff data"
+    ],
+    "upgrade_triggers": [
+      "any Phoenix, Phoenix LiveView, or LocalLiveView version change",
+      "any private surface, descriptor, server diff, or paired client asset change",
+      "any patch envelope, reconnect, generation, lifecycle, session, or socket shape change"
+    ],
+    "actual_adjacent_package_probe": "not-executed-no-locally-available-input",
+    "risk_implication": "Exact-baseline feasibility does not establish a dependency compatibility range.",
+    "stop_implication": "Stop if mismatch cannot disable the adapter before mutation or if private data must escape packages/blazex_renderer_dom_liveview."
+  },
   "confinement_decision": {
     "accepted_for_feasibility": true,
     "conditions": [

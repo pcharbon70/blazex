@@ -41,3 +41,9 @@ is not browser evidence.
   accessibility/input automation; no stable Firefox or AT claim follows.
 - `bh01-phase8-accessibility-webkit-probe.json` — unqualified Linux WebKit
   accessibility/input automation; no Safari or VoiceOver claim follows.
+- `bh01-phase8-compatibility-chromium.json` — qualified Chrome/Linux actual-
+  browser manifest, artifact, feature, renderer, and generation mismatch runs.
+- `bh01-phase8-compatibility-firefox-probe.json` — unqualified Firefox engine
+  execution of the same client compatibility scenarios.
+- `bh01-phase8-compatibility-webkit-probe.json` — unqualified Linux WebKit
+  execution of the same client compatibility scenarios; not Safari evidence.

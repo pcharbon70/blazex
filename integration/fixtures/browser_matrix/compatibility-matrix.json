@@ -1,0 +1,88 @@
+{
+  "schema_version": "1.0.0",
+  "matrix_id": "BX-BH01-PHASE8-COMPATIBILITY-MATRIX-0.1",
+  "status": "executed-partial-environment-blocked-exact-pins-only",
+  "source_revision": "b14cb8f9d5af2084f491e7c744a92e11247af7d3",
+  "authoritative_baseline": {
+    "runtime_manifest": "1.0.0",
+    "runtime_manifest_id": "BX-BH01-BROWSER-RUNTIME-MANIFEST-0.1",
+    "phoenix": "1.8.13",
+    "phoenix_live_view": "1.2.11",
+    "local_live_view": "0.1.0",
+    "liveview_adapter": "blazex-renderer-dom-liveview/bh01-0.1",
+    "browser": "Chrome for Testing 152.0.7977.75 on pinned Linux environment"
+  },
+  "mismatch_coverage": [
+    {"category": "runtime-bundle", "status": "passed", "detection": "artifact-integrity-mismatch before runtime readiness", "fallback": "finite failed state with coherent reload"},
+    {"category": "loader-manifest", "status": "passed", "detection": "manifest-schema-unsupported before artifact use", "fallback": "finite failed state with coherent reload"},
+    {"category": "artifact-cache", "status": "passed", "detection": "artifact-integrity-mismatch despite stale immutable artifact policy", "fallback": "no client cache owner; manifest and loader fetches use no-store"},
+    {"category": "browser-feature", "status": "passed", "detection": "browser-capability-missing before activation", "fallback": "static server-rendered status"},
+    {"category": "phoenix-liveview-local-liveview", "status": "passed-exact-stack-and-simulated-descriptor", "detection": "version-mismatch before optional adapter activation", "fallback": "standalone-dom"},
+    {"category": "renderer-data", "status": "passed", "detection": "batch and generation validation before mutation", "fallback": "dispose isolated renderer generation"},
+    {"category": "server-client-generation", "status": "passed", "detection": "bridge-response-identity-mismatch with no accepted response", "fallback": "reject stale result and preserve current generation"}
+  ],
+  "required_results": [
+    {
+      "configuration_id": "BR-CHROMIUM-DESKTOP",
+      "status": "passed",
+      "compatibility_scope": "exact-pins-only",
+      "evidence": "../raw-evidence/bh01-phase8-compatibility-chromium.json",
+      "evidence_sha256": "0f3c0de6e03ac70a138309e6062deab36e2853256e1270fa1319ec9104aca5eb"
+    },
+    {"configuration_id": "BR-FIREFOX-DESKTOP", "status": "environment-blocked", "blocker_ref": "environment-catalog.json#BR-FIREFOX-DESKTOP"},
+    {"configuration_id": "BR-CHROMIUM-ANDROID", "status": "environment-blocked", "blocker_ref": "environment-catalog.json#BR-CHROMIUM-ANDROID"},
+    {"configuration_id": "BR-WEBKIT-DESKTOP", "status": "environment-blocked", "blocker_ref": "environment-catalog.json#BR-WEBKIT-DESKTOP"},
+    {"configuration_id": "BR-WEBKIT-MOBILE", "status": "environment-blocked", "blocker_ref": "environment-catalog.json#BR-WEBKIT-MOBILE"}
+  ],
+  "non_substituting_probe_results": [
+    {
+      "probe_id": "PROBE-FIREFOX-PLAYWRIGHT-153-LINUX",
+      "status": "passed-experimental",
+      "compatibility_scope": "same-client-mismatch-suite-unqualified-engine",
+      "required_row_credit": false,
+      "evidence": "../raw-evidence/bh01-phase8-compatibility-firefox-probe.json",
+      "evidence_sha256": "bff6309618f96cab70778154d2924d654831c2f510c5dcaf021a1ef4c8635f02"
+    },
+    {
+      "probe_id": "PROBE-WEBKIT-PLAYWRIGHT-26.5-LINUX",
+      "status": "passed-experimental",
+      "compatibility_scope": "same-client-mismatch-suite-unqualified-engine-not-safari",
+      "required_row_credit": false,
+      "evidence": "../raw-evidence/bh01-phase8-compatibility-webkit-probe.json",
+      "evidence_sha256": "c1087938b74516358032273c0bfa62e08ba671611d6ed06469f0e7a316e87b7c"
+    }
+  ],
+  "adjacent_dependency_probes": [
+    {
+      "dependency": "phoenix_live_view",
+      "candidate": "1.2.12 descriptor only",
+      "status": "simulated-descriptor-rejected",
+      "installed_and_executed": false,
+      "result": "version-mismatch and standalone-dom fallback",
+      "compatibility_credit": false
+    },
+    {
+      "dependency": "phoenix",
+      "candidate": null,
+      "status": "not-executed-no-locally-available-adjacent-package",
+      "installed_and_executed": false,
+      "compatibility_credit": false
+    },
+    {
+      "dependency": "local_live_view",
+      "candidate": null,
+      "status": "not-executed-no-locally-available-adjacent-package",
+      "installed_and_executed": false,
+      "compatibility_credit": false
+    }
+  ],
+  "retained_test_evidence": [
+    "js/blazex_runtime/test/manifest-loader.test.js",
+    "js/blazex_runtime/test/host-bridge.test.js",
+    "packages/blazex_renderer_dom_liveview/test/blazex/renderer/dom/live_view_boundary_test.exs",
+    "profiles/browser_phoenix/test/boundary_test.exs",
+    "profiles/browser_phoenix/toolchain/private-api-contract.fixture.json"
+  ],
+  "phase_effect": "blocked-until-four-required-browser-environments-execute",
+  "claims_not_made": ["adjacent dependency compatibility", "version range support", "Firefox support", "Safari support", "Chrome Android support", "browser support"]
+}

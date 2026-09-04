@@ -119,27 +119,27 @@ Back to milestone: [README](README.md)
       - [x] 8.4.2.1 Subtask - Run keyboard action, tab/focus order, focus visibility/restore, field input/change/blur, rapid/composition-like input, validation, and disabled/read-only cases.
       - [x] 8.4.2.2 Subtask - Record engine/automation/assistive-technology limitations and require bounded manual review for evidence unavailable to automation.
 
-  - [ ] 8.5 Section - Characterize compatibility and private-API limits.
+  - [x] 8.5 Section - Characterize compatibility and private-API limits.
 
     Expose exact pins and narrow unsupported combinations rather than claiming a
     broad ecosystem range from one working stack.
 
-    - [ ] 8.5.1 Task - Run version and protocol mismatch scenarios.
+    - [x] 8.5.1 Task - Run version and protocol mismatch scenarios.
 
       Every independently versioned artifact or adapter should fail clearly
       when incompatible.
 
-      - [ ] 8.5.1.1 Subtask - Test runtime/bundle, loader/manifest, artifact/cache, browser feature, Phoenix/LiveView/LocalLiveView, renderer-data, and server/client generation mismatches.
-      - [ ] 8.5.1.2 Subtask - Verify detection before unsafe use, bounded diagnostics, rollback/cache invalidation, adapter disable, local/server fallback, and no hidden semantic change.
+      - [x] 8.5.1.1 Subtask - Test runtime/bundle, loader/manifest, artifact/cache, browser feature, Phoenix/LiveView/LocalLiveView, renderer-data, and server/client generation mismatches.
+      - [x] 8.5.1.2 Subtask - Verify detection before unsafe use, bounded diagnostics, rollback/cache invalidation, adapter disable, local/server fallback, and no hidden semantic change.
 
-    - [ ] 8.5.2 Task - Perform bounded adjacent-version probes.
+    - [x] 8.5.2 Task - Perform bounded adjacent-version probes.
 
       Probes inform pin sensitivity but never broaden the authoritative baseline
       or support matrix by implication.
 
-      - [ ] 8.5.2.1 Subtask - Probe only explicitly selected adjacent dependency/browser versions with the same immutable compatibility scenarios.
-      - [ ] 8.5.2.2 Subtask - Update private-API inventory with breakage, required pins, fallback success, replacement options, upgrade triggers, and risk/stop implications.
-      - [ ] 8.5.2.3 Subtask - Keep the exact pinned baseline authoritative and label all probe outcomes experimental/unqualified.
+      - [x] 8.5.2.1 Subtask - Probe only explicitly selected adjacent dependency/browser versions with the same immutable compatibility scenarios.
+      - [x] 8.5.2.2 Subtask - Update private-API inventory with breakage, required pins, fallback success, replacement options, upgrade triggers, and risk/stop implications.
+      - [x] 8.5.2.3 Subtask - Keep the exact pinned baseline authoritative and label all probe outcomes experimental/unqualified.
 
   - [ ] 8.6 Section - Phase 8 Integration Tests and Completion Evidence.
 
