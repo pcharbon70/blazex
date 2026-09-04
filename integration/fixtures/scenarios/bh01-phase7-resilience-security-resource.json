@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0.0",
+  "scenario_id": "BX-BH01-SCENARIO-PHASE7-RESILIENCE-SECURITY-RESOURCE",
+  "status": "passed",
+  "owner": "quality-owner",
+  "requirement_refs": ["BH-01-PHASE-7", "BX-BH01-PROOF-NESTED-STATE", "BX-BH01-PROOF-TIMER-MESSAGE", "BX-BH01-PROOF-AUTHENTICATED-COMMAND", "BX-BH01-RISK-RUNTIME-SEMANTICS", "BX-BH01-RISK-AUTHENTICATED-COMMAND"],
+  "profiles": ["browser-phoenix-phase7", "chrome-for-testing-152.0.7977.75", "atomvm-popcorn-browser-fixture"],
+  "preconditions": ["Phases 5 and 6 gates passed.", "The Phase 7 failure, recovery, resource, adversarial, and diagnostic contracts are verified.", "The exact governed browser profile has been rebuilt from the Section 7.4 sources."],
+  "steps": ["Tamper a runtime artifact and require rejection before readiness.", "Run twenty mount, local interaction, timer cancellation, authenticated command, selected disconnect/retry, and disposal cycles.", "Exercise direct authority forgery, oversized bridge input, inert HTML text, diagnostics, double-stop, and final cleanup.", "Compose unit, mutation, profile, package, dependency, archive, and retained-evidence gates."],
+  "expected_results": ["Every cycle applies one authorized effect and every selected transport recovery preserves its idempotency identity.", "All declared transient runtime, browser, renderer, transport, server, and adapter resources converge at disposal.", "Tampered or adversarial inputs fail closed without code execution, secret leakage, or unauthorized effect.", "Every injected browser failure has a correlated redacted diagnostic and intentional terminal or recovered state."],
+  "prohibited_results": ["Lower layers retry an authority-bearing command.", "A stale generation, disposal race, replay, or forged client field applies another effect.", "An artifact executes before integrity verification.", "An unexplained resource grows across iterations.", "A console-only or secret-bearing diagnostic is required to understand failure.", "The result is represented as browser support, production hardening, security certification, or a stable public API."],
+  "evidence_types": ["actual-browser-observation", "failure-and-recovery-trace", "adversarial-result", "resource-convergence-report", "redacted-diagnostic-summary", "server-audit-observation"]
+}

@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0.0",
+  "matrix_id": "BX-BH01-PHASE7-ADVERSARIAL-MATRIX-0.1",
+  "status": "phase7-executed-contract-matrix",
+  "seed": 170701,
+  "iterations_per_generated_family": 64,
+  "payload_vectors": [
+    "malformed-json", "unknown-field", "deep-object", "large-string", "large-array", "duplicate-operation", "out-of-order-sequence",
+    "unicode-key", "invalid-encoding", "nonfinite-number", "unsafe-integer", "atom-key-growth", "binary-size", "decompression-mismatch",
+    "path-traversal", "cross-origin-url", "credentialed-url", "redirect", "header-confusion", "origin-forgery", "event-target-substitution",
+    "correlation-substitution", "idempotency-substitution", "stale-generation", "duplicate-result", "html-script-text", "host-operation-abuse"
+  ],
+  "artifact_vectors": [
+    "modified-wasm", "modified-beam", "modified-javascript", "modified-manifest", "unexpected-source-map", "wrong-mime", "wrong-compression",
+    "redirected-response", "cross-origin-response", "stale-cache", "missing-integrity", "csp-conflict", "cors-conflict", "isolation-conflict", "downgrade-attempt"
+  ],
+  "authority_vectors": [
+    "anonymous-direct-transport", "forged-session", "forged-csrf", "forged-role", "resource-substitution", "state-substitution", "replay",
+    "concurrent-replay-race", "adapter-bypass", "host-operation-bypass", "result-target-substitution", "dom-target-substitution", "rate-amplification"
+  ],
+  "required_outcomes": {
+    "bounded_parse": true,
+    "fail_before_artifact_execute": true,
+    "code_execution": false,
+    "html_injection": false,
+    "secret_exposure": false,
+    "dynamic_atom_creation": false,
+    "unauthorized_effect": false,
+    "hidden_downgrade": false,
+    "cleanup_required": true,
+    "correlation_required": true
+  },
+  "specialist_review": {
+    "role": "security-reviewer",
+    "disposition": "accepted-for-phase7-feasibility",
+    "residual_assumptions": [
+      "The browser and all browser runtime state remain attacker-controlled.",
+      "The disposable in-memory authority is not production identity or persistence.",
+      "Transport security and proxy behavior are outside the loopback test profile.",
+      "The CSP unsafe-eval requirement remains an open candidate-stack risk."
+    ],
+    "production_controls_not_implemented": ["external identity provider", "durable transaction store", "distributed rate limiting", "production audit sink", "security monitoring", "key rotation"]
+  },
+  "stop_conditions": [
+    "client presentation or renderer state grants authority",
+    "artifact mismatch executes before rejection",
+    "unbounded input allocates or creates runtime atoms",
+    "secret-bearing diagnostic enters retained evidence",
+    "unauthorized effect occurs",
+    "private adapter bypass contaminates standalone boundaries"
+  ],
+  "claims_not_made": ["security certification", "production penetration test", "browser sandbox proof"]
+}

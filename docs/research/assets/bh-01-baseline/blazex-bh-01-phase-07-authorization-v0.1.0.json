@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0.0",
+  "record_id": "BX-BH01-AUTHORIZATION-PHASE-07-0.1",
+  "status": "approved-phase-7-only",
+  "authorized_at": "2026-09-04",
+  "request": "Implement the next phase of BH-01 section by section with a commit per section and one immediately merged PR, then synchronize main and delete the feature branch.",
+  "base_revision": "30cb700bee8c726b67e609a224b8a2c161ecd0a7",
+  "branch": "codex/bh-01-phase-07-resilience-security-lifecycle",
+  "authorized_scope": [
+    "define and verify the integrated Phase 7 failure taxonomy and coordinated recovery policy",
+    "instrument and stress cancellation, disposal, and bounded resource ownership across the disposable vertical slice",
+    "execute deterministic adversarial payload, artifact-policy, host-operation, and server-authority tests",
+    "standardize correlated, redacted Phase 7 diagnostics and verify failure observability",
+    "record actual-browser Phase 7 resilience, security, diagnostics, and resource evidence",
+    "commit once per completed Phase 7 section",
+    "create and immediately merge one Phase 7 pull request",
+    "synchronize main and delete the local and remote feature branch"
+  ],
+  "not_authorized": [
+    "Phase 8 browser compatibility or accessible fallback matrix work",
+    "BH-02 semantic tree, component, effect, capability, renderer, or stable error contracts",
+    "production authentication, persistence, monitoring, incident response, security certification, or deployment implementation",
+    "browser support, accessibility conformance, quality-budget, performance, mobile, or production-readiness claims"
+  ],
+  "owner": "repository-owner"
+}

@@ -1,0 +1,193 @@
+{
+  "schema_version": "1.0.0",
+  "record_id": "BX-BH01-DECISION-PHASE-07-GO",
+  "record_type": "decision",
+  "state": "passed",
+  "title": "BH-01 Phase 7 resilience, security, and resource lifecycle gate",
+  "owner_role": "bh01-owner",
+  "recorded_at": "2026-09-04T13:51:04.836Z",
+  "observed_at": "2026-09-04T13:51:04.836Z",
+  "source_revision": "0c26d6548b162542250f04ac62c21cca7cc83371",
+  "environment_refs": [
+    "profiles/browser_phoenix/toolchain/environment.lock.json",
+    "profiles/browser_phoenix/toolchain/browser.lock.json",
+    "profiles/browser_phoenix/toolchain/runtime.lock.json",
+    "profiles/browser_phoenix/toolchain/server-dependencies.json",
+    "integration/fixtures/resilience/failure-taxonomy.json",
+    "integration/fixtures/resilience/recovery-policy.json",
+    "integration/fixtures/resilience/resource-policy.json",
+    "integration/fixtures/resilience/adversarial-matrix.json",
+    "integration/fixtures/resilience/diagnostic-contract.json"
+  ],
+  "tool_identities": [
+    {
+      "name": "beam-test-image",
+      "version": "sha256:8d03cfb52e3fa3f5d83d749942b7c45c966dda48a7c4ba4f069390379b59fc39",
+      "source": "docker.io/hexpm/elixir",
+      "sha256": "a2386c21edd5c612b4ed6e2731daba806177dba55baf977ee456c6e194f60d9f"
+    },
+    {
+      "name": "node",
+      "version": "26.8.1",
+      "source": "nodejs.org",
+      "sha256": "3e301118d7df53d563b7e96c1617545f26e2f76f9724be668d6cab65c15dda5d"
+    },
+    {
+      "name": "playwright-core",
+      "version": "1.62.1",
+      "source": "registry.npmjs.org",
+      "sha256": null
+    },
+    {
+      "name": "chrome-for-testing",
+      "version": "152.0.7977.75",
+      "source": "storage.googleapis.com/chrome-for-testing-public",
+      "sha256": "a16d36890636bd72251133b27f05825f7f9269c2425b3408fa3a76e10dccd8f1"
+    },
+    {
+      "name": "phoenix",
+      "version": "1.8.13",
+      "source": "repo.hex.pm",
+      "sha256": null
+    },
+    {
+      "name": "popcorn",
+      "version": "0.3.3",
+      "source": "repo.hex.pm",
+      "sha256": null
+    },
+    {
+      "name": "python",
+      "version": "3.12.12",
+      "source": "local policy environment",
+      "sha256": "fb85a13414b028c49ba18bbd523c2d055a30b56b18b92ce454ea2c51edc656c4"
+    }
+  ],
+  "requirement_refs": [
+    "BH-01-PHASE-7",
+    "BX-BH01-INPUT-BEHAVIORS",
+    "BX-BH01-INPUT-MEASUREMENTS",
+    "BX-BH01-INPUT-STOP-CONDITIONS",
+    "BX-BH01-PROOF-NESTED-STATE",
+    "BX-BH01-PROOF-TIMER-MESSAGE",
+    "BX-BH01-PROOF-AUTHENTICATED-COMMAND",
+    "BX-BH01-RISK-RUNTIME-SEMANTICS",
+    "BX-BH01-RISK-AUTHENTICATED-COMMAND",
+    "BX-BH01-RISK-MOBILE-PERFORMANCE"
+  ],
+  "reciprocal_links": [
+    "docs/research/60-planning/01-browser-host/bh-01-reproducible-browser-feasibility-baseline/phase-07-resilience-security-and-resource-lifecycle.md",
+    "docs/research/60-planning/01-browser-host/bh-01-reproducible-browser-feasibility-baseline/phase-07-implementation-evidence.md",
+    "integration/fixtures/scenarios/bh01-phase7-resilience-security-resource.json",
+    "integration/fixtures/raw-evidence/bh01-phase7-resilience-security-resource.json",
+    "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-07-authorization-v0.1.0.json"
+  ],
+  "command_refs": [
+    "python3 profiles/browser_phoenix/assets/phase4/build_profile.py --output profiles/browser_phoenix/priv/static/bh01",
+    "PHX_SERVER=true PORT=4199 mix run --no-halt",
+    "BLAZEX_BASE_URL=http://127.0.0.1:4199/bh01/ BLAZEX_CHROME_PATH=<qualified-chrome> BLAZEX_REVISION=0c26d6548b162542250f04ac62c21cca7cc83371 node test/browser/phase7.integration.mjs",
+    "npm test",
+    "npm run build",
+    "mix test",
+    "python3 -m unittest discover -s integration/fixtures/local_browser/tests -p test_*.py",
+    "python3 -m unittest discover -s integration/fixtures/resilience/tests -p test_*.py",
+    "python3 -m unittest discover -s profiles/browser_phoenix/toolchain/tests -p test_*.py",
+    "python3 integration/fixtures/browser_host/verify_fixture.py --generated integration/fixtures/browser_host/generated",
+    "python3 profiles/browser_phoenix/assets/phase4/verify_profile.py profiles/browser_phoenix/priv/static/bh01",
+    "python3 profiles/browser_phoenix/toolchain/verify_phase7.py",
+    "python3 docs/research/validate_archive.py",
+    "git diff --check"
+  ],
+  "input_hashes": [
+    {
+      "path": "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-07-authorization-v0.1.0.json",
+      "sha256": "d59cc6479f2f880fa458ed7f06a4d33511e31758db1841d25f01a884969c46a8"
+    },
+    {
+      "path": "integration/fixtures/resilience/failure-taxonomy.json",
+      "sha256": "34b9bafde8b64341c79a4b252d193e90d915aacf8c7293e3d19ee2afc277a81f"
+    },
+    {
+      "path": "integration/fixtures/resilience/recovery-policy.json",
+      "sha256": "1c2e6aa0d615f4866ca0232b857cd95f59f55820c566f383c358051e3aa6d2c1"
+    },
+    {
+      "path": "integration/fixtures/resilience/resource-policy.json",
+      "sha256": "9e1d34a4a2735edfc3c72c435124b667ffc656be6ae1cdfa8c211d123e5d3d84"
+    },
+    {
+      "path": "integration/fixtures/resilience/adversarial-matrix.json",
+      "sha256": "64747d198a6b6360bd5697fe1d959bb0fcc91cef4279dca07291cba874f44753"
+    },
+    {
+      "path": "integration/fixtures/resilience/diagnostic-contract.json",
+      "sha256": "eaa2822a87e2da703fdf634dd77d354b8d001001dde8c498b41238a6c46ba2f1"
+    },
+    {
+      "path": "integration/fixtures/scenarios/bh01-phase7-resilience-security-resource.json",
+      "sha256": "523ad18e290974a1a65d22f8a56db26b3b44d11cac54170ff72f15c0b6697161"
+    },
+    {
+      "path": "integration/fixtures/raw-evidence/bh01-phase7-resilience-security-resource.json",
+      "sha256": "168f39f25f59e104923d723af37fca69fb4f7bde78c5c9f5122ba30e0dbbacaa"
+    },
+    {
+      "path": "integration/fixtures/fixture-index.json",
+      "sha256": "c338d54638578eee2b381e894c55719c45c4b34a6a31bfa8f89924054adbcaf6"
+    }
+  ],
+  "output_hashes": [
+    {
+      "path": "docs/research/60-planning/01-browser-host/bh-01-reproducible-browser-feasibility-baseline/phase-07-implementation-evidence.md",
+      "sha256": "d6cc64e5b02a08dab61a4e90250b0702bea581679943e7060515deca6e853af6"
+    },
+    {
+      "path": "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-07-validation-log-v0.1.0.txt",
+      "sha256": "31350f7b19eb8a583e32757d70e0350e36460a1ffd58c2e83a438b5c7bf2aba6"
+    }
+  ],
+  "raw_evidence_refs": [
+    "integration/fixtures/raw-evidence/bh01-phase7-resilience-security-resource.json",
+    "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-07-validation-log-v0.1.0.txt"
+  ],
+  "normalization": [
+    {
+      "subject": "recovery traces",
+      "method": "Retain bounded scenario, generation, failure, correlation, attempt, delay, state, and redacted error fields; preserve authority-bearing idempotency semantics without retaining credentials or command bodies."
+    },
+    {
+      "subject": "resource observations",
+      "method": "Flatten owner-domain snapshots into named counters and retain baseline, peak, stable, disposed, leak, and explicit-unknown values; do not convert unavailable worker observations to zero."
+    },
+    {
+      "subject": "adversarial and diagnostic results",
+      "method": "Retain only bounded outcome codes, effect deltas, readiness, counts, correlation presence, redaction status, and sanitized summaries; exclude cookies, sessions, CSRF values, command bodies, local paths, stack traces, and authorization internals."
+    }
+  ],
+  "limitations": [
+    "Only one exact headless Chrome for Testing 152/Linux x86-64 environment was executed; all browsers remain unsupported.",
+    "Twenty lifecycle iterations are a Phase 7 feasibility sample, not a production soak or memory-leak certification.",
+    "The AtomVM process inventory is fixture-scoped and parent-frame browser worker count remains unavailable and explicitly unknown.",
+    "The recovery, resource, diagnostic, authority, and adversarial protocols are disposable BH-01 fixtures rather than stable public APIs.",
+    "Production authentication, persistence, TLS/proxy deployment, distributed limits, audit sinks, monitoring, accessibility, mobile behavior, penetration testing, and security certification remain unverified.",
+    "Popcorn 0.3.3 still requires CSP unsafe-eval and the unpruned AVM still lacks accepted payload, startup, memory, CPU, and reliability budgets."
+  ],
+  "supersedes": [],
+  "invalidates": [],
+  "retention": {
+    "class": "permanent",
+    "minimum_days": null,
+    "immutable_raw_evidence": true
+  },
+  "outcome": {
+    "summary": "Phase 7 resilience, security, diagnostics, and resource lifecycle gate passed narrowly; Phase 8 is eligible but not authorized.",
+    "expected": "Twenty repeated and interrupted browser generations recover only through one bounded coordinator, preserve authority/idempotency, reject adversarial artifacts and inputs before effect or execution, emit correlated redacted diagnostics, and converge all declared transient resources without unexplained growth.",
+    "observed": "The pinned browser completed twenty generations and four two-attempt recoveries with one authorized effect per generation, zero unauthorized effects, fail-before-readiness artifact rejection, fail-closed authority and bridge attacks, inert hostile HTML, twenty-five redacted diagnostics, no console-only or uncaught failures, and a forty-sample converged resource report with no leaks and one explicit worker-count unknown."
+  },
+  "review": {
+    "required": true,
+    "reviewer_role": "bh01-owner",
+    "reviewed_at": "2026-09-04T13:51:04.836Z",
+    "disposition": "accepted"
+  }
+}

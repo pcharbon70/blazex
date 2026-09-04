@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
   "index_id": "BX-BH01-FIXTURE-INDEX-0.1",
-  "status": "phase6-trust-and-isolation-observed-pass",
+  "status": "phase7-resilience-security-resource-observed-pass",
   "scenario_schema": "scenario.schema.json",
   "scenario_location": "scenarios",
   "raw_evidence_location": "raw-evidence",
@@ -39,6 +39,12 @@
       "path": "scenarios/bh01-phase6-trust-boundary.json",
       "status": "passed",
       "evidence": "raw-evidence/bh01-phase6-trust-and-isolation.json"
+    },
+    {
+      "scenario_id": "BX-BH01-SCENARIO-PHASE7-RESILIENCE-SECURITY-RESOURCE",
+      "path": "scenarios/bh01-phase7-resilience-security-resource.json",
+      "status": "passed",
+      "evidence": "raw-evidence/bh01-phase7-resilience-security-resource.json"
     }
   ],
   "production_import_allowed": false

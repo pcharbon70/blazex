@@ -214,8 +214,11 @@ def validate(
         errors.append("Phase 5 plan still contains open work")
     if "| complete — gate passed | Exercise disposable state" not in milestone_text:
         errors.append("BH-01 milestone does not record the passed Phase 5 gate")
-    if not re.search(r"Phase 6 is eligible but\s+not\s+authorized", milestone_text):
-        errors.append("BH-01 milestone does not preserve the Phase 6 authorization boundary")
+    if not (
+        re.search(r"Phase 6 is eligible but\s+not\s+authorized", milestone_text)
+        or "| complete — gate passed | Prove one authenticated command" in milestone_text
+    ):
+        errors.append("BH-01 milestone does not preserve or record the Phase 6 boundary")
     for revision in ("cd550a9", "7fc7782", "e78113a", "f5f0ee1", "7332b2e"):
         if revision not in report_text:
             errors.append(f"Phase 5 report omits section revision {revision}")

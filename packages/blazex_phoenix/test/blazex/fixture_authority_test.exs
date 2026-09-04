@@ -34,6 +34,16 @@ defmodule BlazeX.Phoenix.BH01.FixtureAuthorityTest do
 
     snapshot = FixtureAuthority.snapshot(server)
     assert snapshot["active_sessions"] == 1
+    assert snapshot["resources"] == %{
+             "processes" => 1,
+             "tasks" => 0,
+             "pending_commands" => 0,
+             "sockets" => 0,
+             "subscriptions" => 0,
+             "database_effects" => 0,
+             "audit_events" => 0,
+             "adapter_generations" => 0
+           }
     refute inspect(snapshot) =~ session["csrf_token"]
     refute inspect(snapshot) =~ session["session_id"]
   end
@@ -185,6 +195,50 @@ defmodule BlazeX.Phoenix.BH01.FixtureAuthorityTest do
              execute(server, session, command("limited", "failure-four", 0))
 
     assert FixtureAuthority.snapshot(server)["resource"]["value"] == 0
+  end
+
+  test "hostile command shapes remain strings, bounded failures, and effect-free", %{server: server} do
+    session = session(server, "operator")
+    marker = "phase7_never_intern_#{System.unique_integer([:positive])}"
+
+    mutations = [
+      Map.put(command("extra", "extra", 0), marker, "value"),
+      %{command("unicode", "unicode", 0) | "correlation_id" => "λ"},
+      %{command("huge", "huge", 0) | "idempotency_key" => String.duplicate("x", 65)},
+      %{command("negative", "negative", 0) | "expected_version" => -1},
+      %{command("float", "float", 0) | "expected_version" => 0.5},
+      %{command("resource", "resource", 0) | "resource_id" => "other"},
+      %{command("amount", "amount", 0) | "payload" => %{"amount" => 2}},
+      Map.put(command("role", "role", 0), "role", "operator")
+    ]
+
+    for repeat <- 1..64 do
+      envelope = Enum.at(mutations, rem(repeat - 1, length(mutations)))
+      assert {:error, %{"error" => %{"code" => code}}} = execute(server, session, envelope)
+      assert code in ["command-invalid", "command-unknown"]
+    end
+
+    assert_raise ArgumentError, fn -> String.to_existing_atom(marker) end
+    assert FixtureAuthority.snapshot(server)["resource"]["value"] == 0
+  end
+
+  test "concurrent exact replay applies one authoritative effect", %{server: server} do
+    session = session(server, "operator")
+    envelope = command("race", "race-key", 0)
+
+    results =
+      1..20
+      |> Task.async_stream(fn _ -> execute(server, session, envelope) end,
+        max_concurrency: 20,
+        ordered: false
+      )
+      |> Enum.map(fn {:ok, result} -> result end)
+
+    assert Enum.count(results, fn {:ok, %{"result" => %{"replayed" => false}}} -> true; _ -> false end) == 1
+    assert Enum.count(results, fn {:ok, %{"result" => %{"replayed" => true}}} -> true; _ -> false end) == 19
+    snapshot = FixtureAuthority.snapshot(server)
+    assert snapshot["resource"] == %{"id" => "counter", "value" => 1, "version" => 1}
+    assert snapshot["resources"]["audit_events"] == 20
   end
 
   defp session(server, identity, options \\ []) do

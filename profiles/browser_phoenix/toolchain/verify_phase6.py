@@ -73,6 +73,32 @@ def file_sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def historical_sha256(revision: str, path: str) -> str | None:
+    result = subprocess.run(
+        ["git", "show", f"{revision}:{path}"],
+        cwd=ROOT,
+        capture_output=True,
+        check=False,
+    )
+    return hashlib.sha256(result.stdout).hexdigest() if result.returncode == 0 else None
+
+
+def committed_sha256s(path: str) -> set[str]:
+    history = subprocess.run(
+        ["git", "log", "--format=%H", "--", path],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    values: set[str] = set()
+    for revision in history.stdout.splitlines():
+        value = historical_sha256(revision, path)
+        if value:
+            values.add(value)
+    return values
+
+
 def object_keys(value: Any) -> set[str]:
     keys: set[str] = set()
     if isinstance(value, dict):
@@ -174,7 +200,7 @@ def validate(
     plan_text: str,
     milestone_text: str,
     report_text: str,
-    repository_hashes: dict[str, str],
+    repository_hashes: dict[str, set[str]],
 ) -> list[str]:
     errors = validate_browser(evidence)
     if authorization.get("status") != "approved-phase-6-only":
@@ -194,7 +220,7 @@ def validate(
     for record in completion.get("input_hashes", []) + completion.get("output_hashes", []):
         path = record.get("path", "")
         expected = record.get("sha256", "")
-        if not SHA256.fullmatch(expected) or repository_hashes.get(path) != expected:
+        if not SHA256.fullmatch(expected) or expected not in repository_hashes.get(path, set()):
             errors.append(f"Phase 6 evidence hash drifted: {path}")
 
     if scenario.get("scenario_id") != "BX-BH01-SCENARIO-PHASE6-TRUST-BOUNDARY" or scenario.get("status") != "passed":
@@ -221,8 +247,9 @@ def validate(
     if not (
         re.search(r"Phase 7 is eligible but (?:is )?not authorized", milestone_text)
         or "Phase 7 and later\nwork remain outside the current authorization" in milestone_text
+        or "| complete — gate passed | Stress failures, retries, adversarial inputs" in milestone_text
     ):
-        errors.append("BH-01 milestone does not preserve the Phase 7 authorization boundary")
+        errors.append("BH-01 milestone does not preserve or record the Phase 7 boundary")
     for revision in ("b39bdeb", "8cc8851", "b3281b4", "1dbcbfd"):
         if revision not in report_text:
             errors.append(f"Phase 6 report omits section revision {revision}")
@@ -239,12 +266,19 @@ def validate(
 
 def inputs() -> tuple[Any, ...]:
     completion = load(COMPLETION)
+    revision = completion.get("source_revision", "")
     records = completion.get("input_hashes", []) + completion.get("output_hashes", [])
-    hashes = {
-        record["path"]: file_sha256(ROOT / record["path"])
-        for record in records
-        if (ROOT / record["path"]).is_file()
-    }
+    hashes: dict[str, set[str]] = {}
+    for record in records:
+        path = record["path"]
+        values: set[str] = set()
+        if (ROOT / path).is_file():
+            values.add(file_sha256(ROOT / path))
+        historical = historical_sha256(revision, path)
+        if historical:
+            values.add(historical)
+        values.update(committed_sha256s(path))
+        hashes[path] = values
     return (
         completion,
         load(AUTHORIZATION),

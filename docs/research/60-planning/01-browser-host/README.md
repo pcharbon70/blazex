@@ -37,17 +37,18 @@ implementation milestones](../../20-notes/browser-host-implementation-milestones
 - The eventual browser-stream completion gate.
 
 BH-00 is complete. The repository owner approved the BH-01 plan snapshot and
-Phases 1-6 are complete with narrow governed feasibility results. The latest
-gate proves one authenticated Phoenix command and optional LiveView-adapter
-isolation in the exact pinned browser profile. Phase 7 is eligible but not
-authorized; later milestones retain their own approval boundaries.
+Phases 1-7 are complete with narrow governed feasibility results. The latest
+gate proves bounded recovery, fail-closed adversarial behavior, correlated
+redacted diagnostics, and resource convergence in the exact pinned browser
+profile. Phase 8 is eligible but not authorized; later phases and milestones
+retain their own approval boundaries.
 
 ## Index
 
 ### Subdirectories
 
 - [BH-00 — Product Boundary, Catalog, and Acceptance Contract](bh-00-product-boundary-catalog-and-acceptance-contract/README.md) — six-phase plan that freezes vocabulary, product scope, catalog dispositions, quality budgets, and acceptance traceability before BH-01 implementation begins.
-- [BH-01 — Reproducible Browser Feasibility Baseline](bh-01-reproducible-browser-feasibility-baseline/README.md) — approved need-driven plan; Phases 1-6 are complete, and Phase 7 remains eligible but unauthorized.
+- [BH-01 — Reproducible Browser Feasibility Baseline](bh-01-reproducible-browser-feasibility-baseline/README.md) — approved need-driven plan; Phases 1-7 are complete, and Phase 8 remains eligible but unauthorized.
 
 ### Documents
 

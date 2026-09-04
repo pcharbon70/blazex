@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0.0",
+  "policy_id": "BX-BH01-PHASE7-RESOURCE-POLICY-0.1",
+  "status": "proposed-feasibility-limits",
+  "stress_iterations": 20,
+  "interruption_points": ["startup", "dom-update", "timer", "validation", "server-command", "adapter-patch", "measurement", "shutdown"],
+  "required_domains": ["runtime", "browser", "renderer", "transport", "server", "adapter"],
+  "zero_at_disposal": [
+    "runtime.processes", "runtime.mailbox_messages", "runtime.timers", "runtime.pending_messages",
+    "browser.listeners", "browser.observers", "browser.fetches", "browser.requests", "browser.dom_roots", "browser.references",
+    "renderer.roots", "renderer.listeners", "renderer.nodes",
+    "transport.bridge_pending", "transport.bridge_timers", "transport.server_pending",
+    "server.pending_commands", "server.tasks", "server.sockets", "server.subscriptions", "adapter.active_generations"
+  ],
+  "bounded_during_stress": {
+    "transport.bridge_pending": 4,
+    "transport.server_pending": 2,
+    "server.pending_commands": 1,
+    "adapter.active_generations": 1
+  },
+  "allowed_nonzero_after_disposal": {
+    "runtime.memory_pages": "fixed AtomVM linear-memory floor until frame release",
+    "server.processes": "one supervised fixture authority process",
+    "server.audit_events": "bounded retained audit evidence before test reset",
+    "server.database_effects": "in-memory fixture counter effects before test reset"
+  },
+  "unknown_observations": {
+    "runtime.processes": "AtomVM process inventory is available from the disposable fixture snapshot",
+    "browser.workers": "parent-frame browser worker count is not exposed by the selected API"
+  },
+  "nonconvergence_dispositions": ["expected-runtime-floor", "bounded-cache", "expected-server-state", "instrumentation-unavailable", "bounded-mitigation", "upstream-issue", "replacement-path", "blocker"],
+  "claims_not_made": ["passed production resource budget", "memory-leak certification", "mobile viability"]
+}

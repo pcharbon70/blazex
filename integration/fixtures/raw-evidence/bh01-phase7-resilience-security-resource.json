@@ -1,0 +1,819 @@
+{
+  "schema_version": "1.0.0",
+  "evidence_id": "BX-BH01-PHASE-07-RESILIENCE-SECURITY-RESOURCE-EVIDENCE-0.1",
+  "captured_at": "2026-09-04T13:51:04.836Z",
+  "implementation_parent_revision": "0c26d6548b162542250f04ac62c21cca7cc83371",
+  "observed_patch_scope": "Phase 7 actual-browser harness and completion evidence are committed together after the Section 7.4 parent.",
+  "status": "observed-pass",
+  "support_status": "unsupported-provisional-feasibility",
+  "toolchain": {
+    "node": "v26.8.1",
+    "playwright_core": "1.62.1",
+    "browser_product": "Chrome for Testing",
+    "browser_version": "152.0.7977.75",
+    "browser_archive_sha256": "a16d36890636bd72251133b27f05825f7f9269c2425b3408fa3a76e10dccd8f1",
+    "os": "linux 6.8.0-51-generic",
+    "architecture": "x64"
+  },
+  "stress": {
+    "iterations": 20,
+    "recovered_disconnects": 4,
+    "generations": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20
+    ],
+    "interruption_points": [
+      "startup",
+      "dom-update",
+      "timer",
+      "validation",
+      "server-command",
+      "adapter-patch",
+      "measurement",
+      "shutdown"
+    ],
+    "iteration_results": [
+      {
+        "iteration": 1,
+        "generation": 1,
+        "recovered": false,
+        "resource_value": 1,
+        "audit_events": 1,
+        "disposed_runtime": {
+          "mailbox_messages": 0,
+          "pending_messages": 0,
+          "processes": 0,
+          "timers": 0
+        },
+        "disposed_dom": {
+          "roots": 0,
+          "listeners": 0,
+          "nodes": 0
+        }
+      },
+      {
+        "iteration": 2,
+        "generation": 2,
+        "recovered": false,
+        "resource_value": 1,
+        "audit_events": 1,
+        "disposed_runtime": {
+          "mailbox_messages": 0,
+          "pending_messages": 0,
+          "processes": 0,
+          "timers": 0
+        },
+        "disposed_dom": {
+          "roots": 0,
+          "listeners": 0,
+          "nodes": 0
+        }
+      },
+      {
+        "iteration": 3,
+        "generation": 3,
+        "recovered": false,
+        "resource_value": 1,
+        "audit_events": 1,
+        "disposed_runtime": {
+          "mailbox_messages": 0,
+          "pending_messages": 0,
+          "processes": 0,
+          "timers": 0
+        },
+        "disposed_dom": {
+          "roots": 0,
+          "listeners": 0,
+          "nodes": 0
+        }
+      },
+      {
+        "iteration": 4,
+        "generation": 4,
+        "recovered": false,
+        "resource_value": 1,
+        "audit_events": 1,
+        "disposed_runtime": {
+          "mailbox_messages": 0,
+          "pending_messages": 0,
+          "processes": 0,
+          "timers": 0
+        },
+        "disposed_dom": {
+          "roots": 0,
+          "listeners": 0,
+          "nodes": 0
+        }
+      },
+      {
+        "iteration": 5,
+        "generation": 5,
+        "recovered": true,
+        "resource_value": 1,
+        "audit_events": 1,
+        "disposed_runtime": {
+          "mailbox_messages": 0,
+          "pending_messages": 0,
+          "processes": 0,
+          "timers": 0
+        },
+        "disposed_dom": {
+          "roots": 0,
+          "listeners": 0,
+          "nodes": 0
+        }
+      },
+      {
+        "iteration": 6,
+        "generation": 6,
+        "recovered": false,
+        "resource_value": 1,
+        "audit_events": 1,
+        "disposed_runtime": {
+          "mailbox_messages": 0,
+          "pending_messages": 0,
+          "processes": 0,
+          "timers": 0
+        },
+        "disposed_dom": {
+          "roots": 0,
+          "listeners": 0,
+          "nodes": 0
+        }
+      },
+      {
+        "iteration": 7,
+        "generation": 7,
+        "recovered": false,
+        "resource_value": 1,
+        "audit_events": 1,
+        "disposed_runtime": {
+          "mailbox_messages": 0,
+          "pending_messages": 0,
+          "processes": 0,
+          "timers": 0
+        },
+        "disposed_dom": {
+          "roots": 0,
+          "listeners": 0,
+          "nodes": 0
+        }
+      },
+      {
+        "iteration": 8,
+        "generation": 8,
+        "recovered": false,
+        "resource_value": 1,
+        "audit_events": 1,
+        "disposed_runtime": {
+          "mailbox_messages": 0,
+          "pending_messages": 0,
+          "processes": 0,
+          "timers": 0
+        },
+        "disposed_dom": {
+          "roots": 0,
+          "listeners": 0,
+          "nodes": 0
+        }
+      },
+      {
+        "iteration": 9,
+        "generation": 9,
+        "recovered": false,
+        "resource_value": 1,
+        "audit_events": 1,
+        "disposed_runtime": {
+          "mailbox_messages": 0,
+          "pending_messages": 0,
+          "processes": 0,
+          "timers": 0
+        },
+        "disposed_dom": {
+          "roots": 0,
+          "listeners": 0,
+          "nodes": 0
+        }
+      },
+      {
+        "iteration": 10,
+        "generation": 10,
+        "recovered": true,
+        "resource_value": 1,
+        "audit_events": 1,
+        "disposed_runtime": {
+          "mailbox_messages": 0,
+          "pending_messages": 0,
+          "processes": 0,
+          "timers": 0
+        },
+        "disposed_dom": {
+          "roots": 0,
+          "listeners": 0,
+          "nodes": 0
+        }
+      },
+      {
+        "iteration": 11,
+        "generation": 11,
+        "recovered": false,
+        "resource_value": 1,
+        "audit_events": 1,
+        "disposed_runtime": {
+          "mailbox_messages": 0,
+          "pending_messages": 0,
+          "processes": 0,
+          "timers": 0
+        },
+        "disposed_dom": {
+          "roots": 0,
+          "listeners": 0,
+          "nodes": 0
+        }
+      },
+      {
+        "iteration": 12,
+        "generation": 12,
+        "recovered": false,
+        "resource_value": 1,
+        "audit_events": 1,
+        "disposed_runtime": {
+          "mailbox_messages": 0,
+          "pending_messages": 0,
+          "processes": 0,
+          "timers": 0
+        },
+        "disposed_dom": {
+          "roots": 0,
+          "listeners": 0,
+          "nodes": 0
+        }
+      },
+      {
+        "iteration": 13,
+        "generation": 13,
+        "recovered": false,
+        "resource_value": 1,
+        "audit_events": 1,
+        "disposed_runtime": {
+          "mailbox_messages": 0,
+          "pending_messages": 0,
+          "processes": 0,
+          "timers": 0
+        },
+        "disposed_dom": {
+          "roots": 0,
+          "listeners": 0,
+          "nodes": 0
+        }
+      },
+      {
+        "iteration": 14,
+        "generation": 14,
+        "recovered": false,
+        "resource_value": 1,
+        "audit_events": 1,
+        "disposed_runtime": {
+          "mailbox_messages": 0,
+          "pending_messages": 0,
+          "processes": 0,
+          "timers": 0
+        },
+        "disposed_dom": {
+          "roots": 0,
+          "listeners": 0,
+          "nodes": 0
+        }
+      },
+      {
+        "iteration": 15,
+        "generation": 15,
+        "recovered": true,
+        "resource_value": 1,
+        "audit_events": 1,
+        "disposed_runtime": {
+          "mailbox_messages": 0,
+          "pending_messages": 0,
+          "processes": 0,
+          "timers": 0
+        },
+        "disposed_dom": {
+          "roots": 0,
+          "listeners": 0,
+          "nodes": 0
+        }
+      },
+      {
+        "iteration": 16,
+        "generation": 16,
+        "recovered": false,
+        "resource_value": 1,
+        "audit_events": 1,
+        "disposed_runtime": {
+          "mailbox_messages": 0,
+          "pending_messages": 0,
+          "processes": 0,
+          "timers": 0
+        },
+        "disposed_dom": {
+          "roots": 0,
+          "listeners": 0,
+          "nodes": 0
+        }
+      },
+      {
+        "iteration": 17,
+        "generation": 17,
+        "recovered": false,
+        "resource_value": 1,
+        "audit_events": 1,
+        "disposed_runtime": {
+          "mailbox_messages": 0,
+          "pending_messages": 0,
+          "processes": 0,
+          "timers": 0
+        },
+        "disposed_dom": {
+          "roots": 0,
+          "listeners": 0,
+          "nodes": 0
+        }
+      },
+      {
+        "iteration": 18,
+        "generation": 18,
+        "recovered": false,
+        "resource_value": 1,
+        "audit_events": 1,
+        "disposed_runtime": {
+          "mailbox_messages": 0,
+          "pending_messages": 0,
+          "processes": 0,
+          "timers": 0
+        },
+        "disposed_dom": {
+          "roots": 0,
+          "listeners": 0,
+          "nodes": 0
+        }
+      },
+      {
+        "iteration": 19,
+        "generation": 19,
+        "recovered": false,
+        "resource_value": 1,
+        "audit_events": 1,
+        "disposed_runtime": {
+          "mailbox_messages": 0,
+          "pending_messages": 0,
+          "processes": 0,
+          "timers": 0
+        },
+        "disposed_dom": {
+          "roots": 0,
+          "listeners": 0,
+          "nodes": 0
+        }
+      },
+      {
+        "iteration": 20,
+        "generation": 20,
+        "recovered": true,
+        "resource_value": 1,
+        "audit_events": 1,
+        "disposed_runtime": {
+          "mailbox_messages": 0,
+          "pending_messages": 0,
+          "processes": 0,
+          "timers": 0
+        },
+        "disposed_dom": {
+          "roots": 0,
+          "listeners": 0,
+          "nodes": 0
+        }
+      }
+    ]
+  },
+  "recovery": {
+    "state": "stable",
+    "pending": 0,
+    "attempts": {
+      "transport-unavailable:phase7-command-10": 2,
+      "transport-unavailable:phase7-command-15": 2,
+      "transport-unavailable:phase7-command-20": 2,
+      "transport-unavailable:phase7-command-5": 2
+    },
+    "trace": [
+      {
+        "protocol": "blazex.bh01.recovery-trace/0.1",
+        "scenario_id": "phase7-browser-stress",
+        "generation": 1,
+        "kind": "attempt",
+        "details": {
+          "failure_id": "transport-unavailable",
+          "correlation_id": "phase7-command-5",
+          "attempt": 1,
+          "delay_ms": 100,
+          "authority_bearing": true
+        }
+      },
+      {
+        "protocol": "blazex.bh01.recovery-trace/0.1",
+        "scenario_id": "phase7-browser-stress",
+        "generation": 1,
+        "kind": "failed",
+        "details": {
+          "failure_id": "transport-unavailable",
+          "correlation_id": "phase7-command-5",
+          "attempt": 1,
+          "error": {
+            "code": "unexpected-host-error",
+            "message": "transport-unavailable",
+            "details": {}
+          }
+        }
+      },
+      {
+        "protocol": "blazex.bh01.recovery-trace/0.1",
+        "scenario_id": "phase7-browser-stress",
+        "generation": 1,
+        "kind": "attempt",
+        "details": {
+          "failure_id": "transport-unavailable",
+          "correlation_id": "phase7-command-5",
+          "attempt": 2,
+          "delay_ms": 250,
+          "authority_bearing": true
+        }
+      },
+      {
+        "protocol": "blazex.bh01.recovery-trace/0.1",
+        "scenario_id": "phase7-browser-stress",
+        "generation": 1,
+        "kind": "stable",
+        "details": {
+          "failure_id": "transport-unavailable",
+          "correlation_id": "phase7-command-5",
+          "attempt": 2
+        }
+      },
+      {
+        "protocol": "blazex.bh01.recovery-trace/0.1",
+        "scenario_id": "phase7-browser-stress",
+        "generation": 1,
+        "kind": "attempt",
+        "details": {
+          "failure_id": "transport-unavailable",
+          "correlation_id": "phase7-command-10",
+          "attempt": 1,
+          "delay_ms": 100,
+          "authority_bearing": true
+        }
+      },
+      {
+        "protocol": "blazex.bh01.recovery-trace/0.1",
+        "scenario_id": "phase7-browser-stress",
+        "generation": 1,
+        "kind": "failed",
+        "details": {
+          "failure_id": "transport-unavailable",
+          "correlation_id": "phase7-command-10",
+          "attempt": 1,
+          "error": {
+            "code": "unexpected-host-error",
+            "message": "transport-unavailable",
+            "details": {}
+          }
+        }
+      },
+      {
+        "protocol": "blazex.bh01.recovery-trace/0.1",
+        "scenario_id": "phase7-browser-stress",
+        "generation": 1,
+        "kind": "attempt",
+        "details": {
+          "failure_id": "transport-unavailable",
+          "correlation_id": "phase7-command-10",
+          "attempt": 2,
+          "delay_ms": 250,
+          "authority_bearing": true
+        }
+      },
+      {
+        "protocol": "blazex.bh01.recovery-trace/0.1",
+        "scenario_id": "phase7-browser-stress",
+        "generation": 1,
+        "kind": "stable",
+        "details": {
+          "failure_id": "transport-unavailable",
+          "correlation_id": "phase7-command-10",
+          "attempt": 2
+        }
+      },
+      {
+        "protocol": "blazex.bh01.recovery-trace/0.1",
+        "scenario_id": "phase7-browser-stress",
+        "generation": 1,
+        "kind": "attempt",
+        "details": {
+          "failure_id": "transport-unavailable",
+          "correlation_id": "phase7-command-15",
+          "attempt": 1,
+          "delay_ms": 100,
+          "authority_bearing": true
+        }
+      },
+      {
+        "protocol": "blazex.bh01.recovery-trace/0.1",
+        "scenario_id": "phase7-browser-stress",
+        "generation": 1,
+        "kind": "failed",
+        "details": {
+          "failure_id": "transport-unavailable",
+          "correlation_id": "phase7-command-15",
+          "attempt": 1,
+          "error": {
+            "code": "unexpected-host-error",
+            "message": "transport-unavailable",
+            "details": {}
+          }
+        }
+      },
+      {
+        "protocol": "blazex.bh01.recovery-trace/0.1",
+        "scenario_id": "phase7-browser-stress",
+        "generation": 1,
+        "kind": "attempt",
+        "details": {
+          "failure_id": "transport-unavailable",
+          "correlation_id": "phase7-command-15",
+          "attempt": 2,
+          "delay_ms": 250,
+          "authority_bearing": true
+        }
+      },
+      {
+        "protocol": "blazex.bh01.recovery-trace/0.1",
+        "scenario_id": "phase7-browser-stress",
+        "generation": 1,
+        "kind": "stable",
+        "details": {
+          "failure_id": "transport-unavailable",
+          "correlation_id": "phase7-command-15",
+          "attempt": 2
+        }
+      },
+      {
+        "protocol": "blazex.bh01.recovery-trace/0.1",
+        "scenario_id": "phase7-browser-stress",
+        "generation": 1,
+        "kind": "attempt",
+        "details": {
+          "failure_id": "transport-unavailable",
+          "correlation_id": "phase7-command-20",
+          "attempt": 1,
+          "delay_ms": 100,
+          "authority_bearing": true
+        }
+      },
+      {
+        "protocol": "blazex.bh01.recovery-trace/0.1",
+        "scenario_id": "phase7-browser-stress",
+        "generation": 1,
+        "kind": "failed",
+        "details": {
+          "failure_id": "transport-unavailable",
+          "correlation_id": "phase7-command-20",
+          "attempt": 1,
+          "error": {
+            "code": "unexpected-host-error",
+            "message": "transport-unavailable",
+            "details": {}
+          }
+        }
+      },
+      {
+        "protocol": "blazex.bh01.recovery-trace/0.1",
+        "scenario_id": "phase7-browser-stress",
+        "generation": 1,
+        "kind": "attempt",
+        "details": {
+          "failure_id": "transport-unavailable",
+          "correlation_id": "phase7-command-20",
+          "attempt": 2,
+          "delay_ms": 250,
+          "authority_bearing": true
+        }
+      },
+      {
+        "protocol": "blazex.bh01.recovery-trace/0.1",
+        "scenario_id": "phase7-browser-stress",
+        "generation": 1,
+        "kind": "stable",
+        "details": {
+          "failure_id": "transport-unavailable",
+          "correlation_id": "phase7-command-20",
+          "attempt": 2
+        }
+      }
+    ]
+  },
+  "adversarial": {
+    "artifact_tamper": {
+      "state": "failed",
+      "code": "artifact-integrity-mismatch",
+      "runtime_ready": false
+    },
+    "forged_command": {
+      "http_status": 403,
+      "code": "csrf-invalid",
+      "effect_delta": 0
+    },
+    "oversized_bridge": "bridge-payload-string-exceeded",
+    "inert_html": true,
+    "failed_request_count": 5,
+    "unauthorized_effects": 0
+  },
+  "diagnostics": {
+    "count": 25,
+    "duplicate_drops": 0,
+    "correlated_transport_failure": true,
+    "redaction": "passed",
+    "console_only_failures": 0,
+    "uncaught_page_errors": 0
+  },
+  "resources": {
+    "protocol": "blazex.bh01.resource-report/0.1",
+    "scenario_id": "phase7-browser-stress",
+    "generation": 1,
+    "sample_count": 40,
+    "baseline": {
+      "label": "active-1",
+      "generation": 1,
+      "sequence": 1,
+      "resources": {
+        "runtime.mailbox_messages": 0,
+        "runtime.pending_messages": 0,
+        "runtime.processes": 1,
+        "runtime.timers": 0,
+        "runtime.memory_pages": 256,
+        "browser.workers": null,
+        "browser.listeners": 9,
+        "browser.observers": 0,
+        "browser.fetches": 0,
+        "browser.requests": 0,
+        "browser.dom_roots": 1,
+        "browser.references": 1,
+        "renderer.roots": 1,
+        "renderer.listeners": 9,
+        "renderer.nodes": 23,
+        "transport.bridge_pending": 0,
+        "transport.bridge_timers": 0,
+        "transport.server_pending": 0,
+        "server.pending_commands": 0,
+        "server.tasks": 0,
+        "server.sockets": 0,
+        "server.subscriptions": 0,
+        "server.processes": 1,
+        "server.database_effects": 1,
+        "server.audit_events": 1,
+        "adapter.active_generations": 0
+      }
+    },
+    "peak": {
+      "adapter.active_generations": 0,
+      "browser.dom_roots": 1,
+      "browser.fetches": 0,
+      "browser.listeners": 9,
+      "browser.observers": 0,
+      "browser.references": 1,
+      "browser.requests": 0,
+      "browser.workers": null,
+      "renderer.listeners": 9,
+      "renderer.nodes": 23,
+      "renderer.roots": 1,
+      "runtime.mailbox_messages": 0,
+      "runtime.memory_pages": 256,
+      "runtime.pending_messages": 0,
+      "runtime.processes": 1,
+      "runtime.timers": 0,
+      "server.audit_events": 1,
+      "server.database_effects": 1,
+      "server.pending_commands": 0,
+      "server.processes": 1,
+      "server.sockets": 0,
+      "server.subscriptions": 0,
+      "server.tasks": 0,
+      "transport.bridge_pending": 0,
+      "transport.bridge_timers": 0,
+      "transport.server_pending": 0
+    },
+    "stable": {
+      "label": "disposed",
+      "generation": 1,
+      "sequence": 40,
+      "resources": {
+        "runtime.mailbox_messages": 0,
+        "runtime.pending_messages": 0,
+        "runtime.processes": 0,
+        "runtime.timers": 0,
+        "runtime.memory_pages": 256,
+        "browser.workers": null,
+        "browser.listeners": 0,
+        "browser.observers": 0,
+        "browser.fetches": 0,
+        "browser.requests": 0,
+        "browser.dom_roots": 0,
+        "browser.references": 0,
+        "renderer.roots": 0,
+        "renderer.listeners": 0,
+        "renderer.nodes": 0,
+        "transport.bridge_pending": 0,
+        "transport.bridge_timers": 0,
+        "transport.server_pending": 0,
+        "server.pending_commands": 0,
+        "server.tasks": 0,
+        "server.sockets": 0,
+        "server.subscriptions": 0,
+        "server.processes": 1,
+        "server.database_effects": 0,
+        "server.audit_events": 0,
+        "adapter.active_generations": 0
+      }
+    },
+    "disposed": {
+      "label": "disposed",
+      "generation": 1,
+      "sequence": 40,
+      "resources": {
+        "runtime.mailbox_messages": 0,
+        "runtime.pending_messages": 0,
+        "runtime.processes": 0,
+        "runtime.timers": 0,
+        "runtime.memory_pages": 256,
+        "browser.workers": null,
+        "browser.listeners": 0,
+        "browser.observers": 0,
+        "browser.fetches": 0,
+        "browser.requests": 0,
+        "browser.dom_roots": 0,
+        "browser.references": 0,
+        "renderer.roots": 0,
+        "renderer.listeners": 0,
+        "renderer.nodes": 0,
+        "transport.bridge_pending": 0,
+        "transport.bridge_timers": 0,
+        "transport.server_pending": 0,
+        "server.pending_commands": 0,
+        "server.tasks": 0,
+        "server.sockets": 0,
+        "server.subscriptions": 0,
+        "server.processes": 1,
+        "server.database_effects": 0,
+        "server.audit_events": 0,
+        "adapter.active_generations": 0
+      }
+    },
+    "leaks": [],
+    "unknown": {
+      "browser.workers": "The selected parent-frame browser API does not expose worker count"
+    },
+    "converged": true
+  },
+  "audit": [],
+  "findings": [
+    "Twenty mount/interact/command/failure/retry/dispose cycles converged with no declared transient resource leak.",
+    "Four interrupted transports recovered under one coordinator and original idempotency identities without duplicate effects.",
+    "A modified runtime Wasm response failed integrity before runtime readiness.",
+    "The server rejected direct forged presentation/role input without an effect.",
+    "Browser worker count remains unavailable at the parent-frame API and is retained as an explained unknown."
+  ],
+  "limitations": [
+    "Only Chrome for Testing 152.0.7977.75 on one Linux x86-64 host was stressed; all browsers remain unsupported.",
+    "Twenty iterations are a Phase 7 feasibility sample, not a production soak or memory-leak certification.",
+    "The AtomVM process inventory is fixture-scoped and parent-frame worker count remains unavailable.",
+    "The authority, diagnostics, recovery, and resource protocols are disposable BH-01 fixtures, not stable public APIs.",
+    "No production identity, persistence, proxy, TLS, distributed rate limit, audit sink, monitoring, accessibility, mobile, or security certification is established.",
+    "Popcorn's unsafe-eval requirement remains an open security risk for final feasibility disposition."
+  ],
+  "evidence_sha256": "26c8539eb2982e0830196a53e1c54aa4f572947419c662b458cf7d484d05fb47"
+}

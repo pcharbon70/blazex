@@ -17,3 +17,9 @@ is not browser evidence.
 - `bh01-phase5-local-browser.json` — two complete actual-browser local-
   behavior runs, one canonical 29-checkpoint semantic trace, negative paths,
   preliminary timings/accessibility observations, and terminal resource state.
+- `bh01-phase6-trust-and-isolation.json` — actual-browser authenticated command,
+  server-authority failure matrix, optional-adapter eligibility, and complete
+  vertical-slice cleanup observation.
+- `bh01-phase7-resilience-security-resource.json` — twenty actual-browser
+  lifecycle generations, four coordinated disconnect recoveries, artifact and
+  authority attacks, redacted diagnostics, and resource convergence evidence.

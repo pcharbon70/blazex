@@ -1,4 +1,4 @@
-import { BrowserRuntimeLoader, detectBrowserPrerequisites, mayActivate } from "./js/index.js";
+import { BrowserRuntimeLoader, DiagnosticCollector, detectBrowserPrerequisites, mayActivate } from "./js/index.js";
 import { FixtureDOMRenderer } from "./dom/fixture-dom-renderer.js";
 
 const status = document.querySelector("[data-bh01-status]");
@@ -10,11 +10,16 @@ const timingObservations = [];
 const runtimeResources = { memory_pages: null, workers: null };
 const pendingServerRequests = new Set();
 const serverSession = { csrf: null, identity_id: null };
+const diagnostics = new DiagnosticCollector({ source: "browser-host", clockId: "performance" });
 let renderer = null;
 let fixtureQueue = Promise.resolve();
 const record = (event) => {
   if (events.length < 256) events.push(event);
-  if (globalThis.__blazexBH01) globalThis.__blazexBH01.events = events;
+  if (event?.code) recordDiagnostic(event);
+  if (globalThis.__blazexBH01) {
+    globalThis.__blazexBH01.events = events;
+    globalThis.__blazexBH01.diagnostics = diagnostics.summary();
+  }
   if (event?.type === "runtime-ready") runtimeResources.memory_pages = event.memory_pages;
   if (event?.type === "runtime-event" && event.name === "bh01_fixture_effect") applyFixtureEffect(event.payload);
 };
@@ -59,6 +64,7 @@ async function start() {
     detail.textContent = `Activation generation ${activation.generation}; verified Elixir bridge round trip: ${echo.message}.`;
     Object.assign(globalThis.__blazexBH01, { state: "ready", activation, echo, fixture_effects: fixtureEffects, dom_traces: domTraces, timing_observations: timingObservations });
   } catch (error) {
+    record({ type: "activation-failed", code: error?.code ?? "unexpected-host-error" });
     loader.stop("activation-error");
     show("failed", "Experimental runtime failed safely");
     detail.textContent = error instanceof Error ? error.message : "The runtime failed without a diagnostic.";
@@ -69,6 +75,7 @@ async function start() {
 globalThis.blazexBh01Start = start;
 globalThis.blazexBh01Stop = async () => {
   const state = globalThis.__blazexBH01;
+  if (state?.state === "stopped" && state.final_resources) return state.final_resources;
   const completedActivation = state?.activation;
   try {
     if (globalThis.blazexBh01Fixture) await globalThis.blazexBh01Fixture.dispose();
@@ -246,8 +253,26 @@ function rememberTiming(observation) {
   if (timingObservations.length < 256) timingObservations.push(Object.freeze(observation));
 }
 
+function recordDiagnostic(event) {
+  const transport = event.stage?.startsWith("transport");
+  const render = event.type === "fixture-effect-failed";
+  diagnostics.record({
+    scenarioId: "bh01-browser-profile",
+    generation: event.generation ?? globalThis.__blazexBH01?.activation?.generation ?? 1,
+    correlationId: event.correlation_id ?? `event-${events.length}`,
+    layer: transport ? "server-transport" : render ? "standalone-dom" : "browser-runtime",
+    category: transport ? "transport" : render ? "render" : "bridge",
+    severity: "error",
+    owner: render ? "standalone-dom-owner" : "browser-host-owner",
+    code: event.code,
+    userMessage: transport ? "The operation could not reach the server." : render ? "The interface could not be updated." : "The runtime operation failed.",
+    internal: { stage: event.stage ?? null, type: event.type ?? null, http_status: event.http_status ?? null, outcome: event.outcome ?? null },
+  });
+}
+
 function hostResources(activation) {
   const dom = renderer?.snapshot();
+  const domResources = dom ? { roots: dom.root_count, listeners: dom.listener_count, nodes: dom.node_count } : { roots: 0, listeners: 0, nodes: 0 };
   return Object.freeze({
     memory_pages: runtimeResources.memory_pages,
     workers: runtimeResources.workers,
@@ -255,6 +280,16 @@ function hostResources(activation) {
     bridge: activation?.bridge?.metrics?.() ?? null,
     lifecycle: loader?.lifecycle?.() ?? null,
     server: { pending: pendingServerRequests.size, session_configured: serverSession.csrf !== null },
-    dom: dom ? { roots: dom.root_count, listeners: dom.listener_count, nodes: dom.node_count } : { roots: 0, listeners: 0, nodes: 0 },
+    browser: {
+      workers: runtimeResources.workers,
+      listeners: domResources.listeners,
+      observers: 0,
+      fetches: pendingServerRequests.size,
+      requests: (activation?.bridge?.metrics?.().pending ?? 0) + pendingServerRequests.size,
+      dom_roots: domResources.roots,
+      references: renderer ? 1 : 0,
+    },
+    adapter: { active_generations: 0 },
+    dom: domResources,
   });
 }
