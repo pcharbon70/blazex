@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0.0",
+  "catalog_id": "BX-BH01-LOCAL-BROWSER-SCENARIOS-0.1",
+  "status": "experimental-non-public",
+  "protocol": "blazex.bh01.fixture/0.1",
+  "production_import_allowed": false,
+  "scenarios": [
+    {
+      "scenario_id": "BX-BH01-SCENARIO-NESTED-STATE",
+      "owner": "integration/fixtures/local_browser",
+      "proofs": ["BX-BH01-PROOF-NESTED-STATE"],
+      "risks": ["BX-BH01-RISK-RUNTIME-SEMANTICS"],
+      "acceptance": ["keyed identity survives insertion and reorder", "independent child updates do not alter siblings", "removed and replaced identities cannot emit current output"],
+      "positive": ["mount", "parent update", "child update", "insert", "reorder", "remove", "replace", "subtree teardown"],
+      "negative": ["duplicate identity", "missing identity", "stale generation", "late child output", "child crash", "parent crash", "partial DOM failure"],
+      "cleanup": ["zero owned fixture processes", "zero pending messages", "zero DOM listeners", "zero owned roots"],
+      "budgets": ["mailbox growth observation only", "cleanup duration observation only"],
+      "evidence": ["fixture trace", "state snapshots", "DOM observations", "resource snapshots"]
+    },
+    {
+      "scenario_id": "BX-BH01-SCENARIO-FORM-EVENT",
+      "owner": "integration/fixtures/local_browser",
+      "proofs": ["BX-BH01-PROOF-FORM-EVENT"],
+      "risks": ["BX-BH01-RISK-RUNTIME-SEMANTICS"],
+      "acceptance": ["input is normalized before runtime delivery", "local validation and accessible relationships agree", "disabled and read-only states reject mutation"],
+      "positive": ["valid", "invalid", "empty", "rapid", "repeated", "focus", "blur", "programmatic reset", "remount"],
+      "negative": ["composition-like input", "malformed event", "oversized value", "stale validation", "disposal during input", "stale generation"],
+      "cleanup": ["zero field listeners", "no retained event object", "zero owned roots"],
+      "budgets": ["event-to-DOM duration observation only", "message bytes observation only"],
+      "evidence": ["normalized events", "runtime snapshots", "field DOM observations", "accessibility observations"]
+    },
+    {
+      "scenario_id": "BX-BH01-SCENARIO-TIMER-DOM",
+      "owner": "integration/fixtures/local_browser",
+      "proofs": ["BX-BH01-PROOF-TIMER-MESSAGE", "BX-BH01-PROOF-DOM-UPDATE"],
+      "risks": ["BX-BH01-RISK-RUNTIME-SEMANTICS", "BX-BH01-RISK-WASM-ARTIFACT-ACCOUNTING"],
+      "acceptance": ["runtime timer message changes visible output", "stale and late ticks are ignored", "DOM update has one matching fixture transition"],
+      "positive": ["one-shot timer", "bounded repeated timer", "message update", "next-paint observation", "cancel", "restart"],
+      "negative": ["duplicate message", "late message", "stale generation", "detached target", "adapter error", "runtime crash", "disposal race"],
+      "cleanup": ["zero fixture timers", "zero pending bridge requests", "zero DOM listeners", "zero owned roots"],
+      "budgets": ["timer drift observation only", "bridge duration observation only", "paint duration observation only", "Wasm pages observation only"],
+      "evidence": ["runtime timer trace", "bridge trace", "DOM mutation trace", "paint and resource observations"]
+    },
+    {
+      "scenario_id": "BX-BH01-SCENARIO-LOCAL-NEGATIVE-CLEANUP",
+      "owner": "integration/fixtures/local_browser",
+      "proofs": ["BX-BH01-PROOF-NESTED-STATE", "BX-BH01-PROOF-FORM-EVENT", "BX-BH01-PROOF-DOM-UPDATE"],
+      "risks": ["BX-BH01-RISK-RUNTIME-SEMANTICS"],
+      "acceptance": ["malformed and stale traffic fails closed", "partial mutation rolls back", "disposal is idempotent"],
+      "positive": ["explicit dispose", "remount with new generation"],
+      "negative": ["unknown command", "oversized payload", "missing target", "duplicate listener", "post-disposal traffic", "generation replacement"],
+      "cleanup": ["all fixture, bridge, listener, timer, worker, and root counts converge"],
+      "budgets": ["failure and cleanup durations are observations only"],
+      "evidence": ["error records", "disposal records", "resource convergence", "leakage scan"]
+    }
+  ]
+}

@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://blazex.dev/schemas/bh-01/local-browser-fixture-0.1.0.json",
+  "title": "Disposable BH-01 local browser behavior record",
+  "description": "Experimental fixture-only records; not a BlazeX public API.",
+  "oneOf": [
+    {"$ref": "#/$defs/scenario"},
+    {"$ref": "#/$defs/command"},
+    {"$ref": "#/$defs/event"},
+    {"$ref": "#/$defs/snapshot"},
+    {"$ref": "#/$defs/trace"},
+    {"$ref": "#/$defs/error"},
+    {"$ref": "#/$defs/disposal"}
+  ],
+  "$defs": {
+    "identity": {
+      "type": "object",
+      "required": ["protocol", "record_type", "scenario_id", "generation", "sequence"],
+      "properties": {
+        "protocol": {"const": "blazex.bh01.fixture/0.1"},
+        "record_type": {"type": "string"},
+        "scenario_id": {"type": "string", "pattern": "^BX-BH01-SCENARIO-[A-Z0-9.-]+$"},
+        "generation": {"type": "integer", "minimum": 1},
+        "sequence": {"type": "integer", "minimum": 1},
+        "node_id": {"type": "string", "pattern": "^bx-[a-z0-9-]{1,60}$"},
+        "test_id": {"type": "string", "pattern": "^bx-test-[a-z0-9-]{1,60}$"}
+      }
+    },
+    "scenario": {
+      "allOf": [
+        {"$ref": "#/$defs/identity"},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["protocol", "record_type", "scenario_id", "generation", "sequence", "status"],
+          "properties": {
+            "protocol": {}, "record_type": {"const": "scenario"}, "scenario_id": {}, "generation": {}, "sequence": {},
+            "status": {"enum": ["starting", "ready", "failed", "disposed"]}
+          }
+        }
+      ]
+    },
+    "command": {
+      "allOf": [
+        {"$ref": "#/$defs/identity"},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["protocol", "record_type", "scenario_id", "generation", "sequence", "command", "payload"],
+          "properties": {
+            "protocol": {}, "record_type": {"const": "command"}, "scenario_id": {}, "generation": {}, "sequence": {},
+            "command": {"type": "string", "pattern": "^[a-z]+(?:[.-][a-z]+)*$"},
+            "payload": {"$ref": "#/$defs/value"}
+          }
+        }
+      ]
+    },
+    "event": {
+      "allOf": [
+        {"$ref": "#/$defs/identity"},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["protocol", "record_type", "scenario_id", "generation", "sequence", "node_id", "event", "payload"],
+          "properties": {
+            "protocol": {}, "record_type": {"const": "event"}, "scenario_id": {}, "generation": {}, "sequence": {}, "node_id": {},
+            "event": {"enum": ["input", "change", "focus", "blur", "action"]},
+            "payload": {"$ref": "#/$defs/value"}
+          }
+        }
+      ]
+    },
+    "snapshot": {
+      "allOf": [
+        {"$ref": "#/$defs/identity"},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["protocol", "record_type", "scenario_id", "generation", "sequence", "state", "resources"],
+          "properties": {
+            "protocol": {}, "record_type": {"const": "state-snapshot"}, "scenario_id": {}, "generation": {}, "sequence": {},
+            "state": {"$ref": "#/$defs/value"},
+            "resources": {"$ref": "#/$defs/value"}
+          }
+        }
+      ]
+    },
+    "trace": {
+      "allOf": [
+        {"$ref": "#/$defs/identity"},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["protocol", "record_type", "scenario_id", "generation", "sequence", "stage", "result"],
+          "properties": {
+            "protocol": {}, "record_type": {"const": "trace"}, "scenario_id": {}, "generation": {}, "sequence": {},
+            "stage": {"type": "string"}, "result": {"type": "string"}
+          }
+        }
+      ]
+    },
+    "error": {
+      "allOf": [
+        {"$ref": "#/$defs/identity"},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["protocol", "record_type", "scenario_id", "generation", "sequence", "code", "message", "retryable"],
+          "properties": {
+            "protocol": {}, "record_type": {"const": "error"}, "scenario_id": {}, "generation": {}, "sequence": {},
+            "code": {"type": "string"}, "message": {"type": "string", "maxLength": 256}, "retryable": {"type": "boolean"}
+          }
+        }
+      ]
+    },
+    "disposal": {
+      "allOf": [
+        {"$ref": "#/$defs/identity"},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["protocol", "record_type", "scenario_id", "generation", "sequence", "reason", "resources"],
+          "properties": {
+            "protocol": {}, "record_type": {"const": "disposal"}, "scenario_id": {}, "generation": {}, "sequence": {},
+            "reason": {"type": "string", "maxLength": 96}, "resources": {"$ref": "#/$defs/value"}
+          }
+        }
+      ]
+    },
+    "value": {
+      "description": "Bounded JSON value; executable and host-object types are excluded by transport validation.",
+      "type": ["null", "boolean", "number", "string", "array", "object"]
+    }
+  }
+}

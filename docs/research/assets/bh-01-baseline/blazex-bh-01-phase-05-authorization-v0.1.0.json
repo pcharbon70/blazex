@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0.0",
+  "record_id": "BX-BH01-AUTHORIZATION-PHASE-05-0.1",
+  "status": "approved-phase-5-only",
+  "authorized_at": "2026-09-04",
+  "request": "Implement the next phase of BH-01 section by section with a commit per section and one immediately merged PR, then synchronize main and delete the feature branch.",
+  "base_revision": "83b583b43c0dd8d79c726eebbfe4cd465acd5666",
+  "branch": "codex/bh-01-phase-05-dom-vertical-slice",
+  "authorized_scope": [
+    "define disposable local-browser behavior and observation contracts",
+    "implement the closed fixture-only DOM operation and event boundary",
+    "exercise local and nested state identity through the actual browser runtime",
+    "exercise form input, validation, focus, and accessible relationships",
+    "exercise timers, messages, DOM updates, and preliminary resource observations",
+    "record actual-browser Phase 5 evidence and abstraction-leakage results",
+    "commit once per completed Phase 5 section",
+    "create and immediately merge one Phase 5 pull request",
+    "synchronize main and delete the local and remote feature branch"
+  ],
+  "not_authorized": [
+    "Phase 6 Phoenix authority or LiveView integration",
+    "BH-02 semantic tree, component, effect, capability, or renderer contracts",
+    "MudBlazor-compatible production components",
+    "browser support, accessibility conformance, performance-budget, or production-readiness claims"
+  ],
+  "owner": "repository-owner"
+}

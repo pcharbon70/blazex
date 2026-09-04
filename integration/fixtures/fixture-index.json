@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
   "index_id": "BX-BH01-FIXTURE-INDEX-0.1",
-  "status": "phase3-gate-passed-browser-unproven",
+  "status": "phase5-contracts-active-browser-behavior-unproven",
   "scenario_schema": "scenario.schema.json",
   "scenario_location": "scenarios",
   "raw_evidence_location": "raw-evidence",
@@ -12,6 +12,13 @@
       "status": "node-semantics-and-artifact-accounting-passed-browser-unproven",
       "public_api": false,
       "manifest": "runtime_smoke/bundle-manifest.json"
+    },
+    {
+      "id": "BX-BH01-FIXTURE-LOCAL-BROWSER",
+      "path": "local_browser",
+      "status": "phase5-contracts-active-browser-behavior-unproven",
+      "public_api": false,
+      "manifest": "local_browser/scenario-catalog.json"
     }
   ],
   "scenarios": [
@@ -20,6 +27,12 @@
       "path": "scenarios/bh01-runtime-semantics.json",
       "status": "passed",
       "evidence": "raw-evidence/bh01-phase3-runtime-semantics.json"
+    },
+    {
+      "scenario_id": "BX-BH01-SCENARIO-LOCAL-BROWSER-CATALOG",
+      "path": "local_browser/scenario-catalog.json",
+      "status": "ready",
+      "evidence": null
     }
   ],
   "production_import_allowed": false

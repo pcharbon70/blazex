@@ -22,27 +22,27 @@ Back to milestone: [README](README.md)
   DOM updates, accessibility observations, and cleanup through the real browser
   runtime without stabilizing BH-02 component or renderer contracts.
 
-  - [ ] 5.1 Section - Define fixture-only behavior and observation protocols.
+  - [x] 5.1 Section - Define fixture-only behavior and observation protocols.
 
     Create deterministic test contracts that are rich enough to reveal runtime
     feasibility while visibly replaceable by BH-02.
 
-    - [ ] 5.1.1 Task - Define scenario, command, event, and trace records.
+    - [x] 5.1.1 Task - Define scenario, command, event, and trace records.
 
       Every behavior needs stable identity and observable results without
       exposing DOM or JavaScript objects to fixture runtime code.
 
-      - [ ] 5.1.1.1 Subtask - Define test-only scenario, command, event, state-snapshot, generation, node/test identity, error, and disposal records under `integration/fixtures`.
-      - [ ] 5.1.1.2 Subtask - Map each scenario to proof, risk, budget, acceptance, package owner, expected evidence, positive/negative cases, and cleanup expectations.
-      - [ ] 5.1.1.3 Subtask - Mark schemas and names experimental/non-public and add tests that reject imports from production/profile packages.
+      - [x] 5.1.1.1 Subtask - Define test-only scenario, command, event, state-snapshot, generation, node/test identity, error, and disposal records under `integration/fixtures`.
+      - [x] 5.1.1.2 Subtask - Map each scenario to proof, risk, budget, acceptance, package owner, expected evidence, positive/negative cases, and cleanup expectations.
+      - [x] 5.1.1.3 Subtask - Mark schemas and names experimental/non-public and add tests that reject imports from production/profile packages.
 
-    - [ ] 5.1.2 Task - Implement deterministic observation normalization.
+    - [x] 5.1.2 Task - Implement deterministic observation normalization.
 
       Cross-run traces should remove irrelevant timing noise without masking
       order, identity, state, failure, or cleanup differences.
 
-      - [ ] 5.1.2.1 Subtask - Capture runtime messages, fixture transitions, bridge operations, DOM/accessibility observations, errors, resource counts, and owned generations.
-      - [ ] 5.1.2.2 Subtask - Define reviewed normalization for timestamps/opaque process IDs while preserving sequence, causality, state values, semantic identity, failures, and unexplained output.
+      - [x] 5.1.2.1 Subtask - Capture runtime messages, fixture transitions, bridge operations, DOM/accessibility observations, errors, resource counts, and owned generations.
+      - [x] 5.1.2.2 Subtask - Define reviewed normalization for timestamps/opaque process IDs while preserving sequence, causality, state values, semantic identity, failures, and unexplained output.
 
   - [ ] 5.2 Section - Implement bounded DOM fixture operations.
 

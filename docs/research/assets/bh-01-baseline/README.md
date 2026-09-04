@@ -103,6 +103,10 @@ locations rather than this governance directory.
   — schema-valid browser-host decision with retained artifact/network/lifecycle
   evidence, accepted risk disposition, narrow `go`, and explicit Phase 5
   non-authorization.
+- [BH-01 Phase 5 authorization v0.1.0](blazex-bh-01-phase-05-authorization-v0.1.0.json)
+  — repository-owner approval for disposable local behavior, bounded DOM,
+  nested state, form, timer/message, accessibility/resource observations,
+  section commits, one immediately merged PR, synchronization, and cleanup.
 
 ## Maintaining this index
 
