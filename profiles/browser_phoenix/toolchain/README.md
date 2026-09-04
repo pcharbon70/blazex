@@ -63,6 +63,16 @@ python3 profiles/browser_phoenix/toolchain/verify_phase6.py
 python3 -m unittest profiles/browser_phoenix/toolchain/tests/test_phase6.py
 ```
 
+Phase 7 adds a twenty-generation browser stress run, coordinated recovery,
+artifact and authority attacks, correlated diagnostic redaction, and explicit
+resource convergence. Its gate composes all earlier gates with the five
+resilience contracts and retained actual-browser evidence:
+
+```console
+python3 profiles/browser_phoenix/toolchain/verify_phase7.py
+python3 -m unittest profiles/browser_phoenix/toolchain/tests/test_phase7.py
+```
+
 `unified-dependency-inventory.json` binds the canonical locks and reports by
 digest. `acquisition-evidence.json` records true clean and network-disabled
 cache replays for Hex and npm, immutable runtime-source replay timings, binary

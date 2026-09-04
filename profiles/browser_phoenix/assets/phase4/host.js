@@ -75,6 +75,7 @@ async function start() {
 globalThis.blazexBh01Start = start;
 globalThis.blazexBh01Stop = async () => {
   const state = globalThis.__blazexBH01;
+  if (state?.state === "stopped" && state.final_resources) return state.final_resources;
   const completedActivation = state?.activation;
   try {
     if (globalThis.blazexBh01Fixture) await globalThis.blazexBh01Fixture.dispose();

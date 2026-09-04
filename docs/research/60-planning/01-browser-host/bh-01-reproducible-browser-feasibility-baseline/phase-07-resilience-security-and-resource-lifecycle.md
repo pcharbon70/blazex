@@ -16,7 +16,7 @@ aliases:
 
 Back to milestone: [README](README.md)
 
-- [ ] 7 Phase - Resilience, Security, and Resource Lifecycle.
+- [x] 7 Phase - Resilience, Security, and Resource Lifecycle.
 
   Stress the combined runtime, browser, DOM, Phoenix, and optional adapter
   slice under failures and adversarial inputs, proving bounded recovery,
@@ -129,27 +129,27 @@ Back to milestone: [README](README.md)
       - [x] 7.4.2.1 Subtask - Assert each failure scenario emits expected layer/category/correlation, terminal/fallback result, cleanup evidence, and affected proof/risk link.
       - [x] 7.4.2.2 Subtask - Detect silent console-only errors, uncaught exceptions/rejections, missing server audit, orphan traces, duplicate diagnostics, and redaction failures.
 
-  - [ ] 7.5 Section - Phase 7 Integration Tests and Completion Evidence.
+  - [x] 7.5 Section - Phase 7 Integration Tests and Completion Evidence.
 
     Run failure, recovery, security, diagnostics, and resource stress through the
     complete vertical slice before browser-matrix qualification.
 
-    - [ ] 7.5.1 Task - Execute resilience and security integration suites.
+    - [x] 7.5.1 Task - Execute resilience and security integration suites.
 
       Tests combine failures across layers to expose retry amplification,
       authority loss, stale generations, and incomplete cleanup.
 
-      - [ ] 7.5.1.1 Subtask - Run the full failure taxonomy plus selected concurrent/cascading failures under repeated lifecycle and authenticated-command scenarios.
-      - [ ] 7.5.1.2 Subtask - Run adversarial payload/artifact/policy/server-authority suites and verify fail-closed outcomes, diagnostics, audit, and no unauthorized effect.
-      - [ ] 7.5.1.3 Subtask - Evaluate quality failure scenarios/blockers, runtime/authenticated-command risks, and whether observed mitigation is bounded enough to enter Phase 8.
+      - [x] 7.5.1.1 Subtask - Run the full failure taxonomy plus selected concurrent/cascading failures under repeated lifecycle and authenticated-command scenarios.
+      - [x] 7.5.1.2 Subtask - Run adversarial payload/artifact/policy/server-authority suites and verify fail-closed outcomes, diagnostics, audit, and no unauthorized effect.
+      - [x] 7.5.1.3 Subtask - Evaluate quality failure scenarios/blockers, runtime/authenticated-command risks, and whether observed mitigation is bounded enough to enter Phase 8.
 
-    - [ ] 7.5.2 Task - Verify resource convergence and publish phase evidence.
+    - [x] 7.5.2 Task - Verify resource convergence and publish phase evidence.
 
       A phase pass requires explainable resource behavior over repeated and
       interrupted runs.
 
-      - [ ] 7.5.2.1 Subtask - Compare baseline/peak/stable/disposed counts and memory across iterations, inspect retained resources, and fail on unexplained or unbounded growth.
-      - [ ] 7.5.2.2 Subtask - Publish Phase 7 evidence with revisions, commands, scenario/fuzz seeds, raw traces, resource reports, security findings, redaction results, proof/risk outcomes, and stop/go decision.
+      - [x] 7.5.2.1 Subtask - Compare baseline/peak/stable/disposed counts and memory across iterations, inspect retained resources, and fail on unexplained or unbounded growth.
+      - [x] 7.5.2.2 Subtask - Publish Phase 7 evidence with revisions, commands, scenario/fuzz seeds, raw traces, resource reports, security findings, redaction results, proof/risk outcomes, and stop/go decision.
 
 ## Section delivery rule
 

@@ -130,6 +130,13 @@ locations rather than this governance directory.
   — repository-owner approval for integrated failure/recovery, resource stress,
   adversarial security, redacted diagnostics, actual-browser evidence, section
   commits, one immediately merged PR, synchronization, and branch cleanup.
+- [BH-01 Phase 7 validation log v0.1.0](blazex-bh-01-phase-07-validation-log-v0.1.0.txt)
+  — exact actual-browser stress, recovery, security, diagnostic, resource,
+  package, profile, mutation, archive, and evidence-verifier outcomes.
+- [BH-01 Phase 7 completion v0.1.0](blazex-bh-01-phase-07-completion-v0.1.0.json)
+  — schema-valid resilience/security/resource decision with retained browser
+  traces, convergence, redaction and adversarial findings, a narrow `go`, and
+  explicit Phase 8 non-authorization.
 
 ## Maintaining this index
 

@@ -32,26 +32,15 @@ integration tests and completion-evidence gate.
 
 ## Authorization status
 
-The repository owner approved the plan snapshot at revision `d70a965` and
-authorized Phase 1 implementation on 2026-09-03. Phase 1 is complete with a
-governed `go` result for repository activation. The repository owner then
-explicitly authorized Phase 2 implementation, dependency acquisition, its
-section commits, and immediate PR delivery. Phase 2 is complete with a narrow
-`go` result for the selected inputs. The repository owner then explicitly
-authorized Phase 3 implementation, its section commits, and immediate PR
-delivery. Phase 3 is complete with a narrow runtime/package feasibility `go`
-result. The repository owner then explicitly authorized Phase 4 implementation,
-its section commits, controlled browser execution, and immediate PR delivery.
-Phase 4 is complete with a narrow browser-host feasibility `go` result.
-The repository owner then explicitly authorized Phase 5 implementation, its
-section commits, controlled browser execution, immediate PR merge,
-synchronization, and branch cleanup. Phase 5 is complete with a narrow local
-browser behavior and DOM feasibility `go` result. Phase 6 is eligible but not
-authorized. The repository owner subsequently authorized Phase 6 implementation, its
-section commits, controlled browser execution, immediate PR merge,
-synchronization, and branch cleanup. Phase 6 is complete with a narrow Phoenix
-trust-boundary and optional-adapter isolation `go` result. Phase 7 and later
-work remain outside the current authorization.
+The repository owner approved the plan snapshot at revision `d70a965` and has
+subsequently authorized Phases 1-7 one phase at a time. Each phase was delivered
+section by section under the retained authorization record for that phase.
+Phases 1-6 established repository governance, reproducible inputs, runtime and
+browser boot, local DOM behavior, and the Phoenix authority/adapter boundary.
+Phase 7 is complete with a narrow resilience, adversarial-security, diagnostics,
+and resource-lifecycle `go` result in the one pinned browser environment. Phase
+8 is eligible but not authorized; Phase 9, Phase 10, BH-02, browser support, and
+production hardening remain outside the current authorization.
 
 BH-00 remains the accepted product contract. BH-01 may produce feasibility
 evidence and may reject the candidate stack; it cannot weaken BH-00
@@ -121,7 +110,7 @@ failure in the candidate browser stack.
 | [4 — Browser Host Loader, Lifecycle, and Deployment](phase-04-browser-host-loader-lifecycle-and-deployment.md) | complete — gate passed | Implement manifest-driven loading, explicit browser bridges, prerequisite detection, lifecycle/failure behavior, and deployment contracts. | Phase 3 |
 | [5 — Local Browser Behavior and DOM Vertical Slice](phase-05-local-browser-behavior-and-dom-vertical-slice.md) | complete — gate passed | Exercise disposable state, identity, forms, timers/messages, DOM updates, accessibility observations, and cleanup. | Phase 4 |
 | [6 — Phoenix Trust Boundary and LiveView Adapter Isolation](phase-06-phoenix-trust-boundary-and-liveview-isolation.md) | complete — gate passed | Prove one authenticated command, isolate version-sensitive renderer integration, and preserve standalone DOM, Plug, and server authority boundaries. | Phase 5 |
-| [7 — Resilience, Security, and Resource Lifecycle](phase-07-resilience-security-and-resource-lifecycle.md) | planned — not authorized | Stress failures, retries, adversarial inputs, diagnostics, cancellation, disposal, and bounded resource behavior across the vertical slice. | Phases 5–6 |
+| [7 — Resilience, Security, and Resource Lifecycle](phase-07-resilience-security-and-resource-lifecycle.md) | complete — gate passed | Stress failures, retries, adversarial inputs, diagnostics, cancellation, disposal, and bounded resource behavior across the vertical slice. | Phases 5–6 |
 | [8 — Browser Compatibility and Accessible Fallback Matrix](phase-08-browser-compatibility-and-fallback-matrix.md) | planned — not authorized | Run the complete scenario set across candidate desktop/mobile browsers, prerequisite failures, fallbacks, and pinned compatibility combinations. | Phase 7 |
 | [9 — Measurement, Mobile Viability, and Artifact Economics](phase-09-measurement-mobile-viability-and-artifact-economics.md) | planned — not authorized | Measure payload, build, startup, interaction, memory, reliability, and constrained-mobile viability from canonical artifacts and raw samples. | Phase 8 |
 | [10 — Clean Rebuild, Review, and Feasibility Decision](phase-10-clean-rebuild-review-and-feasibility-decision.md) | planned — not authorized | Reproduce the complete baseline independently, reconcile every proof/risk/stop condition, and authorize, revise, or block BH-02 truthfully. | Phase 9 |
@@ -271,6 +260,7 @@ framework API.
 - [Phase 6 — Phoenix Trust Boundary and LiveView Adapter Isolation](phase-06-phoenix-trust-boundary-and-liveview-isolation.md)
 - [Phase 6 implementation evidence](phase-06-implementation-evidence.md)
 - [Phase 7 — Resilience, Security, and Resource Lifecycle](phase-07-resilience-security-and-resource-lifecycle.md)
+- [Phase 7 implementation evidence](phase-07-implementation-evidence.md)
 - [Phase 8 — Browser Compatibility and Accessible Fallback Matrix](phase-08-browser-compatibility-and-fallback-matrix.md)
 - [Phase 9 — Measurement, Mobile Viability, and Artifact Economics](phase-09-measurement-mobile-viability-and-artifact-economics.md)
 - [Phase 10 — Clean Rebuild, Review, and Feasibility Decision](phase-10-clean-rebuild-review-and-feasibility-decision.md)
