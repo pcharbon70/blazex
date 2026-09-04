@@ -43,8 +43,11 @@ delivery. Phase 3 is complete with a narrow runtime/package feasibility `go`
 result. The repository owner then explicitly authorized Phase 4 implementation,
 its section commits, controlled browser execution, and immediate PR delivery.
 Phase 4 is complete with a narrow browser-host feasibility `go` result.
-Phase 5 is eligible but not authorized; Phase 5 and later work remain outside
-the current authorization.
+The repository owner then explicitly authorized Phase 5 implementation, its
+section commits, controlled browser execution, immediate PR merge,
+synchronization, and branch cleanup. Phase 5 is complete with a narrow local
+browser behavior and DOM feasibility `go` result. Phase 6 is eligible but not
+authorized; Phase 6 and later work remain outside the current authorization.
 
 BH-00 remains the accepted product contract. BH-01 may produce feasibility
 evidence and may reject the candidate stack; it cannot weaken BH-00
@@ -112,8 +115,8 @@ failure in the candidate browser stack.
 | [2 — Toolchain and Dependency Qualification](phase-02-toolchain-and-dependency-qualification.md) | complete — gate passed | Resolve, pin, acquire, license, and verify every host, language, runtime, server, browser, and build input before runtime coding. | Phase 1 |
 | [3 — AtomVM/Popcorn Runtime Build and BEAM Packaging](phase-03-runtime-build-and-beam-packaging.md) | complete — gate passed | Build the pinned Wasm runtime, package a minimal BEAM fixture, probe required runtime semantics, and establish the first artifact manifest. | Phase 2 |
 | [4 — Browser Host Loader, Lifecycle, and Deployment](phase-04-browser-host-loader-lifecycle-and-deployment.md) | complete — gate passed | Implement manifest-driven loading, explicit browser bridges, prerequisite detection, lifecycle/failure behavior, and deployment contracts. | Phase 3 |
-| [5 — Local Browser Behavior and DOM Vertical Slice](phase-05-local-browser-behavior-and-dom-vertical-slice.md) | planned — not authorized | Exercise disposable state, identity, forms, timers/messages, DOM updates, accessibility observations, and cleanup. | Phase 4 |
-| [6 — Phoenix Trust Boundary and LiveView Adapter Isolation](phase-06-phoenix-trust-boundary-and-liveview-isolation.md) | planned — not authorized | Prove one authenticated command, isolate version-sensitive renderer integration, and preserve standalone DOM, Plug, and server authority boundaries. | Phase 5 |
+| [5 — Local Browser Behavior and DOM Vertical Slice](phase-05-local-browser-behavior-and-dom-vertical-slice.md) | complete — gate passed | Exercise disposable state, identity, forms, timers/messages, DOM updates, accessibility observations, and cleanup. | Phase 4 |
+| [6 — Phoenix Trust Boundary and LiveView Adapter Isolation](phase-06-phoenix-trust-boundary-and-liveview-isolation.md) | planned — eligible, not authorized | Prove one authenticated command, isolate version-sensitive renderer integration, and preserve standalone DOM, Plug, and server authority boundaries. | Phase 5 |
 | [7 — Resilience, Security, and Resource Lifecycle](phase-07-resilience-security-and-resource-lifecycle.md) | planned — not authorized | Stress failures, retries, adversarial inputs, diagnostics, cancellation, disposal, and bounded resource behavior across the vertical slice. | Phases 5–6 |
 | [8 — Browser Compatibility and Accessible Fallback Matrix](phase-08-browser-compatibility-and-fallback-matrix.md) | planned — not authorized | Run the complete scenario set across candidate desktop/mobile browsers, prerequisite failures, fallbacks, and pinned compatibility combinations. | Phase 7 |
 | [9 — Measurement, Mobile Viability, and Artifact Economics](phase-09-measurement-mobile-viability-and-artifact-economics.md) | planned — not authorized | Measure payload, build, startup, interaction, memory, reliability, and constrained-mobile viability from canonical artifacts and raw samples. | Phase 8 |
@@ -260,6 +263,7 @@ framework API.
 - [Phase 4 — Browser Host Loader, Lifecycle, and Deployment](phase-04-browser-host-loader-lifecycle-and-deployment.md)
 - [Phase 4 implementation evidence](phase-04-implementation-evidence.md)
 - [Phase 5 — Local Browser Behavior and DOM Vertical Slice](phase-05-local-browser-behavior-and-dom-vertical-slice.md)
+- [Phase 5 implementation evidence](phase-05-implementation-evidence.md)
 - [Phase 6 — Phoenix Trust Boundary and LiveView Adapter Isolation](phase-06-phoenix-trust-boundary-and-liveview-isolation.md)
 - [Phase 7 — Resilience, Security, and Resource Lifecycle](phase-07-resilience-security-and-resource-lifecycle.md)
 - [Phase 8 — Browser Compatibility and Accessible Fallback Matrix](phase-08-browser-compatibility-and-fallback-matrix.md)

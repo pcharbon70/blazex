@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0.0",
+  "policy_id": "BX-BH01-LOCAL-BROWSER-NORMALIZATION-0.1",
+  "status": "reviewed-experimental",
+  "preserve": [
+    "scenario and activation generation",
+    "monotonic sequence and causal parent",
+    "opaque semantic node and test identities",
+    "command and normalized event values",
+    "runtime state and DOM/accessibility observations",
+    "failure code, retry disposition, and cleanup outcome",
+    "resource counts and artifact identities",
+    "ordered state and mutation transitions"
+  ],
+  "normalize": [
+    {"subject": "wall-clock timestamps", "method": "retain scenario-relative integer microseconds and ordered sample identity; remove absolute browser wall time"},
+    {"subject": "opaque runtime process and timer references", "method": "replace first-seen values with stable process-N and timer-N labels without reordering"},
+    {"subject": "browser-generated correlation, blob, and context IDs", "method": "replace first-seen values with stable typed labels while preserving equality and causality"},
+    {"subject": "paint and cleanup duration", "method": "retain raw integer observations with environment fingerprint; never use normalization to pass a budget"},
+    {"subject": "cumulative traces", "method": "deduplicate byte-identical repeated snapshots only; preserve every transition, error, and changed resource count"}
+  ],
+  "never_normalize": [
+    "sequence or causal order",
+    "generation or semantic identity",
+    "state, input, validation, DOM text, role, relationship, or focus result",
+    "error, stale-drop, orphan, leak, unexplained output, or cleanup failure",
+    "artifact bytes, hashes, source-map presence, or network path"
+  ]
+}

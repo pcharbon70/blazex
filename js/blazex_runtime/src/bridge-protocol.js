@@ -9,7 +9,7 @@ export const BRIDGE_LIMITS = Object.freeze({
   max_timeout_ms: 10_000,
   max_concurrency: 16,
 });
-export const BRIDGE_OPERATIONS = Object.freeze(["runtime.echo", "runtime.shutdown"]);
+export const BRIDGE_OPERATIONS = Object.freeze(["runtime.echo", "runtime.shutdown", "fixture.command", "fixture.event", "fixture.snapshot"]);
 export const BRIDGE_SIGNAL_TYPES = Object.freeze(["event", "error", "readiness", "shutdown", "diagnostic"]);
 
 const ID = /^[A-Za-z0-9][A-Za-z0-9._:-]{0,95}$/;

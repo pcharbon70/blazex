@@ -28,6 +28,16 @@ test("correlates a bounded allowlisted request and records metrics", async () =>
   assert.deepEqual(traces.map((event) => event.kind), ["request", "response"]);
 });
 
+test("accepts only the three bounded fixture operations added for Phase 5", async () => {
+  const transport = { request: async (request) => response(request, request.payload), cancel() {} };
+  const bridge = new BrowserHostBridge({ transport, generation: 1, scenarioId: "fixture" });
+  for (const operation of ["fixture.command", "fixture.event", "fixture.snapshot"]) {
+    assert.deepEqual(await bridge.request(operation, { command: "snapshot" }), { command: "snapshot" });
+  }
+  await assert.rejects(bridge.request("fixture.dom", {}), { code: "bridge-operation-forbidden" });
+  bridge.stop();
+});
+
 test("rejects operations, executable values, handles, secrets, and oversized values", async () => {
   const transport = { request: async (request) => response(request, null), cancel() {} };
   const bridge = new BrowserHostBridge({ transport, generation: 1, scenarioId: "negative" });

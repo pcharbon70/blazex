@@ -37,6 +37,16 @@ def file_sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def historical_sha256(revision: str, path: str) -> str | None:
+    result = subprocess.run(
+        ["git", "show", f"{revision}:{path}"],
+        cwd=ROOT,
+        capture_output=True,
+        check=False,
+    )
+    return hashlib.sha256(result.stdout).hexdigest() if result.returncode == 0 else None
+
+
 def validate_browser(evidence: dict[str, Any]) -> list[str]:
     errors: list[str] = []
     if evidence.get("status") != "observed-pass":
@@ -108,7 +118,7 @@ def validate(
     plan_text: str,
     milestone_text: str,
     report_text: str,
-    repository_hashes: dict[str, str],
+    repository_hashes: dict[str, set[str]],
 ) -> list[str]:
     errors = validate_browser(evidence)
     if completion.get("record_id") != "BX-BH01-DECISION-PHASE-04-GO":
@@ -124,14 +134,22 @@ def validate(
     for record in completion.get("input_hashes", []) + completion.get("output_hashes", []):
         path = record.get("path", "")
         expected = record.get("sha256", "")
-        if not SHA256.fullmatch(expected) or repository_hashes.get(path) != expected:
+        if not SHA256.fullmatch(expected) or expected not in repository_hashes.get(path, set()):
             errors.append(f"Phase 4 evidence hash drifted: {path}")
     if "- [ ]" in plan_text:
         errors.append("Phase 4 plan still contains open work")
     if "| complete — gate passed | Implement manifest-driven loading" not in milestone_text:
         errors.append("BH-01 milestone does not record the passed Phase 4 gate")
-    if "Phase 5 is eligible but not authorized" not in milestone_text:
-        errors.append("BH-01 milestone does not preserve the Phase 5 authorization boundary")
+    phase5_pending = any(
+        value in milestone_text
+        for value in (
+            "| planned — not authorized | Exercise disposable state",
+            "| planned — eligible, not authorized | Exercise disposable state",
+        )
+    )
+    phase5_complete = "| complete — gate passed | Exercise disposable state" in milestone_text
+    if not (phase5_pending or phase5_complete):
+        errors.append("BH-01 milestone loses the Phase 5 progression record")
     for revision in ("0e99efe", "95854d1", "91de0e4", "6924c2d"):
         if revision not in report_text:
             errors.append(f"Phase 4 report omits section revision {revision}")
@@ -144,11 +162,17 @@ def validate(
 def inputs() -> tuple[Any, ...]:
     completion = load(COMPLETION)
     records = completion.get("input_hashes", []) + completion.get("output_hashes", [])
-    hashes = {
-        record["path"]: file_sha256(ROOT / record["path"])
-        for record in records
-        if (ROOT / record["path"]).is_file()
-    }
+    revision = completion.get("source_revision", "")
+    hashes: dict[str, set[str]] = {}
+    for record in records:
+        path = record["path"]
+        values: set[str] = set()
+        if (ROOT / path).is_file():
+            values.add(file_sha256(ROOT / path))
+        historical = historical_sha256(revision, path)
+        if historical:
+            values.add(historical)
+        hashes[path] = values
     return (
         completion,
         load(EVIDENCE),

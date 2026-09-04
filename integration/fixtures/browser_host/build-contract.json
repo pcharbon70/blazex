@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
   "contract_id": "BX-BH01-BROWSER-HOST-BUNDLE-0.1",
-  "status": "phase4-section-4.2",
+  "status": "phase5-complete",
   "classification": "disposable-non-public-fixture",
   "beam_image": "docker.io/hexpm/elixir@sha256:8d03cfb52e3fa3f5d83d749942b7c45c966dda48a7c4ba4f069390379b59fc39",
   "language": {"otp": "26.0.2", "elixir": "1.17.3"},
@@ -12,7 +12,7 @@
   "resources": [],
   "bridge": {
     "protocol": "blazex.host-bridge/1",
-    "operations": ["runtime.echo", "runtime.shutdown"],
+    "operations": ["runtime.echo", "runtime.shutdown", "fixture.command", "fixture.event", "fixture.snapshot"],
     "max_bytes": 8192,
     "max_depth": 6,
     "max_items": 64,
@@ -20,5 +20,6 @@
     "retry": 0
   },
   "public_api": false,
-  "claims_not_made": ["component rendering", "DOM behavior", "Phoenix authority", "browser support"]
+  "fixture_protocol": "blazex.bh01.fixture-effect/0.1",
+  "claims_not_made": ["public component API", "general DOM rendering", "Phoenix authority", "browser support"]
 }

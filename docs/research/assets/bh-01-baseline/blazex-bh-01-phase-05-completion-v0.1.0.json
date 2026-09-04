@@ -1,0 +1,185 @@
+{
+  "schema_version": "1.0.0",
+  "record_id": "BX-BH01-DECISION-PHASE-05-GO",
+  "record_type": "decision",
+  "state": "passed",
+  "title": "BH-01 Phase 5 local browser behavior and DOM vertical-slice gate",
+  "owner_role": "bh01-owner",
+  "recorded_at": "2026-09-04T11:43:03.154Z",
+  "observed_at": "2026-09-04T11:43:03.154Z",
+  "source_revision": "7332b2e2ec6933eadd424f2948f2297767b06b79",
+  "environment_refs": [
+    "profiles/browser_phoenix/toolchain/environment.lock.json",
+    "profiles/browser_phoenix/toolchain/browser.lock.json",
+    "profiles/browser_phoenix/toolchain/runtime.lock.json",
+    "profiles/browser_phoenix/assets/phase4/deployment-contract.json",
+    "integration/fixtures/browser_host/build-contract.json",
+    "integration/fixtures/local_browser/scenario-catalog.json",
+    "integration/fixtures/local_browser/normalization-policy.json"
+  ],
+  "tool_identities": [
+    {
+      "name": "beam-test-image",
+      "version": "sha256:8d03cfb52e3fa3f5d83d749942b7c45c966dda48a7c4ba4f069390379b59fc39",
+      "source": "docker.io/hexpm/elixir",
+      "sha256": "a2386c21edd5c612b4ed6e2731daba806177dba55baf977ee456c6e194f60d9f"
+    },
+    {
+      "name": "node",
+      "version": "26.8.1",
+      "source": "nodejs.org",
+      "sha256": "3e301118d7df53d563b7e96c1617545f26e2f76f9724be668d6cab65c15dda5d"
+    },
+    {
+      "name": "playwright-core",
+      "version": "1.62.1",
+      "source": "registry.npmjs.org",
+      "sha256": null
+    },
+    {
+      "name": "chrome-for-testing",
+      "version": "152.0.7977.75",
+      "source": "storage.googleapis.com/chrome-for-testing-public",
+      "sha256": "a16d36890636bd72251133b27f05825f7f9269c2425b3408fa3a76e10dccd8f1"
+    },
+    {
+      "name": "phoenix",
+      "version": "1.8.13",
+      "source": "repo.hex.pm",
+      "sha256": null
+    },
+    {
+      "name": "popcorn",
+      "version": "0.3.3",
+      "source": "repo.hex.pm",
+      "sha256": null
+    },
+    {
+      "name": "python",
+      "version": "3.12.12",
+      "source": "local policy environment",
+      "sha256": "fb85a13414b028c49ba18bbd523c2d055a30b56b18b92ce454ea2c51edc656c4"
+    }
+  ],
+  "requirement_refs": [
+    "BH-01-PHASE-5",
+    "BX-BH01-INPUT-PROFILE-SLICE",
+    "BX-BH01-INPUT-BEHAVIORS",
+    "BX-BH01-INPUT-MEASUREMENTS",
+    "BX-BH01-INPUT-STOP-CONDITIONS",
+    "BX-BH01-PROOF-NESTED-STATE",
+    "BX-BH01-PROOF-FORM-EVENT",
+    "BX-BH01-PROOF-TIMER-MESSAGE",
+    "BX-BH01-PROOF-DOM-UPDATE",
+    "BX-BH01-RISK-RUNTIME-SEMANTICS",
+    "BX-BH01-RISK-WASM-ARTIFACT-ACCOUNTING"
+  ],
+  "reciprocal_links": [
+    "docs/research/60-planning/01-browser-host/bh-01-reproducible-browser-feasibility-baseline/phase-05-local-browser-behavior-and-dom-vertical-slice.md",
+    "docs/research/60-planning/01-browser-host/bh-01-reproducible-browser-feasibility-baseline/phase-05-implementation-evidence.md",
+    "integration/fixtures/scenarios/bh01-local-browser-catalog.json",
+    "integration/fixtures/local_browser/scenario-catalog.json",
+    "integration/fixtures/raw-evidence/bh01-phase5-local-browser.json",
+    "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-05-authorization-v0.1.0.json"
+  ],
+  "command_refs": [
+    "docker run --rm --network none <pinned-elixir> mix bh01.browser_package --out-dir generated",
+    "python3 integration/fixtures/browser_host/generate_manifest.py --generated integration/fixtures/browser_host/generated",
+    "python3 profiles/browser_phoenix/assets/phase4/build_profile.py --output profiles/browser_phoenix/priv/static/bh01",
+    "PHX_SERVER=true PORT=4198 mix run --no-halt",
+    "BLAZEX_BASE_URL=http://127.0.0.1:4198/bh01/ BLAZEX_CHROME_PATH=<qualified-chrome> BLAZEX_REVISION=7332b2e2ec6933eadd424f2948f2297767b06b79 node test/browser/phase5.integration.mjs",
+    "npm test",
+    "npm run build",
+    "mix test",
+    "python3 -m unittest discover -s integration/fixtures/local_browser/tests -p test_*.py",
+    "python3 -m unittest discover -s profiles/browser_phoenix/toolchain/tests -p test_*.py",
+    "python3 integration/fixtures/local_browser/verify_contracts.py",
+    "python3 integration/fixtures/browser_host/verify_fixture.py --generated integration/fixtures/browser_host/generated",
+    "python3 profiles/browser_phoenix/assets/phase4/verify_profile.py profiles/browser_phoenix/priv/static/bh01",
+    "python3 profiles/browser_phoenix/toolchain/verify_phase5.py",
+    "python3 docs/research/validate_archive.py",
+    "git diff --check"
+  ],
+  "input_hashes": [
+    {
+      "path": "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-05-authorization-v0.1.0.json",
+      "sha256": "9dcc39faee6f6b938b0d6b700404e839b8e05aa86fd5aa9e3d439400534a3090"
+    },
+    {
+      "path": "integration/fixtures/local_browser/behavior-protocol.schema.json",
+      "sha256": "d3347ee0c9bf9b7d038800a45d09d5e545212d2f8f37d824b215ebf0a157df3e"
+    },
+    {
+      "path": "integration/fixtures/local_browser/scenario-catalog.json",
+      "sha256": "8d6261158e7e3522dc359d2a91b025d62e7a1b3cc06c9bdce8d65431be1373d5"
+    },
+    {
+      "path": "integration/fixtures/local_browser/normalization-policy.json",
+      "sha256": "d0a73b867ae863955a05ccb5222d3c6b2093309facbfbd97ef12c8c6eeb29eb3"
+    },
+    {
+      "path": "integration/fixtures/scenarios/bh01-local-browser-catalog.json",
+      "sha256": "bb821082938302ba07b59f457e0aaa86d943f58327bdda479e3889c341a162de"
+    },
+    {
+      "path": "integration/fixtures/raw-evidence/bh01-phase5-local-browser.json",
+      "sha256": "cbdcbab0c81df97163428fc988a8fa91f5d94849bb7db44362d09862b2367eaa"
+    }
+  ],
+  "output_hashes": [
+    {
+      "path": "docs/research/60-planning/01-browser-host/bh-01-reproducible-browser-feasibility-baseline/phase-05-implementation-evidence.md",
+      "sha256": "bb97e29d09ab79a1ccecfdf803197e85a0765481ee6145d7883bf86a70d14235"
+    },
+    {
+      "path": "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-05-validation-log-v0.1.0.txt",
+      "sha256": "2b8b56cd22b949ece6c63c8a93dad82c2cb0770043894b71a7319e732067820e"
+    }
+  ],
+  "raw_evidence_refs": [
+    "integration/fixtures/raw-evidence/bh01-phase5-local-browser.json",
+    "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-05-validation-log-v0.1.0.txt"
+  ],
+  "normalization": [
+    {
+      "subject": "cross-run semantic checkpoints",
+      "method": "Remove only reviewed wall-clock, opaque process, worker-blob, and lifecycle-cleanup duration variance while preserving order, generation, identity, state, failures, resources, DOM observations, and unexplained output; compare compact JSON bytes by SHA-256."
+    },
+    {
+      "subject": "browser network identity",
+      "method": "Replace each random runtime-worker blob UUID with one typed blob identity and retain the sorted unique profile path inventory plus a separate post-readiness behavior request slice."
+    },
+    {
+      "subject": "timing and resource observations",
+      "method": "Round retained browser timing observations to microsecond precision without using them in semantic equivalence; retain memory pages, known ownership counts, and explicit unknown worker/runtime-inventory fields without inference."
+    }
+  ],
+  "limitations": [
+    "Only one exact headless Chromium 152/Linux x86-64 environment was executed; all browsers remain unsupported.",
+    "Fixture protocols and DOM operations are disposable BH-01 boundaries, not public BlazeX component, tree, renderer, capability, effect, forms, or host APIs.",
+    "No authenticated command, Phoenix changeset, LiveView, LocalLiveView, Plug-only composition, server validation, or server-authority behavior is established.",
+    "Popcorn 0.3.3 still requires CSP unsafe-eval; no production security disposition exists.",
+    "The unpruned AVM has not passed payload, startup, memory, CPU, interaction, reliability, cleanup, accessibility, or mobile budgets.",
+    "The parent frame does not expose worker count or runtime-wide process inventory; unavailable observations were not represented as zero.",
+    "Accessible role, name, relationship, and keyboard observations were made without assistive technology and do not establish accessibility compliance.",
+    "Reverse proxy, CDN, precompression, service worker, production HTTPS, deployment rollback, non-local origins, browser crash recovery, stress, and cross-browser behavior remain unverified."
+  ],
+  "supersedes": [],
+  "invalidates": [],
+  "retention": {
+    "class": "permanent",
+    "minimum_days": null,
+    "immutable_raw_evidence": true
+  },
+  "outcome": {
+    "summary": "Phase 5 local browser behavior and DOM gate passed narrowly; Phase 6 is eligible but not authorized.",
+    "expected": "The disposable Elixir fixture proves bounded local state, keyed identity, form input/validation, timer/message, renderer-owned DOM update, accessibility observation, generation replacement, fail-closed negative behavior, no local server round trip, repeatable semantic traces, cleanup convergence, and abstraction isolation in the exact pinned browser without stabilizing BH-02 contracts.",
+    "observed": "Two independent Chrome 152 runs produced the same 29-checkpoint trace; local behavior generated no network request; all declared behavior and DOM negatives returned typed failures with atomic rollback; original and generation-2 replacement stops reached zero known owned resources; four proofs received provisional passes; fixture and standalone-DOM leakage guards passed."
+  },
+  "review": {
+    "required": true,
+    "reviewer_role": "bh01-owner",
+    "reviewed_at": "2026-09-04T11:43:03.154Z",
+    "disposition": "accepted"
+  }
+}

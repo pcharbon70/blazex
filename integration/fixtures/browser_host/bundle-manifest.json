@@ -1,36 +1,36 @@
 {
   "artifacts": [
     {
-      "bytes": 6532472,
+      "bytes": 6571908,
       "content_encoding": null,
       "id": "BX-BH01-BROWSER-HOST-AVM",
       "kind": "avm",
       "mime": "application/vnd.atomvm.avm",
       "path": "generated/bundle.avm",
-      "sha256": "c9cefe8220bef517032bf006b40925418dcd230e07017a1125a449907312a796"
+      "sha256": "b6d7aafe844474cd5d64debe5d6c7124acf3b7f444b5d0600d93e30a1e740189"
     },
     {
-      "bytes": 3042297,
+      "bytes": 3059844,
       "content_encoding": "gzip",
       "id": "BX-BH01-BROWSER-HOST-AVM-GZIP",
       "kind": "avm-gzip",
       "mime": "application/vnd.atomvm.avm",
       "path": "generated/bundle.avm.gz",
-      "sha256": "e872557f449fdc18e92d0bd148ca6f87ad1bf2b205557a4604b63c4196a8a2b3"
+      "sha256": "a99682dffb0069bc2bfab1a6b1d8af2ba6dc54412e257d79ca7e46b4b1673eee"
     },
     {
-      "bytes": 13991,
+      "bytes": 14031,
       "content_encoding": null,
       "id": "BX-BH01-BROWSER-HOST-MODULE-INVENTORY",
       "kind": "module-inventory",
       "mime": "application/json",
       "path": "generated/module-inventory.json",
-      "sha256": "53aa7cb4c655685580c54aca10d478188761f409c30e8e01b2dd4298debf3489"
+      "sha256": "46bf522fce45707b68180f3e4d77f3761476ce1419db6373a71ade3ecc0899cf"
     }
   ],
-  "build_contract_sha256": "512a72747e5451a887b3ae379c2737bc84ca5ec735a2f1802a1a8f0d8bbd9838",
+  "build_contract_sha256": "d2ee3c9f0304ff1b2f469d256196e73cb744ae0a1b3f6158f817f13b139fc204",
   "limitations": [
-    "browser-only readiness is not evidence of DOM behavior",
+    "Phase 5 behavior is a disposable fixture, not a public component contract",
     "unpruned AVM size is not a passed budget"
   ],
   "manifest_id": "BX-BH01-BROWSER-HOST-BUNDLE-MANIFEST-0.1",
@@ -47,15 +47,19 @@
     },
     {
       "path": "lib/blazex/bh01/browser_host/protocol.ex",
-      "sha256": "dc182c5a1e18097643d663e489b93eb69f6a60ca2ac49607625c28028fee1eee"
+      "sha256": "1ec2026ba942d1edc4ed23db43454e272e23651f3567a8e3de083709e74d87a3"
     },
     {
       "path": "lib/blazex/bh01/browser_host.ex",
-      "sha256": "086258aafbb2d4fa77826ccc4f29e88449ab2929253c0258d64d7b4f276b61e5"
+      "sha256": "16c7c12186b5d9a0259ad78279ecc55faaf4709dc02516bd5d171b3771a71f3b"
+    },
+    {
+      "path": "lib/blazex/bh01/local_behavior.ex",
+      "sha256": "5f808b5615f146671cf98149d7c7110da835dd75497c03a89b9d81a4eb20b3ce"
     },
     {
       "path": "lib/mix/tasks/bh01.browser_package.ex",
-      "sha256": "3e2b8092a2515584bcd51f8b84bc4194612c822cfa8cfc0aa6de11f87bacbb76"
+      "sha256": "6fd936963c4fabff6abd1fe6e268e8f769d2ccec3ce640938c88a5c5560daa24"
     },
     {
       "path": "mix.exs",
