@@ -1,0 +1,167 @@
+{
+  "schema_version": "1.0.0",
+  "evidence_id": "BX-BH01-PHASE8-ACCESSIBILITY-FIREFOX-0.1",
+  "captured_at": "2026-09-04T15:02:23.454Z",
+  "implementation_revision": "083c587c33405d80b3e960115fb2ddad9301406c",
+  "authority": "experimental-unqualified",
+  "support_status": "unsupported",
+  "browser": {
+    "type": "firefox",
+    "version": "153.0",
+    "os": "linux 6.8.0-51-generic",
+    "architecture": "x64"
+  },
+  "status": "observed",
+  "fallback": {
+    "capability_unavailable": {
+      "before_retry": {
+        "state": "fallback",
+        "decision": "static-server-fallback",
+        "runtime_ready": false,
+        "main_count": 1,
+        "heading": "BlazeX browser feasibility profile",
+        "status_text": "Server-rendered fallback active",
+        "status_role": "status",
+        "status_live": "polite",
+        "status_described_by": "bh01-detail",
+        "detail_text": "This browser cannot start the experimental runtime. Server-rendered fallback remains available. Missing: webassembly, shared-memory. Reference: prerequisite-check.",
+        "diagnostic_code": "browser-capability-missing",
+        "correlation_id": "prerequisite-check",
+        "retry_visible": true,
+        "retry_name": "Recheck browser capabilities",
+        "retry_described_by": "bh01-detail",
+        "fixture_children": 0,
+        "focused": "body"
+      },
+      "after_retry": {
+        "state": "fallback",
+        "decision": "static-server-fallback",
+        "runtime_ready": false,
+        "main_count": 1,
+        "heading": "BlazeX browser feasibility profile",
+        "status_text": "Server-rendered fallback active",
+        "status_role": "status",
+        "status_live": "polite",
+        "status_described_by": "bh01-detail",
+        "detail_text": "This browser cannot start the experimental runtime. Server-rendered fallback remains available. Missing: webassembly, shared-memory. Reference: prerequisite-check.",
+        "diagnostic_code": "browser-capability-missing",
+        "correlation_id": "prerequisite-check",
+        "retry_visible": true,
+        "retry_name": "Recheck browser capabilities",
+        "retry_described_by": "bh01-detail",
+        "fixture_children": 0,
+        "focused": "body"
+      },
+      "bounded_retry": "one-user-controlled-reload"
+    },
+    "unsupported_browser": {
+      "state": "fallback",
+      "decision": "unsupported",
+      "runtime_ready": false,
+      "main_count": 1,
+      "heading": "BlazeX browser feasibility profile",
+      "status_text": "Experimental runtime unavailable",
+      "status_role": "status",
+      "status_live": "polite",
+      "status_described_by": "bh01-detail",
+      "detail_text": "This deployment cannot start the experimental runtime because required isolation or secure-context policy is missing: shared-memory, atomics, cross-origin-isolation. Reference: prerequisite-check.",
+      "diagnostic_code": "deployment-policy-missing",
+      "correlation_id": "prerequisite-check",
+      "retry_visible": true,
+      "retry_name": "Recheck browser capabilities",
+      "retry_described_by": "bh01-detail",
+      "fixture_children": 0,
+      "focused": "body"
+    },
+    "no_javascript": {
+      "main_count": 1,
+      "heading": "BlazeX browser feasibility profile",
+      "status_role": "status",
+      "status_text": "Server-rendered fallback available",
+      "detail_text": "This page remains usable when the experimental WebAssembly runtime cannot start.",
+      "noscript_text": "The experimental runtime requires JavaScript. This server-rendered status page remains available.",
+      "retry_hidden": true,
+      "fixture_children": 0,
+      "ordinary_host_reload": true,
+      "partial_activation": false
+    }
+  },
+  "keyboard_focus": {
+    "tab_order": [
+      "bx-parent-action",
+      "bx-child-alpha-action",
+      "bx-child-beta-action",
+      "bx-field",
+      "bx-field-reset",
+      "bx-server-action",
+      "bx-server-action",
+      "bx-server-action",
+      "bx-server-action",
+      "bx-server-action",
+      "bx-server-action",
+      "bx-server-action",
+      "bx-server-action",
+      "bx-server-action",
+      "bx-server-action",
+      "bx-server-action"
+    ],
+    "field_before_reset": true,
+    "keyboard_action": "enter-activated-reset",
+    "focus_visible": {
+      "matches": true,
+      "outline_style": "auto",
+      "outline_width": "1px"
+    },
+    "focus_preserved_after_dom_update": true
+  },
+  "field_input": {
+    "composition_like_sequence": "passed",
+    "rapid_input_final_value": "Ada",
+    "input_change_blur": "passed",
+    "invalid_accessibility": {
+      "accessible_name": "Name",
+      "invalid": "true",
+      "relationships": {
+        "described_by": "bx-field-help bx-field-error",
+        "error_message": "bx-field-error"
+      },
+      "alert_count": 1,
+      "alert_text": "Name is required"
+    },
+    "disabled": {
+      "property": true,
+      "event_rejection": "fixture-field-disabled"
+    },
+    "read_only": {
+      "property": true,
+      "event_rejection": "fixture-field-read-only"
+    }
+  },
+  "user_preferences": {
+    "reduced_motion": {
+      "active": true,
+      "state": "ready",
+      "textbox_role": "implicit",
+      "outline_style": "auto",
+      "animation_duration": "0s",
+      "transition_duration": "0s",
+      "forced_color_adjust": "auto"
+    },
+    "forced_colors": {
+      "active": true,
+      "state": "ready",
+      "textbox_role": "implicit",
+      "outline_style": "auto",
+      "animation_duration": "0s",
+      "transition_duration": "0s",
+      "forced_color_adjust": "auto"
+    }
+  },
+  "manual_evidence": {
+    "assistive_technology": "not-executed-environment-unavailable",
+    "physical_keyboard": "not-executed-headless-automation",
+    "touch_and_virtual_keyboard": "not-applicable-to-desktop-probe"
+  },
+  "page_errors": [],
+  "evidence_sha256": "c8d7f43427ca3bd7776057769ab138f2f7596e5fb3962fa248922798d06371c7"
+}

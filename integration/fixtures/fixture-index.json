@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
   "index_id": "BX-BH01-FIXTURE-INDEX-0.1",
-  "status": "phase8-behavior-trust-matrix-executed-partial-environment-blocked",
+  "status": "phase8-accessibility-input-matrix-executed-partial-environment-blocked",
   "scenario_schema": "scenario.schema.json",
   "scenario_location": "scenarios",
   "raw_evidence_location": "raw-evidence",
@@ -23,7 +23,7 @@
     {
       "id": "BX-BH01-FIXTURE-BROWSER-MATRIX",
       "path": "browser_matrix",
-      "status": "phase8-behavior-trust-matrix",
+      "status": "phase8-accessibility-input-matrix",
       "public_api": false,
       "manifest": "browser_matrix/matrix-policy.json"
     }

@@ -35,3 +35,9 @@ is not browser evidence.
   engine behavior probe; it grants no required-row credit.
 - `bh01-phase8-behavior-webkit-probe.json` — explicitly unqualified WebKit
   MiniBrowser behavior probe; it is not macOS or mobile Safari evidence.
+- `bh01-phase8-accessibility-chromium.json` — qualified Chrome/Linux automated
+  fallback, keyboard, focus, field, reduced-motion, and forced-color evidence.
+- `bh01-phase8-accessibility-firefox-probe.json` — unqualified Firefox engine
+  accessibility/input automation; no stable Firefox or AT claim follows.
+- `bh01-phase8-accessibility-webkit-probe.json` — unqualified Linux WebKit
+  accessibility/input automation; no Safari or VoiceOver claim follows.

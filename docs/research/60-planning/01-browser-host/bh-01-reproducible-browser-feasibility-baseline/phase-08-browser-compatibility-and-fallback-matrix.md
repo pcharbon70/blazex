@@ -97,27 +97,27 @@ Back to milestone: [README](README.md)
       - [x] 8.3.3.1 Subtask - Run the Phase 7 failure taxonomy, repeated lifecycle subset, malformed boundary subset, and diagnostic/redaction assertions.
       - [x] 8.3.3.2 Subtask - Compare resource baseline/peak/disposed states and record browser-specific retention, unobservable metrics, crashes, or automation gaps.
 
-  - [ ] 8.4 Section - Validate accessible fallback and input behavior.
+  - [x] 8.4 Section - Validate accessible fallback and input behavior.
 
     Unsupported or degraded configurations need usable, understandable outcomes
     and cannot disappear behind a console error.
 
-    - [ ] 8.4.1 Task - Exercise all governed fallback categories.
+    - [x] 8.4.1 Task - Exercise all governed fallback categories.
 
       Each prerequisite/failure should select its declared outcome consistently
       and avoid partial activation.
 
-      - [ ] 8.4.1.1 Subtask - Test static content, alternative interaction, in-app substitute, server round trip, explicit unavailability, nonvisual representation, and omission where applicable.
-      - [ ] 8.4.1.2 Subtask - Verify accessible name/message, semantics, keyboard reachability, focus placement, retry/action affordance, reduced-motion/forced-color behavior, and diagnostic correlation.
-      - [ ] 8.4.1.3 Subtask - Record unsupported, failed, environment-blocked, flaky, and not-applicable outcomes separately and prohibit aggregate support from partial coverage.
+      - [x] 8.4.1.1 Subtask - Test static content, alternative interaction, in-app substitute, server round trip, explicit unavailability, nonvisual representation, and omission where applicable.
+      - [x] 8.4.1.2 Subtask - Verify accessible name/message, semantics, keyboard reachability, focus placement, retry/action affordance, reduced-motion/forced-color behavior, and diagnostic correlation.
+      - [x] 8.4.1.3 Subtask - Record unsupported, failed, environment-blocked, flaky, and not-applicable outcomes separately and prohibit aggregate support from partial coverage.
 
-    - [ ] 8.4.2 Task - Compare keyboard, focus, and field observations.
+    - [x] 8.4.2 Task - Compare keyboard, focus, and field observations.
 
       Browser differences in input/event/focus behavior can invalidate fixture
       assumptions even when visible output appears similar.
 
-      - [ ] 8.4.2.1 Subtask - Run keyboard action, tab/focus order, focus visibility/restore, field input/change/blur, rapid/composition-like input, validation, and disabled/read-only cases.
-      - [ ] 8.4.2.2 Subtask - Record engine/automation/assistive-technology limitations and require bounded manual review for evidence unavailable to automation.
+      - [x] 8.4.2.1 Subtask - Run keyboard action, tab/focus order, focus visibility/restore, field input/change/blur, rapid/composition-like input, validation, and disabled/read-only cases.
+      - [x] 8.4.2.2 Subtask - Record engine/automation/assistive-technology limitations and require bounded manual review for evidence unavailable to automation.
 
   - [ ] 8.5 Section - Characterize compatibility and private-API limits.
 

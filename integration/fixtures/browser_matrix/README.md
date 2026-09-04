@@ -19,3 +19,7 @@ engine emulation and non-vendor builds never substitute for a required row.
   adapter, resilience, diagnostic, and cleanup outcomes for Section 8.3.
 - `verify_behavior_trust.py` and `tests/test_behavior_trust.py` — semantic-
   equivalence, authority, no-substitution, and resource-convergence checks.
+- `accessibility-input-matrix.json` — governed fallback values, automated
+  accessibility/input outcomes, divergences, and required manual evidence.
+- `verify_accessibility_input.py` and `tests/test_accessibility_input.py` —
+  fallback, keyboard, focus, field, preference, and no-overclaim checks.

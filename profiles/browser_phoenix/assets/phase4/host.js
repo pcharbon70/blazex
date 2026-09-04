@@ -3,6 +3,7 @@ import { FixtureDOMRenderer } from "./dom/fixture-dom-renderer.js";
 
 const status = document.querySelector("[data-bh01-status]");
 const detail = document.querySelector("[data-bh01-detail]");
+const retry = document.querySelector("[data-bh01-retry]");
 const events = [];
 const fixtureEffects = [];
 const domTraces = [];
@@ -23,10 +24,16 @@ const record = (event) => {
   if (event?.type === "runtime-ready") runtimeResources.memory_pages = event.memory_pages;
   if (event?.type === "runtime-event" && event.name === "bh01_fixture_effect") applyFixtureEffect(event.payload);
 };
-const show = (state, message) => {
+const show = (state, message, diagnostic = null) => {
   status.dataset.state = state;
   status.textContent = message;
+  retry.hidden = !["fallback", "failed"].includes(state);
+  for (const key of ["code", "correlation"]) {
+    if (diagnostic?.[key]) status.dataset[key] = diagnostic[key];
+    else delete status.dataset[key];
+  }
 };
+retry.addEventListener("click", () => globalThis.location.reload());
 
 const prerequisites = detectBrowserPrerequisites();
 globalThis.__blazexBH01 = { prerequisites, events, state: "checked" };
@@ -34,7 +41,12 @@ detail.textContent = prerequisites.message;
 const loader = mayActivate(prerequisites) ? new BrowserRuntimeLoader({ onEvent: record }) : null;
 
 if (!mayActivate(prerequisites)) {
-  show("fallback", prerequisites.decision === "unsupported" ? "Experimental runtime unavailable" : "Server-rendered fallback active");
+  show(
+    "fallback",
+    prerequisites.decision === "unsupported" ? "Experimental runtime unavailable" : "Server-rendered fallback active",
+    { code: prerequisites.reason, correlation: "prerequisite-check" },
+  );
+  detail.textContent = `${prerequisites.message} Reference: prerequisite-check.`;
   globalThis.__blazexBH01.state = "fallback";
 } else {
   await start();
@@ -66,7 +78,7 @@ async function start() {
   } catch (error) {
     record({ type: "activation-failed", code: error?.code ?? "unexpected-host-error" });
     loader.stop("activation-error");
-    show("failed", "Experimental runtime failed safely");
+    show("failed", "Experimental runtime failed safely", { code: error?.code ?? "unexpected-host-error", correlation: "runtime-activation" });
     detail.textContent = error instanceof Error ? error.message : "The runtime failed without a diagnostic.";
     Object.assign(globalThis.__blazexBH01, { state: "failed", error: { code: error?.code ?? "unexpected", message: detail.textContent } });
   }
