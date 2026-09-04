@@ -16,7 +16,14 @@ defmodule BlazeXBrowserPhoenix.ControlPlugTest do
   test "health is public but test identity controls are loopback and test-only" do
     health = request(:get, "/bh01/health")
     assert health.status == 200
-    assert Jason.decode!(health.resp_body)["phase"] == 6
+    health_body = Jason.decode!(health.resp_body)
+    assert health_body["phase"] == 6
+    assert health_body["liveview_adapter"]["status"] == "eligible"
+
+    assert health_body["liveview_adapter"]["versions"] == %{
+             "phoenix_live_view" => "1.2.11",
+             "local_live_view" => "0.1.0"
+           }
 
     denied = request(:post, "/bh01/test/session", [], ~s({"identity_id":"operator"}))
     assert denied.status == 400

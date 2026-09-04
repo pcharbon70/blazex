@@ -13,7 +13,8 @@ defmodule BlazeXBrowserPhoenix.ControlPlug do
       "protocol" => "blazex.bh01.health/0.1",
       "status" => "ready",
       "profile" => "browser-phoenix",
-      "phase" => 6
+      "phase" => 6,
+      "liveview_adapter" => liveview_capability()
     })
   end
 
@@ -96,6 +97,11 @@ defmodule BlazeXBrowserPhoenix.ControlPlug do
     Application.get_env(:blazex_browser_phoenix, :mode) == :test and
       conn.remote_ip in [{127, 0, 0, 1}, {0, 0, 0, 0, 0, 0, 0, 1}] and
       get_req_header(conn, "x-bh01-test-control") == ["enabled"]
+  end
+
+  defp liveview_capability do
+    BlazeX.Renderer.DOM.LiveView.Compatibility.expected_descriptor()
+    |> BlazeX.Renderer.DOM.LiveView.capability()
   end
 
   defp error(code), do: %{"protocol" => "blazex.bh01.error/0.1", "error" => %{"code" => code}}

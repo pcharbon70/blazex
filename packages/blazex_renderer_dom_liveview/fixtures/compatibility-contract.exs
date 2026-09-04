@@ -1,0 +1,30 @@
+%{
+  "versions" => %{"phoenix_live_view" => "1.2.11", "local_live_view" => "0.1.0"},
+  "surfaces" => %{
+    "diff" => [
+      "new_components/0-1",
+      "new_fingerprints/0",
+      "render/4",
+      "render_private/2",
+      "write_component/4",
+      "update_component/3",
+      "mark_for_deletion_component/2",
+      "delete_component/2"
+    ],
+    "renderer" => ["to_rendered/2", "__before_compile__/1"],
+    "utils" => [
+      "clear_changed/1",
+      "clear_temp/1",
+      "changed?/1-2",
+      "post_mount_prune/1",
+      "normalize_layout/1",
+      "clear_flash/1-2",
+      "put_reply/2",
+      "maybe_call_live_view_mount!/4-5"
+    ],
+    "lifecycle" => ["build/1", "stage_info/4"],
+    "session_fields" => ~w(id view root_view parent_pid root_pid session redirected? router flash live_session_name assign_new),
+    "socket_fields" => ~w(id endpoint view parent_pid root_pid router assigns private redirected host_uri transport_pid sticky?),
+    "bridge_actions" => ~w(transport_frame reconnected push push_error update_assigns destroy create handle_params server_message)
+  }
+}

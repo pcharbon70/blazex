@@ -75,27 +75,27 @@ Back to milestone: [README](README.md)
       - [x] 6.2.3.2 Subtask - Test disconnect, timeout, server error/restart, transaction failure, stale/duplicate result, retry, and browser/runtime disposal during command.
       - [x] 6.2.3.3 Subtask - Assert no unauthorized side effect, bounded pending work, deterministic idempotency, redacted diagnostics, intentional client outcome, and cleanup.
 
-  - [ ] 6.3 Section - Isolate LiveView and LocalLiveView integration.
+  - [x] 6.3 Section - Isolate LiveView and LocalLiveView integration.
 
     Confine renderer-data and private/fork-specific APIs to the dedicated
     adapter and make the optional path safe to disable.
 
-    - [ ] 6.3.1 Task - Implement the version-sensitive adapter boundary.
+    - [x] 6.3.1 Task - Implement the version-sensitive adapter boundary.
 
       Every used API and data shape must remain pinned, inventoried, and
       protected by compatibility fixtures.
 
-      - [ ] 6.3.1.1 Subtask - Trace used LiveView, LocalLiveView, socket/channel, renderer-data, diff/patch, event, lifecycle, generated, and fork-specific APIs to exact source lines/revisions.
-      - [ ] 6.3.1.2 Subtask - Place renderer-data translation/shims only in `blazex_renderer_dom_liveview` and expose a narrow fixture-facing boundary.
-      - [ ] 6.3.1.3 Subtask - Add compatibility fixtures for expected/unknown versions, fields, ordering, duplicate/stale patch, malformed payload, disconnect/reconnect, and unavailable adapter.
+      - [x] 6.3.1.1 Subtask - Trace used LiveView, LocalLiveView, socket/channel, renderer-data, diff/patch, event, lifecycle, generated, and fork-specific APIs to exact source lines/revisions.
+      - [x] 6.3.1.2 Subtask - Place renderer-data translation/shims only in `blazex_renderer_dom_liveview` and expose a narrow fixture-facing boundary.
+      - [x] 6.3.1.3 Subtask - Add compatibility fixtures for expected/unknown versions, fields, ordering, duplicate/stale patch, malformed payload, disconnect/reconnect, and unavailable adapter.
 
-    - [ ] 6.3.2 Task - Define disable, mismatch, and fallback behavior.
+    - [x] 6.3.2 Task - Define disable, mismatch, and fallback behavior.
 
       An incompatible optional adapter must fail without compromising the local
       runtime or standalone DOM path.
 
-      - [ ] 6.3.2.1 Subtask - Detect pin/protocol/data mismatch before partial adapter activation and select intentional disable, local DOM, server fallback, or explicit unavailable outcome.
-      - [ ] 6.3.2.2 Subtask - Record adapter activation/version in artifacts and traces and reject hidden fallback that changes semantics or support claims.
+      - [x] 6.3.2.1 Subtask - Detect pin/protocol/data mismatch before partial adapter activation and select intentional disable, local DOM, server fallback, or explicit unavailable outcome.
+      - [x] 6.3.2.2 Subtask - Record adapter activation/version in artifacts and traces and reject hidden fallback that changes semantics or support claims.
 
   - [ ] 6.4 Section - Prove standalone DOM, Plug, and dependency separation.
 
