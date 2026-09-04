@@ -34,6 +34,16 @@ defmodule BlazeX.Phoenix.BH01.FixtureAuthorityTest do
 
     snapshot = FixtureAuthority.snapshot(server)
     assert snapshot["active_sessions"] == 1
+    assert snapshot["resources"] == %{
+             "processes" => 1,
+             "tasks" => 0,
+             "pending_commands" => 0,
+             "sockets" => 0,
+             "subscriptions" => 0,
+             "database_effects" => 0,
+             "audit_events" => 0,
+             "adapter_generations" => 0
+           }
     refute inspect(snapshot) =~ session["csrf_token"]
     refute inspect(snapshot) =~ session["session_id"]
   end

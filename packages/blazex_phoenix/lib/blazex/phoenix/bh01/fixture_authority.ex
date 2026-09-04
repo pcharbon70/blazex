@@ -352,7 +352,17 @@ defmodule BlazeX.Phoenix.BH01.FixtureAuthority do
       "resource" => stringify_resource(state.resource),
       "idempotency_count" => map_size(state.idempotency),
       "rate_subject_count" => map_size(state.rate),
-      "audit" => state.audit
+      "audit" => state.audit,
+      "resources" => %{
+        "processes" => 1,
+        "tasks" => 0,
+        "pending_commands" => 0,
+        "sockets" => 0,
+        "subscriptions" => 0,
+        "database_effects" => state.resource.value,
+        "audit_events" => length(state.audit),
+        "adapter_generations" => 0
+      }
     }
   end
 

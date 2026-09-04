@@ -45,35 +45,35 @@ Back to milestone: [README](README.md)
       - [x] 7.1.2.2 Subtask - Coordinate browser/runtime/transport/server retries under one scenario identity and prohibit lower layers from retrying authority-bearing commands independently.
       - [x] 7.1.2.3 Subtask - Test recovery exhaustion and convergence to intentional failed/fallback/stopped states.
 
-  - [ ] 7.2 Section - Prove cancellation, disposal, and bounded resources.
+  - [x] 7.2 Section - Prove cancellation, disposal, and bounded resources.
 
     Repeated interaction, failure, reconnect, and teardown must not accumulate
     runtime, browser, renderer, transport, or server resources.
 
-    - [ ] 7.2.1 Task - Complete resource instrumentation.
+    - [x] 7.2.1 Task - Complete resource instrumentation.
 
       Resource evidence should cover both sides of the Wasm boundary and the
       authenticated server path.
 
-      - [ ] 7.2.1.1 Subtask - Instrument VM processes/mailboxes/timers/pending messages/memory pages and host workers/listeners/observers/fetches/requests/DOM roots/references.
-      - [ ] 7.2.1.2 Subtask - Instrument sockets/subscriptions/pending commands/server processes/tasks/database effects/audit events and adapter generations.
-      - [ ] 7.2.1.3 Subtask - Correlate counts and ownership with scenario/generation lifecycle and define baseline, peak, stable, disposed, leaked, and unknown states.
+      - [x] 7.2.1.1 Subtask - Instrument VM processes/mailboxes/timers/pending messages/memory pages and host workers/listeners/observers/fetches/requests/DOM roots/references.
+      - [x] 7.2.1.2 Subtask - Instrument sockets/subscriptions/pending commands/server processes/tasks/database effects/audit events and adapter generations.
+      - [x] 7.2.1.3 Subtask - Correlate counts and ownership with scenario/generation lifecycle and define baseline, peak, stable, disposed, leaked, and unknown states.
 
-    - [ ] 7.2.2 Task - Stress repeated lifecycle transitions.
+    - [x] 7.2.2 Task - Stress repeated lifecycle transitions.
 
       Resource bounds need long/repeated paths, not only one teardown.
 
-      - [ ] 7.2.2.1 Subtask - Run mount/interact/command/disconnect/reconnect/fail/retry/unmount loops with controlled iteration counts and cache states.
-      - [ ] 7.2.2.2 Subtask - Interrupt startup, DOM update, timer, validation, command, patch, measurement, and shutdown at defined race points.
-      - [ ] 7.2.2.3 Subtask - Assert idempotent cleanup, stale-result rejection, bounded queues/mailboxes/listeners/sockets, memory convergence, and proposed cleanup limits.
+      - [x] 7.2.2.1 Subtask - Run mount/interact/command/disconnect/reconnect/fail/retry/unmount loops with controlled iteration counts and cache states.
+      - [x] 7.2.2.2 Subtask - Interrupt startup, DOM update, timer, validation, command, patch, measurement, and shutdown at defined race points.
+      - [x] 7.2.2.3 Subtask - Assert idempotent cleanup, stale-result rejection, bounded queues/mailboxes/listeners/sockets, memory convergence, and proposed cleanup limits.
 
-    - [ ] 7.2.3 Task - Characterize non-converging resources.
+    - [x] 7.2.3 Task - Characterize non-converging resources.
 
       Any retained resource must be explained as cache, runtime floor, expected
       server state, instrumentation error, or leak.
 
-      - [ ] 7.2.3.1 Subtask - Capture heap/memory/process/listener/socket evidence for growth and isolate runtime, browser, adapter, fixture, server, or test-harness ownership.
-      - [ ] 7.2.3.2 Subtask - Record bounded mitigation, upstream issue, replacement path, measurement caveat, or blocker for every unexplained retained resource.
+      - [x] 7.2.3.1 Subtask - Capture heap/memory/process/listener/socket evidence for growth and isolate runtime, browser, adapter, fixture, server, or test-harness ownership.
+      - [x] 7.2.3.2 Subtask - Record bounded mitigation, upstream issue, replacement path, measurement caveat, or blocker for every unexplained retained resource.
 
   - [ ] 7.3 Section - Execute the adversarial security matrix.
 

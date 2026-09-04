@@ -248,6 +248,7 @@ function rememberTiming(observation) {
 
 function hostResources(activation) {
   const dom = renderer?.snapshot();
+  const domResources = dom ? { roots: dom.root_count, listeners: dom.listener_count, nodes: dom.node_count } : { roots: 0, listeners: 0, nodes: 0 };
   return Object.freeze({
     memory_pages: runtimeResources.memory_pages,
     workers: runtimeResources.workers,
@@ -255,6 +256,16 @@ function hostResources(activation) {
     bridge: activation?.bridge?.metrics?.() ?? null,
     lifecycle: loader?.lifecycle?.() ?? null,
     server: { pending: pendingServerRequests.size, session_configured: serverSession.csrf !== null },
-    dom: dom ? { roots: dom.root_count, listeners: dom.listener_count, nodes: dom.node_count } : { roots: 0, listeners: 0, nodes: 0 },
+    browser: {
+      workers: runtimeResources.workers,
+      listeners: domResources.listeners,
+      observers: 0,
+      fetches: pendingServerRequests.size,
+      requests: (activation?.bridge?.metrics?.().pending ?? 0) + pendingServerRequests.size,
+      dom_roots: domResources.roots,
+      references: renderer ? 1 : 0,
+    },
+    adapter: { active_generations: 0 },
+    dom: domResources,
   });
 }

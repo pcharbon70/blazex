@@ -22,6 +22,7 @@ export {
 export { BrowserHostBridge } from "./host-bridge.js";
 export { BrowserRuntimeLifecycle, LIFECYCLE_STATES, classifyLifecycleFailure } from "./lifecycle.js";
 export { BrowserRecoveryCoordinator, RECOVERY_TERMINAL_STATES } from "./recovery-coordinator.js";
+export { ResourceLedger } from "./resource-ledger.js";
 export { detectBrowserPrerequisites, mayActivate } from "./prerequisites.js";
 
 export const __bh01BoundaryProbe = Object.freeze({
