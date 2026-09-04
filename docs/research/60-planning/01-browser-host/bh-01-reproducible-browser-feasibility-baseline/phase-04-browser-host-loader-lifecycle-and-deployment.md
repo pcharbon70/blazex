@@ -22,36 +22,36 @@ Back to milestone: [README](README.md)
   browser-host messaging and lifecycle behavior, detect prerequisites before
   activation, and document the feasibility deployment contract.
 
-  - [ ] 4.1 Section - Implement manifest-driven browser loading.
+  - [x] 4.1 Section - Implement manifest-driven browser loading.
 
     The JavaScript loader must fetch and verify declared artifacts without
     becoming an implicit component renderer, state store, or authority layer.
 
-    - [ ] 4.1.1 Task - Build artifact acquisition and integrity checks.
+    - [x] 4.1.1 Task - Build artifact acquisition and integrity checks.
 
       Browser loading should be controlled by the canonical manifest rather
       than hard-coded paths or opportunistic network requests.
 
-      - [ ] 4.1.1.1 Subtask - Implement manifest fetch/version validation, base URL resolution, declared asset selection, MIME/content checks, integrity verification, timeout, cancellation, and correlation.
-      - [ ] 4.1.1.2 Subtask - Load Wasm through the selected streaming/buffered path, verify imports/exports/features, and transfer the declared BEAM/AVM bundle and startup arguments.
-      - [ ] 4.1.1.3 Subtask - Reject stale/unknown manifests, undeclared redirects/assets, integrity mismatch, duplicate IDs, unsupported schema, cache poisoning, partial fetch, and post-cancel completion.
+      - [x] 4.1.1.1 Subtask - Implement manifest fetch/version validation, base URL resolution, declared asset selection, MIME/content checks, integrity verification, timeout, cancellation, and correlation.
+      - [x] 4.1.1.2 Subtask - Load Wasm through the selected streaming/buffered path, verify imports/exports/features, and transfer the declared BEAM/AVM bundle and startup arguments.
+      - [x] 4.1.1.3 Subtask - Reject stale/unknown manifests, undeclared redirects/assets, integrity mismatch, duplicate IDs, unsupported schema, cache poisoning, partial fetch, and post-cancel completion.
 
-    - [ ] 4.1.2 Task - Implement runtime instantiation and readiness.
+    - [x] 4.1.2 Task - Implement runtime instantiation and readiness.
 
       Readiness needs one observable definition that separates network,
       instantiation, bundle loading, runtime startup, and application startup.
 
-      - [ ] 4.1.2.1 Subtask - Wire only declared runtime imports, initialize memory/worker context, load the bundle, start the fixture, and emit typed lifecycle events.
-      - [ ] 4.1.2.2 Subtask - Record fetch, instantiate, bundle-load, runtime-ready, application-ready, and root-ready boundaries with runtime/artifact/environment identities.
-      - [ ] 4.1.2.3 Subtask - Fail on missing imports, trap, memory failure, bundle rejection, startup crash/timeout, readiness protocol mismatch, or duplicate readiness.
+      - [x] 4.1.2.1 Subtask - Wire only declared runtime imports, initialize memory/worker context, load the bundle, start the fixture, and emit typed lifecycle events.
+      - [x] 4.1.2.2 Subtask - Record fetch, instantiate, bundle-load, runtime-ready, application-ready, and root-ready boundaries with runtime/artifact/environment identities.
+      - [x] 4.1.2.3 Subtask - Fail on missing imports, trap, memory failure, bundle rejection, startup crash/timeout, readiness protocol mismatch, or duplicate readiness.
 
-    - [ ] 4.1.3 Task - Keep loader ownership narrow.
+    - [x] 4.1.3 Task - Keep loader ownership narrow.
 
       Loader code must expose browser facilities without absorbing product
       behavior or future portable contracts.
 
-      - [ ] 4.1.3.1 Subtask - Add source/API guards against component state, DOM mutation, Phoenix authorization, LiveView data, arbitrary script execution, and unbounded host calls.
-      - [ ] 4.1.3.2 Subtask - Document each JavaScript operation, artifact, global/listener/worker, browser API, cleanup owner, capability prerequisite, and future replacement boundary.
+      - [x] 4.1.3.1 Subtask - Add source/API guards against component state, DOM mutation, Phoenix authorization, LiveView data, arbitrary script execution, and unbounded host calls.
+      - [x] 4.1.3.2 Subtask - Document each JavaScript operation, artifact, global/listener/worker, browser API, cleanup owner, capability prerequisite, and future replacement boundary.
 
   - [ ] 4.2 Section - Implement the explicit browser-host bridge.
 

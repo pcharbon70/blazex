@@ -1,0 +1,66 @@
+{
+  "artifacts": [
+    {
+      "bytes": 6528588,
+      "content_encoding": null,
+      "id": "BX-BH01-BROWSER-HOST-AVM",
+      "kind": "avm",
+      "mime": "application/vnd.atomvm.avm",
+      "path": "generated/bundle.avm",
+      "sha256": "cb03f91ca2eb39c325c4b4da67fe439a8687ea6d3ad90d5316f99d75a8a353cd"
+    },
+    {
+      "bytes": 3040600,
+      "content_encoding": "gzip",
+      "id": "BX-BH01-BROWSER-HOST-AVM-GZIP",
+      "kind": "avm-gzip",
+      "mime": "application/vnd.atomvm.avm",
+      "path": "generated/bundle.avm.gz",
+      "sha256": "6895016b72dc6598be9d07afde71da025b2ef1cdedc8cb9aa2ed22ea6ebbf147"
+    },
+    {
+      "bytes": 13944,
+      "content_encoding": null,
+      "id": "BX-BH01-BROWSER-HOST-MODULE-INVENTORY",
+      "kind": "module-inventory",
+      "mime": "application/json",
+      "path": "generated/module-inventory.json",
+      "sha256": "8d1b0a491dc4c7a455617b8f88c074d76676b9eebaf56c98bb5ee3275d919dc2"
+    }
+  ],
+  "build_contract_sha256": "e460e49d64386d092170aa6fa03e01e4232d23b818945c48ff39bb10d8087c56",
+  "limitations": [
+    "browser-only readiness is not evidence of DOM behavior",
+    "unpruned AVM size is not a passed budget"
+  ],
+  "manifest_id": "BX-BH01-BROWSER-HOST-BUNDLE-MANIFEST-0.1",
+  "normalization": [
+    "fixed boot module identity",
+    "sorted unique BEAM basenames",
+    "zero gzip MTIME"
+  ],
+  "schema_version": "1.0.0",
+  "source_inputs": [
+    {
+      "path": "config/config.exs",
+      "sha256": "30a1b27a48366f8e0ea4e0fc996709822d61025229ac38234277c427b37b30b6"
+    },
+    {
+      "path": "lib/blazex/bh01/browser_host.ex",
+      "sha256": "00d6a1af36ca72e648cd705cb5835edf6c7acf127472dabf9ce226238a2fe289"
+    },
+    {
+      "path": "lib/mix/tasks/bh01.browser_package.ex",
+      "sha256": "8624a4b5b9cfc45f286a649b796a368ee449ca9fa1a426ba72a83e9debaf9b5e"
+    },
+    {
+      "path": "mix.exs",
+      "sha256": "44c3c6963767694615bdcc7ca88e3dc7ab650d202631c6c2f6ff3cf0dbad39c6"
+    },
+    {
+      "path": "mix.lock",
+      "sha256": "22269a9764b2b7ec4a93aaa007040313f4a924b3031e91c72494dd19f9084c98"
+    }
+  ],
+  "status": "observed-packaged"
+}

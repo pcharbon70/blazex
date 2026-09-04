@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0.0",
+  "manifest_id": "BX-BH01-BROWSER-RUNTIME-MANIFEST-0.1",
+  "generation": 1,
+  "startup": {
+    "entrypoint": "Elixir.BlazeX.BH01.BrowserHost.Boot",
+    "memory_pages": 256,
+    "readiness_event": "popcorn_app_ready",
+    "allowed_import_modules": ["a"],
+    "required_exports": ["ab", "bb", "cb", "db", "gb", "jb"],
+    "required_features": ["shared-memory", "threads"]
+  },
+  "artifacts": [
+    {"id": "BX-BH01-BROWSER-RUNTIME-MODULE", "role": "runtime-module", "source": "packages/blazex_runtime_popcorn/runtime/generated/release-web/artifacts/AtomVM.mjs", "path": "./artifacts/AtomVM.mjs", "mime": "text/javascript"},
+    {"id": "BX-BH01-BROWSER-RUNTIME-WASM", "role": "runtime-wasm", "source": "packages/blazex_runtime_popcorn/runtime/generated/release-web/artifacts/AtomVM.wasm", "path": "./artifacts/AtomVM.wasm", "mime": "application/wasm"},
+    {"id": "BX-BH01-BROWSER-APPLICATION-BUNDLE", "role": "application-bundle", "source": "integration/fixtures/browser_host/generated/bundle.avm", "path": "./artifacts/bundle.avm", "mime": "application/vnd.atomvm.avm"}
+  ]
+}

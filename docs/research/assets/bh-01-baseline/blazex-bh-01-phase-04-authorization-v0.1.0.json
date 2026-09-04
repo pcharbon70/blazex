@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0.0",
+  "record_id": "BX-BH01-AUTHORIZATION-PHASE-04-0.1",
+  "status": "approved-phase-4-only",
+  "authorized_at": "2026-09-04",
+  "request": "Implement the next phase of BH-01 section by section with a commit per section and one immediately merged PR, then synchronize main and delete the feature branch.",
+  "base_revision": "59a6933b6f8afaab203434cf00d53df74b313dc2",
+  "branch": "codex/bh-01-phase-04-browser-host",
+  "authorized_scope": [
+    "implement the governed browser loader and runtime-frame boundary",
+    "implement the bounded browser-host bridge and deterministic lifecycle",
+    "serve and verify the feasibility deployment profile",
+    "execute the actual Wasm and AVM fixture in the qualified browser",
+    "record Phase 4 artifacts, limitations, tests, and completion evidence",
+    "commit once per completed Phase 4 section",
+    "create and immediately merge one Phase 4 pull request",
+    "synchronize main and delete the local and remote feature branch"
+  ],
+  "not_authorized": [
+    "Phase 5 DOM behavior or component implementation",
+    "Phase 6 Phoenix authority or LiveView integration",
+    "BH-02 framework API work",
+    "browser support or production-readiness claims"
+  ],
+  "owner": "repository-owner"
+}
