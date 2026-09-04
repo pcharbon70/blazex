@@ -23,27 +23,27 @@ Back to milestone: [README](README.md)
   cancellation, disposal, resources, and diagnostics before multiplying
   environments in the browser matrix.
 
-  - [ ] 7.1 Section - Define the integrated failure and recovery model.
+  - [x] 7.1 Section - Define the integrated failure and recovery model.
 
     Unify phase-local failures into stable scenarios with explicit ownership,
     retry rules, user outcomes, cleanup, and stop consequences.
 
-    - [ ] 7.1.1 Task - Build the cross-layer failure taxonomy.
+    - [x] 7.1.1 Task - Build the cross-layer failure taxonomy.
 
       Every failure needs one primary owner and a bounded propagation path.
 
-      - [ ] 7.1.1.1 Subtask - Catalog acquisition/build, artifact, network/cache, prerequisite, loader, Wasm, runtime, bridge, DOM, adapter, transport, auth, authorization, state, server, and cleanup failures.
-      - [ ] 7.1.1.2 Subtask - Define severity, retryability, terminal/fallback outcome, diagnostic class, correlation, cleanup owner, affected proof/risk, and stop rule for each.
-      - [ ] 7.1.1.3 Subtask - Detect contradictory recovery policies, duplicated retries, hidden fallback, and failures with no owning boundary.
+      - [x] 7.1.1.1 Subtask - Catalog acquisition/build, artifact, network/cache, prerequisite, loader, Wasm, runtime, bridge, DOM, adapter, transport, auth, authorization, state, server, and cleanup failures.
+      - [x] 7.1.1.2 Subtask - Define severity, retryability, terminal/fallback outcome, diagnostic class, correlation, cleanup owner, affected proof/risk, and stop rule for each.
+      - [x] 7.1.1.3 Subtask - Detect contradictory recovery policies, duplicated retries, hidden fallback, and failures with no owning boundary.
 
-    - [ ] 7.1.2 Task - Implement coordinated retry and recovery policy.
+    - [x] 7.1.2 Task - Implement coordinated retry and recovery policy.
 
       Retries across layers must not amplify work, duplicate authority-bearing
       effects, or revive stale generations.
 
-      - [ ] 7.1.2.1 Subtask - Define retry budget/backoff, idempotency, generation replacement, cache reset, reconnect, state reload, and user-action requirements per failure class.
-      - [ ] 7.1.2.2 Subtask - Coordinate browser/runtime/transport/server retries under one scenario identity and prohibit lower layers from retrying authority-bearing commands independently.
-      - [ ] 7.1.2.3 Subtask - Test recovery exhaustion and convergence to intentional failed/fallback/stopped states.
+      - [x] 7.1.2.1 Subtask - Define retry budget/backoff, idempotency, generation replacement, cache reset, reconnect, state reload, and user-action requirements per failure class.
+      - [x] 7.1.2.2 Subtask - Coordinate browser/runtime/transport/server retries under one scenario identity and prohibit lower layers from retrying authority-bearing commands independently.
+      - [x] 7.1.2.3 Subtask - Test recovery exhaustion and convergence to intentional failed/fallback/stopped states.
 
   - [ ] 7.2 Section - Prove cancellation, disposal, and bounded resources.
 

@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0.0",
+  "policy_id": "BX-BH01-PHASE7-RECOVERY-POLICY-0.1",
+  "status": "phase7-policy",
+  "coordinator": "browser-recovery-coordinator",
+  "max_attempts_per_correlation": 2,
+  "backoff_ms": [100, 250],
+  "authority_bearing": {
+    "retry_owner": "browser-recovery-coordinator",
+    "preserve_idempotency_key": true,
+    "reload_current_state_for": ["state-stale"],
+    "lower_layer_automatic_retry": false
+  },
+  "generation": {
+    "replacement_cancels_inflight": true,
+    "stale_result": "drop",
+    "revival_after_stop": false
+  },
+  "cache": {
+    "integrity_failure": "evict-and-stop-before-execute",
+    "network_failure": "one-coordinated-retry-then-fallback",
+    "downgrade_allowed": false
+  },
+  "reconnect": {
+    "adapter_requires_full_patch": true,
+    "command_replay_requires_original_idempotency": true,
+    "hidden_fallback": false
+  },
+  "terminal_states": ["stable", "failed", "fallback", "user-action", "stopped", "exhausted", "stale-dropped"],
+  "convergence": {
+    "pending_after_terminal": 0,
+    "inflight_per_correlation": 1,
+    "unknown_failure": "stopped"
+  }
+}

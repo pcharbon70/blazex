@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0.0",
+  "taxonomy_id": "BX-BH01-PHASE7-FAILURE-TAXONOMY-0.1",
+  "status": "phase7-policy",
+  "required_fields": [
+    "id",
+    "layer",
+    "owner",
+    "severity",
+    "retryable",
+    "retry_owner",
+    "terminal_outcome",
+    "fallback",
+    "diagnostic_category",
+    "correlation",
+    "cleanup_owner",
+    "requirement_refs",
+    "stop_rule"
+  ],
+  "failures": [
+    {"id":"acquisition-failed","layer":"acquisition-build","owner":"toolchain-owner","severity":"blocker","retryable":false,"retry_owner":null,"terminal_outcome":"stopped","fallback":"none","diagnostic_category":"supply-chain","correlation":"build-run","cleanup_owner":"toolchain-owner","requirement_refs":["BX-BH01-RISK-DEPENDENCY-ACCESS","BX-BH01-PROOF-BUILD-REPRODUCIBILITY"],"stop_rule":"stop-on-unreproducible-input"},
+    {"id":"artifact-integrity-mismatch","layer":"artifact","owner":"browser-host-owner","severity":"blocker","retryable":false,"retry_owner":null,"terminal_outcome":"fallback","fallback":"static-unavailable","diagnostic_category":"integrity","correlation":"activation","cleanup_owner":"browser-host-owner","requirement_refs":["BX-BH01-PROOF-ARTIFACT-ACCOUNTING"],"stop_rule":"stop-before-execute"},
+    {"id":"network-cache-failed","layer":"network-cache","owner":"browser-host-owner","severity":"error","retryable":true,"retry_owner":"browser-recovery-coordinator","terminal_outcome":"fallback","fallback":"static-unavailable","diagnostic_category":"transport","correlation":"activation","cleanup_owner":"browser-host-owner","requirement_refs":["BX-BH01-PROOF-RUNTIME-BOOT"],"stop_rule":"stop-after-budget"},
+    {"id":"prerequisite-missing","layer":"prerequisite","owner":"browser-host-owner","severity":"warning","retryable":false,"retry_owner":null,"terminal_outcome":"fallback","fallback":"server-rendered","diagnostic_category":"compatibility","correlation":"activation","cleanup_owner":"browser-host-owner","requirement_refs":["BX-BH01-PROOF-BROWSER-FALLBACK"],"stop_rule":"do-not-activate"},
+    {"id":"loader-failed","layer":"loader","owner":"browser-host-owner","severity":"error","retryable":true,"retry_owner":"browser-recovery-coordinator","terminal_outcome":"failed","fallback":"static-unavailable","diagnostic_category":"activation","correlation":"activation","cleanup_owner":"browser-host-owner","requirement_refs":["BX-BH01-PROOF-RUNTIME-BOOT"],"stop_rule":"stop-after-budget"},
+    {"id":"wasm-contract-mismatch","layer":"wasm","owner":"runtime-owner","severity":"blocker","retryable":false,"retry_owner":null,"terminal_outcome":"stopped","fallback":"static-unavailable","diagnostic_category":"runtime-contract","correlation":"activation","cleanup_owner":"browser-host-owner","requirement_refs":["BX-BH01-RISK-RUNTIME-SEMANTICS"],"stop_rule":"stop-before-start"},
+    {"id":"runtime-crashed","layer":"runtime","owner":"runtime-owner","severity":"error","retryable":true,"retry_owner":"browser-recovery-coordinator","terminal_outcome":"failed","fallback":"server-rendered","diagnostic_category":"runtime","correlation":"scenario-generation","cleanup_owner":"runtime-owner","requirement_refs":["BX-BH01-RISK-RUNTIME-SEMANTICS"],"stop_rule":"stop-after-budget"},
+    {"id":"bridge-failed","layer":"bridge","owner":"browser-host-owner","severity":"error","retryable":true,"retry_owner":"browser-recovery-coordinator","terminal_outcome":"failed","fallback":"server-rendered","diagnostic_category":"bridge","correlation":"scenario-generation-request","cleanup_owner":"browser-host-owner","requirement_refs":["BX-BH01-PROOF-TIMER-MESSAGE"],"stop_rule":"stop-after-budget"},
+    {"id":"dom-update-failed","layer":"dom","owner":"standalone-dom-owner","severity":"error","retryable":false,"retry_owner":null,"terminal_outcome":"failed","fallback":"static-unavailable","diagnostic_category":"render","correlation":"scenario-generation-event","cleanup_owner":"standalone-dom-owner","requirement_refs":["BX-BH01-PROOF-DOM-UPDATE"],"stop_rule":"dispose-renderer-generation"},
+    {"id":"adapter-incompatible","layer":"optional-adapter","owner":"liveview-adapter-owner","severity":"warning","retryable":false,"retry_owner":null,"terminal_outcome":"fallback","fallback":"standalone-dom","diagnostic_category":"compatibility","correlation":"adapter-generation","cleanup_owner":"liveview-adapter-owner","requirement_refs":["BX-BH01-RISK-PRIVATE-API-COUPLING"],"stop_rule":"disable-adapter"},
+    {"id":"transport-unavailable","layer":"server-transport","owner":"browser-host-owner","severity":"error","retryable":true,"retry_owner":"browser-recovery-coordinator","terminal_outcome":"failed","fallback":"intentional-command-error","diagnostic_category":"transport","correlation":"command","cleanup_owner":"browser-host-owner","requirement_refs":["BX-BH01-PROOF-AUTHENTICATED-COMMAND"],"stop_rule":"stop-after-budget"},
+    {"id":"authentication-failed","layer":"authentication","owner":"server-authority-owner","severity":"warning","retryable":false,"retry_owner":null,"terminal_outcome":"user-action","fallback":"sign-in-required","diagnostic_category":"identity","correlation":"command","cleanup_owner":"server-authority-owner","requirement_refs":["BX-BH01-RISK-AUTHENTICATED-COMMAND"],"stop_rule":"deny-effect"},
+    {"id":"authorization-denied","layer":"authorization","owner":"server-authority-owner","severity":"warning","retryable":false,"retry_owner":null,"terminal_outcome":"failed","fallback":"intentional-command-error","diagnostic_category":"authority","correlation":"command-audit","cleanup_owner":"server-authority-owner","requirement_refs":["BX-BH01-RISK-AUTHENTICATED-COMMAND"],"stop_rule":"deny-effect"},
+    {"id":"state-stale","layer":"server-state","owner":"server-authority-owner","severity":"warning","retryable":true,"retry_owner":"browser-recovery-coordinator","terminal_outcome":"user-action","fallback":"reload-current-state","diagnostic_category":"concurrency","correlation":"command-audit","cleanup_owner":"server-authority-owner","requirement_refs":["BX-BH01-PROOF-AUTHENTICATED-COMMAND"],"stop_rule":"reload-before-retry"},
+    {"id":"server-failed","layer":"server","owner":"server-authority-owner","severity":"error","retryable":true,"retry_owner":"browser-recovery-coordinator","terminal_outcome":"failed","fallback":"intentional-command-error","diagnostic_category":"server","correlation":"command-audit","cleanup_owner":"server-authority-owner","requirement_refs":["BX-BH01-RISK-AUTHENTICATED-COMMAND"],"stop_rule":"stop-after-budget"},
+    {"id":"cleanup-nonconvergent","layer":"cleanup","owner":"lifecycle-owner","severity":"blocker","retryable":false,"retry_owner":null,"terminal_outcome":"stopped","fallback":"none","diagnostic_category":"resource-lifecycle","correlation":"scenario-generation","cleanup_owner":"lifecycle-owner","requirement_refs":["BX-BH01-RISK-RUNTIME-SEMANTICS"],"stop_rule":"stop-phase-on-unexplained-leak"}
+  ],
+  "claims_not_made": [
+    "stable public error taxonomy",
+    "production incident policy",
+    "browser support"
+  ]
+}
