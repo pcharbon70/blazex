@@ -66,36 +66,36 @@ Back to milestone: [README](README.md)
       - [x] 8.2.2.1 Subtask - Exercise offline/online changes, cache eviction, page visibility/navigation, worker termination, memory pressure where observable, session expiry, and server restart.
       - [x] 8.2.2.2 Subtask - Verify intentional recovery/fallback/stop, generation replacement, resource cleanup, and bounded diagnostics.
 
-  - [ ] 8.3 Section - Execute behavior and trust scenarios across browsers.
+  - [x] 8.3 Section - Execute behavior and trust scenarios across browsers.
 
     Run one immutable scenario set so engine differences are attributed to
     evidence rather than ad hoc browser-specific tests.
 
-    - [ ] 8.3.1 Task - Run runtime and local behavior scenarios.
+    - [x] 8.3.1 Task - Run runtime and local behavior scenarios.
 
       Boot, state, forms, async work, DOM updates, failures, and cleanup must be
       compared semantically across every applicable environment.
 
-      - [ ] 8.3.1.1 Subtask - Run boot/readiness, state/nesting, field/validation, timer/message, DOM update, retry, disposal, and resource-convergence scenarios.
-      - [ ] 8.3.1.2 Subtask - Compare normalized semantic traces, DOM/accessibility observations, errors, lifecycle transitions, and artifact selections while retaining raw engine evidence.
-      - [ ] 8.3.1.3 Subtask - Classify divergences by runtime, browser host, loader, bridge, DOM, fixture, automation, or environment owner with severity and support consequence.
+      - [x] 8.3.1.1 Subtask - Run boot/readiness, state/nesting, field/validation, timer/message, DOM update, retry, disposal, and resource-convergence scenarios.
+      - [x] 8.3.1.2 Subtask - Compare normalized semantic traces, DOM/accessibility observations, errors, lifecycle transitions, and artifact selections while retaining raw engine evidence.
+      - [x] 8.3.1.3 Subtask - Classify divergences by runtime, browser host, loader, bridge, DOM, fixture, automation, or environment owner with severity and support consequence.
 
-    - [ ] 8.3.2 Task - Run authenticated command and adapter scenarios.
+    - [x] 8.3.2 Task - Run authenticated command and adapter scenarios.
 
       Trust and optional renderer integration must survive representative engine
       and transport differences.
 
-      - [ ] 8.3.2.1 Subtask - Run authorized/denied/tampered/stale/replayed/disconnected command scenarios with server effect/audit/result verification.
-      - [ ] 8.3.2.2 Subtask - Run standalone DOM, adapter-enabled, mismatch/fallback, reconnect, stale patch, and teardown scenarios where the profile supports them.
-      - [ ] 8.3.2.3 Subtask - Verify client presentation never becomes authority and private renderer data remains isolated in every environment.
+      - [x] 8.3.2.1 Subtask - Run authorized/denied/tampered/stale/replayed/disconnected command scenarios with server effect/audit/result verification.
+      - [x] 8.3.2.2 Subtask - Run standalone DOM, adapter-enabled, mismatch/fallback, reconnect, stale patch, and teardown scenarios where the profile supports them.
+      - [x] 8.3.2.3 Subtask - Verify client presentation never becomes authority and private renderer data remains isolated in every environment.
 
-    - [ ] 8.3.3 Task - Run resilience and resource scenarios.
+    - [x] 8.3.3 Task - Run resilience and resource scenarios.
 
       Cross-browser success requires bounded failure and cleanup, not only
       matching happy-path output.
 
-      - [ ] 8.3.3.1 Subtask - Run the Phase 7 failure taxonomy, repeated lifecycle subset, malformed boundary subset, and diagnostic/redaction assertions.
-      - [ ] 8.3.3.2 Subtask - Compare resource baseline/peak/disposed states and record browser-specific retention, unobservable metrics, crashes, or automation gaps.
+      - [x] 8.3.3.1 Subtask - Run the Phase 7 failure taxonomy, repeated lifecycle subset, malformed boundary subset, and diagnostic/redaction assertions.
+      - [x] 8.3.3.2 Subtask - Compare resource baseline/peak/disposed states and record browser-specific retention, unobservable metrics, crashes, or automation gaps.
 
   - [ ] 8.4 Section - Validate accessible fallback and input behavior.
 

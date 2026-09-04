@@ -15,3 +15,7 @@ engine emulation and non-vendor builds never substitute for a required row.
   prerequisite/lifecycle outcomes.
 - `verify_prerequisites.py` and `tests/test_prerequisites.py` — retained raw-
   evidence, no-partial-activation, and mutation checks for Section 8.2.
+- `behavior-trust-matrix.json` — normalized behavior, server trust, optional-
+  adapter, resilience, diagnostic, and cleanup outcomes for Section 8.3.
+- `verify_behavior_trust.py` and `tests/test_behavior_trust.py` — semantic-
+  equivalence, authority, no-substitution, and resource-convergence checks.
