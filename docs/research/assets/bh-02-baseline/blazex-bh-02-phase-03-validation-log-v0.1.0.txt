@@ -1,0 +1,41 @@
+BH-02 Phase 3 normalized validation log
+recorded_at=2026-09-05
+base_revision=1380da03a68de7af1d7cc3c1faf2d80ef34ea4f2
+source_revision_before_evidence=0c315ee
+branch=codex/bh-02-phase-03-events-effects
+
+PASS seven project-local mix format --check-formatted runs
+PASS seven project-local mix test runs: 42 tests, 0 failures
+PASS python3 validate_bh02_effects.py
+PASS python3 -m unittest test_validate_bh02_effects.py: 10 tests
+PASS python3 validate_bh02_semantics.py
+PASS python3 -m unittest test_validate_bh02_semantics.py: 8 tests
+PASS python3 validate_bh02_activation.py
+PASS python3 -m unittest test_validate_bh02_activation.py: 7 tests
+PASS python3 validate_archive.py: 175 documents, 22 directories, 1259 links, 50 sources
+PASS python3 -m unittest test_validate_archive.py: 8 tests
+PASS python3 validate_bh01_activation.py
+PASS python3 -m unittest test_validate_bh01_activation.py: 13 tests
+PASS python3 validate_bh00_governance.py
+PASS python3 -m unittest test_validate_bh00_governance.py: 25 tests
+PASS python3 generate_bh00_release.py --check
+PASS jq empty for Phase 3 JSON records
+PASS no mix.lock in the seven activated BH-02 projects
+PASS git diff --check
+
+NEGATIVE stale-or-missing-authorization=rejected
+NEGATIVE expanded-event-vocabulary=rejected
+NEGATIVE expanded-capability-operations=rejected
+NEGATIVE relaxed-resource-ownership=rejected
+NEGATIVE concrete-provider-or-platform-leakage=rejected
+NEGATIVE missing-lifecycle-fixture-coverage=rejected
+NEGATIVE provider-or-renderer-result-overclaim=rejected
+NEGATIVE stable-api-overclaim=rejected
+NEGATIVE support-overclaim=rejected
+NEGATIVE phase-4-authorization-overclaim=rejected
+
+LIMITATION local BEAM event/effect/resource evaluation only
+LIMITATION no concrete capability provider executed
+LIMITATION no renderer backend executed
+LIMITATION no stable public API or support claim
+LIMITATION Phase 4 and later work unauthorized

@@ -3,8 +3,9 @@ defmodule BlazeX.UITree do
   Experimental version-1 semantic UI tree.
 
   Phase 2 owns a bounded node vocabulary, deterministic validation, and
-  traversal. Layout, tokens, accessibility, focus, selection, resources,
-  events, renderer extensions, and patches remain deferred to later phases.
+  traversal. Phase 3 adds semantic event bindings and atomic dispatch. Layout,
+  tokens, accessibility, focus, selection, renderer extensions, and patches
+  remain deferred to later phases.
   """
 
   alias BlazeX.Core.{Diagnostic, Evaluation, Identity}

@@ -19,7 +19,7 @@ aliases:
 
 Back to milestone: [README](README.md)
 
-- [ ] 3 Phase - Events, Effects, Capabilities, and Resource Ownership.
+- [x] 3 Phase - Events, Effects, Capabilities, and Resource Ownership.
 
   Add validated intent and host-service boundaries to the Phase 2 semantic
   kernel without importing a concrete provider, renderer, runtime, server, or
@@ -75,22 +75,22 @@ Back to milestone: [README](README.md)
       - [x] 3.3.2.2 Subtask - Register opaque resource IDs, enforce owner/capability/generation checks, support explicit transfer, and make disposal idempotent.
       - [x] 3.3.2.3 Subtask - Cancel pending effects and dispose active resources for an owner generation while rejecting stale completion, transfer, or disposal.
 
-  - [ ] 3.4 Section - Run the Phase 3 integration gate and publish evidence.
+  - [x] 3.4 Section - Run the Phase 3 integration gate and publish evidence.
 
     Exercise event-to-effect and resource-cleanup traces through the composed
     profile without invoking a concrete provider or renderer backend.
 
-    - [ ] 3.4.1 Task - Add conformance and governance evidence.
+    - [x] 3.4.1 Task - Add conformance and governance evidence.
 
-      - [ ] 3.4.1.1 Subtask - Publish versioned event/effect/resource scenarios covering dispatch, denial/fallback, cancellation, timeout, transfer, stale generation, and owner cleanup.
-      - [ ] 3.4.1.2 Subtask - Add fail-closed validation for authorization, hashes, exact vocabularies, ownership, fixture coverage, forbidden leakage, and premature Phase 4–8 claims.
-      - [ ] 3.4.1.3 Subtask - Add negative tests for stale authority, expanded names/operations, provider leakage, missing lifecycle coverage, stable APIs, backend results, and support overclaims.
+      - [x] 3.4.1.1 Subtask - Publish versioned event/effect/resource scenarios covering dispatch, denial/fallback, cancellation, timeout, transfer, stale generation, and owner cleanup.
+      - [x] 3.4.1.2 Subtask - Add fail-closed validation for authorization, hashes, exact vocabularies, ownership, fixture coverage, forbidden leakage, and premature Phase 4–8 claims.
+      - [x] 3.4.1.3 Subtask - Add negative tests for stale authority, expanded names/operations, provider leakage, missing lifecycle coverage, stable APIs, backend results, and support overclaims.
 
-    - [ ] 3.4.2 Task - Execute and record the complete Phase 3 gate.
+    - [x] 3.4.2 Task - Execute and record the complete Phase 3 gate.
 
-      - [ ] 3.4.2.1 Subtask - Run all seven Mix project tests/format checks, Phase 1–3 validators, archive validation, inherited validators, and patch hygiene.
-      - [ ] 3.4.2.2 Subtask - Record tools, commands, hashes, section commits, limitations, and a truthful pass or stop decision.
-      - [ ] 3.4.2.3 Subtask - Leave Phase 4 unauthorized and make no layout, accessibility, focus, renderer, browser, native, performance, or support claim.
+      - [x] 3.4.2.1 Subtask - Run all seven Mix project tests/format checks, Phase 1–3 validators, archive validation, inherited validators, and patch hygiene.
+      - [x] 3.4.2.2 Subtask - Record tools, commands, hashes, section commits, limitations, and a truthful pass or stop decision.
+      - [x] 3.4.2.3 Subtask - Leave Phase 4 unauthorized and make no layout, accessibility, focus, renderer, browser, native, performance, or support claim.
 
 ## Section delivery rule
 
@@ -110,3 +110,4 @@ dependency, provider implementation, renderer behavior, or stable API.
 
 - [Phase 2 implementation evidence](phase-02-implementation-evidence.md)
 - [BH-02 conditional entry manifest](../../../assets/bh-01-release/blazex-bh-02-entry-manifest-v0-1-0.md)
+- [Phase 3 implementation evidence](phase-03-implementation-evidence.md)
