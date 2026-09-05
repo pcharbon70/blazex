@@ -42,21 +42,21 @@ Back to milestone: [README](README.md)
       - [x] 3.1.2.3 Subtask - Freeze four proof capabilities, operations, requirement/fallback states, effect/result fields, and provider-neutral denial/cancel/timeout behavior.
       - [x] 3.1.2.4 Subtask - Freeze opaque resource identity, ownership, transfer, cancellation, disposal, and owner-generation cleanup semantics.
 
-  - [ ] 3.2 Section - Implement semantic events, bindings, and dispatch.
+  - [x] 3.2 Section - Implement semantic events, bindings, and dispatch.
 
     Route validated user intent to a stateful component without exposing a
     concrete callback or host event.
 
-    - [ ] 3.2.1 Task - Implement semantic event and binding data.
+    - [x] 3.2.1 Task - Implement semantic event and binding data.
 
-      - [ ] 3.2.1.1 Subtask - Add the exact version-1 event names and fields with portable map payloads, positive sequences, owner identity, and source-node lineage validation.
-      - [ ] 3.2.1.2 Subtask - Add a semantic document that binds source identity plus event name to one owning component and rejects missing sources, wrong generations, duplicate bindings, and unbound dispatch.
+      - [x] 3.2.1.1 Subtask - Add the exact version-1 event names and fields with portable map payloads, positive sequences, owner identity, and source-node lineage validation.
+      - [x] 3.2.1.2 Subtask - Add a semantic document that binds source identity plus event name to one owning component and rejects missing sources, wrong generations, duplicate bindings, and unbound dispatch.
 
-    - [ ] 3.2.2 Task - Implement atomic stateful event dispatch.
+    - [x] 3.2.2 Task - Implement atomic stateful event dispatch.
 
-      - [ ] 3.2.2.1 Subtask - Extend the component callback/evaluation context with a stateful event transition and opaque emissions while keeping Core independent of the effects package.
-      - [ ] 3.2.2.2 Subtask - Preserve owner identity, increment revision, validate rerendered semantic output atomically, and reject pure targets, stale/wrong owners, malformed callbacks, and invalid output.
-      - [ ] 3.2.2.3 Subtask - Test activation/change/select intent, binding lookup, portable payload limits, sequence, lineage, stale generation, and prior-evaluation retention.
+      - [x] 3.2.2.1 Subtask - Extend the component callback/evaluation context with a stateful event transition and opaque emissions while keeping Core independent of the effects package.
+      - [x] 3.2.2.2 Subtask - Preserve owner identity, increment revision, validate rerendered semantic output atomically, and reject pure targets, stale/wrong owners, malformed callbacks, and invalid output.
+      - [x] 3.2.2.3 Subtask - Test activation/change/select intent, binding lookup, portable payload limits, sequence, lineage, stale generation, and prior-evaluation retention.
 
   - [ ] 3.3 Section - Implement capability, effect, and resource lifecycle contracts.
 

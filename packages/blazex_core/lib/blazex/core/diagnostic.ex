@@ -18,10 +18,17 @@ defmodule BlazeX.Core.Diagnostic do
           | :invalid_callback_result
           | :invalid_state
           | :generation_exhausted
+          | :invalid_event
+          | :event_requires_stateful
+          | :event_owner_mismatch
+          | :stale_event
+          | :stale_event_sequence
+          | :invalid_emissions
           | :invalid_semantic_output
           | :root_identity_mismatch
+          | :unbound_event
 
-  @type stage :: :contract | :mount | :update | :replace | :init | :render
+  @type stage :: :contract | :mount | :update | :replace | :event | :init | :render
   @type t :: %__MODULE__{
           code: code(),
           stage: stage(),

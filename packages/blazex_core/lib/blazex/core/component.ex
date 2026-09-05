@@ -8,7 +8,7 @@ defmodule BlazeX.Core.Component do
   diagnostics because they may contain opaque or sensitive terms.
   """
 
-  alias BlazeX.Core.Context
+  alias BlazeX.Core.{Context, Event}
 
   @type mode :: :pure | :stateful
   @type props :: map()
@@ -20,6 +20,8 @@ defmodule BlazeX.Core.Component do
   @callback init(props(), Context.t()) :: {:ok, state()} | {:error, term()}
   @callback update(props(), state(), Context.t()) :: {:ok, state()} | {:error, term()}
   @callback render(props(), state(), Context.t()) :: {:ok, output()} | {:error, term()}
+  @callback handle_event(Event.t(), props(), state(), Context.t()) ::
+              {:ok, state(), [term()]} | {:error, term()}
 
-  @optional_callbacks render: 2, init: 2, update: 3, render: 3
+  @optional_callbacks render: 2, init: 2, update: 3, render: 3, handle_event: 4
 end

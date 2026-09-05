@@ -8,7 +8,7 @@ defmodule BlazeX.Core.Context do
   @enforce_keys [:identity, :revision, :transition]
   defstruct [:identity, :revision, :transition]
 
-  @type transition :: :mount | :update | :replace
+  @type transition :: :mount | :update | :replace | :event
   @type t :: %__MODULE__{
           identity: Identity.t(),
           revision: non_neg_integer(),

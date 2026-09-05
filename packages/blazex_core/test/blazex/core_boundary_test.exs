@@ -1,7 +1,7 @@
 defmodule BlazeX.CoreBoundaryTest do
   use ExUnit.Case, async: true
 
-  alias BlazeX.Core.Evaluator
+  alias BlazeX.Core.{Evaluator, Event}
 
   defmodule PureComponent do
     @behaviour BlazeX.Core.Component
@@ -78,6 +78,28 @@ defmodule BlazeX.CoreBoundaryTest do
 
     @impl true
     def render(_props, state, _context), do: {:ok, state}
+  end
+
+  defmodule EventCounter do
+    @behaviour BlazeX.Core.Component
+
+    @impl true
+    def mode, do: :stateful
+
+    @impl true
+    def init(props, _context), do: {:ok, %{count: props.initial}}
+
+    @impl true
+    def update(_props, state, _context), do: {:ok, state}
+
+    @impl true
+    def handle_event(%Event{name: :increment, payload: payload}, _props, state, _context) do
+      {:ok, %{state | count: state.count + payload.amount}, [{:effect, :time, :schedule}]}
+    end
+
+    @impl true
+    def render(_props, state, context),
+      do: {:ok, {:event_counter, state.count, context.identity, context.transition}}
   end
 
   test "the experimental module root compiles without dependencies" do
@@ -180,6 +202,73 @@ defmodule BlazeX.CoreBoundaryTest do
 
     assert {:error, %{code: :invalid_state, stage: :init}} =
              Evaluator.mount(InvalidState, identity, %{})
+  end
+
+  test "semantic events validate intent, lineage, payload, and sequence" do
+    owner = valid_root()
+    {:ok, source} = BlazeX.Core.Identity.child(owner, {:action, :increment})
+
+    assert {:ok, event} = Event.new(:activate, owner, source, %{button: :primary}, 1)
+    assert Event.valid?(event)
+    assert event.version == 1
+    assert {:ok, %Event{name: :change}} = Event.new(:change, owner, source, %{value: "new"}, 2)
+    assert {:ok, %Event{name: :select}} = Event.new(:select, owner, source, %{key: 7}, 3)
+
+    assert Event.names() == [
+             :activate,
+             :change,
+             :submit,
+             :select,
+             :expand,
+             :dismiss,
+             :move,
+             :reorder,
+             :increment,
+             :decrement,
+             :request_open,
+             :request_close,
+             :request_page
+           ]
+
+    assert {:error, :unknown_event} = Event.new(:click, owner, source)
+    assert {:error, :invalid_payload} = Event.new(:activate, owner, source, %{pid: self()})
+    assert {:error, :invalid_sequence} = Event.new(:activate, owner, source, %{}, 0)
+
+    {:ok, foreign} = BlazeX.Core.Identity.new(:foreign)
+    assert {:error, :source_outside_owner} = Event.new(:activate, owner, foreign)
+  end
+
+  test "stateful dispatch advances revision and event sequence atomically" do
+    owner = valid_root()
+    {:ok, source} = BlazeX.Core.Identity.child(owner, {:action, :increment})
+    {:ok, event} = Event.new(:increment, owner, source, %{amount: 3}, 1)
+    assert {:ok, mounted} = Evaluator.mount(EventCounter, owner, %{initial: 2})
+
+    assert {:ok, dispatched, emissions} = Evaluator.dispatch(mounted, event)
+    assert dispatched.state == %{count: 5}
+    assert dispatched.revision == 1
+    assert dispatched.last_event_sequence == 1
+    assert dispatched.output == {:event_counter, 5, owner, :event}
+    assert emissions == [{:effect, :time, :schedule}]
+
+    assert {:error, %{code: :stale_event_sequence}} = Evaluator.dispatch(dispatched, event)
+  end
+
+  test "dispatch rejects pure, wrong-owner, and stale-generation events" do
+    owner = valid_root()
+    {:ok, source} = BlazeX.Core.Identity.child(owner, :source)
+    {:ok, event} = Event.new(:activate, owner, source)
+    assert {:ok, pure} = Evaluator.mount(PureComponent, owner, %{})
+    assert {:error, %{code: :event_requires_stateful}} = Evaluator.dispatch(pure, event)
+
+    {:ok, other_owner} = BlazeX.Core.Identity.new(:other)
+    {:ok, other_source} = BlazeX.Core.Identity.child(other_owner, :source)
+    {:ok, wrong_event} = Event.new(:activate, other_owner, other_source)
+    assert {:ok, stateful} = Evaluator.mount(EventCounter, owner, %{initial: 0})
+    assert {:error, %{code: :event_owner_mismatch}} = Evaluator.dispatch(stateful, wrong_event)
+
+    assert {:ok, replaced} = Evaluator.replace(stateful, %{initial: 0})
+    assert {:error, %{code: :stale_event}} = Evaluator.dispatch(replaced, event)
   end
 
   defp valid_root do

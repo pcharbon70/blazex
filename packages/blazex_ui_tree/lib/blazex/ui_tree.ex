@@ -28,4 +28,8 @@ defmodule BlazeX.UITree do
   @spec replace_component(Evaluation.t(), map()) ::
           {:ok, Evaluation.t()} | {:error, Diagnostic.t()}
   def replace_component(evaluation, props), do: ComponentEvaluator.replace(evaluation, props)
+
+  @spec dispatch_component(Evaluation.t(), BlazeX.Core.Event.t()) ::
+          {:ok, Evaluation.t(), [term()]} | {:error, Diagnostic.t()}
+  def dispatch_component(evaluation, event), do: ComponentEvaluator.dispatch(evaluation, event)
 end

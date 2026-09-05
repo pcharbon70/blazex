@@ -62,6 +62,15 @@ defmodule BlazeX.Core.Identity do
 
   def replace(_identity), do: {:error, :invalid_identity}
 
+  @spec contains?(t(), t()) :: boolean()
+  def contains?(%__MODULE__{} = owner, %__MODULE__{} = candidate) do
+    valid?(owner) and valid?(candidate) and owner.root == candidate.root and
+      owner.generation == candidate.generation and
+      Enum.take(candidate.path, length(owner.path)) == owner.path
+  end
+
+  def contains?(_owner, _candidate), do: false
+
   @spec valid?(term()) :: boolean()
   def valid?(%__MODULE__{root: root, path: path, generation: generation}) do
     portable_key?(root) and valid_path?(path) and valid_generation?(generation)

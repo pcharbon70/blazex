@@ -13,4 +13,6 @@ Status: experimental BH-02 Phase 2 implementation. Version-1 nodes, structural
 identity checks, sibling uniqueness, ancestry validation, and deterministic
 preorder traversal are implemented. Component output is accepted atomically
 only when the complete tree is valid and its root identity matches the Core
-evaluation. Later semantic fields and stable public APIs remain deferred.
+evaluation. BH-02 Phase 3 adds semantic documents and validated event bindings
+without adding concrete input callbacks. Later semantic fields and stable
+public APIs remain deferred.
