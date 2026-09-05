@@ -1,0 +1,84 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "BX-BH01-PHASE9-RUN-BUILD-LINUX-0.1",
+  "status": "observed",
+  "captured_at": "2026-09-05T09:46:26.526Z",
+  "source_revision": "22dc98033893cdc85db142bd6a05650ab4032f52",
+  "environment_id": "BX-BH01-ENV-PHASE9-LINUX-BUILD-X64-0.1",
+  "command": [
+    "python3",
+    "profiles/browser_phoenix/assets/phase4/build_profile.py",
+    "--output",
+    "<isolated-temporary-directory>"
+  ],
+  "clock": "python-time-perf-counter-monotonic",
+  "discarded_warmups": 1,
+  "samples": [
+    {
+      "iteration": 1,
+      "seconds": 0.048805036,
+      "manifest_sha256": "818ac7b967db6519c766f9d1fff80455cc92d205e3f188252e6da27258ee4aad",
+      "status": "passed"
+    },
+    {
+      "iteration": 2,
+      "seconds": 0.051036965,
+      "manifest_sha256": "818ac7b967db6519c766f9d1fff80455cc92d205e3f188252e6da27258ee4aad",
+      "status": "passed"
+    },
+    {
+      "iteration": 3,
+      "seconds": 0.048209613,
+      "manifest_sha256": "818ac7b967db6519c766f9d1fff80455cc92d205e3f188252e6da27258ee4aad",
+      "status": "passed"
+    },
+    {
+      "iteration": 4,
+      "seconds": 0.053107392,
+      "manifest_sha256": "818ac7b967db6519c766f9d1fff80455cc92d205e3f188252e6da27258ee4aad",
+      "status": "passed"
+    },
+    {
+      "iteration": 5,
+      "seconds": 0.047310533,
+      "manifest_sha256": "818ac7b967db6519c766f9d1fff80455cc92d205e3f188252e6da27258ee4aad",
+      "status": "passed"
+    },
+    {
+      "iteration": 6,
+      "seconds": 0.046978213,
+      "manifest_sha256": "818ac7b967db6519c766f9d1fff80455cc92d205e3f188252e6da27258ee4aad",
+      "status": "passed"
+    },
+    {
+      "iteration": 7,
+      "seconds": 0.054733587,
+      "manifest_sha256": "818ac7b967db6519c766f9d1fff80455cc92d205e3f188252e6da27258ee4aad",
+      "status": "passed"
+    },
+    {
+      "iteration": 8,
+      "seconds": 0.048840162,
+      "manifest_sha256": "818ac7b967db6519c766f9d1fff80455cc92d205e3f188252e6da27258ee4aad",
+      "status": "passed"
+    },
+    {
+      "iteration": 9,
+      "seconds": 0.046266844,
+      "manifest_sha256": "818ac7b967db6519c766f9d1fff80455cc92d205e3f188252e6da27258ee4aad",
+      "status": "passed"
+    },
+    {
+      "iteration": 10,
+      "seconds": 0.047945756,
+      "manifest_sha256": "818ac7b967db6519c766f9d1fff80455cc92d205e3f188252e6da27258ee4aad",
+      "status": "passed"
+    }
+  ],
+  "output_manifest_sha256": "818ac7b967db6519c766f9d1fff80455cc92d205e3f188252e6da27258ee4aad",
+  "failures": [],
+  "limitations": [
+    "This measures dependency-cached deterministic profile packaging, not a clean AtomVM/Popcorn source rebuild.",
+    "The local workstation exceeds the minimum CI reference hardware and is development evidence only."
+  ]
+}

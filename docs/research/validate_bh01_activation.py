@@ -14,6 +14,8 @@ from typing import Any
 from jsonschema import Draft202012Validator, FormatChecker
 from jsonschema.exceptions import SchemaError, ValidationError as JsonSchemaValidationError
 
+import planning_policy
+
 
 RESEARCH_ROOT = Path(__file__).resolve().parent
 REPO_ROOT = RESEARCH_ROOT.parent.parent
@@ -29,6 +31,7 @@ ACTIVATION_SCHEMA = RESEARCH_ROOT / "assets/bh-01-baseline/blazex-bh-01-reposito
 REPOSITORY_ACTIVATION = RESEARCH_ROOT / "assets/bh-01-baseline/blazex-bh-01-repository-activation-v0.1.0.json"
 PHASE_1_COMPLETION = RESEARCH_ROOT / "assets/bh-01-baseline/blazex-bh-01-phase-01-completion-v0.1.0.json"
 PHASE_1_PLAN = RESEARCH_ROOT / "60-planning/01-browser-host/bh-01-reproducible-browser-feasibility-baseline/phase-01-authorization-evidence-and-repository-activation.md"
+DEVELOPMENT_POLICY = planning_policy.DEVELOPMENT_POLICY_PATH
 
 
 class ValidationError(Exception):
@@ -137,14 +140,33 @@ def _validate_authorization(auth: dict[str, Any], governance: dict[str, Any]) ->
         _require(term in non_authorizations, f"authorization fails to exclude {term}")
 
 
-def _validate_bound_sources(governance: dict[str, Any]) -> None:
+def _validate_bound_sources(
+    governance: dict[str, Any],
+    development_policy_text: str | None = None,
+) -> None:
     _require(governance.get("stage") == "complete", "BH-00 governance is incomplete")
     _require(governance.get("release", {}).get("status") == "accepted-product-contract", "BH-00 release is not accepted")
     _require(governance.get("bh01_entry", {}).get("decision") == "conditionally-ready", "BH-01 entry is not conditionally ready")
+    policy_text = development_policy_text
+    if policy_text is None:
+        _require(DEVELOPMENT_POLICY.is_file(), "development-environment planning amendment is missing")
+        policy_text = DEVELOPMENT_POLICY.read_text(encoding="utf-8")
     for binding in governance.get("source_bindings", []):
         path = RESEARCH_ROOT / str(binding.get("path", ""))
         _require(path.is_file(), f"bound BH-00 source is missing: {binding.get('id')}")
-        _require(_sha256(path) == binding.get("sha256"), f"bound BH-00 source is stale: {binding.get('id')}")
+        actual_sha256 = _sha256(path)
+        expected_sha256 = str(binding.get("sha256", ""))
+        if actual_sha256 == expected_sha256:
+            continue
+        if binding.get("id") == "BX-BH00-SOURCE-ROADMAP":
+            amendment_error = planning_policy.roadmap_amendment_error(
+                expected_sha256,
+                actual_sha256,
+                policy_text,
+            )
+            _require(amendment_error is None, amendment_error or "roadmap amendment is invalid")
+            continue
+        raise ValidationError(f"bound BH-00 source is stale: {binding.get('id')}")
 
 
 def _validate_ledger(
@@ -452,13 +474,24 @@ def _validate_repository_activation(
             Draft202012Validator(environment_schema, format_checker=FormatChecker()).validate(_load_json(environment_path))
         except JsonSchemaValidationError as exc:
             raise ValidationError(f"benchmark environment schema failure in {environment_path.relative_to(REPO_ROOT)}: {exc.message}") from exc
-    _require(
-        benchmark_index.get("measurements") == []
-        and benchmark_index.get("samples") == []
-        and benchmark_index.get("reports") == [],
-        "benchmark index contains measurement evidence before its authorized phase",
-    )
-    _require(benchmark_index.get("budget_state") == "proposed-unmeasured", "benchmark index claims a passed budget")
+    phase9_authorization_path = REPO_ROOT / "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-09-authorization-v0.1.0.json"
+    phase9_authorized = phase9_authorization_path.is_file() and _load_json(phase9_authorization_path).get("status") == "approved-phase-9-only"
+    if phase9_authorized:
+        _require(bool(benchmark_index.get("measurements")), "authorized Phase 9 benchmark index omits measurements")
+        _require(bool(benchmark_index.get("samples")), "authorized Phase 9 benchmark index omits samples")
+        _require(bool(benchmark_index.get("reports")), "authorized Phase 9 benchmark index omits reports")
+        _require(
+            benchmark_index.get("budget_state") == "phase9-active-development-evaluated-conditional-no-support-credit",
+            "authorized Phase 9 benchmark index overclaims its conditional budget state",
+        )
+    else:
+        _require(
+            benchmark_index.get("measurements") == []
+            and benchmark_index.get("samples") == []
+            and benchmark_index.get("reports") == [],
+            "benchmark index contains measurement evidence before its authorized phase",
+        )
+        _require(benchmark_index.get("budget_state") == "proposed-unmeasured", "benchmark index claims a passed budget")
 
     evidence_boundary = activation["evidence_boundary"]
     _require(evidence_boundary == {

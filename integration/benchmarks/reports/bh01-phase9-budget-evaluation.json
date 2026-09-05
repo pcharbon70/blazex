@@ -1,0 +1,890 @@
+{
+  "schema_version": "1.0.0",
+  "report_id": "BX-BH01-PHASE9-BUDGET-EVALUATION-0.1",
+  "status": "conditional-active-development",
+  "source_revision": "2ce8759da6c37f50c9f226bac894610106a368fd",
+  "quality_contract": {
+    "path": "docs/research/assets/quality-acceptance/blazex-quality-contract-v0.1.0.json",
+    "sha256": "21d69d966ed4888ca0f09b957f3a74edfda843af0de23ec4098237ef3d759326",
+    "version": "0.1.0",
+    "changed": false
+  },
+  "inputs": [
+    {
+      "path": "integration/benchmarks/samples/bh01-phase9-linux-desktop-summary.json",
+      "sha256": "4e8502dfc007f491290fd2304741f6b65bafe640d3db48757cd4efa665e166fa"
+    },
+    {
+      "path": "integration/benchmarks/reports/bh01-phase9-artifact-economics.json",
+      "sha256": "b71bfaf536e4979e0fa3fde8b73f0aae32b496c7fee084b8b5fdcd1a4a66aa5d"
+    },
+    {
+      "path": "integration/benchmarks/reports/bh01-phase9-mitigation-assessment.json",
+      "sha256": "3cb81005ba139461d4744605cc8448e78a5f0686d01c8774ee022ce12e14848b"
+    },
+    {
+      "path": "integration/benchmarks/reports/bh01-phase9-deferred-qualification.json",
+      "sha256": "73d61fae636b9d1a5ef4ad16247c989660a7d278d935df62a33046db98f3dd8a"
+    }
+  ],
+  "evaluation_policy": {
+    "statistic": "Use each budget's declared statistic; browser p95 uses deterministic nearest rank.",
+    "aggregate": "Worst per-environment p95 per scenario; never pool unlike environments.",
+    "variance": "Flag and retain distributions above ten-percent coefficient of variation.",
+    "outliers": "Exclude none; preserve every finite raw sample and failure list.",
+    "deferred": "Keep unavailable environments separate and out of active pass rates.",
+    "support_credit": false
+  },
+  "evaluations": [
+    {
+      "budget_id": "BX-BUD-BUILD-RELEASE-SECONDS",
+      "scope": "linux-development-host",
+      "status": "observed-insufficient-boundary",
+      "threshold": {
+        "direction": "at-most",
+        "value": 180,
+        "unit": "seconds",
+        "statistic": "p95",
+        "minimum_samples": 10
+      },
+      "observed": 0.054734,
+      "samples": 10,
+      "evidence": "integration/benchmarks/samples/bh01-phase9-linux-desktop-summary.json",
+      "rationale": "The observed dependency-cached profile packager is below the threshold but does not cover the governed clean production source-build boundary or CI reference environment."
+    },
+    {
+      "budget_id": "BX-BUD-PAYLOAD-APPLICATION-COMPRESSED-KIB",
+      "scope": "delivered-unpruned-application-avm",
+      "status": "fail-active-development",
+      "threshold": {
+        "direction": "at-most",
+        "value": 250,
+        "unit": "kibibytes",
+        "statistic": "maximum",
+        "minimum_samples": 3
+      },
+      "observed": 2147.601,
+      "samples": 3,
+      "evidence": "integration/benchmarks/reports/bh01-phase9-artifact-economics.json",
+      "rationale": "The exact delivered application AVM exceeds the threshold; it also includes runtime/library modules, making reachability pruning the first mitigation rather than a threshold change."
+    },
+    {
+      "budget_id": "BX-BUD-PAYLOAD-APPLICATION-UNCOMPRESSED-KIB",
+      "scope": "delivered-unpruned-application-avm",
+      "status": "fail-active-development",
+      "threshold": {
+        "direction": "at-most",
+        "value": 700,
+        "unit": "kibibytes",
+        "statistic": "maximum",
+        "minimum_samples": 3
+      },
+      "observed": 6424.242,
+      "samples": 3,
+      "evidence": "integration/benchmarks/reports/bh01-phase9-artifact-economics.json",
+      "rationale": "The exact delivered unpruned AVM exceeds the decoded application threshold."
+    },
+    {
+      "budget_id": "BX-BUD-PAYLOAD-LOADER-COMPRESSED-KIB",
+      "scope": "loader-bootstrap-conservative-owner-set",
+      "status": "pass-active-development",
+      "threshold": {
+        "direction": "at-most",
+        "value": 35,
+        "unit": "kibibytes",
+        "statistic": "maximum",
+        "minimum_samples": 3
+      },
+      "observed": 22.889,
+      "samples": 3,
+      "evidence": "integration/benchmarks/reports/bh01-phase9-artifact-economics.json",
+      "rationale": "The owner set is broader than loader code alone and remains below the threshold, so the active-development result is conservative."
+    },
+    {
+      "budget_id": "BX-BUD-PAYLOAD-RUNTIME-COMPRESSED-KIB",
+      "scope": "atomvm-mjs-and-wasm-only",
+      "status": "observed-insufficient-boundary",
+      "threshold": {
+        "direction": "at-most",
+        "value": 1600,
+        "unit": "kibibytes",
+        "statistic": "maximum",
+        "minimum_samples": 3
+      },
+      "observed": 278.965,
+      "samples": 3,
+      "evidence": "integration/benchmarks/reports/bh01-phase9-artifact-economics.json",
+      "rationale": "The measured runtime class excludes standard-library/runtime modules currently folded into the AVM and cannot receive a pass."
+    },
+    {
+      "budget_id": "BX-BUD-PAYLOAD-SOURCEMAPS-PUBLIC-KIB",
+      "scope": "public-bh01-profile",
+      "status": "pass-active-development-early",
+      "threshold": {
+        "direction": "exactly",
+        "value": 0,
+        "unit": "kibibytes",
+        "statistic": "exact",
+        "minimum_samples": 1
+      },
+      "observed": 0,
+      "samples": 1,
+      "evidence": "integration/benchmarks/reports/bh01-phase9-artifact-economics.json",
+      "rationale": "The deployable manifest contains no source maps; this is an early observation before its BH-06 first-measurement milestone."
+    },
+    {
+      "budget_id": "BX-BUD-PAYLOAD-SHARED-UI-KIB",
+      "scope": "inactive-bh01-package",
+      "status": "not-activated",
+      "threshold": {
+        "direction": "at-most",
+        "value": 120,
+        "unit": "kibibytes",
+        "statistic": "maximum",
+        "minimum_samples": 3
+      },
+      "observed": null,
+      "samples": 0,
+      "evidence": "integration/benchmarks/reports/bh01-phase9-artifact-economics.json",
+      "rationale": "The governed optional/product package does not exist in the BH-01 fixture and zero is not claimed as a measurement."
+    },
+    {
+      "budget_id": "BX-BUD-PAYLOAD-FAMILY-BUNDLE-KIB",
+      "scope": "inactive-bh01-package",
+      "status": "not-activated",
+      "threshold": {
+        "direction": "at-most",
+        "value": 80,
+        "unit": "kibibytes",
+        "statistic": "maximum",
+        "minimum_samples": 3
+      },
+      "observed": null,
+      "samples": 0,
+      "evidence": "integration/benchmarks/reports/bh01-phase9-artifact-economics.json",
+      "rationale": "The governed optional/product package does not exist in the BH-01 fixture and zero is not claimed as a measurement."
+    },
+    {
+      "budget_id": "BX-BUD-PAYLOAD-DATA-PACKAGE-KIB",
+      "scope": "inactive-bh01-package",
+      "status": "not-activated",
+      "threshold": {
+        "direction": "at-most",
+        "value": 250,
+        "unit": "kibibytes",
+        "statistic": "maximum",
+        "minimum_samples": 3
+      },
+      "observed": null,
+      "samples": 0,
+      "evidence": "integration/benchmarks/reports/bh01-phase9-artifact-economics.json",
+      "rationale": "The governed optional/product package does not exist in the BH-01 fixture and zero is not claimed as a measurement."
+    },
+    {
+      "budget_id": "BX-BUD-PAYLOAD-CHART-PACKAGE-KIB",
+      "scope": "inactive-bh01-package",
+      "status": "not-activated",
+      "threshold": {
+        "direction": "at-most",
+        "value": 450,
+        "unit": "kibibytes",
+        "statistic": "maximum",
+        "minimum_samples": 3
+      },
+      "observed": null,
+      "samples": 0,
+      "evidence": "integration/benchmarks/reports/bh01-phase9-artifact-economics.json",
+      "rationale": "The governed optional/product package does not exist in the BH-01 fixture and zero is not claimed as a measurement."
+    },
+    {
+      "budget_id": "BX-BUD-PAYLOAD-FONTS-ICONS-KIB",
+      "scope": "inactive-bh01-package",
+      "status": "not-activated",
+      "threshold": {
+        "direction": "at-most",
+        "value": 150,
+        "unit": "kibibytes",
+        "statistic": "maximum",
+        "minimum_samples": 3
+      },
+      "observed": null,
+      "samples": 0,
+      "evidence": "integration/benchmarks/reports/bh01-phase9-artifact-economics.json",
+      "rationale": "The governed optional/product package does not exist in the BH-01 fixture and zero is not claimed as a measurement."
+    },
+    {
+      "budget_id": "BX-BUD-STARTUP-COLD-DESKTOP-MS",
+      "scope": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1:browser-profile:cold",
+      "status": "pass-active-development",
+      "threshold": {
+        "direction": "at-most",
+        "value": 3000,
+        "unit": "milliseconds",
+        "statistic": "p95",
+        "minimum_samples": 30
+      },
+      "observed": 299.99,
+      "samples": 50,
+      "evidence": "integration/benchmarks/samples/bh01-phase9-linux-desktop-summary.json",
+      "rationale": "Nearest-rank p95; variance=4.115028%; all samples retained. Boundary=exact."
+    },
+    {
+      "budget_id": "BX-BUD-STARTUP-COLD-DESKTOP-MS",
+      "scope": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1:browser-profile:cold",
+      "status": "pass-active-development",
+      "threshold": {
+        "direction": "at-most",
+        "value": 3000,
+        "unit": "milliseconds",
+        "statistic": "p95",
+        "minimum_samples": 30
+      },
+      "observed": 790.66,
+      "samples": 50,
+      "evidence": "integration/benchmarks/samples/bh01-phase9-linux-desktop-summary.json",
+      "rationale": "Nearest-rank p95; variance=4.132573%; all samples retained. Boundary=exact."
+    },
+    {
+      "budget_id": "BX-BUD-STARTUP-COLD-DESKTOP-MS",
+      "scope": "aggregate-active-linux:browser-profile:cold",
+      "status": "pass-active-development",
+      "threshold": {
+        "direction": "at-most",
+        "value": 3000,
+        "unit": "milliseconds",
+        "statistic": "p95",
+        "minimum_samples": 30
+      },
+      "observed": 790.66,
+      "samples": 50,
+      "evidence": "integration/benchmarks/samples/bh01-phase9-linux-desktop-summary.json",
+      "rationale": "Conservative aggregate is the worst per-environment nearest-rank p95; it is not a pooled percentile."
+    },
+    {
+      "budget_id": "BX-BUD-STARTUP-WARM-DESKTOP-MS",
+      "scope": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1:browser-profile:warm",
+      "status": "pass-active-development",
+      "threshold": {
+        "direction": "at-most",
+        "value": 1200,
+        "unit": "milliseconds",
+        "statistic": "p95",
+        "minimum_samples": 30
+      },
+      "observed": 295.41,
+      "samples": 50,
+      "evidence": "integration/benchmarks/samples/bh01-phase9-linux-desktop-summary.json",
+      "rationale": "Nearest-rank p95; variance=2.571595%; all samples retained. Boundary=exact."
+    },
+    {
+      "budget_id": "BX-BUD-STARTUP-WARM-DESKTOP-MS",
+      "scope": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1:browser-profile:warm",
+      "status": "pass-active-development",
+      "threshold": {
+        "direction": "at-most",
+        "value": 1200,
+        "unit": "milliseconds",
+        "statistic": "p95",
+        "minimum_samples": 30
+      },
+      "observed": 785.04,
+      "samples": 50,
+      "evidence": "integration/benchmarks/samples/bh01-phase9-linux-desktop-summary.json",
+      "rationale": "Nearest-rank p95; variance=4.419091%; all samples retained. Boundary=exact."
+    },
+    {
+      "budget_id": "BX-BUD-STARTUP-WARM-DESKTOP-MS",
+      "scope": "aggregate-active-linux:browser-profile:warm",
+      "status": "pass-active-development",
+      "threshold": {
+        "direction": "at-most",
+        "value": 1200,
+        "unit": "milliseconds",
+        "statistic": "p95",
+        "minimum_samples": 30
+      },
+      "observed": 785.04,
+      "samples": 50,
+      "evidence": "integration/benchmarks/samples/bh01-phase9-linux-desktop-summary.json",
+      "rationale": "Conservative aggregate is the worst per-environment nearest-rank p95; it is not a pooled percentile."
+    },
+    {
+      "budget_id": "BX-BUD-STARTUP-INSTANTIATE-MS",
+      "scope": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1:browser-profile:cold",
+      "status": "pass-active-development",
+      "threshold": {
+        "direction": "at-most",
+        "value": 1000,
+        "unit": "milliseconds",
+        "statistic": "p95",
+        "minimum_samples": 30
+      },
+      "observed": 128.835,
+      "samples": 50,
+      "evidence": "integration/benchmarks/samples/bh01-phase9-linux-desktop-summary.json",
+      "rationale": "Nearest-rank p95; variance=9.504994%; all samples retained. Boundary=broader-conservative."
+    },
+    {
+      "budget_id": "BX-BUD-STARTUP-INSTANTIATE-MS",
+      "scope": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1:browser-profile:cold",
+      "status": "pass-active-development",
+      "threshold": {
+        "direction": "at-most",
+        "value": 1000,
+        "unit": "milliseconds",
+        "statistic": "p95",
+        "minimum_samples": 30
+      },
+      "observed": 196.9,
+      "samples": 50,
+      "evidence": "integration/benchmarks/samples/bh01-phase9-linux-desktop-summary.json",
+      "rationale": "Nearest-rank p95; variance=15.851794%; all samples retained. Boundary=broader-conservative."
+    },
+    {
+      "budget_id": "BX-BUD-STARTUP-INSTANTIATE-MS",
+      "scope": "aggregate-active-linux:browser-profile:cold",
+      "status": "pass-active-development",
+      "threshold": {
+        "direction": "at-most",
+        "value": 1000,
+        "unit": "milliseconds",
+        "statistic": "p95",
+        "minimum_samples": 30
+      },
+      "observed": 196.9,
+      "samples": 50,
+      "evidence": "integration/benchmarks/samples/bh01-phase9-linux-desktop-summary.json",
+      "rationale": "Conservative aggregate is the worst per-environment nearest-rank p95; it is not a pooled percentile."
+    },
+    {
+      "budget_id": "BX-BUD-STARTUP-ROOT-READINESS-MS",
+      "scope": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1:browser-profile:warm",
+      "status": "pass-active-development",
+      "threshold": {
+        "direction": "at-most",
+        "value": 500,
+        "unit": "milliseconds",
+        "statistic": "p95",
+        "minimum_samples": 50
+      },
+      "observed": 107.625,
+      "samples": 50,
+      "evidence": "integration/benchmarks/samples/bh01-phase9-linux-desktop-summary.json",
+      "rationale": "Nearest-rank p95; variance=5.590226%; all samples retained. Boundary=early-bh03."
+    },
+    {
+      "budget_id": "BX-BUD-STARTUP-ROOT-READINESS-MS",
+      "scope": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1:browser-profile:warm",
+      "status": "pass-active-development",
+      "threshold": {
+        "direction": "at-most",
+        "value": 500,
+        "unit": "milliseconds",
+        "statistic": "p95",
+        "minimum_samples": 50
+      },
+      "observed": 447.62,
+      "samples": 50,
+      "evidence": "integration/benchmarks/samples/bh01-phase9-linux-desktop-summary.json",
+      "rationale": "Nearest-rank p95; variance=3.392821%; all samples retained. Boundary=early-bh03."
+    },
+    {
+      "budget_id": "BX-BUD-STARTUP-ROOT-READINESS-MS",
+      "scope": "aggregate-active-linux:browser-profile:warm",
+      "status": "pass-active-development",
+      "threshold": {
+        "direction": "at-most",
+        "value": 500,
+        "unit": "milliseconds",
+        "statistic": "p95",
+        "minimum_samples": 50
+      },
+      "observed": 447.62,
+      "samples": 50,
+      "evidence": "integration/benchmarks/samples/bh01-phase9-linux-desktop-summary.json",
+      "rationale": "Conservative aggregate is the worst per-environment nearest-rank p95; it is not a pooled percentile."
+    },
+    {
+      "budget_id": "BX-BUD-INTERACTION-LOCAL-EVENT-PAINT-MS",
+      "scope": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1:form-programmatic-update:warm",
+      "status": "pass-active-development",
+      "threshold": {
+        "direction": "at-most",
+        "value": 100,
+        "unit": "milliseconds",
+        "statistic": "p95",
+        "minimum_samples": 100
+      },
+      "observed": 47.325,
+      "samples": 100,
+      "evidence": "integration/benchmarks/samples/bh01-phase9-linux-desktop-summary.json",
+      "rationale": "Nearest-rank p95; variance=36.215999%; all samples retained. Boundary=exact."
+    },
+    {
+      "budget_id": "BX-BUD-INTERACTION-LOCAL-EVENT-PAINT-MS",
+      "scope": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1:nested-keyed-update:warm",
+      "status": "pass-active-development",
+      "threshold": {
+        "direction": "at-most",
+        "value": 100,
+        "unit": "milliseconds",
+        "statistic": "p95",
+        "minimum_samples": 100
+      },
+      "observed": 40.805,
+      "samples": 100,
+      "evidence": "integration/benchmarks/samples/bh01-phase9-linux-desktop-summary.json",
+      "rationale": "Nearest-rank p95; variance=26.765267%; all samples retained. Boundary=exact."
+    },
+    {
+      "budget_id": "BX-BUD-INTERACTION-LOCAL-EVENT-PAINT-MS",
+      "scope": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1:parent-state-update:warm",
+      "status": "pass-active-development",
+      "threshold": {
+        "direction": "at-most",
+        "value": 100,
+        "unit": "milliseconds",
+        "statistic": "p95",
+        "minimum_samples": 100
+      },
+      "observed": 36.645,
+      "samples": 100,
+      "evidence": "integration/benchmarks/samples/bh01-phase9-linux-desktop-summary.json",
+      "rationale": "Nearest-rank p95; variance=27.875289%; all samples retained. Boundary=exact."
+    },
+    {
+      "budget_id": "BX-BUD-INTERACTION-LOCAL-EVENT-PAINT-MS",
+      "scope": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1:timer-message-update:warm",
+      "status": "pass-active-development",
+      "threshold": {
+        "direction": "at-most",
+        "value": 100,
+        "unit": "milliseconds",
+        "statistic": "p95",
+        "minimum_samples": 100
+      },
+      "observed": 66.9,
+      "samples": 100,
+      "evidence": "integration/benchmarks/samples/bh01-phase9-linux-desktop-summary.json",
+      "rationale": "Nearest-rank p95; variance=12.362721%; all samples retained. Boundary=exact."
+    },
+    {
+      "budget_id": "BX-BUD-INTERACTION-LOCAL-EVENT-PAINT-MS",
+      "scope": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1:form-programmatic-update:warm",
+      "status": "pass-active-development",
+      "threshold": {
+        "direction": "at-most",
+        "value": 100,
+        "unit": "milliseconds",
+        "statistic": "p95",
+        "minimum_samples": 100
+      },
+      "observed": 91.72,
+      "samples": 100,
+      "evidence": "integration/benchmarks/samples/bh01-phase9-linux-desktop-summary.json",
+      "rationale": "Nearest-rank p95; variance=16.110828%; all samples retained. Boundary=exact."
+    },
+    {
+      "budget_id": "BX-BUD-INTERACTION-LOCAL-EVENT-PAINT-MS",
+      "scope": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1:nested-keyed-update:warm",
+      "status": "pass-active-development",
+      "threshold": {
+        "direction": "at-most",
+        "value": 100,
+        "unit": "milliseconds",
+        "statistic": "p95",
+        "minimum_samples": 100
+      },
+      "observed": 87.24,
+      "samples": 100,
+      "evidence": "integration/benchmarks/samples/bh01-phase9-linux-desktop-summary.json",
+      "rationale": "Nearest-rank p95; variance=15.167029%; all samples retained. Boundary=exact."
+    },
+    {
+      "budget_id": "BX-BUD-INTERACTION-LOCAL-EVENT-PAINT-MS",
+      "scope": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1:parent-state-update:warm",
+      "status": "pass-active-development",
+      "threshold": {
+        "direction": "at-most",
+        "value": 100,
+        "unit": "milliseconds",
+        "statistic": "p95",
+        "minimum_samples": 100
+      },
+      "observed": 88.28,
+      "samples": 100,
+      "evidence": "integration/benchmarks/samples/bh01-phase9-linux-desktop-summary.json",
+      "rationale": "Nearest-rank p95; variance=18.786311%; all samples retained. Boundary=exact."
+    },
+    {
+      "budget_id": "BX-BUD-INTERACTION-LOCAL-EVENT-PAINT-MS",
+      "scope": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1:timer-message-update:warm",
+      "status": "fail-active-development",
+      "threshold": {
+        "direction": "at-most",
+        "value": 100,
+        "unit": "milliseconds",
+        "statistic": "p95",
+        "minimum_samples": 100
+      },
+      "observed": 147.24,
+      "samples": 100,
+      "evidence": "integration/benchmarks/samples/bh01-phase9-linux-desktop-summary.json",
+      "rationale": "Nearest-rank p95; variance=10.940754%; all samples retained. Boundary=exact."
+    },
+    {
+      "budget_id": "BX-BUD-INTERACTION-LOCAL-EVENT-PAINT-MS",
+      "scope": "aggregate-active-linux:form-programmatic-update:warm",
+      "status": "pass-active-development",
+      "threshold": {
+        "direction": "at-most",
+        "value": 100,
+        "unit": "milliseconds",
+        "statistic": "p95",
+        "minimum_samples": 100
+      },
+      "observed": 91.72,
+      "samples": 100,
+      "evidence": "integration/benchmarks/samples/bh01-phase9-linux-desktop-summary.json",
+      "rationale": "Conservative aggregate is the worst per-environment nearest-rank p95; it is not a pooled percentile."
+    },
+    {
+      "budget_id": "BX-BUD-INTERACTION-LOCAL-EVENT-PAINT-MS",
+      "scope": "aggregate-active-linux:nested-keyed-update:warm",
+      "status": "pass-active-development",
+      "threshold": {
+        "direction": "at-most",
+        "value": 100,
+        "unit": "milliseconds",
+        "statistic": "p95",
+        "minimum_samples": 100
+      },
+      "observed": 87.24,
+      "samples": 100,
+      "evidence": "integration/benchmarks/samples/bh01-phase9-linux-desktop-summary.json",
+      "rationale": "Conservative aggregate is the worst per-environment nearest-rank p95; it is not a pooled percentile."
+    },
+    {
+      "budget_id": "BX-BUD-INTERACTION-LOCAL-EVENT-PAINT-MS",
+      "scope": "aggregate-active-linux:parent-state-update:warm",
+      "status": "pass-active-development",
+      "threshold": {
+        "direction": "at-most",
+        "value": 100,
+        "unit": "milliseconds",
+        "statistic": "p95",
+        "minimum_samples": 100
+      },
+      "observed": 88.28,
+      "samples": 100,
+      "evidence": "integration/benchmarks/samples/bh01-phase9-linux-desktop-summary.json",
+      "rationale": "Conservative aggregate is the worst per-environment nearest-rank p95; it is not a pooled percentile."
+    },
+    {
+      "budget_id": "BX-BUD-INTERACTION-LOCAL-EVENT-PAINT-MS",
+      "scope": "aggregate-active-linux:timer-message-update:warm",
+      "status": "fail-active-development",
+      "threshold": {
+        "direction": "at-most",
+        "value": 100,
+        "unit": "milliseconds",
+        "statistic": "p95",
+        "minimum_samples": 100
+      },
+      "observed": 147.24,
+      "samples": 100,
+      "evidence": "integration/benchmarks/samples/bh01-phase9-linux-desktop-summary.json",
+      "rationale": "Conservative aggregate is the worst per-environment nearest-rank p95; it is not a pooled percentile."
+    },
+    {
+      "budget_id": "BX-BUD-INTERACTION-DOM-UPDATE-MS",
+      "scope": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1:form-programmatic-update:warm",
+      "status": "observed-insufficient-boundary",
+      "threshold": {
+        "direction": "at-most",
+        "value": 50,
+        "unit": "milliseconds",
+        "statistic": "p95",
+        "minimum_samples": 100
+      },
+      "observed": 0.385,
+      "samples": 100,
+      "evidence": "integration/benchmarks/samples/bh01-phase9-linux-desktop-summary.json",
+      "rationale": "Nearest-rank p95; variance=43.702826%; all samples retained. Boundary=narrower."
+    },
+    {
+      "budget_id": "BX-BUD-INTERACTION-DOM-UPDATE-MS",
+      "scope": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1:nested-keyed-update:warm",
+      "status": "observed-insufficient-boundary",
+      "threshold": {
+        "direction": "at-most",
+        "value": 50,
+        "unit": "milliseconds",
+        "statistic": "p95",
+        "minimum_samples": 100
+      },
+      "observed": 0.385,
+      "samples": 100,
+      "evidence": "integration/benchmarks/samples/bh01-phase9-linux-desktop-summary.json",
+      "rationale": "Nearest-rank p95; variance=36.806095%; all samples retained. Boundary=narrower."
+    },
+    {
+      "budget_id": "BX-BUD-INTERACTION-DOM-UPDATE-MS",
+      "scope": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1:parent-state-update:warm",
+      "status": "observed-insufficient-boundary",
+      "threshold": {
+        "direction": "at-most",
+        "value": 50,
+        "unit": "milliseconds",
+        "statistic": "p95",
+        "minimum_samples": 100
+      },
+      "observed": 0.355,
+      "samples": 100,
+      "evidence": "integration/benchmarks/samples/bh01-phase9-linux-desktop-summary.json",
+      "rationale": "Nearest-rank p95; variance=43.973694%; all samples retained. Boundary=narrower."
+    },
+    {
+      "budget_id": "BX-BUD-INTERACTION-DOM-UPDATE-MS",
+      "scope": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1:timer-message-update:warm",
+      "status": "observed-insufficient-boundary",
+      "threshold": {
+        "direction": "at-most",
+        "value": 50,
+        "unit": "milliseconds",
+        "statistic": "p95",
+        "minimum_samples": 100
+      },
+      "observed": 0.34,
+      "samples": 100,
+      "evidence": "integration/benchmarks/samples/bh01-phase9-linux-desktop-summary.json",
+      "rationale": "Nearest-rank p95; variance=26.278679%; all samples retained. Boundary=narrower."
+    },
+    {
+      "budget_id": "BX-BUD-INTERACTION-DOM-UPDATE-MS",
+      "scope": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1:form-programmatic-update:warm",
+      "status": "observed-insufficient-boundary",
+      "threshold": {
+        "direction": "at-most",
+        "value": 50,
+        "unit": "milliseconds",
+        "statistic": "p95",
+        "minimum_samples": 100
+      },
+      "observed": 0.18,
+      "samples": 100,
+      "evidence": "integration/benchmarks/samples/bh01-phase9-linux-desktop-summary.json",
+      "rationale": "Nearest-rank p95; variance=15.773823%; all samples retained. Boundary=narrower."
+    },
+    {
+      "budget_id": "BX-BUD-INTERACTION-DOM-UPDATE-MS",
+      "scope": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1:nested-keyed-update:warm",
+      "status": "observed-insufficient-boundary",
+      "threshold": {
+        "direction": "at-most",
+        "value": 50,
+        "unit": "milliseconds",
+        "statistic": "p95",
+        "minimum_samples": 100
+      },
+      "observed": 0.26,
+      "samples": 100,
+      "evidence": "integration/benchmarks/samples/bh01-phase9-linux-desktop-summary.json",
+      "rationale": "Nearest-rank p95; variance=19.81849%; all samples retained. Boundary=narrower."
+    },
+    {
+      "budget_id": "BX-BUD-INTERACTION-DOM-UPDATE-MS",
+      "scope": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1:parent-state-update:warm",
+      "status": "observed-insufficient-boundary",
+      "threshold": {
+        "direction": "at-most",
+        "value": 50,
+        "unit": "milliseconds",
+        "statistic": "p95",
+        "minimum_samples": 100
+      },
+      "observed": 0.32,
+      "samples": 100,
+      "evidence": "integration/benchmarks/samples/bh01-phase9-linux-desktop-summary.json",
+      "rationale": "Nearest-rank p95; variance=24.038898%; all samples retained. Boundary=narrower."
+    },
+    {
+      "budget_id": "BX-BUD-INTERACTION-DOM-UPDATE-MS",
+      "scope": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1:timer-message-update:warm",
+      "status": "observed-insufficient-boundary",
+      "threshold": {
+        "direction": "at-most",
+        "value": 50,
+        "unit": "milliseconds",
+        "statistic": "p95",
+        "minimum_samples": 100
+      },
+      "observed": 0.22,
+      "samples": 100,
+      "evidence": "integration/benchmarks/samples/bh01-phase9-linux-desktop-summary.json",
+      "rationale": "Nearest-rank p95; variance=22.92367%; all samples retained. Boundary=narrower."
+    },
+    {
+      "budget_id": "BX-BUD-INTERACTION-DOM-UPDATE-MS",
+      "scope": "aggregate-active-linux:form-programmatic-update:warm",
+      "status": "observed-insufficient-boundary",
+      "threshold": {
+        "direction": "at-most",
+        "value": 50,
+        "unit": "milliseconds",
+        "statistic": "p95",
+        "minimum_samples": 100
+      },
+      "observed": 0.385,
+      "samples": 100,
+      "evidence": "integration/benchmarks/samples/bh01-phase9-linux-desktop-summary.json",
+      "rationale": "Conservative aggregate is the worst per-environment nearest-rank p95; it is not a pooled percentile."
+    },
+    {
+      "budget_id": "BX-BUD-INTERACTION-DOM-UPDATE-MS",
+      "scope": "aggregate-active-linux:nested-keyed-update:warm",
+      "status": "observed-insufficient-boundary",
+      "threshold": {
+        "direction": "at-most",
+        "value": 50,
+        "unit": "milliseconds",
+        "statistic": "p95",
+        "minimum_samples": 100
+      },
+      "observed": 0.385,
+      "samples": 100,
+      "evidence": "integration/benchmarks/samples/bh01-phase9-linux-desktop-summary.json",
+      "rationale": "Conservative aggregate is the worst per-environment nearest-rank p95; it is not a pooled percentile."
+    },
+    {
+      "budget_id": "BX-BUD-INTERACTION-DOM-UPDATE-MS",
+      "scope": "aggregate-active-linux:parent-state-update:warm",
+      "status": "observed-insufficient-boundary",
+      "threshold": {
+        "direction": "at-most",
+        "value": 50,
+        "unit": "milliseconds",
+        "statistic": "p95",
+        "minimum_samples": 100
+      },
+      "observed": 0.355,
+      "samples": 100,
+      "evidence": "integration/benchmarks/samples/bh01-phase9-linux-desktop-summary.json",
+      "rationale": "Conservative aggregate is the worst per-environment nearest-rank p95; it is not a pooled percentile."
+    },
+    {
+      "budget_id": "BX-BUD-INTERACTION-DOM-UPDATE-MS",
+      "scope": "aggregate-active-linux:timer-message-update:warm",
+      "status": "observed-insufficient-boundary",
+      "threshold": {
+        "direction": "at-most",
+        "value": 50,
+        "unit": "milliseconds",
+        "statistic": "p95",
+        "minimum_samples": 100
+      },
+      "observed": 0.34,
+      "samples": 100,
+      "evidence": "integration/benchmarks/samples/bh01-phase9-linux-desktop-summary.json",
+      "rationale": "Conservative aggregate is the worst per-environment nearest-rank p95; it is not a pooled percentile."
+    },
+    {
+      "budget_id": "BX-BUD-RESOURCE-CLEANUP-MS",
+      "scope": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+      "status": "observed-insufficient-samples",
+      "threshold": {
+        "direction": "at-most",
+        "value": 1000,
+        "unit": "milliseconds",
+        "statistic": "p95",
+        "minimum_samples": 100
+      },
+      "observed": 101.34,
+      "samples": 20,
+      "evidence": "integration/benchmarks/samples/bh01-phase9-linux-desktop-summary.json",
+      "rationale": "Twenty feasibility cycles do not satisfy the quality contract's one-hundred-cycle minimum or future resource-heavy root boundary."
+    },
+    {
+      "budget_id": "BX-BUD-RESOURCE-CLEANUP-MS",
+      "scope": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+      "status": "observed-insufficient-samples",
+      "threshold": {
+        "direction": "at-most",
+        "value": 1000,
+        "unit": "milliseconds",
+        "statistic": "p95",
+        "minimum_samples": 100
+      },
+      "observed": 70.36,
+      "samples": 20,
+      "evidence": "integration/benchmarks/samples/bh01-phase9-linux-desktop-summary.json",
+      "rationale": "Twenty feasibility cycles do not satisfy the quality contract's one-hundred-cycle minimum or future resource-heavy root boundary."
+    },
+    {
+      "budget_id": "BX-BUD-RESOURCE-MEMORY-GROWTH-MIB",
+      "scope": "active-linux-browser-memory",
+      "status": "observed-insufficient-boundary",
+      "threshold": {
+        "direction": "at-most",
+        "value": 16,
+        "unit": "mebibytes",
+        "statistic": "maximum",
+        "minimum_samples": 10
+      },
+      "observed": 34970157.0,
+      "samples": 2,
+      "evidence": "integration/benchmarks/samples/bh01-phase9-linux-desktop-summary.json",
+      "rationale": "Optional JavaScript heap snapshots exclude Wasm/browser/runtime memory, collection control, and one hundred lifecycle cycles."
+    },
+    {
+      "budget_id": "BX-BUD-INTERACTION-SERVER-ROUNDTRIP-MS",
+      "scope": "same-host-linux-loopback",
+      "status": "observed-not-applicable-environment",
+      "threshold": {
+        "direction": "at-most",
+        "value": 1000,
+        "unit": "milliseconds",
+        "statistic": "p95",
+        "minimum_samples": 50
+      },
+      "observed": 399.24,
+      "samples": 50,
+      "evidence": "integration/benchmarks/samples/bh01-phase9-linux-desktop-summary.json",
+      "rationale": "Desktop loopback observations do not satisfy the mobile regional-server environment; mobile evaluation remains deferred."
+    },
+    {
+      "budget_id": "BX-BUD-STARTUP-COLD-MOBILE-MS",
+      "scope": "android-and-apple-mobile",
+      "status": "deferred",
+      "threshold": {
+        "direction": "at-most",
+        "value": 6000,
+        "unit": "milliseconds",
+        "statistic": "p95",
+        "minimum_samples": 30
+      },
+      "observed": null,
+      "samples": 0,
+      "evidence": "integration/benchmarks/reports/bh01-phase9-deferred-qualification.json",
+      "rationale": "No representative physical mobile environment is available; the obligation reactivates no later than BH-22."
+    }
+  ],
+  "status_counts": {
+    "deferred": 1,
+    "fail-active-development": 4,
+    "not-activated": 5,
+    "observed-insufficient-boundary": 15,
+    "observed-insufficient-samples": 2,
+    "observed-not-applicable-environment": 1,
+    "pass-active-development": 23,
+    "pass-active-development-early": 1
+  },
+  "review": {
+    "sample_adequacy": "All 41 active browser distributions and the build distribution meet Phase 9 harness minimums; cleanup and memory remain insufficient against their later quality-contract methods.",
+    "variance": "High-variance distributions remain visible; no confidence interval or outlier deletion is used to promote a pass.",
+    "harness": "Navigation and local-event boundaries are direct; instantiate is broader, DOM commit is narrower, build is partial, and memory is exploratory.",
+    "environment": "One Linux host, Chrome for Testing, patched Firefox development build, same-host unshaped loopback; no support qualification.",
+    "deferred_limit": "Mobile, Safari, Windows, second-machine, physical-device, and manual assistive-technology conclusions remain undecided."
+  },
+  "threshold_changes": []
+}

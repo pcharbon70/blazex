@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://blazex.dev/schemas/bh-01/phase-09-desktop-summary-1.0.0.json",
+  "title": "BlazeX BH-01 Phase 9 Linux Desktop Summary",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "summary_id", "status", "source_revision", "generated_from_captured_at", "raw_evidence", "measurements", "build", "payload", "reliability", "environment_drift", "cross_machine_comparison", "limitations"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "summary_id": {"const": "BX-BH01-PHASE9-LINUX-DESKTOP-SUMMARY-0.1"},
+    "status": {"enum": ["observed", "observed-with-failures"]},
+    "source_revision": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "generated_from_captured_at": {"type": "string", "format": "date-time"},
+    "raw_evidence": {"type": "array", "minItems": 4, "items": {"type": "object", "required": ["kind", "path", "sha256", "environment_id", "status"]}},
+    "measurements": {"type": "array", "minItems": 1, "items": {"type": "object", "required": ["environment_id", "metric_id", "scenario", "unit", "cache_state", "statistics", "adequacy", "outlier_review", "confidence"]}},
+    "build": {"type": "object", "required": ["environment_id", "metric_id", "statistics", "adequacy", "manifest_sha256"]},
+    "payload": {"type": "object", "required": ["environment_id", "metric_id", "compression", "totals", "artifact_count", "source_maps"]},
+    "reliability": {"type": "array", "minItems": 2, "items": {"type": "object", "required": ["environment_id", "page_errors", "command_failures", "long_task_api", "long_tasks", "resource_growth_detected"]}},
+    "environment_drift": {"type": "object", "required": ["source_revision_consistent", "profile_manifest_consistent", "drift_detected"]},
+    "cross_machine_comparison": {"type": "object", "required": ["status", "reason", "reactivation"]},
+    "limitations": {"type": "array", "minItems": 1, "items": {"type": "string"}, "uniqueItems": true}
+  }
+}

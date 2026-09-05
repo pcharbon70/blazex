@@ -29,6 +29,14 @@ APIs. Several milestones can overlap once their prerequisites are stable, but
 none should be declared complete merely because a demonstration works on one
 developer machine.
 
+During feasibility and framework construction, however, unavailable external
+platforms are not development blockers. Linux with Chrome and Firefox is the
+active development matrix. macOS/Safari, Windows, Android, iOS/iPadOS, physical
+device labs, and unavailable manual assistive-technology pairings remain
+explicitly deferred qualification work until BH-22. Local failures still block
+dependent work; missing external infrastructure does not. See the
+[development environment and deferred qualification policy](../60-planning/development-environment-and-deferred-qualification-policy.md).
+
 The browser is the first implementation and quality baseline, not the
 definition of the component model. Portable components continue to target
 semantic UI, events, effects, resources, and capabilities. Popcorn, AtomVM,
@@ -114,8 +122,10 @@ LocalLiveView, Popcorn, AtomVM, Elixir, and Erlang baseline that can be built on
 a clean machine. Exercise representative state, nested components, form
 events, timers or messages, DOM updates, and one authenticated server command.
 Record emitted artifacts, private dependency risks, runtime limitations,
-browser prerequisites, and cold and warm measurements on representative
-desktop and mobile environments.
+browser prerequisites, and cold and warm measurements in the active Linux
+Chrome/Firefox matrix. Preserve unavailable desktop/mobile/browser/device and
+manual accessibility qualification as explicit deferred work rather than
+blocking feasibility.
 
 **Repository ownership.** Activate `profiles/browser_phoenix`,
 `packages/blazex_runtime_popcorn`, `packages/blazex_host_browser`,
@@ -124,10 +134,12 @@ desktop and mobile environments.
 composition. Put reusable scenarios and measurements in `integration/fixtures`
 and `integration/benchmarks`.
 
-**Completion signal.** The baseline runs repeatably across the initially
-supported browser set, its build inputs and outputs are explainable, and its
-known compatibility restrictions are narrow enough to support a framework.
-Failure to reproduce the exact runtime profile blocks later framework work.
+**Completion signal.** The baseline runs repeatably in the active Linux
+Chrome/Firefox development matrix, its build inputs and outputs are explainable,
+and its observed compatibility restrictions are narrow enough to support a
+framework experiment. Unavailable platform qualification is carried forward as
+deferred and no browser support is implied. Failure to reproduce the exact
+runtime profile in the active environment blocks later framework work.
 
 ### BH-02 — Host-neutral semantic kernel gate
 
@@ -677,13 +689,17 @@ proportion to the surface it adds:
   renderer, browser, and server-boundary evidence appropriate to its claim.
 - **Accessibility.** Semantic roles, names, relationships, state, focus,
   keyboard interaction, announcements, direction, and nonvisual alternatives
-  are part of component completion.
+  are part of component completion. Manual browser/assistive-technology
+  pairings unavailable to the project are retained as deferred BH-22
+  qualification rather than intermediate development blockers.
 - **Security.** Browser code and state remain untrusted; capabilities are
   explicit; server operations revalidate and reauthorize; build outputs are
   auditable.
 - **Performance.** Runtime, shared foundation, feature package, and component
-  costs are measured on representative mobile hardware and constrained
-  networks rather than inferred from desktop development.
+  costs are measured in the active development environment as soon as useful.
+  Representative mobile hardware and constrained-network qualification is
+  deferred until the infrastructure is available and becomes mandatory at
+  BH-22 rather than blocking earlier framework development.
 - **Failure and cleanup.** Every process, command, effect, subscription,
   observer, timer, surface, asset, and resource has ownership, cancellation,
   stale-generation, and disposal behavior.

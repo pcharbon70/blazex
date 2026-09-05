@@ -1,0 +1,400 @@
+{
+  "schema_version": "1.0.0",
+  "report_id": "BX-BH01-PHASE9-ARTIFACT-ECONOMICS-0.1",
+  "status": "observed-with-limitations",
+  "source_revision": "edf2b09434a8a523d05bf03e3699b77c8c4a331b",
+  "evidence_revision": "22dc98033893cdc85db142bd6a05650ab4032f52",
+  "generated_from_captured_at": "2026-09-05T09:57:42.738Z",
+  "inputs": [
+    {
+      "path": "integration/benchmarks/samples/bh01-phase9-linux-desktop-summary.json",
+      "sha256": "4e8502dfc007f491290fd2304741f6b65bafe640d3db48757cd4efa665e166fa"
+    },
+    {
+      "path": "integration/benchmarks/raw-evidence/bh01-phase9-artifacts-linux.json",
+      "sha256": "f0ab01e91723c27055e33a7ac420fbd642a65adfbff301b0ca9558ba24cb3d5b"
+    }
+  ],
+  "profile": {
+    "manifest_sha256": "818ac7b967db6519c766f9d1fff80455cc92d205e3f188252e6da27258ee4aad",
+    "artifact_count": 23,
+    "decoded_bytes": 7827221,
+    "brotli_bytes": 2513184,
+    "request_count": 23,
+    "source_maps": []
+  },
+  "owner_costs": [
+    {
+      "owner_class": "application-bundle-unpruned",
+      "decoded_bytes": 6578424,
+      "brotli_bytes": 2199143,
+      "request_count": 1,
+      "decoded_percent": 84.045,
+      "brotli_percent": 87.504
+    },
+    {
+      "owner_class": "runtime",
+      "decoded_bytes": 1142958,
+      "brotli_bytes": 285660,
+      "request_count": 2,
+      "decoded_percent": 14.602,
+      "brotli_percent": 11.366
+    },
+    {
+      "owner_class": "loader-bootstrap",
+      "decoded_bytes": 84778,
+      "brotli_bytes": 23438,
+      "request_count": 18,
+      "decoded_percent": 1.083,
+      "brotli_percent": 0.933
+    },
+    {
+      "owner_class": "shared-ui-fixture",
+      "decoded_bytes": 21061,
+      "brotli_bytes": 4943,
+      "request_count": 2,
+      "decoded_percent": 0.269,
+      "brotli_percent": 0.197
+    }
+  ],
+  "dominant_cost": {
+    "owner_class": "application-bundle-unpruned",
+    "finding": "The unpruned application AVM contributes 84.045% of decoded bytes and 87.504% of Brotli bytes; its reachability boundary includes runtime and library modules and must not be interpreted as authored application code alone."
+  },
+  "cache_economics": [
+    {
+      "cache_class": "immutable",
+      "artifact_count": 21,
+      "decoded_bytes": 7824910,
+      "brotli_bytes": 2512296
+    },
+    {
+      "cache_class": "no-store",
+      "artifact_count": 2,
+      "decoded_bytes": 2311,
+      "brotli_bytes": 888
+    }
+  ],
+  "runtime_phase_attribution": [
+    {
+      "phase": "navigation-through-ready",
+      "metric_id": "BX-BH01-METRIC-STARTUP-NAVIGATION-READY-MS",
+      "attribution": "Fetch, loader, Wasm, AVM, fixture start, and root mount are combined; no unsupported sub-phase arithmetic is performed.",
+      "distributions": [
+        {
+          "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+          "scenario": "browser-profile",
+          "cache_state": "cold",
+          "p95": 299.99,
+          "unit": "milliseconds",
+          "variance_percent": 4.115028
+        },
+        {
+          "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+          "scenario": "browser-profile",
+          "cache_state": "warm",
+          "p95": 295.41,
+          "unit": "milliseconds",
+          "variance_percent": 2.571595
+        },
+        {
+          "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+          "scenario": "browser-profile",
+          "cache_state": "cold",
+          "p95": 790.66,
+          "unit": "milliseconds",
+          "variance_percent": 4.132573
+        },
+        {
+          "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+          "scenario": "browser-profile",
+          "cache_state": "warm",
+          "p95": 785.04,
+          "unit": "milliseconds",
+          "variance_percent": 4.419091
+        }
+      ]
+    },
+    {
+      "phase": "instantiate-through-application-ready",
+      "metric_id": "BX-BH01-METRIC-STARTUP-INSTANTIATE-READY-MS",
+      "attribution": "Lifecycle transition interval is broader than strict runtime compilation/instantiation and is retained as such.",
+      "distributions": [
+        {
+          "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+          "scenario": "browser-profile",
+          "cache_state": "cold",
+          "p95": 128.835,
+          "unit": "milliseconds",
+          "variance_percent": 9.504994
+        },
+        {
+          "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+          "scenario": "browser-profile",
+          "cache_state": "warm",
+          "p95": 125.115,
+          "unit": "milliseconds",
+          "variance_percent": 3.948541
+        },
+        {
+          "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+          "scenario": "browser-profile",
+          "cache_state": "cold",
+          "p95": 196.9,
+          "unit": "milliseconds",
+          "variance_percent": 15.851794
+        },
+        {
+          "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+          "scenario": "browser-profile",
+          "cache_state": "warm",
+          "p95": 210.68,
+          "unit": "milliseconds",
+          "variance_percent": 16.459784
+        }
+      ]
+    },
+    {
+      "phase": "application-ready-through-root-ready",
+      "metric_id": "BX-BH01-METRIC-STARTUP-ROOT-READY-MS",
+      "attribution": "Fixture activation and first root observation on an already initialized lifecycle timeline.",
+      "distributions": [
+        {
+          "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+          "scenario": "browser-profile",
+          "cache_state": "cold",
+          "p95": 108.695,
+          "unit": "milliseconds",
+          "variance_percent": 6.443686
+        },
+        {
+          "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+          "scenario": "browser-profile",
+          "cache_state": "warm",
+          "p95": 107.625,
+          "unit": "milliseconds",
+          "variance_percent": 5.590226
+        },
+        {
+          "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+          "scenario": "browser-profile",
+          "cache_state": "cold",
+          "p95": 454.5,
+          "unit": "milliseconds",
+          "variance_percent": 3.802948
+        },
+        {
+          "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+          "scenario": "browser-profile",
+          "cache_state": "warm",
+          "p95": 447.62,
+          "unit": "milliseconds",
+          "variance_percent": 3.392821
+        }
+      ]
+    },
+    {
+      "phase": "local-event-through-paint",
+      "metric_id": "BX-BH01-METRIC-INTERACTION-LOCAL-EVENT-PAINT-MS",
+      "attribution": "Bridge request, Elixir fixture update, normalized effect, DOM mutation, snapshot, and next animation frame.",
+      "distributions": [
+        {
+          "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+          "scenario": "form-programmatic-update",
+          "cache_state": "warm",
+          "p95": 47.325,
+          "unit": "milliseconds",
+          "variance_percent": 36.215999
+        },
+        {
+          "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+          "scenario": "nested-keyed-update",
+          "cache_state": "warm",
+          "p95": 40.805,
+          "unit": "milliseconds",
+          "variance_percent": 26.765267
+        },
+        {
+          "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+          "scenario": "parent-state-update",
+          "cache_state": "warm",
+          "p95": 36.645,
+          "unit": "milliseconds",
+          "variance_percent": 27.875289
+        },
+        {
+          "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+          "scenario": "timer-message-update",
+          "cache_state": "warm",
+          "p95": 66.9,
+          "unit": "milliseconds",
+          "variance_percent": 12.362721
+        },
+        {
+          "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+          "scenario": "form-programmatic-update",
+          "cache_state": "warm",
+          "p95": 91.72,
+          "unit": "milliseconds",
+          "variance_percent": 16.110828
+        },
+        {
+          "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+          "scenario": "nested-keyed-update",
+          "cache_state": "warm",
+          "p95": 87.24,
+          "unit": "milliseconds",
+          "variance_percent": 15.167029
+        },
+        {
+          "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+          "scenario": "parent-state-update",
+          "cache_state": "warm",
+          "p95": 88.28,
+          "unit": "milliseconds",
+          "variance_percent": 18.786311
+        },
+        {
+          "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+          "scenario": "timer-message-update",
+          "cache_state": "warm",
+          "p95": 147.24,
+          "unit": "milliseconds",
+          "variance_percent": 10.940754
+        }
+      ]
+    },
+    {
+      "phase": "renderer-effect-through-dom-commit",
+      "metric_id": "BX-BH01-METRIC-INTERACTION-DOM-COMMIT-MS",
+      "attribution": "Synchronous fixture DOM mutation only; this is narrower than a painted-frame budget.",
+      "distributions": [
+        {
+          "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+          "scenario": "form-programmatic-update",
+          "cache_state": "warm",
+          "p95": 0.385,
+          "unit": "milliseconds",
+          "variance_percent": 43.702826
+        },
+        {
+          "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+          "scenario": "nested-keyed-update",
+          "cache_state": "warm",
+          "p95": 0.385,
+          "unit": "milliseconds",
+          "variance_percent": 36.806095
+        },
+        {
+          "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+          "scenario": "parent-state-update",
+          "cache_state": "warm",
+          "p95": 0.355,
+          "unit": "milliseconds",
+          "variance_percent": 43.973694
+        },
+        {
+          "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+          "scenario": "timer-message-update",
+          "cache_state": "warm",
+          "p95": 0.34,
+          "unit": "milliseconds",
+          "variance_percent": 26.278679
+        },
+        {
+          "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+          "scenario": "form-programmatic-update",
+          "cache_state": "warm",
+          "p95": 0.18,
+          "unit": "milliseconds",
+          "variance_percent": 15.773823
+        },
+        {
+          "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+          "scenario": "nested-keyed-update",
+          "cache_state": "warm",
+          "p95": 0.26,
+          "unit": "milliseconds",
+          "variance_percent": 19.81849
+        },
+        {
+          "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+          "scenario": "parent-state-update",
+          "cache_state": "warm",
+          "p95": 0.32,
+          "unit": "milliseconds",
+          "variance_percent": 24.038898
+        },
+        {
+          "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+          "scenario": "timer-message-update",
+          "cache_state": "warm",
+          "p95": 0.22,
+          "unit": "milliseconds",
+          "variance_percent": 22.92367
+        }
+      ]
+    },
+    {
+      "phase": "server-command-roundtrip",
+      "metric_id": "BX-BH01-METRIC-INTERACTION-SERVER-ROUNDTRIP-MS",
+      "attribution": "Same-host transport, Phoenix validation/authorization/effect, result projection, DOM result, and next frame; server sub-phases are not individually clock-correlated.",
+      "distributions": [
+        {
+          "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+          "scenario": "authenticated-success",
+          "cache_state": "warm",
+          "p95": 138.005,
+          "unit": "milliseconds",
+          "variance_percent": 22.991723
+        },
+        {
+          "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+          "scenario": "authorization-denial",
+          "cache_state": "warm",
+          "p95": 137.445,
+          "unit": "milliseconds",
+          "variance_percent": 18.966899
+        },
+        {
+          "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+          "scenario": "disconnect-retry",
+          "cache_state": "warm",
+          "p95": 238.63,
+          "unit": "milliseconds",
+          "variance_percent": 15.128203
+        },
+        {
+          "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+          "scenario": "authenticated-success",
+          "cache_state": "warm",
+          "p95": 226.98,
+          "unit": "milliseconds",
+          "variance_percent": 12.090258
+        },
+        {
+          "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+          "scenario": "authorization-denial",
+          "cache_state": "warm",
+          "p95": 237.82,
+          "unit": "milliseconds",
+          "variance_percent": 11.89312
+        },
+        {
+          "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+          "scenario": "disconnect-retry",
+          "cache_state": "warm",
+          "p95": 399.24,
+          "unit": "milliseconds",
+          "variance_percent": 7.449811
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Brotli quality-11 accounting is local; the Phoenix endpoint currently serves identity bytes and transfer savings require a separate serving change and before/after network evidence.",
+    "The application AVM is unpruned, so application-owned and runtime/library byte ownership cannot yet be separated below the bundle boundary.",
+    "Browser timings do not provide CPU profiles or a common client/server sub-phase clock.",
+    "JavaScript heap excludes Wasm and complete browser/runtime memory; no energy or thermal evidence is available."
+  ]
+}

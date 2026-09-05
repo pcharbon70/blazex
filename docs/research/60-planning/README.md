@@ -27,6 +27,8 @@ evidence requirements.
   roadmap milestones.
 - Future phase documents containing implementation tasks and completion
   evidence.
+- The active development-environment policy and explicit deferred qualification
+  obligations for environments the project cannot currently access.
 - Explicit package, profile, integration-suite, and experiment ownership for
   every phase, including forbidden dependency directions.
 - Links back to the research notes and inquiries whose claims implementation
@@ -46,7 +48,10 @@ renumbered.
 
 ### Documents
 
-- None yet.
+- [Development environment and deferred qualification policy](development-environment-and-deferred-qualification-policy.md)
+  — makes Linux Chrome and Firefox the active development matrix while keeping
+  unavailable platforms, browsers, devices, and manual assistive-technology
+  evidence visible and deferred until production qualification.
 
 ## Maintaining this index
 
@@ -54,4 +59,7 @@ Assign the next unused two-digit prefix when a new planning stream is added.
 Link every stream through its README, keep its status current, and move
 obsolete plans to `90-archive` without reusing their sequence numbers. Every
 stream must identify the monorepo projects it activates without making an
-executable profile the owner of reusable framework contracts.
+executable profile the owner of reusable framework contracts. Do not make an
+unavailable operating system, browser, device, service, or manual test a
+development blocker: mark it `[DEFERRED]`, retain its eventual qualification
+owner, and reactivate it at the declared product-quality milestone.

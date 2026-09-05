@@ -33,6 +33,16 @@ class GovernanceValidationTests(unittest.TestCase):
         with self.assertRaisesRegex(validator.GovernanceValidationError, "source binding is stale"):
             self.validate(document)
 
+    def test_rejects_unbound_roadmap_amendment(self) -> None:
+        with self.assertRaisesRegex(
+            validator.GovernanceValidationError,
+            "roadmap amendment omits the historical source hash",
+        ):
+            validator.validate_sources(
+                copy.deepcopy(self.document),
+                development_policy_text="",
+            )
+
     def test_rejects_missing_adr_binding(self) -> None:
         document = copy.deepcopy(self.document)
         document["source_bindings"] = [record for record in document["source_bindings"] if record["id"] != "BX-BH00-SOURCE-ADR-0008"]

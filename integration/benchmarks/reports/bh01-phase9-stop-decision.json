@@ -1,0 +1,114 @@
+{
+  "schema_version": "1.0.0",
+  "decision_id": "BX-BH01-PHASE9-STOP-DECISION-0.1",
+  "status": "conditional-proceed",
+  "source_revision": "2ce8759da6c37f50c9f226bac894610106a368fd",
+  "budget_evaluation_ref": {
+    "path": "integration/benchmarks/reports/bh01-phase9-budget-evaluation.json",
+    "sha256": "9b788db7f226890894acb6dee38c5edc6e48dc44a86afaf38c26beef47d3fe23"
+  },
+  "stop_conditions": [
+    {
+      "condition": "architecture-integrity",
+      "status": "not-triggered",
+      "finding": "No mitigation changes authority, host-neutral semantics, or the closed bridge/renderer boundaries."
+    },
+    {
+      "condition": "reproducibility",
+      "status": "not-triggered",
+      "finding": "All evidence shares one source/profile identity and both generated report stages are byte-deterministic."
+    },
+    {
+      "condition": "security-or-resource-regression",
+      "status": "not-triggered-with-limits",
+      "finding": "No page error, command failure, long task, or terminal resource growth was observed; complete memory and 100-cycle release methods remain insufficient."
+    },
+    {
+      "condition": "payload-economics",
+      "status": "review-triggered",
+      "finding": "The delivered unpruned application AVM exceeds compressed and decoded application thresholds."
+    },
+    {
+      "condition": "active-interaction",
+      "status": "review-triggered",
+      "finding": "Firefox timer-message p95 is 147.24 ms against the 100 ms active local-event threshold; other active local scenarios remain within threshold."
+    },
+    {
+      "condition": "unavailable-external-qualification",
+      "status": "deferred-not-active-blocker",
+      "finding": "Unavailable environments do not halt Linux feasibility work but prohibit support, release, mobile, and cross-platform claims."
+    }
+  ],
+  "active_failures": [
+    {
+      "budget_id": "BX-BUD-PAYLOAD-APPLICATION-COMPRESSED-KIB",
+      "finding": "2147.601 KiB delivered versus 250 KiB proposed maximum.",
+      "disposition": "Conditional development; execute application AVM reachability experiment before release qualification."
+    },
+    {
+      "budget_id": "BX-BUD-PAYLOAD-APPLICATION-UNCOMPRESSED-KIB",
+      "finding": "6424.242 KiB delivered versus 700 KiB proposed maximum.",
+      "disposition": "Conditional development; use the same reachability experiment and preserve full proof coverage."
+    },
+    {
+      "budget_id": "BX-BUD-INTERACTION-LOCAL-EVENT-PAINT-MS",
+      "finding": "Firefox development-build timer-message p95 is 147.24 ms versus 100 ms.",
+      "disposition": "Repeat with phase attribution after harness/runtime optimization; do not generalize to stable Firefox or mobile."
+    }
+  ],
+  "required_mitigations": [
+    {
+      "mitigation_id": "BX-BH01-MITIGATION-APPLICATION-AVM-REACHABILITY-0.1",
+      "owner": "build and runtime owners",
+      "due": "before release qualification",
+      "expiry": "review at BH-02 activation and every bundle-builder change",
+      "repeat": "Separate before/after manifests plus Phases 3-9 evidence."
+    },
+    {
+      "mitigation_id": "BX-BH01-MITIGATION-BROTLI-TRANSFER-0.1",
+      "owner": "browser profile owner",
+      "due": "before production deployment qualification",
+      "expiry": "review when deployment topology changes",
+      "repeat": "Before/after network and startup runs in active and later qualified environments."
+    },
+    {
+      "mitigation_id": "BX-BH01-MITIGATION-FIREFOX-TIMER-TRACE-0.1",
+      "owner": "browser host and runtime owners",
+      "due": "before stable Firefox qualification",
+      "expiry": "review when stable Firefox automation becomes available",
+      "repeat": "Trace timer dispatch, runtime message, DOM effect, and paint with 100 retained samples."
+    }
+  ],
+  "deferred_obligations": {
+    "path": "integration/benchmarks/reports/bh01-phase9-deferred-qualification.json",
+    "sha256": "73d61fae636b9d1a5ef4ad16247c989660a7d278d935df62a33046db98f3dd8a",
+    "reactivation": "BH-22",
+    "phase_9_effect": "does not block active Linux completion",
+    "support_effect": "blocks support and release qualification"
+  },
+  "decision": {
+    "active_linux_development": "conditional-go",
+    "framework_work": "may continue after Phase 9 integration closure and a separately authorized Phase 10",
+    "mobile_viability": "undecided-deferred",
+    "product_viability": "not-established-by-bh01-phase9",
+    "support": "unsupported"
+  },
+  "phase_10": {
+    "eligibility_after_phase_9_completion": true,
+    "authorized": false,
+    "required_inputs": [
+      "Phase 9 integration verifier pass",
+      "retained active failures and mitigation owners",
+      "unchanged quality thresholds",
+      "deferred qualification ledger"
+    ]
+  },
+  "prohibited_claims": [
+    "browser support",
+    "mobile viability",
+    "cross-platform qualification",
+    "accessibility conformance",
+    "production readiness",
+    "release approval"
+  ]
+}

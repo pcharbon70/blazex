@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0.0",
+  "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+  "captured_at": "2026-09-05T09:57:42.738Z",
+  "source_revision": "22dc98033893cdc85db142bd6a05650ab4032f52",
+  "operating_system": {
+    "name": "Linux Mint",
+    "version": "22.1",
+    "codename": "xia",
+    "kernel": "6.8.0-51-generic"
+  },
+  "architecture": "x86_64",
+  "hardware": {
+    "cpu": "12th Gen Intel(R) Core(TM) i7-12700F",
+    "logical_cpus": 20,
+    "memory_bytes": 67194294272,
+    "power_thermal_state": "unavailable",
+    "display_input": "headless-automation-keyboard-pointer"
+  },
+  "browser": {
+    "required_row": "BR-FIREFOX-DESKTOP",
+    "product": "Playwright patched Firefox development build",
+    "product_version": "153.0",
+    "binary_sha256": "26e4198abe0dfb93c339239297008b1319711575d8cbae8e2d5122d2017b29a1",
+    "authority": "experimental-development-evidence",
+    "required_row_credit": false,
+    "support_status": "unsupported"
+  },
+  "network": {
+    "server_location": "same-host-loopback",
+    "shape": "unshaped",
+    "cache_state": "declared-per-scenario"
+  },
+  "toolchain": [
+    {"name": "node", "version": "26.8.1"},
+    {"name": "playwright-core", "version": "1.62.1"},
+    {"name": "playwright-firefox", "version": "153.0 revision 1538"},
+    {"name": "phoenix", "version": "1.8.13"},
+    {"name": "elixir", "version": "1.17.3"}
+  ],
+  "raw_evidence_refs": ["integration/benchmarks/raw-evidence/bh01-phase9-firefox-linux.json"]
+}

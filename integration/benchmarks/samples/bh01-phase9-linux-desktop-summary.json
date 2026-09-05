@@ -1,0 +1,1237 @@
+{
+  "schema_version": "1.0.0",
+  "summary_id": "BX-BH01-PHASE9-LINUX-DESKTOP-SUMMARY-0.1",
+  "status": "observed",
+  "source_revision": "22dc98033893cdc85db142bd6a05650ab4032f52",
+  "generated_from_captured_at": "2026-09-05T09:57:42.738Z",
+  "raw_evidence": [
+    {
+      "kind": "browser",
+      "path": "integration/benchmarks/raw-evidence/bh01-phase9-chromium-linux.json",
+      "sha256": "49ca2f83a350534e28ce2c1889db05c658015b7083be2535da3e60d202afbaef",
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+      "status": "observed"
+    },
+    {
+      "kind": "browser",
+      "path": "integration/benchmarks/raw-evidence/bh01-phase9-firefox-linux.json",
+      "sha256": "a0d05b98ce400cecf40850baaf951bd09654e6ffba2a40418a79f941db6ba66d",
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+      "status": "observed"
+    },
+    {
+      "kind": "build",
+      "path": "integration/benchmarks/raw-evidence/bh01-phase9-build-linux.json",
+      "sha256": "e22905f29f9e981128e22d3f350a60ef660d510ce36a6f3d0efba4b58f273f80",
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-BUILD-X64-0.1",
+      "status": "observed"
+    },
+    {
+      "kind": "artifacts",
+      "path": "integration/benchmarks/raw-evidence/bh01-phase9-artifacts-linux.json",
+      "sha256": "f0ab01e91723c27055e33a7ac420fbd642a65adfbff301b0ca9558ba24cb3d5b",
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-BUILD-X64-0.1",
+      "status": "observed"
+    }
+  ],
+  "measurements": [
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-CLOCK-RESOLUTION-MS",
+      "scenario": "clock-calibration",
+      "unit": "milliseconds",
+      "cache_state": "not-applicable",
+      "statistics": {
+        "count": 1,
+        "minimum": 0.1,
+        "maximum": 0.1,
+        "mean": 0.1,
+        "median": 0.1,
+        "p95": 0.1,
+        "coefficient_of_variation_percent": 0.0
+      },
+      "adequacy": {
+        "observed_samples": 1,
+        "governed_minimum": 1,
+        "status": "adequate"
+      },
+      "outlier_review": {
+        "samples_excluded": 0,
+        "flag": "none",
+        "rationale": "All finite non-negative samples are retained; high variance is reported rather than removed."
+      },
+      "confidence": "No parametric interval asserted; the full distribution and deterministic nearest-rank p95 are retained."
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-INTERACTION-DOM-COMMIT-MS",
+      "scenario": "form-programmatic-update",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "statistics": {
+        "count": 100,
+        "minimum": 0.06,
+        "maximum": 0.53,
+        "mean": 0.23125,
+        "median": 0.235,
+        "p95": 0.385,
+        "coefficient_of_variation_percent": 43.702826
+      },
+      "adequacy": {
+        "observed_samples": 100,
+        "governed_minimum": 100,
+        "status": "adequate"
+      },
+      "outlier_review": {
+        "samples_excluded": 0,
+        "flag": "variance-review",
+        "rationale": "All finite non-negative samples are retained; high variance is reported rather than removed."
+      },
+      "confidence": "No parametric interval asserted; the full distribution and deterministic nearest-rank p95 are retained."
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-INTERACTION-DOM-COMMIT-MS",
+      "scenario": "nested-keyed-update",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "statistics": {
+        "count": 100,
+        "minimum": 0.085,
+        "maximum": 0.52,
+        "mean": 0.238,
+        "median": 0.245,
+        "p95": 0.385,
+        "coefficient_of_variation_percent": 36.806095
+      },
+      "adequacy": {
+        "observed_samples": 100,
+        "governed_minimum": 100,
+        "status": "adequate"
+      },
+      "outlier_review": {
+        "samples_excluded": 0,
+        "flag": "variance-review",
+        "rationale": "All finite non-negative samples are retained; high variance is reported rather than removed."
+      },
+      "confidence": "No parametric interval asserted; the full distribution and deterministic nearest-rank p95 are retained."
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-INTERACTION-DOM-COMMIT-MS",
+      "scenario": "parent-state-update",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "statistics": {
+        "count": 100,
+        "minimum": 0.065,
+        "maximum": 0.72,
+        "mean": 0.23125,
+        "median": 0.24,
+        "p95": 0.355,
+        "coefficient_of_variation_percent": 43.973694
+      },
+      "adequacy": {
+        "observed_samples": 100,
+        "governed_minimum": 100,
+        "status": "adequate"
+      },
+      "outlier_review": {
+        "samples_excluded": 0,
+        "flag": "variance-review",
+        "rationale": "All finite non-negative samples are retained; high variance is reported rather than removed."
+      },
+      "confidence": "No parametric interval asserted; the full distribution and deterministic nearest-rank p95 are retained."
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-INTERACTION-DOM-COMMIT-MS",
+      "scenario": "timer-message-update",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "statistics": {
+        "count": 100,
+        "minimum": 0.075,
+        "maximum": 0.42,
+        "mean": 0.2393,
+        "median": 0.2425,
+        "p95": 0.34,
+        "coefficient_of_variation_percent": 26.278679
+      },
+      "adequacy": {
+        "observed_samples": 100,
+        "governed_minimum": 100,
+        "status": "adequate"
+      },
+      "outlier_review": {
+        "samples_excluded": 0,
+        "flag": "variance-review",
+        "rationale": "All finite non-negative samples are retained; high variance is reported rather than removed."
+      },
+      "confidence": "No parametric interval asserted; the full distribution and deterministic nearest-rank p95 are retained."
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-INTERACTION-LOCAL-EVENT-PAINT-MS",
+      "scenario": "form-programmatic-update",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "statistics": {
+        "count": 100,
+        "minimum": 10.31,
+        "maximum": 47.42,
+        "mean": 37.10535,
+        "median": 46.5025,
+        "p95": 47.325,
+        "coefficient_of_variation_percent": 36.215999
+      },
+      "adequacy": {
+        "observed_samples": 100,
+        "governed_minimum": 100,
+        "status": "adequate"
+      },
+      "outlier_review": {
+        "samples_excluded": 0,
+        "flag": "variance-review",
+        "rationale": "All finite non-negative samples are retained; high variance is reported rather than removed."
+      },
+      "confidence": "No parametric interval asserted; the full distribution and deterministic nearest-rank p95 are retained."
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-INTERACTION-LOCAL-EVENT-PAINT-MS",
+      "scenario": "nested-keyed-update",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "statistics": {
+        "count": 100,
+        "minimum": 12.85,
+        "maximum": 53.285,
+        "mean": 30.40885,
+        "median": 32.24,
+        "p95": 40.805,
+        "coefficient_of_variation_percent": 26.765267
+      },
+      "adequacy": {
+        "observed_samples": 100,
+        "governed_minimum": 100,
+        "status": "adequate"
+      },
+      "outlier_review": {
+        "samples_excluded": 0,
+        "flag": "variance-review",
+        "rationale": "All finite non-negative samples are retained; high variance is reported rather than removed."
+      },
+      "confidence": "No parametric interval asserted; the full distribution and deterministic nearest-rank p95 are retained."
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-INTERACTION-LOCAL-EVENT-PAINT-MS",
+      "scenario": "parent-state-update",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "statistics": {
+        "count": 100,
+        "minimum": 14.605,
+        "maximum": 50.69,
+        "mean": 29.1021,
+        "median": 31.215,
+        "p95": 36.645,
+        "coefficient_of_variation_percent": 27.875289
+      },
+      "adequacy": {
+        "observed_samples": 100,
+        "governed_minimum": 100,
+        "status": "adequate"
+      },
+      "outlier_review": {
+        "samples_excluded": 0,
+        "flag": "variance-review",
+        "rationale": "All finite non-negative samples are retained; high variance is reported rather than removed."
+      },
+      "confidence": "No parametric interval asserted; the full distribution and deterministic nearest-rank p95 are retained."
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-INTERACTION-LOCAL-EVENT-PAINT-MS",
+      "scenario": "timer-message-update",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "statistics": {
+        "count": 100,
+        "minimum": 31.745,
+        "maximum": 72.27,
+        "mean": 61.04315,
+        "median": 63.7225,
+        "p95": 66.9,
+        "coefficient_of_variation_percent": 12.362721
+      },
+      "adequacy": {
+        "observed_samples": 100,
+        "governed_minimum": 100,
+        "status": "adequate"
+      },
+      "outlier_review": {
+        "samples_excluded": 0,
+        "flag": "variance-review",
+        "rationale": "All finite non-negative samples are retained; high variance is reported rather than removed."
+      },
+      "confidence": "No parametric interval asserted; the full distribution and deterministic nearest-rank p95 are retained."
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-INTERACTION-SERVER-ROUNDTRIP-MS",
+      "scenario": "authenticated-success",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "statistics": {
+        "count": 50,
+        "minimum": 60.415,
+        "maximum": 139.28,
+        "mean": 111.0178,
+        "median": 119.095,
+        "p95": 138.005,
+        "coefficient_of_variation_percent": 22.991723
+      },
+      "adequacy": {
+        "observed_samples": 50,
+        "governed_minimum": 50,
+        "status": "adequate"
+      },
+      "outlier_review": {
+        "samples_excluded": 0,
+        "flag": "variance-review",
+        "rationale": "All finite non-negative samples are retained; high variance is reported rather than removed."
+      },
+      "confidence": "No parametric interval asserted; the full distribution and deterministic nearest-rank p95 are retained."
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-INTERACTION-SERVER-ROUNDTRIP-MS",
+      "scenario": "authorization-denial",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "statistics": {
+        "count": 50,
+        "minimum": 58.365,
+        "maximum": 137.95,
+        "mean": 110.1389,
+        "median": 118.3025,
+        "p95": 137.445,
+        "coefficient_of_variation_percent": 18.966899
+      },
+      "adequacy": {
+        "observed_samples": 50,
+        "governed_minimum": 50,
+        "status": "adequate"
+      },
+      "outlier_review": {
+        "samples_excluded": 0,
+        "flag": "variance-review",
+        "rationale": "All finite non-negative samples are retained; high variance is reported rather than removed."
+      },
+      "confidence": "No parametric interval asserted; the full distribution and deterministic nearest-rank p95 are retained."
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-INTERACTION-SERVER-ROUNDTRIP-MS",
+      "scenario": "disconnect-retry",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "statistics": {
+        "count": 50,
+        "minimum": 103.66,
+        "maximum": 239.12,
+        "mean": 198.0617,
+        "median": 202.4525,
+        "p95": 238.63,
+        "coefficient_of_variation_percent": 15.128203
+      },
+      "adequacy": {
+        "observed_samples": 50,
+        "governed_minimum": 50,
+        "status": "adequate"
+      },
+      "outlier_review": {
+        "samples_excluded": 0,
+        "flag": "variance-review",
+        "rationale": "All finite non-negative samples are retained; high variance is reported rather than removed."
+      },
+      "confidence": "No parametric interval asserted; the full distribution and deterministic nearest-rank p95 are retained."
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-RESOURCE-CLEANUP-MS",
+      "scenario": "repeated-host-stop",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "statistics": {
+        "count": 20,
+        "minimum": 8.005,
+        "maximum": 102.935,
+        "mean": 23.254,
+        "median": 12.665,
+        "p95": 101.34,
+        "coefficient_of_variation_percent": 116.615747
+      },
+      "adequacy": {
+        "observed_samples": 20,
+        "governed_minimum": 20,
+        "status": "adequate"
+      },
+      "outlier_review": {
+        "samples_excluded": 0,
+        "flag": "variance-review",
+        "rationale": "All finite non-negative samples are retained; high variance is reported rather than removed."
+      },
+      "confidence": "No parametric interval asserted; the full distribution and deterministic nearest-rank p95 are retained."
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-RESOURCE-JS-HEAP-BYTES",
+      "scenario": "interaction-lifecycle-envelope",
+      "unit": "bytes",
+      "cache_state": "warm",
+      "statistics": {
+        "count": 2,
+        "minimum": 17420899.0,
+        "maximum": 34970157.0,
+        "mean": 26195528.0,
+        "median": 26195528.0,
+        "p95": 34970157.0,
+        "coefficient_of_variation_percent": 33.496668
+      },
+      "adequacy": {
+        "observed_samples": 2,
+        "governed_minimum": 2,
+        "status": "adequate"
+      },
+      "outlier_review": {
+        "samples_excluded": 0,
+        "flag": "variance-review",
+        "rationale": "All finite non-negative samples are retained; high variance is reported rather than removed."
+      },
+      "confidence": "No parametric interval asserted; the full distribution and deterministic nearest-rank p95 are retained."
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-STARTUP-FALLBACK-READY-MS",
+      "scenario": "webassembly-unavailable",
+      "unit": "milliseconds",
+      "cache_state": "cold",
+      "statistics": {
+        "count": 30,
+        "minimum": 36.435,
+        "maximum": 59.96,
+        "mean": 40.378167,
+        "median": 39.3275,
+        "p95": 51.04,
+        "coefficient_of_variation_percent": 11.506582
+      },
+      "adequacy": {
+        "observed_samples": 30,
+        "governed_minimum": 30,
+        "status": "adequate"
+      },
+      "outlier_review": {
+        "samples_excluded": 0,
+        "flag": "variance-review",
+        "rationale": "All finite non-negative samples are retained; high variance is reported rather than removed."
+      },
+      "confidence": "No parametric interval asserted; the full distribution and deterministic nearest-rank p95 are retained."
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-STARTUP-INSTANTIATE-READY-MS",
+      "scenario": "browser-profile",
+      "unit": "milliseconds",
+      "cache_state": "cold",
+      "statistics": {
+        "count": 50,
+        "minimum": 110.53,
+        "maximum": 190.885,
+        "mean": 118.3615,
+        "median": 116.0225,
+        "p95": 128.835,
+        "coefficient_of_variation_percent": 9.504994
+      },
+      "adequacy": {
+        "observed_samples": 50,
+        "governed_minimum": 30,
+        "status": "adequate"
+      },
+      "outlier_review": {
+        "samples_excluded": 0,
+        "flag": "none",
+        "rationale": "All finite non-negative samples are retained; high variance is reported rather than removed."
+      },
+      "confidence": "No parametric interval asserted; the full distribution and deterministic nearest-rank p95 are retained."
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-STARTUP-INSTANTIATE-READY-MS",
+      "scenario": "browser-profile",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "statistics": {
+        "count": 50,
+        "minimum": 107.845,
+        "maximum": 130.18,
+        "mean": 115.7474,
+        "median": 115.0375,
+        "p95": 125.115,
+        "coefficient_of_variation_percent": 3.948541
+      },
+      "adequacy": {
+        "observed_samples": 50,
+        "governed_minimum": 30,
+        "status": "adequate"
+      },
+      "outlier_review": {
+        "samples_excluded": 0,
+        "flag": "none",
+        "rationale": "All finite non-negative samples are retained; high variance is reported rather than removed."
+      },
+      "confidence": "No parametric interval asserted; the full distribution and deterministic nearest-rank p95 are retained."
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-STARTUP-NAVIGATION-READY-MS",
+      "scenario": "browser-profile",
+      "unit": "milliseconds",
+      "cache_state": "cold",
+      "statistics": {
+        "count": 50,
+        "minimum": 269.665,
+        "maximum": 349.625,
+        "mean": 285.8638,
+        "median": 284.0175,
+        "p95": 299.99,
+        "coefficient_of_variation_percent": 4.115028
+      },
+      "adequacy": {
+        "observed_samples": 50,
+        "governed_minimum": 30,
+        "status": "adequate"
+      },
+      "outlier_review": {
+        "samples_excluded": 0,
+        "flag": "none",
+        "rationale": "All finite non-negative samples are retained; high variance is reported rather than removed."
+      },
+      "confidence": "No parametric interval asserted; the full distribution and deterministic nearest-rank p95 are retained."
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-STARTUP-NAVIGATION-READY-MS",
+      "scenario": "browser-profile",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "statistics": {
+        "count": 50,
+        "minimum": 265.245,
+        "maximum": 297.99,
+        "mean": 282.4469,
+        "median": 281.3375,
+        "p95": 295.41,
+        "coefficient_of_variation_percent": 2.571595
+      },
+      "adequacy": {
+        "observed_samples": 50,
+        "governed_minimum": 30,
+        "status": "adequate"
+      },
+      "outlier_review": {
+        "samples_excluded": 0,
+        "flag": "none",
+        "rationale": "All finite non-negative samples are retained; high variance is reported rather than removed."
+      },
+      "confidence": "No parametric interval asserted; the full distribution and deterministic nearest-rank p95 are retained."
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-STARTUP-ROOT-READY-MS",
+      "scenario": "browser-profile",
+      "unit": "milliseconds",
+      "cache_state": "cold",
+      "statistics": {
+        "count": 50,
+        "minimum": 83.67,
+        "maximum": 110.83,
+        "mean": 96.2683,
+        "median": 96.12,
+        "p95": 108.695,
+        "coefficient_of_variation_percent": 6.443686
+      },
+      "adequacy": {
+        "observed_samples": 50,
+        "governed_minimum": 50,
+        "status": "adequate"
+      },
+      "outlier_review": {
+        "samples_excluded": 0,
+        "flag": "none",
+        "rationale": "All finite non-negative samples are retained; high variance is reported rather than removed."
+      },
+      "confidence": "No parametric interval asserted; the full distribution and deterministic nearest-rank p95 are retained."
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-STARTUP-ROOT-READY-MS",
+      "scenario": "browser-profile",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "statistics": {
+        "count": 50,
+        "minimum": 85.56,
+        "maximum": 110.61,
+        "mean": 96.7968,
+        "median": 96.4425,
+        "p95": 107.625,
+        "coefficient_of_variation_percent": 5.590226
+      },
+      "adequacy": {
+        "observed_samples": 50,
+        "governed_minimum": 50,
+        "status": "adequate"
+      },
+      "outlier_review": {
+        "samples_excluded": 0,
+        "flag": "none",
+        "rationale": "All finite non-negative samples are retained; high variance is reported rather than removed."
+      },
+      "confidence": "No parametric interval asserted; the full distribution and deterministic nearest-rank p95 are retained."
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-CLOCK-RESOLUTION-MS",
+      "scenario": "clock-calibration",
+      "unit": "milliseconds",
+      "cache_state": "not-applicable",
+      "statistics": {
+        "count": 1,
+        "minimum": 1.0,
+        "maximum": 1.0,
+        "mean": 1.0,
+        "median": 1.0,
+        "p95": 1.0,
+        "coefficient_of_variation_percent": 0.0
+      },
+      "adequacy": {
+        "observed_samples": 1,
+        "governed_minimum": 1,
+        "status": "adequate"
+      },
+      "outlier_review": {
+        "samples_excluded": 0,
+        "flag": "none",
+        "rationale": "All finite non-negative samples are retained; high variance is reported rather than removed."
+      },
+      "confidence": "No parametric interval asserted; the full distribution and deterministic nearest-rank p95 are retained."
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-INTERACTION-DOM-COMMIT-MS",
+      "scenario": "form-programmatic-update",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "statistics": {
+        "count": 100,
+        "minimum": 0.12,
+        "maximum": 0.22,
+        "mean": 0.1362,
+        "median": 0.12,
+        "p95": 0.18,
+        "coefficient_of_variation_percent": 15.773823
+      },
+      "adequacy": {
+        "observed_samples": 100,
+        "governed_minimum": 100,
+        "status": "adequate"
+      },
+      "outlier_review": {
+        "samples_excluded": 0,
+        "flag": "variance-review",
+        "rationale": "All finite non-negative samples are retained; high variance is reported rather than removed."
+      },
+      "confidence": "No parametric interval asserted; the full distribution and deterministic nearest-rank p95 are retained."
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-INTERACTION-DOM-COMMIT-MS",
+      "scenario": "nested-keyed-update",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "statistics": {
+        "count": 100,
+        "minimum": 0.14,
+        "maximum": 0.44,
+        "mean": 0.1964,
+        "median": 0.19,
+        "p95": 0.26,
+        "coefficient_of_variation_percent": 19.81849
+      },
+      "adequacy": {
+        "observed_samples": 100,
+        "governed_minimum": 100,
+        "status": "adequate"
+      },
+      "outlier_review": {
+        "samples_excluded": 0,
+        "flag": "variance-review",
+        "rationale": "All finite non-negative samples are retained; high variance is reported rather than removed."
+      },
+      "confidence": "No parametric interval asserted; the full distribution and deterministic nearest-rank p95 are retained."
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-INTERACTION-DOM-COMMIT-MS",
+      "scenario": "parent-state-update",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "statistics": {
+        "count": 100,
+        "minimum": 0.16,
+        "maximum": 0.44,
+        "mean": 0.2224,
+        "median": 0.21,
+        "p95": 0.32,
+        "coefficient_of_variation_percent": 24.038898
+      },
+      "adequacy": {
+        "observed_samples": 100,
+        "governed_minimum": 100,
+        "status": "adequate"
+      },
+      "outlier_review": {
+        "samples_excluded": 0,
+        "flag": "variance-review",
+        "rationale": "All finite non-negative samples are retained; high variance is reported rather than removed."
+      },
+      "confidence": "No parametric interval asserted; the full distribution and deterministic nearest-rank p95 are retained."
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-INTERACTION-DOM-COMMIT-MS",
+      "scenario": "timer-message-update",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "statistics": {
+        "count": 100,
+        "minimum": 0.12,
+        "maximum": 0.32,
+        "mean": 0.1664,
+        "median": 0.16,
+        "p95": 0.22,
+        "coefficient_of_variation_percent": 22.92367
+      },
+      "adequacy": {
+        "observed_samples": 100,
+        "governed_minimum": 100,
+        "status": "adequate"
+      },
+      "outlier_review": {
+        "samples_excluded": 0,
+        "flag": "variance-review",
+        "rationale": "All finite non-negative samples are retained; high variance is reported rather than removed."
+      },
+      "confidence": "No parametric interval asserted; the full distribution and deterministic nearest-rank p95 are retained."
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-INTERACTION-LOCAL-EVENT-PAINT-MS",
+      "scenario": "form-programmatic-update",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "statistics": {
+        "count": 100,
+        "minimum": 58.6,
+        "maximum": 110.34,
+        "mean": 69.5244,
+        "median": 64.19,
+        "p95": 91.72,
+        "coefficient_of_variation_percent": 16.110828
+      },
+      "adequacy": {
+        "observed_samples": 100,
+        "governed_minimum": 100,
+        "status": "adequate"
+      },
+      "outlier_review": {
+        "samples_excluded": 0,
+        "flag": "variance-review",
+        "rationale": "All finite non-negative samples are retained; high variance is reported rather than removed."
+      },
+      "confidence": "No parametric interval asserted; the full distribution and deterministic nearest-rank p95 are retained."
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-INTERACTION-LOCAL-EVENT-PAINT-MS",
+      "scenario": "nested-keyed-update",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "statistics": {
+        "count": 100,
+        "minimum": 52.5,
+        "maximum": 104.82,
+        "mean": 67.2608,
+        "median": 64.75,
+        "p95": 87.24,
+        "coefficient_of_variation_percent": 15.167029
+      },
+      "adequacy": {
+        "observed_samples": 100,
+        "governed_minimum": 100,
+        "status": "adequate"
+      },
+      "outlier_review": {
+        "samples_excluded": 0,
+        "flag": "variance-review",
+        "rationale": "All finite non-negative samples are retained; high variance is reported rather than removed."
+      },
+      "confidence": "No parametric interval asserted; the full distribution and deterministic nearest-rank p95 are retained."
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-INTERACTION-LOCAL-EVENT-PAINT-MS",
+      "scenario": "parent-state-update",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "statistics": {
+        "count": 100,
+        "minimum": 51.1,
+        "maximum": 113.32,
+        "mean": 65.3996,
+        "median": 63.34,
+        "p95": 88.28,
+        "coefficient_of_variation_percent": 18.786311
+      },
+      "adequacy": {
+        "observed_samples": 100,
+        "governed_minimum": 100,
+        "status": "adequate"
+      },
+      "outlier_review": {
+        "samples_excluded": 0,
+        "flag": "variance-review",
+        "rationale": "All finite non-negative samples are retained; high variance is reported rather than removed."
+      },
+      "confidence": "No parametric interval asserted; the full distribution and deterministic nearest-rank p95 are retained."
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-INTERACTION-LOCAL-EVENT-PAINT-MS",
+      "scenario": "timer-message-update",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "statistics": {
+        "count": 100,
+        "minimum": 97.98,
+        "maximum": 159.6,
+        "mean": 124.3656,
+        "median": 124.15,
+        "p95": 147.24,
+        "coefficient_of_variation_percent": 10.940754
+      },
+      "adequacy": {
+        "observed_samples": 100,
+        "governed_minimum": 100,
+        "status": "adequate"
+      },
+      "outlier_review": {
+        "samples_excluded": 0,
+        "flag": "variance-review",
+        "rationale": "All finite non-negative samples are retained; high variance is reported rather than removed."
+      },
+      "confidence": "No parametric interval asserted; the full distribution and deterministic nearest-rank p95 are retained."
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-INTERACTION-SERVER-ROUNDTRIP-MS",
+      "scenario": "authenticated-success",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "statistics": {
+        "count": 50,
+        "minimum": 156.52,
+        "maximum": 277.8,
+        "mean": 191.1464,
+        "median": 189.89,
+        "p95": 226.98,
+        "coefficient_of_variation_percent": 12.090258
+      },
+      "adequacy": {
+        "observed_samples": 50,
+        "governed_minimum": 50,
+        "status": "adequate"
+      },
+      "outlier_review": {
+        "samples_excluded": 0,
+        "flag": "variance-review",
+        "rationale": "All finite non-negative samples are retained; high variance is reported rather than removed."
+      },
+      "confidence": "No parametric interval asserted; the full distribution and deterministic nearest-rank p95 are retained."
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-INTERACTION-SERVER-ROUNDTRIP-MS",
+      "scenario": "authorization-denial",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "statistics": {
+        "count": 50,
+        "minimum": 154.64,
+        "maximum": 251.54,
+        "mean": 187.0284,
+        "median": 184.33,
+        "p95": 237.82,
+        "coefficient_of_variation_percent": 11.89312
+      },
+      "adequacy": {
+        "observed_samples": 50,
+        "governed_minimum": 50,
+        "status": "adequate"
+      },
+      "outlier_review": {
+        "samples_excluded": 0,
+        "flag": "variance-review",
+        "rationale": "All finite non-negative samples are retained; high variance is reported rather than removed."
+      },
+      "confidence": "No parametric interval asserted; the full distribution and deterministic nearest-rank p95 are retained."
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-INTERACTION-SERVER-ROUNDTRIP-MS",
+      "scenario": "disconnect-retry",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "statistics": {
+        "count": 50,
+        "minimum": 308.0,
+        "maximum": 426.36,
+        "mean": 351.4584,
+        "median": 353.39,
+        "p95": 399.24,
+        "coefficient_of_variation_percent": 7.449811
+      },
+      "adequacy": {
+        "observed_samples": 50,
+        "governed_minimum": 50,
+        "status": "adequate"
+      },
+      "outlier_review": {
+        "samples_excluded": 0,
+        "flag": "none",
+        "rationale": "All finite non-negative samples are retained; high variance is reported rather than removed."
+      },
+      "confidence": "No parametric interval asserted; the full distribution and deterministic nearest-rank p95 are retained."
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-RESOURCE-CLEANUP-MS",
+      "scenario": "repeated-host-stop",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "statistics": {
+        "count": 20,
+        "minimum": 37.84,
+        "maximum": 77.12,
+        "mean": 53.687,
+        "median": 52.02,
+        "p95": 70.36,
+        "coefficient_of_variation_percent": 18.907428
+      },
+      "adequacy": {
+        "observed_samples": 20,
+        "governed_minimum": 20,
+        "status": "adequate"
+      },
+      "outlier_review": {
+        "samples_excluded": 0,
+        "flag": "variance-review",
+        "rationale": "All finite non-negative samples are retained; high variance is reported rather than removed."
+      },
+      "confidence": "No parametric interval asserted; the full distribution and deterministic nearest-rank p95 are retained."
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-STARTUP-FALLBACK-READY-MS",
+      "scenario": "webassembly-unavailable",
+      "unit": "milliseconds",
+      "cache_state": "cold",
+      "statistics": {
+        "count": 30,
+        "minimum": 90.86,
+        "maximum": 208.5,
+        "mean": 106.746,
+        "median": 98.75,
+        "p95": 153.46,
+        "coefficient_of_variation_percent": 21.392406
+      },
+      "adequacy": {
+        "observed_samples": 30,
+        "governed_minimum": 30,
+        "status": "adequate"
+      },
+      "outlier_review": {
+        "samples_excluded": 0,
+        "flag": "variance-review",
+        "rationale": "All finite non-negative samples are retained; high variance is reported rather than removed."
+      },
+      "confidence": "No parametric interval asserted; the full distribution and deterministic nearest-rank p95 are retained."
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-STARTUP-INSTANTIATE-READY-MS",
+      "scenario": "browser-profile",
+      "unit": "milliseconds",
+      "cache_state": "cold",
+      "statistics": {
+        "count": 50,
+        "minimum": 119.4,
+        "maximum": 235.08,
+        "mean": 163.5872,
+        "median": 162.39,
+        "p95": 196.9,
+        "coefficient_of_variation_percent": 15.851794
+      },
+      "adequacy": {
+        "observed_samples": 50,
+        "governed_minimum": 30,
+        "status": "adequate"
+      },
+      "outlier_review": {
+        "samples_excluded": 0,
+        "flag": "variance-review",
+        "rationale": "All finite non-negative samples are retained; high variance is reported rather than removed."
+      },
+      "confidence": "No parametric interval asserted; the full distribution and deterministic nearest-rank p95 are retained."
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-STARTUP-INSTANTIATE-READY-MS",
+      "scenario": "browser-profile",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "statistics": {
+        "count": 50,
+        "minimum": 107.46,
+        "maximum": 241.86,
+        "mean": 162.7028,
+        "median": 159.3,
+        "p95": 210.68,
+        "coefficient_of_variation_percent": 16.459784
+      },
+      "adequacy": {
+        "observed_samples": 50,
+        "governed_minimum": 30,
+        "status": "adequate"
+      },
+      "outlier_review": {
+        "samples_excluded": 0,
+        "flag": "variance-review",
+        "rationale": "All finite non-negative samples are retained; high variance is reported rather than removed."
+      },
+      "confidence": "No parametric interval asserted; the full distribution and deterministic nearest-rank p95 are retained."
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-STARTUP-NAVIGATION-READY-MS",
+      "scenario": "browser-profile",
+      "unit": "milliseconds",
+      "cache_state": "cold",
+      "statistics": {
+        "count": 50,
+        "minimum": 665.84,
+        "maximum": 806.9,
+        "mean": 732.6648,
+        "median": 729.5,
+        "p95": 790.66,
+        "coefficient_of_variation_percent": 4.132573
+      },
+      "adequacy": {
+        "observed_samples": 50,
+        "governed_minimum": 30,
+        "status": "adequate"
+      },
+      "outlier_review": {
+        "samples_excluded": 0,
+        "flag": "none",
+        "rationale": "All finite non-negative samples are retained; high variance is reported rather than removed."
+      },
+      "confidence": "No parametric interval asserted; the full distribution and deterministic nearest-rank p95 are retained."
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-STARTUP-NAVIGATION-READY-MS",
+      "scenario": "browser-profile",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "statistics": {
+        "count": 50,
+        "minimum": 663.18,
+        "maximum": 837.5,
+        "mean": 728.7756,
+        "median": 733.45,
+        "p95": 785.04,
+        "coefficient_of_variation_percent": 4.419091
+      },
+      "adequacy": {
+        "observed_samples": 50,
+        "governed_minimum": 30,
+        "status": "adequate"
+      },
+      "outlier_review": {
+        "samples_excluded": 0,
+        "flag": "none",
+        "rationale": "All finite non-negative samples are retained; high variance is reported rather than removed."
+      },
+      "confidence": "No parametric interval asserted; the full distribution and deterministic nearest-rank p95 are retained."
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-STARTUP-ROOT-READY-MS",
+      "scenario": "browser-profile",
+      "unit": "milliseconds",
+      "cache_state": "cold",
+      "statistics": {
+        "count": 50,
+        "minimum": 389.04,
+        "maximum": 484.92,
+        "mean": 425.9484,
+        "median": 424.89,
+        "p95": 454.5,
+        "coefficient_of_variation_percent": 3.802948
+      },
+      "adequacy": {
+        "observed_samples": 50,
+        "governed_minimum": 50,
+        "status": "adequate"
+      },
+      "outlier_review": {
+        "samples_excluded": 0,
+        "flag": "none",
+        "rationale": "All finite non-negative samples are retained; high variance is reported rather than removed."
+      },
+      "confidence": "No parametric interval asserted; the full distribution and deterministic nearest-rank p95 are retained."
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-STARTUP-ROOT-READY-MS",
+      "scenario": "browser-profile",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "statistics": {
+        "count": 50,
+        "minimum": 398.16,
+        "maximum": 481.92,
+        "mean": 426.5932,
+        "median": 425.92,
+        "p95": 447.62,
+        "coefficient_of_variation_percent": 3.392821
+      },
+      "adequacy": {
+        "observed_samples": 50,
+        "governed_minimum": 50,
+        "status": "adequate"
+      },
+      "outlier_review": {
+        "samples_excluded": 0,
+        "flag": "none",
+        "rationale": "All finite non-negative samples are retained; high variance is reported rather than removed."
+      },
+      "confidence": "No parametric interval asserted; the full distribution and deterministic nearest-rank p95 are retained."
+    }
+  ],
+  "build": {
+    "environment_id": "BX-BH01-ENV-PHASE9-LINUX-BUILD-X64-0.1",
+    "metric_id": "BX-BH01-METRIC-BUILD-RELEASE-SECONDS",
+    "statistics": {
+      "count": 10,
+      "minimum": 0.046267,
+      "maximum": 0.054734,
+      "mean": 0.049323,
+      "median": 0.048507,
+      "p95": 0.054734,
+      "coefficient_of_variation_percent": 5.327941
+    },
+    "adequacy": {
+      "observed_samples": 10,
+      "governed_minimum": 10,
+      "status": "adequate"
+    },
+    "manifest_sha256": "818ac7b967db6519c766f9d1fff80455cc92d205e3f188252e6da27258ee4aad"
+  },
+  "payload": {
+    "environment_id": "BX-BH01-ENV-PHASE9-LINUX-BUILD-X64-0.1",
+    "metric_id": "BX-BH01-METRIC-PAYLOAD-BROTLI-BYTES",
+    "compression": {
+      "algorithm": "brotli",
+      "quality": 11,
+      "repetitions": 3
+    },
+    "totals": {
+      "runtime": {
+        "decoded_bytes": 1142958,
+        "brotli_bytes": 285660,
+        "request_count": 2
+      },
+      "application-bundle-unpruned": {
+        "decoded_bytes": 6578424,
+        "brotli_bytes": 2199143,
+        "request_count": 1
+      },
+      "loader-bootstrap": {
+        "decoded_bytes": 84778,
+        "brotli_bytes": 23438,
+        "request_count": 18
+      },
+      "shared-ui-fixture": {
+        "decoded_bytes": 21061,
+        "brotli_bytes": 4943,
+        "request_count": 2
+      },
+      "total": {
+        "decoded_bytes": 7827221,
+        "brotli_bytes": 2513184,
+        "request_count": 23
+      }
+    },
+    "artifact_count": 23,
+    "source_maps": []
+  },
+  "reliability": [
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+      "page_errors": 0,
+      "command_failures": 0,
+      "long_task_api": "available",
+      "long_tasks": [],
+      "resource_growth_detected": false
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+      "page_errors": 0,
+      "command_failures": 0,
+      "long_task_api": "available",
+      "long_tasks": [],
+      "resource_growth_detected": false
+    }
+  ],
+  "environment_drift": {
+    "source_revision_consistent": true,
+    "profile_manifest_consistent": true,
+    "drift_detected": false
+  },
+  "cross_machine_comparison": {
+    "status": "deferred",
+    "reason": "No second controlled Linux development machine is currently available.",
+    "reactivation": "BH-22 qualification infrastructure or earlier when another controlled host becomes available"
+  },
+  "limitations": [
+    "Results describe the available Linux development host and do not establish browser support.",
+    "Firefox is a patched Playwright development build and receives no stable Firefox required-row credit.",
+    "Loopback is unshaped and does not substitute for constrained-network or mobile evidence.",
+    "The build duration covers dependency-cached profile packaging, not the complete clean source-build boundary."
+  ]
+}

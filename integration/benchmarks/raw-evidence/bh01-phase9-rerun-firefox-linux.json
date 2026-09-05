@@ -1,0 +1,1396 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "BX-BH01-PHASE9-RUN-FIREFOX-LINUX-RERUN-0.1",
+  "status": "observed",
+  "captured_at": "2026-09-05T10:16:40.614Z",
+  "source_revision": "04f9eb1bd2b191d6b6a23202247201bce5d82855",
+  "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+  "browser": {
+    "type": "firefox",
+    "product": "Playwright-Firefox-development-build",
+    "version": "153.0",
+    "executable_sha256": "26e4198abe0dfb93c339239297008b1319711575d8cbae8e2d5122d2017b29a1",
+    "os": "linux 6.8.0-51-generic",
+    "architecture": "x64",
+    "authority": "active-development-evidence",
+    "support_status": "unsupported"
+  },
+  "artifact_manifest": {
+    "id": "BX-BH01-PHASE-05-PROFILE-ASSETS-0.1",
+    "sha256": "818ac7b967db6519c766f9d1fff80455cc92d205e3f188252e6da27258ee4aad",
+    "governed_files": 23
+  },
+  "configuration": {
+    "clock": "browser-performance-now-monotonic",
+    "cold_start_samples": 10,
+    "warm_start_samples": 10,
+    "fallback_samples": 10,
+    "interaction_samples": 20,
+    "server_samples": 10,
+    "cleanup_samples": 10,
+    "discarded_warmups": 1,
+    "network": "same-host-loopback-unshaped"
+  },
+  "measurements": [
+    {
+      "metric_id": "BX-BH01-METRIC-CLOCK-RESOLUTION-MS",
+      "scenario": "clock-calibration",
+      "unit": "milliseconds",
+      "cache_state": "not-applicable",
+      "samples": [
+        {
+          "iteration": 1,
+          "value": 1
+        }
+      ]
+    },
+    {
+      "metric_id": "BX-BH01-METRIC-STARTUP-FALLBACK-READY-MS",
+      "scenario": "webassembly-unavailable",
+      "unit": "milliseconds",
+      "cache_state": "cold",
+      "samples": [
+        {
+          "iteration": 1,
+          "value": 135.52
+        },
+        {
+          "iteration": 2,
+          "value": 114.28
+        },
+        {
+          "iteration": 3,
+          "value": 112.48
+        },
+        {
+          "iteration": 4,
+          "value": 120.32
+        },
+        {
+          "iteration": 5,
+          "value": 128.14
+        },
+        {
+          "iteration": 6,
+          "value": 125.94
+        },
+        {
+          "iteration": 7,
+          "value": 115.14
+        },
+        {
+          "iteration": 8,
+          "value": 110.88
+        },
+        {
+          "iteration": 9,
+          "value": 129.02
+        },
+        {
+          "iteration": 10,
+          "value": 114.58
+        }
+      ]
+    },
+    {
+      "metric_id": "BX-BH01-METRIC-STARTUP-NAVIGATION-READY-MS",
+      "scenario": "browser-profile",
+      "unit": "milliseconds",
+      "cache_state": "cold",
+      "samples": [
+        {
+          "iteration": 1,
+          "value": 702.38
+        },
+        {
+          "iteration": 2,
+          "value": 676.2
+        },
+        {
+          "iteration": 3,
+          "value": 698.2
+        },
+        {
+          "iteration": 4,
+          "value": 692.86
+        },
+        {
+          "iteration": 5,
+          "value": 719.08
+        },
+        {
+          "iteration": 6,
+          "value": 679.96
+        },
+        {
+          "iteration": 7,
+          "value": 731.02
+        },
+        {
+          "iteration": 8,
+          "value": 718.7
+        },
+        {
+          "iteration": 9,
+          "value": 677.6
+        },
+        {
+          "iteration": 10,
+          "value": 690.58
+        }
+      ]
+    },
+    {
+      "metric_id": "BX-BH01-METRIC-STARTUP-INSTANTIATE-READY-MS",
+      "scenario": "browser-profile",
+      "unit": "milliseconds",
+      "cache_state": "cold",
+      "samples": [
+        {
+          "iteration": 1,
+          "value": 138.82
+        },
+        {
+          "iteration": 2,
+          "value": 128.22000000000003
+        },
+        {
+          "iteration": 3,
+          "value": 126.36000000000001
+        },
+        {
+          "iteration": 4,
+          "value": 130.49999999999997
+        },
+        {
+          "iteration": 5,
+          "value": 134.77999999999997
+        },
+        {
+          "iteration": 6,
+          "value": 126.14000000000001
+        },
+        {
+          "iteration": 7,
+          "value": 173.52
+        },
+        {
+          "iteration": 8,
+          "value": 126.25999999999999
+        },
+        {
+          "iteration": 9,
+          "value": 124.32000000000002
+        },
+        {
+          "iteration": 10,
+          "value": 127.18
+        }
+      ]
+    },
+    {
+      "metric_id": "BX-BH01-METRIC-STARTUP-ROOT-READY-MS",
+      "scenario": "browser-profile",
+      "unit": "milliseconds",
+      "cache_state": "cold",
+      "samples": [
+        {
+          "iteration": 1,
+          "value": 414
+        },
+        {
+          "iteration": 2,
+          "value": 409.84000000000003
+        },
+        {
+          "iteration": 3,
+          "value": 432.40000000000003
+        },
+        {
+          "iteration": 4,
+          "value": 425.40000000000003
+        },
+        {
+          "iteration": 5,
+          "value": 432.62000000000006
+        },
+        {
+          "iteration": 6,
+          "value": 413.04
+        },
+        {
+          "iteration": 7,
+          "value": 421.78
+        },
+        {
+          "iteration": 8,
+          "value": 422.06000000000006
+        },
+        {
+          "iteration": 9,
+          "value": 409.3
+        },
+        {
+          "iteration": 10,
+          "value": 424.6
+        }
+      ]
+    },
+    {
+      "metric_id": "BX-BH01-METRIC-STARTUP-NAVIGATION-READY-MS",
+      "scenario": "browser-profile",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "samples": [
+        {
+          "iteration": 1,
+          "value": 662.12
+        },
+        {
+          "iteration": 2,
+          "value": 688.8
+        },
+        {
+          "iteration": 3,
+          "value": 691.74
+        },
+        {
+          "iteration": 4,
+          "value": 665.44
+        },
+        {
+          "iteration": 5,
+          "value": 679.62
+        },
+        {
+          "iteration": 6,
+          "value": 681.12
+        },
+        {
+          "iteration": 7,
+          "value": 686.46
+        },
+        {
+          "iteration": 8,
+          "value": 682.8
+        },
+        {
+          "iteration": 9,
+          "value": 698.78
+        },
+        {
+          "iteration": 10,
+          "value": 663
+        }
+      ]
+    },
+    {
+      "metric_id": "BX-BH01-METRIC-STARTUP-INSTANTIATE-READY-MS",
+      "scenario": "browser-profile",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "samples": [
+        {
+          "iteration": 1,
+          "value": 119.70000000000002
+        },
+        {
+          "iteration": 2,
+          "value": 123.30000000000001
+        },
+        {
+          "iteration": 3,
+          "value": 133.12
+        },
+        {
+          "iteration": 4,
+          "value": 113.46000000000001
+        },
+        {
+          "iteration": 5,
+          "value": 119.6
+        },
+        {
+          "iteration": 6,
+          "value": 127.75999999999999
+        },
+        {
+          "iteration": 7,
+          "value": 116.86000000000001
+        },
+        {
+          "iteration": 8,
+          "value": 121.88
+        },
+        {
+          "iteration": 9,
+          "value": 115.06
+        },
+        {
+          "iteration": 10,
+          "value": 118.07999999999998
+        }
+      ]
+    },
+    {
+      "metric_id": "BX-BH01-METRIC-STARTUP-ROOT-READY-MS",
+      "scenario": "browser-profile",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "samples": [
+        {
+          "iteration": 1,
+          "value": 409.1
+        },
+        {
+          "iteration": 2,
+          "value": 431.35999999999996
+        },
+        {
+          "iteration": 3,
+          "value": 415.76
+        },
+        {
+          "iteration": 4,
+          "value": 420.6
+        },
+        {
+          "iteration": 5,
+          "value": 415.94
+        },
+        {
+          "iteration": 6,
+          "value": 416.02
+        },
+        {
+          "iteration": 7,
+          "value": 432
+        },
+        {
+          "iteration": 8,
+          "value": 416.15999999999997
+        },
+        {
+          "iteration": 9,
+          "value": 449.03999999999996
+        },
+        {
+          "iteration": 10,
+          "value": 413.02
+        }
+      ]
+    },
+    {
+      "metric_id": "BX-BH01-METRIC-INTERACTION-LOCAL-EVENT-PAINT-MS",
+      "scenario": "parent-state-update",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "samples": [
+        {
+          "iteration": 1,
+          "value": 55.799999999999955
+        },
+        {
+          "iteration": 2,
+          "value": 54.620000000000005
+        },
+        {
+          "iteration": 3,
+          "value": 57.93999999999994
+        },
+        {
+          "iteration": 4,
+          "value": 53.280000000000086
+        },
+        {
+          "iteration": 5,
+          "value": 59.19999999999982
+        },
+        {
+          "iteration": 6,
+          "value": 52.25999999999999
+        },
+        {
+          "iteration": 7,
+          "value": 58.700000000000045
+        },
+        {
+          "iteration": 8,
+          "value": 55.3599999999999
+        },
+        {
+          "iteration": 9,
+          "value": 56.98000000000002
+        },
+        {
+          "iteration": 10,
+          "value": 52.75999999999999
+        },
+        {
+          "iteration": 11,
+          "value": 60.180000000000064
+        },
+        {
+          "iteration": 12,
+          "value": 55.51999999999998
+        },
+        {
+          "iteration": 13,
+          "value": 57.24000000000001
+        },
+        {
+          "iteration": 14,
+          "value": 53.659999999999854
+        },
+        {
+          "iteration": 15,
+          "value": 60.40000000000009
+        },
+        {
+          "iteration": 16,
+          "value": 52.61999999999989
+        },
+        {
+          "iteration": 17,
+          "value": 58.940000000000055
+        },
+        {
+          "iteration": 18,
+          "value": 69.20000000000005
+        },
+        {
+          "iteration": 19,
+          "value": 60.8599999999999
+        },
+        {
+          "iteration": 20,
+          "value": 52.27999999999997
+        }
+      ]
+    },
+    {
+      "metric_id": "BX-BH01-METRIC-INTERACTION-DOM-COMMIT-MS",
+      "scenario": "parent-state-update",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "samples": [
+        {
+          "iteration": 1,
+          "value": 0.3000000000000682
+        },
+        {
+          "iteration": 2,
+          "value": 0.2400000000000091
+        },
+        {
+          "iteration": 3,
+          "value": 0.36000000000001364
+        },
+        {
+          "iteration": 4,
+          "value": 0.2799999999999727
+        },
+        {
+          "iteration": 5,
+          "value": 0.2199999999997999
+        },
+        {
+          "iteration": 6,
+          "value": 0.1999999999998181
+        },
+        {
+          "iteration": 7,
+          "value": 0.20000000000004547
+        },
+        {
+          "iteration": 8,
+          "value": 0.2799999999999727
+        },
+        {
+          "iteration": 9,
+          "value": 0.31999999999993634
+        },
+        {
+          "iteration": 10,
+          "value": 0.2799999999999727
+        },
+        {
+          "iteration": 11,
+          "value": 0.2400000000000091
+        },
+        {
+          "iteration": 12,
+          "value": 0.2400000000000091
+        },
+        {
+          "iteration": 13,
+          "value": 0.20000000000004547
+        },
+        {
+          "iteration": 14,
+          "value": 0.22000000000002728
+        },
+        {
+          "iteration": 15,
+          "value": 0.2599999999999909
+        },
+        {
+          "iteration": 16,
+          "value": 0.20000000000004547
+        },
+        {
+          "iteration": 17,
+          "value": 0.20000000000004547
+        },
+        {
+          "iteration": 18,
+          "value": 0.20000000000004547
+        },
+        {
+          "iteration": 19,
+          "value": 0.2599999999999909
+        },
+        {
+          "iteration": 20,
+          "value": 0.22000000000002728
+        }
+      ]
+    },
+    {
+      "metric_id": "BX-BH01-METRIC-INTERACTION-LOCAL-EVENT-PAINT-MS",
+      "scenario": "nested-keyed-update",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "samples": [
+        {
+          "iteration": 1,
+          "value": 59.100000000000136
+        },
+        {
+          "iteration": 2,
+          "value": 53.83999999999992
+        },
+        {
+          "iteration": 3,
+          "value": 58.24000000000024
+        },
+        {
+          "iteration": 4,
+          "value": 54.31999999999971
+        },
+        {
+          "iteration": 5,
+          "value": 57.659999999999854
+        },
+        {
+          "iteration": 6,
+          "value": 53.38000000000011
+        },
+        {
+          "iteration": 7,
+          "value": 58.83999999999969
+        },
+        {
+          "iteration": 8,
+          "value": 63.98000000000002
+        },
+        {
+          "iteration": 9,
+          "value": 65.24000000000024
+        },
+        {
+          "iteration": 10,
+          "value": 54.539999999999964
+        },
+        {
+          "iteration": 11,
+          "value": 56.279999999999745
+        },
+        {
+          "iteration": 12,
+          "value": 64.62000000000035
+        },
+        {
+          "iteration": 13,
+          "value": 63.51999999999998
+        },
+        {
+          "iteration": 14,
+          "value": 64.2800000000002
+        },
+        {
+          "iteration": 15,
+          "value": 54.19999999999982
+        },
+        {
+          "iteration": 16,
+          "value": 55.83999999999969
+        },
+        {
+          "iteration": 17,
+          "value": 56.940000000000055
+        },
+        {
+          "iteration": 18,
+          "value": 56.399999999999636
+        },
+        {
+          "iteration": 19,
+          "value": 64.19999999999982
+        },
+        {
+          "iteration": 20,
+          "value": 55.31999999999971
+        }
+      ]
+    },
+    {
+      "metric_id": "BX-BH01-METRIC-INTERACTION-DOM-COMMIT-MS",
+      "scenario": "nested-keyed-update",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "samples": [
+        {
+          "iteration": 1,
+          "value": 0.18000000000006366
+        },
+        {
+          "iteration": 2,
+          "value": 0.2600000000002183
+        },
+        {
+          "iteration": 3,
+          "value": 0.1799999999998363
+        },
+        {
+          "iteration": 4,
+          "value": 0.1999999999998181
+        },
+        {
+          "iteration": 5,
+          "value": 0.2600000000002183
+        },
+        {
+          "iteration": 6,
+          "value": 0.22000000000025466
+        },
+        {
+          "iteration": 7,
+          "value": 0.1799999999998363
+        },
+        {
+          "iteration": 8,
+          "value": 0.24000000000023647
+        },
+        {
+          "iteration": 9,
+          "value": 0.2199999999997999
+        },
+        {
+          "iteration": 10,
+          "value": 0.1799999999998363
+        },
+        {
+          "iteration": 11,
+          "value": 0.22000000000025466
+        },
+        {
+          "iteration": 12,
+          "value": 0.2199999999997999
+        },
+        {
+          "iteration": 13,
+          "value": 0.2199999999997999
+        },
+        {
+          "iteration": 14,
+          "value": 0.24000000000023647
+        },
+        {
+          "iteration": 15,
+          "value": 0.3200000000001637
+        },
+        {
+          "iteration": 16,
+          "value": 0.22000000000025466
+        },
+        {
+          "iteration": 17,
+          "value": 0.16000000000030923
+        },
+        {
+          "iteration": 18,
+          "value": 0.1999999999998181
+        },
+        {
+          "iteration": 19,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 20,
+          "value": 0.1799999999998363
+        }
+      ]
+    },
+    {
+      "metric_id": "BX-BH01-METRIC-INTERACTION-LOCAL-EVENT-PAINT-MS",
+      "scenario": "form-programmatic-update",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "samples": [
+        {
+          "iteration": 1,
+          "value": 59.59999999999991
+        },
+        {
+          "iteration": 2,
+          "value": 64.44000000000005
+        },
+        {
+          "iteration": 3,
+          "value": 69
+        },
+        {
+          "iteration": 4,
+          "value": 60.840000000000146
+        },
+        {
+          "iteration": 5,
+          "value": 59.74000000000024
+        },
+        {
+          "iteration": 6,
+          "value": 59.07999999999993
+        },
+        {
+          "iteration": 7,
+          "value": 60.09999999999991
+        },
+        {
+          "iteration": 8,
+          "value": 58.960000000000036
+        },
+        {
+          "iteration": 9,
+          "value": 61.61999999999989
+        },
+        {
+          "iteration": 10,
+          "value": 60.74000000000024
+        },
+        {
+          "iteration": 11,
+          "value": 59.88000000000011
+        },
+        {
+          "iteration": 12,
+          "value": 60.440000000000055
+        },
+        {
+          "iteration": 13,
+          "value": 59.42000000000007
+        },
+        {
+          "iteration": 14,
+          "value": 60.51999999999998
+        },
+        {
+          "iteration": 15,
+          "value": 60.36000000000013
+        },
+        {
+          "iteration": 16,
+          "value": 60.26000000000022
+        },
+        {
+          "iteration": 17,
+          "value": 59.42000000000007
+        },
+        {
+          "iteration": 18,
+          "value": 67
+        },
+        {
+          "iteration": 19,
+          "value": 60.94000000000051
+        },
+        {
+          "iteration": 20,
+          "value": 61.07999999999993
+        }
+      ]
+    },
+    {
+      "metric_id": "BX-BH01-METRIC-INTERACTION-DOM-COMMIT-MS",
+      "scenario": "form-programmatic-update",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "samples": [
+        {
+          "iteration": 1,
+          "value": 0.44000000000005457
+        },
+        {
+          "iteration": 2,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 3,
+          "value": 0.14000000000032742
+        },
+        {
+          "iteration": 4,
+          "value": 0.16000000000030923
+        },
+        {
+          "iteration": 5,
+          "value": 0.13999999999987267
+        },
+        {
+          "iteration": 6,
+          "value": 0.16000000000030923
+        },
+        {
+          "iteration": 7,
+          "value": 0.24000000000023647
+        },
+        {
+          "iteration": 8,
+          "value": 0.1999999999998181
+        },
+        {
+          "iteration": 9,
+          "value": 0.16000000000030923
+        },
+        {
+          "iteration": 10,
+          "value": 0.13999999999987267
+        },
+        {
+          "iteration": 11,
+          "value": 0.13999999999987267
+        },
+        {
+          "iteration": 12,
+          "value": 0.1799999999998363
+        },
+        {
+          "iteration": 13,
+          "value": 0.13999999999987267
+        },
+        {
+          "iteration": 14,
+          "value": 0.14000000000032742
+        },
+        {
+          "iteration": 15,
+          "value": 0.3000000000001819
+        },
+        {
+          "iteration": 16,
+          "value": 0.14000000000032742
+        },
+        {
+          "iteration": 17,
+          "value": 0.13999999999941792
+        },
+        {
+          "iteration": 18,
+          "value": 0.14000000000032742
+        },
+        {
+          "iteration": 19,
+          "value": 0.14000000000032742
+        },
+        {
+          "iteration": 20,
+          "value": 0.15999999999985448
+        }
+      ]
+    },
+    {
+      "metric_id": "BX-BH01-METRIC-INTERACTION-LOCAL-EVENT-PAINT-MS",
+      "scenario": "timer-message-update",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "samples": [
+        {
+          "iteration": 1,
+          "value": 103.96000000000004
+        },
+        {
+          "iteration": 2,
+          "value": 114.80000000000018
+        },
+        {
+          "iteration": 3,
+          "value": 105.03999999999996
+        },
+        {
+          "iteration": 4,
+          "value": 99
+        },
+        {
+          "iteration": 5,
+          "value": 117.60000000000036
+        },
+        {
+          "iteration": 6,
+          "value": 111.40000000000055
+        },
+        {
+          "iteration": 7,
+          "value": 98.14000000000033
+        },
+        {
+          "iteration": 8,
+          "value": 114.30000000000018
+        },
+        {
+          "iteration": 9,
+          "value": 99.44000000000051
+        },
+        {
+          "iteration": 10,
+          "value": 97.38000000000011
+        },
+        {
+          "iteration": 11,
+          "value": 101.19999999999982
+        },
+        {
+          "iteration": 12,
+          "value": 113.16000000000076
+        },
+        {
+          "iteration": 13,
+          "value": 114.81999999999971
+        },
+        {
+          "iteration": 14,
+          "value": 97.60000000000036
+        },
+        {
+          "iteration": 15,
+          "value": 99.30000000000018
+        },
+        {
+          "iteration": 16,
+          "value": 98.47999999999956
+        },
+        {
+          "iteration": 17,
+          "value": 118
+        },
+        {
+          "iteration": 18,
+          "value": 111.51999999999953
+        },
+        {
+          "iteration": 19,
+          "value": 97.30000000000018
+        },
+        {
+          "iteration": 20,
+          "value": 97.01999999999953
+        }
+      ]
+    },
+    {
+      "metric_id": "BX-BH01-METRIC-INTERACTION-DOM-COMMIT-MS",
+      "scenario": "timer-message-update",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "samples": [
+        {
+          "iteration": 1,
+          "value": 0.22000000000025466
+        },
+        {
+          "iteration": 2,
+          "value": 0.16000000000076398
+        },
+        {
+          "iteration": 3,
+          "value": 0.14000000000032742
+        },
+        {
+          "iteration": 4,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 5,
+          "value": 0.14000000000032742
+        },
+        {
+          "iteration": 6,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 7,
+          "value": 0.14000000000032742
+        },
+        {
+          "iteration": 8,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 9,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 10,
+          "value": 0.13999999999941792
+        },
+        {
+          "iteration": 11,
+          "value": 0.13999999999941792
+        },
+        {
+          "iteration": 12,
+          "value": 0.13999999999941792
+        },
+        {
+          "iteration": 13,
+          "value": 0.13999999999941792
+        },
+        {
+          "iteration": 14,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 15,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 16,
+          "value": 0.13999999999941792
+        },
+        {
+          "iteration": 17,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 18,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 19,
+          "value": 0.13999999999941792
+        },
+        {
+          "iteration": 20,
+          "value": 0.14000000000032742
+        }
+      ]
+    },
+    {
+      "metric_id": "BX-BH01-METRIC-INTERACTION-SERVER-ROUNDTRIP-MS",
+      "scenario": "authenticated-success",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "samples": [
+        {
+          "iteration": 1,
+          "value": 160.1800000000003
+        },
+        {
+          "iteration": 2,
+          "value": 159.1800000000003
+        },
+        {
+          "iteration": 3,
+          "value": 157.59999999999945
+        },
+        {
+          "iteration": 4,
+          "value": 159.65999999999985
+        },
+        {
+          "iteration": 5,
+          "value": 175.48000000000047
+        },
+        {
+          "iteration": 6,
+          "value": 176.4400000000005
+        },
+        {
+          "iteration": 7,
+          "value": 158.60000000000036
+        },
+        {
+          "iteration": 8,
+          "value": 158.85999999999967
+        },
+        {
+          "iteration": 9,
+          "value": 159.5
+        },
+        {
+          "iteration": 10,
+          "value": 159.3199999999997
+        }
+      ]
+    },
+    {
+      "metric_id": "BX-BH01-METRIC-INTERACTION-SERVER-ROUNDTRIP-MS",
+      "scenario": "authorization-denial",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "samples": [
+        {
+          "iteration": 1,
+          "value": 153.02000000000044
+        },
+        {
+          "iteration": 2,
+          "value": 158.8799999999992
+        },
+        {
+          "iteration": 3,
+          "value": 172.92000000000007
+        },
+        {
+          "iteration": 4,
+          "value": 160.03999999999905
+        },
+        {
+          "iteration": 5,
+          "value": 174.5599999999995
+        },
+        {
+          "iteration": 6,
+          "value": 159.78000000000065
+        },
+        {
+          "iteration": 7,
+          "value": 158.64000000000124
+        },
+        {
+          "iteration": 8,
+          "value": 160.04000000000087
+        },
+        {
+          "iteration": 9,
+          "value": 160.20000000000073
+        },
+        {
+          "iteration": 10,
+          "value": 160.3799999999992
+        }
+      ]
+    },
+    {
+      "metric_id": "BX-BH01-METRIC-INTERACTION-SERVER-ROUNDTRIP-MS",
+      "scenario": "disconnect-retry",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "samples": [
+        {
+          "iteration": 1,
+          "value": 307.90000000000146
+        },
+        {
+          "iteration": 2,
+          "value": 309.72000000000116
+        },
+        {
+          "iteration": 3,
+          "value": 310.4200000000001
+        },
+        {
+          "iteration": 4,
+          "value": 310
+        },
+        {
+          "iteration": 5,
+          "value": 309.619999999999
+        },
+        {
+          "iteration": 6,
+          "value": 309.46000000000095
+        },
+        {
+          "iteration": 7,
+          "value": 309.2399999999998
+        },
+        {
+          "iteration": 8,
+          "value": 309.47999999999956
+        },
+        {
+          "iteration": 9,
+          "value": 309.9400000000005
+        },
+        {
+          "iteration": 10,
+          "value": 342.4599999999991
+        }
+      ]
+    },
+    {
+      "metric_id": "BX-BH01-METRIC-RESOURCE-CLEANUP-MS",
+      "scenario": "repeated-host-stop",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "samples": [
+        {
+          "iteration": 1,
+          "value": 39.11999999999898
+        },
+        {
+          "iteration": 2,
+          "value": 39.07999999999993
+        },
+        {
+          "iteration": 3,
+          "value": 36.70000000000073
+        },
+        {
+          "iteration": 4,
+          "value": 38.100000000000364
+        },
+        {
+          "iteration": 5,
+          "value": 38.659999999999854
+        },
+        {
+          "iteration": 6,
+          "value": 38.70000000000073
+        },
+        {
+          "iteration": 7,
+          "value": 38.45999999999913
+        },
+        {
+          "iteration": 8,
+          "value": 38.159999999999854
+        },
+        {
+          "iteration": 9,
+          "value": 37.419999999998254
+        },
+        {
+          "iteration": 10,
+          "value": 40.36000000000058
+        }
+      ]
+    }
+  ],
+  "resource_observations": {
+    "initial": {
+      "observation": "post-readiness",
+      "memory_pages": 256,
+      "workers": null,
+      "processes": 1,
+      "mailbox_messages": 0,
+      "timers": 0,
+      "pending_messages": 0,
+      "bridge_pending": 0,
+      "server_pending": 0,
+      "dom_roots": 1,
+      "dom_listeners": 9,
+      "dom_nodes": 23
+    },
+    "peak": {
+      "observation": "post-interaction-and-server-scenarios",
+      "memory_pages": 256,
+      "workers": null,
+      "processes": 1,
+      "mailbox_messages": 0,
+      "timers": 0,
+      "pending_messages": 0,
+      "bridge_pending": 0,
+      "server_pending": 0,
+      "dom_roots": 1,
+      "dom_listeners": 9,
+      "dom_nodes": 23
+    },
+    "stable": {
+      "observation": "settled-before-lifecycle-cycles",
+      "memory_pages": 256,
+      "workers": null,
+      "processes": 1,
+      "mailbox_messages": 0,
+      "timers": 0,
+      "pending_messages": 0,
+      "bridge_pending": 0,
+      "server_pending": 0,
+      "dom_roots": 1,
+      "dom_listeners": 9,
+      "dom_nodes": 23
+    },
+    "disposed": {
+      "observation": "terminal-after-final-stop",
+      "memory_pages": 256,
+      "workers": null,
+      "worker_observation": "not exposed at the parent-frame boundary",
+      "bridge": {
+        "requests": 5,
+        "responses": 5,
+        "failures": 0,
+        "cancellations": 0,
+        "timeouts": 0,
+        "stale_drops": 0,
+        "bytes_sent": 1240,
+        "bytes_received": 1969,
+        "pending": 0,
+        "generation": 11,
+        "stopped": true,
+        "timers": 0,
+        "retries": 0
+      },
+      "lifecycle": {
+        "protocol": "blazex.lifecycle/1",
+        "state": "stopped",
+        "generation": 10,
+        "attempt": 1,
+        "failure": null,
+        "resources": {},
+        "metrics": {
+          "transitions": 80,
+          "failures": 0,
+          "stale_drops": 0,
+          "cleanup_failures": 0,
+          "cleanup_ms": 2.7600000000020373
+        }
+      },
+      "server": {
+        "pending": 0,
+        "session_configured": false
+      },
+      "browser": {
+        "workers": null,
+        "listeners": 0,
+        "observers": 0,
+        "fetches": 0,
+        "requests": 0,
+        "dom_roots": 0,
+        "references": 0
+      },
+      "adapter": {
+        "active_generations": 0
+      },
+      "dom": {
+        "roots": 0,
+        "listeners": 0,
+        "nodes": 0
+      }
+    },
+    "lifecycle_cycles": 10
+  },
+  "reliability": {
+    "page_errors": 0,
+    "command_failures": 0,
+    "long_task_api": "available",
+    "long_tasks": [],
+    "resource_growth_detected": false
+  },
+  "failures": [],
+  "limitations": [
+    "Development evidence only; no browser support or cross-platform qualification is implied.",
+    "The same-host unshaped loopback environment is not the governed constrained-network product environment.",
+    "Browser-reported JavaScript heap, when available, excludes complete Wasm, native browser, and BEAM process accounting.",
+    "This browser did not expose performance.memory; JavaScript heap growth remains unavailable."
+  ]
+}

@@ -11,8 +11,11 @@ It is the leading supported composition, not the universal container for BlazeX.
 Shared browser, renderer, and component behavior must remain in reusable
 packages rather than this profile.
 
-Status: experimental BH-01 Phase 8 feasibility profile with Phases 1–7 passed
-and the browser matrix in progress. It provides a
+Status: experimental BH-01 Phase 9 feasibility profile. Active Linux Chrome
+and Firefox measurements support a conditional framework-development proceed;
+payload, Firefox timer, and representative-rerun reproducibility findings
+remain open. All browsers remain unsupported, mobile viability is undecided,
+and external qualification is deferred to BH-22. It provides a
 manifest-driven browser loader, isolated Popcorn/AtomVM frame, bounded
 Elixir/browser bridge, lifecycle and prerequisite checks, deterministic static
 profile build, a replaceable fixture-only DOM adapter, and a Phoenix/Bandit

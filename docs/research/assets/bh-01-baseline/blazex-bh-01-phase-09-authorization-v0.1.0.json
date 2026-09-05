@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0.0",
+  "record_id": "BX-BH01-AUTHORIZATION-PHASE-09-0.1",
+  "status": "approved-phase-9-only",
+  "authorized_at": "2026-09-05",
+  "request": "Implement the next phase of BH-01 section by section with a commit per section and one immediately merged PR, then synchronize main and delete the feature branch.",
+  "base_revision": "a97d6291e68a42fc0d46e6994f9519d4a2456bdb",
+  "branch": "codex/bh-01-phase-09-measurement",
+  "authorized_scope": [
+    "define governed build, payload, startup, interaction, server, resource, cleanup, and reliability measurements",
+    "collect reproducible raw evidence in the available Linux Chrome and Firefox development matrix",
+    "record unavailable mobile, operating-system, browser, physical-device, and manual qualification as deferred to BH-22",
+    "attribute profile payload and timing costs to canonical artifacts and lifecycle phases",
+    "compare active observations with proposed budgets without changing thresholds or claiming browser support",
+    "publish a truthful active-environment feasibility and Phase 10 eligibility decision",
+    "commit once per completed or explicitly deferred Phase 9 section",
+    "create and immediately merge one Phase 9 pull request",
+    "synchronize main and delete the local and remote feature branch"
+  ],
+  "not_authorized": [
+    "purchasing, enrolling, or mutating external browser-device services or vendor accounts",
+    "representing desktop emulation or an engine build as physical mobile, Safari, or cross-platform qualification",
+    "changing BH-00 quality thresholds to make the candidate pass",
+    "Phase 10 clean rebuild, final BH-01 decision, or BH-02 framework work",
+    "browser support, accessibility conformance, mobile viability, production readiness, or release claims"
+  ],
+  "owner": "repository-owner"
+}

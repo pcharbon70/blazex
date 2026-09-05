@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://blazex.dev/schemas/bh-01/phase-09-qualification-deferral-1.0.0.json",
+  "title": "BlazeX BH-01 Phase 9 Qualification Deferral Ledger",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "record_id", "status", "recorded_at", "source_revision", "active_development_matrix", "policy", "obligations", "phase_effect", "prohibited_claims"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "record_id": {"const": "BX-BH01-PHASE9-QUALIFICATION-DEFERRALS-0.1"},
+    "status": {"const": "deferred"},
+    "recorded_at": {"type": "string", "format": "date"},
+    "source_revision": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "active_development_matrix": {"type": "array", "minItems": 2, "items": {"type": "string"}, "uniqueItems": true},
+    "policy": {"type": "object", "required": ["reactivation_milestone", "excluded_from_active_pass_rates", "blocks_phase_9", "blocks_support_or_release"]},
+    "obligations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "status", "environment", "missing_capability", "required_evidence", "owner", "reactivation", "substitution_rule"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^BX-BH01-DEFER-[A-Z0-9.-]+$"},
+          "status": {"const": "deferred"},
+          "environment": {"type": "string", "minLength": 1},
+          "missing_capability": {"type": "string", "minLength": 1},
+          "required_evidence": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+          "owner": {"type": "string", "minLength": 1},
+          "reactivation": {"type": "string", "minLength": 1},
+          "substitution_rule": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "phase_effect": {"type": "object", "required": ["active_linux_work_may_continue", "phase_9_completion_allowed", "mobile_viability", "cross_platform_qualification"]},
+    "prohibited_claims": {"type": "array", "minItems": 1, "items": {"type": "string"}, "uniqueItems": true}
+  }
+}

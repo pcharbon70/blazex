@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://blazex.dev/schemas/bh-01/phase-09-measurement-run-1.0.0.json",
+  "title": "BlazeX BH-01 Phase 9 Measurement Run",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "run_id",
+    "status",
+    "captured_at",
+    "source_revision",
+    "environment_id",
+    "browser",
+    "artifact_manifest",
+    "configuration",
+    "measurements",
+    "resource_observations",
+    "reliability",
+    "failures",
+    "limitations"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "run_id": {"type": "string", "pattern": "^BX-BH01-PHASE9-RUN-[A-Z0-9.-]+$"},
+    "status": {"enum": ["running", "observed", "observed-with-failures", "failed"]},
+    "captured_at": {"type": "string", "format": "date-time"},
+    "source_revision": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "environment_id": {"type": "string", "pattern": "^BX-BH01-ENV-[A-Z0-9.-]+$"},
+    "browser": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "product", "version", "executable_sha256", "os", "architecture", "authority", "support_status"],
+      "properties": {
+        "type": {"enum": ["chromium", "firefox"]},
+        "product": {"type": "string", "minLength": 1},
+        "version": {"type": "string", "minLength": 1},
+        "executable_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "os": {"type": "string", "minLength": 1},
+        "architecture": {"type": "string", "minLength": 1},
+        "authority": {"const": "active-development-evidence"},
+        "support_status": {"const": "unsupported"}
+      }
+    },
+    "artifact_manifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "sha256", "governed_files"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "governed_files": {"type": "integer", "minimum": 1}
+      }
+    },
+    "configuration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["clock", "cold_start_samples", "warm_start_samples", "fallback_samples", "interaction_samples", "server_samples", "cleanup_samples", "discarded_warmups", "network"],
+      "properties": {
+        "clock": {"const": "browser-performance-now-monotonic"},
+        "cold_start_samples": {"type": "integer", "minimum": 1},
+        "warm_start_samples": {"type": "integer", "minimum": 1},
+        "fallback_samples": {"type": "integer", "minimum": 1},
+        "interaction_samples": {"type": "integer", "minimum": 1},
+        "server_samples": {"type": "integer", "minimum": 1},
+        "cleanup_samples": {"type": "integer", "minimum": 1},
+        "discarded_warmups": {"type": "integer", "minimum": 1},
+        "network": {"type": "string", "minLength": 1}
+      }
+    },
+    "measurements": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["metric_id", "scenario", "unit", "cache_state", "samples"],
+        "properties": {
+          "metric_id": {"type": "string", "pattern": "^BX-BH01-METRIC-[A-Z0-9.-]+$"},
+          "scenario": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$"},
+          "unit": {"enum": ["milliseconds", "bytes", "count", "percent"]},
+          "cache_state": {"enum": ["cold", "warm", "mixed", "not-applicable"]},
+          "samples": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["iteration", "value"],
+              "properties": {
+                "iteration": {"type": "integer", "minimum": 1},
+                "value": {"type": "number", "minimum": 0}
+              }
+            }
+          }
+        }
+      }
+    },
+    "resource_observations": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["initial", "peak", "stable", "disposed", "lifecycle_cycles"],
+      "properties": {
+        "initial": {"type": "object"},
+        "peak": {"type": "object"},
+        "stable": {"type": "object"},
+        "disposed": {"type": "object"},
+        "lifecycle_cycles": {"type": "integer", "minimum": 1}
+      }
+    },
+    "reliability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["page_errors", "command_failures", "long_task_api", "long_tasks", "resource_growth_detected"],
+      "properties": {
+        "page_errors": {"type": "integer", "minimum": 0},
+        "command_failures": {"type": "integer", "minimum": 0},
+        "long_task_api": {"enum": ["available", "unavailable"]},
+        "long_tasks": {"type": "array", "items": {"type": "number", "minimum": 0}},
+        "resource_growth_detected": {"type": "boolean"}
+      }
+    },
+    "failures": {"type": "array", "items": {"type": "object"}},
+    "limitations": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}, "uniqueItems": true}
+  }
+}

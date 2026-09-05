@@ -1,0 +1,167 @@
+{
+  "schema_version": "1.0.0",
+  "record_id": "BX-BH01-DECISION-PHASE-09-CONDITIONAL",
+  "record_type": "decision",
+  "state": "conditional",
+  "title": "BH-01 Phase 9 measurement, mobile viability, and artifact economics gate",
+  "owner_role": "bh01-owner",
+  "recorded_at": "2026-09-05T10:31:20.000Z",
+  "observed_at": "2026-09-05T10:31:20.000Z",
+  "source_revision": "04f9eb1bd2b191d6b6a23202247201bce5d82855",
+  "environment_refs": [
+    "integration/benchmarks/environments/bh01-phase9-linux-build.json",
+    "integration/benchmarks/environments/bh01-phase9-linux-chrome.json",
+    "integration/benchmarks/environments/bh01-phase9-linux-firefox.json",
+    "integration/benchmarks/reports/bh01-phase9-deferred-qualification.json"
+  ],
+  "tool_identities": [
+    {
+      "name": "beam-test-image",
+      "version": "sha256:8d03cfb52e3fa3f5d83d749942b7c45c966dda48a7c4ba4f069390379b59fc39",
+      "source": "docker.io/hexpm/elixir",
+      "sha256": "a2386c21edd5c612b4ed6e2731daba806177dba55baf977ee456c6e194f60d9f"
+    },
+    {
+      "name": "node",
+      "version": "26.8.1",
+      "source": "nodejs.org",
+      "sha256": "3e301118d7df53d563b7e96c1617545f26e2f76f9724be668d6cab65c15dda5d"
+    },
+    {
+      "name": "playwright-core",
+      "version": "1.62.1",
+      "source": "registry.npmjs.org",
+      "sha256": null
+    },
+    {
+      "name": "chrome-for-testing",
+      "version": "152.0.7977.75",
+      "source": "storage.googleapis.com/chrome-for-testing-public",
+      "sha256": "3c84cfdbadd0b5b9d1943568b67faea54cf818d20ca32a337fd8a68a0d61ac76"
+    },
+    {
+      "name": "playwright-firefox-development-build",
+      "version": "153.0",
+      "source": "playwright browser cache",
+      "sha256": "26e4198abe0dfb93c339239297008b1319711575d8cbae8e2d5122d2017b29a1"
+    },
+    {
+      "name": "python",
+      "version": "3.12.12",
+      "source": "local policy environment",
+      "sha256": "fb85a13414b028c49ba18bbd523c2d055a30b56b18b92ce454ea2c51edc656c4"
+    }
+  ],
+  "requirement_refs": [
+    "BH-01-PHASE-9",
+    "BX-BH01-INPUT-ARTIFACTS",
+    "BX-BH01-INPUT-BROWSERS",
+    "BX-BH01-INPUT-MEASUREMENTS",
+    "BX-BH01-INPUT-STOP-CONDITIONS",
+    "BX-BH01-PROOF-ARTIFACT-ACCOUNTING",
+    "BX-BH01-PROOF-MOBILE-MEASUREMENT",
+    "BX-BH01-RISK-WASM-ARTIFACT-ACCOUNTING",
+    "BX-BH01-RISK-MOBILE-PERFORMANCE"
+  ],
+  "reciprocal_links": [
+    "docs/research/60-planning/01-browser-host/bh-01-reproducible-browser-feasibility-baseline/phase-09-measurement-mobile-viability-and-artifact-economics.md",
+    "docs/research/60-planning/01-browser-host/bh-01-reproducible-browser-feasibility-baseline/phase-09-implementation-evidence.md",
+    "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-09-authorization-v0.1.0.json",
+    "integration/benchmarks/benchmark-index.json",
+    "integration/benchmarks/reports/bh01-phase9-budget-evaluation.json",
+    "integration/benchmarks/reports/bh01-phase9-stop-decision.json",
+    "integration/benchmarks/reports/bh01-phase9-rerun-comparison.json"
+  ],
+  "command_refs": [
+    "node js/blazex_runtime/test/browser/phase9-measurement.integration.mjs",
+    "python3 integration/benchmarks/summarize_phase9.py",
+    "python3 integration/benchmarks/analyze_phase9.py",
+    "python3 integration/benchmarks/evaluate_phase9.py",
+    "python3 integration/benchmarks/compare_phase9_reruns.py",
+    "python3 -m unittest discover -s integration/benchmarks/tests -p test_*.py",
+    "npm test",
+    "npm run build",
+    "mix test",
+    "python3 profiles/browser_phoenix/toolchain/verify_phase9.py",
+    "python3 -m unittest profiles/browser_phoenix/toolchain/tests/test_phase9.py",
+    "python3 docs/research/validate_archive.py",
+    "git diff --check"
+  ],
+  "input_hashes": [
+    {"path": "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-09-authorization-v0.1.0.json", "sha256": "93df0d6faaa8d7e37f1d52ee0e1c189ce09766eef07906eff7601101659509de"},
+    {"path": "docs/research/assets/quality-acceptance/blazex-quality-contract-v0.1.0.json", "sha256": "21d69d966ed4888ca0f09b957f3a74edfda843af0de23ec4098237ef3d759326"},
+    {"path": "integration/benchmarks/benchmark-index.json", "sha256": "cd1abff0d9bb7bd3291a416128374243e786e98bf10850be8f319d9cde8e0fae"},
+    {"path": "integration/benchmarks/phase9-metric-definitions.json", "sha256": "ed6fa835864e74e29b5fe9464f259633192e1c2d174229c3408fff7343a62058"},
+    {"path": "integration/benchmarks/raw-evidence/bh01-phase9-chromium-linux.json", "sha256": "49ca2f83a350534e28ce2c1889db05c658015b7083be2535da3e60d202afbaef"},
+    {"path": "integration/benchmarks/raw-evidence/bh01-phase9-firefox-linux.json", "sha256": "a0d05b98ce400cecf40850baaf951bd09654e6ffba2a40418a79f941db6ba66d"},
+    {"path": "integration/benchmarks/raw-evidence/bh01-phase9-build-linux.json", "sha256": "e22905f29f9e981128e22d3f350a60ef660d510ce36a6f3d0efba4b58f273f80"},
+    {"path": "integration/benchmarks/raw-evidence/bh01-phase9-artifacts-linux.json", "sha256": "f0ab01e91723c27055e33a7ac420fbd642a65adfbff301b0ca9558ba24cb3d5b"},
+    {"path": "integration/benchmarks/raw-evidence/bh01-phase9-rerun-chromium-linux.json", "sha256": "2d97a3180c052f81d6a5eca5ad6ded408817d939aeb33e5940a03bf7a142f5e6"},
+    {"path": "integration/benchmarks/raw-evidence/bh01-phase9-rerun2-chromium-linux.json", "sha256": "a342a91384da4e85e9fa72173904292e634fb8f88384d32ebef374665c2a55de"},
+    {"path": "integration/benchmarks/raw-evidence/bh01-phase9-rerun-firefox-linux.json", "sha256": "ab5c61460e3da319456285b5bf887863ccfb72a41c05d6470be846dc7a155c70"},
+    {"path": "integration/benchmarks/samples/bh01-phase9-linux-desktop-summary.json", "sha256": "4e8502dfc007f491290fd2304741f6b65bafe640d3db48757cd4efa665e166fa"},
+    {"path": "integration/benchmarks/reports/bh01-phase9-deferred-qualification.json", "sha256": "73d61fae636b9d1a5ef4ad16247c989660a7d278d935df62a33046db98f3dd8a"},
+    {"path": "integration/benchmarks/reports/bh01-phase9-artifact-economics.json", "sha256": "b71bfaf536e4979e0fa3fde8b73f0aae32b496c7fee084b8b5fdcd1a4a66aa5d"},
+    {"path": "integration/benchmarks/reports/bh01-phase9-mitigation-assessment.json", "sha256": "3cb81005ba139461d4744605cc8448e78a5f0686d01c8774ee022ce12e14848b"},
+    {"path": "integration/benchmarks/reports/bh01-phase9-budget-evaluation.json", "sha256": "9b788db7f226890894acb6dee38c5edc6e48dc44a86afaf38c26beef47d3fe23"},
+    {"path": "integration/benchmarks/reports/bh01-phase9-stop-decision.json", "sha256": "5b4db9aa3ad6dce19bfdce71701b53f7f257be563ffc00eceabfaf20ad4a1e85"},
+    {"path": "integration/benchmarks/reports/bh01-phase9-rerun-comparison-attempt-1.json", "sha256": "e1d4d837b07dfd97d172d08b2b4a3709a06789527d857c2281c7a354763e230e"},
+    {"path": "integration/benchmarks/reports/bh01-phase9-rerun-comparison.json", "sha256": "3a65050f668ee7f1430bbc28b8b47c4a1232efbeea9eed88522656c204ad4b6a"}
+  ],
+  "output_hashes": [
+    {"path": "docs/research/60-planning/01-browser-host/bh-01-reproducible-browser-feasibility-baseline/phase-09-implementation-evidence.md", "sha256": "327704377f8f340f9aa752c0ff17a9bb078cec24fd83f3d8ed08ae1b8f97a352"},
+    {"path": "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-09-validation-log-v0.1.0.txt", "sha256": "65cedb64634ffac6f97ec8c7759c6e95f1f396bdc22771eb9ff885ae0f44d5b5"}
+  ],
+  "raw_evidence_refs": [
+    "integration/benchmarks/raw-evidence/bh01-phase9-chromium-linux.json",
+    "integration/benchmarks/raw-evidence/bh01-phase9-firefox-linux.json",
+    "integration/benchmarks/raw-evidence/bh01-phase9-build-linux.json",
+    "integration/benchmarks/raw-evidence/bh01-phase9-artifacts-linux.json",
+    "integration/benchmarks/raw-evidence/bh01-phase9-rerun-chromium-linux.json",
+    "integration/benchmarks/raw-evidence/bh01-phase9-rerun2-chromium-linux.json",
+    "integration/benchmarks/raw-evidence/bh01-phase9-rerun-firefox-linux.json",
+    "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-09-validation-log-v0.1.0.txt"
+  ],
+  "normalization": [
+    {
+      "subject": "browser timings",
+      "method": "Retain raw monotonic-clock samples by exact metric, scenario, iteration, cache state, environment, and artifact identity; derive nearest-rank percentiles and population variance without deleting outliers or failed attempts."
+    },
+    {
+      "subject": "artifact payload",
+      "method": "Enumerate every canonical profile-manifest asset, retain decoded bytes, deterministic Brotli quality-11 bytes, ownership, cache class, reachability, and request count for three repetitions."
+    },
+    {
+      "subject": "budget and rerun decisions",
+      "method": "Apply the unchanged quality contract and explicit representative-run tolerance policy; preserve insufficient, failed, deferred, not-applicable, and observed-drift outcomes without promoting them to passes."
+    }
+  ],
+  "limitations": [
+    "Only one Linux x86-64 development host was available; all browsers remain unsupported.",
+    "The Firefox binary is a Playwright patched development build and cannot establish stable Firefox product support.",
+    "The unpruned application AVM fails both decoded and compressed application payload budgets.",
+    "Firefox timer-event p95 exceeds the active local-event target, and representative Chrome reruns expose startup and server-timing drift.",
+    "The build samples cover dependency-cached profile packaging rather than a complete cold dependency and runtime-toolchain rebuild.",
+    "Firefox JavaScript heap observation and parent-frame visibility into all runtime resources remain unavailable.",
+    "Physical-device mobile, Safari, cross-platform, second-machine, thermal/power, and unavailable manual accessibility qualification is deferred to BH-22; mobile viability remains undecided.",
+    "The measured fixtures and metric protocols remain BH-01 experimental evidence, not stable framework APIs or production readiness claims."
+  ],
+  "supersedes": [],
+  "invalidates": [],
+  "retention": {
+    "class": "permanent",
+    "minimum_days": null,
+    "immutable_raw_evidence": true
+  },
+  "outcome": {
+    "summary": "Phase 9 completed with a conditional proceed decision. Phase 10 is eligible but not authorized.",
+    "expected": "The active Linux matrix yields schema-valid retained distributions and deterministic derived reports; unchanged budgets, negative results, rerun variance, and unavailable external qualification produce an explicit feasibility decision without support or mobile claims.",
+    "observed": "Primary Chrome and Firefox runs retained 2,604 browser samples, representative reruns retained 817 samples, all seven reports regenerate byte-for-byte, four active budget failures reduce to three owned mitigation categories, both rerun comparisons retain two timing drifts, and six unavailable qualification obligations remain deferred to BH-22."
+  },
+  "review": {
+    "required": true,
+    "reviewer_role": "bh01-owner",
+    "reviewed_at": "2026-09-05T10:31:20.000Z",
+    "disposition": "accepted"
+  }
+}

@@ -1,0 +1,167 @@
+{
+  "schema_version": "1.0.0",
+  "policy_id": "BX-BH01-PHASE9-METRICS-0.1",
+  "status": "active-linux-development-measurement",
+  "active_matrix": [
+    "Linux Chrome for Testing",
+    "Linux Playwright Firefox development build"
+  ],
+  "support_status": "unsupported",
+  "clock_model": {
+    "browser": "performance.now monotonic clock within one page lifecycle",
+    "build": "Python time.perf_counter monotonic clock around one declared command",
+    "cross_clock_arithmetic": false,
+    "resolution_calibration": "measure the smallest positive delta over 10000 consecutive reads"
+  },
+  "sample_policy": {
+    "discarded_warmups": 1,
+    "retain_failures": true,
+    "percentile_method": "nearest-rank",
+    "statistics": ["count", "minimum", "maximum", "mean", "median", "p95", "coefficient_of_variation"],
+    "variance_review_above_percent": 10,
+    "round_decimal_places": 6
+  },
+  "metrics": [
+    {
+      "id": "BX-BH01-METRIC-CLOCK-RESOLUTION-MS",
+      "budget_ref": "measurement-harness-calibration",
+      "unit": "milliseconds",
+      "statistic": "minimum",
+      "minimum_samples": 1,
+      "boundary": "smallest positive performance.now delta observed across 10000 consecutive reads",
+      "environment": "each active Linux browser",
+      "cache_states": ["not-applicable"],
+      "qualification": "active-calibration"
+    },
+    {
+      "id": "BX-BH01-METRIC-BUILD-RELEASE-SECONDS",
+      "budget_ref": "BX-BUD-BUILD-RELEASE-SECONDS",
+      "unit": "seconds",
+      "statistic": "p95",
+      "minimum_samples": 10,
+      "boundary": "dependency-cached profile packaging command start through content-addressed profile manifest write",
+      "environment": "active Linux build host",
+      "cache_states": ["cold"],
+      "qualification": "active-partial-boundary"
+    },
+    {
+      "id": "BX-BH01-METRIC-PAYLOAD-BROTLI-BYTES",
+      "budget_ref": "payload-budget-by-artifact-class",
+      "unit": "bytes",
+      "statistic": "maximum",
+      "minimum_samples": 3,
+      "boundary": "Brotli quality 11 bytes for every file reachable from the canonical profile asset manifest",
+      "environment": "active Linux asset inspection",
+      "cache_states": ["not-applicable"],
+      "qualification": "active"
+    },
+    {
+      "id": "BX-BH01-METRIC-STARTUP-FALLBACK-READY-MS",
+      "budget_ref": "fallback-readiness-observation",
+      "unit": "milliseconds",
+      "statistic": "p95",
+      "minimum_samples": 30,
+      "boundary": "navigation start through semantic static fallback after the WebAssembly prerequisite is made unavailable",
+      "environment": "each active Linux browser",
+      "cache_states": ["cold"],
+      "qualification": "active-fail-closed-observation"
+    },
+    {
+      "id": "BX-BH01-METRIC-STARTUP-NAVIGATION-READY-MS",
+      "budget_ref": "BX-BUD-STARTUP-COLD-DESKTOP-MS or BX-BUD-STARTUP-WARM-DESKTOP-MS by cache state",
+      "unit": "milliseconds",
+      "statistic": "p95",
+      "minimum_samples": 30,
+      "boundary": "navigation start through the host ready marker after runtime echo and first fixture root mount",
+      "environment": "each active Linux browser",
+      "cache_states": ["cold", "warm"],
+      "qualification": "active"
+    },
+    {
+      "id": "BX-BH01-METRIC-STARTUP-INSTANTIATE-READY-MS",
+      "budget_ref": "BX-BUD-STARTUP-INSTANTIATE-MS",
+      "unit": "milliseconds",
+      "statistic": "p95",
+      "minimum_samples": 30,
+      "boundary": "loader transition into instantiating through application-ready lifecycle transition",
+      "environment": "each active Linux browser",
+      "cache_states": ["cold", "warm"],
+      "qualification": "active-broader-than-budget-boundary"
+    },
+    {
+      "id": "BX-BH01-METRIC-STARTUP-ROOT-READY-MS",
+      "budget_ref": "BX-BUD-STARTUP-ROOT-READINESS-MS",
+      "unit": "milliseconds",
+      "statistic": "p95",
+      "minimum_samples": 50,
+      "boundary": "application-ready lifecycle transition through host ready marker after fixture root mount",
+      "environment": "each active Linux browser",
+      "cache_states": ["cold", "warm"],
+      "qualification": "active"
+    },
+    {
+      "id": "BX-BH01-METRIC-INTERACTION-LOCAL-EVENT-PAINT-MS",
+      "budget_ref": "BX-BUD-INTERACTION-LOCAL-EVENT-PAINT-MS",
+      "unit": "milliseconds",
+      "statistic": "p95",
+      "minimum_samples": 100,
+      "boundary": "local fixture command dispatch through runtime snapshot and next animation frame",
+      "scenarios": ["parent-state-update", "nested-keyed-update", "form-programmatic-update", "timer-message-update"],
+      "environment": "each active Linux browser warm context",
+      "cache_states": ["warm"],
+      "qualification": "active"
+    },
+    {
+      "id": "BX-BH01-METRIC-INTERACTION-DOM-COMMIT-MS",
+      "budget_ref": "BX-BUD-INTERACTION-DOM-UPDATE-MS",
+      "unit": "milliseconds",
+      "statistic": "p95",
+      "minimum_samples": 100,
+      "boundary": "renderer effect receipt through synchronous DOM mutation completion",
+      "scenarios": ["parent-state-update", "nested-keyed-update", "form-programmatic-update", "timer-message-update"],
+      "environment": "each active Linux browser warm context",
+      "cache_states": ["warm"],
+      "qualification": "active-narrower-than-next-paint-budget-boundary"
+    },
+    {
+      "id": "BX-BH01-METRIC-INTERACTION-SERVER-ROUNDTRIP-MS",
+      "budget_ref": "BX-BUD-INTERACTION-SERVER-ROUNDTRIP-MS",
+      "unit": "milliseconds",
+      "statistic": "p95",
+      "minimum_samples": 50,
+      "boundary": "authenticated browser command preparation through server result rendering and next animation frame",
+      "scenarios": ["authenticated-success", "authorization-denial", "disconnect-retry"],
+      "environment": "each active Linux browser over same-host loopback",
+      "cache_states": ["warm"],
+      "qualification": "exploratory-desktop-mobile-budget-deferred"
+    },
+    {
+      "id": "BX-BH01-METRIC-RESOURCE-CLEANUP-MS",
+      "budget_ref": "BX-BUD-RESOURCE-CLEANUP-MS",
+      "unit": "milliseconds",
+      "statistic": "p95",
+      "minimum_samples": 20,
+      "boundary": "explicit browser-host stop request through zero DOM, bridge, and server pending resources",
+      "environment": "each active Linux browser warm context",
+      "cache_states": ["warm"],
+      "qualification": "active-feasibility-sample"
+    },
+    {
+      "id": "BX-BH01-METRIC-RESOURCE-JS-HEAP-BYTES",
+      "budget_ref": "BX-BUD-RESOURCE-MEMORY-GROWTH-MIB",
+      "unit": "bytes",
+      "statistic": "maximum",
+      "minimum_samples": 2,
+      "boundary": "browser-reported used JavaScript heap before and after the measured interaction sequence",
+      "environment": "active Linux browser where performance.memory is available",
+      "cache_states": ["warm"],
+      "qualification": "exploratory-not-wasm-or-process-memory"
+    }
+  ],
+  "deferred_qualification": {
+    "reactivation_milestone": "BH-22",
+    "environments": ["Windows", "macOS Safari", "Android Chrome", "iOS/iPadOS Safari", "physical mobile devices", "unavailable assistive-technology pairings"],
+    "excluded_from_active_pass_rates": true,
+    "support_credit": false
+  }
+}

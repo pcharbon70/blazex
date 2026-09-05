@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0.0",
+  "environment_id": "BX-BH01-ENV-PHASE9-LINUX-BUILD-X64-0.1",
+  "captured_at": "2026-09-05T09:46:26.526Z",
+  "source_revision": "22dc98033893cdc85db142bd6a05650ab4032f52",
+  "operating_system": {
+    "name": "Linux Mint",
+    "version": "22.1",
+    "codename": "xia",
+    "kernel": "6.8.0-51-generic"
+  },
+  "architecture": "x86_64",
+  "hardware": {
+    "cpu": "12th Gen Intel(R) Core(TM) i7-12700F",
+    "logical_cpus": 20,
+    "memory_bytes": 67194294272,
+    "power_thermal_state": "unavailable"
+  },
+  "browser": null,
+  "network": null,
+  "toolchain": [
+    {"name": "python", "version": "3.12.12"},
+    {"name": "node", "version": "26.8.1"},
+    {"name": "profile-builder", "version": "BH-01 Phase 9 Section 9.1"}
+  ],
+  "raw_evidence_refs": [
+    "integration/benchmarks/raw-evidence/bh01-phase9-build-linux.json",
+    "integration/benchmarks/raw-evidence/bh01-phase9-artifacts-linux.json"
+  ]
+}

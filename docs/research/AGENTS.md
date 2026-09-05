@@ -173,6 +173,17 @@ completion-evidence checklist. A research conclusion, stub, compilation
 result, or happy-path demonstration is not completed implementation evidence
 unless it satisfies the phase's stated gate.
 
+Apply the [development environment and deferred qualification
+policy](60-planning/development-environment-and-deferred-qualification-policy.md)
+to every new or revised plan. Linux Chrome and Firefox are the active browser
+development matrix. Work that requires an unavailable operating system,
+browser, physical device, laboratory, service, or manual assistive-technology
+pairing must be labeled `[DEFERRED]`, assigned to its qualification owner and
+reactivation milestone, excluded from active completion calculations, and
+retained in the release ledger. A deferral is neither a pass nor a support
+claim. Failures in available, applicable environments remain blocking where
+the plan says they are gates.
+
 ## Verification
 
 Before reporting archive work complete:
