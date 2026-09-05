@@ -1,0 +1,3271 @@
+{
+  "abi_interpretation": {
+    "component_model": false,
+    "shared_memory": "one imported 256-page minimum/maximum shared memory",
+    "target": "emscripten-js",
+    "threads": true,
+    "wasi_snapshot_preview1_imports": "Emscripten-generated JavaScript ABI shims",
+    "wasi_target": false
+  },
+  "artifacts": [
+    {
+      "artifact_id": "BX-BH01-RUNTIME-DEBUG-WEB-ATOMVM-WASM",
+      "build_lineage": "BX-BH01-RUNTIME-BUILD-0.1",
+      "bytes": 4210633,
+      "content_encoding": null,
+      "deployable": true,
+      "kind": "wasm",
+      "license_record_ids": [
+        "BX-BH01-LICENSE-FISSIONVM",
+        "BX-BH01-LICENSE-MBEDTLS",
+        "BX-BH01-LICENSE-EMSCRIPTEN",
+        "BX-BH01-LICENSE-NINJA",
+        "BX-BH01-LICENSE-GPERF",
+        "BX-BH01-LICENSE-ZLIB"
+      ],
+      "mime": "application/wasm",
+      "mode": "debug-web",
+      "owner": "packages/blazex_runtime_popcorn/runtime",
+      "path": "generated/debug-web/artifacts/AtomVM.wasm",
+      "provenance": "checksum-qualified FissionVM/Mbed TLS sources built in the digest-pinned Emscripten image with networking disabled",
+      "reachability_root": "browser-runtime",
+      "sha256": "e6025168933b62dec3650d9b9f78eb9f613e4eb21407ad837cb0dce9f1a55768",
+      "source_map_policy": "debug-web"
+    },
+    {
+      "artifact_id": "BX-BH01-RUNTIME-DEBUG-WEB-ATOMVM-MJS",
+      "build_lineage": "BX-BH01-RUNTIME-BUILD-0.1",
+      "bytes": 309205,
+      "content_encoding": null,
+      "deployable": true,
+      "kind": "javascript",
+      "license_record_ids": [
+        "BX-BH01-LICENSE-FISSIONVM",
+        "BX-BH01-LICENSE-MBEDTLS",
+        "BX-BH01-LICENSE-EMSCRIPTEN",
+        "BX-BH01-LICENSE-NINJA",
+        "BX-BH01-LICENSE-GPERF",
+        "BX-BH01-LICENSE-ZLIB"
+      ],
+      "mime": "text/javascript",
+      "mode": "debug-web",
+      "owner": "packages/blazex_runtime_popcorn/runtime",
+      "path": "generated/debug-web/artifacts/AtomVM.mjs",
+      "provenance": "checksum-qualified FissionVM/Mbed TLS sources built in the digest-pinned Emscripten image with networking disabled",
+      "reachability_root": "browser-runtime",
+      "sha256": "5379574ca20bf49d71649545182ec3d17f1e324be0766e0aae208c50d255cfc7",
+      "source_map_policy": "debug-web"
+    },
+    {
+      "artifact_id": "BX-BH01-RUNTIME-DEBUG-WEB-ATOMVM-WASM-GZ",
+      "build_lineage": "BX-BH01-RUNTIME-BUILD-0.1",
+      "bytes": 1415022,
+      "content_encoding": "gzip",
+      "deployable": true,
+      "kind": "compressed",
+      "license_record_ids": [
+        "BX-BH01-LICENSE-FISSIONVM",
+        "BX-BH01-LICENSE-MBEDTLS",
+        "BX-BH01-LICENSE-EMSCRIPTEN",
+        "BX-BH01-LICENSE-NINJA",
+        "BX-BH01-LICENSE-GPERF",
+        "BX-BH01-LICENSE-ZLIB"
+      ],
+      "mime": "application/wasm",
+      "mode": "debug-web",
+      "owner": "packages/blazex_runtime_popcorn/runtime",
+      "path": "generated/debug-web/artifacts/AtomVM.wasm.gz",
+      "provenance": "checksum-qualified FissionVM/Mbed TLS sources built in the digest-pinned Emscripten image with networking disabled",
+      "reachability_root": "browser-runtime",
+      "sha256": "1e7c41c0b23247f77235d0ec82778085e2182cb46a749cec47cafdfbecd3ec08",
+      "source_map_policy": "debug-web",
+      "uncompressed_artifact_id": "BX-BH01-RUNTIME-DEBUG-WEB-ATOMVM-WASM",
+      "uncompressed_bytes": 4210633
+    },
+    {
+      "artifact_id": "BX-BH01-RUNTIME-DEBUG-WEB-ATOMVM-MJS-GZ",
+      "build_lineage": "BX-BH01-RUNTIME-BUILD-0.1",
+      "bytes": 74796,
+      "content_encoding": "gzip",
+      "deployable": true,
+      "kind": "compressed",
+      "license_record_ids": [
+        "BX-BH01-LICENSE-FISSIONVM",
+        "BX-BH01-LICENSE-MBEDTLS",
+        "BX-BH01-LICENSE-EMSCRIPTEN",
+        "BX-BH01-LICENSE-NINJA",
+        "BX-BH01-LICENSE-GPERF",
+        "BX-BH01-LICENSE-ZLIB"
+      ],
+      "mime": "text/javascript",
+      "mode": "debug-web",
+      "owner": "packages/blazex_runtime_popcorn/runtime",
+      "path": "generated/debug-web/artifacts/AtomVM.mjs.gz",
+      "provenance": "checksum-qualified FissionVM/Mbed TLS sources built in the digest-pinned Emscripten image with networking disabled",
+      "reachability_root": "browser-runtime",
+      "sha256": "c5afccc5b1efbddc35d8d241f0a6cccb955c0f2a4a1af21dc637e146ba2b315b",
+      "source_map_policy": "debug-web",
+      "uncompressed_artifact_id": "BX-BH01-RUNTIME-DEBUG-WEB-ATOMVM-MJS",
+      "uncompressed_bytes": 309205
+    },
+    {
+      "artifact_id": "BX-BH01-RUNTIME-DEBUG-WEB-BUILD-LOG",
+      "build_lineage": "BX-BH01-RUNTIME-BUILD-0.1",
+      "bytes": 23009,
+      "content_encoding": null,
+      "deployable": false,
+      "kind": "build-log",
+      "license_record_ids": [
+        "BX-BH01-LICENSE-FISSIONVM",
+        "BX-BH01-LICENSE-MBEDTLS",
+        "BX-BH01-LICENSE-EMSCRIPTEN",
+        "BX-BH01-LICENSE-NINJA",
+        "BX-BH01-LICENSE-GPERF",
+        "BX-BH01-LICENSE-ZLIB"
+      ],
+      "mime": "text/plain",
+      "mode": "debug-web",
+      "owner": "packages/blazex_runtime_popcorn/runtime",
+      "path": "generated/debug-web/build.log",
+      "provenance": "checksum-qualified FissionVM/Mbed TLS sources built in the digest-pinned Emscripten image with networking disabled",
+      "reachability_root": "build-evidence",
+      "sha256": "fe83c25bde09e26edccef5e3705808ff72c29588aa4de237f17c5338f39a2fb6",
+      "source_map_policy": "not-applicable build log"
+    },
+    {
+      "artifact_id": "BX-BH01-RUNTIME-RELEASE-WEB-ATOMVM-WASM",
+      "build_lineage": "BX-BH01-RUNTIME-BUILD-0.1",
+      "bytes": 986537,
+      "content_encoding": null,
+      "deployable": true,
+      "kind": "wasm",
+      "license_record_ids": [
+        "BX-BH01-LICENSE-FISSIONVM",
+        "BX-BH01-LICENSE-MBEDTLS",
+        "BX-BH01-LICENSE-EMSCRIPTEN",
+        "BX-BH01-LICENSE-NINJA",
+        "BX-BH01-LICENSE-GPERF",
+        "BX-BH01-LICENSE-ZLIB"
+      ],
+      "mime": "application/wasm",
+      "mode": "release-web",
+      "owner": "packages/blazex_runtime_popcorn/runtime",
+      "path": "generated/release-web/artifacts/AtomVM.wasm",
+      "provenance": "checksum-qualified FissionVM/Mbed TLS sources built in the digest-pinned Emscripten image with networking disabled",
+      "reachability_root": "browser-runtime",
+      "sha256": "d20c491e75936dc8189910c8d0740093b7813d8dcc1cf966a87c011799ade9d8",
+      "source_map_policy": "release-web"
+    },
+    {
+      "artifact_id": "BX-BH01-RUNTIME-RELEASE-WEB-ATOMVM-MJS",
+      "build_lineage": "BX-BH01-RUNTIME-BUILD-0.1",
+      "bytes": 156421,
+      "content_encoding": null,
+      "deployable": true,
+      "kind": "javascript",
+      "license_record_ids": [
+        "BX-BH01-LICENSE-FISSIONVM",
+        "BX-BH01-LICENSE-MBEDTLS",
+        "BX-BH01-LICENSE-EMSCRIPTEN",
+        "BX-BH01-LICENSE-NINJA",
+        "BX-BH01-LICENSE-GPERF",
+        "BX-BH01-LICENSE-ZLIB"
+      ],
+      "mime": "text/javascript",
+      "mode": "release-web",
+      "owner": "packages/blazex_runtime_popcorn/runtime",
+      "path": "generated/release-web/artifacts/AtomVM.mjs",
+      "provenance": "checksum-qualified FissionVM/Mbed TLS sources built in the digest-pinned Emscripten image with networking disabled",
+      "reachability_root": "browser-runtime",
+      "sha256": "43cbf6ec34cd4745777b4ce70aa23844a6bb8af44c301c86a5dd02c0165bef64",
+      "source_map_policy": "release-web"
+    },
+    {
+      "artifact_id": "BX-BH01-RUNTIME-RELEASE-WEB-ATOMVM-WASM-GZ",
+      "build_lineage": "BX-BH01-RUNTIME-BUILD-0.1",
+      "bytes": 317970,
+      "content_encoding": "gzip",
+      "deployable": true,
+      "kind": "compressed",
+      "license_record_ids": [
+        "BX-BH01-LICENSE-FISSIONVM",
+        "BX-BH01-LICENSE-MBEDTLS",
+        "BX-BH01-LICENSE-EMSCRIPTEN",
+        "BX-BH01-LICENSE-NINJA",
+        "BX-BH01-LICENSE-GPERF",
+        "BX-BH01-LICENSE-ZLIB"
+      ],
+      "mime": "application/wasm",
+      "mode": "release-web",
+      "owner": "packages/blazex_runtime_popcorn/runtime",
+      "path": "generated/release-web/artifacts/AtomVM.wasm.gz",
+      "provenance": "checksum-qualified FissionVM/Mbed TLS sources built in the digest-pinned Emscripten image with networking disabled",
+      "reachability_root": "browser-runtime",
+      "sha256": "b36f65b490c041ab9f1845f0f59ea27021d5078c2533a9c1c860fb0b5ae05d96",
+      "source_map_policy": "release-web",
+      "uncompressed_artifact_id": "BX-BH01-RUNTIME-RELEASE-WEB-ATOMVM-WASM",
+      "uncompressed_bytes": 986537
+    },
+    {
+      "artifact_id": "BX-BH01-RUNTIME-RELEASE-WEB-ATOMVM-MJS-GZ",
+      "build_lineage": "BX-BH01-RUNTIME-BUILD-0.1",
+      "bytes": 35461,
+      "content_encoding": "gzip",
+      "deployable": true,
+      "kind": "compressed",
+      "license_record_ids": [
+        "BX-BH01-LICENSE-FISSIONVM",
+        "BX-BH01-LICENSE-MBEDTLS",
+        "BX-BH01-LICENSE-EMSCRIPTEN",
+        "BX-BH01-LICENSE-NINJA",
+        "BX-BH01-LICENSE-GPERF",
+        "BX-BH01-LICENSE-ZLIB"
+      ],
+      "mime": "text/javascript",
+      "mode": "release-web",
+      "owner": "packages/blazex_runtime_popcorn/runtime",
+      "path": "generated/release-web/artifacts/AtomVM.mjs.gz",
+      "provenance": "checksum-qualified FissionVM/Mbed TLS sources built in the digest-pinned Emscripten image with networking disabled",
+      "reachability_root": "browser-runtime",
+      "sha256": "da51cfd3b69ae2e56553b4c7728fa190c0a702592338d15080de21fde95410cd",
+      "source_map_policy": "release-web",
+      "uncompressed_artifact_id": "BX-BH01-RUNTIME-RELEASE-WEB-ATOMVM-MJS",
+      "uncompressed_bytes": 156421
+    },
+    {
+      "artifact_id": "BX-BH01-RUNTIME-RELEASE-WEB-BUILD-LOG",
+      "build_lineage": "BX-BH01-RUNTIME-BUILD-0.1",
+      "bytes": 28093,
+      "content_encoding": null,
+      "deployable": false,
+      "kind": "build-log",
+      "license_record_ids": [
+        "BX-BH01-LICENSE-FISSIONVM",
+        "BX-BH01-LICENSE-MBEDTLS",
+        "BX-BH01-LICENSE-EMSCRIPTEN",
+        "BX-BH01-LICENSE-NINJA",
+        "BX-BH01-LICENSE-GPERF",
+        "BX-BH01-LICENSE-ZLIB"
+      ],
+      "mime": "text/plain",
+      "mode": "release-web",
+      "owner": "packages/blazex_runtime_popcorn/runtime",
+      "path": "generated/release-web/build.log",
+      "provenance": "checksum-qualified FissionVM/Mbed TLS sources built in the digest-pinned Emscripten image with networking disabled",
+      "reachability_root": "build-evidence",
+      "sha256": "c5d2afbe3587e072f2746555b515eb77edde624a29a98eaf54c8436e528c7c1f",
+      "source_map_policy": "not-applicable build log"
+    },
+    {
+      "artifact_id": "BX-BH01-RUNTIME-RELEASE-NODE-PROBE-ATOMVM-WASM",
+      "build_lineage": "BX-BH01-RUNTIME-BUILD-0.1",
+      "bytes": 986130,
+      "content_encoding": null,
+      "deployable": false,
+      "kind": "wasm",
+      "license_record_ids": [
+        "BX-BH01-LICENSE-FISSIONVM",
+        "BX-BH01-LICENSE-MBEDTLS",
+        "BX-BH01-LICENSE-EMSCRIPTEN",
+        "BX-BH01-LICENSE-NINJA",
+        "BX-BH01-LICENSE-GPERF",
+        "BX-BH01-LICENSE-ZLIB"
+      ],
+      "mime": "application/wasm",
+      "mode": "release-node-probe",
+      "owner": "packages/blazex_runtime_popcorn/runtime",
+      "path": "generated/release-node-probe/artifacts/AtomVM.wasm",
+      "provenance": "checksum-qualified FissionVM/Mbed TLS sources built in the digest-pinned Emscripten image with networking disabled",
+      "reachability_root": "phase3-node-probe",
+      "sha256": "7c31ad202adad7e8dca83f0da3a3ac7578c0ee7ea33d51ddc0e44f50e7df6814",
+      "source_map_policy": "release-node-probe"
+    },
+    {
+      "artifact_id": "BX-BH01-RUNTIME-RELEASE-NODE-PROBE-ATOMVM-MJS",
+      "build_lineage": "BX-BH01-RUNTIME-BUILD-0.1",
+      "bytes": 165299,
+      "content_encoding": null,
+      "deployable": false,
+      "kind": "javascript",
+      "license_record_ids": [
+        "BX-BH01-LICENSE-FISSIONVM",
+        "BX-BH01-LICENSE-MBEDTLS",
+        "BX-BH01-LICENSE-EMSCRIPTEN",
+        "BX-BH01-LICENSE-NINJA",
+        "BX-BH01-LICENSE-GPERF",
+        "BX-BH01-LICENSE-ZLIB"
+      ],
+      "mime": "text/javascript",
+      "mode": "release-node-probe",
+      "owner": "packages/blazex_runtime_popcorn/runtime",
+      "path": "generated/release-node-probe/artifacts/AtomVM.mjs",
+      "provenance": "checksum-qualified FissionVM/Mbed TLS sources built in the digest-pinned Emscripten image with networking disabled",
+      "reachability_root": "phase3-node-probe",
+      "sha256": "54ca927247809e78338738d97f7cfa05349c7cdd8a96ca63021a8e218747c8fe",
+      "source_map_policy": "release-node-probe"
+    },
+    {
+      "artifact_id": "BX-BH01-RUNTIME-RELEASE-NODE-PROBE-ATOMVM-WASM-GZ",
+      "build_lineage": "BX-BH01-RUNTIME-BUILD-0.1",
+      "bytes": 317953,
+      "content_encoding": "gzip",
+      "deployable": false,
+      "kind": "compressed",
+      "license_record_ids": [
+        "BX-BH01-LICENSE-FISSIONVM",
+        "BX-BH01-LICENSE-MBEDTLS",
+        "BX-BH01-LICENSE-EMSCRIPTEN",
+        "BX-BH01-LICENSE-NINJA",
+        "BX-BH01-LICENSE-GPERF",
+        "BX-BH01-LICENSE-ZLIB"
+      ],
+      "mime": "application/wasm",
+      "mode": "release-node-probe",
+      "owner": "packages/blazex_runtime_popcorn/runtime",
+      "path": "generated/release-node-probe/artifacts/AtomVM.wasm.gz",
+      "provenance": "checksum-qualified FissionVM/Mbed TLS sources built in the digest-pinned Emscripten image with networking disabled",
+      "reachability_root": "phase3-node-probe",
+      "sha256": "b7a2f6e6f58e60b7d5318ab767094768dcc1f895fd66712c7e9ae91930c6589d",
+      "source_map_policy": "release-node-probe",
+      "uncompressed_artifact_id": "BX-BH01-RUNTIME-RELEASE-NODE-PROBE-ATOMVM-WASM",
+      "uncompressed_bytes": 986130
+    },
+    {
+      "artifact_id": "BX-BH01-RUNTIME-RELEASE-NODE-PROBE-ATOMVM-MJS-GZ",
+      "build_lineage": "BX-BH01-RUNTIME-BUILD-0.1",
+      "bytes": 37994,
+      "content_encoding": "gzip",
+      "deployable": false,
+      "kind": "compressed",
+      "license_record_ids": [
+        "BX-BH01-LICENSE-FISSIONVM",
+        "BX-BH01-LICENSE-MBEDTLS",
+        "BX-BH01-LICENSE-EMSCRIPTEN",
+        "BX-BH01-LICENSE-NINJA",
+        "BX-BH01-LICENSE-GPERF",
+        "BX-BH01-LICENSE-ZLIB"
+      ],
+      "mime": "text/javascript",
+      "mode": "release-node-probe",
+      "owner": "packages/blazex_runtime_popcorn/runtime",
+      "path": "generated/release-node-probe/artifacts/AtomVM.mjs.gz",
+      "provenance": "checksum-qualified FissionVM/Mbed TLS sources built in the digest-pinned Emscripten image with networking disabled",
+      "reachability_root": "phase3-node-probe",
+      "sha256": "1d74d0de10d2f5bd55dc78bca7a8575d91dd8b3ceed8e0777e7486f46bcdb3c6",
+      "source_map_policy": "release-node-probe",
+      "uncompressed_artifact_id": "BX-BH01-RUNTIME-RELEASE-NODE-PROBE-ATOMVM-MJS",
+      "uncompressed_bytes": 165299
+    },
+    {
+      "artifact_id": "BX-BH01-RUNTIME-RELEASE-NODE-PROBE-BUILD-LOG",
+      "build_lineage": "BX-BH01-RUNTIME-BUILD-0.1",
+      "bytes": 28094,
+      "content_encoding": null,
+      "deployable": false,
+      "kind": "build-log",
+      "license_record_ids": [
+        "BX-BH01-LICENSE-FISSIONVM",
+        "BX-BH01-LICENSE-MBEDTLS",
+        "BX-BH01-LICENSE-EMSCRIPTEN",
+        "BX-BH01-LICENSE-NINJA",
+        "BX-BH01-LICENSE-GPERF",
+        "BX-BH01-LICENSE-ZLIB"
+      ],
+      "mime": "text/plain",
+      "mode": "release-node-probe",
+      "owner": "packages/blazex_runtime_popcorn/runtime",
+      "path": "generated/release-node-probe/build.log",
+      "provenance": "checksum-qualified FissionVM/Mbed TLS sources built in the digest-pinned Emscripten image with networking disabled",
+      "reachability_root": "build-evidence",
+      "sha256": "c5a15538c520e368a16c22a550d0a19b9ddf3162f073e6dd1458cc0509493283",
+      "source_map_policy": "not-applicable build log"
+    }
+  ],
+  "build_contract": "build-contract.json",
+  "build_contract_sha256": "ae2f87845d612ac3ba9b23517389df5ddee4d1bda7f99bb9c024c47fea366980",
+  "embedded_artifacts": [
+    {
+      "artifact_id": "BX-BH01-RUNTIME-DEBUG-WEB-EMBEDDED-DEBUG-SECTIONS",
+      "carrier_artifact_id": "BX-BH01-RUNTIME-DEBUG-WEB-ATOMVM-WASM",
+      "kind": "embedded-debug-symbols",
+      "sections": [
+        "name",
+        ".debug_loc",
+        ".debug_abbrev",
+        ".debug_info",
+        ".debug_ranges",
+        ".debug_str",
+        ".debug_line",
+        ".debug_aranges"
+      ],
+      "source_map_policy": "embedded DWARF/name sections only; no external source map"
+    }
+  ],
+  "javascript_inspections": [
+    {
+      "bytes": 309205,
+      "external_source_map_reference": false,
+      "forbidden_embedded_strings": [
+        "/home/",
+        "/inputs/"
+      ],
+      "mode": "debug-web",
+      "sha256": "5379574ca20bf49d71649545182ec3d17f1e324be0766e0aae208c50d255cfc7",
+      "uses_indirect_eval": true,
+      "uses_shared_array_buffer": true,
+      "uses_worker": true
+    },
+    {
+      "bytes": 156421,
+      "external_source_map_reference": false,
+      "forbidden_embedded_strings": [
+        "/home/"
+      ],
+      "mode": "release-web",
+      "sha256": "43cbf6ec34cd4745777b4ce70aa23844a6bb8af44c301c86a5dd02c0165bef64",
+      "uses_indirect_eval": true,
+      "uses_shared_array_buffer": true,
+      "uses_worker": true
+    },
+    {
+      "bytes": 165299,
+      "external_source_map_reference": false,
+      "forbidden_embedded_strings": [
+        "/home/"
+      ],
+      "mode": "release-node-probe",
+      "sha256": "54ca927247809e78338738d97f7cfa05349c7cdd8a96ca63021a8e218747c8fe",
+      "uses_indirect_eval": true,
+      "uses_shared_array_buffer": true,
+      "uses_worker": true
+    }
+  ],
+  "limitations": [
+    "A successful build and binary inspection do not prove browser boot.",
+    "The Node mode is a non-deployable semantic probe harness.",
+    "The Emscripten glue retains upstream indirect-eval behavior for later CSP testing.",
+    "Payload observations are preliminary and do not pass any proposed budget."
+  ],
+  "manifest_id": "BX-BH01-RUNTIME-BINARY-MANIFEST-0.1",
+  "omission_records": [
+    {
+      "applies_to_modes": [
+        "debug-web",
+        "release-web",
+        "release-node-probe"
+      ],
+      "artifact_id": "BX-BH01-RUNTIME-EXTERNAL-SOURCE-MAPS-NOT-EMITTED",
+      "kind": "source-map-omission",
+      "reason": "The pinned Emscripten commands emit no external source map; debug information is embedded only in debug-web."
+    }
+  ],
+  "schema_version": "1.0.0",
+  "source_map_policy": {
+    "debug-web": "DWARF custom sections and names are embedded with canonical relative prefixes; no external map is emitted.",
+    "release-node-probe": "Names and DWARF are stripped; no external map is emitted; artifact is not deployable.",
+    "release-web": "Names and DWARF are stripped; no external map is emitted."
+  },
+  "source_revision": "6c3208c7b3dbc7dacc35a19f8de1fa80b358ac73",
+  "status": "observed-pass",
+  "wasm_inspections": [
+    {
+      "atomic_opcode_prefix_observed": true,
+      "bytes": 4210633,
+      "custom_sections": [
+        "name",
+        ".debug_loc",
+        ".debug_abbrev",
+        ".debug_info",
+        ".debug_ranges",
+        ".debug_str",
+        ".debug_line",
+        ".debug_aranges"
+      ],
+      "exports": [
+        {
+          "index": 112,
+          "kind": "function",
+          "name": "__wasm_call_ctors"
+        },
+        {
+          "index": 115,
+          "kind": "function",
+          "name": "cast"
+        },
+        {
+          "index": 116,
+          "kind": "function",
+          "name": "call"
+        },
+        {
+          "index": 117,
+          "kind": "function",
+          "name": "next_tracked_object_key"
+        },
+        {
+          "index": 118,
+          "kind": "function",
+          "name": "__main_argc_argv"
+        },
+        {
+          "index": 0,
+          "kind": "table",
+          "name": "__indirect_function_table"
+        },
+        {
+          "index": 3909,
+          "kind": "function",
+          "name": "free"
+        },
+        {
+          "index": 3905,
+          "kind": "function",
+          "name": "malloc"
+        },
+        {
+          "index": 3566,
+          "kind": "function",
+          "name": "fflush"
+        },
+        {
+          "index": 3482,
+          "kind": "function",
+          "name": "_emscripten_tls_init"
+        },
+        {
+          "index": 3797,
+          "kind": "function",
+          "name": "pthread_self"
+        },
+        {
+          "index": 3484,
+          "kind": "function",
+          "name": "_emscripten_proxy_main"
+        },
+        {
+          "index": 3936,
+          "kind": "function",
+          "name": "emscripten_stack_get_base"
+        },
+        {
+          "index": 3937,
+          "kind": "function",
+          "name": "emscripten_stack_get_end"
+        },
+        {
+          "index": 3946,
+          "kind": "function",
+          "name": "_emscripten_run_callback_on_thread"
+        },
+        {
+          "index": 3942,
+          "kind": "function",
+          "name": "_emscripten_thread_init"
+        },
+        {
+          "index": 3549,
+          "kind": "function",
+          "name": "_emscripten_thread_crashed"
+        },
+        {
+          "index": 3685,
+          "kind": "function",
+          "name": "_emscripten_run_on_main_thread_js"
+        },
+        {
+          "index": 3738,
+          "kind": "function",
+          "name": "_emscripten_thread_free_data"
+        },
+        {
+          "index": 3739,
+          "kind": "function",
+          "name": "_emscripten_thread_exit"
+        },
+        {
+          "index": 3941,
+          "kind": "function",
+          "name": "strerror"
+        },
+        {
+          "index": 3869,
+          "kind": "function",
+          "name": "_emscripten_check_mailbox"
+        },
+        {
+          "index": 3918,
+          "kind": "function",
+          "name": "sbrk"
+        },
+        {
+          "index": 3917,
+          "kind": "function",
+          "name": "emscripten_get_sbrk_ptr"
+        },
+        {
+          "index": 3933,
+          "kind": "function",
+          "name": "emscripten_stack_init"
+        },
+        {
+          "index": 3934,
+          "kind": "function",
+          "name": "emscripten_stack_set_limits"
+        },
+        {
+          "index": 3935,
+          "kind": "function",
+          "name": "emscripten_stack_get_free"
+        },
+        {
+          "index": 3943,
+          "kind": "function",
+          "name": "_emscripten_stack_restore"
+        },
+        {
+          "index": 3944,
+          "kind": "function",
+          "name": "_emscripten_stack_alloc"
+        },
+        {
+          "index": 3945,
+          "kind": "function",
+          "name": "emscripten_stack_get_current"
+        },
+        {
+          "index": 3948,
+          "kind": "function",
+          "name": "dynCall_vii"
+        },
+        {
+          "index": 3949,
+          "kind": "function",
+          "name": "dynCall_jjj"
+        },
+        {
+          "index": 3950,
+          "kind": "function",
+          "name": "dynCall_iiiiiiiii"
+        },
+        {
+          "index": 3951,
+          "kind": "function",
+          "name": "dynCall_iiiiii"
+        },
+        {
+          "index": 3952,
+          "kind": "function",
+          "name": "dynCall_iiii"
+        },
+        {
+          "index": 3953,
+          "kind": "function",
+          "name": "dynCall_iiiii"
+        },
+        {
+          "index": 3954,
+          "kind": "function",
+          "name": "dynCall_ii"
+        },
+        {
+          "index": 3955,
+          "kind": "function",
+          "name": "dynCall_iiiiiii"
+        },
+        {
+          "index": 3956,
+          "kind": "function",
+          "name": "dynCall_viiii"
+        },
+        {
+          "index": 3957,
+          "kind": "function",
+          "name": "dynCall_iii"
+        },
+        {
+          "index": 3958,
+          "kind": "function",
+          "name": "dynCall_viiiii"
+        },
+        {
+          "index": 3959,
+          "kind": "function",
+          "name": "dynCall_dd"
+        },
+        {
+          "index": 3960,
+          "kind": "function",
+          "name": "dynCall_ddd"
+        },
+        {
+          "index": 3961,
+          "kind": "function",
+          "name": "dynCall_vi"
+        },
+        {
+          "index": 3962,
+          "kind": "function",
+          "name": "dynCall_viii"
+        },
+        {
+          "index": 3963,
+          "kind": "function",
+          "name": "dynCall_iiiiiiii"
+        },
+        {
+          "index": 3964,
+          "kind": "function",
+          "name": "dynCall_i"
+        },
+        {
+          "index": 3965,
+          "kind": "function",
+          "name": "dynCall_jiji"
+        },
+        {
+          "index": 3966,
+          "kind": "function",
+          "name": "dynCall_v"
+        },
+        {
+          "index": 3967,
+          "kind": "function",
+          "name": "dynCall_iidiiii"
+        }
+      ],
+      "forbidden_embedded_strings": [],
+      "format": "WebAssembly",
+      "import_modules": [
+        "env",
+        "wasi_snapshot_preview1"
+      ],
+      "imports": [
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "__assert_fail",
+          "type_index": 10
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "exit",
+          "type_index": 4
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_random",
+          "type_index": 72
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_run_script",
+          "type_index": 4
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "js_tracked_eval",
+          "type_index": 2
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "js_get_tracked_objects",
+          "type_index": 12
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_set_keypress_callback_on_thread",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_set_keydown_callback_on_thread",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_set_keyup_callback_on_thread",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_set_click_callback_on_thread",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_set_mousedown_callback_on_thread",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_set_mouseup_callback_on_thread",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_set_dblclick_callback_on_thread",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_set_mousemove_callback_on_thread",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_set_mouseenter_callback_on_thread",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_set_mouseleave_callback_on_thread",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_set_mouseover_callback_on_thread",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_set_mouseout_callback_on_thread",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_set_wheel_callback_on_thread",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_set_resize_callback_on_thread",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_set_scroll_callback_on_thread",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_set_blur_callback_on_thread",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_set_focus_callback_on_thread",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_set_focusin_callback_on_thread",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_set_focusout_callback_on_thread",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_set_touchstart_callback_on_thread",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_set_touchend_callback_on_thread",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_set_touchmove_callback_on_thread",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_set_touchcancel_callback_on_thread",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_num_logical_cores",
+          "type_index": 11
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_asm_const_int",
+          "type_index": 2
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_promise_destroy",
+          "type_index": 4
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_promise_create",
+          "type_index": 11
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_get_now",
+          "type_index": 53
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_set_deviceorientation_callback_on_thread",
+          "type_index": 5
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_set_devicemotion_callback_on_thread",
+          "type_index": 5
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_set_orientationchange_callback_on_thread",
+          "type_index": 5
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_set_fullscreenchange_callback_on_thread",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_set_pointerlockchange_callback_on_thread",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_set_visibilitychange_callback_on_thread",
+          "type_index": 5
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_set_gamepadconnected_callback_on_thread",
+          "type_index": 5
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_set_gamepaddisconnected_callback_on_thread",
+          "type_index": 5
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_set_beforeunload_callback_on_thread",
+          "type_index": 2
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_set_batterychargingchange_callback_on_thread",
+          "type_index": 2
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_set_batterylevelchange_callback_on_thread",
+          "type_index": 2
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_set_pointerlockerror_callback_on_thread",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_websocket_close",
+          "type_index": 2
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_websocket_delete",
+          "type_index": 0
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_websocket_is_supported",
+          "type_index": 11
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_websocket_new",
+          "type_index": 0
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_websocket_set_onopen_callback_on_thread",
+          "type_index": 5
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_websocket_set_onerror_callback_on_thread",
+          "type_index": 5
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_websocket_set_onclose_callback_on_thread",
+          "type_index": 5
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_websocket_set_onmessage_callback_on_thread",
+          "type_index": 5
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_websocket_get_ready_state",
+          "type_index": 3
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_websocket_get_buffered_amount",
+          "type_index": 3
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_websocket_get_url_length",
+          "type_index": 3
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_websocket_get_url",
+          "type_index": 2
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_websocket_get_extensions_length",
+          "type_index": 3
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_websocket_get_extensions",
+          "type_index": 2
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_websocket_get_protocol_length",
+          "type_index": 3
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_websocket_get_protocol",
+          "type_index": 2
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_websocket_send_utf8_text",
+          "type_index": 3
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_websocket_send_binary",
+          "type_index": 2
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_start_fetch",
+          "type_index": 4
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_fetch_free",
+          "type_index": 4
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "_emscripten_thread_set_strongref",
+          "type_index": 4
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_runtime_keepalive_check",
+          "type_index": 11
+        },
+        {
+          "kind": "function",
+          "module": "wasi_snapshot_preview1",
+          "name": "environ_sizes_get",
+          "type_index": 3
+        },
+        {
+          "kind": "function",
+          "module": "wasi_snapshot_preview1",
+          "name": "environ_get",
+          "type_index": 3
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "_tzset_js",
+          "type_index": 10
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "_abort_js",
+          "type_index": 14
+        },
+        {
+          "kind": "function",
+          "module": "wasi_snapshot_preview1",
+          "name": "clock_time_get",
+          "type_index": 27
+        },
+        {
+          "kind": "function",
+          "module": "wasi_snapshot_preview1",
+          "name": "fd_close",
+          "type_index": 0
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "__syscall_dup3",
+          "type_index": 2
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_exit_with_live_runtime",
+          "type_index": 14
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "__syscall_openat",
+          "type_index": 5
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "__syscall_fcntl64",
+          "type_index": 2
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "__syscall_ioctl",
+          "type_index": 2
+        },
+        {
+          "kind": "function",
+          "module": "wasi_snapshot_preview1",
+          "name": "fd_write",
+          "type_index": 5
+        },
+        {
+          "kind": "function",
+          "module": "wasi_snapshot_preview1",
+          "name": "fd_read",
+          "type_index": 5
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "__syscall_fstat64",
+          "type_index": 3
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "__syscall_stat64",
+          "type_index": 3
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "__syscall_newfstatat",
+          "type_index": 5
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "__syscall_lstat64",
+          "type_index": 3
+        },
+        {
+          "kind": "function",
+          "module": "wasi_snapshot_preview1",
+          "name": "fd_sync",
+          "type_index": 0
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "__syscall_ftruncate64",
+          "type_index": 32
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "__syscall_getcwd",
+          "type_index": 3
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "_emscripten_init_main_thread_js",
+          "type_index": 4
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "_emscripten_thread_mailbox_await",
+          "type_index": 4
+        },
+        {
+          "kind": "function",
+          "module": "wasi_snapshot_preview1",
+          "name": "fd_seek",
+          "type_index": 54
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "__syscall_mkdirat",
+          "type_index": 2
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "__syscall_mknodat",
+          "type_index": 5
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "_localtime_js",
+          "type_index": 33
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "_gmtime_js",
+          "type_index": 33
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "__syscall_pipe",
+          "type_index": 0
+        },
+        {
+          "kind": "function",
+          "module": "wasi_snapshot_preview1",
+          "name": "fd_pread",
+          "type_index": 55
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "_emscripten_receive_on_main_thread_js",
+          "type_index": 56
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_check_blocking_allowed",
+          "type_index": 14
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "__pthread_create_js",
+          "type_index": 5
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "_emscripten_thread_cleanup",
+          "type_index": 4
+        },
+        {
+          "kind": "function",
+          "module": "wasi_snapshot_preview1",
+          "name": "fd_pwrite",
+          "type_index": 55
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "__syscall_getdents64",
+          "type_index": 2
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "__syscall_unlinkat",
+          "type_index": 2
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "__syscall_rmdir",
+          "type_index": 0
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "__syscall_renameat",
+          "type_index": 5
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_get_heap_max",
+          "type_index": 11
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "_emscripten_notify_mailbox_postmessage",
+          "type_index": 7
+        },
+        {
+          "kind": "function",
+          "module": "wasi_snapshot_preview1",
+          "name": "fd_fdstat_get",
+          "type_index": 3
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "emscripten_resize_heap",
+          "type_index": 0
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "segfault",
+          "type_index": 14
+        },
+        {
+          "kind": "function",
+          "module": "env",
+          "name": "alignfault",
+          "type_index": 14
+        },
+        {
+          "kind": "memory",
+          "limits": {
+            "maximum": 256,
+            "memory64": false,
+            "minimum": 256,
+            "shared": true
+          },
+          "module": "env",
+          "name": "memory"
+        }
+      ],
+      "memory_imports": [
+        {
+          "kind": "memory",
+          "limits": {
+            "maximum": 256,
+            "memory64": false,
+            "minimum": 256,
+            "shared": true
+          },
+          "module": "env",
+          "name": "memory"
+        }
+      ],
+      "mode": "debug-web",
+      "sections": [
+        {
+          "bytes": 753,
+          "id": 1,
+          "name": "type"
+        },
+        {
+          "bytes": 4315,
+          "count": 113,
+          "id": 2,
+          "name": "import"
+        },
+        {
+          "bytes": 4458,
+          "id": 3,
+          "name": "function"
+        },
+        {
+          "bytes": 7,
+          "id": 4,
+          "name": "table"
+        },
+        {
+          "bytes": 48,
+          "id": 6,
+          "name": "global"
+        },
+        {
+          "bytes": 1024,
+          "count": 50,
+          "id": 7,
+          "name": "export"
+        },
+        {
+          "bytes": 1,
+          "function_index": 114,
+          "id": 8,
+          "name": "start"
+        },
+        {
+          "bytes": 1121,
+          "id": 9,
+          "name": "element"
+        },
+        {
+          "bytes": 1,
+          "id": 12,
+          "name": "data_count"
+        },
+        {
+          "bytes": 1160578,
+          "id": 10,
+          "name": "code"
+        },
+        {
+          "bytes": 113897,
+          "id": 11,
+          "name": "data"
+        },
+        {
+          "bytes": 119324,
+          "custom_name": "name",
+          "id": 0,
+          "name": "custom"
+        },
+        {
+          "bytes": 351067,
+          "custom_name": ".debug_loc",
+          "id": 0,
+          "name": "custom"
+        },
+        {
+          "bytes": 114189,
+          "custom_name": ".debug_abbrev",
+          "id": 0,
+          "name": "custom"
+        },
+        {
+          "bytes": 1147254,
+          "custom_name": ".debug_info",
+          "id": 0,
+          "name": "custom"
+        },
+        {
+          "bytes": 80662,
+          "custom_name": ".debug_ranges",
+          "id": 0,
+          "name": "custom"
+        },
+        {
+          "bytes": 181864,
+          "custom_name": ".debug_str",
+          "id": 0,
+          "name": "custom"
+        },
+        {
+          "bytes": 929777,
+          "custom_name": ".debug_line",
+          "id": 0,
+          "name": "custom"
+        },
+        {
+          "bytes": 223,
+          "custom_name": ".debug_aranges",
+          "id": 0,
+          "name": "custom"
+        }
+      ],
+      "sha256": "e6025168933b62dec3650d9b9f78eb9f613e4eb21407ad837cb0dce9f1a55768",
+      "start_function_index": 114,
+      "version": 1
+    },
+    {
+      "atomic_opcode_prefix_observed": true,
+      "bytes": 986537,
+      "custom_sections": [],
+      "exports": [
+        {
+          "index": 2027,
+          "kind": "function",
+          "name": "ab"
+        },
+        {
+          "index": 1356,
+          "kind": "function",
+          "name": "bb"
+        },
+        {
+          "index": 1343,
+          "kind": "function",
+          "name": "cb"
+        },
+        {
+          "index": 1311,
+          "kind": "function",
+          "name": "db"
+        },
+        {
+          "index": 722,
+          "kind": "function",
+          "name": "eb"
+        },
+        {
+          "index": 109,
+          "kind": "function",
+          "name": "fb"
+        },
+        {
+          "index": 117,
+          "kind": "function",
+          "name": "gb"
+        },
+        {
+          "index": 1994,
+          "kind": "function",
+          "name": "hb"
+        },
+        {
+          "index": 1965,
+          "kind": "function",
+          "name": "ib"
+        },
+        {
+          "index": 1993,
+          "kind": "function",
+          "name": "jb"
+        },
+        {
+          "index": 1948,
+          "kind": "function",
+          "name": "kb"
+        },
+        {
+          "index": 1949,
+          "kind": "function",
+          "name": "lb"
+        },
+        {
+          "index": 1987,
+          "kind": "function",
+          "name": "mb"
+        },
+        {
+          "index": 1974,
+          "kind": "function",
+          "name": "nb"
+        },
+        {
+          "index": 1968,
+          "kind": "function",
+          "name": "ob"
+        },
+        {
+          "index": 1967,
+          "kind": "function",
+          "name": "pb"
+        },
+        {
+          "index": 1960,
+          "kind": "function",
+          "name": "qb"
+        },
+        {
+          "index": 1954,
+          "kind": "function",
+          "name": "rb"
+        },
+        {
+          "index": 1953,
+          "kind": "function",
+          "name": "sb"
+        },
+        {
+          "index": 1951,
+          "kind": "function",
+          "name": "tb"
+        },
+        {
+          "index": 1950,
+          "kind": "function",
+          "name": "ub"
+        },
+        {
+          "index": 1946,
+          "kind": "function",
+          "name": "vb"
+        },
+        {
+          "index": 1944,
+          "kind": "function",
+          "name": "wb"
+        },
+        {
+          "index": 1943,
+          "kind": "function",
+          "name": "xb"
+        }
+      ],
+      "forbidden_embedded_strings": [],
+      "format": "WebAssembly",
+      "import_modules": [
+        "a"
+      ],
+      "imports": [
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "b",
+          "type_index": 38
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "c",
+          "type_index": 1
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "d",
+          "type_index": 4
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "e",
+          "type_index": 12
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "f",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "g",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "h",
+          "type_index": 2
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "i",
+          "type_index": 1
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "j",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "k",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "l",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "m",
+          "type_index": 1
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "n",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "o",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "p",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "q",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "r",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "s",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "t",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "u",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "v",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "w",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "x",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "y",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "z",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "A",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "B",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "C",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "D",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "E",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "F",
+          "type_index": 5
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "G",
+          "type_index": 14
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "H",
+          "type_index": 2
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "I",
+          "type_index": 1
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "J",
+          "type_index": 2
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "K",
+          "type_index": 5
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "L",
+          "type_index": 1
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "M",
+          "type_index": 5
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "N",
+          "type_index": 5
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "O",
+          "type_index": 4
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "P",
+          "type_index": 1
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Q",
+          "type_index": 39
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "R",
+          "type_index": 5
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "S",
+          "type_index": 29
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "T",
+          "type_index": 2
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "U",
+          "type_index": 30
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "V",
+          "type_index": 29
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "W",
+          "type_index": 4
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "X",
+          "type_index": 31
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Y",
+          "type_index": 31
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Z",
+          "type_index": 2
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "_",
+          "type_index": 1
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "$",
+          "type_index": 40
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "aa",
+          "type_index": 5
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "ba",
+          "type_index": 5
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "ca",
+          "type_index": 3
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "da",
+          "type_index": 21
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "ea",
+          "type_index": 4
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "fa",
+          "type_index": 3
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "ga",
+          "type_index": 2
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "ha",
+          "type_index": 3
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "ia",
+          "type_index": 3
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "ja",
+          "type_index": 14
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "ka",
+          "type_index": 22
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "la",
+          "type_index": 14
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "ma",
+          "type_index": 9
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "na",
+          "type_index": 3
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "oa",
+          "type_index": 3
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "pa",
+          "type_index": 12
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "qa",
+          "type_index": 5
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "ra",
+          "type_index": 5
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "sa",
+          "type_index": 3
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "ta",
+          "type_index": 1
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "ua",
+          "type_index": 3
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "va",
+          "type_index": 1
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "wa",
+          "type_index": 3
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "xa",
+          "type_index": 1
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "ya",
+          "type_index": 3
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "za",
+          "type_index": 3
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Aa",
+          "type_index": 3
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Ba",
+          "type_index": 2
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Ca",
+          "type_index": 2
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Da",
+          "type_index": 2
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Ea",
+          "type_index": 2
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Fa",
+          "type_index": 4
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Ga",
+          "type_index": 12
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Ha",
+          "type_index": 4
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Ia",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Ja",
+          "type_index": 1
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Ka",
+          "type_index": 1
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "La",
+          "type_index": 1
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Ma",
+          "type_index": 2
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Na",
+          "type_index": 15
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Oa",
+          "type_index": 2
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Pa",
+          "type_index": 2
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Qa",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Ra",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Sa",
+          "type_index": 2
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Ta",
+          "type_index": 2
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Ua",
+          "type_index": 2
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Va",
+          "type_index": 12
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Wa",
+          "type_index": 1
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Xa",
+          "type_index": 9
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Ya",
+          "type_index": 4
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Za",
+          "type_index": 7
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "_a",
+          "type_index": 2
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "$a",
+          "type_index": 1
+        },
+        {
+          "kind": "memory",
+          "limits": {
+            "maximum": 256,
+            "memory64": false,
+            "minimum": 256,
+            "shared": true
+          },
+          "module": "a",
+          "name": "a"
+        }
+      ],
+      "memory_imports": [
+        {
+          "kind": "memory",
+          "limits": {
+            "maximum": 256,
+            "memory64": false,
+            "minimum": 256,
+            "shared": true
+          },
+          "module": "a",
+          "name": "a"
+        }
+      ],
+      "mode": "release-web",
+      "sections": [
+        {
+          "bytes": 495,
+          "id": 1,
+          "name": "type"
+        },
+        {
+          "bytes": 707,
+          "count": 108,
+          "id": 2,
+          "name": "import"
+        },
+        {
+          "bytes": 1923,
+          "id": 3,
+          "name": "function"
+        },
+        {
+          "bytes": 7,
+          "id": 4,
+          "name": "table"
+        },
+        {
+          "bytes": 48,
+          "id": 6,
+          "name": "global"
+        },
+        {
+          "bytes": 143,
+          "count": 24,
+          "id": 7,
+          "name": "export"
+        },
+        {
+          "bytes": 2,
+          "function_index": 2026,
+          "id": 8,
+          "name": "start"
+        },
+        {
+          "bytes": 1121,
+          "id": 9,
+          "name": "element"
+        },
+        {
+          "bytes": 1,
+          "id": 12,
+          "name": "data_count"
+        },
+        {
+          "bytes": 873553,
+          "id": 10,
+          "name": "code"
+        },
+        {
+          "bytes": 108498,
+          "id": 11,
+          "name": "data"
+        }
+      ],
+      "sha256": "d20c491e75936dc8189910c8d0740093b7813d8dcc1cf966a87c011799ade9d8",
+      "start_function_index": 2026,
+      "version": 1
+    },
+    {
+      "atomic_opcode_prefix_observed": true,
+      "bytes": 986130,
+      "custom_sections": [],
+      "exports": [
+        {
+          "index": 2022,
+          "kind": "function",
+          "name": "$a"
+        },
+        {
+          "index": 1354,
+          "kind": "function",
+          "name": "ab"
+        },
+        {
+          "index": 1341,
+          "kind": "function",
+          "name": "bb"
+        },
+        {
+          "index": 1309,
+          "kind": "function",
+          "name": "cb"
+        },
+        {
+          "index": 1237,
+          "kind": "function",
+          "name": "db"
+        },
+        {
+          "index": 108,
+          "kind": "function",
+          "name": "eb"
+        },
+        {
+          "index": 116,
+          "kind": "function",
+          "name": "fb"
+        },
+        {
+          "index": 1989,
+          "kind": "function",
+          "name": "gb"
+        },
+        {
+          "index": 1962,
+          "kind": "function",
+          "name": "hb"
+        },
+        {
+          "index": 1945,
+          "kind": "function",
+          "name": "ib"
+        },
+        {
+          "index": 1947,
+          "kind": "function",
+          "name": "jb"
+        },
+        {
+          "index": 1985,
+          "kind": "function",
+          "name": "kb"
+        },
+        {
+          "index": 1971,
+          "kind": "function",
+          "name": "lb"
+        },
+        {
+          "index": 1967,
+          "kind": "function",
+          "name": "mb"
+        },
+        {
+          "index": 1966,
+          "kind": "function",
+          "name": "nb"
+        },
+        {
+          "index": 1957,
+          "kind": "function",
+          "name": "ob"
+        },
+        {
+          "index": 1951,
+          "kind": "function",
+          "name": "pb"
+        },
+        {
+          "index": 1950,
+          "kind": "function",
+          "name": "qb"
+        },
+        {
+          "index": 1949,
+          "kind": "function",
+          "name": "rb"
+        },
+        {
+          "index": 1948,
+          "kind": "function",
+          "name": "sb"
+        },
+        {
+          "index": 1943,
+          "kind": "function",
+          "name": "tb"
+        },
+        {
+          "index": 1942,
+          "kind": "function",
+          "name": "ub"
+        },
+        {
+          "index": 1940,
+          "kind": "function",
+          "name": "vb"
+        }
+      ],
+      "forbidden_embedded_strings": [],
+      "format": "WebAssembly",
+      "import_modules": [
+        "a"
+      ],
+      "imports": [
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "b",
+          "type_index": 38
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "c",
+          "type_index": 1
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "d",
+          "type_index": 4
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "e",
+          "type_index": 12
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "f",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "g",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "h",
+          "type_index": 2
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "i",
+          "type_index": 1
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "j",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "k",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "l",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "m",
+          "type_index": 1
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "n",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "o",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "p",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "q",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "r",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "s",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "t",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "u",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "v",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "w",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "x",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "y",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "z",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "A",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "B",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "C",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "D",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "E",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "F",
+          "type_index": 5
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "G",
+          "type_index": 14
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "H",
+          "type_index": 2
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "I",
+          "type_index": 1
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "J",
+          "type_index": 2
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "K",
+          "type_index": 1
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "L",
+          "type_index": 5
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "M",
+          "type_index": 5
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "N",
+          "type_index": 4
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "O",
+          "type_index": 1
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "P",
+          "type_index": 39
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Q",
+          "type_index": 1
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "R",
+          "type_index": 29
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "S",
+          "type_index": 2
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "T",
+          "type_index": 30
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "U",
+          "type_index": 29
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "V",
+          "type_index": 4
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "W",
+          "type_index": 31
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "X",
+          "type_index": 31
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Y",
+          "type_index": 2
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Z",
+          "type_index": 1
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "_",
+          "type_index": 40
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "$",
+          "type_index": 5
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "aa",
+          "type_index": 5
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "ba",
+          "type_index": 3
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "ca",
+          "type_index": 21
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "da",
+          "type_index": 4
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "ea",
+          "type_index": 3
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "fa",
+          "type_index": 2
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "ga",
+          "type_index": 3
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "ha",
+          "type_index": 3
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "ia",
+          "type_index": 14
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "ja",
+          "type_index": 5
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "ka",
+          "type_index": 22
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "la",
+          "type_index": 14
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "ma",
+          "type_index": 9
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "na",
+          "type_index": 3
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "oa",
+          "type_index": 3
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "pa",
+          "type_index": 5
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "qa",
+          "type_index": 5
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "ra",
+          "type_index": 3
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "sa",
+          "type_index": 1
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "ta",
+          "type_index": 3
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "ua",
+          "type_index": 1
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "va",
+          "type_index": 3
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "wa",
+          "type_index": 1
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "xa",
+          "type_index": 3
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "ya",
+          "type_index": 3
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "za",
+          "type_index": 3
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Aa",
+          "type_index": 2
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Ba",
+          "type_index": 2
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Ca",
+          "type_index": 2
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Da",
+          "type_index": 2
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Ea",
+          "type_index": 4
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Fa",
+          "type_index": 12
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Ga",
+          "type_index": 4
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Ha",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Ia",
+          "type_index": 1
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Ja",
+          "type_index": 1
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Ka",
+          "type_index": 1
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "La",
+          "type_index": 2
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Ma",
+          "type_index": 15
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Na",
+          "type_index": 2
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Oa",
+          "type_index": 2
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Pa",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Qa",
+          "type_index": 6
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Ra",
+          "type_index": 2
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Sa",
+          "type_index": 2
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Ta",
+          "type_index": 2
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Ua",
+          "type_index": 12
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Va",
+          "type_index": 1
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Wa",
+          "type_index": 9
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Xa",
+          "type_index": 4
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Ya",
+          "type_index": 7
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "Za",
+          "type_index": 2
+        },
+        {
+          "kind": "function",
+          "module": "a",
+          "name": "_a",
+          "type_index": 5
+        },
+        {
+          "kind": "memory",
+          "limits": {
+            "maximum": 256,
+            "memory64": false,
+            "minimum": 256,
+            "shared": true
+          },
+          "module": "a",
+          "name": "a"
+        }
+      ],
+      "memory_imports": [
+        {
+          "kind": "memory",
+          "limits": {
+            "maximum": 256,
+            "memory64": false,
+            "minimum": 256,
+            "shared": true
+          },
+          "module": "a",
+          "name": "a"
+        }
+      ],
+      "mode": "release-node-probe",
+      "sections": [
+        {
+          "bytes": 495,
+          "id": 1,
+          "name": "type"
+        },
+        {
+          "bytes": 700,
+          "count": 107,
+          "id": 2,
+          "name": "import"
+        },
+        {
+          "bytes": 1919,
+          "id": 3,
+          "name": "function"
+        },
+        {
+          "bytes": 7,
+          "id": 4,
+          "name": "table"
+        },
+        {
+          "bytes": 48,
+          "id": 6,
+          "name": "global"
+        },
+        {
+          "bytes": 137,
+          "count": 23,
+          "id": 7,
+          "name": "export"
+        },
+        {
+          "bytes": 2,
+          "function_index": 2021,
+          "id": 8,
+          "name": "start"
+        },
+        {
+          "bytes": 1119,
+          "id": 9,
+          "name": "element"
+        },
+        {
+          "bytes": 1,
+          "id": 12,
+          "name": "data_count"
+        },
+        {
+          "bytes": 873181,
+          "id": 10,
+          "name": "code"
+        },
+        {
+          "bytes": 108482,
+          "id": 11,
+          "name": "data"
+        }
+      ],
+      "sha256": "7c31ad202adad7e8dca83f0da3a3ac7578c0ee7ea33d51ddc0e44f50e7df6814",
+      "start_function_index": 2021,
+      "version": 1
+    }
+  ]
+}

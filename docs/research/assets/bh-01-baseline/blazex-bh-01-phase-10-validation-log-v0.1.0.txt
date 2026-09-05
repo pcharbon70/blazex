@@ -1,0 +1,85 @@
+BlazeX BH-01 Phase 10 Validation Log v0.1.0
+Captured: 2026-09-05T12:31:00.000Z
+Source revision entering Section 10.6: 82ffbf872c85d306ef0e6c51c253452676cf9c9b
+Execution scope: one Linux x86-64 development host
+Final result: PASS — proceed with bounded conditions
+Support result: unsupported
+BH-02: eligible=true, authorized=false, may_start=false
+
+Authoritative retained clean executions
+- Clean A: PASS; 38 commands; 10 browser scenarios; zero manual actions.
+- Clean B: PASS; 38 commands; 10 browser scenarios; zero manual actions.
+- Comparison: PASS with declared host variance; 3 exact artifact identities;
+  10 semantic scenario matches; 7 canonical report matches.
+- Retained failed attempts: 3; all stopped, explained, corrected, and rerun from
+  fresh execution state; none promoted into the authoritative record.
+
+Section 10.6 final command outcomes
+- node js/blazex_runtime: npm test — PASS, 10 tests.
+- node packages/blazex_renderer_dom: npm test — PASS, 1 test.
+- node js/blazex_runtime: npm run build — PASS.
+- node packages/blazex_renderer_dom: npm run build — PASS.
+- digest-pinned Elixir 1.17.3 / OTP 26 container, network disabled:
+  - integration/fixtures/browser_host: mix test — PASS, 16 tests.
+  - profiles/browser_phoenix: mix test — PASS, 12 tests.
+  - packages/blazex_runtime_popcorn: mix test — PASS, 2 tests.
+  - packages/blazex_host_browser: mix test — PASS, 1 test.
+  - packages/blazex_renderer_dom: mix test — PASS, 1 test.
+  - packages/blazex_renderer_dom_liveview: mix test — PASS, 4 tests.
+  - packages/blazex_phoenix: mix test — PASS, 10 tests.
+- python3 profiles/browser_phoenix/toolchain/verify_phase9.py — PASS.
+- python3 -m unittest discover -s profiles/browser_phoenix/toolchain/tests
+  -p test_*.py -v — PASS, 97 tests.
+- python3 -m unittest discover -s integration/benchmarks/tests -p test_*.py
+  -v — PASS, 6 tests.
+- python3 -m unittest discover -s integration/reproducibility/tests -v — PASS,
+  31 tests.
+- python3 integration/reproducibility/close_phase10_ledgers.py --output
+  integration/reproducibility/bh01-phase10-ledger-closure.json --check — PASS.
+- python3 integration/reproducibility/conduct_phase10_reviews.py --output
+  integration/reproducibility/bh01-phase10-feasibility-review.json --check — PASS.
+- python3 integration/reproducibility/version_phase10_baseline.py --check — PASS.
+- python3 integration/reproducibility/decide_phase10_entry.py --check — PASS.
+- python3 integration/reproducibility/verify_phase10.py — PASS.
+- python3 docs/research/validate_archive.py — PASS.
+- git diff --check — PASS.
+
+Deterministic generation result
+- Closure, multidisciplinary review, feasibility baseline, decision, and BH-02
+  entry manifest each regenerate twice to identical canonical bytes.
+- All eight generated baseline indexes and both generated decision/entry views
+  match their canonical records.
+- Every retained completion input/output hash, source binding, dependency pin,
+  clean command log, local Markdown link, and archive index entry validates.
+
+Ledger reconciliation
+- Inputs: 8 of 8 explicitly closed.
+- Proof obligations: 10 of 10 explicitly closed; the mobile proof is deferred,
+  not executed and not passed.
+- Risks: 8 of 8 explicitly dispositioned.
+- Stop conditions: 5 of 5 explicitly dispositioned; zero active triggers.
+- Findings: 30 retained with owners and effects.
+- Exceptions: 0.
+- Review lenses: 11; accepted bounded conditions: 9.
+- Deferred BH-22 environment obligations: 6.
+
+Diagnostic attempts retained during final validation
+- Direct host mix tests were rejected by the exact Elixir 1.17.3 project guard
+  because the host provides Elixir 1.18.4. This confirms the pin is enforced.
+- Initial pinned-container reruns exposed missing disposable Hex/rebar setup and
+  historical non-owner build files; these were test-environment setup failures.
+- Final Elixir suites used the digest-pinned image, checksum-retained Hex/rebar,
+  an isolated build root, and a disposable writable profile source copy. The
+  repository source remained unmodified by those reruns.
+
+Limitations and claim boundary
+- Both clean executions and final reruns used one physical Linux host.
+- Chrome for Testing and the Playwright Firefox development build remain
+  observed, unsupported development environments.
+- Application payload, Firefox timer, private API, production security,
+  release-control, and external-qualification conditions remain active.
+- Windows, Safari, physical mobile, second-machine, and manual assistive-
+  technology qualification remain deferred to BH-22.
+- No browser support, mobile viability, accessibility conformance, production
+  security, performance-budget pass, native compatibility, stable public API,
+  package publication, or release readiness is claimed.

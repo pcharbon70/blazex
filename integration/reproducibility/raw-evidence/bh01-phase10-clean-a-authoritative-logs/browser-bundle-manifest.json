@@ -1,0 +1,74 @@
+{
+  "artifacts": [
+    {
+      "bytes": 6578424,
+      "content_encoding": null,
+      "id": "BX-BH01-BROWSER-HOST-AVM",
+      "kind": "avm",
+      "mime": "application/vnd.atomvm.avm",
+      "path": "generated/bundle.avm",
+      "sha256": "e2d9713b17938dbd0886c5e12e927619495b0dc1fd578bf3d79c58de87b94773"
+    },
+    {
+      "bytes": 3062878,
+      "content_encoding": "gzip",
+      "id": "BX-BH01-BROWSER-HOST-AVM-GZIP",
+      "kind": "avm-gzip",
+      "mime": "application/vnd.atomvm.avm",
+      "path": "generated/bundle.avm.gz",
+      "sha256": "9bc66afd7f7de2a9f941e7f80868d775927d3159f4a593b4811cc2569bce5fdf"
+    },
+    {
+      "bytes": 14031,
+      "content_encoding": null,
+      "id": "BX-BH01-BROWSER-HOST-MODULE-INVENTORY",
+      "kind": "module-inventory",
+      "mime": "application/json",
+      "path": "generated/module-inventory.json",
+      "sha256": "4939fd34b1fe872ef682e0b9314ed18231ce148e9b8913f602fd9947a1ca38fd"
+    }
+  ],
+  "build_contract_sha256": "04f92904acb87d109fc808a7ad3045c92184990763508d00694e312a5aaeec05",
+  "limitations": [
+    "Phase 5 behavior is a disposable fixture, not a public component contract",
+    "unpruned AVM size is not a passed budget"
+  ],
+  "manifest_id": "BX-BH01-BROWSER-HOST-BUNDLE-MANIFEST-0.1",
+  "normalization": [
+    "fixed boot module identity",
+    "sorted unique BEAM basenames",
+    "zero gzip MTIME"
+  ],
+  "schema_version": "1.0.0",
+  "source_inputs": [
+    {
+      "path": "config/config.exs",
+      "sha256": "30a1b27a48366f8e0ea4e0fc996709822d61025229ac38234277c427b37b30b6"
+    },
+    {
+      "path": "lib/blazex/bh01/browser_host/protocol.ex",
+      "sha256": "1ec2026ba942d1edc4ed23db43454e272e23651f3567a8e3de083709e74d87a3"
+    },
+    {
+      "path": "lib/blazex/bh01/browser_host.ex",
+      "sha256": "16c7c12186b5d9a0259ad78279ecc55faaf4709dc02516bd5d171b3771a71f3b"
+    },
+    {
+      "path": "lib/blazex/bh01/local_behavior.ex",
+      "sha256": "bc7542e32eaeaa98fd4de57e45ca823534e1e6f17e9a9f2beb40280283104145"
+    },
+    {
+      "path": "lib/mix/tasks/bh01.browser_package.ex",
+      "sha256": "6fd936963c4fabff6abd1fe6e268e8f769d2ccec3ce640938c88a5c5560daa24"
+    },
+    {
+      "path": "mix.exs",
+      "sha256": "44c3c6963767694615bdcc7ca88e3dc7ab650d202631c6c2f6ff3cf0dbad39c6"
+    },
+    {
+      "path": "mix.lock",
+      "sha256": "22269a9764b2b7ec4a93aaa007040313f4a924b3031e91c72494dd19f9084c98"
+    }
+  ],
+  "status": "observed-packaged"
+}

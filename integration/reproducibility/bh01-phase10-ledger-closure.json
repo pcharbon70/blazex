@@ -1,0 +1,767 @@
+{
+  "counts": {
+    "exceptions": 0,
+    "findings": 30,
+    "inputs": 8,
+    "proof_obligations": 10,
+    "risks": 8,
+    "stop_conditions": 5
+  },
+  "decision_effect": "eligible-for-multidisciplinary-review-with-bounded-conditions",
+  "exceptions": [],
+  "findings": [
+    {
+      "decision_effect": "Retained as active evidence and carried to review.",
+      "disposition": "closed-active-pass",
+      "finding": "The pinned Chromium host reached application readiness through the Phoenix profile, Popcorn/AtomVM Wasm runtime, governed AVM, and Elixir echo bridge.",
+      "id": "BX-BH01-PHASE4-FINDING-01",
+      "owner": "bh01-owner",
+      "source": "integration/fixtures/raw-evidence/bh01-phase4-browser.json"
+    },
+    {
+      "decision_effect": "Retained as active evidence and carried to review.",
+      "disposition": "closed-active-pass",
+      "finding": "Three same-page activation generations and one warm navigation converged to zero lifecycle-owned resources after stop.",
+      "id": "BX-BH01-PHASE4-FINDING-02",
+      "owner": "bh01-owner",
+      "source": "integration/fixtures/raw-evidence/bh01-phase4-browser.json"
+    },
+    {
+      "decision_effect": "Retained as active evidence and carried to review.",
+      "disposition": "closed-active-pass",
+      "finding": "Missing cross-origin isolation, manifest network failure, and Wasm integrity drift failed intentionally without promoting browser support.",
+      "id": "BX-BH01-PHASE4-FINDING-03",
+      "owner": "bh01-owner",
+      "source": "integration/fixtures/raw-evidence/bh01-phase4-browser.json"
+    },
+    {
+      "decision_effect": "Retained as active evidence and carried to review.",
+      "disposition": "accepted-bounded-condition",
+      "finding": "Popcorn 0.3.3 requires unsafe-eval for its current bridge implementation; this remains explicit feasibility security debt.",
+      "id": "BX-BH01-PHASE4-FINDING-04",
+      "owner": "bh01-owner",
+      "source": "integration/fixtures/raw-evidence/bh01-phase4-browser.json"
+    },
+    {
+      "decision_effect": "Retained as active evidence and carried to review.",
+      "disposition": "closed-active-pass",
+      "finding": "Elixir-authored state, keyed nesting, form validation, timers, and process messages produced bounded DOM operations in the pinned browser runtime.",
+      "id": "BX-BH01-PHASE5-FINDING-01",
+      "owner": "bh01-owner",
+      "source": "integration/fixtures/raw-evidence/bh01-phase5-local-browser.json"
+    },
+    {
+      "decision_effect": "Retained as active evidence and carried to review.",
+      "disposition": "closed-active-pass",
+      "finding": "Two independent executions produced byte-identical normalized semantic traces and no local-behavior network request after readiness.",
+      "id": "BX-BH01-PHASE5-FINDING-02",
+      "owner": "bh01-owner",
+      "source": "integration/fixtures/raw-evidence/bh01-phase5-local-browser.json"
+    },
+    {
+      "decision_effect": "Retained as active evidence and carried to review.",
+      "disposition": "closed-active-pass",
+      "finding": "A replacement activation used generation 2 and completed an AtomVM timer without accepting generation-1 ownership.",
+      "id": "BX-BH01-PHASE5-FINDING-03",
+      "owner": "bh01-owner",
+      "source": "integration/fixtures/raw-evidence/bh01-phase5-local-browser.json"
+    },
+    {
+      "decision_effect": "Retained as active evidence and carried to review.",
+      "disposition": "closed-active-pass",
+      "finding": "Explicit stop converged fixture, DOM, bridge, and lifecycle ownership; renderer negatives failed before partial mutation.",
+      "id": "BX-BH01-PHASE5-FINDING-04",
+      "owner": "bh01-owner",
+      "source": "integration/fixtures/raw-evidence/bh01-phase5-local-browser.json"
+    },
+    {
+      "decision_effect": "Retained as active evidence and carried to review.",
+      "disposition": "resolved-and-retested",
+      "finding": "The first browser run exposed the unavailable Erlang re NIF behind Regex.match?/2 in AtomVM; byte-level identifier validation replaced it and a source guard now prevents regression.",
+      "id": "BX-BH01-PHASE6-FINDING-01",
+      "owner": "bh01-owner",
+      "source": "integration/fixtures/raw-evidence/bh01-phase6-trust-and-isolation.json"
+    },
+    {
+      "decision_effect": "Retained as active evidence and carried to review.",
+      "disposition": "closed-active-pass",
+      "finding": "A normalized DOM action crossed the Elixir runtime, bridge, same-origin transport, Phoenix endpoint, server authority, audit, and DOM result path.",
+      "id": "BX-BH01-PHASE6-FINDING-02",
+      "owner": "bh01-owner",
+      "source": "integration/fixtures/raw-evidence/bh01-phase6-trust-and-isolation.json"
+    },
+    {
+      "decision_effect": "Retained as active evidence and carried to review.",
+      "disposition": "closed-active-pass",
+      "finding": "Server-owned session identity, authorization, current resource version, idempotency, rate, and side effect remained outside browser runtime state.",
+      "id": "BX-BH01-PHASE6-FINDING-03",
+      "owner": "bh01-owner",
+      "source": "integration/fixtures/raw-evidence/bh01-phase6-trust-and-isolation.json"
+    },
+    {
+      "decision_effect": "Retained as active evidence and carried to review.",
+      "disposition": "closed-active-pass",
+      "finding": "Mismatch and failure outcomes were bounded; disconnect retry applied once and disposal aborted pending transport without delivering a late runtime result.",
+      "id": "BX-BH01-PHASE6-FINDING-04",
+      "owner": "bh01-owner",
+      "source": "integration/fixtures/raw-evidence/bh01-phase6-trust-and-isolation.json"
+    },
+    {
+      "decision_effect": "Retained as active evidence and carried to review.",
+      "disposition": "accepted-bounded-condition",
+      "finding": "The optional LiveView compatibility adapter reported only exact pinned eligibility and retained standalone-dom as its explicit fallback.",
+      "id": "BX-BH01-PHASE6-FINDING-05",
+      "owner": "bh01-owner",
+      "source": "integration/fixtures/raw-evidence/bh01-phase6-trust-and-isolation.json"
+    },
+    {
+      "decision_effect": "Retained as active evidence and carried to review.",
+      "disposition": "closed-active-pass",
+      "finding": "Twenty mount/interact/command/failure/retry/dispose cycles converged with no declared transient resource leak.",
+      "id": "BX-BH01-PHASE7-FINDING-01",
+      "owner": "bh01-owner",
+      "source": "integration/fixtures/raw-evidence/bh01-phase7-resilience-security-resource.json"
+    },
+    {
+      "decision_effect": "Retained as active evidence and carried to review.",
+      "disposition": "closed-active-pass",
+      "finding": "Four interrupted transports recovered under one coordinator and original idempotency identities without duplicate effects.",
+      "id": "BX-BH01-PHASE7-FINDING-02",
+      "owner": "bh01-owner",
+      "source": "integration/fixtures/raw-evidence/bh01-phase7-resilience-security-resource.json"
+    },
+    {
+      "decision_effect": "Retained as active evidence and carried to review.",
+      "disposition": "closed-active-pass",
+      "finding": "A modified runtime Wasm response failed integrity before runtime readiness.",
+      "id": "BX-BH01-PHASE7-FINDING-03",
+      "owner": "bh01-owner",
+      "source": "integration/fixtures/raw-evidence/bh01-phase7-resilience-security-resource.json"
+    },
+    {
+      "decision_effect": "Retained as active evidence and carried to review.",
+      "disposition": "closed-active-pass",
+      "finding": "The server rejected direct forged presentation/role input without an effect.",
+      "id": "BX-BH01-PHASE7-FINDING-04",
+      "owner": "bh01-owner",
+      "source": "integration/fixtures/raw-evidence/bh01-phase7-resilience-security-resource.json"
+    },
+    {
+      "decision_effect": "Retained as active evidence and carried to review.",
+      "disposition": "accepted-residual-limitation",
+      "finding": "Browser worker count remains unavailable at the parent-frame API and is retained as an explained unknown.",
+      "id": "BX-BH01-PHASE7-FINDING-05",
+      "owner": "bh01-owner",
+      "source": "integration/fixtures/raw-evidence/bh01-phase7-resilience-security-resource.json"
+    },
+    {
+      "decision_effect": "Deferred items reactivate at BH-22; exact pins and probes grant no support range.",
+      "disposition": "deferred-bh22",
+      "finding": "Four of five required browser environments could not execute.",
+      "id": "BX-BH01-PHASE8-FINDING-REQUIRED-ENVIRONMENTS",
+      "owner": "browser-matrix-owner",
+      "source": "integration/fixtures/browser_matrix/matrix-report.json"
+    },
+    {
+      "decision_effect": "Deferred items reactivate at BH-22; exact pins and probes grant no support range.",
+      "disposition": "deferred-bh22",
+      "finding": "No required browser/assistive-technology pairing or physical/mobile input review executed.",
+      "id": "BX-BH01-PHASE8-FINDING-MANUAL-ACCESSIBILITY",
+      "owner": "accessibility-owner",
+      "source": "integration/fixtures/browser_matrix/matrix-report.json"
+    },
+    {
+      "decision_effect": "Deferred items reactivate at BH-22; exact pins and probes grant no support range.",
+      "disposition": "accepted-bounded-condition",
+      "finding": "Only the exact Phoenix 1.8.13, Phoenix LiveView 1.2.11, and LocalLiveView 0.1.0 set is qualified; adjacent packages were unavailable.",
+      "id": "BX-BH01-PHASE8-FINDING-EXACT-PINS",
+      "owner": "liveview-adapter-owner",
+      "source": "integration/fixtures/browser_matrix/matrix-report.json"
+    },
+    {
+      "decision_effect": "Deferred items reactivate at BH-22; exact pins and probes grant no support range.",
+      "disposition": "informational",
+      "finding": "Unqualified Firefox and Linux WebKit probes matched automated semantics and fail-closed behavior but grant no support credit.",
+      "id": "BX-BH01-PHASE8-FINDING-PROBES",
+      "owner": "browser-matrix-owner",
+      "source": "integration/fixtures/browser_matrix/matrix-report.json"
+    },
+    {
+      "decision_effect": "Conditional development; execute application AVM reachability experiment before release qualification.",
+      "disposition": "accepted-bounded-condition",
+      "finding": "2147.601 KiB delivered versus 250 KiB proposed maximum.",
+      "id": "BX-BH01-PHASE9-FINDING-BX-BUD-PAYLOAD-APPLICATION-COMPRESSED-KIB",
+      "owner": "quality-owner",
+      "source": "integration/benchmarks/reports/bh01-phase9-stop-decision.json"
+    },
+    {
+      "decision_effect": "Conditional development; use the same reachability experiment and preserve full proof coverage.",
+      "disposition": "accepted-bounded-condition",
+      "finding": "6424.242 KiB delivered versus 700 KiB proposed maximum.",
+      "id": "BX-BH01-PHASE9-FINDING-BX-BUD-PAYLOAD-APPLICATION-UNCOMPRESSED-KIB",
+      "owner": "quality-owner",
+      "source": "integration/benchmarks/reports/bh01-phase9-stop-decision.json"
+    },
+    {
+      "decision_effect": "Repeat with phase attribution after harness/runtime optimization; do not generalize to stable Firefox or mobile.",
+      "disposition": "accepted-bounded-condition",
+      "finding": "Firefox development-build timer-message p95 is 147.24 ms versus 100 ms.",
+      "id": "BX-BH01-PHASE9-FINDING-BX-BUD-INTERACTION-LOCAL-EVENT-PAINT-MS",
+      "owner": "quality-owner",
+      "source": "integration/benchmarks/reports/bh01-phase9-stop-decision.json"
+    },
+    {
+      "decision_effect": "Prevents a strong cross-run performance-reproducibility claim and requires future controlled measurement.",
+      "disposition": "accepted-residual-limitation",
+      "finding": "Representative rerun comparison 1 retained 2 timing distributions outside development tolerance.",
+      "id": "BX-BH01-PHASE9-FINDING-RERUN-1",
+      "owner": "quality-owner",
+      "source": "integration/benchmarks/reports/bh01-phase9-rerun-comparison-attempt-1.json"
+    },
+    {
+      "decision_effect": "Prevents a strong cross-run performance-reproducibility claim and requires future controlled measurement.",
+      "disposition": "accepted-residual-limitation",
+      "finding": "Representative rerun comparison 2 retained 2 timing distributions outside development tolerance.",
+      "id": "BX-BH01-PHASE9-FINDING-RERUN-2",
+      "owner": "quality-owner",
+      "source": "integration/benchmarks/reports/bh01-phase9-rerun-comparison.json"
+    },
+    {
+      "decision_effect": "Mount the browser fixture itself at the canonical /workspace container root for every dependency, compile, package, and test command.",
+      "disposition": "resolved-and-retested",
+      "finding": "The clean runner mounted the repository root rather than the fixture root at /workspace. Jason preserves a dependency source path in macro literals, so checkout-relative nesting changed one packaged BEAM and the enclosing AVM identity.",
+      "id": "BX-BH01-PHASE10-CLEAN-A-ATTEMPT-1-0.1",
+      "owner": "bh01-owner",
+      "source": "integration/reproducibility/raw-evidence/bh01-phase10-clean-a-attempt-1.json"
+    },
+    {
+      "decision_effect": "Retain the assigned server-log Path on the process object and hash that exact path during finalization instead of deriving a name from the later command count.",
+      "disposition": "resolved-and-retested",
+      "finding": "The server starts before ten browser commands are appended. Finalization recomputed its filename from the later list length, so it requested log 30 although the retained server log was assigned sequence 20.",
+      "id": "BX-BH01-PHASE10-CLEAN-A-ATTEMPT-2-0.1",
+      "owner": "bh01-owner",
+      "source": "integration/reproducibility/raw-evidence/bh01-phase10-clean-a-attempt-2.json"
+    },
+    {
+      "decision_effect": "Locate the pending profile-server command record by command identity during finalization and update that record rather than indexing the final command in the expanded list.",
+      "disposition": "resolved-and-retested",
+      "finding": "The path correction retained the right server log but finalization still wrote its hash through self.commands[-1]. Ten browser commands had been appended since startup, leaving the actual server record pending and corrupting the final browser command hash.",
+      "id": "BX-BH01-PHASE10-CLEAN-A-ATTEMPT-3-0.1",
+      "owner": "bh01-owner",
+      "source": "integration/reproducibility/raw-evidence/bh01-phase10-clean-a-attempt-3.json"
+    }
+  ],
+  "inputs": [
+    {
+      "decision_effect": "Continue only with the reachability and serving conditions; no release claim.",
+      "evidence": [
+        "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-03-completion-v0.1.0.json",
+        "integration/benchmarks/reports/bh01-phase9-artifact-economics.json",
+        "integration/reproducibility/bh01-phase10-clean-rebuild-comparison.json"
+      ],
+      "id": "BX-BH01-INPUT-ARTIFACTS",
+      "outcome": "All runtime, AVM, JavaScript, map, profile, hash, provenance, and size identities are accounted for; the unpruned application AVM remains over budget.",
+      "owner": "build-owner",
+      "state": "closed-conditional"
+    },
+    {
+      "decision_effect": "Supports review of a host-neutral contract, not stabilization of fixture protocols.",
+      "evidence": [
+        "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-05-completion-v0.1.0.json",
+        "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-06-completion-v0.1.0.json",
+        "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-07-completion-v0.1.0.json",
+        "integration/fixtures/browser_matrix/matrix-report.json"
+      ],
+      "id": "BX-BH01-INPUT-BEHAVIORS",
+      "outcome": "Runtime, state, nesting, form, timer/message, DOM, command, failure, recovery, and cleanup behavior passed the active Linux evidence boundary.",
+      "owner": "bh01-owner",
+      "state": "closed-passed"
+    },
+    {
+      "decision_effect": "Does not block BH-02 review and grants no browser support.",
+      "evidence": [
+        "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-08-completion-v0.1.0.json",
+        "integration/benchmarks/reports/bh01-phase9-deferred-qualification.json",
+        "integration/reproducibility/bh01-phase10-clean-rebuild-comparison.json"
+      ],
+      "id": "BX-BH01-INPUT-BROWSERS",
+      "outcome": "Chrome and Firefox development evidence is complete for Linux; unavailable product/platform/device/manual rows remain deferred to BH-22.",
+      "owner": "browser-profile-owner",
+      "state": "closed-with-deferred-qualification"
+    },
+    {
+      "decision_effect": "Requires bounded follow-up before release qualification; no threshold changed.",
+      "evidence": [
+        "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-09-completion-v0.1.0.json",
+        "integration/benchmarks/reports/bh01-phase9-budget-evaluation.json",
+        "integration/benchmarks/reports/bh01-phase9-rerun-comparison.json"
+      ],
+      "id": "BX-BH01-INPUT-MEASUREMENTS",
+      "outcome": "Active measurements are retained with payload and Firefox timer failures plus scheduler-sensitive rerun drift; mobile remains undecided and deferred.",
+      "owner": "quality-owner",
+      "state": "closed-conditional"
+    },
+    {
+      "decision_effect": "Optional adapter may inform BH-02 but cannot define portable semantics.",
+      "evidence": [
+        "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-02-completion-v0.1.0.json",
+        "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-06-completion-v0.1.0.json",
+        "profiles/browser_phoenix/toolchain/private-api-inventory.json"
+      ],
+      "id": "BX-BH01-INPUT-PRIVATE-API",
+      "outcome": "LiveView and LocalLiveView private surfaces are inventoried, exact-pinned, isolated, and fail to standalone DOM on mismatch.",
+      "owner": "compatibility-owner",
+      "state": "closed-exact-pins-only"
+    },
+    {
+      "decision_effect": "Profile facts may be consumed; fixture contracts remain disposable.",
+      "evidence": [
+        "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-06-completion-v0.1.0.json",
+        "profiles/browser_phoenix/priv/static/bh01/profile-assets-manifest.json"
+      ],
+      "id": "BX-BH01-INPUT-PROFILE-SLICE",
+      "outcome": "The disposable Phoenix/browser profile composes the required vertical slice while standalone DOM, Plug, and headless dependency boundaries remain isolated.",
+      "owner": "browser-profile-owner",
+      "state": "closed-passed"
+    },
+    {
+      "decision_effect": "Eligible for multidisciplinary review with all conditions visible.",
+      "evidence": [
+        "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-09-completion-v0.1.0.json",
+        "integration/benchmarks/reports/bh01-phase9-stop-decision.json",
+        "integration/reproducibility/bh01-phase10-clean-rebuild-comparison.json"
+      ],
+      "id": "BX-BH01-INPUT-STOP-CONDITIONS",
+      "outcome": "All five binding stop conditions are evaluated; none requires stopping active framework exploration, while two retain bounded conditions.",
+      "owner": "architecture-owner",
+      "state": "closed-conditional"
+    },
+    {
+      "decision_effect": "Satisfies active reproducibility input; cross-machine qualification remains limited.",
+      "evidence": [
+        "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-02-completion-v0.1.0.json",
+        "profiles/browser_phoenix/toolchain/environment.lock.json",
+        "integration/reproducibility/bh01-phase10-clean-rebuild-comparison.json"
+      ],
+      "id": "BX-BH01-INPUT-TOOLCHAIN",
+      "outcome": "Pinned tool, archive, dependency, and container identities rebuilt the baseline in two independent clean execution contexts on one Linux host.",
+      "owner": "bh01-owner",
+      "state": "closed-passed"
+    }
+  ],
+  "policy": {
+    "active_environment": "Linux x86-64 with Chrome and Firefox development evidence",
+    "deferred_is_active_blocker": false,
+    "deferred_is_pass": false,
+    "deferred_milestone": "BH-22"
+  },
+  "proof_obligations": [
+    {
+      "acceptance_refs": [
+        "BX-ACC-ENV-BH01-REQUIRED-RECORDS-REC-ARTIFACTS",
+        "BX-ACC-ROADMAP-BH-01"
+      ],
+      "budget_refs": [
+        "BX-BUD-PAYLOAD-APPLICATION-COMPRESSED-KIB",
+        "BX-BUD-PAYLOAD-RUNTIME-COMPRESSED-KIB"
+      ],
+      "decision_effect": "Proof is satisfied for accounting and conditional for economics; release claims remain prohibited.",
+      "evidence": [
+        "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-03-completion-v0.1.0.json",
+        "integration/benchmarks/reports/bh01-phase9-artifact-economics.json",
+        "integration/fixtures/browser_matrix/matrix-report.json",
+        "integration/reproducibility/bh01-phase10-clean-rebuild-comparison.json"
+      ],
+      "id": "BX-BH01-PROOF-ARTIFACT-ACCOUNTING",
+      "outcome": "Artifact identity and origin are complete, but the unpruned application AVM fails both application payload budgets.",
+      "owner": "build-owner",
+      "positive_and_negative_executed": true,
+      "scope": "active-linux",
+      "state": "closed-conditional",
+      "stop_on_failure": true
+    },
+    {
+      "acceptance_refs": [
+        "BX-ACC-ENV-SECURITY-INVARIANTS-SEC-SERVER-REVALIDATION",
+        "BX-ACC-ROADMAP-BH-01"
+      ],
+      "budget_refs": [
+        "BX-BUD-INTERACTION-SERVER-ROUNDTRIP-MS"
+      ],
+      "decision_effect": "Supports neutral command/effect design while production security remains future work.",
+      "evidence": [
+        "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-06-completion-v0.1.0.json",
+        "integration/fixtures/raw-evidence/bh01-phase7-resilience-security-resource.json",
+        "integration/fixtures/browser_matrix/matrix-report.json",
+        "integration/reproducibility/bh01-phase10-clean-rebuild-comparison.json"
+      ],
+      "id": "BX-BH01-PROOF-AUTHENTICATED-COMMAND",
+      "outcome": "Positive, denied, forged, stale, replayed, disconnected, retried, and disposed command cases preserve server authority with zero unauthorized effects.",
+      "owner": "server-adapter-owner",
+      "positive_and_negative_executed": true,
+      "scope": "active-linux",
+      "state": "closed-passed",
+      "stop_on_failure": true
+    },
+    {
+      "acceptance_refs": [
+        "BX-ACC-ENV-PAPER-SCENARIOS-SCN-MISSING-CROSS-ORIGIN-ISOLATION",
+        "BX-ACC-ROADMAP-BH-01"
+      ],
+      "budget_refs": [
+        "BX-BUD-STARTUP-COLD-DESKTOP-MS"
+      ],
+      "decision_effect": "Active proof passes; unavailable product/browser/device/manual qualification remains BH-22.",
+      "evidence": [
+        "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-04-completion-v0.1.0.json",
+        "integration/fixtures/browser_matrix/matrix-report.json"
+      ],
+      "id": "BX-BH01-PROOF-BROWSER-FALLBACK",
+      "outcome": "Missing Wasm, isolation, manifest, integrity, and JavaScript prerequisites produce bounded accessible fallback in active development browsers.",
+      "owner": "browser-host-owner",
+      "positive_and_negative_executed": true,
+      "scope": "active-linux",
+      "state": "closed-with-deferred-qualification",
+      "stop_on_failure": true
+    },
+    {
+      "acceptance_refs": [
+        "BX-ACC-ENV-BH01-REQUIRED-RECORDS-REC-REBUILD",
+        "BX-ACC-ROADMAP-BH-01"
+      ],
+      "budget_refs": [
+        "BX-BUD-BUILD-RELEASE-SECONDS"
+      ],
+      "decision_effect": "Active clean-build proof passes on one physical Linux host.",
+      "evidence": [
+        "integration/reproducibility/raw-evidence/bh01-phase10-clean-a-authoritative.json",
+        "integration/reproducibility/raw-evidence/bh01-phase10-clean-b.json",
+        "integration/reproducibility/bh01-phase10-clean-rebuild-comparison.json"
+      ],
+      "id": "BX-BH01-PROOF-BUILD-REPRODUCIBILITY",
+      "outcome": "Two cache-empty archive executions produce exact runtime, AVM, profile, and canonical report identities after the canonical fixture-root correction.",
+      "owner": "bh01-owner",
+      "positive_and_negative_executed": true,
+      "scope": "active-linux",
+      "state": "closed-passed",
+      "stop_on_failure": true
+    },
+    {
+      "acceptance_refs": [
+        "BX-ACC-ENV-RENDERING-MODES-MODE-BROWSER-LOCAL",
+        "BX-ACC-ROADMAP-BH-01"
+      ],
+      "budget_refs": [
+        "BX-BUD-INTERACTION-DOM-UPDATE-MS"
+      ],
+      "decision_effect": "Supports renderer contract exploration without making the DOM protocol public.",
+      "evidence": [
+        "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-05-completion-v0.1.0.json",
+        "integration/fixtures/browser_matrix/matrix-report.json",
+        "integration/reproducibility/bh01-phase10-clean-rebuild-comparison.json"
+      ],
+      "id": "BX-BH01-PROOF-DOM-UPDATE",
+      "outcome": "Local, nested, form, timer, and command outcomes produce bounded validated DOM operations with negative operations rejected before partial mutation.",
+      "owner": "dom-renderer-owner",
+      "positive_and_negative_executed": true,
+      "scope": "active-linux",
+      "state": "closed-passed",
+      "stop_on_failure": true
+    },
+    {
+      "acceptance_refs": [
+        "BX-ACC-ENV-PAPER-SCENARIOS-SCN-PHOENIX-BROWSER-LOCAL",
+        "BX-ACC-ROADMAP-BH-01"
+      ],
+      "budget_refs": [
+        "BX-BUD-INTERACTION-LOCAL-EVENT-PAINT-MS"
+      ],
+      "decision_effect": "Supports event-normalization exploration; fixtures remain disposable.",
+      "evidence": [
+        "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-05-completion-v0.1.0.json",
+        "integration/fixtures/raw-evidence/bh01-phase6-trust-and-isolation.json",
+        "integration/fixtures/browser_matrix/matrix-report.json",
+        "integration/reproducibility/bh01-phase10-clean-rebuild-comparison.json"
+      ],
+      "id": "BX-BH01-PROOF-FORM-EVENT",
+      "outcome": "Input, change, blur, rapid/composition-like, validation, disabled, read-only, and programmatic-update paths execute with canonical semantics.",
+      "owner": "bh01-owner",
+      "positive_and_negative_executed": true,
+      "scope": "active-linux",
+      "state": "closed-passed",
+      "stop_on_failure": true
+    },
+    {
+      "acceptance_refs": [
+        "BX-ACC-BUDGET-BX-BUD-STARTUP-COLD-MOBILE-MS",
+        "BX-ACC-ENV-BROWSER-CONFIGURATIONS-BR-WEBKIT-MOBILE"
+      ],
+      "budget_refs": [
+        "BX-BUD-RESOURCE-MEMORY-GROWTH-MIB",
+        "BX-BUD-STARTUP-COLD-MOBILE-MS"
+      ],
+      "decision_effect": "Not an active BH-02 blocker and not a pass; reactivates at BH-22.",
+      "evidence": [
+        "integration/benchmarks/reports/bh01-phase9-deferred-qualification.json"
+      ],
+      "id": "BX-BH01-PROOF-MOBILE-MEASUREMENT",
+      "outcome": "No representative physical Android or iOS/iPadOS environment was available; mobile viability remains explicitly undecided.",
+      "owner": "quality-owner",
+      "positive_and_negative_executed": false,
+      "scope": "deferred-bh22",
+      "state": "closed-with-deferred-qualification",
+      "stop_on_failure": true
+    },
+    {
+      "acceptance_refs": [
+        "BX-ACC-ENV-PROFILES-PROFILE-BROWSER-PHOENIX",
+        "BX-ACC-ROADMAP-BH-01"
+      ],
+      "budget_refs": [
+        "BX-BUD-INTERACTION-LOCAL-EVENT-PAINT-MS"
+      ],
+      "decision_effect": "Supports neutral identity/lifecycle exploration without freezing fixture messages.",
+      "evidence": [
+        "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-05-completion-v0.1.0.json",
+        "integration/fixtures/raw-evidence/bh01-phase7-resilience-security-resource.json",
+        "integration/fixtures/browser_matrix/matrix-report.json",
+        "integration/reproducibility/bh01-phase10-clean-rebuild-comparison.json"
+      ],
+      "id": "BX-BH01-PROOF-NESTED-STATE",
+      "outcome": "Keyed child identity, parent state, replacement generation, failure recovery, and disposal preserve state boundaries in active runs.",
+      "owner": "bh01-owner",
+      "positive_and_negative_executed": true,
+      "scope": "active-linux",
+      "state": "closed-passed",
+      "stop_on_failure": true
+    },
+    {
+      "acceptance_refs": [
+        "BX-ACC-ENV-TOOLCHAIN-INPUTS-TC-POPCORN",
+        "BX-ACC-ROADMAP-BH-01"
+      ],
+      "budget_refs": [
+        "BX-BUD-PAYLOAD-RUNTIME-COMPRESSED-KIB",
+        "BX-BUD-STARTUP-INSTANTIATE-MS"
+      ],
+      "decision_effect": "Runtime viability passes for active Linux development only.",
+      "evidence": [
+        "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-03-completion-v0.1.0.json",
+        "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-04-completion-v0.1.0.json",
+        "integration/fixtures/browser_matrix/matrix-report.json",
+        "integration/reproducibility/bh01-phase10-clean-rebuild-comparison.json"
+      ],
+      "id": "BX-BH01-PROOF-RUNTIME-BOOT",
+      "outcome": "The pinned Popcorn/AtomVM runtime boots the governed AVM and fails intentionally on prerequisite, network, and integrity negatives.",
+      "owner": "runtime-owner",
+      "positive_and_negative_executed": true,
+      "scope": "active-linux",
+      "state": "closed-passed",
+      "stop_on_failure": true
+    },
+    {
+      "acceptance_refs": [
+        "BX-ACC-BUDGET-BX-BUD-RESOURCE-CLEANUP-MS",
+        "BX-ACC-ROADMAP-BH-01"
+      ],
+      "budget_refs": [
+        "BX-BUD-RELIABILITY-PENDING-EFFECTS-COUNT",
+        "BX-BUD-RESOURCE-CLEANUP-MS"
+      ],
+      "decision_effect": "Functional proof passes with a measured Firefox optimization/retest condition.",
+      "evidence": [
+        "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-03-completion-v0.1.0.json",
+        "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-05-completion-v0.1.0.json",
+        "integration/benchmarks/reports/bh01-phase9-budget-evaluation.json",
+        "integration/fixtures/browser_matrix/matrix-report.json",
+        "integration/reproducibility/bh01-phase10-clean-rebuild-comparison.json"
+      ],
+      "id": "BX-BH01-PROOF-TIMER-MESSAGE",
+      "outcome": "Delivery, cancellation generation checks, duplicate drain, and cleanup pass functionally; Firefox development timer-event p95 exceeds the active target.",
+      "owner": "runtime-owner",
+      "positive_and_negative_executed": true,
+      "scope": "active-linux",
+      "state": "closed-conditional",
+      "stop_on_failure": true
+    }
+  ],
+  "record_id": "BX-BH01-PHASE10-LEDGER-CLOSURE-0.1",
+  "risks": [
+    {
+      "decision_effect": "Does not block BH-02 neutral effect contracts.",
+      "evidence": [
+        "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-06-completion-v0.1.0.json",
+        "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-07-completion-v0.1.0.json"
+      ],
+      "id": "BX-BH01-RISK-AUTHENTICATED-COMMAND",
+      "impact": "critical",
+      "likelihood": "low",
+      "mitigation": "Keep browser state untrusted and retain server-side authentication, authorization, version, idempotency, rate, and audit checks.",
+      "owner": "server-adapter-owner",
+      "residual_risk": "Production identity, persistence, distributed limits, TLS, audit sinks, and penetration testing are not established.",
+      "review_trigger": "Before production authority or authentication design",
+      "state": "accepted-residual"
+    },
+    {
+      "decision_effect": "Does not block active abstraction work; blocks support claims.",
+      "evidence": [
+        "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-04-completion-v0.1.0.json",
+        "integration/benchmarks/reports/bh01-phase9-deferred-qualification.json"
+      ],
+      "id": "BX-BH01-RISK-BROWSER-PREREQUISITES",
+      "impact": "high",
+      "likelihood": "medium",
+      "mitigation": "Retain manifest/prerequisite fail-closed behavior and carry unavailable products, platforms, and manual pairings to BH-22.",
+      "owner": "browser-host-owner",
+      "residual_risk": "Only exact Linux Chrome and a Firefox development binary have current evidence; all remain unsupported.",
+      "review_trigger": "Browser pin, prerequisite, deployment, or BH-22 change",
+      "state": "accepted-residual"
+    },
+    {
+      "decision_effect": "Does not block BH-02 under current exact pins.",
+      "evidence": [
+        "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-02-completion-v0.1.0.json",
+        "integration/reproducibility/raw-evidence/bh01-phase10-clean-a-authoritative.json"
+      ],
+      "id": "BX-BH01-RISK-DEPENDENCY-ACCESS",
+      "impact": "high",
+      "likelihood": "low",
+      "mitigation": "Keep locks, checksums, immutable images, provenance, license records, and explicit acquisition-only network stages.",
+      "owner": "bh01-owner",
+      "residual_risk": "Upstream availability and registries remain external dependencies despite retained identities.",
+      "review_trigger": "Any dependency source, checksum, license, or registry change",
+      "state": "accepted-residual"
+    },
+    {
+      "decision_effect": "Neither pass nor active blocker; prohibits mobile and release claims.",
+      "evidence": [
+        "integration/benchmarks/reports/bh01-phase9-deferred-qualification.json"
+      ],
+      "id": "BX-BH01-RISK-MOBILE-PERFORMANCE",
+      "impact": "unknown-deferred",
+      "likelihood": "unknown-deferred",
+      "mitigation": "Execute representative physical-device startup, memory, lifecycle, thermal, power, input, and accessibility qualification at BH-22.",
+      "owner": "quality-owner",
+      "residual_risk": "Mobile viability is undecided; desktop or emulated evidence cannot reduce this uncertainty.",
+      "review_trigger": "Representative Android or iOS/iPadOS environment becomes available or BH-22 starts",
+      "state": "deferred-bh22"
+    },
+    {
+      "decision_effect": "Does not block BH-02 if portable semantics remain independent.",
+      "evidence": [
+        "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-02-completion-v0.1.0.json",
+        "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-06-completion-v0.1.0.json",
+        "profiles/browser_phoenix/toolchain/private-api-inventory.json"
+      ],
+      "id": "BX-BH01-RISK-PRIVATE-API-COUPLING",
+      "impact": "high",
+      "likelihood": "high",
+      "mitigation": "Keep private APIs exact-pinned inside the optional LiveView adapter and fail to standalone DOM on mismatch.",
+      "owner": "liveview-adapter-owner",
+      "residual_risk": "No adjacent package range is qualified; upgrades can disable the optional adapter.",
+      "review_trigger": "Phoenix, LiveView, LocalLiveView, or adapter pin changes",
+      "state": "accepted-residual"
+    },
+    {
+      "decision_effect": "Supports BH-02 with explicit lifecycle constraints.",
+      "evidence": [
+        "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-03-completion-v0.1.0.json",
+        "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-05-completion-v0.1.0.json",
+        "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-07-completion-v0.1.0.json"
+      ],
+      "id": "BX-BH01-RISK-RUNTIME-SEMANTICS",
+      "impact": "high",
+      "likelihood": "medium",
+      "mitigation": "Preserve generation checks, closed bridges, bounded resources, duplicate drain, recovery, and repeat all proofs after runtime changes.",
+      "owner": "runtime-owner",
+      "residual_risk": "AtomVM timer cancellation reports false and scale/fairness/long-soak coverage remains experimental.",
+      "review_trigger": "Runtime/Popcorn/OTP change or semantic-contract design",
+      "state": "accepted-residual"
+    },
+    {
+      "decision_effect": "Active proof passes; cross-machine claims remain excluded.",
+      "evidence": [
+        "integration/reproducibility/bh01-phase10-clean-rebuild-comparison.json",
+        "integration/reproducibility/raw-evidence/bh01-phase10-clean-a-attempt-1.json"
+      ],
+      "id": "BX-BH01-RISK-TOOLCHAIN-REPRODUCIBILITY",
+      "impact": "critical",
+      "likelihood": "low",
+      "mitigation": "Use immutable tools and the canonical fixture container root; fail on hidden caches, mutable inputs, or undeclared tools.",
+      "owner": "bh01-owner",
+      "residual_risk": "Both authoritative runs used one physical Linux host, and Elixir macro literals remain path-sensitive outside the canonical root.",
+      "review_trigger": "Tool identity, build path contract, source revision, or second-machine availability changes",
+      "state": "accepted-residual"
+    },
+    {
+      "decision_effect": "Does not block BH-02 semantics; conditions packaging and release work.",
+      "evidence": [
+        "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-03-completion-v0.1.0.json",
+        "integration/benchmarks/reports/bh01-phase9-artifact-economics.json"
+      ],
+      "id": "BX-BH01-RISK-WASM-ARTIFACT-ACCOUNTING",
+      "impact": "high",
+      "likelihood": "high",
+      "mitigation": "Retain full manifests and run the application AVM reachability plus actual Brotli-serving experiments before release qualification.",
+      "owner": "build-owner",
+      "residual_risk": "The unpruned application AVM dominates payload and fails decoded and compressed application budgets.",
+      "review_trigger": "Before release/profile hardening or any runtime/bundle composition change",
+      "state": "accepted-residual"
+    }
+  ],
+  "schema_version": "1.0.0",
+  "source_revision": "7071e0f358903aea4a86c50db982c3fb1086584d",
+  "status": "closed-with-bounded-conditions-and-deferrals",
+  "stop_conditions": [
+    {
+      "evidence": [
+        "integration/reproducibility/bh01-phase10-clean-rebuild-comparison.json"
+      ],
+      "id": "BX-BH01-STOP-REPRODUCIBILITY",
+      "outcome": "Independent clean contexts produce equivalent explainable artifacts and reports under the corrected canonical build-root contract.",
+      "owner": "bh01-owner",
+      "state": "not-triggered"
+    },
+    {
+      "evidence": [
+        "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-03-completion-v0.1.0.json",
+        "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-05-completion-v0.1.0.json",
+        "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-07-completion-v0.1.0.json"
+      ],
+      "id": "BX-BH01-STOP-RUNTIME-SEMANTICS",
+      "outcome": "Required active semantics execute without moving DOM, browser, Phoenix, or authority concerns into host-neutral contracts.",
+      "owner": "architecture-owner",
+      "state": "not-triggered"
+    },
+    {
+      "evidence": [
+        "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-06-completion-v0.1.0.json"
+      ],
+      "id": "BX-BH01-STOP-ADAPTER-ISOLATION",
+      "outcome": "Phoenix authority and exact-pinned private LiveView integration remain isolated from standalone DOM, Plug, headless, and future portable packages.",
+      "owner": "architecture-owner",
+      "state": "not-triggered"
+    },
+    {
+      "evidence": [
+        "integration/benchmarks/reports/bh01-phase9-stop-decision.json",
+        "integration/benchmarks/reports/bh01-phase9-mitigation-assessment.json"
+      ],
+      "id": "BX-BH01-STOP-PRODUCT-VIABILITY",
+      "outcome": "Active payload and Firefox timer failures have bounded, owned experiments; mobile and unavailable product qualification remain undecided and deferred.",
+      "owner": "quality-owner",
+      "state": "conditionally-not-triggered"
+    },
+    {
+      "evidence": [
+        "integration/benchmarks/reports/bh01-phase9-artifact-economics.json",
+        "integration/reproducibility/bh01-phase10-clean-rebuild-comparison.json"
+      ],
+      "id": "BX-BH01-STOP-ARTIFACT-ACCOUNTING",
+      "outcome": "Artifact origin, integrity, licenses, size, and identity are explained, while payload failures continue to prohibit support and release claims.",
+      "owner": "build-owner",
+      "state": "conditionally-not-triggered"
+    }
+  ],
+  "support_status": "unsupported"
+}

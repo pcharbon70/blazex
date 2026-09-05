@@ -1,0 +1,23 @@
+{
+  "canonical_report_matches": 7,
+  "declared_variance": [
+    "captured timestamps",
+    "command and acquisition durations",
+    "raw browser timing samples and raw-record hashes",
+    "ephemeral ports and clean source/cache paths"
+  ],
+  "environment_records": [
+    "BX-BH01-PHASE10-CLEAN-A-0.1",
+    "BX-BH01-PHASE10-CLEAN-B-0.1"
+  ],
+  "exact_artifact_matches": 3,
+  "manual_intervention": [],
+  "physical_host_scope": "same-linux-host-two-clean-execution-contexts-not-two-physical-machines",
+  "report_id": "BX-BH01-PHASE10-CLEAN-REBUILD-COMPARISON-0.1",
+  "schema_version": "1.0.0",
+  "semantic_scenario_matches": 10,
+  "source_revision": "4e6301b55dc9f2e44b848818d14c60606c0476a6",
+  "status": "pass-with-declared-host-variance",
+  "support_status": "unsupported",
+  "unexplained_variance": []
+}

@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0.0",
+  "record_id": "BX-BH01-AUTHORIZATION-PHASE-10-0.1",
+  "status": "approved-phase-10-only",
+  "authorized_at": "2026-09-05",
+  "request": "Implement the next phase of BH-01 section by section with a commit per section and one immediately merged PR, then synchronize main and delete the feature branch.",
+  "base_revision": "4e6301b55dc9f2e44b848818d14c60606c0476a6",
+  "branch": "codex/bh-01-phase-10-feasibility",
+  "authorized_scope": [
+    "execute two independent cache-empty clean execution-context rebuilds on the available Linux host",
+    "reconcile all BH-01 inputs, proofs, risks, stop conditions, findings, and exceptions",
+    "conduct and retain multidisciplinary feasibility reviews",
+    "version the exact BH-01 reproducible feasibility baseline and supersession rules",
+    "make the BH-02 entry decision from retained evidence and bounded conditions",
+    "publish the final BH-01 integration, acceptance, and completion records",
+    "retain unavailable platform, mobile, Safari, device, and manual qualification as deferred to BH-22",
+    "commit once per completed Phase 10 section",
+    "create and immediately merge one Phase 10 pull request",
+    "synchronize main and delete the local and remote feature branch"
+  ],
+  "not_authorized": [
+    "BH-02 implementation, package activation, or stabilization of BH-01 fixture protocols",
+    "browser, mobile, accessibility, security, performance, native-host, production, or release support claims",
+    "changing quality thresholds or deleting unfavorable evidence to obtain a proceed result",
+    "purchasing, enrolling, or mutating external browser-device services or vendor accounts",
+    "representing two isolated executions on one Linux machine as two physical machines",
+    "closing BH-22 deferred qualification obligations"
+  ],
+  "owner": "repository-owner"
+}

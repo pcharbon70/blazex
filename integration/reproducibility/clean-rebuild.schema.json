@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://blazex.dev/schemas/bh01-clean-rebuild-v0.1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "record_id", "status", "captured_at", "source_revision", "physical_host_scope", "clean_state", "tools", "commands", "artifacts", "browser_scenarios", "reports", "recovery", "deferred_qualification", "manual_actions", "failures", "limitations"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "record_id": {"type": "string", "pattern": "^BX-BH01-PHASE10-CLEAN-[AB]-0\\.1$"},
+    "status": {"enum": ["passed", "failed"]},
+    "captured_at": {"type": "string", "format": "date-time"},
+    "source_revision": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "physical_host_scope": {"const": "same-linux-host-independent-clean-execution-context"},
+    "clean_state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["git_archive", "git_metadata_present", "dependency_directories_present_before", "generated_directories_present_before", "mix_home_initially_empty", "hex_home_initially_empty", "npm_cache_initially_empty", "undeclared_preinstalled_tools_used", "fixture_mounted_at_canonical_root"],
+      "properties": {
+        "git_archive": {"const": true},
+        "git_metadata_present": {"const": false},
+        "dependency_directories_present_before": {"const": false},
+        "generated_directories_present_before": {"const": false},
+        "mix_home_initially_empty": {"const": true},
+        "hex_home_initially_empty": {"const": true},
+        "npm_cache_initially_empty": {"const": true},
+        "undeclared_preinstalled_tools_used": {"const": false},
+        "fixture_mounted_at_canonical_root": {"const": true}
+      }
+    },
+    "tools": {"type": "array", "minItems": 5, "items": {"type": "object", "required": ["name", "identity", "sha256"], "properties": {"name": {"type": "string"}, "identity": {"type": "string"}, "sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"}}}},
+    "commands": {"type": "array", "minItems": 15, "items": {"type": "object", "required": ["id", "network", "result", "duration_ms", "log_sha256"], "properties": {"id": {"type": "string"}, "network": {"type": "boolean"}, "result": {"const": "pass"}, "duration_ms": {"type": "integer", "minimum": 0}, "log_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}}}},
+    "artifacts": {"type": "object", "required": ["runtime_manifest_sha256", "browser_bundle_manifest_sha256", "profile_manifest_sha256", "profile_file_count"]},
+    "browser_scenarios": {"type": "array", "minItems": 10, "items": {"type": "object", "required": ["browser", "scenario", "status", "support_status", "semantic_sha256", "raw_sha256"], "properties": {"browser": {"enum": ["chromium", "firefox"]}, "scenario": {"type": "string"}, "status": {"const": "observed"}, "support_status": {"const": "unsupported"}, "semantic_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}, "raw_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}}}},
+    "reports": {"type": "array", "minItems": 7, "items": {"type": "object", "required": ["id", "matches_canonical", "sha256"], "properties": {"id": {"type": "string"}, "matches_canonical": {"const": true}, "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}}}},
+    "recovery": {"type": "object", "required": ["tamper_rejected", "restored_from_canonical_inputs", "restored_profile_sha256"], "properties": {"tamper_rejected": {"const": true}, "restored_from_canonical_inputs": {"const": true}, "restored_profile_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}}},
+    "deferred_qualification": {"type": "object", "required": ["status", "reactivation_milestone", "excluded_from_pass"], "properties": {"status": {"const": "deferred"}, "reactivation_milestone": {"const": "BH-22"}, "excluded_from_pass": {"const": true}}},
+    "manual_actions": {"type": "array", "maxItems": 0},
+    "failures": {"type": "array", "maxItems": 0},
+    "limitations": {"type": "array", "minItems": 4, "items": {"type": "string"}}
+  }
+}

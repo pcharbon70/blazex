@@ -1,0 +1,28 @@
+{
+  "commands_completed": 30,
+  "environment": "A",
+  "evidence": {
+    "browser_scenarios_completed": 10,
+    "bundle_manifest_sha256": "e533fca13147327deafed0ed2e44aea4292b45c83e050001c913c21918c202ee",
+    "error": "No such file or directory: 30-profile-server.log",
+    "profile_manifest_sha256": "818ac7b967db6519c766f9d1fff80455cc92d205e3f188252e6da27258ee4aad",
+    "server_log_actual_path": "20-profile-server.log"
+  },
+  "failure_kind": "evidence-harness-log-reference",
+  "record_id": "BX-BH01-PHASE10-CLEAN-A-ATTEMPT-2-0.1",
+  "resolution": {
+    "change": "Retain the assigned server-log Path on the process object and hash that exact path during finalization instead of deriving a name from the later command count.",
+    "verification_records": [
+      "raw-evidence/bh01-phase10-clean-a-authoritative.json",
+      "raw-evidence/bh01-phase10-clean-b.json",
+      "bh01-phase10-clean-rebuild-comparison.json"
+    ]
+  },
+  "root_cause": "The server starts before ten browser commands are appended. Finalization recomputed its filename from the later list length, so it requested log 30 although the retained server log was assigned sequence 20.",
+  "schema_version": "1.0.0",
+  "source_revision": "4e6301b55dc9f2e44b848818d14c60606c0476a6",
+  "status": "failed-and-resolved",
+  "stopped_at": "server-log-finalization-after-browser-replay",
+  "support_status": "unsupported",
+  "retained_log_directory": "raw-evidence/bh01-phase10-clean-a-final-logs"
+}

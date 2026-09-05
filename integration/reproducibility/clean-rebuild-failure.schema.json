@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://blazex.dev/schemas/bh01-clean-rebuild-failure-v0.1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "record_id", "status", "source_revision", "environment", "failure_kind", "stopped_at", "commands_completed", "retained_log_directory", "evidence", "root_cause", "resolution", "support_status"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "record_id": {"type": "string", "pattern": "^BX-BH01-PHASE10-CLEAN-A-ATTEMPT-[123]-0\\.1$"},
+    "status": {"const": "failed-and-resolved"},
+    "source_revision": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "environment": {"const": "A"},
+    "failure_kind": {"enum": ["artifact-path-sensitivity", "evidence-harness-log-reference", "evidence-record-hash-assignment"]},
+    "stopped_at": {"enum": ["profile-identity-check-before-browser-replay", "server-log-finalization-after-browser-replay", "post-execution-schema-validation"]},
+    "commands_completed": {"type": "integer", "minimum": 19},
+    "retained_log_directory": {"type": "string", "pattern": "^raw-evidence/bh01-phase10-clean-a.*-logs$"},
+    "evidence": {"type": "object", "minProperties": 1},
+    "root_cause": {"type": "string", "minLength": 40},
+    "resolution": {"type": "object", "required": ["change", "verification_records"]},
+    "support_status": {"const": "unsupported"}
+  }
+}

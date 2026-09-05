@@ -1,0 +1,6 @@
+embuilder:INFO: building zlib
+cache:INFO: generating port: sysroot/lib/wasm32-emscripten/libz.a... (this will be cached in "/emsdk/upstream/emscripten/cache/sysroot/lib/wasm32-emscripten/libz.a" for subsequent builds)
+system_libs:INFO: compiled 15 inputs in 0.30s
+cache:INFO:  - ok
+embuilder:INFO: ...success. Took (0.33s)
+BH-01 runtime build: PASS (debug-web, release-web, release-node-probe)

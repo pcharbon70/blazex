@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://blazex.dev/schemas/bh01-feasibility-decision-v0.1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "decision_id", "status", "source_revision", "baseline_ref", "review_ref", "authorization_ref", "approvals", "result", "rationale", "proof_summary", "risk_summary", "stop_summary", "blocking_findings", "accepted_conditions", "invalidated_evidence", "bh01_status", "bh02_entry", "prohibited_claims"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "decision_id": {"const": "BX-BH01-PHASE10-FEASIBILITY-DECISION-0.1"},
+    "status": {"const": "authorized-proceed-with-bounded-conditions"},
+    "source_revision": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "baseline_ref": {"$ref": "#/$defs/ref"}, "review_ref": {"$ref": "#/$defs/ref"}, "authorization_ref": {"$ref": "#/$defs/ref"},
+    "approvals": {"type": "array", "minItems": 1, "items": {"type": "object", "required": ["role", "identity", "basis"]}},
+    "result": {"const": "proceed-with-bounded-conditions"},
+    "rationale": {"type": "string", "minLength": 100},
+    "proof_summary": {"type": "object"}, "risk_summary": {"type": "object"}, "stop_summary": {"type": "object"},
+    "blocking_findings": {"type": "array", "maxItems": 0},
+    "accepted_conditions": {"type": "array", "minItems": 9, "maxItems": 9},
+    "invalidated_evidence": {"type": "array", "maxItems": 0},
+    "bh01_status": {"const": "complete-proceed-with-bounded-conditions"},
+    "bh02_entry": {
+      "type": "object", "additionalProperties": false, "required": ["eligible", "authorized", "may_start", "required_next_action"],
+      "properties": {
+        "eligible": {"const": true}, "authorized": {"const": false}, "may_start": {"const": false},
+        "required_next_action": {"const": "receive explicit repository-owner BH-02 authorization"}
+      }
+    },
+    "prohibited_claims": {"type": "array", "minItems": 7}
+  },
+  "$defs": {"ref": {"type": "object", "additionalProperties": false, "required": ["path", "sha256"], "properties": {"path": {"type": "string"}, "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}}}}
+}

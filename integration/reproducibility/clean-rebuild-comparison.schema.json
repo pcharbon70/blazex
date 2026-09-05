@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://blazex.dev/schemas/bh01-clean-rebuild-comparison-v0.1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "report_id", "status", "source_revision", "environment_records", "exact_artifact_matches", "semantic_scenario_matches", "canonical_report_matches", "declared_variance", "unexplained_variance", "manual_intervention", "physical_host_scope", "support_status"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "report_id": {"const": "BX-BH01-PHASE10-CLEAN-REBUILD-COMPARISON-0.1"},
+    "status": {"const": "pass-with-declared-host-variance"},
+    "source_revision": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "environment_records": {"type": "array", "minItems": 2, "maxItems": 2, "uniqueItems": true},
+    "exact_artifact_matches": {"type": "integer", "minimum": 3},
+    "semantic_scenario_matches": {"type": "integer", "minimum": 8},
+    "canonical_report_matches": {"const": 7},
+    "declared_variance": {"type": "array", "minItems": 3},
+    "unexplained_variance": {"type": "array", "maxItems": 0},
+    "manual_intervention": {"type": "array", "maxItems": 0},
+    "physical_host_scope": {"const": "same-linux-host-two-clean-execution-contexts-not-two-physical-machines"},
+    "support_status": {"const": "unsupported"}
+  }
+}

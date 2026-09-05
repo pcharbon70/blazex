@@ -1,0 +1,169 @@
+{
+  "artifacts": [
+    {
+      "bytes": 156421,
+      "cache": "immutable",
+      "mime": "text/javascript",
+      "path": "artifacts/AtomVM.mjs",
+      "sha256": "43cbf6ec34cd4745777b4ce70aa23844a6bb8af44c301c86a5dd02c0165bef64"
+    },
+    {
+      "bytes": 986537,
+      "cache": "immutable",
+      "mime": "application/wasm",
+      "path": "artifacts/AtomVM.wasm",
+      "sha256": "d20c491e75936dc8189910c8d0740093b7813d8dcc1cf966a87c011799ade9d8"
+    },
+    {
+      "bytes": 6578424,
+      "cache": "immutable",
+      "mime": "application/vnd.atomvm.avm",
+      "path": "artifacts/bundle.avm",
+      "sha256": "e2d9713b17938dbd0886c5e12e927619495b0dc1fd578bf3d79c58de87b94773"
+    },
+    {
+      "bytes": 2604,
+      "cache": "immutable",
+      "mime": "application/json",
+      "path": "deployment-contract.json",
+      "sha256": "58c08767d8b3df044dd61982e81a1b38c4087883ed6cc6d148ad86ba047f85b6"
+    },
+    {
+      "bytes": 7382,
+      "cache": "immutable",
+      "mime": "text/javascript",
+      "path": "dom/fixture-dom-protocol.js",
+      "sha256": "8567a6be77448aef313c8e6160c12cb62c0ae6a6e90503e76f011eaafb529c6b"
+    },
+    {
+      "bytes": 13679,
+      "cache": "immutable",
+      "mime": "text/javascript",
+      "path": "dom/fixture-dom-renderer.js",
+      "sha256": "8d9c2d243239b3af7985864415b9b1750183cf7d98f7e959ea6ea7062daa075c"
+    },
+    {
+      "bytes": 13957,
+      "cache": "immutable",
+      "mime": "text/javascript",
+      "path": "host.js",
+      "sha256": "3cd86fdaa4a184e47ddf4316f2dc0a5aa9ef421dc42f2cab1cfea1280b289043"
+    },
+    {
+      "bytes": 983,
+      "cache": "no-store",
+      "mime": "text/html",
+      "path": "index.html",
+      "sha256": "e662963edee94292565c86b85cd8c86e82563a054d3021d84cd5bb2497dba990"
+    },
+    {
+      "bytes": 6496,
+      "cache": "immutable",
+      "mime": "text/javascript",
+      "path": "js/bridge-protocol.js",
+      "sha256": "0dcbc1b119d3c2dad75cfd711846bac40e6bbdc54763bb26c9ea6bdc29d1df97"
+    },
+    {
+      "bytes": 3129,
+      "cache": "immutable",
+      "mime": "text/javascript",
+      "path": "js/diagnostic-collector.js",
+      "sha256": "98d2527ed01793a552a8a1425b8b4079553fcf82108e26a3959bd8c29dc9611b"
+    },
+    {
+      "bytes": 5011,
+      "cache": "immutable",
+      "mime": "text/javascript",
+      "path": "js/host-bridge.js",
+      "sha256": "d1e287676bd4f324eea4b1e28fe8caccbed07a46797a8dd0ebd13835e4ac0478"
+    },
+    {
+      "bytes": 1199,
+      "cache": "immutable",
+      "mime": "text/javascript",
+      "path": "js/index.js",
+      "sha256": "9bddc218e4fe4330668670022d0627df4325ec3cb0b90484eaaa77146e9d5eef"
+    },
+    {
+      "bytes": 1752,
+      "cache": "immutable",
+      "mime": "text/javascript",
+      "path": "js/internal/errors.js",
+      "sha256": "72325b832d8eda4323815ec5dfe7a68f05dc4795643a33c023a0c5aaab2cca2b"
+    },
+    {
+      "bytes": 5505,
+      "cache": "immutable",
+      "mime": "text/javascript",
+      "path": "js/lifecycle.js",
+      "sha256": "ad8b73603f8fbe8f788a60e4461a879f885e681add79cc7f14965c7dec67441e"
+    },
+    {
+      "bytes": 11538,
+      "cache": "immutable",
+      "mime": "text/javascript",
+      "path": "js/manifest-loader.js",
+      "sha256": "64fcf2f80a095c5ab586ec7ad483814837fcb2a0b786f324f67e1fffd4c08114"
+    },
+    {
+      "bytes": 3190,
+      "cache": "immutable",
+      "mime": "text/javascript",
+      "path": "js/prerequisites.js",
+      "sha256": "748e011f2af5e3b1112a420e464ce716f4c9235f90557672cce7df0281b907fa"
+    },
+    {
+      "bytes": 5584,
+      "cache": "immutable",
+      "mime": "text/javascript",
+      "path": "js/recovery-coordinator.js",
+      "sha256": "0186a76fe591ef24de513d1a7c7cba3fea7b752177031badb9888959e5cdc84c"
+    },
+    {
+      "bytes": 3834,
+      "cache": "immutable",
+      "mime": "text/javascript",
+      "path": "js/resource-ledger.js",
+      "sha256": "025690623f1a04d53c2acbba5142698e4fa1eed54e3c9bc5b21c37ace3d6d5d8"
+    },
+    {
+      "bytes": 5422,
+      "cache": "immutable",
+      "mime": "text/javascript",
+      "path": "js/runtime-frame-port.js",
+      "sha256": "d2935978d645e7528913980ccd64f2c65e9149b47499814f74b9a19a0c324f8e"
+    },
+    {
+      "bytes": 6767,
+      "cache": "immutable",
+      "mime": "text/javascript",
+      "path": "js/runtime-loader.js",
+      "sha256": "d23445f72dd73533db3957390f4d869abdf81e0b29655c1a7c9f9e2069b2460f"
+    },
+    {
+      "bytes": 186,
+      "cache": "immutable",
+      "mime": "text/html",
+      "path": "runtime-frame.html",
+      "sha256": "d526a4953a314b099696bef4023903f8d8df6617a11d17e25e67f56bd1b58a4f"
+    },
+    {
+      "bytes": 6293,
+      "cache": "immutable",
+      "mime": "text/javascript",
+      "path": "runtime-frame.js",
+      "sha256": "8dac47fcb1bf635cbca26d2b2be4c5b26fe5f412563d8ab0cc17a339b4487b35"
+    },
+    {
+      "bytes": 1328,
+      "cache": "no-store",
+      "mime": "application/json",
+      "path": "runtime-manifest.json",
+      "sha256": "2b354caa5a2871952bd786eb35651a28ba4636326a59a046a0bdcc29bfb03547"
+    }
+  ],
+  "manifest_id": "BX-BH01-PHASE-05-PROFILE-ASSETS-0.1",
+  "network_policy": "same-origin declared profile assets only",
+  "schema_version": "1.0.0",
+  "source_maps": []
+}

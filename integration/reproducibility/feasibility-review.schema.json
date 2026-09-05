@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://blazex.dev/schemas/bh01-phase10-feasibility-review-v0.1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "record_id", "status", "source_revision", "ledger_ref", "method", "lenses", "conditions", "alternatives", "blocking_findings", "accepted_findings", "decision", "prohibited_claims"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "record_id": {"const": "BX-BH01-PHASE10-FEASIBILITY-REVIEW-0.1"},
+    "status": {"const": "reviewed-proceed-with-bounded-conditions"},
+    "source_revision": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "ledger_ref": {"$ref": "#/$defs/reference"},
+    "method": {
+      "type": "object", "additionalProperties": false,
+      "required": ["review_model", "human_independence_claimed", "owner_acceptance_required_for_decision"],
+      "properties": {
+        "review_model": {"const": "discipline-separated-evidence-review"},
+        "human_independence_claimed": {"const": false},
+        "owner_acceptance_required_for_decision": {"const": true}
+      }
+    },
+    "lenses": {"type": "array", "minItems": 11, "maxItems": 11, "items": {"$ref": "#/$defs/lens"}},
+    "conditions": {"type": "array", "minItems": 9, "maxItems": 9, "items": {"$ref": "#/$defs/condition"}},
+    "alternatives": {"type": "array", "minItems": 6, "maxItems": 6, "items": {"$ref": "#/$defs/alternative"}},
+    "blocking_findings": {"type": "array", "maxItems": 0},
+    "accepted_findings": {"type": "array", "minItems": 7, "items": {"type": "string"}},
+    "decision": {
+      "type": "object", "additionalProperties": false,
+      "required": ["result", "rationale", "bh02_eligibility", "bh02_authorized", "support_status"],
+      "properties": {
+        "result": {"const": "proceed-with-bounded-conditions"},
+        "rationale": {"type": "string", "minLength": 80},
+        "bh02_eligibility": {"const": "eligible-pending-entry-record-and-owner-authorization"},
+        "bh02_authorized": {"const": false},
+        "support_status": {"const": "unsupported"}
+      }
+    },
+    "prohibited_claims": {"type": "array", "minItems": 6, "items": {"type": "string"}}
+  },
+  "$defs": {
+    "reference": {
+      "type": "object", "additionalProperties": false, "required": ["path", "sha256"],
+      "properties": {"path": {"type": "string"}, "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}}
+    },
+    "lens": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "discipline", "reviewer_role", "scope", "evidence", "favorable_observations", "challenges", "alternatives_considered", "conditions", "conclusion"],
+      "properties": {
+        "id": {"type": "string"}, "discipline": {"type": "string"}, "reviewer_role": {"type": "string"}, "scope": {"type": "string", "minLength": 20},
+        "evidence": {"type": "array", "minItems": 2, "items": {"type": "string"}},
+        "favorable_observations": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "challenges": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "alternatives_considered": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "conditions": {"type": "array", "items": {"type": "string"}},
+        "conclusion": {"enum": ["acceptable-with-conditions", "acceptable-with-deferred-qualification", "acceptable-exact-pins-only"]}
+      }
+    },
+    "condition": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "owner", "trigger", "required_action", "blocks", "expiry"],
+      "properties": {
+        "id": {"type": "string"}, "owner": {"type": "string"}, "trigger": {"type": "string", "minLength": 10},
+        "required_action": {"type": "string", "minLength": 20}, "blocks": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "expiry": {"type": "string", "minLength": 10}
+      }
+    },
+    "alternative": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "option", "disposition", "rationale", "revisit_trigger"],
+      "properties": {
+        "id": {"type": "string"}, "option": {"type": "string"},
+        "disposition": {"enum": ["selected-for-bh02-input", "reserve-if-triggered", "required-later-experiment", "viable-fallback", "not-selected"]},
+        "rationale": {"type": "string", "minLength": 30}, "revisit_trigger": {"type": "string", "minLength": 10}
+      }
+    }
+  }
+}

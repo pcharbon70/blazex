@@ -1,0 +1,48 @@
+
+> @blazex/runtime-browser-experimental@0.0.0-bh01 test
+> node --test test/*.test.js
+
+✔ rejects deterministic hostile bridge families without executing values (1.486349ms)
+✔ retains script and HTML payloads only as inert bounded text (0.184101ms)
+✔ rejects traversal, credentials, downgrade, and missing integrity declarations (1.348485ms)
+✔ fails artifact MIME, compression, size, and integrity before returning bytes (21.602003ms)
+✔ the experimental bridge boundary remains narrow (0.955378ms)
+✔ the loader source owns no component or server behavior (4.722096ms)
+✔ emits correlated developer and user summaries without console dependence (1.910827ms)
+✔ redacts keys, credentials, queries, local paths, and stack frames (0.4378ms)
+✔ drops identical diagnostics and counts the duplicate (0.229538ms)
+✔ rejects orphan correlation, unknown classification, and retention overflow (2.058129ms)
+✔ correlates a bounded allowlisted request and records metrics (7.706041ms)
+✔ accepts only the three bounded fixture operations added for Phase 5 (2.175621ms)
+✔ rejects operations, executable values, handles, secrets, and oversized values (0.650694ms)
+✔ times out, cancels transport, and drops a late result (6.259458ms)
+✔ rejects stale responses and makes stop idempotent (0.585183ms)
+✔ defines bounded event, error, readiness, shutdown, and diagnostic signals (0.312872ms)
+✔ follows the monotonic activation state machine (3.280316ms)
+✔ releases owned resources in reverse order and makes stop idempotent (2.126316ms)
+✔ classifies retry, integrity, attempt limits, and stale generations (1.410714ms)
+✔ validates the exact Phase 4 manifest and resolves same-origin assets (2.503527ms)
+✔ fetches a no-store manifest and rejects redirects (19.714827ms)
+✔ verifies artifact bytes, MIME, digest, Wasm, and cancellation (4.990457ms)
+✔ rejects undeclared Wasm imports and missing required exports (1.32662ms)
+✔ classifies full and buffered-only browser prerequisites (4.371752ms)
+✔ distinguishes deployment policy from browser capability failure (0.428998ms)
+✔ coordinates one authority-bearing retry under the browser owner (2.423703ms)
+✔ prohibits a lower-layer authority retry (0.834213ms)
+✔ bounds exhaustion without starting a third operation (1.311108ms)
+✔ drops stale generations and cancels replacement work (0.608578ms)
+✔ converges non-retryable and stopped recovery (0.940527ms)
+✔ reports baseline, peak, disposed convergence, and explained unknowns (2.098329ms)
+✔ rejects unexplained unknown and invalid counts (0.997415ms)
+✔ detects nonconverging disposal (0.408821ms)
+✔ rejects stale generations and bounded sample overflow (1.130292ms)
+✔ waits for application readiness and converges resources on stop (28.213472ms)
+✔ contains runtime failure and startup cancellation (5.013137ms)
+ℹ tests 36
+ℹ suites 0
+ℹ pass 36
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 108.855333

@@ -1,0 +1,13 @@
+==> blazex_renderer_dom_liveview
+Generated blazex_renderer_dom_liveview app
+==> blazex_phoenix
+Generated blazex_phoenix app
+==> blazex_browser_phoenix
+Compiling 1 file (.ex)
+
+11:37:27.237 [info] Running BlazeXBrowserPhoenix.Endpoint with Bandit 1.12.5 at 127.0.0.1:43114 (http)
+
+11:37:27.240 [info] Access BlazeXBrowserPhoenix.Endpoint at http://localhost:43114
+
+11:38:29.182 [notice] SIGTERM received - shutting down
+

@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://blazex.dev/schemas/bh02-entry-manifest-v0.1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "manifest_id", "status", "source_revision", "baseline_ref", "decision_ref", "activation", "goal", "repository_boundaries", "proven_host_facts", "neutral_contract_constraints", "disposable_lessons", "limitations", "conditions", "deferred_qualification", "repeat_obligations", "forbidden_leakage", "required_outputs", "support_status"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "manifest_id": {"const": "BX-BH02-ENTRY-MANIFEST-0.1"},
+    "status": {"const": "ready-pending-explicit-authorization"},
+    "source_revision": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "baseline_ref": {"$ref": "#/$defs/ref"}, "decision_ref": {"$ref": "#/$defs/ref"},
+    "activation": {
+      "type": "object", "additionalProperties": false, "required": ["eligible", "authorized", "may_start", "authorization_requirement"],
+      "properties": {
+        "eligible": {"const": true}, "authorized": {"const": false}, "may_start": {"const": false},
+        "authorization_requirement": {"const": "explicit repository-owner authorization after BH-01 completion"}
+      }
+    },
+    "goal": {"type": "string", "minLength": 80},
+    "repository_boundaries": {"type": "array", "minItems": 10},
+    "proven_host_facts": {"type": "array", "minItems": 7},
+    "neutral_contract_constraints": {"type": "array", "minItems": 8},
+    "disposable_lessons": {"type": "array", "minItems": 6},
+    "limitations": {"type": "array", "minItems": 8},
+    "conditions": {"type": "array", "minItems": 9, "maxItems": 9},
+    "deferred_qualification": {"type": "array", "minItems": 6, "maxItems": 6},
+    "repeat_obligations": {"type": "array", "minItems": 9, "maxItems": 9},
+    "forbidden_leakage": {"type": "array", "minItems": 7},
+    "required_outputs": {"type": "array", "minItems": 8},
+    "support_status": {"const": "unsupported"}
+  },
+  "$defs": {"ref": {"type": "object", "additionalProperties": false, "required": ["path", "sha256"], "properties": {"path": {"type": "string"}, "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}}}}
+}

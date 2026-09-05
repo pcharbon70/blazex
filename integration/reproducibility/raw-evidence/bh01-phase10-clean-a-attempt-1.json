@@ -1,0 +1,42 @@
+{
+  "commands_completed": 19,
+  "environment": "A",
+  "evidence": {
+    "expected": {
+      "bundle_bytes": 6578424,
+      "bundle_sha256": "e2d9713b17938dbd0886c5e12e927619495b0dc1fd578bf3d79c58de87b94773",
+      "profile_manifest_sha256": "818ac7b967db6519c766f9d1fff80455cc92d205e3f188252e6da27258ee4aad"
+    },
+    "localization": {
+      "different_files": 1,
+      "expected_embedded_path": "/workspace/deps/jason/lib/decoder.ex",
+      "expected_module_sha256": "a71409283dcaa53279280400072cf47cfc599e6190e6a96d6cde340855bf28ed",
+      "module": "Elixir.Jason.Decoder.Unescape.beam",
+      "observed_embedded_path": "/workspace/integration/fixtures/browser_host/deps/jason/lib/decoder.ex",
+      "observed_module_sha256": "bf06615062daa89b6bbd1298c2e6cc0140892307d03e6ecbc3bfec49d4997266"
+    },
+    "observed": {
+      "bundle_bytes": 6578660,
+      "bundle_manifest_sha256": "a624dbca4cafa85850efc65c826f935bc16a006ee0740cd50bb04181b3586c9f",
+      "bundle_sha256": "10cc197816f70511d905599ba8b2063f734d9ff36d1366313ea94d2c208bdfdd",
+      "profile_manifest_sha256": "03510f336864155fb52497f3929dbcaca768eb1e875a35686e7cb5aa6db50362"
+    }
+  },
+  "failure_kind": "artifact-path-sensitivity",
+  "record_id": "BX-BH01-PHASE10-CLEAN-A-ATTEMPT-1-0.1",
+  "resolution": {
+    "change": "Mount the browser fixture itself at the canonical /workspace container root for every dependency, compile, package, and test command.",
+    "verification_records": [
+      "raw-evidence/bh01-phase10-clean-a-authoritative.json",
+      "raw-evidence/bh01-phase10-clean-b.json",
+      "bh01-phase10-clean-rebuild-comparison.json"
+    ]
+  },
+  "root_cause": "The clean runner mounted the repository root rather than the fixture root at /workspace. Jason preserves a dependency source path in macro literals, so checkout-relative nesting changed one packaged BEAM and the enclosing AVM identity.",
+  "schema_version": "1.0.0",
+  "source_revision": "4e6301b55dc9f2e44b848818d14c60606c0476a6",
+  "status": "failed-and-resolved",
+  "stopped_at": "profile-identity-check-before-browser-replay",
+  "support_status": "unsupported",
+  "retained_log_directory": "raw-evidence/bh01-phase10-clean-a-logs"
+}

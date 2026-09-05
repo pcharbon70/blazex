@@ -1,0 +1,2 @@
+ERROR: profile artifact identity drifted: artifacts/bundle.avm
+ERROR: runtime manifest mismatch: artifacts/bundle.avm
