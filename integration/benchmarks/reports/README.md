@@ -5,3 +5,13 @@ ledger for unavailable mobile, operating-system, second-machine, physical
 device, and manual assistive-technology evidence. Deferred rows are excluded
 from active Linux pass rates, do not block Phase 9 development completion, and
 remain mandatory for support or release no later than BH-22.
+
+`bh01-phase9-artifact-economics.json` attributes decoded bytes, Brotli bytes,
+requests, cache policy, and observed runtime phases. It identifies the unpruned
+application AVM as 84.045% of decoded and 87.504% of Brotli bytes while
+explicitly warning that this bundle includes runtime/library modules.
+
+`bh01-phase9-mitigation-assessment.json` records four bounded candidates,
+required before/after evidence, owners, tradeoffs, review triggers, and four
+rejected shortcuts. No threshold changed and no estimated saving receives
+budget credit.

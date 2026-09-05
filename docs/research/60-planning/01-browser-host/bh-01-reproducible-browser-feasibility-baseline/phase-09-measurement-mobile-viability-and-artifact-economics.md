@@ -120,27 +120,27 @@ or mobile viability.
       - **[DEFERRED] 9.3.2.2 Subtask** - Measure memory/pages, repeated interaction, cleanup, background/foreground or navigation where governed, errors/crashes, long tasks, and thermal/power caveats.
       - **[DEFERRED] 9.3.2.3 Subtask** - Repeat enough samples across Android and iOS/iPadOS candidate scenarios to classify insufficient, failed, conditional, or observed results honestly.
 
-  - [ ] 9.4 Section - Analyze artifact economics and optimization options.
+  - [x] 9.4 Section - Analyze artifact economics and optimization options.
 
     Identify dominant payload, startup, memory, build, and interaction costs
     before proposing bounded mitigations or threshold changes.
 
-    - [ ] 9.4.1 Task - Attribute costs to artifacts and runtime phases.
+    - [x] 9.4.1 Task - Attribute costs to artifacts and runtime phases.
 
       Optimization decisions should connect to owned inputs rather than
       undifferentiated totals.
 
-      - [ ] 9.4.1.1 Subtask - Produce size/reachability and startup critical-path reports by runtime, application modules, JavaScript/loader, maps/assets, requests, compression, and cache behavior.
-      - [ ] 9.4.1.2 Subtask - Attribute CPU/time/memory/long-task observations to fetch, instantiate, runtime boot, bundle load, fixture start, bridge, DOM, transport/server, or harness overhead where evidence permits.
+      - [x] 9.4.1.1 Subtask - Produce size/reachability and startup critical-path reports by runtime, application modules, JavaScript/loader, maps/assets, requests, compression, and cache behavior.
+      - [x] 9.4.1.2 Subtask - Attribute CPU/time/memory/long-task observations to fetch, instantiate, runtime boot, bundle load, fixture start, bridge, DOM, transport/server, or harness overhead where evidence permits.
 
-    - [ ] 9.4.2 Task - Evaluate bounded mitigations.
+    - [x] 9.4.2 Task - Evaluate bounded mitigations.
 
       Feasibility optimization may tune build/profile choices but cannot weaken
       proofs or redefine host-neutral contracts.
 
-      - [ ] 9.4.2.1 Subtask - Evaluate stripping, compression, module reachability, split/deferred artifacts, caching, build flags, worker strategy, message batching, or fixture simplification with separate before/after evidence.
-      - [ ] 9.4.2.2 Subtask - Reject mitigations that hide required artifacts, remove difficult scenarios, move behavior into JavaScript/server presentation, broaden private coupling, or make builds non-reproducible.
-      - [ ] 9.4.2.3 Subtask - Record mitigation owner, expected effect, tradeoff, affected proofs/artifacts, browser constraints, repeat requirements, and expiry/review trigger.
+      - [x] 9.4.2.1 Subtask - Evaluate stripping, compression, module reachability, split/deferred artifacts, caching, build flags, worker strategy, message batching, or fixture simplification with separate before/after evidence.
+      - [x] 9.4.2.2 Subtask - Reject mitigations that hide required artifacts, remove difficult scenarios, move behavior into JavaScript/server presentation, broaden private coupling, or make builds non-reproducible.
+      - [x] 9.4.2.3 Subtask - Record mitigation owner, expected effect, tradeoff, affected proofs/artifacts, browser constraints, repeat requirements, and expiry/review trigger.
 
   - [ ] 9.5 Section - Compare observations with budgets and stop conditions.
 

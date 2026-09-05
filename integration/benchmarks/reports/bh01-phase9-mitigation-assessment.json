@@ -1,0 +1,123 @@
+{
+  "schema_version": "1.0.0",
+  "report_id": "BX-BH01-PHASE9-MITIGATION-ASSESSMENT-0.1",
+  "status": "reviewed-candidates-no-threshold-change",
+  "source_revision": "edf2b09434a8a523d05bf03e3699b77c8c4a331b",
+  "artifact_economics_ref": {
+    "path": "integration/benchmarks/reports/bh01-phase9-artifact-economics.json",
+    "sha256": "b71bfaf536e4979e0fa3fde8b73f0aae32b496c7fee084b8b5fdcd1a4a66aa5d"
+  },
+  "threshold_changes": [],
+  "candidates": [
+    {
+      "id": "BX-BH01-MITIGATION-APPLICATION-AVM-REACHABILITY-0.1",
+      "status": "required-bounded-experiment",
+      "priority": "highest",
+      "owner": "build and runtime owners",
+      "target": "application-bundle-unpruned",
+      "baseline": {
+        "decoded_bytes": 6578424,
+        "brotli_bytes": 2199143
+      },
+      "expected_effect": "Remove unreachable OTP, library, and fixture modules while preserving the exact BH-01 proof inventory.",
+      "tradeoff": "Requires a trustworthy module-reachability model and can produce false-small bundles if dynamic calls are missed.",
+      "affected_proofs": [
+        "runtime semantics",
+        "local behavior",
+        "authenticated command",
+        "failure recovery"
+      ],
+      "browser_constraints": "Must remain compatible with AtomVM/Popcorn loading and the same manifest/integrity contract.",
+      "repeat_requirement": "Produce separate before/after manifests and rerun Phases 3 through 9; no estimate receives budget credit.",
+      "review_trigger": "Before any release claim and when the bundle builder gains reachability pruning."
+    },
+    {
+      "id": "BX-BH01-MITIGATION-BROTLI-TRANSFER-0.1",
+      "status": "required-serving-experiment",
+      "priority": "high",
+      "owner": "browser profile owner",
+      "target": "first-load transfer",
+      "baseline": {
+        "identity_bytes": 7827221,
+        "locally_computed_brotli_bytes": 2513184
+      },
+      "expected_effect": "Serve precompressed content-addressed artifacts with correct negotiation, MIME, integrity, cache, and isolation headers.",
+      "tradeoff": "Adds deployment variants and requires CDN/proxy validation; local compression alone proves no network saving.",
+      "affected_proofs": [
+        "deployment",
+        "artifact integrity",
+        "fallback",
+        "startup"
+      ],
+      "browser_constraints": "Must preserve streaming Wasm behavior and never serve compressed bytes without correct Content-Encoding and Vary semantics.",
+      "repeat_requirement": "Capture before/after network bytes and startup distributions in Chrome and Firefox, then repeat external qualification when available.",
+      "review_trigger": "Before production-profile deployment work."
+    },
+    {
+      "id": "BX-BH01-MITIGATION-BUNDLE-PARTITION-0.1",
+      "status": "investigate-after-reachability",
+      "priority": "medium",
+      "owner": "build owner",
+      "target": "application AVM and future optional packages",
+      "baseline": {
+        "request_count": 1,
+        "brotli_bytes": 2199143
+      },
+      "expected_effect": "Separate required startup modules from future optional families only where AtomVM loading semantics permit deterministic lazy reachability.",
+      "tradeoff": "Additional requests and lifecycle states may worsen startup or reliability and must not hide mandatory fixture code.",
+      "affected_proofs": [
+        "startup",
+        "offline",
+        "recovery",
+        "reproducibility"
+      ],
+      "browser_constraints": "No service-worker dependency or browser-only component semantics may enter portable packages.",
+      "repeat_requirement": "Measure one exact before/after candidate after pruning, including cold/warm/offline/failure paths.",
+      "review_trigger": "After the application reachability experiment establishes a truthful ownership boundary."
+    },
+    {
+      "id": "BX-BH01-MITIGATION-BRIDGE-BATCHING-0.1",
+      "status": "not-indicated-by-current-evidence",
+      "priority": "low",
+      "owner": "browser host and DOM renderer owners",
+      "target": "bridge and DOM interaction path",
+      "baseline": {
+        "evidence": "local interaction and DOM distributions in the desktop summary"
+      },
+      "expected_effect": "Potentially reduce bridge calls only if a future representative component trace demonstrates pressure.",
+      "tradeoff": "Batching can increase latency, obscure ordering, and complicate cancellation and stale-generation semantics.",
+      "affected_proofs": [
+        "event ordering",
+        "DOM atomicity",
+        "cancellation",
+        "generation isolation"
+      ],
+      "browser_constraints": "Must preserve the bounded closed protocol and deterministic normalized trace.",
+      "repeat_requirement": "No implementation until a traced bottleneck exists; then retain before/after trace and timing evidence.",
+      "review_trigger": "A future representative trace exceeds its interaction budget with bridge overhead attribution."
+    }
+  ],
+  "rejected_approaches": [
+    {
+      "approach": "Remove required difficult scenarios or artifacts from the measured profile",
+      "reason": "This would invalidate the BH-01 proof inventory and create a false-small candidate."
+    },
+    {
+      "approach": "Move Elixir component behavior or presentation decisions into JavaScript or the Phoenix server",
+      "reason": "This violates the host-neutral semantic and authority boundaries."
+    },
+    {
+      "approach": "Lower thresholds, change metric boundaries, or reduce sample counts after seeing results",
+      "reason": "Quality-contract changes require separate versioned review and cannot retroactively manufacture a pass."
+    },
+    {
+      "approach": "Treat desktop emulation or Linux engine builds as mobile, Safari, Windows, or accessibility qualification",
+      "reason": "Those obligations are explicitly deferred and non-substitutable."
+    }
+  ],
+  "recommendation": {
+    "active_development": "continue conditionally while the unpruned application AVM remains an explicit feasibility risk",
+    "required_follow_up": "Run reachability pruning and actual Brotli serving as separately reviewed before/after experiments before release qualification.",
+    "support_effect": "none; these candidates and observations grant no browser, mobile, accessibility, production, or release support"
+  }
+}

@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
   "index_id": "BX-BH01-BENCHMARK-INDEX-0.1",
-  "status": "phase9-section3-external-qualification-deferred",
+  "status": "phase9-section4-artifact-economics-reviewed",
   "environment_schema": "environment-fingerprint.schema.json",
   "sample_schema": "sample.schema.json",
   "artifact_run_schema": "artifact-run.schema.json",
@@ -9,6 +9,8 @@
   "measurement_run_schema": "measurement-run.schema.json",
   "desktop_summary_schema": "desktop-summary.schema.json",
   "qualification_deferral_schema": "qualification-deferral.schema.json",
+  "artifact_economics_schema": "artifact-economics.schema.json",
+  "mitigation_assessment_schema": "mitigation-assessment.schema.json",
   "metric_definitions": "phase9-metric-definitions.json",
   "locations": {
     "environments": "environments",
@@ -52,7 +54,9 @@
     {"summary_id": "BX-BH01-PHASE9-LINUX-DESKTOP-SUMMARY-0.1", "path": "samples/bh01-phase9-linux-desktop-summary.json", "status": "observed", "distribution_count": 41}
   ],
   "reports": [
-    {"report_id": "BX-BH01-PHASE9-QUALIFICATION-DEFERRALS-0.1", "path": "reports/bh01-phase9-deferred-qualification.json", "status": "deferred-to-bh22", "excluded_from_active_pass_rates": true}
+    {"report_id": "BX-BH01-PHASE9-QUALIFICATION-DEFERRALS-0.1", "path": "reports/bh01-phase9-deferred-qualification.json", "status": "deferred-to-bh22", "excluded_from_active_pass_rates": true},
+    {"report_id": "BX-BH01-PHASE9-ARTIFACT-ECONOMICS-0.1", "path": "reports/bh01-phase9-artifact-economics.json", "status": "observed-with-limitations"},
+    {"report_id": "BX-BH01-PHASE9-MITIGATION-ASSESSMENT-0.1", "path": "reports/bh01-phase9-mitigation-assessment.json", "status": "reviewed-candidates-no-threshold-change"}
   ],
   "budget_state": "proposed-unmeasured"
 }

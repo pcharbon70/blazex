@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://blazex.dev/schemas/bh-01/phase-09-artifact-economics-1.0.0.json",
+  "title": "BlazeX BH-01 Phase 9 Artifact Economics",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "report_id", "status", "source_revision", "evidence_revision", "generated_from_captured_at", "inputs", "profile", "owner_costs", "dominant_cost", "cache_economics", "runtime_phase_attribution", "limitations"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "report_id": {"const": "BX-BH01-PHASE9-ARTIFACT-ECONOMICS-0.1"},
+    "status": {"const": "observed-with-limitations"},
+    "source_revision": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "evidence_revision": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "generated_from_captured_at": {"type": "string", "format": "date-time"},
+    "inputs": {"type": "array", "minItems": 2, "items": {"type": "object", "required": ["path", "sha256"]}},
+    "profile": {"type": "object", "required": ["manifest_sha256", "artifact_count", "decoded_bytes", "brotli_bytes", "request_count", "source_maps"]},
+    "owner_costs": {"type": "array", "minItems": 1, "items": {"type": "object", "required": ["owner_class", "decoded_bytes", "decoded_percent", "brotli_bytes", "brotli_percent", "request_count"]}},
+    "dominant_cost": {"type": "object", "required": ["owner_class", "finding"]},
+    "cache_economics": {"type": "array", "minItems": 1, "items": {"type": "object", "required": ["cache_class", "artifact_count", "decoded_bytes", "brotli_bytes"]}},
+    "runtime_phase_attribution": {"type": "array", "minItems": 1, "items": {"type": "object", "required": ["phase", "metric_id", "attribution", "distributions"]}},
+    "limitations": {"type": "array", "minItems": 1, "items": {"type": "string"}, "uniqueItems": true}
+  }
+}

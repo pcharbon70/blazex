@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://blazex.dev/schemas/bh-01/phase-09-mitigation-assessment-1.0.0.json",
+  "title": "BlazeX BH-01 Phase 9 Mitigation Assessment",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "report_id", "status", "source_revision", "artifact_economics_ref", "threshold_changes", "candidates", "rejected_approaches", "recommendation"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "report_id": {"const": "BX-BH01-PHASE9-MITIGATION-ASSESSMENT-0.1"},
+    "status": {"const": "reviewed-candidates-no-threshold-change"},
+    "source_revision": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "artifact_economics_ref": {"type": "object", "required": ["path", "sha256"]},
+    "threshold_changes": {"const": []},
+    "candidates": {"type": "array", "minItems": 1, "items": {"type": "object", "required": ["id", "status", "priority", "owner", "target", "baseline", "expected_effect", "tradeoff", "affected_proofs", "browser_constraints", "repeat_requirement", "review_trigger"]}},
+    "rejected_approaches": {"type": "array", "minItems": 1, "items": {"type": "object", "required": ["approach", "reason"]}},
+    "recommendation": {"type": "object", "required": ["active_development", "required_follow_up", "support_effect"]}
+  }
+}

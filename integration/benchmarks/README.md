@@ -28,6 +28,8 @@ claim is made at this section boundary.
 - `desktop-summary.schema.json` — derived Linux desktop distribution contract.
 - `qualification-deferral.schema.json` — unavailable-environment obligation and
   reactivation contract.
+- `artifact-economics.schema.json` and `mitigation-assessment.schema.json` —
+  owned cost attribution and bounded optimization decision contracts.
 - `phase9-metric-definitions.json` — clocks, boundaries, sample policy, budget
   links, and deferred qualification boundary.
 - `phase9_metrics.py` — deterministic nearest-rank statistics and raw sample
@@ -37,6 +39,8 @@ claim is made at this section boundary.
   payload accounting.
 - `summarize_phase9.py` — fail-closed raw-evidence validator and deterministic
   nearest-rank desktop summary generator.
+- `analyze_phase9.py` — deterministic owner/cache/phase attribution and
+  mitigation assessment generator.
 - `benchmark-index.json` — canonical environment/measurement/sample/report index.
 - `environments/`, `samples/`, `raw-evidence/`, and `reports/` — future evidence locations.
 - `environments/bh01-phase8-local-linux.json` — exact local Linux/Chrome
@@ -52,3 +56,6 @@ claim is made at this section boundary.
   statistics, adequacy, variance flags, and deferred second-machine comparison.
 - `reports/bh01-phase9-deferred-qualification.json` — exact external
   qualification deferrals, owners, reactivation points, and prohibited claims.
+- `reports/bh01-phase9-artifact-economics.json` and
+  `reports/bh01-phase9-mitigation-assessment.json` — cost ownership, critical
+  paths, limitations, and bounded follow-up experiments.
