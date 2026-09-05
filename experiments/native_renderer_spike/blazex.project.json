@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0.0",
+  "id": "experiments/native_renderer_spike",
+  "path": "experiments/native_renderer_spike",
+  "kind": "bounded-experiment",
+  "activation_phase": "BH-02 Phase 7",
+  "status": "experimental-native-control-projection",
+  "owner_role": "native-renderer-owner",
+  "module_roots": ["BlazeX.NativeSpike"],
+  "manifest": "mix.exs",
+  "test_entrypoints": ["test"],
+  "dependencies": ["blazex_core", "blazex_effects", "blazex_ui_tree", "blazex_renderer"],
+  "planned_dependencies": [],
+  "must_not_own": ["production-native-renderer", "portable-component-semantics", "platform-support"],
+  "forbidden_dependencies": ["phoenix", "plug", "live_view", "local_live_view", "dom", "javascript", "qt", "wxwidgets"],
+  "public_api_state": "experimental-not-stable"
+}

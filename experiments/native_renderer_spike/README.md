@@ -11,7 +11,9 @@ backend. Shared traces and assertions belong in `integration/conformance`;
 portable contracts and fixes belong in host-neutral packages. No production
 native-renderer support may be claimed from this experiment alone.
 
-Status: BH-02 Phase 1 activates only the governed experiment boundary. No
-control is implemented. Windows and macOS execution are `[DEFERRED]` until
-governed environments are available; Linux GTK work remains unexecuted and
-unauthorized until Phase 7.
+Status: BH-02 Phase 7 has activated an experimental Mix backend that lowers
+the existing semantic slice to deterministic, platform-neutral native-control
+batches and the strict BXN1 line protocol. No platform object crosses into
+that backend. Direct adapter implementation and GTK execution follow in
+Section 7.3; Windows and macOS execution remain `[DEFERRED]` until governed
+environments are available.

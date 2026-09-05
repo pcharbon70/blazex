@@ -39,19 +39,19 @@ Back to milestone: [README](README.md)
       - [x] 7.1.2.2 Subtask - Require actual GTK 4 controls and automated Linux observations under Xvfb.
       - [x] 7.1.2.3 Subtask - Mark Windows/macOS execution, platform accessibility trees, manual screen readers, IME, file-dialog interaction, geometry, pixels, performance, and packaging deferred.
 
-  - [ ] 7.2 Section - Implement the portable native experiment backend.
+  - [x] 7.2 Section - Implement the portable native experiment backend.
 
-    - [ ] 7.2.1 Task - Lower semantic output to a closed native-control batch.
+    - [x] 7.2.1 Task - Lower semantic output to a closed native-control batch.
 
-      - [ ] 7.2.1.1 Subtask - Activate only the experiment Mix project over the four neutral packages and implement bounded capabilities.
-      - [ ] 7.2.1.2 Subtask - Lower all seven semantic node kinds, stack intent, accessibility, bindings, focus, selection, and file-choice intent without platform objects.
-      - [ ] 7.2.1.3 Subtask - Implement deterministic identity/digest, mount/update/replace/dispose lifecycle, stale rejection, and idempotent cleanup.
+      - [x] 7.2.1.1 Subtask - Activate only the experiment Mix project over the four neutral packages and implement bounded capabilities.
+      - [x] 7.2.1.2 Subtask - Lower all seven semantic node kinds, stack intent, accessibility, bindings, focus, selection, and file-choice intent without platform objects.
+      - [x] 7.2.1.3 Subtask - Implement deterministic identity/digest, mount/update/replace/dispose lifecycle, stale rejection, and idempotent cleanup.
 
-    - [ ] 7.2.2 Task - Encode a strict platform boundary.
+    - [x] 7.2.2 Task - Encode a strict platform boundary.
 
-      - [ ] 7.2.2.1 Subtask - Encode complete validated batches through the closed BXN1 tab-separated hex-UTF-8 protocol.
-      - [ ] 7.2.2.2 Subtask - Reject unknown records, kinds, fields, controls, invalid relationships, excessive depth/count/value, and forbidden host data.
-      - [ ] 7.2.2.3 Subtask - Test deterministic output and all representative slice mappings without loading a platform API.
+      - [x] 7.2.2.1 Subtask - Encode complete validated batches through the closed BXN1 tab-separated hex-UTF-8 protocol.
+      - [x] 7.2.2.2 Subtask - Reject unknown records, kinds, fields, controls, invalid relationships, excessive depth/count/value, and forbidden host data.
+      - [x] 7.2.2.3 Subtask - Test deterministic output and all representative slice mappings without loading a platform API.
 
   - [ ] 7.3 Section - Implement direct platform adapters and execute GTK 4.
 
