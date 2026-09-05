@@ -164,6 +164,13 @@ locations rather than this governance directory.
   multidisciplinary review, baseline versioning, the BH-02 entry decision,
   one commit per section, one immediately merged PR, and branch cleanup without
   authorizing BH-02 implementation or support claims.
+- [BH-01 Phase 10 validation log v0.1.0](blazex-bh-01-phase-10-validation-log-v0.1.0.txt)
+  — exact clean-rebuild, package, JavaScript, Python, generator, archive,
+  deterministic-regeneration, ledger, diagnostic, and claim-boundary outcomes.
+- [BH-01 Phase 10 completion v0.1.0](blazex-bh-01-phase-10-completion-v0.1.0.json)
+  — schema-valid final conditional decision with evidence hashes, complete
+  ledger reconciliation, accepted bounded conditions, unsupported browsers,
+  BH-22 deferrals, BH-01 completion, and explicit BH-02 non-authorization.
 
 ## Maintaining this index
 

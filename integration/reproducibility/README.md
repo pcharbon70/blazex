@@ -48,3 +48,9 @@ evidence and invalidates affected proofs on any governed identity change.
 and a bounded BH-02 input manifest. Its negative checks prohibit stale evidence,
 missing conditions/deferrals/proofs, backend leakage into neutral constraints,
 support promotion, and BH-02 activation without a later explicit authorization.
+
+`verify_phase10.py` is the final milestone gate. It revalidates both clean
+records and all 76 command-log hashes, checks the three retained failed attempts,
+regenerates the closure/review/baseline/decision package twice in memory,
+compares every generated view, reconciles the complete ledger, verifies the
+completion record, and enforces the final planning and authorization state.

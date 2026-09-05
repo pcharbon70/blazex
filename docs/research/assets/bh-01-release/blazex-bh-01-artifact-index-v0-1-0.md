@@ -2,11 +2,12 @@
 title: "BH-01 Artifact Index"
 kind: map
 created: "2026-09-05"
-maturity: stable
 tags:
   - bh-01
   - generated-index
   - feasibility
+aliases:
+  - "BH-01 Artifact Index generated view"
 ---
 
 # BH-01 Artifact Index
@@ -22,3 +23,7 @@ tags:
 - request_count: `23`
 - source_maps: `[]`
 - dominant_cost: `The unpruned application AVM contributes 84.045% of decoded bytes and 87.504% of Brotli bytes; its reachability boundary includes runtime and library modules and must not be interpreted as authored application code alone.`
+
+## Connections
+
+- [BH-01 plan](../../60-planning/01-browser-host/bh-01-reproducible-browser-feasibility-baseline/README.md)

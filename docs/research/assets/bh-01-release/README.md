@@ -20,7 +20,24 @@ This directory holds the immutable candidate feasibility baseline, its schema,
 and generated human indexes. The baseline records what BH-01 actually proved,
 failed, conditioned, or deferred; it is not a production software release.
 
-## Canonical artifacts
+## What belongs here
+
+- The versioned BH-01 feasibility baseline and its validation schema.
+- Deterministic generated views of compatibility, artifacts, benchmarks,
+  proofs, risks, findings, and environments.
+- The authorized feasibility decision, bounded BH-02 entry manifest, and final
+  milestone acceptance document.
+
+Runtime binaries, mutable build products, raw browser traces, and unreviewed
+support claims do not belong here.
+
+## Index
+
+### Subdirectories
+
+- None yet.
+
+### Files
 
 - [Feasibility baseline v0.1.0](blazex-bh-01-feasibility-baseline-v0.1.0.json)
 - [Feasibility baseline schema](blazex-bh-01-feasibility-baseline.schema.json)
@@ -38,12 +55,15 @@ failed, conditioned, or deferred; it is not a production software release.
 - [BH-02 entry manifest](blazex-bh-02-entry-manifest-v0.1.0.json) and
   [schema](blazex-bh-02-entry-manifest.schema.json)
 - [BH-02 entry manifest view](blazex-bh-02-entry-manifest-v0-1-0.md)
+- [BH-01 final acceptance](blazex-bh-01-final-acceptance-v0-1-0.md)
 
-## Maintenance
+## Maintaining this index
 
 Generate and validate this package with
-`integration/reproducibility/version_phase10_baseline.py`. Never edit a
-generated index as independent truth. A changed source, tool, lock, runtime,
-private API, browser, environment, scenario, mitigation, or threshold must
-invalidate affected evidence, preserve this baseline, repeat the governed
-proofs, and publish a superseding version.
+`integration/reproducibility/version_phase10_baseline.py`,
+`integration/reproducibility/decide_phase10_entry.py`, and the final
+`integration/reproducibility/verify_phase10.py` gate. Never edit a generated
+index as independent truth. A changed source, tool, lock, runtime, private API,
+browser, environment, scenario, mitigation, or threshold must invalidate
+affected evidence, preserve this baseline, repeat the governed proofs, and
+publish a superseding version.

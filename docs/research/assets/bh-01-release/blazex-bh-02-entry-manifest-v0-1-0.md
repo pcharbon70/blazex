@@ -7,11 +7,13 @@ tags:
   - bh-02
   - entry-manifest
   - host-neutral
+aliases:
+  - "BH-02 conditional entry manifest"
 ---
 
 # BH-02 Conditional Entry Manifest v0.1.0
 
-- Status: `ready-pending-final-integration-and-explicit-authorization`
+- Status: `ready-pending-explicit-authorization`
 - Authorized: `false`
 - May start: `false`
 
@@ -72,4 +74,8 @@ Define the first host-neutral semantic kernel and prove that one interaction set
 - limited native-control portability spike conforming to the same interaction set
 - automated forbidden-dependency and leakage checks
 
-BH-02 requires explicit owner authorization after Phase 10 integration. This manifest grants no browser, native, mobile, accessibility, security, performance, or release support.
+BH-01 is complete. BH-02 is eligible, but may not start until it receives explicit owner authorization. This manifest grants no browser, native, mobile, accessibility, security, performance, or release support.
+
+## Connections
+
+- [BH-01 plan](../../60-planning/01-browser-host/bh-01-reproducible-browser-feasibility-baseline/README.md)

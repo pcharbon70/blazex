@@ -1,6 +1,6 @@
 {
   "activation": {
-    "authorization_requirement": "explicit repository-owner authorization after Phase 10 integration completion",
+    "authorization_requirement": "explicit repository-owner authorization after BH-01 completion",
     "authorized": false,
     "eligible": true,
     "may_start": false
@@ -115,7 +115,7 @@
   ],
   "decision_ref": {
     "path": "docs/research/assets/bh-01-release/blazex-bh-01-feasibility-decision-v0.1.0.json",
-    "sha256": "486e13351d7a48cc26b51459c90cca905048a3d48d06888c00a443ca64bf0b51"
+    "sha256": "e2363cef39b55f000b3d16ceb1f433f0144df71019bf9803c0a8921a0230660f"
   },
   "deferred_qualification": [
     {
@@ -248,7 +248,7 @@
     "automated forbidden-dependency and leakage checks"
   ],
   "schema_version": "1.0.0",
-  "source_revision": "04c115e317d7edc483c34cd697ac304310a14369",
-  "status": "ready-pending-final-integration-and-explicit-authorization",
+  "source_revision": "82ffbf872c85d306ef0e6c51c253452676cf9c9b",
+  "status": "ready-pending-explicit-authorization",
   "support_status": "unsupported"
 }

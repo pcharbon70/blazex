@@ -2,11 +2,12 @@
 title: "BH-01 Risk Index"
 kind: map
 created: "2026-09-05"
-maturity: stable
 tags:
   - bh-01
   - generated-index
   - feasibility
+aliases:
+  - "BH-01 Risk Index generated view"
 ---
 
 # BH-01 Risk Index
@@ -21,3 +22,7 @@ tags:
 - `BX-BH01-RISK-RUNTIME-SEMANTICS` — **accepted-residual**, medium/high: AtomVM timer cancellation reports false and scale/fairness/long-soak coverage remains experimental. Trigger: Runtime/Popcorn/OTP change or semantic-contract design
 - `BX-BH01-RISK-TOOLCHAIN-REPRODUCIBILITY` — **accepted-residual**, low/critical: Both authoritative runs used one physical Linux host, and Elixir macro literals remain path-sensitive outside the canonical root. Trigger: Tool identity, build path contract, source revision, or second-machine availability changes
 - `BX-BH01-RISK-WASM-ARTIFACT-ACCOUNTING` — **accepted-residual**, high/high: The unpruned application AVM dominates payload and fails decoded and compressed application budgets. Trigger: Before release/profile hardening or any runtime/bundle composition change
+
+## Connections
+
+- [BH-01 plan](../../60-planning/01-browser-host/bh-01-reproducible-browser-feasibility-baseline/README.md)

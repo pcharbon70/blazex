@@ -7,14 +7,14 @@
   "properties": {
     "schema_version": {"const": "1.0.0"},
     "manifest_id": {"const": "BX-BH02-ENTRY-MANIFEST-0.1"},
-    "status": {"const": "ready-pending-final-integration-and-explicit-authorization"},
+    "status": {"const": "ready-pending-explicit-authorization"},
     "source_revision": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
     "baseline_ref": {"$ref": "#/$defs/ref"}, "decision_ref": {"$ref": "#/$defs/ref"},
     "activation": {
       "type": "object", "additionalProperties": false, "required": ["eligible", "authorized", "may_start", "authorization_requirement"],
       "properties": {
         "eligible": {"const": true}, "authorized": {"const": false}, "may_start": {"const": false},
-        "authorization_requirement": {"const": "explicit repository-owner authorization after Phase 10 integration completion"}
+        "authorization_requirement": {"const": "explicit repository-owner authorization after BH-01 completion"}
       }
     },
     "goal": {"type": "string", "minLength": 80},

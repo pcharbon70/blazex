@@ -118,12 +118,12 @@
     "path": "docs/research/assets/bh-01-release/blazex-bh-01-feasibility-baseline-v0.1.0.json",
     "sha256": "2e8f96b2afe2e139543c898249161b8e5794a4876eccd8bac679a4347e1134ff"
   },
-  "bh01_status": "decision-authorized-final-integration-pending",
+  "bh01_status": "complete-proceed-with-bounded-conditions",
   "bh02_entry": {
     "authorized": false,
     "eligible": true,
     "may_start": false,
-    "required_next_action": "complete Phase 10 integration and receive explicit repository-owner BH-02 authorization"
+    "required_next_action": "receive explicit repository-owner BH-02 authorization"
   },
   "blocking_findings": [],
   "decision_id": "BX-BH01-PHASE10-FEASIBILITY-DECISION-0.1",
@@ -153,7 +153,7 @@
     "deferred-bh22": 1
   },
   "schema_version": "1.0.0",
-  "source_revision": "04c115e317d7edc483c34cd697ac304310a14369",
+  "source_revision": "82ffbf872c85d306ef0e6c51c253452676cf9c9b",
   "status": "authorized-proceed-with-bounded-conditions",
   "stop_summary": {
     "conditionally-not-triggered": 2,

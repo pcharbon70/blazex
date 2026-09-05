@@ -2,11 +2,12 @@
 title: "BH-01 Environment Index"
 kind: map
 created: "2026-09-05"
-maturity: stable
 tags:
   - bh-01
   - generated-index
   - feasibility
+aliases:
+  - "BH-01 Environment Index generated view"
 ---
 
 # BH-01 Environment Index
@@ -26,3 +27,7 @@ tags:
 - `BX-BH01-DEFER-WINDOWS-DESKTOP-0.1` — Windows desktop browser qualification; owner: browser-host and quality owners; reactivation: BH-22 or earlier when a governed Windows host becomes available
 - `BX-BH01-DEFER-SECOND-LINUX-HOST-0.1` — second clean controlled Linux execution context; owner: quality owner; reactivation: BH-22 or earlier when a second controlled Linux context becomes available
 - `BX-BH01-DEFER-MANUAL-AT-0.1` — required browser, assistive-technology, touch, and physical-keyboard pairings; owner: accessibility and quality owners; reactivation: BH-22 or earlier when governed pairings and reviewers become available
+
+## Connections
+
+- [BH-01 plan](../../60-planning/01-browser-host/bh-01-reproducible-browser-feasibility-baseline/README.md)

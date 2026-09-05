@@ -1,0 +1,216 @@
+{
+  "schema_version": "1.0.0",
+  "record_id": "BX-BH01-DECISION-PHASE-10-CONDITIONAL",
+  "record_type": "decision",
+  "state": "conditional",
+  "title": "BH-01 Phase 10 clean rebuild, review, and feasibility decision gate",
+  "owner_role": "bh01-owner",
+  "recorded_at": "2026-09-05T12:31:00.000Z",
+  "observed_at": "2026-09-05T12:31:00.000Z",
+  "source_revision": "82ffbf872c85d306ef0e6c51c253452676cf9c9b",
+  "environment_refs": [
+    "integration/reproducibility/raw-evidence/bh01-phase10-clean-a-authoritative.json",
+    "integration/reproducibility/raw-evidence/bh01-phase10-clean-b.json",
+    "integration/benchmarks/environments/bh01-phase9-linux-build.json",
+    "integration/benchmarks/environments/bh01-phase9-linux-chrome.json",
+    "integration/benchmarks/environments/bh01-phase9-linux-firefox.json"
+  ],
+  "tool_identities": [
+    {
+      "name": "beam-image",
+      "version": "docker.io/hexpm/elixir@sha256:8d03cfb52e3fa3f5d83d749942b7c45c966dda48a7c4ba4f069390379b59fc39",
+      "source": "docker.io/hexpm/elixir",
+      "sha256": "a2386c21edd5c612b4ed6e2731daba806177dba55baf977ee456c6e194f60d9f"
+    },
+    {
+      "name": "wasm-image",
+      "version": "docker.io/emscripten/emsdk@sha256:92c97951b9a6835cb5da9592e9d95226f67e09ecd01a541d817a5b4801f235a4",
+      "source": "docker.io/emscripten/emsdk",
+      "sha256": "2a003481ef771a04cc1a7b5c4be03db0b3cb76405aaddac0d27629a5aac322c2"
+    },
+    {
+      "name": "node",
+      "version": "26.8.1",
+      "source": "nodejs.org",
+      "sha256": "19235a9b678f84729464c52623f92de130a165452747c6826d3fdc13df3abcc3"
+    },
+    {
+      "name": "chrome-for-testing",
+      "version": "152.0.7977.75",
+      "source": "storage.googleapis.com/chrome-for-testing-public",
+      "sha256": "3c84cfdbadd0b5b9d1943568b67faea54cf818d20ca32a337fd8a68a0d61ac76"
+    },
+    {
+      "name": "playwright-firefox-development-build",
+      "version": "153.0",
+      "source": "playwright browser cache",
+      "sha256": "26e4198abe0dfb93c339239297008b1319711575d8cbae8e2d5122d2017b29a1"
+    }
+  ],
+  "requirement_refs": [
+    "BH-01-PHASE-10",
+    "BX-BH01-INPUT-ARTIFACTS",
+    "BX-BH01-INPUT-BEHAVIORS",
+    "BX-BH01-INPUT-BROWSERS",
+    "BX-BH01-INPUT-MEASUREMENTS",
+    "BX-BH01-INPUT-PRIVATE-API",
+    "BX-BH01-INPUT-PROFILE-SLICE",
+    "BX-BH01-INPUT-STOP-CONDITIONS",
+    "BX-BH01-INPUT-TOOLCHAIN",
+    "BX-BH01-PROOF-ARTIFACT-ACCOUNTING",
+    "BX-BH01-PROOF-AUTHENTICATED-COMMAND",
+    "BX-BH01-PROOF-BROWSER-FALLBACK",
+    "BX-BH01-PROOF-BUILD-REPRODUCIBILITY",
+    "BX-BH01-PROOF-DOM-UPDATE",
+    "BX-BH01-PROOF-FORM-EVENT",
+    "BX-BH01-PROOF-MOBILE-MEASUREMENT",
+    "BX-BH01-PROOF-NESTED-STATE",
+    "BX-BH01-PROOF-RUNTIME-BOOT",
+    "BX-BH01-PROOF-TIMER-MESSAGE",
+    "BX-BH01-RISK-AUTHENTICATED-COMMAND",
+    "BX-BH01-RISK-BROWSER-PREREQUISITES",
+    "BX-BH01-RISK-DEPENDENCY-ACCESS",
+    "BX-BH01-RISK-MOBILE-PERFORMANCE",
+    "BX-BH01-RISK-PRIVATE-API-COUPLING",
+    "BX-BH01-RISK-RUNTIME-SEMANTICS",
+    "BX-BH01-RISK-TOOLCHAIN-REPRODUCIBILITY",
+    "BX-BH01-RISK-WASM-ARTIFACT-ACCOUNTING",
+    "BX-BH01-STOP-ADAPTER-ISOLATION",
+    "BX-BH01-STOP-ARTIFACT-ACCOUNTING",
+    "BX-BH01-STOP-PRODUCT-VIABILITY",
+    "BX-BH01-STOP-REPRODUCIBILITY",
+    "BX-BH01-STOP-RUNTIME-SEMANTICS"
+  ],
+  "reciprocal_links": [
+    "docs/research/60-planning/01-browser-host/bh-01-reproducible-browser-feasibility-baseline/phase-10-clean-rebuild-review-and-feasibility-decision.md",
+    "docs/research/60-planning/01-browser-host/bh-01-reproducible-browser-feasibility-baseline/phase-10-implementation-evidence.md",
+    "docs/research/assets/bh-01-release/blazex-bh-01-feasibility-baseline-v0.1.0.json",
+    "docs/research/assets/bh-01-release/blazex-bh-01-feasibility-decision-v0.1.0.json",
+    "docs/research/assets/bh-01-release/blazex-bh-02-entry-manifest-v0.1.0.json",
+    "docs/research/assets/bh-01-release/blazex-bh-01-final-acceptance-v0-1-0.md"
+  ],
+  "command_refs": [
+    "python3 profiles/browser_phoenix/toolchain/verify_phase9.py",
+    "python3 -m unittest discover -s profiles/browser_phoenix/toolchain/tests -p test_*.py -v",
+    "python3 -m unittest discover -s integration/benchmarks/tests -p test_*.py -v",
+    "python3 -m unittest discover -s integration/reproducibility/tests -v",
+    "python3 integration/reproducibility/close_phase10_ledgers.py --output integration/reproducibility/bh01-phase10-ledger-closure.json --check",
+    "python3 integration/reproducibility/conduct_phase10_reviews.py --output integration/reproducibility/bh01-phase10-feasibility-review.json --check",
+    "python3 integration/reproducibility/version_phase10_baseline.py --check",
+    "python3 integration/reproducibility/decide_phase10_entry.py --check",
+    "python3 integration/reproducibility/verify_phase10.py",
+    "python3 docs/research/validate_archive.py",
+    "npm test",
+    "npm run build",
+    "mix test",
+    "git diff --check"
+  ],
+  "input_hashes": [
+    {
+      "path": "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-10-authorization-v0.1.0.json",
+      "sha256": "9bf0d819e66a1f51f6ac5cbf93d0a95466516d487cef97312cfb5943b0a98cf6"
+    },
+    {
+      "path": "integration/reproducibility/raw-evidence/bh01-phase10-clean-a-authoritative.json",
+      "sha256": "2d03428bd4bf218351daf77070c157eb19a9ec62a5f3acb56aad5136f38f786c"
+    },
+    {
+      "path": "integration/reproducibility/raw-evidence/bh01-phase10-clean-b.json",
+      "sha256": "8a37d1b1d33b02ab4a3b3eb5e9ebb74575e18e30057af960c0c3638e24224dca"
+    },
+    {
+      "path": "integration/reproducibility/bh01-phase10-clean-rebuild-comparison.json",
+      "sha256": "e58cb3524ca8c4d75076d15b228bc3bae3119a057d273aa4bb4514e1d025a371"
+    },
+    {
+      "path": "integration/reproducibility/bh01-phase10-ledger-closure.json",
+      "sha256": "64246be9187d2f532cf9fe9f458acc90270d5e6919a3c987da491cb03c3f0153"
+    },
+    {
+      "path": "integration/reproducibility/bh01-phase10-feasibility-review.json",
+      "sha256": "b95a28ea39a3f353e91e9400f16e535d0c8fbffb0f16dbc1d8c479dcb8b0cfd3"
+    },
+    {
+      "path": "docs/research/assets/bh-01-release/blazex-bh-01-feasibility-baseline-v0.1.0.json",
+      "sha256": "2e8f96b2afe2e139543c898249161b8e5794a4876eccd8bac679a4347e1134ff"
+    }
+  ],
+  "output_hashes": [
+    {
+      "path": "docs/research/assets/bh-01-release/blazex-bh-01-feasibility-decision-v0.1.0.json",
+      "sha256": "e2363cef39b55f000b3d16ceb1f433f0144df71019bf9803c0a8921a0230660f"
+    },
+    {
+      "path": "docs/research/assets/bh-01-release/blazex-bh-02-entry-manifest-v0.1.0.json",
+      "sha256": "f9a68de442a5ab9853659e588d129351218940406b64992e8cba40553fc89a6c"
+    },
+    {
+      "path": "docs/research/assets/bh-01-release/blazex-bh-01-final-acceptance-v0-1-0.md",
+      "sha256": "fcdbd493d014562911a66223edca8b35866dc1137a0c727f16adbde89f2530c3"
+    },
+    {
+      "path": "docs/research/60-planning/01-browser-host/bh-01-reproducible-browser-feasibility-baseline/phase-10-implementation-evidence.md",
+      "sha256": "e5a9589ce170977463df3ef57062652571f13c2624b8626aa0e94331fa5ebed1"
+    },
+    {
+      "path": "docs/research/60-planning/01-browser-host/bh-01-reproducible-browser-feasibility-baseline/phase-10-clean-rebuild-review-and-feasibility-decision.md",
+      "sha256": "104335d2a4a31a56453bcbde43eafedfd2b074e923bacbbfa73f218ee6c1bafe"
+    },
+    {
+      "path": "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-10-validation-log-v0.1.0.txt",
+      "sha256": "e4043795229f6d23b0af1fbac13ba0aa25644fded3758877ded48cfb433e062a"
+    }
+  ],
+  "raw_evidence_refs": [
+    "integration/reproducibility/raw-evidence/bh01-phase10-clean-a-authoritative.json",
+    "integration/reproducibility/raw-evidence/bh01-phase10-clean-b.json",
+    "integration/reproducibility/raw-evidence/bh01-phase10-clean-a-attempt-1.json",
+    "integration/reproducibility/raw-evidence/bh01-phase10-clean-a-attempt-2.json",
+    "integration/reproducibility/raw-evidence/bh01-phase10-clean-a-attempt-3.json",
+    "integration/reproducibility/raw-evidence/bh01-phase10-clean-a-authoritative-logs",
+    "integration/reproducibility/raw-evidence/bh01-phase10-clean-b-logs",
+    "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-10-validation-log-v0.1.0.txt"
+  ],
+  "normalization": [
+    {
+      "subject": "clean execution comparison",
+      "method": "Require exact tool/source/artifact/report identities and normalized semantic browser outcomes while retaining timestamps, command durations, raw timing samples, ports, and ephemeral paths as declared variance."
+    },
+    {
+      "subject": "derived feasibility records",
+      "method": "Regenerate closure, review, baseline, decision, entry manifest, and human views twice from canonical inputs; require byte-identical outputs and current source hashes."
+    },
+    {
+      "subject": "active and deferred outcomes",
+      "method": "Count every original identity exactly once, preserve conditional and negative results, exclude deferred external environments from pass rates, and prohibit support or BH-02 authorization promotion."
+    }
+  ],
+  "limitations": [
+    "Both authoritative clean executions and final validation used one physical Linux x86-64 host.",
+    "Chrome for Testing and the Playwright Firefox development build remain unsupported development environments.",
+    "The unpruned application AVM remains outside active payload budgets and requires the bounded reachability experiment.",
+    "Firefox timer behavior and representative Chrome timing reruns retain observed performance limitations.",
+    "Private LiveView and LocalLiveView integration remains exact-pins-only with standalone DOM fallback.",
+    "Production security, Brotli serving, release controls, and public API stability are not established.",
+    "Windows, Safari, physical mobile, second-machine, and manual assistive-technology qualification remains deferred to BH-22.",
+    "BH-02 is eligible but not authorized, and this record grants no browser, native, mobile, accessibility, security, performance, or release support."
+  ],
+  "supersedes": [],
+  "invalidates": [],
+  "retention": {
+    "class": "permanent",
+    "minimum_days": null,
+    "immutable_raw_evidence": true
+  },
+  "outcome": {
+    "summary": "BH-01 and Phase 10 completed with an accepted proceed-with-bounded-conditions decision. BH-02 is eligible but not authorized.",
+    "expected": "Two independent clean execution contexts reproduce equivalent explainable artifacts and active behavior; every input, proof, risk, stop, finding, exception, condition, deferral, generated view, package boundary, and integration gate has a truthful final disposition without support promotion.",
+    "observed": "Two clean contexts completed 76 commands and ten semantic scenarios each without manual intervention; three artifact identities and seven reports matched; eight inputs, ten proofs, eight risks, five stops, thirty findings, zero exceptions, eleven review lenses, nine conditions, and six BH-22 deferrals reconcile; all final package, generator, schema, link, hash, and planning gates pass."
+  },
+  "review": {
+    "required": true,
+    "reviewer_role": "bh01-owner",
+    "reviewed_at": "2026-09-05T12:31:00.000Z",
+    "disposition": "accepted"
+  }
+}

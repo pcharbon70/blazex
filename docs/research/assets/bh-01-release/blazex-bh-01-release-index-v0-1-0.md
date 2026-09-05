@@ -2,11 +2,12 @@
 title: "BlazeX BH-01 Feasibility Baseline v0.1.0"
 kind: map
 created: "2026-09-05"
-maturity: stable
 tags:
   - bh-01
   - generated-index
   - feasibility
+aliases:
+  - "BlazeX BH-01 Feasibility Baseline v0.1.0 generated view"
 ---
 
 # BlazeX BH-01 Feasibility Baseline v0.1.0
@@ -22,3 +23,7 @@ tags:
 - Conditions: 9
 
 This baseline accepts a reproducible feasibility result with bounded conditions. It is not a browser or product release.
+
+## Connections
+
+- [BH-01 plan](../../60-planning/01-browser-host/bh-01-reproducible-browser-feasibility-baseline/README.md)

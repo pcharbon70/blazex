@@ -16,7 +16,7 @@ from jsonschema import Draft202012Validator
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
 RELEASE = ROOT / "docs/research/assets/bh-01-release"
-SOURCE_REVISION = "04c115e317d7edc483c34cd697ac304310a14369"
+SOURCE_REVISION = "82ffbf872c85d306ef0e6c51c253452676cf9c9b"
 BASELINE_PATH = "docs/research/assets/bh-01-release/blazex-bh-01-feasibility-baseline-v0.1.0.json"
 REVIEW_PATH = "integration/reproducibility/bh01-phase10-feasibility-review.json"
 AUTH_PATH = "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-10-authorization-v0.1.0.json"
@@ -55,8 +55,8 @@ def build_decision() -> dict[str, Any]:
         "rationale": "The candidate reconstructs exactly in two independent clean contexts on the available Linux host, executes required active semantics without violating renderer or server-authority boundaries, and retains every adverse result. Payload economics, Firefox timer behavior, exact private pins, production controls, release work, and external qualification remain bounded conditions rather than manufactured passes.",
         "proof_summary": counts(closure["proof_obligations"], "state"), "risk_summary": counts(closure["risks"], "state"), "stop_summary": counts(closure["stop_conditions"], "state"),
         "blocking_findings": [], "accepted_conditions": review["conditions"], "invalidated_evidence": [],
-        "bh01_status": "decision-authorized-final-integration-pending",
-        "bh02_entry": {"eligible": True, "authorized": False, "may_start": False, "required_next_action": "complete Phase 10 integration and receive explicit repository-owner BH-02 authorization"},
+        "bh01_status": "complete-proceed-with-bounded-conditions",
+        "bh02_entry": {"eligible": True, "authorized": False, "may_start": False, "required_next_action": "receive explicit repository-owner BH-02 authorization"},
         "prohibited_claims": review["prohibited_claims"],
     }
 
@@ -67,9 +67,9 @@ def build_entry(decision: dict[str, Any]) -> dict[str, Any]:
     active_proofs = [item["id"] for item in closure["proof_obligations"] if item["scope"] == "active-linux"]
     return {
         "schema_version": "1.0.0", "manifest_id": "BX-BH02-ENTRY-MANIFEST-0.1",
-        "status": "ready-pending-final-integration-and-explicit-authorization", "source_revision": SOURCE_REVISION,
+        "status": "ready-pending-explicit-authorization", "source_revision": SOURCE_REVISION,
         "baseline_ref": ref(BASELINE_PATH), "decision_ref": {"path": DECISION_PATH, "sha256": hashlib.sha256((json.dumps(decision, indent=2, sort_keys=True) + "\n").encode()).hexdigest()},
-        "activation": {"eligible": True, "authorized": False, "may_start": False, "authorization_requirement": "explicit repository-owner authorization after Phase 10 integration completion"},
+        "activation": {"eligible": True, "authorized": False, "may_start": False, "authorization_requirement": "explicit repository-owner authorization after BH-01 completion"},
         "goal": "Define the first host-neutral semantic kernel and prove that one interaction set can target headless, DOM, and a limited native-control spike without browser or toolkit objects in portable component code.",
         "repository_boundaries": ["packages/blazex_core", "packages/blazex_effects", "packages/blazex_ui_tree", "packages/blazex_renderer", "packages/blazex_renderer_headless", "packages/blazex_renderer_dom", "packages/blazex_test", "profiles/headless", "integration/conformance", "integration/fixtures", "experiments/native_renderer_spike"],
         "proven_host_facts": [
@@ -119,14 +119,14 @@ def build_entry(decision: dict[str, Any]) -> dict[str, Any]:
 
 
 def render_decision(decision: dict[str, Any]) -> str:
-    return f"---\ntitle: \"BH-01 Feasibility Decision v0.1.0\"\nkind: note\ncreated: \"2026-09-05\"\nmaturity: stable\ntags:\n  - bh-01\n  - decision\n  - feasibility\n---\n\n# BH-01 Feasibility Decision v0.1.0\n\n- Result: **{decision['result']}**\n- Decision authorization: **recorded**\n- BH-01 status: `{decision['bh01_status']}`\n- BH-02 eligible: `{str(decision['bh02_entry']['eligible']).lower()}`\n- BH-02 authorized: `{str(decision['bh02_entry']['authorized']).lower()}`\n- Support: `unsupported`\n\n{decision['rationale']}\n\nNine accepted conditions remain binding. Final Phase 10 integration and a separate explicit repository-owner request are required before BH-02 may start.\n"
+    return f"---\ntitle: \"BH-01 Feasibility Decision v0.1.0\"\nkind: note\ncreated: \"2026-09-05\"\nmaturity: stable\ntags:\n  - bh-01\n  - decision\n  - feasibility\naliases:\n  - \"BH-01 feasibility decision\"\n---\n\n# BH-01 Feasibility Decision v0.1.0\n\n- Result: **{decision['result']}**\n- Decision authorization: **recorded**\n- BH-01 status: `{decision['bh01_status']}`\n- BH-02 eligible: `{str(decision['bh02_entry']['eligible']).lower()}`\n- BH-02 authorized: `{str(decision['bh02_entry']['authorized']).lower()}`\n- Support: `unsupported`\n\n{decision['rationale']}\n\nNine accepted conditions remain binding. BH-02 requires a separate explicit repository-owner request before it may start.\n\n## Connections\n\n- [BH-01 plan](../../60-planning/01-browser-host/bh-01-reproducible-browser-feasibility-baseline/README.md)\n"
 
 
 def render_entry(entry: dict[str, Any]) -> str:
-    sections = ["---\ntitle: \"BH-02 Conditional Entry Manifest v0.1.0\"\nkind: note\ncreated: \"2026-09-05\"\nmaturity: stable\ntags:\n  - bh-02\n  - entry-manifest\n  - host-neutral\n---\n\n# BH-02 Conditional Entry Manifest v0.1.0\n", f"\n- Status: `{entry['status']}`\n- Authorized: `{str(entry['activation']['authorized']).lower()}`\n- May start: `{str(entry['activation']['may_start']).lower()}`\n", f"\n## Goal\n\n{entry['goal']}\n"]
+    sections = ["---\ntitle: \"BH-02 Conditional Entry Manifest v0.1.0\"\nkind: note\ncreated: \"2026-09-05\"\nmaturity: stable\ntags:\n  - bh-02\n  - entry-manifest\n  - host-neutral\naliases:\n  - \"BH-02 conditional entry manifest\"\n---\n\n# BH-02 Conditional Entry Manifest v0.1.0\n", f"\n- Status: `{entry['status']}`\n- Authorized: `{str(entry['activation']['authorized']).lower()}`\n- May start: `{str(entry['activation']['may_start']).lower()}`\n", f"\n## Goal\n\n{entry['goal']}\n"]
     for title, key in (("Proven host facts", "proven_host_facts"), ("Neutral contract constraints", "neutral_contract_constraints"), ("Disposable BH-01 lessons", "disposable_lessons"), ("Forbidden leakage", "forbidden_leakage"), ("Required outputs", "required_outputs")):
         sections.append(f"\n## {title}\n\n" + "\n".join(f"- {item}" for item in entry[key]) + "\n")
-    sections.append("\nBH-02 requires explicit owner authorization after Phase 10 integration. This manifest grants no browser, native, mobile, accessibility, security, performance, or release support.\n")
+    sections.append("\nBH-01 is complete. BH-02 is eligible, but may not start until it receives explicit owner authorization. This manifest grants no browser, native, mobile, accessibility, security, performance, or release support.\n\n## Connections\n\n- [BH-01 plan](../../60-planning/01-browser-host/bh-01-reproducible-browser-feasibility-baseline/README.md)\n")
     return "".join(sections)
 
 

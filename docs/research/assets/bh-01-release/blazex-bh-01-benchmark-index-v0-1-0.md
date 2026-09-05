@@ -2,11 +2,12 @@
 title: "BH-01 Benchmark Index"
 kind: map
 created: "2026-09-05"
-maturity: stable
 tags:
   - bh-01
   - generated-index
   - feasibility
+aliases:
+  - "BH-01 Benchmark Index generated view"
 ---
 
 # BH-01 Benchmark Index
@@ -25,3 +26,7 @@ tags:
 - `pass-active-development-early`: 1
 
 Profile: 7827221 decoded bytes, 2513184 locally computed Brotli bytes, 23 requests.
+
+## Connections
+
+- [BH-01 plan](../../60-planning/01-browser-host/bh-01-reproducible-browser-feasibility-baseline/README.md)

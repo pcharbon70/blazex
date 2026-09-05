@@ -199,9 +199,21 @@ def validate(value: dict[str, Any]) -> list[str]:
         errors.append("Phase 9 plan hides deferred mobile work")
     if "| complete — conditional active-Linux proceed; external qualification deferred | Measure payload" not in value["milestone"]:
         errors.append("BH-01 milestone does not record completed conditional Phase 9")
-    if "| eligible — not authorized | Reproduce the complete baseline" not in value["milestone"]:
+    if not any(
+        text in value["milestone"]
+        for text in (
+            "| eligible — not authorized | Reproduce the complete baseline",
+            "| complete — proceed with bounded conditions; BH-02 eligible but not authorized | Reproduce the complete baseline",
+        )
+    ):
         errors.append("BH-01 milestone over-authorizes or blocks Phase 10")
-    if "Phase 9 is complete" not in value["browser_plan"] or "Phase 10 is eligible but not authorized" not in value["browser_plan"]:
+    if "Phase 9 is complete" not in value["browser_plan"] or not any(
+        text in value["browser_plan"]
+        for text in (
+            "Phase 10 is eligible but not authorized",
+            "BH-01 is complete with a proceed-with-bounded-conditions decision",
+        )
+    ):
         errors.append("browser planning index does not expose the Phase 9/10 boundary")
     normalized = " ".join(value["report"].split()).lower()
     for phrase in ("conditional proceed", "all browsers remain unsupported", "mobile viability remains undecided", "phase 10 is eligible but not authorized", "unpruned application avm", "representative rerun drift"):

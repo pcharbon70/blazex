@@ -160,8 +160,9 @@ The repository-owner Phase 10 authorization covers making and merging the
 feasibility decision. The authorized outcome is **proceed with bounded
 conditions**. Its record binds the exact baseline, review, and authorization;
 retains proof/risk/stop summaries, nine owned conditions and expiries, zero
-blocking findings, zero invalidated evidence, and all prohibited claims. BH-01
-remains at `decision-authorized-final-integration-pending` until Section 10.6.
+blocking findings, zero invalidated evidence, and all prohibited claims. The
+Section 10.5 snapshot held BH-01 at final-integration-pending; Section 10.6
+promotes that same governed decision to milestone completion after its gate.
 
 The BH-02 entry manifest carries proven runtime/host facts separately from
 neutral contract constraints and disposable BH-01 lessons. It names the
@@ -171,11 +172,10 @@ outputs. Portable constraints reject HTML/DOM, browser/JavaScript,
 Phoenix/Plug/LiveView, Popcorn/AtomVM, fixture-wire, and native-toolkit types.
 
 BH-02 is **eligible but not authorized**. Both `authorized` and `may_start` are
-false. Section 10.6 must pass and the repository owner must then explicitly
-authorize BH-02 before any of its packages, profiles, conformance work, or
-native portability spike begins. Replacement, revision, and blocked paths were
-not selected; their reactivation triggers remain in the reviewed alternatives
-and conditions.
+false. The repository owner must explicitly authorize BH-02 before any of its
+packages, profiles, conformance work, or native portability spike begins.
+Replacement, revision, and blocked paths were not selected; their reactivation
+triggers remain in the reviewed alternatives and conditions.
 
 ### Canonical evidence
 
@@ -185,11 +185,46 @@ and conditions.
 - [BH-02 entry view](../../../assets/bh-01-release/blazex-bh-02-entry-manifest-v0-1-0.md)
 - [Decision generator and validator](../../../../../integration/reproducibility/decide_phase10_entry.py)
 
-## Remaining Phase 10 work
+## Section 10.6 — Milestone integration and final acceptance
 
-Section 10.6 remains open. The decision and handoff do not complete BH-01 until
-the milestone-wide integration, deterministic regeneration, trace, and final
-acceptance gate passes.
+The final integration gate revalidated the complete Phase 9 suite and the
+Phase 10 clean-rebuild, closure, review, baseline, and entry-decision layers.
+It verifies both clean records, all 76 retained command-log hashes, the three
+failed and resolved A attempts, ten semantic browser scenarios, seven canonical
+reports per rebuild, eight inputs, ten proofs, eight risks, five stop
+conditions, thirty findings, zero exceptions, eleven review lenses, nine
+conditions, six BH-22 deferrals, and every generated release view.
+
+Closure, review, baseline, decision, and handoff records are each regenerated
+twice and compared byte-for-byte in memory before their committed forms and
+human views are checked. The package, JavaScript, Phoenix profile, benchmark,
+archive, source-binding, dependency, private-API, forbidden-direction, and
+completion-record gates pass together. The exact commands and outcomes are
+retained in the Phase 10 validation log.
+
+BH-01 is therefore complete with an accepted **proceed with bounded
+conditions** decision. This permits a later, separately authorized BH-02
+framework experiment; it does not start BH-02. Chrome and Firefox remain
+unsupported development environments. Browser support, mobile viability,
+accessibility conformance, production security, performance-budget pass,
+native compatibility, public API stability, and release readiness remain
+unclaimed.
+
+### Section delivery record
+
+- Section 10.1 — `7071e0f358903aea4a86c50db982c3fb1086584d`
+- Section 10.2 — `e40476cd6f531bfa8a5405c8363508b48be03ac9`
+- Section 10.3 — `d4335a128f6883a8c4685b5c073a15375ac40999`
+- Section 10.4 — `04c115e317d7edc483c34cd697ac304310a14369`
+- Section 10.5 — `82ffbf872c85d306ef0e6c51c253452676cf9c9b`
+- Section 10.6 — the final coherent Phase 10 integration and acceptance commit
+
+### Canonical evidence
+
+- [Phase 10 completion record](../../../assets/bh-01-baseline/blazex-bh-01-phase-10-completion-v0.1.0.json)
+- [Phase 10 validation log](../../../assets/bh-01-baseline/blazex-bh-01-phase-10-validation-log-v0.1.0.txt)
+- [BH-01 final acceptance](../../../assets/bh-01-release/blazex-bh-01-final-acceptance-v0-1-0.md)
+- [Milestone integration verifier](../../../../../integration/reproducibility/verify_phase10.py)
 
 ## Connections
 

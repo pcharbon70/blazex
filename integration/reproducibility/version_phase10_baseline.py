@@ -140,7 +140,7 @@ def build() -> dict[str, Any]:
 def render_views(record: dict[str, Any]) -> dict[str, str]:
     baseline_hash = hashlib.sha256((json.dumps(record, indent=2, sort_keys=True) + "\n").encode()).hexdigest()
     def header(title: str) -> str:
-        return f"---\ntitle: \"{title}\"\nkind: map\ncreated: \"2026-09-05\"\nmaturity: stable\ntags:\n  - bh-01\n  - generated-index\n  - feasibility\n---\n\n# {title}\n\n> Generated from `{record['baseline_id']}` (`{baseline_hash}`). Edit canonical evidence, not this view.\n\n"
+        return f"---\ntitle: \"{title}\"\nkind: map\ncreated: \"2026-09-05\"\ntags:\n  - bh-01\n  - generated-index\n  - feasibility\naliases:\n  - \"{title} generated view\"\n---\n\n# {title}\n\n> Generated from `{record['baseline_id']}` (`{baseline_hash}`). Edit canonical evidence, not this view.\n\n"
     release = header("BlazeX BH-01 Feasibility Baseline v0.1.0") + f"- Status: `{record['status']}`\n- Source revision: `{record['source_revision']}`\n- Support: `{record['support_status']}`\n- BH-02 authorized: `{str(record['review']['bh02_authorized']).lower()}`\n- Bound sources: {len(record['source_bindings'])}\n- Review lenses: {len(record['review']['lenses'])}\n- Conditions: {len(record['review']['condition_ids'])}\n\nThis baseline accepts a reproducible feasibility result with bounded conditions. It is not a browser or product release.\n"
     compatibility = header("BH-01 Compatibility and Limitations Index") + "## Active observed environments\n\n" + "\n".join(f"- `{item['id']}` — {item['browser']}: {item['status']}" for item in record["environments"]["active"]) + "\n\n## Limitations\n\n" + "\n".join(f"- {item}" for item in record["limitations"]) + "\n"
     artifacts = header("BH-01 Artifact Index") + "\n".join(f"- {key}: `{value}`" for key, value in record["artifact_identity"].items()) + "\n"
@@ -150,7 +150,15 @@ def render_views(record: dict[str, Any]) -> dict[str, str]:
     risks = header("BH-01 Risk Index") + "\n".join(f"- `{item['id']}` — **{item['state']}**, {item['likelihood']}/{item['impact']}: {item['residual_risk']} Trigger: {item['review_trigger']}" for item in closure["risks"]) + "\n"
     findings = header("BH-01 Finding Index") + "\n".join(f"- `{item['id']}` — **{item['disposition']}**: {item['finding']}" for item in closure["findings"]) + "\n"
     environments = header("BH-01 Environment Index") + "## Active\n\n" + "\n".join(f"- `{item['id']}` — {item['browser']}: {item['status']}" for item in record["environments"]["active"]) + "\n\n## Deferred to BH-22\n\n" + "\n".join(f"- `{item['id']}` — {item['environment']}; owner: {item['owner']}; reactivation: {item['reactivation']}" for item in record["environments"]["deferred"]) + "\n"
-    return dict(zip(VIEW_NAMES, (release, compatibility, artifacts, benchmarks, proofs, risks, findings, environments), strict=True))
+    connection = "\n## Connections\n\n- [BH-01 plan](../../60-planning/01-browser-host/bh-01-reproducible-browser-feasibility-baseline/README.md)\n"
+    return {
+        name: text + connection
+        for name, text in zip(
+            VIEW_NAMES,
+            (release, compatibility, artifacts, benchmarks, proofs, risks, findings, environments),
+            strict=True,
+        )
+    }
 
 
 def validate(record: dict[str, Any]) -> list[str]:

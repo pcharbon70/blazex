@@ -2,11 +2,12 @@
 title: "BH-01 Proof Index"
 kind: map
 created: "2026-09-05"
-maturity: stable
 tags:
   - bh-01
   - generated-index
   - feasibility
+aliases:
+  - "BH-01 Proof Index generated view"
 ---
 
 # BH-01 Proof Index
@@ -23,3 +24,7 @@ tags:
 - `BX-BH01-PROOF-NESTED-STATE` — **closed-passed** (active-linux): Keyed child identity, parent state, replacement generation, failure recovery, and disposal preserve state boundaries in active runs.
 - `BX-BH01-PROOF-RUNTIME-BOOT` — **closed-passed** (active-linux): The pinned Popcorn/AtomVM runtime boots the governed AVM and fails intentionally on prerequisite, network, and integrity negatives.
 - `BX-BH01-PROOF-TIMER-MESSAGE` — **closed-conditional** (active-linux): Delivery, cancellation generation checks, duplicate drain, and cleanup pass functionally; Firefox development timer-event p95 exceeds the active target.
+
+## Connections
+
+- [BH-01 plan](../../60-planning/01-browser-host/bh-01-reproducible-browser-feasibility-baseline/README.md)

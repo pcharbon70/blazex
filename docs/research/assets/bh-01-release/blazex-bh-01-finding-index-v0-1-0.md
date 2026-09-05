@@ -2,11 +2,12 @@
 title: "BH-01 Finding Index"
 kind: map
 created: "2026-09-05"
-maturity: stable
 tags:
   - bh-01
   - generated-index
   - feasibility
+aliases:
+  - "BH-01 Finding Index generated view"
 ---
 
 # BH-01 Finding Index
@@ -43,3 +44,7 @@ tags:
 - `BX-BH01-PHASE10-CLEAN-A-ATTEMPT-1-0.1` — **resolved-and-retested**: The clean runner mounted the repository root rather than the fixture root at /workspace. Jason preserves a dependency source path in macro literals, so checkout-relative nesting changed one packaged BEAM and the enclosing AVM identity.
 - `BX-BH01-PHASE10-CLEAN-A-ATTEMPT-2-0.1` — **resolved-and-retested**: The server starts before ten browser commands are appended. Finalization recomputed its filename from the later list length, so it requested log 30 although the retained server log was assigned sequence 20.
 - `BX-BH01-PHASE10-CLEAN-A-ATTEMPT-3-0.1` — **resolved-and-retested**: The path correction retained the right server log but finalization still wrote its hash through self.commands[-1]. Ten browser commands had been appended since startup, leaving the actual server record pending and corrupting the final browser command hash.
+
+## Connections
+
+- [BH-01 plan](../../60-planning/01-browser-host/bh-01-reproducible-browser-feasibility-baseline/README.md)

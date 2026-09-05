@@ -2,11 +2,12 @@
 title: "BH-01 Compatibility and Limitations Index"
 kind: map
 created: "2026-09-05"
-maturity: stable
 tags:
   - bh-01
   - generated-index
   - feasibility
+aliases:
+  - "BH-01 Compatibility and Limitations Index generated view"
 ---
 
 # BH-01 Compatibility and Limitations Index
@@ -30,3 +31,7 @@ tags:
 - Physical mobile, Safari, Windows, second-machine, and manual assistive-technology qualification is deferred to BH-22.
 - Mobile viability, accessibility conformance, production deployment, native compatibility, and release readiness are not established.
 - BH-01 fixtures and protocols are disposable evidence rather than stable BlazeX APIs.
+
+## Connections
+
+- [BH-01 plan](../../60-planning/01-browser-host/bh-01-reproducible-browser-feasibility-baseline/README.md)

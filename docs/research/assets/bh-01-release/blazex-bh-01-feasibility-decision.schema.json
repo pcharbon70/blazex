@@ -17,12 +17,12 @@
     "blocking_findings": {"type": "array", "maxItems": 0},
     "accepted_conditions": {"type": "array", "minItems": 9, "maxItems": 9},
     "invalidated_evidence": {"type": "array", "maxItems": 0},
-    "bh01_status": {"const": "decision-authorized-final-integration-pending"},
+    "bh01_status": {"const": "complete-proceed-with-bounded-conditions"},
     "bh02_entry": {
       "type": "object", "additionalProperties": false, "required": ["eligible", "authorized", "may_start", "required_next_action"],
       "properties": {
         "eligible": {"const": true}, "authorized": {"const": false}, "may_start": {"const": false},
-        "required_next_action": {"const": "complete Phase 10 integration and receive explicit repository-owner BH-02 authorization"}
+        "required_next_action": {"const": "receive explicit repository-owner BH-02 authorization"}
       }
     },
     "prohibited_claims": {"type": "array", "minItems": 7}

@@ -2,7 +2,7 @@
 title: "Phase 10 - Clean Rebuild, Review, and Feasibility Decision"
 kind: note
 created: "2026-09-03"
-maturity: developing
+maturity: stable
 tags:
   - acceptance-criteria
   - bh-01
@@ -26,7 +26,7 @@ environments cannot block BH-02, but they also cannot be treated as passing or
 support evidence. See the
 [development environment and deferred qualification policy](../../development-environment-and-deferred-qualification-policy.md).
 
-- [ ] 10 Phase - Clean Rebuild, Review, and Feasibility Decision.
+- [x] 10 Phase - Clean Rebuild, Review, and Feasibility Decision.
 
   Reproduce the complete baseline from immutable inputs in independent clean
   environments, reconcile every input/proof/risk/stop condition, publish a
@@ -169,30 +169,30 @@ support evidence. See the
       - [x] 10.5.2.2 Subtask - If revising, identify replacement dependency/profile, amended phases/tests, retained/invalidated evidence, repository cleanup, and required reapproval. *(Not selected; the generated decision records the exact trigger that would reactivate this path.)*
       - [x] 10.5.2.3 Subtask - If blocked, identify exact failed stop conditions, retained research/evidence, project retirement or archival actions, and rule preventing unauthorized framework work. *(Not selected; the generated decision records the exact trigger that would reactivate this path.)*
 
-  - [ ] 10.6 Section - Phase 10 Integration Tests and BH-01 Acceptance.
+  - [x] 10.6 Section - Phase 10 Integration Tests and BH-01 Acceptance.
 
     Execute the complete milestone validation matrix, regenerate every derived
     record, and publish final feasibility truth from actual evidence.
 
-    - [ ] 10.6.1 Task - Run milestone-wide integration and reproducibility gates.
+    - [x] 10.6.1 Task - Run milestone-wide integration and reproducibility gates.
 
       Final checks cover active acquisition, build, artifacts, runtime, browser
       host, behavior, trust, resilience, compatibility, fallback, measurement,
       package boundaries, evidence integrity, and deferred-ledger integrity
       together.
 
-      - [ ] 10.6.1.1 Subtask - Run archive/schema/lock/dependency/provenance, forbidden graph/token, runtime/bundle, loader/lifecycle, local behavior, command/adapter, resilience/security, active-browser/fallback, active measurement, deferred-ledger, and clean-rebuild suites.
-      - [ ] 10.6.1.2 Subtask - Regenerate artifact/browser/benchmark/compatibility/proof/risk/release/deferred views twice, compare bytes/hashes, validate source bindings/links, and run patch/diff hygiene.
-      - [ ] 10.6.1.3 Subtask - Reconcile every phase checklist item, eight inputs, ten proofs, eight risks, five stop conditions, findings, exceptions, activated boundaries, quality/acceptance traces, and evidence record.
+      - [x] 10.6.1.1 Subtask - Run archive/schema/lock/dependency/provenance, forbidden graph/token, runtime/bundle, loader/lifecycle, local behavior, command/adapter, resilience/security, active-browser/fallback, active measurement, deferred-ledger, and clean-rebuild suites.
+      - [x] 10.6.1.2 Subtask - Regenerate artifact/browser/benchmark/compatibility/proof/risk/release/deferred views twice, compare bytes/hashes, validate source bindings/links, and run patch/diff hygiene.
+      - [x] 10.6.1.3 Subtask - Reconcile every phase checklist item, eight inputs, ten proofs, eight risks, five stop conditions, findings, exceptions, activated boundaries, quality/acceptance traces, and evidence record.
 
-    - [ ] 10.6.2 Task - Record final truth and deliver BH-01.
+    - [x] 10.6.2 Task - Record final truth and deliver BH-01.
 
       A failed candidate may complete BH-01 while still blocking BH-02; milestone
       completion and proceed authorization remain separate decisions.
 
-      - [ ] 10.6.2.1 Subtask - Record exact revisions, commands, tools, clean environments, artifact/report hashes, browser/device matrix, measurements, proofs, reviewers, findings, risks, stop decisions, exceptions, and failed/deferred evidence.
-      - [ ] 10.6.2.2 Subtask - Mark BH-01 complete when every active mandatory gate has an outcome, every unavailable external qualification item has an explicit deferred disposition, and the proceed/condition/revise/blocked decision is authorized; otherwise leave exact active work open.
-      - [ ] 10.6.2.3 Subtask - Complete one commit per coherent section and open the Phase 10 PR without beginning BH-02 or claiming stable APIs, browser support, production security/accessibility/performance, native compatibility, or release readiness.
+      - [x] 10.6.2.1 Subtask - Record exact revisions, commands, tools, clean environments, artifact/report hashes, browser/device matrix, measurements, proofs, reviewers, findings, risks, stop decisions, exceptions, and failed/deferred evidence.
+      - [x] 10.6.2.2 Subtask - Mark BH-01 complete when every active mandatory gate has an outcome, every unavailable external qualification item has an explicit deferred disposition, and the proceed/condition/revise/blocked decision is authorized; otherwise leave exact active work open.
+      - [x] 10.6.2.3 Subtask - Complete one commit per coherent section and open the Phase 10 PR without beginning BH-02 or claiming stable APIs, browser support, production security/accessibility/performance, native compatibility, or release readiness.
 
 ## Section delivery rule
 
