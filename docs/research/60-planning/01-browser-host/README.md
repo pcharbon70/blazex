@@ -54,8 +54,9 @@ was explicitly authorized on 2026-09-05; its event, effect, capability, and
 resource gate passed locally. Phase 4 was explicitly authorized on 2026-09-05,
 and its portable presentation-intent gate passed locally. Phase 5 passed its
 renderer lifecycle/headless-oracle gate. Phase 6 passed its experimental
-standalone DOM and active Linux Chrome/Firefox development gate on 2026-09-05;
-later work retains its own approval boundary.
+standalone DOM and active Linux Chrome/Firefox development gate on 2026-09-05.
+Phase 7 was explicitly authorized and its bounded direct-native-control
+portability work is active; later work retains its own approval boundary.
 
 ## Index
 
@@ -63,7 +64,7 @@ later work retains its own approval boundary.
 
 - [BH-00 — Product Boundary, Catalog, and Acceptance Contract](bh-00-product-boundary-catalog-and-acceptance-contract/README.md) — six-phase plan that freezes vocabulary, product scope, catalog dispositions, quality budgets, and acceptance traceability before BH-01 implementation begins.
 - [BH-01 — Reproducible Browser Feasibility Baseline](bh-01-reproducible-browser-feasibility-baseline/README.md) — completed need-driven plan with a proceed-with-bounded-conditions decision; external browser qualification remains deferred, and its immutable entry artifact records the pre-authorization BH-02 state.
-- [BH-02 — Host-Neutral Semantic Kernel Gate](bh-02-host-neutral-semantic-kernel-gate/README.md) — eight-phase contract and cross-renderer proof plan; Phases 1–6 are complete and Phases 7–8 remain unauthorized.
+- [BH-02 — Host-Neutral Semantic Kernel Gate](bh-02-host-neutral-semantic-kernel-gate/README.md) — eight-phase contract and cross-renderer proof plan; Phases 1–6 are complete, Phase 7 is active, and Phase 8 remains unauthorized.
 
 ### Documents
 
