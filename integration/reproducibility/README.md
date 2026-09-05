@@ -43,3 +43,8 @@ authorization.
 source and dependency hash, and generates the eight navigable indexes under
 `docs/research/assets/bh-01-release`. Its supersession policy preserves prior
 evidence and invalidates affected proofs on any governed identity change.
+
+`decide_phase10_entry.py` generates the authorized BH-01 feasibility decision
+and a bounded BH-02 input manifest. Its negative checks prohibit stale evidence,
+missing conditions/deferrals/proofs, backend leakage into neutral constraints,
+support promotion, and BH-02 activation without a later explicit authorization.

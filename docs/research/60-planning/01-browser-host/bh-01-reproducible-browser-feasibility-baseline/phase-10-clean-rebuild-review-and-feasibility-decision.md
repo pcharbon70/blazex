@@ -147,27 +147,27 @@ support evidence. See the
       - [x] 10.4.2.2 Subtask - Define invalidation, rollback, amendment, and supersession rules for changed runtime/dependency/API/browser/environment/build/scenario/mitigation/threshold inputs.
       - [x] 10.4.2.3 Subtask - Preserve prior evidence, require affected active phases/proofs to repeat before a new baseline replaces the current identity, and reactivate deferred proofs when their environment becomes available or BH-22 begins.
 
-  - [ ] 10.5 Section - Make the BH-02 entry decision.
+  - [x] 10.5 Section - Make the BH-02 entry decision.
 
     Follow proof and stop outcomes even when they require revising or rejecting
     the candidate browser stack.
 
-    - [ ] 10.5.1 Task - Select and authorize the milestone outcome.
+    - [x] 10.5.1 Task - Select and authorize the milestone outcome.
 
       The outcome is proceed, proceed with bounded conditions, revise and
       repeat, or blocked—not an ambiguous “mostly works.”
 
-      - [ ] 10.5.1.1 Subtask - Record the decision with rationale, approvers, proof/risk/stop summary, blocking/accepted findings, conditions, owners, expiries, invalidated evidence, and prohibited claims.
-      - [ ] 10.5.1.2 Subtask - Require explicit authorization for BH-02 and prohibit its activation when an active-scope decision is revise-and-repeat or blocked; deferred external qualification alone does not prohibit activation.
+      - [x] 10.5.1.1 Subtask - Record the decision with rationale, approvers, proof/risk/stop summary, blocking/accepted findings, conditions, owners, expiries, invalidated evidence, and prohibited claims.
+      - [x] 10.5.1.2 Subtask - Require explicit authorization for BH-02 and prohibit its activation when an active-scope decision is revise-and-repeat or blocked; deferred external qualification alone does not prohibit activation.
 
-    - [ ] 10.5.2 Task - Prepare either BH-02 inputs or the revision/block record.
+    - [x] 10.5.2 Task - Prepare either BH-02 inputs or the revision/block record.
 
       The handoff must carry only proven facts and never stabilize BH-01 fixture
       protocols as portable architecture.
 
-      - [ ] 10.5.2.1 Subtask - If proceeding, create a BH-02 input manifest containing proven runtime/host facts, disposable lessons, limitations, conditions, deferred BH-22 qualification obligations, repeated active proof obligations, and no DOM/JavaScript/LiveView/Popcorn contract leakage.
-      - [ ] 10.5.2.2 Subtask - If revising, identify replacement dependency/profile, amended phases/tests, retained/invalidated evidence, repository cleanup, and required reapproval.
-      - [ ] 10.5.2.3 Subtask - If blocked, identify exact failed stop conditions, retained research/evidence, project retirement or archival actions, and rule preventing unauthorized framework work.
+      - [x] 10.5.2.1 Subtask - If proceeding, create a BH-02 input manifest containing proven runtime/host facts, disposable lessons, limitations, conditions, deferred BH-22 qualification obligations, repeated active proof obligations, and no DOM/JavaScript/LiveView/Popcorn contract leakage.
+      - [x] 10.5.2.2 Subtask - If revising, identify replacement dependency/profile, amended phases/tests, retained/invalidated evidence, repository cleanup, and required reapproval. *(Not selected; the generated decision records the exact trigger that would reactivate this path.)*
+      - [x] 10.5.2.3 Subtask - If blocked, identify exact failed stop conditions, retained research/evidence, project retirement or archival actions, and rule preventing unauthorized framework work. *(Not selected; the generated decision records the exact trigger that would reactivate this path.)*
 
   - [ ] 10.6 Section - Phase 10 Integration Tests and BH-01 Acceptance.
 

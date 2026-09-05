@@ -1,0 +1,162 @@
+{
+  "accepted_conditions": [
+    {
+      "blocks": [
+        "release readiness",
+        "application payload pass"
+      ],
+      "expiry": "Expires when superseded by accepted measured reachability evidence.",
+      "id": "BX-BH01-CONDITION-AVM-REACHABILITY",
+      "owner": "build-owner",
+      "required_action": "Run a sound module-reachability experiment with before/after manifests and repeat affected Phases 3\u201310 proofs.",
+      "trigger": "Before release qualification or material bundle composition change"
+    },
+    {
+      "blocks": [
+        "production deployment",
+        "transfer-size claim"
+      ],
+      "expiry": "Expires when an accepted production-serving profile supersedes the local estimate.",
+      "id": "BX-BH01-CONDITION-BROTLI-SERVING",
+      "owner": "browser-profile-owner",
+      "required_action": "Verify actual precompressed serving, negotiation, MIME, integrity, cache, isolation, proxy, and CDN behavior.",
+      "trigger": "Before production profile deployment or transfer-size claim"
+    },
+    {
+      "blocks": [
+        "Firefox support",
+        "local interaction budget pass"
+      ],
+      "expiry": "Expires only on accepted same-boundary stable-product evidence.",
+      "id": "BX-BH01-CONDITION-FIREFOX-TIMER",
+      "owner": "quality-owner",
+      "required_action": "Attribute harness/runtime phases, optimize without changing semantics, and repeat the same timer distribution in a stable Firefox product.",
+      "trigger": "Before stable Firefox support or interaction-budget promotion"
+    },
+    {
+      "blocks": [
+        "optional adapter compatibility",
+        "package upgrade"
+      ],
+      "expiry": "Reevaluated at every private dependency revision.",
+      "id": "BX-BH01-CONDITION-PRIVATE-API-PINS",
+      "owner": "liveview-adapter-owner",
+      "required_action": "Repeat private-surface inventory and compatibility probes while retaining standalone DOM fallback and neutral package isolation.",
+      "trigger": "Any Phoenix, LiveView, LocalLiveView, or optional adapter change"
+    },
+    {
+      "blocks": [
+        "baseline supersession",
+        "runtime compatibility claim"
+      ],
+      "expiry": "Reevaluated at every named runtime or toolchain change.",
+      "id": "BX-BH01-CONDITION-RUNTIME-REPEAT",
+      "owner": "runtime-owner",
+      "required_action": "Repeat affected runtime, browser, behavior, resilience, measurement, and clean-rebuild proofs from immutable inputs.",
+      "trigger": "Any runtime, OTP, Popcorn, toolchain, bridge, or canonical build-root change"
+    },
+    {
+      "blocks": [
+        "production security",
+        "production deployment"
+      ],
+      "expiry": "Expires only through an accepted production security gate.",
+      "id": "BX-BH01-CONDITION-PRODUCTION-SECURITY",
+      "owner": "security-owner",
+      "required_action": "Design and validate production identity, TLS/proxy, persistence, distributed limits, CSP, audit, monitoring, and penetration-test controls.",
+      "trigger": "Before production authentication, deployment, or security claim"
+    },
+    {
+      "blocks": [
+        "browser support",
+        "mobile viability",
+        "cross-platform support",
+        "accessibility conformance",
+        "release readiness"
+      ],
+      "expiry": "Remains open until BH-22 qualification accepts or rejects each deferred row.",
+      "id": "BX-BH01-CONDITION-BH22-QUALIFICATION",
+      "owner": "quality-owner",
+      "required_action": "Execute non-substitutable platform, stable-browser, physical-device, mobile, and manual assistive-technology qualification.",
+      "trigger": "BH-22 start or availability of representative external environments"
+    },
+    {
+      "blocks": [
+        "public API stabilization",
+        "host-neutral contract acceptance"
+      ],
+      "expiry": "Expires only when BH-02 accepts independently reviewed neutral contracts.",
+      "id": "BX-BH01-CONDITION-FIXTURE-DISPOSABILITY",
+      "owner": "architecture-owner",
+      "required_action": "Derive neutral contracts from observable facts and prohibit BH-01 messages, DOM operations, Phoenix routes, and profile fixtures from becoming public APIs by default.",
+      "trigger": "During BH-02 semantic, renderer, capability, effect, or resource contract design"
+    },
+    {
+      "blocks": [
+        "package publication",
+        "release readiness"
+      ],
+      "expiry": "Expires only through an accepted release gate.",
+      "id": "BX-BH01-CONDITION-RELEASE-CONTROLS",
+      "owner": "build-owner",
+      "required_action": "Complete SBOM, license/notice, signing, source-map, reachability, production serving, rollback, provenance, and release invalidation gates.",
+      "trigger": "Before package publication or release-readiness claim"
+    }
+  ],
+  "approvals": [
+    {
+      "basis": "The explicit Phase 10 authorization includes making and immediately merging the evidence-based BH-02 entry decision.",
+      "identity": "pcharbon70",
+      "role": "repository-owner"
+    }
+  ],
+  "authorization_ref": {
+    "path": "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-10-authorization-v0.1.0.json",
+    "sha256": "9bf0d819e66a1f51f6ac5cbf93d0a95466516d487cef97312cfb5943b0a98cf6"
+  },
+  "baseline_ref": {
+    "path": "docs/research/assets/bh-01-release/blazex-bh-01-feasibility-baseline-v0.1.0.json",
+    "sha256": "2e8f96b2afe2e139543c898249161b8e5794a4876eccd8bac679a4347e1134ff"
+  },
+  "bh01_status": "decision-authorized-final-integration-pending",
+  "bh02_entry": {
+    "authorized": false,
+    "eligible": true,
+    "may_start": false,
+    "required_next_action": "complete Phase 10 integration and receive explicit repository-owner BH-02 authorization"
+  },
+  "blocking_findings": [],
+  "decision_id": "BX-BH01-PHASE10-FEASIBILITY-DECISION-0.1",
+  "invalidated_evidence": [],
+  "prohibited_claims": [
+    "browser support",
+    "mobile viability",
+    "accessibility conformance",
+    "production security",
+    "performance budget pass",
+    "native compatibility",
+    "release readiness"
+  ],
+  "proof_summary": {
+    "closed-conditional": 2,
+    "closed-passed": 6,
+    "closed-with-deferred-qualification": 2
+  },
+  "rationale": "The candidate reconstructs exactly in two independent clean contexts on the available Linux host, executes required active semantics without violating renderer or server-authority boundaries, and retains every adverse result. Payload economics, Firefox timer behavior, exact private pins, production controls, release work, and external qualification remain bounded conditions rather than manufactured passes.",
+  "result": "proceed-with-bounded-conditions",
+  "review_ref": {
+    "path": "integration/reproducibility/bh01-phase10-feasibility-review.json",
+    "sha256": "b95a28ea39a3f353e91e9400f16e535d0c8fbffb0f16dbc1d8c479dcb8b0cfd3"
+  },
+  "risk_summary": {
+    "accepted-residual": 7,
+    "deferred-bh22": 1
+  },
+  "schema_version": "1.0.0",
+  "source_revision": "04c115e317d7edc483c34cd697ac304310a14369",
+  "status": "authorized-proceed-with-bounded-conditions",
+  "stop_summary": {
+    "conditionally-not-triggered": 2,
+    "not-triggered": 3
+  }
+}

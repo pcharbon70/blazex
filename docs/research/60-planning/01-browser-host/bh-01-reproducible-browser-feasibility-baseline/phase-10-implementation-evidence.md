@@ -154,10 +154,42 @@ starts. Rollback selects an immutable prior baseline; it never rewrites one.
 - [Generated release index](../../../assets/bh-01-release/blazex-bh-01-release-index-v0-1-0.md)
 - [Baseline generator and validator](../../../../../integration/reproducibility/version_phase10_baseline.py)
 
+## Section 10.5 — BH-02 entry decision
+
+The repository-owner Phase 10 authorization covers making and merging the
+feasibility decision. The authorized outcome is **proceed with bounded
+conditions**. Its record binds the exact baseline, review, and authorization;
+retains proof/risk/stop summaries, nine owned conditions and expiries, zero
+blocking findings, zero invalidated evidence, and all prohibited claims. BH-01
+remains at `decision-authorized-final-integration-pending` until Section 10.6.
+
+The BH-02 entry manifest carries proven runtime/host facts separately from
+neutral contract constraints and disposable BH-01 lessons. It names the
+planned repository boundaries, nine active proof obligations to repeat, six
+BH-22 deferrals, nine conditions, seven leakage prohibitions, and nine required
+outputs. Portable constraints reject HTML/DOM, browser/JavaScript,
+Phoenix/Plug/LiveView, Popcorn/AtomVM, fixture-wire, and native-toolkit types.
+
+BH-02 is **eligible but not authorized**. Both `authorized` and `may_start` are
+false. Section 10.6 must pass and the repository owner must then explicitly
+authorize BH-02 before any of its packages, profiles, conformance work, or
+native portability spike begins. Replacement, revision, and blocked paths were
+not selected; their reactivation triggers remain in the reviewed alternatives
+and conditions.
+
+### Canonical evidence
+
+- [BH-01 decision](../../../assets/bh-01-release/blazex-bh-01-feasibility-decision-v0.1.0.json)
+- [BH-01 decision view](../../../assets/bh-01-release/blazex-bh-01-feasibility-decision-v0-1-0.md)
+- [BH-02 entry manifest](../../../assets/bh-01-release/blazex-bh-02-entry-manifest-v0.1.0.json)
+- [BH-02 entry view](../../../assets/bh-01-release/blazex-bh-02-entry-manifest-v0-1-0.md)
+- [Decision generator and validator](../../../../../integration/reproducibility/decide_phase10_entry.py)
+
 ## Remaining Phase 10 work
 
-Sections 10.5–10.6 remain open. Versioning the reviewed candidate does not
-itself authorize BH-02 or complete BH-01.
+Section 10.6 remains open. The decision and handoff do not complete BH-01 until
+the milestone-wide integration, deterministic regeneration, trace, and final
+acceptance gate passes.
 
 ## Connections
 

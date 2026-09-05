@@ -32,6 +32,12 @@ failed, conditioned, or deferred; it is not a production software release.
 - [Risk index](blazex-bh-01-risk-index-v0-1-0.md)
 - [Finding index](blazex-bh-01-finding-index-v0-1-0.md)
 - [Environment index](blazex-bh-01-environment-index-v0-1-0.md)
+- [BH-01 feasibility decision](blazex-bh-01-feasibility-decision-v0.1.0.json)
+  and [schema](blazex-bh-01-feasibility-decision.schema.json)
+- [BH-01 feasibility decision view](blazex-bh-01-feasibility-decision-v0-1-0.md)
+- [BH-02 entry manifest](blazex-bh-02-entry-manifest-v0.1.0.json) and
+  [schema](blazex-bh-02-entry-manifest.schema.json)
+- [BH-02 entry manifest view](blazex-bh-02-entry-manifest-v0-1-0.md)
 
 ## Maintenance
 
