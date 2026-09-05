@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0.0",
+  "record_id": "BX-BH02-PHASE-06-DOM-BROWSER-MATRIX-0.1",
+  "recorded_at": "2026-09-05",
+  "source_revision_before_evidence": "7150b1d",
+  "environment": "local-linux-x86_64",
+  "command": "python3 js/run-browser-conformance.py",
+  "results": [
+    {
+      "browser": "chrome",
+      "executable": "/usr/bin/google-chrome",
+      "version": "Google Chrome 140.0.7339.80",
+      "result": "passed",
+      "checks": ["mount", "semantic-accessibility", "autofocus-selection", "event-normalization", "focus-restoration", "atomic-stale-rejection", "dispose"]
+    },
+    {
+      "browser": "firefox",
+      "executable": "/usr/bin/firefox",
+      "version": "Mozilla Firefox 134.0",
+      "result": "passed",
+      "checks": ["mount", "semantic-accessibility", "autofocus-selection", "event-normalization", "focus-restoration", "atomic-stale-rejection", "dispose"]
+    }
+  ],
+  "limitations": [
+    "Automated local development conformance only; no browser support claim.",
+    "No pixel, visual-equivalence, performance, device, or manual assistive-technology result.",
+    "The Phase 6 driver replaces complete roots and does not establish incremental reconciliation or hydration."
+  ],
+  "support_state": "unsupported"
+}

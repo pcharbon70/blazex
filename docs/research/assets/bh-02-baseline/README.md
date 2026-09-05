@@ -66,6 +66,9 @@ not belong here.
 - [BH-02 Phase 5 normalized validation log](blazex-bh-02-phase-05-validation-log-v0.1.0.txt)
 - [BH-02 Phase 6 authorization](blazex-bh-02-phase-06-authorization-v0.1.0.json)
 - [BH-02 Phase 6 contract envelope](blazex-bh-02-phase-06-contract-v0.1.0.json)
+- [BH-02 Phase 6 output ledger](blazex-bh-02-phase-06-output-ledger-v0.6.0.json)
+- [BH-02 Phase 6 completion decision](blazex-bh-02-phase-06-completion-v0.1.0.json)
+- [BH-02 Phase 6 normalized validation log](blazex-bh-02-phase-06-validation-log-v0.1.0.txt)
 
 ## Maintaining this index
 

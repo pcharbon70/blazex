@@ -18,7 +18,7 @@ aliases:
 
 Back to milestone: [README](README.md)
 
-- [ ] 6 Phase - Standalone DOM Lowering and Browser Conformance.
+- [x] 6 Phase - Standalone DOM Lowering and Browser Conformance.
 
   Replace the disposable BH-01 fixture adapter with the first bounded
   Phase 5-conforming standalone DOM backend and execute it in the active Linux
@@ -65,19 +65,19 @@ Back to milestone: [README](README.md)
       - [x] 6.3.2.2 Subtask - Apply autofocus, same-ID update restoration, controlled value/text selection, accessibility relationships, and semantic child order.
       - [x] 6.3.2.3 Subtask - Pass dependency-free fake-DOM tests and automated real-page runs in local Linux Google Chrome and Firefox.
 
-  - [ ] 6.4 Section - Run the Phase 6 integration gate and publish evidence.
+  - [x] 6.4 Section - Run the Phase 6 integration gate and publish evidence.
 
-    - [ ] 6.4.1 Task - Add cross-renderer conformance and governance evidence.
+    - [x] 6.4.1 Task - Add cross-renderer conformance and governance evidence.
 
-      - [ ] 6.4.1.1 Subtask - Publish versioned DOM scenarios covering lowering, headless semantic parity, lifecycle, browser events, accessibility, focus, selection, ordering, rejection, and cleanup.
-      - [ ] 6.4.1.2 Subtask - Add fail-closed validation for authorization, hashes, dependency direction, exact surfaces, browser evidence, leakage, and premature Phase 7–8 claims.
-      - [ ] 6.4.1.3 Subtask - Add negative tests for stale authority, expanded tags/fields/events, framework leakage, missing browser rows, visual overclaims, stable APIs, and support claims.
+      - [x] 6.4.1.1 Subtask - Publish versioned DOM scenarios covering lowering, headless semantic parity, lifecycle, browser events, accessibility, focus, selection, ordering, rejection, and cleanup.
+      - [x] 6.4.1.2 Subtask - Add fail-closed validation for authorization, hashes, dependency direction, exact surfaces, browser evidence, leakage, and premature Phase 7–8 claims.
+      - [x] 6.4.1.3 Subtask - Add negative tests for stale authority, expanded tags/fields/events, framework leakage, missing browser rows, visual overclaims, stable APIs, and support claims.
 
-    - [ ] 6.4.2 Task - Execute and record the complete Phase 6 gate.
+    - [x] 6.4.2 Task - Execute and record the complete Phase 6 gate.
 
-      - [ ] 6.4.2.1 Subtask - Run all activated Mix and JavaScript tests/format or syntax checks, Chrome/Firefox conformance, Phase 1–6 validators, archive validation, inherited validators, and patch hygiene.
-      - [ ] 6.4.2.2 Subtask - Record tools, commands, browser versions, hashes, section commits, limitations, and a truthful pass or stop decision.
-      - [ ] 6.4.2.3 Subtask - Leave Phase 7 unauthorized and make no native, visual/pixel, manual-accessibility, performance, stable-API, product, or support claim.
+      - [x] 6.4.2.1 Subtask - Run all activated Mix and JavaScript tests/format or syntax checks, Chrome/Firefox conformance, Phase 1–6 validators, archive validation, inherited validators, and patch hygiene.
+      - [x] 6.4.2.2 Subtask - Record tools, commands, browser versions, hashes, section commits, limitations, and a truthful pass or stop decision.
+      - [x] 6.4.2.3 Subtask - Leave Phase 7 unauthorized and make no native, visual/pixel, manual-accessibility, performance, stable-API, product, or support claim.
 
 ## Section delivery rule
 
@@ -96,4 +96,5 @@ API.
 ## Sources
 
 - [Phase 5 implementation evidence](phase-05-implementation-evidence.md)
+- [Phase 6 implementation evidence](phase-06-implementation-evidence.md)
 - [Cross-renderer component-model inquiry](../../../40-inquiries/can-one-blazex-component-model-target-dom-and-native-controls.md)

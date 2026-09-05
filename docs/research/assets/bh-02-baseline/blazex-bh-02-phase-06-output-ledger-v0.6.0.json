@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0.0",
+  "ledger_id": "BX-BH02-OUTPUT-LEDGER-0.6",
+  "status": "phase-6-standalone-dom-contracts-implemented-experimental",
+  "authorization_ref": "BX-BH02-PHASE-06-AUTHORIZATION-0.1",
+  "supersedes": {
+    "path": "docs/research/assets/bh-02-baseline/blazex-bh-02-phase-05-output-ledger-v0.5.0.json",
+    "sha256": "cecec48c1dee26f8f8763c52cbe90ce7597d3e50f06808bf56c46e3ec9b2b81b",
+    "preserved_unchanged": true
+  },
+  "required_outputs": [
+    {"id": "semantic-ui-node-identity", "state": "implemented-experimental-phase-2", "phase": 2},
+    {"id": "event-action-contract", "state": "implemented-experimental-phase-3", "phase": 3},
+    {"id": "effect-capability-resource-contract", "state": "implemented-experimental-phase-3", "phase": 3},
+    {"id": "layout-token-accessibility-focus-selection-file-intent", "state": "implemented-experimental-phase-4", "phase": 4},
+    {"id": "renderer-lifecycle-capability-negotiation", "state": "implemented-experimental-phase-5", "phase": 5},
+    {"id": "deterministic-headless-renderer-traces", "state": "implemented-experimental-phase-5", "phase": 5},
+    {"id": "minimal-dom-lowering", "state": "implemented-experimental-phase-6", "phase": 6},
+    {"id": "limited-direct-native-control-spike", "state": "planned-unimplemented", "phase": 7},
+    {"id": "forbidden-dependency-leakage-checks", "state": "implemented-phase-1-extended-phase-6", "phase": 1}
+  ],
+  "evidence_boundary": {
+    "semantic_contracts": "experimental-version-1",
+    "component_behavior": "experimental-pure-stateful-event-evaluation",
+    "event_effect_resources": "experimental-version-1-local-beam",
+    "presentation_intent": "experimental-version-1-local-beam",
+    "renderer_lifecycle": "experimental-version-1-local-beam",
+    "headless_renderer": "experimental-deterministic-nonvisual-local-beam",
+    "standalone_dom": "experimental-full-projection-local-beam-node-chrome-firefox",
+    "incremental_reconciliation": "unimplemented",
+    "hydration": "unimplemented",
+    "server_transport": "unimplemented",
+    "visual_equivalence": "unexecuted",
+    "pixel_results": "unexecuted",
+    "manual_accessibility": "unexecuted",
+    "native_controls": "unexecuted",
+    "support": "unsupported",
+    "quality_budgets": "unpassed"
+  },
+  "unchanged_inherited_handoff": {
+    "conditions": true,
+    "repository_boundaries": true,
+    "forbidden_leakage": true,
+    "limitations": true,
+    "repeat_obligations": true,
+    "deferred_qualification": true
+  }
+}

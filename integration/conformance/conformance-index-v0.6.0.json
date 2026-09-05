@@ -1,0 +1,58 @@
+{
+  "schema_version": "1.0.0",
+  "contract": "blazex.bh02.conformance-index/0.6",
+  "status": "phase-6-standalone-dom-passed-local",
+  "activation_phase": "BH-02 Phase 6",
+  "owner_role": "quality-owner",
+  "authorization": {
+    "path": "docs/research/assets/bh-02-baseline/blazex-bh-02-phase-06-authorization-v0.1.0.json",
+    "sha256": "8f58a205e6637409d2e70cac0466d7a53002876ca1c5492292a71ea897967493"
+  },
+  "phase_contract": {
+    "path": "docs/research/assets/bh-02-baseline/blazex-bh-02-phase-06-contract-v0.1.0.json",
+    "sha256": "bff23f61d7e6ac468d847df7618ecbc9e78aeef1cc454543da36ed9fdd442e89"
+  },
+  "fixture_sets": [
+    {"id": "BX-BH02-SEMANTIC-KERNEL-FIXTURES-0.1", "path": "integration/conformance/semantic-kernel-fixtures-v0.1.0.json", "sha256": "74e7db1e0194cb97f7d1c3b37b815d3cd0139050b75382078138570a58e04b78", "scenario_count": 8, "result": "passed-local-semantic-evaluation"},
+    {"id": "BX-BH02-EVENT-EFFECT-RESOURCE-FIXTURES-0.1", "path": "integration/conformance/event-effect-resource-fixtures-v0.1.0.json", "sha256": "e5372f49136fdf3b049c478fedcdc4c0171d1e7331a386b8d7ff6e3e85b4982d", "scenario_count": 12, "result": "passed-local-event-effect-resource-evaluation"},
+    {"id": "BX-BH02-PRESENTATION-INTENT-FIXTURES-0.1", "path": "integration/conformance/presentation-intent-fixtures-v0.1.0.json", "sha256": "86998ccbd9be44100e0be87a4249540022eaab6784433b4600ad4ca423c36665", "scenario_count": 14, "result": "passed-local-presentation-intent-evaluation"},
+    {"id": "BX-BH02-RENDERER-HEADLESS-FIXTURES-0.1", "path": "integration/conformance/renderer-headless-fixtures-v0.1.0.json", "sha256": "56c5ef67550d9a5adee03e37e34a507046d1990cf4caf4ee32c36e25b2fdf1d3", "scenario_count": 16, "result": "passed-local-renderer-headless-evaluation"},
+    {"id": "BX-BH02-DOM-RENDERER-FIXTURES-0.1", "path": "integration/conformance/dom-renderer-fixtures-v0.1.0.json", "sha256": "c2ea66f720dbfdc7325dc15596e3f431cb0d85c4a2df1852cb27891c1e5a6124", "scenario_count": 20, "result": "passed-local-dom-renderer-evaluation"}
+  ],
+  "local_contract_results": [
+    {
+      "environment": "local-beam-and-node",
+      "result": "passed",
+      "evidence": [
+        "packages/blazex_renderer_dom/test/blazex/renderer/dom_boundary_test.exs",
+        "packages/blazex_renderer_dom/js/test/dom-driver.test.js",
+        "integration/conformance/test/cross_renderer_conformance_test.exs"
+      ]
+    }
+  ],
+  "canonical_traces": [
+    {"id": "headless-mount-update-replace-dispose", "backend": "blazex_renderer_headless", "result": "passed-local-deterministic"},
+    {"id": "dom-mount-update-replace-dispose", "backend": "blazex_renderer_dom", "result": "passed-local-deterministic"}
+  ],
+  "backend_results": [
+    {"backend": "blazex_renderer_headless", "environment": "local-beam", "result": "passed-nonvisual-oracle-only"},
+    {"backend": "blazex_renderer_dom", "environment": "local-beam-and-javascript", "result": "passed-standalone-full-projection-only"}
+  ],
+  "browser_results": [
+    {"browser": "linux-google-chrome", "version": "140.0.7339.80", "result": "passed-local-development-conformance"},
+    {"browser": "linux-firefox", "version": "134.0", "result": "passed-local-development-conformance"}
+  ],
+  "browser_matrix": {
+    "path": "integration/conformance/dom-browser-matrix-v0.1.0.json",
+    "sha256": "610e744e2931745201aca645b6299c9ebefebdc3a79c5484d890d56ba745497a"
+  },
+  "geometry_results": [],
+  "visual_results": [],
+  "pixel_results": [],
+  "manual_accessibility_results": [],
+  "native_results": [],
+  "provider_results": [],
+  "next_authorized_work": null,
+  "api_state": "experimental",
+  "support_state": "unsupported"
+}
