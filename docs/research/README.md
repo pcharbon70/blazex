@@ -123,6 +123,7 @@ identifiers.
 - [`generate_bh00_release.py`](generate_bh00_release.py) — deterministic BH-00 baseline index and conditional BH-01 entry-manifest generator
 - [`requirements-validation.txt`](requirements-validation.txt) — validator dependencies
 - [`generate_acceptance_registry.py`](generate_acceptance_registry.py) — deterministic Phase 5 acceptance registry and coverage-report generator
+- [`planning_policy.py`](planning_policy.py) — shared fail-closed validation for explicitly bound research-planning amendments
 - [`test_validate_browser_product_envelope.py`](test_validate_browser_product_envelope.py) — focused browser-envelope validator tests
 - [`test_validate_component_catalog.py`](test_validate_component_catalog.py) — focused component-catalog validator tests
 - [`test_validate_component_classification.py`](test_validate_component_classification.py) — focused Phase 4 classification validator tests

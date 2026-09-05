@@ -13,6 +13,7 @@ from jsonschema import Draft202012Validator
 from jsonschema.exceptions import SchemaError
 
 import generate_acceptance_registry as acceptance_generator
+import planning_policy
 
 
 ROOT = Path(__file__).resolve().parent
@@ -343,6 +344,7 @@ def validate_acceptance_registry(
     schema: dict[str, Any],
     quality: dict[str, Any],
     classification: dict[str, Any],
+    development_policy_text: str | None = None,
 ) -> dict[str, int]:
     validate_acceptance_document_schema(document, schema)
     requirements = document["requirements"]
@@ -355,10 +357,26 @@ def validate_acceptance_registry(
         raise QualityAcceptanceValidationError("acceptance registry must define all ten evidence classes")
     if binding_ids != set(acceptance_generator.SOURCE_BINDINGS):
         raise QualityAcceptanceValidationError("acceptance registry source bindings are incomplete")
+    roadmap_amendment_bound = False
     for binding in document["source_bindings"]:
         path = ROOT / binding["path"]
-        if not path.exists() or acceptance_generator.sha256(path) != binding["sha256"]:
+        if not path.exists():
             raise QualityAcceptanceValidationError(f"acceptance source binding is stale: {binding['id']}")
+        actual_sha256 = acceptance_generator.sha256(path)
+        expected_sha256 = binding["sha256"]
+        if actual_sha256 == expected_sha256:
+            continue
+        if binding["id"] == "BX-SOURCE-BROWSER-ROADMAP":
+            amendment_error = planning_policy.roadmap_amendment_error(
+                expected_sha256,
+                actual_sha256,
+                development_policy_text,
+            )
+            if amendment_error is None:
+                roadmap_amendment_bound = True
+                continue
+            raise QualityAcceptanceValidationError(amendment_error)
+        raise QualityAcceptanceValidationError(f"acceptance source binding is stale: {binding['id']}")
 
     requirements_by_id = {record["id"]: record for record in requirements}
     conditions_by_id = {record["id"]: record for record in conditions}
@@ -414,6 +432,8 @@ def validate_acceptance_registry(
         raise QualityAcceptanceValidationError("completed acceptance source-kind counts are locked")
 
     expected = acceptance_generator.build_registry()
+    if roadmap_amendment_bound:
+        expected = acceptance_generator.historical_registry_for_bound_roadmap_amendment(expected)
     if document != expected:
         raise QualityAcceptanceValidationError("acceptance registry is stale relative to its governed sources and generator")
     return counts

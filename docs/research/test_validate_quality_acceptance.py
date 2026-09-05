@@ -187,6 +187,19 @@ class QualityAcceptanceValidationTests(unittest.TestCase):
         with self.assertRaisesRegex(validator.QualityAcceptanceValidationError, "source binding is stale"):
             self.validate_acceptance(document)
 
+    def test_rejects_unbound_roadmap_amendment(self) -> None:
+        with self.assertRaisesRegex(
+            validator.QualityAcceptanceValidationError,
+            "roadmap amendment omits the historical source hash",
+        ):
+            validator.validate_acceptance_registry(
+                copy.deepcopy(self.acceptance),
+                self.acceptance_schema,
+                self.document,
+                self.classification,
+                development_policy_text="",
+            )
+
     def test_rejects_nonreciprocal_requirement_link(self) -> None:
         document = copy.deepcopy(self.acceptance)
         document["requirements"][0]["acceptance_ids"] = [document["acceptance_conditions"][1]["id"]]

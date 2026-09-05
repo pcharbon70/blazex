@@ -16,18 +16,35 @@ aliases:
 
 Back to milestone: [README](README.md)
 
+## Current planning disposition
+
+Phase 8 remains complete and its published evidence remains an immutable,
+truthful record of the matrix that could execute. Its original blocked result
+is historical evidence, not a continuing framework-development gate. Under the
+[development environment and deferred qualification policy](../../development-environment-and-deferred-qualification-policy.md),
+Linux Chrome and Firefox form the active development scope. macOS/Safari,
+Android, iOS/iPadOS, physical-device observations, and unavailable manual
+assistive-technology pairings are `[DEFERRED]` until BH-22.
+
+The deferral does not turn an unavailable row into a pass or support claim. An
+actual failure reproduced in an available Linux browser remains actionable and
+may block dependent work. The planning amendment makes Phase 9 eligible for
+explicit authorization without modifying the Phase 8 evidence files or
+completion decision.
+
 - [x] 8 Phase - Browser Compatibility and Accessible Fallback Matrix.
 
-  Execute the complete pinned scenario suite across candidate desktop and
-  mobile browsers, verify prerequisite and compatibility failures, and produce
-  intentional accessible fallbacks without promoting browser support.
+  Execute the complete pinned scenario suite across available Linux browsers,
+  catalog unavailable desktop/mobile qualification as deferred, verify
+  prerequisite and compatibility failures, and produce intentional accessible
+  fallbacks without promoting browser support.
 
   - [x] 8.1 Section - Materialize and govern browser environments.
 
     Each result must identify the engine/version, operating system, device,
     policies, automation limits, network, and artifacts that produced it.
 
-    - [x] 8.1.1 Task - Provision the five candidate configurations.
+    - [x] 8.1.1 Task - Catalog five candidate configurations and provision the active local matrix.
 
       Use the browser-envelope identities for Chromium desktop/Android, Firefox
       desktop, Safari macOS, and Safari iOS/iPadOS.
@@ -42,7 +59,7 @@ Back to milestone: [README](README.md)
       shrinking the matrix.
 
       - [x] 8.1.2.1 Subtask - Define scheduling, environment verification, scenario selection, retry limit, quarantine, raw evidence, artifact identity, and result schema.
-      - [x] 8.1.2.2 Subtask - Fail the required run on drift, missing browser/device, stale artifact, silent retry, incomplete trace, or unreviewed quarantine and distinguish environment-blocked from product-failed.
+      - [x] 8.1.2.2 Subtask - Fail an active run on drift, stale artifact, silent retry, incomplete trace, or unreviewed quarantine; classify unavailable browser/device rows as `[DEFERRED]` and distinguish them from product failures.
 
   - [x] 8.2 Section - Execute the prerequisite matrix.
 
@@ -117,7 +134,7 @@ Back to milestone: [README](README.md)
       assumptions even when visible output appears similar.
 
       - [x] 8.4.2.1 Subtask - Run keyboard action, tab/focus order, focus visibility/restore, field input/change/blur, rapid/composition-like input, validation, and disabled/read-only cases.
-      - [x] 8.4.2.2 Subtask - Record engine/automation/assistive-technology limitations and require bounded manual review for evidence unavailable to automation.
+      - [x] 8.4.2.2 Subtask - Record engine/automation/assistive-technology limitations and mark manual review unavailable in the development environment `[DEFERRED]` to BH-22.
 
   - [x] 8.5 Section - Characterize compatibility and private-API limits.
 
@@ -144,14 +161,16 @@ Back to milestone: [README](README.md)
   - [x] 8.6 Section - Phase 8 Integration Tests and Completion Evidence.
 
     Reconcile prerequisite, behavior, trust, resilience, fallback,
-    accessibility, and compatibility results as one complete browser matrix.
+    accessibility, and compatibility results as one active matrix plus an
+    explicit deferred-qualification ledger.
 
-    - [x] 8.6.1 Task - Run the immutable full-matrix gate.
+    - [x] 8.6.1 Task - Run the immutable active-matrix and deferred-ledger gate.
 
-      Required environments and scenarios must execute from verified artifacts
-      with no silent omission or stale evidence.
+      Available required environments and scenarios must execute from verified
+      artifacts with no silent omission or stale evidence. Unavailable external
+      environments remain deferred instead of blocking development.
 
-      - [x] 8.6.1.1 Subtask - Execute all applicable scenarios, verify environment/artifact fingerprints, and fail on missing required rows, stale inputs, incomplete traces, or unreviewed retries/quarantine.
+      - [x] 8.6.1.1 Subtask - Execute all locally applicable scenarios, verify environment/artifact fingerprints, fail on missing active rows, stale inputs, incomplete traces, or unreviewed retries/quarantine, and retain unavailable external rows as `[DEFERRED]`.
       - [x] 8.6.1.2 Subtask - Reconcile runtime-boot, nested-state, form-event, timer-message, DOM-update, authenticated-command, and browser-fallback proofs across the matrix.
       - [x] 8.6.1.3 Subtask - Stop if prerequisites cannot fail intentionally/accessibly, required semantics diverge without bounded mitigation, or private coupling escapes its adapter.
 
@@ -168,12 +187,15 @@ Back to milestone: [README](README.md)
 Complete and verify each coherent section before committing it. Open one PR for
 this phase only after the final integration section passes or records a
 truthful stop decision. Do not remove a difficult browser or scenario merely to
-produce a complete matrix.
+produce a complete matrix. For subsequent planning, retain unavailable rows as
+`[DEFERRED]` BH-22 qualification rather than using missing infrastructure to
+stop framework development.
 
 ## Connections
 
 - [BH-01 plan](README.md)
 - [Phase 7](phase-07-resilience-security-and-resource-lifecycle.md)
+- [Development environment and deferred qualification policy](../../development-environment-and-deferred-qualification-policy.md)
 - [Browser support policy](../../../20-notes/blazex-browser-and-toolchain-support-policy.md)
 
 ## Sources

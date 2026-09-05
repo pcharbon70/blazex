@@ -42,6 +42,13 @@ class BH01ActivationValidationTests(unittest.TestCase):
         with self.assertRaisesRegex(validator.ValidationError, "bound BH-00 source is stale"):
             validator._validate_bound_sources(governance)
 
+    def test_rejects_unbound_roadmap_amendment(self) -> None:
+        with self.assertRaisesRegex(
+            validator.ValidationError,
+            "roadmap amendment omits the historical source hash",
+        ):
+            validator._validate_bound_sources(self.bh00, development_policy_text="")
+
     def test_rejects_incomplete_ledger(self) -> None:
         ledger = copy.deepcopy(self.ledger)
         ledger["inputs"].pop()

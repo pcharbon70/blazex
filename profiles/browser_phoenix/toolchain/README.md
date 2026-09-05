@@ -85,9 +85,11 @@ python3 profiles/browser_phoenix/toolchain/verify_phase8.py
 python3 -m unittest profiles/browser_phoenix/toolchain/tests/test_phase8.py
 ```
 
-A successful verifier invocation confirms that the evidence is internally
-valid. The governed Phase 8 product decision remains blocked, all browsers
-remain unsupported, and Phase 9 remains ineligible and unauthorized.
+A successful verifier invocation confirms that the historical evidence is
+internally valid. The governed Phase 8 matrix decision remains blocked and all
+browsers remain unsupported. The current planning policy carries unavailable
+external-platform qualification to BH-22, so Phase 9 is eligible for separate
+authorization without rewriting the Phase 8 result.
 
 `unified-dependency-inventory.json` binds the canonical locks and reports by
 digest. `acquisition-evidence.json` records true clean and network-disabled

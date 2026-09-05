@@ -13,6 +13,7 @@ from jsonschema import Draft202012Validator
 from jsonschema.exceptions import SchemaError
 
 import generate_bh00_release as release_generator
+import planning_policy
 
 
 ROOT = Path(__file__).resolve().parent
@@ -174,7 +175,10 @@ def validate_schema(document: dict[str, Any], schema: dict[str, Any]) -> None:
         raise GovernanceValidationError(f"governance schema violation at {path}: {error.message}")
 
 
-def validate_sources(document: dict[str, Any]) -> set[str]:
+def validate_sources(
+    document: dict[str, Any],
+    development_policy_text: str | None = None,
+) -> set[str]:
     source_ids = _ids(document["source_bindings"], "source binding")
     if not EXPECTED_ADR_BINDINGS <= source_ids:
         raise GovernanceValidationError("all eight accepted ADRs must be source-bound")
@@ -185,8 +189,20 @@ def validate_sources(document: dict[str, Any]) -> set[str]:
         path = (ROOT / record["path"]).resolve()
         if not path.is_file():
             raise GovernanceValidationError(f"source binding path is missing: {record['id']}")
-        if sha256(path) != record["sha256"]:
-            raise GovernanceValidationError(f"source binding is stale: {record['id']}")
+        actual_sha256 = sha256(path)
+        expected_sha256 = record["sha256"]
+        if actual_sha256 == expected_sha256:
+            continue
+        if record["id"] == "BX-BH00-SOURCE-ROADMAP":
+            amendment_error = planning_policy.roadmap_amendment_error(
+                expected_sha256,
+                actual_sha256,
+                development_policy_text,
+            )
+            if amendment_error is None:
+                continue
+            raise GovernanceValidationError(amendment_error)
+        raise GovernanceValidationError(f"source binding is stale: {record['id']}")
     return source_ids
 
 

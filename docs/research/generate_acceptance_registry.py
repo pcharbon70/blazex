@@ -12,6 +12,8 @@ from collections import Counter
 from pathlib import Path
 from typing import Any
 
+import planning_policy
+
 
 ROOT = Path(__file__).resolve().parent
 ASSET_DIR = ROOT / "assets" / "quality-acceptance"
@@ -29,6 +31,11 @@ SOURCE_BINDINGS = {
     "BX-SOURCE-QUALITY-CONTRACT": QUALITY_PATH,
 }
 PROFILE_IDS = ["PROFILE-BROWSER-PHOENIX", "PROFILE-BROWSER-PLUG", "PROFILE-HEADLESS"]
+HISTORICAL_BH01_COMPLETION = (
+    "The baseline runs repeatably across the initially supported browser set, its build inputs and outputs are "
+    "explainable, and its known compatibility restrictions are narrow enough to support a framework. Failure to "
+    "reproduce the exact runtime profile blocks later framework work."
+)
 ENVELOPE_COLLECTIONS = [
     "adapters",
     "bh01_required_records",
@@ -617,6 +624,45 @@ def build_registry() -> dict[str, Any]:
     }
 
 
+def historical_registry_for_bound_roadmap_amendment(
+    current_registry: dict[str, Any],
+) -> dict[str, Any]:
+    """Reconstruct the immutable v0.1.0 registry under the exact planning amendment."""
+
+    historical = json.loads(json.dumps(current_registry))
+    roadmap_binding = next(
+        record
+        for record in historical["source_bindings"]
+        if record["id"] == "BX-SOURCE-BROWSER-ROADMAP"
+    )
+    roadmap_binding["sha256"] = planning_policy.HISTORICAL_ROADMAP_SHA256
+    bh01 = next(
+        record
+        for record in historical["acceptance_conditions"]
+        if record["id"] == "BX-ACC-ROADMAP-BH-01"
+    )
+    bh01["normative_statement"] = HISTORICAL_BH01_COMPLETION
+    bh01["observable_results"] = [HISTORICAL_BH01_COMPLETION]
+    return historical
+
+
+def committed_registry_expectation() -> tuple[dict[str, Any], bool]:
+    """Return the current or bounded historical registry expected on disk."""
+
+    registry = build_registry()
+    roadmap_binding = next(
+        record
+        for record in registry["source_bindings"]
+        if record["id"] == "BX-SOURCE-BROWSER-ROADMAP"
+    )
+    if planning_policy.roadmap_amendment_is_bound(
+        planning_policy.HISTORICAL_ROADMAP_SHA256,
+        roadmap_binding["sha256"],
+    ):
+        return historical_registry_for_bound_roadmap_amendment(registry), True
+    return registry, False
+
+
 def render_report(registry: dict[str, Any]) -> str:
     summary = registry["summary"]
     lines = [
@@ -705,7 +751,7 @@ def render_report(registry: dict[str, Any]) -> str:
 
 
 def write_outputs(registry_path: Path, report_path: Path) -> None:
-    registry = build_registry()
+    registry, _historical_amendment = committed_registry_expectation()
     registry_path.write_text(json.dumps(registry, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     report_path.write_text(render_report(registry), encoding="utf-8")
 
@@ -716,7 +762,7 @@ def main() -> int:
     parser.add_argument("--registry-output", type=Path, default=REGISTRY_PATH)
     parser.add_argument("--report-output", type=Path, default=REPORT_PATH)
     args = parser.parse_args()
-    registry = build_registry()
+    registry, historical_amendment = committed_registry_expectation()
     registry_text = json.dumps(registry, indent=2, ensure_ascii=False) + "\n"
     report_text = render_report(registry)
     if args.check:
@@ -729,7 +775,8 @@ def main() -> int:
             return 1
         print(
             f"Acceptance generation matches committed outputs: {len(registry['requirements'])} requirements, "
-            f"{len(registry['acceptance_conditions'])} conditions, zero executed evidence."
+            f"{len(registry['acceptance_conditions'])} conditions, zero executed evidence"
+            + ("; historical roadmap snapshot retained by bounded planning amendment." if historical_amendment else ".")
         )
         return 0
     args.registry_output.write_text(registry_text, encoding="utf-8")

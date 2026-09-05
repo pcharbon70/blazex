@@ -37,18 +37,21 @@ implementation milestones](../../20-notes/browser-host-implementation-milestones
 - The eventual browser-stream completion gate.
 
 BH-00 is complete. The repository owner approved the BH-01 plan snapshot and
-Phases 1-8 are complete as governed work. Phase 8 records a truthful blocked
-gate: only the Chrome/Linux row was available, four required browser/device
-rows and all required assistive-technology pairings remain blocked, and the
-two engine probes grant no support credit. Phase 9 is not eligible and is not
-authorized; later phases and milestones retain their own approval boundaries.
+Phases 1-8 are complete as governed work. Phase 8 retains its truthful
+historical blocked result: only the Chrome/Linux row was available, four
+browser/device rows and manual assistive-technology pairings could not execute,
+and the two engine probes grant no support credit. Under the repository-wide
+[development environment and deferred qualification policy](../development-environment-and-deferred-qualification-policy.md),
+those unavailable external environments are now deferred rather than blockers
+to framework development. Phase 9 is eligible but not authorized; later phases
+and milestones retain their own approval boundaries.
 
 ## Index
 
 ### Subdirectories
 
 - [BH-00 — Product Boundary, Catalog, and Acceptance Contract](bh-00-product-boundary-catalog-and-acceptance-contract/README.md) — six-phase plan that freezes vocabulary, product scope, catalog dispositions, quality budgets, and acceptance traceability before BH-01 implementation begins.
-- [BH-01 — Reproducible Browser Feasibility Baseline](bh-01-reproducible-browser-feasibility-baseline/README.md) — approved need-driven plan; Phases 1-8 are complete, with Phase 8 blocked and Phase 9 ineligible and unauthorized.
+- [BH-01 — Reproducible Browser Feasibility Baseline](bh-01-reproducible-browser-feasibility-baseline/README.md) — approved need-driven plan; Phases 1-8 are complete, external browser qualification is deferred, and Phase 9 is eligible but not authorized.
 
 ### Documents
 
@@ -59,7 +62,9 @@ authorized; later phases and milestones retain their own approval boundaries.
 Add phase documents only after the phase decomposition is explicitly
 approved. When phases are introduced, index every phase here, record their
 dependency order, activated projects, forbidden dependencies, and shared
-completion rules. Keep all work unchecked until reproducible implementation
-evidence satisfies the stated gates. The BH-02 native renderer remains a
-bounded experiment unless a later planning stream explicitly promotes it to a
-supported package.
+completion rules. Keep active work unchecked until reproducible implementation
+evidence satisfies the stated gates. Label work that requires an unavailable
+platform, browser, device, service, or manual pairing `[DEFERRED]`; do not count
+it as completed or allow it to block active development. The BH-02 native
+renderer remains a bounded experiment unless a later planning stream explicitly
+promotes it to a supported package.

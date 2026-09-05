@@ -219,10 +219,12 @@ def validate(
 
     if "- [ ]" in plan_text:
         errors.append("Phase 8 plan still contains open work")
-    if "| complete — gate blocked | Run the complete scenario set" not in milestone_text:
-        errors.append("BH-01 milestone does not record the blocked Phase 8 gate")
-    if "| [9 — Measurement" not in milestone_text or "| planned — not authorized | Measure payload" not in milestone_text:
-        errors.append("BH-01 milestone does not preserve Phase 9 non-authorization")
+    if "| complete — local evidence accepted; external qualification deferred |" not in milestone_text:
+        errors.append("BH-01 milestone does not preserve the Phase 8 deferred-qualification disposition")
+    if "| [9 — Measurement" not in milestone_text or "| eligible — not authorized | Measure payload" not in milestone_text:
+        errors.append("BH-01 milestone does not preserve Phase 9 eligibility and non-authorization")
+    if "development environment and deferred qualification policy" not in milestone_text.lower():
+        errors.append("BH-01 milestone does not link the governing development-environment policy")
     normalized_report = " ".join(report_text.split()).lower()
     for boundary in (
         "all browsers remain unsupported",
@@ -307,7 +309,7 @@ def main() -> int:
         for error in errors:
             print(f"ERROR: {error}", file=sys.stderr)
         return 1
-    print("BH-01 Phase 8 browser compatibility and fallback matrix gate: BLOCKED (evidence complete; Phase 9 ineligible and unauthorized)")
+    print("BH-01 Phase 8 historical browser matrix: BLOCKED (evidence valid; external qualification deferred by current planning policy)")
     return 0
 
 
