@@ -241,4 +241,9 @@ accessibility/focus/selection intent, Phase 4 conformance fixtures, or Phase 4
 evidence changes, also run `python3 validate_bh02_intent.py` and
 `python3 -m unittest test_validate_bh02_intent.py`.
 
+When BH-02 Phase 5 authorization, renderer capability or lifecycle contracts,
+headless snapshots or traces, Phase 5 conformance fixtures, or Phase 5 evidence
+changes, also run `python3 validate_bh02_renderer.py` and
+`python3 -m unittest test_validate_bh02_renderer.py`.
+
 Do not commit, push, publish, or open a pull request unless the user asks.

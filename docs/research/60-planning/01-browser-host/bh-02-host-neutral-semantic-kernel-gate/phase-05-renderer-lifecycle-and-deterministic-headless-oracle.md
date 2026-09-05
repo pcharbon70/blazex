@@ -18,7 +18,7 @@ aliases:
 
 Back to milestone: [README](README.md)
 
-- [ ] 5 Phase - Renderer Lifecycle and Deterministic Headless Oracle.
+- [x] 5 Phase - Renderer Lifecycle and Deterministic Headless Oracle.
 
   Implement the first renderer contract and deterministic nonvisual oracle over
   the completed portable semantic intent. Keep concrete visual backends,
@@ -74,23 +74,23 @@ Back to milestone: [README](README.md)
       - [x] 5.3.2.2 Subtask - Add reusable script execution and equality assertions in `blazex_test` without browser, server, runtime, or native dependencies.
       - [x] 5.3.2.3 Subtask - Test repeatability, meaningful-order sensitivity, unordered-map normalization, lifecycle ordering, generation replacement, disposal, and unsupported intent.
 
-  - [ ] 5.4 Section - Run the Phase 5 integration gate and publish evidence.
+  - [x] 5.4 Section - Run the Phase 5 integration gate and publish evidence.
 
     Exercise the representative portable interaction slice through the
     deterministic headless lifecycle without treating it as visual or native
     conformance.
 
-    - [ ] 5.4.1 Task - Add conformance and governance evidence.
+    - [x] 5.4.1 Task - Add conformance and governance evidence.
 
-      - [ ] 5.4.1.1 Subtask - Publish versioned renderer lifecycle and headless scenarios covering negotiation, mount/update/replace/dispose, normalization, repeatability, event/effect/resource coordination, focus, selection, and rejection paths.
-      - [ ] 5.4.1.2 Subtask - Add fail-closed validation for authorization, hashes, exact vocabularies, lifecycle surface, fixture coverage, forbidden leakage, and premature Phase 6–8 claims.
-      - [ ] 5.4.1.3 Subtask - Add negative tests for stale authority, expanded capabilities, concrete-backend leakage, missing trace coverage, stable APIs, visual/backend results, and support overclaims.
+      - [x] 5.4.1.1 Subtask - Publish versioned renderer lifecycle and headless scenarios covering negotiation, mount/update/replace/dispose, normalization, repeatability, event/effect/resource coordination, focus, selection, and rejection paths.
+      - [x] 5.4.1.2 Subtask - Add fail-closed validation for authorization, hashes, exact vocabularies, lifecycle surface, fixture coverage, forbidden leakage, and premature Phase 6–8 claims.
+      - [x] 5.4.1.3 Subtask - Add negative tests for stale authority, expanded capabilities, concrete-backend leakage, missing trace coverage, stable APIs, visual/backend results, and support overclaims.
 
-    - [ ] 5.4.2 Task - Execute and record the complete Phase 5 gate.
+    - [x] 5.4.2 Task - Execute and record the complete Phase 5 gate.
 
-      - [ ] 5.4.2.1 Subtask - Run all seven Mix project tests/format checks, Phase 1–5 validators, archive validation, inherited validators, and patch hygiene.
-      - [ ] 5.4.2.2 Subtask - Record tools, commands, hashes, section commits, limitations, and a truthful pass or stop decision.
-      - [ ] 5.4.2.3 Subtask - Leave Phase 6 unauthorized and make no geometry, DOM, browser, native, pixel, platform-accessibility, performance, or support claim.
+      - [x] 5.4.2.1 Subtask - Run all seven Mix project tests/format checks, Phase 1–5 validators, archive validation, inherited validators, and patch hygiene.
+      - [x] 5.4.2.2 Subtask - Record tools, commands, hashes, section commits, limitations, and a truthful pass or stop decision.
+      - [x] 5.4.2.3 Subtask - Leave Phase 6 unauthorized and make no geometry, DOM, browser, native, pixel, platform-accessibility, performance, or support claim.
 
 ## Section delivery rule
 

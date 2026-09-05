@@ -13,11 +13,11 @@ the same semantic traces as the headless and DOM renderers. Its presence in the
 matrix supplies portability evidence without turning the experiment into a
 supported backend.
 
-Status: BH-02 Phase 4 contains versioned semantic-kernel,
-event/effect/resource, and presentation-intent fixture sets with local BEAM
-evaluation outcomes. No geometry engine, platform accessibility mapping,
-concrete provider, or renderer backend has executed these fixtures, so
-conformance and all support claims remain absent.
+Status: BH-02 Phase 5 adds a versioned renderer/headless fixture set with local
+BEAM lifecycle, canonical snapshot, and trace outcomes. This is a deterministic
+nonvisual oracle only. No geometry engine, visual backend, platform
+accessibility mapping, browser, or native-control result exists, and all
+support claims remain absent.
 
 Versioned records:
 
@@ -34,3 +34,7 @@ Versioned records:
   accessibility, focus, selection, and atomic-validation scenarios.
 - `conformance-index-v0.4.0.json` — Phase 4 local intent-result index; geometry,
   platform mapping, and renderer results remain empty.
+- `renderer-headless-fixtures-v0.1.0.json` — Phase 5 negotiation, lifecycle,
+  normalization, trace, coordination, and rejection scenarios.
+- `conformance-index-v0.5.0.json` — Phase 5 local deterministic-headless result
+  index; visual, geometry, browser, and native results remain empty.

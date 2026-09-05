@@ -1,0 +1,45 @@
+BH-02 Phase 5 normalized validation log
+recorded_at=2026-09-05
+base_revision=c50e8849649987ebe770e5e568b4c38528a1abbc
+source_revision_before_evidence=4d92ac3
+branch=codex/bh-02-phase-05-headless-renderer
+
+PASS seven project-local mix format --check-formatted runs
+PASS seven project-local mix test runs: 68 tests, 0 failures
+PASS python3 validate_bh02_renderer.py
+PASS python3 -m unittest test_validate_bh02_renderer.py: 14 tests
+PASS python3 validate_bh02_intent.py
+PASS python3 -m unittest test_validate_bh02_intent.py: 10 tests
+PASS python3 validate_bh02_effects.py
+PASS python3 -m unittest test_validate_bh02_effects.py: 10 tests
+PASS python3 validate_bh02_semantics.py
+PASS python3 -m unittest test_validate_bh02_semantics.py: 8 tests
+PASS python3 validate_bh02_activation.py
+PASS python3 -m unittest test_validate_bh02_activation.py: 7 tests
+PASS python3 validate_archive.py: 179 documents, 22 directories, 1303 links, 50 sources
+PASS python3 -m unittest test_validate_archive.py: 8 tests
+PASS python3 validate_bh01_activation.py
+PASS python3 -m unittest test_validate_bh01_activation.py: 13 tests
+PASS python3 validate_bh00_governance.py
+PASS python3 -m unittest test_validate_bh00_governance.py: 25 tests
+PASS python3 generate_bh00_release.py --check
+PASS jq empty for Phase 5 JSON records
+PASS no mix.lock in the seven activated BH-02 projects
+PASS git diff --check
+
+NEGATIVE stale-or-missing-authorization=rejected
+NEGATIVE expanded-renderer-capability-vocabulary=rejected
+NEGATIVE changed-lifecycle-or-snapshot-surface=rejected
+NEGATIVE concrete-backend-leakage=rejected
+NEGATIVE missing-headless-scenario-or-trace-coverage=rejected
+NEGATIVE geometry-or-visual-result-overclaim=rejected
+NEGATIVE stable-api-overclaim=rejected
+NEGATIVE support-overclaim=rejected
+NEGATIVE phase-6-authorization-overclaim=rejected
+
+LIMITATION local BEAM deterministic nonvisual evaluation only
+LIMITATION no geometry, measurement, hit testing, pixel, or visual output
+LIMITATION no platform accessibility or host focus/selection operation executed
+LIMITATION no DOM, browser, or native-control backend executed
+LIMITATION no performance qualification, stable public API, or support claim
+LIMITATION Phase 6 and later work unauthorized

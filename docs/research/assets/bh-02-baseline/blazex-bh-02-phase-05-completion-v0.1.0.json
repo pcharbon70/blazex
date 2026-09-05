@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0.0",
+  "record_id": "BX-BH02-DECISION-PHASE-05-GO",
+  "state": "passed",
+  "decided_at": "2026-09-05",
+  "authorization_ref": "BX-BH02-PHASE-05-AUTHORIZATION-0.1",
+  "contract_ref": "BX-BH02-PHASE-05-CONTRACT-0.1",
+  "section_commits": [
+    {"section": "5.1", "commit": "337484f"},
+    {"section": "5.2", "commit": "ab1c3b3"},
+    {"section": "5.3", "commit": "4d92ac3"},
+    {"section": "5.4", "commit": "resolve-from-this-records-git-commit"}
+  ],
+  "artifact_hashes": [
+    {
+      "path": "docs/research/assets/bh-02-baseline/blazex-bh-02-phase-05-authorization-v0.1.0.json",
+      "sha256": "5e2925494bd42d73492f2ccb01babe1e5297685c0c90c0ff543c3254a6148b9e"
+    },
+    {
+      "path": "docs/research/assets/bh-02-baseline/blazex-bh-02-phase-05-contract-v0.1.0.json",
+      "sha256": "c7da238f2f9b98fe0be5ae53552c1b1e15019b88a8cb3ed2fb666603b437c89e"
+    },
+    {
+      "path": "docs/research/assets/bh-02-baseline/blazex-bh-02-phase-05-output-ledger-v0.5.0.json",
+      "sha256": "cecec48c1dee26f8f8763c52cbe90ce7597d3e50f06808bf56c46e3ec9b2b81b"
+    },
+    {
+      "path": "integration/conformance/renderer-headless-fixtures-v0.1.0.json",
+      "sha256": "56c5ef67550d9a5adee03e37e34a507046d1990cf4caf4ee32c36e25b2fdf1d3"
+    },
+    {
+      "path": "integration/conformance/conformance-index-v0.5.0.json",
+      "sha256": "ffeb44a5a4d7d349d9f580ce75c976b64e008fb8bee14d9a19bf299c3f3d073f"
+    }
+  ],
+  "outcome": {
+    "renderer_lifecycle": "implemented-experimental-local-beam",
+    "headless_renderer": "implemented-experimental-deterministic-nonvisual-local-beam",
+    "geometry_state": "unimplemented",
+    "visual_output_state": "unimplemented",
+    "platform_accessibility_state": "unimplemented",
+    "host_focus_selection_state": "unimplemented",
+    "dom_state": "unimplemented",
+    "native_control_state": "unimplemented",
+    "api_state": "experimental",
+    "support_state": "unsupported",
+    "next_phase": "BH-02 Phase 6 is eligible but not authorized"
+  }
+}
