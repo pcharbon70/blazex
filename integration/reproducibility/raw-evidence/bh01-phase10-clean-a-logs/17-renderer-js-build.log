@@ -1,0 +1,4 @@
+
+> @blazex/renderer-dom-experimental@0.0.0-bh01 build
+> node --check js/fixture-dom-protocol.js && node --check js/fixture-dom-renderer.js
+

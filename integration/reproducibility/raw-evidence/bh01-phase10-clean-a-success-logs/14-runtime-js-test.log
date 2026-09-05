@@ -1,0 +1,48 @@
+
+> @blazex/runtime-browser-experimental@0.0.0-bh01 test
+> node --test test/*.test.js
+
+✔ rejects deterministic hostile bridge families without executing values (1.55891ms)
+✔ retains script and HTML payloads only as inert bounded text (0.35832ms)
+✔ rejects traversal, credentials, downgrade, and missing integrity declarations (1.871916ms)
+✔ fails artifact MIME, compression, size, and integrity before returning bytes (23.214682ms)
+✔ the experimental bridge boundary remains narrow (1.296949ms)
+✔ the loader source owns no component or server behavior (4.218224ms)
+✔ emits correlated developer and user summaries without console dependence (1.588381ms)
+✔ redacts keys, credentials, queries, local paths, and stack frames (0.230952ms)
+✔ drops identical diagnostics and counts the duplicate (0.182264ms)
+✔ rejects orphan correlation, unknown classification, and retention overflow (1.668338ms)
+✔ correlates a bounded allowlisted request and records metrics (5.124967ms)
+✔ accepts only the three bounded fixture operations added for Phase 5 (1.487523ms)
+✔ rejects operations, executable values, handles, secrets, and oversized values (0.512719ms)
+✔ times out, cancels transport, and drops a late result (6.725349ms)
+✔ rejects stale responses and makes stop idempotent (0.618271ms)
+✔ defines bounded event, error, readiness, shutdown, and diagnostic signals (0.250189ms)
+✔ follows the monotonic activation state machine (3.023729ms)
+✔ releases owned resources in reverse order and makes stop idempotent (1.346706ms)
+✔ classifies retry, integrity, attempt limits, and stale generations (0.647066ms)
+✔ validates the exact Phase 4 manifest and resolves same-origin assets (3.463428ms)
+✔ fetches a no-store manifest and rejects redirects (20.744165ms)
+✔ verifies artifact bytes, MIME, digest, Wasm, and cancellation (5.093123ms)
+✔ rejects undeclared Wasm imports and missing required exports (1.358877ms)
+✔ classifies full and buffered-only browser prerequisites (3.288832ms)
+✔ distinguishes deployment policy from browser capability failure (0.282161ms)
+✔ coordinates one authority-bearing retry under the browser owner (1.859165ms)
+✔ prohibits a lower-layer authority retry (0.651211ms)
+✔ bounds exhaustion without starting a third operation (0.841061ms)
+✔ drops stale generations and cancels replacement work (0.335466ms)
+✔ converges non-retryable and stopped recovery (0.738944ms)
+✔ reports baseline, peak, disposed convergence, and explained unknowns (1.322894ms)
+✔ rejects unexplained unknown and invalid counts (0.80114ms)
+✔ detects nonconverging disposal (0.284848ms)
+✔ rejects stale generations and bounded sample overflow (0.805251ms)
+✔ waits for application readiness and converges resources on stop (24.422479ms)
+✔ contains runtime failure and startup cancellation (4.265568ms)
+ℹ tests 36
+ℹ suites 0
+ℹ pass 36
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 108.249339

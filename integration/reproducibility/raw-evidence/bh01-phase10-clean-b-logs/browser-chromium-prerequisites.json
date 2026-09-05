@@ -1,0 +1,234 @@
+{
+  "schema_version": "1.0.0",
+  "evidence_id": "BX-BH01-PHASE8-PREREQUISITES-CHROMIUM-0.1",
+  "captured_at": "2026-09-05T11:48:32.453Z",
+  "implementation_revision": "4e6301b55dc9f2e44b848818d14c60606c0476a6",
+  "authority": "required-row",
+  "support_status": "unsupported",
+  "browser": {
+    "type": "chromium",
+    "version": "152.0.7977.75",
+    "os": "linux 6.8.0-51-generic",
+    "architecture": "x64"
+  },
+  "status": "observed",
+  "profile": {
+    "manifest_id": "BX-BH01-PHASE-05-PROFILE-ASSETS-0.1",
+    "manifest_sha256": "818ac7b967db6519c766f9d1fff80455cc92d205e3f188252e6da27258ee4aad",
+    "governed_files": 23
+  },
+  "capabilities": {
+    "webassembly_validate": true,
+    "memory": true,
+    "table": true,
+    "shared_memory": true,
+    "workers": true,
+    "modules": true,
+    "streaming": true,
+    "buffered": true,
+    "structured_clone": true,
+    "transferable_array_buffer": true,
+    "timers": true,
+    "secure_context": true,
+    "cross_origin_isolated": true
+  },
+  "deployment": {
+    "manifest_status": 200,
+    "manifest_cache": "no-store",
+    "wasm_status": 200,
+    "wasm_mime": "application/wasm",
+    "wasm_compression": "identity",
+    "wasm_redirected": false,
+    "coop": "same-origin",
+    "coep": "require-corp",
+    "corp": "same-origin",
+    "cors": null
+  },
+  "negative_scenarios": [
+    {
+      "name": "webassembly",
+      "expected_decision": "static-server-fallback",
+      "state": "fallback",
+      "prerequisites": {
+        "protocol": "blazex.browser-prerequisites/1",
+        "decision": "static-server-fallback",
+        "reason": "browser-capability-missing",
+        "missing": [
+          "webassembly",
+          "shared-memory"
+        ],
+        "capabilities": {
+          "webassembly": false,
+          "workers": true,
+          "modules": true,
+          "shared-memory": false,
+          "atomics": true,
+          "fetch": true,
+          "subtle-crypto": true,
+          "secure-context": true,
+          "cross-origin-isolation": true,
+          "wasm-streaming": false
+        },
+        "message": "This browser cannot start the experimental runtime. Server-rendered fallback remains available. Missing: webassembly, shared-memory."
+      },
+      "error": null,
+      "generation": null,
+      "runtime_ready": false
+    },
+    {
+      "name": "workers",
+      "expected_decision": "static-server-fallback",
+      "state": "fallback",
+      "prerequisites": {
+        "protocol": "blazex.browser-prerequisites/1",
+        "decision": "static-server-fallback",
+        "reason": "browser-capability-missing",
+        "missing": [
+          "workers"
+        ],
+        "capabilities": {
+          "webassembly": true,
+          "workers": false,
+          "modules": true,
+          "shared-memory": true,
+          "atomics": true,
+          "fetch": true,
+          "subtle-crypto": true,
+          "secure-context": true,
+          "cross-origin-isolation": true,
+          "wasm-streaming": true
+        },
+        "message": "This browser cannot start the experimental runtime. Server-rendered fallback remains available. Missing: workers."
+      },
+      "error": null,
+      "generation": null,
+      "runtime_ready": false
+    },
+    {
+      "name": "streaming",
+      "expected_decision": "alternate-loading",
+      "state": "ready",
+      "prerequisites": {
+        "protocol": "blazex.browser-prerequisites/1",
+        "decision": "alternate-loading",
+        "reason": "buffered-wasm-loading-required",
+        "missing": [],
+        "capabilities": {
+          "webassembly": true,
+          "workers": true,
+          "modules": true,
+          "shared-memory": true,
+          "atomics": true,
+          "fetch": true,
+          "subtle-crypto": true,
+          "secure-context": true,
+          "cross-origin-isolation": true,
+          "wasm-streaming": false
+        },
+        "message": "The experimental runtime can start with buffered WebAssembly loading."
+      },
+      "error": null,
+      "generation": 1,
+      "runtime_ready": true
+    },
+    {
+      "name": "cross-origin-isolation",
+      "expected_decision": "unsupported",
+      "state": "fallback",
+      "prerequisites": {
+        "protocol": "blazex.browser-prerequisites/1",
+        "decision": "unsupported",
+        "reason": "deployment-policy-missing",
+        "missing": [
+          "shared-memory",
+          "atomics",
+          "cross-origin-isolation"
+        ],
+        "capabilities": {
+          "webassembly": true,
+          "workers": true,
+          "modules": true,
+          "shared-memory": false,
+          "atomics": false,
+          "fetch": true,
+          "subtle-crypto": true,
+          "secure-context": true,
+          "cross-origin-isolation": false,
+          "wasm-streaming": true
+        },
+        "message": "This deployment cannot start the experimental runtime because required isolation or secure-context policy is missing: shared-memory, atomics, cross-origin-isolation."
+      },
+      "error": null,
+      "generation": null,
+      "runtime_ready": false
+    }
+  ],
+  "lifecycle_changes": {
+    "offline": "network-unavailable",
+    "online_status": 200,
+    "disposed": {
+      "dom": {
+        "roots": 0,
+        "listeners": 0,
+        "nodes": 0
+      },
+      "bridge": {
+        "requests": 5,
+        "responses": 5,
+        "failures": 0,
+        "cancellations": 0,
+        "timeouts": 0,
+        "stale_drops": 0,
+        "bytes_sent": 1229,
+        "bytes_received": 1957,
+        "pending": 0,
+        "generation": 2,
+        "stopped": true,
+        "timers": 0,
+        "retries": 0
+      },
+      "server": {
+        "pending": 0,
+        "session_configured": false
+      }
+    },
+    "restarted_state": "ready",
+    "navigation_state": "ready",
+    "session_expiry": "covered-by-retained-phase6-evidence",
+    "server_restart": "covered-by-retained-phase6-evidence",
+    "visibility": "automation-not-authoritative",
+    "memory_pressure": "unobservable"
+  },
+  "unobservable": [
+    "memory-pressure",
+    "power-thermal-state",
+    "service-worker-mutation"
+  ],
+  "page_errors": [],
+  "initial": {
+    "state": "ready",
+    "prerequisites": {
+      "protocol": "blazex.browser-prerequisites/1",
+      "decision": "proceed",
+      "reason": "all-required-capabilities-observed",
+      "missing": [],
+      "capabilities": {
+        "webassembly": true,
+        "workers": true,
+        "modules": true,
+        "shared-memory": true,
+        "atomics": true,
+        "fetch": true,
+        "subtle-crypto": true,
+        "secure-context": true,
+        "cross-origin-isolation": true,
+        "wasm-streaming": true
+      },
+      "message": "The experimental BlazeX browser runtime can start."
+    },
+    "error": null,
+    "generation": 1,
+    "runtime_ready": true
+  },
+  "evidence_sha256": "f8c2a185be91811b4aac859576581114c7de30be5c0018ea5a2ca1fd9a4a2753"
+}

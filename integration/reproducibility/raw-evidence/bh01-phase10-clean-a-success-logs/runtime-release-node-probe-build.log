@@ -1,0 +1,403 @@
+
+
+
+      |                                                                           ^
+      |                                                                  ^
+      |                                                          ^
+      |                                                         ^
+      |                                              ^
+      |                                             ^
+      |                                            ^
+      |                                      ^
+      |                                 ^
+      |                                 ^
+      |                                 ^
+      |                                 ^
+      |                                 void
+      |                                ^
+      |                                void
+      |                               ^
+      |                               void
+      |                              ^
+      |                             void
+      |                            ^
+      |                           void
+      |                          ^
+      |                         void
+      |                        ^
+      |                ^
+      |         ^~~~~~~~~~
+      |         ^~~~~~~~~~
+      |         ^~~~~~~~~~
+      |         ^~~~~~~~~~
+      |         ^~~~~~~~~~
+      |         ^~~~~~~~~~
+      |         ^~~~~~~~~~
+      |         ^~~~~~~~~~
+      |         ^~~~~~~~~~
+      |         ^~~~~~~~~~
+      |         ^~~~~~~~~~
+      |         ^~~~~~~~~~
+      |         ^~~~~~~~~~
+      |         ^~~~~~~~~~
+      |         ^~~~~~~~~~
+      |   ^
+      |   ^
+    AVM_BUILD_RUNTIME_ONLY
+   67 |         EM_ASM({ promiseMap.get($0).resolve($1); }, promise, value);
+   67 |         EM_ASM({ promiseMap.get($0).resolve($1); }, promise, value);
+   69 |         EM_ASM({ promiseMap.get($0).reject($1); }, promise, value);
+   69 |         EM_ASM({ promiseMap.get($0).reject($1); }, promise, value);
+   74 | Mutex *smp_mutex_create()
+   84 |         EM_ASM({ promiseMap.get($0).resolve(UTF8ToString($1)); }, promise, value);
+   84 |         EM_ASM({ promiseMap.get($0).resolve(UTF8ToString($1)); }, promise, value);
+   86 |         EM_ASM({ promiseMap.get($0).reject(UTF8ToString($1)); }, promise, value);
+   86 |         EM_ASM({ promiseMap.get($0).reject(UTF8ToString($1)); }, promise, value);
+  114 | CondVar *smp_condvar_create()
+  129 |     EM_ASM({ Module['onTrackedObjectDelete']($0); }, key);
+  145 | size_t next_tracked_object_key()
+  148 | RWLock *smp_rwlock_create()
+  169 |     term obj = enif_make_resource(erl_nif_env_from_context(ctx), rsrc_obj);
+  187 | });
+  201 | int smp_get_online_processors()
+  217 | ERL_NIF_TERM enif_make_resource(ErlNifEnv *env, void *obj) __attribute__((deprecated("use memory_erl_nif_env_ensure_free + term_from_resource instead")));
+  320 | });
+  367 |     int funs_count = READ_32_UNALIGNED(table_data + 8);
+  367 |     int funs_count = READ_32_UNALIGNED(table_data + 8);
+  367 |     int funs_count = READ_32_UNALIGNED(table_data + 8);
+  367 |     int funs_count = READ_32_UNALIGNED(table_data + 8);
+  367 |     int funs_count = READ_32_UNALIGNED(table_data + 8);
+  367 |     int funs_count = READ_32_UNALIGNED(table_data + 8);
+  367 |     int funs_count = READ_32_UNALIGNED(table_data + 8);
+  367 |     int funs_count = READ_32_UNALIGNED(table_data + 8);
+  367 |     int funs_count = READ_32_UNALIGNED(table_data + 8);
+  367 |     int funs_count = READ_32_UNALIGNED(table_data + 8);
+  367 |     int funs_count = READ_32_UNALIGNED(table_data + 8);
+  367 |     int funs_count = READ_32_UNALIGNED(table_data + 8);
+  367 |     int funs_count = READ_32_UNALIGNED(table_data + 8);
+  367 |     int funs_count = READ_32_UNALIGNED(table_data + 8);
+  367 |     int funs_count = READ_32_UNALIGNED(table_data + 8);
+  433 |             keys = term_list_prepend(term_from_int32(ref_keys[i]), keys, &ctx->heap);
+  637 | uint64_t sys_monotonic_time_u64()
+  Manually-specified variables were not used by the project:
+ 1137 | static inline term term_from_int32(int32_t value) __attribute__((deprecated("term_from_int32 is unsafe and will be removed")));
+-- Build files have been written to: /outputs/cmake
+-- Check for working C compiler: /emsdk/upstream/emscripten/emcc - skipped
+-- Check for working CXX compiler: /emsdk/upstream/emscripten/em++ - skipped
+-- Configuring done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Found Python3: /usr/bin/python3.10 (found version "3.10.12") found components: Interpreter 
+-- Found Threads: TRUE  
+-- Generating done
+-- Looking for O_CLOEXEC
+-- Looking for O_CLOEXEC - found
+-- Looking for O_DIRECTORY
+-- Looking for O_DIRECTORY - found
+-- Looking for O_DSYNC
+-- Looking for O_DSYNC - found
+-- Looking for O_EXEC
+-- Looking for O_EXEC - found
+-- Looking for O_NOFOLLOW
+-- Looking for O_NOFOLLOW - found
+-- Looking for O_RSYNC
+-- Looking for O_RSYNC - found
+-- Looking for O_SEARCH
+-- Looking for O_SEARCH - found
+-- Looking for O_TTY_INIT
+-- Looking for O_TTY_INIT - found
+-- Looking for PATH_MAX
+-- Looking for PATH_MAX - found
+-- Looking for POSIX_SPAWN_CLOEXEC_DEFAULT
+-- Looking for POSIX_SPAWN_CLOEXEC_DEFAULT - not found
+-- Looking for clock_settime
+-- Looking for clock_settime - found
+-- Looking for select
+-- Looking for select - found
+-- Looking for settimeofday
+-- Looking for settimeofday - not found
+-- Looking for socket
+-- Looking for socket - found
+-- Looking for stdatomic.h
+-- Looking for stdatomic.h - found
+-- Performing Test ATOMIC_POINTER_LOCK_FREE_IS_TWO
+-- Performing Test ATOMIC_POINTER_LOCK_FREE_IS_TWO - Success
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Performing Test HAVE_CLOSE
+-- Performing Test HAVE_CLOSE - Success
+-- Performing Test HAVE_CLOSEDIR
+-- Performing Test HAVE_CLOSEDIR - Success
+-- Performing Test HAVE_CLOSEFROM
+-- Performing Test HAVE_CLOSEFROM - Failed
+-- Performing Test HAVE_EXECVE
+-- Performing Test HAVE_EXECVE - Success
+-- Performing Test HAVE_FSTAT
+-- Performing Test HAVE_FSTAT - Success
+-- Performing Test HAVE_FSYNC
+-- Performing Test HAVE_FSYNC - Success
+-- Performing Test HAVE_FTRUNCATE
+-- Performing Test HAVE_FTRUNCATE - Success
+-- Performing Test HAVE_GETCWD
+-- Performing Test HAVE_GETCWD - Success
+-- Performing Test HAVE_LSEEK
+-- Performing Test HAVE_LSEEK - Success
+-- Performing Test HAVE_MKDIR
+-- Performing Test HAVE_MKDIR - Success
+-- Performing Test HAVE_MKFIFO
+-- Performing Test HAVE_MKFIFO - Success
+-- Performing Test HAVE_OPEN
+-- Performing Test HAVE_OPEN - Success
+-- Performing Test HAVE_OPENDIR
+-- Performing Test HAVE_OPENDIR - Success
+-- Performing Test HAVE_PRAGMA_STDC_FENV_ACCESS
+-- Performing Test HAVE_PRAGMA_STDC_FENV_ACCESS - Failed
+-- Performing Test HAVE_PREAD
+-- Performing Test HAVE_PREAD - Success
+-- Performing Test HAVE_PSA_CRYPTO
+-- Performing Test HAVE_PSA_CRYPTO - Success
+-- Performing Test HAVE_PWRITE
+-- Performing Test HAVE_PWRITE - Success
+-- Performing Test HAVE_READDIR
+-- Performing Test HAVE_READDIR - Success
+-- Performing Test HAVE_RENAME
+-- Performing Test HAVE_RENAME - Success
+-- Performing Test HAVE_RMDIR
+-- Performing Test HAVE_RMDIR - Success
+-- Performing Test HAVE_STAT
+-- Performing Test HAVE_STAT - Success
+-- Performing Test HAVE_TCGETATTR
+-- Performing Test HAVE_TCGETATTR - Success
+-- Performing Test HAVE_UNLINK
+-- Performing Test HAVE_UNLINK - Success
+-- Performing Test compiler_supports_unterminated_string_initialization
+-- Performing Test compiler_supports_unterminated_string_initialization - Failed
+-- The C compiler identification is Clang 21.0.0
+-- The CXX compiler identification is Clang 21.0.0
+/inputs/fissionvm/src/libAtomVM/erl_nif.h:217:75: note: 'enif_make_resource' has been explicitly marked deprecated here
+/inputs/fissionvm/src/libAtomVM/module.h:367:9: warning: unused variable 'funs_count' [-Wunused-variable]
+/inputs/fissionvm/src/libAtomVM/module.h:367:9: warning: unused variable 'funs_count' [-Wunused-variable]
+/inputs/fissionvm/src/libAtomVM/module.h:367:9: warning: unused variable 'funs_count' [-Wunused-variable]
+/inputs/fissionvm/src/libAtomVM/module.h:367:9: warning: unused variable 'funs_count' [-Wunused-variable]
+/inputs/fissionvm/src/libAtomVM/module.h:367:9: warning: unused variable 'funs_count' [-Wunused-variable]
+/inputs/fissionvm/src/libAtomVM/module.h:367:9: warning: unused variable 'funs_count' [-Wunused-variable]
+/inputs/fissionvm/src/libAtomVM/module.h:367:9: warning: unused variable 'funs_count' [-Wunused-variable]
+/inputs/fissionvm/src/libAtomVM/module.h:367:9: warning: unused variable 'funs_count' [-Wunused-variable]
+/inputs/fissionvm/src/libAtomVM/module.h:367:9: warning: unused variable 'funs_count' [-Wunused-variable]
+/inputs/fissionvm/src/libAtomVM/module.h:367:9: warning: unused variable 'funs_count' [-Wunused-variable]
+/inputs/fissionvm/src/libAtomVM/module.h:367:9: warning: unused variable 'funs_count' [-Wunused-variable]
+/inputs/fissionvm/src/libAtomVM/module.h:367:9: warning: unused variable 'funs_count' [-Wunused-variable]
+/inputs/fissionvm/src/libAtomVM/module.h:367:9: warning: unused variable 'funs_count' [-Wunused-variable]
+/inputs/fissionvm/src/libAtomVM/module.h:367:9: warning: unused variable 'funs_count' [-Wunused-variable]
+/inputs/fissionvm/src/libAtomVM/module.h:367:9: warning: unused variable 'funs_count' [-Wunused-variable]
+/inputs/fissionvm/src/libAtomVM/term.h:1137:66: note: 'term_from_int32' has been explicitly marked deprecated here
+/inputs/fissionvm/src/platforms/emscripten/src/lib/platform_nifs.c:169:16: warning: 'enif_make_resource' is deprecated: use memory_erl_nif_env_ensure_free + term_from_resource instead [-Wdeprecated-declarations]
+/inputs/fissionvm/src/platforms/emscripten/src/lib/platform_nifs.c:187:3: warning: extra ';' outside of a function [-Wextra-semi]
+/inputs/fissionvm/src/platforms/emscripten/src/lib/platform_nifs.c:320:3: warning: extra ';' outside of a function [-Wextra-semi]
+/inputs/fissionvm/src/platforms/emscripten/src/lib/platform_nifs.c:433:38: warning: 'term_from_int32' is deprecated: term_from_int32 is unsafe and will be removed [-Wdeprecated-declarations]
+/inputs/fissionvm/src/platforms/emscripten/src/lib/smp.c:114:28: warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
+/inputs/fissionvm/src/platforms/emscripten/src/lib/smp.c:148:26: warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
+/inputs/fissionvm/src/platforms/emscripten/src/lib/smp.c:201:30: warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
+/inputs/fissionvm/src/platforms/emscripten/src/lib/smp.c:74:24: warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
+/inputs/fissionvm/src/platforms/emscripten/src/lib/sys.c:129:46: warning: '$' in identifier [-Wdollar-in-identifier-extension]
+/inputs/fissionvm/src/platforms/emscripten/src/lib/sys.c:637:32: warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
+/inputs/fissionvm/src/platforms/emscripten/src/lib/sys.c:67:33: warning: '$' in identifier [-Wdollar-in-identifier-extension]
+/inputs/fissionvm/src/platforms/emscripten/src/lib/sys.c:67:45: warning: '$' in identifier [-Wdollar-in-identifier-extension]
+/inputs/fissionvm/src/platforms/emscripten/src/lib/sys.c:69:33: warning: '$' in identifier [-Wdollar-in-identifier-extension]
+/inputs/fissionvm/src/platforms/emscripten/src/lib/sys.c:69:44: warning: '$' in identifier [-Wdollar-in-identifier-extension]
+/inputs/fissionvm/src/platforms/emscripten/src/lib/sys.c:84:33: warning: '$' in identifier [-Wdollar-in-identifier-extension]
+/inputs/fissionvm/src/platforms/emscripten/src/lib/sys.c:84:58: warning: '$' in identifier [-Wdollar-in-identifier-extension]
+/inputs/fissionvm/src/platforms/emscripten/src/lib/sys.c:86:33: warning: '$' in identifier [-Wdollar-in-identifier-extension]
+/inputs/fissionvm/src/platforms/emscripten/src/lib/sys.c:86:57: warning: '$' in identifier [-Wdollar-in-identifier-extension]
+/inputs/fissionvm/src/platforms/emscripten/src/main.c:145:31: warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
+1 warning generated.
+1 warning generated.
+1 warning generated.
+1 warning generated.
+1 warning generated.
+1 warning generated.
+1 warning generated.
+1 warning generated.
+1 warning generated.
+1 warning generated.
+1 warning generated.
+1 warning generated.
+11 warnings generated.
+2 warnings generated.
+4 warnings generated.
+5 warnings generated.
+CMake Warning:
+In file included from /inputs/fissionvm/src/libAtomVM/bif.c:21:
+In file included from /inputs/fissionvm/src/libAtomVM/bif.h:34:
+In file included from /inputs/fissionvm/src/libAtomVM/bif.h:34:
+In file included from /inputs/fissionvm/src/libAtomVM/bif.h:34:
+In file included from /inputs/fissionvm/src/libAtomVM/context.c:36:
+In file included from /inputs/fissionvm/src/libAtomVM/external_term.c:34:
+In file included from /inputs/fissionvm/src/libAtomVM/globalcontext.c:42:
+In file included from /inputs/fissionvm/src/libAtomVM/module.c:23:
+In file included from /inputs/fissionvm/src/libAtomVM/nifs.c:41:
+In file included from /inputs/fissionvm/src/libAtomVM/popcorn/popcorn_nifs.c:9:
+In file included from /inputs/fissionvm/src/libAtomVM/resources.c:34:
+In file included from /inputs/fissionvm/src/libAtomVM/scheduler.c:29:
+In file included from /inputs/fissionvm/src/libAtomVM/stacktrace.c:21:
+In file included from /inputs/fissionvm/src/libAtomVM/stacktrace.h:25:
+In file included from /inputs/fissionvm/src/libAtomVM/sys.h:34:
+In file included from /inputs/fissionvm/src/libAtomVM/sys.h:34:
+In file included from /inputs/fissionvm/src/libAtomVM/sys.h:34:
+In file included from /inputs/fissionvm/src/libAtomVM/sys.h:34:
+In file included from /inputs/fissionvm/src/libAtomVM/sys.h:34:
+In file included from /inputs/fissionvm/src/libAtomVM/sys.h:34:
+In file included from /inputs/fissionvm/src/libAtomVM/sys.h:34:
+In file included from /inputs/fissionvm/src/libAtomVM/term.c:29:
+In file included from /inputs/fissionvm/src/platforms/emscripten/src/lib/emscripten_sys.h:29:
+In file included from /inputs/fissionvm/src/platforms/emscripten/src/lib/emscripten_sys.h:29:
+In file included from /inputs/fissionvm/src/platforms/emscripten/src/lib/platform_nifs.c:44:
+In file included from /inputs/fissionvm/src/platforms/emscripten/src/lib/sys.c:21:
+In file included from /inputs/fissionvm/src/platforms/emscripten/src/lib/websocket_nifs.c:37:
+In file included from /inputs/fissionvm/src/platforms/emscripten/src/main.c:31:
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+[*/137] Building C object _deps/mbedtls-build/3rdparty/everest/CMakeFiles/everest.dir/library/Hacl_Curve25519_joined.c.o
+[*/137] Building C object _deps/mbedtls-build/3rdparty/everest/CMakeFiles/everest.dir/library/everest.c.o
+[*/137] Building C object _deps/mbedtls-build/3rdparty/everest/CMakeFiles/everest.dir/library/x25519.c.o
+[*/137] Building C object _deps/mbedtls-build/3rdparty/p256-m/CMakeFiles/p256m.dir/p256-m/p256-m.c.o
+[*/137] Building C object _deps/mbedtls-build/3rdparty/p256-m/CMakeFiles/p256m.dir/p256-m_driver_entrypoints.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/aes.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/aesce.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/aesni.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/aria.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/asn1parse.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/asn1write.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/base64.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/bignum.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/bignum_core.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/bignum_mod.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/bignum_mod_raw.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/block_cipher.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/camellia.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/ccm.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/chacha20.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/chachapoly.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/cipher.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/cipher_wrap.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/cmac.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/constant_time.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/ctr_drbg.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/des.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/dhm.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/ecdh.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/ecdsa.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/ecjpake.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/ecp.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/ecp_curves.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/ecp_curves_new.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/entropy.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/entropy_poll.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/error.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/gcm.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/hkdf.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/hmac_drbg.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/lmots.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/lms.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/md.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/md5.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/memory_buffer_alloc.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/nist_kw.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/oid.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/padlock.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/pem.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/pk.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/pk_ecc.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/pk_wrap.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/pkcs12.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/pkcs5.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/pkparse.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/pkwrite.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/platform.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/platform_util.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/poly1305.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/psa_crypto.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/psa_crypto_aead.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/psa_crypto_cipher.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/psa_crypto_client.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/psa_crypto_driver_wrappers_no_static.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/psa_crypto_ecp.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/psa_crypto_ffdh.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/psa_crypto_hash.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/psa_crypto_mac.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/psa_crypto_pake.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/psa_crypto_rsa.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/psa_crypto_se.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/psa_crypto_slot_management.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/psa_crypto_storage.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/psa_its_file.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/psa_util.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/ripemd160.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/rsa.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/rsa_alt_helpers.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/sha1.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/sha256.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/sha3.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/sha512.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/threading.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/timing.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/version.c.o
+[*/137] Building C object _deps/mbedtls-build/library/CMakeFiles/mbedcrypto.dir/version_features.c.o
+[*/137] Building C object src/CMakeFiles/AtomVM.dir/main.c.o
+[*/137] Building C object src/lib/CMakeFiles/libAtomVMEmscripten-x86.dir/inputs/fissionvm/src/libAtomVM/otp_crypto.c.o
+[*/137] Building C object src/lib/CMakeFiles/libAtomVMEmscripten-x86.dir/platform_defaultatoms.c.o
+[*/137] Building C object src/lib/CMakeFiles/libAtomVMEmscripten-x86.dir/platform_nifs.c.o
+[*/137] Building C object src/lib/CMakeFiles/libAtomVMEmscripten-x86.dir/smp.c.o
+[*/137] Building C object src/lib/CMakeFiles/libAtomVMEmscripten-x86.dir/sys.c.o
+[*/137] Building C object src/lib/CMakeFiles/libAtomVMEmscripten-x86.dir/websocket_nifs.c.o
+[*/137] Building C object src/libAtomVM/CMakeFiles/libAtomVM.dir/atom.c.o
+[*/137] Building C object src/libAtomVM/CMakeFiles/libAtomVM.dir/atom_table.c.o
+[*/137] Building C object src/libAtomVM/CMakeFiles/libAtomVM.dir/avmpack.c.o
+[*/137] Building C object src/libAtomVM/CMakeFiles/libAtomVM.dir/bif.c.o
+[*/137] Building C object src/libAtomVM/CMakeFiles/libAtomVM.dir/bitstring.c.o
+[*/137] Building C object src/libAtomVM/CMakeFiles/libAtomVM.dir/context.c.o
+[*/137] Building C object src/libAtomVM/CMakeFiles/libAtomVM.dir/debug.c.o
+[*/137] Building C object src/libAtomVM/CMakeFiles/libAtomVM.dir/defaultatoms.c.o
+[*/137] Building C object src/libAtomVM/CMakeFiles/libAtomVM.dir/dictionary.c.o
+[*/137] Building C object src/libAtomVM/CMakeFiles/libAtomVM.dir/dist_nifs.c.o
+[*/137] Building C object src/libAtomVM/CMakeFiles/libAtomVM.dir/ets.c.o
+[*/137] Building C object src/libAtomVM/CMakeFiles/libAtomVM.dir/ets_multimap.c.o
+[*/137] Building C object src/libAtomVM/CMakeFiles/libAtomVM.dir/external_term.c.o
+[*/137] Building C object src/libAtomVM/CMakeFiles/libAtomVM.dir/float_utils.c.o
+[*/137] Building C object src/libAtomVM/CMakeFiles/libAtomVM.dir/globalcontext.c.o
+[*/137] Building C object src/libAtomVM/CMakeFiles/libAtomVM.dir/iff.c.o
+[*/137] Building C object src/libAtomVM/CMakeFiles/libAtomVM.dir/interop.c.o
+[*/137] Building C object src/libAtomVM/CMakeFiles/libAtomVM.dir/intn.c.o
+[*/137] Building C object src/libAtomVM/CMakeFiles/libAtomVM.dir/mailbox.c.o
+[*/137] Building C object src/libAtomVM/CMakeFiles/libAtomVM.dir/memory.c.o
+[*/137] Building C object src/libAtomVM/CMakeFiles/libAtomVM.dir/module.c.o
+[*/137] Building C object src/libAtomVM/CMakeFiles/libAtomVM.dir/nifs.c.o
+[*/137] Building C object src/libAtomVM/CMakeFiles/libAtomVM.dir/popcorn/popcorn_nifs.c.o
+[*/137] Building C object src/libAtomVM/CMakeFiles/libAtomVM.dir/port.c.o
+[*/137] Building C object src/libAtomVM/CMakeFiles/libAtomVM.dir/posix_nifs.c.o
+[*/137] Building C object src/libAtomVM/CMakeFiles/libAtomVM.dir/refc_binary.c.o
+[*/137] Building C object src/libAtomVM/CMakeFiles/libAtomVM.dir/resources.c.o
+[*/137] Building C object src/libAtomVM/CMakeFiles/libAtomVM.dir/scheduler.c.o
+[*/137] Building C object src/libAtomVM/CMakeFiles/libAtomVM.dir/stacktrace.c.o
+[*/137] Building C object src/libAtomVM/CMakeFiles/libAtomVM.dir/term.c.o
+[*/137] Building C object src/libAtomVM/CMakeFiles/libAtomVM.dir/timer_list.c.o
+[*/137] Building C object src/libAtomVM/CMakeFiles/libAtomVM.dir/unicode.c.o
+[*/137] Building C object src/libAtomVM/CMakeFiles/libAtomVM.dir/unlocalized.c.o
+[*/137] Building C object src/libAtomVM/CMakeFiles/libAtomVM.dir/utils.c.o
+[*/137] Building C object src/libAtomVM/CMakeFiles/libAtomVM.dir/valueshashtable.c.o
+[*/137] Hashing /inputs/fissionvm/src/libAtomVM/bifs.gperf
+[*/137] Hashing /inputs/fissionvm/src/libAtomVM/nifs.gperf
+[*/137] Hashing /inputs/fissionvm/src/libAtomVM/popcorn/popcorn_nifs.gperf
+[*/137] Linking C executable src/AtomVM.mjs
+[*/137] Linking C static library _deps/mbedtls-build/3rdparty/everest/libeverest.a
+[*/137] Linking C static library _deps/mbedtls-build/3rdparty/p256-m/libp256m.a
+[*/137] Linking C static library _deps/mbedtls-build/library/libmbedcrypto.a
+[*/137] Linking C static library src/lib/liblibAtomVMEmscripten-x86.a
+[*/137] Linking C static library src/libAtomVM/liblibAtomVM.a
+configure: cmake -G Ninja -DCMAKE_BUILD_TYPE=Release -DAVM_BUILD_RUNTIME_ONLY=1 -DAVM_EMSCRIPTEN_ENV=node -DFETCHCONTENT_FULLY_DISCONNECTED=ON -DFETCHCONTENT_SOURCE_DIR_MBEDTLS=/inputs/mbedtls '-DCMAKE_C_FLAGS=-ffile-prefix-map=/inputs/fissionvm=fissionvm -ffile-prefix-map=/inputs/mbedtls=mbedtls -ffile-prefix-map=/outputs/cmake=build -fdebug-prefix-map=/inputs/fissionvm=fissionvm -fdebug-prefix-map=/inputs/mbedtls=mbedtls -fdebug-prefix-map=/outputs/cmake=build' '-DCMAKE_CXX_FLAGS=-ffile-prefix-map=/inputs/fissionvm=fissionvm -ffile-prefix-map=/inputs/mbedtls=mbedtls -ffile-prefix-map=/outputs/cmake=build -fdebug-prefix-map=/inputs/fissionvm=fissionvm -fdebug-prefix-map=/inputs/mbedtls=mbedtls -fdebug-prefix-map=/outputs/cmake=build' /inputs/fissionvm/src/platforms/emscripten -DCMAKE_TOOLCHAIN_FILE=/emsdk/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake -DCMAKE_CROSSCOMPILING_EMULATOR=/emsdk/node/20.18.0_64bit/bin/node
+fatal: not a git repository (or any parent up to mount point /inputs)

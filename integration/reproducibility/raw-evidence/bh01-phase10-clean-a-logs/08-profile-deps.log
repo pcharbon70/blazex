@@ -1,0 +1,82 @@
+Resolving Hex dependencies...
+Resolution completed in 0.101s
+Unchanged:
+  bandit 1.12.5
+  decimal 3.1.1
+  ecto 3.14.2
+  file_system 1.1.1
+  finch 0.23.0
+  glob_ex 0.1.12
+  hpax 1.0.4
+  igniter 0.7.9
+  jason 1.4.5
+  local_live_view 0.1.0
+  mime 2.0.7
+  mint 1.9.3 VULNERABLE!
+    EEF-CVE-2026-82729 (MEDIUM)
+    aka: CVE-2026-82729, GHSA-7p8w-j234-7qc8
+    Quadratic chunk-size parsing in Mint.HTTP1.Parse allows CPU-exhaustion DoS
+    https://osv.dev/vulnerability/EEF-CVE-2026-82729
+
+    EEF-CVE-2026-82728 (HIGH)
+    aka: CVE-2026-82728, GHSA-g83f-2j6r-q6m4
+    Unbounded HTTP/1 status-line and chunk-extension buffering in Mint causes memory-exhaustion DoS
+    https://osv.dev/vulnerability/EEF-CVE-2026-82728
+  nimble_options 1.1.1
+  nimble_pool 1.1.0
+  owl 0.13.1
+  phoenix 1.8.13
+  phoenix_ecto 4.7.0
+  phoenix_html 4.3.0
+  phoenix_live_view 1.2.11
+  phoenix_pubsub 2.3.0
+  phoenix_template 1.0.4
+  plug 1.20.3
+  plug_crypto 2.2.0
+  popcorn 0.3.3
+  req 0.7.4
+  rewrite 1.3.0
+  sourceror 1.12.2
+  spitfire 0.4.0
+  tailwind 0.5.1
+  telemetry 1.4.2
+  text_diff 0.1.0
+  thousand_island 1.5.0
+  websock 0.5.3
+  websock_adapter 0.6.0
+* Getting phoenix (Hex package)
+* Getting phoenix_live_view (Hex package)
+* Getting local_live_view (Hex package)
+* Getting bandit (Hex package)
+* Getting igniter (Hex package)
+* Getting glob_ex (Hex package)
+* Getting jason (Hex package)
+* Getting owl (Hex package)
+* Getting req (Hex package)
+* Getting rewrite (Hex package)
+* Getting sourceror (Hex package)
+* Getting spitfire (Hex package)
+* Getting text_diff (Hex package)
+* Getting finch (Hex package)
+* Getting mime (Hex package)
+* Getting mint (Hex package)
+* Getting nimble_options (Hex package)
+* Getting nimble_pool (Hex package)
+* Getting telemetry (Hex package)
+* Getting hpax (Hex package)
+* Getting plug (Hex package)
+* Getting thousand_island (Hex package)
+* Getting websock (Hex package)
+* Getting plug_crypto (Hex package)
+* Getting ecto (Hex package)
+* Getting file_system (Hex package)
+* Getting phoenix_ecto (Hex package)
+* Getting phoenix_html (Hex package)
+* Getting popcorn (Hex package)
+* Getting tailwind (Hex package)
+* Getting decimal (Hex package)
+* Getting phoenix_template (Hex package)
+* Getting phoenix_pubsub (Hex package)
+* Getting websock_adapter (Hex package)
+You have added/upgraded packages you could sponsor, run `mix hex.sponsor` to learn more
+Found packages with security advisories, see above for details

@@ -1,0 +1,137 @@
+{
+  "schema_version": "1.0.0",
+  "evidence_id": "BX-BH01-PHASE8-COMPATIBILITY-CHROMIUM-0.1",
+  "captured_at": "2026-09-05T11:13:53.265Z",
+  "implementation_revision": "4e6301b55dc9f2e44b848818d14c60606c0476a6",
+  "authority": "required-row",
+  "support_status": "unsupported",
+  "browser": {
+    "type": "chromium",
+    "version": "152.0.7977.75",
+    "os": "linux 6.8.0-51-generic",
+    "architecture": "x64"
+  },
+  "status": "observed",
+  "exact_baseline": {
+    "state": "ready",
+    "manifest_id": "BX-BH01-BROWSER-RUNTIME-MANIFEST-0.1",
+    "manifest_generation": 1,
+    "activation_generation": 1,
+    "profile_manifest_id": "BX-BH01-PHASE-05-PROFILE-ASSETS-0.1",
+    "profile_manifest_sha256": "818ac7b967db6519c766f9d1fff80455cc92d205e3f188252e6da27258ee4aad",
+    "profile_governed_files": 23,
+    "manifest_cache_control": "no-store",
+    "artifact_cache_control": "public, max-age=31536000, immutable",
+    "semantic_state": {
+      "parent_count": 0,
+      "children": [
+        {
+          "key": "alpha",
+          "count": 0
+        },
+        {
+          "key": "beta",
+          "count": 0
+        }
+      ],
+      "field": {
+        "value": "",
+        "valid": false
+      },
+      "dom": {
+        "roots": 1,
+        "nodes": 23,
+        "listeners": 9
+      }
+    }
+  },
+  "mismatch_scenarios": {
+    "loader_manifest": {
+      "name": "loader-manifest",
+      "expected_code": "manifest-schema-unsupported",
+      "state": "failed",
+      "code": "manifest-schema-unsupported",
+      "runtime_ready": false,
+      "loader_stopped": true,
+      "status_code": "manifest-schema-unsupported",
+      "status_correlation": "runtime-activation",
+      "retry_visible": true,
+      "fixture_children": 0,
+      "detected_before_runtime_ready": true,
+      "partial_activation": false
+    },
+    "runtime_bundle": {
+      "name": "runtime-bundle",
+      "expected_code": "artifact-integrity-mismatch",
+      "state": "failed",
+      "code": "artifact-integrity-mismatch",
+      "runtime_ready": false,
+      "loader_stopped": true,
+      "status_code": "artifact-integrity-mismatch",
+      "status_correlation": "runtime-activation",
+      "retry_visible": true,
+      "fixture_children": 0,
+      "detected_before_runtime_ready": true,
+      "partial_activation": false
+    },
+    "artifact_cache": {
+      "name": "artifact-cache",
+      "expected_code": "artifact-integrity-mismatch",
+      "state": "failed",
+      "code": "artifact-integrity-mismatch",
+      "runtime_ready": false,
+      "loader_stopped": true,
+      "status_code": "artifact-integrity-mismatch",
+      "status_correlation": "runtime-activation",
+      "retry_visible": true,
+      "fixture_children": 0,
+      "detected_before_runtime_ready": true,
+      "partial_activation": false
+    },
+    "browser_feature": {
+      "state": "fallback",
+      "decision": "static-server-fallback",
+      "code": "browser-capability-missing",
+      "runtime_ready": false,
+      "retry_visible": true,
+      "fixture_children": 0,
+      "detected_before_runtime_ready": true,
+      "partial_activation": false
+    },
+    "renderer_data": {
+      "code": "fixture-target-missing",
+      "stale_generation": "fixture-generation-stale",
+      "partial_text_after_failure": "before",
+      "final_roots": 0,
+      "partial_activation": false
+    },
+    "server_client_generation": {
+      "code": "bridge-response-identity-mismatch",
+      "failures": 1,
+      "responses": 0,
+      "pending": 0,
+      "partial_activation": false
+    }
+  },
+  "retained_server_adapter_evidence": {
+    "phoenix": "1.8.13",
+    "phoenix_live_view": "1.2.11",
+    "local_live_view": "0.1.0",
+    "descriptor_mismatch": "covered-by-current-exunit-boundary-suite",
+    "adapter_disable": "standalone-dom",
+    "private_data_confinement": "packages/blazex_renderer_dom_liveview",
+    "adjacent_dependency_package_probe": "not-executed-no-locally-available-adjacent-package"
+  },
+  "cache_and_rollback": {
+    "manifest_cache_control": "no-store",
+    "artifact_cache_control": "public, max-age=31536000, immutable",
+    "loader_fetch_policy": "no-store-manifest-and-artifacts",
+    "scoped_client_cache_owner": "none",
+    "cache_invalidation": "not-applicable-no-service-worker-or-client-cache",
+    "retry": "user-controlled-coherent-page-reload",
+    "fresh_baseline_after_mismatches": true,
+    "hidden_semantic_change": false
+  },
+  "page_errors": [],
+  "evidence_sha256": "329aba9ca06de2ed36766c4d758b62f46a26a92a093846a544829b2dd360cf26"
+}

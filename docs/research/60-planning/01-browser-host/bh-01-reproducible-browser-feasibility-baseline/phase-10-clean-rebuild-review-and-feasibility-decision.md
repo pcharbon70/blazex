@@ -33,39 +33,39 @@ support evidence. See the
   versioned feasibility record, and authorize, revise, condition, or block
   BH-02 without converting evidence into product support.
 
-  - [ ] 10.1 Section - Execute independent clean-machine rebuilds.
+  - [x] 10.1 Section - Execute independent clean-machine rebuilds.
 
     Demonstrate that committed source, toolchain, dependency, build, profile,
     scenario, and report inputs are sufficient without hidden workstation
     state or undocumented repairs.
 
-    - [ ] 10.1.1 Task - Provision independent clean environments.
+    - [x] 10.1.1 Task - Provision independent clean environments.
 
       At least two environments need immutable images or complete fingerprints
       and empty project caches.
 
-      - [ ] 10.1.1.1 Subtask - Provision and verify OS/image, architecture, resources, network, credentials/test data, clocks, toolchain, certificate roots, and empty cache/build state.
-      - [ ] 10.1.1.2 Subtask - Record unavailable external services, operating systems, browsers, and mobile devices separately as `[DEFERRED]` with future qualification owner, identity requirements, state, drift, and evidence limitations.
-      - [ ] 10.1.1.3 Subtask - Fail the rebuild on undeclared preinstalled tools, mutable inputs, implicit downloads, local path dependencies, hidden cache, or undocumented manual intervention.
+      - [x] 10.1.1.1 Subtask - Provision and verify OS/image, architecture, resources, network, credentials/test data, clocks, toolchain, certificate roots, and empty cache/build state.
+      - [x] 10.1.1.2 Subtask - Record unavailable external services, operating systems, browsers, and mobile devices separately as `[DEFERRED]` with future qualification owner, identity requirements, state, drift, and evidence limitations.
+      - [x] 10.1.1.3 Subtask - Fail the rebuild on undeclared preinstalled tools, mutable inputs, implicit downloads, local path dependencies, hidden cache, or undocumented manual intervention.
 
-    - [ ] 10.1.2 Task - Rebuild, serve, and execute the complete baseline.
+    - [x] 10.1.2 Task - Rebuild, serve, and execute the complete baseline.
 
       Clean environments must run the same noninteractive workflow from
       acquisition through profile and scenario reports.
 
-      - [ ] 10.1.2.1 Subtask - Acquire dependencies, build debug/release runtime/application/browser artifacts, generate manifests, launch the profile, and verify deployment prerequisites.
-      - [ ] 10.1.2.2 Subtask - Run controlled runtime, local behavior, command, resilience, browser/fallback, and representative measurement suites using canonical scenario identities.
-      - [ ] 10.1.2.3 Subtask - Generate artifact, compatibility, benchmark, proof, risk, and release reports solely from canonical inputs/raw evidence.
-      - [ ] 10.1.2.4 Subtask - Capture commands, logs, durations, network acquisitions, cache effects, environment fingerprints, failures/retries, and operator actions.
+      - [x] 10.1.2.1 Subtask - Acquire dependencies, build debug/release runtime/application/browser artifacts, generate manifests, launch the profile, and verify deployment prerequisites.
+      - [x] 10.1.2.2 Subtask - Run controlled runtime, local behavior, command, resilience, browser/fallback, and representative measurement suites using canonical scenario identities.
+      - [x] 10.1.2.3 Subtask - Generate artifact, compatibility, benchmark, proof, risk, and release reports solely from canonical inputs/raw evidence.
+      - [x] 10.1.2.4 Subtask - Capture commands, logs, durations, network acquisitions, cache effects, environment fingerprints, failures/retries, and operator actions.
 
-    - [ ] 10.1.3 Task - Compare outputs and exercise recovery.
+    - [x] 10.1.3 Task - Compare outputs and exercise recovery.
 
       Equivalent results must be byte-identical or have reviewed bounded
       platform variance.
 
-      - [ ] 10.1.3.1 Subtask - Compare locks, dependency/provenance graphs, artifacts, manifests, binary structure, modules, hashes, sizes, source maps, licenses, reachability, and deployment paths.
-      - [ ] 10.1.3.2 Subtask - Compare active Linux scenario outcomes, normalized traces, browser rows, raw/report hashes, proof/risk states, findings, and unexplained environment differences while verifying deferred rows remain separate.
-      - [ ] 10.1.3.3 Subtask - Rebuild after cache eviction and run one documented rollback/stale-artifact recovery path with integrity and generation checks.
+      - [x] 10.1.3.1 Subtask - Compare locks, dependency/provenance graphs, artifacts, manifests, binary structure, modules, hashes, sizes, source maps, licenses, reachability, and deployment paths.
+      - [x] 10.1.3.2 Subtask - Compare active Linux scenario outcomes, normalized traces, browser rows, raw/report hashes, proof/risk states, findings, and unexplained environment differences while verifying deferred rows remain separate.
+      - [x] 10.1.3.3 Subtask - Rebuild after cache eviction and run one documented rollback/stale-artifact recovery path with integrity and generation checks.
 
   - [ ] 10.2 Section - Close input, proof, risk, and stop ledgers.
 

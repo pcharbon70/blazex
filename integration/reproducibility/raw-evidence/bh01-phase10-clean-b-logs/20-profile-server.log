@@ -1,0 +1,26 @@
+==> blazex_renderer_dom_liveview
+Generated blazex_renderer_dom_liveview app
+==> blazex_phoenix
+Generated blazex_phoenix app
+==> blazex_browser_phoenix
+Compiling 1 file (.ex)
+
+11:48:31.958 [info] Running BlazeXBrowserPhoenix.Endpoint with Bandit 1.12.5 at 127.0.0.1:43116 (http)
+
+11:48:31.960 [info] Access BlazeXBrowserPhoenix.Endpoint at http://localhost:43116
+
+11:49:11.797 [debug] Converted error Bandit.TransportError to 500 response
+
+11:49:11.800 [error] ** (ArgumentError) no "500" html template defined for BlazeXBrowserPhoenix.ErrorView  (the module does not exist)
+    (phoenix_template 1.0.4) lib/phoenix/template.ex:248: Phoenix.Template.render_with_fallback/4
+    (phoenix_template 1.0.4) lib/phoenix/template.ex:126: Phoenix.Template.render_to_iodata/4
+    (phoenix 1.8.13) lib/phoenix/controller.ex:1015: anonymous fn/5 in Phoenix.Controller.template_render_to_iodata/4
+    (telemetry 1.4.2) /workspace/profiles/browser_phoenix/deps/telemetry/src/telemetry.erl:359: :telemetry.span/3
+    (phoenix 1.8.13) lib/phoenix/controller.ex:981: Phoenix.Controller.render_and_send/4
+    (phoenix 1.8.13) lib/phoenix/endpoint/render_errors.ex:85: Phoenix.Endpoint.RenderErrors.instrument_render_and_send/5
+    (phoenix 1.8.13) lib/phoenix/endpoint/render_errors.ex:62: Phoenix.Endpoint.RenderErrors.__catch__/5
+    (bandit 1.12.5) lib/bandit/pipeline.ex:129: Bandit.Pipeline.call_plug!/2
+
+
+11:49:33.720 [notice] SIGTERM received - shutting down
+

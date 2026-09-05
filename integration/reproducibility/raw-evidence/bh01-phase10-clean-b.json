@@ -1,0 +1,493 @@
+{
+  "artifacts": {
+    "browser_bundle_manifest_sha256": "e533fca13147327deafed0ed2e44aea4292b45c83e050001c913c21918c202ee",
+    "profile_file_count": 23,
+    "profile_manifest_sha256": "818ac7b967db6519c766f9d1fff80455cc92d205e3f188252e6da27258ee4aad",
+    "retained_files": [
+      {
+        "path": "bh01-phase10-clean-b-logs/runtime-binary-manifest.json",
+        "sha256": "8db2038a7eb98aeaa772460101776b6b60c9114a88701c9cb1067ca3609b6c11"
+      },
+      {
+        "path": "bh01-phase10-clean-b-logs/browser-bundle-manifest.json",
+        "sha256": "e533fca13147327deafed0ed2e44aea4292b45c83e050001c913c21918c202ee"
+      },
+      {
+        "path": "bh01-phase10-clean-b-logs/profile-assets-manifest.json",
+        "sha256": "818ac7b967db6519c766f9d1fff80455cc92d205e3f188252e6da27258ee4aad"
+      },
+      {
+        "path": "bh01-phase10-clean-b-logs/runtime-debug-web-build.log",
+        "sha256": "fe83c25bde09e26edccef5e3705808ff72c29588aa4de237f17c5338f39a2fb6"
+      },
+      {
+        "path": "bh01-phase10-clean-b-logs/runtime-release-web-build.log",
+        "sha256": "c5d2afbe3587e072f2746555b515eb77edde624a29a98eaf54c8436e528c7c1f"
+      },
+      {
+        "path": "bh01-phase10-clean-b-logs/runtime-release-node-probe-build.log",
+        "sha256": "c5a15538c520e368a16c22a550d0a19b9ddf3162f073e6dd1458cc0509493283"
+      }
+    ],
+    "runtime_manifest_sha256": "8db2038a7eb98aeaa772460101776b6b60c9114a88701c9cb1067ca3609b6c11"
+  },
+  "browser_scenarios": [
+    {
+      "browser": "chromium",
+      "evidence_path": "bh01-phase10-clean-b-logs/browser-chromium-prerequisites.json",
+      "raw_sha256": "b826a828b526db93e1bb094ddc34b2f284370a74db3bc30ccbb9f79eaa33be60",
+      "scenario": "prerequisites",
+      "semantic_sha256": "7b0480af60132dd384597edc2924be489e3f1649757ec5607c27ee0df5e522c4",
+      "status": "observed",
+      "support_status": "unsupported"
+    },
+    {
+      "browser": "chromium",
+      "evidence_path": "bh01-phase10-clean-b-logs/browser-chromium-behavior.json",
+      "raw_sha256": "91f2f20f4fdbe3da673266dd0ee6850c524b7686878b381d9b4d66f3d3e12e9e",
+      "scenario": "behavior",
+      "semantic_sha256": "62d69e13a1c6cebb83d5d03d85c3492cff645bbb47a4ba62f0969e44ae6df50c",
+      "status": "observed",
+      "support_status": "unsupported"
+    },
+    {
+      "browser": "chromium",
+      "evidence_path": "bh01-phase10-clean-b-logs/browser-chromium-accessibility.json",
+      "raw_sha256": "aa5651a5db06d71d7c191ce122fa1287213a31eb9a9be98b80f64971e2490de3",
+      "scenario": "accessibility",
+      "semantic_sha256": "a292feaaaaa787c2fe27bfea63f48eec83cccd6752314eae99878dd6a9fc4206",
+      "status": "observed",
+      "support_status": "unsupported"
+    },
+    {
+      "browser": "chromium",
+      "evidence_path": "bh01-phase10-clean-b-logs/browser-chromium-compatibility.json",
+      "raw_sha256": "9d1c029fd8e7c8c3314a6340cdff6ff0ab47358c3da11f6a6b3fc2867ea048b4",
+      "scenario": "compatibility",
+      "semantic_sha256": "ab6188c4ff428f782aeef036e6688be08bfbe6247fa7e50309276d300a094bd4",
+      "status": "observed",
+      "support_status": "unsupported"
+    },
+    {
+      "browser": "chromium",
+      "evidence_path": "bh01-phase10-clean-b-logs/browser-chromium-measurement.json",
+      "raw_sha256": "d1af4130ffcbfda0f9a0b199abdb3d4460bb048cbd0aefb6f23240c472b0ae9f",
+      "scenario": "measurement",
+      "semantic_sha256": "fe1323e4d16d90a3489b71beea24ec73da0d83ca1f2e7fa13776eaaadeeea180",
+      "status": "observed",
+      "support_status": "unsupported"
+    },
+    {
+      "browser": "firefox",
+      "evidence_path": "bh01-phase10-clean-b-logs/browser-firefox-prerequisites.json",
+      "raw_sha256": "289bd60f29852de77e784251758d07847ac2203ef2712bb6ae8d174ad1c73e6b",
+      "scenario": "prerequisites",
+      "semantic_sha256": "887928f190a98da5a37b6945ea7a2adf2ac0b61d1363354c8dfc92403bea0673",
+      "status": "observed",
+      "support_status": "unsupported"
+    },
+    {
+      "browser": "firefox",
+      "evidence_path": "bh01-phase10-clean-b-logs/browser-firefox-behavior.json",
+      "raw_sha256": "83514f6e92782d8bfc3e0ff4618e944f7e7497701e5d083d8f87ef47002a93d5",
+      "scenario": "behavior",
+      "semantic_sha256": "4c4ee87768597d9a74a41333d7dbb6f6dbb75b23eddb483e0f967f814e358b9d",
+      "status": "observed",
+      "support_status": "unsupported"
+    },
+    {
+      "browser": "firefox",
+      "evidence_path": "bh01-phase10-clean-b-logs/browser-firefox-accessibility.json",
+      "raw_sha256": "89b207ce3b9aec52c4072b807b1c6a6e6da433f8ca000d5d286a0ac55d505e14",
+      "scenario": "accessibility",
+      "semantic_sha256": "ac54a00196a35d53f5d133af65ba06a8ee937d59c282f6601521904857b9271b",
+      "status": "observed",
+      "support_status": "unsupported"
+    },
+    {
+      "browser": "firefox",
+      "evidence_path": "bh01-phase10-clean-b-logs/browser-firefox-compatibility.json",
+      "raw_sha256": "41f91f29c077e1281bf67452f4bb5a8d206603c10cf54c21dded264fa4754c82",
+      "scenario": "compatibility",
+      "semantic_sha256": "3e603f57df45dfa3dcd2a532652276852c9c6852bc9930c9d4433dd67e5942b0",
+      "status": "observed",
+      "support_status": "unsupported"
+    },
+    {
+      "browser": "firefox",
+      "evidence_path": "bh01-phase10-clean-b-logs/browser-firefox-measurement.json",
+      "raw_sha256": "28cfa4f10e357f47e9b02832a8e3945cb06ab1e56cf5a6283203e30239788035",
+      "scenario": "measurement",
+      "semantic_sha256": "5f7e5b15ce29e8250e943e5072695056e4696626e615fb23e390f4e666e682a6",
+      "status": "observed",
+      "support_status": "unsupported"
+    }
+  ],
+  "captured_at": "2026-09-05T11:49:35.740Z",
+  "clean_state": {
+    "dependency_directories_present_before": false,
+    "fixture_mounted_at_canonical_root": true,
+    "generated_directories_present_before": false,
+    "git_archive": true,
+    "git_metadata_present": false,
+    "hex_home_initially_empty": true,
+    "mix_home_initially_empty": true,
+    "npm_cache_initially_empty": true,
+    "undeclared_preinstalled_tools_used": false
+  },
+  "commands": [
+    {
+      "duration_ms": 1099,
+      "id": "hex-install",
+      "log_sha256": "b752d7efb1ce28c071bfd9f37d6aacdc61213b109d2bdead3f0efb0f7a880409",
+      "network": true,
+      "result": "pass"
+    },
+    {
+      "duration_ms": 942,
+      "id": "rebar-install",
+      "log_sha256": "d00c62446c7efe6c2bbee309b4160799cb27523103144eeb2e72cfec0b6e0078",
+      "network": true,
+      "result": "pass"
+    },
+    {
+      "duration_ms": 1114,
+      "id": "fixture-deps",
+      "log_sha256": "a2fad84f6a57c26dfd42c5fa51ee88fb9d5c6391e6e117cca51c7b0ddf7f8dc6",
+      "network": true,
+      "result": "pass"
+    },
+    {
+      "duration_ms": 9927,
+      "id": "fixture-compile",
+      "log_sha256": "0c4ee1b9005d64d842c97170a2dd6dc42263577ffb292ea6b80e952f05052601",
+      "network": false,
+      "result": "pass"
+    },
+    {
+      "duration_ms": 1206,
+      "id": "fixture-package",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "network": false,
+      "result": "pass"
+    },
+    {
+      "duration_ms": 10033,
+      "id": "fixture-test",
+      "log_sha256": "bf02275bb50a4ada80b46f7728a7a8696cfa3a8611752bff059557bdf157ba92",
+      "network": false,
+      "result": "pass"
+    },
+    {
+      "duration_ms": 45,
+      "id": "fixture-manifest",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "network": false,
+      "result": "pass"
+    },
+    {
+      "duration_ms": 2382,
+      "id": "profile-deps",
+      "log_sha256": "7611cacdad512b8299a89e546b55520a013f895288b2700ad775038bba6dff58",
+      "network": true,
+      "result": "pass"
+    },
+    {
+      "duration_ms": 23180,
+      "id": "profile-test",
+      "log_sha256": "606997dcce318db1e2f6e91d15539c01b841928d050adbc9da80bc2a0d814d81",
+      "network": false,
+      "result": "pass"
+    },
+    {
+      "duration_ms": 490541,
+      "id": "runtime-build",
+      "log_sha256": "b6c8316122cfe2eea041a7b16cdf87605751efd4eec819ea214d6060fbf557f3",
+      "network": false,
+      "result": "pass"
+    },
+    {
+      "duration_ms": 68,
+      "id": "runtime-manifest",
+      "log_sha256": "a7d1c0b71d7bb4e892faf45a46665fd8d6cae3986ae02ce5d9af3d4817ee58b9",
+      "network": false,
+      "result": "pass"
+    },
+    {
+      "duration_ms": 1593,
+      "id": "npm-acquire",
+      "log_sha256": "461ea3b4da304d95eadcca361af5ab2694e8d69e478c8014053b4c1837012e8b",
+      "network": true,
+      "result": "pass"
+    },
+    {
+      "duration_ms": 39,
+      "id": "npm-esbuild-install",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "network": false,
+      "result": "pass"
+    },
+    {
+      "duration_ms": 217,
+      "id": "runtime-js-test",
+      "log_sha256": "d6b834eb1bbd2cebdcf4f045131d88a3c53f97d4d0961435077514a55f9b9458",
+      "network": false,
+      "result": "pass"
+    },
+    {
+      "duration_ms": 574,
+      "id": "runtime-js-build",
+      "log_sha256": "f6be05f279b4f34d7f31f607b29db10663d9d6ffaf3e2e2086d1eac1ccc255a3",
+      "network": false,
+      "result": "pass"
+    },
+    {
+      "duration_ms": 140,
+      "id": "renderer-js-test",
+      "log_sha256": "7f520c1dd08674edb770ff3e6c5c49ab2577cdd0c65797665ad387f7c2272f72",
+      "network": false,
+      "result": "pass"
+    },
+    {
+      "duration_ms": 129,
+      "id": "renderer-js-build",
+      "log_sha256": "747a019ba80f729a0cb481ec73579440b6543f24e5325d0b836f75bef08ebff6",
+      "network": false,
+      "result": "pass"
+    },
+    {
+      "duration_ms": 56,
+      "id": "profile-build",
+      "log_sha256": "8c923bc958476434e6bba4586a90a1a03a2f2cd2ed749ff8e4520b62267c35d8",
+      "network": false,
+      "result": "pass"
+    },
+    {
+      "duration_ms": 46,
+      "id": "profile-verify",
+      "log_sha256": "22cbfa57071d15dc25a04a144bdea0e966365a5aa1495ae077d65016b621125f",
+      "network": false,
+      "result": "pass"
+    },
+    {
+      "duration_ms": 1048,
+      "id": "profile-server",
+      "log_sha256": "9e9facc39c1a46142ca9d31b9b1a31023b3e35bd604b821d07f43d608f6d00f1",
+      "network": false,
+      "result": "pass"
+    },
+    {
+      "duration_ms": 2131,
+      "id": "browser-chromium-prerequisites",
+      "log_sha256": "f00f0c8430f73f5f7bcfd3ed3c39326e4ef7f6d855acf873564c20f415fe4f78",
+      "network": false,
+      "result": "pass"
+    },
+    {
+      "duration_ms": 2526,
+      "id": "browser-chromium-behavior",
+      "log_sha256": "e7071c6fe7027a1653b9b171efbbdaf814f6d4e916e3a4a9e03bf978b7ce5eb9",
+      "network": false,
+      "result": "pass"
+    },
+    {
+      "duration_ms": 2592,
+      "id": "browser-chromium-accessibility",
+      "log_sha256": "fb9554e67ad12d076ac0086aa4882215a153d32c1e8154882e4056e9504d5706",
+      "network": false,
+      "result": "pass"
+    },
+    {
+      "duration_ms": 2527,
+      "id": "browser-chromium-compatibility",
+      "log_sha256": "c7196efb3014a30ef364ef0a9569e6696bf5fed530505a78a408b9580de9ac44",
+      "network": false,
+      "result": "pass"
+    },
+    {
+      "duration_ms": 7270,
+      "id": "browser-chromium-measurement",
+      "log_sha256": "34895ba37101b5e828ca4dafba7baf61965968ba42764fb05a9bd9f240b16b80",
+      "network": false,
+      "result": "pass"
+    },
+    {
+      "duration_ms": 5577,
+      "id": "browser-firefox-prerequisites",
+      "log_sha256": "b396ba84bcb1f9b6560d41a6f00429d16624347dc7c6ee6f894a2d1e33eccd41",
+      "network": false,
+      "result": "pass"
+    },
+    {
+      "duration_ms": 6416,
+      "id": "browser-firefox-behavior",
+      "log_sha256": "8f2c709889fb135fd37f64a99ad489c85f1e21e3e40ed62610d4f746df8c0b86",
+      "network": false,
+      "result": "pass"
+    },
+    {
+      "duration_ms": 7599,
+      "id": "browser-firefox-accessibility",
+      "log_sha256": "31b674a0b3584d01de832a6ce6f87947f8d99a864f67631c48cffd9a4172940f",
+      "network": false,
+      "result": "pass"
+    },
+    {
+      "duration_ms": 6538,
+      "id": "browser-firefox-compatibility",
+      "log_sha256": "7f4b144da891a5cb47e62729e5724a06df9e053d3d2c42b1413a6686684babf1",
+      "network": false,
+      "result": "pass"
+    },
+    {
+      "duration_ms": 18417,
+      "id": "browser-firefox-measurement",
+      "log_sha256": "ee813eebc47132e950813b02984f8e633738d4e9d66a7536d9d91e5f16e4e83b",
+      "network": false,
+      "result": "pass"
+    },
+    {
+      "duration_ms": 162,
+      "id": "report-summary",
+      "log_sha256": "2481dca9b046f0aa2ea349dc3b236582c738499a9e0292926280ee4ea8a1edc6",
+      "network": false,
+      "result": "pass"
+    },
+    {
+      "duration_ms": 104,
+      "id": "report-economics",
+      "log_sha256": "760ea0cb972c65a3b7b10ad5888d9a59b5e7529f659ced8809ba70e77220e38b",
+      "network": false,
+      "result": "pass"
+    },
+    {
+      "duration_ms": 114,
+      "id": "report-budgets",
+      "log_sha256": "642c58749f49c2b295cc05c613b1ce2ad2dc68b0c4eeea571445e3950867111b",
+      "network": false,
+      "result": "pass"
+    },
+    {
+      "duration_ms": 167,
+      "id": "report-rerun-attempt",
+      "log_sha256": "00fee2449662d5e0ed705c8fa1990b93005fa254341b84a6048140d2de5314e7",
+      "network": false,
+      "result": "pass"
+    },
+    {
+      "duration_ms": 169,
+      "id": "report-rerun-final",
+      "log_sha256": "00fee2449662d5e0ed705c8fa1990b93005fa254341b84a6048140d2de5314e7",
+      "network": false,
+      "result": "pass"
+    },
+    {
+      "duration_ms": 34,
+      "id": "tamper-rejection",
+      "log_sha256": "60287db3e0f47e9a02851d7bf6f532429bf7bf980d1145c7bd7a77a64c7d0fcd",
+      "network": false,
+      "result": "pass"
+    },
+    {
+      "duration_ms": 55,
+      "id": "profile-restore",
+      "log_sha256": "8c923bc958476434e6bba4586a90a1a03a2f2cd2ed749ff8e4520b62267c35d8",
+      "network": false,
+      "result": "pass"
+    },
+    {
+      "duration_ms": 44,
+      "id": "restored-profile-verify",
+      "log_sha256": "22cbfa57071d15dc25a04a144bdea0e966365a5aa1495ae077d65016b621125f",
+      "network": false,
+      "result": "pass"
+    }
+  ],
+  "deferred_qualification": {
+    "excluded_from_pass": true,
+    "reactivation_milestone": "BH-22",
+    "status": "deferred"
+  },
+  "failures": [],
+  "limitations": [
+    "Both clean executions share one physical Linux host and do not establish cross-machine reproducibility.",
+    "Firefox is a Playwright patched development build and all browsers remain unsupported.",
+    "Representative browser timings are scheduler-sensitive observations, not exact-output comparisons.",
+    "External platform, mobile, Safari, device, and unavailable manual qualification remains deferred to BH-22."
+  ],
+  "manual_actions": [],
+  "physical_host_scope": "same-linux-host-independent-clean-execution-context",
+  "record_id": "BX-BH01-PHASE10-CLEAN-B-0.1",
+  "recovery": {
+    "restored_from_canonical_inputs": true,
+    "restored_profile_sha256": "818ac7b967db6519c766f9d1fff80455cc92d205e3f188252e6da27258ee4aad",
+    "tamper_rejected": true
+  },
+  "reports": [
+    {
+      "id": "summary",
+      "matches_canonical": true,
+      "sha256": "4e8502dfc007f491290fd2304741f6b65bafe640d3db48757cd4efa665e166fa"
+    },
+    {
+      "id": "economics",
+      "matches_canonical": true,
+      "sha256": "b71bfaf536e4979e0fa3fde8b73f0aae32b496c7fee084b8b5fdcd1a4a66aa5d"
+    },
+    {
+      "id": "mitigations",
+      "matches_canonical": true,
+      "sha256": "3cb81005ba139461d4744605cc8448e78a5f0686d01c8774ee022ce12e14848b"
+    },
+    {
+      "id": "budgets",
+      "matches_canonical": true,
+      "sha256": "9b788db7f226890894acb6dee38c5edc6e48dc44a86afaf38c26beef47d3fe23"
+    },
+    {
+      "id": "decision",
+      "matches_canonical": true,
+      "sha256": "5b4db9aa3ad6dce19bfdce71701b53f7f257be563ffc00eceabfaf20ad4a1e85"
+    },
+    {
+      "id": "rerun-attempt",
+      "matches_canonical": true,
+      "sha256": "e1d4d837b07dfd97d172d08b2b4a3709a06789527d857c2281c7a354763e230e"
+    },
+    {
+      "id": "rerun-final",
+      "matches_canonical": true,
+      "sha256": "3a65050f668ee7f1430bbc28b8b47c4a1232efbeea9eed88522656c204ad4b6a"
+    }
+  ],
+  "schema_version": "1.0.0",
+  "source_revision": "4e6301b55dc9f2e44b848818d14c60606c0476a6",
+  "status": "passed",
+  "tools": [
+    {
+      "identity": "docker.io/hexpm/elixir@sha256:8d03cfb52e3fa3f5d83d749942b7c45c966dda48a7c4ba4f069390379b59fc39",
+      "name": "beam-image",
+      "sha256": "a2386c21edd5c612b4ed6e2731daba806177dba55baf977ee456c6e194f60d9f"
+    },
+    {
+      "identity": "docker.io/emscripten/emsdk@sha256:92c97951b9a6835cb5da9592e9d95226f67e09ecd01a541d817a5b4801f235a4",
+      "name": "wasm-image",
+      "sha256": "2a003481ef771a04cc1a7b5c4be03db0b3cb76405aaddac0d27629a5aac322c2"
+    },
+    {
+      "identity": "26.8.1",
+      "name": "node",
+      "sha256": "19235a9b678f84729464c52623f92de130a165452747c6826d3fdc13df3abcc3"
+    },
+    {
+      "identity": "152.0.7977.75",
+      "name": "chrome-for-testing",
+      "sha256": "3c84cfdbadd0b5b9d1943568b67faea54cf818d20ca32a337fd8a68a0d61ac76"
+    },
+    {
+      "identity": "153.0",
+      "name": "playwright-firefox-development-build",
+      "sha256": "26e4198abe0dfb93c339239297008b1319711575d8cbae8e2d5122d2017b29a1"
+    }
+  ]
+}

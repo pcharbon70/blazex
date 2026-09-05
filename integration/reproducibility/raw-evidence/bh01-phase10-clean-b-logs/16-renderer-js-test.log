@@ -1,0 +1,21 @@
+
+> @blazex/renderer-dom-experimental@0.0.0-bh01 test
+> node --test js/test/*.test.js
+
+✔ applies the closed node, relationship, property, move, and removal operations (1.695914ms)
+✔ applies field validity, mutability, and accessible error relationships (0.333643ms)
+✔ normalizes events to bounded value records without retaining the event object (0.813887ms)
+✔ normalizes focus, blur, change, and action events in listener order (0.318228ms)
+✔ rejects unknown operations, arbitrary kinds, undeclared fields, and stale generations (0.480046ms)
+✔ rejects missing targets, duplicate listeners, oversized values, and stale sequence (0.26575ms)
+✔ preflights a whole batch before mutation and supports bounded no-op and burst updates (0.688516ms)
+✔ disposal removes roots/listeners and rejects post-disposal traffic idempotently (0.215817ms)
+✔ adapter source has no generic mutation, selector, network, global, or code escape (2.666749ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 49.14537

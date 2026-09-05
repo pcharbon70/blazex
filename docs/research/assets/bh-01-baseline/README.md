@@ -159,6 +159,11 @@ locations rather than this governance directory.
   — schema-valid conditional decision with retained negative results, evidence
   hashes, unsupported browsers, undecided mobile viability, and explicit Phase
   10 eligibility without authorization.
+- [BH-01 Phase 10 authorization v0.1.0](blazex-bh-01-phase-10-authorization-v0.1.0.json)
+  — repository-owner approval for independent clean rebuilds, ledger closure,
+  multidisciplinary review, baseline versioning, the BH-02 entry decision,
+  one commit per section, one immediately merged PR, and branch cleanup without
+  authorizing BH-02 implementation or support claims.
 
 ## Maintaining this index
 
