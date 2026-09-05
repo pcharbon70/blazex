@@ -53,19 +53,19 @@ Back to milestone: [README](README.md)
       - [x] 7.2.2.2 Subtask - Reject unknown records, kinds, fields, controls, invalid relationships, excessive depth/count/value, and forbidden host data.
       - [x] 7.2.2.3 Subtask - Test deterministic output and all representative slice mappings without loading a platform API.
 
-  - [ ] 7.3 Section - Implement direct platform adapters and execute GTK 4.
+  - [x] 7.3 Section - Implement direct platform adapters and execute GTK 4.
 
-    - [ ] 7.3.1 Task - Add three independent direct-platform materializers.
+    - [x] 7.3.1 Task - Add three independent direct-platform materializers.
 
-      - [ ] 7.3.1.1 Subtask - Implement direct Win32 standard/common control source with no shared toolkit; retain compile/run as deferred.
-      - [ ] 7.3.1.2 Subtask - Implement direct AppKit control source with no shared toolkit; retain compile/run as deferred.
-      - [ ] 7.3.1.3 Subtask - Implement a header-independent direct GTK 4 runtime-ABI adapter and reproducible local build.
+      - [x] 7.3.1.1 Subtask - Implement direct Win32 standard/common control source with no shared toolkit; retain compile/run as deferred.
+      - [x] 7.3.1.2 Subtask - Implement direct AppKit control source with no shared toolkit; retain compile/run as deferred.
+      - [x] 7.3.1.3 Subtask - Implement a header-independent direct GTK 4 runtime-ABI adapter and reproducible local build.
 
-    - [ ] 7.3.2 Task - Execute the available native-control proof.
+    - [x] 7.3.2 Task - Execute the available native-control proof.
 
-      - [ ] 7.3.2.1 Subtask - Materialize a real GtkWindow, GtkBox, GtkLabel, GtkButton, GtkEntry, GtkCheckButton, and GtkListBox under Xvfb.
-      - [ ] 7.3.2.2 Subtask - Observe control types, events, focus, entry/checkbox/list selection, accessible roles, stale rejection, and idempotent disposal.
-      - [ ] 7.3.2.3 Subtask - Record exact GTK/GLib/compiler/display versions and preserve unavailable platform work as deferrals rather than passes.
+      - [x] 7.3.2.1 Subtask - Materialize a real GtkWindow, GtkBox, GtkLabel, GtkButton, GtkEntry, GtkCheckButton, and GtkListBox under Xvfb.
+      - [x] 7.3.2.2 Subtask - Observe control types, events, focus, entry/checkbox/list selection, accessible roles, stale rejection, and idempotent disposal.
+      - [x] 7.3.2.3 Subtask - Record exact GTK/GLib/compiler/display versions and preserve unavailable platform work as deferrals rather than passes.
 
   - [ ] 7.4 Section - Run cross-renderer reconciliation and publish evidence.
 

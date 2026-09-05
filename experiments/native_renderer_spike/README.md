@@ -11,9 +11,22 @@ backend. Shared traces and assertions belong in `integration/conformance`;
 portable contracts and fixes belong in host-neutral packages. No production
 native-renderer support may be claimed from this experiment alone.
 
-Status: BH-02 Phase 7 has activated an experimental Mix backend that lowers
-the existing semantic slice to deterministic, platform-neutral native-control
-batches and the strict BXN1 line protocol. No platform object crosses into
-that backend. Direct adapter implementation and GTK execution follow in
-Section 7.3; Windows and macOS execution remain `[DEFERRED]` until governed
-environments are available.
+Status: BH-02 Phase 7 Section 7.3 now materializes the frozen BXN1 fixture
+through direct platform adapter sources. The Linux adapter compiled against
+the installed GTK 4 runtime ABI and passed under Xvfb with actual GTK controls,
+events, focus, selection, role observations, stale rejection, and idempotent
+disposal. Windows and macOS sources consume the same batch but compilation and
+execution remain `[DEFERRED]` until governed environments are available.
+
+Reproduce the active platform proof with:
+
+```sh
+mix run scripts/write_fixture.exs fixtures/representative-v0.1.0.bxn1 fixtures/stale-update-v0.1.0.bxn1
+python3 scripts/run_gtk4.py --output gtk4-result-v0.1.0.json
+mix test
+```
+
+The passed local result remains experimental and unsupported. In particular,
+the GTK role observations identify adapter work still needed for exact dialog,
+group, list-item, and status semantics; they are not platform accessibility
+qualification.

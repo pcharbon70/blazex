@@ -1,0 +1,81 @@
+{
+  "schema_version": "1.0.0",
+  "experiment": "BH-02 Phase 7 direct GTK native-control spike",
+  "support_state": "experimental-unsupported",
+  "result": "passed",
+  "environment": {
+    "kernel": "6.8.0-51-generic",
+    "architecture": "x86_64",
+    "compiler": "cc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0",
+    "gtk_runtime_package": "4.14.5+ds-0ubuntu0.5",
+    "glib_runtime_package": "2.80.0-6ubuntu3.7",
+    "display": "xvfb-run -a"
+  },
+  "controls": [
+    {
+      "semantic_kind": "surface",
+      "native_type": "GtkWindow",
+      "accessible_role": "GTK_ACCESSIBLE_ROLE_APPLICATION"
+    },
+    {
+      "semantic_kind": "group",
+      "native_type": "GtkBox",
+      "accessible_role": "GTK_ACCESSIBLE_ROLE_GENERIC"
+    },
+    {
+      "semantic_kind": "text",
+      "native_type": "GtkLabel",
+      "accessible_role": "GTK_ACCESSIBLE_ROLE_LABEL"
+    },
+    {
+      "semantic_kind": "action",
+      "native_type": "GtkButton",
+      "accessible_role": "GTK_ACCESSIBLE_ROLE_BUTTON"
+    },
+    {
+      "semantic_kind": "field",
+      "native_type": "GtkEntry",
+      "accessible_role": "GTK_ACCESSIBLE_ROLE_TEXT_BOX"
+    },
+    {
+      "semantic_kind": "selection",
+      "native_type": "GtkCheckButton",
+      "accessible_role": "GTK_ACCESSIBLE_ROLE_CHECKBOX"
+    },
+    {
+      "semantic_kind": "collection",
+      "native_type": "GtkListBox",
+      "accessible_role": "GTK_ACCESSIBLE_ROLE_LIST"
+    },
+    {
+      "semantic_kind": "selection",
+      "native_type": "GtkLabel",
+      "accessible_role": "GTK_ACCESSIBLE_ROLE_LABEL"
+    },
+    {
+      "semantic_kind": "selection",
+      "native_type": "GtkLabel",
+      "accessible_role": "GTK_ACCESSIBLE_ROLE_LABEL"
+    },
+    {
+      "semantic_kind": "text",
+      "native_type": "GtkLabel",
+      "accessible_role": "GTK_ACCESSIBLE_ROLE_LABEL"
+    }
+  ],
+  "services": [
+    {
+      "intent": "file-choice",
+      "native_type": "GtkFileDialog"
+    }
+  ],
+  "observation": "RESULT\tpassed\tcontrols=10\taction=1\tchange=1\tselection_events=3\ttext_selection=1:0:3\tcheck=1\tlist=1\tfocus=1\tstale_rejected=1\tdisposals=1",
+  "deferred": [
+    "Windows compile and execution",
+    "macOS compile and execution",
+    "platform accessibility-tree inspection",
+    "manual screen-reader behavior",
+    "IME and file-dialog interaction",
+    "geometry, pixels, performance, and packaging"
+  ]
+}
