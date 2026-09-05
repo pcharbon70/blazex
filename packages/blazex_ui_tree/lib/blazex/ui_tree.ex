@@ -1,8 +1,17 @@
 defmodule BlazeX.UITree do
   @moduledoc """
-  Experimental BH-02 ownership boundary for the semantic UI representation.
+  Experimental version-1 semantic UI tree.
 
-  Phase 1 activates the package only. Node, identity, layout, token,
-  accessibility, focus, selection, and patch contracts remain unimplemented.
+  Phase 2 owns a bounded node vocabulary, deterministic validation, and
+  traversal. Layout, tokens, accessibility, focus, selection, resources,
+  events, renderer extensions, and patches remain deferred to later phases.
   """
+
+  alias BlazeX.UITree.{Node, ValidationError}
+
+  @spec validate(term()) :: :ok | {:error, ValidationError.t()}
+  def validate(root), do: Node.validate(root)
+
+  @spec preorder(term()) :: {:ok, [Node.t()]} | {:error, ValidationError.t()}
+  def preorder(root), do: Node.preorder(root)
 end

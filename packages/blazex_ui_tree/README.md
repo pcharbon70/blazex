@@ -9,5 +9,7 @@ native-toolkit objects. Renderer-specific lowering belongs in renderer
 packages. The tree may refer to opaque resource identities, but effect and
 resource lifecycle belongs to `blazex_effects`.
 
-Status: experimental BH-02 Phase 1 Mix skeleton. Semantic tree data and APIs
-remain unimplemented until their later authorized phase.
+Status: experimental BH-02 Phase 2 implementation. Version-1 nodes, structural
+identity checks, sibling uniqueness, ancestry validation, and deterministic
+preorder traversal are implemented. Later semantic fields and stable public
+APIs remain deferred.

@@ -1,9 +1,9 @@
 defmodule BlazeX.Core do
   @moduledoc """
-  Experimental BH-02 ownership boundary for portable component evaluation.
+  Experimental host-neutral component-kernel boundary.
 
-  Phase 1 activates the package only. Semantic nodes, component behaviour,
-  lifecycle, state, identity, and event contracts remain unimplemented until
-  their separately authorized phases.
+  BH-02 Phase 2 defines deterministic component identity here. Component
+  evaluation is added in the next section; events, effects, process lifecycle,
+  messages, commands, and disposal remain outside this phase.
   """
 end

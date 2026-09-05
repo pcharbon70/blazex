@@ -39,22 +39,22 @@ Back to milestone: [README](README.md)
       - [x] 2.1.2.2 Subtask - Freeze semantic-tree version 1, a bounded node-kind vocabulary, portable identity/key rules, and deterministic sibling uniqueness requirements.
       - [x] 2.1.2.3 Subtask - Freeze pure/stateful mount, update, replacement, output-validation, and failure semantics without lifecycle effects or renderer work.
 
-  - [ ] 2.2 Section - Implement semantic nodes and deterministic identity.
+  - [x] 2.2 Section - Implement semantic nodes and deterministic identity.
 
     Make identity and tree validity executable in the inward packages without
     introducing later-phase fields.
 
-    - [ ] 2.2.1 Task - Implement portable component and node identity.
+    - [x] 2.2.1 Task - Implement portable component and node identity.
 
-      - [ ] 2.2.1.1 Subtask - Add a structural identity containing root, path, and positive generation with bounded portable key validation.
-      - [ ] 2.2.1.2 Subtask - Preserve identity across update and move, derive child identity deterministically, and increment generation on replacement.
-      - [ ] 2.2.1.3 Subtask - Reject PIDs, references, functions, maps, structs, improper lists, and other opaque terms as identity material.
+      - [x] 2.2.1.1 Subtask - Add a structural identity containing root, path, and positive generation with bounded portable key validation.
+      - [x] 2.2.1.2 Subtask - Preserve identity across update and move, derive child identity deterministically, and increment generation on replacement.
+      - [x] 2.2.1.3 Subtask - Reject PIDs, references, functions, maps, structs, improper lists, and other opaque terms as identity material.
 
-    - [ ] 2.2.2 Task - Implement semantic node version 1.
+    - [x] 2.2.2 Task - Implement semantic node version 1.
 
-      - [ ] 2.2.2.1 Subtask - Add typed text, group, action, field, selection, collection, and surface nodes with identity, optional key, content, and ordered children only.
-      - [ ] 2.2.2.2 Subtask - Validate the complete tree, identity ancestry, duplicate sibling identities/keys, text/content rules, and unknown or malformed structures before acceptance.
-      - [ ] 2.2.2.3 Subtask - Add deterministic traversal and focused positive/negative unit tests without defining events, layout, tokens, accessibility, resources, or renderer extensions.
+      - [x] 2.2.2.1 Subtask - Add typed text, group, action, field, selection, collection, and surface nodes with identity, optional key, content, and ordered children only.
+      - [x] 2.2.2.2 Subtask - Validate the complete tree, identity ancestry, duplicate sibling identities/keys, text/content rules, and unknown or malformed structures before acceptance.
+      - [x] 2.2.2.3 Subtask - Add deterministic traversal and focused positive/negative unit tests without defining events, layout, tokens, accessibility, resources, or renderer extensions.
 
   - [ ] 2.3 Section - Implement portable pure and stateful evaluation.
 
