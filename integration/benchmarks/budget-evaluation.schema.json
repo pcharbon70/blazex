@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://blazex.dev/schemas/bh-01/phase-09-budget-evaluation-1.0.0.json",
+  "title": "BlazeX BH-01 Phase 9 Budget Evaluation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "report_id", "status", "source_revision", "quality_contract", "inputs", "evaluation_policy", "evaluations", "status_counts", "review", "threshold_changes"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "report_id": {"const": "BX-BH01-PHASE9-BUDGET-EVALUATION-0.1"},
+    "status": {"const": "conditional-active-development"},
+    "source_revision": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "quality_contract": {"type": "object", "required": ["path", "sha256", "version", "changed"]},
+    "inputs": {"type": "array", "minItems": 3, "items": {"type": "object", "required": ["path", "sha256"]}},
+    "evaluation_policy": {"type": "object", "required": ["statistic", "aggregate", "variance", "outliers", "deferred", "support_credit"]},
+    "evaluations": {"type": "array", "minItems": 1, "items": {"type": "object", "required": ["budget_id", "scope", "status", "threshold", "observed", "samples", "evidence", "rationale"]}},
+    "status_counts": {"type": "object", "minProperties": 1},
+    "review": {"type": "object", "required": ["sample_adequacy", "variance", "harness", "environment", "deferred_limit"]},
+    "threshold_changes": {"const": []}
+  }
+}

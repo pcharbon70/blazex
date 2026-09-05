@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://blazex.dev/schemas/bh-01/phase-09-stop-decision-1.0.0.json",
+  "title": "BlazeX BH-01 Phase 9 Stop Decision",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "decision_id", "status", "source_revision", "budget_evaluation_ref", "stop_conditions", "active_failures", "required_mitigations", "deferred_obligations", "decision", "phase_10", "prohibited_claims"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "decision_id": {"const": "BX-BH01-PHASE9-STOP-DECISION-0.1"},
+    "status": {"const": "conditional-proceed"},
+    "source_revision": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "budget_evaluation_ref": {"type": "object", "required": ["path", "sha256"]},
+    "stop_conditions": {"type": "array", "minItems": 1, "items": {"type": "object", "required": ["condition", "status", "finding"]}},
+    "active_failures": {"type": "array", "minItems": 1, "items": {"type": "object", "required": ["budget_id", "finding", "disposition"]}},
+    "required_mitigations": {"type": "array", "minItems": 1, "items": {"type": "object", "required": ["mitigation_id", "owner", "due", "expiry", "repeat"]}},
+    "deferred_obligations": {"type": "object", "required": ["path", "sha256", "reactivation", "phase_9_effect", "support_effect"]},
+    "decision": {"type": "object", "required": ["active_linux_development", "framework_work", "mobile_viability", "product_viability", "support"]},
+    "phase_10": {"type": "object", "required": ["eligibility_after_phase_9_completion", "authorized", "required_inputs"]},
+    "prohibited_claims": {"type": "array", "minItems": 1, "items": {"type": "string"}, "uniqueItems": true}
+  }
+}

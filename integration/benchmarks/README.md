@@ -30,6 +30,8 @@ claim is made at this section boundary.
   reactivation contract.
 - `artifact-economics.schema.json` and `mitigation-assessment.schema.json` —
   owned cost attribution and bounded optimization decision contracts.
+- `budget-evaluation.schema.json` and `stop-decision.schema.json` — unchanged
+  quality-contract comparison and conditional continuation contracts.
 - `phase9-metric-definitions.json` — clocks, boundaries, sample policy, budget
   links, and deferred qualification boundary.
 - `phase9_metrics.py` — deterministic nearest-rank statistics and raw sample
@@ -41,6 +43,8 @@ claim is made at this section boundary.
   nearest-rank desktop summary generator.
 - `analyze_phase9.py` — deterministic owner/cache/phase attribution and
   mitigation assessment generator.
+- `evaluate_phase9.py` — deterministic per-environment, aggregate, deferred,
+  and inactive budget evaluator plus Phase 9 stop-decision generator.
 - `benchmark-index.json` — canonical environment/measurement/sample/report index.
 - `environments/`, `samples/`, `raw-evidence/`, and `reports/` — future evidence locations.
 - `environments/bh01-phase8-local-linux.json` — exact local Linux/Chrome
@@ -59,3 +63,6 @@ claim is made at this section boundary.
 - `reports/bh01-phase9-artifact-economics.json` and
   `reports/bh01-phase9-mitigation-assessment.json` — cost ownership, critical
   paths, limitations, and bounded follow-up experiments.
+- `reports/bh01-phase9-budget-evaluation.json` and
+  `reports/bh01-phase9-stop-decision.json` — 52 unchanged-contract evaluations,
+  active failures, required mitigations, and conditional continuation.

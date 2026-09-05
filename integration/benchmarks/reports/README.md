@@ -15,3 +15,13 @@ explicitly warning that this bundle includes runtime/library modules.
 required before/after evidence, owners, tradeoffs, review triggers, and four
 rejected shortcuts. No threshold changed and no estimated saving receives
 budget credit.
+
+`bh01-phase9-budget-evaluation.json` applies the unchanged quality contract to
+52 explicit active, insufficient, inactive, and deferred evaluations. It keeps
+per-environment results separate and uses the worst p95 as the conservative
+active-Linux aggregate.
+
+`bh01-phase9-stop-decision.json` records a conditional proceed decision. The
+unpruned application AVM fails both application-payload thresholds and the
+Firefox development-build timer scenario exceeds the local-event p95 target.
+Required mitigations have owners and repeat rules; Phase 10 is not authorized.

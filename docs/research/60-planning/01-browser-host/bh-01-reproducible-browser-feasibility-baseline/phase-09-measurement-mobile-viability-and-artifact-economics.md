@@ -142,28 +142,28 @@ or mobile viability.
       - [x] 9.4.2.2 Subtask - Reject mitigations that hide required artifacts, remove difficult scenarios, move behavior into JavaScript/server presentation, broaden private coupling, or make builds non-reproducible.
       - [x] 9.4.2.3 Subtask - Record mitigation owner, expected effect, tradeoff, affected proofs/artifacts, browser constraints, repeat requirements, and expiry/review trigger.
 
-  - [ ] 9.5 Section - Compare observations with budgets and stop conditions.
+  - [x] 9.5 Section - Compare observations with budgets and stop conditions.
 
     Treat BH-00 thresholds as proposed gates to calibrate with evidence rather
     than targets to retroactively lower until the candidate passes.
 
-    - [ ] 9.5.1 Task - Produce statistical budget evaluations.
+    - [x] 9.5.1 Task - Produce statistical budget evaluations.
 
       Every evaluation must be reproducible from raw samples and preserve
       environment and variance context.
 
-      - [ ] 9.5.1.1 Subtask - Generate per-environment and aggregate observed/pass/fail/insufficient records for active Linux build, payload, startup, interaction, server, resource, cleanup, and reliability budgets; list deferred environments separately.
-      - [ ] 9.5.1.2 Subtask - Review active sample adequacy, harness overhead, environment variance, outliers, failures, tail percentiles, automation gaps, and the limits imposed by deferred mobile evidence with quality owners.
-      - [ ] 9.5.1.3 Subtask - Require a versioned quality-contract review before changing any threshold, environment, metric boundary, statistic, sample count, or severity.
+      - [x] 9.5.1.1 Subtask - Generate per-environment and aggregate observed/pass/fail/insufficient records for active Linux build, payload, startup, interaction, server, resource, cleanup, and reliability budgets; list deferred environments separately.
+      - [x] 9.5.1.2 Subtask - Review active sample adequacy, harness overhead, environment variance, outliers, failures, tail percentiles, automation gaps, and the limits imposed by deferred mobile evidence with quality owners.
+      - [x] 9.5.1.3 Subtask - Require a versioned quality-contract review before changing any threshold, environment, metric boundary, statistic, sample count, or severity.
 
-    - [ ] 9.5.2 Task - Decide active-environment feasibility and preserve deferred viability obligations.
+    - [x] 9.5.2 Task - Decide active-environment feasibility and preserve deferred viability obligations.
 
       The candidate proceeds toward framework work only with acceptable local
       results or bounded reviewed mitigations that preserve architecture and
       reproducibility. Product-wide and mobile viability remain undecided.
 
-      - [ ] 9.5.2.1 Subtask - Evaluate active Linux payload/artifact and performance risk; record `BX-BH01-PROOF-MOBILE-MEASUREMENT` and mobile-performance risk as `[DEFERRED]` to BH-22.
-      - [ ] 9.5.2.2 Subtask - Record proceed/conditional/repeat/stop recommendation for active development, required mitigations, owner, expiry, repeated phases, deferred qualification, and prohibited support claims.
+      - [x] 9.5.2.1 Subtask - Evaluate active Linux payload/artifact and performance risk; record `BX-BH01-PROOF-MOBILE-MEASUREMENT` and mobile-performance risk as `[DEFERRED]` to BH-22.
+      - [x] 9.5.2.2 Subtask - Record proceed/conditional/repeat/stop recommendation for active development, required mitigations, owner, expiry, repeated phases, deferred qualification, and prohibited support claims.
 
   - [ ] 9.6 Section - Phase 9 Integration Tests and Completion Evidence.
 
