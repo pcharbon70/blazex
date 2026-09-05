@@ -125,27 +125,27 @@ support evidence. See the
       - [x] 10.3.2.2 Subtask - Review active prerequisite/fallback accessibility, keyboard/focus/field observations, deferred manual gaps and browser compatibility, private pins, upgrade/rollback, and unsupported combinations.
       - [x] 10.3.2.3 Subtask - Review statistical validity, explicitly undecided mobile viability, failures/resources, artifact reachability, licenses/notices, dependency risks, source maps, generated evidence, and future SBOM/release work.
 
-  - [ ] 10.4 Section - Version the reproducible feasibility baseline.
+  - [x] 10.4 Section - Version the reproducible feasibility baseline.
 
     Freeze immutable identities for the exact tools, dependencies, artifacts,
     environments, scenarios, observations, limitations, and reviews accepted by
     BH-01.
 
-    - [ ] 10.4.1 Task - Publish canonical machine-readable baseline records.
+    - [x] 10.4.1 Task - Publish canonical machine-readable baseline records.
 
       Later work must detect when any fact it relies on has changed.
 
-      - [ ] 10.4.1.1 Subtask - Publish schema/data/release identity, source/tool revisions, locks, build flags, profile composition, artifact-manifest hash, browser matrix, scenario/report hashes, evidence IDs, findings, risks, and stop outcomes.
-      - [ ] 10.4.1.2 Subtask - Bind every generated view to canonical hashes and add validators for stale source, missing active evidence, omitted deferred evidence, forbidden status, changed environment, incomplete active matrix, and unexplained artifact drift.
+      - [x] 10.4.1.1 Subtask - Publish schema/data/release identity, source/tool revisions, locks, build flags, profile composition, artifact-manifest hash, browser matrix, scenario/report hashes, evidence IDs, findings, risks, and stop outcomes.
+      - [x] 10.4.1.2 Subtask - Bind every generated view to canonical hashes and add validators for stale source, missing active evidence, omitted deferred evidence, forbidden status, changed environment, incomplete active matrix, and unexplained artifact drift.
 
-    - [ ] 10.4.2 Task - Publish navigable reports and supersession control.
+    - [x] 10.4.2 Task - Publish navigable reports and supersession control.
 
       Human review needs clear material states without turning generated reports
       into independent truth.
 
-      - [ ] 10.4.2.1 Subtask - Generate release, compatibility/limitation, artifact, benchmark, proof, risk, finding, and environment indexes distinguishing observed/passed/failed/conditional/unsupported/untested/deferred/historical states.
-      - [ ] 10.4.2.2 Subtask - Define invalidation, rollback, amendment, and supersession rules for changed runtime/dependency/API/browser/environment/build/scenario/mitigation/threshold inputs.
-      - [ ] 10.4.2.3 Subtask - Preserve prior evidence, require affected active phases/proofs to repeat before a new baseline replaces the current identity, and reactivate deferred proofs when their environment becomes available or BH-22 begins.
+      - [x] 10.4.2.1 Subtask - Generate release, compatibility/limitation, artifact, benchmark, proof, risk, finding, and environment indexes distinguishing observed/passed/failed/conditional/unsupported/untested/deferred/historical states.
+      - [x] 10.4.2.2 Subtask - Define invalidation, rollback, amendment, and supersession rules for changed runtime/dependency/API/browser/environment/build/scenario/mitigation/threshold inputs.
+      - [x] 10.4.2.3 Subtask - Preserve prior evidence, require affected active phases/proofs to repeat before a new baseline replaces the current identity, and reactivate deferred proofs when their environment becomes available or BH-22 begins.
 
   - [ ] 10.5 Section - Make the BH-02 entry decision.
 

@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://blazex.dev/schemas/bh01-feasibility-baseline-v0.1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "baseline_id", "baseline_version", "status", "source_revision", "source_bindings", "tools", "dependency_inputs", "artifact_identity", "environments", "browser_scenarios", "observations", "closure_inventory", "review", "limitations", "generated_views", "supersession", "support_status", "prohibited_claims"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "baseline_id": {"const": "BX-BH01-FEASIBILITY-BASELINE-0.1.0"},
+    "baseline_version": {"const": "0.1.0"},
+    "status": {"const": "candidate-reproducible-proceed-with-bounded-conditions"},
+    "source_revision": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "source_bindings": {"type": "array", "minItems": 26, "items": {"$ref": "#/$defs/binding"}},
+    "tools": {"type": "array", "minItems": 5},
+    "dependency_inputs": {"type": "array", "minItems": 6, "items": {"$ref": "#/$defs/binding"}},
+    "artifact_identity": {
+      "type": "object", "additionalProperties": false,
+      "required": ["runtime_manifest_sha256", "browser_bundle_manifest_sha256", "profile_manifest_sha256", "profile_file_count", "decoded_bytes", "brotli_bytes", "request_count", "source_maps", "dominant_cost"],
+      "properties": {
+        "runtime_manifest_sha256": {"$ref": "#/$defs/hash"}, "browser_bundle_manifest_sha256": {"$ref": "#/$defs/hash"}, "profile_manifest_sha256": {"$ref": "#/$defs/hash"},
+        "profile_file_count": {"const": 23}, "decoded_bytes": {"type": "integer"}, "brotli_bytes": {"type": "integer"}, "request_count": {"type": "integer"}, "source_maps": {"type": "array"}, "dominant_cost": {"type": "string"}
+      }
+    },
+    "environments": {
+      "type": "object", "additionalProperties": false, "required": ["physical_host_scope", "active", "deferred"],
+      "properties": {
+        "physical_host_scope": {"const": "one-linux-host-two-independent-clean-execution-contexts"},
+        "active": {"type": "array", "minItems": 2, "maxItems": 2},
+        "deferred": {"type": "array", "minItems": 6, "maxItems": 6}
+      }
+    },
+    "browser_scenarios": {"type": "array", "minItems": 10, "maxItems": 10},
+    "observations": {"type": "object", "required": ["budget_status_counts", "proof_state_counts", "risk_state_counts", "stop_state_counts", "finding_disposition_counts", "exceptions"]},
+    "closure_inventory": {
+      "type": "object", "additionalProperties": false,
+      "required": ["inputs", "proof_obligations", "risks", "stop_conditions", "findings", "exceptions"],
+      "properties": {
+        "inputs": {"type": "array", "minItems": 8, "maxItems": 8},
+        "proof_obligations": {"type": "array", "minItems": 10, "maxItems": 10},
+        "risks": {"type": "array", "minItems": 8, "maxItems": 8},
+        "stop_conditions": {"type": "array", "minItems": 5, "maxItems": 5},
+        "findings": {"type": "array", "minItems": 30, "maxItems": 30},
+        "exceptions": {"type": "array", "maxItems": 0}
+      }
+    },
+    "review": {"type": "object", "required": ["record_id", "sha256", "result", "lenses", "condition_ids", "bh02_authorized"]},
+    "limitations": {"type": "array", "minItems": 8, "items": {"type": "string"}},
+    "generated_views": {"type": "array", "minItems": 8, "maxItems": 8, "items": {"type": "string"}},
+    "supersession": {
+      "type": "object", "additionalProperties": false,
+      "required": ["immutable", "supersedes", "next_version_must_name_this_baseline", "invalidation_triggers", "rules"],
+      "properties": {
+        "immutable": {"const": true}, "supersedes": {"type": "null"}, "next_version_must_name_this_baseline": {"const": true},
+        "invalidation_triggers": {"type": "array", "minItems": 9, "maxItems": 9}, "rules": {"type": "array", "minItems": 5}
+      }
+    },
+    "support_status": {"const": "unsupported"},
+    "prohibited_claims": {"type": "array", "minItems": 7}
+  },
+  "$defs": {
+    "hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "binding": {
+      "type": "object", "additionalProperties": false, "required": ["id", "role", "state", "path", "sha256"],
+      "properties": {"id": {"type": "string"}, "role": {"type": "string"}, "state": {"type": "string"}, "path": {"type": "string"}, "sha256": {"$ref": "#/$defs/hash"}}
+    }
+  }
+}

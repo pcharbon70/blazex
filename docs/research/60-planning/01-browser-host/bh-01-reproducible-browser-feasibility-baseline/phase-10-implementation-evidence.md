@@ -121,10 +121,43 @@ claims.
 - [Review schema](../../../../../integration/reproducibility/feasibility-review.schema.json)
 - [Review generator and validator](../../../../../integration/reproducibility/conduct_phase10_reviews.py)
 
+## Section 10.4 — Versioned feasibility baseline
+
+`BX-BH01-FEASIBILITY-BASELINE-0.1.0` freezes the candidate result against 29
+source/evidence bindings, seven exact dependency inputs, the pinned tool list,
+three artifact-manifest identities, ten active browser scenarios, the complete
+closure inventory, eleven review lenses, nine conditions, six deferred
+environment obligations, limitations, and prohibited claims. The baseline is
+`candidate-reproducible-proceed-with-bounded-conditions`; it is not a product
+release and keeps BH-02 authorization false.
+
+Eight generated indexes expose release, compatibility/limitations, artifacts,
+benchmarks, proofs, risks, findings, and environments. Every index names the
+baseline ID and canonical JSON hash and is regenerated solely from the
+baseline. Validators reject stale source hashes, missing active or deferred
+evidence, changed scenario identities, changed generated-view inventory,
+incomplete invalidation triggers, support promotion, and implicit BH-02
+authorization.
+
+The supersession contract treats this identity and all favorable and
+unfavorable evidence as immutable. Source, tool/build-path, dependency/private
+API, runtime/OTP, browser, platform/device, scenario/normalization,
+mitigation/profile, or quality-threshold changes invalidate affected evidence.
+A new version must name this baseline, explain changed bindings, repeat affected
+proofs, and reactivate deferred work when the environment appears or BH-22
+starts. Rollback selects an immutable prior baseline; it never rewrites one.
+
+### Canonical evidence
+
+- [BH-01 release asset index](../../../assets/bh-01-release/README.md)
+- [Feasibility baseline](../../../assets/bh-01-release/blazex-bh-01-feasibility-baseline-v0.1.0.json)
+- [Generated release index](../../../assets/bh-01-release/blazex-bh-01-release-index-v0-1-0.md)
+- [Baseline generator and validator](../../../../../integration/reproducibility/version_phase10_baseline.py)
+
 ## Remaining Phase 10 work
 
-Sections 10.4–10.6 remain open. Review does not itself version the baseline,
-authorize BH-02, or complete BH-01.
+Sections 10.5–10.6 remain open. Versioning the reviewed candidate does not
+itself authorize BH-02 or complete BH-01.
 
 ## Connections
 

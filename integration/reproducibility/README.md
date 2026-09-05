@@ -38,3 +38,8 @@ lenses, nine owned conditions, and six candidate-stack alternatives. It binds
 the review to the exact closure-ledger hash and rejects missing challenges,
 unknown conditions, stale evidence, support promotion, or implicit BH-02
 authorization.
+
+`version_phase10_baseline.py` freezes the reviewed candidate, validates every
+source and dependency hash, and generates the eight navigable indexes under
+`docs/research/assets/bh-01-release`. Its supersession policy preserves prior
+evidence and invalidates affected proofs on any governed identity change.
