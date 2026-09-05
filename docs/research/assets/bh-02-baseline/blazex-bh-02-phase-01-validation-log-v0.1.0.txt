@@ -1,0 +1,39 @@
+BH-02 Phase 1 normalized validation log
+Recorded: 2026-09-05T13:52:47Z
+Base: 8b732641910ebbdf28dd1c8a4b4a9fc435c820ce
+Branch: codex/bh-02-phase-01-activation
+
+PASS mix format --check-formatted: 7/7 activated Mix projects
+PASS mix test: 7/7 activated Mix projects, 7 tests, 0 failures
+PASS python3 validate_bh02_activation.py
+PASS python3 -m unittest test_validate_bh02_activation.py: 7 tests
+PASS python3 validate_archive.py: 171 documents, 22 directories, 1216 links, 50 sources
+PASS python3 -m unittest test_validate_archive.py: 8 tests
+PASS python3 validate_bh01_activation.py
+PASS python3 -m unittest test_validate_bh01_activation.py: 13 tests
+PASS python3 validate_bh00_governance.py
+PASS python3 -m unittest test_validate_bh00_governance.py: 25 tests
+PASS python3 generate_bh00_release.py --check
+PASS git diff --check
+
+Negative cases exercised:
+- missing BH-02 owner authorization
+- incomplete inherited conditions
+- extra activation boundary
+- forbidden portable-source token
+- external/unapproved Mix dependency
+- false native-support state
+
+Evidence boundary:
+- no external dependency or lockfile
+- no semantic component implementation
+- no renderer output or canonical trace
+- no native control implementation
+- no browser result
+- no quality-budget pass
+- all support states remain unsupported
+
+Initial inherited-validator failures were retained in the implementation
+evidence narrative. The accepted BH-00 source-bound files were restored, and
+the BH-00/BH-01 validators now permit only complete, explicitly authorized
+successor activation records.

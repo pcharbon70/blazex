@@ -20,7 +20,7 @@
     {"id": "deterministic-headless-renderer-traces", "state": "planned-unimplemented", "phase": 5},
     {"id": "minimal-dom-lowering", "state": "planned-unimplemented", "phase": 6},
     {"id": "limited-direct-native-control-spike", "state": "planned-unimplemented", "phase": 7},
-    {"id": "forbidden-dependency-leakage-checks", "state": "phase-1-in-progress", "phase": 1}
+    {"id": "forbidden-dependency-leakage-checks", "state": "implemented-phase-1", "phase": 1}
   ],
   "inherited_condition_ids": [
     "BX-BH01-CONDITION-AVM-REACHABILITY",

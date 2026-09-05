@@ -10,10 +10,9 @@ runtime, a DOM renderer, and optional Phoenix or Plug integration. The
 architecture deliberately leaves room for future native-control, WebView, and
 standalone WebAssembly hosts without making browser concepts part of the core.
 
-This repository is an experimental implementation scaffold. BH-01 activated
-the browser-feasibility projects, and BH-02 Phase 1 activates the host-neutral
-foundation and headless composition. Those projects remain pre-public and do
-not establish framework APIs or support claims.
+This repository is currently an architecture and research scaffold. The
+directories below are tracked with responsibility and dependency-boundary
+documents; they are not Mix or JavaScript projects yet.
 
 ## Repository structure
 

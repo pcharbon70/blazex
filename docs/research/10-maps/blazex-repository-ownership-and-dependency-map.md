@@ -117,7 +117,7 @@ claims require integration evidence.
 
 | Directory | Question | Promotion boundary |
 | --- | --- | --- |
-| `experiments/native_renderer_spike` | Can the BH-02 semantic vertical slice create direct Win32, AppKit, and GTK controls without browser or platform types in portable code? | shared contracts and traces move to packages/integration; no supported native package exists until a later decision and evidence gate |
+| `experiments/native_renderer_spike` | Can the BH-02 semantic vertical slice create actual toolkit controls without browser types in portable code? | shared contracts and traces move to packages/integration; no supported native package exists until a later decision and evidence gate |
 
 An experiment must state its question, completion criteria, removal criteria,
 and evidence destinations. It cannot publish support claims, become a hidden
@@ -189,8 +189,8 @@ The following are architecture options, not current directories or commitments:
 - desktop execution-host adapters;
 - WebView packaging adapters;
 - native/non-browser AtomVM runtime adapters;
-- platform-neutral native renderer helpers;
-- direct platform-native renderer backends;
+- toolkit-neutral native renderer helpers;
+- toolkit-specific native renderer backends;
 - standalone Wasm host adapters; and
 - custom-scene/GPU renderer packages.
 

@@ -16,7 +16,7 @@ aliases:
 
 Back to milestone: [README](README.md)
 
-- [ ] 1 Phase - Authorization, Input Reconciliation, and Foundation Activation.
+- [x] 1 Phase - Authorization, Input Reconciliation, and Foundation Activation.
 
   Convert the conditional BH-02 handoff into an auditable start, activate only
   the host-neutral foundation needed by later contract work, and prove that
@@ -72,20 +72,20 @@ Back to milestone: [README](README.md)
       - [x] 1.3.2.2 Subtask - Scan portable manifests and sources for forbidden browser, server, runtime, DOM, JavaScript, Qt, wxWidgets, and platform-object leakage.
       - [x] 1.3.2.3 Subtask - Add negative tests for unauthorized branches, stale inputs, extra projects, forbidden dependencies/tokens, and false implementation/support claims.
 
-  - [ ] 1.4 Section - Run the Phase 1 integration gate and publish evidence.
+  - [x] 1.4 Section - Run the Phase 1 integration gate and publish evidence.
 
     Demonstrate that authorization, activation, and enforcement work together
     before any semantic contract is implemented.
 
-    - [ ] 1.4.1 Task - Execute the complete Phase 1 gate.
+    - [x] 1.4.1 Task - Execute the complete Phase 1 gate.
 
-      - [ ] 1.4.1.1 Subtask - Run all package/profile tests, formatting checks, BH-02 validator tests, archive validation, relevant inherited validators, and patch hygiene checks.
-      - [ ] 1.4.1.2 Subtask - Confirm no external dependency, lockfile, semantic component implementation, renderer output, native control, browser result, support state, or quality-budget pass was introduced.
+      - [x] 1.4.1.1 Subtask - Run all package/profile tests, formatting checks, BH-02 validator tests, archive validation, relevant inherited validators, and patch hygiene checks.
+      - [x] 1.4.1.2 Subtask - Confirm no external dependency, lockfile, semantic component implementation, renderer output, native control, browser result, support state, or quality-budget pass was introduced.
 
-    - [ ] 1.4.2 Task - Publish reproducible completion evidence.
+    - [x] 1.4.2 Task - Publish reproducible completion evidence.
 
-      - [ ] 1.4.2.1 Subtask - Record tool identities, commands, project inventory, hashes, negative cases, limitations, deferred evidence, and section commits.
-      - [ ] 1.4.2.2 Subtask - Record a truthful pass or stop decision and leave Phase 2 unauthorized.
+      - [x] 1.4.2.1 Subtask - Record tool identities, commands, project inventory, hashes, negative cases, limitations, deferred evidence, and section commits.
+      - [x] 1.4.2.2 Subtask - Record a truthful pass or stop decision and leave Phase 2 unauthorized.
 
 ## Section delivery rule
 
@@ -99,6 +99,7 @@ external dependency and implements no stable semantic or renderer API.
 - [BH-02 entry manifest](../../../assets/bh-01-release/blazex-bh-02-entry-manifest-v0-1-0.md)
 - [BH-02 authorization](../../../assets/bh-02-baseline/blazex-bh-02-authorization-v0.1.0.json)
 - [Repository ownership map](../../../10-maps/blazex-repository-ownership-and-dependency-map.md)
+- [Phase 1 implementation evidence](phase-01-implementation-evidence.md)
 
 ## Sources
 

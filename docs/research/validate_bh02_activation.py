@@ -105,7 +105,7 @@ def validate_ledger(ledger: dict[str, Any], entry: dict[str, Any]) -> None:
     outputs = ledger.get("required_outputs", [])
     _require([record.get("id") for record in outputs] == EXPECTED_OUTPUT_IDS, "required-output ledger is incomplete or reordered")
     _require(all(record.get("state") == "planned-unimplemented" for record in outputs[:-1]), "future output overclaims implementation")
-    _require(outputs[-1].get("state") == "phase-1-in-progress", "Phase 1 validation output has an invalid state")
+    _require(outputs[-1].get("state") == "implemented-phase-1", "Phase 1 validation output has an invalid state")
     _require(ledger.get("inherited_condition_ids") == [record["id"] for record in entry["conditions"]], "inherited conditions diverge")
     _require(ledger.get("repository_boundaries") == entry["repository_boundaries"], "repository boundary handoff diverges")
     _require(ledger.get("inherited_forbidden_leakage") == entry["forbidden_leakage"], "forbidden-leakage handoff diverges")

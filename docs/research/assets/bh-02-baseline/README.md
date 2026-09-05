@@ -42,6 +42,8 @@ not belong here.
 - [BH-02 Phase 1 authorization](blazex-bh-02-authorization-v0.1.0.json)
 - [BH-02 entry ledger](blazex-bh-02-entry-ledger-v0.1.0.json)
 - [BH-02 repository activation](blazex-bh-02-repository-activation-v0.1.0.json)
+- [BH-02 Phase 1 completion decision](blazex-bh-02-phase-01-completion-v0.1.0.json)
+- [BH-02 Phase 1 normalized validation log](blazex-bh-02-phase-01-validation-log-v0.1.0.txt)
 
 ## Maintaining this index
 

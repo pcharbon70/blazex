@@ -43,9 +43,9 @@ renumbered.
 ### Subdirectories
 
 - [01 — Browser host](01-browser-host/README.md) — active first implementation
-  stream: BH-00 and BH-01 are complete, and the explicitly authorized BH-02
-  Phase 1 activates the host-neutral foundation without yet implementing its
-  semantic contracts.
+  stream: BH-00 and BH-01 are complete, BH-02 Phase 1 has activated and
+  validated the host-neutral foundation, and Phase 2 is eligible but not
+  authorized.
 
 ### Documents
 

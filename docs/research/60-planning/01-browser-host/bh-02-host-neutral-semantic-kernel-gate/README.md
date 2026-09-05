@@ -34,7 +34,9 @@ The repository owner explicitly authorized BH-02 Phase 1 on 2026-09-05 and
 requested section-ordered implementation, one commit per section, one pull
 request for the phase, and cleanup of the feature branch after returning to a
 synchronized `main`. Only Phase 1 is authorized. Phases 2–8 remain planned and
-may not begin without a later repository-owner request.
+may not begin without a later repository-owner request. The completed gate and
+its reproducible command record are preserved in the
+[Phase 1 implementation evidence](phase-01-implementation-evidence.md).
 
 ## What belongs here
 
@@ -65,8 +67,8 @@ milestone work.
 
 | Phase | Status | Delivery | Dependency |
 | --- | --- | --- | --- |
-| [1 — Authorization, Input Reconciliation, and Foundation Activation](phase-01-authorization-input-reconciliation-and-foundation-activation.md) | active — explicitly authorized | Bind the BH-01 handoff, activate only the neutral foundation projects and evidence locations, and prove their dependency/leakage boundary. | Completed BH-01 and explicit authorization |
-| 2 — Semantic Nodes, Identity, and Portable Component Evaluation | planned — not authorized | Define the first versioned semantic node/identity vocabulary and the smallest pure/stateful component evaluation contract. | Phase 1 |
+| [1 — Authorization, Input Reconciliation, and Foundation Activation](phase-01-authorization-input-reconciliation-and-foundation-activation.md) | complete — gate passed | Bind the BH-01 handoff, activate only the neutral foundation projects and evidence locations, and prove their dependency/leakage boundary. | Completed BH-01 and explicit authorization |
+| 2 — Semantic Nodes, Identity, and Portable Component Evaluation | eligible — not authorized | Define the first versioned semantic node/identity vocabulary and the smallest pure/stateful component evaluation contract. | Phase 1 |
 | 3 — Events, Effects, Capabilities, and Resource Ownership | planned — not authorized | Define validated semantic events and generation-scoped effect/resource lifecycles without host objects. | Phase 2 |
 | 4 — Layout, Tokens, Accessibility, Focus, and Selection Intent | planned — not authorized | Complete the portable intent needed by the representative interaction slice. | Phases 2–3 |
 | 5 — Renderer Lifecycle and Deterministic Headless Oracle | planned — not authorized | Implement renderer negotiation, mount/update/dispose behavior, canonical normalization, and trace fixtures. | Phases 2–4 |
@@ -113,6 +115,7 @@ first portable contract version without making a support claim.
 ### Documents
 
 - [Phase 1 — Authorization, Input Reconciliation, and Foundation Activation](phase-01-authorization-input-reconciliation-and-foundation-activation.md)
+- [Phase 1 — Implementation Evidence](phase-01-implementation-evidence.md)
 
 ## Maintaining this index
 

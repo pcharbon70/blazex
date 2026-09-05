@@ -48,8 +48,8 @@ proceed decision, retained payload/timer failures, and representative rerun
 drift. BH-01 is complete with a proceed-with-bounded-conditions decision after
 two independent clean execution contexts and the milestone-wide integration
 gate passed. The repository owner explicitly authorized BH-02 Phase 1 on
-2026-09-05; BH-02 Phases 2–8 and later milestones retain their own approval
-boundaries.
+2026-09-05; its activation and validation gate passed. BH-02 Phase 2 is
+eligible but not authorized, and later work retains its own approval boundary.
 
 ## Index
 
@@ -57,7 +57,7 @@ boundaries.
 
 - [BH-00 — Product Boundary, Catalog, and Acceptance Contract](bh-00-product-boundary-catalog-and-acceptance-contract/README.md) — six-phase plan that freezes vocabulary, product scope, catalog dispositions, quality budgets, and acceptance traceability before BH-01 implementation begins.
 - [BH-01 — Reproducible Browser Feasibility Baseline](bh-01-reproducible-browser-feasibility-baseline/README.md) — completed need-driven plan with a proceed-with-bounded-conditions decision; external browser qualification remains deferred, and its immutable entry artifact records the pre-authorization BH-02 state.
-- [BH-02 — Host-Neutral Semantic Kernel Gate](bh-02-host-neutral-semantic-kernel-gate/README.md) — active eight-phase contract and cross-renderer proof plan; only Phase 1 authorization, input reconciliation, foundation activation, and validation is currently authorized.
+- [BH-02 — Host-Neutral Semantic Kernel Gate](bh-02-host-neutral-semantic-kernel-gate/README.md) — eight-phase contract and cross-renderer proof plan; Phase 1 activation and validation is complete, while Phase 2 is eligible but not authorized.
 
 ### Documents
 
