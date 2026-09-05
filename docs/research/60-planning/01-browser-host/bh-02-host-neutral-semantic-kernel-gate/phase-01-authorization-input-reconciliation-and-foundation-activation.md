@@ -38,23 +38,23 @@ Back to milestone: [README](README.md)
       - [x] 1.1.2.2 Subtask - Import all nine required outputs, nine inherited conditions, repository boundaries, forbidden leakage, limitations, and repeat obligations into the BH-02 entry ledger without rewriting their evidence state.
       - [x] 1.1.2.3 Subtask - Reconcile the native proof with the direct Win32/AppKit/GTK decision and exclude Qt/wxWidgets from active or transitive use.
 
-  - [ ] 1.2 Section - Activate the host-neutral project boundaries.
+  - [x] 1.2 Section - Activate the host-neutral project boundaries.
 
     Initialize only the packages and profile required for later portable
     contracts, with experimental module roots and explicit inward dependency
     direction.
 
-    - [ ] 1.2.1 Task - Activate the contract-owning packages.
+    - [x] 1.2.1 Task - Activate the contract-owning packages.
 
-      - [ ] 1.2.1.1 Subtask - Initialize independent Mix projects for `blazex_core`, `blazex_effects`, `blazex_ui_tree`, and `blazex_renderer` with ownership metadata and boundary tests.
-      - [ ] 1.2.1.2 Subtask - Give each project only its architecture-approved inward path dependencies and no external dependency or lockfile.
-      - [ ] 1.2.1.3 Subtask - Mark all module roots experimental and prohibit semantic implementation before its later authorized phase.
+      - [x] 1.2.1.1 Subtask - Initialize independent Mix projects for `blazex_core`, `blazex_effects`, `blazex_ui_tree`, and `blazex_renderer` with ownership metadata and boundary tests.
+      - [x] 1.2.1.2 Subtask - Give each project only its architecture-approved inward path dependencies and no external dependency or lockfile.
+      - [x] 1.2.1.3 Subtask - Mark all module roots experimental and prohibit semantic implementation before its later authorized phase.
 
-    - [ ] 1.2.2 Task - Activate the oracle, test support, and headless composition.
+    - [x] 1.2.2 Task - Activate the oracle, test support, and headless composition.
 
-      - [ ] 1.2.2.1 Subtask - Initialize `blazex_renderer_headless` and `blazex_test` as independent Mix projects with inward-only development dependencies.
-      - [ ] 1.2.2.2 Subtask - Initialize `profiles/headless` as an executable test composition without browser, server, runtime-adapter, or native dependencies.
-      - [ ] 1.2.2.3 Subtask - Compile and test every activated project independently without claiming renderer or component behavior.
+      - [x] 1.2.2.1 Subtask - Initialize `blazex_renderer_headless` and `blazex_test` as independent Mix projects with inward-only development dependencies.
+      - [x] 1.2.2.2 Subtask - Initialize `profiles/headless` as an executable test composition without browser, server, runtime-adapter, or native dependencies.
+      - [x] 1.2.2.3 Subtask - Compile and test every activated project independently without claiming renderer or component behavior.
 
   - [ ] 1.3 Section - Establish repository and evidence governance.
 

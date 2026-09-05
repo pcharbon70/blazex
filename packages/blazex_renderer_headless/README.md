@@ -7,6 +7,5 @@ the reference oracle for component and renderer-contract behavior.
 It should depend only on the core, UI-tree, and renderer contracts, keeping it
 usable outside browser and desktop profiles.
 
-Status: directory scaffold only; create the Mix project when its implementation
-milestone begins.
-
+Status: experimental BH-02 Phase 1 Mix skeleton. The deterministic renderer
+and canonical traces remain unimplemented until their later authorized phase.

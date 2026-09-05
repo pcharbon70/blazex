@@ -10,8 +10,12 @@ published independently.
 
 BH-01 Phase 1 activates only `blazex_runtime_popcorn`, `blazex_host_browser`,
 `blazex_renderer_dom`, `blazex_renderer_dom_liveview`, and `blazex_phoenix` as
-dependency-free experimental skeletons. All other packages remain inactive;
-the activated module roots are ownership markers rather than stable APIs.
+experimental projects. BH-02 Phase 1 additionally activates `blazex_core`,
+`blazex_effects`, `blazex_ui_tree`, `blazex_renderer`,
+`blazex_renderer_headless`, and `blazex_test` as inward-only experimental
+skeletons. Their module roots and path dependencies prove ownership and graph
+direction, not component or renderer behavior or stable APIs. Component-family,
+build, and Plug packages remain inactive.
 
 ## Host-neutral foundation
 

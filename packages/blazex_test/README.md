@@ -7,6 +7,5 @@ Shared conformance definitions belong here when they are useful to downstream
 packages; repository-wide suites and executable matrices belong under
 `integration/`.
 
-Status: directory scaffold only; create the Mix project when its implementation
-milestone begins.
-
+Status: experimental BH-02 Phase 1 Mix skeleton. No reusable fixture or
+conformance API is implemented yet.
