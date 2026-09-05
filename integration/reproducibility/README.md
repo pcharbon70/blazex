@@ -32,3 +32,9 @@ fresh execution contexts.
 original BH-01 milestone ledger and retained Phase 4–10 evidence. It preserves
 all identities, owners, proof requirement links, conditions, deferrals,
 findings, and zero exceptions. `--check` rejects a stale or edited view.
+
+`conduct_phase10_reviews.py` materializes eleven discipline-separated review
+lenses, nine owned conditions, and six candidate-stack alternatives. It binds
+the review to the exact closure-ledger hash and rejects missing challenges,
+unknown conditions, stale evidence, support promotion, or implicit BH-02
+authorization.

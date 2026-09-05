@@ -1,0 +1,481 @@
+{
+  "accepted_findings": [
+    "BX-BH01-CONDITION-AVM-REACHABILITY",
+    "BX-BH01-CONDITION-BROTLI-SERVING",
+    "BX-BH01-CONDITION-FIREFOX-TIMER",
+    "BX-BH01-CONDITION-PRIVATE-API-PINS",
+    "BX-BH01-CONDITION-RUNTIME-REPEAT",
+    "BX-BH01-CONDITION-PRODUCTION-SECURITY",
+    "BX-BH01-CONDITION-BH22-QUALIFICATION",
+    "BX-BH01-CONDITION-FIXTURE-DISPOSABILITY",
+    "BX-BH01-CONDITION-RELEASE-CONTROLS"
+  ],
+  "alternatives": [
+    {
+      "disposition": "selected-for-bh02-input",
+      "id": "BX-BH01-ALT-CONTINUE",
+      "option": "Continue the exact candidate stack into host-neutral BH-02 contract design",
+      "rationale": "Active semantics, isolation, recovery, and reproducibility pass while known failures have bounded conditions.",
+      "revisit_trigger": "Any active stop condition becomes triggered."
+    },
+    {
+      "disposition": "reserve-if-triggered",
+      "id": "BX-BH01-ALT-REPLACE-RUNTIME",
+      "option": "Replace AtomVM or Popcorn before BH-02",
+      "rationale": "Immediate replacement is not justified by current active proofs, but runtime semantics, security, or build failure can trigger it.",
+      "revisit_trigger": "Runtime proof failure, unsafe bridge dead end, or unbounded resource behavior."
+    },
+    {
+      "disposition": "reserve-if-triggered",
+      "id": "BX-BH01-ALT-FORK",
+      "option": "Fork or patch a pinned dependency",
+      "rationale": "A fork adds maintenance burden and is justified only when an owned upstream limitation blocks a required proof or condition.",
+      "revisit_trigger": "Pinned upstream cannot satisfy a required bounded mitigation."
+    },
+    {
+      "disposition": "viable-fallback",
+      "id": "BX-BH01-ALT-DROP-LIVEVIEW",
+      "option": "Drop the optional LiveView/LocalLiveView adapter",
+      "rationale": "Standalone DOM and Phoenix authority boundaries remain independent, so private API incompatibility need not block the core browser host.",
+      "revisit_trigger": "Private pins drift or adapter maintenance outweighs demonstrated value."
+    },
+    {
+      "disposition": "required-later-experiment",
+      "id": "BX-BH01-ALT-REVISE-PROFILE",
+      "option": "Revise the profile through AVM pruning and actual compressed serving",
+      "rationale": "The current unpruned application bundle is the dominant payload and fails both active application limits.",
+      "revisit_trigger": "Before any release or production profile claim."
+    },
+    {
+      "disposition": "not-selected",
+      "id": "BX-BH01-ALT-BLOCK",
+      "option": "Block and archive the candidate browser stack",
+      "rationale": "No active semantic, isolation, reproducibility, or accounting stop condition is triggered after bounded conditions are applied.",
+      "revisit_trigger": "A condition cannot be satisfied without violating neutral or authority boundaries."
+    }
+  ],
+  "blocking_findings": [],
+  "conditions": [
+    {
+      "blocks": [
+        "release readiness",
+        "application payload pass"
+      ],
+      "expiry": "Expires when superseded by accepted measured reachability evidence.",
+      "id": "BX-BH01-CONDITION-AVM-REACHABILITY",
+      "owner": "build-owner",
+      "required_action": "Run a sound module-reachability experiment with before/after manifests and repeat affected Phases 3\u201310 proofs.",
+      "trigger": "Before release qualification or material bundle composition change"
+    },
+    {
+      "blocks": [
+        "production deployment",
+        "transfer-size claim"
+      ],
+      "expiry": "Expires when an accepted production-serving profile supersedes the local estimate.",
+      "id": "BX-BH01-CONDITION-BROTLI-SERVING",
+      "owner": "browser-profile-owner",
+      "required_action": "Verify actual precompressed serving, negotiation, MIME, integrity, cache, isolation, proxy, and CDN behavior.",
+      "trigger": "Before production profile deployment or transfer-size claim"
+    },
+    {
+      "blocks": [
+        "Firefox support",
+        "local interaction budget pass"
+      ],
+      "expiry": "Expires only on accepted same-boundary stable-product evidence.",
+      "id": "BX-BH01-CONDITION-FIREFOX-TIMER",
+      "owner": "quality-owner",
+      "required_action": "Attribute harness/runtime phases, optimize without changing semantics, and repeat the same timer distribution in a stable Firefox product.",
+      "trigger": "Before stable Firefox support or interaction-budget promotion"
+    },
+    {
+      "blocks": [
+        "optional adapter compatibility",
+        "package upgrade"
+      ],
+      "expiry": "Reevaluated at every private dependency revision.",
+      "id": "BX-BH01-CONDITION-PRIVATE-API-PINS",
+      "owner": "liveview-adapter-owner",
+      "required_action": "Repeat private-surface inventory and compatibility probes while retaining standalone DOM fallback and neutral package isolation.",
+      "trigger": "Any Phoenix, LiveView, LocalLiveView, or optional adapter change"
+    },
+    {
+      "blocks": [
+        "baseline supersession",
+        "runtime compatibility claim"
+      ],
+      "expiry": "Reevaluated at every named runtime or toolchain change.",
+      "id": "BX-BH01-CONDITION-RUNTIME-REPEAT",
+      "owner": "runtime-owner",
+      "required_action": "Repeat affected runtime, browser, behavior, resilience, measurement, and clean-rebuild proofs from immutable inputs.",
+      "trigger": "Any runtime, OTP, Popcorn, toolchain, bridge, or canonical build-root change"
+    },
+    {
+      "blocks": [
+        "production security",
+        "production deployment"
+      ],
+      "expiry": "Expires only through an accepted production security gate.",
+      "id": "BX-BH01-CONDITION-PRODUCTION-SECURITY",
+      "owner": "security-owner",
+      "required_action": "Design and validate production identity, TLS/proxy, persistence, distributed limits, CSP, audit, monitoring, and penetration-test controls.",
+      "trigger": "Before production authentication, deployment, or security claim"
+    },
+    {
+      "blocks": [
+        "browser support",
+        "mobile viability",
+        "cross-platform support",
+        "accessibility conformance",
+        "release readiness"
+      ],
+      "expiry": "Remains open until BH-22 qualification accepts or rejects each deferred row.",
+      "id": "BX-BH01-CONDITION-BH22-QUALIFICATION",
+      "owner": "quality-owner",
+      "required_action": "Execute non-substitutable platform, stable-browser, physical-device, mobile, and manual assistive-technology qualification.",
+      "trigger": "BH-22 start or availability of representative external environments"
+    },
+    {
+      "blocks": [
+        "public API stabilization",
+        "host-neutral contract acceptance"
+      ],
+      "expiry": "Expires only when BH-02 accepts independently reviewed neutral contracts.",
+      "id": "BX-BH01-CONDITION-FIXTURE-DISPOSABILITY",
+      "owner": "architecture-owner",
+      "required_action": "Derive neutral contracts from observable facts and prohibit BH-01 messages, DOM operations, Phoenix routes, and profile fixtures from becoming public APIs by default.",
+      "trigger": "During BH-02 semantic, renderer, capability, effect, or resource contract design"
+    },
+    {
+      "blocks": [
+        "package publication",
+        "release readiness"
+      ],
+      "expiry": "Expires only through an accepted release gate.",
+      "id": "BX-BH01-CONDITION-RELEASE-CONTROLS",
+      "owner": "build-owner",
+      "required_action": "Complete SBOM, license/notice, signing, source-map, reachability, production serving, rollback, provenance, and release invalidation gates.",
+      "trigger": "Before package publication or release-readiness claim"
+    }
+  ],
+  "decision": {
+    "bh02_authorized": false,
+    "bh02_eligibility": "eligible-pending-entry-record-and-owner-authorization",
+    "rationale": "The active Linux evidence proves the candidate can support neutral framework exploration, clean rebuilding, bounded lifecycle behavior, isolated server authority, and disposable rendering experiments. Payload, Firefox timing, private API, production, release, and external qualification gaps remain explicit owned conditions rather than hidden passes.",
+    "result": "proceed-with-bounded-conditions",
+    "support_status": "unsupported"
+  },
+  "ledger_ref": {
+    "path": "integration/reproducibility/bh01-phase10-ledger-closure.json",
+    "sha256": "64246be9187d2f532cf9fe9f458acc90270d5e6919a3c987da491cb03c3f0153"
+  },
+  "lenses": [
+    {
+      "alternatives_considered": [
+        "block the stack",
+        "continue with bounded optimization"
+      ],
+      "challenges": [
+        "The application AVM is far over both payload targets, mobile value is unknown, and no support range exists."
+      ],
+      "conclusion": "acceptable-with-conditions",
+      "conditions": [
+        "BX-BH01-CONDITION-AVM-REACHABILITY",
+        "BX-BH01-CONDITION-BH22-QUALIFICATION"
+      ],
+      "discipline": "product-value",
+      "evidence": [
+        "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-09-completion-v0.1.0.json",
+        "integration/benchmarks/reports/bh01-phase9-budget-evaluation.json",
+        "integration/reproducibility/bh01-phase10-ledger-closure.json"
+      ],
+      "favorable_observations": [
+        "Local state, forms, timers, DOM updates, fallback, and one server-authorized command work end to end."
+      ],
+      "id": "BX-BH01-REVIEW-PRODUCT",
+      "reviewer_role": "product-owner",
+      "scope": "Whether the active Linux slice provides enough value to justify neutral framework work."
+    },
+    {
+      "alternatives_considered": [
+        "derive neutral contracts in BH-02",
+        "promote fixture protocols"
+      ],
+      "challenges": [
+        "BH-01 messages and DOM operations are disposable and too implementation-specific to become public contracts."
+      ],
+      "conclusion": "acceptable-with-conditions",
+      "conditions": [
+        "BX-BH01-CONDITION-FIXTURE-DISPOSABILITY"
+      ],
+      "discipline": "host-neutral-architecture",
+      "evidence": [
+        "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-05-completion-v0.1.0.json",
+        "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-06-completion-v0.1.0.json",
+        "integration/reproducibility/bh01-phase10-ledger-closure.json"
+      ],
+      "favorable_observations": [
+        "Standalone DOM, optional LiveView, Phoenix authority, runtime, and fixture ownership remain separated."
+      ],
+      "id": "BX-BH01-REVIEW-ARCHITECTURE",
+      "reviewer_role": "architecture-owner",
+      "scope": "Whether proven facts can inform neutral contracts without importing browser or Phoenix details."
+    },
+    {
+      "alternatives_considered": [
+        "retain exact pins",
+        "replace or fork runtime when a trigger fails"
+      ],
+      "challenges": [
+        "Timer cancellation reports false, Popcorn requires unsafe-eval, and long-soak/fairness evidence remains incomplete."
+      ],
+      "conclusion": "acceptable-with-conditions",
+      "conditions": [
+        "BX-BH01-CONDITION-RUNTIME-REPEAT"
+      ],
+      "discipline": "runtime-viability",
+      "evidence": [
+        "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-03-completion-v0.1.0.json",
+        "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-07-completion-v0.1.0.json",
+        "integration/reproducibility/bh01-phase10-clean-rebuild-comparison.json"
+      ],
+      "favorable_observations": [
+        "Boot, process/message behavior, recovery, generation isolation, and bounded cleanup pass repeated active scenarios."
+      ],
+      "id": "BX-BH01-REVIEW-RUNTIME",
+      "reviewer_role": "runtime-owner",
+      "scope": "Whether AtomVM and Popcorn expose sufficient bounded process, message, timer, and lifecycle behavior."
+    },
+    {
+      "alternatives_considered": [
+        "retain reproducible pipeline",
+        "replace the runtime toolchain"
+      ],
+      "challenges": [
+        "The build is multi-language, path-sensitive without a canonical mount, and expensive enough to demand strict automation."
+      ],
+      "conclusion": "acceptable-with-conditions",
+      "conditions": [
+        "BX-BH01-CONDITION-RUNTIME-REPEAT"
+      ],
+      "discipline": "implementation-complexity",
+      "evidence": [
+        "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-04-completion-v0.1.0.json",
+        "integration/reproducibility/bh01-phase10-clean-rebuild-comparison.json",
+        "integration/reproducibility/bh01-phase10-ledger-closure.json"
+      ],
+      "favorable_observations": [
+        "Two clean contexts rebuild and exercise the whole baseline noninteractively with deterministic derived reports."
+      ],
+      "id": "BX-BH01-REVIEW-IMPLEMENTATION",
+      "reviewer_role": "bh01-owner",
+      "scope": "Whether the build, host, bridge, profile, and evidence burden remains manageable for framework exploration."
+    },
+    {
+      "alternatives_considered": [
+        "replace AtomVM/Popcorn",
+        "fork exact dependencies",
+        "drop LiveView adapter",
+        "revise profile",
+        "block candidate"
+      ],
+      "challenges": [
+        "High payload and private-API risk can still make later replacement, adapter removal, or a fork preferable."
+      ],
+      "conclusion": "acceptable-with-conditions",
+      "conditions": [
+        "BX-BH01-CONDITION-AVM-REACHABILITY",
+        "BX-BH01-CONDITION-PRIVATE-API-PINS"
+      ],
+      "discipline": "candidate-alternatives",
+      "evidence": [
+        "integration/reproducibility/bh01-phase10-ledger-closure.json",
+        "integration/benchmarks/reports/bh01-phase9-artifact-economics.json",
+        "integration/benchmarks/reports/bh01-phase9-mitigation-assessment.json"
+      ],
+      "favorable_observations": [
+        "No active semantic or isolation stop condition is triggered, so immediate replacement would discard validated capability."
+      ],
+      "id": "BX-BH01-REVIEW-ALTERNATIVES",
+      "reviewer_role": "architecture-owner",
+      "scope": "Whether replacement, pinning, forking, adapter removal, profile revision, or blocking is more justified."
+    },
+    {
+      "alternatives_considered": [
+        "continue with untrusted-client invariant",
+        "move authority into the client"
+      ],
+      "challenges": [
+        "Production identity, TLS/proxy, persistence, distributed limits, CSP removal, audit sinks, and penetration testing are absent."
+      ],
+      "conclusion": "acceptable-with-conditions",
+      "conditions": [
+        "BX-BH01-CONDITION-PRODUCTION-SECURITY"
+      ],
+      "discipline": "security-trust",
+      "evidence": [
+        "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-06-completion-v0.1.0.json",
+        "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-07-completion-v0.1.0.json",
+        "integration/reproducibility/bh01-phase10-clean-rebuild-comparison.json"
+      ],
+      "favorable_observations": [
+        "Client claims are rejected, authority is server-owned, integrity drift fails before readiness, and retained diagnostics are redacted."
+      ],
+      "id": "BX-BH01-REVIEW-SECURITY",
+      "reviewer_role": "security-owner",
+      "scope": "Whether current trust, integrity, adversarial, diagnostics, and cleanup evidence is sufficient for BH-02 input."
+    },
+    {
+      "alternatives_considered": [
+        "defer unavailable qualification to BH-22",
+        "pretend automation establishes conformance"
+      ],
+      "challenges": [
+        "No screen-reader pairing, physical mobile input, virtual keyboard, touch, rotation, or accessibility conformance review executed."
+      ],
+      "conclusion": "acceptable-with-deferred-qualification",
+      "conditions": [
+        "BX-BH01-CONDITION-BH22-QUALIFICATION"
+      ],
+      "discipline": "accessibility-input",
+      "evidence": [
+        "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-05-completion-v0.1.0.json",
+        "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-08-completion-v0.1.0.json",
+        "integration/benchmarks/reports/bh01-phase9-deferred-qualification.json"
+      ],
+      "favorable_observations": [
+        "Required fallback content and automated keyboard/focus/field observations pass in active development evidence."
+      ],
+      "id": "BX-BH01-REVIEW-ACCESSIBILITY",
+      "reviewer_role": "accessibility-owner",
+      "scope": "Whether automated fallback, keyboard, focus, names, roles, fields, and unavailable manual evidence are represented truthfully."
+    },
+    {
+      "alternatives_considered": [
+        "keep exact pins",
+        "drop optional adapter",
+        "claim a compatibility range"
+      ],
+      "challenges": [
+        "Only exact package pins and one Linux host are evidenced; Firefox is a development binary and Safari/mobile are absent."
+      ],
+      "conclusion": "acceptable-exact-pins-only",
+      "conditions": [
+        "BX-BH01-CONDITION-PRIVATE-API-PINS",
+        "BX-BH01-CONDITION-BH22-QUALIFICATION"
+      ],
+      "discipline": "browser-and-private-api-compatibility",
+      "evidence": [
+        "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-08-completion-v0.1.0.json",
+        "integration/benchmarks/reports/bh01-phase9-deferred-qualification.json",
+        "profiles/browser_phoenix/toolchain/private-api-inventory.json"
+      ],
+      "favorable_observations": [
+        "Active Chrome and Firefox development runs agree semantically; private mismatch disables the optional adapter."
+      ],
+      "id": "BX-BH01-REVIEW-COMPATIBILITY",
+      "reviewer_role": "compatibility-owner",
+      "scope": "Whether browser prerequisites and private package surfaces have a bounded compatibility posture."
+    },
+    {
+      "alternatives_considered": [
+        "keep conditional result",
+        "lower thresholds",
+        "repeat after attribution"
+      ],
+      "challenges": [
+        "Payload and Firefox timer budgets fail; Chrome reruns drift; heap/process observations and long-soak methods are incomplete."
+      ],
+      "conclusion": "acceptable-with-conditions",
+      "conditions": [
+        "BX-BH01-CONDITION-FIREFOX-TIMER",
+        "BX-BH01-CONDITION-AVM-REACHABILITY"
+      ],
+      "discipline": "quality-and-statistics",
+      "evidence": [
+        "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-09-completion-v0.1.0.json",
+        "integration/benchmarks/reports/bh01-phase9-budget-evaluation.json",
+        "integration/benchmarks/reports/bh01-phase9-rerun-comparison.json"
+      ],
+      "favorable_observations": [
+        "Raw samples, unchanged thresholds, deterministic reports, failures, and representative reruns are retained."
+      ],
+      "id": "BX-BH01-REVIEW-QUALITY",
+      "reviewer_role": "quality-owner",
+      "scope": "Whether measurement methods, negative outcomes, resource observations, and rerun variance support the decision."
+    },
+    {
+      "alternatives_considered": [
+        "prune reachability",
+        "serve precompressed artifacts",
+        "retain unpruned bundle"
+      ],
+      "challenges": [
+        "AVM reachability is unpruned and actual Brotli negotiation, CDN/proxy behavior, production rollback, and SBOM release automation remain future work."
+      ],
+      "conclusion": "acceptable-with-conditions",
+      "conditions": [
+        "BX-BH01-CONDITION-AVM-REACHABILITY",
+        "BX-BH01-CONDITION-BROTLI-SERVING",
+        "BX-BH01-CONDITION-RELEASE-CONTROLS"
+      ],
+      "discipline": "build-packaging-provenance",
+      "evidence": [
+        "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-02-completion-v0.1.0.json",
+        "integration/benchmarks/reports/bh01-phase9-artifact-economics.json",
+        "integration/reproducibility/bh01-phase10-clean-rebuild-comparison.json"
+      ],
+      "favorable_observations": [
+        "Exact archives, locks, licenses, manifests, artifact hashes, source-map policy, and stale-artifact recovery are recorded."
+      ],
+      "id": "BX-BH01-REVIEW-BUILD-RELEASE",
+      "reviewer_role": "build-owner",
+      "scope": "Whether artifact origin, reachability, licenses, integrity, maps, serving, rollback, and release gaps are visible."
+    },
+    {
+      "alternatives_considered": [
+        "accept one-host clean contexts",
+        "require unavailable platforms before BH-02"
+      ],
+      "challenges": [
+        "Both authoritative contexts share one physical host and browser timings remain scheduler-sensitive observations."
+      ],
+      "conclusion": "acceptable-with-conditions",
+      "conditions": [
+        "BX-BH01-CONDITION-RUNTIME-REPEAT",
+        "BX-BH01-CONDITION-BH22-QUALIFICATION"
+      ],
+      "discipline": "evidence-reproducibility",
+      "evidence": [
+        "integration/reproducibility/bh01-phase10-ledger-closure.json",
+        "integration/reproducibility/bh01-phase10-clean-rebuild-comparison.json",
+        "integration/reproducibility/raw-evidence/bh01-phase10-clean-a-attempt-1.json"
+      ],
+      "favorable_observations": [
+        "A/B authoritative runs agree exactly or semantically and all three failed attempts remain separate from the pass."
+      ],
+      "id": "BX-BH01-REVIEW-EVIDENCE",
+      "reviewer_role": "bh01-owner",
+      "scope": "Whether the final evidence is source-bound, reciprocal, reproducible, failure-preserving, and honest about scope."
+    }
+  ],
+  "method": {
+    "human_independence_claimed": false,
+    "owner_acceptance_required_for_decision": true,
+    "review_model": "discipline-separated-evidence-review"
+  },
+  "prohibited_claims": [
+    "browser support",
+    "mobile viability",
+    "accessibility conformance",
+    "production security",
+    "performance budget pass",
+    "native compatibility",
+    "release readiness"
+  ],
+  "record_id": "BX-BH01-PHASE10-FEASIBILITY-REVIEW-0.1",
+  "schema_version": "1.0.0",
+  "source_revision": "e40476cd6f531bfa8a5405c8363508b48be03ac9",
+  "status": "reviewed-proceed-with-bounded-conditions"
+}

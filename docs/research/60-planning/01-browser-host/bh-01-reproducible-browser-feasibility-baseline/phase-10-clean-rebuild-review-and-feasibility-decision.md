@@ -101,29 +101,29 @@ support evidence. See the
       - [x] 10.2.3.2 Subtask - Evaluate all five stop conditions and every phase finding under the active/deferred policy; prohibit silent closure, severity reduction, waived active critical unknowns, and expired mitigations.
       - [x] 10.2.3.3 Subtask - Record any policy-permitted exception with scope, rationale, owner, expiry, compensating evidence, and excluded support; retain zero exceptions when none are justified.
 
-  - [ ] 10.3 Section - Conduct multidisciplinary feasibility review.
+  - [x] 10.3 Section - Conduct multidisciplinary feasibility review.
 
     Independent lenses must challenge reproducibility, value, architecture,
     security, accessibility, compatibility, quality, packaging, and provenance
     before a proceed decision.
 
-    - [ ] 10.3.1 Task - Review product, architecture, runtime, and implementation viability.
+    - [x] 10.3.1 Task - Review product, architecture, runtime, and implementation viability.
 
       Passing scenarios do not justify framework work if the stack is too
       fragile, costly, coupled, or semantically incompatible.
 
-      - [ ] 10.3.1.1 Subtask - Review active Linux browser value, payload/startup/resource costs, runtime process/message/timer limitations, build complexity, support burden, bounded mitigations, and the limits of deferred mobile evidence.
-      - [ ] 10.3.1.2 Subtask - Review host/renderer/server separation, fixture disposability, standalone DOM/Plug/headless feasibility, private API isolation, and whether BH-02 can define neutral contracts from proven facts.
-      - [ ] 10.3.1.3 Subtask - Challenge alternatives including replacing/pinning/forking dependencies, dropping an optional adapter, revising the profile, or blocking the candidate stack.
+      - [x] 10.3.1.1 Subtask - Review active Linux browser value, payload/startup/resource costs, runtime process/message/timer limitations, build complexity, support burden, bounded mitigations, and the limits of deferred mobile evidence.
+      - [x] 10.3.1.2 Subtask - Review host/renderer/server separation, fixture disposability, standalone DOM/Plug/headless feasibility, private API isolation, and whether BH-02 can define neutral contracts from proven facts.
+      - [x] 10.3.1.3 Subtask - Challenge alternatives including replacing/pinning/forking dependencies, dropping an optional adapter, revising the profile, or blocking the candidate stack.
 
-    - [ ] 10.3.2 Task - Review security, accessibility, compatibility, quality, and release inputs.
+    - [x] 10.3.2 Task - Review security, accessibility, compatibility, quality, and release inputs.
 
       Specialist review must distinguish feasibility evidence from production
       certification and future release gates.
 
-      - [ ] 10.3.2.1 Subtask - Review client distrust, authenticated command, artifact integrity, boundary fuzzing, diagnostics/redaction, residual threats, and production controls not implemented.
-      - [ ] 10.3.2.2 Subtask - Review active prerequisite/fallback accessibility, keyboard/focus/field observations, deferred manual gaps and browser compatibility, private pins, upgrade/rollback, and unsupported combinations.
-      - [ ] 10.3.2.3 Subtask - Review statistical validity, explicitly undecided mobile viability, failures/resources, artifact reachability, licenses/notices, dependency risks, source maps, generated evidence, and future SBOM/release work.
+      - [x] 10.3.2.1 Subtask - Review client distrust, authenticated command, artifact integrity, boundary fuzzing, diagnostics/redaction, residual threats, and production controls not implemented.
+      - [x] 10.3.2.2 Subtask - Review active prerequisite/fallback accessibility, keyboard/focus/field observations, deferred manual gaps and browser compatibility, private pins, upgrade/rollback, and unsupported combinations.
+      - [x] 10.3.2.3 Subtask - Review statistical validity, explicitly undecided mobile viability, failures/resources, artifact reachability, licenses/notices, dependency risks, source maps, generated evidence, and future SBOM/release work.
 
   - [ ] 10.4 Section - Version the reproducible feasibility baseline.
 
