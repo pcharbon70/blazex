@@ -133,13 +133,13 @@ static void dispose(GtkSpike *spike) {
 int main(int argc, char **argv) {
   if (argc != 3) { fprintf(stderr, "usage: gtk4_adapter MOUNT_BATCH STALE_BATCH\n"); return 2; }
   gtk_init();
-  gpointer file_dialog = gtk_file_dialog_new();
-  printf("SERVICE\tfile-choice\t%s\n", g_type_name_from_instance(file_dialog));
-  g_object_unref(file_dialog);
   GtkSpike spike;
   memset(&spike, 0, sizeof(spike));
   char error[BX_MAX_ERROR] = {0};
   if (!materialize(&spike, argv[1], error)) { fprintf(stderr, "%s\n", error); return 3; }
+  gpointer file_dialog = gtk_file_dialog_new();
+  printf("SERVICE\tfile-choice\t%s\n", g_type_name_from_instance(file_dialog));
+  g_object_unref(file_dialog);
   gtk_window_present((GtkWindow *)spike.widgets[0]);
   while (g_main_context_iteration(NULL, 0)) {}
 

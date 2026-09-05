@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0.0",
+  "ledger_id": "BX-BH02-OUTPUT-LEDGER-0.7",
+  "status": "phase-7-direct-native-control-spike-implemented-experimental",
+  "authorization_ref": "BX-BH02-PHASE-07-AUTHORIZATION-0.1",
+  "supersedes": {
+    "path": "docs/research/assets/bh-02-baseline/blazex-bh-02-phase-06-output-ledger-v0.6.0.json",
+    "sha256": "285c3bff7435b1afe3fa4d3859a6efceda568e8e732f17d7bd5adf58707ec590",
+    "preserved_unchanged": true
+  },
+  "required_outputs": [
+    {"id": "semantic-ui-node-identity", "state": "implemented-experimental-phase-2", "phase": 2},
+    {"id": "event-action-contract", "state": "implemented-experimental-phase-3", "phase": 3},
+    {"id": "effect-capability-resource-contract", "state": "implemented-experimental-phase-3", "phase": 3},
+    {"id": "layout-token-accessibility-focus-selection-file-intent", "state": "implemented-experimental-phase-4", "phase": 4},
+    {"id": "renderer-lifecycle-capability-negotiation", "state": "implemented-experimental-phase-5", "phase": 5},
+    {"id": "deterministic-headless-renderer-traces", "state": "implemented-experimental-phase-5", "phase": 5},
+    {"id": "minimal-dom-lowering", "state": "implemented-experimental-phase-6", "phase": 6},
+    {"id": "limited-direct-native-control-spike", "state": "implemented-experimental-phase-7-one-target-two-deferred", "phase": 7},
+    {"id": "forbidden-dependency-leakage-checks", "state": "implemented-phase-1-extended-phase-7", "phase": 1}
+  ],
+  "evidence_boundary": {
+    "semantic_contracts": "experimental-version-1",
+    "component_behavior": "experimental-pure-stateful-event-evaluation",
+    "event_effect_resources": "experimental-version-1-local-beam",
+    "presentation_intent": "experimental-version-1-local-beam",
+    "renderer_lifecycle": "experimental-version-1-local-beam",
+    "headless_renderer": "experimental-deterministic-nonvisual-local-beam",
+    "standalone_dom": "experimental-full-projection-local-beam-node-chrome-firefox",
+    "native_controls": "experimental-direct-gtk4-local-xvfb-windows-macos-deferred",
+    "native_accessibility_roles": "observed-defaults-not-qualified",
+    "incremental_reconciliation": "unimplemented",
+    "hydration": "unimplemented",
+    "server_transport": "unimplemented",
+    "visual_equivalence": "unexecuted",
+    "pixel_results": "unexecuted",
+    "manual_accessibility": "unexecuted",
+    "support": "unsupported",
+    "quality_budgets": "unpassed"
+  },
+  "platform_results": [
+    {"target": "linux-x86_64", "result": "passed-local-development-conformance", "api": "gtk-4.14.5-runtime-abi"},
+    {"target": "windows", "result": "deferred-environment-unavailable", "api": "win32-standard-and-common-controls"},
+    {"target": "macos", "result": "deferred-environment-unavailable", "api": "appkit"}
+  ],
+  "unchanged_inherited_handoff": {
+    "conditions": true,
+    "repository_boundaries": true,
+    "forbidden_leakage": true,
+    "limitations": true,
+    "repeat_obligations": true,
+    "deferred_qualification": true
+  }
+}

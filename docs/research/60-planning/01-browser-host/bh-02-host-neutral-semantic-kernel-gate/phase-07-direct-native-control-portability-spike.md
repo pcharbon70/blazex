@@ -18,7 +18,7 @@ aliases:
 
 Back to milestone: [README](README.md)
 
-- [ ] 7 Phase - Direct Native-Control Portability Spike.
+- [x] 7 Phase - Direct Native-Control Portability Spike.
 
   Exercise the established semantic and renderer contracts against actual
   platform controls without choosing a production desktop backend. Compile and
@@ -67,19 +67,19 @@ Back to milestone: [README](README.md)
       - [x] 7.3.2.2 Subtask - Observe control types, events, focus, entry/checkbox/list selection, accessible roles, stale rejection, and idempotent disposal.
       - [x] 7.3.2.3 Subtask - Record exact GTK/GLib/compiler/display versions and preserve unavailable platform work as deferrals rather than passes.
 
-  - [ ] 7.4 Section - Run cross-renderer reconciliation and publish evidence.
+  - [x] 7.4 Section - Run cross-renderer reconciliation and publish evidence.
 
-    - [ ] 7.4.1 Task - Compare the headless, DOM, and native-spike surfaces.
+    - [x] 7.4.1 Task - Compare the headless, DOM, and native-spike surfaces.
 
-      - [ ] 7.4.1.1 Subtask - Publish versioned native scenarios and exact platform result rows.
-      - [ ] 7.4.1.2 Subtask - Compare kinds, identity, events, focus, selection, relationships, lifecycle, stale rejection, and disposal without requiring geometry/pixel equality.
-      - [ ] 7.4.1.3 Subtask - Record semantic findings and keep platform differences behind the experiment boundary.
+      - [x] 7.4.1.1 Subtask - Publish versioned native scenarios and exact platform result rows.
+      - [x] 7.4.1.2 Subtask - Compare kinds, identity, events, focus, selection, relationships, lifecycle, stale rejection, and disposal without requiring geometry/pixel equality.
+      - [x] 7.4.1.3 Subtask - Record semantic findings and keep platform differences behind the experiment boundary.
 
-    - [ ] 7.4.2 Task - Execute and record the complete Phase 7 gate.
+    - [x] 7.4.2 Task - Execute and record the complete Phase 7 gate.
 
-      - [ ] 7.4.2.1 Subtask - Run all activated tests/formats, GTK build/run, Phase 1–7 and inherited validators, archive checks, JSON checks, and patch hygiene.
-      - [ ] 7.4.2.2 Subtask - Add fail-closed validation and negative tests for authority, hashes, surfaces, forbidden toolkits, false platform passes, and premature support or Phase 8 claims.
-      - [ ] 7.4.2.3 Subtask - Publish a truthful pass or stop decision and leave Phase 8 unauthorized.
+      - [x] 7.4.2.1 Subtask - Run all activated tests/formats, GTK build/run, Phase 1–7 and inherited validators, archive checks, JSON checks, and patch hygiene.
+      - [x] 7.4.2.2 Subtask - Add fail-closed validation and negative tests for authority, hashes, surfaces, forbidden toolkits, false platform passes, and premature support or Phase 8 claims.
+      - [x] 7.4.2.3 Subtask - Publish a truthful pass or stop decision and leave Phase 8 unauthorized.
 
 ## Section delivery rule
 
@@ -94,6 +94,7 @@ claim.
 - [ADR-0007 — Native-control portability gate](../../../20-notes/architecture-decisions/adr-0007-native-control-portability-gate.md)
 - [Direct native-host architecture](../../../20-notes/cross-platform-native-host-and-renderer-architecture.md)
 - [Cross-renderer inquiry](../../../40-inquiries/can-one-blazex-component-model-target-dom-and-native-controls.md)
+- [Phase 7 implementation evidence](phase-07-implementation-evidence.md)
 
 ## Sources
 

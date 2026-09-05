@@ -31,7 +31,7 @@ component families, production accessibility, or release readiness.
 ## Authorization status
 
 The repository owner explicitly authorized BH-02 Phase 7 on 2026-09-05 after
-Phase 6 passed and merged. Phase 7 is active under the same four-section,
+Phase 6 passed and merged. Phase 7 is complete under the same four-section,
 single-PR, synchronized-main cleanup rules. Phase 8 remains planned and
 unauthorized. The completed gates
 are preserved in the [Phase 1 implementation
@@ -40,7 +40,8 @@ evidence](phase-02-implementation-evidence.md), [Phase 3 implementation
 evidence](phase-03-implementation-evidence.md), and [Phase 4 implementation
 evidence](phase-04-implementation-evidence.md), [Phase 5 implementation
 evidence](phase-05-implementation-evidence.md), and [Phase 6 implementation
-evidence](phase-06-implementation-evidence.md).
+evidence](phase-06-implementation-evidence.md), and [Phase 7 implementation
+evidence](phase-07-implementation-evidence.md).
 
 ## What belongs here
 
@@ -77,7 +78,7 @@ milestone work.
 | [4 — Layout, Tokens, Accessibility, Focus, and Selection Intent](phase-04-layout-tokens-accessibility-focus-and-selection-intent.md) | complete — gate passed | Complete the portable intent needed by the representative interaction slice. | Phases 2–3 |
 | [5 — Renderer Lifecycle and Deterministic Headless Oracle](phase-05-renderer-lifecycle-and-deterministic-headless-oracle.md) | complete — gate passed | Implement renderer negotiation, mount/update/dispose behavior, canonical normalization, and trace fixtures. | Phases 2–4 |
 | [6 — Standalone DOM Lowering and Browser Conformance](phase-06-standalone-dom-lowering-and-browser-conformance.md) | complete — gate passed | Replace disposable BH-01 DOM operations with a conforming renderer adapter and browser evidence. | Phase 5 |
-| [7 — Direct Native-Control Portability Spike](phase-07-direct-native-control-portability-spike.md) | active — explicitly authorized | Exercise the same slice through direct Win32, AppKit, and GTK adapters; unavailable target execution remains deferred under policy. | Phase 5 |
+| [7 — Direct Native-Control Portability Spike](phase-07-direct-native-control-portability-spike.md) | complete — gate passed in active Linux scope | Exercise the same slice through direct Win32, AppKit, and GTK adapters; unavailable target execution remains deferred under policy. | Phase 5 |
 | 8 — Cross-Backend Reconciliation and BH-02 Acceptance | planned — not authorized | Resolve semantic leaks, review every required output and condition, and accept, revise, or block later framework work. | Phases 6–7 |
 
 ## Shared delivery rules
@@ -131,6 +132,7 @@ first portable contract version without making a support claim.
 - [Phase 6 — Standalone DOM Lowering and Browser Conformance](phase-06-standalone-dom-lowering-and-browser-conformance.md)
 - [Phase 6 — Implementation Evidence](phase-06-implementation-evidence.md)
 - [Phase 7 — Direct Native-Control Portability Spike](phase-07-direct-native-control-portability-spike.md)
+- [Phase 7 — Implementation Evidence](phase-07-implementation-evidence.md)
 
 ## Maintaining this index
 

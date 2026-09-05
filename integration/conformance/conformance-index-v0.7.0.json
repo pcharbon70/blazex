@@ -1,0 +1,74 @@
+{
+  "schema_version": "1.0.0",
+  "contract": "blazex.bh02.conformance-index/0.7",
+  "status": "phase-7-direct-native-spike-passed-local-gtk",
+  "activation_phase": "BH-02 Phase 7",
+  "owner_role": "quality-owner",
+  "authorization": {
+    "path": "docs/research/assets/bh-02-baseline/blazex-bh-02-phase-07-authorization-v0.1.0.json",
+    "sha256": "4b9e0557c10ad41fc8bc8c00f7551962ff0f3c9da9f848b31c47fe52806b6b49"
+  },
+  "phase_contract": {
+    "path": "docs/research/assets/bh-02-baseline/blazex-bh-02-phase-07-contract-v0.1.0.json",
+    "sha256": "653fcd52018e3948cbb3336cde12371b3b7e55946498dc6adf61e3b2b930018f"
+  },
+  "fixture_sets": [
+    {"id": "BX-BH02-SEMANTIC-KERNEL-FIXTURES-0.1", "path": "integration/conformance/semantic-kernel-fixtures-v0.1.0.json", "sha256": "74e7db1e0194cb97f7d1c3b37b815d3cd0139050b75382078138570a58e04b78", "scenario_count": 8, "result": "passed-local-semantic-evaluation"},
+    {"id": "BX-BH02-EVENT-EFFECT-RESOURCE-FIXTURES-0.1", "path": "integration/conformance/event-effect-resource-fixtures-v0.1.0.json", "sha256": "e5372f49136fdf3b049c478fedcdc4c0171d1e7331a386b8d7ff6e3e85b4982d", "scenario_count": 12, "result": "passed-local-event-effect-resource-evaluation"},
+    {"id": "BX-BH02-PRESENTATION-INTENT-FIXTURES-0.1", "path": "integration/conformance/presentation-intent-fixtures-v0.1.0.json", "sha256": "86998ccbd9be44100e0be87a4249540022eaab6784433b4600ad4ca423c36665", "scenario_count": 14, "result": "passed-local-presentation-intent-evaluation"},
+    {"id": "BX-BH02-RENDERER-HEADLESS-FIXTURES-0.1", "path": "integration/conformance/renderer-headless-fixtures-v0.1.0.json", "sha256": "56c5ef67550d9a5adee03e37e34a507046d1990cf4caf4ee32c36e25b2fdf1d3", "scenario_count": 16, "result": "passed-local-renderer-headless-evaluation"},
+    {"id": "BX-BH02-DOM-RENDERER-FIXTURES-0.1", "path": "integration/conformance/dom-renderer-fixtures-v0.1.0.json", "sha256": "c2ea66f720dbfdc7325dc15596e3f431cb0d85c4a2df1852cb27891c1e5a6124", "scenario_count": 20, "result": "passed-local-dom-renderer-evaluation"},
+    {"id": "BX-BH02-NATIVE-CONTROL-FIXTURES-0.1", "path": "integration/conformance/native-control-fixtures-v0.1.0.json", "sha256": "ba75baa9a4a4c306ac2d06b300ec2f5d951818ee48d808cc621b45c00ba4fa58", "scenario_count": 22, "result": "passed-local-native-projection-and-gtk-development-evaluation"}
+  ],
+  "local_contract_results": [
+    {
+      "environment": "local-beam-node-and-gtk4-xvfb",
+      "result": "passed",
+      "evidence": [
+        "experiments/native_renderer_spike/test/native_spike_boundary_test.exs",
+        "experiments/native_renderer_spike/test/gtk4_platform_test.exs",
+        "integration/conformance/test/native_control_conformance_test.exs"
+      ]
+    }
+  ],
+  "canonical_traces": [
+    {"id": "headless-mount-update-replace-dispose", "backend": "blazex_renderer_headless", "result": "passed-local-deterministic"},
+    {"id": "dom-mount-update-replace-dispose", "backend": "blazex_renderer_dom", "result": "passed-local-deterministic"},
+    {"id": "native-mount-update-replace-dispose", "backend": "blazex_native_renderer_spike", "result": "passed-local-deterministic"}
+  ],
+  "backend_results": [
+    {"backend": "blazex_renderer_headless", "environment": "local-beam", "result": "passed-nonvisual-oracle-only"},
+    {"backend": "blazex_renderer_dom", "environment": "local-beam-and-javascript", "result": "passed-standalone-full-projection-only"},
+    {"backend": "blazex_native_renderer_spike", "environment": "local-beam-and-direct-gtk4-xvfb", "result": "passed-bounded-experiment-only"}
+  ],
+  "browser_results": [
+    {"browser": "linux-google-chrome", "version": "140.0.7339.80", "result": "passed-local-development-conformance"},
+    {"browser": "linux-firefox", "version": "134.0", "result": "passed-local-development-conformance"}
+  ],
+  "browser_matrix": {
+    "path": "integration/conformance/dom-browser-matrix-v0.1.0.json",
+    "sha256": "610e744e2931745201aca645b6299c9ebefebdc3a79c5484d890d56ba745497a"
+  },
+  "native_experiment": {
+    "path": "experiments/native_renderer_spike/experiment-index-v0.2.0.json",
+    "sha256": "8ec4f7922c4ab4825b0edd1a06ef9c759c0de4696700dc3de22bfae71332e575"
+  },
+  "native_results": [
+    {"target": "linux-x86_64", "api": "gtk-4.14.5-runtime-abi", "result": "passed-local-development-conformance", "evidence": "experiments/native_renderer_spike/gtk4-result-v0.1.0.json", "sha256": "3c2a5df17a899b427e909c393e8a159eed6f8a19bd62361015da13ff774578f5"},
+    {"target": "windows", "api": "win32-standard-and-common-controls", "result": "deferred-environment-unavailable"},
+    {"target": "macos", "api": "appkit", "result": "deferred-environment-unavailable"}
+  ],
+  "semantic_findings": [
+    "source identity remains deterministic across renderers while backend ID prefixes and encodings remain private",
+    "logical layout is shared but platform geometry is not part of parity",
+    "GTK default accessible roles do not yet implement every requested semantic role and require future adapter-specific mapping"
+  ],
+  "geometry_results": [],
+  "visual_results": [],
+  "pixel_results": [],
+  "manual_accessibility_results": [],
+  "provider_results": [],
+  "next_authorized_work": null,
+  "api_state": "experimental",
+  "support_state": "unsupported"
+}

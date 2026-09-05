@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0.0",
+  "record_id": "BX-BH02-DECISION-PHASE-07-GO",
+  "state": "passed",
+  "decided_at": "2026-09-05",
+  "authorization_ref": "BX-BH02-PHASE-07-AUTHORIZATION-0.1",
+  "contract_ref": "BX-BH02-PHASE-07-CONTRACT-0.1",
+  "section_commits": [
+    {"section": "7.1", "commit": "8dee03f"},
+    {"section": "7.2", "commit": "bcac88b"},
+    {"section": "7.3", "commit": "c3f41b9"},
+    {"section": "7.4", "commit": "resolve-from-this-records-git-commit"}
+  ],
+  "artifact_hashes": [
+    {"path": "docs/research/assets/bh-02-baseline/blazex-bh-02-phase-07-authorization-v0.1.0.json", "sha256": "4b9e0557c10ad41fc8bc8c00f7551962ff0f3c9da9f848b31c47fe52806b6b49"},
+    {"path": "docs/research/assets/bh-02-baseline/blazex-bh-02-phase-07-contract-v0.1.0.json", "sha256": "653fcd52018e3948cbb3336cde12371b3b7e55946498dc6adf61e3b2b930018f"},
+    {"path": "docs/research/assets/bh-02-baseline/blazex-bh-02-phase-07-output-ledger-v0.7.0.json", "sha256": "2d953c2ab3cae82a134209a06372632b223953d5c8a0d32e7135044f5023388b"},
+    {"path": "integration/conformance/native-control-fixtures-v0.1.0.json", "sha256": "ba75baa9a4a4c306ac2d06b300ec2f5d951818ee48d808cc621b45c00ba4fa58"},
+    {"path": "experiments/native_renderer_spike/experiment-index-v0.2.0.json", "sha256": "8ec4f7922c4ab4825b0edd1a06ef9c759c0de4696700dc3de22bfae71332e575"},
+    {"path": "experiments/native_renderer_spike/gtk4-result-v0.1.0.json", "sha256": "3c2a5df17a899b427e909c393e8a159eed6f8a19bd62361015da13ff774578f5"},
+    {"path": "integration/conformance/conformance-index-v0.7.0.json", "sha256": "e163e595a4e24b1d6a22d380dcf5c2e9bd96b0af5e01a13ae0f1b9f3736d92b5"}
+  ],
+  "outcome": {
+    "native_projection": "implemented-experimental-complete-batch-and-bxn1",
+    "headless_dom_native_semantic_parity": "passed-local",
+    "linux": "passed-local-direct-gtk-4.14.5-under-xvfb",
+    "windows": "deferred-environment-unavailable",
+    "macos": "deferred-environment-unavailable",
+    "native_accessibility": "default-roles-observed-not-qualified",
+    "manual_accessibility": "unexecuted",
+    "geometry_pixels_visual_performance_packaging": "unexecuted",
+    "production_native_backend": "unimplemented",
+    "api_state": "experimental",
+    "support_state": "unsupported",
+    "next_phase": "BH-02 Phase 8 remains planned and unauthorized"
+  }
+}

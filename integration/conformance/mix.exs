@@ -13,6 +13,7 @@ defmodule BlazeXConformance.MixProject do
         {:blazex_renderer, path: "../../packages/blazex_renderer"},
         {:blazex_renderer_headless, path: "../../packages/blazex_renderer_headless"},
         {:blazex_renderer_dom, path: "../../packages/blazex_renderer_dom"},
+        {:blazex_native_renderer_spike, path: "../../experiments/native_renderer_spike"},
         {:blazex_test, path: "../../packages/blazex_test"}
       ]
     ]

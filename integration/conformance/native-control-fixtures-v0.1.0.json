@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0.0",
+  "fixture_set_id": "BX-BH02-NATIVE-CONTROL-FIXTURES-0.1",
+  "phase": "BH-02 Phase 7",
+  "scope": "portable-native-batch-cross-renderer-and-direct-gtk-development-evidence",
+  "scenarios": [
+    {"id": "native-complete-capabilities", "expected": "all seven node kinds, none/stack layout, all roles, and five semantic features accepted"},
+    {"id": "native-all-semantic-node-kinds", "expected": "preorder native projection preserves every semantic node kind"},
+    {"id": "native-deterministic-identity", "expected": "the same semantic identities produce the same native IDs"},
+    {"id": "native-deterministic-batch", "expected": "the same accepted output and context produce the same batch and digest"},
+    {"id": "native-bxn1-wire-roundtrip", "expected": "the closed BXN1 representation decodes with exact bounded records"},
+    {"id": "native-atomic-mount", "expected": "a complete validated mount batch precedes platform mutation"},
+    {"id": "native-update-revision", "expected": "same-generation updates advance exactly one revision"},
+    {"id": "native-generation-replacement", "expected": "replacement advances exactly one generation and resets revision"},
+    {"id": "native-idempotent-disposal", "expected": "repeated disposal is a no-op after exactly one platform cleanup"},
+    {"id": "native-stale-revision-rejection", "expected": "non-successor update is rejected before native mutation"},
+    {"id": "native-accessibility-projection", "expected": "roles, names, states, live intent, and relationships remain portable"},
+    {"id": "native-layout-projection", "expected": "stack direction and alignment remain logical until adapter mapping"},
+    {"id": "native-focus", "expected": "auto-focus intent maps to the native root focus target"},
+    {"id": "native-controlled-text-selection", "expected": "entry text and range selection are observable after application"},
+    {"id": "native-checkbox-selection", "expected": "checked state and selection event are observable"},
+    {"id": "native-keyed-list-selection", "expected": "the selected keyed list item and selection event are observable"},
+    {"id": "native-semantic-event-mapping", "expected": "activate, change, and select bindings produce semantic event counts"},
+    {"id": "native-validation-relationship", "expected": "described-by and error-message targets remain identity-based"},
+    {"id": "native-file-choice-intent", "expected": "opaque file-choice effect intent maps only inside the platform adapter"},
+    {"id": "headless-dom-native-semantic-parity", "expected": "kinds, source identities, bindings, focus, selection, relationships, and lifecycle agree"},
+    {"id": "linux-gtk-direct-control-materialization", "expected": "real GTK 4 controls compile and pass automated observations under Xvfb"},
+    {"id": "windows-appkit-governed-deferral", "expected": "direct adapter sources exist while unavailable compilation and execution remain deferred"}
+  ],
+  "active_platform_results": [
+    {
+      "target": "linux-x86_64",
+      "api": "gtk-4.14.5-runtime-abi",
+      "result": "passed-local-development-conformance",
+      "evidence": "experiments/native_renderer_spike/gtk4-result-v0.1.0.json"
+    }
+  ],
+  "deferred_platform_results": [
+    {"target": "windows", "result": "deferred-environment-unavailable"},
+    {"target": "macos", "result": "deferred-environment-unavailable"}
+  ],
+  "geometry_results": [],
+  "visual_results": [],
+  "pixel_results": [],
+  "manual_accessibility_results": [],
+  "performance_results": [],
+  "api_state": "experimental",
+  "support_state": "unsupported"
+}
