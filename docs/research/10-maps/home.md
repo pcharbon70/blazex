@@ -126,8 +126,9 @@ provider, and remote adapter.
   architecture](../20-notes/cross-platform-native-host-and-renderer-architecture.md) —
   the Windows/macOS/Linux deep dive: split-process ERTS/native shell, SDL3 and
   winit, renderer-local layout/hit testing, Skia and Cairo, text/IME,
-  AccessKit and platform accessibility, Qt/wxWidgets/GTK/Slint tradeoffs,
-  packaging, and executable proof gates.
+  AccessKit and platform accessibility, direct Win32/AppKit/GTK controls,
+  packaging, and executable proof gates. Qt and wxWidgets are explicitly
+  excluded from the active design.
 - [MudBlazor-inspired component system for
   BlazeX](../20-notes/mudblazor-inspired-component-system-for-blazex.md) — the
   product-level architecture, exhaustive 83-family disposition, native API
@@ -145,6 +146,10 @@ provider, and remote adapter.
 
 ## Research record
 
+- [2026-09-04 direct native-control host
+  revision](../50-journal/2026-09-04-direct-native-control-host-revision.md) —
+  replaces the active wrapper-toolkit recommendation with direct Win32,
+  AppKit, and GTK 4 proof adapters while retaining historical evidence.
 - [2026-09-03 cross-platform native-host deep
   dive](../50-journal/2026-09-03-cross-platform-native-host-deep-dive.md) —
   records the shell/drawing, toolkit/accessibility, runtime/packaging,
@@ -171,9 +176,10 @@ provider, and remote adapter.
 
 - Which semantic authoring syntax can preserve Phoenix ergonomics without
   making HTML canonical?
-- Whether wxWidgets or direct Win32/AppKit/GTK should prove actual controls
-  first, and whether SDL3+Skia, winit/Slint, or Qt has the lowest measured
-  total ownership for the custom-scene profile.
+- How thin direct Win32/AppKit/GTK adapters can share protocol bindings,
+  fixtures, and conformance tests without importing platform types into the
+  portable model, and whether SDL3+Skia or a winit/Slint path configured
+  without excluded backends has the lowest custom-scene ownership cost.
 - Whether SkParagraph/SkShaper or direct HarfBuzz/ICU/platform-font services
   should own complex text, caret geometry, and accessible text ranges.
 - Whether AtomVM needs a native embedding target or separate Wasmtime/WASI

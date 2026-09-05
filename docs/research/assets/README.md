@@ -34,6 +34,9 @@ insufficient. Record source, creator, license, provenance, and use.
 - [BH-01 feasibility release](bh-01-release/README.md) — versioned candidate
   feasibility baseline, generated release/compatibility/artifact/benchmark/
   proof/risk/finding/environment indexes, and supersession control.
+- [BH-02 semantic-kernel baseline](bh-02-baseline/README.md) — explicit Phase
+  1 authorization, inherited-entry ledger, activation, validation, and phase
+  evidence without rewriting the BH-01 release.
 - [Component catalog](component-catalog/README.md) — pinned upstream reference,
   raw extraction inputs, BlazeX catalog schema/data, and deterministic reports.
 - [Quality and acceptance](quality-acceptance/README.md) — versioned quality

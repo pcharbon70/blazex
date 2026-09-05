@@ -30,6 +30,7 @@ notes.
 
 ### Documents
 
+- [2026-09-04 direct native-control host revision](2026-09-04-direct-native-control-host-revision.md) — records the constraint excluding Qt and wxWidgets, the direct Win32/AppKit/GTK evidence, the revised proof program, and current evidence limits.
 - [2026-09-02 Blazor component semantics deep dive](2026-09-02-blazor-component-semantics-deep-dive.md) — records the public API inventory,
   Phoenix and LocalLiveView design-comparison method, scope decisions, and
   evidence limits behind the BlazeX capability matrix.

@@ -22,6 +22,8 @@ aliases:
 
 **Research date:** 2026-09-03
 
+**Revision date:** 2026-09-04
+
 **Question:** How can BlazeX build a desktop host that works on Windows,
 macOS, and Linux, including a portable drawing path, without confusing
 custom-drawn pixels with actual native controls or accessible UI?
@@ -42,7 +44,8 @@ desktop profile needs a small set of independently replaceable subsystems:
    comparison and fallback;
 6. a renderer-local layout, intrinsic-measurement, scrolling, and hit-testing
    subsystem, initially comparing a bounded BlazeX layout vocabulary with
-   **Taffy**, **Yoga**, and toolkit-owned layout;
+   **Taffy** and **Yoga**, plus platform-control-owned layout in the direct
+   native-control adapters;
 7. a text subsystem for shaping, fallback, bidi, line breaking, caret
    geometry, selection, and IME composition;
 8. an accessibility adapter that maps the BlazeX semantic tree to Windows UI
@@ -65,11 +68,16 @@ systems is not assumed.
 This stack is a custom-drawn BlazeX Material renderer. It does **not** satisfy
 the accepted actual-native-control gate in
 [ADR-0007](architecture-decisions/adr-0007-native-control-portability-gate.md).
-That gate should be proven separately with a bounded **wxWidgets** adapter—or
-direct Win32/AppKit/GTK controls if the cross-platform adapter obscures too
-much—using the same semantic fixtures and traces. Qt 6 should be used as a
-mature integration benchmark and optional prototype, but Qt's native-looking
-styles are not evidence that most child controls are OS-owned widgets.
+That gate should be proven separately with three bounded direct adapters:
+**Win32 standard/common controls on Windows, AppKit controls on macOS, and
+GTK 4 controls on Linux**. Each adapter receives the same semantic fixtures
+and traces while owning its platform event loop, controls, accessibility
+objects, dialogs, focus, and disposal locally.
+
+Qt and wxWidgets are excluded from the active implementation, proof,
+benchmark, dependency, and fallback set. Their older source notes remain in
+the archive solely as historical evidence for the superseded comparison; they
+must not re-enter the recommendation transitively through another candidate.
 
 The term “SDLC” in the research request is interpreted as **SDL**, the Simple
 DirectMedia Layer. No relevant cross-platform drawing or UI project named
@@ -83,8 +91,8 @@ into “choose a GUI library”:
 | Decision | Required outcome | Representative candidates |
 | --- | --- | --- |
 | OS shell | window lifecycle, event loop, input, IME transport, native handles | SDL3, winit, GLFW, toolkit shell |
-| Drawing engine | paths, clips, transforms, paint, images, glyph runs, layers | Skia, Cairo, Qt paint/scene graph, GSK, Vello |
-| UI materialization | custom scene, toolkit controls, or actual OS controls | BlazeX scene, Slint, Qt, GTK, wxWidgets |
+| Drawing engine | paths, clips, transforms, paint, images, glyph runs, layers | Skia, Cairo, GSK, Vello |
+| UI materialization | custom scene or direct platform controls | BlazeX scene, Slint without an excluded backend, Win32, AppKit, GTK 4 |
 | Runtime integration | safe state/event exchange with the UI main thread | external process, port, NIF, embedded runtime |
 
 Consequential claims are based primarily on project documentation, platform
@@ -140,8 +148,8 @@ objects to portable components.
 | Meaning | What the user receives | Examples | BlazeX consequence |
 | --- | --- | --- | --- |
 | Native application shell | OS window, app identity, event loop, menus/services | SDL/winit shell, AppKit/Win32/GTK top level | Necessary but says nothing about child controls |
-| Toolkit-drawn native-looking UI | framework owns layout and pixels; styles follow the OS | Qt Widgets/Quick, GTK4, Slint, Flutter | Consistent semantic renderer; accessibility must be supplied by the toolkit/adapter |
-| Actual native controls | platform or native-port widget resources own behavior | wxWidgets where a native control exists, direct Win32/AppKit/GTK | Best proof against browser-shaped contracts; behavior and catalog coverage diverge by OS |
+| Toolkit-drawn native-looking UI | framework owns layout and pixels; styles follow the OS | GTK4, Slint, Flutter | Consistent semantic renderer; accessibility must be supplied by the toolkit/adapter |
+| Actual native controls | platform control resources own behavior | direct Win32/AppKit/GTK | Best proof against browser-shaped contracts; behavior and catalog coverage diverge by OS |
 
 This distinction resolves an apparent conflict in the prior research. BlazeX
 can ship a high-quality custom-drawn desktop renderer and still retain actual
@@ -304,7 +312,7 @@ ABI:
 | Bounded BlazeX stack/grid | smallest contract and easiest conformance fixtures | every measurement, flow, and edge case is ours | mandatory semantic baseline, not necessarily the production solver |
 | **Taffy 0.14.0** | embeddable Rust Block, Flexbox, and Grid with measurement callbacks | text, scrolling, hit testing, focus, and stable C binding remain external | leading Rust custom-scene layout experiment |
 | **Yoga 3.2.1** | mature embeddable C++ Flexbox engine and generated tests | narrower than Taffy; no Grid or host behavior | C++ comparison for a Skia-oriented host |
-| Toolkit-owned layout | native/toolkit intrinsic control measurement, focus, and conventions | geometry and behavior differ by toolkit and OS | required for wxWidgets/Qt proofs |
+| Platform-control-owned layout | native intrinsic control measurement, focus, and conventions | geometry and behavior differ by OS | required for the direct Win32/AppKit/GTK proofs |
 | Cassowary-style constraints | incremental required/preferred linear relationships | not a general block, grid, text, scroll, or hit-test engine | specialized panes, splitters, overlays, and alignment only |
 
 This comparison is grounded in the pinned
@@ -375,7 +383,7 @@ path must preserve the same scene protocol and prove software fallback.
 | **Platform APIs** | Direct2D/DirectWrite, Core Graphics/Core Text, Cairo/Pango give best local integration | three implementations and divergent metrics | platform escape hatches and validation backends, not first shared renderer |
 | **wgpu/Dawn/bgfx** | portable GPU devices, shaders, pipelines, and presentation | no paths, text, layout, input, or accessibility | substrate only, not the common drawing primitive |
 | **Vello 0.9 family over wgpu** | Classic GPU, CPU, and early Hybrid renderer directions for modern retained 2D | Hybrid has no API-stability or feature-parity guarantee; production readiness of the family is unproven | measured research branch, not baseline |
-| **Qt Quick/RHI or GTK4/GSK** | integrated scene graph, text, input, and toolkit accessibility | adopts a large toolkit/runtime contract | full-stack prototype or benchmark, not a neutral low-level library |
+| **GTK4/GSK** | Linux-integrated scene graph, text, input, and toolkit accessibility | adopts GTK's toolkit/runtime contract and is not the shared three-OS renderer | Linux validation backend, not a neutral common drawing library |
 
 [Levien's GPU scene research](../30-sources/levien-2022-gpu-tree-scene-rendering.md)
 shows why tree-structured clips, blends, culling, and bounding boxes can
@@ -463,52 +471,57 @@ combinations. Together, these works argue for semantic portability plus
 platform escape hatches and actual screen-reader testing—not a lowest-common-
 denominator role string.
 
-## 10. Integrated toolkit comparison
+## 10. Direct platform-control adapters
 
-| Candidate | What it proves | Principal concern | Recommended use |
+The actual-native-control proof should use the platform APIs directly. This
+accepts three materializers in exchange for unambiguous control ownership and
+removes a cross-platform widget object's lifecycle, event model, and fallback
+behavior from the BlazeX boundary.
+
+| Target | Direct control path | What it proves | Principal concern |
 | --- | --- | --- | --- |
-| **Qt 6** | mature Windows/macOS/Linux text, IME, DPI, accessibility, Widgets and GPU scene paths | large C++ deployment; LGPLv3/commercial choice; most child widgets are Qt-owned/native-styled rather than OS controls | **mature integration oracle and first full-stack prototype** |
-| **wxWidgets** | native Win32/Cocoa/GTK controls where available, broad desktop services | generic/custom controls and cross-platform accessibility are uneven; C++ shim required | **bounded actual-native-control F0 proof** |
-| **Slint + AccessKit** | lean Rust/custom-drawn architecture; replaceable winit/Qt backends and Skia/wgpu/software renderers | younger stack, renderer-dependent text quality, licensing/attribution decision | **second custom-scene prototype** |
-| **GTK4** | stable C/GObject boundary, excellent Linux/Wayland/Pango/AT-SPI integration, GSK scene graph | Windows/macOS packaging and polish weaker; those accessibility backends are newer | optional Linux-first/C-ABI prototype |
-| **libui-ng** | attractive small C API over Win32/Cocoa/GTK plus a drawing area | project explicitly describes itself as mid-alpha; small catalog and incomplete custom accessibility story | reject as production foundation |
-| Flutter/Avalonia | production examples of custom-drawn, semantically accessible multi-OS engines | add Dart or .NET managed framework/runtime and do not expose their internals as a neutral BlazeX renderer ABI | architecture benchmarks only |
+| **Windows** | Win32 standard/common controls and platform dialogs | concrete child-window resources, message-loop ownership, standard UI Automation providers, native focus and input behavior | Win32 conventions and custom-provider work must stay behind the adapter |
+| **macOS** | AppKit `NSApplication`, `NSWindow`, `NSControl` subclasses, and panels | AppKit-owned controls, target-action events, first-responder behavior, built-in accessibility for standard controls | Objective-C/Swift interoperability and main-thread lifecycle are platform-specific |
+| **Linux** | GTK 4 application, widgets, dialogs/services, and accessibility | GTK widget behavior, GLib main-loop ownership, Pango/IME integration, and AT-SPI exposure | Linux desktop, display-server, theme, portal, and distribution variance requires named test environments |
 
-The detailed toolkit evidence is preserved in the
-[Qt](../30-sources/qt-project-2026-desktop-ui-platform.md),
-[GTK4](../30-sources/gtk-project-2026-gtk4-desktop-ui-platform.md),
-[wxWidgets](../30-sources/wxwidgets-project-2026-native-control-toolkit.md),
-[Slint](../30-sources/slint-project-2026-desktop-ui-runtime.md), and
-[libui-ng](../30-sources/libui-ng-project-2026-portable-native-gui.md)
-source notes.
+The [direct platform-control source
+note](../30-sources/platform-vendors-2026-direct-native-control-apis.md)
+records the official evidence. Each host consumes the same versioned semantic
+snapshot, patch, event, effect, capability, and opaque-resource protocol.
+Platform objects never cross that boundary. Generated protocol bindings,
+fixtures, and conformance tests may be shared; widget construction,
+measurement, event translation, accessibility, and lifecycle code are
+platform-owned.
 
-### 10.1 Why not simply select Qt
+The bounded fixture remains: label, stack/layout, button, checkbox, text
+entry, keyed list and selection, menu, dialog, focus restoration, validation
+relationship, and file choice. Success means equivalent semantic state,
+event order, identity, focus, accessibility relationships, resource ownership,
+stale-event rejection, and disposal. Exact geometry, styling, and pixels are
+not required to match across visual profiles.
 
-Qt is the strongest “buy the integration” option. It could materially reduce
-the first implementation's text, IME, accessibility, DPI, layout, and
-platform-service risk. It is therefore worth prototyping before BlazeX
-commits to assembling those subsystems.
+### 10.1 Relationship to the custom-scene host
 
-Selecting Qt would also make Qt's C++ object/event model, deployment plugins,
-binary footprint, and LGPLv3 or commercial terms part of the desktop product.
-Qt Widgets provide a native look and behavior but generally paint through Qt
-styles; they do not satisfy an exact “OS owns every child control” definition.
-The spike must distinguish Qt Widgets, Qt Quick, and genuinely native dialogs
-or windows rather than treating “Qt” as one rendering strategy.
+The direct-control hosts and the SDL3/Skia custom-scene host are separate
+renderer profiles. SDL does not own or embed the proof controls. Both paths
+share the semantic protocol and headless oracle, not a window hierarchy or a
+widget abstraction. A later hybrid profile would require a new, explicit
+surface, focus, accessibility, clipping, and lifecycle proof.
 
-### 10.2 Why wxWidgets is the portability proof, not automatically the product
+### 10.2 Excluded and historical candidates
 
-wxWidgets is the clearest mature cross-platform route to real Win32, Cocoa,
-and GTK controls for basic F0 components. That makes it unusually valuable as
-an adversarial proof for the semantic ABI. Its generic or owner-drawn complex
-controls, accessibility gaps, styling limits, and three-port behavior mean it
-should not be promoted to the full 83-family product without evidence.
+Qt and wxWidgets are excluded from active selection, implementation,
+prototyping, integration benchmarking, dependencies, and fallbacks. The
+[Qt](../30-sources/qt-project-2026-desktop-ui-platform.md) and
+[wxWidgets](../30-sources/wxwidgets-project-2026-native-control-toolkit.md)
+notes are retained only to preserve the reasoning history; they are not
+current candidates.
 
-The native proof should remain intentionally small: label, stack/layout,
-button, checkbox, text entry, keyed list, menu, dialog, focus restoration,
-validation relationship, and file choice. The proof succeeds if the same
-portable components and event/effect traces work—not if every pixel matches
-the BlazeX Material profile.
+[Slint](../30-sources/slint-project-2026-desktop-ui-runtime.md) remains only an
+optional custom-scene comparison when configured without an excluded backend.
+[libui-ng](../30-sources/libui-ng-project-2026-portable-native-gui.md) remains
+rejected as a production foundation, and Flutter/Avalonia remain architecture
+references rather than BlazeX host candidates.
 
 ## 11. Runtime choices
 
@@ -600,21 +613,31 @@ and Linux portals.
 
 ### Gate C — actual-native-control portability proof
 
-1. Implement the existing ADR-0007 slice in wxWidgets.
-2. Compare semantic trees, event ordering, focus, validation relations,
-   effect ownership, stale event rejection, and disposal with headless and
-   DOM renderers.
-3. Record every component that is a native control, generic toolkit control,
-   composite, host service, or unsupported fallback.
-4. Use failures to revise the BlazeX semantic ABI before F0 stability.
+1. Implement the existing ADR-0007 slice independently with Win32 controls,
+   AppKit controls, and GTK 4 controls.
+2. Compare all three adapters' semantic trees, event ordering, focus,
+   validation relations, effect ownership, stale-event rejection, and
+   disposal with the headless and DOM renderers.
+3. Record the concrete control class and whether each component is a stock
+   control, native composite, platform service, framework-drawn extension, or
+   unsupported fallback on each target.
+4. Inspect UI Automation, NSAccessibility, and AT-SPI output and exercise the
+   selected screen readers on named platform versions.
+5. Use failures to revise the BlazeX semantic ABI before F0 stability; do not
+   hide differences behind a new cross-platform widget abstraction.
 
-### Gate D — alternative and integration oracle
+### Gate D — adapter convergence and custom-scene alternative
 
-1. Implement the same slice in Qt 6, separating Widgets and Quick evidence.
-2. If a Rust-native product remains attractive, repeat the custom-scene slice
-   with winit + AccessKit + Skia or Slint.
+1. Compare the Win32, AppKit, and GTK adapters for protocol reuse, generated
+   bindings, platform extensions, duplicate logic, and semantic drift.
+2. If a Rust-native custom-scene product remains attractive, repeat the scene
+   slice with winit + AccessKit + Skia or Slint configured without an excluded
+   backend.
 3. Compare integration code, binary size, cold start, idle power, patch cost,
-   text fidelity, accessibility completeness, packaging, and license posture.
+   text fidelity, accessibility completeness, packaging, maintenance surface,
+   and license posture.
+4. Inspect dependency manifests and produced artifacts to prove that neither
+   excluded system entered directly or transitively.
 
 ### Gate E — GPU and distribution
 
@@ -653,12 +676,12 @@ not native-looking paint.
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |
 | SDL3 + Skia + AccessKit | 5 | 5 | 3 | 3 | 1 | 4 | leading custom-scene spike hypothesis; prove layout, text, accessibility, and presentation paths |
 | winit + Skia + AccessKit | 4 | 5 | 3 | 4 | 1 | 4 | best Rust-first alternative |
-| Qt 6 full stack | 5 | 5 | 5 | 4 | 2 | 2 | strongest mature integration prototype/oracle |
-| wxWidgets | 5 | 3 | 4 | 3 | 5 | 3 | bounded real-native-control proof |
-| Slint + AccessKit | 4 | 4 | 3 | 4 | 1 | 3 | promising lean second prototype |
-| GTK4 | 4 | 4 | 5 | 4 | 1 | 3 | Linux-first/C-ABI alternative |
+| Slint + AccessKit, non-excluded backend only | 4 | 4 | 3 | 4 | 1 | 3 | promising lean second prototype |
 | wgpu + Vello 0.9 family | 4 | 3 | 2 | 1 | 1 | 3 | research branch only |
-| Per-OS Win32/AppKit/GTK | 5 | 4 | 5 | 5 | 5 | 1 | highest fidelity, highest implementation cost; fallback if adapters fail |
+| Direct Win32 control adapter | 1 | 1 | 5 | 5 | 5 | 3 | required Windows actual-control proof |
+| Direct AppKit control adapter | 1 | 1 | 5 | 5 | 5 | 3 | required macOS actual-control proof |
+| Direct GTK 4 control adapter | 1 | 2 | 5 | 5 | 5 | 3 | required Linux actual-control proof |
+| Combined direct-adapter program | 5 | 2 | 5 | 5 | 5 | 1 | required Gate C path; highest fidelity and implementation cost |
 
 ## 16. Risks, contradictions, and stop conditions
 
@@ -668,8 +691,8 @@ not native-looking paint.
 | SDL and Skia can both present, but shared surface/queue ownership is unspecified | prove one raster-upload or Skia-owned GPU path per OS; do not mix render APIs without explicit interop |
 | A scene graph exists, but no subsystem owns final geometry | keep layout, measurement, scrolling, and hit testing renderer-local; compare Taffy/Yoga/toolkit layout before selection |
 | Skia “draws text” but core Skia does not perform all shaping/layout | make shaping/paragraph services explicit and test them independently |
-| Qt advertises native look and feel, while styles often emulate OS controls | inspect actual widget ownership; do not count style fidelity as ADR-0007 proof |
-| wxWidgets wraps native controls but some controls are generic/owner-drawn | classify every proof control and test custom accessibility separately |
+| Three direct adapters may drift into three component models | share only the semantic protocol, generated bindings, fixtures, and conformance suite; revise the ABI if equivalent intent cannot map cleanly |
+| Platform controls cover different catalogs and expose different lifecycle rules | classify stock, composite, drawn, service, and unsupported cases per OS; never claim portability from one target's result |
 | AccessKit covers all three OS APIs but cannot guarantee every complex pattern | test text ranges, grids/trees, live regions, virtualization, and focus per OS |
 | GPU rendering promises speed but adds driver/device-loss risk | pinned software comparison and fallback are mandatory before GPU promotion; the headless renderer remains the semantic oracle |
 | A NIF promises low latency but shares VM failure and thread constraints | external process first; reconsider only with measured IPC evidence |
@@ -684,6 +707,8 @@ Stop or redesign the selected production stack if the prototype cannot:
 - expose required accessibility patterns without synchronous BEAM calls;
 - recover from renderer failure from a semantic snapshot;
 - pass the native-control portability slice without HTML-shaped contracts;
+- keep the excluded widget systems out of source, dependency graphs, linked
+  artifacts, and packaged applications;
 - produce signed/installable artifacts under realistic sandbox policies; or
 - meet measured startup, memory, interaction, idle-power, and binary budgets
   established before product promotion.
@@ -719,8 +744,9 @@ different proof; packaging is target-specific.
 
 **Medium confidence:** SDL3 will have lower total cost than winit for BlazeX;
 AccessKit will cover the required complex controls without substantial
-platform code; SkParagraph will be preferable to direct HarfBuzz/ICU;
-wxWidgets is the best proof adapter rather than direct platform controls.
+platform code; SkParagraph will be preferable to direct HarfBuzz/ICU; and the
+direct Win32/AppKit/GTK proof can preserve one semantic protocol without
+forcing platform types into portable components.
 
 **Unknown until implementation:** binary size, cold start, patch throughput,
 idle power, SDL–Skia surface integration, layout-engine fit, GPU driver
@@ -737,7 +763,8 @@ not a production-toolkit selection.
 - [Host-neutral BlazeX architecture and native control backends](host-neutral-blazex-architecture-and-native-control-backends.md) — parent architecture whose renderer and desktop-host choices this report develops.
 - [Host-neutral and native-renderer architecture map](../10-maps/host-neutral-and-native-renderer-architecture.md) — curated route through the architecture and evidence.
 - [Can one BlazeX component model target DOM and native controls?](../40-inquiries/can-one-blazex-component-model-target-dom-and-native-controls.md) — remains open until the proposed proofs execute.
-- [2026-09-03 native-host research journal](../50-journal/2026-09-03-cross-platform-native-host-deep-dive.md) — methods, source classes, contradictions, and evidence limits.
+- [2026-09-04 direct native-control host revision](../50-journal/2026-09-04-direct-native-control-host-revision.md) — supersedes the active toolkit recommendation while preserving the earlier research record.
+- [2026-09-03 native-host research journal](../50-journal/2026-09-03-cross-platform-native-host-deep-dive.md) — historical methods, source classes, contradictions, and evidence limits.
 
 ## Sources
 
@@ -748,9 +775,8 @@ not a production-toolkit selection.
 - [Badros, Borning, and Stuckey on Cassowary constraints](../30-sources/badros-borning-stuckey-2001-cassowary-layout-constraints.md)
 - [Rust window, GPU, and vector-rendering stack](../30-sources/rust-windowing-gfx-rs-linebender-2026-native-graphics-stack.md)
 - [Desktop accessibility APIs and AccessKit](../30-sources/accesskit-platform-vendors-2026-desktop-accessibility-bridges.md)
-- [Qt desktop UI platform](../30-sources/qt-project-2026-desktop-ui-platform.md)
+- [Direct Windows, AppKit, and GTK native-control APIs](../30-sources/platform-vendors-2026-direct-native-control-apis.md)
 - [GTK4 desktop UI platform](../30-sources/gtk-project-2026-gtk4-desktop-ui-platform.md)
-- [wxWidgets native-control toolkit](../30-sources/wxwidgets-project-2026-native-control-toolkit.md)
 - [Slint desktop UI runtime](../30-sources/slint-project-2026-desktop-ui-runtime.md)
 - [libui-ng portable native GUI](../30-sources/libui-ng-project-2026-portable-native-gui.md)
 - [Flutter desktop embedder architecture](../30-sources/flutter-project-2026-desktop-embedder-architecture.md)

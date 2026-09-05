@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0.0",
+  "authorization_id": "BX-BH02-AUTHORIZATION-0.1",
+  "status": "approved-phase-1-only",
+  "approved_at": "2026-09-05",
+  "approved_by": {
+    "identity": "pcharbon70",
+    "name": "Pascal Charbonneau",
+    "role": "repository-owner",
+    "approval_record": "Repository-owner request in the BlazeX Codex task to implement the next BH-02 phase section by section with one commit per section, one pull request, and final synchronized-main branch cleanup."
+  },
+  "activation": {
+    "base_branch": "main",
+    "base_revision": "8b732641910ebbdf28dd1c8a4b4a9fc435c820ce",
+    "base_remote_revision": "8b732641910ebbdf28dd1c8a4b4a9fc435c820ce",
+    "main_synchronized_before_branch": true,
+    "working_branch": "codex/bh-02-phase-01-activation",
+    "phase": "BH-02 Phase 1"
+  },
+  "approval_basis": [
+    {
+      "path": "docs/research/assets/bh-01-release/blazex-bh-02-entry-manifest-v0.1.0.json",
+      "sha256": "f9a68de442a5ab9853659e588d129351218940406b64992e8cba40553fc89a6c"
+    },
+    {
+      "path": "docs/research/20-notes/browser-host-implementation-milestones.md",
+      "sha256": "a23f08ce1bf6021a6d1e9d1dd5998f85e37a7604d23bc032e0618f1c5facddb0"
+    },
+    {
+      "path": "docs/research/60-planning/development-environment-and-deferred-qualification-policy.md",
+      "sha256": "5d50cded3d70e95d47359df2a003a6979d92b8745fab012824646cc1e6bc8cfa"
+    }
+  ],
+  "authorized_scope": [
+    "Record authorization and reconcile the immutable BH-01 handoff.",
+    "Activate only the BH-02 host-neutral foundation, headless profile, conformance location, and bounded native experiment boundary.",
+    "Add automated dependency, ownership, forbidden-leakage, and negative validation.",
+    "Run and publish the Phase 1 integration gate."
+  ],
+  "delivery_rules": {
+    "sections_in_order": true,
+    "commit_per_section": true,
+    "single_pull_request": true,
+    "return_to_synchronized_main_after_delivery": true,
+    "delete_local_feature_branch_after_delivery": true
+  },
+  "not_authorized": [
+    "BH-02 Phases 2 through 8",
+    "stable or public semantic component APIs",
+    "product component-family implementation",
+    "external dependency acquisition or runtime/toolchain upgrades",
+    "browser, native-host, mobile, accessibility, security, performance, or release support claims"
+  ]
+}
