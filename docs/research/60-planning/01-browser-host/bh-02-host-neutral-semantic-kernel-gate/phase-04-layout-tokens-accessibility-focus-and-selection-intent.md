@@ -43,21 +43,21 @@ Back to milestone: [README](README.md)
       - [x] 4.1.2.3 Subtask - Freeze accessibility roles, states, relationships, live intent, focus participation/scope/restoration, and controlled selection forms.
       - [x] 4.1.2.4 Subtask - Freeze a versioned intent-set wrapper that preserves the Phase 3 semantic document and validates every annotation against exact tree identity and generation.
 
-  - [ ] 4.2 Section - Implement design-token references and logical layout intent.
+  - [x] 4.2 Section - Implement design-token references and logical layout intent.
 
     Represent portable constraints and relationships without computing final
     geometry or importing a renderer-owned measurement type.
 
-    - [ ] 4.2.1 Task - Implement bounded token and metric data.
+    - [x] 4.2.1 Task - Implement bounded token and metric data.
 
-      - [ ] 4.2.1.1 Subtask - Add exact token categories with bounded portable names and reject literal host objects, CSS values, and toolkit resources.
-      - [ ] 4.2.1.2 Subtask - Add logical auto/content/fill/unit/token metrics and validate non-negative finite unit values.
+      - [x] 4.2.1.1 Subtask - Add exact token categories with bounded portable names and reject literal host objects, CSS values, and toolkit resources.
+      - [x] 4.2.1.2 Subtask - Add logical auto/content/fill/unit/token metrics and validate non-negative finite unit values.
 
-    - [ ] 4.2.2 Task - Implement per-node layout intent.
+    - [x] 4.2.2 Task - Implement per-node layout intent.
 
-      - [ ] 4.2.2.1 Subtask - Add exact layout modes, direction, alignment, gap, padding, size bounds, growth, overflow, and optional virtualization hints.
-      - [ ] 4.2.2.2 Subtask - Reject invalid modes, dimensions, min/max relations, virtualization forms, owner identities, opaque terms, and concrete renderer vocabulary.
-      - [ ] 4.2.2.3 Subtask - Test representative stack/grid, logical token, scrolling, sizing, and virtualization declarations without producing geometry.
+      - [x] 4.2.2.1 Subtask - Add exact layout modes, direction, alignment, gap, padding, size bounds, growth, overflow, and optional virtualization hints.
+      - [x] 4.2.2.2 Subtask - Reject invalid modes, dimensions, min/max relations, virtualization forms, owner identities, opaque terms, and concrete renderer vocabulary.
+      - [x] 4.2.2.3 Subtask - Test representative stack/grid, logical token, scrolling, sizing, and virtualization declarations without producing geometry.
 
   - [ ] 4.3 Section - Implement accessibility, focus, selection, and intent-set validation.
 

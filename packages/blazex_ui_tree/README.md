@@ -9,10 +9,11 @@ native-toolkit objects. Renderer-specific lowering belongs in renderer
 packages. The tree may refer to opaque resource identities, but effect and
 resource lifecycle belongs to `blazex_effects`.
 
-Status: experimental BH-02 Phase 2 implementation. Version-1 nodes, structural
+Status: experimental BH-02 implementation. Version-1 nodes, structural
 identity checks, sibling uniqueness, ancestry validation, and deterministic
 preorder traversal are implemented. Component output is accepted atomically
 only when the complete tree is valid and its root identity matches the Core
 evaluation. BH-02 Phase 3 adds semantic documents and validated event bindings
-without adding concrete input callbacks. Later semantic fields and stable
-public APIs remain deferred.
+without adding concrete input callbacks. BH-02 Phase 4 adds renderer-independent
+token references and logical layout intent without calculating geometry.
+Stable public APIs remain deferred.
