@@ -40,37 +40,37 @@ or mobile viability.
   constrained-mobile and unavailable browser measurements as deferred
   production-qualification work.
 
-  - [ ] 9.1 Section - Finalize metric definitions and measurement harnesses.
+  - [x] 9.1 Section - Finalize metric definitions and measurement harnesses.
 
     Each metric requires explicit boundaries, clocks, environment/cache state,
     sample policy, aggregation, variance handling, and artifact correlation.
 
-    - [ ] 9.1.1 Task - Implement build and payload measurements.
+    - [x] 9.1.1 Task - Implement build and payload measurements.
 
       Build and payload economics should derive from canonical manifests rather
       than manually selected files.
 
-      - [ ] 9.1.1.1 Subtask - Measure clean/incremental release build duration with declared phases, caches, parallelism, machine resources, and success criteria.
-      - [ ] 9.1.1.2 Subtask - Measure compressed/uncompressed runtime, BEAM/application, JavaScript, loader/worker, maps, manifests, licenses/assets, request count, and total first-load payload.
-      - [ ] 9.1.1.3 Subtask - Attribute every byte/request to artifact ID, package owner, reachability root, cache class, profile/mode, debug/release inclusion, and integrity metadata.
+      - [x] 9.1.1.1 Subtask - Measure clean/incremental release build duration with declared phases, caches, parallelism, machine resources, and success criteria.
+      - [x] 9.1.1.2 Subtask - Measure compressed/uncompressed runtime, BEAM/application, JavaScript, loader/worker, maps, manifests, licenses/assets, request count, and total first-load payload.
+      - [x] 9.1.1.3 Subtask - Attribute every byte/request to artifact ID, package owner, reachability root, cache class, profile/mode, debug/release inclusion, and integrity metadata.
 
-    - [ ] 9.1.2 Task - Implement startup and readiness measurements.
+    - [x] 9.1.2 Task - Implement startup and readiness measurements.
 
       Startup needs separate network, instantiate, runtime, application, and
       first-observable-root intervals.
 
-      - [ ] 9.1.2.1 Subtask - Instrument navigation, manifest/artifact fetch, Wasm instantiate, bundle load, runtime ready, application ready, root ready, and fallback ready with one clock model.
-      - [ ] 9.1.2.2 Subtask - Define cold/warm cache and process states, network conditions, service-worker behavior, warmups, samples, failures, timeout, and percentile/variance reporting.
+      - [x] 9.1.2.1 Subtask - Instrument navigation, manifest/artifact fetch, Wasm instantiate, bundle load, runtime ready, application ready, root ready, and fallback ready with one clock model.
+      - [x] 9.1.2.2 Subtask - Define cold/warm cache and process states, network conditions, service-worker behavior, warmups, samples, failures, timeout, and percentile/variance reporting.
 
-    - [ ] 9.1.3 Task - Implement interaction, server, resource, and reliability measurements.
+    - [x] 9.1.3 Task - Implement interaction, server, resource, and reliability measurements.
 
       Local and remote paths need comparable boundaries while retaining their
       different authority and network costs.
 
-      - [ ] 9.1.3.1 Subtask - Instrument local event receipt, runtime transition, bridge, DOM update, next paint, validation, timer/message, and nested update intervals.
-      - [ ] 9.1.3.2 Subtask - Instrument authenticated command dispatch, transport, server queue/validation/authorization/effect, response, DOM result, reconnect, retry, and cleanup intervals.
-      - [ ] 9.1.3.3 Subtask - Instrument initial/peak/stable/disposed memory, Wasm pages, processes/mailboxes/timers/pending work, repeated-growth slope, errors/crashes, long tasks, and cleanup convergence.
-      - [ ] 9.1.3.4 Subtask - Calibrate harness overhead and clock resolution and record metrics unavailable or unreliable on a browser/device.
+      - [x] 9.1.3.1 Subtask - Instrument local event receipt, runtime transition, bridge, DOM update, next paint, validation, timer/message, and nested update intervals.
+      - [x] 9.1.3.2 Subtask - Instrument authenticated command dispatch, transport, server queue/validation/authorization/effect, response, DOM result, reconnect, retry, and cleanup intervals.
+      - [x] 9.1.3.3 Subtask - Instrument initial/peak/stable/disposed memory, Wasm pages, processes/mailboxes/timers/pending work, repeated-growth slope, errors/crashes, long tasks, and cleanup convergence.
+      - [x] 9.1.3.4 Subtask - Calibrate harness overhead and clock resolution and record metrics unavailable or unreliable on a browser/device.
 
   - [ ] 9.2 Section - Execute controlled desktop measurements.
 

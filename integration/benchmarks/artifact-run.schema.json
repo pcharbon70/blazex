@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://blazex.dev/schemas/bh-01/phase-09-artifact-run-1.0.0.json",
+  "title": "BlazeX BH-01 Phase 9 Artifact Run",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "run_id", "status", "captured_at", "source_revision", "environment_id", "profile_manifest", "compression", "artifacts", "totals", "source_maps", "limitations"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "run_id": {"const": "BX-BH01-PHASE9-RUN-ARTIFACTS-LINUX-0.1"},
+    "status": {"const": "observed"},
+    "captured_at": {"type": "string", "format": "date-time"},
+    "source_revision": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "environment_id": {"type": "string", "pattern": "^BX-BH01-ENV-[A-Z0-9.-]+$"},
+    "profile_manifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "sha256", "governed_files"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "governed_files": {"type": "integer", "minimum": 1}
+      }
+    },
+    "compression": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["algorithm", "quality", "repetitions"],
+      "properties": {
+        "algorithm": {"const": "brotli"},
+        "quality": {"const": 11},
+        "repetitions": {"type": "integer", "minimum": 3}
+      }
+    },
+    "artifacts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["artifact_id", "owner_class", "reachability_root", "cache_class", "mime", "source_sha256", "decoded_bytes", "brotli_quality", "brotli_bytes", "repetitions", "request_count", "profile", "mode", "build_mode"],
+        "properties": {
+          "artifact_id": {"type": "string", "minLength": 1},
+          "owner_class": {"enum": ["runtime", "application-bundle-unpruned", "loader-bootstrap", "shared-ui-fixture", "other-profile-asset"]},
+          "reachability_root": {"const": "profile-assets-manifest.json"},
+          "cache_class": {"enum": ["immutable", "no-cache", "no-store"]},
+          "mime": {"type": "string", "minLength": 1},
+          "source_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "decoded_bytes": {"type": "integer", "minimum": 0},
+          "brotli_quality": {"const": 11},
+          "brotli_bytes": {"type": "integer", "minimum": 0},
+          "repetitions": {"type": "integer", "minimum": 3},
+          "request_count": {"const": 1},
+          "profile": {"const": "PROFILE-BROWSER-PHOENIX"},
+          "mode": {"const": "standalone-dom-feasibility"},
+          "build_mode": {"const": "release-candidate-artifacts"}
+        }
+      }
+    },
+    "totals": {
+      "type": "object",
+      "required": ["runtime", "application-bundle-unpruned", "loader-bootstrap", "shared-ui-fixture", "total"],
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["decoded_bytes", "brotli_bytes", "request_count"],
+        "properties": {
+          "decoded_bytes": {"type": "integer", "minimum": 0},
+          "brotli_bytes": {"type": "integer", "minimum": 0},
+          "request_count": {"type": "integer", "minimum": 0}
+        }
+      }
+    },
+    "source_maps": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "limitations": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}, "uniqueItems": true}
+  }
+}

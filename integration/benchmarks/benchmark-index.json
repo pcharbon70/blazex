@@ -1,9 +1,13 @@
 {
   "schema_version": "1.0.0",
   "index_id": "BX-BH01-BENCHMARK-INDEX-0.1",
-  "status": "phase8-environments-materialized-no-measurement-budget-passed",
+  "status": "phase9-section1-measurement-contract-ready",
   "environment_schema": "environment-fingerprint.schema.json",
   "sample_schema": "sample.schema.json",
+  "artifact_run_schema": "artifact-run.schema.json",
+  "build_run_schema": "build-run.schema.json",
+  "measurement_run_schema": "measurement-run.schema.json",
+  "metric_definitions": "phase9-metric-definitions.json",
   "locations": {
     "environments": "environments",
     "samples": "samples",
