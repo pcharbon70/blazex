@@ -99,7 +99,9 @@ or mobile viability.
     This entire section is deferred until representative Android and iOS/iPadOS
     device infrastructure is available and becomes mandatory no later than
     BH-22. Desktop emulation may inform harness development but cannot close
-    these obligations.
+    these obligations. The exact environments, missing capabilities, required
+    evidence, owners, reactivation points, and prohibited substitutions are
+    retained in the [Phase 9 qualification deferral ledger](../../../../../integration/benchmarks/reports/bh01-phase9-deferred-qualification.json).
 
     - **[DEFERRED] 9.3.1 Task - Fingerprint and stabilize mobile runs.**
 

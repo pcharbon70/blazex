@@ -1,0 +1,92 @@
+{
+  "schema_version": "1.0.0",
+  "record_id": "BX-BH01-PHASE9-QUALIFICATION-DEFERRALS-0.1",
+  "status": "deferred",
+  "recorded_at": "2026-09-05",
+  "source_revision": "d8345948be7347059df8ba4f06e8c22ae11b5287",
+  "active_development_matrix": [
+    "Linux Chrome for Testing 152.0.7977.75",
+    "Linux Playwright patched Firefox 153.0 development build"
+  ],
+  "policy": {
+    "reactivation_milestone": "BH-22",
+    "excluded_from_active_pass_rates": true,
+    "blocks_phase_9": false,
+    "blocks_support_or_release": true
+  },
+  "obligations": [
+    {
+      "id": "BX-BH01-DEFER-ANDROID-PHYSICAL-0.1",
+      "status": "deferred",
+      "environment": "representative physical Android phone and tablet with governed Chrome build",
+      "missing_capability": "No Android device, device lab, governed browser build, or authorized automation endpoint is available.",
+      "required_evidence": ["exact device and browser fingerprint", "cold and warm startup", "payload and shaped network", "local and authenticated interaction", "memory, lifecycle cleanup, long tasks, thermal and power observations"],
+      "owner": "browser-host and quality owners",
+      "reactivation": "BH-22 or earlier when representative Android infrastructure becomes available",
+      "substitution_rule": "Desktop emulation and Linux Chromium do not close physical Android evidence."
+    },
+    {
+      "id": "BX-BH01-DEFER-APPLE-MOBILE-0.1",
+      "status": "deferred",
+      "environment": "representative iPhone and iPad with governed iOS/iPadOS Safari builds",
+      "missing_capability": "No Apple hardware, Xcode simulator host, Mobile Safari build, or authorized automation endpoint is available.",
+      "required_evidence": ["exact device, operating-system, and Safari fingerprint", "cold and warm startup", "payload and shaped network", "local and authenticated interaction", "memory, background/foreground, cleanup, long tasks, thermal and power observations"],
+      "owner": "browser-host and quality owners",
+      "reactivation": "BH-22 or earlier when representative Apple mobile infrastructure becomes available",
+      "substitution_rule": "Linux WebKit builds, desktop emulation, and responsive viewport tests do not constitute iOS or iPadOS Safari evidence."
+    },
+    {
+      "id": "BX-BH01-DEFER-MACOS-SAFARI-0.1",
+      "status": "deferred",
+      "environment": "macOS Safari desktop qualification",
+      "missing_capability": "No macOS host or Safari automation endpoint is available.",
+      "required_evidence": ["exact macOS and Safari fingerprint", "complete desktop measurement distribution", "manual input and assistive-technology review"],
+      "owner": "browser-host and quality owners",
+      "reactivation": "BH-22 or earlier when a governed macOS host becomes available",
+      "substitution_rule": "A Linux WebKit build is engine-development evidence only and cannot substitute for Safari."
+    },
+    {
+      "id": "BX-BH01-DEFER-WINDOWS-DESKTOP-0.1",
+      "status": "deferred",
+      "environment": "Windows desktop browser qualification",
+      "missing_capability": "No Windows host is available.",
+      "required_evidence": ["exact Windows and browser fingerprint", "complete desktop measurement distribution", "manual input and assistive-technology review"],
+      "owner": "browser-host and quality owners",
+      "reactivation": "BH-22 or earlier when a governed Windows host becomes available",
+      "substitution_rule": "Linux browser evidence does not qualify Windows browser behavior or performance."
+    },
+    {
+      "id": "BX-BH01-DEFER-SECOND-LINUX-HOST-0.1",
+      "status": "deferred",
+      "environment": "second clean controlled Linux execution context",
+      "missing_capability": "Only one Linux development machine is currently available.",
+      "required_evidence": ["repeat subset with independent host fingerprint", "compare profile identity, medians, p95, variance, errors, and resource convergence"],
+      "owner": "quality owner",
+      "reactivation": "BH-22 or earlier when a second controlled Linux context becomes available",
+      "substitution_rule": "Repeated runs on the same host do not constitute cross-machine comparison."
+    },
+    {
+      "id": "BX-BH01-DEFER-MANUAL-AT-0.1",
+      "status": "deferred",
+      "environment": "required browser, assistive-technology, touch, and physical-keyboard pairings",
+      "missing_capability": "The required assistive technologies, devices, and trained manual review contexts are unavailable.",
+      "required_evidence": ["screen-reader semantics and announcements", "physical keyboard and focus visibility", "touch target and gesture behavior", "reduced-motion and high-contrast manual review"],
+      "owner": "accessibility and quality owners",
+      "reactivation": "BH-22 or earlier when governed pairings and reviewers become available",
+      "substitution_rule": "Automated accessibility inspection cannot substitute for manual assistive-technology evidence."
+    }
+  ],
+  "phase_effect": {
+    "active_linux_work_may_continue": true,
+    "phase_9_completion_allowed": true,
+    "mobile_viability": "undecided-deferred",
+    "cross_platform_qualification": "undecided-deferred"
+  },
+  "prohibited_claims": [
+    "Android or Apple mobile viability",
+    "Safari, Windows, or stable Firefox support",
+    "cross-platform qualification",
+    "accessibility conformance",
+    "production readiness or release support"
+  ]
+}

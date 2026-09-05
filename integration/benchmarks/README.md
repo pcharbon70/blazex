@@ -26,6 +26,8 @@ claim is made at this section boundary.
 - `build-run.schema.json` — isolated profile-packaging timing evidence contract.
 - `measurement-run.schema.json` — raw active-browser run contract.
 - `desktop-summary.schema.json` — derived Linux desktop distribution contract.
+- `qualification-deferral.schema.json` — unavailable-environment obligation and
+  reactivation contract.
 - `phase9-metric-definitions.json` — clocks, boundaries, sample policy, budget
   links, and deferred qualification boundary.
 - `phase9_metrics.py` — deterministic nearest-rank statistics and raw sample
@@ -48,3 +50,5 @@ claim is made at this section boundary.
   distributions.
 - `samples/bh01-phase9-linux-desktop-summary.json` — generated active-matrix
   statistics, adequacy, variance flags, and deferred second-machine comparison.
+- `reports/bh01-phase9-deferred-qualification.json` — exact external
+  qualification deferrals, owners, reactivation points, and prohibited claims.

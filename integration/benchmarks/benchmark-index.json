@@ -1,13 +1,14 @@
 {
   "schema_version": "1.0.0",
   "index_id": "BX-BH01-BENCHMARK-INDEX-0.1",
-  "status": "phase9-section2-linux-desktop-evidence-observed",
+  "status": "phase9-section3-external-qualification-deferred",
   "environment_schema": "environment-fingerprint.schema.json",
   "sample_schema": "sample.schema.json",
   "artifact_run_schema": "artifact-run.schema.json",
   "build_run_schema": "build-run.schema.json",
   "measurement_run_schema": "measurement-run.schema.json",
   "desktop_summary_schema": "desktop-summary.schema.json",
+  "qualification_deferral_schema": "qualification-deferral.schema.json",
   "metric_definitions": "phase9-metric-definitions.json",
   "locations": {
     "environments": "environments",
@@ -50,6 +51,8 @@
   "samples": [
     {"summary_id": "BX-BH01-PHASE9-LINUX-DESKTOP-SUMMARY-0.1", "path": "samples/bh01-phase9-linux-desktop-summary.json", "status": "observed", "distribution_count": 41}
   ],
-  "reports": [],
+  "reports": [
+    {"report_id": "BX-BH01-PHASE9-QUALIFICATION-DEFERRALS-0.1", "path": "reports/bh01-phase9-deferred-qualification.json", "status": "deferred-to-bh22", "excluded_from_active_pass_rates": true}
+  ],
   "budget_state": "proposed-unmeasured"
 }
