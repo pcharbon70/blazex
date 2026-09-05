@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0.0",
+  "fixture_set_id": "BX-BH02-RENDERER-HEADLESS-FIXTURES-0.1",
+  "contract_ref": "BX-BH02-PHASE-05-CONTRACT-0.1",
+  "status": "passed-local-renderer-headless-evaluation",
+  "environment": "local-beam",
+  "scenarios": [
+    {"id": "renderer-capability-negotiation", "expected": "complete-current-requirements-accepted"},
+    {"id": "missing-renderer-capability", "expected": "rejected-before-backend-callback"},
+    {"id": "headless-mount-snapshot", "expected": "revision-zero-canonical-snapshot"},
+    {"id": "headless-repeatability", "expected": "same-input-context-same-snapshot-and-digest"},
+    {"id": "headless-update-revision", "expected": "same-owner-next-revision"},
+    {"id": "headless-generation-replacement", "expected": "next-generation-revision-zero"},
+    {"id": "headless-disposal", "expected": "dispose-trace-entry-with-last-snapshot-digest"},
+    {"id": "headless-idempotent-disposal", "expected": "second-dispose-does-not-append"},
+    {"id": "unordered-declaration-normalization", "expected": "bindings-annotations-and-map-entries-canonicalized"},
+    {"id": "meaningful-child-order", "expected": "child-order-change-produces-different-digest"},
+    {"id": "event-render-update", "expected": "accepted-dispatch-output-updates-renderer-revision"},
+    {"id": "effect-resource-render-disposal", "expected": "renderer-disposes-and-owner-effect-is-cancelled"},
+    {"id": "focus-intent-snapshot", "expected": "focus-intent-recorded-without-host-execution"},
+    {"id": "selection-intent-snapshot", "expected": "selection-intent-recorded-without-host-execution"},
+    {"id": "invalid-semantic-rejection", "expected": "prior-session-retained-and-backend-not-invoked"},
+    {"id": "callback-failure-atomicity", "expected": "stable-diagnostic-without-private-error-or-session-mutation"}
+  ],
+  "canonical_trace": [
+    {"sequence": 1, "transition": "mount", "generation": 1, "revision": 0, "digest": "sha256-lower-hex"},
+    {"sequence": 2, "transition": "update", "generation": 1, "revision": 1, "digest": "sha256-lower-hex"},
+    {"sequence": 3, "transition": "replace", "generation": 2, "revision": 0, "digest": "sha256-lower-hex"},
+    {"sequence": 4, "transition": "dispose", "generation": 2, "revision": 0, "digest": "same-as-sequence-3"}
+  ],
+  "visual_results": [],
+  "geometry_results": [],
+  "dom_results": [],
+  "browser_results": [],
+  "native_results": [],
+  "platform_accessibility_results": [],
+  "api_state": "experimental",
+  "support_state": "unsupported"
+}

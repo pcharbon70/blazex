@@ -1,8 +1,9 @@
 defmodule BlazeX.Renderer do
   @moduledoc """
-  Experimental BH-02 ownership boundary for renderer contracts.
+  Experimental host-neutral renderer lifecycle contracts.
 
-  Phase 1 activates the package only. Negotiation, mount, update, diagnostics,
-  resource, generation, and disposal contracts remain unimplemented.
+  BH-02 Phase 5 implements explicit capability negotiation and immutable
+  mount, update, replacement, and disposal sessions. Concrete backends remain
+  in separate outward packages.
   """
 end

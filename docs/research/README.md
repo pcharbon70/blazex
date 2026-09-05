@@ -116,6 +116,8 @@ python3 validate_bh02_effects.py
 python3 -m unittest test_validate_bh02_effects.py
 python3 validate_bh02_intent.py
 python3 -m unittest test_validate_bh02_intent.py
+python3 validate_bh02_renderer.py
+python3 -m unittest test_validate_bh02_renderer.py
 ```
 
 The validator checks metadata, placeholders, filenames, local links,
@@ -141,6 +143,7 @@ identifiers.
 - [`test_validate_bh02_semantics.py`](test_validate_bh02_semantics.py) — focused BH-02 Phase 2 authorization, semantic vocabulary, identity, evaluation, fixture, leakage, and overclaim tests
 - [`test_validate_bh02_effects.py`](test_validate_bh02_effects.py) — focused BH-02 Phase 3 event, capability, effect, resource, fixture, leakage, and overclaim tests
 - [`test_validate_bh02_intent.py`](test_validate_bh02_intent.py) — focused BH-02 Phase 4 token, layout, accessibility, focus, selection, fixture, leakage, and overclaim tests
+- [`test_validate_bh02_renderer.py`](test_validate_bh02_renderer.py) — focused BH-02 Phase 5 renderer capability, lifecycle, headless snapshot, trace, fixture, leakage, and overclaim tests
 - [`test_validate_quality_acceptance.py`](test_validate_quality_acceptance.py) — focused Phase 5 quality-budget and acceptance-traceability validator tests
 - [`test_validate_archive.py`](test_validate_archive.py) — focused validator tests
 - [`validate_browser_product_envelope.py`](validate_browser_product_envelope.py) — deterministic BH-00 browser-envelope checks
@@ -152,5 +155,6 @@ identifiers.
 - [`validate_bh02_semantics.py`](validate_bh02_semantics.py) — fail-closed BH-02 Phase 2 semantic-tree, identity, component-evaluation, fixture, and support-limit checks
 - [`validate_bh02_effects.py`](validate_bh02_effects.py) — fail-closed BH-02 Phase 3 semantic-event, capability, effect, resource-lifecycle, fixture, and support-limit checks
 - [`validate_bh02_intent.py`](validate_bh02_intent.py) — fail-closed BH-02 Phase 4 presentation-intent, ownership, fixture, and support-limit checks
+- [`validate_bh02_renderer.py`](validate_bh02_renderer.py) — fail-closed BH-02 Phase 5 renderer lifecycle, deterministic-headless, trace, fixture, and support-limit checks
 - [`validate_quality_acceptance.py`](validate_quality_acceptance.py) — deterministic BH-00 quality-budget and acceptance-traceability checks
 - [`validate_archive.py`](validate_archive.py) — deterministic archive checks

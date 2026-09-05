@@ -3,7 +3,20 @@ defmodule BlazeX.SemanticKernelIntegrationTest do
 
   alias BlazeX.Core.{Event, Identity}
   alias BlazeX.Effects.{Effect, Result, Tracker}
-  alias BlazeX.UITree.{Accessibility, Binding, Document, Focus, IntentSet, Layout, Node, TokenRef}
+  alias BlazeX.Renderer.Session
+  alias BlazeX.Renderer.Headless
+
+  alias BlazeX.UITree.{
+    Accessibility,
+    Binding,
+    Document,
+    Focus,
+    IntentSet,
+    Layout,
+    Node,
+    Selection,
+    TokenRef
+  }
 
   defmodule StatefulActions do
     @behaviour BlazeX.Core.Component
@@ -82,10 +95,12 @@ defmodule BlazeX.SemanticKernelIntegrationTest do
     @impl true
     def render(_props, context) do
       {:ok, title_id} = Identity.child(context.identity, :title)
+      {:ok, choice_id} = Identity.child(context.identity, :choice)
       {:ok, close_id} = Identity.child(context.identity, :close)
       {:ok, title} = Node.text(title_id, "Preferences", key: :title)
+      {:ok, choice} = Node.container(:selection, choice_id, [], key: :choice)
       {:ok, close} = Node.container(:action, close_id, [], key: :close)
-      {:ok, root} = Node.container(:surface, context.identity, [title, close])
+      {:ok, root} = Node.container(:surface, context.identity, [title, choice, close])
       {:ok, document} = Document.new(root)
       {:ok, space} = TokenRef.new(:space, :dialog_inset)
 
@@ -103,14 +118,23 @@ defmodule BlazeX.SemanticKernelIntegrationTest do
         )
 
       {:ok, title_accessibility} = Accessibility.new(title_id, :text, name: "Preferences")
+      {:ok, choice_accessibility} = Accessibility.new(choice_id, :list_item, name: "Theme")
       {:ok, close_accessibility} = Accessibility.new(close_id, :button, name: "Close")
       {:ok, scope} = Focus.new(context.identity, :scope, restore: :previous, wrap: true)
-      {:ok, target} = Focus.new(close_id, :target, order: 0, auto_focus: true)
+      {:ok, choice_target} = Focus.new(choice_id, :target, order: 0, auto_focus: true)
+      {:ok, close_target} = Focus.new(close_id, :target, order: 1)
+      {:ok, selection} = Selection.new(choice_id, :single, :dark)
 
       IntentSet.new(document,
         layouts: [layout],
-        accessibility: [dialog_accessibility, title_accessibility, close_accessibility],
-        focus: [scope, target]
+        accessibility: [
+          dialog_accessibility,
+          title_accessibility,
+          choice_accessibility,
+          close_accessibility
+        ],
+        focus: [scope, choice_target, close_target],
+        selections: [selection]
       )
     end
   end
@@ -173,9 +197,60 @@ defmodule BlazeX.SemanticKernelIntegrationTest do
     assert :ok = IntentSet.validate(mounted.output)
     assert [%Layout{mode: :overlay}] = mounted.output.layouts
 
-    assert Enum.map(mounted.output.accessibility, & &1.role) == [:dialog, :text, :button]
-    assert Enum.map(mounted.output.focus, & &1.behavior) == [:scope, :target]
+    assert Enum.map(mounted.output.accessibility, & &1.role) == [
+             :dialog,
+             :text,
+             :list_item,
+             :button
+           ]
+
+    assert Enum.map(mounted.output.focus, & &1.behavior) == [:scope, :target, :target]
     assert Enum.any?(mounted.output.focus, & &1.auto_focus)
+    assert [%Selection{kind: :single, value: :dark}] = mounted.output.selections
     refute Map.has_key?(Map.from_struct(hd(mounted.output.layouts)), :bounds)
+  end
+
+  test "headless lifecycle observes presentation intent without producing geometry" do
+    {:ok, owner} = Identity.new({:component, :headless_dialog})
+    assert {:ok, evaluated} = BlazeX.UITree.mount_component(AccessibleDialog, owner, %{})
+    assert {:ok, mounted} = Session.mount(Headless, evaluated.output)
+    assert mounted.artifact.format == :headless_snapshot
+    assert mounted.artifact.value.focus != []
+    assert mounted.artifact.value.selections != []
+    refute Map.has_key?(Map.from_struct(mounted.artifact.value), :geometry)
+
+    assert {:ok, updated} = Session.update(mounted, evaluated.output)
+    assert updated.revision == 1
+    assert {:ok, disposed} = Session.dispose(updated)
+
+    assert Enum.map(disposed.backend_state.trace.entries, & &1.transition) == [
+             :mount,
+             :update,
+             :dispose
+           ]
+  end
+
+  test "event, effect, resource cleanup, and renderer disposal coordinate" do
+    {:ok, owner} = Identity.new({:component, :coordinated})
+    assert {:ok, evaluated} = BlazeX.UITree.mount_component(EffectfulClipboard, owner, %{})
+    assert {:ok, rendered} = Session.mount(Headless, evaluated.output)
+    [binding] = evaluated.output.bindings
+    {:ok, event} = Event.new(:activate, owner, binding.source, %{}, 1)
+
+    assert {:ok, dispatched, [effect]} = BlazeX.UITree.dispatch_component(evaluated, event)
+    assert {:ok, updated_renderer} = Session.update(rendered, dispatched.output)
+    assert {:ok, tracker} = Tracker.new([:"ui.clipboard"])
+    assert {:ok, pending, :pending} = Tracker.submit(tracker, effect)
+    assert {:ok, disposed_renderer} = Session.dispose(updated_renderer)
+
+    assert {:ok, cleaned, [%Result{status: :cancelled}]} = Tracker.dispose_owner(pending, owner)
+    assert cleaned.pending == %{}
+    assert disposed_renderer.status == :disposed
+
+    assert Enum.map(disposed_renderer.backend_state.trace.entries, & &1.transition) == [
+             :mount,
+             :update,
+             :dispose
+           ]
   end
 end

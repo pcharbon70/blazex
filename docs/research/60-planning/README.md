@@ -45,7 +45,8 @@ renumbered.
 - [01 — Browser host](01-browser-host/README.md) — active first implementation
   stream: BH-00 and BH-01 are complete, BH-02 Phases 1–3 have validated the
   neutral foundation, semantic kernel, event/effect/resource contracts, and
-  portable presentation intent; Phase 5 remains unauthorized.
+  portable presentation intent; Phase 5 renderer lifecycle/headless-oracle work
+  is explicitly authorized and active.
 
 ### Documents
 

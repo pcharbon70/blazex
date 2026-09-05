@@ -1,0 +1,81 @@
+{
+  "schema_version": "1.0.0",
+  "contract": "blazex.bh02.conformance-index/0.5",
+  "status": "phase-5-renderer-headless-passed-local",
+  "activation_phase": "BH-02 Phase 5",
+  "owner_role": "quality-owner",
+  "authorization": {
+    "path": "docs/research/assets/bh-02-baseline/blazex-bh-02-phase-05-authorization-v0.1.0.json",
+    "sha256": "5e2925494bd42d73492f2ccb01babe1e5297685c0c90c0ff543c3254a6148b9e"
+  },
+  "phase_contract": {
+    "path": "docs/research/assets/bh-02-baseline/blazex-bh-02-phase-05-contract-v0.1.0.json",
+    "sha256": "c7da238f2f9b98fe0be5ae53552c1b1e15019b88a8cb3ed2fb666603b437c89e"
+  },
+  "fixture_sets": [
+    {
+      "id": "BX-BH02-SEMANTIC-KERNEL-FIXTURES-0.1",
+      "path": "integration/conformance/semantic-kernel-fixtures-v0.1.0.json",
+      "sha256": "74e7db1e0194cb97f7d1c3b37b815d3cd0139050b75382078138570a58e04b78",
+      "scenario_count": 8,
+      "result": "passed-local-semantic-evaluation"
+    },
+    {
+      "id": "BX-BH02-EVENT-EFFECT-RESOURCE-FIXTURES-0.1",
+      "path": "integration/conformance/event-effect-resource-fixtures-v0.1.0.json",
+      "sha256": "e5372f49136fdf3b049c478fedcdc4c0171d1e7331a386b8d7ff6e3e85b4982d",
+      "scenario_count": 12,
+      "result": "passed-local-event-effect-resource-evaluation"
+    },
+    {
+      "id": "BX-BH02-PRESENTATION-INTENT-FIXTURES-0.1",
+      "path": "integration/conformance/presentation-intent-fixtures-v0.1.0.json",
+      "sha256": "86998ccbd9be44100e0be87a4249540022eaab6784433b4600ad4ca423c36665",
+      "scenario_count": 14,
+      "result": "passed-local-presentation-intent-evaluation"
+    },
+    {
+      "id": "BX-BH02-RENDERER-HEADLESS-FIXTURES-0.1",
+      "path": "integration/conformance/renderer-headless-fixtures-v0.1.0.json",
+      "sha256": "56c5ef67550d9a5adee03e37e34a507046d1990cf4caf4ee32c36e25b2fdf1d3",
+      "scenario_count": 16,
+      "result": "passed-local-renderer-headless-evaluation"
+    }
+  ],
+  "local_contract_results": [
+    {
+      "environment": "local-beam",
+      "result": "passed",
+      "evidence": [
+        "packages/blazex_renderer/test/blazex/renderer_boundary_test.exs",
+        "packages/blazex_renderer_headless/test/blazex/renderer/headless_boundary_test.exs",
+        "packages/blazex_test/test/blazex/test_boundary_test.exs",
+        "profiles/headless/test/blazex/semantic_kernel_integration_test.exs"
+      ]
+    }
+  ],
+  "canonical_traces": [
+    {
+      "id": "mount-update-replace-dispose",
+      "fixture_set": "BX-BH02-RENDERER-HEADLESS-FIXTURES-0.1",
+      "result": "passed-local-deterministic"
+    }
+  ],
+  "backend_results": [
+    {
+      "backend": "blazex_renderer_headless",
+      "environment": "local-beam",
+      "result": "passed-nonvisual-oracle-only"
+    }
+  ],
+  "geometry_results": [],
+  "visual_results": [],
+  "accessibility_mapping_results": [],
+  "dom_results": [],
+  "browser_results": [],
+  "native_results": [],
+  "provider_results": [],
+  "next_authorized_work": null,
+  "api_state": "experimental",
+  "support_state": "unsupported"
+}
