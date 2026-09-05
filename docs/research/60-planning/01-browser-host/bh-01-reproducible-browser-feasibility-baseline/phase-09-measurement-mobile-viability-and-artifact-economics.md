@@ -72,27 +72,27 @@ or mobile viability.
       - [x] 9.1.3.3 Subtask - Instrument initial/peak/stable/disposed memory, Wasm pages, processes/mailboxes/timers/pending work, repeated-growth slope, errors/crashes, long tasks, and cleanup convergence.
       - [x] 9.1.3.4 Subtask - Calibrate harness overhead and clock resolution and record metrics unavailable or unreliable on a browser/device.
 
-  - [ ] 9.2 Section - Execute controlled desktop measurements.
+  - [x] 9.2 Section - Execute controlled desktop measurements.
 
     Produce reproducible raw distributions under fingerprinted Linux Chrome
     and Firefox environments without waiting for other operating systems.
 
-    - [ ] 9.2.1 Task - Run startup and payload experiments.
+    - [x] 9.2.1 Task - Run startup and payload experiments.
 
       Cold and warm results must preserve failed samples and exact cache/network
       conditions.
 
-      - [ ] 9.2.1.1 Subtask - Execute governed sample/warmup counts for clean build, cold/warm navigation, fetch, instantiate, readiness, and fallback under selected desktop environments.
-      - [ ] 9.2.1.2 Subtask - Preserve raw samples, failed/time-out runs, medians/percentiles, variance/confidence, outlier flags/rationale, artifact hashes, and environment drift.
-      - [ ] 9.2.1.3 Subtask - Repeat a subset in a second clean controlled Linux execution context when available; otherwise record cross-machine comparison as `[DEFERRED]` without blocking the phase.
+      - [x] 9.2.1.1 Subtask - Execute governed sample/warmup counts for clean build, cold/warm navigation, fetch, instantiate, readiness, and fallback under selected desktop environments.
+      - [x] 9.2.1.2 Subtask - Preserve raw samples, failed/time-out runs, medians/percentiles, variance/confidence, outlier flags/rationale, artifact hashes, and environment drift.
+      - [x] 9.2.1.3 Subtask - Repeat a subset in a second clean controlled Linux execution context when available; otherwise record cross-machine comparison as `[DEFERRED]` without blocking the phase. **[DEFERRED: no second controlled Linux machine is currently available; reactivates at BH-22 or earlier when infrastructure appears.]**
 
-    - [ ] 9.2.2 Task - Run interaction, command, memory, and reliability experiments.
+    - [x] 9.2.2 Task - Run interaction, command, memory, and reliability experiments.
 
       Representative local and remote scenarios should be measured over enough
       repetitions to expose growth and tail behavior.
 
-      - [ ] 9.2.2.1 Subtask - Measure local/nested/form/timer/DOM scenarios and authenticated command success/denial/reconnect under stable fixture data.
-      - [ ] 9.2.2.2 Subtask - Run repeated lifecycle/resource scenarios, capture growth/convergence/crashes/errors, and correlate anomalies with Phase 7 evidence.
+      - [x] 9.2.2.1 Subtask - Measure local/nested/form/timer/DOM scenarios and authenticated command success/denial/reconnect under stable fixture data.
+      - [x] 9.2.2.2 Subtask - Run repeated lifecycle/resource scenarios, capture growth/convergence/crashes/errors, and correlate anomalies with Phase 7 evidence.
 
   - **[DEFERRED] 9.3 Section - Execute constrained-mobile measurements.**
 

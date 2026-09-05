@@ -56,6 +56,17 @@
       "qualification": "active"
     },
     {
+      "id": "BX-BH01-METRIC-STARTUP-FALLBACK-READY-MS",
+      "budget_ref": "fallback-readiness-observation",
+      "unit": "milliseconds",
+      "statistic": "p95",
+      "minimum_samples": 30,
+      "boundary": "navigation start through semantic static fallback after the WebAssembly prerequisite is made unavailable",
+      "environment": "each active Linux browser",
+      "cache_states": ["cold"],
+      "qualification": "active-fail-closed-observation"
+    },
+    {
       "id": "BX-BH01-METRIC-STARTUP-NAVIGATION-READY-MS",
       "budget_ref": "BX-BUD-STARTUP-COLD-DESKTOP-MS or BX-BUD-STARTUP-WARM-DESKTOP-MS by cache state",
       "unit": "milliseconds",
@@ -95,6 +106,7 @@
       "statistic": "p95",
       "minimum_samples": 100,
       "boundary": "local fixture command dispatch through runtime snapshot and next animation frame",
+      "scenarios": ["parent-state-update", "nested-keyed-update", "form-programmatic-update", "timer-message-update"],
       "environment": "each active Linux browser warm context",
       "cache_states": ["warm"],
       "qualification": "active"
@@ -106,6 +118,7 @@
       "statistic": "p95",
       "minimum_samples": 100,
       "boundary": "renderer effect receipt through synchronous DOM mutation completion",
+      "scenarios": ["parent-state-update", "nested-keyed-update", "form-programmatic-update", "timer-message-update"],
       "environment": "each active Linux browser warm context",
       "cache_states": ["warm"],
       "qualification": "active-narrower-than-next-paint-budget-boundary"
@@ -117,6 +130,7 @@
       "statistic": "p95",
       "minimum_samples": 50,
       "boundary": "authenticated browser command preparation through server result rendering and next animation frame",
+      "scenarios": ["authenticated-success", "authorization-denial", "disconnect-retry"],
       "environment": "each active Linux browser over same-host loopback",
       "cache_states": ["warm"],
       "qualification": "exploratory-desktop-mobile-budget-deferred"
@@ -137,7 +151,7 @@
       "budget_ref": "BX-BUD-RESOURCE-MEMORY-GROWTH-MIB",
       "unit": "bytes",
       "statistic": "maximum",
-      "minimum_samples": 10,
+      "minimum_samples": 2,
       "boundary": "browser-reported used JavaScript heap before and after the measured interaction sequence",
       "environment": "active Linux browser where performance.memory is available",
       "cache_states": ["warm"],

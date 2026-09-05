@@ -22,6 +22,7 @@ class Phase9MetricTests(unittest.TestCase):
         }
         self.measurements = [{
             "metric_id": "BX-BH01-METRIC-TEST",
+            "scenario": "representative",
             "unit": "milliseconds",
             "cache_state": "warm",
             "samples": [

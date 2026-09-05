@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0.0",
+  "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+  "captured_at": "2026-09-05T09:56:02.157Z",
+  "source_revision": "22dc98033893cdc85db142bd6a05650ab4032f52",
+  "operating_system": {
+    "name": "Linux Mint",
+    "version": "22.1",
+    "codename": "xia",
+    "kernel": "6.8.0-51-generic"
+  },
+  "architecture": "x86_64",
+  "hardware": {
+    "cpu": "12th Gen Intel(R) Core(TM) i7-12700F",
+    "logical_cpus": 20,
+    "memory_bytes": 67194294272,
+    "power_thermal_state": "unavailable",
+    "display_input": "headless-automation-keyboard-pointer"
+  },
+  "browser": {
+    "required_row": "BR-CHROMIUM-DESKTOP",
+    "product": "Chrome for Testing",
+    "product_version": "152.0.7977.75",
+    "binary_sha256": "3c84cfdbadd0b5b9d1943568b67faea54cf818d20ca32a337fd8a68a0d61ac76",
+    "authority": "active-development-evidence",
+    "support_status": "unsupported"
+  },
+  "network": {
+    "server_location": "same-host-loopback",
+    "shape": "unshaped",
+    "cache_state": "declared-per-scenario"
+  },
+  "toolchain": [
+    {"name": "node", "version": "26.8.1"},
+    {"name": "playwright-core", "version": "1.62.1"},
+    {"name": "chrome-for-testing", "version": "152.0.7977.75"},
+    {"name": "phoenix", "version": "1.8.13"},
+    {"name": "elixir", "version": "1.17.3"}
+  ],
+  "raw_evidence_refs": ["integration/benchmarks/raw-evidence/bh01-phase9-chromium-linux.json"]
+}

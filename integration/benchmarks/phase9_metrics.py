@@ -54,7 +54,7 @@ def validate_measurements(
     measurements: list[dict[str, Any]],
     definitions: dict[str, dict[str, Any]],
 ) -> None:
-    seen: set[tuple[str, str, int]] = set()
+    seen: set[tuple[str, str, str, int]] = set()
     for measurement in measurements:
         metric_id = measurement.get("metric_id")
         if metric_id not in definitions:
@@ -65,10 +65,13 @@ def validate_measurements(
         cache_state = measurement.get("cache_state")
         if cache_state not in definition["cache_states"]:
             raise ValueError(f"metric cache state mismatch: {metric_id}")
+        scenario = measurement.get("scenario")
+        if not isinstance(scenario, str) or not scenario:
+            raise ValueError(f"missing measurement scenario: {metric_id}")
         for sample in measurement.get("samples", []):
             value = sample.get("value")
             iteration = sample.get("iteration")
-            key = (metric_id, cache_state, iteration)
+            key = (metric_id, scenario, cache_state, iteration)
             if key in seen:
                 raise ValueError(f"duplicate sample identity: {key}")
             seen.add(key)
@@ -81,10 +84,11 @@ def validate_measurements(
 def summarize_measurements(
     measurements: list[dict[str, Any]],
 ) -> list[dict[str, Any]]:
-    grouped: dict[tuple[str, str, str], list[float]] = defaultdict(list)
+    grouped: dict[tuple[str, str, str, str], list[float]] = defaultdict(list)
     for measurement in measurements:
         key = (
             measurement["metric_id"],
+            measurement["scenario"],
             measurement["unit"],
             measurement["cache_state"],
         )
@@ -92,9 +96,10 @@ def summarize_measurements(
     return [
         {
             "metric_id": metric_id,
+            "scenario": scenario,
             "unit": unit,
             "cache_state": cache_state,
             "statistics": summarize(values),
         }
-        for (metric_id, unit, cache_state), values in sorted(grouped.items())
+        for (metric_id, scenario, unit, cache_state), values in sorted(grouped.items())
     ]

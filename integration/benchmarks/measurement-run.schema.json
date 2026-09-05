@@ -15,6 +15,8 @@
     "artifact_manifest",
     "configuration",
     "measurements",
+    "resource_observations",
+    "reliability",
     "failures",
     "limitations"
   ],
@@ -53,11 +55,12 @@
     "configuration": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["clock", "cold_start_samples", "warm_start_samples", "interaction_samples", "server_samples", "cleanup_samples", "discarded_warmups", "network"],
+      "required": ["clock", "cold_start_samples", "warm_start_samples", "fallback_samples", "interaction_samples", "server_samples", "cleanup_samples", "discarded_warmups", "network"],
       "properties": {
         "clock": {"const": "browser-performance-now-monotonic"},
         "cold_start_samples": {"type": "integer", "minimum": 1},
         "warm_start_samples": {"type": "integer", "minimum": 1},
+        "fallback_samples": {"type": "integer", "minimum": 1},
         "interaction_samples": {"type": "integer", "minimum": 1},
         "server_samples": {"type": "integer", "minimum": 1},
         "cleanup_samples": {"type": "integer", "minimum": 1},
@@ -71,9 +74,10 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["metric_id", "unit", "cache_state", "samples"],
+        "required": ["metric_id", "scenario", "unit", "cache_state", "samples"],
         "properties": {
           "metric_id": {"type": "string", "pattern": "^BX-BH01-METRIC-[A-Z0-9.-]+$"},
+          "scenario": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$"},
           "unit": {"enum": ["milliseconds", "bytes", "count", "percent"]},
           "cache_state": {"enum": ["cold", "warm", "mixed", "not-applicable"]},
           "samples": {
@@ -89,6 +93,30 @@
             }
           }
         }
+      }
+    },
+    "resource_observations": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["initial", "peak", "stable", "disposed", "lifecycle_cycles"],
+      "properties": {
+        "initial": {"type": "object"},
+        "peak": {"type": "object"},
+        "stable": {"type": "object"},
+        "disposed": {"type": "object"},
+        "lifecycle_cycles": {"type": "integer", "minimum": 1}
+      }
+    },
+    "reliability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["page_errors", "command_failures", "long_task_api", "long_tasks", "resource_growth_detected"],
+      "properties": {
+        "page_errors": {"type": "integer", "minimum": 0},
+        "command_failures": {"type": "integer", "minimum": 0},
+        "long_task_api": {"enum": ["available", "unavailable"]},
+        "long_tasks": {"type": "array", "items": {"type": "number", "minimum": 0}},
+        "resource_growth_detected": {"type": "boolean"}
       }
     },
     "failures": {"type": "array", "items": {"type": "object"}},

@@ -1,0 +1,5516 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "BX-BH01-PHASE9-RUN-FIREFOX-LINUX-0.1",
+  "status": "observed",
+  "captured_at": "2026-09-05T09:57:42.738Z",
+  "source_revision": "22dc98033893cdc85db142bd6a05650ab4032f52",
+  "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+  "browser": {
+    "type": "firefox",
+    "product": "Playwright-Firefox-development-build",
+    "version": "153.0",
+    "executable_sha256": "26e4198abe0dfb93c339239297008b1319711575d8cbae8e2d5122d2017b29a1",
+    "os": "linux 6.8.0-51-generic",
+    "architecture": "x64",
+    "authority": "active-development-evidence",
+    "support_status": "unsupported"
+  },
+  "artifact_manifest": {
+    "id": "BX-BH01-PHASE-05-PROFILE-ASSETS-0.1",
+    "sha256": "818ac7b967db6519c766f9d1fff80455cc92d205e3f188252e6da27258ee4aad",
+    "governed_files": 23
+  },
+  "configuration": {
+    "clock": "browser-performance-now-monotonic",
+    "cold_start_samples": 50,
+    "warm_start_samples": 50,
+    "fallback_samples": 30,
+    "interaction_samples": 100,
+    "server_samples": 50,
+    "cleanup_samples": 20,
+    "discarded_warmups": 1,
+    "network": "same-host-loopback-unshaped"
+  },
+  "measurements": [
+    {
+      "metric_id": "BX-BH01-METRIC-CLOCK-RESOLUTION-MS",
+      "scenario": "clock-calibration",
+      "unit": "milliseconds",
+      "cache_state": "not-applicable",
+      "samples": [
+        {
+          "iteration": 1,
+          "value": 1
+        }
+      ]
+    },
+    {
+      "metric_id": "BX-BH01-METRIC-STARTUP-FALLBACK-READY-MS",
+      "scenario": "webassembly-unavailable",
+      "unit": "milliseconds",
+      "cache_state": "cold",
+      "samples": [
+        {
+          "iteration": 1,
+          "value": 208.5
+        },
+        {
+          "iteration": 2,
+          "value": 104.12
+        },
+        {
+          "iteration": 3,
+          "value": 98.86
+        },
+        {
+          "iteration": 4,
+          "value": 104.04
+        },
+        {
+          "iteration": 5,
+          "value": 96.62
+        },
+        {
+          "iteration": 6,
+          "value": 95.48
+        },
+        {
+          "iteration": 7,
+          "value": 95.98
+        },
+        {
+          "iteration": 8,
+          "value": 114.64
+        },
+        {
+          "iteration": 9,
+          "value": 107.82
+        },
+        {
+          "iteration": 10,
+          "value": 116.3
+        },
+        {
+          "iteration": 11,
+          "value": 101.9
+        },
+        {
+          "iteration": 12,
+          "value": 91.7
+        },
+        {
+          "iteration": 13,
+          "value": 100.68
+        },
+        {
+          "iteration": 14,
+          "value": 103.52
+        },
+        {
+          "iteration": 15,
+          "value": 133.28
+        },
+        {
+          "iteration": 16,
+          "value": 100.86
+        },
+        {
+          "iteration": 17,
+          "value": 98.1
+        },
+        {
+          "iteration": 18,
+          "value": 93.42
+        },
+        {
+          "iteration": 19,
+          "value": 153.46
+        },
+        {
+          "iteration": 20,
+          "value": 98.64
+        },
+        {
+          "iteration": 21,
+          "value": 94.84
+        },
+        {
+          "iteration": 22,
+          "value": 94.28
+        },
+        {
+          "iteration": 23,
+          "value": 95.68
+        },
+        {
+          "iteration": 24,
+          "value": 98.3
+        },
+        {
+          "iteration": 25,
+          "value": 95.04
+        },
+        {
+          "iteration": 26,
+          "value": 113.3
+        },
+        {
+          "iteration": 27,
+          "value": 90.86
+        },
+        {
+          "iteration": 28,
+          "value": 95.06
+        },
+        {
+          "iteration": 29,
+          "value": 110.52
+        },
+        {
+          "iteration": 30,
+          "value": 96.58
+        }
+      ]
+    },
+    {
+      "metric_id": "BX-BH01-METRIC-STARTUP-NAVIGATION-READY-MS",
+      "scenario": "browser-profile",
+      "unit": "milliseconds",
+      "cache_state": "cold",
+      "samples": [
+        {
+          "iteration": 1,
+          "value": 720.6
+        },
+        {
+          "iteration": 2,
+          "value": 743.36
+        },
+        {
+          "iteration": 3,
+          "value": 697.12
+        },
+        {
+          "iteration": 4,
+          "value": 790.66
+        },
+        {
+          "iteration": 5,
+          "value": 721.26
+        },
+        {
+          "iteration": 6,
+          "value": 665.84
+        },
+        {
+          "iteration": 7,
+          "value": 734.86
+        },
+        {
+          "iteration": 8,
+          "value": 687.02
+        },
+        {
+          "iteration": 9,
+          "value": 721.68
+        },
+        {
+          "iteration": 10,
+          "value": 737.66
+        },
+        {
+          "iteration": 11,
+          "value": 728.52
+        },
+        {
+          "iteration": 12,
+          "value": 736.28
+        },
+        {
+          "iteration": 13,
+          "value": 743.16
+        },
+        {
+          "iteration": 14,
+          "value": 688.4
+        },
+        {
+          "iteration": 15,
+          "value": 710.04
+        },
+        {
+          "iteration": 16,
+          "value": 727.18
+        },
+        {
+          "iteration": 17,
+          "value": 798.42
+        },
+        {
+          "iteration": 18,
+          "value": 719.28
+        },
+        {
+          "iteration": 19,
+          "value": 687.1
+        },
+        {
+          "iteration": 20,
+          "value": 757.74
+        },
+        {
+          "iteration": 21,
+          "value": 723
+        },
+        {
+          "iteration": 22,
+          "value": 753.94
+        },
+        {
+          "iteration": 23,
+          "value": 773.3
+        },
+        {
+          "iteration": 24,
+          "value": 720.72
+        },
+        {
+          "iteration": 25,
+          "value": 734.22
+        },
+        {
+          "iteration": 26,
+          "value": 730.48
+        },
+        {
+          "iteration": 27,
+          "value": 738.38
+        },
+        {
+          "iteration": 28,
+          "value": 789.8
+        },
+        {
+          "iteration": 29,
+          "value": 708.74
+        },
+        {
+          "iteration": 30,
+          "value": 757.24
+        },
+        {
+          "iteration": 31,
+          "value": 692.6
+        },
+        {
+          "iteration": 32,
+          "value": 755.9
+        },
+        {
+          "iteration": 33,
+          "value": 737.12
+        },
+        {
+          "iteration": 34,
+          "value": 750.88
+        },
+        {
+          "iteration": 35,
+          "value": 685.72
+        },
+        {
+          "iteration": 36,
+          "value": 754
+        },
+        {
+          "iteration": 37,
+          "value": 720.4
+        },
+        {
+          "iteration": 38,
+          "value": 714.12
+        },
+        {
+          "iteration": 39,
+          "value": 725.92
+        },
+        {
+          "iteration": 40,
+          "value": 739.6
+        },
+        {
+          "iteration": 41,
+          "value": 736.96
+        },
+        {
+          "iteration": 42,
+          "value": 715.8
+        },
+        {
+          "iteration": 43,
+          "value": 722.74
+        },
+        {
+          "iteration": 44,
+          "value": 753.48
+        },
+        {
+          "iteration": 45,
+          "value": 756.3
+        },
+        {
+          "iteration": 46,
+          "value": 705.7
+        },
+        {
+          "iteration": 47,
+          "value": 806.9
+        },
+        {
+          "iteration": 48,
+          "value": 717.34
+        },
+        {
+          "iteration": 49,
+          "value": 706.78
+        },
+        {
+          "iteration": 50,
+          "value": 788.98
+        }
+      ]
+    },
+    {
+      "metric_id": "BX-BH01-METRIC-STARTUP-INSTANTIATE-READY-MS",
+      "scenario": "browser-profile",
+      "unit": "milliseconds",
+      "cache_state": "cold",
+      "samples": [
+        {
+          "iteration": 1,
+          "value": 162.11999999999998
+        },
+        {
+          "iteration": 2,
+          "value": 169.04
+        },
+        {
+          "iteration": 3,
+          "value": 162.65999999999997
+        },
+        {
+          "iteration": 4,
+          "value": 195.83999999999997
+        },
+        {
+          "iteration": 5,
+          "value": 140.35999999999999
+        },
+        {
+          "iteration": 6,
+          "value": 119.4
+        },
+        {
+          "iteration": 7,
+          "value": 158.72
+        },
+        {
+          "iteration": 8,
+          "value": 129.26
+        },
+        {
+          "iteration": 9,
+          "value": 152.28
+        },
+        {
+          "iteration": 10,
+          "value": 165.14000000000001
+        },
+        {
+          "iteration": 11,
+          "value": 153.02000000000004
+        },
+        {
+          "iteration": 12,
+          "value": 132.67999999999998
+        },
+        {
+          "iteration": 13,
+          "value": 125.38
+        },
+        {
+          "iteration": 14,
+          "value": 133.07999999999998
+        },
+        {
+          "iteration": 15,
+          "value": 137.35999999999999
+        },
+        {
+          "iteration": 16,
+          "value": 127.95999999999998
+        },
+        {
+          "iteration": 17,
+          "value": 136.3
+        },
+        {
+          "iteration": 18,
+          "value": 172.02
+        },
+        {
+          "iteration": 19,
+          "value": 125.94
+        },
+        {
+          "iteration": 20,
+          "value": 180.42
+        },
+        {
+          "iteration": 21,
+          "value": 176.67999999999998
+        },
+        {
+          "iteration": 22,
+          "value": 168.4
+        },
+        {
+          "iteration": 23,
+          "value": 189.14000000000001
+        },
+        {
+          "iteration": 24,
+          "value": 152.75999999999996
+        },
+        {
+          "iteration": 25,
+          "value": 165.84
+        },
+        {
+          "iteration": 26,
+          "value": 195.44
+        },
+        {
+          "iteration": 27,
+          "value": 195.72
+        },
+        {
+          "iteration": 28,
+          "value": 196.2
+        },
+        {
+          "iteration": 29,
+          "value": 148.40000000000003
+        },
+        {
+          "iteration": 30,
+          "value": 176.56
+        },
+        {
+          "iteration": 31,
+          "value": 136.23999999999998
+        },
+        {
+          "iteration": 32,
+          "value": 196.89999999999998
+        },
+        {
+          "iteration": 33,
+          "value": 174.49999999999997
+        },
+        {
+          "iteration": 34,
+          "value": 182.57999999999998
+        },
+        {
+          "iteration": 35,
+          "value": 136.3
+        },
+        {
+          "iteration": 36,
+          "value": 193.38
+        },
+        {
+          "iteration": 37,
+          "value": 158
+        },
+        {
+          "iteration": 38,
+          "value": 166.04
+        },
+        {
+          "iteration": 39,
+          "value": 157.28
+        },
+        {
+          "iteration": 40,
+          "value": 172.54000000000002
+        },
+        {
+          "iteration": 41,
+          "value": 184.76
+        },
+        {
+          "iteration": 42,
+          "value": 157.38
+        },
+        {
+          "iteration": 43,
+          "value": 153.74
+        },
+        {
+          "iteration": 44,
+          "value": 181.06000000000003
+        },
+        {
+          "iteration": 45,
+          "value": 188.39999999999998
+        },
+        {
+          "iteration": 46,
+          "value": 140.22
+        },
+        {
+          "iteration": 47,
+          "value": 229.28000000000003
+        },
+        {
+          "iteration": 48,
+          "value": 151.94
+        },
+        {
+          "iteration": 49,
+          "value": 139.61999999999998
+        },
+        {
+          "iteration": 50,
+          "value": 235.07999999999998
+        }
+      ]
+    },
+    {
+      "metric_id": "BX-BH01-METRIC-STARTUP-ROOT-READY-MS",
+      "scenario": "browser-profile",
+      "unit": "milliseconds",
+      "cache_state": "cold",
+      "samples": [
+        {
+          "iteration": 1,
+          "value": 416.70000000000005
+        },
+        {
+          "iteration": 2,
+          "value": 434.90000000000003
+        },
+        {
+          "iteration": 3,
+          "value": 402.12
+        },
+        {
+          "iteration": 4,
+          "value": 441.15999999999997
+        },
+        {
+          "iteration": 5,
+          "value": 436.7
+        },
+        {
+          "iteration": 6,
+          "value": 413.74
+        },
+        {
+          "iteration": 7,
+          "value": 425.62
+        },
+        {
+          "iteration": 8,
+          "value": 409.46
+        },
+        {
+          "iteration": 9,
+          "value": 422.23999999999995
+        },
+        {
+          "iteration": 10,
+          "value": 417.03999999999996
+        },
+        {
+          "iteration": 11,
+          "value": 433.31999999999994
+        },
+        {
+          "iteration": 12,
+          "value": 454.5
+        },
+        {
+          "iteration": 13,
+          "value": 466.97999999999996
+        },
+        {
+          "iteration": 14,
+          "value": 402.2
+        },
+        {
+          "iteration": 15,
+          "value": 434.15999999999997
+        },
+        {
+          "iteration": 16,
+          "value": 442.85999999999996
+        },
+        {
+          "iteration": 17,
+          "value": 484.91999999999996
+        },
+        {
+          "iteration": 18,
+          "value": 407.47999999999996
+        },
+        {
+          "iteration": 19,
+          "value": 425.92
+        },
+        {
+          "iteration": 20,
+          "value": 432.54
+        },
+        {
+          "iteration": 21,
+          "value": 410.36
+        },
+        {
+          "iteration": 22,
+          "value": 436.88000000000005
+        },
+        {
+          "iteration": 23,
+          "value": 427.6
+        },
+        {
+          "iteration": 24,
+          "value": 433.44000000000005
+        },
+        {
+          "iteration": 25,
+          "value": 425.84000000000003
+        },
+        {
+          "iteration": 26,
+          "value": 389.04
+        },
+        {
+          "iteration": 27,
+          "value": 405.71999999999997
+        },
+        {
+          "iteration": 28,
+          "value": 433.4800000000001
+        },
+        {
+          "iteration": 29,
+          "value": 422.65999999999997
+        },
+        {
+          "iteration": 30,
+          "value": 434.06
+        },
+        {
+          "iteration": 31,
+          "value": 416.8
+        },
+        {
+          "iteration": 32,
+          "value": 420.58
+        },
+        {
+          "iteration": 33,
+          "value": 424.04
+        },
+        {
+          "iteration": 34,
+          "value": 429.04
+        },
+        {
+          "iteration": 35,
+          "value": 411.16
+        },
+        {
+          "iteration": 36,
+          "value": 421.52
+        },
+        {
+          "iteration": 37,
+          "value": 423.47999999999996
+        },
+        {
+          "iteration": 38,
+          "value": 400.48
+        },
+        {
+          "iteration": 39,
+          "value": 434.41999999999996
+        },
+        {
+          "iteration": 40,
+          "value": 432.58
+        },
+        {
+          "iteration": 41,
+          "value": 413.06000000000006
+        },
+        {
+          "iteration": 42,
+          "value": 417.85999999999996
+        },
+        {
+          "iteration": 43,
+          "value": 420.62
+        },
+        {
+          "iteration": 44,
+          "value": 436.52
+        },
+        {
+          "iteration": 45,
+          "value": 432.4
+        },
+        {
+          "iteration": 46,
+          "value": 424.16
+        },
+        {
+          "iteration": 47,
+          "value": 442.23999999999995
+        },
+        {
+          "iteration": 48,
+          "value": 420.22
+        },
+        {
+          "iteration": 49,
+          "value": 429.2
+        },
+        {
+          "iteration": 50,
+          "value": 423.40000000000003
+        }
+      ]
+    },
+    {
+      "metric_id": "BX-BH01-METRIC-STARTUP-NAVIGATION-READY-MS",
+      "scenario": "browser-profile",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "samples": [
+        {
+          "iteration": 1,
+          "value": 691.88
+        },
+        {
+          "iteration": 2,
+          "value": 761.84
+        },
+        {
+          "iteration": 3,
+          "value": 715.1
+        },
+        {
+          "iteration": 4,
+          "value": 737.34
+        },
+        {
+          "iteration": 5,
+          "value": 751.36
+        },
+        {
+          "iteration": 6,
+          "value": 703.22
+        },
+        {
+          "iteration": 7,
+          "value": 714.06
+        },
+        {
+          "iteration": 8,
+          "value": 675.24
+        },
+        {
+          "iteration": 9,
+          "value": 723.6
+        },
+        {
+          "iteration": 10,
+          "value": 704.54
+        },
+        {
+          "iteration": 11,
+          "value": 705.8
+        },
+        {
+          "iteration": 12,
+          "value": 692.24
+        },
+        {
+          "iteration": 13,
+          "value": 753.22
+        },
+        {
+          "iteration": 14,
+          "value": 758.18
+        },
+        {
+          "iteration": 15,
+          "value": 754.66
+        },
+        {
+          "iteration": 16,
+          "value": 747.22
+        },
+        {
+          "iteration": 17,
+          "value": 668.2
+        },
+        {
+          "iteration": 18,
+          "value": 732.58
+        },
+        {
+          "iteration": 19,
+          "value": 713.08
+        },
+        {
+          "iteration": 20,
+          "value": 753.28
+        },
+        {
+          "iteration": 21,
+          "value": 739.94
+        },
+        {
+          "iteration": 22,
+          "value": 764.44
+        },
+        {
+          "iteration": 23,
+          "value": 735.34
+        },
+        {
+          "iteration": 24,
+          "value": 724.24
+        },
+        {
+          "iteration": 25,
+          "value": 682.86
+        },
+        {
+          "iteration": 26,
+          "value": 709.5
+        },
+        {
+          "iteration": 27,
+          "value": 735.3
+        },
+        {
+          "iteration": 28,
+          "value": 704.48
+        },
+        {
+          "iteration": 29,
+          "value": 735.1
+        },
+        {
+          "iteration": 30,
+          "value": 737.54
+        },
+        {
+          "iteration": 31,
+          "value": 738.6
+        },
+        {
+          "iteration": 32,
+          "value": 785.04
+        },
+        {
+          "iteration": 33,
+          "value": 756.24
+        },
+        {
+          "iteration": 34,
+          "value": 719.3
+        },
+        {
+          "iteration": 35,
+          "value": 663.18
+        },
+        {
+          "iteration": 36,
+          "value": 757.98
+        },
+        {
+          "iteration": 37,
+          "value": 789.38
+        },
+        {
+          "iteration": 38,
+          "value": 750.12
+        },
+        {
+          "iteration": 39,
+          "value": 837.5
+        },
+        {
+          "iteration": 40,
+          "value": 738.38
+        },
+        {
+          "iteration": 41,
+          "value": 681.94
+        },
+        {
+          "iteration": 42,
+          "value": 722.36
+        },
+        {
+          "iteration": 43,
+          "value": 708.98
+        },
+        {
+          "iteration": 44,
+          "value": 743.34
+        },
+        {
+          "iteration": 45,
+          "value": 747.92
+        },
+        {
+          "iteration": 46,
+          "value": 688.96
+        },
+        {
+          "iteration": 47,
+          "value": 721.62
+        },
+        {
+          "iteration": 48,
+          "value": 706.28
+        },
+        {
+          "iteration": 49,
+          "value": 721.96
+        },
+        {
+          "iteration": 50,
+          "value": 734.32
+        }
+      ]
+    },
+    {
+      "metric_id": "BX-BH01-METRIC-STARTUP-INSTANTIATE-READY-MS",
+      "scenario": "browser-profile",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "samples": [
+        {
+          "iteration": 1,
+          "value": 126.08000000000001
+        },
+        {
+          "iteration": 2,
+          "value": 182.4
+        },
+        {
+          "iteration": 3,
+          "value": 153.34000000000003
+        },
+        {
+          "iteration": 4,
+          "value": 187.34000000000003
+        },
+        {
+          "iteration": 5,
+          "value": 189.02
+        },
+        {
+          "iteration": 6,
+          "value": 151.67999999999998
+        },
+        {
+          "iteration": 7,
+          "value": 168.96
+        },
+        {
+          "iteration": 8,
+          "value": 114.42000000000002
+        },
+        {
+          "iteration": 9,
+          "value": 160.72
+        },
+        {
+          "iteration": 10,
+          "value": 150.60000000000002
+        },
+        {
+          "iteration": 11,
+          "value": 156.57999999999998
+        },
+        {
+          "iteration": 12,
+          "value": 145.27999999999997
+        },
+        {
+          "iteration": 13,
+          "value": 210.67999999999998
+        },
+        {
+          "iteration": 14,
+          "value": 156.72000000000003
+        },
+        {
+          "iteration": 15,
+          "value": 182.68
+        },
+        {
+          "iteration": 16,
+          "value": 168.22000000000003
+        },
+        {
+          "iteration": 17,
+          "value": 107.46000000000001
+        },
+        {
+          "iteration": 18,
+          "value": 144.98
+        },
+        {
+          "iteration": 19,
+          "value": 171.2
+        },
+        {
+          "iteration": 20,
+          "value": 136.96
+        },
+        {
+          "iteration": 21,
+          "value": 157.8
+        },
+        {
+          "iteration": 22,
+          "value": 197.06
+        },
+        {
+          "iteration": 23,
+          "value": 182.28
+        },
+        {
+          "iteration": 24,
+          "value": 155.84
+        },
+        {
+          "iteration": 25,
+          "value": 131.65999999999997
+        },
+        {
+          "iteration": 26,
+          "value": 142.24
+        },
+        {
+          "iteration": 27,
+          "value": 164.48
+        },
+        {
+          "iteration": 28,
+          "value": 152.90000000000003
+        },
+        {
+          "iteration": 29,
+          "value": 157.12000000000003
+        },
+        {
+          "iteration": 30,
+          "value": 163.54000000000002
+        },
+        {
+          "iteration": 31,
+          "value": 172.48000000000002
+        },
+        {
+          "iteration": 32,
+          "value": 210.71999999999997
+        },
+        {
+          "iteration": 33,
+          "value": 177.08
+        },
+        {
+          "iteration": 34,
+          "value": 146.48000000000002
+        },
+        {
+          "iteration": 35,
+          "value": 119.5
+        },
+        {
+          "iteration": 36,
+          "value": 177.9
+        },
+        {
+          "iteration": 37,
+          "value": 197.16
+        },
+        {
+          "iteration": 38,
+          "value": 172.36
+        },
+        {
+          "iteration": 39,
+          "value": 241.85999999999999
+        },
+        {
+          "iteration": 40,
+          "value": 136.38
+        },
+        {
+          "iteration": 41,
+          "value": 122.88
+        },
+        {
+          "iteration": 42,
+          "value": 180.49999999999997
+        },
+        {
+          "iteration": 43,
+          "value": 135.72000000000003
+        },
+        {
+          "iteration": 44,
+          "value": 189.22000000000003
+        },
+        {
+          "iteration": 45,
+          "value": 184.54000000000002
+        },
+        {
+          "iteration": 46,
+          "value": 123.6
+        },
+        {
+          "iteration": 47,
+          "value": 156.94000000000003
+        },
+        {
+          "iteration": 48,
+          "value": 157.87999999999997
+        },
+        {
+          "iteration": 49,
+          "value": 165.33999999999997
+        },
+        {
+          "iteration": 50,
+          "value": 196.36
+        }
+      ]
+    },
+    {
+      "metric_id": "BX-BH01-METRIC-STARTUP-ROOT-READY-MS",
+      "scenario": "browser-profile",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "samples": [
+        {
+          "iteration": 1,
+          "value": 427.41999999999996
+        },
+        {
+          "iteration": 2,
+          "value": 433.54
+        },
+        {
+          "iteration": 3,
+          "value": 420.52
+        },
+        {
+          "iteration": 4,
+          "value": 420.7
+        },
+        {
+          "iteration": 5,
+          "value": 419.88
+        },
+        {
+          "iteration": 6,
+          "value": 410.48
+        },
+        {
+          "iteration": 7,
+          "value": 410.96000000000004
+        },
+        {
+          "iteration": 8,
+          "value": 423.4
+        },
+        {
+          "iteration": 9,
+          "value": 432.48
+        },
+        {
+          "iteration": 10,
+          "value": 416.55999999999995
+        },
+        {
+          "iteration": 11,
+          "value": 415.02
+        },
+        {
+          "iteration": 12,
+          "value": 413.28000000000003
+        },
+        {
+          "iteration": 13,
+          "value": 413.70000000000005
+        },
+        {
+          "iteration": 14,
+          "value": 460.48
+        },
+        {
+          "iteration": 15,
+          "value": 435.78
+        },
+        {
+          "iteration": 16,
+          "value": 447.3
+        },
+        {
+          "iteration": 17,
+          "value": 423.1
+        },
+        {
+          "iteration": 18,
+          "value": 436.18000000000006
+        },
+        {
+          "iteration": 19,
+          "value": 410.18000000000006
+        },
+        {
+          "iteration": 20,
+          "value": 481.91999999999996
+        },
+        {
+          "iteration": 21,
+          "value": 426.28000000000003
+        },
+        {
+          "iteration": 22,
+          "value": 431.26000000000005
+        },
+        {
+          "iteration": 23,
+          "value": 408.6
+        },
+        {
+          "iteration": 24,
+          "value": 437.5
+        },
+        {
+          "iteration": 25,
+          "value": 416.92
+        },
+        {
+          "iteration": 26,
+          "value": 433.15999999999997
+        },
+        {
+          "iteration": 27,
+          "value": 431.44000000000005
+        },
+        {
+          "iteration": 28,
+          "value": 414.9
+        },
+        {
+          "iteration": 29,
+          "value": 438.44
+        },
+        {
+          "iteration": 30,
+          "value": 406.49999999999994
+        },
+        {
+          "iteration": 31,
+          "value": 419.5
+        },
+        {
+          "iteration": 32,
+          "value": 438.46
+        },
+        {
+          "iteration": 33,
+          "value": 425.56
+        },
+        {
+          "iteration": 34,
+          "value": 431.34000000000003
+        },
+        {
+          "iteration": 35,
+          "value": 413.49999999999994
+        },
+        {
+          "iteration": 36,
+          "value": 447.62
+        },
+        {
+          "iteration": 37,
+          "value": 439.68
+        },
+        {
+          "iteration": 38,
+          "value": 437.84
+        },
+        {
+          "iteration": 39,
+          "value": 416.54
+        },
+        {
+          "iteration": 40,
+          "value": 435.84
+        },
+        {
+          "iteration": 41,
+          "value": 430.22
+        },
+        {
+          "iteration": 42,
+          "value": 409.98
+        },
+        {
+          "iteration": 43,
+          "value": 435.26
+        },
+        {
+          "iteration": 44,
+          "value": 422.48
+        },
+        {
+          "iteration": 45,
+          "value": 431.23999999999995
+        },
+        {
+          "iteration": 46,
+          "value": 433.5400000000001
+        },
+        {
+          "iteration": 47,
+          "value": 429.76
+        },
+        {
+          "iteration": 48,
+          "value": 413.32
+        },
+        {
+          "iteration": 49,
+          "value": 421.94000000000005
+        },
+        {
+          "iteration": 50,
+          "value": 398.16
+        }
+      ]
+    },
+    {
+      "metric_id": "BX-BH01-METRIC-INTERACTION-LOCAL-EVENT-PAINT-MS",
+      "scenario": "parent-state-update",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "samples": [
+        {
+          "iteration": 1,
+          "value": 71.59999999999991
+        },
+        {
+          "iteration": 2,
+          "value": 61.33999999999992
+        },
+        {
+          "iteration": 3,
+          "value": 70.24000000000001
+        },
+        {
+          "iteration": 4,
+          "value": 68.27999999999997
+        },
+        {
+          "iteration": 5,
+          "value": 72.41999999999985
+        },
+        {
+          "iteration": 6,
+          "value": 63.940000000000055
+        },
+        {
+          "iteration": 7,
+          "value": 62.37999999999988
+        },
+        {
+          "iteration": 8,
+          "value": 76.77999999999997
+        },
+        {
+          "iteration": 9,
+          "value": 88.27999999999997
+        },
+        {
+          "iteration": 10,
+          "value": 103
+        },
+        {
+          "iteration": 11,
+          "value": 65.58000000000015
+        },
+        {
+          "iteration": 12,
+          "value": 67.31999999999994
+        },
+        {
+          "iteration": 13,
+          "value": 56.63999999999987
+        },
+        {
+          "iteration": 14,
+          "value": 54.01999999999998
+        },
+        {
+          "iteration": 15,
+          "value": 54.6400000000001
+        },
+        {
+          "iteration": 16,
+          "value": 53.73999999999978
+        },
+        {
+          "iteration": 17,
+          "value": 51.440000000000055
+        },
+        {
+          "iteration": 18,
+          "value": 54.100000000000364
+        },
+        {
+          "iteration": 19,
+          "value": 52.61999999999989
+        },
+        {
+          "iteration": 20,
+          "value": 65.5
+        },
+        {
+          "iteration": 21,
+          "value": 54.38000000000011
+        },
+        {
+          "iteration": 22,
+          "value": 53.80000000000018
+        },
+        {
+          "iteration": 23,
+          "value": 54.19999999999982
+        },
+        {
+          "iteration": 24,
+          "value": 53.40000000000009
+        },
+        {
+          "iteration": 25,
+          "value": 54.879999999999654
+        },
+        {
+          "iteration": 26,
+          "value": 57.7199999999998
+        },
+        {
+          "iteration": 27,
+          "value": 60.86000000000013
+        },
+        {
+          "iteration": 28,
+          "value": 55.38000000000011
+        },
+        {
+          "iteration": 29,
+          "value": 52.840000000000146
+        },
+        {
+          "iteration": 30,
+          "value": 57.92000000000007
+        },
+        {
+          "iteration": 31,
+          "value": 66.32000000000016
+        },
+        {
+          "iteration": 32,
+          "value": 87.90000000000009
+        },
+        {
+          "iteration": 33,
+          "value": 61.59999999999991
+        },
+        {
+          "iteration": 34,
+          "value": 57.63999999999987
+        },
+        {
+          "iteration": 35,
+          "value": 51.820000000000164
+        },
+        {
+          "iteration": 36,
+          "value": 65.05999999999995
+        },
+        {
+          "iteration": 37,
+          "value": 52.779999999999745
+        },
+        {
+          "iteration": 38,
+          "value": 60.07999999999947
+        },
+        {
+          "iteration": 39,
+          "value": 55.92000000000007
+        },
+        {
+          "iteration": 40,
+          "value": 57.099999999999454
+        },
+        {
+          "iteration": 41,
+          "value": 53.18000000000029
+        },
+        {
+          "iteration": 42,
+          "value": 59.47999999999956
+        },
+        {
+          "iteration": 43,
+          "value": 81.31999999999971
+        },
+        {
+          "iteration": 44,
+          "value": 81.0600000000004
+        },
+        {
+          "iteration": 45,
+          "value": 51.100000000000364
+        },
+        {
+          "iteration": 46,
+          "value": 66.34000000000015
+        },
+        {
+          "iteration": 47,
+          "value": 58.88000000000011
+        },
+        {
+          "iteration": 48,
+          "value": 64.57999999999993
+        },
+        {
+          "iteration": 49,
+          "value": 64.25999999999931
+        },
+        {
+          "iteration": 50,
+          "value": 54.460000000000036
+        },
+        {
+          "iteration": 51,
+          "value": 58.85999999999967
+        },
+        {
+          "iteration": 52,
+          "value": 57.31999999999971
+        },
+        {
+          "iteration": 53,
+          "value": 55.05999999999949
+        },
+        {
+          "iteration": 54,
+          "value": 65.0600000000004
+        },
+        {
+          "iteration": 55,
+          "value": 64.19999999999982
+        },
+        {
+          "iteration": 56,
+          "value": 65.8799999999992
+        },
+        {
+          "iteration": 57,
+          "value": 88.02000000000044
+        },
+        {
+          "iteration": 58,
+          "value": 74.65999999999985
+        },
+        {
+          "iteration": 59,
+          "value": 87.81999999999971
+        },
+        {
+          "iteration": 60,
+          "value": 75.30000000000018
+        },
+        {
+          "iteration": 61,
+          "value": 54.720000000000255
+        },
+        {
+          "iteration": 62,
+          "value": 68.27999999999975
+        },
+        {
+          "iteration": 63,
+          "value": 72.0600000000004
+        },
+        {
+          "iteration": 64,
+          "value": 62.5600000000004
+        },
+        {
+          "iteration": 65,
+          "value": 64.85999999999967
+        },
+        {
+          "iteration": 66,
+          "value": 61.159999999999854
+        },
+        {
+          "iteration": 67,
+          "value": 57.599999999999454
+        },
+        {
+          "iteration": 68,
+          "value": 62.73999999999978
+        },
+        {
+          "iteration": 69,
+          "value": 64.76000000000022
+        },
+        {
+          "iteration": 70,
+          "value": 53.01999999999953
+        },
+        {
+          "iteration": 71,
+          "value": 78.23999999999978
+        },
+        {
+          "iteration": 72,
+          "value": 62.69999999999982
+        },
+        {
+          "iteration": 73,
+          "value": 73.98000000000047
+        },
+        {
+          "iteration": 74,
+          "value": 69.23999999999978
+        },
+        {
+          "iteration": 75,
+          "value": 64.57999999999993
+        },
+        {
+          "iteration": 76,
+          "value": 57.73999999999978
+        },
+        {
+          "iteration": 77,
+          "value": 105.69999999999982
+        },
+        {
+          "iteration": 78,
+          "value": 71.58000000000084
+        },
+        {
+          "iteration": 79,
+          "value": 60.659999999999854
+        },
+        {
+          "iteration": 80,
+          "value": 63.88000000000011
+        },
+        {
+          "iteration": 81,
+          "value": 75.07999999999993
+        },
+        {
+          "iteration": 82,
+          "value": 71.90000000000055
+        },
+        {
+          "iteration": 83,
+          "value": 53.30000000000018
+        },
+        {
+          "iteration": 84,
+          "value": 66.22000000000025
+        },
+        {
+          "iteration": 85,
+          "value": 95.71999999999935
+        },
+        {
+          "iteration": 86,
+          "value": 63.779999999999745
+        },
+        {
+          "iteration": 87,
+          "value": 78.69999999999982
+        },
+        {
+          "iteration": 88,
+          "value": 113.31999999999971
+        },
+        {
+          "iteration": 89,
+          "value": 63.68000000000029
+        },
+        {
+          "iteration": 90,
+          "value": 89.68000000000029
+        },
+        {
+          "iteration": 91,
+          "value": 74
+        },
+        {
+          "iteration": 92,
+          "value": 63
+        },
+        {
+          "iteration": 93,
+          "value": 76.72000000000025
+        },
+        {
+          "iteration": 94,
+          "value": 57
+        },
+        {
+          "iteration": 95,
+          "value": 61.159999999999854
+        },
+        {
+          "iteration": 96,
+          "value": 64.82000000000062
+        },
+        {
+          "iteration": 97,
+          "value": 64.43999999999869
+        },
+        {
+          "iteration": 98,
+          "value": 55.219999999999345
+        },
+        {
+          "iteration": 99,
+          "value": 57.26000000000022
+        },
+        {
+          "iteration": 100,
+          "value": 52.600000000000364
+        }
+      ]
+    },
+    {
+      "metric_id": "BX-BH01-METRIC-INTERACTION-DOM-COMMIT-MS",
+      "scenario": "parent-state-update",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "samples": [
+        {
+          "iteration": 1,
+          "value": 0.31999999999993634
+        },
+        {
+          "iteration": 2,
+          "value": 0.2799999999999727
+        },
+        {
+          "iteration": 3,
+          "value": 0.2800000000002001
+        },
+        {
+          "iteration": 4,
+          "value": 0.2999999999999545
+        },
+        {
+          "iteration": 5,
+          "value": 0.2999999999999545
+        },
+        {
+          "iteration": 6,
+          "value": 0.22000000000002728
+        },
+        {
+          "iteration": 7,
+          "value": 0.2599999999999909
+        },
+        {
+          "iteration": 8,
+          "value": 0.22000000000002728
+        },
+        {
+          "iteration": 9,
+          "value": 0.40000000000009095
+        },
+        {
+          "iteration": 10,
+          "value": 0.33999999999991815
+        },
+        {
+          "iteration": 11,
+          "value": 0.2400000000000091
+        },
+        {
+          "iteration": 12,
+          "value": 0.2199999999997999
+        },
+        {
+          "iteration": 13,
+          "value": 0.2599999999999909
+        },
+        {
+          "iteration": 14,
+          "value": 0.22000000000002728
+        },
+        {
+          "iteration": 15,
+          "value": 0.20000000000004547
+        },
+        {
+          "iteration": 16,
+          "value": 0.20000000000004547
+        },
+        {
+          "iteration": 17,
+          "value": 0.1999999999998181
+        },
+        {
+          "iteration": 18,
+          "value": 0.22000000000025466
+        },
+        {
+          "iteration": 19,
+          "value": 0.3000000000001819
+        },
+        {
+          "iteration": 20,
+          "value": 0.3200000000001637
+        },
+        {
+          "iteration": 21,
+          "value": 0.20000000000027285
+        },
+        {
+          "iteration": 22,
+          "value": 0.24000000000023647
+        },
+        {
+          "iteration": 23,
+          "value": 0.2199999999997999
+        },
+        {
+          "iteration": 24,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 25,
+          "value": 0.20000000000027285
+        },
+        {
+          "iteration": 26,
+          "value": 0.2600000000002183
+        },
+        {
+          "iteration": 27,
+          "value": 0.25999999999976353
+        },
+        {
+          "iteration": 28,
+          "value": 0.2199999999997999
+        },
+        {
+          "iteration": 29,
+          "value": 0.2800000000002001
+        },
+        {
+          "iteration": 30,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 31,
+          "value": 0.20000000000027285
+        },
+        {
+          "iteration": 32,
+          "value": 0.23999999999978172
+        },
+        {
+          "iteration": 33,
+          "value": 0.29999999999972715
+        },
+        {
+          "iteration": 34,
+          "value": 0.23999999999978172
+        },
+        {
+          "iteration": 35,
+          "value": 0.24000000000023647
+        },
+        {
+          "iteration": 36,
+          "value": 0.22000000000025466
+        },
+        {
+          "iteration": 37,
+          "value": 0.1999999999998181
+        },
+        {
+          "iteration": 38,
+          "value": 0.1999999999998181
+        },
+        {
+          "iteration": 39,
+          "value": 0.2000000000007276
+        },
+        {
+          "iteration": 40,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 41,
+          "value": 0.28000000000065484
+        },
+        {
+          "iteration": 42,
+          "value": 0.22000000000025466
+        },
+        {
+          "iteration": 43,
+          "value": 0.1999999999998181
+        },
+        {
+          "iteration": 44,
+          "value": 0.17999999999938154
+        },
+        {
+          "iteration": 45,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 46,
+          "value": 0.1999999999998181
+        },
+        {
+          "iteration": 47,
+          "value": 0.21999999999934516
+        },
+        {
+          "iteration": 48,
+          "value": 0.17999999999938154
+        },
+        {
+          "iteration": 49,
+          "value": 0.1999999999998181
+        },
+        {
+          "iteration": 50,
+          "value": 0.1999999999998181
+        },
+        {
+          "iteration": 51,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 52,
+          "value": 0.22000000000025466
+        },
+        {
+          "iteration": 53,
+          "value": 0.23999999999978172
+        },
+        {
+          "iteration": 54,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 55,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 56,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 57,
+          "value": 0.22000000000025466
+        },
+        {
+          "iteration": 58,
+          "value": 0.17999999999938154
+        },
+        {
+          "iteration": 59,
+          "value": 0.4399999999995998
+        },
+        {
+          "iteration": 60,
+          "value": 0.1999999999998181
+        },
+        {
+          "iteration": 61,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 62,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 63,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 64,
+          "value": 0.1999999999998181
+        },
+        {
+          "iteration": 65,
+          "value": 0.23999999999978172
+        },
+        {
+          "iteration": 66,
+          "value": 0.23999999999978172
+        },
+        {
+          "iteration": 67,
+          "value": 0.1999999999998181
+        },
+        {
+          "iteration": 68,
+          "value": 0.22000000000025466
+        },
+        {
+          "iteration": 69,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 70,
+          "value": 0.2000000000007276
+        },
+        {
+          "iteration": 71,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 72,
+          "value": 0.1999999999998181
+        },
+        {
+          "iteration": 73,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 74,
+          "value": 0.17999999999938154
+        },
+        {
+          "iteration": 75,
+          "value": 0.1999999999998181
+        },
+        {
+          "iteration": 76,
+          "value": 0.17999999999938154
+        },
+        {
+          "iteration": 77,
+          "value": 0.22000000000025466
+        },
+        {
+          "iteration": 78,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 79,
+          "value": 0.23999999999978172
+        },
+        {
+          "iteration": 80,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 81,
+          "value": 0.27999999999974534
+        },
+        {
+          "iteration": 82,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 83,
+          "value": 0.22000000000025466
+        },
+        {
+          "iteration": 84,
+          "value": 0.21999999999934516
+        },
+        {
+          "iteration": 85,
+          "value": 0.22000000000025466
+        },
+        {
+          "iteration": 86,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 87,
+          "value": 0.2000000000007276
+        },
+        {
+          "iteration": 88,
+          "value": 0.4400000000005093
+        },
+        {
+          "iteration": 89,
+          "value": 0.21999999999934516
+        },
+        {
+          "iteration": 90,
+          "value": 0.22000000000025466
+        },
+        {
+          "iteration": 91,
+          "value": 0.23999999999978172
+        },
+        {
+          "iteration": 92,
+          "value": 0.17999999999938154
+        },
+        {
+          "iteration": 93,
+          "value": 0.22000000000025466
+        },
+        {
+          "iteration": 94,
+          "value": 0.2000000000007276
+        },
+        {
+          "iteration": 95,
+          "value": 0.1999999999998181
+        },
+        {
+          "iteration": 96,
+          "value": 0.1999999999998181
+        },
+        {
+          "iteration": 97,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 98,
+          "value": 0.23999999999978172
+        },
+        {
+          "iteration": 99,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 100,
+          "value": 0.17999999999847205
+        }
+      ]
+    },
+    {
+      "metric_id": "BX-BH01-METRIC-INTERACTION-LOCAL-EVENT-PAINT-MS",
+      "scenario": "nested-keyed-update",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "samples": [
+        {
+          "iteration": 1,
+          "value": 58.05999999999949
+        },
+        {
+          "iteration": 2,
+          "value": 54.18000000000029
+        },
+        {
+          "iteration": 3,
+          "value": 81.34000000000015
+        },
+        {
+          "iteration": 4,
+          "value": 83.23999999999978
+        },
+        {
+          "iteration": 5,
+          "value": 71.39999999999964
+        },
+        {
+          "iteration": 6,
+          "value": 65.42000000000007
+        },
+        {
+          "iteration": 7,
+          "value": 73.5
+        },
+        {
+          "iteration": 8,
+          "value": 75.14000000000124
+        },
+        {
+          "iteration": 9,
+          "value": 61.659999999999854
+        },
+        {
+          "iteration": 10,
+          "value": 64.73999999999978
+        },
+        {
+          "iteration": 11,
+          "value": 88.15999999999985
+        },
+        {
+          "iteration": 12,
+          "value": 65.63999999999942
+        },
+        {
+          "iteration": 13,
+          "value": 70.39999999999964
+        },
+        {
+          "iteration": 14,
+          "value": 68.76000000000022
+        },
+        {
+          "iteration": 15,
+          "value": 104.81999999999971
+        },
+        {
+          "iteration": 16,
+          "value": 68.07999999999993
+        },
+        {
+          "iteration": 17,
+          "value": 54.45999999999913
+        },
+        {
+          "iteration": 18,
+          "value": 55.54000000000087
+        },
+        {
+          "iteration": 19,
+          "value": 65.54000000000087
+        },
+        {
+          "iteration": 20,
+          "value": 52.5
+        },
+        {
+          "iteration": 21,
+          "value": 60.840000000000146
+        },
+        {
+          "iteration": 22,
+          "value": 63.42000000000007
+        },
+        {
+          "iteration": 23,
+          "value": 52.899999999999636
+        },
+        {
+          "iteration": 24,
+          "value": 60.13999999999942
+        },
+        {
+          "iteration": 25,
+          "value": 53.899999999999636
+        },
+        {
+          "iteration": 26,
+          "value": 58.07999999999993
+        },
+        {
+          "iteration": 27,
+          "value": 64.02000000000044
+        },
+        {
+          "iteration": 28,
+          "value": 63.97999999999956
+        },
+        {
+          "iteration": 29,
+          "value": 85.18000000000029
+        },
+        {
+          "iteration": 30,
+          "value": 83
+        },
+        {
+          "iteration": 31,
+          "value": 93.07999999999993
+        },
+        {
+          "iteration": 32,
+          "value": 63.11999999999898
+        },
+        {
+          "iteration": 33,
+          "value": 65.23999999999978
+        },
+        {
+          "iteration": 34,
+          "value": 66.01999999999862
+        },
+        {
+          "iteration": 35,
+          "value": 58.66000000000167
+        },
+        {
+          "iteration": 36,
+          "value": 63.13999999999942
+        },
+        {
+          "iteration": 37,
+          "value": 58.18000000000029
+        },
+        {
+          "iteration": 38,
+          "value": 72.17999999999847
+        },
+        {
+          "iteration": 39,
+          "value": 62.5
+        },
+        {
+          "iteration": 40,
+          "value": 64.85999999999876
+        },
+        {
+          "iteration": 41,
+          "value": 80.59999999999854
+        },
+        {
+          "iteration": 42,
+          "value": 81.05999999999949
+        },
+        {
+          "iteration": 43,
+          "value": 77
+        },
+        {
+          "iteration": 44,
+          "value": 68.89999999999964
+        },
+        {
+          "iteration": 45,
+          "value": 64.7599999999984
+        },
+        {
+          "iteration": 46,
+          "value": 53.73999999999978
+        },
+        {
+          "iteration": 47,
+          "value": 55.7400000000016
+        },
+        {
+          "iteration": 48,
+          "value": 54.52000000000044
+        },
+        {
+          "iteration": 49,
+          "value": 63.57999999999993
+        },
+        {
+          "iteration": 50,
+          "value": 68.31999999999971
+        },
+        {
+          "iteration": 51,
+          "value": 55.340000000000146
+        },
+        {
+          "iteration": 52,
+          "value": 64.65999999999985
+        },
+        {
+          "iteration": 53,
+          "value": 68.76000000000022
+        },
+        {
+          "iteration": 54,
+          "value": 61.07999999999993
+        },
+        {
+          "iteration": 55,
+          "value": 64.07999999999993
+        },
+        {
+          "iteration": 56,
+          "value": 64.7400000000016
+        },
+        {
+          "iteration": 57,
+          "value": 67.44000000000051
+        },
+        {
+          "iteration": 58,
+          "value": 78.41999999999825
+        },
+        {
+          "iteration": 59,
+          "value": 82.29999999999927
+        },
+        {
+          "iteration": 60,
+          "value": 64.47999999999956
+        },
+        {
+          "iteration": 61,
+          "value": 74.84000000000015
+        },
+        {
+          "iteration": 62,
+          "value": 56.600000000000364
+        },
+        {
+          "iteration": 63,
+          "value": 60.899999999999636
+        },
+        {
+          "iteration": 64,
+          "value": 71.92000000000007
+        },
+        {
+          "iteration": 65,
+          "value": 72.97999999999956
+        },
+        {
+          "iteration": 66,
+          "value": 53.32000000000153
+        },
+        {
+          "iteration": 67,
+          "value": 59.42000000000007
+        },
+        {
+          "iteration": 68,
+          "value": 63.52000000000044
+        },
+        {
+          "iteration": 69,
+          "value": 54
+        },
+        {
+          "iteration": 70,
+          "value": 58.44000000000051
+        },
+        {
+          "iteration": 71,
+          "value": 67.42000000000007
+        },
+        {
+          "iteration": 72,
+          "value": 87.52000000000044
+        },
+        {
+          "iteration": 73,
+          "value": 82.89999999999964
+        },
+        {
+          "iteration": 74,
+          "value": 81.26000000000022
+        },
+        {
+          "iteration": 75,
+          "value": 87.23999999999978
+        },
+        {
+          "iteration": 76,
+          "value": 62.38000000000102
+        },
+        {
+          "iteration": 77,
+          "value": 63.42000000000007
+        },
+        {
+          "iteration": 78,
+          "value": 72.78000000000065
+        },
+        {
+          "iteration": 79,
+          "value": 69.78000000000065
+        },
+        {
+          "iteration": 80,
+          "value": 56.539999999999054
+        },
+        {
+          "iteration": 81,
+          "value": 63.45999999999913
+        },
+        {
+          "iteration": 82,
+          "value": 65.20000000000073
+        },
+        {
+          "iteration": 83,
+          "value": 64.42000000000007
+        },
+        {
+          "iteration": 84,
+          "value": 70.05999999999949
+        },
+        {
+          "iteration": 85,
+          "value": 63.81999999999971
+        },
+        {
+          "iteration": 86,
+          "value": 72.81999999999971
+        },
+        {
+          "iteration": 87,
+          "value": 71.18000000000029
+        },
+        {
+          "iteration": 88,
+          "value": 92.86000000000058
+        },
+        {
+          "iteration": 89,
+          "value": 66.68000000000029
+        },
+        {
+          "iteration": 90,
+          "value": 62.11999999999898
+        },
+        {
+          "iteration": 91,
+          "value": 76.5
+        },
+        {
+          "iteration": 92,
+          "value": 62.840000000000146
+        },
+        {
+          "iteration": 93,
+          "value": 68
+        },
+        {
+          "iteration": 94,
+          "value": 59.960000000000946
+        },
+        {
+          "iteration": 95,
+          "value": 63.36000000000058
+        },
+        {
+          "iteration": 96,
+          "value": 70.68000000000029
+        },
+        {
+          "iteration": 97,
+          "value": 58.45999999999913
+        },
+        {
+          "iteration": 98,
+          "value": 53.780000000000655
+        },
+        {
+          "iteration": 99,
+          "value": 58.02000000000044
+        },
+        {
+          "iteration": 100,
+          "value": 70.14000000000124
+        }
+      ]
+    },
+    {
+      "metric_id": "BX-BH01-METRIC-INTERACTION-DOM-COMMIT-MS",
+      "scenario": "nested-keyed-update",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "samples": [
+        {
+          "iteration": 1,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 2,
+          "value": 0.2000000000007276
+        },
+        {
+          "iteration": 3,
+          "value": 0.2000000000007276
+        },
+        {
+          "iteration": 4,
+          "value": 0.21999999999934516
+        },
+        {
+          "iteration": 5,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 6,
+          "value": 0.2000000000007276
+        },
+        {
+          "iteration": 7,
+          "value": 0.21999999999934516
+        },
+        {
+          "iteration": 8,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 9,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 10,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 11,
+          "value": 0.1999999999989086
+        },
+        {
+          "iteration": 12,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 13,
+          "value": 0.2600000000002183
+        },
+        {
+          "iteration": 14,
+          "value": 0.1999999999989086
+        },
+        {
+          "iteration": 15,
+          "value": 0.22000000000116415
+        },
+        {
+          "iteration": 16,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 17,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 18,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 19,
+          "value": 0.2000000000007276
+        },
+        {
+          "iteration": 20,
+          "value": 0.1999999999989086
+        },
+        {
+          "iteration": 21,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 22,
+          "value": 0.1999999999989086
+        },
+        {
+          "iteration": 23,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 24,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 25,
+          "value": 0.2000000000007276
+        },
+        {
+          "iteration": 26,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 27,
+          "value": 0.2000000000007276
+        },
+        {
+          "iteration": 28,
+          "value": 0.16000000000167347
+        },
+        {
+          "iteration": 29,
+          "value": 0.2000000000007276
+        },
+        {
+          "iteration": 30,
+          "value": 0.23999999999978172
+        },
+        {
+          "iteration": 31,
+          "value": 0.21999999999934516
+        },
+        {
+          "iteration": 32,
+          "value": 0.22000000000116415
+        },
+        {
+          "iteration": 33,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 34,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 35,
+          "value": 0.17999999999847205
+        },
+        {
+          "iteration": 36,
+          "value": 0.2000000000007276
+        },
+        {
+          "iteration": 37,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 38,
+          "value": 0.23999999999978172
+        },
+        {
+          "iteration": 39,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 40,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 41,
+          "value": 0.2000000000007276
+        },
+        {
+          "iteration": 42,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 43,
+          "value": 0.31999999999970896
+        },
+        {
+          "iteration": 44,
+          "value": 0.2000000000007276
+        },
+        {
+          "iteration": 45,
+          "value": 0.2000000000007276
+        },
+        {
+          "iteration": 46,
+          "value": 0.2000000000007276
+        },
+        {
+          "iteration": 47,
+          "value": 0.1999999999989086
+        },
+        {
+          "iteration": 48,
+          "value": 0.2000000000007276
+        },
+        {
+          "iteration": 49,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 50,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 51,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 52,
+          "value": 0.28000000000065484
+        },
+        {
+          "iteration": 53,
+          "value": 0.4399999999986903
+        },
+        {
+          "iteration": 54,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 55,
+          "value": 0.1400000000012369
+        },
+        {
+          "iteration": 56,
+          "value": 0.2600000000002183
+        },
+        {
+          "iteration": 57,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 58,
+          "value": 0.2000000000007276
+        },
+        {
+          "iteration": 59,
+          "value": 0.23999999999978172
+        },
+        {
+          "iteration": 60,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 61,
+          "value": 0.2000000000007276
+        },
+        {
+          "iteration": 62,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 63,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 64,
+          "value": 0.2000000000007276
+        },
+        {
+          "iteration": 65,
+          "value": 0.23999999999978172
+        },
+        {
+          "iteration": 66,
+          "value": 0.23999999999978172
+        },
+        {
+          "iteration": 67,
+          "value": 0.28000000000065484
+        },
+        {
+          "iteration": 68,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 69,
+          "value": 0.2000000000007276
+        },
+        {
+          "iteration": 70,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 71,
+          "value": 0.2000000000007276
+        },
+        {
+          "iteration": 72,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 73,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 74,
+          "value": 0.17999999999847205
+        },
+        {
+          "iteration": 75,
+          "value": 0.21999999999934516
+        },
+        {
+          "iteration": 76,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 77,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 78,
+          "value": 0.1999999999989086
+        },
+        {
+          "iteration": 79,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 80,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 81,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 82,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 83,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 84,
+          "value": 0.23999999999978172
+        },
+        {
+          "iteration": 85,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 86,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 87,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 88,
+          "value": 0.21999999999934516
+        },
+        {
+          "iteration": 89,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 90,
+          "value": 0.21999999999934516
+        },
+        {
+          "iteration": 91,
+          "value": 0.1999999999989086
+        },
+        {
+          "iteration": 92,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 93,
+          "value": 0.22000000000116415
+        },
+        {
+          "iteration": 94,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 95,
+          "value": 0.2000000000007276
+        },
+        {
+          "iteration": 96,
+          "value": 0.2000000000007276
+        },
+        {
+          "iteration": 97,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 98,
+          "value": 0.22000000000116415
+        },
+        {
+          "iteration": 99,
+          "value": 0.2000000000007276
+        },
+        {
+          "iteration": 100,
+          "value": 0.18000000000029104
+        }
+      ]
+    },
+    {
+      "metric_id": "BX-BH01-METRIC-INTERACTION-LOCAL-EVENT-PAINT-MS",
+      "scenario": "form-programmatic-update",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "samples": [
+        {
+          "iteration": 1,
+          "value": 90.10000000000036
+        },
+        {
+          "iteration": 2,
+          "value": 82.5
+        },
+        {
+          "iteration": 3,
+          "value": 71.01999999999862
+        },
+        {
+          "iteration": 4,
+          "value": 72.76000000000022
+        },
+        {
+          "iteration": 5,
+          "value": 61.31999999999971
+        },
+        {
+          "iteration": 6,
+          "value": 79.30000000000109
+        },
+        {
+          "iteration": 7,
+          "value": 58.73999999999978
+        },
+        {
+          "iteration": 8,
+          "value": 60.95999999999913
+        },
+        {
+          "iteration": 9,
+          "value": 64.65999999999985
+        },
+        {
+          "iteration": 10,
+          "value": 60.1200000000008
+        },
+        {
+          "iteration": 11,
+          "value": 63.31999999999971
+        },
+        {
+          "iteration": 12,
+          "value": 63.340000000000146
+        },
+        {
+          "iteration": 13,
+          "value": 60.899999999999636
+        },
+        {
+          "iteration": 14,
+          "value": 72.52000000000044
+        },
+        {
+          "iteration": 15,
+          "value": 91.71999999999935
+        },
+        {
+          "iteration": 16,
+          "value": 82.68000000000029
+        },
+        {
+          "iteration": 17,
+          "value": 61.13999999999942
+        },
+        {
+          "iteration": 18,
+          "value": 70.22000000000116
+        },
+        {
+          "iteration": 19,
+          "value": 62.68000000000029
+        },
+        {
+          "iteration": 20,
+          "value": 70.36000000000058
+        },
+        {
+          "iteration": 21,
+          "value": 75.23999999999796
+        },
+        {
+          "iteration": 22,
+          "value": 64.18000000000029
+        },
+        {
+          "iteration": 23,
+          "value": 60.460000000002765
+        },
+        {
+          "iteration": 24,
+          "value": 59.93999999999869
+        },
+        {
+          "iteration": 25,
+          "value": 63.88000000000102
+        },
+        {
+          "iteration": 26,
+          "value": 73.97999999999956
+        },
+        {
+          "iteration": 27,
+          "value": 63.840000000000146
+        },
+        {
+          "iteration": 28,
+          "value": 60.79999999999927
+        },
+        {
+          "iteration": 29,
+          "value": 71.54000000000087
+        },
+        {
+          "iteration": 30,
+          "value": 71.76000000000204
+        },
+        {
+          "iteration": 31,
+          "value": 74.57999999999811
+        },
+        {
+          "iteration": 32,
+          "value": 70.11999999999898
+        },
+        {
+          "iteration": 33,
+          "value": 71.84000000000015
+        },
+        {
+          "iteration": 34,
+          "value": 64.08000000000175
+        },
+        {
+          "iteration": 35,
+          "value": 59.400000000001455
+        },
+        {
+          "iteration": 36,
+          "value": 72.39999999999782
+        },
+        {
+          "iteration": 37,
+          "value": 62.18000000000029
+        },
+        {
+          "iteration": 38,
+          "value": 64.20000000000073
+        },
+        {
+          "iteration": 39,
+          "value": 62.599999999998545
+        },
+        {
+          "iteration": 40,
+          "value": 61.919999999998254
+        },
+        {
+          "iteration": 41,
+          "value": 63.52000000000044
+        },
+        {
+          "iteration": 42,
+          "value": 63.54000000000087
+        },
+        {
+          "iteration": 43,
+          "value": 71.77999999999884
+        },
+        {
+          "iteration": 44,
+          "value": 83.27999999999884
+        },
+        {
+          "iteration": 45,
+          "value": 97.77999999999884
+        },
+        {
+          "iteration": 46,
+          "value": 74.20000000000073
+        },
+        {
+          "iteration": 47,
+          "value": 62.2599999999984
+        },
+        {
+          "iteration": 48,
+          "value": 76.7599999999984
+        },
+        {
+          "iteration": 49,
+          "value": 60.36000000000058
+        },
+        {
+          "iteration": 50,
+          "value": 58.60000000000218
+        },
+        {
+          "iteration": 51,
+          "value": 70.70000000000073
+        },
+        {
+          "iteration": 52,
+          "value": 59.280000000002474
+        },
+        {
+          "iteration": 53,
+          "value": 60.2400000000016
+        },
+        {
+          "iteration": 54,
+          "value": 64.09999999999854
+        },
+        {
+          "iteration": 55,
+          "value": 76.41999999999825
+        },
+        {
+          "iteration": 56,
+          "value": 67.15999999999985
+        },
+        {
+          "iteration": 57,
+          "value": 103.34000000000015
+        },
+        {
+          "iteration": 58,
+          "value": 100.68000000000029
+        },
+        {
+          "iteration": 59,
+          "value": 72.57999999999811
+        },
+        {
+          "iteration": 60,
+          "value": 63.63999999999942
+        },
+        {
+          "iteration": 61,
+          "value": 83.28000000000247
+        },
+        {
+          "iteration": 62,
+          "value": 73.95999999999913
+        },
+        {
+          "iteration": 63,
+          "value": 70.06000000000131
+        },
+        {
+          "iteration": 64,
+          "value": 59.10000000000218
+        },
+        {
+          "iteration": 65,
+          "value": 59.640000000003056
+        },
+        {
+          "iteration": 66,
+          "value": 60.42000000000189
+        },
+        {
+          "iteration": 67,
+          "value": 59.29999999999927
+        },
+        {
+          "iteration": 68,
+          "value": 62.83999999999651
+        },
+        {
+          "iteration": 69,
+          "value": 59.94000000000233
+        },
+        {
+          "iteration": 70,
+          "value": 65.81999999999971
+        },
+        {
+          "iteration": 71,
+          "value": 82.34000000000015
+        },
+        {
+          "iteration": 72,
+          "value": 110.34000000000015
+        },
+        {
+          "iteration": 73,
+          "value": 83.88000000000102
+        },
+        {
+          "iteration": 74,
+          "value": 62.57999999999811
+        },
+        {
+          "iteration": 75,
+          "value": 67.42000000000189
+        },
+        {
+          "iteration": 76,
+          "value": 81.22000000000116
+        },
+        {
+          "iteration": 77,
+          "value": 59.63999999999942
+        },
+        {
+          "iteration": 78,
+          "value": 63.2599999999984
+        },
+        {
+          "iteration": 79,
+          "value": 59.0199999999968
+        },
+        {
+          "iteration": 80,
+          "value": 62.63999999999942
+        },
+        {
+          "iteration": 81,
+          "value": 64
+        },
+        {
+          "iteration": 82,
+          "value": 60.60000000000218
+        },
+        {
+          "iteration": 83,
+          "value": 62.04000000000087
+        },
+        {
+          "iteration": 84,
+          "value": 60.47999999999956
+        },
+        {
+          "iteration": 85,
+          "value": 67.34000000000015
+        },
+        {
+          "iteration": 86,
+          "value": 60.31999999999971
+        },
+        {
+          "iteration": 87,
+          "value": 61.63999999999942
+        },
+        {
+          "iteration": 88,
+          "value": 62.31999999999971
+        },
+        {
+          "iteration": 89,
+          "value": 59.76000000000204
+        },
+        {
+          "iteration": 90,
+          "value": 67.86000000000058
+        },
+        {
+          "iteration": 91,
+          "value": 84.38000000000102
+        },
+        {
+          "iteration": 92,
+          "value": 89.96000000000276
+        },
+        {
+          "iteration": 93,
+          "value": 62.97999999999956
+        },
+        {
+          "iteration": 94,
+          "value": 64.38000000000102
+        },
+        {
+          "iteration": 95,
+          "value": 68.07999999999811
+        },
+        {
+          "iteration": 96,
+          "value": 84.47999999999956
+        },
+        {
+          "iteration": 97,
+          "value": 68.04000000000087
+        },
+        {
+          "iteration": 98,
+          "value": 59.79999999999927
+        },
+        {
+          "iteration": 99,
+          "value": 75.88000000000102
+        },
+        {
+          "iteration": 100,
+          "value": 101.88000000000102
+        }
+      ]
+    },
+    {
+      "metric_id": "BX-BH01-METRIC-INTERACTION-DOM-COMMIT-MS",
+      "scenario": "form-programmatic-update",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "samples": [
+        {
+          "iteration": 1,
+          "value": 0.22000000000116415
+        },
+        {
+          "iteration": 2,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 3,
+          "value": 0.13999999999941792
+        },
+        {
+          "iteration": 4,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 5,
+          "value": 0.13999999999941792
+        },
+        {
+          "iteration": 6,
+          "value": 0.11999999999898137
+        },
+        {
+          "iteration": 7,
+          "value": 0.1400000000012369
+        },
+        {
+          "iteration": 8,
+          "value": 0.1400000000012369
+        },
+        {
+          "iteration": 9,
+          "value": 0.13999999999941792
+        },
+        {
+          "iteration": 10,
+          "value": 0.12000000000080036
+        },
+        {
+          "iteration": 11,
+          "value": 0.13999999999941792
+        },
+        {
+          "iteration": 12,
+          "value": 0.12000000000080036
+        },
+        {
+          "iteration": 13,
+          "value": 0.11999999999898137
+        },
+        {
+          "iteration": 14,
+          "value": 0.11999999999898137
+        },
+        {
+          "iteration": 15,
+          "value": 0.2000000000007276
+        },
+        {
+          "iteration": 16,
+          "value": 0.2000000000007276
+        },
+        {
+          "iteration": 17,
+          "value": 0.12000000000261934
+        },
+        {
+          "iteration": 18,
+          "value": 0.13999999999941792
+        },
+        {
+          "iteration": 19,
+          "value": 0.1400000000030559
+        },
+        {
+          "iteration": 20,
+          "value": 0.12000000000261934
+        },
+        {
+          "iteration": 21,
+          "value": 0.12000000000261934
+        },
+        {
+          "iteration": 22,
+          "value": 0.1400000000030559
+        },
+        {
+          "iteration": 23,
+          "value": 0.11999999999898137
+        },
+        {
+          "iteration": 24,
+          "value": 0.11999999999898137
+        },
+        {
+          "iteration": 25,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 26,
+          "value": 0.11999999999898137
+        },
+        {
+          "iteration": 27,
+          "value": 0.11999999999898137
+        },
+        {
+          "iteration": 28,
+          "value": 0.11999999999898137
+        },
+        {
+          "iteration": 29,
+          "value": 0.11999999999898137
+        },
+        {
+          "iteration": 30,
+          "value": 0.12000000000261934
+        },
+        {
+          "iteration": 31,
+          "value": 0.13999999999941792
+        },
+        {
+          "iteration": 32,
+          "value": 0.11999999999898137
+        },
+        {
+          "iteration": 33,
+          "value": 0.11999999999898137
+        },
+        {
+          "iteration": 34,
+          "value": 0.11999999999898137
+        },
+        {
+          "iteration": 35,
+          "value": 0.11999999999898137
+        },
+        {
+          "iteration": 36,
+          "value": 0.12000000000261934
+        },
+        {
+          "iteration": 37,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 38,
+          "value": 0.11999999999898137
+        },
+        {
+          "iteration": 39,
+          "value": 0.12000000000261934
+        },
+        {
+          "iteration": 40,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 41,
+          "value": 0.12000000000261934
+        },
+        {
+          "iteration": 42,
+          "value": 0.13999999999941792
+        },
+        {
+          "iteration": 43,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 44,
+          "value": 0.11999999999898137
+        },
+        {
+          "iteration": 45,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 46,
+          "value": 0.13999999999941792
+        },
+        {
+          "iteration": 47,
+          "value": 0.11999999999898137
+        },
+        {
+          "iteration": 48,
+          "value": 0.11999999999898137
+        },
+        {
+          "iteration": 49,
+          "value": 0.12000000000261934
+        },
+        {
+          "iteration": 50,
+          "value": 0.12000000000261934
+        },
+        {
+          "iteration": 51,
+          "value": 0.11999999999898137
+        },
+        {
+          "iteration": 52,
+          "value": 0.13999999999941792
+        },
+        {
+          "iteration": 53,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 54,
+          "value": 0.13999999999941792
+        },
+        {
+          "iteration": 55,
+          "value": 0.11999999999898137
+        },
+        {
+          "iteration": 56,
+          "value": 0.12000000000261934
+        },
+        {
+          "iteration": 57,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 58,
+          "value": 0.11999999999898137
+        },
+        {
+          "iteration": 59,
+          "value": 0.13999999999941792
+        },
+        {
+          "iteration": 60,
+          "value": 0.11999999999898137
+        },
+        {
+          "iteration": 61,
+          "value": 0.2000000000007276
+        },
+        {
+          "iteration": 62,
+          "value": 0.1400000000030559
+        },
+        {
+          "iteration": 63,
+          "value": 0.13999999999941792
+        },
+        {
+          "iteration": 64,
+          "value": 0.13999999999941792
+        },
+        {
+          "iteration": 65,
+          "value": 0.11999999999898137
+        },
+        {
+          "iteration": 66,
+          "value": 0.11999999999898137
+        },
+        {
+          "iteration": 67,
+          "value": 0.13999999999941792
+        },
+        {
+          "iteration": 68,
+          "value": 0.1400000000030559
+        },
+        {
+          "iteration": 69,
+          "value": 0.11999999999898137
+        },
+        {
+          "iteration": 70,
+          "value": 0.11999999999898137
+        },
+        {
+          "iteration": 71,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 72,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 73,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 74,
+          "value": 0.11999999999898137
+        },
+        {
+          "iteration": 75,
+          "value": 0.11999999999898137
+        },
+        {
+          "iteration": 76,
+          "value": 0.12000000000261934
+        },
+        {
+          "iteration": 77,
+          "value": 0.11999999999898137
+        },
+        {
+          "iteration": 78,
+          "value": 0.11999999999898137
+        },
+        {
+          "iteration": 79,
+          "value": 0.12000000000261934
+        },
+        {
+          "iteration": 80,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 81,
+          "value": 0.11999999999898137
+        },
+        {
+          "iteration": 82,
+          "value": 0.12000000000261934
+        },
+        {
+          "iteration": 83,
+          "value": 0.11999999999898137
+        },
+        {
+          "iteration": 84,
+          "value": 0.13999999999941792
+        },
+        {
+          "iteration": 85,
+          "value": 0.13999999999941792
+        },
+        {
+          "iteration": 86,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 87,
+          "value": 0.13999999999941792
+        },
+        {
+          "iteration": 88,
+          "value": 0.11999999999898137
+        },
+        {
+          "iteration": 89,
+          "value": 0.13999999999941792
+        },
+        {
+          "iteration": 90,
+          "value": 0.12000000000261934
+        },
+        {
+          "iteration": 91,
+          "value": 0.13999999999941792
+        },
+        {
+          "iteration": 92,
+          "value": 0.12000000000261934
+        },
+        {
+          "iteration": 93,
+          "value": 0.11999999999898137
+        },
+        {
+          "iteration": 94,
+          "value": 0.11999999999898137
+        },
+        {
+          "iteration": 95,
+          "value": 0.1400000000030559
+        },
+        {
+          "iteration": 96,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 97,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 98,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 99,
+          "value": 0.11999999999898137
+        },
+        {
+          "iteration": 100,
+          "value": 0.15999999999985448
+        }
+      ]
+    },
+    {
+      "metric_id": "BX-BH01-METRIC-INTERACTION-LOCAL-EVENT-PAINT-MS",
+      "scenario": "timer-message-update",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "samples": [
+        {
+          "iteration": 1,
+          "value": 116.97999999999956
+        },
+        {
+          "iteration": 2,
+          "value": 129.29999999999927
+        },
+        {
+          "iteration": 3,
+          "value": 131.37999999999738
+        },
+        {
+          "iteration": 4,
+          "value": 112.43999999999869
+        },
+        {
+          "iteration": 5,
+          "value": 114.28000000000247
+        },
+        {
+          "iteration": 6,
+          "value": 130.05999999999767
+        },
+        {
+          "iteration": 7,
+          "value": 140.45999999999913
+        },
+        {
+          "iteration": 8,
+          "value": 154.15999999999985
+        },
+        {
+          "iteration": 9,
+          "value": 114.29999999999927
+        },
+        {
+          "iteration": 10,
+          "value": 123.92000000000189
+        },
+        {
+          "iteration": 11,
+          "value": 120.29999999999927
+        },
+        {
+          "iteration": 12,
+          "value": 116.13999999999942
+        },
+        {
+          "iteration": 13,
+          "value": 114.30000000000291
+        },
+        {
+          "iteration": 14,
+          "value": 117.13999999999942
+        },
+        {
+          "iteration": 15,
+          "value": 133.5600000000013
+        },
+        {
+          "iteration": 16,
+          "value": 113.18000000000029
+        },
+        {
+          "iteration": 17,
+          "value": 123.39999999999782
+        },
+        {
+          "iteration": 18,
+          "value": 124.12000000000262
+        },
+        {
+          "iteration": 19,
+          "value": 138.95999999999913
+        },
+        {
+          "iteration": 20,
+          "value": 115.15999999999985
+        },
+        {
+          "iteration": 21,
+          "value": 158.03999999999724
+        },
+        {
+          "iteration": 22,
+          "value": 136.61999999999898
+        },
+        {
+          "iteration": 23,
+          "value": 137.97999999999956
+        },
+        {
+          "iteration": 24,
+          "value": 115.22000000000116
+        },
+        {
+          "iteration": 25,
+          "value": 98.18000000000029
+        },
+        {
+          "iteration": 26,
+          "value": 98.70000000000073
+        },
+        {
+          "iteration": 27,
+          "value": 99.61999999999898
+        },
+        {
+          "iteration": 28,
+          "value": 122.97999999999956
+        },
+        {
+          "iteration": 29,
+          "value": 106.18000000000029
+        },
+        {
+          "iteration": 30,
+          "value": 120.76000000000204
+        },
+        {
+          "iteration": 31,
+          "value": 123.59999999999854
+        },
+        {
+          "iteration": 32,
+          "value": 132.5
+        },
+        {
+          "iteration": 33,
+          "value": 155.09999999999854
+        },
+        {
+          "iteration": 34,
+          "value": 111.10000000000218
+        },
+        {
+          "iteration": 35,
+          "value": 131.7599999999984
+        },
+        {
+          "iteration": 36,
+          "value": 117.93999999999869
+        },
+        {
+          "iteration": 37,
+          "value": 152.84000000000015
+        },
+        {
+          "iteration": 38,
+          "value": 104.56000000000131
+        },
+        {
+          "iteration": 39,
+          "value": 127.04000000000087
+        },
+        {
+          "iteration": 40,
+          "value": 143.96000000000276
+        },
+        {
+          "iteration": 41,
+          "value": 116.68000000000029
+        },
+        {
+          "iteration": 42,
+          "value": 130.1800000000003
+        },
+        {
+          "iteration": 43,
+          "value": 130.37999999999738
+        },
+        {
+          "iteration": 44,
+          "value": 126.69999999999709
+        },
+        {
+          "iteration": 45,
+          "value": 135.47999999999956
+        },
+        {
+          "iteration": 46,
+          "value": 111.7400000000016
+        },
+        {
+          "iteration": 47,
+          "value": 121.90000000000146
+        },
+        {
+          "iteration": 48,
+          "value": 130.15999999999985
+        },
+        {
+          "iteration": 49,
+          "value": 112.77999999999884
+        },
+        {
+          "iteration": 50,
+          "value": 139.34000000000015
+        },
+        {
+          "iteration": 51,
+          "value": 106.95999999999913
+        },
+        {
+          "iteration": 52,
+          "value": 120.56000000000131
+        },
+        {
+          "iteration": 53,
+          "value": 117.20000000000073
+        },
+        {
+          "iteration": 54,
+          "value": 125.22000000000116
+        },
+        {
+          "iteration": 55,
+          "value": 111.88000000000102
+        },
+        {
+          "iteration": 56,
+          "value": 126.5
+        },
+        {
+          "iteration": 57,
+          "value": 122.15999999999985
+        },
+        {
+          "iteration": 58,
+          "value": 134
+        },
+        {
+          "iteration": 59,
+          "value": 132.72000000000116
+        },
+        {
+          "iteration": 60,
+          "value": 132.9399999999987
+        },
+        {
+          "iteration": 61,
+          "value": 114.68000000000029
+        },
+        {
+          "iteration": 62,
+          "value": 108.45999999999913
+        },
+        {
+          "iteration": 63,
+          "value": 97.97999999999956
+        },
+        {
+          "iteration": 64,
+          "value": 121.92000000000189
+        },
+        {
+          "iteration": 65,
+          "value": 115.90000000000146
+        },
+        {
+          "iteration": 66,
+          "value": 132.5
+        },
+        {
+          "iteration": 67,
+          "value": 116.15999999999985
+        },
+        {
+          "iteration": 68,
+          "value": 133.21999999999753
+        },
+        {
+          "iteration": 69,
+          "value": 127.20000000000073
+        },
+        {
+          "iteration": 70,
+          "value": 143.72000000000116
+        },
+        {
+          "iteration": 71,
+          "value": 127.34000000000015
+        },
+        {
+          "iteration": 72,
+          "value": 159.59999999999854
+        },
+        {
+          "iteration": 73,
+          "value": 139.13999999999942
+        },
+        {
+          "iteration": 74,
+          "value": 140.02000000000044
+        },
+        {
+          "iteration": 75,
+          "value": 112.11999999999898
+        },
+        {
+          "iteration": 76,
+          "value": 147.23999999999796
+        },
+        {
+          "iteration": 77,
+          "value": 116.02000000000044
+        },
+        {
+          "iteration": 78,
+          "value": 129.27999999999884
+        },
+        {
+          "iteration": 79,
+          "value": 144.88000000000102
+        },
+        {
+          "iteration": 80,
+          "value": 114.5
+        },
+        {
+          "iteration": 81,
+          "value": 137.59999999999854
+        },
+        {
+          "iteration": 82,
+          "value": 142.39999999999418
+        },
+        {
+          "iteration": 83,
+          "value": 119.25999999999476
+        },
+        {
+          "iteration": 84,
+          "value": 132.6800000000003
+        },
+        {
+          "iteration": 85,
+          "value": 107.27999999999884
+        },
+        {
+          "iteration": 86,
+          "value": 124.18000000000029
+        },
+        {
+          "iteration": 87,
+          "value": 130.88000000000466
+        },
+        {
+          "iteration": 88,
+          "value": 109.16000000000349
+        },
+        {
+          "iteration": 89,
+          "value": 128.91999999999825
+        },
+        {
+          "iteration": 90,
+          "value": 117.54000000000087
+        },
+        {
+          "iteration": 91,
+          "value": 124.62000000000262
+        },
+        {
+          "iteration": 92,
+          "value": 102.33999999999651
+        },
+        {
+          "iteration": 93,
+          "value": 124.58000000000175
+        },
+        {
+          "iteration": 94,
+          "value": 135.73999999999796
+        },
+        {
+          "iteration": 95,
+          "value": 127.86000000000058
+        },
+        {
+          "iteration": 96,
+          "value": 103.86000000000058
+        },
+        {
+          "iteration": 97,
+          "value": 98.86000000000058
+        },
+        {
+          "iteration": 98,
+          "value": 124.59999999999854
+        },
+        {
+          "iteration": 99,
+          "value": 126.52000000000407
+        },
+        {
+          "iteration": 100,
+          "value": 112.09999999999854
+        }
+      ]
+    },
+    {
+      "metric_id": "BX-BH01-METRIC-INTERACTION-DOM-COMMIT-MS",
+      "scenario": "timer-message-update",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "samples": [
+        {
+          "iteration": 1,
+          "value": 0.21999999999752617
+        },
+        {
+          "iteration": 2,
+          "value": 0.12000000000261934
+        },
+        {
+          "iteration": 3,
+          "value": 0.2000000000007276
+        },
+        {
+          "iteration": 4,
+          "value": 0.13999999999941792
+        },
+        {
+          "iteration": 5,
+          "value": 0.21999999999752617
+        },
+        {
+          "iteration": 6,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 7,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 8,
+          "value": 0.31999999999970896
+        },
+        {
+          "iteration": 9,
+          "value": 0.11999999999898137
+        },
+        {
+          "iteration": 10,
+          "value": 0.13999999999941792
+        },
+        {
+          "iteration": 11,
+          "value": 0.13999999999941792
+        },
+        {
+          "iteration": 12,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 13,
+          "value": 0.31999999999970896
+        },
+        {
+          "iteration": 14,
+          "value": 0.1400000000030559
+        },
+        {
+          "iteration": 15,
+          "value": 0.13999999999941792
+        },
+        {
+          "iteration": 16,
+          "value": 0.2000000000007276
+        },
+        {
+          "iteration": 17,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 18,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 19,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 20,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 21,
+          "value": 0.1400000000030559
+        },
+        {
+          "iteration": 22,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 23,
+          "value": 0.17999999999665306
+        },
+        {
+          "iteration": 24,
+          "value": 0.13999999999941792
+        },
+        {
+          "iteration": 25,
+          "value": 0.13999999999941792
+        },
+        {
+          "iteration": 26,
+          "value": 0.12000000000261934
+        },
+        {
+          "iteration": 27,
+          "value": 0.13999999999941792
+        },
+        {
+          "iteration": 28,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 29,
+          "value": 0.2999999999992724
+        },
+        {
+          "iteration": 30,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 31,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 32,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 33,
+          "value": 0.19999999999708962
+        },
+        {
+          "iteration": 34,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 35,
+          "value": 0.2000000000007276
+        },
+        {
+          "iteration": 36,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 37,
+          "value": 0.13999999999941792
+        },
+        {
+          "iteration": 38,
+          "value": 0.13999999999941792
+        },
+        {
+          "iteration": 39,
+          "value": 0.11999999999898137
+        },
+        {
+          "iteration": 40,
+          "value": 0.2000000000007276
+        },
+        {
+          "iteration": 41,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 42,
+          "value": 0.11999999999898137
+        },
+        {
+          "iteration": 43,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 44,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 45,
+          "value": 0.13999999999941792
+        },
+        {
+          "iteration": 46,
+          "value": 0.11999999999898137
+        },
+        {
+          "iteration": 47,
+          "value": 0.11999999999898137
+        },
+        {
+          "iteration": 48,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 49,
+          "value": 0.13999999999941792
+        },
+        {
+          "iteration": 50,
+          "value": 0.2599999999983993
+        },
+        {
+          "iteration": 51,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 52,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 53,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 54,
+          "value": 0.13999999999941792
+        },
+        {
+          "iteration": 55,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 56,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 57,
+          "value": 0.2000000000007276
+        },
+        {
+          "iteration": 58,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 59,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 60,
+          "value": 0.2000000000007276
+        },
+        {
+          "iteration": 61,
+          "value": 0.13999999999941792
+        },
+        {
+          "iteration": 62,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 63,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 64,
+          "value": 0.11999999999898137
+        },
+        {
+          "iteration": 65,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 66,
+          "value": 0.13999999999941792
+        },
+        {
+          "iteration": 67,
+          "value": 0.23999999999796273
+        },
+        {
+          "iteration": 68,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 69,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 70,
+          "value": 0.13999999999941792
+        },
+        {
+          "iteration": 71,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 72,
+          "value": 0.13999999999941792
+        },
+        {
+          "iteration": 73,
+          "value": 0.13999999999941792
+        },
+        {
+          "iteration": 74,
+          "value": 0.15999999999985448
+        },
+        {
+          "iteration": 75,
+          "value": 0.13999999999941792
+        },
+        {
+          "iteration": 76,
+          "value": 0.12000000000261934
+        },
+        {
+          "iteration": 77,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 78,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 79,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 80,
+          "value": 0.11999999999898137
+        },
+        {
+          "iteration": 81,
+          "value": 0.22000000000116415
+        },
+        {
+          "iteration": 82,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 83,
+          "value": 0.1599999999962165
+        },
+        {
+          "iteration": 84,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 85,
+          "value": 0.13999999999941792
+        },
+        {
+          "iteration": 86,
+          "value": 0.22000000000116415
+        },
+        {
+          "iteration": 87,
+          "value": 0.13999999999941792
+        },
+        {
+          "iteration": 88,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 89,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 90,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 91,
+          "value": 0.13999999999941792
+        },
+        {
+          "iteration": 92,
+          "value": 0.13999999999941792
+        },
+        {
+          "iteration": 93,
+          "value": 0.13999999999941792
+        },
+        {
+          "iteration": 94,
+          "value": 0.13999999999941792
+        },
+        {
+          "iteration": 95,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 96,
+          "value": 0.13999999999941792
+        },
+        {
+          "iteration": 97,
+          "value": 0.13999999999941792
+        },
+        {
+          "iteration": 98,
+          "value": 0.13999999999941792
+        },
+        {
+          "iteration": 99,
+          "value": 0.18000000000029104
+        },
+        {
+          "iteration": 100,
+          "value": 0.16000000000349246
+        }
+      ]
+    },
+    {
+      "metric_id": "BX-BH01-METRIC-INTERACTION-SERVER-ROUNDTRIP-MS",
+      "scenario": "authenticated-success",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "samples": [
+        {
+          "iteration": 1,
+          "value": 219.06000000000495
+        },
+        {
+          "iteration": 2,
+          "value": 211.65999999999622
+        },
+        {
+          "iteration": 3,
+          "value": 192.40000000000146
+        },
+        {
+          "iteration": 4,
+          "value": 186.55999999999767
+        },
+        {
+          "iteration": 5,
+          "value": 173.36000000000058
+        },
+        {
+          "iteration": 6,
+          "value": 193.1600000000035
+        },
+        {
+          "iteration": 7,
+          "value": 160.55999999999767
+        },
+        {
+          "iteration": 8,
+          "value": 191.05999999999767
+        },
+        {
+          "iteration": 9,
+          "value": 194.58000000000175
+        },
+        {
+          "iteration": 10,
+          "value": 176.24000000000524
+        },
+        {
+          "iteration": 11,
+          "value": 201.70000000000437
+        },
+        {
+          "iteration": 12,
+          "value": 156.5199999999968
+        },
+        {
+          "iteration": 13,
+          "value": 160.36000000000058
+        },
+        {
+          "iteration": 14,
+          "value": 159.91999999999825
+        },
+        {
+          "iteration": 15,
+          "value": 161.2800000000061
+        },
+        {
+          "iteration": 16,
+          "value": 158.26000000000204
+        },
+        {
+          "iteration": 17,
+          "value": 161.40000000000146
+        },
+        {
+          "iteration": 18,
+          "value": 194.1600000000035
+        },
+        {
+          "iteration": 19,
+          "value": 164.2800000000061
+        },
+        {
+          "iteration": 20,
+          "value": 179.22000000000116
+        },
+        {
+          "iteration": 21,
+          "value": 191
+        },
+        {
+          "iteration": 22,
+          "value": 174.1999999999971
+        },
+        {
+          "iteration": 23,
+          "value": 221.94000000000233
+        },
+        {
+          "iteration": 24,
+          "value": 190.06000000000495
+        },
+        {
+          "iteration": 25,
+          "value": 175.86000000000058
+        },
+        {
+          "iteration": 26,
+          "value": 214.77999999999884
+        },
+        {
+          "iteration": 27,
+          "value": 189.72000000000116
+        },
+        {
+          "iteration": 28,
+          "value": 277.8000000000029
+        },
+        {
+          "iteration": 29,
+          "value": 188.52000000000407
+        },
+        {
+          "iteration": 30,
+          "value": 184.97999999999593
+        },
+        {
+          "iteration": 31,
+          "value": 173.38000000000466
+        },
+        {
+          "iteration": 32,
+          "value": 208.62000000000262
+        },
+        {
+          "iteration": 33,
+          "value": 225.8399999999965
+        },
+        {
+          "iteration": 34,
+          "value": 215.54000000000087
+        },
+        {
+          "iteration": 35,
+          "value": 174.55999999999767
+        },
+        {
+          "iteration": 36,
+          "value": 176.05999999999767
+        },
+        {
+          "iteration": 37,
+          "value": 229.5
+        },
+        {
+          "iteration": 38,
+          "value": 195.8000000000029
+        },
+        {
+          "iteration": 39,
+          "value": 196.72000000000116
+        },
+        {
+          "iteration": 40,
+          "value": 191.87999999999738
+        },
+        {
+          "iteration": 41,
+          "value": 198.77999999999884
+        },
+        {
+          "iteration": 42,
+          "value": 219.38000000000466
+        },
+        {
+          "iteration": 43,
+          "value": 209.57999999999447
+        },
+        {
+          "iteration": 44,
+          "value": 179.8199999999997
+        },
+        {
+          "iteration": 45,
+          "value": 186.62000000000262
+        },
+        {
+          "iteration": 46,
+          "value": 180.90000000000146
+        },
+        {
+          "iteration": 47,
+          "value": 188.08000000000175
+        },
+        {
+          "iteration": 48,
+          "value": 176.76000000000204
+        },
+        {
+          "iteration": 49,
+          "value": 197.91999999999825
+        },
+        {
+          "iteration": 50,
+          "value": 226.9800000000032
+        }
+      ]
+    },
+    {
+      "metric_id": "BX-BH01-METRIC-INTERACTION-SERVER-ROUNDTRIP-MS",
+      "scenario": "authorization-denial",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "samples": [
+        {
+          "iteration": 1,
+          "value": 173.95999999999913
+        },
+        {
+          "iteration": 2,
+          "value": 179.27999999999884
+        },
+        {
+          "iteration": 3,
+          "value": 206.12000000000262
+        },
+        {
+          "iteration": 4,
+          "value": 202.08000000000175
+        },
+        {
+          "iteration": 5,
+          "value": 251.54000000000087
+        },
+        {
+          "iteration": 6,
+          "value": 197.70000000000437
+        },
+        {
+          "iteration": 7,
+          "value": 183.77999999999884
+        },
+        {
+          "iteration": 8,
+          "value": 181.6800000000003
+        },
+        {
+          "iteration": 9,
+          "value": 181.44000000000233
+        },
+        {
+          "iteration": 10,
+          "value": 171.94000000000233
+        },
+        {
+          "iteration": 11,
+          "value": 182.4800000000032
+        },
+        {
+          "iteration": 12,
+          "value": 159.89999999999418
+        },
+        {
+          "iteration": 13,
+          "value": 174.34000000000378
+        },
+        {
+          "iteration": 14,
+          "value": 188.3399999999965
+        },
+        {
+          "iteration": 15,
+          "value": 190.36000000000058
+        },
+        {
+          "iteration": 16,
+          "value": 174.5
+        },
+        {
+          "iteration": 17,
+          "value": 167.8399999999965
+        },
+        {
+          "iteration": 18,
+          "value": 172.1800000000003
+        },
+        {
+          "iteration": 19,
+          "value": 159.72000000000116
+        },
+        {
+          "iteration": 20,
+          "value": 237.8199999999997
+        },
+        {
+          "iteration": 21,
+          "value": 185.08000000000175
+        },
+        {
+          "iteration": 22,
+          "value": 154.63999999999942
+        },
+        {
+          "iteration": 23,
+          "value": 174.22000000000116
+        },
+        {
+          "iteration": 24,
+          "value": 189.5
+        },
+        {
+          "iteration": 25,
+          "value": 204.89999999999418
+        },
+        {
+          "iteration": 26,
+          "value": 198.73999999999796
+        },
+        {
+          "iteration": 27,
+          "value": 180.90000000000146
+        },
+        {
+          "iteration": 28,
+          "value": 172.72000000000116
+        },
+        {
+          "iteration": 29,
+          "value": 207.63999999999942
+        },
+        {
+          "iteration": 30,
+          "value": 210.6999999999971
+        },
+        {
+          "iteration": 31,
+          "value": 220.8000000000029
+        },
+        {
+          "iteration": 32,
+          "value": 184.87999999999738
+        },
+        {
+          "iteration": 33,
+          "value": 186.13999999999942
+        },
+        {
+          "iteration": 34,
+          "value": 169.26000000000204
+        },
+        {
+          "iteration": 35,
+          "value": 192.56000000000495
+        },
+        {
+          "iteration": 36,
+          "value": 225.08000000000175
+        },
+        {
+          "iteration": 37,
+          "value": 187.88000000000466
+        },
+        {
+          "iteration": 38,
+          "value": 196.02000000000407
+        },
+        {
+          "iteration": 39,
+          "value": 248.37999999999738
+        },
+        {
+          "iteration": 40,
+          "value": 191.04000000000087
+        },
+        {
+          "iteration": 41,
+          "value": 191.54000000000087
+        },
+        {
+          "iteration": 42,
+          "value": 206.3000000000029
+        },
+        {
+          "iteration": 43,
+          "value": 173.91999999999825
+        },
+        {
+          "iteration": 44,
+          "value": 175.58000000000175
+        },
+        {
+          "iteration": 45,
+          "value": 190.90000000000146
+        },
+        {
+          "iteration": 46,
+          "value": 159.58000000000175
+        },
+        {
+          "iteration": 47,
+          "value": 159
+        },
+        {
+          "iteration": 48,
+          "value": 158.87999999999738
+        },
+        {
+          "iteration": 49,
+          "value": 158.44000000000233
+        },
+        {
+          "iteration": 50,
+          "value": 159.20000000000437
+        }
+      ]
+    },
+    {
+      "metric_id": "BX-BH01-METRIC-INTERACTION-SERVER-ROUNDTRIP-MS",
+      "scenario": "disconnect-retry",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "samples": [
+        {
+          "iteration": 1,
+          "value": 308
+        },
+        {
+          "iteration": 2,
+          "value": 402.679999999993
+        },
+        {
+          "iteration": 3,
+          "value": 357.0400000000009
+        },
+        {
+          "iteration": 4,
+          "value": 331.22000000000116
+        },
+        {
+          "iteration": 5,
+          "value": 364.74000000000524
+        },
+        {
+          "iteration": 6,
+          "value": 339.8399999999965
+        },
+        {
+          "iteration": 7,
+          "value": 332.6800000000003
+        },
+        {
+          "iteration": 8,
+          "value": 330.57999999999447
+        },
+        {
+          "iteration": 9,
+          "value": 337.0400000000009
+        },
+        {
+          "iteration": 10,
+          "value": 399.23999999999796
+        },
+        {
+          "iteration": 11,
+          "value": 345.5400000000009
+        },
+        {
+          "iteration": 12,
+          "value": 326.70000000000437
+        },
+        {
+          "iteration": 13,
+          "value": 376.40000000000146
+        },
+        {
+          "iteration": 14,
+          "value": 342.8600000000006
+        },
+        {
+          "iteration": 15,
+          "value": 359.0200000000041
+        },
+        {
+          "iteration": 16,
+          "value": 426.3600000000006
+        },
+        {
+          "iteration": 17,
+          "value": 331.0199999999968
+        },
+        {
+          "iteration": 18,
+          "value": 359.4599999999991
+        },
+        {
+          "iteration": 19,
+          "value": 368.4599999999991
+        },
+        {
+          "iteration": 20,
+          "value": 324.8799999999974
+        },
+        {
+          "iteration": 21,
+          "value": 396.9800000000032
+        },
+        {
+          "iteration": 22,
+          "value": 362.0400000000009
+        },
+        {
+          "iteration": 23,
+          "value": 357.73999999999796
+        },
+        {
+          "iteration": 24,
+          "value": 331.8000000000029
+        },
+        {
+          "iteration": 25,
+          "value": 334.6200000000026
+        },
+        {
+          "iteration": 26,
+          "value": 386.6600000000035
+        },
+        {
+          "iteration": 27,
+          "value": 363.08000000000175
+        },
+        {
+          "iteration": 28,
+          "value": 358.8600000000006
+        },
+        {
+          "iteration": 29,
+          "value": 389.81999999999243
+        },
+        {
+          "iteration": 30,
+          "value": 327.54000000000815
+        },
+        {
+          "iteration": 31,
+          "value": 325.77999999999884
+        },
+        {
+          "iteration": 32,
+          "value": 360.41999999999825
+        },
+        {
+          "iteration": 33,
+          "value": 325.5
+        },
+        {
+          "iteration": 34,
+          "value": 309.77999999999884
+        },
+        {
+          "iteration": 35,
+          "value": 310.1600000000035
+        },
+        {
+          "iteration": 36,
+          "value": 351.8600000000006
+        },
+        {
+          "iteration": 37,
+          "value": 331.1000000000058
+        },
+        {
+          "iteration": 38,
+          "value": 368.8600000000006
+        },
+        {
+          "iteration": 39,
+          "value": 309.6200000000099
+        },
+        {
+          "iteration": 40,
+          "value": 359.77999999999884
+        },
+        {
+          "iteration": 41,
+          "value": 366.179999999993
+        },
+        {
+          "iteration": 42,
+          "value": 346.8999999999942
+        },
+        {
+          "iteration": 43,
+          "value": 365.81999999999243
+        },
+        {
+          "iteration": 44,
+          "value": 354.91999999999825
+        },
+        {
+          "iteration": 45,
+          "value": 326.8600000000006
+        },
+        {
+          "iteration": 46,
+          "value": 388.1999999999971
+        },
+        {
+          "iteration": 47,
+          "value": 363.27999999999884
+        },
+        {
+          "iteration": 48,
+          "value": 350.58000000000175
+        },
+        {
+          "iteration": 49,
+          "value": 361.7399999999907
+        },
+        {
+          "iteration": 50,
+          "value": 322.679999999993
+        }
+      ]
+    },
+    {
+      "metric_id": "BX-BH01-METRIC-RESOURCE-CLEANUP-MS",
+      "scenario": "repeated-host-stop",
+      "unit": "milliseconds",
+      "cache_state": "warm",
+      "samples": [
+        {
+          "iteration": 1,
+          "value": 50.279999999998836
+        },
+        {
+          "iteration": 2,
+          "value": 37.84000000001106
+        },
+        {
+          "iteration": 3,
+          "value": 45.76000000000931
+        },
+        {
+          "iteration": 4,
+          "value": 46.30000000000291
+        },
+        {
+          "iteration": 5,
+          "value": 68.82000000000698
+        },
+        {
+          "iteration": 6,
+          "value": 44.5
+        },
+        {
+          "iteration": 7,
+          "value": 57.079999999987194
+        },
+        {
+          "iteration": 8,
+          "value": 50.80000000000291
+        },
+        {
+          "iteration": 9,
+          "value": 52.55999999999767
+        },
+        {
+          "iteration": 10,
+          "value": 40.75999999999476
+        },
+        {
+          "iteration": 11,
+          "value": 60.05999999999767
+        },
+        {
+          "iteration": 12,
+          "value": 77.1200000000099
+        },
+        {
+          "iteration": 13,
+          "value": 49.66000000000349
+        },
+        {
+          "iteration": 14,
+          "value": 56.11999999999534
+        },
+        {
+          "iteration": 15,
+          "value": 39.9600000000064
+        },
+        {
+          "iteration": 16,
+          "value": 57.0399999999936
+        },
+        {
+          "iteration": 17,
+          "value": 54.379999999990105
+        },
+        {
+          "iteration": 18,
+          "value": 70.36000000000058
+        },
+        {
+          "iteration": 19,
+          "value": 51.479999999995925
+        },
+        {
+          "iteration": 20,
+          "value": 62.86000000000058
+        }
+      ]
+    }
+  ],
+  "resource_observations": {
+    "initial": {
+      "observation": "post-readiness",
+      "memory_pages": 256,
+      "workers": null,
+      "processes": 1,
+      "mailbox_messages": 0,
+      "timers": 0,
+      "pending_messages": 0,
+      "bridge_pending": 0,
+      "server_pending": 0,
+      "dom_roots": 1,
+      "dom_listeners": 9,
+      "dom_nodes": 23
+    },
+    "peak": {
+      "observation": "post-interaction-and-server-scenarios",
+      "memory_pages": 256,
+      "workers": null,
+      "processes": 1,
+      "mailbox_messages": 0,
+      "timers": 0,
+      "pending_messages": 0,
+      "bridge_pending": 0,
+      "server_pending": 0,
+      "dom_roots": 1,
+      "dom_listeners": 9,
+      "dom_nodes": 23
+    },
+    "stable": {
+      "observation": "settled-before-lifecycle-cycles",
+      "memory_pages": 256,
+      "workers": null,
+      "processes": 1,
+      "mailbox_messages": 0,
+      "timers": 0,
+      "pending_messages": 0,
+      "bridge_pending": 0,
+      "server_pending": 0,
+      "dom_roots": 1,
+      "dom_listeners": 9,
+      "dom_nodes": 23
+    },
+    "disposed": {
+      "observation": "terminal-after-final-stop",
+      "memory_pages": 256,
+      "workers": null,
+      "worker_observation": "not exposed at the parent-frame boundary",
+      "bridge": {
+        "requests": 5,
+        "responses": 5,
+        "failures": 0,
+        "cancellations": 0,
+        "timeouts": 0,
+        "stale_drops": 0,
+        "bytes_sent": 1240,
+        "bytes_received": 1969,
+        "pending": 0,
+        "generation": 21,
+        "stopped": true,
+        "timers": 0,
+        "retries": 0
+      },
+      "lifecycle": {
+        "protocol": "blazex.lifecycle/1",
+        "state": "stopped",
+        "generation": 20,
+        "attempt": 1,
+        "failure": null,
+        "resources": {},
+        "metrics": {
+          "transitions": 160,
+          "failures": 0,
+          "stale_drops": 0,
+          "cleanup_failures": 0,
+          "cleanup_ms": 5.30000000000291
+        }
+      },
+      "server": {
+        "pending": 0,
+        "session_configured": false
+      },
+      "browser": {
+        "workers": null,
+        "listeners": 0,
+        "observers": 0,
+        "fetches": 0,
+        "requests": 0,
+        "dom_roots": 0,
+        "references": 0
+      },
+      "adapter": {
+        "active_generations": 0
+      },
+      "dom": {
+        "roots": 0,
+        "listeners": 0,
+        "nodes": 0
+      }
+    },
+    "lifecycle_cycles": 20
+  },
+  "reliability": {
+    "page_errors": 0,
+    "command_failures": 0,
+    "long_task_api": "available",
+    "long_tasks": [],
+    "resource_growth_detected": false
+  },
+  "failures": [],
+  "limitations": [
+    "Development evidence only; no browser support or cross-platform qualification is implied.",
+    "The same-host unshaped loopback environment is not the governed constrained-network product environment.",
+    "Browser-reported JavaScript heap, when available, excludes complete Wasm, native browser, and BEAM process accounting.",
+    "This browser did not expose performance.memory; JavaScript heap growth remains unavailable."
+  ]
+}
