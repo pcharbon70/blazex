@@ -30,11 +30,10 @@ component families, production accessibility, or release readiness.
 
 ## Authorization status
 
-The repository owner explicitly authorized BH-02 Phase 4 on 2026-09-05 after
-Phase 3 passed and merged. The portable presentation-intent gate has passed
-locally with four section commits. Phase 5 is eligible but remains
-unauthorized; Phases 6–8 also remain planned and unauthorized. The completed
-gates are preserved in the [Phase 1 implementation
+The repository owner explicitly authorized BH-02 Phase 5 on 2026-09-05 after
+Phase 4 passed and merged. Phase 5 is active under the same four-section,
+single-PR, synchronized-main cleanup rules. Phases 6–8 remain planned and
+unauthorized. The completed gates are preserved in the [Phase 1 implementation
 evidence](phase-01-implementation-evidence.md), [Phase 2 implementation
 evidence](phase-02-implementation-evidence.md), [Phase 3 implementation
 evidence](phase-03-implementation-evidence.md), and [Phase 4 implementation
@@ -73,7 +72,7 @@ milestone work.
 | [2 — Semantic Nodes, Identity, and Portable Component Evaluation](phase-02-semantic-nodes-identity-and-component-evaluation.md) | complete — gate passed | Define the first versioned semantic node/identity vocabulary and the smallest pure/stateful component evaluation contract. | Phase 1 |
 | [3 — Events, Effects, Capabilities, and Resource Ownership](phase-03-events-effects-capabilities-and-resource-ownership.md) | complete — gate passed | Define validated semantic events and generation-scoped effect/resource lifecycles without host objects. | Phase 2 |
 | [4 — Layout, Tokens, Accessibility, Focus, and Selection Intent](phase-04-layout-tokens-accessibility-focus-and-selection-intent.md) | complete — gate passed | Complete the portable intent needed by the representative interaction slice. | Phases 2–3 |
-| 5 — Renderer Lifecycle and Deterministic Headless Oracle | planned — not authorized | Implement renderer negotiation, mount/update/dispose behavior, canonical normalization, and trace fixtures. | Phases 2–4 |
+| [5 — Renderer Lifecycle and Deterministic Headless Oracle](phase-05-renderer-lifecycle-and-deterministic-headless-oracle.md) | active — explicitly authorized | Implement renderer negotiation, mount/update/dispose behavior, canonical normalization, and trace fixtures. | Phases 2–4 |
 | 6 — Standalone DOM Lowering and Browser Conformance | planned — not authorized | Replace disposable BH-01 DOM operations with a conforming renderer adapter and browser evidence. | Phase 5 |
 | 7 — Direct Native-Control Portability Spike | planned — not authorized | Exercise the same slice through direct Win32, AppKit, and GTK adapters; unavailable target execution remains deferred under policy. | Phase 5 |
 | 8 — Cross-Backend Reconciliation and BH-02 Acceptance | planned — not authorized | Resolve semantic leaks, review every required output and condition, and accept, revise, or block later framework work. | Phases 6–7 |
@@ -124,6 +123,7 @@ first portable contract version without making a support claim.
 - [Phase 3 — Implementation Evidence](phase-03-implementation-evidence.md)
 - [Phase 4 — Layout, Tokens, Accessibility, Focus, and Selection Intent](phase-04-layout-tokens-accessibility-focus-and-selection-intent.md)
 - [Phase 4 — Implementation Evidence](phase-04-implementation-evidence.md)
+- [Phase 5 — Renderer Lifecycle and Deterministic Headless Oracle](phase-05-renderer-lifecycle-and-deterministic-headless-oracle.md)
 
 ## Maintaining this index
 

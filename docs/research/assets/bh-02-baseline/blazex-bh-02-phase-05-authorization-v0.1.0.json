@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0.0",
+  "authorization_id": "BX-BH02-PHASE-05-AUTHORIZATION-0.1",
+  "status": "approved-phase-5-only",
+  "approved_at": "2026-09-05",
+  "approved_by": {
+    "identity": "pcharbon70",
+    "name": "Pascal Charbonneau",
+    "role": "repository-owner",
+    "approval_record": "Repository-owner request in the BlazeX Codex task to implement the next BH-02 phase section by section with one commit per section, one pull request, and final synchronized-main branch cleanup."
+  },
+  "activation": {
+    "base_branch": "main",
+    "base_revision": "c50e8849649987ebe770e5e568b4c38528a1abbc",
+    "base_remote_revision": "c50e8849649987ebe770e5e568b4c38528a1abbc",
+    "main_synchronized_before_branch": true,
+    "working_branch": "codex/bh-02-phase-05-headless-renderer",
+    "phase": "BH-02 Phase 5"
+  },
+  "approval_basis": [
+    {"path": "docs/research/assets/bh-02-baseline/blazex-bh-02-phase-04-completion-v0.1.0.json", "sha256": "01466036257379c96bc95962e8d2a9fb039042b5f2fa3e9eed059b0647e89f8e"},
+    {"path": "docs/research/20-notes/architecture-decisions/adr-0002-versioned-semantic-ui-tree.md", "sha256": "9d5fa9d3bae06e93836ad46fff79c2301456ee912263906e613b18f085283745"},
+    {"path": "docs/research/20-notes/architecture-decisions/adr-0004-renderer-backend-separation.md", "sha256": "c221548f8c42a4e2560293b66fdaa2ae5d254a433acef11799906e4243d35354"},
+    {"path": "docs/research/20-notes/architecture-decisions/adr-0007-native-control-portability-gate.md", "sha256": "4ebd2feb853a08c258141479726f14a60ed409b98cabdd5f0537ff9f02784343"}
+  ],
+  "authorized_scope": [
+    "Define exact renderer capabilities and derive requirements from current semantic output.",
+    "Implement backend-neutral mount, update, replacement, and idempotent disposal sessions.",
+    "Implement deterministic headless normalization, snapshots, digests, and ordered lifecycle traces.",
+    "Implement reusable headless render-script and trace-equality test support.",
+    "Publish Phase 5 conformance fixtures and local validation evidence."
+  ],
+  "delivery_rules": {
+    "sections_in_order": true,
+    "commit_per_section": true,
+    "section_count": 4,
+    "single_pull_request": true,
+    "return_to_synchronized_main_after_delivery": true,
+    "delete_local_feature_branch_after_delivery": true,
+    "delete_remote_feature_branch_after_delivery": true
+  },
+  "not_authorized": [
+    "BH-02 Phases 6 through 8",
+    "stable or public renderer, snapshot, trace, test, or component APIs",
+    "product component-family implementation",
+    "geometry, measurement, hit testing, pixels, visual output, DOM lowering, browser behavior, or native-control behavior",
+    "concrete platform accessibility mapping, host focus/selection execution, external dependencies, or renderer resources",
+    "runtime or toolchain upgrades",
+    "browser, native-host, accessibility-conformance, security, performance, or release support claims"
+  ]
+}

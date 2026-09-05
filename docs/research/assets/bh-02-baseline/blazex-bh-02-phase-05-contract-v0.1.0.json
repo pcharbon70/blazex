@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0.0",
+  "contract_id": "BX-BH02-PHASE-05-CONTRACT-0.1",
+  "status": "authorized-experimental",
+  "authorization_ref": "BX-BH02-PHASE-05-AUTHORIZATION-0.1",
+  "renderer_capabilities": {
+    "version": 1,
+    "fields": ["version", "tree_versions", "node_kinds", "layout_modes", "accessibility_roles", "features"],
+    "tree_versions": [1],
+    "node_kinds": ["text", "group", "action", "field", "selection", "collection", "surface"],
+    "layout_modes": ["none", "stack", "grid", "overlay"],
+    "accessibility_roles": ["generic", "text", "group", "button", "text_field", "checkbox", "list", "list_item", "dialog", "status"],
+    "features": ["event_bindings", "logical_layout", "accessibility", "focus", "selection"],
+    "default": "unsupported"
+  },
+  "renderer_requirements": {
+    "fields": ["tree_version", "node_kinds", "layout_modes", "accessibility_roles", "features"],
+    "derivation": "complete-semantic-output",
+    "compatibility": "every-requirement-explicitly-supported",
+    "missing": "reject-before-backend-callback"
+  },
+  "renderer_context": {
+    "version": 1,
+    "fields": ["version", "owner", "generation", "revision", "transition"],
+    "transitions": ["mount", "update", "replace", "dispose"]
+  },
+  "backend_behavior": {
+    "callbacks": ["capabilities", "mount", "update", "replace", "dispose"],
+    "success": ["backend_state", "artifact"],
+    "backend_state": "opaque-renderer-owned",
+    "artifact": "validated-renderer-owned",
+    "callback_failure": "stable-diagnostic-without-private-error"
+  },
+  "session": {
+    "fields": ["backend", "capabilities", "requirements", "owner", "generation", "revision", "status", "backend_state", "artifact"],
+    "states": ["mounted", "disposed"],
+    "mount_revision": 0,
+    "update": "same-owner-generation-increment-revision",
+    "replace": "same-root-path-next-generation-reset-revision",
+    "dispose": "idempotent",
+    "partial_acceptance": "forbidden"
+  },
+  "headless_snapshot": {
+    "version": 1,
+    "fields": ["version", "owner", "generation", "revision", "tree", "bindings", "layouts", "accessibility", "focus", "selections", "digest"],
+    "canonical_encoding": "erlang-deterministic-term",
+    "digest": "sha256-lower-hex",
+    "meaningful_order": ["children", "selection_values"],
+    "canonical_sort": ["bindings", "layouts", "accessibility", "focus", "map_entries"]
+  },
+  "headless_trace": {
+    "version": 1,
+    "entry_fields": ["sequence", "transition", "owner", "generation", "revision", "digest"],
+    "transitions": ["mount", "update", "replace", "dispose"],
+    "sequence": "positive-contiguous",
+    "repeatability": "same-input-same-snapshot-and-digest"
+  },
+  "explicitly_deferred": ["geometry", "measurement", "hit-testing", "pixels", "visual-output", "dom-lowering", "browser-execution", "native-controls", "platform-accessibility-mapping", "host-focus-selection-execution", "performance-qualification"],
+  "api_state": "experimental",
+  "support_state": "unsupported"
+}
