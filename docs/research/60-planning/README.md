@@ -45,7 +45,7 @@ renumbered.
 - [01 — Browser host](01-browser-host/README.md) — active first implementation
   stream: BH-00 and BH-01 are complete, BH-02 Phases 1–3 have validated the
   neutral foundation, semantic kernel, and event/effect/resource contracts;
-  Phase 4 remains unauthorized.
+  Phase 4 portable presentation-intent work is explicitly authorized and active.
 
 ### Documents
 

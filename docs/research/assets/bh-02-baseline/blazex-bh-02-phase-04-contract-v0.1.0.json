@@ -1,0 +1,62 @@
+{
+  "schema_version": "1.0.0",
+  "contract_id": "BX-BH02-PHASE-04-CONTRACT-0.1",
+  "status": "authorized-experimental",
+  "authorization_ref": "BX-BH02-PHASE-04-AUTHORIZATION-0.1",
+  "token_reference": {
+    "version": 1,
+    "fields": ["version", "category", "name"],
+    "categories": ["space", "size", "color", "typography", "radius", "motion"],
+    "name": "bounded-portable-key"
+  },
+  "metric": {
+    "forms": ["auto", "content", "fill", "units", "token"],
+    "units": "finite-non-negative-logical-number",
+    "token_categories": ["space", "size"]
+  },
+  "layout": {
+    "version": 1,
+    "fields": ["version", "owner", "mode", "direction", "align", "gap", "padding", "width", "height", "min_width", "min_height", "max_width", "max_height", "grow", "overflow", "virtualization"],
+    "modes": ["none", "stack", "grid", "overlay"],
+    "directions": ["row", "column"],
+    "alignments": ["start", "center", "end", "stretch"],
+    "overflow": ["visible", "clip", "scroll"],
+    "virtualization_fields": ["axis", "estimated_extent", "overscan"],
+    "geometry_output": "forbidden"
+  },
+  "accessibility": {
+    "version": 1,
+    "fields": ["version", "owner", "role", "name", "description", "states", "relationships", "live"],
+    "roles": ["generic", "text", "group", "button", "text_field", "checkbox", "list", "list_item", "dialog", "status"],
+    "state_keys": ["disabled", "expanded", "selected", "checked", "invalid", "required", "readonly", "busy"],
+    "relationship_keys": ["labelled_by", "described_by", "controls", "owns", "error_message"],
+    "live": ["off", "polite", "assertive"],
+    "platform_mapping": "deferred"
+  },
+  "focus": {
+    "version": 1,
+    "fields": ["version", "owner", "behavior", "order", "auto_focus", "restore", "wrap"],
+    "behaviors": ["none", "target", "scope"],
+    "restore": ["none", "previous"],
+    "execution": "deferred"
+  },
+  "selection": {
+    "version": 1,
+    "fields": ["version", "owner", "kind", "value"],
+    "kinds": ["none", "single", "multiple", "text_range"],
+    "text_range_fields": ["anchor", "focus", "direction"],
+    "text_directions": ["forward", "backward"]
+  },
+  "intent_set": {
+    "version": 1,
+    "fields": ["version", "document", "layouts", "accessibility", "focus", "selections"],
+    "owner_rule": "every-annotation-owner-is-an-exact-document-node",
+    "relationship_rule": "every-target-is-an-exact-document-node",
+    "duplicate_annotation_owner": "reject-per-kind",
+    "duplicate_focus_order": "reject-for-targets",
+    "partial_acceptance": "forbidden"
+  },
+  "explicitly_deferred": ["geometry", "measurement", "hit-testing", "painting", "renderer-lifecycle", "renderer-output", "concrete-accessibility-mapping", "host-focus-execution", "host-selection-execution", "dom-lowering", "native-controls"],
+  "api_state": "experimental",
+  "support_state": "unsupported"
+}
