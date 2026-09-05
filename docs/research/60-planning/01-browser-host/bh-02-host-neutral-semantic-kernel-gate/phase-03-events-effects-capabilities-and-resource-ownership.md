@@ -58,22 +58,22 @@ Back to milestone: [README](README.md)
       - [x] 3.2.2.2 Subtask - Preserve owner identity, increment revision, validate rerendered semantic output atomically, and reject pure targets, stale/wrong owners, malformed callbacks, and invalid output.
       - [x] 3.2.2.3 Subtask - Test activation/change/select intent, binding lookup, portable payload limits, sequence, lineage, stale generation, and prior-evaluation retention.
 
-  - [ ] 3.3 Section - Implement capability, effect, and resource lifecycle contracts.
+  - [x] 3.3 Section - Implement capability, effect, and resource lifecycle contracts.
 
     Make host authority and resource lifetime explicit as pure portable data
     before any concrete provider exists.
 
-    - [ ] 3.3.1 Task - Implement capability negotiation and typed effects.
+    - [x] 3.3.1 Task - Implement capability negotiation and typed effects.
 
-      - [ ] 3.3.1.1 Subtask - Add time, clipboard, file-choice, and storage capabilities with exact allowed operations, required/optional modes, and fail/omit/component fallbacks.
-      - [ ] 3.3.1.2 Subtask - Deny by default, fail missing required capabilities without fallback, record optional/fallback outcomes, and reject duplicates or unknown capabilities.
-      - [ ] 3.3.1.3 Subtask - Add typed effect requests/results and a provider behaviour without embedding a provider object or concrete host type.
+      - [x] 3.3.1.1 Subtask - Add time, clipboard, file-choice, and storage capabilities with exact allowed operations, required/optional modes, and fail/omit/component fallbacks.
+      - [x] 3.3.1.2 Subtask - Deny by default, fail missing required capabilities without fallback, record optional/fallback outcomes, and reject duplicates or unknown capabilities.
+      - [x] 3.3.1.3 Subtask - Add typed effect requests/results and a provider behaviour without embedding a provider object or concrete host type.
 
-    - [ ] 3.3.2 Task - Implement generation-scoped effect and resource tracking.
+    - [x] 3.3.2 Task - Implement generation-scoped effect and resource tracking.
 
-      - [ ] 3.3.2.1 Subtask - Track unique pending effect IDs and deterministic completion, denial, cancellation, timeout, and failure states without partial mutation.
-      - [ ] 3.3.2.2 Subtask - Register opaque resource IDs, enforce owner/capability/generation checks, support explicit transfer, and make disposal idempotent.
-      - [ ] 3.3.2.3 Subtask - Cancel pending effects and dispose active resources for an owner generation while rejecting stale completion, transfer, or disposal.
+      - [x] 3.3.2.1 Subtask - Track unique pending effect IDs and deterministic completion, denial, cancellation, timeout, and failure states without partial mutation.
+      - [x] 3.3.2.2 Subtask - Register opaque resource IDs, enforce owner/capability/generation checks, support explicit transfer, and make disposal idempotent.
+      - [x] 3.3.2.3 Subtask - Cancel pending effects and dispose active resources for an owner generation while rejecting stale completion, transfer, or disposal.
 
   - [ ] 3.4 Section - Run the Phase 3 integration gate and publish evidence.
 

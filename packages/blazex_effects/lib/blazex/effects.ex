@@ -1,8 +1,9 @@
 defmodule BlazeX.Effects do
   @moduledoc """
-  Experimental BH-02 ownership boundary for portable effects and resources.
+  Experimental host-neutral capability, effect, and resource contracts.
 
-  Phase 1 activates the package only. Capability, effect, cancellation, and
-  resource-lifecycle contracts remain unimplemented.
+  BH-02 Phase 3 implements provider-neutral negotiation, request/result data,
+  pending-effect tracking, and generation-scoped opaque resource ownership.
+  Concrete providers and privileged host objects remain outside this package.
   """
 end

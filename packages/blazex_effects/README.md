@@ -9,5 +9,8 @@ Concrete providers belong in host adapters such as `blazex_host_browser`.
 Renderer capabilities remain distinct and are negotiated through
 `blazex_renderer`.
 
-Status: experimental BH-02 Phase 1 Mix skeleton. Only the approved inward core
-dependency exists; effect and resource contracts remain unimplemented.
+Status: experimental BH-02 Phase 3 implementation. Four proof capabilities,
+deny-by-default negotiation, typed effect requests/results, a provider
+behaviour, deterministic pending-effect tracking, and generation-scoped opaque
+resource ownership/transfer/disposal are implemented. No concrete provider or
+support claim exists.
