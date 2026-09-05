@@ -55,11 +55,44 @@ BH-22. Chrome and Firefox evidence remains development-only and unsupported.
 - [Attempt 2 finding](../../../../../integration/reproducibility/raw-evidence/bh01-phase10-clean-a-attempt-2.json)
 - [Attempt 3 finding](../../../../../integration/reproducibility/raw-evidence/bh01-phase10-clean-a-attempt-3.json)
 
+## Section 10.2 — Ledger closure
+
+The canonical closure record reciprocally reconciles the original BH-01
+milestone ledger without deleting an unfavorable state. All eight input IDs,
+ten proof IDs with original budget and acceptance links, eight risk IDs, and
+five binding stop IDs retain their original owners. Thirty formal findings from
+Phases 4–10 are preserved with source, disposition, owner, and decision effect;
+the exception ledger is empty.
+
+Seven inputs close as active passes, exact-pin-only evidence, or explicit
+conditions; browser and measurement inputs preserve BH-22 deferrals. Nine
+proofs have active Linux outcomes and the mobile-measurement proof closes for
+BH-01 only as deferred—not executed and not passed. Artifact accounting and
+timer/message proofs retain the application-payload and Firefox-timer
+conditions. Reproducibility, runtime semantics, and adapter isolation do not
+trigger their stop conditions. Product viability and artifact accounting are
+conditionally not triggered because the failures have bounded mitigations but
+continue to block support and release claims.
+
+All eight risks retain likelihood, impact, evidence, mitigation, residual
+risk, review trigger, and downstream decision effect. Mobile performance is
+still an unknown deferred risk. Private-API coupling and Wasm artifact
+economics remain high residual risks. The canonical validator rejects changed
+identity sets or owners, altered proof traces, missing evidence, deferred proof
+promotion, triggered active stops, stale generated output, and any unreviewed
+exception.
+
+### Canonical evidence
+
+- [Closure ledger](../../../../../integration/reproducibility/bh01-phase10-ledger-closure.json)
+- [Closure schema](../../../../../integration/reproducibility/ledger-closure.schema.json)
+- [Closure generator and validator](../../../../../integration/reproducibility/close_phase10_ledgers.py)
+
 ## Remaining Phase 10 work
 
-Sections 10.2–10.6 remain open. Clean reproducibility does not itself close the
-input/proof/risk/stop ledgers, complete multidisciplinary review, version the
-baseline, authorize BH-02, or complete BH-01.
+Sections 10.3–10.6 remain open. Ledger closure does not itself complete
+multidisciplinary review, version the baseline, authorize BH-02, or complete
+BH-01.
 
 ## Connections
 

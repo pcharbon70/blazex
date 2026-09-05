@@ -67,39 +67,39 @@ support evidence. See the
       - [x] 10.1.3.2 Subtask - Compare active Linux scenario outcomes, normalized traces, browser rows, raw/report hashes, proof/risk states, findings, and unexplained environment differences while verifying deferred rows remain separate.
       - [x] 10.1.3.3 Subtask - Rebuild after cache eviction and run one documented rollback/stale-artifact recovery path with integrity and generation checks.
 
-  - [ ] 10.2 Section - Close input, proof, risk, and stop ledgers.
+  - [x] 10.2 Section - Close input, proof, risk, and stop ledgers.
 
     Evaluate BH-01 as a falsifiable contract in which missing, failed,
     conditional, and passing results remain visible and reciprocally traced.
 
-    - [ ] 10.2.1 Task - Reconcile all eight required inputs.
+    - [x] 10.2.1 Task - Reconcile all eight required inputs.
 
       No active `required-unproven` input may disappear because its result was
       unfavorable. An input unavailable solely because an external environment
       cannot be accessed must remain visible as `[DEFERRED]` rather than become
       a pass or blocker.
 
-      - [ ] 10.2.1.1 Subtask - Close active toolchain, profile slice, artifacts, behaviors, private APIs, Linux browsers, measurements, and stop-condition records with exact evidence/outcome/owner links.
-      - [ ] 10.2.1.2 Subtask - Record missing, unavailable, deferred, invalidated, superseded, conditional, or blocked inputs explicitly and identify affected phases/proofs and BH-22 reactivation ownership.
+      - [x] 10.2.1.1 Subtask - Close active toolchain, profile slice, artifacts, behaviors, private APIs, Linux browsers, measurements, and stop-condition records with exact evidence/outcome/owner links.
+      - [x] 10.2.1.2 Subtask - Record missing, unavailable, deferred, invalidated, superseded, conditional, or blocked inputs explicitly and identify affected phases/proofs and BH-22 reactivation ownership.
 
-    - [ ] 10.2.2 Task - Evaluate all ten proof obligations.
+    - [x] 10.2.2 Task - Evaluate all ten proof obligations.
 
       Every active proof must reach its development claim, ADR, budgets,
       acceptance IDs, owner, evidence types, positive/negative scenarios,
       environments, and stop-on-failure rule. Deferred qualification proofs
       retain their future support claim and owner without blocking BH-02.
 
-      - [ ] 10.2.2.1 Subtask - Evaluate active runtime boot, artifact accounting, nested state, form event, timer/message, DOM update, authenticated command, browser fallback, and build reproducibility; carry mobile measurement as `[DEFERRED]` to BH-22.
-      - [ ] 10.2.2.2 Subtask - Detect stale artifacts, circular evidence, generated-only evidence, unexecuted active negative cases, unsupported status transitions, and any unavailable environment that was omitted instead of explicitly deferred.
-      - [ ] 10.2.2.3 Subtask - Require failed active stop-on-failure proofs to block or trigger an explicitly approved revise-and-repeat decision; deferred external qualification does neither.
+      - [x] 10.2.2.1 Subtask - Evaluate active runtime boot, artifact accounting, nested state, form event, timer/message, DOM update, authenticated command, browser fallback, and build reproducibility; carry mobile measurement as `[DEFERRED]` to BH-22.
+      - [x] 10.2.2.2 Subtask - Detect stale artifacts, circular evidence, generated-only evidence, unexecuted active negative cases, unsupported status transitions, and any unavailable environment that was omitted instead of explicitly deferred.
+      - [x] 10.2.2.3 Subtask - Require failed active stop-on-failure proofs to block or trigger an explicitly approved revise-and-repeat decision; deferred external qualification does neither.
 
-    - [ ] 10.2.3 Task - Disposition risks, stop conditions, findings, and exceptions.
+    - [x] 10.2.3 Task - Disposition risks, stop conditions, findings, and exceptions.
 
       Every uncertainty needs an evidence-based status and downstream effect.
 
-      - [ ] 10.2.3.1 Subtask - Disposition all eight risks with likelihood/impact updates, evidence, owner, mitigation, residual risk, expiry/review trigger, and decision effect.
-      - [ ] 10.2.3.2 Subtask - Evaluate all five stop conditions and every phase finding under the active/deferred policy; prohibit silent closure, severity reduction, waived active critical unknowns, and expired mitigations.
-      - [ ] 10.2.3.3 Subtask - Record any policy-permitted exception with scope, rationale, owner, expiry, compensating evidence, and excluded support; retain zero exceptions when none are justified.
+      - [x] 10.2.3.1 Subtask - Disposition all eight risks with likelihood/impact updates, evidence, owner, mitigation, residual risk, expiry/review trigger, and decision effect.
+      - [x] 10.2.3.2 Subtask - Evaluate all five stop conditions and every phase finding under the active/deferred policy; prohibit silent closure, severity reduction, waived active critical unknowns, and expired mitigations.
+      - [x] 10.2.3.3 Subtask - Record any policy-permitted exception with scope, rationale, owner, expiry, compensating evidence, and excluded support; retain zero exceptions when none are justified.
 
   - [ ] 10.3 Section - Conduct multidisciplinary feasibility review.
 

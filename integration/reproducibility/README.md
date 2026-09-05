@@ -27,3 +27,8 @@ that stopped attempt. Attempts 2 and 3 record independent server-log
 finalization and command-hash assignment defects found only after all browser
 scenarios completed. The authoritative A/B records prove all corrections under
 fresh execution contexts.
+
+`close_phase10_ledgers.py` derives the canonical closure record from the
+original BH-01 milestone ledger and retained Phase 4–10 evidence. It preserves
+all identities, owners, proof requirement links, conditions, deferrals,
+findings, and zero exceptions. `--check` rejects a stale or edited view.
