@@ -226,4 +226,9 @@ activation, conformance/native experiment indexes, or Phase 1 evidence changes,
 also run `python3 validate_bh02_activation.py` and
 `python3 -m unittest test_validate_bh02_activation.py`.
 
+When BH-02 Phase 2 authorization, semantic-tree or identity contracts,
+component evaluation, semantic conformance fixtures, or Phase 2 evidence
+changes, also run `python3 validate_bh02_semantics.py` and
+`python3 -m unittest test_validate_bh02_semantics.py`.
+
 Do not commit, push, publish, or open a pull request unless the user asks.

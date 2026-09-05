@@ -1,0 +1,50 @@
+{
+  "schema_version": "1.0.0",
+  "contract_id": "BX-BH02-PHASE-02-CONTRACT-0.1",
+  "status": "authorized-experimental",
+  "authorization_ref": "BX-BH02-PHASE-02-AUTHORIZATION-0.1",
+  "semantic_tree": {
+    "version": 1,
+    "node_kinds": ["text", "group", "action", "field", "selection", "collection", "surface"],
+    "fields": ["version", "kind", "identity", "key", "content", "children"],
+    "ordered_children": true,
+    "duplicate_sibling_identity": "reject",
+    "duplicate_sibling_key": "reject",
+    "unknown_or_malformed_node": "reject-before-acceptance"
+  },
+  "identity": {
+    "fields": ["root", "path", "generation"],
+    "portable_key_terms": ["atom", "binary", "integer", "finite-proper-list", "finite-tuple"],
+    "forbidden_key_terms": ["pid", "reference", "function", "port", "map", "struct", "float", "improper-list"],
+    "update": "preserve",
+    "move": "preserve-when-keyed",
+    "replacement": "increment-generation",
+    "implicit_rename": "forbidden"
+  },
+  "component_evaluation": {
+    "modes": ["pure", "stateful"],
+    "transitions": ["mount", "update", "replace"],
+    "props": "map",
+    "state": "opaque-portable-term-owned-by-component",
+    "revision": "monotonic-non-negative-integer",
+    "output": "validated-semantic-tree-root-with-component-identity",
+    "callback_failure": "structured-deterministic-diagnostic",
+    "partial_acceptance": "forbidden"
+  },
+  "explicitly_deferred": [
+    "events",
+    "effects",
+    "capabilities",
+    "resources",
+    "layout",
+    "tokens",
+    "accessibility",
+    "focus",
+    "selection",
+    "renderer-lifecycle",
+    "renderer-output",
+    "disposal"
+  ],
+  "api_state": "experimental",
+  "support_state": "unsupported"
+}

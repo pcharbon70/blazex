@@ -8,6 +8,8 @@ This package must not depend on Phoenix, Plug, DOM or JavaScript types,
 Popcorn/AtomVM, or any native UI toolkit. It is the innermost dependency of the
 framework.
 
-Status: experimental BH-02 Phase 1 Mix skeleton. The package compiles and owns
-its boundary, but component and lifecycle contracts remain unimplemented and
-non-public until a later authorized phase.
+Status: experimental BH-02 Phase 2 implementation. Structural identity,
+bounded portable props/state, evaluation context, pure/stateful mount and
+update, replacement generations, and stable diagnostics are implemented.
+Events, effects, process lifecycle, messages, commands, disposal, and stable
+public APIs remain deferred.

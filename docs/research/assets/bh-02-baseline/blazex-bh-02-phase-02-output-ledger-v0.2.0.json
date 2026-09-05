@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0.0",
+  "ledger_id": "BX-BH02-OUTPUT-LEDGER-0.2",
+  "status": "phase-2-semantic-contracts-implemented-experimental",
+  "authorization_ref": "BX-BH02-PHASE-02-AUTHORIZATION-0.1",
+  "supersedes": {
+    "path": "docs/research/assets/bh-02-baseline/blazex-bh-02-entry-ledger-v0.1.0.json",
+    "sha256": "761514204143b8685a7ce58df1aa24fb5333f91bcb8f9bb762b0251006923717",
+    "preserved_unchanged": true
+  },
+  "required_outputs": [
+    {"id": "semantic-ui-node-identity", "state": "implemented-experimental-phase-2", "phase": 2},
+    {"id": "event-action-contract", "state": "planned-unimplemented", "phase": 3},
+    {"id": "effect-capability-resource-contract", "state": "planned-unimplemented", "phase": 3},
+    {"id": "layout-token-accessibility-focus-selection-file-intent", "state": "planned-unimplemented", "phase": 4},
+    {"id": "renderer-lifecycle-capability-negotiation", "state": "planned-unimplemented", "phase": 5},
+    {"id": "deterministic-headless-renderer-traces", "state": "planned-unimplemented", "phase": 5},
+    {"id": "minimal-dom-lowering", "state": "planned-unimplemented", "phase": 6},
+    {"id": "limited-direct-native-control-spike", "state": "planned-unimplemented", "phase": 7},
+    {"id": "forbidden-dependency-leakage-checks", "state": "implemented-phase-1-extended-phase-2", "phase": 1}
+  ],
+  "evidence_boundary": {
+    "semantic_contracts": "experimental-version-1",
+    "component_behavior": "experimental-pure-stateful-evaluation",
+    "headless_renderer": "unimplemented",
+    "dom_conformance": "unexecuted",
+    "native_controls": "unexecuted",
+    "support": "unsupported",
+    "quality_budgets": "unpassed"
+  },
+  "unchanged_inherited_handoff": {
+    "conditions": true,
+    "repository_boundaries": true,
+    "forbidden_leakage": true,
+    "limitations": true,
+    "repeat_obligations": true,
+    "deferred_qualification": true
+  }
+}

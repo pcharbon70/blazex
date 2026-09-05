@@ -1,0 +1,36 @@
+BH-02 Phase 2 normalized validation log
+recorded_at=2026-09-05T14:27:07Z
+base_revision=1e92ac866d8472f693214fe700f5c006b68c0f5e
+source_revision_before_evidence=42d66ec
+branch=codex/bh-02-phase-02-semantic-kernel
+
+PASS seven project-local mix format --check-formatted runs
+PASS seven project-local mix test runs: 27 tests, 0 failures
+PASS python3 validate_bh02_semantics.py
+PASS python3 -m unittest test_validate_bh02_semantics.py: 8 tests
+PASS python3 validate_bh02_activation.py
+PASS python3 -m unittest test_validate_bh02_activation.py: 7 tests
+PASS python3 validate_archive.py: 173 documents, 22 directories, 1237 links, 50 sources
+PASS python3 -m unittest test_validate_archive.py: 8 tests
+PASS python3 validate_bh01_activation.py
+PASS python3 -m unittest test_validate_bh01_activation.py: 13 tests
+PASS python3 validate_bh00_governance.py
+PASS python3 -m unittest test_validate_bh00_governance.py: 25 tests
+PASS python3 generate_bh00_release.py --check
+PASS jq empty for Phase 2 JSON records
+PASS no mix.lock in the seven activated Phase 2 projects
+PASS git diff --check
+
+NEGATIVE stale-or-missing-authorization=rejected
+NEGATIVE expanded-node-vocabulary=rejected
+NEGATIVE relaxed-opaque-identity-policy=rejected
+NEGATIVE concrete-adapter-or-platform-leakage=rejected
+NEGATIVE missing-fixture-coverage=rejected
+NEGATIVE renderer-result-overclaim=rejected
+NEGATIVE stable-api-overclaim=rejected
+NEGATIVE support-overclaim=rejected
+
+LIMITATION local BEAM semantic evaluation only
+LIMITATION no renderer backend executed
+LIMITATION no stable public API or support claim
+LIMITATION Phase 3 and later work unauthorized

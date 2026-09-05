@@ -1,0 +1,62 @@
+{
+  "schema_version": "1.0.0",
+  "authorization_id": "BX-BH02-PHASE-02-AUTHORIZATION-0.1",
+  "status": "approved-phase-2-only",
+  "approved_at": "2026-09-05",
+  "approved_by": {
+    "identity": "pcharbon70",
+    "name": "Pascal Charbonneau",
+    "role": "repository-owner",
+    "approval_record": "Repository-owner request in the BlazeX Codex task to implement the next BH-02 phase section by section with one commit per section, one pull request, and final synchronized-main branch cleanup."
+  },
+  "activation": {
+    "base_branch": "main",
+    "base_revision": "1e92ac866d8472f693214fe700f5c006b68c0f5e",
+    "base_remote_revision": "1e92ac866d8472f693214fe700f5c006b68c0f5e",
+    "main_synchronized_before_branch": true,
+    "working_branch": "codex/bh-02-phase-02-semantic-kernel",
+    "phase": "BH-02 Phase 2"
+  },
+  "approval_basis": [
+    {
+      "path": "docs/research/assets/bh-02-baseline/blazex-bh-02-phase-01-completion-v0.1.0.json",
+      "sha256": "402ba7aa8c1a5a36edf7552a6db664611eb6871e82173ceabbbdc2828cde8702"
+    },
+    {
+      "path": "docs/research/20-notes/architecture-decisions/adr-0001-host-neutral-semantic-component-kernel.md",
+      "sha256": "b99fb71e09caad0f00f27b8d945f573eca749e2c2f336b21dd9f42de8742f329"
+    },
+    {
+      "path": "docs/research/20-notes/architecture-decisions/adr-0002-versioned-semantic-ui-tree.md",
+      "sha256": "9d5fa9d3bae06e93836ad46fff79c2301456ee912263906e613b18f085283745"
+    },
+    {
+      "path": "docs/research/20-notes/host-neutral-blazex-architecture-and-native-control-backends.md",
+      "sha256": "b8ac7619c9cd0db3795c100a543932dee597d5aa4994b909cf7f821226c9b221"
+    }
+  ],
+  "authorized_scope": [
+    "Define semantic-tree version 1 and its bounded node vocabulary.",
+    "Implement deterministic portable identity and sibling uniqueness.",
+    "Implement the smallest pure and stateful component evaluation contract.",
+    "Publish semantic/evaluation conformance fixtures and Phase 2 validation evidence."
+  ],
+  "delivery_rules": {
+    "sections_in_order": true,
+    "commit_per_section": true,
+    "section_count": 4,
+    "single_pull_request": true,
+    "return_to_synchronized_main_after_delivery": true,
+    "delete_local_feature_branch_after_delivery": true,
+    "delete_remote_feature_branch_after_delivery": true
+  },
+  "not_authorized": [
+    "BH-02 Phases 3 through 8",
+    "stable or public semantic component APIs",
+    "product component-family implementation",
+    "semantic events, effects, capabilities, resources, layout, tokens, accessibility, focus, selection, or renderer lifecycle",
+    "DOM, browser, native-control, or custom-scene renderer behavior",
+    "external dependency acquisition or runtime/toolchain upgrades",
+    "browser, native-host, mobile, accessibility, security, performance, or release support claims"
+  ]
+}
