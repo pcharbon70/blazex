@@ -474,13 +474,24 @@ def _validate_repository_activation(
             Draft202012Validator(environment_schema, format_checker=FormatChecker()).validate(_load_json(environment_path))
         except JsonSchemaValidationError as exc:
             raise ValidationError(f"benchmark environment schema failure in {environment_path.relative_to(REPO_ROOT)}: {exc.message}") from exc
-    _require(
-        benchmark_index.get("measurements") == []
-        and benchmark_index.get("samples") == []
-        and benchmark_index.get("reports") == [],
-        "benchmark index contains measurement evidence before its authorized phase",
-    )
-    _require(benchmark_index.get("budget_state") == "proposed-unmeasured", "benchmark index claims a passed budget")
+    phase9_authorization_path = REPO_ROOT / "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-09-authorization-v0.1.0.json"
+    phase9_authorized = phase9_authorization_path.is_file() and _load_json(phase9_authorization_path).get("status") == "approved-phase-9-only"
+    if phase9_authorized:
+        _require(bool(benchmark_index.get("measurements")), "authorized Phase 9 benchmark index omits measurements")
+        _require(bool(benchmark_index.get("samples")), "authorized Phase 9 benchmark index omits samples")
+        _require(bool(benchmark_index.get("reports")), "authorized Phase 9 benchmark index omits reports")
+        _require(
+            benchmark_index.get("budget_state") == "phase9-active-development-evaluated-conditional-no-support-credit",
+            "authorized Phase 9 benchmark index overclaims its conditional budget state",
+        )
+    else:
+        _require(
+            benchmark_index.get("measurements") == []
+            and benchmark_index.get("samples") == []
+            and benchmark_index.get("reports") == [],
+            "benchmark index contains measurement evidence before its authorized phase",
+        )
+        _require(benchmark_index.get("budget_state") == "proposed-unmeasured", "benchmark index claims a passed budget")
 
     evidence_boundary = activation["evidence_boundary"]
     _require(evidence_boundary == {

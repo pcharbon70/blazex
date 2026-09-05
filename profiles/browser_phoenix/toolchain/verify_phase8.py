@@ -221,8 +221,10 @@ def validate(
         errors.append("Phase 8 plan still contains open work")
     if "| complete — local evidence accepted; external qualification deferred |" not in milestone_text:
         errors.append("BH-01 milestone does not preserve the Phase 8 deferred-qualification disposition")
-    if "| [9 — Measurement" not in milestone_text or "| eligible — not authorized | Measure payload" not in milestone_text:
-        errors.append("BH-01 milestone does not preserve Phase 9 eligibility and non-authorization")
+    phase9_historical = "| eligible — not authorized | Measure payload" in milestone_text
+    phase9_progressed = "| complete — conditional active-Linux proceed; external qualification deferred | Measure payload" in milestone_text
+    if "| [9 — Measurement" not in milestone_text or not (phase9_historical or phase9_progressed):
+        errors.append("BH-01 milestone does not preserve the historical or completed Phase 9 boundary")
     if "development environment and deferred qualification policy" not in milestone_text.lower():
         errors.append("BH-01 milestone does not link the governing development-environment policy")
     normalized_report = " ".join(report_text.split()).lower()

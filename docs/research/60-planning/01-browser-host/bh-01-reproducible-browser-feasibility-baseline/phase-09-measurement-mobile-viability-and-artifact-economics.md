@@ -18,7 +18,7 @@ Back to milestone: [README](README.md)
 
 ## Active and deferred scope
 
-Phase 9 is eligible for explicit authorization. Its active execution scope is
+Phase 9 was explicitly authorized and is complete. Its active execution scope was
 the available Linux development environment with Chrome and Firefox. Build,
 artifact, startup, interaction, server, memory, cleanup, and reliability work
 proceeds in that matrix. Firefox automation limitations must be recorded and
@@ -32,7 +32,7 @@ pairings are `[DEFERRED]` to BH-22 under the
 They remain visible obligations and cannot be represented as passes, support,
 or mobile viability.
 
-- [ ] 9 Phase - Measurement, Mobile Viability, and Artifact Economics.
+- [x] 9 Phase - Measurement, Mobile Viability, and Artifact Economics.
 
   Measure build, payload, startup, interaction, memory, and reliability from
   canonical artifacts and stable Linux Chrome/Firefox scenarios, then determine
@@ -165,27 +165,27 @@ or mobile viability.
       - [x] 9.5.2.1 Subtask - Evaluate active Linux payload/artifact and performance risk; record `BX-BH01-PROOF-MOBILE-MEASUREMENT` and mobile-performance risk as `[DEFERRED]` to BH-22.
       - [x] 9.5.2.2 Subtask - Record proceed/conditional/repeat/stop recommendation for active development, required mitigations, owner, expiry, repeated phases, deferred qualification, and prohibited support claims.
 
-  - [ ] 9.6 Section - Phase 9 Integration Tests and Completion Evidence.
+  - [x] 9.6 Section - Phase 9 Integration Tests and Completion Evidence.
 
     Reproduce reports from raw evidence, validate artifact/metric integrity, and
     apply performance stop rules before final clean-build review.
 
-    - [ ] 9.6.1 Task - Run deterministic measurement and report gates.
+    - [x] 9.6.1 Task - Run deterministic measurement and report gates.
 
       Headline values must be derivable byte-for-byte from governed samples and
       canonical artifact/environment identities.
 
-      - [ ] 9.6.1.1 Subtask - Validate raw sample schemas, environment/artifact fingerprints, metric boundaries, clock sources, sample/failure counts, statistics, and reciprocal budget/acceptance links.
-      - [ ] 9.6.1.2 Subtask - Regenerate all benchmark/artifact/budget reports twice, compare bytes/hashes, and reject manual spreadsheet values or undocumented data filtering.
-      - [ ] 9.6.1.3 Subtask - Rerun representative Linux Chrome/Firefox measurements and compare within governed variance/reproducibility rules; validate that deferred rows remain explicit and excluded from pass rates.
+      - [x] 9.6.1.1 Subtask - Validate raw sample schemas, environment/artifact fingerprints, metric boundaries, clock sources, sample/failure counts, statistics, and reciprocal budget/acceptance links.
+      - [x] 9.6.1.2 Subtask - Regenerate all benchmark/artifact/budget reports twice, compare bytes/hashes, and reject manual spreadsheet values or undocumented data filtering.
+      - [x] 9.6.1.3 Subtask - Rerun representative Linux Chrome/Firefox measurements and compare within governed variance/reproducibility rules; validate that deferred rows remain explicit and excluded from pass rates.
 
-    - [ ] 9.6.2 Task - Review viability and publish phase evidence.
+    - [x] 9.6.2 Task - Review viability and publish phase evidence.
 
       Phase evidence must retain negative results and clearly separate observed
       feasibility from support or release claims.
 
-      - [ ] 9.6.2.1 Subtask - Review payload, build, Linux browser startup, interaction, command, memory, reliability, cleanup, mitigation, budget outcomes, and deferred external-environment obligations with product/quality/runtime/build owners.
-      - [ ] 9.6.2.2 Subtask - Publish Phase 9 evidence with exact tools/environments, raw/report/artifact hashes, statistics, failures, active budget outcomes, deferred mobile proof and risks, stop/go decision, and limitations.
+      - [x] 9.6.2.1 Subtask - Review payload, build, Linux browser startup, interaction, command, memory, reliability, cleanup, mitigation, budget outcomes, and deferred external-environment obligations with product/quality/runtime/build owners.
+      - [x] 9.6.2.2 Subtask - Publish Phase 9 evidence with exact tools/environments, raw/report/artifact hashes, statistics, failures, active budget outcomes, deferred mobile proof and risks, stop/go decision, and limitations.
 
 ## Section delivery rule
 

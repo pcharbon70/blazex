@@ -1,0 +1,1019 @@
+{
+  "schema_version": "1.0.0",
+  "report_id": "BX-BH01-PHASE9-RERUN-COMPARISON-0.1",
+  "status": "observed-drift",
+  "source_revision": "04f9eb1bd2b191d6b6a23202247201bce5d82855",
+  "policy": {
+    "median_relative_floor": 0.5,
+    "p95_relative_floor": 0.75,
+    "variance_multiplier_median": 3,
+    "variance_multiplier_p95": 4,
+    "near_zero_absolute_ms": 0.5,
+    "excluded_metrics": [
+      "BX-BH01-METRIC-CLOCK-RESOLUTION-MS",
+      "BX-BH01-METRIC-RESOURCE-JS-HEAP-BYTES"
+    ]
+  },
+  "inputs": [
+    {
+      "role": "primary",
+      "path": "integration/benchmarks/raw-evidence/bh01-phase9-chromium-linux.json",
+      "sha256": "49ca2f83a350534e28ce2c1889db05c658015b7083be2535da3e60d202afbaef",
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+      "source_revision": "22dc98033893cdc85db142bd6a05650ab4032f52"
+    },
+    {
+      "role": "representative-rerun",
+      "path": "integration/benchmarks/raw-evidence/bh01-phase9-rerun2-chromium-linux.json",
+      "sha256": "a342a91384da4e85e9fa72173904292e634fb8f88384d32ebef374665c2a55de",
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+      "source_revision": "04f9eb1bd2b191d6b6a23202247201bce5d82855"
+    },
+    {
+      "role": "primary",
+      "path": "integration/benchmarks/raw-evidence/bh01-phase9-firefox-linux.json",
+      "sha256": "a0d05b98ce400cecf40850baaf951bd09654e6ffba2a40418a79f941db6ba66d",
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+      "source_revision": "22dc98033893cdc85db142bd6a05650ab4032f52"
+    },
+    {
+      "role": "representative-rerun",
+      "path": "integration/benchmarks/raw-evidence/bh01-phase9-rerun-firefox-linux.json",
+      "sha256": "ab5c61460e3da319456285b5bf887863ccfb72a41c05d6470be846dc7a155c70",
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+      "source_revision": "04f9eb1bd2b191d6b6a23202247201bce5d82855"
+    }
+  ],
+  "identity_checks": [
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+      "browser_binary_match": true,
+      "profile_manifest_match": true,
+      "environment_match": true
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+      "browser_binary_match": true,
+      "profile_manifest_match": true,
+      "environment_match": true
+    }
+  ],
+  "comparisons": [
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-INTERACTION-DOM-COMMIT-MS",
+      "scenario": "form-programmatic-update",
+      "cache_state": "warm",
+      "primary": {
+        "count": 100,
+        "median": 0.235,
+        "p95": 0.385,
+        "variance_percent": 43.702826
+      },
+      "rerun": {
+        "count": 20,
+        "median": 0.095,
+        "p95": 0.125,
+        "variance_percent": 14.307651
+      },
+      "tolerance": {
+        "median_relative": 1.311085,
+        "p95_relative": 1.748113,
+        "observed_median_relative_delta": 0.0,
+        "observed_p95_relative_delta": 0.0
+      },
+      "status": "within-development-tolerance"
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-INTERACTION-DOM-COMMIT-MS",
+      "scenario": "nested-keyed-update",
+      "cache_state": "warm",
+      "primary": {
+        "count": 100,
+        "median": 0.245,
+        "p95": 0.385,
+        "variance_percent": 36.806095
+      },
+      "rerun": {
+        "count": 20,
+        "median": 0.1,
+        "p95": 0.265,
+        "variance_percent": 51.665951
+      },
+      "tolerance": {
+        "median_relative": 1.104183,
+        "p95_relative": 1.472244,
+        "observed_median_relative_delta": 0.0,
+        "observed_p95_relative_delta": 0.0
+      },
+      "status": "within-development-tolerance"
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-INTERACTION-DOM-COMMIT-MS",
+      "scenario": "parent-state-update",
+      "cache_state": "warm",
+      "primary": {
+        "count": 100,
+        "median": 0.24,
+        "p95": 0.355,
+        "variance_percent": 43.973694
+      },
+      "rerun": {
+        "count": 20,
+        "median": 0.105,
+        "p95": 0.185,
+        "variance_percent": 29.904812
+      },
+      "tolerance": {
+        "median_relative": 1.319211,
+        "p95_relative": 1.758948,
+        "observed_median_relative_delta": 0.0,
+        "observed_p95_relative_delta": 0.0
+      },
+      "status": "within-development-tolerance"
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-INTERACTION-DOM-COMMIT-MS",
+      "scenario": "timer-message-update",
+      "cache_state": "warm",
+      "primary": {
+        "count": 100,
+        "median": 0.2425,
+        "p95": 0.34,
+        "variance_percent": 26.278679
+      },
+      "rerun": {
+        "count": 20,
+        "median": 0.0825,
+        "p95": 0.135,
+        "variance_percent": 23.496234
+      },
+      "tolerance": {
+        "median_relative": 0.78836,
+        "p95_relative": 1.051147,
+        "observed_median_relative_delta": 0.0,
+        "observed_p95_relative_delta": 0.0
+      },
+      "status": "within-development-tolerance"
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-INTERACTION-LOCAL-EVENT-PAINT-MS",
+      "scenario": "form-programmatic-update",
+      "cache_state": "warm",
+      "primary": {
+        "count": 100,
+        "median": 46.5025,
+        "p95": 47.325,
+        "variance_percent": 36.215999
+      },
+      "rerun": {
+        "count": 20,
+        "median": 15.21,
+        "p95": 15.455,
+        "variance_percent": 2.025356
+      },
+      "tolerance": {
+        "median_relative": 1.08648,
+        "p95_relative": 1.44864,
+        "observed_median_relative_delta": 0.672921,
+        "observed_p95_relative_delta": 0.673428
+      },
+      "status": "within-development-tolerance"
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-INTERACTION-LOCAL-EVENT-PAINT-MS",
+      "scenario": "nested-keyed-update",
+      "cache_state": "warm",
+      "primary": {
+        "count": 100,
+        "median": 32.24,
+        "p95": 40.805,
+        "variance_percent": 26.765267
+      },
+      "rerun": {
+        "count": 20,
+        "median": 15.3425,
+        "p95": 31.135,
+        "variance_percent": 35.351462
+      },
+      "tolerance": {
+        "median_relative": 0.802958,
+        "p95_relative": 1.070611,
+        "observed_median_relative_delta": 0.524116,
+        "observed_p95_relative_delta": 0.236981
+      },
+      "status": "within-development-tolerance"
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-INTERACTION-LOCAL-EVENT-PAINT-MS",
+      "scenario": "parent-state-update",
+      "cache_state": "warm",
+      "primary": {
+        "count": 100,
+        "median": 31.215,
+        "p95": 36.645,
+        "variance_percent": 27.875289
+      },
+      "rerun": {
+        "count": 20,
+        "median": 14.945,
+        "p95": 15.36,
+        "variance_percent": 2.097647
+      },
+      "tolerance": {
+        "median_relative": 0.836259,
+        "p95_relative": 1.115012,
+        "observed_median_relative_delta": 0.521224,
+        "observed_p95_relative_delta": 0.580843
+      },
+      "status": "within-development-tolerance"
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-INTERACTION-LOCAL-EVENT-PAINT-MS",
+      "scenario": "timer-message-update",
+      "cache_state": "warm",
+      "primary": {
+        "count": 100,
+        "median": 63.7225,
+        "p95": 66.9,
+        "variance_percent": 12.362721
+      },
+      "rerun": {
+        "count": 20,
+        "median": 32.0725,
+        "p95": 46.595,
+        "variance_percent": 14.618563
+      },
+      "tolerance": {
+        "median_relative": 0.5,
+        "p95_relative": 0.75,
+        "observed_median_relative_delta": 0.496685,
+        "observed_p95_relative_delta": 0.303513
+      },
+      "status": "within-development-tolerance"
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-INTERACTION-SERVER-ROUNDTRIP-MS",
+      "scenario": "authenticated-success",
+      "cache_state": "warm",
+      "primary": {
+        "count": 50,
+        "median": 119.095,
+        "p95": 138.005,
+        "variance_percent": 22.991723
+      },
+      "rerun": {
+        "count": 10,
+        "median": 45.53,
+        "p95": 61.895,
+        "variance_percent": 14.560403
+      },
+      "tolerance": {
+        "median_relative": 0.689752,
+        "p95_relative": 0.919669,
+        "observed_median_relative_delta": 0.6177,
+        "observed_p95_relative_delta": 0.551502
+      },
+      "status": "within-development-tolerance"
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-INTERACTION-SERVER-ROUNDTRIP-MS",
+      "scenario": "authorization-denial",
+      "cache_state": "warm",
+      "primary": {
+        "count": 50,
+        "median": 118.3025,
+        "p95": 137.445,
+        "variance_percent": 18.966899
+      },
+      "rerun": {
+        "count": 10,
+        "median": 45.5875,
+        "p95": 62.215,
+        "variance_percent": 14.732398
+      },
+      "tolerance": {
+        "median_relative": 0.569007,
+        "p95_relative": 0.758676,
+        "observed_median_relative_delta": 0.614653,
+        "observed_p95_relative_delta": 0.547346
+      },
+      "status": "drift"
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-INTERACTION-SERVER-ROUNDTRIP-MS",
+      "scenario": "disconnect-retry",
+      "cache_state": "warm",
+      "primary": {
+        "count": 50,
+        "median": 202.4525,
+        "p95": 238.63,
+        "variance_percent": 15.128203
+      },
+      "rerun": {
+        "count": 10,
+        "median": 78.8625,
+        "p95": 111.785,
+        "variance_percent": 12.829201
+      },
+      "tolerance": {
+        "median_relative": 0.5,
+        "p95_relative": 0.75,
+        "observed_median_relative_delta": 0.610464,
+        "observed_p95_relative_delta": 0.531555
+      },
+      "status": "drift"
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-RESOURCE-CLEANUP-MS",
+      "scenario": "repeated-host-stop",
+      "cache_state": "warm",
+      "primary": {
+        "count": 20,
+        "median": 12.665,
+        "p95": 101.34,
+        "variance_percent": 116.615747
+      },
+      "rerun": {
+        "count": 10,
+        "median": 10.5,
+        "p95": 56.69,
+        "variance_percent": 96.108998
+      },
+      "tolerance": {
+        "median_relative": 3.498472,
+        "p95_relative": 4.66463,
+        "observed_median_relative_delta": 0.170944,
+        "observed_p95_relative_delta": 0.440596
+      },
+      "status": "within-development-tolerance"
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-STARTUP-FALLBACK-READY-MS",
+      "scenario": "webassembly-unavailable",
+      "cache_state": "cold",
+      "primary": {
+        "count": 30,
+        "median": 39.3275,
+        "p95": 51.04,
+        "variance_percent": 11.506582
+      },
+      "rerun": {
+        "count": 10,
+        "median": 40.76,
+        "p95": 55.43,
+        "variance_percent": 11.121783
+      },
+      "tolerance": {
+        "median_relative": 0.5,
+        "p95_relative": 0.75,
+        "observed_median_relative_delta": 0.036425,
+        "observed_p95_relative_delta": 0.086011
+      },
+      "status": "within-development-tolerance"
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-STARTUP-INSTANTIATE-READY-MS",
+      "scenario": "browser-profile",
+      "cache_state": "cold",
+      "primary": {
+        "count": 50,
+        "median": 116.0225,
+        "p95": 128.835,
+        "variance_percent": 9.504994
+      },
+      "rerun": {
+        "count": 10,
+        "median": 121.705,
+        "p95": 131.675,
+        "variance_percent": 3.54423
+      },
+      "tolerance": {
+        "median_relative": 0.5,
+        "p95_relative": 0.75,
+        "observed_median_relative_delta": 0.048978,
+        "observed_p95_relative_delta": 0.022044
+      },
+      "status": "within-development-tolerance"
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-STARTUP-INSTANTIATE-READY-MS",
+      "scenario": "browser-profile",
+      "cache_state": "warm",
+      "primary": {
+        "count": 50,
+        "median": 115.0375,
+        "p95": 125.115,
+        "variance_percent": 3.948541
+      },
+      "rerun": {
+        "count": 10,
+        "median": 117.3275,
+        "p95": 129.355,
+        "variance_percent": 4.002651
+      },
+      "tolerance": {
+        "median_relative": 0.5,
+        "p95_relative": 0.75,
+        "observed_median_relative_delta": 0.019907,
+        "observed_p95_relative_delta": 0.033889
+      },
+      "status": "within-development-tolerance"
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-STARTUP-NAVIGATION-READY-MS",
+      "scenario": "browser-profile",
+      "cache_state": "cold",
+      "primary": {
+        "count": 50,
+        "median": 284.0175,
+        "p95": 299.99,
+        "variance_percent": 4.115028
+      },
+      "rerun": {
+        "count": 10,
+        "median": 295.0375,
+        "p95": 301.4,
+        "variance_percent": 2.088908
+      },
+      "tolerance": {
+        "median_relative": 0.5,
+        "p95_relative": 0.75,
+        "observed_median_relative_delta": 0.0388,
+        "observed_p95_relative_delta": 0.0047
+      },
+      "status": "within-development-tolerance"
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-STARTUP-NAVIGATION-READY-MS",
+      "scenario": "browser-profile",
+      "cache_state": "warm",
+      "primary": {
+        "count": 50,
+        "median": 281.3375,
+        "p95": 295.41,
+        "variance_percent": 2.571595
+      },
+      "rerun": {
+        "count": 10,
+        "median": 292.8575,
+        "p95": 309.045,
+        "variance_percent": 3.720265
+      },
+      "tolerance": {
+        "median_relative": 0.5,
+        "p95_relative": 0.75,
+        "observed_median_relative_delta": 0.040947,
+        "observed_p95_relative_delta": 0.046156
+      },
+      "status": "within-development-tolerance"
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-STARTUP-ROOT-READY-MS",
+      "scenario": "browser-profile",
+      "cache_state": "cold",
+      "primary": {
+        "count": 50,
+        "median": 96.12,
+        "p95": 108.695,
+        "variance_percent": 6.443686
+      },
+      "rerun": {
+        "count": 10,
+        "median": 95.8575,
+        "p95": 103.94,
+        "variance_percent": 5.0184
+      },
+      "tolerance": {
+        "median_relative": 0.5,
+        "p95_relative": 0.75,
+        "observed_median_relative_delta": 0.002731,
+        "observed_p95_relative_delta": 0.043746
+      },
+      "status": "within-development-tolerance"
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-CHROME-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-STARTUP-ROOT-READY-MS",
+      "scenario": "browser-profile",
+      "cache_state": "warm",
+      "primary": {
+        "count": 50,
+        "median": 96.4425,
+        "p95": 107.625,
+        "variance_percent": 5.590226
+      },
+      "rerun": {
+        "count": 10,
+        "median": 100.0975,
+        "p95": 109.675,
+        "variance_percent": 6.947834
+      },
+      "tolerance": {
+        "median_relative": 0.5,
+        "p95_relative": 0.75,
+        "observed_median_relative_delta": 0.037898,
+        "observed_p95_relative_delta": 0.019048
+      },
+      "status": "within-development-tolerance"
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-INTERACTION-DOM-COMMIT-MS",
+      "scenario": "form-programmatic-update",
+      "cache_state": "warm",
+      "primary": {
+        "count": 100,
+        "median": 0.12,
+        "p95": 0.18,
+        "variance_percent": 15.773823
+      },
+      "rerun": {
+        "count": 20,
+        "median": 0.15,
+        "p95": 0.3,
+        "variance_percent": 40.496228
+      },
+      "tolerance": {
+        "median_relative": 0.5,
+        "p95_relative": 0.75,
+        "observed_median_relative_delta": 0.0,
+        "observed_p95_relative_delta": 0.0
+      },
+      "status": "within-development-tolerance"
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-INTERACTION-DOM-COMMIT-MS",
+      "scenario": "nested-keyed-update",
+      "cache_state": "warm",
+      "primary": {
+        "count": 100,
+        "median": 0.19,
+        "p95": 0.26,
+        "variance_percent": 19.81849
+      },
+      "rerun": {
+        "count": 20,
+        "median": 0.22,
+        "p95": 0.26,
+        "variance_percent": 17.258117
+      },
+      "tolerance": {
+        "median_relative": 0.594555,
+        "p95_relative": 0.79274,
+        "observed_median_relative_delta": 0.0,
+        "observed_p95_relative_delta": 0.0
+      },
+      "status": "within-development-tolerance"
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-INTERACTION-DOM-COMMIT-MS",
+      "scenario": "parent-state-update",
+      "cache_state": "warm",
+      "primary": {
+        "count": 100,
+        "median": 0.21,
+        "p95": 0.32,
+        "variance_percent": 24.038898
+      },
+      "rerun": {
+        "count": 20,
+        "median": 0.24,
+        "p95": 0.32,
+        "variance_percent": 18.197585
+      },
+      "tolerance": {
+        "median_relative": 0.721167,
+        "p95_relative": 0.961556,
+        "observed_median_relative_delta": 0.0,
+        "observed_p95_relative_delta": 0.0
+      },
+      "status": "within-development-tolerance"
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-INTERACTION-DOM-COMMIT-MS",
+      "scenario": "timer-message-update",
+      "cache_state": "warm",
+      "primary": {
+        "count": 100,
+        "median": 0.16,
+        "p95": 0.22,
+        "variance_percent": 22.92367
+      },
+      "rerun": {
+        "count": 20,
+        "median": 0.15,
+        "p95": 0.18,
+        "variance_percent": 12.822327
+      },
+      "tolerance": {
+        "median_relative": 0.68771,
+        "p95_relative": 0.916947,
+        "observed_median_relative_delta": 0.0,
+        "observed_p95_relative_delta": 0.0
+      },
+      "status": "within-development-tolerance"
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-INTERACTION-LOCAL-EVENT-PAINT-MS",
+      "scenario": "form-programmatic-update",
+      "cache_state": "warm",
+      "primary": {
+        "count": 100,
+        "median": 64.19,
+        "p95": 91.72,
+        "variance_percent": 16.110828
+      },
+      "rerun": {
+        "count": 20,
+        "median": 60.4,
+        "p95": 67.0,
+        "variance_percent": 4.194672
+      },
+      "tolerance": {
+        "median_relative": 0.5,
+        "p95_relative": 0.75,
+        "observed_median_relative_delta": 0.059043,
+        "observed_p95_relative_delta": 0.269516
+      },
+      "status": "within-development-tolerance"
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-INTERACTION-LOCAL-EVENT-PAINT-MS",
+      "scenario": "nested-keyed-update",
+      "cache_state": "warm",
+      "primary": {
+        "count": 100,
+        "median": 64.75,
+        "p95": 87.24,
+        "variance_percent": 15.167029
+      },
+      "rerun": {
+        "count": 20,
+        "median": 57.3,
+        "p95": 64.62,
+        "variance_percent": 6.978723
+      },
+      "tolerance": {
+        "median_relative": 0.5,
+        "p95_relative": 0.75,
+        "observed_median_relative_delta": 0.115058,
+        "observed_p95_relative_delta": 0.259285
+      },
+      "status": "within-development-tolerance"
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-INTERACTION-LOCAL-EVENT-PAINT-MS",
+      "scenario": "parent-state-update",
+      "cache_state": "warm",
+      "primary": {
+        "count": 100,
+        "median": 63.34,
+        "p95": 88.28,
+        "variance_percent": 18.786311
+      },
+      "rerun": {
+        "count": 20,
+        "median": 56.39,
+        "p95": 60.86,
+        "variance_percent": 6.992463
+      },
+      "tolerance": {
+        "median_relative": 0.563589,
+        "p95_relative": 0.751452,
+        "observed_median_relative_delta": 0.109725,
+        "observed_p95_relative_delta": 0.310603
+      },
+      "status": "within-development-tolerance"
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-INTERACTION-LOCAL-EVENT-PAINT-MS",
+      "scenario": "timer-message-update",
+      "cache_state": "warm",
+      "primary": {
+        "count": 100,
+        "median": 124.15,
+        "p95": 147.24,
+        "variance_percent": 10.940754
+      },
+      "rerun": {
+        "count": 20,
+        "median": 102.58,
+        "p95": 117.6,
+        "variance_percent": 7.321335
+      },
+      "tolerance": {
+        "median_relative": 0.5,
+        "p95_relative": 0.75,
+        "observed_median_relative_delta": 0.173741,
+        "observed_p95_relative_delta": 0.201304
+      },
+      "status": "within-development-tolerance"
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-INTERACTION-SERVER-ROUNDTRIP-MS",
+      "scenario": "authenticated-success",
+      "cache_state": "warm",
+      "primary": {
+        "count": 50,
+        "median": 189.89,
+        "p95": 226.98,
+        "variance_percent": 12.090258
+      },
+      "rerun": {
+        "count": 10,
+        "median": 159.41,
+        "p95": 176.44,
+        "variance_percent": 4.168997
+      },
+      "tolerance": {
+        "median_relative": 0.5,
+        "p95_relative": 0.75,
+        "observed_median_relative_delta": 0.160514,
+        "observed_p95_relative_delta": 0.222663
+      },
+      "status": "within-development-tolerance"
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-INTERACTION-SERVER-ROUNDTRIP-MS",
+      "scenario": "authorization-denial",
+      "cache_state": "warm",
+      "primary": {
+        "count": 50,
+        "median": 184.33,
+        "p95": 237.82,
+        "variance_percent": 11.89312
+      },
+      "rerun": {
+        "count": 10,
+        "median": 160.04,
+        "p95": 174.56,
+        "variance_percent": 3.892605
+      },
+      "tolerance": {
+        "median_relative": 0.5,
+        "p95_relative": 0.75,
+        "observed_median_relative_delta": 0.131775,
+        "observed_p95_relative_delta": 0.265999
+      },
+      "status": "within-development-tolerance"
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-INTERACTION-SERVER-ROUNDTRIP-MS",
+      "scenario": "disconnect-retry",
+      "cache_state": "warm",
+      "primary": {
+        "count": 50,
+        "median": 353.39,
+        "p95": 399.24,
+        "variance_percent": 7.449811
+      },
+      "rerun": {
+        "count": 10,
+        "median": 309.67,
+        "p95": 342.46,
+        "variance_percent": 3.164322
+      },
+      "tolerance": {
+        "median_relative": 0.5,
+        "p95_relative": 0.75,
+        "observed_median_relative_delta": 0.123716,
+        "observed_p95_relative_delta": 0.14222
+      },
+      "status": "within-development-tolerance"
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-RESOURCE-CLEANUP-MS",
+      "scenario": "repeated-host-stop",
+      "cache_state": "warm",
+      "primary": {
+        "count": 20,
+        "median": 52.02,
+        "p95": 70.36,
+        "variance_percent": 18.907428
+      },
+      "rerun": {
+        "count": 10,
+        "median": 38.56,
+        "p95": 40.36,
+        "variance_percent": 2.455195
+      },
+      "tolerance": {
+        "median_relative": 0.567223,
+        "p95_relative": 0.756297,
+        "observed_median_relative_delta": 0.258747,
+        "observed_p95_relative_delta": 0.426379
+      },
+      "status": "within-development-tolerance"
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-STARTUP-FALLBACK-READY-MS",
+      "scenario": "webassembly-unavailable",
+      "cache_state": "cold",
+      "primary": {
+        "count": 30,
+        "median": 98.75,
+        "p95": 153.46,
+        "variance_percent": 21.392406
+      },
+      "rerun": {
+        "count": 10,
+        "median": 117.73,
+        "p95": 135.52,
+        "variance_percent": 6.659493
+      },
+      "tolerance": {
+        "median_relative": 0.641772,
+        "p95_relative": 0.855696,
+        "observed_median_relative_delta": 0.192203,
+        "observed_p95_relative_delta": 0.116903
+      },
+      "status": "within-development-tolerance"
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-STARTUP-INSTANTIATE-READY-MS",
+      "scenario": "browser-profile",
+      "cache_state": "cold",
+      "primary": {
+        "count": 50,
+        "median": 162.39,
+        "p95": 196.9,
+        "variance_percent": 15.851794
+      },
+      "rerun": {
+        "count": 10,
+        "median": 127.7,
+        "p95": 173.52,
+        "variance_percent": 10.451708
+      },
+      "tolerance": {
+        "median_relative": 0.5,
+        "p95_relative": 0.75,
+        "observed_median_relative_delta": 0.213622,
+        "observed_p95_relative_delta": 0.11874
+      },
+      "status": "within-development-tolerance"
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-STARTUP-INSTANTIATE-READY-MS",
+      "scenario": "browser-profile",
+      "cache_state": "warm",
+      "primary": {
+        "count": 50,
+        "median": 159.3,
+        "p95": 210.68,
+        "variance_percent": 16.459784
+      },
+      "rerun": {
+        "count": 10,
+        "median": 119.65,
+        "p95": 133.12,
+        "variance_percent": 4.679418
+      },
+      "tolerance": {
+        "median_relative": 0.5,
+        "p95_relative": 0.75,
+        "observed_median_relative_delta": 0.248901,
+        "observed_p95_relative_delta": 0.368141
+      },
+      "status": "within-development-tolerance"
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-STARTUP-NAVIGATION-READY-MS",
+      "scenario": "browser-profile",
+      "cache_state": "cold",
+      "primary": {
+        "count": 50,
+        "median": 729.5,
+        "p95": 790.66,
+        "variance_percent": 4.132573
+      },
+      "rerun": {
+        "count": 10,
+        "median": 695.53,
+        "p95": 731.02,
+        "variance_percent": 2.590795
+      },
+      "tolerance": {
+        "median_relative": 0.5,
+        "p95_relative": 0.75,
+        "observed_median_relative_delta": 0.046566,
+        "observed_p95_relative_delta": 0.075431
+      },
+      "status": "within-development-tolerance"
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-STARTUP-NAVIGATION-READY-MS",
+      "scenario": "browser-profile",
+      "cache_state": "warm",
+      "primary": {
+        "count": 50,
+        "median": 733.45,
+        "p95": 785.04,
+        "variance_percent": 4.419091
+      },
+      "rerun": {
+        "count": 10,
+        "median": 681.96,
+        "p95": 698.78,
+        "variance_percent": 1.7645
+      },
+      "tolerance": {
+        "median_relative": 0.5,
+        "p95_relative": 0.75,
+        "observed_median_relative_delta": 0.070202,
+        "observed_p95_relative_delta": 0.10988
+      },
+      "status": "within-development-tolerance"
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-STARTUP-ROOT-READY-MS",
+      "scenario": "browser-profile",
+      "cache_state": "cold",
+      "primary": {
+        "count": 50,
+        "median": 424.89,
+        "p95": 454.5,
+        "variance_percent": 3.802948
+      },
+      "rerun": {
+        "count": 10,
+        "median": 421.92,
+        "p95": 432.62,
+        "variance_percent": 1.9471
+      },
+      "tolerance": {
+        "median_relative": 0.5,
+        "p95_relative": 0.75,
+        "observed_median_relative_delta": 0.00699,
+        "observed_p95_relative_delta": 0.048141
+      },
+      "status": "within-development-tolerance"
+    },
+    {
+      "environment_id": "BX-BH01-ENV-PHASE9-LINUX-FIREFOX-X64-0.1",
+      "metric_id": "BX-BH01-METRIC-STARTUP-ROOT-READY-MS",
+      "scenario": "browser-profile",
+      "cache_state": "warm",
+      "primary": {
+        "count": 50,
+        "median": 425.92,
+        "p95": 447.62,
+        "variance_percent": 3.392821
+      },
+      "rerun": {
+        "count": 10,
+        "median": 416.09,
+        "p95": 449.04,
+        "variance_percent": 2.716173
+      },
+      "tolerance": {
+        "median_relative": 0.5,
+        "p95_relative": 0.75,
+        "observed_median_relative_delta": 0.023079,
+        "observed_p95_relative_delta": 0.003172
+      },
+      "status": "within-development-tolerance"
+    }
+  ],
+  "drift_count": 2,
+  "limitations": [
+    "The representative rerun uses fewer samples than the primary run and is a development drift check, not a second-machine or support qualification.",
+    "Tolerance expands with retained primary coefficient of variation and cannot turn a failed budget into a pass.",
+    "Clock calibration and optional JavaScript heap are excluded because they are capability observations rather than comparable workload distributions."
+  ]
+}

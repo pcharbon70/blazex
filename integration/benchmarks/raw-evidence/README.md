@@ -10,3 +10,9 @@ Firefox development build, ten dependency-cached profile-packaging samples,
 and manifest-derived decoded/Brotli accounting for all 23 profile assets. Raw
 browser records retain every sample and contain empty failure lists; no sample
 was removed as an outlier.
+
+The final gate also retains 273-sample first and second Chrome representative
+reruns and a 271-sample Firefox representative rerun. The first comparison is
+preserved even though a second Chrome run was taken: each comparison found two
+different timing drifts, so rerunning did not erase or replace the original
+negative reproducibility evidence.

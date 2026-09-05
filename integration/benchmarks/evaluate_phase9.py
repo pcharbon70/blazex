@@ -38,6 +38,7 @@ def main() -> int:
     parser.add_argument("--revision", required=True)
     parser.add_argument("--budget-output", type=Path, required=True)
     parser.add_argument("--decision-output", type=Path, required=True)
+    parser.add_argument("--budget-reference-path", type=Path)
     args = parser.parse_args()
     if len(args.revision) != 40 or any(char not in "0123456789abcdef" for char in args.revision):
         raise SystemExit("--revision must be an exact lowercase commit")
@@ -150,7 +151,7 @@ def main() -> int:
         "decision_id": "BX-BH01-PHASE9-STOP-DECISION-0.1",
         "status": "conditional-proceed",
         "source_revision": args.revision,
-        "budget_evaluation_ref": ref(args.budget_output),
+        "budget_evaluation_ref": ref(args.budget_reference_path or args.budget_output),
         "stop_conditions": [
             {"condition": "architecture-integrity", "status": "not-triggered", "finding": "No mitigation changes authority, host-neutral semantics, or the closed bridge/renderer boundaries."},
             {"condition": "reproducibility", "status": "not-triggered", "finding": "All evidence shares one source/profile identity and both generated report stages are byte-deterministic."},

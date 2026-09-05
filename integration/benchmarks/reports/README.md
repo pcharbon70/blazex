@@ -25,3 +25,10 @@ active-Linux aggregate.
 unpruned application AVM fails both application-payload thresholds and the
 Firefox development-build timer scenario exceeds the local-event p95 target.
 Required mitigations have owners and repeat rules; Phase 10 is not authorized.
+
+`bh01-phase9-rerun-comparison-attempt-1.json` preserves startup fallback and
+Wasm-instantiation drift from the first representative comparison.
+`bh01-phase9-rerun-comparison.json` preserves authorization-denial and
+disconnect-retry drift from the second comparison. Both reports are generated
+from retained raw samples, both report exactly two drifts, and neither is a
+browser-support or general performance claim.

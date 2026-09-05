@@ -16,7 +16,11 @@ instrumented Chrome/Firefox runner. Section 9.2 retains 1,303 Chrome and 1,301
 Firefox browser samples, ten build samples, manifest-derived payload evidence,
 three exact environment fingerprints, and a reproducible 41-distribution
 summary. These are Linux development observations; no budget or browser support
-claim is made at this section boundary.
+claim is made at this section boundary. The completed Phase 9 gate retains two
+representative Chrome reruns and one Firefox rerun, including both comparison
+attempts that found two timing distributions outside the governed tolerance.
+It records a conditional proceed for framework development, not a performance
+pass or support claim.
 
 ## Index
 
@@ -32,6 +36,8 @@ claim is made at this section boundary.
   owned cost attribution and bounded optimization decision contracts.
 - `budget-evaluation.schema.json` and `stop-decision.schema.json` — unchanged
   quality-contract comparison and conditional continuation contracts.
+- `rerun-comparison.schema.json` — representative-run tolerance and retained
+  drift-decision contract.
 - `phase9-metric-definitions.json` — clocks, boundaries, sample policy, budget
   links, and deferred qualification boundary.
 - `phase9_metrics.py` — deterministic nearest-rank statistics and raw sample
@@ -45,6 +51,8 @@ claim is made at this section boundary.
   mitigation assessment generator.
 - `evaluate_phase9.py` — deterministic per-environment, aggregate, deferred,
   and inactive budget evaluator plus Phase 9 stop-decision generator.
+- `compare_phase9_reruns.py` — fail-visible comparison of representative
+  reruns against primary distributions under the governed tolerance policy.
 - `benchmark-index.json` — canonical environment/measurement/sample/report index.
 - `environments/`, `samples/`, `raw-evidence/`, and `reports/` — future evidence locations.
 - `environments/bh01-phase8-local-linux.json` — exact local Linux/Chrome
@@ -66,3 +74,6 @@ claim is made at this section boundary.
 - `reports/bh01-phase9-budget-evaluation.json` and
   `reports/bh01-phase9-stop-decision.json` — 52 unchanged-contract evaluations,
   active failures, required mitigations, and conditional continuation.
+- `reports/bh01-phase9-rerun-comparison*.json` — retained first and second
+  comparisons, each with two observed timing drifts rather than a hidden or
+  discarded retry.

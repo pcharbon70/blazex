@@ -91,6 +91,24 @@ browsers remain unsupported. The current planning policy carries unavailable
 external-platform qualification to BH-22, so Phase 9 is eligible for separate
 authorization without rewriting the Phase 8 result.
 
+Phase 9 measures the available Linux Chrome and Firefox environments, retains
+manifest-derived artifact and build evidence, applies unchanged quality
+budgets, and records external/mobile qualification as deferred. Its final gate
+validates all schemas and evidence hashes, composes the Phase 8 and profile
+verifiers, regenerates every derived report twice byte-for-byte, retains both
+representative-rerun drift reports, and rejects support or Phase 10
+authorization overclaims:
+
+```console
+python3 profiles/browser_phoenix/toolchain/verify_phase9.py
+python3 -m unittest profiles/browser_phoenix/toolchain/tests/test_phase9.py
+```
+
+Success means the conditional Phase 9 decision is internally reproducible and
+truthfully bounded. It does not turn failed budgets into passes, resolve
+representative timing drift, establish mobile viability, or support any
+browser.
+
 `unified-dependency-inventory.json` binds the canonical locks and reports by
 digest. `acquisition-evidence.json` records true clean and network-disabled
 cache replays for Hex and npm, immutable runtime-source replay timings, binary

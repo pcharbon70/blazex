@@ -54,6 +54,7 @@ def main() -> int:
     parser.add_argument("--revision", required=True)
     parser.add_argument("--economics-output", type=Path, required=True)
     parser.add_argument("--mitigations-output", type=Path, required=True)
+    parser.add_argument("--economics-reference-path", type=Path)
     args = parser.parse_args()
     if len(args.revision) != 40 or any(char not in "0123456789abcdef" for char in args.revision):
         raise SystemExit("--revision must be an exact lowercase commit")
@@ -125,7 +126,7 @@ def main() -> int:
         "report_id": "BX-BH01-PHASE9-MITIGATION-ASSESSMENT-0.1",
         "status": "reviewed-candidates-no-threshold-change",
         "source_revision": args.revision,
-        "artifact_economics_ref": ref(args.economics_output),
+        "artifact_economics_ref": ref(args.economics_reference_path or args.economics_output),
         "threshold_changes": [],
         "candidates": [
             {

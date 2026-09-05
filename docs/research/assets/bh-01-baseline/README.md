@@ -152,6 +152,13 @@ locations rather than this governance directory.
   — repository-owner approval for active Linux measurements, deferred external
   qualification, section commits, one immediately merged PR, synchronization,
   and branch cleanup without authorizing Phase 10 or support claims.
+- [BH-01 Phase 9 validation log v0.1.0](blazex-bh-01-phase-09-validation-log-v0.1.0.txt)
+  — exact primary/rerun sample counts, deterministic report regeneration,
+  active failures, retained drift, test outcomes, deferrals, and claim limits.
+- [BH-01 Phase 9 completion v0.1.0](blazex-bh-01-phase-09-completion-v0.1.0.json)
+  — schema-valid conditional decision with retained negative results, evidence
+  hashes, unsupported browsers, undecided mobile viability, and explicit Phase
+  10 eligibility without authorization.
 
 ## Maintaining this index
 

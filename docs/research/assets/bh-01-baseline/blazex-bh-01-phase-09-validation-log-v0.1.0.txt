@@ -1,0 +1,56 @@
+BH-01 Phase 9 validation log v0.1.0
+Recorded: 2026-09-05
+Evidence source revision: 04f9eb1bd2b191d6b6a23202247201bce5d82855
+Execution boundary: Linux x86-64 development environment only
+
+PRIMARY MEASUREMENT EVIDENCE
+- Chrome for Testing 152.0.7977.75: 1,303 retained samples, 0 failed runs, 0 excluded outliers.
+- Playwright Firefox 1538 development build: 1,301 retained samples, 0 failed runs, 0 excluded outliers.
+- Dependency-cached profile packaging: 10 retained samples.
+- Manifest artifact accounting: 69 observations, 23 assets, 7,827,221 decoded bytes, 2,513,184 Brotli bytes.
+- Desktop summary: 41 distributions; 41 adequate under the Phase 9 harness minimums.
+- One profile-manifest identity across primary browser, representative rerun, and artifact records: 818ac7b967db6519c766f9d1fff80455cc92d205e3f188252e6da27258ee4aad.
+
+REPRESENTATIVE RERUN EVIDENCE
+- Chrome rerun 1: 273 retained samples.
+- Chrome rerun 2: 273 retained samples.
+- Firefox rerun: 271 retained samples.
+- Attempt 1 comparison: OBSERVED-DRIFT, 38 distributions, 2 drift (startup fallback readiness and Wasm instantiate readiness).
+- Final comparison: OBSERVED-DRIFT, 38 distributions, 2 drift (authorization denial and disconnect/retry).
+- The first comparison was retained; the second Chrome run did not replace or hide it.
+
+ARTIFACT AND BUDGET OUTCOME
+- The unpruned application AVM accounts for 84.045% of decoded bytes and 87.504% of Brotli bytes.
+- 52 unchanged-contract budget evaluations were generated.
+- 23 active passes plus 1 early active pass were retained.
+- 4 active failure rows represent decoded application payload, compressed application payload, and Firefox timer-event p95.
+- 3 bounded required mitigations have owners and repeat rules.
+- 0 quality thresholds changed; 4 prohibited shortcuts were rejected.
+- Decision: CONDITIONAL PROCEED for active Linux framework development.
+
+DEFERRED AND CLAIM BOUNDARIES
+- 6 unavailable external-environment obligations remain explicitly deferred to BH-22 and excluded from active pass rates.
+- No physical Android or iOS/iPadOS device evidence exists; mobile viability remains undecided.
+- No macOS/Safari, Windows, second-machine, or unavailable manual assistive-technology evidence is inferred.
+- All browsers remain unsupported.
+- Phase 10 is eligible but not authorized; BH-02 and production/support promotion are not authorized.
+
+COMPLETED VALIDATION COMMANDS
+- python3 -m unittest discover -s integration/benchmarks/tests -p 'test_*.py' -v: PASS, 6 tests.
+- python3 -m unittest discover -s docs/research -p 'test_*.py' -v: PASS, 127 tests.
+- npm test, js/blazex_runtime: PASS, 10 tests.
+- npm run build, js/blazex_runtime: PASS.
+- npm test, packages/blazex_renderer_dom: PASS, 1 test.
+- npm run build, packages/blazex_renderer_dom: PASS.
+- mix test, packages/blazex_phoenix, pinned container: PASS, 10 tests.
+- mix test, packages/blazex_renderer_dom_liveview, pinned container: PASS, 4 tests.
+- mix test, integration/fixtures/browser_host, pinned container: PASS, 16 tests.
+- mix test, profiles/browser_phoenix, pinned container: PASS, 12 tests.
+
+FINAL GATE COMMANDS
+- python3 profiles/browser_phoenix/toolchain/verify_phase9.py: PASS, CONDITIONAL PROCEED; seven reports regenerated twice and matched retained bytes.
+- python3 -m unittest profiles/browser_phoenix/toolchain/tests/test_phase9.py -v: PASS, 10 tests including nine fail-closed mutations.
+- python3 -m unittest discover -s profiles/browser_phoenix/toolchain/tests -p 'test_*.py' -v: PASS, 97 tests.
+- python3 profiles/browser_phoenix/toolchain/verify_phase8.py: PASS, historical BLOCKED result retained under deferred-qualification policy.
+- python3 docs/research/validate_archive.py: PASS, 154 documents, 19 directories, 1,120 local links, and 50 source notes.
+- git diff --check: PASS.

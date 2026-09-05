@@ -12,6 +12,7 @@ const evidencePath = process.env.BLAZEX_EVIDENCE_PATH ?? `/tmp/blazex-bh01-phase
 const revision = process.env.BLAZEX_REVISION;
 const environmentId = process.env.BLAZEX_ENVIRONMENT_ID;
 const product = process.env.BLAZEX_BROWSER_PRODUCT ?? browserName;
+const runLabel = process.env.BLAZEX_RUN_LABEL ?? "PRIMARY";
 const coldSamples = positiveInteger("BLAZEX_COLD_START_SAMPLES", 30);
 const warmSamples = positiveInteger("BLAZEX_WARM_START_SAMPLES", 30);
 const fallbackSamples = positiveInteger("BLAZEX_FALLBACK_SAMPLES", 30);
@@ -22,6 +23,7 @@ const cleanupSamples = positiveInteger("BLAZEX_CLEANUP_SAMPLES", 20);
 if (!executablePath || !playwright[browserName]) throw new Error("A valid BLAZEX_BROWSER_TYPE and BLAZEX_BROWSER_PATH are required");
 if (!/^[0-9a-f]{40}$/.test(revision ?? "")) throw new Error("BLAZEX_REVISION must be an exact commit");
 if (!/^BX-BH01-ENV-[A-Z0-9.-]+$/.test(environmentId ?? "")) throw new Error("BLAZEX_ENVIRONMENT_ID is required");
+if (!/^[A-Z0-9.-]+$/.test(runLabel)) throw new Error("BLAZEX_RUN_LABEL must be an uppercase stable identifier");
 
 const executableBytes = await readFile(executablePath);
 const launchOptions = { executablePath, headless: true };
@@ -29,7 +31,7 @@ if (browserName === "chromium") launchOptions.args = ["--no-sandbox", "--disable
 const browser = await playwright[browserName].launch(launchOptions);
 const evidence = {
   schema_version: "1.0.0",
-  run_id: `BX-BH01-PHASE9-RUN-${browserName.toUpperCase()}-LINUX-0.1`,
+  run_id: `BX-BH01-PHASE9-RUN-${browserName.toUpperCase()}-LINUX-${runLabel}-0.1`,
   status: "running",
   captured_at: new Date().toISOString(),
   source_revision: revision,

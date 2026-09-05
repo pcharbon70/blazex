@@ -33,7 +33,7 @@ integration tests and completion-evidence gate.
 ## Authorization status
 
 The repository owner approved the plan snapshot at revision `d70a965` and has
-subsequently authorized Phases 1-8 one phase at a time. Each phase was delivered
+subsequently authorized Phases 1-9 one phase at a time. Each phase was delivered
 section by section under the retained authorization record for that phase.
 Phases 1-6 established repository governance, reproducible inputs, runtime and
 browser boot, local DOM behavior, and the Phoenix authority/adapter boundary.
@@ -43,9 +43,11 @@ and resource-lifecycle `go` result in the one pinned browser environment. Phase
 browser/device rows and required manual accessibility pairings were unavailable.
 The [development environment and deferred qualification policy](../../development-environment-and-deferred-qualification-policy.md)
 now carries those unavailable external-environment obligations as deferred
-rather than allowing them to stop framework development. Phase 9 is eligible
-but not authorized; Phase 10, BH-02, browser support, and production hardening
-remain outside the current authorization.
+rather than allowing them to stop framework development. Phase 9 is complete
+with a conditional active-Linux proceed decision: payload and Firefox timer
+failures have bounded follow-up experiments, while representative reruns retain
+timing drift. Phase 10 is eligible but not authorized; BH-02, browser support,
+and production hardening remain outside the current authorization.
 
 BH-00 remains the accepted product contract. BH-01 may produce feasibility
 evidence and may reject the candidate stack; it cannot weaken BH-00
@@ -121,8 +123,8 @@ failure in the candidate browser stack.
 | [6 — Phoenix Trust Boundary and LiveView Adapter Isolation](phase-06-phoenix-trust-boundary-and-liveview-isolation.md) | complete — gate passed | Prove one authenticated command, isolate version-sensitive renderer integration, and preserve standalone DOM, Plug, and server authority boundaries. | Phase 5 |
 | [7 — Resilience, Security, and Resource Lifecycle](phase-07-resilience-security-and-resource-lifecycle.md) | complete — gate passed | Stress failures, retries, adversarial inputs, diagnostics, cancellation, disposal, and bounded resource behavior across the vertical slice. | Phases 5–6 |
 | [8 — Browser Compatibility and Accessible Fallback Matrix](phase-08-browser-compatibility-and-fallback-matrix.md) | complete — local evidence accepted; external qualification deferred | Retain the historical five-row result, use available Linux Chrome/Firefox evidence for development, and carry unavailable platform/device/manual qualification to BH-22. | Phase 7 |
-| [9 — Measurement, Mobile Viability, and Artifact Economics](phase-09-measurement-mobile-viability-and-artifact-economics.md) | eligible — not authorized | Measure payload, build, startup, interaction, memory, and reliability in the active matrix; record unavailable mobile/cross-platform measurements as deferred. | Phase 8 local-development evidence and the deferred-qualification policy |
-| [10 — Clean Rebuild, Review, and Feasibility Decision](phase-10-clean-rebuild-review-and-feasibility-decision.md) | planned — not authorized | Reproduce the complete baseline independently, reconcile every proof/risk/stop condition, and authorize, revise, or block BH-02 truthfully. | Phase 9 |
+| [9 — Measurement, Mobile Viability, and Artifact Economics](phase-09-measurement-mobile-viability-and-artifact-economics.md) | complete — conditional active-Linux proceed; external qualification deferred | Measure payload, build, startup, interaction, memory, and reliability in the active matrix; record unavailable mobile/cross-platform measurements as deferred. | Phase 8 local-development evidence and the deferred-qualification policy |
+| [10 — Clean Rebuild, Review, and Feasibility Decision](phase-10-clean-rebuild-review-and-feasibility-decision.md) | eligible — not authorized | Reproduce the complete baseline independently, reconcile every proof/risk/stop condition, and authorize, revise, or block BH-02 truthfully. | Phase 9 |
 
 The current need-driven decomposition contains ten phases, 53 sections, 120
 tasks, and 323 subtasks. These totals are consequences of the present
@@ -281,6 +283,7 @@ framework API.
 - [Phase 8 — Browser Compatibility and Accessible Fallback Matrix](phase-08-browser-compatibility-and-fallback-matrix.md)
 - [Phase 8 implementation evidence](phase-08-implementation-evidence.md)
 - [Phase 9 — Measurement, Mobile Viability, and Artifact Economics](phase-09-measurement-mobile-viability-and-artifact-economics.md)
+- [Phase 9 implementation evidence](phase-09-implementation-evidence.md)
 - [Phase 10 — Clean Rebuild, Review, and Feasibility Decision](phase-10-clean-rebuild-review-and-feasibility-decision.md)
 
 ## Maintaining this index

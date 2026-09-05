@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
   "index_id": "BX-BH01-BENCHMARK-INDEX-0.1",
-  "status": "phase9-section5-conditional-proceed",
+  "status": "phase9-complete-conditional-proceed",
   "environment_schema": "environment-fingerprint.schema.json",
   "sample_schema": "sample.schema.json",
   "artifact_run_schema": "artifact-run.schema.json",
@@ -13,6 +13,7 @@
   "mitigation_assessment_schema": "mitigation-assessment.schema.json",
   "budget_evaluation_schema": "budget-evaluation.schema.json",
   "stop_decision_schema": "stop-decision.schema.json",
+  "rerun_comparison_schema": "rerun-comparison.schema.json",
   "metric_definitions": "phase9-metric-definitions.json",
   "locations": {
     "environments": "environments",
@@ -50,7 +51,10 @@
     {"measurement_id": "BX-BH01-MEASUREMENT-PHASE9-CHROME-LINUX-0.1", "path": "raw-evidence/bh01-phase9-chromium-linux.json", "status": "observed", "sample_count": 1303},
     {"measurement_id": "BX-BH01-MEASUREMENT-PHASE9-FIREFOX-LINUX-0.1", "path": "raw-evidence/bh01-phase9-firefox-linux.json", "status": "observed-development-only", "sample_count": 1301},
     {"measurement_id": "BX-BH01-MEASUREMENT-PHASE9-BUILD-LINUX-0.1", "path": "raw-evidence/bh01-phase9-build-linux.json", "status": "observed-partial-boundary", "sample_count": 10},
-    {"measurement_id": "BX-BH01-MEASUREMENT-PHASE9-ARTIFACTS-LINUX-0.1", "path": "raw-evidence/bh01-phase9-artifacts-linux.json", "status": "observed", "sample_count": 69}
+    {"measurement_id": "BX-BH01-MEASUREMENT-PHASE9-ARTIFACTS-LINUX-0.1", "path": "raw-evidence/bh01-phase9-artifacts-linux.json", "status": "observed", "sample_count": 69},
+    {"measurement_id": "BX-BH01-MEASUREMENT-PHASE9-CHROME-RERUN-1-0.1", "path": "raw-evidence/bh01-phase9-rerun-chromium-linux.json", "status": "observed-drift-input", "sample_count": 273},
+    {"measurement_id": "BX-BH01-MEASUREMENT-PHASE9-CHROME-RERUN-2-0.1", "path": "raw-evidence/bh01-phase9-rerun2-chromium-linux.json", "status": "observed-drift-input", "sample_count": 273},
+    {"measurement_id": "BX-BH01-MEASUREMENT-PHASE9-FIREFOX-RERUN-0.1", "path": "raw-evidence/bh01-phase9-rerun-firefox-linux.json", "status": "observed-development-only", "sample_count": 271}
   ],
   "samples": [
     {"summary_id": "BX-BH01-PHASE9-LINUX-DESKTOP-SUMMARY-0.1", "path": "samples/bh01-phase9-linux-desktop-summary.json", "status": "observed", "distribution_count": 41}
@@ -60,7 +64,9 @@
     {"report_id": "BX-BH01-PHASE9-ARTIFACT-ECONOMICS-0.1", "path": "reports/bh01-phase9-artifact-economics.json", "status": "observed-with-limitations"},
     {"report_id": "BX-BH01-PHASE9-MITIGATION-ASSESSMENT-0.1", "path": "reports/bh01-phase9-mitigation-assessment.json", "status": "reviewed-candidates-no-threshold-change"},
     {"report_id": "BX-BH01-PHASE9-BUDGET-EVALUATION-0.1", "path": "reports/bh01-phase9-budget-evaluation.json", "status": "conditional-active-development", "evaluation_count": 52},
-    {"report_id": "BX-BH01-PHASE9-STOP-DECISION-0.1", "path": "reports/bh01-phase9-stop-decision.json", "status": "conditional-proceed"}
+    {"report_id": "BX-BH01-PHASE9-STOP-DECISION-0.1", "path": "reports/bh01-phase9-stop-decision.json", "status": "conditional-proceed"},
+    {"report_id": "BX-BH01-PHASE9-RERUN-COMPARISON-ATTEMPT-1-0.1", "path": "reports/bh01-phase9-rerun-comparison-attempt-1.json", "status": "observed-drift", "drift_count": 2},
+    {"report_id": "BX-BH01-PHASE9-RERUN-COMPARISON-0.1", "path": "reports/bh01-phase9-rerun-comparison.json", "status": "observed-drift", "drift_count": 2}
   ],
   "budget_state": "phase9-active-development-evaluated-conditional-no-support-credit"
 }

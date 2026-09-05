@@ -101,7 +101,7 @@ class BH01ActivationValidationTests(unittest.TestCase):
                 boundary_record["allowed_planned_dependencies"],
             )
 
-    def test_fixture_evidence_is_nonproduction_and_budgets_remain_unmeasured(self) -> None:
+    def test_fixture_evidence_is_nonproduction_and_phase9_evidence_is_conditional(self) -> None:
         fixtures = validator._load_json(validator.REPO_ROOT / "integration/fixtures/fixture-index.json")
         benchmarks = validator._load_json(
             validator.REPO_ROOT / "integration/benchmarks/benchmark-index.json"
@@ -123,10 +123,23 @@ class BH01ActivationValidationTests(unittest.TestCase):
             self.assertTrue(
                 (validator.REPO_ROOT / "integration/benchmarks" / environment["raw_evidence"]).is_file()
             )
-        self.assertEqual(benchmarks["measurements"], [])
-        self.assertEqual(benchmarks["samples"], [])
-        self.assertEqual(benchmarks["reports"], [])
-        self.assertEqual(benchmarks["budget_state"], "proposed-unmeasured")
+        phase9_authorized = (
+            validator.REPO_ROOT
+            / "docs/research/assets/bh-01-baseline/blazex-bh-01-phase-09-authorization-v0.1.0.json"
+        ).is_file()
+        if phase9_authorized:
+            self.assertGreaterEqual(len(benchmarks["measurements"]), 1)
+            self.assertGreaterEqual(len(benchmarks["samples"]), 1)
+            self.assertGreaterEqual(len(benchmarks["reports"]), 1)
+            self.assertEqual(
+                benchmarks["budget_state"],
+                "phase9-active-development-evaluated-conditional-no-support-credit",
+            )
+        else:
+            self.assertEqual(benchmarks["measurements"], [])
+            self.assertEqual(benchmarks["samples"], [])
+            self.assertEqual(benchmarks["reports"], [])
+            self.assertEqual(benchmarks["budget_state"], "proposed-unmeasured")
 
 
 if __name__ == "__main__":
