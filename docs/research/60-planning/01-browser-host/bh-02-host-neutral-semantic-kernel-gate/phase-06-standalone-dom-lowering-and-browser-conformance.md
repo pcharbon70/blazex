@@ -39,18 +39,18 @@ Back to milestone: [README](README.md)
       - [x] 6.1.2.3 Subtask - Freeze full-root atomic projection, accessibility/layout/focus/selection lowering, deterministic IDs/digests, stale rejection, and idempotent disposal.
       - [x] 6.1.2.4 Subtask - Require automated local Chrome and Firefox execution while excluding pixels, visual equivalence, manual accessibility conformance, and support credit.
 
-  - [ ] 6.2 Section - Implement standalone DOM lowering.
+  - [x] 6.2 Section - Implement standalone DOM lowering.
 
-    - [ ] 6.2.1 Task - Activate the Elixir DOM backend over neutral contracts.
+    - [x] 6.2.1 Task - Activate the Elixir DOM backend over neutral contracts.
 
-      - [ ] 6.2.1.1 Subtask - Replace the BH-01 package skeleton dependency graph and implement full current renderer capability declaration.
-      - [ ] 6.2.1.2 Subtask - Add versioned DOM batch, node, listener, focus, selection, portable-wire, and deterministic identity/digest data.
+      - [x] 6.2.1.1 Subtask - Replace the BH-01 package skeleton dependency graph and implement full current renderer capability declaration.
+      - [x] 6.2.1.2 Subtask - Add versioned DOM batch, node, listener, focus, selection, portable-wire, and deterministic identity/digest data.
 
-    - [ ] 6.2.2 Task - Lower complete semantic output without host access.
+    - [x] 6.2.2 Task - Lower complete semantic output without host access.
 
-      - [ ] 6.2.2.1 Subtask - Lower all seven node kinds, bindings, logical layout/token references, accessibility roles/states/relationships/live intent, focus, and selection.
-      - [ ] 6.2.2.2 Subtask - Produce atomic mount/update/replace projections and disposal batches through the Phase 5 renderer session.
-      - [ ] 6.2.2.3 Subtask - Test exact mappings, ordering, deterministic IDs/digests, lifecycle generations/revisions, invalid output, and absence of server/framework leakage.
+      - [x] 6.2.2.1 Subtask - Lower all seven node kinds, bindings, logical layout/token references, accessibility roles/states/relationships/live intent, focus, and selection.
+      - [x] 6.2.2.2 Subtask - Produce atomic mount/update/replace projections and disposal batches through the Phase 5 renderer session.
+      - [x] 6.2.2.3 Subtask - Test exact mappings, ordering, deterministic IDs/digests, lifecycle generations/revisions, invalid output, and absence of server/framework leakage.
 
   - [ ] 6.3 Section - Implement the dependency-free browser driver and matrix tests.
 
