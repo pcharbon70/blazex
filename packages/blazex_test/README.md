@@ -7,5 +7,6 @@ Shared conformance definitions belong here when they are useful to downstream
 packages; repository-wide suites and executable matrices belong under
 `integration/`.
 
-Status: experimental BH-02 Phase 1 Mix skeleton. No reusable fixture or
-conformance API is implemented yet.
+Status: experimental BH-02 Phase 5 support. Backend-neutral lifecycle scripts
+and exact artifact equality assertions are implemented. No concrete backend,
+runtime, browser, server, or support claim is included.

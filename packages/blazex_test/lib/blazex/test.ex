@@ -1,8 +1,8 @@
 defmodule BlazeX.Test do
   @moduledoc """
-  Experimental BH-02 ownership boundary for reusable conformance support.
+  Experimental reusable support for renderer contract tests.
 
-  Phase 1 activates the package only. Fixtures, scripts, assertions, and
-  compatibility helpers remain unimplemented.
+  This package executes backend-neutral renderer scripts and compares their
+  artifacts. It has no dependency on a concrete backend.
   """
 end

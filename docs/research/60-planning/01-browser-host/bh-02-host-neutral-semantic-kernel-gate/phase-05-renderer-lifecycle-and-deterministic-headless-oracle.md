@@ -58,21 +58,21 @@ Back to milestone: [README](README.md)
       - [x] 5.2.2.2 Subtask - Enforce exact root ownership, monotonic revisions, next-generation replacement, compatibility before callbacks, callback result shape, and idempotent disposal.
       - [x] 5.2.2.3 Subtask - Test happy paths, missing capabilities, stale/wrong output, callback rejection/failure, invalid artifacts, and prior-session retention.
 
-  - [ ] 5.3 Section - Implement deterministic headless snapshots and traces.
+  - [x] 5.3 Section - Implement deterministic headless snapshots and traces.
 
     Materialize semantic meaning into a canonical nonvisual oracle without
     calculating layout or accessing a host.
 
-    - [ ] 5.3.1 Task - Implement canonical normalization and snapshots.
+    - [x] 5.3.1 Task - Implement canonical normalization and snapshots.
 
-      - [ ] 5.3.1.1 Subtask - Normalize node identity/content/children, bindings, logical layout, token references, accessibility, focus, and selection into fixed tagged tuple/list sections.
-      - [ ] 5.3.1.2 Subtask - Sort unordered declarations and maps, preserve meaningful child/list order, use deterministic term encoding, and publish SHA-256 digests.
+      - [x] 5.3.1.1 Subtask - Normalize node identity/content/children, bindings, logical layout, token references, accessibility, focus, and selection into fixed tagged tuple/list sections.
+      - [x] 5.3.1.2 Subtask - Sort unordered declarations and maps, preserve meaningful child/list order, use deterministic term encoding, and publish SHA-256 digests.
 
-    - [ ] 5.3.2 Task - Implement the headless backend and reusable trace support.
+    - [x] 5.3.2 Task - Implement the headless backend and reusable trace support.
 
-      - [ ] 5.3.2.1 Subtask - Implement full current renderer capability declaration and deterministic mount/update/replace/dispose artifacts with ordered trace entries.
-      - [ ] 5.3.2.2 Subtask - Add reusable script execution and equality assertions in `blazex_test` without browser, server, runtime, or native dependencies.
-      - [ ] 5.3.2.3 Subtask - Test repeatability, meaningful-order sensitivity, unordered-map normalization, lifecycle ordering, generation replacement, disposal, and unsupported intent.
+      - [x] 5.3.2.1 Subtask - Implement full current renderer capability declaration and deterministic mount/update/replace/dispose artifacts with ordered trace entries.
+      - [x] 5.3.2.2 Subtask - Add reusable script execution and equality assertions in `blazex_test` without browser, server, runtime, or native dependencies.
+      - [x] 5.3.2.3 Subtask - Test repeatability, meaningful-order sensitivity, unordered-map normalization, lifecycle ordering, generation replacement, disposal, and unsupported intent.
 
   - [ ] 5.4 Section - Run the Phase 5 integration gate and publish evidence.
 

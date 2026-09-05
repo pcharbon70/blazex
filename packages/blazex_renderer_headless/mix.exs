@@ -15,5 +15,5 @@ defmodule BlazeXRendererHeadless.MixProject do
     ]
   end
 
-  def application, do: []
+  def application, do: [extra_applications: [:crypto]]
 end
