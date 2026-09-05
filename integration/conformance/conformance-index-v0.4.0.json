@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0.0",
+  "contract": "blazex.bh02.conformance-index/0.4",
+  "status": "phase-4-presentation-intent-passed-local",
+  "activation_phase": "BH-02 Phase 4",
+  "owner_role": "quality-owner",
+  "authorization": {
+    "path": "docs/research/assets/bh-02-baseline/blazex-bh-02-phase-04-authorization-v0.1.0.json",
+    "sha256": "0dd5e9c7cc519550b16e902a2cfdd10fa98f5cc1f62cc55a124347e90b451922"
+  },
+  "phase_contract": {
+    "path": "docs/research/assets/bh-02-baseline/blazex-bh-02-phase-04-contract-v0.1.0.json",
+    "sha256": "037a42b96fda568d3787fbda9d27c6d133a86899c7c4ce12da7fc626ac397bcf"
+  },
+  "fixture_sets": [
+    {
+      "id": "BX-BH02-SEMANTIC-KERNEL-FIXTURES-0.1",
+      "path": "integration/conformance/semantic-kernel-fixtures-v0.1.0.json",
+      "sha256": "74e7db1e0194cb97f7d1c3b37b815d3cd0139050b75382078138570a58e04b78",
+      "scenario_count": 8,
+      "result": "passed-local-semantic-evaluation"
+    },
+    {
+      "id": "BX-BH02-EVENT-EFFECT-RESOURCE-FIXTURES-0.1",
+      "path": "integration/conformance/event-effect-resource-fixtures-v0.1.0.json",
+      "sha256": "e5372f49136fdf3b049c478fedcdc4c0171d1e7331a386b8d7ff6e3e85b4982d",
+      "scenario_count": 12,
+      "result": "passed-local-event-effect-resource-evaluation"
+    },
+    {
+      "id": "BX-BH02-PRESENTATION-INTENT-FIXTURES-0.1",
+      "path": "integration/conformance/presentation-intent-fixtures-v0.1.0.json",
+      "sha256": "86998ccbd9be44100e0be87a4249540022eaab6784433b4600ad4ca423c36665",
+      "scenario_count": 14,
+      "result": "passed-local-presentation-intent-evaluation"
+    }
+  ],
+  "local_contract_results": [
+    {
+      "environment": "local-beam",
+      "result": "passed",
+      "evidence": [
+        "packages/blazex_ui_tree/test/blazex/layout_intent_test.exs",
+        "packages/blazex_ui_tree/test/blazex/presentation_intent_test.exs",
+        "profiles/headless/test/blazex/semantic_kernel_integration_test.exs"
+      ]
+    }
+  ],
+  "canonical_traces": [],
+  "geometry_results": [],
+  "accessibility_mapping_results": [],
+  "provider_results": [],
+  "backend_results": [],
+  "next_authorized_work": null,
+  "api_state": "experimental",
+  "support_state": "unsupported"
+}

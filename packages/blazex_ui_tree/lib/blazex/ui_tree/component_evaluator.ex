@@ -1,6 +1,7 @@
 defmodule BlazeX.UITree.ComponentEvaluator do
   @moduledoc """
-  Atomically accepts Core evaluations whose output is a valid semantic tree.
+  Atomically accepts Core evaluations whose output is a valid semantic tree,
+  semantic document, or composed presentation-intent set.
   """
 
   alias BlazeX.Core.{Diagnostic, Evaluation, Evaluator, Event, Identity}

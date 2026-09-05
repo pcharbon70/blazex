@@ -19,7 +19,7 @@ aliases:
 
 Back to milestone: [README](README.md)
 
-- [ ] 4 Phase - Layout, Tokens, Accessibility, Focus, and Selection Intent.
+- [x] 4 Phase - Layout, Tokens, Accessibility, Focus, and Selection Intent.
 
   Complete the portable semantic intent required by the representative BH-02
   interaction slice without implementing geometry, rendering, platform
@@ -75,22 +75,22 @@ Back to milestone: [README](README.md)
       - [x] 4.3.2.2 Subtask - Add a version-1 intent set over a semantic document; reject unknown owners/targets, duplicate annotations, duplicate focus order, incompatible node kinds, and stale generations.
       - [x] 4.3.2.3 Subtask - Accept intent-set component output atomically across mount, update, event dispatch, and replacement while retaining prior evaluation on failure.
 
-  - [ ] 4.4 Section - Run the Phase 4 integration gate and publish evidence.
+  - [x] 4.4 Section - Run the Phase 4 integration gate and publish evidence.
 
     Exercise the representative semantic relationships through the composed
     profile without calculating layout or invoking a concrete renderer.
 
-    - [ ] 4.4.1 Task - Add conformance and governance evidence.
+    - [x] 4.4.1 Task - Add conformance and governance evidence.
 
-      - [ ] 4.4.1.1 Subtask - Publish versioned layout/token/accessibility/focus/selection scenarios covering positive declarations, relationships, ordering, controlled updates, and rejection paths.
-      - [ ] 4.4.1.2 Subtask - Add fail-closed validation for authorization, hashes, exact vocabularies, ownership, fixture coverage, forbidden leakage, and premature Phase 5–8 claims.
-      - [ ] 4.4.1.3 Subtask - Add negative tests for stale authority, expanded vocabularies, concrete-system leakage, missing lifecycle coverage, stable APIs, backend results, and support overclaims.
+      - [x] 4.4.1.1 Subtask - Publish versioned layout/token/accessibility/focus/selection scenarios covering positive declarations, relationships, ordering, controlled updates, and rejection paths.
+      - [x] 4.4.1.2 Subtask - Add fail-closed validation for authorization, hashes, exact vocabularies, ownership, fixture coverage, forbidden leakage, and premature Phase 5–8 claims.
+      - [x] 4.4.1.3 Subtask - Add negative tests for stale authority, expanded vocabularies, concrete-system leakage, missing lifecycle coverage, stable APIs, backend results, and support overclaims.
 
-    - [ ] 4.4.2 Task - Execute and record the complete Phase 4 gate.
+    - [x] 4.4.2 Task - Execute and record the complete Phase 4 gate.
 
-      - [ ] 4.4.2.1 Subtask - Run all seven Mix project tests/format checks, Phase 1–4 validators, archive validation, inherited validators, and patch hygiene.
-      - [ ] 4.4.2.2 Subtask - Record tools, commands, hashes, section commits, limitations, and a truthful pass or stop decision.
-      - [ ] 4.4.2.3 Subtask - Leave Phase 5 unauthorized and make no renderer, geometry, browser, native, performance, accessibility-conformance, or support claim.
+      - [x] 4.4.2.1 Subtask - Run all seven Mix project tests/format checks, Phase 1–4 validators, archive validation, inherited validators, and patch hygiene.
+      - [x] 4.4.2.2 Subtask - Record tools, commands, hashes, section commits, limitations, and a truthful pass or stop decision.
+      - [x] 4.4.2.3 Subtask - Leave Phase 5 unauthorized and make no renderer, geometry, browser, native, performance, accessibility-conformance, or support claim.
 
 ## Section delivery rule
 
@@ -112,3 +112,4 @@ API.
 - [Phase 3 implementation evidence](phase-03-implementation-evidence.md)
 - [Foundational component semantics inquiry](../../../40-inquiries/which-foundational-component-semantics-does-blazex-need.md)
 - [Cross-renderer component-model inquiry](../../../40-inquiries/can-one-blazex-component-model-target-dom-and-native-controls.md)
+- [Phase 4 implementation evidence](phase-04-implementation-evidence.md)

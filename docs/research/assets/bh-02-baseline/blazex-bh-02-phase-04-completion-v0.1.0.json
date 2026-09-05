@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0.0",
+  "record_id": "BX-BH02-DECISION-PHASE-04-GO",
+  "state": "passed",
+  "decided_at": "2026-09-05",
+  "authorization_ref": "BX-BH02-PHASE-04-AUTHORIZATION-0.1",
+  "contract_ref": "BX-BH02-PHASE-04-CONTRACT-0.1",
+  "section_commits": [
+    {"section": "4.1", "commit": "beeac9e"},
+    {"section": "4.2", "commit": "9f61ea0"},
+    {"section": "4.3", "commit": "b300845"},
+    {"section": "4.4", "commit": "resolve-from-this-records-git-commit"}
+  ],
+  "artifact_hashes": [
+    {
+      "path": "docs/research/assets/bh-02-baseline/blazex-bh-02-phase-04-authorization-v0.1.0.json",
+      "sha256": "0dd5e9c7cc519550b16e902a2cfdd10fa98f5cc1f62cc55a124347e90b451922"
+    },
+    {
+      "path": "docs/research/assets/bh-02-baseline/blazex-bh-02-phase-04-contract-v0.1.0.json",
+      "sha256": "037a42b96fda568d3787fbda9d27c6d133a86899c7c4ce12da7fc626ac397bcf"
+    },
+    {
+      "path": "docs/research/assets/bh-02-baseline/blazex-bh-02-phase-04-output-ledger-v0.4.0.json",
+      "sha256": "7cb21fee7f42f2ee8e14840f5a60bbffc87b8b5655151733891103cac48e87e1"
+    },
+    {
+      "path": "integration/conformance/presentation-intent-fixtures-v0.1.0.json",
+      "sha256": "86998ccbd9be44100e0be87a4249540022eaab6784433b4600ad4ca423c36665"
+    },
+    {
+      "path": "integration/conformance/conformance-index-v0.4.0.json",
+      "sha256": "a6d33e9f31c5925c9bd8334549b7a58679b0990934d1f099aad08fe3d8811714"
+    }
+  ],
+  "outcome": {
+    "presentation_intent_contract": "implemented-experimental-local-beam",
+    "geometry_state": "unimplemented",
+    "platform_accessibility_state": "unimplemented",
+    "renderer_state": "unimplemented",
+    "api_state": "experimental",
+    "support_state": "unsupported",
+    "next_phase": "BH-02 Phase 5 is eligible but not authorized"
+  }
+}

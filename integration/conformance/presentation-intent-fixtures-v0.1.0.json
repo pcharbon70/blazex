@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0.0",
+  "fixture_id": "BX-BH02-PRESENTATION-INTENT-FIXTURES-0.1",
+  "contract_ref": "BX-BH02-PHASE-04-CONTRACT-0.1",
+  "status": "passed-local-presentation-intent-evaluation",
+  "scenarios": [
+    {"id": "portable-token-reference", "input": "categorized space or size token with portable name", "expected": "retain an opaque reference without a literal renderer value"},
+    {"id": "logical-stack-layout", "input": "row or column stack with alignment, spacing, size, and growth", "expected": "validate constraints without producing geometry"},
+    {"id": "logical-grid-layout", "input": "grid intent with fill/content metrics and scrolling", "expected": "validate renderer-independent layout relationships"},
+    {"id": "virtualization-hint", "input": "axis, positive estimated extent, and bounded overscan", "expected": "retain a hint without measuring or materializing visible rows"},
+    {"id": "invalid-layout-range", "input": "minimum logical units exceed maximum logical units", "expected": "reject the complete layout annotation"},
+    {"id": "accessibility-relationship", "input": "field labelled by an exact in-tree semantic node", "expected": "validate role, state, name, and exact relationship target"},
+    {"id": "missing-accessibility-target", "input": "relationship points outside the accepted document generation", "expected": "reject the complete intent set"},
+    {"id": "focus-order", "input": "unique ordered target with one autofocus declaration", "expected": "retain deterministic portable focus participation"},
+    {"id": "focus-scope-restoration", "input": "group or surface scope requests wrapping and previous-focus restoration", "expected": "retain scope intent without executing host focus"},
+    {"id": "duplicate-focus-order", "input": "two targets declare the same order", "expected": "reject the complete intent set"},
+    {"id": "controlled-collection-selection", "input": "unique portable single or multiple selected keys", "expected": "retain controlled selection without a host object"},
+    {"id": "controlled-text-selection", "input": "field declares bounded anchor, focus, and direction", "expected": "retain the controlled range across valid update and event rerender"},
+    {"id": "stale-annotation-owner", "input": "annotation owner belongs to another generation", "expected": "reject the complete intent set"},
+    {"id": "atomic-intent-output", "input": "component rerender produces an invalid intent set", "expected": "reject the candidate and retain the prior accepted evaluation"}
+  ],
+  "geometry_results": [],
+  "accessibility_mapping_results": [],
+  "renderer_results": [],
+  "api_state": "experimental",
+  "support_state": "unsupported"
+}
