@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0.0",
+  "authorization_id": "BX-BH02-PHASE-06-AUTHORIZATION-0.1",
+  "status": "approved-phase-6-only",
+  "approved_at": "2026-09-05",
+  "approved_by": {
+    "identity": "pcharbon70",
+    "name": "Pascal Charbonneau",
+    "role": "repository-owner",
+    "approval_record": "Repository-owner request in the BlazeX Codex task to implement the next BH-02 phase section by section with one commit per section, one pull request, and final synchronized-main branch cleanup."
+  },
+  "activation": {
+    "base_branch": "main",
+    "base_revision": "4ae389f55de15f71d33628c994d17e9a6556ea06",
+    "base_remote_revision": "4ae389f55de15f71d33628c994d17e9a6556ea06",
+    "main_synchronized_before_branch": true,
+    "working_branch": "codex/bh-02-phase-06-dom-lowering",
+    "phase": "BH-02 Phase 6"
+  },
+  "approval_basis": [
+    {"path": "docs/research/assets/bh-02-baseline/blazex-bh-02-phase-05-completion-v0.1.0.json", "sha256": "b8158ec9ac181ab0ddd99690a49c5b31cb3cc8e93cf85d44a67a1d06da853041"},
+    {"path": "docs/research/20-notes/architecture-decisions/adr-0002-versioned-semantic-ui-tree.md", "sha256": "9d5fa9d3bae06e93836ad46fff79c2301456ee912263906e613b18f085283745"},
+    {"path": "docs/research/20-notes/architecture-decisions/adr-0004-renderer-backend-separation.md", "sha256": "c221548f8c42a4e2560293b66fdaa2ae5d254a433acef11799906e4243d35354"},
+    {"path": "docs/research/20-notes/architecture-decisions/adr-0007-native-control-portability-gate.md", "sha256": "4ebd2feb853a08c258141479726f14a60ed409b98cabdd5f0537ff9f02784343"},
+    {"path": "docs/research/20-notes/blazex-browser-rendering-and-profile-modes.md", "sha256": "bdac6b9c8c6311c0b2f4fcc239c5726a70948d928dda5270e3c73d17108ab351"}
+  ],
+  "authorized_scope": [
+    "Activate blazex_renderer_dom over the Phase 5 renderer and semantic contracts without server-framework dependencies.",
+    "Implement a bounded full-projection standalone DOM lowering for all current semantic nodes and intent annotations.",
+    "Implement a dependency-free browser driver for atomic projection replacement, semantic event normalization, focus, selection, and disposal.",
+    "Execute automated conformance in the active local Linux Chrome and Firefox development matrix.",
+    "Publish Phase 6 conformance fixtures and local validation evidence."
+  ],
+  "delivery_rules": {
+    "sections_in_order": true,
+    "commit_per_section": true,
+    "section_count": 4,
+    "single_pull_request": true,
+    "return_to_synchronized_main_after_delivery": true,
+    "delete_local_feature_branch_after_delivery": true,
+    "delete_remote_feature_branch_after_delivery": true
+  },
+  "not_authorized": [
+    "BH-02 Phases 7 through 8",
+    "stable or public renderer, DOM wire, browser driver, test, or component APIs",
+    "product component-family implementation or production browser-host delivery",
+    "incremental DOM reconciliation, hydration, server transport, LiveView or LocalLiveView lowering",
+    "visual or pixel equivalence, geometry or measurement, performance qualification, or manual accessibility conformance",
+    "native-control behavior, external dependencies, runtime or toolchain upgrades",
+    "browser, native-host, accessibility-conformance, security, performance, or release support claims"
+  ]
+}

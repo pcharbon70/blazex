@@ -246,4 +246,9 @@ headless snapshots or traces, Phase 5 conformance fixtures, or Phase 5 evidence
 changes, also run `python3 validate_bh02_renderer.py` and
 `python3 -m unittest test_validate_bh02_renderer.py`.
 
+When BH-02 Phase 6 authorization, standalone DOM lowering, the browser driver,
+Chrome/Firefox evidence, cross-renderer conformance, Phase 6 fixtures, or Phase
+6 evidence changes, also run `python3 validate_bh02_dom.py` and
+`python3 -m unittest test_validate_bh02_dom.py`.
+
 Do not commit, push, publish, or open a pull request unless the user asks.

@@ -13,11 +13,12 @@ the same semantic traces as the headless and DOM renderers. Its presence in the
 matrix supplies portability evidence without turning the experiment into a
 supported backend.
 
-Status: BH-02 Phase 5 adds a versioned renderer/headless fixture set with local
-BEAM lifecycle, canonical snapshot, and trace outcomes. This is a deterministic
-nonvisual oracle only. No geometry engine, visual backend, platform
-accessibility mapping, browser, or native-control result exists, and all
-support claims remain absent.
+Status: BH-02 Phase 6 adds a standalone full-projection DOM renderer, a strict
+dependency-free browser driver, a cross-renderer Mix suite, and automated local
+Linux Chrome and Firefox results. This remains experimental development
+evidence only. Incremental reconciliation, hydration, geometry, pixels, visual
+equivalence, manual accessibility conformance, native controls, and support
+claims remain absent.
 
 Versioned records:
 
@@ -38,3 +39,11 @@ Versioned records:
   normalization, trace, coordination, and rejection scenarios.
 - `conformance-index-v0.5.0.json` — Phase 5 local deterministic-headless result
   index; visual, geometry, browser, and native results remain empty.
+- `mix.exs` and `test/` — Phase 6 executable headless/DOM semantic parity and
+  lifecycle conformance suite.
+- `dom-renderer-fixtures-v0.1.0.json` — Phase 6 lowering, browser behavior,
+  lifecycle, rejection, isolation, and parity scenarios.
+- `dom-browser-matrix-v0.1.0.json` — exact local Linux Chrome and Firefox
+  executable versions and automated page-conformance outcomes.
+- `conformance-index-v0.6.0.json` — Phase 6 local standalone-DOM result index;
+  visual, pixel, manual-accessibility, and native results remain empty.

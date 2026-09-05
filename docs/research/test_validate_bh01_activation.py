@@ -95,11 +95,18 @@ class BH01ActivationValidationTests(unittest.TestCase):
             metadata = validator._load_json(
                 validator.REPO_ROOT / boundary_record["path"] / "blazex.project.json"
             )
-            self.assertEqual(metadata["dependencies"], [])
-            self.assertEqual(
-                metadata["planned_dependencies"],
-                boundary_record["allowed_planned_dependencies"],
-            )
+            if boundary_record["path"] == "packages/blazex_renderer_dom":
+                self.assertEqual(
+                    metadata["dependencies"],
+                    ["blazex_core", "blazex_effects", "blazex_ui_tree", "blazex_renderer"],
+                )
+                self.assertEqual(metadata["activation_phase"], "BH-02 Phase 6")
+            else:
+                self.assertEqual(metadata["dependencies"], [])
+                self.assertEqual(
+                    metadata["planned_dependencies"],
+                    boundary_record["allowed_planned_dependencies"],
+                )
 
     def test_fixture_evidence_is_nonproduction_and_phase9_evidence_is_conditional(self) -> None:
         fixtures = validator._load_json(validator.REPO_ROOT / "integration/fixtures/fixture-index.json")

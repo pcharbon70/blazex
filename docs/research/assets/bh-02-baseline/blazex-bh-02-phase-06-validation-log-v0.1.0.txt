@@ -1,0 +1,37 @@
+BH-02 Phase 6 normalized validation log
+recorded_at=2026-09-05
+base_revision=4ae389f55de15f71d33628c994d17e9a6556ea06
+source_revision_before_evidence=7150b1d
+branch=codex/bh-02-phase-06-dom-lowering
+
+PASS nine project-local mix format --check-formatted runs
+PASS nine project-local mix test runs: 79 tests, 0 failures
+PASS npm run build in packages/blazex_renderer_dom
+PASS npm test in packages/blazex_renderer_dom: 7 tests, 0 failures
+PASS python3 js/run-browser-conformance.py: Google Chrome 140.0.7339.80
+PASS python3 js/run-browser-conformance.py: Mozilla Firefox 134.0
+PASS python3 validate_bh02_dom.py
+PASS python3 -m unittest test_validate_bh02_dom.py: 16 tests
+PASS Phase 1-5 BH-02 validators and focused tests
+PASS python3 validate_archive.py and focused tests
+PASS BH-00 and BH-01 validators, focused tests, and generated-release check
+PASS JSON parsing, no-lock, and git diff --check gates
+
+NEGATIVE stale-or-missing-authorization=rejected
+NEGATIVE expanded-dom-tags-or-fields=rejected
+NEGATIVE changed-event-mapping=rejected
+NEGATIVE dependency-graph-expansion=rejected
+NEGATIVE server-framework-leakage=rejected
+NEGATIVE missing-or-failed-browser-evidence=rejected
+NEGATIVE missing-dom-scenario-coverage=rejected
+NEGATIVE visual-result-overclaim=rejected
+NEGATIVE stable-api-overclaim=rejected
+NEGATIVE support-overclaim=rejected
+NEGATIVE phase-7-authorization-overclaim=rejected
+
+LIMITATION experimental full-root replacement only; no incremental reconciliation
+LIMITATION no hydration, server transport, or LiveView lowering
+LIMITATION no geometry, pixel, visual-equivalence, or performance result
+LIMITATION no manual accessibility or assistive-technology conformance result
+LIMITATION no native-control result, stable public API, or support claim
+LIMITATION Phase 7 and later work unauthorized

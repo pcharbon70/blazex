@@ -1,0 +1,60 @@
+{
+  "schema_version": "1.0.0",
+  "contract_id": "BX-BH02-PHASE-06-CONTRACT-0.1",
+  "status": "authorized-experimental",
+  "authorization_ref": "BX-BH02-PHASE-06-AUTHORIZATION-0.1",
+  "package_boundary": {
+    "package": "blazex_renderer_dom",
+    "dependencies": ["blazex_core", "blazex_effects", "blazex_ui_tree", "blazex_renderer"],
+    "forbidden_dependencies": ["phoenix", "plug", "live_view", "local_live_view", "blazex_renderer_dom_liveview"],
+    "external_dependencies": "none"
+  },
+  "dom_capabilities": {
+    "tree_versions": [1],
+    "node_kinds": ["text", "group", "action", "field", "selection", "collection", "surface"],
+    "layout_modes": ["none", "stack", "grid", "overlay"],
+    "accessibility_roles": ["generic", "text", "group", "button", "text_field", "checkbox", "list", "list_item", "dialog", "status"],
+    "features": ["event_bindings", "logical_layout", "accessibility", "focus", "selection"]
+  },
+  "dom_batch": {
+    "version": 1,
+    "fields": ["version", "owner", "generation", "revision", "transition", "root", "digest"],
+    "projection_transitions": ["mount", "update", "replace"],
+    "dispose_root": "none",
+    "application": "atomic-full-root-replacement",
+    "encoding": "plain-versioned-wire-map"
+  },
+  "dom_node": {
+    "version": 1,
+    "fields": ["version", "id", "tag", "text", "attributes", "listeners", "focus", "selection", "children"],
+    "tags": ["span", "div", "button", "input", "ul", "li", "section"],
+    "id": "bx-plus-lowercase-sha256-prefix-of-canonical-identity",
+    "child_order": "semantic-child-order",
+    "unknown_tag_or_field": "reject"
+  },
+  "dom_listener": {
+    "fields": ["semantic", "native", "owner", "source"],
+    "semantic_events": ["activate", "change", "submit", "select", "expand", "dismiss", "move", "reorder", "increment", "decrement", "request_open", "request_close", "request_page"],
+    "native_mapping": {"activate": "click", "change": "input", "submit": "submit", "select": "change", "expand": "click", "dismiss": "click", "move": "pointermove", "reorder": "drop", "increment": "click", "decrement": "click", "request_open": "click", "request_close": "click", "request_page": "click"},
+    "payloads": "bounded-value-for-change-and-select-empty-for-other-current-events",
+    "retains_browser_event": false
+  },
+  "lowering": {
+    "accessibility": "semantic-role-name-description-state-relationship-and-live-to-bounded-dom-attributes",
+    "layout": "logical-intent-to-data-attributes-without-calculated-geometry",
+    "focus": "tab-order-autofocus-and-same-id-update-restoration",
+    "selection": "controlled-value-or-text-range-application",
+    "tokens": "portable-token-reference-only-no-resolved-visual-value"
+  },
+  "browser_driver": {
+    "methods": ["apply", "snapshot", "dispose"],
+    "event_callback": "plain-semantic-event-wire-record",
+    "stale_generation_or_revision": "reject-before-mutation",
+    "dispose": "idempotent-remove-root-and-listeners",
+    "global_or_network_access": "forbidden"
+  },
+  "active_browser_matrix": ["linux-google-chrome", "linux-firefox"],
+  "explicitly_deferred": ["incremental-reconciliation", "hydration", "server-transport", "liveview-lowering", "geometry", "measurement", "pixel-output", "visual-equivalence", "manual-accessibility-conformance", "native-controls", "performance-qualification"],
+  "api_state": "experimental",
+  "support_state": "unsupported"
+}

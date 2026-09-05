@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0.0",
+  "record_id": "BX-BH02-DECISION-PHASE-06-GO",
+  "state": "passed",
+  "decided_at": "2026-09-05",
+  "authorization_ref": "BX-BH02-PHASE-06-AUTHORIZATION-0.1",
+  "contract_ref": "BX-BH02-PHASE-06-CONTRACT-0.1",
+  "section_commits": [
+    {"section": "6.1", "commit": "9161542"},
+    {"section": "6.2", "commit": "a265ad1"},
+    {"section": "6.3", "commit": "7150b1d"},
+    {"section": "6.4", "commit": "resolve-from-this-records-git-commit"}
+  ],
+  "artifact_hashes": [
+    {"path": "docs/research/assets/bh-02-baseline/blazex-bh-02-phase-06-authorization-v0.1.0.json", "sha256": "8f58a205e6637409d2e70cac0466d7a53002876ca1c5492292a71ea897967493"},
+    {"path": "docs/research/assets/bh-02-baseline/blazex-bh-02-phase-06-contract-v0.1.0.json", "sha256": "bff23f61d7e6ac468d847df7618ecbc9e78aeef1cc454543da36ed9fdd442e89"},
+    {"path": "docs/research/assets/bh-02-baseline/blazex-bh-02-phase-06-output-ledger-v0.6.0.json", "sha256": "285c3bff7435b1afe3fa4d3859a6efceda568e8e732f17d7bd5adf58707ec590"},
+    {"path": "integration/conformance/dom-renderer-fixtures-v0.1.0.json", "sha256": "c2ea66f720dbfdc7325dc15596e3f431cb0d85c4a2df1852cb27891c1e5a6124"},
+    {"path": "integration/conformance/dom-browser-matrix-v0.1.0.json", "sha256": "610e744e2931745201aca645b6299c9ebefebdc3a79c5484d890d56ba745497a"},
+    {"path": "integration/conformance/conformance-index-v0.6.0.json", "sha256": "c03b7e975afd5e275c469672696c4f2129ca8d88ea074f13e58e50fde1383392"}
+  ],
+  "outcome": {
+    "standalone_dom": "implemented-experimental-full-projection-local-beam-node-chrome-firefox",
+    "headless_dom_semantic_parity": "passed-local",
+    "incremental_reconciliation": "unimplemented",
+    "hydration": "unimplemented",
+    "server_transport": "unimplemented",
+    "visual_equivalence": "unexecuted",
+    "manual_accessibility": "unexecuted",
+    "native_control_state": "unimplemented",
+    "api_state": "experimental",
+    "support_state": "unsupported",
+    "next_phase": "BH-02 Phase 7 is eligible but not authorized"
+  }
+}

@@ -361,6 +361,12 @@ def _validate_repository_activation(
     ledger: dict[str, Any],
     activation_document: dict[str, Any] | None = None,
 ) -> None:
+    phase6_dom_authorization = RESEARCH_ROOT / "assets/bh-02-baseline/blazex-bh-02-phase-06-authorization-v0.1.0.json"
+    dom_successor_active = False
+    if phase6_dom_authorization.is_file():
+        phase6_auth = _load_json(phase6_dom_authorization)
+        dom_successor_active = phase6_auth.get("status") == "approved-phase-6-only"
+
     activation_schema = _load_json(ACTIVATION_SCHEMA)
     activation = activation_document or _load_json(REPOSITORY_ACTIVATION)
     try:
@@ -402,8 +408,20 @@ def _validate_repository_activation(
         _require(metadata.get("id") == record["id"] and metadata.get("path") == record["path"], f"ownership identity mismatch: {record['path']}")
         _require(metadata.get("kind") == record["kind"] and metadata.get("owner_role") == record["owner"], f"ownership kind/owner mismatch: {record['path']}")
         _require(metadata.get("manifest") == record["manifest"], f"ownership manifest mismatch: {record['path']}")
-        _require(metadata.get("dependencies") == [], f"Phase 1 acquired a dependency: {record['path']}")
-        _require(metadata.get("planned_dependencies") == record["allowed_planned_dependencies"], f"planned dependency graph changed: {record['path']}")
+        if record["path"] == "packages/blazex_renderer_dom" and dom_successor_active:
+            _require(
+                record["allowed_planned_dependencies"] == [],
+                "planned dependency graph changed: packages/blazex_renderer_dom",
+            )
+            _require(
+                metadata.get("dependencies") == ["blazex_core", "blazex_effects", "blazex_ui_tree", "blazex_renderer"],
+                "authorized BH-02 Phase 6 DOM dependencies differ",
+            )
+            _require(metadata.get("planned_dependencies") == [], "authorized DOM planned dependencies differ")
+            _require(metadata.get("activation_phase") == "BH-02 Phase 6", "DOM successor activation phase differs")
+        else:
+            _require(metadata.get("dependencies") == [], f"Phase 1 acquired a dependency: {record['path']}")
+            _require(metadata.get("planned_dependencies") == record["allowed_planned_dependencies"], f"planned dependency graph changed: {record['path']}")
         _require(metadata.get("public_api_state") == record["api_state"], f"API state changed: {record['path']}")
         _require(set(metadata.get("planned_dependencies", [])) <= active_ids, f"planned edge leaves activated slice: {record['path']}")
         for source_root in record["source_roots"]:
@@ -432,6 +450,8 @@ def _validate_repository_activation(
     )
     production_boundaries = [record for record in boundaries if record["kind"] not in {"integration-fixtures", "integration-benchmarks"}]
     for record in production_boundaries:
+        if record["path"] == "packages/blazex_renderer_dom" and dom_successor_active:
+            continue
         for source in _source_files(REPO_ROOT / record["path"]):
             text = source.read_text(encoding="utf-8")
             for token in inactive_import_tokens:

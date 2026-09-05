@@ -11,10 +11,19 @@ export class FakeElement {
     this.disabled = false;
     this.readOnly = false;
     this.hidden = false;
+    this.selectionStart = null;
+    this.selectionEnd = null;
+    this.selectionDirection = null;
   }
 
   append(node) {
     this.insertBefore(node, null);
+  }
+
+  replaceChildren(...nodes) {
+    for (const child of this.children) child.parentNode = null;
+    this.children = [];
+    for (const node of nodes) this.append(node);
   }
 
   insertBefore(node, before) {
@@ -37,6 +46,11 @@ export class FakeElement {
     for (const handler of this.listeners.get(name) ?? []) handler(event);
   }
   focus() { this.ownerDocument.activeElement = this; }
+  setSelectionRange(start, end, direction = "none") {
+    this.selectionStart = start;
+    this.selectionEnd = end;
+    this.selectionDirection = direction;
+  }
 }
 
 export class FakeDocument {

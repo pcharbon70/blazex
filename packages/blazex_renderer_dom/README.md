@@ -10,11 +10,8 @@ optional LiveView patching integration belongs in
 `blazex_renderer_dom_liveview`, allowing the Plug and future WebView profiles to
 reuse the DOM renderer without inheriting Phoenix dependencies.
 
-Status: experimental BH-01 Phase 5 fixture adapter. The dependency-free
-JavaScript module owns one closed, value-only DOM operation set for the
-disposable local-browser feasibility scenario. It maps opaque fixture kinds to
-fixed elements, normalizes five allowlisted browser events, tracks every root
-and listener by generation, and disposes them deterministically. It rejects
-arbitrary tags, HTML, selectors, styles, properties, events, host objects,
-network access, and executable values. This is not a general renderer or stable
-public API and must be replaced by BH-02 contracts.
+Status: experimental BH-02 Phase 6 standalone renderer. The Elixir backend
+lowers all current semantic nodes and presentation intent to deterministic,
+versioned full-root wire projections. It depends only on the neutral Phase 5
+contract graph. Incremental reconciliation, hydration, server integration,
+visual qualification, stable APIs, and support remain outside this package.
