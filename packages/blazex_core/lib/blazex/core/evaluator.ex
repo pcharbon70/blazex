@@ -146,12 +146,18 @@ defmodule BlazeX.Core.Evaluator do
   end
 
   defp validate_evaluation(%Evaluation{} = evaluation, stage) do
+    state_valid =
+      case evaluation.mode do
+        :pure -> is_nil(evaluation.state)
+        :stateful -> Portable.valid?(evaluation.state)
+        _other -> false
+      end
+
     valid =
       is_atom(evaluation.component) and evaluation.mode in [:pure, :stateful] and
         Identity.valid?(evaluation.identity) and is_map(evaluation.props) and
         Portable.valid?(evaluation.props) and is_integer(evaluation.revision) and
-        evaluation.revision >= 0 and
-        (evaluation.mode == :pure or Portable.valid?(evaluation.state))
+        evaluation.revision >= 0 and state_valid
 
     if valid,
       do: :ok,

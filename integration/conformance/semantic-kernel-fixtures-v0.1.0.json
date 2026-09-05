@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0.0",
+  "fixture_set_id": "BX-BH02-SEMANTIC-KERNEL-FIXTURES-0.1",
+  "contract_ref": "BX-BH02-PHASE-02-CONTRACT-0.1",
+  "status": "passed-local-semantic-evaluation",
+  "scenarios": [
+    {
+      "id": "semantic-text-tree",
+      "category": "semantic-tree",
+      "transition": "mount",
+      "expected": ["tree-version-1", "text-content-preserved", "preorder-deterministic"]
+    },
+    {
+      "id": "pure-mount-update",
+      "category": "component-evaluation",
+      "transition": "mount-update",
+      "expected": ["identity-preserved", "revision-advances", "validated-output"]
+    },
+    {
+      "id": "stateful-mount-update",
+      "category": "component-evaluation",
+      "transition": "mount-update",
+      "expected": ["portable-state-initialized", "portable-state-updated", "validated-output"]
+    },
+    {
+      "id": "keyed-reorder",
+      "category": "identity",
+      "transition": "update",
+      "expected": ["sibling-order-changes", "keyed-identities-preserved"]
+    },
+    {
+      "id": "replacement-generation",
+      "category": "identity",
+      "transition": "replace",
+      "expected": ["root-and-path-preserved", "generation-increments", "revision-restarts"]
+    },
+    {
+      "id": "duplicate-sibling-rejection",
+      "category": "semantic-tree",
+      "transition": "validate",
+      "expected": ["duplicate-identity-rejected", "duplicate-key-rejected", "no-partial-acceptance"]
+    },
+    {
+      "id": "opaque-term-rejection",
+      "category": "portability",
+      "transition": "mount",
+      "expected": ["opaque-props-rejected", "opaque-state-rejected", "diagnostic-normalized"]
+    },
+    {
+      "id": "invalid-output-rejection",
+      "category": "component-evaluation",
+      "transition": "mount-update",
+      "expected": ["malformed-tree-rejected", "wrong-root-rejected", "previous-evaluation-retained"]
+    }
+  ],
+  "renderer_results": [],
+  "support_state": "unsupported",
+  "limitations": [
+    "These fixtures cover only local host-neutral semantic evaluation.",
+    "No headless renderer, browser adapter, or native-control adapter executed in Phase 2.",
+    "Events, effects, resources, layout, accessibility, focus, selection, and disposal remain unimplemented."
+  ]
+}

@@ -13,6 +13,14 @@ the same semantic traces as the headless and DOM renderers. Its presence in the
 matrix supplies portability evidence without turning the experiment into a
 supported backend.
 
-Status: activated as a BH-02 Phase 1 evidence boundary. The versioned index is
-empty: no semantic fixture, canonical trace, backend result, or support claim
-exists yet.
+Status: BH-02 Phase 2 contains a versioned semantic-kernel fixture set and
+local evaluation outcomes. No renderer backend has executed these fixtures,
+so renderer conformance and all support claims remain absent.
+
+Versioned records:
+
+- `conformance-index-v0.1.0.json` — immutable Phase 1 empty activation index.
+- `semantic-kernel-fixtures-v0.1.0.json` — Phase 2 semantic-tree, identity,
+  and evaluation scenarios with expected outcomes.
+- `conformance-index-v0.2.0.json` — Phase 2 fixture/result index; renderer
+  results remain empty.

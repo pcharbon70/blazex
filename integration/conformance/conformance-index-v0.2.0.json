@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "contract": "blazex.bh02.conformance-index/0.2",
+  "status": "phase-2-semantic-kernel-passed-local",
+  "activation_phase": "BH-02 Phase 2",
+  "owner_role": "quality-owner",
+  "authorization": {
+    "path": "docs/research/assets/bh-02-baseline/blazex-bh-02-phase-02-authorization-v0.1.0.json",
+    "sha256": "6fbbcfeed1bc4b1da9d0c970f9a73fdba2d6b7afdf4876bfff7bdba4355775b4"
+  },
+  "semantic_contract": {
+    "path": "docs/research/assets/bh-02-baseline/blazex-bh-02-phase-02-contract-v0.1.0.json",
+    "sha256": "b7e98bf1fcbd6c4c6dead077cd4ddb4203fee957e944674e7642db458fc2ce04"
+  },
+  "fixture_sets": [
+    {
+      "id": "BX-BH02-SEMANTIC-KERNEL-FIXTURES-0.1",
+      "path": "integration/conformance/semantic-kernel-fixtures-v0.1.0.json",
+      "sha256": "74e7db1e0194cb97f7d1c3b37b815d3cd0139050b75382078138570a58e04b78",
+      "scenario_count": 8,
+      "result": "passed-local-semantic-evaluation"
+    }
+  ],
+  "semantic_kernel_results": [
+    {
+      "environment": "local-beam",
+      "result": "passed",
+      "evidence": [
+        "packages/blazex_core/test/blazex/core_boundary_test.exs",
+        "packages/blazex_ui_tree/test/blazex/ui_tree_boundary_test.exs",
+        "profiles/headless/test/blazex/semantic_kernel_integration_test.exs"
+      ]
+    }
+  ],
+  "canonical_traces": [],
+  "backend_results": [],
+  "next_authorized_work": null,
+  "api_state": "experimental",
+  "support_state": "unsupported"
+}

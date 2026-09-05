@@ -17,7 +17,7 @@ aliases:
 
 Back to milestone: [README](README.md)
 
-- [ ] 2 Phase - Semantic Nodes, Identity, and Portable Component Evaluation.
+- [x] 2 Phase - Semantic Nodes, Identity, and Portable Component Evaluation.
 
   Define the smallest executable semantic-tree and component-evaluation
   contract that can remain independent of every renderer, host, runtime, and
@@ -72,22 +72,22 @@ Back to milestone: [README](README.md)
       - [x] 2.3.2.1 Subtask - Add UI-tree integration that validates component output and root identity after mount, update, and replacement.
       - [x] 2.3.2.2 Subtask - Prove pure evaluation, stateful transitions, keyed reorder identity, replacement generation, malformed callbacks, and invalid-tree rejection.
 
-  - [ ] 2.4 Section - Run the Phase 2 integration gate and publish evidence.
+  - [x] 2.4 Section - Run the Phase 2 integration gate and publish evidence.
 
     Demonstrate the contract as a coherent experimental slice while preventing
     later semantics or platform objects from entering it.
 
-    - [ ] 2.4.1 Task - Add conformance and governance evidence.
+    - [x] 2.4.1 Task - Add conformance and governance evidence.
 
-      - [ ] 2.4.1.1 Subtask - Publish versioned semantic/evaluation fixtures and expected outcomes without claiming renderer conformance.
-      - [ ] 2.4.1.2 Subtask - Add fail-closed validation for authorization, bound hashes, exact contract vocabulary, API ownership, fixture coverage, forbidden leakage, and premature later-phase claims.
-      - [ ] 2.4.1.3 Subtask - Add negative tests for stale authorization, expanded kinds, invalid identity material, renderer leakage, missing fixture coverage, and stable/support overclaims.
+      - [x] 2.4.1.1 Subtask - Publish versioned semantic/evaluation fixtures and expected outcomes without claiming renderer conformance.
+      - [x] 2.4.1.2 Subtask - Add fail-closed validation for authorization, bound hashes, exact contract vocabulary, API ownership, fixture coverage, forbidden leakage, and premature later-phase claims.
+      - [x] 2.4.1.3 Subtask - Add negative tests for stale authorization, expanded kinds, invalid identity material, renderer leakage, missing fixture coverage, and stable/support overclaims.
 
-    - [ ] 2.4.2 Task - Execute and record the complete Phase 2 gate.
+    - [x] 2.4.2 Task - Execute and record the complete Phase 2 gate.
 
-      - [ ] 2.4.2.1 Subtask - Run all affected Mix tests and format checks, BH-02 Phase 1 and Phase 2 validators, archive validation, inherited validators, and patch hygiene checks.
-      - [ ] 2.4.2.2 Subtask - Record tool identities, commands, hashes, section commits, limitations, and a truthful pass or stop decision.
-      - [ ] 2.4.2.3 Subtask - Leave Phase 3 unauthorized and make no renderer, browser, native-control, accessibility, performance, or support claim.
+      - [x] 2.4.2.1 Subtask - Run all affected Mix tests and format checks, BH-02 Phase 1 and Phase 2 validators, archive validation, inherited validators, and patch hygiene checks.
+      - [x] 2.4.2.2 Subtask - Record tool identities, commands, hashes, section commits, limitations, and a truthful pass or stop decision.
+      - [x] 2.4.2.3 Subtask - Leave Phase 3 unauthorized and make no renderer, browser, native-control, accessibility, performance, or support claim.
 
 ## Section delivery rule
 
@@ -102,6 +102,7 @@ external dependency and does not stabilize its experimental APIs.
 - [ADR-0002 — Versioned semantic UI tree](../../../20-notes/architecture-decisions/adr-0002-versioned-semantic-ui-tree.md)
 - [Host-neutral architecture](../../../20-notes/host-neutral-blazex-architecture-and-native-control-backends.md)
 - [Foundational component semantics inquiry](../../../40-inquiries/which-foundational-component-semantics-does-blazex-need.md)
+- [Phase 2 implementation evidence](phase-02-implementation-evidence.md)
 
 ## Sources
 

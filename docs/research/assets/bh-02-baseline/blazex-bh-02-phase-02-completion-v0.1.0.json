@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0.0",
+  "record_id": "BX-BH02-DECISION-PHASE-02-GO",
+  "record_type": "decision",
+  "state": "passed",
+  "recorded_at": "2026-09-05T14:27:07Z",
+  "source_revision": "42d66ec",
+  "authorization_ref": "BX-BH02-PHASE-02-AUTHORIZATION-0.1",
+  "contract_ref": "BX-BH02-PHASE-02-CONTRACT-0.1",
+  "section_commits": [
+    {"section": "2.1", "commit": "e22fbd4"},
+    {"section": "2.2", "commit": "9b8ac52"},
+    {"section": "2.3", "commit": "42d66ec"},
+    {"section": "2.4", "commit": "resolve-from-this-records-git-commit"}
+  ],
+  "artifact_hashes": [
+    {"path": "docs/research/assets/bh-02-baseline/blazex-bh-02-phase-02-authorization-v0.1.0.json", "sha256": "6fbbcfeed1bc4b1da9d0c970f9a73fdba2d6b7afdf4876bfff7bdba4355775b4"},
+    {"path": "docs/research/assets/bh-02-baseline/blazex-bh-02-phase-02-contract-v0.1.0.json", "sha256": "b7e98bf1fcbd6c4c6dead077cd4ddb4203fee957e944674e7642db458fc2ce04"},
+    {"path": "docs/research/assets/bh-02-baseline/blazex-bh-02-phase-02-output-ledger-v0.2.0.json", "sha256": "fd5d3772e2ab900f24fa5a9438b70902c1eb367696732778abd83a781b0dd657"},
+    {"path": "integration/conformance/semantic-kernel-fixtures-v0.1.0.json", "sha256": "74e7db1e0194cb97f7d1c3b37b815d3cd0139050b75382078138570a58e04b78"},
+    {"path": "integration/conformance/conformance-index-v0.2.0.json", "sha256": "e74da6a416631edecd345bf0e843ae79fade8a68ca325aec37c02476efa9d552"}
+  ],
+  "outcome": {
+    "summary": "BH-02 Phase 2 semantic node, identity, and component-evaluation gate passed.",
+    "next_phase": "BH-02 Phase 3 is eligible but not authorized.",
+    "api_state": "experimental",
+    "support_state": "unsupported"
+  },
+  "limitations": [
+    "Only local BEAM semantic-tree, identity, and pure/stateful evaluation behavior was proved.",
+    "Events, effects, capabilities, resources, layout, accessibility, focus, selection, renderer lifecycle, and disposal remain unimplemented.",
+    "No renderer backend executed and no browser, native-control, performance, accessibility, or support result exists.",
+    "Windows, macOS, physical-device, unavailable-browser, and manual assistive-technology evidence remains deferred."
+  ]
+}
