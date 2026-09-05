@@ -700,7 +700,9 @@ shell, SDL3 plus Skia as the leading custom-scene spike hypothesis,
 renderer-local layout and hit testing, the existing headless renderer as the
 semantic oracle, pinned Skia Raster/Cairo comparisons, separate
 SkParagraph/Pango-HarfBuzz text-layout comparisons, explicit accessibility
-subsystems, and a wxWidgets actual-control proof. These are research
+subsystems, and direct Win32/AppKit/GTK actual-control proofs. Qt and
+wxWidgets are retained only as historical comparisons and are excluded from
+the active design. These are research
 candidates, not accepted production dependencies; the custom-scene program
 does not expand ADR-0007's resolution requirements.
 

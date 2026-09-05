@@ -15,6 +15,7 @@ The initial profiles are:
 - `browser_plug` — smaller browser host proving Phoenix and LiveView independence.
 - `headless` — deterministic nonvisual composition for conformance and tooling.
 
-BH-01 Phase 1 activates only `browser_phoenix` as a dependency-free
-experimental skeleton. `browser_plug` and `headless` remain README-only
-boundaries so their exclusions stay independently inspectable.
+BH-01 activates `browser_phoenix` for the completed feasibility baseline.
+BH-02 Phase 1 activates `headless` as an inward-only experimental Mix
+composition without implementing a component or renderer. `browser_plug`
+remains a README-only boundary.

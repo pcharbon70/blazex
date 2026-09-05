@@ -234,9 +234,25 @@ def validate_reconciliation(document: dict[str, Any], source_ids: set[str]) -> N
             for record in activation.get("boundaries", [])
             if record.get("kind") == "elixir-package"
         }
+        bh02_authorization_path = ROOT / "assets/bh-02-baseline/blazex-bh-02-authorization-v0.1.0.json"
+        bh02_activation_path = ROOT / "assets/bh-02-baseline/blazex-bh-02-repository-activation-v0.1.0.json"
+        if bh02_authorization_path.is_file() or bh02_activation_path.is_file():
+            if not bh02_authorization_path.is_file() or not bh02_activation_path.is_file():
+                raise GovernanceValidationError("BH-02 activation records are incomplete")
+            bh02_authorization = load_json(bh02_authorization_path)
+            bh02_activation = load_json(bh02_activation_path)
+            if bh02_authorization.get("status") != "approved-phase-1-only":
+                raise GovernanceValidationError("later package activation lacks approved BH-02 Phase 1 scope")
+            if bh02_activation.get("authorization_ref") != bh02_authorization.get("authorization_id"):
+                raise GovernanceValidationError("BH-02 activation authorization link is invalid")
+            authorized_packages |= {
+                Path(record["path"]).name
+                for record in bh02_activation.get("boundaries", [])
+                if record.get("kind") == "elixir-package"
+            }
         if activated_packages != authorized_packages:
             raise GovernanceValidationError(
-                f"repository package activation differs from approved BH-01 slice: {sorted(activated_packages ^ authorized_packages)}"
+                f"repository package activation differs from approved milestone slices: {sorted(activated_packages ^ authorized_packages)}"
             )
         for package in activated_packages:
             package_dir = REPO_ROOT / "packages" / package

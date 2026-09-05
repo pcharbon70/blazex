@@ -76,7 +76,8 @@ failure paths, and real native control instances.
 
 ### Cross-renderer vertical slice
 
-Implement the same examples in headless, DOM, and one native toolkit adapter:
+Implement the same examples in headless, DOM, and direct Win32, AppKit, and
+GTK 4 adapters:
 
 - stack/text/button;
 - controlled text field and checkbox;
@@ -95,9 +96,9 @@ Implement the same examples in headless, DOM, and one native toolkit adapter:
 - Treat Tauri/webview as a capability and packaging test, not native-renderer
   evidence.
 
-### Native toolkit selection
+### Direct native-control adapters
 
-Compare at least one cross-platform toolkit and platform-specific adapters on:
+Compare the three platform-specific adapters on:
 
 - actual native controls and text input/IME behavior;
 - accessibility APIs;
@@ -107,6 +108,9 @@ Compare at least one cross-platform toolkit and platform-specific adapters on:
 - theming/custom drawing;
 - grids, trees, menus, dialogs, and popovers; and
 - Windows, macOS, and Linux coverage.
+
+Qt and wxWidgets are excluded from the active proof, dependency, benchmark,
+and fallback set. Their older source notes remain historical records only.
 
 ## Findings
 
@@ -143,13 +147,13 @@ Compare at least one cross-platform toolkit and platform-specific adapters on:
   supports a target-specific BEAM release plus an external native host. This
   gives the OS event loop a stable main thread and keeps native renderer faults
   outside the VM.
-- A custom-drawn SDL3/Skia renderer cannot satisfy ADR-0007 by itself.
-  [wxWidgets](../30-sources/wxwidgets-project-2026-native-control-toolkit.md)
-  is the leading bounded actual-control proof, while
-  [Qt](../30-sources/qt-project-2026-desktop-ui-platform.md) is the leading
-  mature integration oracle and
-  [Slint](../30-sources/slint-project-2026-desktop-ui-runtime.md) is the
-  strongest lean Rust/custom-scene comparison.
+- A custom-drawn SDL3/Skia renderer cannot satisfy ADR-0007 by itself. The
+  [direct platform-control evidence](../30-sources/platform-vendors-2026-direct-native-control-apis.md)
+  supports independent Win32, AppKit, and GTK 4 materializers behind the same
+  semantic protocol. This makes actual control ownership explicit at the
+  cost of three implementations. [Slint](../30-sources/slint-project-2026-desktop-ui-runtime.md)
+  remains only an optional custom-scene comparison when configured without an
+  excluded backend.
 - Research on [cross-platform accessibility
   gaps](../30-sources/mascetti-et-al-2021-cross-platform-accessibility.md),
   [semantic accessibility
@@ -167,18 +171,18 @@ Compare at least one cross-platform toolkit and platform-specific adapters on:
 | Semantic oracle | existing headless renderer | deterministic normalized semantic tree, state/event traces, identity, and capabilities | pixels, platform text, or native controls |
 | Pinned raster comparison | Skia Raster and Cairo over the same already-shaped display list | backend independence, fallback, and image tolerances under pinned fonts/resources/versions | deterministic cross-OS pixels or text shaping |
 | Text-layout comparison | SkParagraph/SkShaper and Pango/HarfBuzz | shaping, line-break, cluster, caret, and selection conformance for pinned fixtures | final GPU behavior or native controls |
-| Actual native controls | wxWidgets F0 adapter | semantic mapping to Win32/Cocoa/GTK controls where available | full-catalog consistency or custom-control accessibility |
-| Mature integration oracle | Qt Widgets and Qt Quick, evaluated separately | expected text, IME, DPI, accessibility, graphics, and deployment baseline | exact OS ownership of most child controls |
-| Rust alternative | winit + AccessKit + Skia, or Slint | lower-friction Rust host architecture | production maturity without measurements |
+| Actual native controls | direct Win32, AppKit, and GTK 4 F0 adapters | semantic mapping to concrete platform controls and accessibility APIs on each target | full-catalog consistency, cross-target geometry, or custom-control accessibility |
+| Adapter convergence | common protocol bindings, fixtures, and conformance tests across all three direct adapters | whether one semantic ABI survives three platform object and event models | production cost without measurements |
+| Rust custom-scene alternative | winit + AccessKit + Skia, or Slint without an excluded backend | lower-friction Rust scene-host architecture | actual native controls or production maturity without measurements |
 
 ## Outcome
 
 Open. Desk research now supplies a falsifiable host architecture and a ranked
 proof program, but no native renderer or control adapter has been implemented.
 Resolution still requires the same portable vertical slice to pass headless,
-DOM, and actual-native-control evidence as required by ADR-0007, including
-state, event, identity, focus, accessibility, effect/resource, and disposal
-behavior. The custom-scene, full IME, host-failure, packaging, and three-OS
-distribution program is valuable additional product-renderer evidence, but it
-is not part of ADR-0007's resolution unless that accepted decision is formally
-superseded.
+DOM, and direct Win32/AppKit/GTK actual-native-control evidence as required by
+ADR-0007, including state, event, identity, focus, accessibility,
+effect/resource, and disposal behavior. Qt and wxWidgets are not candidates.
+The custom-scene, full IME, host-failure, packaging, and three-OS distribution
+program is valuable additional product-renderer evidence, but it is not part
+of ADR-0007's resolution unless that accepted decision is formally superseded.

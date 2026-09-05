@@ -9,5 +9,5 @@ native-toolkit objects. Renderer-specific lowering belongs in renderer
 packages. The tree may refer to opaque resource identities, but effect and
 resource lifecycle belongs to `blazex_effects`.
 
-Status: directory scaffold only; create the Mix project when its implementation
-milestone begins.
+Status: experimental BH-02 Phase 1 Mix skeleton. Semantic tree data and APIs
+remain unimplemented until their later authorized phase.

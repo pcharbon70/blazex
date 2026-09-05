@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0.0",
+  "id": "blazex_ui_tree",
+  "path": "packages/blazex_ui_tree",
+  "kind": "elixir-package",
+  "activation_phase": "BH-02 Phase 1",
+  "status": "experimental-activation-skeleton",
+  "owner_role": "ui-tree-owner",
+  "module_roots": ["BlazeX.UITree"],
+  "manifest": "mix.exs",
+  "test_entrypoints": ["test"],
+  "dependencies": ["blazex_core"],
+  "must_not_own": ["component-evaluation", "renderer-lifecycle", "dom-or-native-lowering"],
+  "forbidden_dependencies": ["phoenix", "plug", "live_view", "local_live_view", "popcorn", "atomvm", "blazex_renderer_dom", "html", "css", "javascript", "qt", "wxwidgets"],
+  "public_api_state": "experimental-unimplemented"
+}

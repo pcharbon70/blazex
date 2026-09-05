@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0.0",
+  "activation_id": "BX-BH02-REPOSITORY-ACTIVATION-0.1",
+  "status": "phase-1-experimental-skeletons",
+  "authorization_ref": "BX-BH02-AUTHORIZATION-0.1",
+  "activated_at": "2026-09-05",
+  "boundaries": [
+    {"id": "blazex_core", "path": "packages/blazex_core", "kind": "elixir-package", "owner_role": "core-owner", "manifest": "mix.exs", "dependencies": []},
+    {"id": "blazex_effects", "path": "packages/blazex_effects", "kind": "elixir-package", "owner_role": "effects-owner", "manifest": "mix.exs", "dependencies": ["blazex_core"]},
+    {"id": "blazex_ui_tree", "path": "packages/blazex_ui_tree", "kind": "elixir-package", "owner_role": "ui-tree-owner", "manifest": "mix.exs", "dependencies": ["blazex_core"]},
+    {"id": "blazex_renderer", "path": "packages/blazex_renderer", "kind": "elixir-package", "owner_role": "renderer-contract-owner", "manifest": "mix.exs", "dependencies": ["blazex_core", "blazex_effects", "blazex_ui_tree"]},
+    {"id": "blazex_renderer_headless", "path": "packages/blazex_renderer_headless", "kind": "elixir-package", "owner_role": "headless-renderer-owner", "manifest": "mix.exs", "dependencies": ["blazex_core", "blazex_effects", "blazex_ui_tree", "blazex_renderer"]},
+    {"id": "blazex_test", "path": "packages/blazex_test", "kind": "elixir-package", "owner_role": "test-support-owner", "manifest": "mix.exs", "dependencies": ["blazex_core", "blazex_effects", "blazex_ui_tree", "blazex_renderer"]},
+    {"id": "profiles/headless", "path": "profiles/headless", "kind": "executable-profile", "owner_role": "headless-profile-owner", "manifest": "mix.exs", "dependencies": ["blazex_core", "blazex_effects", "blazex_ui_tree", "blazex_renderer", "blazex_renderer_headless", "blazex_test"]},
+    {"id": "integration/conformance", "path": "integration/conformance", "kind": "integration-conformance", "owner_role": "quality-owner", "manifest": "conformance-index-v0.1.0.json", "dependencies": []},
+    {"id": "experiments/native_renderer_spike", "path": "experiments/native_renderer_spike", "kind": "bounded-experiment", "owner_role": "native-renderer-owner", "manifest": "experiment-index-v0.1.0.json", "dependencies": []}
+  ],
+  "evidence_boundary": {
+    "dependencies": "local-path-only",
+    "external_dependencies": "none-acquired",
+    "locks": "none-created",
+    "semantic_contracts": "unimplemented",
+    "component_behavior": "unimplemented",
+    "renderer_behavior": "unimplemented",
+    "native_controls": "unexecuted",
+    "support": "unsupported"
+  },
+  "checks": [
+    "authorization-and-source-hashes",
+    "entry-ledger-equivalence",
+    "exact-boundary-inventory",
+    "metadata-and-manifest-agreement",
+    "allowed-local-path-dependency-graph",
+    "no-external-dependency-or-lock",
+    "portable-source-forbidden-token-scan",
+    "excluded-native-system-scan",
+    "unimplemented-and-unsupported-state"
+  ]
+}

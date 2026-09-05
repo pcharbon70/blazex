@@ -1,7 +1,7 @@
 {
-  "contract": "blazex.bh01.headless-dependencies/0.1",
-  "status": "boundary-only-not-activated",
-  "proof_limit": "intended dependency direction; no executable headless profile is claimed",
+  "contract": "blazex.bh02.headless-dependencies/0.1",
+  "status": "experimental-activation-skeleton",
+  "proof_limit": "compiled dependency direction only; no component, renderer, or supported profile is claimed",
   "allowed_local_dependencies": [
     "blazex_core",
     "blazex_effects",

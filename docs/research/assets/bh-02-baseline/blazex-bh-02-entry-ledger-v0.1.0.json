@@ -1,0 +1,117 @@
+{
+  "schema_version": "1.0.0",
+  "ledger_id": "BX-BH02-ENTRY-LEDGER-0.1",
+  "status": "phase-1-authorized-contracts-unimplemented",
+  "authorization_ref": "BX-BH02-AUTHORIZATION-0.1",
+  "entry_manifest": {
+    "path": "docs/research/assets/bh-01-release/blazex-bh-02-entry-manifest-v0.1.0.json",
+    "sha256": "f9a68de442a5ab9853659e588d129351218940406b64992e8cba40553fc89a6c"
+  },
+  "feasibility_baseline": {
+    "path": "docs/research/assets/bh-01-release/blazex-bh-01-feasibility-baseline-v0.1.0.json",
+    "sha256": "2e8f96b2afe2e139543c898249161b8e5794a4876eccd8bac679a4347e1134ff"
+  },
+  "required_outputs": [
+    {"id": "semantic-ui-node-identity", "state": "planned-unimplemented", "phase": 2},
+    {"id": "event-action-contract", "state": "planned-unimplemented", "phase": 3},
+    {"id": "effect-capability-resource-contract", "state": "planned-unimplemented", "phase": 3},
+    {"id": "layout-token-accessibility-focus-selection-file-intent", "state": "planned-unimplemented", "phase": 4},
+    {"id": "renderer-lifecycle-capability-negotiation", "state": "planned-unimplemented", "phase": 5},
+    {"id": "deterministic-headless-renderer-traces", "state": "planned-unimplemented", "phase": 5},
+    {"id": "minimal-dom-lowering", "state": "planned-unimplemented", "phase": 6},
+    {"id": "limited-direct-native-control-spike", "state": "planned-unimplemented", "phase": 7},
+    {"id": "forbidden-dependency-leakage-checks", "state": "implemented-phase-1", "phase": 1}
+  ],
+  "inherited_condition_ids": [
+    "BX-BH01-CONDITION-AVM-REACHABILITY",
+    "BX-BH01-CONDITION-BROTLI-SERVING",
+    "BX-BH01-CONDITION-FIREFOX-TIMER",
+    "BX-BH01-CONDITION-PRIVATE-API-PINS",
+    "BX-BH01-CONDITION-RUNTIME-REPEAT",
+    "BX-BH01-CONDITION-PRODUCTION-SECURITY",
+    "BX-BH01-CONDITION-BH22-QUALIFICATION",
+    "BX-BH01-CONDITION-FIXTURE-DISPOSABILITY",
+    "BX-BH01-CONDITION-RELEASE-CONTROLS"
+  ],
+  "repository_boundaries": [
+    "packages/blazex_core",
+    "packages/blazex_effects",
+    "packages/blazex_ui_tree",
+    "packages/blazex_renderer",
+    "packages/blazex_renderer_headless",
+    "packages/blazex_renderer_dom",
+    "packages/blazex_test",
+    "profiles/headless",
+    "integration/conformance",
+    "integration/fixtures",
+    "experiments/native_renderer_spike"
+  ],
+  "new_activation_boundaries": [
+    "packages/blazex_core",
+    "packages/blazex_effects",
+    "packages/blazex_ui_tree",
+    "packages/blazex_renderer",
+    "packages/blazex_renderer_headless",
+    "packages/blazex_test",
+    "profiles/headless",
+    "integration/conformance",
+    "experiments/native_renderer_spike"
+  ],
+  "forbidden_leakage_classes": [
+    "html-dom-css-javascript",
+    "phoenix-plug-liveview-localliveview",
+    "popcorn-atomvm",
+    "bh01-fixture-wire-and-route-shapes",
+    "native-platform-widget-or-toolkit-objects",
+    "qt-or-wxwidgets-direct-or-transitive"
+  ],
+  "inherited_forbidden_leakage": [
+    "HTML or DOM node types in portable packages",
+    "browser event or JavaScript callback objects in semantic APIs",
+    "Phoenix, Plug, LiveView, or LocalLiveView dependencies in portable packages",
+    "Popcorn or AtomVM types in semantic packages",
+    "BH-01 fixture message tuples, route paths, command strings, or JSON shapes as public contracts",
+    "private LiveView renderer data outside its optional adapter",
+    "native toolkit handles or widget classes in portable component code"
+  ],
+  "evidence_boundary": {
+    "semantic_contracts": "unimplemented",
+    "component_behavior": "unimplemented",
+    "headless_renderer": "unimplemented",
+    "dom_conformance": "unexecuted",
+    "native_controls": "unexecuted",
+    "support": "unsupported",
+    "quality_budgets": "unpassed"
+  },
+  "inherited_limitations": [
+    "Both authoritative clean executions used one physical Linux x86-64 host.",
+    "Chrome and the Firefox development binary are observed development environments and remain unsupported.",
+    "The unpruned application AVM fails decoded and compressed application payload budgets.",
+    "Firefox development timer-event p95 exceeds the active local-event target.",
+    "Representative Chrome timing reruns retain scheduler-sensitive drift.",
+    "Private LiveView and LocalLiveView compatibility is exact-pins-only with standalone DOM fallback.",
+    "Popcorn requires unsafe-eval and production security controls are not implemented.",
+    "Physical mobile, Safari, Windows, second-machine, and manual assistive-technology qualification is deferred to BH-22.",
+    "Mobile viability, accessibility conformance, production deployment, native compatibility, and release readiness are not established.",
+    "BH-01 fixtures and protocols are disposable evidence rather than stable BlazeX APIs."
+  ],
+  "repeat_obligations": [
+    "BX-BH01-PROOF-ARTIFACT-ACCOUNTING",
+    "BX-BH01-PROOF-AUTHENTICATED-COMMAND",
+    "BX-BH01-PROOF-BROWSER-FALLBACK",
+    "BX-BH01-PROOF-BUILD-REPRODUCIBILITY",
+    "BX-BH01-PROOF-DOM-UPDATE",
+    "BX-BH01-PROOF-FORM-EVENT",
+    "BX-BH01-PROOF-NESTED-STATE",
+    "BX-BH01-PROOF-RUNTIME-BOOT",
+    "BX-BH01-PROOF-TIMER-MESSAGE"
+  ],
+  "deferred_qualification_ids": [
+    "BX-BH01-DEFER-ANDROID-PHYSICAL-0.1",
+    "BX-BH01-DEFER-APPLE-MOBILE-0.1",
+    "BX-BH01-DEFER-MACOS-SAFARI-0.1",
+    "BX-BH01-DEFER-WINDOWS-DESKTOP-0.1",
+    "BX-BH01-DEFER-SECOND-LINUX-HOST-0.1",
+    "BX-BH01-DEFER-MANUAL-AT-0.1"
+  ]
+}

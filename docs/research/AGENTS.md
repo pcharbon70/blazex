@@ -221,4 +221,9 @@ Before reporting archive work complete:
     benchmark indexes, or Phase 1 evidence changes; and
 12. inspect the complete change for stale paths and accidental rewrites.
 
+When BH-02 authorization, inherited-entry reconciliation, foundation project
+activation, conformance/native experiment indexes, or Phase 1 evidence changes,
+also run `python3 validate_bh02_activation.py` and
+`python3 -m unittest test_validate_bh02_activation.py`.
+
 Do not commit, push, publish, or open a pull request unless the user asks.

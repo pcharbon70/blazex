@@ -61,10 +61,11 @@ on Win32, Cocoa, and GTK?
 
 ## Relevance
 
-wxWidgets is the best-supported bounded proof for ADR-0007's actual-native-
-control requirement. The proof should exercise basic F0 controls and report
-which resources are truly native, generic, composite, or unsupported. It is
-not yet evidence for using wxWidgets across the full BlazeX catalog.
+**Current BlazeX disposition (2026-09-04): excluded.** This note is retained
+as historical evidence for a superseded proof proposal. wxWidgets is not an
+active implementation, proof, benchmark, dependency, or fallback candidate.
+The direct Win32/AppKit/GTK program now supplies the ADR-0007 actual-control
+proof path.
 
 ## Limits
 
@@ -78,3 +79,4 @@ must not be assumed present in the 3.2.11 stable series without verification.
 - [Cross-platform native host and renderer architecture](../20-notes/cross-platform-native-host-and-renderer-architecture.md)
 - [ADR-0007 native-control portability gate](../20-notes/architecture-decisions/adr-0007-native-control-portability-gate.md)
 - [Cross-renderer portability inquiry](../40-inquiries/can-one-blazex-component-model-target-dom-and-native-controls.md)
+- [2026-09-04 direct native-control host revision](../50-journal/2026-09-04-direct-native-control-host-revision.md)

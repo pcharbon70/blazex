@@ -437,9 +437,22 @@ def _validate_repository_activation(
             for token in inactive_import_tokens:
                 _require(token not in text, f"forbidden inactive/fixture import {token!r} in {source.relative_to(REPO_ROOT)}")
 
+    successor_authorization_path = RESEARCH_ROOT / "assets/bh-02-baseline/blazex-bh-02-authorization-v0.1.0.json"
+    successor_activation_path = RESEARCH_ROOT / "assets/bh-02-baseline/blazex-bh-02-repository-activation-v0.1.0.json"
+    successor_paths: set[str] = set()
+    if successor_authorization_path.is_file() or successor_activation_path.is_file():
+        _require(successor_authorization_path.is_file() and successor_activation_path.is_file(), "BH-02 successor activation records are incomplete")
+        successor_authorization = _load_json(successor_authorization_path)
+        successor_activation = _load_json(successor_activation_path)
+        _require(successor_authorization.get("status") == "approved-phase-1-only", "BH-02 successor activation lacks approval")
+        _require(successor_activation.get("authorization_ref") == successor_authorization.get("authorization_id"), "BH-02 successor activation authorization link is invalid")
+        successor_paths = {str(record.get("path")) for record in successor_activation.get("boundaries", [])}
+
     for inactive in activation["inactive_boundaries"]:
         boundary = REPO_ROOT / inactive
         _require(boundary.is_dir(), f"declared inactive boundary is missing: {inactive}")
+        if inactive in successor_paths:
+            continue
         for forbidden in ("mix.exs", "package.json", "blazex.project.json", "lib", "src"):
             _require(not (boundary / forbidden).exists(), f"inactive boundary was activated: {inactive}/{forbidden}")
 

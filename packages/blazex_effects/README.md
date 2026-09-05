@@ -9,6 +9,5 @@ Concrete providers belong in host adapters such as `blazex_host_browser`.
 Renderer capabilities remain distinct and are negotiated through
 `blazex_renderer`.
 
-Status: directory scaffold only; create the Mix project when its implementation
-milestone begins.
-
+Status: experimental BH-02 Phase 1 Mix skeleton. Only the approved inward core
+dependency exists; effect and resource contracts remain unimplemented.

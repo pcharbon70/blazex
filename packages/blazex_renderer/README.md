@@ -7,6 +7,5 @@ error reporting, resource ownership, and disposal.
 This package contains no concrete rendering implementation and must not assume
 a DOM, WebView, native toolkit, or server framework.
 
-Status: directory scaffold only; create the Mix project when its implementation
-milestone begins.
-
+Status: experimental BH-02 Phase 1 Mix skeleton. Renderer lifecycle and
+capability-negotiation contracts remain unimplemented.

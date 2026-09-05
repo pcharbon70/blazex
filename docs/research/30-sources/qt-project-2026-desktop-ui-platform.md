@@ -60,10 +60,11 @@ BlazeX's actual-native-control goal?
 
 ## Relevance
 
-Qt is the strongest mature integration oracle and a valuable full-stack
-prototype. It can show how much implementation risk SDL+Skia+AccessKit would
-assume. It cannot be counted as actual OS-control proof merely because its
-widgets look and behave conventionally.
+**Current BlazeX disposition (2026-09-04): excluded.** This note is retained
+as historical evidence for a superseded comparison. Qt is not an active
+implementation, proof, benchmark, dependency, or fallback candidate. The
+findings still explain why native-looking widgets cannot be counted as actual
+OS-control proof merely because they look and behave conventionally.
 
 ## Limits
 
@@ -75,4 +76,4 @@ interaction models and must be evaluated separately.
 
 - [Cross-platform native host and renderer architecture](../20-notes/cross-platform-native-host-and-renderer-architecture.md)
 - [Cross-renderer portability inquiry](../40-inquiries/can-one-blazex-component-model-target-dom-and-native-controls.md)
-
+- [2026-09-04 direct native-control host revision](../50-journal/2026-09-04-direct-native-control-host-revision.md)

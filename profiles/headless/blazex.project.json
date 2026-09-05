@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0.0",
+  "id": "profiles/headless",
+  "path": "profiles/headless",
+  "kind": "executable-profile",
+  "activation_phase": "BH-02 Phase 1",
+  "status": "experimental-activation-skeleton",
+  "owner_role": "headless-profile-owner",
+  "module_roots": ["BlazeX.HeadlessProfile"],
+  "manifest": "mix.exs",
+  "test_entrypoints": ["test"],
+  "dependencies": ["blazex_core", "blazex_effects", "blazex_ui_tree", "blazex_renderer", "blazex_renderer_headless", "blazex_test"],
+  "must_not_own": ["reusable-component-semantics", "renderer-contracts", "browser-or-server-behavior"],
+  "forbidden_dependencies": ["blazex_host_browser", "blazex_runtime_popcorn", "blazex_renderer_dom", "blazex_renderer_dom_liveview", "blazex_phoenix", "blazex_plug", "phoenix", "plug", "live_view", "local_live_view", "popcorn", "atomvm", "qt", "wxwidgets"],
+  "public_api_state": "experimental-unimplemented"
+}

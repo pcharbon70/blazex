@@ -44,11 +44,16 @@ renderer target, with a webview shell retained as an intermediate profile.
   native-control strategies, package boundaries, and N0–N4 gates.
 - [Cross-platform native host and renderer
   architecture](../20-notes/cross-platform-native-host-and-renderer-architecture.md) —
-  deep comparison of SDL3, winit, Skia, Cairo/Pango, AccessKit, Qt, GTK,
-  wxWidgets, Slint, BEAM integration, platform packaging, and the recommended
-  multi-proof program.
+  deep comparison of SDL3, winit, Skia, Cairo/Pango, AccessKit, direct
+  Win32/AppKit/GTK controls, Slint, BEAM integration, platform packaging, and
+  the recommended multi-proof program. Qt and wxWidgets are excluded from the
+  active design.
 - [Can one BlazeX component model target DOM and native
   controls?](../40-inquiries/can-one-blazex-component-model-target-dom-and-native-controls.md) — executable criteria for proving that the abstraction is real.
+- [2026-09-04 direct native-control host
+  revision](../50-journal/2026-09-04-direct-native-control-host-revision.md) —
+  records why direct Win32/AppKit/GTK adapters supersede the earlier wrapper-
+  toolkit recommendation.
 - [2026-09-02 host-neutral native-renderer design
   revision](../50-journal/2026-09-02-host-neutral-native-renderer-design-revision.md) — records the reasoning, source pass, and negative findings.
 
@@ -126,16 +131,21 @@ and Phoenix sockets are adapter concerns.
   integration](../30-sources/erlang-elixir-2026-releases-ports-and-native-integration.md)
   supports the split-process runtime/host boundary.
 
-### Integrated toolkit and native-control trail
+### Direct platform-control trail
 
-- [Qt](../30-sources/qt-project-2026-desktop-ui-platform.md) is the mature
-  integration oracle, not automatic evidence of OS-owned child controls.
-- [wxWidgets](../30-sources/wxwidgets-project-2026-native-control-toolkit.md)
-  is the leading bounded actual-native-control proof for ADR-0007.
-- [Slint](../30-sources/slint-project-2026-desktop-ui-runtime.md) is the
-  leading lean Rust/custom-scene comparison, while
-  [GTK4](../30-sources/gtk-project-2026-gtk4-desktop-ui-platform.md) is the
-  strongest Linux-first/C-ABI toolkit comparison.
+- [Direct Windows, AppKit, and GTK native-control
+  APIs](../30-sources/platform-vendors-2026-direct-native-control-apis.md)
+  support three bounded platform materializers behind the same semantic
+  protocol and are the required ADR-0007 control-proof path.
+- [GTK4](../30-sources/gtk-project-2026-gtk4-desktop-ui-platform.md) provides
+  the deeper Linux toolkit, text, accessibility, and display-server context.
+- [Slint](../30-sources/slint-project-2026-desktop-ui-runtime.md) remains an
+  optional lean Rust/custom-scene comparison only when configured without an
+  excluded backend.
+- [Qt](../30-sources/qt-project-2026-desktop-ui-platform.md) and
+  [wxWidgets](../30-sources/wxwidgets-project-2026-native-control-toolkit.md)
+  are retained as historical comparisons and are excluded from active
+  implementation, proof, benchmarking, dependencies, and fallbacks.
 - [Flutter's embedder architecture](../30-sources/flutter-project-2026-desktop-embedder-architecture.md)
   provides production precedent for portable engine plus platform-specific
   surfaces, input, accessibility, event loop, and packaging.
@@ -156,7 +166,7 @@ and Phoenix sockets are adapter concerns.
 - versioned semantic node/event/effect/accessibility contracts;
 - deterministic headless renderer;
 - DOM/LiveView lowering behind an adapter;
-- a native toolkit spike creating actual control resources;
+- direct Win32, AppKit, and GTK 4 spikes creating actual control resources;
 - shared button, field, selection, list, surface, focus, file, and disposal
   traces; and
 - static checks preventing DOM, CSS, JavaScript, Phoenix, and native toolkit
@@ -164,7 +174,7 @@ and Phoenix sockets are adapter concerns.
 
 These bullets are the existing early portability program. ADR-0007 itself
 resolves only when the same representative slice passes deterministic
-headless, standalone DOM, and actual native toolkit-control proofs. The
+headless, standalone DOM, and direct actual-native-control proofs. The
 custom-scene work below is a separate native-host research program and does
 not silently expand that decision.
 
@@ -188,11 +198,13 @@ not silently expand that decision.
 
 - Which authoring syntax can preserve Phoenix ergonomics while producing a
   renderer-neutral semantic tree?
-- Which native toolkit should prove the protocol first?
-- Does SDL3 + Skia + AccessKit have lower measured total ownership than a Qt
-  full-stack host or a winit/Slint Rust host?
-- Can wxWidgets expose the full F0 native-control slice accessibly on Win32,
-  Cocoa, and GTK without forcing toolkit concepts into portable components?
+- How much implementation can the Win32, AppKit, and GTK adapters share
+  through generated protocol bindings and fixtures without creating another
+  widget abstraction?
+- Does SDL3 + Skia + AccessKit have lower measured total ownership than a
+  winit/Slint custom-scene host configured without excluded backends?
+- Can the full F0 slice preserve equivalent event, focus, accessibility,
+  resource, and disposal semantics across the three direct adapters?
 - Should the production text path use SkParagraph/SkShaper or direct
   HarfBuzz/ICU plus platform font services?
 - Can current AtomVM be embedded natively, or should desktop initially use
