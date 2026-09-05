@@ -30,9 +30,9 @@ component families, production accessibility, or release readiness.
 
 ## Authorization status
 
-The repository owner explicitly authorized BH-02 Phase 5 on 2026-09-05 after
-Phase 4 passed and merged. Phase 5 has passed under the same four-section,
-single-PR, synchronized-main cleanup rules. Phases 6–8 remain planned and
+The repository owner explicitly authorized BH-02 Phase 6 on 2026-09-05 after
+Phase 5 passed and merged. Phase 6 is active under the same four-section,
+single-PR, synchronized-main cleanup rules. Phases 7–8 remain planned and
 unauthorized. The completed gates are preserved in the [Phase 1 implementation
 evidence](phase-01-implementation-evidence.md), [Phase 2 implementation
 evidence](phase-02-implementation-evidence.md), [Phase 3 implementation
@@ -74,7 +74,7 @@ milestone work.
 | [3 — Events, Effects, Capabilities, and Resource Ownership](phase-03-events-effects-capabilities-and-resource-ownership.md) | complete — gate passed | Define validated semantic events and generation-scoped effect/resource lifecycles without host objects. | Phase 2 |
 | [4 — Layout, Tokens, Accessibility, Focus, and Selection Intent](phase-04-layout-tokens-accessibility-focus-and-selection-intent.md) | complete — gate passed | Complete the portable intent needed by the representative interaction slice. | Phases 2–3 |
 | [5 — Renderer Lifecycle and Deterministic Headless Oracle](phase-05-renderer-lifecycle-and-deterministic-headless-oracle.md) | complete — gate passed | Implement renderer negotiation, mount/update/dispose behavior, canonical normalization, and trace fixtures. | Phases 2–4 |
-| 6 — Standalone DOM Lowering and Browser Conformance | planned — not authorized | Replace disposable BH-01 DOM operations with a conforming renderer adapter and browser evidence. | Phase 5 |
+| [6 — Standalone DOM Lowering and Browser Conformance](phase-06-standalone-dom-lowering-and-browser-conformance.md) | active — explicitly authorized | Replace disposable BH-01 DOM operations with a conforming renderer adapter and browser evidence. | Phase 5 |
 | 7 — Direct Native-Control Portability Spike | planned — not authorized | Exercise the same slice through direct Win32, AppKit, and GTK adapters; unavailable target execution remains deferred under policy. | Phase 5 |
 | 8 — Cross-Backend Reconciliation and BH-02 Acceptance | planned — not authorized | Resolve semantic leaks, review every required output and condition, and accept, revise, or block later framework work. | Phases 6–7 |
 
@@ -126,6 +126,7 @@ first portable contract version without making a support claim.
 - [Phase 4 — Implementation Evidence](phase-04-implementation-evidence.md)
 - [Phase 5 — Renderer Lifecycle and Deterministic Headless Oracle](phase-05-renderer-lifecycle-and-deterministic-headless-oracle.md)
 - [Phase 5 — Implementation Evidence](phase-05-implementation-evidence.md)
+- [Phase 6 — Standalone DOM Lowering and Browser Conformance](phase-06-standalone-dom-lowering-and-browser-conformance.md)
 
 ## Maintaining this index
 
