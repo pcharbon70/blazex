@@ -15,5 +15,7 @@ preorder traversal are implemented. Component output is accepted atomically
 only when the complete tree is valid and its root identity matches the Core
 evaluation. BH-02 Phase 3 adds semantic documents and validated event bindings
 without adding concrete input callbacks. BH-02 Phase 4 adds renderer-independent
-token references and logical layout intent without calculating geometry.
-Stable public APIs remain deferred.
+token references, logical layout, accessibility roles/states/relationships,
+focus participation/restoration, controlled selection, and a composed intent
+set without calculating geometry or invoking a platform API. Stable public
+APIs remain deferred.

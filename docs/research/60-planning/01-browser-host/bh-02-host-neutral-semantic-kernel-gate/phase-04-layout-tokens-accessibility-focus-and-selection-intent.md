@@ -59,21 +59,21 @@ Back to milestone: [README](README.md)
       - [x] 4.2.2.2 Subtask - Reject invalid modes, dimensions, min/max relations, virtualization forms, owner identities, opaque terms, and concrete renderer vocabulary.
       - [x] 4.2.2.3 Subtask - Test representative stack/grid, logical token, scrolling, sizing, and virtualization declarations without producing geometry.
 
-  - [ ] 4.3 Section - Implement accessibility, focus, selection, and intent-set validation.
+  - [x] 4.3 Section - Implement accessibility, focus, selection, and intent-set validation.
 
     Attach nonvisual meaning and interaction state to exact semantic nodes
     while keeping platform APIs and execution in later renderer phases.
 
-    - [ ] 4.3.1 Task - Implement accessibility and focus intent.
+    - [x] 4.3.1 Task - Implement accessibility and focus intent.
 
-      - [ ] 4.3.1.1 Subtask - Add exact roles, bounded names/descriptions, typed states, in-tree relationships, and off/polite/assertive live intent.
-      - [ ] 4.3.1.2 Subtask - Add none/target/scope focus behavior, deterministic order, optional autofocus, previous-focus restoration, and scope wrapping.
+      - [x] 4.3.1.1 Subtask - Add exact roles, bounded names/descriptions, typed states, in-tree relationships, and off/polite/assertive live intent.
+      - [x] 4.3.1.2 Subtask - Add none/target/scope focus behavior, deterministic order, optional autofocus, previous-focus restoration, and scope wrapping.
 
-    - [ ] 4.3.2 Task - Implement controlled selection and composed validation.
+    - [x] 4.3.2 Task - Implement controlled selection and composed validation.
 
-      - [ ] 4.3.2.1 Subtask - Add none, single, multiple, and directional text-range selection with portable unique values and bounded offsets.
-      - [ ] 4.3.2.2 Subtask - Add a version-1 intent set over a semantic document; reject unknown owners/targets, duplicate annotations, duplicate focus order, incompatible node kinds, and stale generations.
-      - [ ] 4.3.2.3 Subtask - Accept intent-set component output atomically across mount, update, event dispatch, and replacement while retaining prior evaluation on failure.
+      - [x] 4.3.2.1 Subtask - Add none, single, multiple, and directional text-range selection with portable unique values and bounded offsets.
+      - [x] 4.3.2.2 Subtask - Add a version-1 intent set over a semantic document; reject unknown owners/targets, duplicate annotations, duplicate focus order, incompatible node kinds, and stale generations.
+      - [x] 4.3.2.3 Subtask - Accept intent-set component output atomically across mount, update, event dispatch, and replacement while retaining prior evaluation on failure.
 
   - [ ] 4.4 Section - Run the Phase 4 integration gate and publish evidence.
 

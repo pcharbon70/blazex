@@ -10,9 +10,10 @@ defmodule BlazeX.UITree do
   """
 
   alias BlazeX.Core.{Diagnostic, Evaluation, Identity}
-  alias BlazeX.UITree.{ComponentEvaluator, Node, ValidationError}
+  alias BlazeX.UITree.{ComponentEvaluator, IntentSet, Node, ValidationError}
 
-  @spec validate(term()) :: :ok | {:error, ValidationError.t()}
+  @spec validate(term()) :: :ok | {:error, ValidationError.t() | atom()}
+  def validate(%IntentSet{} = intent_set), do: IntentSet.validate(intent_set)
   def validate(root), do: Node.validate(root)
 
   @spec preorder(term()) :: {:ok, [Node.t()]} | {:error, ValidationError.t()}
