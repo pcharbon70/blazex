@@ -13,10 +13,11 @@ the same semantic traces as the headless and DOM renderers. Its presence in the
 matrix supplies portability evidence without turning the experiment into a
 supported backend.
 
-Status: BH-02 Phase 3 contains versioned semantic-kernel and
-event/effect/resource fixture sets with local BEAM evaluation outcomes. No
-concrete provider or renderer backend has executed these fixtures, so provider
-and renderer conformance and all support claims remain absent.
+Status: BH-02 Phase 4 contains versioned semantic-kernel,
+event/effect/resource, and presentation-intent fixture sets with local BEAM
+evaluation outcomes. No geometry engine, platform accessibility mapping,
+concrete provider, or renderer backend has executed these fixtures, so
+conformance and all support claims remain absent.
 
 Versioned records:
 
@@ -29,3 +30,7 @@ Versioned records:
   capability negotiation, effect lifecycle, and resource ownership scenarios.
 - `conformance-index-v0.3.0.json` — Phase 3 local contract-result index;
   concrete provider and renderer results remain empty.
+- `presentation-intent-fixtures-v0.1.0.json` — Phase 4 token, layout,
+  accessibility, focus, selection, and atomic-validation scenarios.
+- `conformance-index-v0.4.0.json` — Phase 4 local intent-result index; geometry,
+  platform mapping, and renderer results remain empty.

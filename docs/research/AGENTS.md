@@ -236,4 +236,9 @@ effect contracts, resource ownership, Phase 3 conformance fixtures, or Phase 3
 evidence changes, also run `python3 validate_bh02_effects.py` and
 `python3 -m unittest test_validate_bh02_effects.py`.
 
+When BH-02 Phase 4 authorization, token or logical-layout intent,
+accessibility/focus/selection intent, Phase 4 conformance fixtures, or Phase 4
+evidence changes, also run `python3 validate_bh02_intent.py` and
+`python3 -m unittest test_validate_bh02_intent.py`.
+
 Do not commit, push, publish, or open a pull request unless the user asks.

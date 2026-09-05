@@ -1,0 +1,44 @@
+BH-02 Phase 4 normalized validation log
+recorded_at=2026-09-05
+base_revision=313dfe578b354e81b12b204b299060f90808d4e6
+source_revision_before_evidence=b300845
+branch=codex/bh-02-phase-04-semantic-intent
+
+PASS seven project-local mix format --check-formatted runs
+PASS seven project-local mix test runs: 52 tests, 0 failures
+PASS python3 validate_bh02_intent.py
+PASS python3 -m unittest test_validate_bh02_intent.py: 10 tests
+PASS python3 validate_bh02_effects.py
+PASS python3 -m unittest test_validate_bh02_effects.py: 10 tests
+PASS python3 validate_bh02_semantics.py
+PASS python3 -m unittest test_validate_bh02_semantics.py: 8 tests
+PASS python3 validate_bh02_activation.py
+PASS python3 -m unittest test_validate_bh02_activation.py: 7 tests
+PASS python3 validate_archive.py: 177 documents, 22 directories, 1282 links, 50 sources
+PASS python3 -m unittest test_validate_archive.py: 8 tests
+PASS python3 validate_bh01_activation.py
+PASS python3 -m unittest test_validate_bh01_activation.py: 13 tests
+PASS python3 validate_bh00_governance.py
+PASS python3 -m unittest test_validate_bh00_governance.py: 25 tests
+PASS python3 generate_bh00_release.py --check
+PASS jq empty for Phase 4 JSON records
+PASS no mix.lock in the seven activated BH-02 projects
+PASS git diff --check
+
+NEGATIVE stale-or-missing-authorization=rejected
+NEGATIVE expanded-token-or-layout-vocabulary=rejected
+NEGATIVE expanded-accessibility-vocabulary=rejected
+NEGATIVE relaxed-annotation-ownership=rejected
+NEGATIVE concrete-layout-or-accessibility-system-leakage=rejected
+NEGATIVE missing-intent-fixture-coverage=rejected
+NEGATIVE geometry-or-platform-result-overclaim=rejected
+NEGATIVE stable-api-overclaim=rejected
+NEGATIVE support-overclaim=rejected
+NEGATIVE phase-5-authorization-overclaim=rejected
+
+LIMITATION local BEAM presentation-intent evaluation only
+LIMITATION no geometry or measurement engine executed
+LIMITATION no platform accessibility or host focus/selection operation executed
+LIMITATION no renderer backend executed
+LIMITATION no stable public API or support claim
+LIMITATION Phase 5 and later work unauthorized

@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0.0",
+  "authorization_id": "BX-BH02-PHASE-04-AUTHORIZATION-0.1",
+  "status": "approved-phase-4-only",
+  "approved_at": "2026-09-05",
+  "approved_by": {
+    "identity": "pcharbon70",
+    "name": "Pascal Charbonneau",
+    "role": "repository-owner",
+    "approval_record": "Repository-owner request in the BlazeX Codex task to implement the next BH-02 phase section by section with one commit per section, one pull request, and final synchronized-main branch cleanup."
+  },
+  "activation": {
+    "base_branch": "main",
+    "base_revision": "313dfe578b354e81b12b204b299060f90808d4e6",
+    "base_remote_revision": "313dfe578b354e81b12b204b299060f90808d4e6",
+    "main_synchronized_before_branch": true,
+    "working_branch": "codex/bh-02-phase-04-semantic-intent",
+    "phase": "BH-02 Phase 4"
+  },
+  "approval_basis": [
+    {"path": "docs/research/assets/bh-02-baseline/blazex-bh-02-phase-03-completion-v0.1.0.json", "sha256": "6abcbd9ce4bb5e1d50ba47c71b2597f6a6e5fcc6d98430ba827cda0f3b74d23c"},
+    {"path": "docs/research/20-notes/architecture-decisions/adr-0001-host-neutral-semantic-component-kernel.md", "sha256": "b99fb71e09caad0f00f27b8d945f573eca749e2c2f336b21dd9f42de8742f329"},
+    {"path": "docs/research/20-notes/architecture-decisions/adr-0002-versioned-semantic-ui-tree.md", "sha256": "9d5fa9d3bae06e93836ad46fff79c2301456ee912263906e613b18f085283745"},
+    {"path": "docs/research/20-notes/architecture-decisions/adr-0007-native-control-portability-gate.md", "sha256": "4ebd2feb853a08c258141479726f14a60ed409b98cabdd5f0537ff9f02784343"}
+  ],
+  "authorized_scope": [
+    "Define bounded design-token references and logical layout intent without computing geometry.",
+    "Define portable accessibility roles, states, relationships, and live intent.",
+    "Define focus participation, ordering, containment, restoration, and controlled selection intent.",
+    "Compose Phase 2 through Phase 4 semantic data in a validated versioned intent set.",
+    "Publish Phase 4 conformance fixtures and local validation evidence."
+  ],
+  "delivery_rules": {
+    "sections_in_order": true,
+    "commit_per_section": true,
+    "section_count": 4,
+    "single_pull_request": true,
+    "return_to_synchronized_main_after_delivery": true,
+    "delete_local_feature_branch_after_delivery": true,
+    "delete_remote_feature_branch_after_delivery": true
+  },
+  "not_authorized": [
+    "BH-02 Phases 5 through 8",
+    "stable or public layout, token, accessibility, focus, selection, renderer, or component APIs",
+    "product component-family implementation",
+    "geometry calculation, measurement, hit testing, painting, renderer lifecycle, DOM lowering, browser behavior, or native-control behavior",
+    "concrete layout engines, accessibility APIs or bridges, host focus/selection operations, or external dependency acquisition",
+    "runtime or toolchain upgrades",
+    "browser, native-host, accessibility-conformance, security, performance, or release support claims"
+  ]
+}

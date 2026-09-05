@@ -1,10 +1,11 @@
 defmodule BlazeX.UITree.ComponentEvaluator do
   @moduledoc """
-  Atomically accepts Core evaluations whose output is a valid semantic tree.
+  Atomically accepts Core evaluations whose output is a valid semantic tree,
+  semantic document, or composed presentation-intent set.
   """
 
   alias BlazeX.Core.{Diagnostic, Evaluation, Evaluator, Event, Identity}
-  alias BlazeX.UITree.{Document, Node}
+  alias BlazeX.UITree.{Document, IntentSet, Node}
 
   @spec mount(module(), Identity.t(), map()) ::
           {:ok, Evaluation.t()} | {:error, Diagnostic.t()}
@@ -70,6 +71,19 @@ defmodule BlazeX.UITree.ComponentEvaluator do
     end
   end
 
+  defp validate_output(%Evaluation{output: %IntentSet{} = output} = evaluation, stage) do
+    case IntentSet.validate(output) do
+      :ok when output.document.root.identity == evaluation.identity ->
+        {:ok, evaluation}
+
+      :ok ->
+        diagnostic(:root_identity_mismatch, stage, evaluation.component)
+
+      {:error, reason} ->
+        diagnostic(:invalid_semantic_output, stage, evaluation.component, reason)
+    end
+  end
+
   defp validate_output(%Evaluation{} = evaluation, stage),
     do: diagnostic(:invalid_semantic_output, stage, evaluation.component, :malformed_node)
 
@@ -79,6 +93,9 @@ defmodule BlazeX.UITree.ComponentEvaluator do
       {:error, reason} -> diagnostic(:unbound_event, :event, component, reason)
     end
   end
+
+  defp validate_binding(%IntentSet{document: document}, event, component),
+    do: validate_binding(document, event, component)
 
   defp validate_binding(_output, _event, component),
     do: diagnostic(:unbound_event, :event, component, :document_required)

@@ -3,15 +3,17 @@ defmodule BlazeX.UITree do
   Experimental version-1 semantic UI tree.
 
   Phase 2 owns a bounded node vocabulary, deterministic validation, and
-  traversal. Phase 3 adds semantic event bindings and atomic dispatch. Layout,
-  tokens, accessibility, focus, selection, renderer extensions, and patches
+  traversal. Phase 3 adds semantic event bindings and atomic dispatch. Phase 4
+  adds portable token, layout, accessibility, focus, and selection intent.
+  Renderer behavior, geometry, platform mappings, extensions, and patches
   remain deferred to later phases.
   """
 
   alias BlazeX.Core.{Diagnostic, Evaluation, Identity}
-  alias BlazeX.UITree.{ComponentEvaluator, Node, ValidationError}
+  alias BlazeX.UITree.{ComponentEvaluator, IntentSet, Node, ValidationError}
 
-  @spec validate(term()) :: :ok | {:error, ValidationError.t()}
+  @spec validate(term()) :: :ok | {:error, ValidationError.t() | atom()}
+  def validate(%IntentSet{} = intent_set), do: IntentSet.validate(intent_set)
   def validate(root), do: Node.validate(root)
 
   @spec preorder(term()) :: {:ok, [Node.t()]} | {:error, ValidationError.t()}

@@ -3,7 +3,7 @@ defmodule BlazeX.SemanticKernelIntegrationTest do
 
   alias BlazeX.Core.{Event, Identity}
   alias BlazeX.Effects.{Effect, Result, Tracker}
-  alias BlazeX.UITree.{Binding, Document, Node}
+  alias BlazeX.UITree.{Accessibility, Binding, Document, Focus, IntentSet, Layout, Node, TokenRef}
 
   defmodule StatefulActions do
     @behaviour BlazeX.Core.Component
@@ -70,6 +70,51 @@ defmodule BlazeX.SemanticKernelIntegrationTest do
     end
   end
 
+  defmodule AccessibleDialog do
+    @behaviour BlazeX.Core.Component
+
+    alias BlazeX.Core.Identity
+    alias BlazeX.UITree.{Accessibility, Document, Focus, IntentSet, Layout, Node, TokenRef}
+
+    @impl true
+    def mode, do: :pure
+
+    @impl true
+    def render(_props, context) do
+      {:ok, title_id} = Identity.child(context.identity, :title)
+      {:ok, close_id} = Identity.child(context.identity, :close)
+      {:ok, title} = Node.text(title_id, "Preferences", key: :title)
+      {:ok, close} = Node.container(:action, close_id, [], key: :close)
+      {:ok, root} = Node.container(:surface, context.identity, [title, close])
+      {:ok, document} = Document.new(root)
+      {:ok, space} = TokenRef.new(:space, :dialog_inset)
+
+      {:ok, layout} =
+        Layout.new(context.identity, :overlay,
+          padding: {{:token, space}, {:token, space}, {:token, space}, {:token, space}},
+          width: :content,
+          height: :content
+        )
+
+      {:ok, dialog_accessibility} =
+        Accessibility.new(context.identity, :dialog,
+          name: "Preferences",
+          relationships: %{labelled_by: [title_id]}
+        )
+
+      {:ok, title_accessibility} = Accessibility.new(title_id, :text, name: "Preferences")
+      {:ok, close_accessibility} = Accessibility.new(close_id, :button, name: "Close")
+      {:ok, scope} = Focus.new(context.identity, :scope, restore: :previous, wrap: true)
+      {:ok, target} = Focus.new(close_id, :target, order: 0, auto_focus: true)
+
+      IntentSet.new(document,
+        layouts: [layout],
+        accessibility: [dialog_accessibility, title_accessibility, close_accessibility],
+        focus: [scope, target]
+      )
+    end
+  end
+
   test "composed profile preserves keyed identity through update and replacement" do
     {:ok, identity} = Identity.new({:component, :actions})
 
@@ -119,5 +164,18 @@ defmodule BlazeX.SemanticKernelIntegrationTest do
 
     assert {:error, %{code: :effect_not_pending}} =
              Tracker.complete(cleaned, effect.id, %{text: "late"})
+  end
+
+  test "composed profile validates logical dialog, accessibility, and focus intent" do
+    {:ok, owner} = Identity.new({:component, :dialog})
+    assert {:ok, mounted} = BlazeX.UITree.mount_component(AccessibleDialog, owner, %{})
+    assert %IntentSet{} = mounted.output
+    assert :ok = IntentSet.validate(mounted.output)
+    assert [%Layout{mode: :overlay}] = mounted.output.layouts
+
+    assert Enum.map(mounted.output.accessibility, & &1.role) == [:dialog, :text, :button]
+    assert Enum.map(mounted.output.focus, & &1.behavior) == [:scope, :target]
+    assert Enum.any?(mounted.output.focus, & &1.auto_focus)
+    refute Map.has_key?(Map.from_struct(hd(mounted.output.layouts)), :bounds)
   end
 end
