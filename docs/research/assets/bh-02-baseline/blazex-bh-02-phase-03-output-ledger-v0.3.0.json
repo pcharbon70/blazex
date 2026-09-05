@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0.0",
+  "ledger_id": "BX-BH02-OUTPUT-LEDGER-0.3",
+  "status": "phase-3-event-effect-resource-contracts-implemented-experimental",
+  "authorization_ref": "BX-BH02-PHASE-03-AUTHORIZATION-0.1",
+  "supersedes": {
+    "path": "docs/research/assets/bh-02-baseline/blazex-bh-02-phase-02-output-ledger-v0.2.0.json",
+    "sha256": "fd5d3772e2ab900f24fa5a9438b70902c1eb367696732778abd83a781b0dd657",
+    "preserved_unchanged": true
+  },
+  "required_outputs": [
+    {"id": "semantic-ui-node-identity", "state": "implemented-experimental-phase-2", "phase": 2},
+    {"id": "event-action-contract", "state": "implemented-experimental-phase-3", "phase": 3},
+    {"id": "effect-capability-resource-contract", "state": "implemented-experimental-phase-3", "phase": 3},
+    {"id": "layout-token-accessibility-focus-selection-file-intent", "state": "planned-unimplemented", "phase": 4},
+    {"id": "renderer-lifecycle-capability-negotiation", "state": "planned-unimplemented", "phase": 5},
+    {"id": "deterministic-headless-renderer-traces", "state": "planned-unimplemented", "phase": 5},
+    {"id": "minimal-dom-lowering", "state": "planned-unimplemented", "phase": 6},
+    {"id": "limited-direct-native-control-spike", "state": "planned-unimplemented", "phase": 7},
+    {"id": "forbidden-dependency-leakage-checks", "state": "implemented-phase-1-extended-phase-3", "phase": 1}
+  ],
+  "evidence_boundary": {
+    "semantic_contracts": "experimental-version-1",
+    "component_behavior": "experimental-pure-stateful-event-evaluation",
+    "event_effect_resources": "experimental-version-1-local-beam",
+    "concrete_providers": "unimplemented",
+    "headless_renderer": "unimplemented",
+    "dom_conformance": "unexecuted",
+    "native_controls": "unexecuted",
+    "support": "unsupported",
+    "quality_budgets": "unpassed"
+  },
+  "unchanged_inherited_handoff": {
+    "conditions": true,
+    "repository_boundaries": true,
+    "forbidden_leakage": true,
+    "limitations": true,
+    "repeat_obligations": true,
+    "deferred_qualification": true
+  }
+}

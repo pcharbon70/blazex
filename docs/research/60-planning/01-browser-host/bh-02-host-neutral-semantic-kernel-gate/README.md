@@ -30,14 +30,14 @@ component families, production accessibility, or release readiness.
 
 ## Authorization status
 
-The repository owner explicitly authorized BH-02 Phase 2 on 2026-09-05 after
-Phase 1 passed and merged. The request retained section-ordered implementation,
-one commit per section, one pull request for the phase, and cleanup of the
-feature branch after returning to a synchronized `main`. Phase 2 has passed its
-gate; Phase 3 is eligible but not authorized, and Phases 4–8 remain planned.
-The completed gates are preserved in the [Phase 1 implementation
-evidence](phase-01-implementation-evidence.md) and [Phase 2 implementation
-evidence](phase-02-implementation-evidence.md).
+The repository owner explicitly authorized BH-02 Phase 3 on 2026-09-05 after
+Phase 2 passed and merged. The event, effect, capability, and resource gate has
+passed locally with four section commits. Phase 4 is eligible but remains
+unauthorized; Phases 5–8 also remain planned and unauthorized. The completed
+gates are preserved in the [Phase 1 implementation
+evidence](phase-01-implementation-evidence.md), [Phase 2 implementation
+evidence](phase-02-implementation-evidence.md), and [Phase 3 implementation
+evidence](phase-03-implementation-evidence.md).
 
 ## What belongs here
 
@@ -70,7 +70,7 @@ milestone work.
 | --- | --- | --- | --- |
 | [1 — Authorization, Input Reconciliation, and Foundation Activation](phase-01-authorization-input-reconciliation-and-foundation-activation.md) | complete — gate passed | Bind the BH-01 handoff, activate only the neutral foundation projects and evidence locations, and prove their dependency/leakage boundary. | Completed BH-01 and explicit authorization |
 | [2 — Semantic Nodes, Identity, and Portable Component Evaluation](phase-02-semantic-nodes-identity-and-component-evaluation.md) | complete — gate passed | Define the first versioned semantic node/identity vocabulary and the smallest pure/stateful component evaluation contract. | Phase 1 |
-| 3 — Events, Effects, Capabilities, and Resource Ownership | eligible — not authorized | Define validated semantic events and generation-scoped effect/resource lifecycles without host objects. | Phase 2 |
+| [3 — Events, Effects, Capabilities, and Resource Ownership](phase-03-events-effects-capabilities-and-resource-ownership.md) | complete — gate passed | Define validated semantic events and generation-scoped effect/resource lifecycles without host objects. | Phase 2 |
 | 4 — Layout, Tokens, Accessibility, Focus, and Selection Intent | planned — not authorized | Complete the portable intent needed by the representative interaction slice. | Phases 2–3 |
 | 5 — Renderer Lifecycle and Deterministic Headless Oracle | planned — not authorized | Implement renderer negotiation, mount/update/dispose behavior, canonical normalization, and trace fixtures. | Phases 2–4 |
 | 6 — Standalone DOM Lowering and Browser Conformance | planned — not authorized | Replace disposable BH-01 DOM operations with a conforming renderer adapter and browser evidence. | Phase 5 |
@@ -119,6 +119,8 @@ first portable contract version without making a support claim.
 - [Phase 1 — Implementation Evidence](phase-01-implementation-evidence.md)
 - [Phase 2 — Semantic Nodes, Identity, and Portable Component Evaluation](phase-02-semantic-nodes-identity-and-component-evaluation.md)
 - [Phase 2 — Implementation Evidence](phase-02-implementation-evidence.md)
+- [Phase 3 — Events, Effects, Capabilities, and Resource Ownership](phase-03-events-effects-capabilities-and-resource-ownership.md)
+- [Phase 3 — Implementation Evidence](phase-03-implementation-evidence.md)
 
 ## Maintaining this index
 

@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0.0",
+  "contract": "blazex.bh02.conformance-index/0.3",
+  "status": "phase-3-event-effect-resource-passed-local",
+  "activation_phase": "BH-02 Phase 3",
+  "owner_role": "quality-owner",
+  "authorization": {
+    "path": "docs/research/assets/bh-02-baseline/blazex-bh-02-phase-03-authorization-v0.1.0.json",
+    "sha256": "5805884e7c8729f7cd00fc70c6e0ac47fcf040124eeb8b99bd5e2ccd1148d9a3"
+  },
+  "phase_contract": {
+    "path": "docs/research/assets/bh-02-baseline/blazex-bh-02-phase-03-contract-v0.1.0.json",
+    "sha256": "3602b414973e57e05da1e107f68097c63c47a4373d2da2689064cd28939a018d"
+  },
+  "fixture_sets": [
+    {
+      "id": "BX-BH02-SEMANTIC-KERNEL-FIXTURES-0.1",
+      "path": "integration/conformance/semantic-kernel-fixtures-v0.1.0.json",
+      "sha256": "74e7db1e0194cb97f7d1c3b37b815d3cd0139050b75382078138570a58e04b78",
+      "scenario_count": 8,
+      "result": "passed-local-semantic-evaluation"
+    },
+    {
+      "id": "BX-BH02-EVENT-EFFECT-RESOURCE-FIXTURES-0.1",
+      "path": "integration/conformance/event-effect-resource-fixtures-v0.1.0.json",
+      "sha256": "e5372f49136fdf3b049c478fedcdc4c0171d1e7331a386b8d7ff6e3e85b4982d",
+      "scenario_count": 12,
+      "result": "passed-local-event-effect-resource-evaluation"
+    }
+  ],
+  "local_contract_results": [
+    {
+      "environment": "local-beam",
+      "result": "passed",
+      "evidence": [
+        "packages/blazex_core/test/blazex/core_boundary_test.exs",
+        "packages/blazex_ui_tree/test/blazex/ui_tree_boundary_test.exs",
+        "packages/blazex_effects/test/blazex/effects_boundary_test.exs",
+        "profiles/headless/test/blazex/semantic_kernel_integration_test.exs"
+      ]
+    }
+  ],
+  "canonical_traces": [],
+  "provider_results": [],
+  "backend_results": [],
+  "next_authorized_work": null,
+  "api_state": "experimental",
+  "support_state": "unsupported"
+}

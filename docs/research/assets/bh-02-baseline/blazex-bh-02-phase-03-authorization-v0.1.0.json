@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0.0",
+  "authorization_id": "BX-BH02-PHASE-03-AUTHORIZATION-0.1",
+  "status": "approved-phase-3-only",
+  "approved_at": "2026-09-05",
+  "approved_by": {
+    "identity": "pcharbon70",
+    "name": "Pascal Charbonneau",
+    "role": "repository-owner",
+    "approval_record": "Repository-owner request in the BlazeX Codex task to implement the next BH-02 phase section by section with one commit per section, one pull request, and final synchronized-main branch cleanup."
+  },
+  "activation": {
+    "base_branch": "main",
+    "base_revision": "1380da03a68de7af1d7cc3c1faf2d80ef34ea4f2",
+    "base_remote_revision": "1380da03a68de7af1d7cc3c1faf2d80ef34ea4f2",
+    "main_synchronized_before_branch": true,
+    "working_branch": "codex/bh-02-phase-03-events-effects",
+    "phase": "BH-02 Phase 3"
+  },
+  "approval_basis": [
+    {"path": "docs/research/assets/bh-02-baseline/blazex-bh-02-phase-02-completion-v0.1.0.json", "sha256": "1f71039ed1acdcbac27e5503d7a2348f2c8cece974862b44d38a6b6e5e1bb09c"},
+    {"path": "docs/research/20-notes/architecture-decisions/adr-0001-host-neutral-semantic-component-kernel.md", "sha256": "b99fb71e09caad0f00f27b8d945f573eca749e2c2f336b21dd9f42de8742f329"},
+    {"path": "docs/research/20-notes/architecture-decisions/adr-0003-host-neutral-effects-capabilities-and-resources.md", "sha256": "2c99891c5f780afddbb85083d4300c2e1b5d453536c5198ff32a88037522df74"},
+    {"path": "docs/research/20-notes/host-neutral-blazex-architecture-and-native-control-backends.md", "sha256": "b8ac7619c9cd0db3795c100a543932dee597d5aa4994b909cf7f821226c9b221"}
+  ],
+  "authorized_scope": [
+    "Define semantic event version 1, node bindings, and stateful event dispatch.",
+    "Define four proof capabilities and provider-neutral negotiation.",
+    "Implement typed effect requests/results and deterministic pending-effect lifecycle.",
+    "Implement opaque generation-scoped resource ownership, transfer, and disposal.",
+    "Publish event/effect/resource conformance fixtures and Phase 3 validation evidence."
+  ],
+  "delivery_rules": {
+    "sections_in_order": true,
+    "commit_per_section": true,
+    "section_count": 4,
+    "single_pull_request": true,
+    "return_to_synchronized_main_after_delivery": true,
+    "delete_local_feature_branch_after_delivery": true,
+    "delete_remote_feature_branch_after_delivery": true
+  },
+  "not_authorized": [
+    "BH-02 Phases 4 through 8",
+    "stable or public event, effect, capability, resource, or component APIs",
+    "product component-family implementation",
+    "layout, tokens, accessibility, focus, selection, renderer lifecycle, DOM, browser, native-control, or custom-scene behavior",
+    "concrete capability providers or external dependency acquisition",
+    "runtime or toolchain upgrades",
+    "browser, native-host, mobile, accessibility, security, performance, or release support claims"
+  ]
+}

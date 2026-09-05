@@ -11,5 +11,6 @@ framework.
 Status: experimental BH-02 Phase 2 implementation. Structural identity,
 bounded portable props/state, evaluation context, pure/stateful mount and
 update, replacement generations, and stable diagnostics are implemented.
-Events, effects, process lifecycle, messages, commands, disposal, and stable
-public APIs remain deferred.
+BH-02 Phase 3 adds semantic events and stateful dispatch. Effects remain in
+their dedicated package; process lifecycle, messages, commands, disposal, and
+stable public APIs remain deferred.

@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0.0",
+  "contract_id": "BX-BH02-PHASE-03-CONTRACT-0.1",
+  "status": "authorized-experimental",
+  "authorization_ref": "BX-BH02-PHASE-03-AUTHORIZATION-0.1",
+  "semantic_event": {
+    "version": 1,
+    "names": ["activate", "change", "submit", "select", "expand", "dismiss", "move", "reorder", "increment", "decrement", "request_open", "request_close", "request_page"],
+    "fields": ["version", "name", "owner", "source", "payload", "sequence"],
+    "payload": "bounded-portable-map",
+    "owner_source_rule": "same-root-generation-source-descends-from-owner",
+    "sequence": "positive-monotonic-per-owner",
+    "stale_generation": "reject"
+  },
+  "semantic_document": {
+    "fields": ["version", "root", "bindings"],
+    "binding_fields": ["event", "owner", "source"],
+    "duplicate_source_event": "reject",
+    "missing_source_or_wrong_owner_generation": "reject"
+  },
+  "component_dispatch": {
+    "mode": "stateful-only",
+    "transition": "event",
+    "result": ["new-portable-state", "opaque-emissions"],
+    "revision": "increment-after-valid-rerender",
+    "partial_acceptance": "forbidden"
+  },
+  "capabilities": {
+    "names": ["time", "ui.clipboard", "ui.files.choose", "ui.storage"],
+    "operations": {
+      "time": ["schedule"],
+      "ui.clipboard": ["read", "write"],
+      "ui.files.choose": ["choose"],
+      "ui.storage": ["get", "put", "delete"]
+    },
+    "requirement": ["required", "optional"],
+    "fallback": ["fail", "omit", "component"],
+    "default": "denied"
+  },
+  "effect": {
+    "version": 1,
+    "fields": ["version", "id", "owner", "capability", "operation", "payload", "timeout_ms", "fallback"],
+    "result_statuses": ["ok", "denied", "cancelled", "timeout", "unsupported", "failed"],
+    "pending_id_uniqueness": "per-tracker",
+    "late_or_stale_completion": "reject"
+  },
+  "resource": {
+    "identifier_fields": ["owner", "capability", "id", "generation"],
+    "states": ["active", "cancelled", "disposed"],
+    "transfer": "explicit-owner-to-owner-same-generation",
+    "dispose": "idempotent",
+    "owner_cleanup": "cancel-pending-and-dispose-active-for-exact-generation"
+  },
+  "explicitly_deferred": ["layout", "tokens", "accessibility", "focus", "selection", "renderer-lifecycle", "renderer-output", "concrete-provider", "dom-lowering", "native-controls"],
+  "api_state": "experimental",
+  "support_state": "unsupported"
+}

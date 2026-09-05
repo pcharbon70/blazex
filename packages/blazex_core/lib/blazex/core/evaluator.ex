@@ -7,7 +7,9 @@ defmodule BlazeX.Core.Evaluator do
   tree passes.
   """
 
-  alias BlazeX.Core.{Context, Diagnostic, Evaluation, Identity, Portable}
+  alias BlazeX.Core.{Context, Diagnostic, Evaluation, Event, Identity, Portable}
+
+  @max_emissions 256
 
   @spec mount(module(), Identity.t(), map()) :: {:ok, Evaluation.t()} | {:error, Diagnostic.t()}
   def mount(component, identity, props), do: do_mount(component, identity, props, :mount)
@@ -43,6 +45,42 @@ defmodule BlazeX.Core.Evaluator do
   end
 
   def update(value, _props), do: diagnostic(:invalid_evaluation, :update, component_of(value))
+
+  @spec dispatch(Evaluation.t(), Event.t()) ::
+          {:ok, Evaluation.t(), [term()]} | {:error, Diagnostic.t()}
+  def dispatch(%Evaluation{} = evaluation, %Event{} = event) do
+    with :ok <- validate_evaluation(evaluation, :event),
+         :ok <- validate_event(evaluation, event),
+         :ok <- validate_stateful(evaluation),
+         {:ok, state, emissions} <- event_callback(evaluation, event),
+         :ok <- validate_state(state, evaluation.component, :event),
+         :ok <- validate_emissions(emissions, evaluation.component),
+         {:ok, output} <-
+           callback(
+             evaluation.component,
+             :render,
+             [
+               evaluation.props,
+               state,
+               context(evaluation.identity, evaluation.revision + 1, :event)
+             ],
+             :render
+           ) do
+      {:ok,
+       %{
+         evaluation
+         | state: state,
+           output: output,
+           revision: evaluation.revision + 1,
+           last_event_sequence: event.sequence
+       }, emissions}
+    end
+  end
+
+  def dispatch(%Evaluation{} = evaluation, _event),
+    do: diagnostic(:invalid_event, :event, evaluation.component)
+
+  def dispatch(value, _event), do: diagnostic(:invalid_evaluation, :event, component_of(value))
 
   @spec replace(Evaluation.t(), map()) :: {:ok, Evaluation.t()} | {:error, Diagnostic.t()}
   def replace(%Evaluation{} = evaluation, props) do
@@ -80,7 +118,8 @@ defmodule BlazeX.Core.Evaluator do
          props: props,
          state: nil,
          output: output,
-         revision: 0
+         revision: 0,
+         last_event_sequence: 0
        }}
     end
   end
@@ -97,7 +136,8 @@ defmodule BlazeX.Core.Evaluator do
          props: props,
          state: state,
          output: output,
-         revision: 0
+         revision: 0,
+         last_event_sequence: 0
        }}
     end
   end
@@ -135,6 +175,35 @@ defmodule BlazeX.Core.Evaluator do
     end
   end
 
+  defp event_callback(evaluation, event) do
+    component = evaluation.component
+    revision = evaluation.revision + 1
+    context = context(evaluation.identity, revision, :event)
+
+    if function_exported?(component, :handle_event, 4) do
+      case invoke(
+             component,
+             :handle_event,
+             [event, evaluation.props, evaluation.state, context],
+             :event
+           ) do
+        {:ok, {:ok, state, emissions}} ->
+          {:ok, state, emissions}
+
+        {:ok, {:error, _reason}} ->
+          diagnostic(:callback_rejected, :event, component, :handle_event)
+
+        {:ok, _other} ->
+          diagnostic(:invalid_callback_result, :event, component, :handle_event)
+
+        {:error, diagnostic} ->
+          {:error, diagnostic}
+      end
+    else
+      diagnostic(:missing_callback, :event, component, :handle_event)
+    end
+  end
+
   defp invoke(component, callback, arguments, stage) do
     try do
       {:ok, apply(component, callback, arguments)}
@@ -157,7 +226,8 @@ defmodule BlazeX.Core.Evaluator do
       is_atom(evaluation.component) and evaluation.mode in [:pure, :stateful] and
         Identity.valid?(evaluation.identity) and is_map(evaluation.props) and
         Portable.valid?(evaluation.props) and is_integer(evaluation.revision) and
-        evaluation.revision >= 0 and state_valid
+        evaluation.revision >= 0 and is_integer(evaluation.last_event_sequence) and
+        evaluation.last_event_sequence >= 0 and state_valid
 
     if valid,
       do: :ok,
@@ -181,6 +251,47 @@ defmodule BlazeX.Core.Evaluator do
       do: :ok,
       else: diagnostic(:invalid_state, stage, component)
   end
+
+  defp validate_event(evaluation, event) do
+    cond do
+      not Event.valid?(event) ->
+        diagnostic(:invalid_event, :event, evaluation.component)
+
+      event.owner == evaluation.identity and event.sequence > evaluation.last_event_sequence ->
+        :ok
+
+      same_instance_different_generation?(event.owner, evaluation.identity) ->
+        diagnostic(:stale_event, :event, evaluation.component)
+
+      event.owner != evaluation.identity ->
+        diagnostic(:event_owner_mismatch, :event, evaluation.component)
+
+      true ->
+        diagnostic(:stale_event_sequence, :event, evaluation.component)
+    end
+  end
+
+  defp validate_stateful(%Evaluation{mode: :stateful}), do: :ok
+
+  defp validate_stateful(%Evaluation{component: component}),
+    do: diagnostic(:event_requires_stateful, :event, component)
+
+  defp validate_emissions(emissions, component) do
+    case proper_list_size(emissions) do
+      {:ok, size} when size <= @max_emissions -> :ok
+      _other -> diagnostic(:invalid_emissions, :event, component)
+    end
+  end
+
+  defp same_instance_different_generation?(left, right) do
+    left.root == right.root and left.path == right.path and left.generation != right.generation
+  end
+
+  defp proper_list_size(term), do: proper_list_size(term, 0)
+  defp proper_list_size([], size), do: {:ok, size}
+  defp proper_list_size([_head | _tail], size) when size == @max_emissions, do: :too_large
+  defp proper_list_size([_head | tail], size), do: proper_list_size(tail, size + 1)
+  defp proper_list_size(_improper, _size), do: :improper
 
   defp replace_identity(%Evaluation{identity: identity, component: component}) do
     case Identity.replace(identity) do

@@ -1,0 +1,72 @@
+{
+  "schema_version": "1.0.0",
+  "fixture_id": "BX-BH02-EVENT-EFFECT-RESOURCE-FIXTURES-0.1",
+  "contract_ref": "BX-BH02-PHASE-03-CONTRACT-0.1",
+  "status": "passed-local-event-effect-resource-evaluation",
+  "scenarios": [
+    {
+      "id": "semantic-event-dispatch",
+      "input": "bound activate event with sequence 1",
+      "expected": "state and revision advance atomically and emit a typed effect"
+    },
+    {
+      "id": "unbound-event-rejection",
+      "input": "valid event without an exact source/name binding",
+      "expected": "reject without changing the accepted evaluation"
+    },
+    {
+      "id": "stale-event-rejection",
+      "input": "repeated sequence or previous owner generation",
+      "expected": "reject before component state changes"
+    },
+    {
+      "id": "capability-grant",
+      "input": "explicit time grant for a required time capability",
+      "expected": "record the capability as granted"
+    },
+    {
+      "id": "required-capability-denial",
+      "input": "required capability with fail policy and no grant",
+      "expected": "fail negotiation and deny ungranted effect submission"
+    },
+    {
+      "id": "component-fallback",
+      "input": "missing capability with component fallback",
+      "expected": "record a component-owned fallback without provider access"
+    },
+    {
+      "id": "effect-completion",
+      "input": "unique pending effect receives a portable result",
+      "expected": "produce one terminal ok result and reject a later completion"
+    },
+    {
+      "id": "effect-cancellation",
+      "input": "unique pending effect is cancelled",
+      "expected": "produce one terminal cancelled result"
+    },
+    {
+      "id": "effect-timeout",
+      "input": "unique pending effect reaches its declared timeout boundary",
+      "expected": "produce one terminal timeout result"
+    },
+    {
+      "id": "resource-transfer",
+      "input": "active opaque resource and a new owner in the same generation",
+      "expected": "replace ownership explicitly and invalidate the prior resource identity"
+    },
+    {
+      "id": "stale-resource-rejection",
+      "input": "transfer, completion, or disposal using a stale resource identity",
+      "expected": "reject without mutating the current tracker"
+    },
+    {
+      "id": "owner-generation-cleanup",
+      "input": "cleanup for one exact component owner generation",
+      "expected": "cancel its pending effects and dispose its resources while retaining other generations"
+    }
+  ],
+  "provider_results": [],
+  "renderer_results": [],
+  "api_state": "experimental",
+  "support_state": "unsupported"
+}

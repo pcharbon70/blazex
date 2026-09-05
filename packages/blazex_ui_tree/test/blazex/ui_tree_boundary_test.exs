@@ -1,8 +1,8 @@
 defmodule BlazeX.UITreeBoundaryTest do
   use ExUnit.Case, async: true
 
-  alias BlazeX.Core.Identity
-  alias BlazeX.UITree.Node
+  alias BlazeX.Core.{Event, Identity}
+  alias BlazeX.UITree.{Binding, Document, Node}
 
   defmodule PureLabel do
     @behaviour BlazeX.Core.Component
@@ -77,6 +77,59 @@ defmodule BlazeX.UITreeBoundaryTest do
     @impl true
     def render(_props, :valid, context), do: Node.container(:group, context.identity, [])
     def render(_props, :invalid, _context), do: {:ok, %{kind: :raw}}
+  end
+
+  defmodule InteractiveCounter do
+    @behaviour BlazeX.Core.Component
+
+    @impl true
+    def mode, do: :stateful
+
+    @impl true
+    def init(props, _context), do: {:ok, %{count: props.initial}}
+
+    @impl true
+    def update(_props, state, _context), do: {:ok, state}
+
+    @impl true
+    def handle_event(%Event{name: :increment, payload: payload}, _props, state, _context) do
+      {:ok, %{state | count: state.count + payload.amount}, [{:schedule, payload.amount}]}
+    end
+
+    @impl true
+    def render(_props, _state, context) do
+      key = {:action, :increment}
+      {:ok, source} = Identity.child(context.identity, key)
+      {:ok, action} = Node.container(:action, source, [], key: key)
+      {:ok, root} = Node.container(:group, context.identity, [action])
+      {:ok, binding} = Binding.new(:increment, context.identity, source)
+      Document.new(root, [binding])
+    end
+  end
+
+  defmodule InvalidEventRender do
+    @behaviour BlazeX.Core.Component
+
+    @impl true
+    def mode, do: :stateful
+
+    @impl true
+    def init(_props, _context), do: {:ok, :valid}
+
+    @impl true
+    def update(_props, state, _context), do: {:ok, state}
+
+    @impl true
+    def handle_event(_event, _props, _state, _context), do: {:ok, :invalid, []}
+
+    @impl true
+    def render(_props, :valid, context) do
+      {:ok, root} = Node.container(:action, context.identity, [])
+      {:ok, binding} = Binding.new(:activate, context.identity, context.identity)
+      Document.new(root, [binding])
+    end
+
+    def render(_props, :invalid, _context), do: {:ok, %{raw: true}}
   end
 
   test "the boundary depends inward only on core" do
@@ -215,5 +268,57 @@ defmodule BlazeX.UITreeBoundaryTest do
     assert mounted.revision == 0
     assert mounted.state == :valid
     assert :ok = BlazeX.UITree.validate(mounted.output)
+  end
+
+  test "semantic document validates bindings and resolves exact events" do
+    {:ok, owner} = Identity.new(:document)
+    {:ok, source} = Identity.child(owner, {:action, :save})
+    {:ok, action} = Node.container(:action, source, [], key: {:action, :save})
+    {:ok, root} = Node.container(:group, owner, [action])
+    {:ok, binding} = Binding.new(:activate, owner, source)
+    assert {:ok, document} = Document.new(root, [binding])
+    {:ok, event} = Event.new(:activate, owner, source)
+    assert {:ok, ^binding} = Document.resolve(document, event)
+
+    assert {:error, :duplicate_binding} = Document.new(root, [binding, binding])
+    {:ok, missing_source} = Identity.child(owner, {:action, :missing})
+    {:ok, missing_binding} = Binding.new(:activate, owner, missing_source)
+    assert {:error, :binding_source_missing} = Document.new(root, [missing_binding])
+  end
+
+  test "bound stateful dispatch validates the rerender and returns emissions" do
+    {:ok, owner} = Identity.new(:counter)
+
+    assert {:ok, mounted} =
+             BlazeX.UITree.mount_component(InteractiveCounter, owner, %{initial: 2})
+
+    [binding] = mounted.output.bindings
+    {:ok, event} = Event.new(:increment, owner, binding.source, %{amount: 3}, 1)
+
+    assert {:ok, dispatched, [{:schedule, 3}]} =
+             BlazeX.UITree.dispatch_component(mounted, event)
+
+    assert dispatched.state == %{count: 5}
+    assert dispatched.revision == 1
+    assert Document.validate(dispatched.output) == :ok
+  end
+
+  test "unbound and invalid event rerenders leave prior evaluation usable" do
+    {:ok, owner} = Identity.new(:event_failure)
+    assert {:ok, mounted} = BlazeX.UITree.mount_component(InvalidEventRender, owner, %{})
+
+    {:ok, unbound} = Event.new(:dismiss, owner, owner, %{}, 1)
+
+    assert {:error, %{code: :unbound_event}} =
+             BlazeX.UITree.dispatch_component(mounted, unbound)
+
+    {:ok, bound} = Event.new(:activate, owner, owner, %{}, 1)
+
+    assert {:error, %{code: :invalid_semantic_output}} =
+             BlazeX.UITree.dispatch_component(mounted, bound)
+
+    assert mounted.state == :valid
+    assert mounted.revision == 0
+    assert Document.validate(mounted.output) == :ok
   end
 end

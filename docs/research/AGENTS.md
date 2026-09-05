@@ -231,4 +231,9 @@ component evaluation, semantic conformance fixtures, or Phase 2 evidence
 changes, also run `python3 validate_bh02_semantics.py` and
 `python3 -m unittest test_validate_bh02_semantics.py`.
 
+When BH-02 Phase 3 authorization, semantic events or bindings, capability and
+effect contracts, resource ownership, Phase 3 conformance fixtures, or Phase 3
+evidence changes, also run `python3 validate_bh02_effects.py` and
+`python3 -m unittest test_validate_bh02_effects.py`.
+
 Do not commit, push, publish, or open a pull request unless the user asks.
