@@ -52,18 +52,18 @@ Back to milestone: [README](README.md)
       - [x] 6.2.2.2 Subtask - Produce atomic mount/update/replace projections and disposal batches through the Phase 5 renderer session.
       - [x] 6.2.2.3 Subtask - Test exact mappings, ordering, deterministic IDs/digests, lifecycle generations/revisions, invalid output, and absence of server/framework leakage.
 
-  - [ ] 6.3 Section - Implement the dependency-free browser driver and matrix tests.
+  - [x] 6.3 Section - Implement the dependency-free browser driver and matrix tests.
 
-    - [ ] 6.3.1 Task - Implement strict wire validation and DOM application.
+    - [x] 6.3.1 Task - Implement strict wire validation and DOM application.
 
-      - [ ] 6.3.1.1 Subtask - Replace the disposable fixture protocol with exact versioned batch/node/listener validation, closed tags/fields/attributes, and bounded depth/count/text/value limits.
-      - [ ] 6.3.1.2 Subtask - Build projections detached, replace one owned root atomically, reject stale generation/revision before mutation, and dispose roots/listeners idempotently.
+      - [x] 6.3.1.1 Subtask - Replace the disposable fixture protocol with exact versioned batch/node/listener validation, closed tags/fields/attributes, and bounded depth/count/text/value limits.
+      - [x] 6.3.1.2 Subtask - Build projections detached, replace one owned root atomically, reject stale generation/revision before mutation, and dispose roots/listeners idempotently.
 
-    - [ ] 6.3.2 Task - Implement and execute browser behavior.
+    - [x] 6.3.2 Task - Implement and execute browser behavior.
 
-      - [ ] 6.3.2.1 Subtask - Normalize semantic events to plain bounded records without retaining browser event objects.
-      - [ ] 6.3.2.2 Subtask - Apply autofocus, same-ID update restoration, controlled value/text selection, accessibility relationships, and semantic child order.
-      - [ ] 6.3.2.3 Subtask - Pass dependency-free fake-DOM tests and automated real-page runs in local Linux Google Chrome and Firefox.
+      - [x] 6.3.2.1 Subtask - Normalize semantic events to plain bounded records without retaining browser event objects.
+      - [x] 6.3.2.2 Subtask - Apply autofocus, same-ID update restoration, controlled value/text selection, accessibility relationships, and semantic child order.
+      - [x] 6.3.2.3 Subtask - Pass dependency-free fake-DOM tests and automated real-page runs in local Linux Google Chrome and Firefox.
 
   - [ ] 6.4 Section - Run the Phase 6 integration gate and publish evidence.
 
