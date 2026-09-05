@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0.0",
+  "contract": "blazex.bh02.direct-native-control-experiment/0.1",
+  "status": "activated-boundary-no-controls-implemented",
+  "activation_phase": "BH-02 Phase 1",
+  "owner_role": "native-renderer-owner",
+  "portable_input": "future-versioned-bh02-semantic-fixture",
+  "adapters": [
+    {"target": "windows", "api": "direct-win32-standard-and-common-controls", "state": "deferred-environment-unavailable", "qualification_owner": "native-renderer-owner", "reactivation": "BH-02 Phase 7 when a governed Windows environment is available"},
+    {"target": "macos", "api": "direct-appkit-controls", "state": "deferred-environment-unavailable", "qualification_owner": "native-renderer-owner", "reactivation": "BH-02 Phase 7 when a governed macOS environment is available"},
+    {"target": "linux", "api": "direct-gtk4-controls", "state": "planned-unexecuted-and-not-authorized", "qualification_owner": "native-renderer-owner", "reactivation": "BH-02 Phase 7 after separate authorization"}
+  ],
+  "excluded_direct_or_transitive": ["qt", "wxwidgets"],
+  "implemented_controls": [],
+  "evidence": [],
+  "support_state": "unsupported"
+}

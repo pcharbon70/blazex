@@ -108,6 +108,8 @@ python3 -m unittest test_validate_bh00_governance.py
 python3 generate_bh00_release.py --check
 python3 validate_bh01_activation.py
 python3 -m unittest test_validate_bh01_activation.py
+python3 validate_bh02_activation.py
+python3 -m unittest test_validate_bh02_activation.py
 ```
 
 The validator checks metadata, placeholders, filenames, local links,
@@ -129,6 +131,7 @@ identifiers.
 - [`test_validate_component_classification.py`](test_validate_component_classification.py) — focused Phase 4 classification validator tests
 - [`test_validate_bh00_governance.py`](test_validate_bh00_governance.py) — focused Phase 6 reconciliation, review, release, and BH-01 entry validator tests
 - [`test_validate_bh01_activation.py`](test_validate_bh01_activation.py) — focused BH-01 approval, evidence-governance, boundary-graph, inactive-slice, and no-dependency fail-closed tests
+- [`test_validate_bh02_activation.py`](test_validate_bh02_activation.py) — focused BH-02 authorization, handoff-equivalence, project-graph, forbidden-leakage, and evidence-boundary fail-closed tests
 - [`test_validate_quality_acceptance.py`](test_validate_quality_acceptance.py) — focused Phase 5 quality-budget and acceptance-traceability validator tests
 - [`test_validate_archive.py`](test_validate_archive.py) — focused validator tests
 - [`validate_browser_product_envelope.py`](validate_browser_product_envelope.py) — deterministic BH-00 browser-envelope checks
@@ -136,5 +139,6 @@ identifiers.
 - [`validate_component_classification.py`](validate_component_classification.py) — deterministic BH-00 product/package/capability/portability classification checks
 - [`validate_bh00_governance.py`](validate_bh00_governance.py) — deterministic BH-00 source-binding, reconciliation, review, release, and readiness checks
 - [`validate_bh01_activation.py`](validate_bh01_activation.py) — fail-closed BH-01 approval, inherited-baseline, milestone-ledger, evidence-governance, and repository-activation checks
+- [`validate_bh02_activation.py`](validate_bh02_activation.py) — fail-closed BH-02 Phase 1 authorization, inherited-entry, foundation-activation, dependency, leakage, and evidence-state checks
 - [`validate_quality_acceptance.py`](validate_quality_acceptance.py) — deterministic BH-00 quality-budget and acceptance-traceability checks
 - [`validate_archive.py`](validate_archive.py) — deterministic archive checks

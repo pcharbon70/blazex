@@ -56,21 +56,21 @@ Back to milestone: [README](README.md)
       - [x] 1.2.2.2 Subtask - Initialize `profiles/headless` as an executable test composition without browser, server, runtime-adapter, or native dependencies.
       - [x] 1.2.2.3 Subtask - Compile and test every activated project independently without claiming renderer or component behavior.
 
-  - [ ] 1.3 Section - Establish repository and evidence governance.
+  - [x] 1.3 Section - Establish repository and evidence governance.
 
     Make the approved activation boundary machine-checkable before semantic
     implementation begins.
 
-    - [ ] 1.3.1 Task - Activate conformance and native-spike evidence locations.
+    - [x] 1.3.1 Task - Activate conformance and native-spike evidence locations.
 
-      - [ ] 1.3.1.1 Subtask - Add versioned indexes for shared semantic fixtures, renderer traces, and backend outcomes under `integration/conformance`.
-      - [ ] 1.3.1.2 Subtask - Define the bounded direct Win32/AppKit/GTK experiment inventory and `[DEFERRED]` unavailable-target states without implementing controls.
+      - [x] 1.3.1.1 Subtask - Add versioned indexes for shared semantic fixtures, renderer traces, and backend outcomes under `integration/conformance`.
+      - [x] 1.3.1.2 Subtask - Define the bounded direct Win32/AppKit/GTK experiment inventory and `[DEFERRED]` unavailable-target states without implementing controls.
 
-    - [ ] 1.3.2 Task - Add fail-closed validation.
+    - [x] 1.3.2 Task - Add fail-closed validation.
 
-      - [ ] 1.3.2.1 Subtask - Validate authorization, inherited hashes, exact project inventory, ownership metadata, allowed path dependencies, and absence of external locks.
-      - [ ] 1.3.2.2 Subtask - Scan portable manifests and sources for forbidden browser, server, runtime, DOM, JavaScript, Qt, wxWidgets, and platform-object leakage.
-      - [ ] 1.3.2.3 Subtask - Add negative tests for unauthorized branches, stale inputs, extra projects, forbidden dependencies/tokens, and false implementation/support claims.
+      - [x] 1.3.2.1 Subtask - Validate authorization, inherited hashes, exact project inventory, ownership metadata, allowed path dependencies, and absence of external locks.
+      - [x] 1.3.2.2 Subtask - Scan portable manifests and sources for forbidden browser, server, runtime, DOM, JavaScript, Qt, wxWidgets, and platform-object leakage.
+      - [x] 1.3.2.3 Subtask - Add negative tests for unauthorized branches, stale inputs, extra projects, forbidden dependencies/tokens, and false implementation/support claims.
 
   - [ ] 1.4 Section - Run the Phase 1 integration gate and publish evidence.
 

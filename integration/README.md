@@ -12,6 +12,6 @@ contracts.
 - `benchmarks` tracks performance and payload budgets against recorded
   baselines.
 
-BH-01 Phase 1 activates governed empty indexes and schemas in `fixtures` and
-`benchmarks`. Empty means unexecuted: no scenario, sample, report, environment,
-budget result, runtime result, or browser result is claimed.
+BH-01 activates governed fixture and benchmark evidence. BH-02 Phase 1
+activates an empty versioned `conformance` index. Empty means no semantic
+fixture, canonical trace, backend result, or cross-renderer claim exists yet.

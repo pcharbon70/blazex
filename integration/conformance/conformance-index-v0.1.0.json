@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0.0",
+  "contract": "blazex.bh02.conformance-index/0.1",
+  "status": "activated-no-semantic-fixtures-or-results",
+  "activation_phase": "BH-02 Phase 1",
+  "owner_role": "quality-owner",
+  "fixture_sets": [],
+  "canonical_traces": [],
+  "backend_results": [],
+  "support_state": "unsupported",
+  "next_authorized_work": null
+}
