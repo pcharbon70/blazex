@@ -7,11 +7,25 @@ defmodule BlazeX.UITree do
   events, renderer extensions, and patches remain deferred to later phases.
   """
 
-  alias BlazeX.UITree.{Node, ValidationError}
+  alias BlazeX.Core.{Diagnostic, Evaluation, Identity}
+  alias BlazeX.UITree.{ComponentEvaluator, Node, ValidationError}
 
   @spec validate(term()) :: :ok | {:error, ValidationError.t()}
   def validate(root), do: Node.validate(root)
 
   @spec preorder(term()) :: {:ok, [Node.t()]} | {:error, ValidationError.t()}
   def preorder(root), do: Node.preorder(root)
+
+  @spec mount_component(module(), Identity.t(), map()) ::
+          {:ok, Evaluation.t()} | {:error, Diagnostic.t()}
+  def mount_component(component, identity, props),
+    do: ComponentEvaluator.mount(component, identity, props)
+
+  @spec update_component(Evaluation.t(), map()) ::
+          {:ok, Evaluation.t()} | {:error, Diagnostic.t()}
+  def update_component(evaluation, props), do: ComponentEvaluator.update(evaluation, props)
+
+  @spec replace_component(Evaluation.t(), map()) ::
+          {:ok, Evaluation.t()} | {:error, Diagnostic.t()}
+  def replace_component(evaluation, props), do: ComponentEvaluator.replace(evaluation, props)
 end

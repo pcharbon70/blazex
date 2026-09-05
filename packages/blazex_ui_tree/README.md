@@ -11,5 +11,6 @@ resource lifecycle belongs to `blazex_effects`.
 
 Status: experimental BH-02 Phase 2 implementation. Version-1 nodes, structural
 identity checks, sibling uniqueness, ancestry validation, and deterministic
-preorder traversal are implemented. Later semantic fields and stable public
-APIs remain deferred.
+preorder traversal are implemented. Component output is accepted atomically
+only when the complete tree is valid and its root identity matches the Core
+evaluation. Later semantic fields and stable public APIs remain deferred.

@@ -4,6 +4,81 @@ defmodule BlazeX.UITreeBoundaryTest do
   alias BlazeX.Core.Identity
   alias BlazeX.UITree.Node
 
+  defmodule PureLabel do
+    @behaviour BlazeX.Core.Component
+
+    @impl true
+    def mode, do: :pure
+
+    @impl true
+    def render(props, context), do: Node.text(context.identity, props.label)
+  end
+
+  defmodule StatefulList do
+    @behaviour BlazeX.Core.Component
+
+    @impl true
+    def mode, do: :stateful
+
+    @impl true
+    def init(props, _context), do: {:ok, props.items}
+
+    @impl true
+    def update(props, _state, _context), do: {:ok, props.items}
+
+    @impl true
+    def render(_props, items, context) do
+      children =
+        Enum.map(items, fn item ->
+          {:ok, item_identity} = Identity.child(context.identity, {:item, item})
+          {:ok, node} = Node.container(:action, item_identity, [], key: {:item, item})
+          node
+        end)
+
+      Node.container(:collection, context.identity, children)
+    end
+  end
+
+  defmodule InvalidTree do
+    @behaviour BlazeX.Core.Component
+
+    @impl true
+    def mode, do: :pure
+
+    @impl true
+    def render(_props, _context), do: {:ok, %{kind: :raw}}
+  end
+
+  defmodule WrongRoot do
+    @behaviour BlazeX.Core.Component
+
+    @impl true
+    def mode, do: :pure
+
+    @impl true
+    def render(_props, _context) do
+      {:ok, wrong_identity} = Identity.new(:wrong)
+      Node.container(:group, wrong_identity, [])
+    end
+  end
+
+  defmodule InvalidUpdateTree do
+    @behaviour BlazeX.Core.Component
+
+    @impl true
+    def mode, do: :stateful
+
+    @impl true
+    def init(_props, _context), do: {:ok, :valid}
+
+    @impl true
+    def update(_props, _state, _context), do: {:ok, :invalid}
+
+    @impl true
+    def render(_props, :valid, context), do: Node.container(:group, context.identity, [])
+    def render(_props, :invalid, _context), do: {:ok, %{kind: :raw}}
+  end
+
   test "the boundary depends inward only on core" do
     assert Code.ensure_loaded?(BlazeX.Core)
     assert Code.ensure_loaded?(BlazeX.UITree)
@@ -81,5 +156,64 @@ defmodule BlazeX.UITreeBoundaryTest do
     }
 
     assert {:error, %{code: :unsupported_version}} = BlazeX.UITree.validate(invalid_version)
+  end
+
+  test "pure component output is accepted only with its component identity" do
+    {:ok, identity} = Identity.new(:label)
+    assert {:ok, mounted} = BlazeX.UITree.mount_component(PureLabel, identity, %{label: "One"})
+    assert mounted.output.content == "One"
+    assert mounted.output.identity == identity
+
+    assert {:ok, updated} = BlazeX.UITree.update_component(mounted, %{label: "Two"})
+    assert updated.output.content == "Two"
+    assert updated.identity == identity
+    assert updated.revision == 1
+  end
+
+  test "stateful keyed reorder retains child identity" do
+    {:ok, identity} = Identity.new(:items)
+
+    assert {:ok, mounted} =
+             BlazeX.UITree.mount_component(StatefulList, identity, %{items: [1, 2]})
+
+    before = Map.new(mounted.output.children, &{&1.key, &1.identity})
+    assert {:ok, updated} = BlazeX.UITree.update_component(mounted, %{items: [2, 1]})
+    after_reorder = Map.new(updated.output.children, &{&1.key, &1.identity})
+    assert before == after_reorder
+    assert Enum.map(updated.output.children, & &1.key) == [{:item, 2}, {:item, 1}]
+  end
+
+  test "replacement remounts semantic output under a new generation" do
+    {:ok, identity} = Identity.new(:items)
+
+    assert {:ok, mounted} =
+             BlazeX.UITree.mount_component(StatefulList, identity, %{items: [1]})
+
+    assert {:ok, replaced} = BlazeX.UITree.replace_component(mounted, %{items: [1]})
+    assert replaced.identity.generation == 2
+    assert replaced.output.identity == replaced.identity
+    assert hd(replaced.output.children).identity.generation == 2
+  end
+
+  test "invalid semantic output and wrong root identity fail closed" do
+    {:ok, identity} = Identity.new(:invalid)
+
+    assert {:error, %{code: :invalid_semantic_output, detail: :malformed_node}} =
+             BlazeX.UITree.mount_component(InvalidTree, identity, %{})
+
+    assert {:error, %{code: :root_identity_mismatch}} =
+             BlazeX.UITree.mount_component(WrongRoot, identity, %{})
+  end
+
+  test "failed update leaves the previously accepted evaluation unchanged" do
+    {:ok, identity} = Identity.new(:atomic)
+    assert {:ok, mounted} = BlazeX.UITree.mount_component(InvalidUpdateTree, identity, %{})
+
+    assert {:error, %{code: :invalid_semantic_output}} =
+             BlazeX.UITree.update_component(mounted, %{})
+
+    assert mounted.revision == 0
+    assert mounted.state == :valid
+    assert :ok = BlazeX.UITree.validate(mounted.output)
   end
 end

@@ -56,21 +56,21 @@ Back to milestone: [README](README.md)
       - [x] 2.2.2.2 Subtask - Validate the complete tree, identity ancestry, duplicate sibling identities/keys, text/content rules, and unknown or malformed structures before acceptance.
       - [x] 2.2.2.3 Subtask - Add deterministic traversal and focused positive/negative unit tests without defining events, layout, tokens, accessibility, resources, or renderer extensions.
 
-  - [ ] 2.3 Section - Implement portable pure and stateful evaluation.
+  - [x] 2.3 Section - Implement portable pure and stateful evaluation.
 
     Evaluate component modules through one host-neutral state machine and
     accept output only after semantic-tree validation.
 
-    - [ ] 2.3.1 Task - Implement the component evaluation state machine.
+    - [x] 2.3.1 Task - Implement the component evaluation state machine.
 
-      - [ ] 2.3.1.1 Subtask - Define explicit pure and stateful component modes and required callbacks with map props and opaque portable state.
-      - [ ] 2.3.1.2 Subtask - Implement mount and update with stable identity, monotonic revision, fail-closed callback results, and structured deterministic diagnostics.
-      - [ ] 2.3.1.3 Subtask - Implement replacement as a new generation and prohibit implicit rename, ambient rerender, process ownership, effects, messages, and disposal semantics.
+      - [x] 2.3.1.1 Subtask - Define explicit pure and stateful component modes and required callbacks with map props and opaque portable state.
+      - [x] 2.3.1.2 Subtask - Implement mount and update with stable identity, monotonic revision, fail-closed callback results, and structured deterministic diagnostics.
+      - [x] 2.3.1.3 Subtask - Implement replacement as a new generation and prohibit implicit rename, ambient rerender, process ownership, effects, messages, and disposal semantics.
 
-    - [ ] 2.3.2 Task - Validate semantic output atomically.
+    - [x] 2.3.2 Task - Validate semantic output atomically.
 
-      - [ ] 2.3.2.1 Subtask - Add UI-tree integration that validates component output and root identity after mount, update, and replacement.
-      - [ ] 2.3.2.2 Subtask - Prove pure evaluation, stateful transitions, keyed reorder identity, replacement generation, malformed callbacks, and invalid-tree rejection.
+      - [x] 2.3.2.1 Subtask - Add UI-tree integration that validates component output and root identity after mount, update, and replacement.
+      - [x] 2.3.2.2 Subtask - Prove pure evaluation, stateful transitions, keyed reorder identity, replacement generation, malformed callbacks, and invalid-tree rejection.
 
   - [ ] 2.4 Section - Run the Phase 2 integration gate and publish evidence.
 
