@@ -42,21 +42,21 @@ Back to milestone: [README](README.md)
       - [x] 5.1.2.3 Subtask - Freeze mount/update/replace/dispose context, identity/generation/revision rules, backend callback results, atomic rejection, and idempotent disposal.
       - [x] 5.1.2.4 Subtask - Freeze deterministic snapshot sections, canonical ordering, digest encoding, ordered lifecycle traces, and the nonvisual evidence boundary.
 
-  - [ ] 5.2 Section - Implement renderer negotiation and lifecycle contracts.
+  - [x] 5.2 Section - Implement renderer negotiation and lifecycle contracts.
 
     Provide a backend-neutral session boundary that owns lifecycle sequencing
     and rejects incompatible or stale semantic output before invoking a backend.
 
-    - [ ] 5.2.1 Task - Implement capability discovery and compatibility checks.
+    - [x] 5.2.1 Task - Implement capability discovery and compatibility checks.
 
-      - [ ] 5.2.1.1 Subtask - Add exact capability and derived-requirement data for tree version, node kinds, layout modes, accessibility roles, and five current semantic features.
-      - [ ] 5.2.1.2 Subtask - Reject malformed declarations, unknown or duplicate values, missing required features, and backend capability expansion outside the frozen vocabulary.
+      - [x] 5.2.1.1 Subtask - Add exact capability and derived-requirement data for tree version, node kinds, layout modes, accessibility roles, and five current semantic features.
+      - [x] 5.2.1.2 Subtask - Reject malformed declarations, unknown or duplicate values, missing required features, and backend capability expansion outside the frozen vocabulary.
 
-    - [ ] 5.2.2 Task - Implement backend behavior and lifecycle session.
+    - [x] 5.2.2 Task - Implement backend behavior and lifecycle session.
 
-      - [ ] 5.2.2.1 Subtask - Add stable diagnostic and context data plus mount/update/replace/dispose callbacks with opaque backend-owned state.
-      - [ ] 5.2.2.2 Subtask - Enforce exact root ownership, monotonic revisions, next-generation replacement, compatibility before callbacks, callback result shape, and idempotent disposal.
-      - [ ] 5.2.2.3 Subtask - Test happy paths, missing capabilities, stale/wrong output, callback rejection/failure, invalid artifacts, and prior-session retention.
+      - [x] 5.2.2.1 Subtask - Add stable diagnostic and context data plus mount/update/replace/dispose callbacks with opaque backend-owned state.
+      - [x] 5.2.2.2 Subtask - Enforce exact root ownership, monotonic revisions, next-generation replacement, compatibility before callbacks, callback result shape, and idempotent disposal.
+      - [x] 5.2.2.3 Subtask - Test happy paths, missing capabilities, stale/wrong output, callback rejection/failure, invalid artifacts, and prior-session retention.
 
   - [ ] 5.3 Section - Implement deterministic headless snapshots and traces.
 
