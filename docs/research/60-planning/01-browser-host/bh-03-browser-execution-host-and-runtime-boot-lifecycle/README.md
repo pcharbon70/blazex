@@ -39,9 +39,9 @@ bundle-load handoff, and correlated readiness gate on 2026-09-06. Phase 4
 completed its exact-compatible runtime sharing and independent root lifecycle
 gate on 2026-09-06. Phase 5 completed its registry-owned shutdown,
 generation-bound runtime loss, one bounded replacement, atomic root replay, and
-non-DOM fallback gate on 2026-09-06. Browser-profile composition remains Phase
-6 and was explicitly authorized on 2026-09-06. Its contract and four-section
-delivery are frozen; implementation is active.
+non-DOM fallback gate on 2026-09-06. Phase 6 passed its separate Phoenix
+profile and active Linux Chrome/Firefox conformance gate on 2026-09-06. Phase
+7 is eligible but not authorized.
 
 ## What belongs here
 
@@ -66,7 +66,7 @@ host delivery do not belong here.
 | [3 — Artifact Acquisition, Runtime Startup, and Readiness](phase-03-artifact-acquisition-runtime-startup-and-readiness.md) | complete — gate passed | Validated bounded all-or-nothing acquisition, exposed the Popcorn startup descriptor, transferred bundle bytes to one isolated attempt, and proved correlated bounded readiness with injected-transport conformance. | Phase 2 |
 | [4 — Shared Runtime Registry and Independent Root Lifecycle](phase-04-shared-runtime-registry-and-independent-root-lifecycle.md) | complete — gate passed | Reuses one exact-compatible runtime through injected transport conformance while roots register, mount, update, move, dispose, and remount through independent queues. | Phase 3 |
 | [5 — Shutdown, Runtime Loss, Mismatch, and Fallback](phase-05-shutdown-runtime-loss-mismatch-and-fallback.md) | complete — gate passed | Implements deterministic shutdown, one bounded runtime-loss replacement with atomic root replay, and intentional non-DOM fallback decisions without partial activation. | Phases 3–4 |
-| [6 — Browser Profile Integration and Active-Matrix Conformance](phase-06-browser-profile-integration-and-active-matrix-conformance.md) | active — Sections 6.1–6.3 complete | Compose reusable boundaries in a separate Phoenix development profile and execute the same governed scenarios in active Linux Chrome and Firefox. | Phases 2–5 |
+| [6 — Browser Profile Integration and Active-Matrix Conformance](phase-06-browser-profile-integration-and-active-matrix-conformance.md) | complete — gate passed | Composed the reusable lifecycle in a separate Phoenix `/bh03/` profile and passed the same five scenarios in active Linux Chrome and Firefox. | Phases 2–5 |
 | 7 — Resource, Reliability, and Startup Measurements | planned — unauthorized | Measure root counts, readiness, memory growth, cleanup, repetition, and declared failure scenarios without promoting release budgets. | Phase 6 |
 | 8 — Reconciliation, Review, and BH-03 Acceptance | planned — unauthorized | Reconcile outputs and obligations, run the complete gate, and accept, revise, or block BH-04 eligibility. | Phases 1–7 |
 
@@ -116,6 +116,7 @@ making a support or public-stability claim.
 - [Phase 5 — Shutdown, Runtime Loss, Mismatch, and Fallback](phase-05-shutdown-runtime-loss-mismatch-and-fallback.md)
 - [Phase 5 implementation evidence](phase-05-implementation-evidence.md)
 - [Phase 6 — Browser Profile Integration and Active-Matrix Conformance](phase-06-browser-profile-integration-and-active-matrix-conformance.md)
+- [Phase 6 implementation evidence](phase-06-implementation-evidence.md)
 
 ## Maintaining this index
 

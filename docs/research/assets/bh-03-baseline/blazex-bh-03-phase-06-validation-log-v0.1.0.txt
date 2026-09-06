@@ -1,0 +1,55 @@
+BH-03 Phase 6 normalized validation log
+Recorded: 2026-09-06T13:30:00-04:00
+Base: 8aee16c17a8e4c3130a638457ec43afe9f48fdee
+Branch: codex/bh-03-phase-06-browser-profile
+Host tools: Node 24.3.0, npm 11.4.2, Python 3.12.12, Git 2.49.0, jq 1.7, Linux 6.8.0-51-generic x86-64
+
+PASS pinned Elixir 1.17.3 / OTP 26 mix format --check-formatted and mix test
+  packages/blazex_runtime_popcorn: 4 tests, 0 failures
+  packages/blazex_host_browser: 4 tests, 0 failures
+  profiles/browser_phoenix: 14 tests, 0 failures
+  integration/fixtures/browser_host: 17 tests, 0 failures
+  total: 4 projects, 39 tests, 0 failures
+  image: docker.io/hexpm/elixir@sha256:8d03cfb52e3fa3f5d83d749942b7c45c966dda48a7c4ba4f069390379b59fc39
+  Hex archive: 2.5.1, sha256 2eadc51d9300a134db10859cfce41b4754d44f65bd843ebe359e87e3476c6e2b
+PASS disposable AVM packaging and deterministic BH-03 profile build
+PASS Phase 6 profile verifier: 29 governed files and 3 exact runtime artifacts
+PASS npm run build and npm test in js/blazex_runtime: 19 test files, 0 failures
+PASS npm run test:browser:bh03-phase6: 2 active browsers, 5 identical scenarios each
+  Chrome: /usr/bin/google-chrome, 140.0.7339.80, passed
+  Firefox: /home/ducky/.cache/ms-playwright/firefox-1538/firefox/firefox, 153.0, passed
+PASS runtime build-contract verifier and Python tests: contract PASS, 9 tests
+PASS python3 -m unittest discover -p 'test_*.py' in docs/research: 279 tests, 0 failures
+PASS 21 research validators, including BH-03 Phases 1 through 6
+PASS 4 deterministic generators in --check mode
+PASS validate_archive.py: 214 documents, 25 directories, 1586 local links, 50 sources
+PASS all repository JSON documents parse with jq 1.7
+PASS all Phase 6 completion-bound paths are tracked or staged for the section commit
+PASS git diff --check
+PASS historical generated /bh01/ file hash inventory unchanged across Phase 6 build
+
+Active browser scenario set:
+- verified-profile-startup
+- shared-runtime-two-root-lifecycle
+- identity-mismatch-fallback
+- unsupported-prerequisite-fallback
+- registry-owned-shutdown
+
+Observed in both active rows:
+- 29 governed profile files and exact three-artifact manifest
+- one AtomVM/Elixir runtime start for two compatible opens
+- primary-root and secondary-root independently ready before shutdown
+- 8 Elixir root acknowledgements before shutdown and 11 total afterwards
+- mismatch -> deployment-action with no partial activation
+- unsupported prerequisite -> static-content with no partial activation
+- both roots disposed and runtime shutdown acknowledged/released with zero root failures
+
+Deferred without pass credit:
+- Safari, mobile, physical devices, second host, and manual assistive-technology pairings
+
+Evidence boundary:
+- active Linux development-browser conformance only; browser support remains unsupported
+- profile diagnostic presentation is not the BH-04 DOM interaction transport
+- no resource, reliability, startup, memory-growth, repetition, or release-budget claim
+- no BH-03 acceptance, BH-04 eligibility, public stability, or publication claim
+- Phase 7 is eligible but not authorized

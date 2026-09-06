@@ -20,6 +20,11 @@ Its completed gate is blocked by four unavailable required browser rows and
 required manual accessibility evidence. Production projects remain forbidden
 from importing this directory.
 
+BH-03 Phase 6 reuses the disposable `browser_host` AVM only to acknowledge the
+frozen host root lifecycle, and retains active Linux Chrome/Firefox profile
+evidence under `raw-evidence/`. This grants no browser support or component-
+renderer claim.
+
 ## Phase 1 index
 
 - `scenario.schema.json` — deterministic scenario identity and expected-result contract.

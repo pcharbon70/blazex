@@ -16,7 +16,7 @@ aliases:
 
 Back to milestone: [README](README.md)
 
-- [ ] 6 Phase - Browser Profile Integration and Active-Matrix Conformance.
+- [x] 6 Phase - Browser Profile Integration and Active-Matrix Conformance.
 
   Compose the reusable BH-03 startup, shared-runtime, independent-root,
   shutdown, recovery, and fallback boundaries in the Phoenix development
@@ -65,19 +65,19 @@ Back to milestone: [README](README.md)
       - [x] 6.3.2.2 Subtask - Record unavailable Safari, mobile, device, second-host, and manual assistive-technology rows as deferred under policy, never passed.
       - [x] 6.3.2.3 Subtask - Keep all browser support states unsupported and carry observations, not release budgets, into Phase 7.
 
-  - [ ] 6.4 Section - Run the inherited gate and publish completion evidence.
+  - [x] 6.4 Section - Run the inherited gate and publish completion evidence.
 
-    - [ ] 6.4.1 Task - Execute the active Phase 6 checks.
+    - [x] 6.4.1 Task - Execute the active Phase 6 checks.
 
-      - [ ] 6.4.1.1 Subtask - Run project-local Mix/Node tests and builds, profile verification, active browser scenarios, Phase 1 through Phase 6 validators/tests, inherited validators/generators, JSON, archive, tracked-file, and patch hygiene.
-      - [ ] 6.4.1.2 Subtask - Confirm predecessor completion-bound artifacts and `/bh01/` remain unchanged and measurement/acceptance result sets remain empty.
-      - [ ] 6.4.1.3 Subtask - Record exact commands, counts, negative outcomes, environment, active browser versions, and limitations.
+      - [x] 6.4.1.1 Subtask - Run project-local Mix/Node tests and builds, profile verification, active browser scenarios, Phase 1 through Phase 6 validators/tests, inherited validators/generators, JSON, archive, tracked-file, and patch hygiene.
+      - [x] 6.4.1.2 Subtask - Confirm predecessor completion-bound artifacts and `/bh01/` remain unchanged and measurement/acceptance result sets remain empty.
+      - [x] 6.4.1.3 Subtask - Record exact commands, counts, negative outcomes, environment, active browser versions, and limitations.
 
-    - [ ] 6.4.2 Task - Publish the Phase 6 decision.
+    - [x] 6.4.2 Task - Publish the Phase 6 decision.
 
-      - [ ] 6.4.2.1 Subtask - Emit a versioned validation log, implementation-evidence note, validator, tests, and completion decision bound to tracked artifacts.
-      - [ ] 6.4.2.2 Subtask - Mark Phase 6 complete only if every active row and inherited gate passes without overclaim.
-      - [ ] 6.4.2.3 Subtask - Leave Phase 7 eligible but unauthorized.
+      - [x] 6.4.2.1 Subtask - Emit a versioned validation log, implementation-evidence note, validator, tests, and completion decision bound to tracked artifacts.
+      - [x] 6.4.2.2 Subtask - Mark Phase 6 complete only if every active row and inherited gate passes without overclaim.
+      - [x] 6.4.2.3 Subtask - Leave Phase 7 eligible but unauthorized.
 
 ## Section delivery rule
 
@@ -93,3 +93,4 @@ budgets, or product support part of BH-03.
 - [Phase 5 implementation evidence](phase-05-implementation-evidence.md)
 - [Development environment and deferred qualification policy](../../development-environment-and-deferred-qualification-policy.md)
 - [BH-03 Phase 6 executable contract](../../../assets/bh-03-baseline/blazex-bh-03-phase-06-contract-v0.1.0.json)
+- [Phase 6 implementation evidence](phase-06-implementation-evidence.md)

@@ -1,0 +1,59 @@
+{
+  "schema_version": "1.0.0",
+  "record_id": "BX-BH03-DECISION-PHASE-06-GO",
+  "state": "passed",
+  "recorded_at": "2026-09-06",
+  "authorization_ref": "BX-BH03-PHASE-06-AUTHORIZATION-0.1",
+  "contract_ref": "BX-BH03-PHASE-06-CONTRACT-0.1",
+  "source_revision": "00c70d5bf6061ea6e824483bda6f7c835940ae18",
+  "section_commits": [
+    {"section": "6.1", "commit": "a57a3b7"},
+    {"section": "6.2", "commit": "fbb078e"},
+    {"section": "6.3", "commit": "00c70d5"},
+    {"section": "6.4", "commit": "resolve-from-this-records-git-commit"}
+  ],
+  "artifact_hashes": [
+    {"path": "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-06-authorization-v0.1.0.json", "sha256": "607a5a58a052f576386adfcef9da329d1db00a1972ffd24102a6391e3ffce922"},
+    {"path": "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-06-contract-v0.1.0.json", "sha256": "9485bdae02c074d8b2cfef11b9c3b5476352cceac8519ad1b4739279fa93df85"},
+    {"path": "profiles/browser_phoenix/assets/phase6/build_profile.py", "sha256": "2ac27ed6bc0425f21536db216d3316a05a09d9b0606c69a77e209b0ff1680a4f"},
+    {"path": "profiles/browser_phoenix/assets/phase6/verify_profile.py", "sha256": "65bdfa608083cbe7f49188ffefe30bee50bceaa41081904876163918511a1303"},
+    {"path": "profiles/browser_phoenix/assets/phase6/host.js", "sha256": "1bd8e1f5929b17e529637854d33c69be911a19640db01eaedfe612945141f882"},
+    {"path": "integration/fixtures/browser_host/lib/blazex/bh01/browser_host/protocol.ex", "sha256": "173d4a7fcdcfffb2fa31bdbaf777288ff80ce47b3ed4708d3717473d78cacbc3"},
+    {"path": "js/blazex_runtime/src/artifact-acquisition.js", "sha256": "6620ac5c6eaf23b3047ebe02b2366cff9ce4a4630c89156e016b07c53345f205"},
+    {"path": "js/blazex_runtime/test/browser/bh03-phase6.integration.mjs", "sha256": "6ab01eeb92c3407a68fda0271180bdbf48991c5195710de093eb3546e074846a"},
+    {"path": "integration/bh-03/phase-06/browser-profile-fixtures-v0.1.0.json", "sha256": "7e088bcd864a7de0de47938af13c72924a0edd77826c4e51607bb4345293f3c2"},
+    {"path": "integration/bh-03/integration-index-v0.6.0.json", "sha256": "4869301427445fd9a92f97d11775e3cfc1b38388b511bcfd93e293cfba4cbf70"},
+    {"path": "integration/fixtures/raw-evidence/bh03-phase6-browser-matrix.json", "sha256": "47214bde6218bbc28ec9541361197dab70725b2a5aebef9f23c937fa6520cee7"},
+    {"path": "docs/research/60-planning/01-browser-host/bh-03-browser-execution-host-and-runtime-boot-lifecycle/phase-06-browser-profile-integration-and-active-matrix-conformance.md", "sha256": "b62d3fd50c58489c412f7c92ebdecb162c005be6b4c5ce9c1d6e55307f62b44f"},
+    {"path": "docs/research/60-planning/01-browser-host/bh-03-browser-execution-host-and-runtime-boot-lifecycle/phase-06-implementation-evidence.md", "sha256": "a45fcc9fc8b1682e8a8e7f69c26016f203960c2e1a64dad1f02927f84650ee2e"},
+    {"path": "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-06-validation-log-v0.1.0.txt", "sha256": "6c4c1decda0d236003e0d240b22bae3df332ca10935de7d324b8df004e65d650"},
+    {"path": "docs/research/validate_bh03_profile.py", "sha256": "23dd641fae591b07279809603cd9a4029a25e279b520ce8c45d306975cdbdb99"},
+    {"path": "docs/research/test_validate_bh03_profile.py", "sha256": "5d20c16b2976680f4f05274dfedef7271834db6806de7253d67d6a7992208391"}
+  ],
+  "outcome": {
+    "active_browser_rows": 2,
+    "scenarios_per_browser": 5,
+    "profile_governed_files": 29,
+    "runtime_artifacts": 3,
+    "runtime_starts_per_browser": 1,
+    "compatible_opens_per_browser": 2,
+    "roots_per_browser": 2,
+    "runtime_acknowledgements_before_shutdown": 8,
+    "runtime_acknowledgements_after_shutdown": 11,
+    "deferred_rows": 5,
+    "measurements": 0,
+    "acceptance_evidence": 0,
+    "public_api_state": "experimental-not-stable",
+    "support_state": "unsupported",
+    "next_phase": "BH-03 Phase 7 eligible but not authorized"
+  },
+  "limitations": [
+    "Chrome and Firefox are active Linux development rows only; neither result promotes browser support.",
+    "Safari, mobile, physical-device, second-host, and manual assistive-technology qualification remains deferred without pass credit.",
+    "Profile-owned diagnostic HTML is not the BH-04 reference DOM interaction transport.",
+    "Resource, reliability, startup, memory-growth, repetition, and release-budget measurements remain Phase 7 work.",
+    "BH-03 acceptance, BH-04 eligibility, public API stability, and publication remain unclaimed."
+  ],
+  "next_authorized_work": null,
+  "next_eligible_phase": "BH-03 Phase 7"
+}

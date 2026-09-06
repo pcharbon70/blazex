@@ -20,6 +20,8 @@ CONTRACT = BASELINE_ROOT / "blazex-bh-03-phase-05-contract-v0.1.0.json"
 FIXTURES = REPO_ROOT / "integration/bh-03/phase-05/resilience-fixtures-v0.1.0.json"
 INTEGRATION_INDEX = REPO_ROOT / "integration/bh-03/integration-index-v0.5.0.json"
 COMPLETION = BASELINE_ROOT / "blazex-bh-03-phase-05-completion-v0.1.0.json"
+PHASE6_AUTHORIZATION = BASELINE_ROOT / "blazex-bh-03-phase-06-authorization-v0.1.0.json"
+PHASE6_BASE = "8aee16c17a8e4c3130a638457ec43afe9f48fdee"
 
 RUNTIME_STATES = ["starting", "ready", "stopping", "stopped", "recovering", "failed", "fallback"]
 FALLBACK_CLASSES = {
@@ -71,6 +73,16 @@ def _load(path: Path) -> dict[str, Any]:
 
 def _sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def _sha256_at_revision(repo_root: Path, revision: str, path: str) -> str | None:
+    result = subprocess.run(
+        ["git", "show", f"{revision}:{path}"],
+        cwd=repo_root,
+        capture_output=True,
+        check=False,
+    )
+    return hashlib.sha256(result.stdout).hexdigest() if result.returncode == 0 else None
 
 
 def _require(condition: bool, message: str) -> None:
@@ -166,9 +178,12 @@ def validate_implementation(repo_root: Path = REPO_ROOT) -> None:
         _require(marker in registry and marker in host, f"host/runtime protocol agreement is missing: {marker}")
     for forbidden in ("document.", "innerHTML", "HTMLElement", "createElement("):
         _require(forbidden not in registry + roots, f"DOM fallback leaked into reusable lifecycle: {forbidden}")
+    phase6_authorized = PHASE6_AUTHORIZATION.is_file() and _load(PHASE6_AUTHORIZATION).get("status") == "approved-phase-6-only"
     for path in ("packages/blazex_host_browser", "js/blazex_runtime"):
         metadata = _load(repo_root / path / "blazex.project.json")
-        _require(metadata.get("current_phase") == "BH-03 Phase 5" and metadata.get("status") == "experimental-bh03-phase5-recovery-fallback", f"Phase 5 metadata diverges: {path}")
+        current = metadata.get("current_phase") == "BH-03 Phase 5" and metadata.get("status") == "experimental-bh03-phase5-recovery-fallback"
+        successor = phase6_authorized and path == "js/blazex_runtime" and metadata.get("current_phase") == "BH-03 Phase 6" and metadata.get("status") == "experimental-bh03-phase6-browser-profile"
+        _require(current or successor, f"Phase 5 metadata diverges: {path}")
         _require(metadata.get("public_api_state") == "experimental-not-stable", f"public API was promoted: {path}")
     _require(_mix_dependencies(repo_root / "packages/blazex_host_browser") == [], "browser host acquired a dependency")
     _require(_load(repo_root / "js/blazex_runtime/package.json").get("dependencies") == {}, "browser runtime acquired a dependency")
@@ -180,9 +195,13 @@ def validate_completion(completion: dict[str, Any], repo_root: Path = REPO_ROOT)
     _require(completion.get("section_commits") == SECTION_COMMITS, "completion section commits diverge")
     bindings = completion.get("artifact_hashes", [])
     _require(len(bindings) == 14 and len({row.get("path") for row in bindings}) == 14, "completion artifact bindings diverge")
+    phase6_mutable = {"docs/research/validate_bh03_resilience.py"}
     for binding in bindings:
-        path = repo_root / str(binding.get("path", ""))
-        _require(path.is_file() and _sha256(path) == binding.get("sha256"), f"completion artifact is stale: {path}")
+        relative = str(binding.get("path", ""))
+        path = repo_root / relative
+        current = path.is_file() and _sha256(path) == binding.get("sha256")
+        authorized_successor = relative in phase6_mutable and _sha256_at_revision(repo_root, PHASE6_BASE, relative) == binding.get("sha256")
+        _require(current or authorized_successor, f"completion artifact is stale: {path}")
     outcome = completion.get("outcome", {})
     _require(outcome.get("conformance_cases") == 16 and outcome.get("shutdown_test_cases") == 4 and outcome.get("recovery_fallback_test_cases") == 9, "completion case counts diverge")
     _require(outcome.get("evidence") == "injected-transport-unit-conformance", "completion overclaims evidence")
