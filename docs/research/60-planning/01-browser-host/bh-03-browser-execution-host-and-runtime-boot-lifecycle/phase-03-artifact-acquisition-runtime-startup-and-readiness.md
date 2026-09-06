@@ -16,7 +16,7 @@ aliases:
 
 Back to milestone: [README](README.md)
 
-- [ ] 3 Phase - Artifact Acquisition, Runtime Startup, and Readiness.
+- [x] 3 Phase - Artifact Acquisition, Runtime Startup, and Readiness.
 
   Acquire only the artifacts accepted by the Phase 2 pre-acquisition gate,
   start the pinned Popcorn runtime through an isolated transport, load the
@@ -65,19 +65,19 @@ Back to milestone: [README](README.md)
       - [x] 3.3.2.2 Subtask - Add versioned success and negative fixtures plus deterministic unit/conformance tests.
       - [x] 3.3.2.3 Subtask - Return an attempt-scoped ready handle without implementing runtime sharing, roots, recovery, or browser-profile composition.
 
-  - [ ] 3.4 Section - Run the inherited gate and publish completion evidence.
+  - [x] 3.4 Section - Run the inherited gate and publish completion evidence.
 
-    - [ ] 3.4.1 Task - Execute the active Phase 3 checks.
+    - [x] 3.4.1 Task - Execute the active Phase 3 checks.
 
-      - [ ] 3.4.1.1 Subtask - Run project-local Mix/Node tests and builds, runtime verification, Phase 1 through Phase 3 validators/tests, inherited validators/generators, JSON, archive, tracked-file, and patch hygiene.
-      - [ ] 3.4.1.2 Subtask - Confirm the three profile artifacts still match their Phase 2 declarations and no completion-bound predecessor artifact changed.
-      - [ ] 3.4.1.3 Subtask - Record exact commands, counts, negative outcomes, environment, limitations, and zero browser/root/measurement/acceptance results.
+      - [x] 3.4.1.1 Subtask - Run project-local Mix/Node tests and builds, runtime verification, Phase 1 through Phase 3 validators/tests, inherited validators/generators, JSON, archive, tracked-file, and patch hygiene.
+      - [x] 3.4.1.2 Subtask - Confirm the three profile artifacts still match their Phase 2 declarations and no completion-bound predecessor artifact changed.
+      - [x] 3.4.1.3 Subtask - Record exact commands, counts, negative outcomes, environment, limitations, and zero browser/root/measurement/acceptance results.
 
-    - [ ] 3.4.2 Task - Publish the Phase 3 decision.
+    - [x] 3.4.2 Task - Publish the Phase 3 decision.
 
-      - [ ] 3.4.2.1 Subtask - Emit a versioned validation log, implementation-evidence note, validator, tests, and completion decision bound to tracked artifacts.
-      - [ ] 3.4.2.2 Subtask - Mark Phase 3 complete only if every active gate passes without overclaim.
-      - [ ] 3.4.2.3 Subtask - Leave Phase 4 eligible but unauthorized.
+      - [x] 3.4.2.1 Subtask - Emit a versioned validation log, implementation-evidence note, validator, tests, and completion decision bound to tracked artifacts.
+      - [x] 3.4.2.2 Subtask - Mark Phase 3 complete only if every active gate passes without overclaim.
+      - [x] 3.4.2.3 Subtask - Leave Phase 4 eligible but unauthorized.
 
 ## Section delivery rule
 
@@ -90,5 +90,6 @@ runtime, register a root, or claim browser conformance.
 
 - [BH-03 plan](README.md)
 - [Phase 2 implementation evidence](phase-02-implementation-evidence.md)
+- [Phase 3 implementation evidence](phase-03-implementation-evidence.md)
 - [Development environment and deferred qualification policy](../../development-environment-and-deferred-qualification-policy.md)
 - [BH-03 Phase 3 executable contract](../../../assets/bh-03-baseline/blazex-bh-03-phase-03-contract-v0.1.0.json)

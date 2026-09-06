@@ -24,6 +24,7 @@ export class BrowserRuntimeStartup {
   #manifestGeneration = null;
   #onEvent;
   #ready = null;
+  #readinessObserved = false;
   #state = "inactive";
 
   constructor({ frameFactory = (options) => new BrowserRuntimeFrame(options), onEvent = () => {} } = {}) {
@@ -37,6 +38,7 @@ export class BrowserRuntimeStartup {
     this.#attempt += 1;
     const attempt = this.#attempt;
     this.#failure = null;
+    this.#readinessObserved = false;
     this.#controller = new AbortController();
     this.#externalSignal = signal ?? null;
     this.#externalAbort = () => this.#controller?.abort(signal?.reason ?? new DOMException("Cancelled", "AbortError"));
@@ -116,11 +118,14 @@ export class BrowserRuntimeStartup {
     }
     this.#emit("transport-event", { event_type: event.type });
     if (event.type === "application-ready") {
-      if (event.name !== BH03_RUNTIME_STARTUP.readiness_event || this.#state !== "starting") {
+      if (event.name !== BH03_RUNTIME_STARTUP.readiness_event || this.#state !== "starting" || this.#readinessObserved) {
         this.#reject(startupError("protocol-mismatch", "Runtime readiness was duplicate, out of order, or incompatible"));
         return;
       }
-      this.#ready?.resolve(event);
+      this.#readinessObserved = true;
+      queueMicrotask(() => {
+        if (this.#state === "starting" && this.#readinessObserved) this.#ready?.resolve(event);
+      });
       return;
     }
     if (event.type === "runtime-failed") {
@@ -159,6 +164,7 @@ export class BrowserRuntimeStartup {
     this.#externalSignal = null;
     this.#frame = null;
     this.#ready = null;
+    this.#readinessObserved = false;
   }
 
   #transition(state, details) {

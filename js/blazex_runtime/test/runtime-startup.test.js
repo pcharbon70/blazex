@@ -70,6 +70,7 @@ function frameFactory(behavior, record = {}) {
     start(message) {
       record.message = message;
       record.emit = onEvent;
+      record.onStart?.();
       const base = {
         protocol: "blazex.runtime.frame/1",
         generation: message.generation,
@@ -80,6 +81,10 @@ function frameFactory(behavior, record = {}) {
         queueMicrotask(() => onEvent({ ...base, generation: message.generation + 1, type: "application-ready", name: "popcorn_app_ready" }));
         queueMicrotask(() => onEvent({ ...base, type: "application-ready", name: "popcorn_app_ready" }));
       }
+      if (behavior === "duplicate-ready") queueMicrotask(() => {
+        onEvent({ ...base, type: "application-ready", name: "popcorn_app_ready" });
+        onEvent({ ...base, type: "application-ready", name: "popcorn_app_ready" });
+      });
       if (behavior === "runtime-failure") queueMicrotask(() => onEvent({ ...base, type: "runtime-failed", code: "engine-abort" }));
       if (behavior === "bundle-failure") queueMicrotask(() => onEvent({ ...base, type: "runtime-failed", code: "bundle-load-failed" }));
     },
@@ -136,13 +141,14 @@ test("classifies transport, runtime, bundle, timeout, and cancellation failures 
     { behavior: "attach-failure", code: "runtime-startup", reason: "transport-attach" },
     { behavior: "runtime-failure", code: "runtime-startup", reason: "runtime-failed" },
     { behavior: "bundle-failure", code: "bundle-load", reason: "bundle-load-failed" },
+    { behavior: "duplicate-ready", code: "runtime-startup", reason: "protocol-mismatch" },
     { behavior: "silent", code: "readiness-timeout", reason: "readiness-timeout" },
   ]) {
     const accepted = gate();
     const record = {};
     const startup = new BrowserRuntimeStartup({ frameFactory: frameFactory(scenario.behavior, record) });
     await assert.rejects(
-      startup.start({ gate: accepted, frameUrl: "https://example.test/frame", fetchImpl: fetchFor(accepted), cryptoImpl: webcrypto, timeoutMs: 5 }),
+      startup.start({ gate: accepted, frameUrl: "https://example.test/frame", fetchImpl: fetchFor(accepted), cryptoImpl: webcrypto, timeoutMs: scenario.behavior === "silent" ? 100 : 1_000 }),
       failure(scenario.code, scenario.reason),
       scenario.behavior,
     );
@@ -153,10 +159,14 @@ test("classifies transport, runtime, bundle, timeout, and cancellation failures 
 
   const accepted = gate();
   const record = {};
+  let markStarted;
+  const started = new Promise((resolve) => { markStarted = resolve; });
+  record.onStart = markStarted;
   const controller = new AbortController();
   const startup = new BrowserRuntimeStartup({ frameFactory: frameFactory("silent", record) });
-  const pending = startup.start({ gate: accepted, frameUrl: "https://example.test/frame", fetchImpl: fetchFor(accepted), cryptoImpl: webcrypto, signal: controller.signal, timeoutMs: 100 });
-  setTimeout(() => controller.abort(), 0);
+  const pending = startup.start({ gate: accepted, frameUrl: "https://example.test/frame", fetchImpl: fetchFor(accepted), cryptoImpl: webcrypto, signal: controller.signal, timeoutMs: 1_000 });
+  await started;
+  controller.abort();
   await assert.rejects(pending, failure("runtime-startup", "startup-cancelled"));
   assert.equal(record.stops, 1);
 });

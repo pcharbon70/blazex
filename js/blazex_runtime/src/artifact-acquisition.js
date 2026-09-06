@@ -124,13 +124,16 @@ async function fetchArtifact(declaration, options) {
     if (options.signal?.aborted) unavailable("fetch-cancelled", "Artifact acquisition was cancelled", { id: declaration.id });
     if (controller.signal.aborted) unavailable("fetch-timeout", "Artifact acquisition timed out", { id: declaration.id });
     validateResponse(response, expectedUrl, declaration);
-    const bytes = await readExactBytes(response, declaration, controller.signal);
+    const bytes = await readExactBytes(response, declaration, controller.signal, options.signal);
+    assertNotAborted(controller.signal, options.signal, declaration.id);
     const digest = await digestHex(bytes, options.cryptoImpl, declaration.id);
+    assertNotAborted(controller.signal, options.signal, declaration.id);
     if (digest !== declaration.sha256) {
       integrity("digest", "Artifact SHA-256 does not match its accepted declaration", { id: declaration.id, expected: declaration.sha256, observed: digest });
     }
     let wasm;
     if (declaration.role === "runtime-wasm") wasm = inspectWebAssembly(bytes, options.webAssemblyImpl, declaration.id);
+    assertNotAborted(controller.signal, options.signal, declaration.id);
     return Object.freeze({
       declaration,
       bytes,
@@ -171,14 +174,14 @@ function validateResponse(response, expectedUrl, declaration) {
   }
 }
 
-async function readExactBytes(response, declaration, signal) {
+async function readExactBytes(response, declaration, signal, externalSignal) {
   const limit = Math.min(declaration.bytes, BH03_ARTIFACT_LIMITS[declaration.role]);
   if (typeof response.body?.getReader !== "function") {
     let bytes;
     try {
       bytes = new Uint8Array(await response.arrayBuffer());
     } catch (error) {
-      unavailable(signal.aborted ? "fetch-timeout" : "fetch-network", "Artifact response bytes could not be read", { id: declaration.id, cause: error instanceof Error ? error.name : String(error) });
+      unavailable(fetchFailureReason(signal, externalSignal), "Artifact response bytes could not be read", { id: declaration.id, cause: error instanceof Error ? error.name : String(error) });
     }
     assertExactLength(bytes.byteLength, declaration, limit);
     return bytes;
@@ -190,6 +193,7 @@ async function readExactBytes(response, declaration, signal) {
     while (true) {
       const { done, value } = await reader.read();
       if (done) break;
+      assertNotAborted(signal, externalSignal, declaration.id);
       length += value.byteLength;
       if (length > limit) {
         await reader.cancel();
@@ -199,7 +203,7 @@ async function readExactBytes(response, declaration, signal) {
     }
   } catch (error) {
     if (error instanceof BlazeXHostError) throw error;
-    unavailable(signal.aborted ? "fetch-timeout" : "fetch-network", "Artifact response stream failed", { id: declaration.id, cause: error instanceof Error ? error.name : String(error) });
+    unavailable(fetchFailureReason(signal, externalSignal), "Artifact response stream failed", { id: declaration.id, cause: error instanceof Error ? error.name : String(error) });
   }
   assertExactLength(length, declaration, limit);
   const bytes = new Uint8Array(length);
@@ -242,6 +246,17 @@ function validateTimeout(value) {
     unavailable("timeout-invalid", "Artifact acquisition timeout must be between 1 and 60000 milliseconds");
   }
   return value;
+}
+
+function fetchFailureReason(signal, externalSignal) {
+  if (externalSignal?.aborted) return "fetch-cancelled";
+  return signal.aborted ? "fetch-timeout" : "fetch-network";
+}
+
+function assertNotAborted(signal, externalSignal, id) {
+  if (signal.aborted) {
+    unavailable(fetchFailureReason(signal, externalSignal), "Artifact acquisition was cancelled or timed out", { id });
+  }
 }
 
 function integrity(reason, message, details = {}) {

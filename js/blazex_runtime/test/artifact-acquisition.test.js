@@ -131,6 +131,23 @@ test("rejects unavailable, timed-out, cancelled, and oversize-stream artifacts",
   controller.abort();
   await assert.rejects(cancelled, failure("artifact-unavailable", "fetch-cancelled"));
 
+  const digestController = new AbortController();
+  const cancelledCrypto = {
+    subtle: {
+      async digest(algorithm, bytes) {
+        digestController.abort();
+        return webcrypto.subtle.digest(algorithm, bytes);
+      },
+    },
+  };
+  await assert.rejects(
+    acquireHostArtifacts(accepted, { fetchImpl: async (url) => {
+      const declaration = accepted.manifest.artifacts.find((item) => item.url === url.href);
+      return response(bytesByRole[declaration.role], declaration);
+    }, cryptoImpl: cancelledCrypto, signal: digestController.signal }),
+    failure("artifact-unavailable", "fetch-cancelled"),
+  );
+
   const streamFetch = async (url) => {
     const declaration = accepted.manifest.artifacts.find((item) => item.url === url.href);
     const stream = new ReadableStream({ start(streamController) { streamController.enqueue(new Uint8Array(declaration.bytes + 1)); streamController.close(); } });
