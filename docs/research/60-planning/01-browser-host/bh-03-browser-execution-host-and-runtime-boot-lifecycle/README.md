@@ -35,9 +35,10 @@ lifecycle vocabulary, existing reusable boundaries, empty integration suite,
 and fail-closed validation are now recorded. Phase 2 completed its compatibility
 identity, discovery, prerequisite, and strict manifest gate on 2026-09-06.
 Phase 3 completed its bounded artifact acquisition, isolated runtime startup,
-bundle-load handoff, and correlated readiness gate on 2026-09-06. Phase 4 is
-eligible but remains unauthorized; shared-runtime and root lifecycle behavior
-is still unimplemented.
+bundle-load handoff, and correlated readiness gate on 2026-09-06. Phase 4
+completed its exact-compatible runtime sharing and independent root lifecycle
+gate on 2026-09-06. Phase 5 is eligible but unauthorized; shutdown, runtime
+loss, retry, recovery, and fallback remain unimplemented.
 
 ## What belongs here
 
@@ -60,7 +61,7 @@ host delivery do not belong here.
 | [1 — Authorization, Handoff Reconciliation, and Boundary Activation](phase-01-authorization-handoff-reconciliation-and-boundary-activation.md) | complete — gate passed | Bound BH-02 acceptance and inherited conditions, froze the eight-phase plan, activated reusable boundaries and empty evidence locations, and proved the initial dependency/evidence boundary. | Accepted BH-02 and explicit authorization |
 | [2 — Compatibility Identity, Discovery, Prerequisites, and Manifest Contract](phase-02-compatibility-identity-discovery-prerequisites-and-manifest.md) | complete — gate passed | Defined and implemented versioned runtime/host/profile identities, deterministic discovery, prerequisite detection, and fail-closed manifest validation. | Phase 1 |
 | [3 — Artifact Acquisition, Runtime Startup, and Readiness](phase-03-artifact-acquisition-runtime-startup-and-readiness.md) | complete — gate passed | Validated bounded all-or-nothing acquisition, exposed the Popcorn startup descriptor, transferred bundle bytes to one isolated attempt, and proved correlated bounded readiness with injected-transport conformance. | Phase 2 |
-| 4 — Shared Runtime Registry and Independent Root Lifecycle | planned — unauthorized | Reuse one compatible runtime while roots register, mount, update, move, dispose, and remount independently. | Phase 3 |
+| [4 — Shared Runtime Registry and Independent Root Lifecycle](phase-04-shared-runtime-registry-and-independent-root-lifecycle.md) | complete — gate passed | Reuses one exact-compatible runtime through injected transport conformance while roots register, mount, update, move, dispose, and remount through independent queues. | Phase 3 |
 | 5 — Shutdown, Runtime Loss, Mismatch, and Fallback | planned — unauthorized | Implement deterministic shutdown and intentional recovery/fallback paths without partial activation. | Phases 3–4 |
 | 6 — Browser Profile Integration and Active-Matrix Conformance | planned — unauthorized | Compose reusable boundaries in the Phoenix development profile and execute Chrome/Firefox integration scenarios. | Phases 2–5 |
 | 7 — Resource, Reliability, and Startup Measurements | planned — unauthorized | Measure root counts, readiness, memory growth, cleanup, repetition, and declared failure scenarios without promoting release budgets. | Phase 6 |
@@ -107,6 +108,8 @@ making a support or public-stability claim.
 - [Phase 2 implementation evidence](phase-02-implementation-evidence.md)
 - [Phase 3 — Artifact Acquisition, Runtime Startup, and Readiness](phase-03-artifact-acquisition-runtime-startup-and-readiness.md)
 - [Phase 3 implementation evidence](phase-03-implementation-evidence.md)
+- [Phase 4 — Shared Runtime Registry and Independent Root Lifecycle](phase-04-shared-runtime-registry-and-independent-root-lifecycle.md)
+- [Phase 4 implementation evidence](phase-04-implementation-evidence.md)
 
 ## Maintaining this index
 

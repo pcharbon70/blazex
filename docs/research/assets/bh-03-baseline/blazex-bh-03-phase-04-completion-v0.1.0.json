@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0.0",
+  "record_id": "BX-BH03-DECISION-PHASE-04-GO",
+  "state": "passed",
+  "recorded_at": "2026-09-06",
+  "authorization_ref": "BX-BH03-PHASE-04-AUTHORIZATION-0.1",
+  "contract_ref": "BX-BH03-PHASE-04-CONTRACT-0.1",
+  "section_commits": [
+    {"section": "4.1", "commit": "109a0e7"},
+    {"section": "4.2", "commit": "666ed96"},
+    {"section": "4.3", "commit": "7cf1776"},
+    {"section": "4.4", "commit": "resolve-from-this-records-git-commit"}
+  ],
+  "artifact_hashes": [
+    {"path": "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-04-authorization-v0.1.0.json", "sha256": "b82abf7039a2e614ee0918c712358de5be4b952d3e67d142d986862223bc102d"},
+    {"path": "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-04-contract-v0.1.0.json", "sha256": "f0b6093d76f676d6dcbfdc31027248e299a72f207a07918d234b7f7e76771c17"},
+    {"path": "js/blazex_runtime/src/runtime-registry.js", "sha256": "39354edeb25dc884c67faef1ffec03dad740357b7df191a05c7afea640e27480"},
+    {"path": "js/blazex_runtime/test/runtime-registry.test.js", "sha256": "21d0a9623ff5e535a836acc1613a0a3fc37331bcb3935f0faf0278f855fe68f4"},
+    {"path": "js/blazex_runtime/src/root-lifecycle.js", "sha256": "ab05e596a83c87c39556c251139706101445cf50f52eb2a4f79689f18c57bfec"},
+    {"path": "js/blazex_runtime/test/root-lifecycle.test.js", "sha256": "56586f318d4d98e47ab7ec155e2c34653626347171cb964de0afb2aced8aa537"},
+    {"path": "js/blazex_runtime/src/bridge-protocol.js", "sha256": "d55f746f486af4d25e053e94fe07a6c5d9e0b0033c0950e29a85ebce0f6d2efa"},
+    {"path": "packages/blazex_host_browser/lib/blazex/host/browser/lifecycle.ex", "sha256": "58da8b21866df219b9c37fa035cc42b1aee9b7bae7d42da5bd5c2c77b3b2b6af"},
+    {"path": "integration/bh-03/phase-04/shared-runtime-root-fixtures-v0.1.0.json", "sha256": "2b1f4662592f4bbc5f662aa3303ab8174b734263da5f754af15a7a2cbc2fdf25"},
+    {"path": "integration/bh-03/integration-index-v0.4.0.json", "sha256": "c309db041bf09bfb7831cb516609e1a655433159144d22d5f881317d4f9ad42d"},
+    {"path": "docs/research/60-planning/01-browser-host/bh-03-browser-execution-host-and-runtime-boot-lifecycle/phase-04-shared-runtime-registry-and-independent-root-lifecycle.md", "sha256": "1b4c7f4ff64bd46ecb693a75378f0c914a644e472ed1b5f853e09232ea614e23"},
+    {"path": "docs/research/60-planning/01-browser-host/bh-03-browser-execution-host-and-runtime-boot-lifecycle/phase-04-implementation-evidence.md", "sha256": "eca064ef6bca34b5aca5354006d0197f232e4e16402483d62839818e2b8748c9"},
+    {"path": "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-04-validation-log-v0.1.0.txt", "sha256": "5c73da4ba8a9e0dd05b9a0025ca8d2039fd0c97b13377fc76c2a831b2be3248d"}
+  ],
+  "outcome": {
+    "max_scopes": 16,
+    "max_roots_per_scope": 64,
+    "conformance_cases": 12,
+    "runtime_root_evidence": "injected-transport-unit-conformance",
+    "browser_results": 0,
+    "shutdown_results": 0,
+    "runtime_loss_results": 0,
+    "recovery_results": 0,
+    "fallback_results": 0,
+    "measurements": 0,
+    "acceptance_evidence": 0,
+    "public_api_state": "experimental-not-stable",
+    "support_state": "unsupported",
+    "next_phase": "BH-03 Phase 5 eligible but not authorized"
+  },
+  "limitations": [
+    "Shared runtime and root lifecycle execution uses a deterministic injected transport; no browser executes the retained runtime or application artifacts in Phase 4.",
+    "Root handles do not own runtime transport or release, and Phase 4 implements no deterministic runtime shutdown or runtime-loss behavior.",
+    "Retry, restart, recovery, fallback, browser-profile composition, browser results, measurements, acceptance, publication, stability, and support remain unimplemented or unclaimed."
+  ],
+  "next_authorized_work": null,
+  "next_eligible_phase": "BH-03 Phase 5"
+}

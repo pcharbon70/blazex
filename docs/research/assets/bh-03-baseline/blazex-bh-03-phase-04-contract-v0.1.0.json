@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0.0",
+  "contract_id": "BX-BH03-PHASE-04-CONTRACT-0.1",
+  "status": "authorized-experimental",
+  "authorization_ref": "BX-BH03-PHASE-04-AUTHORIZATION-0.1",
+  "runtime_registry": {
+    "protocol": "blazex.runtime-registry/1",
+    "scope_id": "bounded-lowercase-kebab-identifier",
+    "max_scopes": 16,
+    "compatibility": "complete-exact-opaque-identity-table",
+    "states": ["starting", "ready", "failed"],
+    "startup": "one-coalesced-attempt-per-scope",
+    "ready_reuse": "same-scope-and-compatibility-returns-same-runtime-scope",
+    "mismatch": "identity-mismatch-before-reuse-or-startup",
+    "failure": "sticky-tombstone-no-retry-or-fallback",
+    "runtime_release_owner": "registry-not-root"
+  },
+  "root_lifecycle": {
+    "protocol": "blazex.root-lifecycle/1",
+    "root_id": "bounded-lowercase-kebab-identifier",
+    "max_roots_per_scope": 64,
+    "states": ["unregistered", "registered", "mounting", "ready", "moving", "disposing", "disposed", "failed"],
+    "operations": ["root.register", "root.mount", "root.update", "root.move", "root.dispose"],
+    "serialization": "one-fifo-queue-per-root",
+    "cross_root_progress": "independent",
+    "acknowledgement": ["root-id", "root-generation"],
+    "generation": "positive-safe-integer-incremented-per-dispatched-operation",
+    "remount": "disposed-to-mounting-to-ready-on-same-registration",
+    "dispose": "idempotent-after-disposed"
+  },
+  "ownership": {
+    "runtime_instance_and_release": "runtime-registry",
+    "root_identity_state_and_queue": "root-handle",
+    "root_bridge": "root-handle",
+    "runtime_transport": "runtime-scope-not-root",
+    "renderer_component_and_server_behavior": "outside-phase-4"
+  },
+  "failure_classes": {
+    "identity-mismatch": ["incompatible-scope-reuse"],
+    "duplicate-root": ["existing-or-reserved-root-id"],
+    "stale-generation": ["wrong-root-generation"],
+    "ownership-violation": ["foreign-root-acknowledgement"],
+    "root-lifecycle": ["illegal-transition", "invalid-root-or-target-id", "root-limit"]
+  },
+  "explicitly_deferred": [
+    "runtime-shutdown",
+    "runtime-loss",
+    "retry-restart-and-recovery",
+    "fallback-execution",
+    "browser-profile-composition",
+    "browser-results",
+    "resource-and-reliability-measurements",
+    "acceptance-evidence"
+  ],
+  "api_state": "experimental-not-stable",
+  "support_state": "unsupported"
+}

@@ -22,6 +22,7 @@ FIXTURES = REPO_ROOT / "integration/bh-03/phase-03/startup-fixtures-v0.1.0.json"
 INTEGRATION_INDEX = REPO_ROOT / "integration/bh-03/integration-index-v0.3.0.json"
 PROFILE_MANIFEST = REPO_ROOT / "profiles/browser_phoenix/priv/static/bh01/bh03-runtime-manifest.json"
 COMPLETION = BASELINE_ROOT / "blazex-bh-03-phase-03-completion-v0.1.0.json"
+PHASE4_AUTHORIZATION = BASELINE_ROOT / "blazex-bh-03-phase-04-authorization-v0.1.0.json"
 
 ROLES = ["runtime-module", "runtime-wasm", "application-bundle"]
 LIMITS = {"runtime-module": 2_097_152, "runtime-wasm": 16_777_216, "application-bundle": 33_554_432}
@@ -178,9 +179,12 @@ def validate_implementation(contract: dict[str, Any], repo_root: Path = REPO_ROO
         "packages/blazex_host_browser": "experimental-bh03-phase3-isolated-startup-boundary",
         "js/blazex_runtime": "experimental-bh03-phase3-acquisition-startup-readiness",
     }
+    phase4_authorized = PHASE4_AUTHORIZATION.is_file() and _load(PHASE4_AUTHORIZATION).get("status") == "approved-phase-4-only"
     for path, status in expected_metadata.items():
         metadata = _load(repo_root / path / "blazex.project.json")
-        _require(metadata.get("current_phase") == "BH-03 Phase 3" and metadata.get("status") == status, f"Phase 3 metadata diverges: {path}")
+        current = metadata.get("current_phase") == "BH-03 Phase 3" and metadata.get("status") == status
+        phase4_successor = phase4_authorized and path in {"packages/blazex_host_browser", "js/blazex_runtime"} and metadata.get("current_phase") == "BH-03 Phase 4" and metadata.get("status") == "experimental-bh03-phase4-shared-runtime-roots"
+        _require(current or phase4_successor, f"Phase 3 metadata diverges: {path}")
         _require(metadata.get("public_api_state") == "experimental-not-stable", f"public API was promoted: {path}")
     profile = _load(repo_root / "profiles/browser_phoenix/blazex.project.json")
     _require(profile.get("current_phase") == "BH-03 Phase 2" and profile.get("status") == "experimental-bh03-phase2-profile-manifest", "Phase 6 profile integration leaked into Phase 3")

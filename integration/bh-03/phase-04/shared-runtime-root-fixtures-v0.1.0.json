@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0.0",
+  "fixture_set_id": "BX-BH03-PHASE-04-SHARED-RUNTIME-ROOT-FIXTURES-0.1",
+  "contract_ref": "BX-BH03-PHASE-04-CONTRACT-0.1",
+  "runtime_registry": {
+    "protocol": "blazex.runtime-registry/1",
+    "max_scopes": 16,
+    "states": ["starting", "ready", "failed"],
+    "compatibility": "complete-exact-opaque-identity-table",
+    "failed_scope_policy": "sticky-tombstone-no-retry-or-fallback"
+  },
+  "root_lifecycle": {
+    "protocol": "blazex.root-lifecycle/1",
+    "max_roots_per_scope": 64,
+    "states": ["unregistered", "registered", "mounting", "ready", "moving", "disposing", "disposed", "failed"],
+    "operations": ["root.register", "root.mount", "root.update", "root.move", "root.dispose"],
+    "serialization": "one-fifo-queue-per-root",
+    "acknowledgement": ["root_id", "root_generation"],
+    "runtime_release_owner": "runtime-registry"
+  },
+  "cases": [
+    {"id": "concurrent-startup-coalescing", "expected": "one-start-per-compatible-scope"},
+    {"id": "ready-runtime-reuse", "expected": "same-runtime-scope"},
+    {"id": "incompatible-scope-reuse", "expected": "identity-mismatch"},
+    {"id": "sticky-startup-failure", "expected": "failed-without-retry"},
+    {"id": "unique-root-registration", "expected": "registered"},
+    {"id": "reserved-or-existing-root", "expected": "duplicate-root"},
+    {"id": "independent-root-queues", "expected": "cross-root-progress"},
+    {"id": "mount-update-move-dispose-remount", "expected": "ready"},
+    {"id": "wrong-root-generation", "expected": "stale-generation"},
+    {"id": "foreign-root-acknowledgement", "expected": "ownership-violation"},
+    {"id": "failed-root-isolation", "expected": "other-root-unchanged"},
+    {"id": "bounded-root-registry", "expected": "root-limit"}
+  ],
+  "evidence_boundary": {
+    "transport": "injected-unit-conformance",
+    "compatible_runtime_instances": 1,
+    "root_operation_conformance": true,
+    "runtime_shutdown_results": 0,
+    "runtime_loss_results": 0,
+    "recovery_or_fallback_results": 0,
+    "browser_results": 0,
+    "measurements": 0,
+    "acceptance_evidence": 0,
+    "api_state": "experimental-not-stable",
+    "support_state": "unsupported"
+  }
+}

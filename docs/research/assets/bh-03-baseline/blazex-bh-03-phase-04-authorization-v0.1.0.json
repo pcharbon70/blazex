@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0.0",
+  "authorization_id": "BX-BH03-PHASE-04-AUTHORIZATION-0.1",
+  "status": "approved-phase-4-only",
+  "approved_at": "2026-09-06",
+  "approved_by": {
+    "identity": "repository-user",
+    "role": "repository-owner",
+    "evidence": "Explicit request to implement the next BH-03 phase section by section, merge one pull request, synchronize main, and delete the feature branch."
+  },
+  "activation": {
+    "base_branch": "main",
+    "base_revision": "0fec9157c14ab400fdd1615e873f0b5d2ecea9b5",
+    "base_remote_revision": "0fec9157c14ab400fdd1615e873f0b5d2ecea9b5",
+    "main_synchronized_before_branch": true,
+    "working_branch": "codex/bh-03-phase-04-shared-runtime-roots",
+    "phase": "BH-03 Phase 4"
+  },
+  "approval_basis": [
+    {"path": "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-03-completion-v0.1.0.json", "sha256": "354ecfd265e8b6a60d13a881a70ce6a2955cafb283b1c2be554643700988fea9"},
+    {"path": "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-03-contract-v0.1.0.json", "sha256": "0e1ff285979d77fd935d0e04e312617ab6811aba8db1c830d571f3409354c574"},
+    {"path": "docs/research/60-planning/01-browser-host/bh-03-browser-execution-host-and-runtime-boot-lifecycle/phase-03-implementation-evidence.md", "sha256": "6671bbfc789ee88c925c1d7a5a8def265f63f9e069f2a24c6f8f3d8ef701a08f"},
+    {"path": "integration/bh-03/integration-index-v0.3.0.json", "sha256": "b71a76933b18dd2be60c7ac9a4d4533121f9723ca8ff5157e3ac468340628e97"},
+    {"path": "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-01-contract-v0.1.0.json", "sha256": "44cd9dc05a528e7847c09868566b365d34d087f57116a44d8a23ff907ea562eb"}
+  ],
+  "authorized_scope": [
+    "Implement one exact-compatible shared runtime result per bounded host scope.",
+    "Coalesce concurrent startup and reuse the ready runtime without transferring release ownership to roots.",
+    "Implement independent root registration, mount, update, move, dispose, and remount queues.",
+    "Require root identifier and generation acknowledgements before state commits.",
+    "Reject duplicate roots, incompatible reuse, stale generations, foreign acknowledgements, and illegal transitions.",
+    "Publish versioned Phase 4 fixtures, validation, and completion evidence."
+  ],
+  "delivery_rules": {
+    "sections_in_order": true,
+    "commit_per_section": true,
+    "section_count": 4,
+    "single_pull_request": true,
+    "merge_pull_request": true,
+    "return_to_synchronized_main_after_delivery": true,
+    "delete_local_feature_branch_after_delivery": true,
+    "delete_remote_feature_branch_after_delivery": true
+  },
+  "not_authorized": [
+    "BH-03 Phase 5 or later implementation",
+    "runtime shutdown or runtime-loss handling",
+    "retry, restart, recovery, or fallback execution",
+    "browser-profile composition or active browser results",
+    "renderer, DOM interaction, component, Phoenix, Plug, or server command behavior",
+    "resource or reliability measurements and BH-03 acceptance",
+    "public API stability, package publication, or support claims"
+  ]
+}

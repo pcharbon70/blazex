@@ -47,4 +47,19 @@ defmodule BlazeX.Host.BrowserBoundaryTest do
              |> Map.put("renderer", "blazex.renderer/2")
              |> BlazeX.Host.Browser.negotiate_compatibility()
   end
+
+  test "publishes the closed independent-root lifecycle without runtime ownership" do
+    contract = BlazeX.Host.Browser.root_lifecycle_contract()
+
+    assert contract.protocol == "blazex.root-lifecycle/1"
+    assert contract.max_roots_per_scope == 64
+
+    assert contract.operations ==
+             ["root.register", "root.mount", "root.update", "root.move", "root.dispose"]
+
+    assert contract.serialization == :one_fifo_queue_per_root
+    assert contract.cross_root_progress == :independent
+    assert contract.runtime_owner == :runtime_registry
+    refute contract.root_owns_runtime_release
+  end
 end

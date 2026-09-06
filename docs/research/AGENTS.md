@@ -268,4 +268,14 @@ fixtures, or Phase 2 evidence changes, also run
 `python3 validate_bh03_compatibility.py` and
 `python3 -m unittest test_validate_bh03_compatibility.py`.
 
+When BH-03 Phase 3 authorization, artifact acquisition, runtime startup,
+bundle-load, readiness, startup fixtures, or Phase 3 evidence changes, also run
+`python3 validate_bh03_startup.py` and
+`python3 -m unittest test_validate_bh03_startup.py`.
+
+When BH-03 Phase 4 authorization, shared-runtime ownership, root registration
+or lifecycle, generation acknowledgement, Phase 4 fixtures, or Phase 4 evidence
+changes, also run `python3 validate_bh03_roots.py` and
+`python3 -m unittest test_validate_bh03_roots.py`.
+
 Do not commit, push, publish, or open a pull request unless the user asks.
