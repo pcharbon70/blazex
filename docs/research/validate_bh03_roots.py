@@ -20,6 +20,8 @@ CONTRACT = BASELINE_ROOT / "blazex-bh-03-phase-04-contract-v0.1.0.json"
 FIXTURES = REPO_ROOT / "integration/bh-03/phase-04/shared-runtime-root-fixtures-v0.1.0.json"
 INTEGRATION_INDEX = REPO_ROOT / "integration/bh-03/integration-index-v0.4.0.json"
 COMPLETION = BASELINE_ROOT / "blazex-bh-03-phase-04-completion-v0.1.0.json"
+PHASE5_AUTHORIZATION = BASELINE_ROOT / "blazex-bh-03-phase-05-authorization-v0.1.0.json"
+PHASE5_BASE = "a4b3f1d78f98434ae2d0a20b87be5421b9f53ada"
 
 SCOPE_STATES = ["starting", "ready", "failed"]
 ROOT_STATES = ["unregistered", "registered", "mounting", "ready", "moving", "disposing", "disposed", "failed"]
@@ -63,6 +65,11 @@ def _load(path: Path) -> dict[str, Any]:
 
 def _sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def _sha256_at_revision(repo_root: Path, revision: str, path: str) -> str | None:
+    result = subprocess.run(["git", "show", f"{revision}:{path}"], cwd=repo_root, capture_output=True, check=False)
+    return hashlib.sha256(result.stdout).hexdigest() if result.returncode == 0 else None
 
 
 def _require(condition: bool, message: str) -> None:
@@ -160,7 +167,9 @@ def validate_implementation(repo_root: Path = REPO_ROOT) -> None:
         _require(marker in roots, f"root lifecycle implementation is incomplete: {marker}")
     for operation in OPERATIONS:
         _require(f'"{operation}"' in roots and f'"{operation}"' in bridge and f'"{operation}"' in host, f"root operation is missing: {operation}")
-    _require(".release(" not in roots and "runtime.shutdown" not in roots + registry, "root or registry acquired deferred runtime shutdown ownership")
+    phase5_authorized = PHASE5_AUTHORIZATION.is_file() and _load(PHASE5_AUTHORIZATION).get("status") == "approved-phase-5-only"
+    _require(".release(" not in roots, "a root acquired runtime release ownership")
+    _require((phase5_authorized and "runtime.shutdown" in registry) or (not phase5_authorized and "runtime.shutdown" not in roots + registry), "registry shutdown differs without an authorized Phase 5 successor")
     metadata_expectations = {
         "packages/blazex_runtime_popcorn": ("BH-03 Phase 3", "experimental-bh03-phase3-startup-descriptor"),
         "packages/blazex_host_browser": ("BH-03 Phase 4", "experimental-bh03-phase4-shared-runtime-roots"),
@@ -169,7 +178,9 @@ def validate_implementation(repo_root: Path = REPO_ROOT) -> None:
     }
     for path, (phase, status) in metadata_expectations.items():
         metadata = _load(repo_root / path / "blazex.project.json")
-        _require(metadata.get("current_phase") == phase and metadata.get("status") == status, f"Phase 4 metadata diverges: {path}")
+        current = metadata.get("current_phase") == phase and metadata.get("status") == status
+        phase5_successor = phase5_authorized and path in {"packages/blazex_host_browser", "js/blazex_runtime"} and metadata.get("current_phase") == "BH-03 Phase 5" and metadata.get("status") == "experimental-bh03-phase5-recovery-fallback"
+        _require(current or phase5_successor, f"Phase 4 metadata diverges: {path}")
         _require(metadata.get("public_api_state") == "experimental-not-stable", f"public API was promoted: {path}")
     _require(_mix_dependencies(repo_root / "packages/blazex_runtime_popcorn") == [], "runtime adapter acquired a dependency")
     _require(_mix_dependencies(repo_root / "packages/blazex_host_browser") == [], "browser host acquired a dependency")
@@ -183,9 +194,18 @@ def validate_completion(completion: dict[str, Any], repo_root: Path = REPO_ROOT)
     _require(completion.get("section_commits") == SECTION_COMMITS, "completion section commits diverge")
     bindings = completion.get("artifact_hashes", [])
     _require(len(bindings) == 13 and len({row.get("path") for row in bindings}) == 13, "completion artifact bindings diverge")
+    phase5_mutable = {
+        "js/blazex_runtime/src/runtime-registry.js",
+        "js/blazex_runtime/test/runtime-registry.test.js",
+        "js/blazex_runtime/src/root-lifecycle.js",
+        "packages/blazex_host_browser/lib/blazex/host/browser/lifecycle.ex",
+    }
     for binding in bindings:
-        path = repo_root / str(binding.get("path", ""))
-        _require(path.is_file() and _sha256(path) == binding.get("sha256"), f"completion artifact is stale: {path}")
+        relative = str(binding.get("path", ""))
+        path = repo_root / relative
+        current = path.is_file() and _sha256(path) == binding.get("sha256")
+        authorized_successor = relative in phase5_mutable and _sha256_at_revision(repo_root, PHASE5_BASE, relative) == binding.get("sha256")
+        _require(current or authorized_successor, f"completion artifact is stale: {path}")
     outcome = completion.get("outcome", {})
     _require(outcome.get("max_scopes") == 16 and outcome.get("max_roots_per_scope") == 64 and outcome.get("conformance_cases") == 12, "completion contract counts diverge")
     _require(outcome.get("runtime_root_evidence") == "injected-transport-unit-conformance", "completion overclaims runtime/root evidence")

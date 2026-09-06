@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0.0",
+  "contract_id": "BX-BH03-PHASE-05-CONTRACT-0.1",
+  "status": "authorized-experimental",
+  "authorization_ref": "BX-BH03-PHASE-05-AUTHORIZATION-0.1",
+  "runtime_lifecycle": {
+    "protocol": "blazex.runtime-registry/1",
+    "states": ["starting", "ready", "stopping", "stopped", "recovering", "failed", "fallback"],
+    "runtime_release_owner": "runtime-registry-not-root",
+    "terminal_scope_records": "retained-bounded-tombstones"
+  },
+  "shutdown": {
+    "protocol": "blazex.runtime-shutdown/1",
+    "operation": "runtime.shutdown",
+    "default_timeout_ms": 5000,
+    "max_timeout_ms": 10000,
+    "order": ["reject-new-roots", "drain-and-dispose-roots", "request-runtime-shutdown", "release-owned-transport", "record-stopped"],
+    "acknowledgement": ["scope-id", "runtime-generation"],
+    "timeout": "force-release-and-raise-shutdown-timeout",
+    "idempotence": "subsequent-close-returns-stopped-snapshot"
+  },
+  "runtime_loss": {
+    "protocol": "blazex.runtime-loss/1",
+    "report_identity": ["scope-id", "runtime-generation"],
+    "stale_report": "reject-without-mutation",
+    "active_root_action": "quiesce-and-retain-replay-intent",
+    "old_runtime_action": "release-once-before-replacement",
+    "max_replacements": 1,
+    "replacement_delay_ms": 100,
+    "root_replay": "same-handles-all-or-nothing-register-and-restore",
+    "replay_failure": "release-replacement-and-fallback-without-partial-ready"
+  },
+  "fallback": {
+    "protocol": "blazex.runtime-fallback/1",
+    "presentation": "bounded-non-dom-decision-only",
+    "classes": {
+      "identity-mismatch": "deployment-action",
+      "unsupported-prerequisite": "static-content",
+      "runtime-startup": "user-action",
+      "runtime-loss": "user-action",
+      "recovery-exhausted": "user-action"
+    },
+    "diagnostic": "redacted-error-record",
+    "partial_activation": "forbidden"
+  },
+  "failure_classes": {
+    "shutdown-timeout": ["root-drain-or-runtime-ack-timeout"],
+    "runtime-loss": ["active-generation-runtime-exited"],
+    "stale-generation": ["stale-runtime-loss-report", "stale-shutdown-acknowledgement"],
+    "ownership-violation": ["foreign-shutdown-acknowledgement"],
+    "recovery-exhausted": ["non-retryable-loss", "replacement-or-root-replay-failed", "replacement-limit"]
+  },
+  "explicitly_deferred": [
+    "browser-profile-composition",
+    "dom-or-html-fallback-presentation",
+    "active-browser-results",
+    "resource-and-reliability-measurements",
+    "bh-03-acceptance-evidence",
+    "public-api-stability-and-support"
+  ],
+  "api_state": "experimental-not-stable",
+  "support_state": "unsupported"
+}

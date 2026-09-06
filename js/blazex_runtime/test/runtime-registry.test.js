@@ -32,7 +32,7 @@ test("coalesces concurrent startup and reuses one ready scope", async () => {
   const [left, right] = await Promise.all([first, second]);
   assert.strictEqual(left, right);
   assert.strictEqual(await registry.open({ scopeId: "browser-page", compatibility: REQUIRED_COMPATIBILITY }), left);
-  assert.deepEqual(registry.snapshot().metrics, { starts: 1, shares: 2, failures: 0, mismatches: 0, scope_count: 1 });
+  assert.deepEqual(registry.snapshot().metrics, { starts: 1, shares: 2, failures: 0, mismatches: 0, shutdowns: 0, shutdown_failures: 0, losses: 0, recoveries: 0, recovery_failures: 0, fallbacks: 0, scope_count: 1 });
   assert.ok(events.some((event) => event.stage === "scope-starting"));
   assert.ok(events.some((event) => event.stage === "scope-ready"));
   assert.equal(left.snapshot().owns_runtime_release, false);
@@ -70,7 +70,7 @@ test("retains a failed scope tombstone without retry", async () => {
   await assert.rejects(registry.open({ scopeId: "failed-page", compatibility: REQUIRED_COMPATIBILITY }), failure("runtime-startup", "startup-failed"));
   assert.equal(starts, 1);
   assert.equal(registry.snapshot().scopes[0].state, "failed");
-  assert.deepEqual(registry.snapshot().metrics, { starts: 1, shares: 1, failures: 1, mismatches: 0, scope_count: 1 });
+  assert.deepEqual(registry.snapshot().metrics, { starts: 1, shares: 1, failures: 1, mismatches: 0, shutdowns: 0, shutdown_failures: 0, losses: 0, recoveries: 0, recovery_failures: 0, fallbacks: 0, scope_count: 1 });
 });
 
 test("bounds scope identifiers and registry size", async () => {

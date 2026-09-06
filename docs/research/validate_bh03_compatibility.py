@@ -23,6 +23,7 @@ PROFILE_MANIFEST = REPO_ROOT / "profiles/browser_phoenix/priv/static/bh01/bh03-r
 COMPLETION = BASELINE_ROOT / "blazex-bh-03-phase-02-completion-v0.1.0.json"
 PHASE3_AUTHORIZATION = BASELINE_ROOT / "blazex-bh-03-phase-03-authorization-v0.1.0.json"
 PHASE4_AUTHORIZATION = BASELINE_ROOT / "blazex-bh-03-phase-04-authorization-v0.1.0.json"
+PHASE5_AUTHORIZATION = BASELINE_ROOT / "blazex-bh-03-phase-05-authorization-v0.1.0.json"
 
 REQUIRED_COMPATIBILITY = {
     "browser_host": "blazex.browser-host/1",
@@ -190,12 +191,14 @@ def validate_implementation(contract: dict[str, Any], repo_root: Path = REPO_ROO
     }
     phase3_authorized = PHASE3_AUTHORIZATION.is_file() and _load(PHASE3_AUTHORIZATION).get("status") == "approved-phase-3-only"
     phase4_authorized = PHASE4_AUTHORIZATION.is_file() and _load(PHASE4_AUTHORIZATION).get("status") == "approved-phase-4-only"
+    phase5_authorized = PHASE5_AUTHORIZATION.is_file() and _load(PHASE5_AUTHORIZATION).get("status") == "approved-phase-5-only"
     for path, (phase, status, successor_phase, successor_status) in metadata_expectations.items():
         metadata = _load(repo_root / path / "blazex.project.json")
         current = metadata.get("current_phase") == phase and metadata.get("status") == status
         successor = phase3_authorized and successor_phase is not None and metadata.get("current_phase") == successor_phase and metadata.get("status") == successor_status
         phase4_successor = phase4_authorized and path in {"packages/blazex_host_browser", "js/blazex_runtime"} and metadata.get("current_phase") == "BH-03 Phase 4" and metadata.get("status") == "experimental-bh03-phase4-shared-runtime-roots"
-        _require(current or successor or phase4_successor, f"Phase 2 metadata diverges without an authorized successor: {path}")
+        phase5_successor = phase5_authorized and path in {"packages/blazex_host_browser", "js/blazex_runtime"} and metadata.get("current_phase") == "BH-03 Phase 5" and metadata.get("status") == "experimental-bh03-phase5-recovery-fallback"
+        _require(current or successor or phase4_successor or phase5_successor, f"Phase 2 metadata diverges without an authorized successor: {path}")
         _require(metadata.get("public_api_state") == "experimental-not-stable", f"public API was promoted: {path}")
     _require(contract.get("owners", {}).get("browser_discovery_prerequisites_and_manifest_validation") == "js/blazex_runtime", "implementation owner diverges")
 

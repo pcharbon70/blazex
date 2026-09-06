@@ -8,9 +8,10 @@ Phase 2 adds pure pre-acquisition contract fixtures for compatibility,
 discovery, prerequisites, and manifest validation. Phase 3 adds verified-byte
 and injected-transport startup conformance fixtures. Phase 4 adds
 injected-transport conformance fixtures for exact-compatible runtime sharing
-and independent root queues. Browser, shutdown, recovery, measurement, and
-acceptance result sets remain empty. Later content requires separate phase
-authorization.
+and independent root queues. Phase 5 adds injected-transport shutdown,
+generation-loss, same-handle replay, and non-DOM fallback conformance. Browser,
+measurement, and acceptance result sets remain empty. Later content requires
+separate phase authorization.
 
 Versioned records:
 
@@ -24,3 +25,6 @@ Versioned records:
 - `integration-index-v0.4.0.json` — Phase 4 shared-runtime and independent-root
   conformance index with later result sets empty.
 - `phase-04/` — Phase 4 runtime registry and root lifecycle fixtures.
+- `integration-index-v0.5.0.json` — Phase 5 shutdown, recovery, and fallback
+  unit-conformance index with browser and measurement result sets empty.
+- `phase-05/` — Phase 5 injected-transport resilience fixtures.

@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0.0",
+  "fixture_set_id": "BX-BH03-PHASE-05-RESILIENCE-FIXTURES-0.1",
+  "contract_ref": "BX-BH03-PHASE-05-CONTRACT-0.1",
+  "shutdown": {
+    "protocol": "blazex.runtime-shutdown/1",
+    "default_timeout_ms": 5000,
+    "max_timeout_ms": 10000,
+    "acknowledgement": ["scope-id", "runtime-generation"],
+    "release": "registry-owned-exactly-once"
+  },
+  "runtime_loss": {
+    "protocol": "blazex.runtime-loss/1",
+    "max_replacements": 1,
+    "replacement_delay_ms": 100,
+    "root_replay": "same-handles-all-or-nothing"
+  },
+  "fallback": {
+    "protocol": "blazex.runtime-fallback/1",
+    "presentation": "bounded-non-dom-decision-only",
+    "partial_activation": false
+  },
+  "cases": [
+    {"id": "ordered-root-drain", "expected": "root-dispose-before-runtime-shutdown"},
+    {"id": "coalesced-concurrent-close", "expected": "one-shutdown-and-release"},
+    {"id": "idempotent-late-close", "expected": "same-stopped-tombstone"},
+    {"id": "shutdown-timeout", "expected": "force-release-and-stopped"},
+    {"id": "foreign-shutdown-ack", "expected": "ownership-violation"},
+    {"id": "stale-shutdown-ack", "expected": "stale-generation"},
+    {"id": "stale-loss-report", "expected": "reject-without-mutation"},
+    {"id": "active-loss-replacement", "expected": "one-delayed-replacement"},
+    {"id": "registered-root-replay", "expected": "same-handle-registered"},
+    {"id": "ready-root-replay", "expected": "same-handle-target-and-tree-restored"},
+    {"id": "disposed-root-replay", "expected": "same-handle-disposed"},
+    {"id": "root-replay-failure", "expected": "replacement-released-no-partial-ready"},
+    {"id": "replacement-limit", "expected": "recovery-exhausted"},
+    {"id": "non-retryable-loss", "expected": "recovery-exhausted-without-replacement"},
+    {"id": "closed-fallback-classes", "expected": "five-class-action-map"},
+    {"id": "fallback-diagnostic", "expected": "redacted-bounded-non-dom"}
+  ],
+  "evidence_boundary": {
+    "transport": "injected-unit-conformance",
+    "browser_profile_composition": false,
+    "dom_fallback_presentation": false,
+    "browser_results": 0,
+    "measurements": 0,
+    "acceptance_evidence": 0,
+    "api_state": "experimental-not-stable",
+    "support_state": "unsupported"
+  }
+}

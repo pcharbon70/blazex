@@ -7,6 +7,7 @@ export const BH03_ROOT_LIMITS = Object.freeze({ max_roots_per_scope: 64 });
 
 export class BrowserRootRegistry {
   #createBridge;
+  #accepting = true;
   #onEvent;
   #roots = new Map();
   #scopeId;
@@ -21,6 +22,9 @@ export class BrowserRootRegistry {
 
   register(rootId) {
     validateId(rootId, "invalid-root-or-target-id");
+    if (!this.#accepting) {
+      return Promise.reject(new BlazeXHostError("root-lifecycle", "The root registry is not accepting registrations", { reason: "scope-not-ready", scope_id: this.#scopeId }));
+    }
     if (this.#roots.has(rootId)) {
       return Promise.reject(new BlazeXHostError("duplicate-root", "The root identity is already registered or reserved", { reason: "existing-or-reserved-root-id", root_id: rootId }));
     }
@@ -53,7 +57,43 @@ export class BrowserRootRegistry {
       states: Object.freeze(states),
       owns_runtime: false,
       owns_runtime_release: false,
+      accepting: this.#accepting,
     });
+  }
+
+  async shutdown({ reason = "runtime-shutdown", signal, timeoutMs = 5_000 } = {}) {
+    this.#accepting = false;
+    const results = await Promise.allSettled(
+      [...this.#roots.values()].map((root) => root.dispose({ signal, timeoutMs })),
+    );
+    for (const root of this.#roots.values()) root.stop(reason);
+    return Object.freeze({
+      root_count: results.length,
+      failures: results.filter((result) => result.status === "rejected").length,
+    });
+  }
+
+  forceStop(reason = "runtime-stopped") {
+    this.#accepting = false;
+    for (const root of this.#roots.values()) root.stop(reason);
+  }
+
+  runtimeLost(reason = "active-generation-runtime-exited") {
+    this.#accepting = false;
+    for (const root of this.#roots.values()) root.runtimeLost(reason);
+  }
+
+  async recover(createBridge) {
+    if (typeof createBridge !== "function") throw new TypeError("A replacement root bridge factory is required");
+    this.#createBridge = createBridge;
+    try {
+      await Promise.all([...this.#roots.values()].map((root) => root.recover(this.#createBridge(root.snapshot().root_id))));
+      this.#accepting = true;
+      return this.snapshot();
+    } catch (error) {
+      this.forceStop("root-replay-failed");
+      throw error;
+    }
   }
 }
 
@@ -61,12 +101,14 @@ export class BrowserRootHandle {
   #bridge;
   #failure = null;
   #generation = 0;
+  #desired = Object.freeze({ state: "registered" });
   #onEvent;
   #pending = 0;
   #rootId;
   #scopeId;
   #state = "unregistered";
   #tail = Promise.resolve();
+  #terminal = false;
 
   constructor({ bridge, onEvent = () => {}, rootId, scopeId }) {
     if (!bridge?.request || !bridge?.metrics) throw new TypeError("A bounded root bridge is required");
@@ -79,27 +121,81 @@ export class BrowserRootHandle {
   }
 
   register() {
-    return this.#enqueue("root.register", ["unregistered"], "registered", () => ({}));
+    return this.#enqueue("root.register", ["unregistered"], "registered", () => ({}), null, false, {}, () => {
+      this.#desired = Object.freeze({ state: "registered" });
+    });
   }
 
   mount({ targetId, tree }) {
     validateId(targetId, "invalid-root-or-target-id");
     assertBoundedValue(tree);
-    return this.#enqueue("root.mount", ["registered", "disposed"], "ready", () => ({ target_id: targetId, tree }), "mounting");
+    return this.#enqueue("root.mount", ["registered", "disposed"], "ready", () => ({ target_id: targetId, tree }), "mounting", false, {}, () => {
+      this.#desired = Object.freeze({ state: "ready", targetId, tree: cloneBounded(tree) });
+    });
   }
 
   update(tree) {
     assertBoundedValue(tree);
-    return this.#enqueue("root.update", ["ready"], "ready", () => ({ tree }));
+    return this.#enqueue("root.update", ["ready"], "ready", () => ({ tree }), null, false, {}, () => {
+      this.#desired = Object.freeze({ ...this.#desired, tree: cloneBounded(tree) });
+    });
   }
 
   move(targetId) {
     validateId(targetId, "invalid-root-or-target-id");
-    return this.#enqueue("root.move", ["ready"], "ready", () => ({ target_id: targetId }), "moving");
+    return this.#enqueue("root.move", ["ready"], "ready", () => ({ target_id: targetId }), "moving", false, {}, () => {
+      this.#desired = Object.freeze({ ...this.#desired, targetId });
+    });
   }
 
-  dispose() {
-    return this.#enqueue("root.dispose", ["registered", "ready", "failed"], "disposed", () => ({}), "disposing", true);
+  dispose(options = {}) {
+    return this.#enqueue("root.dispose", ["registered", "ready", "failed"], "disposed", () => ({}), "disposing", true, options, () => {
+      this.#desired = Object.freeze({ state: "disposed" });
+    });
+  }
+
+  stop(reason = "runtime-stopped") {
+    if (this.#terminal) return;
+    this.#terminal = true;
+    this.#bridge.stop(reason);
+    if (this.#state !== "disposed") {
+      this.#failure = errorRecord(new BlazeXHostError("runtime-shutdown", "The owning runtime stopped", { reason: "scope-stopped" }));
+      this.#transition("failed", "runtime.stop");
+    }
+  }
+
+  runtimeLost(reason = "active-generation-runtime-exited") {
+    if (this.#terminal) return;
+    this.#terminal = true;
+    this.#bridge.stop(reason);
+    this.#failure = errorRecord(new BlazeXHostError("runtime-loss", "The active runtime generation was lost", { reason }));
+    this.#transition("failed", "runtime.loss");
+  }
+
+  recover(bridge) {
+    if (!bridge?.request || !bridge?.metrics) throw new TypeError("A bounded replacement root bridge is required");
+    const task = this.#tail.then(async () => {
+      this.#bridge = bridge;
+      this.#terminal = false;
+      this.#failure = null;
+      this.#transition("unregistered", "runtime.recover");
+      try {
+        await this.#replay("root.register", {}, "registered");
+        if (this.#desired.state === "ready") {
+          await this.#replay("root.mount", { target_id: this.#desired.targetId, tree: this.#desired.tree }, "ready", "mounting");
+        } else if (this.#desired.state === "disposed") {
+          await this.#replay("root.dispose", {}, "disposed", "disposing");
+        }
+        return this.snapshot();
+      } catch (error) {
+        const normalized = normalizeRootFailure(error);
+        this.#failure = errorRecord(normalized);
+        this.#transition("failed", "runtime.replay");
+        throw normalized;
+      }
+    });
+    this.#tail = task.catch(() => {});
+    return task;
   }
 
   snapshot() {
@@ -116,10 +212,13 @@ export class BrowserRootHandle {
     });
   }
 
-  #enqueue(operation, allowed, successState, payload, transientState = null, idempotentDisposed = false) {
+  #enqueue(operation, allowed, successState, payload, transientState = null, idempotentDisposed = false, bridgeOptions = {}, onSuccess = () => {}) {
     this.#pending += 1;
     const task = this.#tail.then(async () => {
       if (idempotentDisposed && this.#state === "disposed") return this.snapshot();
+      if (this.#terminal) {
+        throw new BlazeXHostError("root-lifecycle", "The owning runtime is stopped", { reason: "scope-stopped", root_id: this.#rootId });
+      }
       if (!allowed.includes(this.#state)) {
         throw new BlazeXHostError("root-lifecycle", "The root operation is not valid in its current state", {
           reason: "illegal-transition",
@@ -137,8 +236,9 @@ export class BrowserRootHandle {
       if (transientState) this.#transition(transientState, operation);
 
       try {
-        const result = await this.#bridge.request(operation, requestPayload);
+        const result = await this.#bridge.request(operation, requestPayload, bridgeOptions);
         validateAcknowledgement(result, this.#rootId, generation);
+        onSuccess();
         this.#transition(successState, operation);
         return this.snapshot();
       } catch (error) {
@@ -150,6 +250,17 @@ export class BrowserRootHandle {
     });
     this.#tail = task.catch(() => {});
     return task.finally(() => { this.#pending -= 1; });
+  }
+
+  async #replay(operation, payload, successState, transientState = null) {
+    const generation = this.#generation + 1;
+    const requestPayload = { root_id: this.#rootId, root_generation: generation, ...payload };
+    assertBoundedValue(requestPayload);
+    this.#generation = generation;
+    if (transientState) this.#transition(transientState, operation);
+    const result = await this.#bridge.request(operation, requestPayload);
+    validateAcknowledgement(result, this.#rootId, generation);
+    this.#transition(successState, operation);
   }
 
   #transition(state, operation) {
@@ -187,4 +298,8 @@ function validateId(value, reason) {
 
 function isPlainObject(value) {
   return value !== null && typeof value === "object" && !Array.isArray(value) && Object.getPrototypeOf(value) === Object.prototype;
+}
+
+function cloneBounded(value) {
+  return JSON.parse(JSON.stringify(value));
 }

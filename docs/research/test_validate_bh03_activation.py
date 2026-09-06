@@ -84,7 +84,7 @@ class BH03ActivationValidatorTest(unittest.TestCase):
         activation = copy.deepcopy(self.activation)
         activation["next_authorized_work"] = "BH-03 Phase 2"
         with self.assertRaisesRegex(validator.ValidationError, "later authority"):
-            validator.validate_activation(activation, self.contract, phase2_authorized=True, phase3_authorized=True, phase4_authorized=True)
+            validator.validate_activation(activation, self.contract, phase2_authorized=True, phase3_authorized=True, phase4_authorized=True, phase5_authorized=True)
 
     def test_rejects_divergent_completion(self) -> None:
         completion = copy.deepcopy(self.completion)
