@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0.0",
+  "authorization_id": "BX-BH03-PHASE-05-AUTHORIZATION-0.1",
+  "status": "approved-phase-5-only",
+  "approved_at": "2026-09-06",
+  "approved_by": {
+    "identity": "repository-user",
+    "role": "repository-owner",
+    "evidence": "Explicit request to implement the next BH-03 phase section by section, merge one pull request, synchronize main, and delete the feature branch."
+  },
+  "activation": {
+    "base_branch": "main",
+    "base_revision": "a4b3f1d78f98434ae2d0a20b87be5421b9f53ada",
+    "base_remote_revision": "a4b3f1d78f98434ae2d0a20b87be5421b9f53ada",
+    "main_synchronized_before_branch": true,
+    "working_branch": "codex/bh-03-phase-05-shutdown-recovery",
+    "phase": "BH-03 Phase 5"
+  },
+  "approval_basis": [
+    {"path": "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-04-completion-v0.1.0.json", "sha256": "053f251b5436f49a775c8a93c6106f31e4a16915b5b8a3689256780845575d54"},
+    {"path": "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-04-contract-v0.1.0.json", "sha256": "f0b6093d76f676d6dcbfdc31027248e299a72f207a07918d234b7f7e76771c17"},
+    {"path": "docs/research/60-planning/01-browser-host/bh-03-browser-execution-host-and-runtime-boot-lifecycle/phase-04-implementation-evidence.md", "sha256": "eca064ef6bca34b5aca5354006d0197f232e4e16402483d62839818e2b8748c9"},
+    {"path": "integration/bh-03/integration-index-v0.4.0.json", "sha256": "c309db041bf09bfb7831cb516609e1a655433159144d22d5f881317d4f9ad42d"},
+    {"path": "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-01-contract-v0.1.0.json", "sha256": "44cd9dc05a528e7847c09868566b365d34d087f57116a44d8a23ff907ea562eb"}
+  ],
+  "authorized_scope": [
+    "Implement idempotent registry-owned shutdown with bounded root quiescence, runtime acknowledgement, and unconditional transport release.",
+    "Reject new roots after shutdown begins and preserve root/runtime ownership boundaries.",
+    "Accept runtime-loss reports only for the exact active scope generation and reject stale reports without mutation.",
+    "Attempt at most one governed replacement after a retryable post-readiness runtime loss.",
+    "Replay existing registered, ready, and disposed roots through their existing handles and reject partial recovery.",
+    "Return bounded non-DOM fallback decisions for mismatch, unsupported prerequisites, non-retryable loss, or recovery exhaustion.",
+    "Publish versioned Phase 5 fixtures, validation, and completion evidence."
+  ],
+  "delivery_rules": {
+    "sections_in_order": true,
+    "commit_per_section": true,
+    "section_count": 4,
+    "single_pull_request": true,
+    "merge_pull_request": true,
+    "return_to_synchronized_main_after_delivery": true,
+    "delete_local_feature_branch_after_delivery": true,
+    "delete_remote_feature_branch_after_delivery": true
+  },
+  "not_authorized": [
+    "BH-03 Phase 6 or later implementation",
+    "more than one runtime replacement, unbounded retry, or restart loops",
+    "DOM, HTML, or browser-profile fallback rendering",
+    "active browser composition or browser result claims",
+    "renderer, component, Phoenix, Plug, LiveView, or server command behavior",
+    "resource or reliability measurements and BH-03 acceptance",
+    "public API stability, package publication, or support claims"
+  ]
+}
