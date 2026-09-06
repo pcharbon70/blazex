@@ -26,7 +26,8 @@
   ],
   "descriptive_summary_fields": ["count", "minimum", "median", "maximum", "mean"],
   "memory_shapes": {
-    "available": ["available", "api", "ready_bytes", "after_root_cycle_bytes", "after_shutdown_bytes", "observed_peak_growth_bytes", "ready_to_shutdown_delta_bytes"],
+    "available_raw": ["available", "api", "ready_bytes", "after_root_cycle_bytes", "after_shutdown_bytes"],
+    "available_normalized": ["available", "api", "ready_bytes", "after_root_cycle_bytes", "after_shutdown_bytes", "observed_peak_growth_bytes", "ready_to_shutdown_delta_bytes"],
     "unavailable": ["available", "api", "reason"]
   },
   "declared_failure_scenarios": [

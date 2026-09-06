@@ -3,6 +3,7 @@ import test from "node:test";
 
 import {
   BH03_MEASUREMENT_PROTOCOL,
+  describeByteSamples,
   describeSamples,
   normalizeMemoryObservation,
   summarizeLifecycleSamples,
@@ -17,6 +18,17 @@ test("describes bounded timing samples deterministically", () => {
     mean: 6,
   });
   assert.deepEqual(describeSamples([4, 2]), { count: 2, minimum: 2, median: 3, maximum: 4, mean: 3 });
+});
+
+test("describes byte samples without applying duration ceilings", () => {
+  assert.deepEqual(describeByteSamples([120_000, 80_000], { expectedCount: 2 }), {
+    count: 2,
+    minimum: 80_000,
+    median: 100_000,
+    maximum: 120_000,
+    mean: 100_000,
+  });
+  assert.throws(() => describeByteSamples([-1]), /non-negative safe integer/);
 });
 
 test("normalizes available and unavailable memory without inventing values", () => {
@@ -40,6 +52,13 @@ test("normalizes available and unavailable memory without inventing values", () 
     api: null,
     reason: "browser-memory-api-unavailable",
   });
+  assert.equal(normalizeMemoryObservation({
+    available: true,
+    api: "performance.memory.usedJSHeapSize",
+    ready_bytes: 200,
+    after_root_cycle_bytes: 150,
+    after_shutdown_bytes: 100,
+  }).observed_peak_growth_bytes, 0);
 });
 
 test("summarizes lifecycle observations while keeping budgets and support absent", () => {

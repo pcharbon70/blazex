@@ -51,19 +51,19 @@ Back to milestone: [README](README.md)
       - [x] 7.2.2.2 Subtask - Register, mount, update, and dispose eight additional measurement roots through the existing shared runtime.
       - [x] 7.2.2.3 Subtask - Verify root counts, acknowledgements, disposed states, iframe removal, and unsupported experimental status.
 
-  - [ ] 7.3 Section - Execute and retain active-browser measurements.
+  - [x] 7.3 Section - Execute and retain active-browser measurements.
 
-    - [ ] 7.3.1 Task - Run one browser-independent measurement harness.
+    - [x] 7.3.1 Task - Run one browser-independent measurement harness.
 
-      - [ ] 7.3.1.1 Subtask - Drive the identical warm-up, retained lifecycle, root fan-out, cleanup, and declared-failure sequence in Chrome and Firefox.
-      - [ ] 7.3.1.2 Subtask - Record exact executable, browser version, host environment, individual samples, descriptive summaries, memory capability, and bounded diagnostics.
-      - [ ] 7.3.1.3 Subtask - Fail on absent active rows, divergent scenario identity, lifecycle leakage, unsuccessful cleanup, or non-convergent declared failures.
+      - [x] 7.3.1.1 Subtask - Drive the identical warm-up, retained lifecycle, root fan-out, cleanup, and declared-failure sequence in Chrome and Firefox.
+      - [x] 7.3.1.2 Subtask - Record exact executable, browser version, host environment, individual samples, descriptive summaries, memory capability, and bounded diagnostics.
+      - [x] 7.3.1.3 Subtask - Fail on absent active rows, divergent scenario identity, lifecycle leakage, unsuccessful cleanup, or non-convergent declared failures.
 
-    - [ ] 7.3.2 Task - Preserve observational limits.
+    - [x] 7.3.2 Task - Preserve observational limits.
 
-      - [ ] 7.3.2.1 Subtask - Retain raw active Linux Chrome and Firefox evidence and bind it into the versioned BH-03 integration index.
-      - [ ] 7.3.2.2 Subtask - Record unavailable Safari, mobile, device, second-host, and manual assistive-technology rows as deferred without pass credit.
-      - [ ] 7.3.2.3 Subtask - Keep timing and memory values non-normative, every browser unsupported, and all BH-03 acceptance evidence empty.
+      - [x] 7.3.2.1 Subtask - Retain raw active Linux Chrome and Firefox evidence and bind it into the versioned BH-03 integration index.
+      - [x] 7.3.2.2 Subtask - Record unavailable Safari, mobile, device, second-host, and manual assistive-technology rows as deferred without pass credit.
+      - [x] 7.3.2.3 Subtask - Keep timing and memory values non-normative, every browser unsupported, and all BH-03 acceptance evidence empty.
 
   - [ ] 7.4 Section - Run the inherited gate and publish completion evidence.
 

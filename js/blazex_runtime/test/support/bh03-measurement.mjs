@@ -26,10 +26,21 @@ export function describeSamples(values, { expectedCount } = {}) {
   if (!Array.isArray(values) || values.length < 1 || values.length > BH03_MEASUREMENT_LIMITS.max_samples) {
     throw new TypeError("Measurement samples must be a non-empty bounded array");
   }
+  return describe(values.map(finiteDuration), expectedCount);
+}
+
+export function describeByteSamples(values, { expectedCount } = {}) {
+  if (!Array.isArray(values) || values.length < 1 || values.length > BH03_MEASUREMENT_LIMITS.max_samples) {
+    throw new TypeError("Memory samples must be a non-empty bounded array");
+  }
+  return describe(values.map(finiteBytes), expectedCount);
+}
+
+function describe(values, expectedCount) {
   if (expectedCount !== undefined && values.length !== expectedCount) {
     throw new TypeError(`Expected ${expectedCount} measurement samples`);
   }
-  const sorted = values.map(finiteDuration).sort((left, right) => left - right);
+  const sorted = [...values].sort((left, right) => left - right);
   const middle = Math.floor(sorted.length / 2);
   const median = sorted.length % 2 === 0
     ? (sorted[middle - 1] + sorted[middle]) / 2
@@ -63,7 +74,7 @@ export function normalizeMemoryObservation(value) {
     ready_bytes: ready,
     after_root_cycle_bytes: afterRoots,
     after_shutdown_bytes: afterShutdown,
-    observed_peak_growth_bytes: Math.max(0, afterRoots, afterShutdown) - ready,
+    observed_peak_growth_bytes: Math.max(ready, afterRoots, afterShutdown) - ready,
     ready_to_shutdown_delta_bytes: afterShutdown - ready,
   });
 }
