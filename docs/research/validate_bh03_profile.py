@@ -26,6 +26,8 @@ MILESTONE = PLAN.parent / "README.md"
 
 BASE_REVISION = "8aee16c17a8e4c3130a638457ec43afe9f48fdee"
 IMPLEMENTATION_REVISION = "fbb078e95b7f8eaaa014c9d01602b1a3102ca83c"
+PHASE7_BASE = "eb4e1e8db89756f54b7f73803905ccdc6a5b5859"
+PHASE7_AUTHORIZATION = BASELINE_ROOT / "blazex-bh-03-phase-07-authorization-v0.1.0.json"
 SCENARIOS = [
     "verified-profile-startup",
     "shared-runtime-two-root-lifecycle",
@@ -72,6 +74,11 @@ def _load(path: Path) -> dict[str, Any]:
 
 def _sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def _sha256_at_revision(repo_root: Path, revision: str, relative: str) -> str | None:
+    result = subprocess.run(["git", "show", f"{revision}:{relative}"], cwd=repo_root, capture_output=True, check=False)
+    return hashlib.sha256(result.stdout).hexdigest() if result.returncode == 0 else None
 
 
 def _require(condition: bool, message: str) -> None:
@@ -187,9 +194,18 @@ def validate_completion(completion: dict[str, Any], repo_root: Path = REPO_ROOT)
     _require(completion.get("section_commits") == SECTION_COMMITS, "completion section commits diverge")
     bindings = completion.get("artifact_hashes", [])
     _require(len(bindings) == 16 and len({row.get("path") for row in bindings}) == 16, "completion artifact bindings diverge")
+    phase7_authorized = PHASE7_AUTHORIZATION.is_file() and _load(PHASE7_AUTHORIZATION).get("status") == "approved-phase-7-only"
+    phase7_mutable = {
+        "profiles/browser_phoenix/assets/phase6/build_profile.py",
+        "profiles/browser_phoenix/assets/phase6/host.js",
+        "docs/research/validate_bh03_profile.py",
+    }
     for binding in bindings:
-        path = repo_root / str(binding.get("path", ""))
-        _require(path.is_file() and _sha256(path) == binding.get("sha256"), f"completion artifact is stale: {path}")
+        relative = str(binding.get("path", ""))
+        path = repo_root / relative
+        current = path.is_file() and _sha256(path) == binding.get("sha256")
+        authorized_successor = phase7_authorized and relative in phase7_mutable and _sha256_at_revision(repo_root, PHASE7_BASE, relative) == binding.get("sha256")
+        _require(current or authorized_successor, f"completion artifact is stale: {path}")
     outcome = completion.get("outcome", {})
     _require(outcome.get("active_browser_rows") == 2 and outcome.get("scenarios_per_browser") == 5 and outcome.get("profile_governed_files") == 29, "completion browser counts diverge")
     _require(outcome.get("runtime_starts_per_browser") == 1 and outcome.get("roots_per_browser") == 2, "completion runtime/root counts diverge")

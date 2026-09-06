@@ -37,19 +37,19 @@ Back to milestone: [README](README.md)
       - [x] 7.1.2.2 Subtask - Exercise two profile roots plus eight measurement roots, exact runtime sharing, acknowledged operations, registry-owned shutdown, frame cleanup, and three declared failure paths.
       - [x] 7.1.2.3 Subtask - Record descriptive readiness, shutdown, memory-capability, and memory-growth observations while forbidding release thresholds or unavailable-memory false passes.
 
-  - [ ] 7.2 Section - Implement bounded measurement instrumentation and fixtures.
+  - [x] 7.2 Section - Implement bounded measurement instrumentation and fixtures.
 
-    - [ ] 7.2.1 Task - Add deterministic measurement primitives.
+    - [x] 7.2.1 Task - Add deterministic measurement primitives.
 
-      - [ ] 7.2.1.1 Subtask - Summarize finite non-negative timing samples with stable count, minimum, median, maximum, and arithmetic mean fields.
-      - [ ] 7.2.1.2 Subtask - Normalize capability-aware memory observations without inventing values when a browser exposes no suitable heap API.
-      - [ ] 7.2.1.3 Subtask - Reject unbounded counts, malformed samples, mixed browser identities, unknown fields, and release-budget language.
+      - [x] 7.2.1.1 Subtask - Summarize finite non-negative timing samples with stable count, minimum, median, maximum, and arithmetic mean fields.
+      - [x] 7.2.1.2 Subtask - Normalize capability-aware memory observations without inventing values when a browser exposes no suitable heap API.
+      - [x] 7.2.1.3 Subtask - Reject unbounded counts, malformed samples, mixed browser identities, unknown fields, and release-budget language.
 
-    - [ ] 7.2.2 Task - Instrument the executable profile without changing its product boundary.
+    - [x] 7.2.2 Task - Instrument the executable profile without changing its product boundary.
 
-      - [ ] 7.2.2.1 Subtask - Expose bounded startup and shutdown clocks plus observed runtime memory pages through experimental diagnostic state.
-      - [ ] 7.2.2.2 Subtask - Register, mount, update, and dispose eight additional measurement roots through the existing shared runtime.
-      - [ ] 7.2.2.3 Subtask - Verify root counts, acknowledgements, disposed states, iframe removal, and unsupported experimental status.
+      - [x] 7.2.2.1 Subtask - Expose bounded startup and shutdown clocks plus observed runtime memory pages through experimental diagnostic state.
+      - [x] 7.2.2.2 Subtask - Register, mount, update, and dispose eight additional measurement roots through the existing shared runtime.
+      - [x] 7.2.2.3 Subtask - Verify root counts, acknowledgements, disposed states, iframe removal, and unsupported experimental status.
 
   - [ ] 7.3 Section - Execute and retain active-browser measurements.
 

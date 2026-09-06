@@ -12,9 +12,11 @@ const restartButton = document.querySelector("[data-bh03-restart]");
 const events = [];
 const checks = [];
 const runtimeAcknowledgements = [];
+const profileStartedAt = performance.now();
 let runtimeStarts = 0;
 let registry = null;
 let scope = null;
+let measurementUsed = false;
 
 const state = globalThis.__blazexBH03 = {
   protocol: "blazex.bh03.browser-profile/1",
@@ -23,6 +25,7 @@ const state = globalThis.__blazexBH03 = {
   events,
   checks,
   runtime_acknowledgements: runtimeAcknowledgements,
+  measurement_protocol: "blazex.bh03.measurement/1",
 };
 
 stopButton.addEventListener("click", () => stop());
@@ -113,6 +116,15 @@ async function start() {
     pass("elixir-runtime-root-acknowledgements");
 
     state.state = "ready";
+    state.measurement = {
+      protocol: state.measurement_protocol,
+      startup_to_ready_ms: elapsed(profileStartedAt),
+      runtime_memory_pages: observedRuntimeMemoryPages(),
+      memory_ready: browserMemory(),
+      root_cycle: null,
+      shutdown_ms: null,
+      memory_after_shutdown: null,
+    };
     state.scope = scope;
     state.registry = registry;
     stopButton.disabled = false;
@@ -134,10 +146,16 @@ async function start() {
 async function stop() {
   if (!registry || state.state === "stopped") return state.shutdown;
   stopButton.disabled = true;
+  const stopStartedAt = performance.now();
   try {
     const shutdown = await registry.close("page-runtime", { reason: "profile-owner-stop", timeoutMs: 5_000 });
     state.shutdown = shutdown;
     state.state = "stopped";
+    if (state.measurement) {
+      state.measurement.shutdown_ms = elapsed(stopStartedAt);
+      state.measurement.memory_after_shutdown = browserMemory();
+      state.measurement.runtime_iframes_after_shutdown = runtimeFrameCount();
+    }
     pass("registry-owned-shutdown");
     show("stopped", "Shared runtime stopped and both roots released");
     publish();
@@ -152,6 +170,46 @@ async function stop() {
 }
 
 globalThis.blazexBh03Stop = stop;
+globalThis.blazexBh03MeasureRoots = measureRoots;
+
+async function measureRoots() {
+  if (state.state !== "ready" || !scope) throw new Error("The BH-03 profile is not ready for measurement");
+  if (measurementUsed) throw new Error("The bounded root measurement already ran for this profile generation");
+  measurementUsed = true;
+  const startedAt = performance.now();
+  const acknowledgementStart = runtimeAcknowledgements.length;
+  const roots = scope.roots();
+  const handles = await Promise.all(
+    Array.from({ length: 8 }, (_, index) => roots.register(`measure-root-${String(index + 1).padStart(2, "0")}`)),
+  );
+  await Promise.all(handles.map((root, index) => root.mount({
+    targetId: "primary-slot",
+    tree: tree(`Measurement root ${index + 1}`, 1),
+  })));
+  await Promise.all(handles.map((root, index) => root.update(tree(`Measurement root ${index + 1} updated`, 2))));
+  await Promise.all(handles.map((root) => root.dispose()));
+
+  const snapshot = scope.rootsSnapshot();
+  const measuredStates = Object.entries(snapshot.states).filter(([rootId]) => rootId.startsWith("measure-root-"));
+  if (snapshot.root_count !== 10 || measuredStates.length !== 8 || measuredStates.some(([, rootState]) => rootState !== "disposed")) {
+    throw new Error("Measured root fan-out did not converge to the governed disposed state");
+  }
+  const acknowledgementCount = runtimeAcknowledgements.length - acknowledgementStart;
+  if (acknowledgementCount !== 32) throw new Error("Measured root operations were not fully acknowledged");
+
+  const result = {
+    protocol: state.measurement_protocol,
+    additional_roots: 8,
+    root_count: snapshot.root_count,
+    disposed_measurement_roots: measuredStates.length,
+    runtime_acknowledgements: acknowledgementCount,
+    elapsed_ms: elapsed(startedAt),
+    memory_after_root_cycle: browserMemory(),
+  };
+  state.measurement.root_cycle = result;
+  publish();
+  return result;
+}
 
 function record(event) {
   if (events.length < 256) events.push(event);
@@ -196,8 +254,28 @@ function publish() {
     shutdown: state.shutdown ?? null,
     error: state.error ?? null,
     runtime_acknowledgement_count: runtimeAcknowledgements.length,
+    measurement: state.measurement ?? null,
   };
   snapshotElement.textContent = JSON.stringify(state.snapshot, null, 2);
+}
+
+function observedRuntimeMemoryPages() {
+  return events.findLast((event) => event?.protocol === "blazex.runtime-startup/1" && event.stage === "transport-event" && event.details?.event_type === "runtime-memory")?.details?.memory_pages ?? null;
+}
+
+function browserMemory() {
+  const bytes = performance.memory?.usedJSHeapSize;
+  return Number.isSafeInteger(bytes) && bytes >= 0
+    ? { available: true, api: "performance.memory.usedJSHeapSize", bytes }
+    : { available: false, reason: "browser-memory-api-unavailable" };
+}
+
+function runtimeFrameCount() {
+  return document.querySelectorAll('iframe[title="BlazeX experimental runtime host"]').length;
+}
+
+function elapsed(startedAt) {
+  return Math.round((performance.now() - startedAt) * 1_000) / 1_000;
 }
 
 function boundedError(error) {

@@ -11,8 +11,11 @@ injected-transport conformance fixtures for exact-compatible runtime sharing
 and independent root queues. Phase 5 adds injected-transport shutdown,
 generation-loss, same-handle replay, and non-DOM fallback conformance. Phase 6
 adds the separate Phoenix `/bh03/` profile, one cross-browser scenario fixture,
-and observed active Linux Chrome/Firefox results. Measurement and acceptance
-result sets remain empty. Later content requires separate phase authorization.
+and observed active Linux Chrome/Firefox results. Phase 7 adds bounded
+measurement instrumentation for repeated startup, ten-root lifecycle cleanup,
+declared failures, and capability-aware memory observations. Its execution
+results remain empty until the active matrix is measured. Acceptance remains
+empty and later content requires separate phase authorization.
 
 Versioned records:
 
@@ -32,3 +35,6 @@ Versioned records:
 - `integration-index-v0.6.0.json` — Phase 6 active Chrome/Firefox browser-
   profile conformance index with measurement and acceptance results empty.
 - `phase-06/` — Phase 6 browser-profile and active-matrix fixtures.
+- `integration-index-v0.7.0.json` — Phase 7 measurement-instrumentation index;
+  active execution results and acceptance remain empty.
+- `phase-07/` — Phase 7 sampling, observation, cleanup, and negative fixtures.

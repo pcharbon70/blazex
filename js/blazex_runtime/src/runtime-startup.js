@@ -25,6 +25,7 @@ export class BrowserRuntimeStartup {
   #onEvent;
   #ready = null;
   #readinessObserved = false;
+  #runtimeMemoryPages = null;
   #state = "inactive";
 
   constructor({ frameFactory = (options) => new BrowserRuntimeFrame(options), onEvent = () => {} } = {}) {
@@ -39,6 +40,7 @@ export class BrowserRuntimeStartup {
     const attempt = this.#attempt;
     this.#failure = null;
     this.#readinessObserved = false;
+    this.#runtimeMemoryPages = null;
     this.#controller = new AbortController();
     this.#externalSignal = signal ?? null;
     this.#externalAbort = () => this.#controller?.abort(signal?.reason ?? new DOMException("Cancelled", "AbortError"));
@@ -78,6 +80,7 @@ export class BrowserRuntimeStartup {
         manifest_id: acquired.manifest_id,
         manifest_generation: acquired.manifest_generation,
         acquired_bytes: acquired.total_bytes,
+        runtime_memory_pages: this.#runtimeMemoryPages,
         startup: BH03_RUNTIME_STARTUP,
         transport: this.#frame,
         release: (reason = "owner-release") => this.release(reason),
@@ -105,6 +108,7 @@ export class BrowserRuntimeStartup {
       state: this.#state,
       attempt_generation: this.#attempt,
       manifest_generation: this.#manifestGeneration,
+      runtime_memory_pages: this.#runtimeMemoryPages,
       failure: this.#failure,
       owns_transport: this.#frame !== null,
     });
@@ -116,7 +120,17 @@ export class BrowserRuntimeStartup {
       this.#emit("stale-event-rejected", { event_type: event.type });
       return;
     }
-    this.#emit("transport-event", { event_type: event.type });
+    if (event.type === "runtime-memory") {
+      if (!Number.isSafeInteger(event.memory_pages) || event.memory_pages !== BH03_RUNTIME_STARTUP.memory_pages) {
+        this.#reject(startupError("protocol-mismatch", "Runtime memory observation is missing or incompatible"));
+        return;
+      }
+      this.#runtimeMemoryPages = event.memory_pages;
+    }
+    this.#emit("transport-event", {
+      event_type: event.type,
+      ...(event.type === "runtime-memory" || event.type === "runtime-ready" ? { memory_pages: event.memory_pages } : {}),
+    });
     if (event.type === "application-ready") {
       if (event.name !== BH03_RUNTIME_STARTUP.readiness_event || this.#state !== "starting" || this.#readinessObserved) {
         this.#reject(startupError("protocol-mismatch", "Runtime readiness was duplicate, out of order, or incompatible"));
@@ -165,6 +179,7 @@ export class BrowserRuntimeStartup {
     this.#frame = null;
     this.#ready = null;
     this.#readinessObserved = false;
+    this.#runtimeMemoryPages = null;
   }
 
   #transition(state, details) {
