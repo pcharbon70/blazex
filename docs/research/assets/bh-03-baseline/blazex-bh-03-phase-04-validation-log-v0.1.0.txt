@@ -1,0 +1,42 @@
+BH-03 Phase 4 normalized validation log
+Recorded: 2026-09-06T18:00:00Z
+Base: 0fec9157c14ab400fdd1615e873f0b5d2ecea9b5
+Branch: codex/bh-03-phase-04-shared-runtime-roots
+
+PASS pinned Elixir 1.17.3 / OTP 26 mix format --check-formatted and mix test
+  packages/blazex_runtime_popcorn: 4 tests, 0 failures
+  packages/blazex_host_browser: 4 tests, 0 failures
+  profiles/browser_phoenix: 13 tests, 0 failures
+  total: 3 projects, 21 tests, 0 failures
+  image: docker.io/hexpm/elixir@sha256:8d03cfb52e3fa3f5d83d749942b7c45c966dda48a7c4ba4f069390379b59fc39
+PASS npm run build and npm test in js/blazex_runtime: 17 test files, 0 failures
+PASS runtime build-contract verifier and Python tests: contract PASS, 9 tests
+PASS python3 -m unittest test_*.py in docs/research: 258 tests, 0 failures
+PASS 19 research validators, including BH-03 Phases 1 through 4
+PASS 4 deterministic generators in --check mode
+PASS validate_archive.py: 197 documents, 24 directories, 1482 links, 50 sources
+PASS all repository JSON documents parse with jq 1.7
+PASS all Phase 4 completion-bound paths are tracked or staged for the section commit
+PASS git diff --check
+
+BH-03 Phase 4 contract cases:
+- 16 exact-compatible runtime scopes and 64 independent roots per scope
+- 12 runtime registry and root lifecycle conformance cases
+- one coalesced startup and ready scope for compatible same-scope callers
+- one FIFO operation queue per root with independent cross-root progress
+- root identity and positive operation-generation acknowledgement before state commit
+- unique root reservation, idempotent disposal, and same-registration remount
+
+Negative outcomes include invalid and excessive scope/root identities;
+incompatible scope reuse; sticky startup failure; reserved or existing root
+duplicates; illegal transitions; wrong root generations; foreign root
+acknowledgements; and isolated root operation failures.
+
+Evidence boundary:
+- runtime sharing and roots exercised through an injected unit-conformance transport
+- no root runtime-transport or runtime-release ownership
+- no runtime shutdown, runtime-loss, retry, restart, recovery, or fallback result
+- no browser-profile composition or browser execution result
+- no resource/reliability measurement or acceptance evidence
+- no public stability, publication, or support claim
+- Phase 5 is eligible but not authorized

@@ -65,19 +65,19 @@ Back to milestone: [README](README.md)
       - [x] 4.3.2.2 Subtask - Prove one root's failure or disposal cannot mutate, block, or dispose another root.
       - [x] 4.3.2.3 Subtask - Add versioned conformance fixtures and expose root/registry snapshots without renderer or runtime ownership.
 
-  - [ ] 4.4 Section - Run the inherited gate and publish completion evidence.
+  - [x] 4.4 Section - Run the inherited gate and publish completion evidence.
 
-    - [ ] 4.4.1 Task - Execute the active Phase 4 checks.
+    - [x] 4.4.1 Task - Execute the active Phase 4 checks.
 
-      - [ ] 4.4.1.1 Subtask - Run project-local Mix/Node tests and builds, runtime verification, Phase 1 through Phase 4 validators/tests, inherited validators/generators, JSON, archive, tracked-file, and patch hygiene.
-      - [ ] 4.4.1.2 Subtask - Confirm predecessor completion-bound artifacts remain unchanged and later browser/shutdown/recovery/measurement/acceptance results remain empty.
-      - [ ] 4.4.1.3 Subtask - Record exact commands, counts, negative outcomes, environment, and limitations.
+      - [x] 4.4.1.1 Subtask - Run project-local Mix/Node tests and builds, runtime verification, Phase 1 through Phase 4 validators/tests, inherited validators/generators, JSON, archive, tracked-file, and patch hygiene.
+      - [x] 4.4.1.2 Subtask - Confirm predecessor completion-bound artifacts remain unchanged and later browser/shutdown/recovery/measurement/acceptance results remain empty.
+      - [x] 4.4.1.3 Subtask - Record exact commands, counts, negative outcomes, environment, and limitations.
 
-    - [ ] 4.4.2 Task - Publish the Phase 4 decision.
+    - [x] 4.4.2 Task - Publish the Phase 4 decision.
 
-      - [ ] 4.4.2.1 Subtask - Emit a versioned validation log, implementation-evidence note, validator, tests, and completion decision bound to tracked artifacts.
-      - [ ] 4.4.2.2 Subtask - Mark Phase 4 complete only if every active gate passes without overclaim.
-      - [ ] 4.4.2.3 Subtask - Leave Phase 5 eligible but unauthorized.
+      - [x] 4.4.2.1 Subtask - Emit a versioned validation log, implementation-evidence note, validator, tests, and completion decision bound to tracked artifacts.
+      - [x] 4.4.2.2 Subtask - Mark Phase 4 complete only if every active gate passes without overclaim.
+      - [x] 4.4.2.3 Subtask - Leave Phase 5 eligible but unauthorized.
 
 ## Section delivery rule
 
