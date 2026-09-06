@@ -37,19 +37,19 @@ Back to milestone: [README](README.md)
       - [x] 2.1.2.2 Subtask - Define deterministic discovery sources, ambiguity rejection, same-origin rules, and prerequisite decisions.
       - [x] 2.1.2.3 Subtask - Define the strict manifest envelope, artifact declarations, failure classes, ownership, and Phase 3 boundary.
 
-  - [ ] 2.2 Section - Implement compatibility identities and negotiation.
+  - [x] 2.2 Section - Implement compatibility identities and negotiation.
 
-    - [ ] 2.2.1 Task - Publish owner-specific identity descriptors.
+    - [x] 2.2.1 Task - Publish owner-specific identity descriptors.
 
-      - [ ] 2.2.1.1 Subtask - Replace the runtime adapter's disposable-only surface with a reusable, experimental Popcorn compatibility descriptor while retaining the historical BH-01 adapter contract.
-      - [ ] 2.2.1.2 Subtask - Implement browser-host required identities and deterministic missing, unknown, duplicate, and mismatch rejection without acquiring dependencies.
-      - [ ] 2.2.1.3 Subtask - Mirror the exact identity table and negotiation outcome in the browser loader.
+      - [x] 2.2.1.1 Subtask - Replace the runtime adapter's disposable-only surface with a reusable, experimental Popcorn compatibility descriptor while retaining the historical BH-01 adapter contract.
+      - [x] 2.2.1.2 Subtask - Implement browser-host required identities and deterministic missing, unknown, duplicate, and mismatch rejection without acquiring dependencies.
+      - [x] 2.2.1.3 Subtask - Mirror the exact identity table and negotiation outcome in the browser loader.
 
-    - [ ] 2.2.2 Task - Prove cross-language agreement.
+    - [x] 2.2.2 Task - Prove cross-language agreement.
 
-      - [ ] 2.2.2.1 Subtask - Add positive exact-match tests and negative missing, extra, duplicate, malformed, and mismatched identity cases.
-      - [ ] 2.2.2.2 Subtask - Verify failures classify as `identity-mismatch` before acquisition or activation.
-      - [ ] 2.2.2.3 Subtask - Keep APIs experimental and component, renderer, server, and root behavior outside these modules.
+      - [x] 2.2.2.1 Subtask - Add positive exact-match tests and negative missing, extra, duplicate, malformed, and mismatched identity cases.
+      - [x] 2.2.2.2 Subtask - Verify failures classify as `identity-mismatch` before acquisition or activation.
+      - [x] 2.2.2.3 Subtask - Keep APIs experimental and component, renderer, server, and root behavior outside these modules.
 
   - [ ] 2.3 Section - Implement discovery, prerequisites, manifest validation, and fixtures.
 

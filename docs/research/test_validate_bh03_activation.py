@@ -18,6 +18,7 @@ class BH03ActivationValidatorTest(unittest.TestCase):
         cls.activation = json.loads(validator.ACTIVATION.read_text(encoding="utf-8"))
         cls.index = json.loads(validator.INTEGRATION_INDEX.read_text(encoding="utf-8"))
         cls.completion = json.loads(validator.COMPLETION.read_text(encoding="utf-8"))
+        cls.phase2_authorization = json.loads(validator.PHASE2_AUTHORIZATION.read_text(encoding="utf-8"))
         cls.registry = json.loads(validator.REGISTRY.read_text(encoding="utf-8"))
         cls.decision = json.loads(validator.BH02_DECISION.read_text(encoding="utf-8"))
         cls.reconciliation = json.loads(validator.BH02_RECONCILIATION.read_text(encoding="utf-8"))
@@ -83,13 +84,19 @@ class BH03ActivationValidatorTest(unittest.TestCase):
         activation = copy.deepcopy(self.activation)
         activation["next_authorized_work"] = "BH-03 Phase 2"
         with self.assertRaisesRegex(validator.ValidationError, "later authority"):
-            validator.validate_activation(activation, self.contract)
+            validator.validate_activation(activation, self.contract, phase2_authorized=True)
 
     def test_rejects_divergent_completion(self) -> None:
         completion = copy.deepcopy(self.completion)
         completion["outcome"]["support_state"] = "supported"
         with self.assertRaisesRegex(validator.ValidationError, "promotes stability or support"):
             validator.validate_completion(completion)
+
+    def test_rejects_unapproved_phase_2_successor(self) -> None:
+        authorization = copy.deepcopy(self.phase2_authorization)
+        authorization["status"] = "pending"
+        with self.assertRaisesRegex(validator.ValidationError, "lacks explicit approval"):
+            validator.validate_phase2_authorization(authorization)
 
 
 if __name__ == "__main__":

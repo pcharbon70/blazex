@@ -1,4 +1,5 @@
 export { BlazeXHostError, errorRecord, redactDiagnostic } from "./internal/errors.js";
+export { REQUIRED_COMPATIBILITY, negotiateCompatibility } from "./compatibility.js";
 export {
   acquireDeclaredArtifacts,
   fetchDeclaredArtifact,

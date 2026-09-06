@@ -21,6 +21,7 @@ CONTRACT = BASELINE_ROOT / "blazex-bh-03-phase-01-contract-v0.1.0.json"
 ACTIVATION = BASELINE_ROOT / "blazex-bh-03-repository-activation-v0.1.0.json"
 INTEGRATION_INDEX = REPO_ROOT / "integration/bh-03/integration-index-v0.1.0.json"
 COMPLETION = BASELINE_ROOT / "blazex-bh-03-phase-01-completion-v0.1.0.json"
+PHASE2_AUTHORIZATION = BASELINE_ROOT / "blazex-bh-03-phase-02-authorization-v0.1.0.json"
 REGISTRY = RESEARCH_ROOT / "assets/quality-acceptance/blazex-acceptance-registry-v0.1.0.json"
 BH02_DECISION = RESEARCH_ROOT / "assets/bh-02-baseline/blazex-bh-02-acceptance-decision-v0.1.0.json"
 BH02_RECONCILIATION = RESEARCH_ROOT / "assets/bh-02-baseline/blazex-bh-02-reconciliation-v0.1.0.json"
@@ -48,6 +49,12 @@ SECTION_COMMITS = [
     {"section": "1.3", "commit": "334f047"},
     {"section": "1.4", "commit": "resolve-from-this-records-git-commit"},
 ]
+PHASE2_STATUSES = {
+    "blazex_runtime_popcorn": "experimental-bh03-phase2-compatibility-identity",
+    "blazex_host_browser": "experimental-bh03-phase2-identity-negotiation",
+    "js/blazex_runtime": "experimental-bh03-phase2-identity-negotiation",
+    "profiles/browser_phoenix": "experimental-bh03-phase2-profile-manifest",
+}
 
 
 class ValidationError(Exception):
@@ -141,7 +148,7 @@ def _mix_dependencies(path: Path) -> list[str]:
     return re.findall(r"\{:\s*([a-z0-9_]+)\s*,", text)
 
 
-def validate_activation(activation: dict[str, Any], contract: dict[str, Any], repo_root: Path = REPO_ROOT) -> None:
+def validate_activation(activation: dict[str, Any], contract: dict[str, Any], repo_root: Path = REPO_ROOT, phase2_authorized: bool = False) -> None:
     boundaries = activation.get("boundaries", [])
     _require([row.get("id") for row in boundaries] == BOUNDARY_IDS and len({row.get("id") for row in boundaries}) == 5, "activation boundaries are incomplete or duplicated")
     contract_rows = {row["id"]: row for row in contract.get("repository_boundaries", [])}
@@ -151,8 +158,11 @@ def validate_activation(activation: dict[str, Any], contract: dict[str, Any], re
         metadata_path = path / "blazex.project.json"
         if metadata_path.is_file():
             metadata = _load(metadata_path)
-            for key in ("id", "path", "kind", "owner_role", "current_phase", "status"):
+            for key in ("id", "path", "kind", "owner_role"):
                 _require(metadata.get(key) == row.get(key), f"activation metadata differs: {row['id']} {key}")
+            current_matches = metadata.get("current_phase") == row.get("current_phase") and metadata.get("status") == row.get("status")
+            successor_matches = phase2_authorized and metadata.get("current_phase") == "BH-03 Phase 2" and metadata.get("status") == PHASE2_STATUSES.get(row["id"])
+            _require(current_matches or successor_matches, f"activation metadata differs: {row['id']} current phase or status")
             _require(metadata.get("activation_phase") == row.get("origin_activation"), f"origin activation was rewritten: {row['id']}")
             _require(metadata.get("public_api_state") == "experimental-not-stable", f"public API was promoted: {row['id']}")
         manifest = path / contract_rows[row["id"]]["manifest"]
@@ -167,6 +177,22 @@ def validate_activation(activation: dict[str, Any], contract: dict[str, Any], re
     _require(activation.get("actual_dependency_edges") == ["profiles/browser_phoenix -> blazex_phoenix", "profiles/browser_phoenix -> blazex_renderer_dom_liveview"], "actual dependency edges are stale")
     _require(activation.get("lifecycle_behavior") == "unimplemented" and activation.get("next_authorized_work") is None, "activation overclaims behavior or later authority")
     _require(activation.get("api_state") == "experimental-not-stable" and activation.get("support_state") == "unsupported", "activation promotes stability or support")
+
+
+def validate_phase2_authorization(auth: dict[str, Any], repo_root: Path = REPO_ROOT) -> None:
+    _require(auth.get("authorization_id") == "BX-BH03-PHASE-02-AUTHORIZATION-0.1", "Phase 2 authorization ID is invalid")
+    _require(auth.get("status") == "approved-phase-2-only", "BH-03 Phase 2 lacks explicit approval")
+    approver = auth.get("approved_by", {})
+    _require(approver.get("identity") and approver.get("role") == "repository-owner", "Phase 2 repository-owner approval is incomplete")
+    activation = auth.get("activation", {})
+    base = str(activation.get("base_revision", ""))
+    _require(base == "0d4d70231ecc2b0f6ca839b72a5ba55bea36e590" and base == activation.get("base_remote_revision"), "Phase 2 synchronized base is invalid")
+    _require(activation.get("main_synchronized_before_branch") is True, "Phase 2 main synchronization is not recorded")
+    for binding in auth.get("approval_basis", []):
+        path = repo_root / str(binding.get("path", ""))
+        _require(path.is_file() and _sha256(path) == binding.get("sha256"), f"Phase 2 authorization input is stale: {path}")
+    result = subprocess.run(["git", "merge-base", "--is-ancestor", base, "HEAD"], cwd=repo_root, capture_output=True, text=True, check=False)
+    _require(result.returncode == 0, "current work does not descend from the Phase 2 authorized base")
 
 
 def validate_integration(index: dict[str, Any], repo_root: Path = REPO_ROOT) -> None:
@@ -206,13 +232,15 @@ def validate(repo_root: Path = REPO_ROOT, research_root: Path = RESEARCH_ROOT) -
     activation = _load(research_root / ACTIVATION.relative_to(RESEARCH_ROOT))
     index = _load(repo_root / INTEGRATION_INDEX.relative_to(REPO_ROOT))
     completion = _load(research_root / COMPLETION.relative_to(RESEARCH_ROOT))
+    phase2_authorization = _load(research_root / PHASE2_AUTHORIZATION.relative_to(RESEARCH_ROOT))
     registry = _load(research_root / REGISTRY.relative_to(RESEARCH_ROOT))
     decision = _load(research_root / BH02_DECISION.relative_to(RESEARCH_ROOT))
     reconciliation = _load(research_root / BH02_RECONCILIATION.relative_to(RESEARCH_ROOT))
     validate_authorization(auth, repo_root)
     validate_ledger(ledger, registry, decision, reconciliation)
     validate_contract(contract)
-    validate_activation(activation, contract, repo_root)
+    validate_phase2_authorization(phase2_authorization, repo_root)
+    validate_activation(activation, contract, repo_root, phase2_authorized=True)
     validate_integration(index, repo_root)
     validate_completion(completion, repo_root)
 
