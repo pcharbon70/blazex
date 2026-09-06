@@ -18,6 +18,7 @@ class BH03CompatibilityValidatorTest(unittest.TestCase):
         cls.fixtures = json.loads(validator.FIXTURES.read_text(encoding="utf-8"))
         cls.index = json.loads(validator.INTEGRATION_INDEX.read_text(encoding="utf-8"))
         cls.profile = json.loads(validator.PROFILE_MANIFEST.read_text(encoding="utf-8"))
+        cls.completion = json.loads(validator.COMPLETION.read_text(encoding="utf-8"))
 
     def test_current_repository_passes(self) -> None:
         validator.validate()
@@ -75,6 +76,12 @@ class BH03CompatibilityValidatorTest(unittest.TestCase):
             manifest["artifacts"][0]["sha256"] = "0" * 64
             with self.assertRaisesRegex(validator.ValidationError, "digest is stale"):
                 validator.validate_artifact_declarations(manifest, root)
+
+    def test_rejects_divergent_completion(self) -> None:
+        completion = copy.deepcopy(self.completion)
+        completion["outcome"]["artifacts_acquired"] = 1
+        with self.assertRaisesRegex(validator.ValidationError, "overclaims later-phase evidence"):
+            validator.validate_completion(completion)
 
 
 if __name__ == "__main__":

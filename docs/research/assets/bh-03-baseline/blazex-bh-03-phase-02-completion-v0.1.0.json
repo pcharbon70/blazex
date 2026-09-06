@@ -1,0 +1,59 @@
+{
+  "schema_version": "1.0.0",
+  "record_id": "BX-BH03-DECISION-PHASE-02-GO",
+  "record_type": "decision",
+  "state": "passed",
+  "recorded_at": "2026-09-06T10:20:40Z",
+  "authorization_ref": "BX-BH03-PHASE-02-AUTHORIZATION-0.1",
+  "section_commits": [
+    {"section": "2.1", "commit": "b4344e4"},
+    {"section": "2.2", "commit": "492c7ca"},
+    {"section": "2.3", "commit": "85dce00"},
+    {"section": "2.4", "commit": "resolve-from-this-records-git-commit"}
+  ],
+  "artifact_hashes": [
+    {"path": "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-02-authorization-v0.1.0.json", "sha256": "6b0602f2d9d73ceb6a713c33c11729198c60943e220a2df0179fad63d76504e3"},
+    {"path": "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-02-contract-v0.1.0.json", "sha256": "72d8afe559f213f48955d4c116c016dac333e295fbc87fb63401a82abc6f434b"},
+    {"path": "js/blazex_runtime/src/compatibility.js", "sha256": "1e61fbc4cf2cb1cb726bc517fdec515cd95e063da900dec7e514b7b351275c00"},
+    {"path": "js/blazex_runtime/src/discovery.js", "sha256": "5a9c764d4d96309a6c45d15e7661c2f6771e7e965e2d4e9259816cba775060d7"},
+    {"path": "js/blazex_runtime/src/host-manifest.js", "sha256": "3e6db892bd505c5aaba9e4ba460420199d8ec17b6c1e2e9ebde91e6b11916710"},
+    {"path": "integration/bh-03/phase-02/pre-acquisition-fixtures-v0.1.0.json", "sha256": "3d4a46fbd15bfc3c7809f99e615650bd1c0c7c05e6909932242ea284b52f3d25"},
+    {"path": "integration/bh-03/integration-index-v0.2.0.json", "sha256": "aa754155be5e211fc240622ff4b5d2265a9f770a9054c794a29b4c8dfda480b3"},
+    {"path": "profiles/browser_phoenix/priv/static/bh01/bh03-runtime-manifest.json", "sha256": "de29c89e0a6e4f0cfd06c4bbedf4804a23384feb39c6ad6cd90096b63a3350cd"},
+    {"path": "docs/research/60-planning/01-browser-host/bh-03-browser-execution-host-and-runtime-boot-lifecycle/phase-02-implementation-evidence.md", "sha256": "1d91201d46c5ea4b199262fcaf7957644683b0a3272dd75f624e6881a9fbc5db"},
+    {"path": "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-02-validation-log-v0.1.0.txt", "sha256": "8872dd1e43e882553ca8f7b0eba2d496717791f353a062f0b7a97a3726932e24"}
+  ],
+  "outcome": {
+    "summary": "BH-03 Phase 2 exact compatibility, deterministic discovery, prerequisites, strict manifest validation, profile declaration, and fail-closed gate passed.",
+    "compatibility_identities": 8,
+    "discovery_sources": 3,
+    "prerequisites": 10,
+    "artifact_declarations": 3,
+    "contract_cases": 27,
+    "artifacts_acquired": 0,
+    "runtime_starts": 0,
+    "later_phase_results": "empty",
+    "public_api_state": "experimental-not-stable",
+    "support_state": "unsupported",
+    "next_phase": "BH-03 Phase 3 eligible but not authorized"
+  },
+  "validation_counts": {
+    "mix_projects": 3,
+    "mix_tests": 19,
+    "node_tests": 13,
+    "runtime_python_tests": 9,
+    "research_python_tests": 239,
+    "research_validators": 17,
+    "generator_checks": 4,
+    "phase2_negative_cases": 9
+  },
+  "limitations": [
+    "Phase 2 fetches only bounded JSON manifest data and does not acquire any declared runtime or application artifact.",
+    "Runtime startup, readiness, shared instance ownership, root lifecycle, shutdown, recovery, fallback execution, and measurements remain unimplemented.",
+    "Browser, runtime, root, failure-execution, measurement, and acceptance result sets remain empty.",
+    "One undeclared historical BH-01 toolchain assertion remains successor-unaware of accepted BH-02 dependency and status changes; no Phase 2 project entrypoint fails.",
+    "No public API stability, package publication, or support claim exists."
+  ],
+  "next_authorized_work": null,
+  "next_eligible_phase": "BH-03 Phase 3"
+}

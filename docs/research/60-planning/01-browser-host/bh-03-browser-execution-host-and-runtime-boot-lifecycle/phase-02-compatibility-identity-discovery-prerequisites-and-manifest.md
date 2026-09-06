@@ -17,7 +17,7 @@ aliases:
 
 Back to milestone: [README](README.md)
 
-- [ ] 2 Phase - Compatibility Identity, Discovery, Prerequisites, and Manifest Contract.
+- [x] 2 Phase - Compatibility Identity, Discovery, Prerequisites, and Manifest Contract.
 
   Implement the versioned identity and validation gate that decides whether a
   browser profile is eligible to proceed to artifact acquisition. This phase
@@ -65,19 +65,19 @@ Back to milestone: [README](README.md)
       - [x] 2.3.2.2 Subtask - Add unit/conformance tests proving deterministic normalized outputs and atomic rejection.
       - [x] 2.3.2.3 Subtask - Keep browser results, artifact bytes, startup, roots, measurements, and acceptance evidence empty.
 
-  - [ ] 2.4 Section - Run the inherited gate and publish completion evidence.
+  - [x] 2.4 Section - Run the inherited gate and publish completion evidence.
 
-    - [ ] 2.4.1 Task - Execute the active Phase 2 checks.
+    - [x] 2.4.1 Task - Execute the active Phase 2 checks.
 
-      - [ ] 2.4.1.1 Subtask - Run project-local Mix/Node tests and builds, runtime verification, Phase 1 and Phase 2 validators/tests, all inherited validators/generators, JSON, archive, and patch hygiene.
-      - [ ] 2.4.1.2 Subtask - Confirm Phase 3 behavior and all BH-03 browser/runtime/root/measurement/acceptance result sets remain absent.
-      - [ ] 2.4.1.3 Subtask - Record exact commands, counts, negative outcomes, environment, and limitations.
+      - [x] 2.4.1.1 Subtask - Run project-local Mix/Node tests and builds, runtime verification, Phase 1 and Phase 2 validators/tests, all inherited validators/generators, JSON, archive, and patch hygiene.
+      - [x] 2.4.1.2 Subtask - Confirm Phase 3 behavior and all BH-03 browser/runtime/root/measurement/acceptance result sets remain absent.
+      - [x] 2.4.1.3 Subtask - Record exact commands, counts, negative outcomes, environment, and limitations.
 
-    - [ ] 2.4.2 Task - Publish the Phase 2 decision.
+    - [x] 2.4.2 Task - Publish the Phase 2 decision.
 
-      - [ ] 2.4.2.1 Subtask - Emit a versioned validation log, implementation-evidence note, and completion decision bound to current artifacts.
-      - [ ] 2.4.2.2 Subtask - Mark Phase 2 complete only if every active gate passes without overclaim.
-      - [ ] 2.4.2.3 Subtask - Leave Phase 3 eligible but unauthorized.
+      - [x] 2.4.2.1 Subtask - Emit a versioned validation log, implementation-evidence note, and completion decision bound to current artifacts.
+      - [x] 2.4.2.2 Subtask - Mark Phase 2 complete only if every active gate passes without overclaim.
+      - [x] 2.4.2.3 Subtask - Leave Phase 3 eligible but unauthorized.
 
 ## Section delivery rule
 
@@ -89,5 +89,6 @@ manifest itself but must not acquire any declared artifact or start a runtime.
 
 - [BH-03 plan](README.md)
 - [Phase 1 completion evidence](phase-01-implementation-evidence.md)
+- [Phase 2 implementation evidence](phase-02-implementation-evidence.md)
 - [Development environment and deferred qualification policy](../../development-environment-and-deferred-qualification-policy.md)
 - [BH-02 internal contract baseline](../../../assets/bh-02-baseline/blazex-bh-02-contract-baseline-v0.1.0.json)

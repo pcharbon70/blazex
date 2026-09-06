@@ -20,6 +20,7 @@ CONTRACT = BASELINE_ROOT / "blazex-bh-03-phase-02-contract-v0.1.0.json"
 FIXTURES = REPO_ROOT / "integration/bh-03/phase-02/pre-acquisition-fixtures-v0.1.0.json"
 INTEGRATION_INDEX = REPO_ROOT / "integration/bh-03/integration-index-v0.2.0.json"
 PROFILE_MANIFEST = REPO_ROOT / "profiles/browser_phoenix/priv/static/bh01/bh03-runtime-manifest.json"
+COMPLETION = BASELINE_ROOT / "blazex-bh-03-phase-02-completion-v0.1.0.json"
 
 REQUIRED_COMPATIBILITY = {
     "browser_host": "blazex.browser-host/1",
@@ -37,6 +38,12 @@ OPTIONAL = ["wasm-streaming"]
 ARTIFACT_ROLES = ["runtime-module", "runtime-wasm", "application-bundle"]
 SCENARIOS = ["compatibility-exact-match", "manifest-discovery", "prerequisite-evaluation", "strict-manifest-validation"]
 RESULT_FIELDS = ["browser_results", "runtime_results", "root_results", "failure_results", "measurements", "acceptance_evidence"]
+SECTION_COMMITS = [
+    {"section": "2.1", "commit": "b4344e4"},
+    {"section": "2.2", "commit": "492c7ca"},
+    {"section": "2.3", "commit": "85dce00"},
+    {"section": "2.4", "commit": "resolve-from-this-records-git-commit"},
+]
 
 
 class ValidationError(Exception):
@@ -186,18 +193,38 @@ def validate_implementation(contract: dict[str, Any], repo_root: Path = REPO_ROO
     _require(contract.get("owners", {}).get("browser_discovery_prerequisites_and_manifest_validation") == "js/blazex_runtime", "implementation owner diverges")
 
 
+def validate_completion(completion: dict[str, Any], repo_root: Path = REPO_ROOT) -> None:
+    _require(completion.get("record_id") == "BX-BH03-DECISION-PHASE-02-GO", "completion decision ID is invalid")
+    _require(completion.get("state") == "passed", "completion decision does not pass")
+    _require(completion.get("authorization_ref") == "BX-BH03-PHASE-02-AUTHORIZATION-0.1", "completion authorization is missing")
+    _require(completion.get("section_commits") == SECTION_COMMITS, "completion section commits diverge")
+    bindings = completion.get("artifact_hashes", [])
+    _require(len(bindings) == 10 and len({row.get("path") for row in bindings}) == 10, "completion artifact bindings diverge")
+    for binding in bindings:
+        path = repo_root / str(binding.get("path", ""))
+        _require(path.is_file() and _sha256(path) == binding.get("sha256"), f"completion artifact is stale: {path}")
+    outcome = completion.get("outcome", {})
+    _require(outcome.get("compatibility_identities") == 8 and outcome.get("contract_cases") == 27, "completion contract counts diverge")
+    _require(outcome.get("artifacts_acquired") == 0 and outcome.get("runtime_starts") == 0 and outcome.get("later_phase_results") == "empty", "completion overclaims later-phase evidence")
+    _require(outcome.get("public_api_state") == "experimental-not-stable" and outcome.get("support_state") == "unsupported", "completion promotes stability or support")
+    _require(outcome.get("next_phase") == "BH-03 Phase 3 eligible but not authorized", "completion authorizes Phase 3")
+    _require(completion.get("next_authorized_work") is None and completion.get("next_eligible_phase") == "BH-03 Phase 3", "completion next-work state diverges")
+
+
 def validate(repo_root: Path = REPO_ROOT, research_root: Path = RESEARCH_ROOT) -> None:
     authorization = _load(research_root / AUTHORIZATION.relative_to(RESEARCH_ROOT))
     contract = _load(research_root / CONTRACT.relative_to(RESEARCH_ROOT))
     fixtures = _load(repo_root / FIXTURES.relative_to(REPO_ROOT))
     index = _load(repo_root / INTEGRATION_INDEX.relative_to(REPO_ROOT))
     profile = _load(repo_root / PROFILE_MANIFEST.relative_to(REPO_ROOT))
+    completion = _load(research_root / COMPLETION.relative_to(RESEARCH_ROOT))
     validate_authorization(authorization, repo_root)
     validate_contract(contract)
     validate_fixtures(fixtures, contract)
     validate_index(index, repo_root)
     validate_profile_manifest(profile, fixtures, repo_root)
     validate_implementation(contract, repo_root)
+    validate_completion(completion, repo_root)
 
 
 def main() -> int:
@@ -206,7 +233,7 @@ def main() -> int:
     except ValidationError as exc:
         print(f"BH-03 Phase 2 compatibility validation failed: {exc}", file=sys.stderr)
         return 1
-    print("BH-03 Phase 2 compatibility validation passed: 8 exact identities, 3 discovery sources, 10 prerequisites, 3 artifact declarations, 27 conformance cases, empty later-phase results, and unsupported experimental state verified.")
+    print("BH-03 Phase 2 compatibility validation passed: 8 exact identities, 3 discovery sources, 10 prerequisites, 3 artifact declarations, 27 conformance cases, completion bindings, empty later-phase results, and unsupported experimental state verified.")
     return 0
 
 
