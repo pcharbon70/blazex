@@ -1,0 +1,50 @@
+{
+  "schema_version": "1.0.0",
+  "authorization_id": "BX-BH03-PHASE-07-AUTHORIZATION-0.1",
+  "status": "approved-phase-7-only",
+  "approved_at": "2026-09-06",
+  "approved_by": {
+    "identity": "repository-user",
+    "role": "repository-owner",
+    "evidence": "Explicit request to implement the next BH-03 phase section by section, merge one pull request, synchronize main, and delete the feature branch."
+  },
+  "activation": {
+    "base_branch": "main",
+    "base_revision": "eb4e1e8db89756f54b7f73803905ccdc6a5b5859",
+    "base_remote_revision": "eb4e1e8db89756f54b7f73803905ccdc6a5b5859",
+    "main_synchronized_before_branch": true,
+    "working_branch": "codex/bh-03-phase-07-resource-reliability-measurements",
+    "phase": "BH-03 Phase 7"
+  },
+  "approval_basis": [
+    {"path": "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-06-completion-v0.1.0.json", "sha256": "f5255c0f665b77fe126ae0e45b7f6e6dc63827126def64d0375e0f1057ac62ef"},
+    {"path": "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-06-contract-v0.1.0.json", "sha256": "9485bdae02c074d8b2cfef11b9c3b5476352cceac8519ad1b4739279fa93df85"},
+    {"path": "docs/research/60-planning/01-browser-host/bh-03-browser-execution-host-and-runtime-boot-lifecycle/phase-06-implementation-evidence.md", "sha256": "a45fcc9fc8b1682e8a8e7f69c26016f203960c2e1a64dad1f02927f84650ee2e"},
+    {"path": "integration/bh-03/integration-index-v0.6.0.json", "sha256": "4869301427445fd9a92f97d11775e3cfc1b38388b511bcfd93e293cfba4cbf70"},
+    {"path": "integration/fixtures/raw-evidence/bh03-phase6-browser-matrix.json", "sha256": "47214bde6218bbc28ec9541361197dab70725b2a5aebef9f23c937fa6520cee7"},
+    {"path": "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-01-contract-v0.1.0.json", "sha256": "44cd9dc05a528e7847c09868566b365d34d087f57116a44d8a23ff907ea562eb"}
+  ],
+  "authorized_scope": [
+    "Add bounded measurement instrumentation to the existing experimental BH-03 lifecycle and profile.",
+    "Observe startup, readiness, root count, memory capability and growth, cleanup, repetition, and declared failure convergence.",
+    "Execute the same measurement plan in active Linux Chrome and Firefox and retain raw descriptive evidence.",
+    "Publish versioned Phase 7 fixtures, measurement evidence, validation, and completion evidence."
+  ],
+  "delivery_rules": {
+    "sections_in_order": true,
+    "commit_per_section": true,
+    "section_count": 4,
+    "single_pull_request": true,
+    "merge_pull_request": true,
+    "return_to_synchronized_main_after_delivery": true,
+    "delete_local_feature_branch_after_delivery": true,
+    "delete_remote_feature_branch_after_delivery": true
+  },
+  "not_authorized": [
+    "BH-03 Phase 8 implementation, BH-03 acceptance, or BH-04 authorization",
+    "release budgets, production baselines, performance guarantees, or pass thresholds derived from observed timings or memory values",
+    "reference DOM interaction transport, Phoenix command authority, product components, or native host delivery",
+    "Safari, mobile, device, second-host, or assistive-technology qualification",
+    "public API stability, package publication, or support claims"
+  ]
+}
