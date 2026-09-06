@@ -4,6 +4,8 @@ import { BlazeXHostError, errorRecord } from "./internal/errors.js";
 import { BH03_ROOT_LIMITS, BrowserRootRegistry } from "./root-lifecycle.js";
 import { BrowserRuntimeStartup } from "./runtime-startup.js";
 
+export const BH03_RUNTIME_LOSS_PROTOCOL = "blazex.runtime-loss/1";
+export const BH03_RUNTIME_FALLBACK_PROTOCOL = "blazex.runtime-fallback/1";
 export const BH03_RUNTIME_REGISTRY_LIMITS = Object.freeze({
   max_scopes: 16,
   max_roots_per_scope: BH03_ROOT_LIMITS.max_roots_per_scope,
@@ -485,7 +487,7 @@ function fallbackDecision(scopeId, runtimeGeneration, error) {
   const diagnostic = errorRecord(error);
   const failureClass = Object.hasOwn(FALLBACK_ACTIONS, diagnostic.code) ? diagnostic.code : "runtime-startup";
   return Object.freeze({
-    protocol: "blazex.runtime-fallback/1",
+    protocol: BH03_RUNTIME_FALLBACK_PROTOCOL,
     decision: "fallback",
     scope_id: scopeId,
     runtime_generation: runtimeGeneration,

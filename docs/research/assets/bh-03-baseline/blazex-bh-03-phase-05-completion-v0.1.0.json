@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0.0",
+  "record_id": "BX-BH03-DECISION-PHASE-05-GO",
+  "state": "passed",
+  "recorded_at": "2026-09-06",
+  "authorization_ref": "BX-BH03-PHASE-05-AUTHORIZATION-0.1",
+  "contract_ref": "BX-BH03-PHASE-05-CONTRACT-0.1",
+  "section_commits": [
+    {"section": "5.1", "commit": "6909002"},
+    {"section": "5.2", "commit": "b3f2462"},
+    {"section": "5.3", "commit": "2ae84d2"},
+    {"section": "5.4", "commit": "resolve-from-this-records-git-commit"}
+  ],
+  "artifact_hashes": [
+    {"path": "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-05-authorization-v0.1.0.json", "sha256": "4ab806ce876b0e8885cf3149ebb0957713b0f63abab3ccdf091436e4dd31ae34"},
+    {"path": "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-05-contract-v0.1.0.json", "sha256": "b0dbbfa1d9fe574c628cfec29d32302fbb238f2d70eee53124cc01dde3511743"},
+    {"path": "js/blazex_runtime/src/runtime-registry.js", "sha256": "225081ba2df00867bb4aa7ad630e82ceb883a43b9cee1180fb0bf2ab0b763711"},
+    {"path": "js/blazex_runtime/src/root-lifecycle.js", "sha256": "9ba5c518f802b188def31508916f03888b43f581a6b36a849222ca96e2d4a7b6"},
+    {"path": "js/blazex_runtime/test/runtime-shutdown.test.js", "sha256": "a15eb1a59b8a4e0723674c3ea5c325a0cde4e2540633b476fe770e3d769fa855"},
+    {"path": "js/blazex_runtime/test/runtime-recovery.test.js", "sha256": "8c31e4fc73d817d989b701505d4aac7ab4e96fedd7f0a7122485875e4f8b6e03"},
+    {"path": "packages/blazex_host_browser/lib/blazex/host/browser/lifecycle.ex", "sha256": "de2de03335b0eda4c10bf21d92f9d7a68a7f3c09d3e7b267fb4fc1962d0f0644"},
+    {"path": "integration/bh-03/phase-05/resilience-fixtures-v0.1.0.json", "sha256": "cec0d05f0c04683ce7169ffee5610d28644b6744a99be07a2a90df9679b5ac92"},
+    {"path": "integration/bh-03/integration-index-v0.5.0.json", "sha256": "8fae9d62af27f502ee51b39000c94ce7aac718ca6a2f07b2bfdcbd917fa72653"},
+    {"path": "docs/research/60-planning/01-browser-host/bh-03-browser-execution-host-and-runtime-boot-lifecycle/phase-05-shutdown-runtime-loss-mismatch-and-fallback.md", "sha256": "ef3080463acdace9659052e43b793e5e45da8830efda2a0a9453a7f964b38f65"},
+    {"path": "docs/research/60-planning/01-browser-host/bh-03-browser-execution-host-and-runtime-boot-lifecycle/phase-05-implementation-evidence.md", "sha256": "1d42226b2f08036c363081144b5e211605939da5b30d177f28a8110eb18bca03"},
+    {"path": "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-05-validation-log-v0.1.0.txt", "sha256": "9f62e43169bfe4f91b75d9b97d11d0b5509c7e19711c5dae75565aae3d8a99f9"},
+    {"path": "docs/research/validate_bh03_resilience.py", "sha256": "1e1a4a65dd1754732922054b827b59009f45b8ecc0817a20f3a6f8af55ddb1d0"},
+    {"path": "docs/research/test_validate_bh03_resilience.py", "sha256": "2bebd82758cc3f1db1f15986147d4fa8da4cb4bf16398c2ef452acf543ea8df9"}
+  ],
+  "outcome": {
+    "conformance_cases": 16,
+    "shutdown_test_cases": 4,
+    "recovery_fallback_test_cases": 9,
+    "evidence": "injected-transport-unit-conformance",
+    "max_replacements": 1,
+    "replacement_delay_ms": 100,
+    "fallback_classes": 5,
+    "browser_results": 0,
+    "measurements": 0,
+    "acceptance_evidence": 0,
+    "public_api_state": "experimental-not-stable",
+    "support_state": "unsupported",
+    "next_phase": "BH-03 Phase 6 eligible but not authorized"
+  },
+  "limitations": [
+    "Shutdown, loss, recovery, replay, and fallback evidence uses deterministic injected transports or pure decisions; no browser executes these Phase 5 flows.",
+    "Fallback is a bounded non-DOM decision record. Browser-profile composition and visible presentation remain Phase 6.",
+    "Browser results, resource and reliability measurements, BH-03 acceptance, publication, public stability, and support remain unclaimed."
+  ],
+  "next_authorized_work": null,
+  "next_eligible_phase": "BH-03 Phase 6"
+}

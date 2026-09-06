@@ -16,7 +16,7 @@ aliases:
 
 Back to milestone: [README](README.md)
 
-- [ ] 5 Phase - Shutdown, Runtime Loss, Mismatch, and Fallback.
+- [x] 5 Phase - Shutdown, Runtime Loss, Mismatch, and Fallback.
 
   Make page-level runtime ownership converge intentionally after shutdown,
   post-readiness runtime loss, incompatibility, and unavailable prerequisites.
@@ -66,19 +66,19 @@ Back to milestone: [README](README.md)
       - [x] 5.3.2.2 Subtask - Redact and bound fallback diagnostics, forbid partial activation, and keep all DOM/HTML/browser-profile behavior absent.
       - [x] 5.3.2.3 Subtask - Add versioned injected-transport fixtures and prove retry, replay, isolation, exhaustion, and fallback behavior.
 
-  - [ ] 5.4 Section - Run the inherited gate and publish completion evidence.
+  - [x] 5.4 Section - Run the inherited gate and publish completion evidence.
 
-    - [ ] 5.4.1 Task - Execute the active Phase 5 checks.
+    - [x] 5.4.1 Task - Execute the active Phase 5 checks.
 
-      - [ ] 5.4.1.1 Subtask - Run project-local Mix/Node tests and builds, runtime verification, Phase 1 through Phase 5 validators/tests, inherited validators/generators, JSON, archive, tracked-file, and patch hygiene.
-      - [ ] 5.4.1.2 Subtask - Confirm predecessor completion-bound artifacts remain unchanged and browser/profile/measurement/acceptance results remain empty.
-      - [ ] 5.4.1.3 Subtask - Record exact commands, counts, negative outcomes, environment, and limitations.
+      - [x] 5.4.1.1 Subtask - Run project-local Mix/Node tests and builds, runtime verification, Phase 1 through Phase 5 validators/tests, inherited validators/generators, JSON, archive, tracked-file, and patch hygiene.
+      - [x] 5.4.1.2 Subtask - Confirm predecessor completion-bound artifacts remain unchanged and browser/profile/measurement/acceptance results remain empty.
+      - [x] 5.4.1.3 Subtask - Record exact commands, counts, negative outcomes, environment, and limitations.
 
-    - [ ] 5.4.2 Task - Publish the Phase 5 decision.
+    - [x] 5.4.2 Task - Publish the Phase 5 decision.
 
-      - [ ] 5.4.2.1 Subtask - Emit a versioned validation log, implementation-evidence note, validator, tests, and completion decision bound to tracked artifacts.
-      - [ ] 5.4.2.2 Subtask - Mark Phase 5 complete only if every active gate passes without overclaim.
-      - [ ] 5.4.2.3 Subtask - Leave Phase 6 eligible but unauthorized.
+      - [x] 5.4.2.1 Subtask - Emit a versioned validation log, implementation-evidence note, validator, tests, and completion decision bound to tracked artifacts.
+      - [x] 5.4.2.2 Subtask - Mark Phase 5 complete only if every active gate passes without overclaim.
+      - [x] 5.4.2.3 Subtask - Leave Phase 6 eligible but unauthorized.
 
 ## Section delivery rule
 
