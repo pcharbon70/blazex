@@ -78,6 +78,10 @@ not belong here.
 - [BH-02 Phase 8 contract envelope](blazex-bh-02-phase-08-contract-v0.1.0.json)
 - [BH-02 cross-backend reconciliation](blazex-bh-02-reconciliation-v0.1.0.json)
 - [BH-02 candidate internal contract baseline](blazex-bh-02-contract-baseline-v0.1.0.json)
+- [BH-02 machine-readable multidisciplinary review](blazex-bh-02-review-v0.1.0.json)
+- [BH-02 multidisciplinary review](blazex-bh-02-multidisciplinary-review-v0-1-0.md)
+- [BH-02 acceptance execution overlay](blazex-bh-02-acceptance-overlay-v0.1.0.json)
+- [BH-02 candidate acceptance decision](blazex-bh-02-candidate-decision-v0.1.0.json)
 
 ## Maintaining this index
 

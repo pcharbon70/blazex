@@ -52,19 +52,19 @@ Back to milestone: [README](README.md)
       - [x] 8.2.2.2 Subtask - Separate accepted internal compatibility identities from experimental public-API and unsupported product states.
       - [x] 8.2.2.3 Subtask - Require superseding ADR and compatibility review for material downstream changes.
 
-  - [ ] 8.3 Section - Execute analytical reviews and the candidate acceptance gate.
+  - [x] 8.3 Section - Execute analytical reviews and the candidate acceptance gate.
 
-    - [ ] 8.3.1 Task - Challenge the candidate through separate evidence-first lenses.
+    - [x] 8.3.1 Task - Challenge the candidate through separate evidence-first lenses.
 
-      - [ ] 8.3.1.1 Subtask - Run architecture, implementation, and conformance reviews against source-bound evidence rather than phase-completion labels.
-      - [ ] 8.3.1.2 Subtask - Run accessibility and security reviews without converting bounded automation into manual or production qualification.
-      - [ ] 8.3.1.3 Subtask - Run packaging and provenance reviews over dependency direction, experiment isolation, generated artifacts, and distributed-material nonclaims.
+      - [x] 8.3.1.1 Subtask - Run architecture, implementation, and conformance reviews against source-bound evidence rather than phase-completion labels.
+      - [x] 8.3.1.2 Subtask - Run accessibility and security reviews without converting bounded automation into manual or production qualification.
+      - [x] 8.3.1.3 Subtask - Run packaging and provenance reviews over dependency direction, experiment isolation, generated artifacts, and distributed-material nonclaims.
 
-    - [ ] 8.3.2 Task - Implement and execute the deterministic BH-02 release gate.
+    - [x] 8.3.2 Task - Implement and execute the deterministic BH-02 release gate.
 
-      - [ ] 8.3.2.1 Subtask - Verify phase hashes, reconciliation closure, review coverage, evidence freshness, exact deferrals, support language, and change-control handoff.
-      - [ ] 8.3.2.2 Subtask - Add fail-closed negative tests for missing outputs, stale evidence, hidden findings, false qualification, public stability, and premature BH-03 authorization.
-      - [ ] 8.3.2.3 Subtask - Emit an acceptance overlay and candidate decision without editing the canonical planned registry.
+      - [x] 8.3.2.1 Subtask - Verify phase hashes, reconciliation closure, review coverage, evidence freshness, exact deferrals, support language, and change-control handoff.
+      - [x] 8.3.2.2 Subtask - Add fail-closed negative tests for missing outputs, stale evidence, hidden findings, false qualification, public stability, and premature BH-03 authorization.
+      - [x] 8.3.2.3 Subtask - Emit an acceptance overlay and candidate decision without editing the canonical planned registry.
 
   - [ ] 8.4 Section - Run the complete inherited gate and publish BH-02 closure.
 

@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "record_id": "BX-EVIDENCE-BH02-GATE-0.1",
+  "record_type": "candidate-acceptance-decision",
+  "status": "passed-candidate-gate",
+  "source_revision": "904f7ba44a8187ea8c2a5506cb7cdb3889496b94",
+  "authorization_ref": "BX-BH02-PHASE-08-AUTHORIZATION-0.1",
+  "bindings": [
+    {"path": "docs/research/assets/bh-02-baseline/blazex-bh-02-reconciliation-v0.1.0.json", "sha256": "3299373e65b3eabffc5db53dfa699a98fb0da62c936685367c63dffb0847376d"},
+    {"path": "docs/research/assets/bh-02-baseline/blazex-bh-02-contract-baseline-v0.1.0.json", "sha256": "b1969f57f707adc834fd221b5758c2cfb41683a9ab8aaf1439f355f883bd430a"},
+    {"path": "docs/research/assets/bh-02-baseline/blazex-bh-02-review-v0.1.0.json", "sha256": "69e9716f5c3ece880e8cdae0f35dd83bf4465d9325b357a92eb46f9cd12401db"},
+    {"path": "docs/research/assets/bh-02-baseline/blazex-bh-02-acceptance-overlay-v0.1.0.json", "sha256": "3255f9ad72401436cacd07891ba57d85579c5f8d63f842142201174747006ec8"},
+    {"path": "docs/research/assets/quality-acceptance/blazex-acceptance-registry-v0.1.0.json", "sha256": "43025d17513f068eb1ac0838a381da4c132bf41b74aa602bffdc130e411368ed"}
+  ],
+  "checks": [
+    {"id": "all-phase-decisions-pass-and-bind-current-artifacts", "result": "passed"},
+    {"id": "all-nine-required-outputs-implemented-experimental", "result": "passed"},
+    {"id": "representative-slice-reconciled-across-headless-dom-native", "result": "passed-with-declared-file-dialog-and-platform-bounds"},
+    {"id": "portable-project-graph-has-no-host-or-toolkit-leakage", "result": "passed"},
+    {"id": "native-experiment-remains-disposable-and-outward-only", "result": "passed"},
+    {"id": "inherited-conditions-repeat-obligations-and-deferrals-preserved", "result": "passed"},
+    {"id": "findings-have-explicit-dispositions-and-no-hidden-blocker", "result": "passed"},
+    {"id": "analytical-review-lenses-complete", "result": "passed"},
+    {"id": "complete-reproducible-gate-passes", "result": "pending-section-8.4"},
+    {"id": "public-api-and-support-states-remain-unpromoted", "result": "passed"}
+  ],
+  "candidate_outcome": "accepted-with-bounded-conditions",
+  "final_decision": "pending-section-8.4-complete-reproducible-gate",
+  "active_blockers": [],
+  "bounded_conditions": [
+    "Public APIs remain experimental and carry no SemVer stability promise.",
+    "Every browser, native platform, accessibility, security, packaging, performance, and release support state remains unsupported or unqualified.",
+    "Windows, macOS, physical mobile, second-host, and manual assistive-technology obligations remain deferred to BH-22 or earlier governed environments.",
+    "GTK role gaps and native file-dialog interaction must close before their respective native accessibility or provider claims.",
+    "Material contract changes require a superseding ADR, compatibility review, fixture update, and affected backend reexecution."
+  ],
+  "bh03_state": "not-authorized",
+  "api_state": "experimental-not-stable",
+  "support_state": "unsupported"
+}

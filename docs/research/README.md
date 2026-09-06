@@ -122,6 +122,8 @@ python3 validate_bh02_dom.py
 python3 -m unittest test_validate_bh02_dom.py
 python3 validate_bh02_native.py
 python3 -m unittest test_validate_bh02_native.py
+python3 validate_bh02_acceptance.py
+python3 -m unittest test_validate_bh02_acceptance.py
 ```
 
 The validator checks metadata, placeholders, filenames, local links,
@@ -150,6 +152,7 @@ identifiers.
 - [`test_validate_bh02_renderer.py`](test_validate_bh02_renderer.py) — focused BH-02 Phase 5 renderer capability, lifecycle, headless snapshot, trace, fixture, leakage, and overclaim tests
 - [`test_validate_bh02_dom.py`](test_validate_bh02_dom.py) — focused BH-02 Phase 6 DOM surface, browser evidence, dependency, fixture, leakage, and overclaim tests
 - [`test_validate_bh02_native.py`](test_validate_bh02_native.py) — focused BH-02 Phase 7 native surface, direct-platform evidence, dependency, fixture, deferral, leakage, and overclaim tests
+- [`test_validate_bh02_acceptance.py`](test_validate_bh02_acceptance.py) — focused BH-02 Phase 8 reconciliation, review, overlay, stability, deferral, and downstream-authorization fail-closed tests
 - [`test_validate_quality_acceptance.py`](test_validate_quality_acceptance.py) — focused Phase 5 quality-budget and acceptance-traceability validator tests
 - [`test_validate_archive.py`](test_validate_archive.py) — focused validator tests
 - [`validate_browser_product_envelope.py`](validate_browser_product_envelope.py) — deterministic BH-00 browser-envelope checks
@@ -164,5 +167,6 @@ identifiers.
 - [`validate_bh02_renderer.py`](validate_bh02_renderer.py) — fail-closed BH-02 Phase 5 renderer lifecycle, deterministic-headless, trace, fixture, and support-limit checks
 - [`validate_bh02_dom.py`](validate_bh02_dom.py) — fail-closed BH-02 Phase 6 standalone-DOM lowering, browser-driver, browser-matrix, fixture, and support-limit checks
 - [`validate_bh02_native.py`](validate_bh02_native.py) — fail-closed BH-02 Phase 7 portable native lowering, direct adapters, GTK execution, cross-renderer fixtures, deferrals, and support-limit checks
+- [`validate_bh02_acceptance.py`](validate_bh02_acceptance.py) — fail-closed BH-02 Phase 8 phase binding, reconciliation, contract, review, acceptance-overlay, and candidate-decision checks
 - [`validate_quality_acceptance.py`](validate_quality_acceptance.py) — deterministic BH-00 quality-budget and acceptance-traceability checks
 - [`validate_archive.py`](validate_archive.py) — deterministic archive checks
