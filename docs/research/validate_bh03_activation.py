@@ -20,6 +20,7 @@ LEDGER = BASELINE_ROOT / "blazex-bh-03-entry-ledger-v0.1.0.json"
 CONTRACT = BASELINE_ROOT / "blazex-bh-03-phase-01-contract-v0.1.0.json"
 ACTIVATION = BASELINE_ROOT / "blazex-bh-03-repository-activation-v0.1.0.json"
 INTEGRATION_INDEX = REPO_ROOT / "integration/bh-03/integration-index-v0.1.0.json"
+COMPLETION = BASELINE_ROOT / "blazex-bh-03-phase-01-completion-v0.1.0.json"
 REGISTRY = RESEARCH_ROOT / "assets/quality-acceptance/blazex-acceptance-registry-v0.1.0.json"
 BH02_DECISION = RESEARCH_ROOT / "assets/bh-02-baseline/blazex-bh-02-acceptance-decision-v0.1.0.json"
 BH02_RECONCILIATION = RESEARCH_ROOT / "assets/bh-02-baseline/blazex-bh-02-reconciliation-v0.1.0.json"
@@ -41,6 +42,12 @@ HOST_STATES = ["inactive", "discovering", "validating", "acquiring", "starting",
 ROOT_STATES = ["unregistered", "registered", "mounting", "ready", "moving", "disposing", "disposed", "failed"]
 FAILURE_CLASSES = ["unsupported-prerequisite", "manifest-invalid", "identity-mismatch", "artifact-integrity", "artifact-unavailable", "runtime-startup", "bundle-load", "readiness-timeout", "duplicate-root", "stale-generation", "runtime-loss", "shutdown-timeout", "ownership-violation"]
 EMPTY_EVIDENCE_FIELDS = ["fixture_sets", "scenarios", "browser_results", "runtime_results", "root_results", "failure_results", "measurements", "acceptance_evidence"]
+SECTION_COMMITS = [
+    {"section": "1.1", "commit": "fa68b22"},
+    {"section": "1.2", "commit": "5252f8b"},
+    {"section": "1.3", "commit": "334f047"},
+    {"section": "1.4", "commit": "resolve-from-this-records-git-commit"},
+]
 
 
 class ValidationError(Exception):
@@ -171,12 +178,34 @@ def validate_integration(index: dict[str, Any], repo_root: Path = REPO_ROOT) -> 
     _require(files == {"README.md", "integration-index-v0.1.0.json"}, "unowned BH-03 integration artifact exists")
 
 
+def validate_completion(completion: dict[str, Any], repo_root: Path = REPO_ROOT) -> None:
+    _require(completion.get("record_id") == "BX-BH03-DECISION-PHASE-01-GO", "completion decision ID is invalid")
+    _require(completion.get("state") == "passed", "completion decision does not pass")
+    _require(completion.get("authorization_ref") == "BX-BH03-PHASE-01-AUTHORIZATION-0.1", "completion authorization is missing")
+    _require(completion.get("section_commits") == SECTION_COMMITS, "completion section commits diverge")
+    bindings = completion.get("artifact_hashes", [])
+    _require(len(bindings) == 7 and len({row.get("path") for row in bindings}) == 7, "completion artifact bindings diverge")
+    for binding in bindings:
+        path = repo_root / str(binding.get("path", ""))
+        _require(path.is_file(), f"completion artifact is missing: {path}")
+        _require(_sha256(path) == binding.get("sha256"), f"completion artifact is stale: {path}")
+    outcome = completion.get("outcome", {})
+    _require(outcome.get("activated_boundaries") == 5, "completion boundary count diverges")
+    _require(outcome.get("required_outputs") == "nine-of-nine-planned-unimplemented", "completion overclaims outputs")
+    _require(outcome.get("acceptance_conditions") == "ten-of-ten-planned-unexecuted", "completion overclaims acceptance")
+    _require(outcome.get("lifecycle_behavior") == "unimplemented" and outcome.get("integration_evidence") == "empty", "completion overclaims lifecycle evidence")
+    _require(outcome.get("public_api_state") == "experimental-not-stable" and outcome.get("support_state") == "unsupported", "completion promotes stability or support")
+    _require(outcome.get("next_phase") == "BH-03 Phase 2 eligible but not authorized", "completion authorizes Phase 2")
+    _require(completion.get("next_authorized_work") is None and completion.get("next_eligible_phase") == "BH-03 Phase 2", "completion next-work state diverges")
+
+
 def validate(repo_root: Path = REPO_ROOT, research_root: Path = RESEARCH_ROOT) -> None:
     auth = _load(research_root / AUTHORIZATION.relative_to(RESEARCH_ROOT))
     ledger = _load(research_root / LEDGER.relative_to(RESEARCH_ROOT))
     contract = _load(research_root / CONTRACT.relative_to(RESEARCH_ROOT))
     activation = _load(research_root / ACTIVATION.relative_to(RESEARCH_ROOT))
     index = _load(repo_root / INTEGRATION_INDEX.relative_to(REPO_ROOT))
+    completion = _load(research_root / COMPLETION.relative_to(RESEARCH_ROOT))
     registry = _load(research_root / REGISTRY.relative_to(RESEARCH_ROOT))
     decision = _load(research_root / BH02_DECISION.relative_to(RESEARCH_ROOT))
     reconciliation = _load(research_root / BH02_RECONCILIATION.relative_to(RESEARCH_ROOT))
@@ -185,6 +214,7 @@ def validate(repo_root: Path = REPO_ROOT, research_root: Path = RESEARCH_ROOT) -
     validate_contract(contract)
     validate_activation(activation, contract, repo_root)
     validate_integration(index, repo_root)
+    validate_completion(completion, repo_root)
 
 
 def main() -> int:
@@ -193,7 +223,7 @@ def main() -> int:
     except ValidationError as exc:
         print(f"BH-03 activation validation failed: {exc}", file=sys.stderr)
         return 1
-    print("BH-03 Phase 1 activation passed: authority, BH-02 handoff, 9 outputs, 10 acceptance conditions, lifecycle vocabulary, 5 boundaries, empty evidence, and unsupported experimental state verified.")
+    print("BH-03 Phase 1 activation passed: authority, BH-02 handoff, 9 outputs, 10 acceptance conditions, lifecycle vocabulary, 5 boundaries, empty evidence, completion bindings, and unsupported experimental state verified.")
     return 0
 
 

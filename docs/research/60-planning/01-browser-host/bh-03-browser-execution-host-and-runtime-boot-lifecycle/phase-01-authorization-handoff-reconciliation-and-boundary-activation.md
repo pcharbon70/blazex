@@ -17,7 +17,7 @@ aliases:
 
 Back to milestone: [README](README.md)
 
-- [ ] 1 Phase - Authorization, Handoff Reconciliation, and Boundary Activation.
+- [x] 1 Phase - Authorization, Handoff Reconciliation, and Boundary Activation.
 
   Establish the exact BH-03 authority, immutable input handoff, package and
   integration boundaries, lifecycle vocabulary, and fail-closed evidence gate.
@@ -65,19 +65,19 @@ Back to milestone: [README](README.md)
       - [x] 1.3.2.2 Subtask - Reject lifecycle implementation, nonempty results, support/stability promotion, and later-phase authorization.
       - [x] 1.3.2.3 Subtask - Prove current repository state passes deterministically.
 
-  - [ ] 1.4 Section - Run the inherited gate and publish completion evidence.
+  - [x] 1.4 Section - Run the inherited gate and publish completion evidence.
 
-    - [ ] 1.4.1 Task - Execute the active Phase 1 checks.
+    - [x] 1.4.1 Task - Execute the active Phase 1 checks.
 
-      - [ ] 1.4.1.1 Subtask - Run project-local Mix/Node tests and builds, Phase 1 validator/tests, all inherited BH-02 validators, archive/BH-00/BH-01/generated checks, JSON, and patch hygiene.
-      - [ ] 1.4.1.2 Subtask - Confirm all runtime lifecycle behavior and BH-03 acceptance evidence remains unimplemented/unexecuted.
-      - [ ] 1.4.1.3 Subtask - Record exact commands, counts, limits, negative outcomes, and unsupported state.
+      - [x] 1.4.1.1 Subtask - Run project-local Mix/Node tests and builds, Phase 1 validator/tests, all inherited BH-02 validators, archive/BH-00/BH-01/generated checks, JSON, and patch hygiene.
+      - [x] 1.4.1.2 Subtask - Confirm all runtime lifecycle behavior and BH-03 acceptance evidence remains unimplemented/unexecuted.
+      - [x] 1.4.1.3 Subtask - Record exact commands, counts, limits, negative outcomes, and unsupported state.
 
-    - [ ] 1.4.2 Task - Publish the Phase 1 decision.
+    - [x] 1.4.2 Task - Publish the Phase 1 decision.
 
-      - [ ] 1.4.2.1 Subtask - Emit a versioned validation log, implementation-evidence note, and completion decision bound to current artifacts.
-      - [ ] 1.4.2.2 Subtask - Mark Phase 1 complete only if every active gate passes without overclaim.
-      - [ ] 1.4.2.3 Subtask - Leave Phase 2 eligible but unauthorized.
+      - [x] 1.4.2.1 Subtask - Emit a versioned validation log, implementation-evidence note, and completion decision bound to current artifacts.
+      - [x] 1.4.2.2 Subtask - Mark Phase 1 complete only if every active gate passes without overclaim.
+      - [x] 1.4.2.3 Subtask - Leave Phase 2 eligible but unauthorized.
 
 ## Section delivery rule
 
@@ -88,6 +88,7 @@ support evidence.
 ## Connections
 
 - [BH-03 plan](README.md)
+- [Phase 1 implementation evidence](phase-01-implementation-evidence.md)
 - [Browser-host milestone roadmap](../../../20-notes/browser-host-implementation-milestones.md)
 - [Development environment and deferred qualification policy](../../development-environment-and-deferred-qualification-policy.md)
 - [BH-02 release index](../../../assets/bh-02-baseline/blazex-bh-02-release-index-v0-1-0.md)

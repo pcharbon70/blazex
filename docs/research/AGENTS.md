@@ -257,4 +257,9 @@ fixtures, governed platform deferrals, or Phase 7 evidence changes, also run
 `python3 validate_bh02_native.py` and
 `python3 -m unittest test_validate_bh02_native.py`.
 
+When BH-03 Phase 1 authorization, accepted-handoff reconciliation, lifecycle
+vocabulary, browser-host/runtime boundary activation, empty integration index,
+or Phase 1 evidence changes, also run `python3 validate_bh03_activation.py` and
+`python3 -m unittest test_validate_bh03_activation.py`.
+
 Do not commit, push, publish, or open a pull request unless the user asks.

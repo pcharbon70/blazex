@@ -17,6 +17,7 @@ class BH03ActivationValidatorTest(unittest.TestCase):
         cls.contract = json.loads(validator.CONTRACT.read_text(encoding="utf-8"))
         cls.activation = json.loads(validator.ACTIVATION.read_text(encoding="utf-8"))
         cls.index = json.loads(validator.INTEGRATION_INDEX.read_text(encoding="utf-8"))
+        cls.completion = json.loads(validator.COMPLETION.read_text(encoding="utf-8"))
         cls.registry = json.loads(validator.REGISTRY.read_text(encoding="utf-8"))
         cls.decision = json.loads(validator.BH02_DECISION.read_text(encoding="utf-8"))
         cls.reconciliation = json.loads(validator.BH02_RECONCILIATION.read_text(encoding="utf-8"))
@@ -83,6 +84,12 @@ class BH03ActivationValidatorTest(unittest.TestCase):
         activation["next_authorized_work"] = "BH-03 Phase 2"
         with self.assertRaisesRegex(validator.ValidationError, "later authority"):
             validator.validate_activation(activation, self.contract)
+
+    def test_rejects_divergent_completion(self) -> None:
+        completion = copy.deepcopy(self.completion)
+        completion["outcome"]["support_state"] = "supported"
+        with self.assertRaisesRegex(validator.ValidationError, "promotes stability or support"):
+            validator.validate_completion(completion)
 
 
 if __name__ == "__main__":
