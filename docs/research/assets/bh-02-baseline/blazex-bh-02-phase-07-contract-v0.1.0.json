@@ -1,0 +1,50 @@
+{
+  "schema_version": "1.0.0",
+  "contract_id": "BX-BH02-PHASE-07-CONTRACT-0.1",
+  "status": "authorized-experimental",
+  "authorization_ref": "BX-BH02-PHASE-07-AUTHORIZATION-0.1",
+  "experiment_boundary": {
+    "path": "experiments/native_renderer_spike",
+    "dependencies": ["blazex_core", "blazex_effects", "blazex_ui_tree", "blazex_renderer"],
+    "system_apis": ["direct-win32", "direct-appkit", "direct-gtk4"],
+    "forbidden_direct_or_transitive": ["qt", "wxwidgets", "phoenix", "plug", "live_view", "local_live_view", "dom", "javascript"],
+    "external_package_dependencies": "none"
+  },
+  "native_capabilities": {
+    "tree_versions": [1],
+    "node_kinds": ["text", "group", "action", "field", "selection", "collection", "surface"],
+    "layout_modes": ["none", "stack"],
+    "accessibility_roles": ["generic", "text", "group", "button", "text_field", "checkbox", "list", "list_item", "dialog", "status"],
+    "features": ["event_bindings", "logical_layout", "accessibility", "focus", "selection"]
+  },
+  "native_batch": {
+    "version": 1,
+    "fields": ["version", "owner", "generation", "revision", "transition", "root", "digest"],
+    "projection_transitions": ["mount", "update", "replace"],
+    "dispose_root": "none",
+    "encoding": "BXN1-tab-separated-hex-utf8",
+    "application": "validate-complete-batch-before-platform-mutation"
+  },
+  "native_node": {
+    "version": 1,
+    "fields": ["version", "id", "kind", "text", "attributes", "listeners", "focus", "selection", "children"],
+    "kinds": ["text", "group", "action", "field", "selection", "collection", "surface"],
+    "child_order": "semantic-child-order",
+    "unknown_kind_or_field": "reject"
+  },
+  "representative_slice": ["stack", "text", "button", "controlled-text-field", "checkbox", "keyed-list-selection", "dialog-surface", "focus-restoration", "validation-relationship", "file-choice-effect-intent", "disposal"],
+  "platform_mappings": {
+    "windows": ["HWND", "STATIC", "BUTTON", "EDIT", "LISTBOX", "GetOpenFileNameW"],
+    "macos": ["NSWindow", "NSStackView", "NSTextField", "NSButton", "NSTableView", "NSOpenPanel"],
+    "linux": ["GtkWindow", "GtkBox", "GtkLabel", "GtkButton", "GtkEntry", "GtkCheckButton", "GtkListBox", "GtkFileDialog"]
+  },
+  "platform_evidence": [
+    {"target": "linux-x86_64", "api": "gtk-4.14.5-runtime-abi", "compile": "required", "execution": "required-under-xvfb", "state": "active"},
+    {"target": "windows", "api": "win32-standard-and-common-controls", "compile": "deferred-environment-unavailable", "execution": "deferred-environment-unavailable", "state": "deferred"},
+    {"target": "macos", "api": "appkit", "compile": "deferred-environment-unavailable", "execution": "deferred-environment-unavailable", "state": "deferred"}
+  ],
+  "linux_automated_observations": ["actual-control-types", "semantic-events", "focus", "controlled-entry", "checkbox-selection", "keyed-list-selection", "accessible-roles", "stale-rejection-before-mutation", "idempotent-disposal"],
+  "explicitly_deferred": ["windows-compilation-and-execution", "macos-compilation-and-execution", "uiautomation-inspection", "nsaccessibility-inspection", "at-spi-tree-inspection", "manual-screen-reader-conformance", "ime-matrix", "file-dialog-interaction", "cross-platform-geometry", "pixels", "visual-equivalence", "performance", "packaging"],
+  "api_state": "experimental",
+  "support_state": "unsupported"
+}

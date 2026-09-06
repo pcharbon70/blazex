@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0.0",
+  "authorization_id": "BX-BH02-PHASE-07-AUTHORIZATION-0.1",
+  "status": "approved-phase-7-only",
+  "approved_at": "2026-09-05",
+  "approved_by": {
+    "identity": "pcharbon70",
+    "name": "Pascal Charbonneau",
+    "role": "repository-owner",
+    "approval_record": "Repository-owner request in the BlazeX Codex task to implement the next BH-02 phase section by section with one commit per section, one pull request, merge, synchronized-main cleanup, and feature-branch deletion."
+  },
+  "activation": {
+    "base_branch": "main",
+    "base_revision": "966fd5c8406cb03fb392c6ba83015ab2e9eb56ac",
+    "base_remote_revision": "966fd5c8406cb03fb392c6ba83015ab2e9eb56ac",
+    "main_synchronized_before_branch": true,
+    "working_branch": "codex/bh-02-phase-07-native-control-spike",
+    "phase": "BH-02 Phase 7"
+  },
+  "approval_basis": [
+    {"path": "docs/research/assets/bh-02-baseline/blazex-bh-02-phase-06-completion-v0.1.0.json", "sha256": "bcfe7c0a61e5a42baa97ca953022bcf9ba6c7e38269e743365e596d53e16e73e"},
+    {"path": "docs/research/20-notes/architecture-decisions/adr-0007-native-control-portability-gate.md", "sha256": "4ebd2feb853a08c258141479726f14a60ed409b98cabdd5f0537ff9f02784343"},
+    {"path": "docs/research/20-notes/cross-platform-native-host-and-renderer-architecture.md", "sha256": "e5d330e3ee5cc52f474c15c8e3068b8d71ff78670cb8573db32f91c4752439b5"},
+    {"path": "docs/research/40-inquiries/can-one-blazex-component-model-target-dom-and-native-controls.md", "sha256": "2b88c15f4826fc9f683a826dc618e06dc771e323c8cd31648b8aaa1a44bdb4d6"},
+    {"path": "docs/research/30-sources/platform-vendors-2026-direct-native-control-apis.md", "sha256": "7c014b9021d4a2edc9f25bd387f4ed7b6f0584f8df0b28e61a26416f9781e761"},
+    {"path": "docs/research/60-planning/development-environment-and-deferred-qualification-policy.md", "sha256": "5d50cded3d70e95d47359df2a003a6979d92b8745fab012824646cc1e6bc8cfa"}
+  ],
+  "authorized_scope": [
+    "Activate only experiments/native_renderer_spike over the existing neutral Phase 5 renderer and Phase 2 through 4 semantic contracts.",
+    "Implement a bounded platform-neutral native-control batch and deterministic line protocol for the representative semantic slice.",
+    "Implement direct Win32, AppKit, and GTK 4 experiment adapters without a cross-platform widget toolkit.",
+    "Compile and execute the direct GTK 4 adapter in the available Linux/Xvfb environment, including actual controls, events, focus, selection, accessibility roles, stale rejection, and disposal.",
+    "Retain Windows and macOS compilation, execution, UI Automation, NSAccessibility, and manual assistive-technology work as explicit deferred qualification.",
+    "Publish headless, DOM, and native-spike comparison fixtures and Phase 7 evidence."
+  ],
+  "delivery_rules": {
+    "sections_in_order": true,
+    "commit_per_section": true,
+    "section_count": 4,
+    "single_pull_request": true,
+    "merge_pull_request": true,
+    "return_to_synchronized_main_after_delivery": true,
+    "delete_local_feature_branch_after_delivery": true,
+    "delete_remote_feature_branch_after_delivery": true
+  },
+  "not_authorized": [
+    "BH-02 Phase 8 or any later milestone",
+    "promotion of experiment code into a production package or executable profile",
+    "stable or public renderer, native batch, line protocol, host adapter, test, or component APIs",
+    "Qt or wxWidgets directly, transitively, as a fallback, or as a benchmark candidate",
+    "custom-scene rendering, WebView substitution, production desktop hosting, packaging, signing, or distribution",
+    "cross-platform geometry, pixel or visual equivalence, performance qualification, or broad component-family coverage",
+    "claims that deferred Windows, macOS, UI Automation, NSAccessibility, AT-SPI, screen-reader, or manual accessibility work passed",
+    "native-host, native-control, accessibility-conformance, security, performance, release, or support claims"
+  ]
+}

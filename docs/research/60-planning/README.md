@@ -43,9 +43,9 @@ renumbered.
 ### Subdirectories
 
 - [01 — Browser host](01-browser-host/README.md) — active first implementation
-  stream: BH-00 and BH-01 are complete, BH-02 Phases 1–5 have validated the
-  neutral foundation through the deterministic headless oracle, and Phase 6
-  standalone DOM/browser-conformance work is explicitly authorized and active.
+  stream: BH-00 and BH-01 are complete, BH-02 Phases 1–6 have validated the
+  neutral foundation through standalone DOM conformance, and Phase 7 direct
+  native-control portability work is explicitly authorized and active.
 
 ### Documents
 

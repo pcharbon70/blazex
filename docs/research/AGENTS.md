@@ -251,4 +251,10 @@ Chrome/Firefox evidence, cross-renderer conformance, Phase 6 fixtures, or Phase
 6 evidence changes, also run `python3 validate_bh02_dom.py` and
 `python3 -m unittest test_validate_bh02_dom.py`.
 
+When BH-02 Phase 7 authorization, portable native lowering, direct Win32,
+AppKit, or GTK adapter sources, GTK execution evidence, native conformance
+fixtures, governed platform deferrals, or Phase 7 evidence changes, also run
+`python3 validate_bh02_native.py` and
+`python3 -m unittest test_validate_bh02_native.py`.
+
 Do not commit, push, publish, or open a pull request unless the user asks.

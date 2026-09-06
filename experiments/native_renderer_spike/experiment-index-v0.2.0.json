@@ -1,0 +1,72 @@
+{
+  "schema_version": "1.0.0",
+  "contract": "blazex.bh02.direct-native-control-experiment/0.2",
+  "status": "phase-7-linux-gtk-passed-local-two-platforms-deferred",
+  "activation_phase": "BH-02 Phase 7",
+  "owner_role": "native-renderer-owner",
+  "portable_input": "BXN1-tab-separated-hex-utf8-complete-batch",
+  "experiment_dependencies": [
+    "blazex_core",
+    "blazex_effects",
+    "blazex_ui_tree",
+    "blazex_renderer"
+  ],
+  "adapters": [
+    {
+      "target": "windows",
+      "api": "direct-win32-standard-and-common-controls",
+      "source": "platform/win32_adapter.c",
+      "state": "implemented-source-deferred-uncompiled-environment-unavailable",
+      "qualification_owner": "native-renderer-owner",
+      "reactivation": "a governed Windows environment"
+    },
+    {
+      "target": "macos",
+      "api": "direct-appkit-controls",
+      "source": "platform/appkit_adapter.m",
+      "state": "implemented-source-deferred-uncompiled-environment-unavailable",
+      "qualification_owner": "native-renderer-owner",
+      "reactivation": "a governed macOS environment"
+    },
+    {
+      "target": "linux-x86_64",
+      "api": "direct-gtk4-runtime-abi",
+      "source": "platform/gtk4_adapter.c",
+      "state": "passed-local-gtk-4.14.5-under-xvfb",
+      "qualification_owner": "native-renderer-owner",
+      "evidence": "gtk4-result-v0.1.0.json"
+    }
+  ],
+  "linux_implemented_controls": [
+    "GtkWindow",
+    "GtkBox",
+    "GtkLabel",
+    "GtkButton",
+    "GtkEntry",
+    "GtkCheckButton",
+    "GtkListBox",
+    "GtkFileDialog"
+  ],
+  "linux_passed_observations": [
+    "actual-control-types",
+    "semantic-events",
+    "focus",
+    "controlled-entry",
+    "checkbox-selection",
+    "keyed-list-selection",
+    "accessible-roles",
+    "stale-rejection-before-mutation",
+    "idempotent-disposal"
+  ],
+  "known_semantic_findings": [
+    "GTK derives application/generic/label roles for the surface, group, list-item labels, and status label unless adapter-specific accessibility properties override them",
+    "headless Xvfb has no window manager, so focus intent is asserted through GtkRoot focus rather than operating-system window activation"
+  ],
+  "excluded_direct_or_transitive": ["qt", "wxwidgets"],
+  "evidence": [
+    "fixtures/representative-v0.1.0.bxn1",
+    "fixtures/stale-update-v0.1.0.bxn1",
+    "gtk4-result-v0.1.0.json"
+  ],
+  "support_state": "experimental-unsupported"
+}

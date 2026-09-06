@@ -13,12 +13,12 @@ the same semantic traces as the headless and DOM renderers. Its presence in the
 matrix supplies portability evidence without turning the experiment into a
 supported backend.
 
-Status: BH-02 Phase 6 adds a standalone full-projection DOM renderer, a strict
-dependency-free browser driver, a cross-renderer Mix suite, and automated local
-Linux Chrome and Firefox results. This remains experimental development
-evidence only. Incremental reconciliation, hydration, geometry, pixels, visual
-equivalence, manual accessibility conformance, native controls, and support
-claims remain absent.
+Status: BH-02 Phase 7 adds the bounded native-spike backend to the executable
+headless/DOM/native semantic matrix and records a passing direct GTK 4 run on
+local Linux under Xvfb. This remains experimental development evidence only.
+Windows and macOS execution, incremental DOM reconciliation, hydration,
+geometry, pixels, visual equivalence, manual accessibility conformance, and
+support claims remain absent or explicitly deferred.
 
 Versioned records:
 
@@ -47,3 +47,8 @@ Versioned records:
   executable versions and automated page-conformance outcomes.
 - `conformance-index-v0.6.0.json` — Phase 6 local standalone-DOM result index;
   visual, pixel, manual-accessibility, and native results remain empty.
+- `native-control-fixtures-v0.1.0.json` — Phase 7 native projection,
+  headless/DOM/native parity, direct GTK execution, and governed platform
+  deferral scenarios.
+- `conformance-index-v0.7.0.json` — Phase 7 local native-spike index with one
+  passing GTK development row and explicit Windows/macOS deferrals.
