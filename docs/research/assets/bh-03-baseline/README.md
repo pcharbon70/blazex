@@ -64,6 +64,10 @@ integration directories.
 - [BH-03 Phase 6 executable contract](blazex-bh-03-phase-06-contract-v0.1.0.json)
 - [BH-03 Phase 6 validation log](blazex-bh-03-phase-06-validation-log-v0.1.0.txt)
 - [BH-03 Phase 6 completion decision](blazex-bh-03-phase-06-completion-v0.1.0.json)
+- [BH-03 Phase 7 authorization](blazex-bh-03-phase-07-authorization-v0.1.0.json)
+- [BH-03 Phase 7 executable measurement contract](blazex-bh-03-phase-07-contract-v0.1.0.json)
+- [BH-03 Phase 7 validation log](blazex-bh-03-phase-07-validation-log-v0.1.0.txt)
+- [BH-03 Phase 7 completion decision](blazex-bh-03-phase-07-completion-v0.1.0.json)
 
 ## Maintaining this index
 

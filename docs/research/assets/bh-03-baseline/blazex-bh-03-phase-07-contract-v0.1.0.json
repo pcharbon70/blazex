@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0.0",
+  "contract_id": "BX-BH03-PHASE-07-CONTRACT-0.1",
+  "status": "authorized-experimental-observation",
+  "authorization_ref": "BX-BH03-PHASE-07-AUTHORIZATION-0.1",
+  "profile": {
+    "path": "/bh03/",
+    "legacy_profile": "/bh01/",
+    "legacy_profile_policy": "immutable",
+    "phase_6_profile_policy": "extend-diagnostics-without-changing-lifecycle-semantics"
+  },
+  "sampling": {
+    "warmup_repetitions_per_browser": 1,
+    "retained_repetitions_per_browser": 5,
+    "profile_roots": 2,
+    "additional_measurement_roots": 8,
+    "root_operations": ["register", "mount", "update", "dispose"],
+    "declared_failure_scenarios": ["identity-mismatch", "unsupported-prerequisite", "artifact-unavailable"],
+    "active_matrix": [
+      {"platform": "linux", "browser": "chrome", "state": "required-active"},
+      {"platform": "linux", "browser": "firefox", "state": "required-active"}
+    ]
+  },
+  "observations": {
+    "timing_fields": ["startup_to_ready_ms", "measurement_root_cycle_ms", "shutdown_ms"],
+    "descriptive_summary": ["count", "minimum", "median", "maximum", "mean"],
+    "resource_fields": ["runtime_memory_pages", "root_count_before_shutdown", "disposed_root_count_after_shutdown", "runtime_iframes_after_shutdown", "runtime_acknowledgements"],
+    "memory_policy": "record-browser-heap-signal-when-available-otherwise-explicitly-unavailable",
+    "memory_growth_policy": "descriptive-observation-only",
+    "cleanup_rule": "all-roots-disposed-one-runtime-released-zero-runtime-iframes",
+    "failure_rule": "every-declared-failure-converges-to-exact-closed-fallback-without-partial-activation"
+  },
+  "evidence_rules": {
+    "active_row": "all-warmup-retained-cleanup-and-failure-runs-must-complete",
+    "missing_or_failed_active_row": "phase-stop",
+    "unavailable_memory_signal": "recorded-not-failed-and-not-passed",
+    "raw_samples": "retained",
+    "release_budgets": "forbidden",
+    "acceptance_evidence": "empty"
+  },
+  "deferred_matrix": ["safari", "mobile", "physical-devices", "second-host", "manual-assistive-technology"],
+  "api_state": "experimental-not-stable",
+  "support_state": "unsupported"
+}

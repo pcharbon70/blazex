@@ -76,7 +76,10 @@ function frameFactory(behavior, record = {}) {
         generation: message.generation,
         manifest_generation: message.manifest.generation,
       };
-      if (behavior === "ready") queueMicrotask(() => onEvent({ ...base, type: "application-ready", name: "popcorn_app_ready" }));
+      if (behavior === "ready") queueMicrotask(() => {
+        onEvent({ ...base, type: "runtime-memory", memory_pages: 256 });
+        onEvent({ ...base, type: "application-ready", name: "popcorn_app_ready" });
+      });
       if (behavior === "stale-then-ready") {
         queueMicrotask(() => onEvent({ ...base, generation: message.generation + 1, type: "application-ready", name: "popcorn_app_ready" }));
         queueMicrotask(() => onEvent({ ...base, type: "application-ready", name: "popcorn_app_ready" }));
@@ -104,12 +107,14 @@ test("starts one isolated attempt, loads the bundle contract, and waits for corr
   assert.equal(ready.protocol, "blazex.runtime-ready/1");
   assert.equal(ready.attempt_generation, 1);
   assert.equal(ready.manifest_generation, 3);
+  assert.equal(ready.runtime_memory_pages, 256);
   assert.deepEqual(ready.startup, fixtures.startup_descriptor);
   assert.equal(record.message.manifest.startup.bundle_virtual_path, "/bundle.avm");
   assert.deepEqual(Object.keys(record.message.artifacts), ["runtime-module", "runtime-wasm", "application-bundle"]);
   assert.equal(startup.snapshot().state, "ready");
   assert.ok(events.some((event) => event.stage === "acquiring"));
   assert.ok(events.some((event) => event.stage === "ready"));
+  assert.ok(events.some((event) => event.details?.memory_pages === 256));
   assert.equal(ready.release().state, "stopped");
   assert.equal(record.stops, 1);
   assert.equal(startup.snapshot().owns_transport, false);

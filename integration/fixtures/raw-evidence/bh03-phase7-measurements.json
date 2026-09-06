@@ -1,0 +1,95 @@
+{
+  "schema_version": "1.0.0",
+  "evidence_id": "BX-BH03-PHASE-07-ACTIVE-MEASUREMENTS-0.1",
+  "captured_at": "2026-09-06T13:54:26.348Z",
+  "implementation_revision": "2a04d3a779aefd5243848826ecdc41e55699f7ca",
+  "platform": "linux 6.8.0-51-generic x64",
+  "node_version": "v24.3.0",
+  "playwright_core_version": "1.62.1",
+  "profile_url": "http://127.0.0.1:4197/bh03/",
+  "scenario_set": ["repeated-startup-readiness", "measurement-root-fanout", "resource-cleanup", "declared-failure-convergence", "capability-aware-memory-observation"],
+  "sampling": {"warmup_repetitions_per_browser": 1, "retained_repetitions_per_browser": 5, "profile_roots": 2, "additional_measurement_roots": 8},
+  "results": [
+    {
+      "browser": "chrome",
+      "executable": "/usr/bin/google-chrome",
+      "browser_version": "140.0.7339.80",
+      "scenario_set": ["repeated-startup-readiness", "measurement-root-fanout", "resource-cleanup", "declared-failure-convergence", "capability-aware-memory-observation"],
+      "result": "passed",
+      "warmup": {"result": "passed-discarded", "root_count_before_shutdown": 10, "disposed_root_count_after_shutdown": 10, "runtime_iframes_after_shutdown": 0},
+      "samples": [
+        {"iteration": 1, "startup_to_ready_ms": 218.09, "measurement_root_cycle_ms": 115.745, "shutdown_ms": 14.815, "runtime_memory_pages": 256, "root_count_before_shutdown": 10, "disposed_root_count_after_shutdown": 10, "runtime_iframes_after_shutdown": 0, "runtime_acknowledgements": 43, "memory": {"available": true, "api": "performance.memory.usedJSHeapSize", "ready_bytes": 34301526, "after_root_cycle_bytes": 33491597, "after_shutdown_bytes": 33491597}},
+        {"iteration": 2, "startup_to_ready_ms": 221.32, "measurement_root_cycle_ms": 130.795, "shutdown_ms": 13.89, "runtime_memory_pages": 256, "root_count_before_shutdown": 10, "disposed_root_count_after_shutdown": 10, "runtime_iframes_after_shutdown": 0, "runtime_acknowledgements": 43, "memory": {"available": true, "api": "performance.memory.usedJSHeapSize", "ready_bytes": 34302282, "after_root_cycle_bytes": 33516601, "after_shutdown_bytes": 33516601}},
+        {"iteration": 3, "startup_to_ready_ms": 229.17, "measurement_root_cycle_ms": 138.545, "shutdown_ms": 13.64, "runtime_memory_pages": 256, "root_count_before_shutdown": 10, "disposed_root_count_after_shutdown": 10, "runtime_iframes_after_shutdown": 0, "runtime_acknowledgements": 43, "memory": {"available": true, "api": "performance.memory.usedJSHeapSize", "ready_bytes": 34325482, "after_root_cycle_bytes": 33529769, "after_shutdown_bytes": 33529769}},
+        {"iteration": 4, "startup_to_ready_ms": 209.415, "measurement_root_cycle_ms": 113.93, "shutdown_ms": 11.645, "runtime_memory_pages": 256, "root_count_before_shutdown": 10, "disposed_root_count_after_shutdown": 10, "runtime_iframes_after_shutdown": 0, "runtime_acknowledgements": 43, "memory": {"available": true, "api": "performance.memory.usedJSHeapSize", "ready_bytes": 34301894, "after_root_cycle_bytes": 33530157, "after_shutdown_bytes": 33530157}},
+        {"iteration": 5, "startup_to_ready_ms": 214.79, "measurement_root_cycle_ms": 115.99, "shutdown_ms": 13.105, "runtime_memory_pages": 256, "root_count_before_shutdown": 10, "disposed_root_count_after_shutdown": 10, "runtime_iframes_after_shutdown": 0, "runtime_acknowledgements": 43, "memory": {"available": true, "api": "performance.memory.usedJSHeapSize", "ready_bytes": 34299274, "after_root_cycle_bytes": 33508737, "after_shutdown_bytes": 33508737}}
+      ],
+      "summary": {
+        "protocol": "blazex.bh03.measurement/1",
+        "sample_count": 5,
+        "timing_ms": {
+          "startup_to_ready": {"count": 5, "minimum": 209.415, "median": 218.09, "maximum": 229.17, "mean": 218.557},
+          "measurement_root_cycle": {"count": 5, "minimum": 113.93, "median": 115.99, "maximum": 138.545, "mean": 123.001},
+          "shutdown": {"count": 5, "minimum": 11.645, "median": 13.64, "maximum": 14.815, "mean": 13.419}
+        },
+        "memory_capability": {"available_samples": 5, "unavailable_samples": 0},
+        "lifecycle": {"roots_per_sample": 10, "disposed_roots_per_sample": 10, "runtime_iframes_after_shutdown": 0, "runtime_memory_pages": 256, "runtime_acknowledgements_after_shutdown": 43},
+        "release_budget": null,
+        "support_state": "unsupported"
+      },
+      "memory_growth": {"state": "observed", "api": "performance.memory.usedJSHeapSize", "observed_peak_growth_bytes": {"count": 5, "minimum": 0, "median": 0, "maximum": 0, "mean": 0}, "release_budget": null},
+      "failure_scenarios": [
+        {"id": "identity-mismatch", "result": "passed", "failure_class": "identity-mismatch", "action": "deployment-action", "partial_activation": false},
+        {"id": "unsupported-prerequisite", "result": "passed", "failure_class": "unsupported-prerequisite", "action": "static-content", "partial_activation": false},
+        {"id": "artifact-unavailable", "result": "passed", "failure_class": "runtime-startup", "action": "user-action", "partial_activation": false}
+      ],
+      "failures": []
+    },
+    {
+      "browser": "firefox",
+      "executable": "/home/ducky/.cache/ms-playwright/firefox-1538/firefox/firefox",
+      "browser_version": "153.0",
+      "scenario_set": ["repeated-startup-readiness", "measurement-root-fanout", "resource-cleanup", "declared-failure-convergence", "capability-aware-memory-observation"],
+      "result": "passed",
+      "warmup": {"result": "passed-discarded", "root_count_before_shutdown": 10, "disposed_root_count_after_shutdown": 10, "runtime_iframes_after_shutdown": 0},
+      "samples": [
+        {"iteration": 1, "startup_to_ready_ms": 372.58, "measurement_root_cycle_ms": 681.92, "shutdown_ms": 57.98, "runtime_memory_pages": 256, "root_count_before_shutdown": 10, "disposed_root_count_after_shutdown": 10, "runtime_iframes_after_shutdown": 0, "runtime_acknowledgements": 43, "memory": {"available": false, "reason": "browser-memory-api-unavailable"}},
+        {"iteration": 2, "startup_to_ready_ms": 377.8, "measurement_root_cycle_ms": 693.38, "shutdown_ms": 59.22, "runtime_memory_pages": 256, "root_count_before_shutdown": 10, "disposed_root_count_after_shutdown": 10, "runtime_iframes_after_shutdown": 0, "runtime_acknowledgements": 43, "memory": {"available": false, "reason": "browser-memory-api-unavailable"}},
+        {"iteration": 3, "startup_to_ready_ms": 399.18, "measurement_root_cycle_ms": 686.42, "shutdown_ms": 55.5, "runtime_memory_pages": 256, "root_count_before_shutdown": 10, "disposed_root_count_after_shutdown": 10, "runtime_iframes_after_shutdown": 0, "runtime_acknowledgements": 43, "memory": {"available": false, "reason": "browser-memory-api-unavailable"}},
+        {"iteration": 4, "startup_to_ready_ms": 452.12, "measurement_root_cycle_ms": 685.76, "shutdown_ms": 55.7, "runtime_memory_pages": 256, "root_count_before_shutdown": 10, "disposed_root_count_after_shutdown": 10, "runtime_iframes_after_shutdown": 0, "runtime_acknowledgements": 43, "memory": {"available": false, "reason": "browser-memory-api-unavailable"}},
+        {"iteration": 5, "startup_to_ready_ms": 375.58, "measurement_root_cycle_ms": 672.82, "shutdown_ms": 54.86, "runtime_memory_pages": 256, "root_count_before_shutdown": 10, "disposed_root_count_after_shutdown": 10, "runtime_iframes_after_shutdown": 0, "runtime_acknowledgements": 43, "memory": {"available": false, "reason": "browser-memory-api-unavailable"}}
+      ],
+      "summary": {
+        "protocol": "blazex.bh03.measurement/1",
+        "sample_count": 5,
+        "timing_ms": {
+          "startup_to_ready": {"count": 5, "minimum": 372.58, "median": 377.8, "maximum": 452.12, "mean": 395.452},
+          "measurement_root_cycle": {"count": 5, "minimum": 672.82, "median": 685.76, "maximum": 693.38, "mean": 684.06},
+          "shutdown": {"count": 5, "minimum": 54.86, "median": 55.7, "maximum": 59.22, "mean": 56.652}
+        },
+        "memory_capability": {"available_samples": 0, "unavailable_samples": 5},
+        "lifecycle": {"roots_per_sample": 10, "disposed_roots_per_sample": 10, "runtime_iframes_after_shutdown": 0, "runtime_memory_pages": 256, "runtime_acknowledgements_after_shutdown": 43},
+        "release_budget": null,
+        "support_state": "unsupported"
+      },
+      "memory_growth": {"state": "unavailable", "api": null, "reason": "browser-memory-api-unavailable"},
+      "failure_scenarios": [
+        {"id": "identity-mismatch", "result": "passed", "failure_class": "identity-mismatch", "action": "deployment-action", "partial_activation": false},
+        {"id": "unsupported-prerequisite", "result": "passed", "failure_class": "unsupported-prerequisite", "action": "static-content", "partial_activation": false},
+        {"id": "artifact-unavailable", "result": "passed", "failure_class": "runtime-startup", "action": "user-action", "partial_activation": false}
+      ],
+      "failures": []
+    }
+  ],
+  "deferred": [
+    {"environment": "safari", "state": "deferred-unavailable"},
+    {"environment": "mobile", "state": "deferred-unavailable"},
+    {"environment": "physical-devices", "state": "deferred-unavailable"},
+    {"environment": "second-host", "state": "deferred-unavailable"},
+    {"environment": "manual-assistive-technology", "state": "deferred-unavailable"}
+  ],
+  "release_budgets": [],
+  "acceptance_evidence": [],
+  "api_state": "experimental-not-stable",
+  "support_state": "unsupported"
+}

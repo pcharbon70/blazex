@@ -1,0 +1,54 @@
+BH-03 Phase 7 normalized validation log
+Recorded: 2026-09-06T10:05:26-04:00
+Base: eb4e1e8db89756f54b7f73803905ccdc6a5b5859
+Branch: codex/bh-03-phase-07-resource-reliability-measurements
+Host tools: Node 24.3.0, npm 11.4.2, Python 3.12.12, Git 2.49.0, jq 1.7, Linux 6.8.0-51-generic x86-64
+
+PASS pinned Elixir 1.17.3 / OTP 26 format and tests
+  packages/blazex_runtime_popcorn: 4 tests, 0 failures
+  packages/blazex_host_browser: 4 tests, 0 failures
+  profiles/browser_phoenix: 14 tests, 0 failures
+  integration/fixtures/browser_host: 17 tests, 0 failures
+  total: 4 projects, 39 tests, 0 failures
+  note: the fixture project has no formatter inputs; its test suite was run directly
+PASS deterministic BH-03 profile build and verifier: 29 governed files, 3 exact runtime artifacts
+PASS npm run build and npm test in js/blazex_runtime: 20 test files, 0 failures
+PASS npm run test:browser:bh03-phase7: 2 active browsers, 1 discarded warm-up, 5 retained samples, and 3 declared failure scenarios per browser
+  Chrome: /usr/bin/google-chrome, 140.0.7339.80, passed
+  Firefox: /home/ducky/.cache/ms-playwright/firefox-1538/firefox/firefox, 153.0, passed
+PASS npm run test:browser:bh03-phase6 regression: 2 browsers, 5 scenarios each
+PASS runtime build-contract verifier and Python tests: contract PASS, 9 tests
+PASS python3 -m unittest discover -p 'test_*.py' in docs/research: 289 tests, 0 failures
+PASS 22 research validators, including BH-03 Phases 1 through 7
+PASS 4 deterministic generators in --check mode
+PASS validate_archive.py: 216 documents, 25 directories, 1607 local links, 50 source notes
+PASS all repository JSON documents parse with jq 1.7
+PASS all Phase 7 completion-bound paths are tracked or staged for the section commit
+PASS git diff --check
+PASS historical Phase 4 /bh01/ runtime-frame source hash unchanged from the Phase 7 base
+
+Active measurement plan per browser:
+- one completed warm-up retained only as a discarded-pass cleanup record
+- five retained startup, eight-additional-root, shutdown, and cleanup samples
+- ten total roots per sample, all disposed at shutdown
+- 256 observed WebAssembly memory pages and 43 Elixir acknowledgements per retained sample
+- zero runtime iframes after every retained shutdown
+- identity mismatch, unsupported prerequisite, and artifact unavailable converged without partial activation
+
+Descriptive retained medians:
+- Chrome: startup-to-ready 218.090 ms; eight-root cycle 115.990 ms; shutdown 13.640 ms
+- Firefox: startup-to-ready 377.800 ms; eight-root cycle 685.760 ms; shutdown 55.700 ms
+
+Memory capability:
+- Chrome exposed performance.memory.usedJSHeapSize; positive observed peak growth was 0 bytes in these five samples
+- Firefox exposed no governed heap API and is recorded browser-memory-api-unavailable
+- neither observation is a leak proof, budget, qualification threshold, guarantee, or comparative claim
+
+Deferred without pass credit:
+- Safari, mobile, physical devices, second host, and manual assistive-technology pairings
+
+Evidence boundary:
+- active Linux development observations only; all browser support remains unsupported
+- no release budget, production baseline, performance guarantee, or BH-03 acceptance evidence
+- no BH-04 authorization, public stability, or publication claim
+- Phase 8 is eligible but not authorized

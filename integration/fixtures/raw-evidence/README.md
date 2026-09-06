@@ -53,3 +53,7 @@ is not browser evidence.
   profile suite passing in active Linux Chrome 140.0.7339.80 and Firefox 153.0,
   including actual AtomVM/Elixir root acknowledgements and shutdown. It keeps
   browser support unsupported and unavailable qualification rows deferred.
+- `bh03-phase7-measurements.json` — one discarded warm-up and five retained
+  ten-root lifecycle repetitions per active browser, descriptive startup/root/
+  shutdown timings, deterministic cleanup, three declared failure paths, and
+  capability-aware heap observations. Values are not release budgets.

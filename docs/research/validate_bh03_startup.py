@@ -25,7 +25,9 @@ COMPLETION = BASELINE_ROOT / "blazex-bh-03-phase-03-completion-v0.1.0.json"
 PHASE4_AUTHORIZATION = BASELINE_ROOT / "blazex-bh-03-phase-04-authorization-v0.1.0.json"
 PHASE5_AUTHORIZATION = BASELINE_ROOT / "blazex-bh-03-phase-05-authorization-v0.1.0.json"
 PHASE6_AUTHORIZATION = BASELINE_ROOT / "blazex-bh-03-phase-06-authorization-v0.1.0.json"
+PHASE7_AUTHORIZATION = BASELINE_ROOT / "blazex-bh-03-phase-07-authorization-v0.1.0.json"
 PHASE6_BASE = "8aee16c17a8e4c3130a638457ec43afe9f48fdee"
+PHASE7_BASE = "eb4e1e8db89756f54b7f73803905ccdc6a5b5859"
 
 ROLES = ["runtime-module", "runtime-wasm", "application-bundle"]
 LIMITS = {"runtime-module": 2_097_152, "runtime-wasm": 16_777_216, "application-bundle": 33_554_432}
@@ -195,18 +197,21 @@ def validate_implementation(contract: dict[str, Any], repo_root: Path = REPO_ROO
     phase4_authorized = PHASE4_AUTHORIZATION.is_file() and _load(PHASE4_AUTHORIZATION).get("status") == "approved-phase-4-only"
     phase5_authorized = PHASE5_AUTHORIZATION.is_file() and _load(PHASE5_AUTHORIZATION).get("status") == "approved-phase-5-only"
     phase6_authorized = PHASE6_AUTHORIZATION.is_file() and _load(PHASE6_AUTHORIZATION).get("status") == "approved-phase-6-only"
+    phase7_authorized = PHASE7_AUTHORIZATION.is_file() and _load(PHASE7_AUTHORIZATION).get("status") == "approved-phase-7-only"
     for path, status in expected_metadata.items():
         metadata = _load(repo_root / path / "blazex.project.json")
         current = metadata.get("current_phase") == "BH-03 Phase 3" and metadata.get("status") == status
         phase4_successor = phase4_authorized and path in {"packages/blazex_host_browser", "js/blazex_runtime"} and metadata.get("current_phase") == "BH-03 Phase 4" and metadata.get("status") == "experimental-bh03-phase4-shared-runtime-roots"
         phase5_successor = phase5_authorized and path in {"packages/blazex_host_browser", "js/blazex_runtime"} and metadata.get("current_phase") == "BH-03 Phase 5" and metadata.get("status") == "experimental-bh03-phase5-recovery-fallback"
         phase6_successor = phase6_authorized and path == "js/blazex_runtime" and metadata.get("current_phase") == "BH-03 Phase 6" and metadata.get("status") == "experimental-bh03-phase6-browser-profile"
-        _require(current or phase4_successor or phase5_successor or phase6_successor, f"Phase 3 metadata diverges: {path}")
+        phase7_successor = phase7_authorized and path == "js/blazex_runtime" and metadata.get("current_phase") == "BH-03 Phase 7" and metadata.get("status") == "experimental-bh03-phase7-measurements"
+        _require(current or phase4_successor or phase5_successor or phase6_successor or phase7_successor, f"Phase 3 metadata diverges: {path}")
         _require(metadata.get("public_api_state") == "experimental-not-stable", f"public API was promoted: {path}")
     profile = _load(repo_root / "profiles/browser_phoenix/blazex.project.json")
     profile_current = profile.get("current_phase") == "BH-03 Phase 2" and profile.get("status") == "experimental-bh03-phase2-profile-manifest"
     profile_successor = phase6_authorized and profile.get("current_phase") == "BH-03 Phase 6" and profile.get("status") == "experimental-bh03-phase6-browser-profile"
-    _require(profile_current or profile_successor, "Phase 6 profile integration exists without authorization")
+    profile_phase7 = phase7_authorized and profile.get("current_phase") == "BH-03 Phase 7" and profile.get("status") == "experimental-bh03-phase7-measurements"
+    _require(profile_current or profile_successor or profile_phase7, "Profile integration or measurement exists without authorization")
     _require(_mix_dependencies(repo_root / "packages/blazex_runtime_popcorn") == [], "runtime adapter acquired a dependency")
     _require(_mix_dependencies(repo_root / "packages/blazex_host_browser") == [], "browser host acquired a dependency")
     package = _load(repo_root / "js/blazex_runtime/package.json")
@@ -234,11 +239,19 @@ def validate_completion(completion: dict[str, Any], repo_root: Path = REPO_ROOT)
         "js/blazex_runtime/src/artifact-acquisition.js",
         "js/blazex_runtime/test/artifact-acquisition.test.js",
     }
+    phase7_mutable = {
+        "js/blazex_runtime/src/runtime-startup.js",
+        "js/blazex_runtime/test/runtime-startup.test.js",
+    }
     for binding in bindings:
         relative = str(binding.get("path", ""))
         path = repo_root / relative
         current = path.is_file() and _sha256(path) == binding.get("sha256")
-        authorized_successor = relative in phase6_mutable and _sha256_at_revision(repo_root, PHASE6_BASE, relative) == binding.get("sha256")
+        authorized_successor = (
+            relative in phase6_mutable and _sha256_at_revision(repo_root, PHASE6_BASE, relative) == binding.get("sha256")
+        ) or (
+            relative in phase7_mutable and _sha256_at_revision(repo_root, PHASE7_BASE, relative) == binding.get("sha256")
+        )
         _require(current or authorized_successor, f"completion artifact is stale: {path}")
     outcome = completion.get("outcome", {})
     _require(outcome.get("artifact_roles") == 3 and outcome.get("conformance_cases") == 10, "completion contract counts diverge")

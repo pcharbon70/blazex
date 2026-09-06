@@ -21,6 +21,7 @@ FIXTURES = REPO_ROOT / "integration/bh-03/phase-05/resilience-fixtures-v0.1.0.js
 INTEGRATION_INDEX = REPO_ROOT / "integration/bh-03/integration-index-v0.5.0.json"
 COMPLETION = BASELINE_ROOT / "blazex-bh-03-phase-05-completion-v0.1.0.json"
 PHASE6_AUTHORIZATION = BASELINE_ROOT / "blazex-bh-03-phase-06-authorization-v0.1.0.json"
+PHASE7_AUTHORIZATION = BASELINE_ROOT / "blazex-bh-03-phase-07-authorization-v0.1.0.json"
 PHASE6_BASE = "8aee16c17a8e4c3130a638457ec43afe9f48fdee"
 
 RUNTIME_STATES = ["starting", "ready", "stopping", "stopped", "recovering", "failed", "fallback"]
@@ -179,11 +180,13 @@ def validate_implementation(repo_root: Path = REPO_ROOT) -> None:
     for forbidden in ("document.", "innerHTML", "HTMLElement", "createElement("):
         _require(forbidden not in registry + roots, f"DOM fallback leaked into reusable lifecycle: {forbidden}")
     phase6_authorized = PHASE6_AUTHORIZATION.is_file() and _load(PHASE6_AUTHORIZATION).get("status") == "approved-phase-6-only"
+    phase7_authorized = PHASE7_AUTHORIZATION.is_file() and _load(PHASE7_AUTHORIZATION).get("status") == "approved-phase-7-only"
     for path in ("packages/blazex_host_browser", "js/blazex_runtime"):
         metadata = _load(repo_root / path / "blazex.project.json")
         current = metadata.get("current_phase") == "BH-03 Phase 5" and metadata.get("status") == "experimental-bh03-phase5-recovery-fallback"
         successor = phase6_authorized and path == "js/blazex_runtime" and metadata.get("current_phase") == "BH-03 Phase 6" and metadata.get("status") == "experimental-bh03-phase6-browser-profile"
-        _require(current or successor, f"Phase 5 metadata diverges: {path}")
+        phase7_successor = phase7_authorized and path == "js/blazex_runtime" and metadata.get("current_phase") == "BH-03 Phase 7" and metadata.get("status") == "experimental-bh03-phase7-measurements"
+        _require(current or successor or phase7_successor, f"Phase 5 metadata diverges: {path}")
         _require(metadata.get("public_api_state") == "experimental-not-stable", f"public API was promoted: {path}")
     _require(_mix_dependencies(repo_root / "packages/blazex_host_browser") == [], "browser host acquired a dependency")
     _require(_load(repo_root / "js/blazex_runtime/package.json").get("dependencies") == {}, "browser runtime acquired a dependency")

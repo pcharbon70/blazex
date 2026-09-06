@@ -44,8 +44,8 @@ def main() -> int:
     )
     for name in ("index.html", "host.js", "profile.css", "deployment-contract.json"):
         shutil.copyfile(HERE / name, output / name)
-    for name in ("runtime-frame.html", "runtime-frame.js"):
-        shutil.copyfile(PHASE4 / name, output / name)
+    shutil.copyfile(PHASE4 / "runtime-frame.html", output / "runtime-frame.html")
+    shutil.copyfile(HERE / "runtime-frame.js", output / "runtime-frame.js")
     shutil.copytree(ROOT / "js/blazex_runtime/src", output / "js")
 
     records = []

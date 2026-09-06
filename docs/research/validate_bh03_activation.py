@@ -26,6 +26,7 @@ PHASE3_AUTHORIZATION = BASELINE_ROOT / "blazex-bh-03-phase-03-authorization-v0.1
 PHASE4_AUTHORIZATION = BASELINE_ROOT / "blazex-bh-03-phase-04-authorization-v0.1.0.json"
 PHASE5_AUTHORIZATION = BASELINE_ROOT / "blazex-bh-03-phase-05-authorization-v0.1.0.json"
 PHASE6_AUTHORIZATION = BASELINE_ROOT / "blazex-bh-03-phase-06-authorization-v0.1.0.json"
+PHASE7_AUTHORIZATION = BASELINE_ROOT / "blazex-bh-03-phase-07-authorization-v0.1.0.json"
 REGISTRY = RESEARCH_ROOT / "assets/quality-acceptance/blazex-acceptance-registry-v0.1.0.json"
 BH02_DECISION = RESEARCH_ROOT / "assets/bh-02-baseline/blazex-bh-02-acceptance-decision-v0.1.0.json"
 BH02_RECONCILIATION = RESEARCH_ROOT / "assets/bh-02-baseline/blazex-bh-02-reconciliation-v0.1.0.json"
@@ -75,6 +76,10 @@ PHASE5_STATUSES = {
 PHASE6_STATUSES = {
     "js/blazex_runtime": "experimental-bh03-phase6-browser-profile",
     "profiles/browser_phoenix": "experimental-bh03-phase6-browser-profile",
+}
+PHASE7_STATUSES = {
+    "js/blazex_runtime": "experimental-bh03-phase7-measurements",
+    "profiles/browser_phoenix": "experimental-bh03-phase7-measurements",
 }
 
 
@@ -170,6 +175,7 @@ def _mix_dependencies(path: Path) -> list[str]:
 
 
 def validate_activation(activation: dict[str, Any], contract: dict[str, Any], repo_root: Path = REPO_ROOT, phase2_authorized: bool = False, phase3_authorized: bool = False, phase4_authorized: bool = False, phase5_authorized: bool = False, phase6_authorized: bool = False) -> None:
+    phase7_authorized = PHASE7_AUTHORIZATION.is_file() and _load(PHASE7_AUTHORIZATION).get("status") == "approved-phase-7-only"
     boundaries = activation.get("boundaries", [])
     _require([row.get("id") for row in boundaries] == BOUNDARY_IDS and len({row.get("id") for row in boundaries}) == 5, "activation boundaries are incomplete or duplicated")
     contract_rows = {row["id"]: row for row in contract.get("repository_boundaries", [])}
@@ -187,7 +193,8 @@ def validate_activation(activation: dict[str, Any], contract: dict[str, Any], re
             phase4_matches = phase4_authorized and metadata.get("current_phase") == "BH-03 Phase 4" and metadata.get("status") == PHASE4_STATUSES.get(row["id"])
             phase5_matches = phase5_authorized and metadata.get("current_phase") == "BH-03 Phase 5" and metadata.get("status") == PHASE5_STATUSES.get(row["id"])
             phase6_matches = phase6_authorized and metadata.get("current_phase") == "BH-03 Phase 6" and metadata.get("status") == PHASE6_STATUSES.get(row["id"])
-            _require(current_matches or successor_matches or phase3_matches or phase4_matches or phase5_matches or phase6_matches, f"activation metadata differs: {row['id']} current phase or status")
+            phase7_matches = phase7_authorized and metadata.get("current_phase") == "BH-03 Phase 7" and metadata.get("status") == PHASE7_STATUSES.get(row["id"])
+            _require(current_matches or successor_matches or phase3_matches or phase4_matches or phase5_matches or phase6_matches or phase7_matches, f"activation metadata differs: {row['id']} current phase or status")
             _require(metadata.get("activation_phase") == row.get("origin_activation"), f"origin activation was rewritten: {row['id']}")
             _require(metadata.get("public_api_state") == "experimental-not-stable", f"public API was promoted: {row['id']}")
         manifest = path / contract_rows[row["id"]]["manifest"]
@@ -235,6 +242,7 @@ def validate_integration(index: dict[str, Any], repo_root: Path = REPO_ROOT, pha
     phase5_state = phase5_authorized and phase5_index.is_file()
     phase6_index = repo_root / "integration/bh-03/integration-index-v0.6.0.json"
     phase6_state = phase6_authorized and phase6_index.is_file()
+    phase7_state = PHASE7_AUTHORIZATION.is_file() and _load(PHASE7_AUTHORIZATION).get("status") == "approved-phase-7-only" and (repo_root / "integration/bh-03/integration-index-v0.7.0.json").is_file()
     files = {path.name for path in (repo_root / "integration/bh-03").iterdir() if path.is_file()}
     expected_files = {"README.md", "integration-index-v0.1.0.json"}
     if successor_state:
@@ -247,6 +255,8 @@ def validate_integration(index: dict[str, Any], repo_root: Path = REPO_ROOT, pha
         expected_files.add("integration-index-v0.5.0.json")
     if phase6_state:
         expected_files.add("integration-index-v0.6.0.json")
+    if phase7_state:
+        expected_files.add("integration-index-v0.7.0.json")
     _require(files == expected_files, "unowned BH-03 integration artifact exists")
     directories = {path.name for path in (repo_root / "integration/bh-03").iterdir() if path.is_dir()}
     expected_directories = set()
@@ -260,6 +270,8 @@ def validate_integration(index: dict[str, Any], repo_root: Path = REPO_ROOT, pha
         expected_directories.add("phase-05")
     if phase6_state:
         expected_directories.add("phase-06")
+    if phase7_state:
+        expected_directories.add("phase-07")
     _require(directories == expected_directories, "unowned BH-03 integration directory exists")
 
 
