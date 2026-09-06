@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="blazex-runtime-manifest" href="./runtime-manifest.json">
+    <link rel="stylesheet" href="./profile.css">
+    <title>BlazeX BH-03 shared runtime profile</title>
+  </head>
+  <body>
+    <main>
+      <p><code>BH-03 · Phase 6 · experimental</code></p>
+      <h1>One runtime. Independent roots.</h1>
+      <p class="lede">This development profile starts the governed AtomVM/Elixir bundle once, then drives two isolated root lifecycles through the reusable browser host.</p>
+      <p data-bh03-status data-state="checking" role="status" aria-live="polite">Checking browser and deployment prerequisites…</p>
+      <div class="controls">
+        <button type="button" data-bh03-stop disabled>Stop shared runtime</button>
+        <button type="button" data-bh03-restart>Reload profile</button>
+      </div>
+      <section class="slots" aria-label="Independent runtime root observations">
+        <div class="slot" id="primary-slot"><article class="root" data-root="primary-root" hidden></article></div>
+        <div class="slot" id="secondary-slot"><article class="root" data-root="secondary-root" hidden></article></div>
+        <div class="slot" id="alternate-slot"><p>Alternate target</p></div>
+      </section>
+      <h2>Bounded profile snapshot</h2>
+      <pre data-bh03-snapshot aria-live="polite">Pending</pre>
+      <noscript>The experimental runtime requires JavaScript. No browser support claim is made by this profile.</noscript>
+    </main>
+    <script type="module" src="./host.js"></script>
+  </body>
+</html>

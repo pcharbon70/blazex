@@ -37,19 +37,19 @@ Back to milestone: [README](README.md)
       - [x] 6.1.2.2 Subtask - Require exact manifest negotiation, verified artifact startup, one shared runtime, two independent roots, intentional fallback, and deterministic shutdown.
       - [x] 6.1.2.3 Subtask - Require Chrome and Firefox to execute the same scenario set; any unavailable or failed active row blocks Phase 6 rather than becoming a false pass.
 
-  - [ ] 6.2 Section - Compose the reusable lifecycle in the Phoenix profile.
+  - [x] 6.2 Section - Compose the reusable lifecycle in the Phoenix profile.
 
-    - [ ] 6.2.1 Task - Build and serve a governed BH-03 profile.
+    - [x] 6.2.1 Task - Build and serve a governed BH-03 profile.
 
-      - [ ] 6.2.1.1 Subtask - Produce a deterministic `/bh03/` asset inventory from exact runtime artifacts and reusable JavaScript modules.
-      - [ ] 6.2.1.2 Subtask - Serve `/bh03/` with the existing isolation, content-type, cache, range, and ETag rules without changing `/bh01/` artifacts.
-      - [ ] 6.2.1.3 Subtask - Verify that manifest identities, artifact bytes, and the complete profile inventory fail closed on drift.
+      - [x] 6.2.1.1 Subtask - Produce a deterministic `/bh03/` asset inventory from exact runtime artifacts and reusable JavaScript modules.
+      - [x] 6.2.1.2 Subtask - Serve `/bh03/` with the existing isolation, content-type, cache, range, and ETag rules without changing `/bh01/` artifacts.
+      - [x] 6.2.1.3 Subtask - Verify that manifest identities, artifact bytes, and the complete profile inventory fail closed on drift.
 
-    - [ ] 6.2.2 Task - Exercise shared runtime and independent roots through the profile.
+    - [x] 6.2.2 Task - Exercise shared runtime and independent roots through the profile.
 
-      - [ ] 6.2.2.1 Subtask - Start one verified runtime scope and coalesce concurrent compatible opens.
-      - [ ] 6.2.2.2 Subtask - Register, mount, update, move, dispose, and remount two independent roots through the retained runtime transport.
-      - [ ] 6.2.2.3 Subtask - Expose bounded profile snapshots and user-invokable restart/stop controls without declaring a stable API.
+      - [x] 6.2.2.1 Subtask - Start one verified runtime scope and coalesce concurrent compatible opens.
+      - [x] 6.2.2.2 Subtask - Register, mount, update, move, dispose, and remount two independent roots through the retained runtime transport.
+      - [x] 6.2.2.3 Subtask - Expose bounded profile snapshots and user-invokable restart/stop controls without declaring a stable API.
 
   - [ ] 6.3 Section - Execute the active Chrome and Firefox matrix.
 

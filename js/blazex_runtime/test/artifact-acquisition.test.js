@@ -80,6 +80,25 @@ test("acquires the three accepted artifacts in order and publishes only after ve
   assert.deepEqual(result.artifacts["runtime-wasm"].webassembly, { imports: 0, exports: 0 });
 });
 
+test("binds the host fetch capability when no injected fetch is supplied", async () => {
+  const accepted = gate();
+  const originalFetch = globalThis.fetch;
+  const calls = [];
+  globalThis.fetch = async function (url) {
+    assert.strictEqual(this, globalThis);
+    const declaration = accepted.manifest.artifacts.find((item) => item.url === url.href);
+    calls.push(declaration.role);
+    return response(bytesByRole[declaration.role], declaration);
+  };
+  try {
+    const result = await acquireHostArtifacts(accepted, { cryptoImpl: webcrypto });
+    assert.equal(result.artifacts["application-bundle"].bytes.byteLength, bytesByRole["application-bundle"].byteLength);
+    assert.deepEqual(calls, ["runtime-module", "runtime-wasm", "application-bundle"]);
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
 test("rejects missing gates and declaration limits before any fetch", async () => {
   let fetches = 0;
   const fetchImpl = async () => { fetches += 1; };

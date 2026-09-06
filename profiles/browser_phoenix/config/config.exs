@@ -1,8 +1,8 @@
 import Config
 
 config :blazex_browser_phoenix,
-  activation_state: :bh01_phase6,
-  endpoint_state: :feasibility_static_delivery,
+  activation_state: :bh03_phase6,
+  endpoint_state: :experimental_browser_profile_delivery,
   runtime_state: :experimental
 
 config :blazex_browser_phoenix, BlazeXBrowserPhoenix.Endpoint,

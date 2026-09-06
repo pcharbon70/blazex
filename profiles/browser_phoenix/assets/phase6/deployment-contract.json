@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0.0",
+  "contract_id": "BX-BH03-PHASE-06-PROFILE-DEPLOYMENT-0.1",
+  "path": "/bh03/",
+  "policies": {
+    "cross_origin_opener_policy": "same-origin",
+    "cross_origin_embedder_policy": "require-corp",
+    "cross_origin_resource_policy": "same-origin",
+    "artifacts": "same-origin-only",
+    "volatile_entries": ["index.html", "runtime-manifest.json", "profile-assets-manifest.json"]
+  },
+  "scenario": "one verified AtomVM runtime and two independent root lifecycles",
+  "source_maps": "none",
+  "api_state": "experimental-not-stable",
+  "support_state": "unsupported"
+}

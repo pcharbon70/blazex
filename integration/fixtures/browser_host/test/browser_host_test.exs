@@ -1,6 +1,7 @@
 defmodule BlazeX.BH01.BrowserHostTest do
   use ExUnit.Case, async: true
 
+  alias BlazeX.BH01.BrowserHost.Protocol
   alias BlazeX.BH01.LocalBehavior
 
   test "fixture remains disposable and browser-only" do
@@ -27,6 +28,57 @@ defmodule BlazeX.BH01.BrowserHostTest do
 
     assert {:error, %{"status" => "error", "error" => %{"code" => "bridge-request-invalid"}}} =
              BlazeX.BH01.BrowserHost.Protocol.handle(%{request | "operation" => "browser.fetch"})
+  end
+
+  test "profile fixture acknowledges two independent BH-03 root lifecycles" do
+    assert root_request("root.register", "primary-root", 1, %{}) |> ok_root("primary-root", 1)
+    assert root_request("root.register", "secondary-root", 1, %{}) |> ok_root("secondary-root", 1)
+
+    assert root_request("root.mount", "primary-root", 2, %{
+             "target_id" => "primary-slot",
+             "tree" => %{"kind" => "status", "text" => "Primary mounted"}
+           })
+           |> ok_root("primary-root", 2)
+
+    assert root_request("root.mount", "secondary-root", 2, %{
+             "target_id" => "secondary-slot",
+             "tree" => %{"kind" => "status", "text" => "Secondary mounted"}
+           })
+           |> ok_root("secondary-root", 2)
+
+    assert root_request("root.update", "primary-root", 3, %{
+             "tree" => %{"kind" => "status", "text" => "Primary updated"}
+           })
+           |> ok_root("primary-root", 3)
+
+    assert root_request("root.move", "secondary-root", 3, %{"target_id" => "alternate-slot"})
+           |> ok_root("secondary-root", 3)
+
+    assert root_request("root.dispose", "primary-root", 4, %{})
+           |> ok_root("primary-root", 4)
+
+    assert root_request("root.mount", "primary-root", 5, %{
+             "target_id" => "primary-slot",
+             "tree" => %{"kind" => "status", "text" => "Primary remounted"}
+           })
+           |> ok_root("primary-root", 5)
+
+    assert {:ok,
+            %{
+              "result" => %{
+                "scope_id" => "page-runtime",
+                "runtime_generation" => 1,
+                "runtime_fixture" => "bh03-profile"
+              }
+            },
+            "runtime.shutdown"} =
+             Protocol.handle(
+               request("runtime.shutdown", %{
+                 "scope_id" => "page-runtime",
+                 "runtime_generation" => 1,
+                 "root_failures" => 0
+               })
+             )
   end
 
   test "nested fixture preserves keyed identity through independent updates and reorder" do
@@ -57,6 +109,48 @@ defmodule BlazeX.BH01.BrowserHostTest do
     assert Enum.map(snapshot["children"], & &1["key"]) == ["gamma", "beta", "alpha"]
     assert Enum.find(snapshot["children"], &(&1["key"] == "alpha"))["count"] == 1
     assert Enum.find(snapshot["children"], &(&1["key"] == "beta"))["count"] == 0
+  end
+
+  defp root_request(operation, root_id, root_generation, payload) do
+    Protocol.handle(
+      request(
+        operation,
+        Map.merge(payload, %{
+          "root_id" => root_id,
+          "root_generation" => root_generation
+        })
+      )
+    )
+  end
+
+  defp ok_root(
+         {:ok,
+          %{
+            "status" => "ok",
+            "result" => %{
+              "root_id" => root_id,
+              "root_generation" => root_generation,
+              "runtime_fixture" => "bh03-profile"
+            }
+          }, _operation},
+         root_id,
+         root_generation
+       ),
+       do: true
+
+  defp request(operation, payload) do
+    %{
+      "protocol" => "blazex.host-bridge/1",
+      "type" => "request",
+      "scenario_id" => "bh03-profile-test",
+      "generation" => 1,
+      "correlation_id" => "correlation-1",
+      "sequence" => 1,
+      "operation" => operation,
+      "payload" => payload,
+      "timeout_ms" => 1000,
+      "retry" => 0
+    }
   end
 
   test "nested fixture rejects duplicate and missing identity and drops late output" do

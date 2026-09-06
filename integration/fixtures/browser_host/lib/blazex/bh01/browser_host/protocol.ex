@@ -5,6 +5,11 @@ defmodule BlazeX.BH01.BrowserHost.Protocol do
   @operations [
     "runtime.echo",
     "runtime.shutdown",
+    "root.register",
+    "root.mount",
+    "root.update",
+    "root.move",
+    "root.dispose",
     "fixture.command",
     "fixture.event",
     "fixture.snapshot"
@@ -13,6 +18,7 @@ defmodule BlazeX.BH01.BrowserHost.Protocol do
   @max_items 64
   @max_string_bytes 2_048
   @sensitive ["authorization", "cookie", "credential", "password", "secret", "token"]
+  @roots_key :blazex_bh03_profile_roots
 
   def handle(
         %{
@@ -59,8 +65,33 @@ defmodule BlazeX.BH01.BrowserHost.Protocol do
   defp execute(request, "runtime.echo", payload),
     do: {:ok, response(request, "ok", %{"result" => payload}), "runtime.echo"}
 
-  defp execute(request, "runtime.shutdown", _payload),
-    do: {:ok, response(request, "ok", %{"result" => %{"accepted" => true}}), "runtime.shutdown"}
+  defp execute(
+         request,
+         "runtime.shutdown",
+         %{"scope_id" => scope_id, "runtime_generation" => runtime_generation}
+       )
+       when is_binary(scope_id) and is_integer(runtime_generation) and runtime_generation > 0 do
+    Process.delete(@roots_key)
+
+    {:ok,
+     response(request, "ok", %{
+       "result" => %{
+         "scope_id" => scope_id,
+         "runtime_generation" => runtime_generation,
+         "runtime_fixture" => "bh03-profile"
+       }
+     }), "runtime.shutdown"}
+  end
+
+  defp execute(request, operation, payload)
+       when operation in [
+              "root.register",
+              "root.mount",
+              "root.update",
+              "root.move",
+              "root.dispose"
+            ],
+       do: root_operation(request, operation, payload)
 
   defp execute(request, "fixture.snapshot", _payload),
     do:
@@ -84,6 +115,89 @@ defmodule BlazeX.BH01.BrowserHost.Protocol do
         BlazeX.BH01.LocalBehavior.event(Map.fetch!(request, "generation"), payload),
         "fixture.event"
       )
+
+  defp execute(request, _operation, _payload),
+    do:
+      {:error,
+       response(request, "error", %{
+         "error" =>
+           error("bridge-operation-payload-invalid", "The operation payload is malformed")
+       })}
+
+  defp root_operation(
+         request,
+         operation,
+         %{"root_id" => root_id, "root_generation" => root_generation} = payload
+       )
+       when is_binary(root_id) and byte_size(root_id) <= 64 and is_integer(root_generation) and
+              root_generation > 0 do
+    roots = Process.get(@roots_key, %{})
+    current = Map.get(roots, root_id)
+
+    with {:ok, next} <- root_transition(operation, current, payload) do
+      Process.put(@roots_key, Map.put(roots, root_id, next))
+
+      {:ok,
+       response(request, "ok", %{
+         "result" => %{
+           "root_id" => root_id,
+           "root_generation" => root_generation,
+           "runtime_fixture" => "bh03-profile"
+         }
+       }), operation}
+    else
+      {:error, code, message} ->
+        {:error, response(request, "error", %{"error" => error(code, message)})}
+    end
+  end
+
+  defp root_operation(request, _operation, _payload),
+    do:
+      {:error,
+       response(request, "error", %{
+         "error" => error("root-payload-invalid", "The root operation payload is malformed")
+       })}
+
+  defp root_transition("root.register", nil, %{"root_generation" => generation}),
+    do: {:ok, %{state: :registered, generation: generation}}
+
+  defp root_transition("root.register", _current, _payload),
+    do: {:error, "root-duplicate", "The root is already registered"}
+
+  defp root_transition(
+         "root.mount",
+         %{state: state},
+         %{"root_generation" => generation, "target_id" => target_id, "tree" => tree}
+       )
+       when state in [:registered, :disposed] and is_binary(target_id) and
+              byte_size(target_id) <= 64,
+       do: {:ok, %{state: :ready, generation: generation, target_id: target_id, tree: tree}}
+
+  defp root_transition(
+         "root.update",
+         %{state: :ready} = current,
+         %{"root_generation" => generation, "tree" => tree}
+       ),
+       do: {:ok, %{current | generation: generation, tree: tree}}
+
+  defp root_transition(
+         "root.move",
+         %{state: :ready} = current,
+         %{"root_generation" => generation, "target_id" => target_id}
+       )
+       when is_binary(target_id) and byte_size(target_id) <= 64,
+       do: {:ok, %{current | generation: generation, target_id: target_id}}
+
+  defp root_transition(
+         "root.dispose",
+         %{state: state},
+         %{"root_generation" => generation}
+       )
+       when state in [:registered, :ready],
+       do: {:ok, %{state: :disposed, generation: generation}}
+
+  defp root_transition(_operation, _current, _payload),
+    do: {:error, "root-transition-invalid", "The root operation is invalid in its current state"}
 
   defp fixture_result(request, {:ok, effect, result}, operation) do
     :ok = Popcorn.Wasm.send_event("bh01_fixture_effect", effect)
