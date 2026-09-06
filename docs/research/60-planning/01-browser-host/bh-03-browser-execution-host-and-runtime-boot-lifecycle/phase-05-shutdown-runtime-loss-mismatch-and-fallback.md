@@ -52,19 +52,19 @@ Back to milestone: [README](README.md)
       - [x] 5.2.2.2 Subtask - Force-stop root bridges and classify timeout, stale acknowledgement, foreign acknowledgement, and remote rejection deterministically.
       - [x] 5.2.2.3 Subtask - Prove roots and scope handles cannot release or revive the runtime after registry shutdown.
 
-  - [ ] 5.3 Section - Implement runtime-loss recovery and bounded fallback decisions.
+  - [x] 5.3 Section - Implement runtime-loss recovery and bounded fallback decisions.
 
-    - [ ] 5.3.1 Task - Recover one exact active generation without partial roots.
+    - [x] 5.3.1 Task - Recover one exact active generation without partial roots.
 
-      - [ ] 5.3.1.1 Subtask - Reject stale loss reports without mutation; quiesce active roots and release the failed runtime once.
-      - [ ] 5.3.1.2 Subtask - Attempt one delayed replacement, preserve scope and root handle identities, and replay registered, ready, and disposed roots.
-      - [ ] 5.3.1.3 Subtask - Publish ready only after every retained root replay succeeds; otherwise release the replacement and retain fallback state.
+      - [x] 5.3.1.1 Subtask - Reject stale loss reports without mutation; quiesce active roots and release the failed runtime once.
+      - [x] 5.3.1.2 Subtask - Attempt one delayed replacement, preserve scope and root handle identities, and replay registered, ready, and disposed roots.
+      - [x] 5.3.1.3 Subtask - Publish ready only after every retained root replay succeeds; otherwise release the replacement and retain fallback state.
 
-    - [ ] 5.3.2 Task - Classify intentional fallback without rendering it.
+    - [x] 5.3.2 Task - Classify intentional fallback without rendering it.
 
-      - [ ] 5.3.2.1 Subtask - Map compatibility mismatch, unsupported prerequisites, startup failure, non-retryable loss, replay failure, and replacement exhaustion to closed fallback actions.
-      - [ ] 5.3.2.2 Subtask - Redact and bound fallback diagnostics, forbid partial activation, and keep all DOM/HTML/browser-profile behavior absent.
-      - [ ] 5.3.2.3 Subtask - Add versioned injected-transport fixtures and prove retry, replay, isolation, exhaustion, and fallback behavior.
+      - [x] 5.3.2.1 Subtask - Map compatibility mismatch, unsupported prerequisites, startup failure, non-retryable loss, replay failure, and replacement exhaustion to closed fallback actions.
+      - [x] 5.3.2.2 Subtask - Redact and bound fallback diagnostics, forbid partial activation, and keep all DOM/HTML/browser-profile behavior absent.
+      - [x] 5.3.2.3 Subtask - Add versioned injected-transport fixtures and prove retry, replay, isolation, exhaustion, and fallback behavior.
 
   - [ ] 5.4 Section - Run the inherited gate and publish completion evidence.
 

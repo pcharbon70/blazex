@@ -13,6 +13,6 @@ Status: experimental BH-03 Phase 5 shutdown and recovery boundary.
 The dependency-free package publishes the host's eight exact required
 identities and the closed root/runtime lifecycle vocabulary. The browser
 runtime package implements compatible runtime sharing, independent root queues,
-and registry-owned bounded shutdown. Runtime-loss recovery and bounded fallback
-decisions are completed in the next section. Its modules are not a stable public
-API.
+registry-owned bounded shutdown, one generation-bound runtime replacement with
+same-handle root replay, and non-DOM fallback decisions. Browser-profile
+composition remains deferred to Phase 6. Its modules are not a stable public API.

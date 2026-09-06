@@ -18,7 +18,10 @@ decisions without acquiring any declared artifact. Compatible scopes share one
 runtime while independent roots retain their own ordered queues. The registry
 now rejects new roots, drains and disposes existing roots, verifies a bounded
 generation-bound shutdown acknowledgement, and releases the runtime exactly
-once. The
+once. A matching active-generation loss can make one delayed replacement and
+replay retained roots through the same handles; stale reports do not mutate the
+registry, and any exhausted recovery converges to a redacted, bounded, non-DOM
+fallback decision without partial ready state. The
 historical BH-01 loader accepts and verifies its disposable fixture manifest;
 that evidence is not the BH-03 profile-manifest contract. The package has no
 component logic, renderer, Phoenix authority, or stable public API.

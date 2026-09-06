@@ -74,5 +74,19 @@ defmodule BlazeX.Host.BrowserBoundaryTest do
              release: :registry_owned_exactly_once,
              terminal_record: :stopped_tombstone
            }
+
+    assert contract.runtime_loss == %{
+             protocol: "blazex.runtime-loss/1",
+             acknowledgement: [:scope_id, :runtime_generation],
+             stale_report: :reject_without_mutation,
+             max_replacements: 1,
+             replacement_delay_ms: 100,
+             root_replay: :same_handles_all_or_nothing
+           }
+
+    assert contract.fallback.presentation == :non_dom_decision_only
+    refute contract.fallback.partial_activation
+    assert contract.fallback.classes["identity-mismatch"] == "deployment-action"
+    assert contract.fallback.classes["unsupported-prerequisite"] == "static-content"
   end
 end

@@ -34,6 +34,26 @@ defmodule BlazeX.Host.Browser.Lifecycle do
       max_timeout_ms: 10_000,
       release: :registry_owned_exactly_once,
       terminal_record: :stopped_tombstone
+    },
+    runtime_loss: %{
+      protocol: "blazex.runtime-loss/1",
+      acknowledgement: [:scope_id, :runtime_generation],
+      stale_report: :reject_without_mutation,
+      max_replacements: 1,
+      replacement_delay_ms: 100,
+      root_replay: :same_handles_all_or_nothing
+    },
+    fallback: %{
+      protocol: "blazex.runtime-fallback/1",
+      presentation: :non_dom_decision_only,
+      partial_activation: false,
+      classes: %{
+        "identity-mismatch" => "deployment-action",
+        "unsupported-prerequisite" => "static-content",
+        "runtime-startup" => "user-action",
+        "runtime-loss" => "user-action",
+        "recovery-exhausted" => "user-action"
+      }
     }
   }
 

@@ -9,6 +9,8 @@ export const BH03_RUNTIME_REGISTRY_LIMITS = Object.freeze({
   max_roots_per_scope: BH03_ROOT_LIMITS.max_roots_per_scope,
   default_shutdown_timeout_ms: 5_000,
   max_shutdown_timeout_ms: 10_000,
+  max_replacements: 1,
+  replacement_delay_ms: 100,
 });
 
 const ID = /^[a-z][a-z0-9-]{0,63}$/;
@@ -17,14 +19,17 @@ const RUNTIME_SCOPE_OWNERS = new WeakMap();
 export class SharedRuntimeRegistry {
   #entries = new Map();
   #generation = 0;
-  #metrics = { starts: 0, shares: 0, failures: 0, mismatches: 0, shutdowns: 0, shutdown_failures: 0 };
+  #metrics = { starts: 0, shares: 0, failures: 0, mismatches: 0, shutdowns: 0, shutdown_failures: 0, losses: 0, recoveries: 0, recovery_failures: 0, fallbacks: 0 };
   #onEvent;
   #startRuntime;
+  #wait;
 
-  constructor({ startRuntime = (options) => new BrowserRuntimeStartup().start(options), onEvent = () => {} } = {}) {
+  constructor({ startRuntime = (options) => new BrowserRuntimeStartup().start(options), onEvent = () => {}, wait = boundedWait } = {}) {
     if (typeof startRuntime !== "function") throw new TypeError("A runtime startup function is required");
+    if (typeof wait !== "function") throw new TypeError("A bounded wait function is required");
     this.#startRuntime = startRuntime;
     this.#onEvent = onEvent;
+    this.#wait = wait;
   }
 
   async open({ scopeId, compatibility, startupOptions = {} } = {}) {
@@ -48,6 +53,7 @@ export class SharedRuntimeRegistry {
         this.#emit("scope-shared", existing);
         throw failureFromRecord(existing.failure);
       }
+      if (existing.state === "fallback") throw failureFromRecord(existing.failure);
       if (["stopping", "stopped"].includes(existing.state)) {
         throw new BlazeXHostError("runtime-shutdown", "The runtime scope is closing or stopped", { reason: "scope-not-open", scope_id: scopeId });
       }
@@ -63,11 +69,15 @@ export class SharedRuntimeRegistry {
       compatibility: signature,
       closePromise: null,
       failure: null,
+      fallback: null,
       generation: ++this.#generation,
       promise: null,
       ready: null,
+      recoveryPromise: null,
+      restartCount: 0,
       scope: null,
       scopeId,
+      startupOptions,
       state: "starting",
     };
     this.#entries.set(scopeId, entry);
@@ -94,6 +104,47 @@ export class SharedRuntimeRegistry {
     return entry.promise;
   }
 
+  async openOrFallback(options = {}) {
+    try {
+      return await this.open(options);
+    } catch (error) {
+      const entry = this.#entries.get(options.scopeId);
+      return entry?.fallback ?? this.#recordFallback(entry, options.scopeId, error);
+    }
+  }
+
+  fallbackFor({ scopeId, error, runtimeGeneration = 0 } = {}) {
+    validateId(scopeId, "scope-id-invalid");
+    if (!Number.isSafeInteger(runtimeGeneration) || runtimeGeneration < 0) throw new TypeError("A non-negative runtime generation is required");
+    return fallbackDecision(scopeId, runtimeGeneration, error);
+  }
+
+  reportRuntimeLoss({ scopeId, runtimeGeneration, reason = "active-generation-runtime-exited", retryable = true } = {}) {
+    validateId(scopeId, "scope-id-invalid");
+    if (!Number.isSafeInteger(runtimeGeneration) || runtimeGeneration < 1) {
+      return Promise.reject(new BlazeXHostError("stale-generation", "The runtime loss report has an invalid generation", { reason: "stale-runtime-loss-report" }));
+    }
+    const entry = this.#entries.get(scopeId);
+    if (!entry || entry.generation !== runtimeGeneration) {
+      return Promise.reject(new BlazeXHostError("stale-generation", "The runtime loss report does not match the active generation", { reason: "stale-runtime-loss-report", expected: entry?.generation ?? null, observed: runtimeGeneration }));
+    }
+    if (entry.state === "recovering" && entry.recoveryPromise) return entry.recoveryPromise;
+    if (entry.state !== "ready") {
+      return Promise.reject(new BlazeXHostError("runtime-loss", "The runtime scope is not in an active state", { reason: "scope-not-ready", state: entry.state }));
+    }
+
+    entry.state = "recovering";
+    this.#metrics.losses += 1;
+    this.#emit("scope-runtime-lost", entry);
+    entry.recoveryPromise = this.#recoverEntry(entry, { reason: boundedReason(reason), retryable: retryable === true });
+    entry.promise = entry.recoveryPromise.then((result) => {
+      if (result === entry.scope) return result;
+      throw failureFromRecord(entry.failure);
+    });
+    entry.promise.catch(() => {});
+    return entry.recoveryPromise;
+  }
+
   close(scopeId, { reason = "owner-close", timeoutMs = BH03_RUNTIME_REGISTRY_LIMITS.default_shutdown_timeout_ms } = {}) {
     validateId(scopeId, "scope-id-invalid");
     validateShutdownTimeout(timeoutMs);
@@ -115,6 +166,8 @@ export class SharedRuntimeRegistry {
         generation: entry.generation,
         state: entry.state,
         failure: entry.failure,
+        fallback: entry.fallback,
+        restart_count: entry.restartCount,
       }));
     return Object.freeze({
       protocol: "blazex.runtime-registry/1",
@@ -141,6 +194,15 @@ export class SharedRuntimeRegistry {
       } catch (_error) {
         // Startup owns failure cleanup. Closing retains a stopped tombstone.
       }
+    }
+    if (entry.state === "recovering" && entry.recoveryPromise) await entry.recoveryPromise;
+    if (entry.state === "fallback") {
+      RUNTIME_SCOPE_OWNERS.get(entry.scope)?.forceStop(options.reason);
+      entry.state = "stopped";
+      entry.shutdown = shutdownSnapshot(entry, { acknowledged: false, root_failures: 0 });
+      this.#metrics.shutdowns += 1;
+      this.#emit("scope-stopped", entry);
+      return entry.shutdown;
     }
     if (!entry.scope) {
       entry.state = "stopped";
@@ -170,6 +232,55 @@ export class SharedRuntimeRegistry {
       throw normalized;
     }
   }
+
+  async #recoverEntry(entry, { reason, retryable }) {
+    try {
+      RUNTIME_SCOPE_OWNERS.get(entry.scope).runtimeLost(reason);
+    } catch (error) {
+      return this.#recordRecoveryFailure(entry, error, "replacement-or-root-replay-failed");
+    }
+    if (!retryable) return this.#recordRecoveryFailure(entry, new BlazeXHostError("runtime-loss", "The runtime loss is not retryable", { reason }), "non-retryable-loss");
+    if (entry.restartCount >= BH03_RUNTIME_REGISTRY_LIMITS.max_replacements) {
+      return this.#recordRecoveryFailure(entry, new BlazeXHostError("runtime-loss", "The runtime replacement limit is exhausted", { reason }), "replacement-limit");
+    }
+
+    entry.restartCount += 1;
+    await this.#wait(BH03_RUNTIME_REGISTRY_LIMITS.replacement_delay_ms);
+    try {
+      const ready = await this.#startRuntime(entry.startupOptions);
+      validateReadyHandle(ready);
+      entry.generation = ++this.#generation;
+      entry.ready = ready;
+      await RUNTIME_SCOPE_OWNERS.get(entry.scope).recover(ready);
+      entry.failure = null;
+      entry.fallback = null;
+      entry.state = "ready";
+      this.#metrics.recoveries += 1;
+      this.#emit("scope-recovered", entry);
+      return entry.scope;
+    } catch (error) {
+      return this.#recordRecoveryFailure(entry, error, "replacement-or-root-replay-failed");
+    }
+  }
+
+  #recordRecoveryFailure(entry, error, reason) {
+    this.#metrics.recovery_failures += 1;
+    const exhausted = new BlazeXHostError("recovery-exhausted", "Runtime recovery did not converge", { reason, cause: errorRecord(error) });
+    return this.#recordFallback(entry, entry.scopeId, exhausted);
+  }
+
+  #recordFallback(entry, scopeId, error) {
+    const generation = entry?.generation ?? 0;
+    const fallback = fallbackDecision(scopeId, generation, error);
+    if (entry && entry.state !== "fallback") {
+      entry.failure = fallback.diagnostic;
+      entry.fallback = fallback;
+      entry.state = "fallback";
+      this.#metrics.fallbacks += 1;
+      this.#emit("scope-fallback", entry);
+    }
+    return fallback;
+  }
 }
 
 export class BrowserRuntimeScope {
@@ -185,6 +296,9 @@ export class BrowserRuntimeScope {
     this.#onEvent = onEvent;
     RUNTIME_SCOPE_OWNERS.set(this, Object.freeze({
       shutdown: (options) => this.#shutdown(options),
+      runtimeLost: (reason) => this.#runtimeLost(reason),
+      recover: (readyHandle) => this.#recover(readyHandle),
+      forceStop: (reason) => this.#roots?.forceStop(reason),
     }));
   }
 
@@ -254,6 +368,32 @@ export class BrowserRuntimeScope {
       control?.stop(reason);
       this.#roots?.forceStop(reason);
       this.#release(reason);
+    }
+  }
+
+  #runtimeLost(reason) {
+    try {
+      this.#roots?.runtimeLost(reason);
+    } finally {
+      this.#release(reason);
+    }
+  }
+
+  async #recover(ready) {
+    this.#ready = ready;
+    this.#released = false;
+    try {
+      if (this.#roots) {
+        await this.#roots.recover((rootId) => new BrowserHostBridge({
+          transport: ready.transport,
+          generation: ready.attempt_generation,
+          scenarioId: `root:${this.#entry.scopeId}:${rootId}`,
+          onTrace: this.#onEvent,
+        }));
+      }
+    } catch (error) {
+      this.#release("root-replay-failed");
+      throw error;
     }
   }
 
@@ -339,4 +479,32 @@ function boundedReason(reason) {
 
 function isPlainObject(value) {
   return value !== null && typeof value === "object" && !Array.isArray(value) && Object.getPrototypeOf(value) === Object.prototype;
+}
+
+function fallbackDecision(scopeId, runtimeGeneration, error) {
+  const diagnostic = errorRecord(error);
+  const failureClass = Object.hasOwn(FALLBACK_ACTIONS, diagnostic.code) ? diagnostic.code : "runtime-startup";
+  return Object.freeze({
+    protocol: "blazex.runtime-fallback/1",
+    decision: "fallback",
+    scope_id: scopeId,
+    runtime_generation: runtimeGeneration,
+    failure_class: failureClass,
+    action: FALLBACK_ACTIONS[failureClass],
+    diagnostic,
+    partial_activation: false,
+    presentation: "non-dom-decision-only",
+  });
+}
+
+const FALLBACK_ACTIONS = Object.freeze({
+  "identity-mismatch": "deployment-action",
+  "unsupported-prerequisite": "static-content",
+  "runtime-startup": "user-action",
+  "runtime-loss": "user-action",
+  "recovery-exhausted": "user-action",
+});
+
+function boundedWait(delayMs) {
+  return new Promise((resolve) => setTimeout(resolve, delayMs));
 }
