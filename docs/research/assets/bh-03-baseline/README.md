@@ -48,6 +48,8 @@ integration directories.
 - [BH-03 Phase 2 executable contract](blazex-bh-03-phase-02-contract-v0.1.0.json)
 - [BH-03 Phase 2 validation log](blazex-bh-03-phase-02-validation-log-v0.1.0.txt)
 - [BH-03 Phase 2 completion decision](blazex-bh-03-phase-02-completion-v0.1.0.json)
+- [BH-03 Phase 3 authorization](blazex-bh-03-phase-03-authorization-v0.1.0.json)
+- [BH-03 Phase 3 executable contract](blazex-bh-03-phase-03-contract-v0.1.0.json)
 
 ## Maintaining this index
 
