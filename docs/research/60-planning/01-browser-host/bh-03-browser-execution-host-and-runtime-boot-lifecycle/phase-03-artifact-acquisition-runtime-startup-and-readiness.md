@@ -37,19 +37,19 @@ Back to milestone: [README](README.md)
       - [x] 3.1.2.2 Subtask - Define the immutable Popcorn startup descriptor, isolated transport handoff, application-bundle load, and generation correlation.
       - [x] 3.1.2.3 Subtask - Define bounded readiness, cancellation, failure classification, cleanup ownership, and the Phase 4 boundary.
 
-  - [ ] 3.2 Section - Implement verified all-or-nothing artifact acquisition.
+  - [x] 3.2 Section - Implement verified all-or-nothing artifact acquisition.
 
-    - [ ] 3.2.1 Task - Acquire only accepted manifest artifacts.
+    - [x] 3.2.1 Task - Acquire only accepted manifest artifacts.
 
-      - [ ] 3.2.1.1 Subtask - Require a successful Phase 2 gate result and preserve the declared runtime-module, runtime-wasm, and application-bundle order.
-      - [ ] 3.2.1.2 Subtask - Fetch same-origin, no-store, identity-encoded responses with bounded cancellation and no redirects.
-      - [ ] 3.2.1.3 Subtask - Enforce declaration, per-role, aggregate, MIME, exact-size, SHA-256, and WebAssembly structural checks before publishing any bytes.
+      - [x] 3.2.1.1 Subtask - Require a successful Phase 2 gate result and preserve the declared runtime-module, runtime-wasm, and application-bundle order.
+      - [x] 3.2.1.2 Subtask - Fetch same-origin, no-store, identity-encoded responses with bounded cancellation and no redirects.
+      - [x] 3.2.1.3 Subtask - Enforce declaration, per-role, aggregate, MIME, exact-size, SHA-256, and WebAssembly structural checks before publishing any bytes.
 
-    - [ ] 3.2.2 Task - Prove integrity and availability failures are atomic.
+    - [x] 3.2.2 Task - Prove integrity and availability failures are atomic.
 
-      - [ ] 3.2.2.1 Subtask - Cover valid acquisition, corruption, truncation, oversize streams, MIME/encoding/redirect errors, cancellation, and unavailable artifacts.
-      - [ ] 3.2.2.2 Subtask - Normalize failures to the Phase 1 artifact-integrity or artifact-unavailable vocabulary.
-      - [ ] 3.2.2.3 Subtask - Keep runtime starts and all later evidence at zero.
+      - [x] 3.2.2.1 Subtask - Cover valid acquisition, corruption, truncation, oversize streams, MIME/encoding/redirect errors, cancellation, and unavailable artifacts.
+      - [x] 3.2.2.2 Subtask - Normalize failures to the Phase 1 artifact-integrity or artifact-unavailable vocabulary.
+      - [x] 3.2.2.3 Subtask - Keep runtime starts and all later evidence at zero.
 
   - [ ] 3.3 Section - Implement isolated runtime startup, bundle load, and readiness.
 

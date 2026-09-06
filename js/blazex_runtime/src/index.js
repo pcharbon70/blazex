@@ -2,6 +2,7 @@ export { BlazeXHostError, errorRecord, redactDiagnostic } from "./internal/error
 export { REQUIRED_COMPATIBILITY, negotiateCompatibility } from "./compatibility.js";
 export { discoverHostManifest, resolveHostUrl } from "./discovery.js";
 export { fetchHostManifest, inspectHostManifest, validateHostManifest } from "./host-manifest.js";
+export { acquireHostArtifacts, BH03_ARTIFACT_LIMITS, BH03_ARTIFACT_ROLES } from "./artifact-acquisition.js";
 export {
   acquireDeclaredArtifacts,
   fetchDeclaredArtifact,
