@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0.0",
+  "contract_id": "BX-BH03-PHASE-06-CONTRACT-0.1",
+  "status": "authorized-experimental",
+  "authorization_ref": "BX-BH03-PHASE-06-AUTHORIZATION-0.1",
+  "profile": {
+    "path": "/bh03/",
+    "legacy_profile": "/bh01/",
+    "legacy_profile_policy": "immutable",
+    "asset_origin": "same-origin-only",
+    "inventory": "complete-sha256-and-byte-governed",
+    "runtime_manifest_cache": "no-store"
+  },
+  "scenario": {
+    "manifest": "strict-exact-compatible",
+    "artifacts": "all-or-nothing-verified-before-startup",
+    "runtime_scopes": 1,
+    "compatible_open_calls": 2,
+    "expected_runtime_starts": 1,
+    "roots": ["primary-root", "secondary-root"],
+    "root_operations": ["register", "mount", "update", "move", "dispose", "remount"],
+    "fallback_cases": ["identity-mismatch", "unsupported-prerequisite"],
+    "shutdown": "registry-owned-correlated-and-bounded"
+  },
+  "active_matrix": [
+    {"platform": "linux", "browser": "chrome", "state": "required-active"},
+    {"platform": "linux", "browser": "firefox", "state": "required-active"}
+  ],
+  "active_row_rule": "same-scenario-set-and-observed-pass-required",
+  "deferred_matrix": ["safari", "mobile", "physical-devices", "second-host", "manual-assistive-technology"],
+  "evidence": {
+    "browser_result_fields": ["browser", "browser-version", "executable", "platform", "scenario-set", "result"],
+    "profile_snapshot": "bounded-experimental-diagnostic",
+    "missing_or_failed_active_row": "phase-stop",
+    "deferred_row": "recorded-not-passed"
+  },
+  "explicitly_deferred": [
+    "resource-reliability-and-startup-measurements",
+    "bh-03-acceptance",
+    "reference-dom-interaction-transport",
+    "phoenix-command-authority-and-liveview",
+    "product-components-and-native-hosts",
+    "public-api-stability-and-support"
+  ],
+  "api_state": "experimental-not-stable",
+  "support_state": "unsupported"
+}
