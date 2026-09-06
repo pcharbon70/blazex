@@ -38,19 +38,19 @@ Back to milestone: [README](README.md)
       - [x] 8.1.2.2 Subtask - Require architecture, implementation, conformance, accessibility, security, packaging, and provenance analytical lenses with explicit scope and independence limits.
       - [x] 8.1.2.3 Subtask - Keep the canonical planned acceptance registry immutable and place execution evidence in a separate versioned BH-02 overlay.
 
-  - [ ] 8.2 Section - Reconcile outputs, conditions, findings, and contract surfaces.
+  - [x] 8.2 Section - Reconcile outputs, conditions, findings, and contract surfaces.
 
-    - [ ] 8.2.1 Task - Produce a machine-verifiable reconciliation ledger.
+    - [x] 8.2.1 Task - Produce a machine-verifiable reconciliation ledger.
 
-      - [ ] 8.2.1.1 Subtask - Resolve every required output to implementation, conformance, and owning phase evidence without changing historical records.
-      - [ ] 8.2.1.2 Subtask - Reconcile inherited conditions, repeat obligations, deferred qualifications, package boundaries, and forbidden leakage one identity at a time.
-      - [ ] 8.2.1.3 Subtask - Record current findings, owners, severities, dispositions, stop boundaries, and downstream due points.
+      - [x] 8.2.1.1 Subtask - Resolve every required output to implementation, conformance, and owning phase evidence without changing historical records.
+      - [x] 8.2.1.2 Subtask - Reconcile inherited conditions, repeat obligations, deferred qualifications, package boundaries, and forbidden leakage one identity at a time.
+      - [x] 8.2.1.3 Subtask - Record current findings, owners, severities, dispositions, stop boundaries, and downstream due points.
 
-    - [ ] 8.2.2 Task - Freeze the accepted internal contract surface.
+    - [x] 8.2.2 Task - Freeze the accepted internal contract surface.
 
-      - [ ] 8.2.2.1 Subtask - Inventory version-1 semantic, event/effect/resource, presentation-intent, renderer, DOM, and native-experiment surfaces.
-      - [ ] 8.2.2.2 Subtask - Separate accepted internal compatibility identities from experimental public-API and unsupported product states.
-      - [ ] 8.2.2.3 Subtask - Require superseding ADR and compatibility review for material downstream changes.
+      - [x] 8.2.2.1 Subtask - Inventory version-1 semantic, event/effect/resource, presentation-intent, renderer, DOM, and native-experiment surfaces.
+      - [x] 8.2.2.2 Subtask - Separate accepted internal compatibility identities from experimental public-API and unsupported product states.
+      - [x] 8.2.2.3 Subtask - Require superseding ADR and compatibility review for material downstream changes.
 
   - [ ] 8.3 Section - Execute analytical reviews and the candidate acceptance gate.
 

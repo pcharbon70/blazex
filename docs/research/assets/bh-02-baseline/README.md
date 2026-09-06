@@ -76,6 +76,8 @@ not belong here.
 - [BH-02 Phase 7 normalized validation log](blazex-bh-02-phase-07-validation-log-v0.1.0.txt)
 - [BH-02 Phase 8 authorization](blazex-bh-02-phase-08-authorization-v0.1.0.json)
 - [BH-02 Phase 8 contract envelope](blazex-bh-02-phase-08-contract-v0.1.0.json)
+- [BH-02 cross-backend reconciliation](blazex-bh-02-reconciliation-v0.1.0.json)
+- [BH-02 candidate internal contract baseline](blazex-bh-02-contract-baseline-v0.1.0.json)
 
 ## Maintaining this index
 

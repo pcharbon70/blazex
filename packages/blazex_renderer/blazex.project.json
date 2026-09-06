@@ -4,7 +4,7 @@
   "path": "packages/blazex_renderer",
   "kind": "elixir-package",
   "activation_phase": "BH-02 Phase 1",
-  "status": "experimental-activation-skeleton",
+  "status": "implemented-experimental-bh02-candidate",
   "owner_role": "renderer-contract-owner",
   "module_roots": ["BlazeX.Renderer"],
   "manifest": "mix.exs",
@@ -12,5 +12,5 @@
   "dependencies": ["blazex_core", "blazex_effects", "blazex_ui_tree"],
   "must_not_own": ["concrete-rendering", "component-evaluation", "host-capability-implementation"],
   "forbidden_dependencies": ["phoenix", "plug", "live_view", "local_live_view", "popcorn", "atomvm", "blazex_renderer_dom", "blazex_renderer_headless", "qt", "wxwidgets"],
-  "public_api_state": "experimental-unimplemented"
+  "public_api_state": "experimental-not-stable"
 }

@@ -4,7 +4,7 @@
   "path": "packages/blazex_effects",
   "kind": "elixir-package",
   "activation_phase": "BH-02 Phase 1",
-  "status": "experimental-activation-skeleton",
+  "status": "implemented-experimental-bh02-candidate",
   "owner_role": "effects-owner",
   "module_roots": ["BlazeX.Effects"],
   "manifest": "mix.exs",
@@ -12,5 +12,5 @@
   "dependencies": ["blazex_core"],
   "must_not_own": ["host-capability-implementation", "renderer-capabilities", "platform-resources"],
   "forbidden_dependencies": ["phoenix", "plug", "live_view", "local_live_view", "popcorn", "atomvm", "blazex_host_browser", "javascript", "qt", "wxwidgets"],
-  "public_api_state": "experimental-unimplemented"
+  "public_api_state": "experimental-not-stable"
 }
