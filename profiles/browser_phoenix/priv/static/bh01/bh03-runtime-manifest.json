@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0.0",
+  "manifest_id": "BX-BH03-BROWSER-PHOENIX-MANIFEST-001",
+  "generation": 1,
+  "profile_id": "browser-phoenix",
+  "compatibility": {
+    "browser_host": "blazex.browser-host/1",
+    "runtime_adapter": "blazex.popcorn-runtime-adapter/1",
+    "runtime_loader": "blazex.browser-runtime-loader/1",
+    "profile_manifest": "blazex.browser-profile-manifest/1",
+    "root_lifecycle": "blazex.browser-root-lifecycle/1",
+    "semantic_tree": "blazex.ui-tree/1",
+    "renderer": "blazex.renderer/1",
+    "dom_projection": "blazex.dom-projection/1"
+  },
+  "prerequisites": {
+    "browser_required": ["webassembly", "workers", "module-scripts", "fetch", "abort-controller", "subtle-crypto"],
+    "deployment_required": ["secure-context", "cross-origin-isolation", "same-origin-artifacts"],
+    "optional": ["wasm-streaming"]
+  },
+  "artifacts": [
+    {"id": "atomvm-module", "role": "runtime-module", "path": "./artifacts/AtomVM.mjs", "mime": "text/javascript", "bytes": 156421, "sha256": "43cbf6ec34cd4745777b4ce70aa23844a6bb8af44c301c86a5dd02c0165bef64"},
+    {"id": "atomvm-wasm", "role": "runtime-wasm", "path": "./artifacts/AtomVM.wasm", "mime": "application/wasm", "bytes": 986537, "sha256": "d20c491e75936dc8189910c8d0740093b7813d8dcc1cf966a87c011799ade9d8"},
+    {"id": "application-bundle", "role": "application-bundle", "path": "./artifacts/bundle.avm", "mime": "application/vnd.atomvm.avm", "bytes": 6578424, "sha256": "e2d9713b17938dbd0886c5e12e927619495b0dc1fd578bf3d79c58de87b94773"}
+  ]
+}
