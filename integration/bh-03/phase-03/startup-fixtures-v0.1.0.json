@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0.0",
+  "fixture_set_id": "BX-BH03-PHASE-03-STARTUP-FIXTURES-0.1",
+  "contract_ref": "BX-BH03-PHASE-03-CONTRACT-0.1",
+  "artifact_payloads": [
+    {"role": "runtime-module", "base64": "ZXhwb3J0IGRlZmF1bHQgKCkgPT4gKHt9KQ==", "bytes": 25, "sha256": "d520943aba6571455760a964ae9dcd3f2ef90a9e6b56831a47b8db1ccc12338d"},
+    {"role": "runtime-wasm", "base64": "AGFzbQEAAAA=", "bytes": 8, "sha256": "93a44bbb96c751218e4c00d479e4c14358122a389acca16205b1e4d0dc5f9476"},
+    {"role": "application-bundle", "base64": "QVZNLXBoYXNlLTM=", "bytes": 11, "sha256": "53744326eb8c2fca6e038351886a30f036c2d84bd90c1c86fd87ffd13be4b66b"}
+  ],
+  "startup_descriptor": {
+    "protocol": "blazex.runtime-startup/1",
+    "adapter_identity": "blazex.popcorn-runtime-adapter/1",
+    "engine": "fissionvm-popcorn",
+    "transport_protocol": "blazex.runtime.frame/1",
+    "memory_pages": 256,
+    "bundle_virtual_path": "/bundle.avm",
+    "entrypoint": "Elixir.BlazeX.BH01.BrowserHost.Boot",
+    "readiness_event": "popcorn_app_ready",
+    "required_features": ["shared-memory", "threads"]
+  },
+  "cases": [
+    {"id": "verified-acquisition", "expected": "artifact-acquisition"},
+    {"id": "artifact-integrity-rejection", "expected": "artifact-integrity"},
+    {"id": "artifact-unavailable-rejection", "expected": "artifact-unavailable"},
+    {"id": "correlated-readiness", "expected": "ready"},
+    {"id": "stale-readiness-rejection", "expected": "bounded-wait"},
+    {"id": "duplicate-readiness-rejection", "expected": "runtime-startup"},
+    {"id": "transport-startup-rejection", "expected": "runtime-startup"},
+    {"id": "bundle-load-rejection", "expected": "bundle-load"},
+    {"id": "readiness-timeout", "expected": "readiness-timeout"},
+    {"id": "startup-cancellation", "expected": "runtime-startup"}
+  ],
+  "evidence_boundary": {
+    "transport": "injected-unit-conformance",
+    "pinned_profile_artifacts": "declaration-bound-not-browser-executed",
+    "shared_runtime_instances": 0,
+    "root_operations": 0,
+    "browser_results": 0,
+    "measurements": 0,
+    "acceptance_evidence": 0,
+    "api_state": "experimental-not-stable",
+    "support_state": "unsupported"
+  }
+}

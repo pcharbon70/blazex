@@ -21,6 +21,7 @@ FIXTURES = REPO_ROOT / "integration/bh-03/phase-02/pre-acquisition-fixtures-v0.1
 INTEGRATION_INDEX = REPO_ROOT / "integration/bh-03/integration-index-v0.2.0.json"
 PROFILE_MANIFEST = REPO_ROOT / "profiles/browser_phoenix/priv/static/bh01/bh03-runtime-manifest.json"
 COMPLETION = BASELINE_ROOT / "blazex-bh-03-phase-02-completion-v0.1.0.json"
+PHASE3_AUTHORIZATION = BASELINE_ROOT / "blazex-bh-03-phase-03-authorization-v0.1.0.json"
 
 REQUIRED_COMPATIBILITY = {
     "browser_host": "blazex.browser-host/1",
@@ -181,14 +182,17 @@ def validate_implementation(contract: dict[str, Any], repo_root: Path = REPO_ROO
         _require(forbidden not in phase2_sources, f"Phase 3 behavior leaked into Phase 2: {forbidden}")
     _require("artifacts_acquired: 0" in phase2_sources, "pre-acquisition boundary is not explicit")
     metadata_expectations = {
-        "packages/blazex_runtime_popcorn": "experimental-bh03-phase2-compatibility-identity",
-        "packages/blazex_host_browser": "experimental-bh03-phase2-identity-negotiation",
-        "js/blazex_runtime": "experimental-bh03-phase2-identity-negotiation",
-        "profiles/browser_phoenix": "experimental-bh03-phase2-profile-manifest",
+        "packages/blazex_runtime_popcorn": ("BH-03 Phase 2", "experimental-bh03-phase2-compatibility-identity", "BH-03 Phase 3", "experimental-bh03-phase3-startup-descriptor"),
+        "packages/blazex_host_browser": ("BH-03 Phase 2", "experimental-bh03-phase2-identity-negotiation", "BH-03 Phase 3", "experimental-bh03-phase3-isolated-startup-boundary"),
+        "js/blazex_runtime": ("BH-03 Phase 2", "experimental-bh03-phase2-identity-negotiation", "BH-03 Phase 3", "experimental-bh03-phase3-acquisition-startup-readiness"),
+        "profiles/browser_phoenix": ("BH-03 Phase 2", "experimental-bh03-phase2-profile-manifest", None, None),
     }
-    for path, status in metadata_expectations.items():
+    phase3_authorized = PHASE3_AUTHORIZATION.is_file() and _load(PHASE3_AUTHORIZATION).get("status") == "approved-phase-3-only"
+    for path, (phase, status, successor_phase, successor_status) in metadata_expectations.items():
         metadata = _load(repo_root / path / "blazex.project.json")
-        _require(metadata.get("current_phase") == "BH-03 Phase 2" and metadata.get("status") == status, f"Phase 2 metadata diverges: {path}")
+        current = metadata.get("current_phase") == phase and metadata.get("status") == status
+        successor = phase3_authorized and successor_phase is not None and metadata.get("current_phase") == successor_phase and metadata.get("status") == successor_status
+        _require(current or successor, f"Phase 2 metadata diverges without an authorized successor: {path}")
         _require(metadata.get("public_api_state") == "experimental-not-stable", f"public API was promoted: {path}")
     _require(contract.get("owners", {}).get("browser_discovery_prerequisites_and_manifest_validation") == "js/blazex_runtime", "implementation owner diverges")
 

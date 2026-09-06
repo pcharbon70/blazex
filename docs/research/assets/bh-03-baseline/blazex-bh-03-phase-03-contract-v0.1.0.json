@@ -1,0 +1,68 @@
+{
+  "schema_version": "1.0.0",
+  "contract_id": "BX-BH03-PHASE-03-CONTRACT-0.1",
+  "status": "authorized-experimental",
+  "authorization_ref": "BX-BH03-PHASE-03-AUTHORIZATION-0.1",
+  "input_gate": {
+    "protocol": "blazex.pre-acquisition-gate/1",
+    "required_decision": "eligible-for-artifact-acquisition",
+    "manifest_contract": "blazex.browser-profile-manifest/1",
+    "partial_or_unvalidated_input": "forbidden"
+  },
+  "acquisition": {
+    "protocol": "blazex.artifact-acquisition/1",
+    "roles_in_order": ["runtime-module", "runtime-wasm", "application-bundle"],
+    "per_role_max_bytes": {
+      "runtime-module": 2097152,
+      "runtime-wasm": 16777216,
+      "application-bundle": 33554432
+    },
+    "aggregate_max_bytes": 52428800,
+    "response_policy": ["same-origin", "no-store", "same-origin-credentials", "no-redirect", "identity-encoding", "declared-mime", "exact-declared-bytes"],
+    "integrity": ["sha-256", "valid-webassembly-module"],
+    "publication": "all-or-nothing-after-all-artifacts-pass"
+  },
+  "startup": {
+    "protocol": "blazex.runtime-startup/1",
+    "adapter_identity": "blazex.popcorn-runtime-adapter/1",
+    "engine": "fissionvm-popcorn",
+    "transport_protocol": "blazex.runtime.frame/1",
+    "memory_pages": 256,
+    "bundle_virtual_path": "/bundle.avm",
+    "entrypoint": "Elixir.BlazeX.BH01.BrowserHost.Boot",
+    "readiness_event": "popcorn_app_ready",
+    "required_features": ["shared-memory", "threads"],
+    "attempt_timeout_default_ms": 15000,
+    "attempt_timeout_max_ms": 60000,
+    "correlation": ["attempt-generation", "manifest-generation", "readiness-event"],
+    "ready_handle_scope": "single-attempt-not-shared"
+  },
+  "failure_classes": {
+    "artifact-integrity": ["declaration-limit", "response-metadata", "size", "digest", "webassembly"],
+    "artifact-unavailable": ["fetch-status", "fetch-network", "fetch-timeout", "fetch-cancelled"],
+    "runtime-startup": ["transport-attach", "runtime-failed", "runtime-exited", "protocol-mismatch"],
+    "bundle-load": ["bundle-load-failed"],
+    "readiness-timeout": ["readiness-timeout"]
+  },
+  "ownership": {
+    "artifact_bytes": "startup-attempt-until-transfer-or-failure",
+    "transport": "startup-attempt",
+    "timers_and_abort_listeners": "startup-attempt",
+    "runtime_descriptor": "packages/blazex_runtime_popcorn",
+    "browser_orchestration": "js/blazex_runtime",
+    "fixtures": "integration/bh-03"
+  },
+  "explicitly_deferred": [
+    "shared-runtime-registry",
+    "runtime-reuse",
+    "root-registration-and-lifecycle",
+    "shutdown-and-runtime-loss",
+    "retry-and-fallback-execution",
+    "browser-profile-composition",
+    "browser-results",
+    "measurements",
+    "acceptance-evidence"
+  ],
+  "api_state": "experimental-not-stable",
+  "support_state": "unsupported"
+}

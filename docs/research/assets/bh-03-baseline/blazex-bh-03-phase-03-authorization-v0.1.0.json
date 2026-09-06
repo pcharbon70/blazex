@@ -1,0 +1,69 @@
+{
+  "schema_version": "1.0.0",
+  "authorization_id": "BX-BH03-PHASE-03-AUTHORIZATION-0.1",
+  "status": "approved-phase-3-only",
+  "approved_at": "2026-09-06",
+  "approved_by": {
+    "identity": "repository-user",
+    "role": "repository-owner",
+    "evidence": "Explicit request to implement the next BH-03 phase section by section, merge one pull request, synchronize main, and delete the feature branch."
+  },
+  "activation": {
+    "base_branch": "main",
+    "base_revision": "63bc9799d45853d8f01d32e9c70cdb1113e2bdd8",
+    "base_remote_revision": "63bc9799d45853d8f01d32e9c70cdb1113e2bdd8",
+    "main_synchronized_before_branch": true,
+    "working_branch": "codex/bh-03-phase-03-startup-readiness",
+    "phase": "BH-03 Phase 3"
+  },
+  "approval_basis": [
+    {
+      "path": "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-02-completion-v0.1.0.json",
+      "sha256": "bc63c32f9fb17ee680f491ef2dba60355ea54f8d9d0d069dec582daa8e5b1df2"
+    },
+    {
+      "path": "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-02-contract-v0.1.0.json",
+      "sha256": "72d8afe559f213f48955d4c116c016dac333e295fbc87fb63401a82abc6f434b"
+    },
+    {
+      "path": "docs/research/60-planning/01-browser-host/bh-03-browser-execution-host-and-runtime-boot-lifecycle/phase-02-implementation-evidence.md",
+      "sha256": "1d91201d46c5ea4b199262fcaf7957644683b0a3272dd75f624e6881a9fbc5db"
+    },
+    {
+      "path": "integration/bh-03/integration-index-v0.2.0.json",
+      "sha256": "aa754155be5e211fc240622ff4b5d2265a9f770a9054c794a29b4c8dfda480b3"
+    },
+    {
+      "path": "profiles/browser_phoenix/priv/static/bh01/bh03-runtime-manifest.json",
+      "sha256": "de29c89e0a6e4f0cfd06c4bbedf4804a23384feb39c6ad6cd90096b63a3350cd"
+    }
+  ],
+  "authorized_scope": [
+    "Acquire exactly the three artifacts accepted by the Phase 2 pre-acquisition gate.",
+    "Verify bounded response metadata, exact bytes, SHA-256 integrity, and the WebAssembly structural contract before publishing artifact bytes.",
+    "Publish the experimental Popcorn startup descriptor and start one isolated runtime attempt.",
+    "Load the accepted application bundle and expose bounded generation-correlated readiness.",
+    "Classify acquisition, startup, bundle-load, cancellation, and readiness failures and release attempt-owned resources.",
+    "Publish versioned Phase 3 conformance fixtures, validation, and completion evidence."
+  ],
+  "delivery_rules": {
+    "sections_in_order": true,
+    "commit_per_section": true,
+    "section_count": 4,
+    "single_pull_request": true,
+    "merge_pull_request": true,
+    "return_to_synchronized_main_after_delivery": true,
+    "delete_local_feature_branch_after_delivery": true,
+    "delete_remote_feature_branch_after_delivery": true
+  },
+  "not_authorized": [
+    "BH-03 Phase 4 or later implementation",
+    "shared runtime registry or runtime reuse",
+    "root registration, mount, update, move, disposal, or remount lifecycle",
+    "shutdown, runtime-loss recovery, retry orchestration, or fallback execution",
+    "browser-profile composition or active browser results",
+    "renderer, component, Phoenix, Plug, or server command behavior",
+    "resource or reliability measurements and BH-03 acceptance",
+    "public API stability, package publication, or support claims"
+  ]
+}

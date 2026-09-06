@@ -2,13 +2,12 @@ defmodule BlazeX.Runtime.Popcorn do
   @moduledoc """
   Experimental adapter boundary for the pinned FissionVM/Popcorn runtime.
 
-  The values exposed here describe the disposable fixture-facing hooks that
-  Phase 3 is allowed to exercise. They are not a stable framework runtime API,
-  and they deliberately contain no browser, renderer, server-framework, or
-  component semantics.
+  The retained BH-01 hooks and BH-03 compatibility/startup descriptors are not
+  a stable framework runtime API. They deliberately contain no browser,
+  renderer, server-framework, root, or component semantics.
   """
 
-  alias BlazeX.Runtime.Popcorn.Identity
+  alias BlazeX.Runtime.Popcorn.{Identity, Startup}
 
   @typedoc "Experimental runtime-adapter hook used only by BH-01 fixtures."
   @type fixture_hook :: :boot_fixture | :dispatch_fixture_message | :dispose_fixture
@@ -28,4 +27,8 @@ defmodule BlazeX.Runtime.Popcorn do
   @doc "Returns the reusable BH-03 compatibility descriptor."
   @spec compatibility_descriptor() :: map()
   defdelegate compatibility_descriptor(), to: Identity
+
+  @doc "Returns the immutable descriptor for one isolated BH-03 startup attempt."
+  @spec startup_descriptor() :: map()
+  defdelegate startup_descriptor(), to: Startup, as: :descriptor
 end

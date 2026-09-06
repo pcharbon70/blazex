@@ -28,4 +28,20 @@ defmodule BlazeX.Runtime.PopcornBoundaryTest do
              "support_state" => "unsupported"
            } = BlazeX.Runtime.Popcorn.compatibility_descriptor()
   end
+
+  test "publishes the exact isolated startup descriptor" do
+    assert %{
+             "protocol" => "blazex.runtime-startup/1",
+             "adapter_identity" => "blazex.popcorn-runtime-adapter/1",
+             "engine" => "fissionvm-popcorn",
+             "transport_protocol" => "blazex.runtime.frame/1",
+             "memory_pages" => 256,
+             "bundle_virtual_path" => "/bundle.avm",
+             "entrypoint" => "Elixir.BlazeX.BH01.BrowserHost.Boot",
+             "readiness_event" => "popcorn_app_ready",
+             "required_features" => ["shared-memory", "threads"],
+             "api_state" => "experimental-not-stable",
+             "support_state" => "unsupported"
+           } = BlazeX.Runtime.Popcorn.startup_descriptor()
+  end
 end

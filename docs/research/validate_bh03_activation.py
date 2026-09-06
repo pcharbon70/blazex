@@ -22,6 +22,7 @@ ACTIVATION = BASELINE_ROOT / "blazex-bh-03-repository-activation-v0.1.0.json"
 INTEGRATION_INDEX = REPO_ROOT / "integration/bh-03/integration-index-v0.1.0.json"
 COMPLETION = BASELINE_ROOT / "blazex-bh-03-phase-01-completion-v0.1.0.json"
 PHASE2_AUTHORIZATION = BASELINE_ROOT / "blazex-bh-03-phase-02-authorization-v0.1.0.json"
+PHASE3_AUTHORIZATION = BASELINE_ROOT / "blazex-bh-03-phase-03-authorization-v0.1.0.json"
 REGISTRY = RESEARCH_ROOT / "assets/quality-acceptance/blazex-acceptance-registry-v0.1.0.json"
 BH02_DECISION = RESEARCH_ROOT / "assets/bh-02-baseline/blazex-bh-02-acceptance-decision-v0.1.0.json"
 BH02_RECONCILIATION = RESEARCH_ROOT / "assets/bh-02-baseline/blazex-bh-02-reconciliation-v0.1.0.json"
@@ -54,6 +55,11 @@ PHASE2_STATUSES = {
     "blazex_host_browser": "experimental-bh03-phase2-identity-negotiation",
     "js/blazex_runtime": "experimental-bh03-phase2-identity-negotiation",
     "profiles/browser_phoenix": "experimental-bh03-phase2-profile-manifest",
+}
+PHASE3_STATUSES = {
+    "blazex_runtime_popcorn": "experimental-bh03-phase3-startup-descriptor",
+    "blazex_host_browser": "experimental-bh03-phase3-isolated-startup-boundary",
+    "js/blazex_runtime": "experimental-bh03-phase3-acquisition-startup-readiness",
 }
 
 
@@ -148,7 +154,7 @@ def _mix_dependencies(path: Path) -> list[str]:
     return re.findall(r"\{:\s*([a-z0-9_]+)\s*,", text)
 
 
-def validate_activation(activation: dict[str, Any], contract: dict[str, Any], repo_root: Path = REPO_ROOT, phase2_authorized: bool = False) -> None:
+def validate_activation(activation: dict[str, Any], contract: dict[str, Any], repo_root: Path = REPO_ROOT, phase2_authorized: bool = False, phase3_authorized: bool = False) -> None:
     boundaries = activation.get("boundaries", [])
     _require([row.get("id") for row in boundaries] == BOUNDARY_IDS and len({row.get("id") for row in boundaries}) == 5, "activation boundaries are incomplete or duplicated")
     contract_rows = {row["id"]: row for row in contract.get("repository_boundaries", [])}
@@ -162,7 +168,8 @@ def validate_activation(activation: dict[str, Any], contract: dict[str, Any], re
                 _require(metadata.get(key) == row.get(key), f"activation metadata differs: {row['id']} {key}")
             current_matches = metadata.get("current_phase") == row.get("current_phase") and metadata.get("status") == row.get("status")
             successor_matches = phase2_authorized and metadata.get("current_phase") == "BH-03 Phase 2" and metadata.get("status") == PHASE2_STATUSES.get(row["id"])
-            _require(current_matches or successor_matches, f"activation metadata differs: {row['id']} current phase or status")
+            phase3_matches = phase3_authorized and metadata.get("current_phase") == "BH-03 Phase 3" and metadata.get("status") == PHASE3_STATUSES.get(row["id"])
+            _require(current_matches or successor_matches or phase3_matches, f"activation metadata differs: {row['id']} current phase or status")
             _require(metadata.get("activation_phase") == row.get("origin_activation"), f"origin activation was rewritten: {row['id']}")
             _require(metadata.get("public_api_state") == "experimental-not-stable", f"public API was promoted: {row['id']}")
         manifest = path / contract_rows[row["id"]]["manifest"]
@@ -195,18 +202,29 @@ def validate_phase2_authorization(auth: dict[str, Any], repo_root: Path = REPO_R
     _require(result.returncode == 0, "current work does not descend from the Phase 2 authorized base")
 
 
-def validate_integration(index: dict[str, Any], repo_root: Path = REPO_ROOT, phase2_authorized: bool = False) -> None:
+def validate_integration(index: dict[str, Any], repo_root: Path = REPO_ROOT, phase2_authorized: bool = False, phase3_authorized: bool = False) -> None:
     phase1_state = index.get("status") == "activated-no-lifecycle-fixtures-or-results" and all(index.get(key) == [] for key in EMPTY_EVIDENCE_FIELDS)
     _require(phase1_state, "integration index is not the immutable empty Phase 1 activation")
     _require(index.get("next_authorized_work") is None, "integration index authorizes later work")
     _require(index.get("api_state") == "experimental-not-stable" and index.get("support_state") == "unsupported", "integration index promotes stability or support")
     successor_index = repo_root / "integration/bh-03/integration-index-v0.2.0.json"
     successor_state = phase2_authorized and successor_index.is_file()
+    phase3_index = repo_root / "integration/bh-03/integration-index-v0.3.0.json"
+    phase3_state = phase3_authorized and phase3_index.is_file()
     files = {path.name for path in (repo_root / "integration/bh-03").iterdir() if path.is_file()}
-    expected_files = {"README.md", "integration-index-v0.1.0.json", "integration-index-v0.2.0.json"} if successor_state else {"README.md", "integration-index-v0.1.0.json"}
+    expected_files = {"README.md", "integration-index-v0.1.0.json"}
+    if successor_state:
+        expected_files.add("integration-index-v0.2.0.json")
+    if phase3_state:
+        expected_files.add("integration-index-v0.3.0.json")
     _require(files == expected_files, "unowned BH-03 integration artifact exists")
     directories = {path.name for path in (repo_root / "integration/bh-03").iterdir() if path.is_dir()}
-    _require(directories == ({"phase-02"} if successor_state else set()), "unowned BH-03 integration directory exists")
+    expected_directories = set()
+    if successor_state:
+        expected_directories.add("phase-02")
+    if phase3_state:
+        expected_directories.add("phase-03")
+    _require(directories == expected_directories, "unowned BH-03 integration directory exists")
 
 
 def validate_completion(completion: dict[str, Any], repo_root: Path = REPO_ROOT) -> None:
@@ -238,6 +256,7 @@ def validate(repo_root: Path = REPO_ROOT, research_root: Path = RESEARCH_ROOT) -
     index = _load(repo_root / INTEGRATION_INDEX.relative_to(REPO_ROOT))
     completion = _load(research_root / COMPLETION.relative_to(RESEARCH_ROOT))
     phase2_authorization = _load(research_root / PHASE2_AUTHORIZATION.relative_to(RESEARCH_ROOT))
+    phase3_authorization = _load(research_root / PHASE3_AUTHORIZATION.relative_to(RESEARCH_ROOT))
     registry = _load(research_root / REGISTRY.relative_to(RESEARCH_ROOT))
     decision = _load(research_root / BH02_DECISION.relative_to(RESEARCH_ROOT))
     reconciliation = _load(research_root / BH02_RECONCILIATION.relative_to(RESEARCH_ROOT))
@@ -245,8 +264,9 @@ def validate(repo_root: Path = REPO_ROOT, research_root: Path = RESEARCH_ROOT) -
     validate_ledger(ledger, registry, decision, reconciliation)
     validate_contract(contract)
     validate_phase2_authorization(phase2_authorization, repo_root)
-    validate_activation(activation, contract, repo_root, phase2_authorized=True)
-    validate_integration(index, repo_root, phase2_authorized=True)
+    _require(phase3_authorization.get("status") == "approved-phase-3-only", "BH-03 Phase 3 lacks explicit approval")
+    validate_activation(activation, contract, repo_root, phase2_authorized=True, phase3_authorized=True)
+    validate_integration(index, repo_root, phase2_authorized=True, phase3_authorized=True)
     validate_completion(completion, repo_root)
 
 
