@@ -1,0 +1,53 @@
+BH-02 Phase 8 normalized validation log
+recorded_at=2026-09-05
+source_revision_before_final_evidence=872bf88007450348cab416cf44ac4b5ca2621017
+branch=codex/bh-02-phase-08-acceptance
+scope=one Linux x86-64 development host
+result=PASS accepted-with-bounded-conditions
+api_state=experimental-not-stable
+support_state=unsupported
+
+Tool identities
+- Erlang/OTP 27, erts-15.2.3
+- Elixir 1.18.4
+- Mix 1.18.4
+- Node.js 24.3.0
+- npm 11.4.2
+- Python 3.12.12
+- cc 13.3.0
+- Google Chrome 140.0.7339.80
+- Mozilla Firefox 134.0
+- GTK runtime package 4.14.5+ds-0ubuntu0.5
+
+Final command outcomes
+- PASS ten project-local mix format --check-formatted runs.
+- PASS ten project-local mix test runs: 91 tests, 0 failures.
+- PASS npm run build in packages/blazex_renderer_dom.
+- PASS npm test in packages/blazex_renderer_dom: 7 tests, 0 failures.
+- PASS Chrome browser conformance: mount, semantic accessibility, autofocus/selection, event normalization, focus restoration, stale rejection, disposal.
+- PASS Firefox browser conformance: the same seven checks.
+- PASS direct GTK 4 experiment under Xvfb: 10 controls, 1 file-choice service mapping, action/change/selection/focus/stale-rejection/disposal observations.
+- PASS all research Python unit tests: 218 tests, 0 failures.
+- PASS archive, browser-envelope, catalog, classification, quality/acceptance, BH-00 governance, BH-01 activation, and BH-02 Phase 1-8 validators.
+- PASS component-catalog, component-classification, acceptance-registry, and BH-00 release deterministic generation checks.
+- PASS JSON parsing, portable forbidden-toolkit scans, canonical acceptance-registry immutability, no-new-lock, and git diff --check gates.
+
+Acceptance-gate negative outcomes
+- REJECT missing required output.
+- REJECT stale phase or candidate evidence.
+- REJECT hidden or invented finding.
+- REJECT false accessibility qualification.
+- REJECT public API stability promotion.
+- REJECT premature BH-03 authorization.
+- REJECT invalid package lifecycle transition.
+
+Open bounded conditions
+- Windows and macOS native compilation/execution remain deferred.
+- Physical mobile, second-host, Safari, and manual assistive-technology qualification remain deferred to BH-22 or earlier governed environments.
+- GTK default accessible-role gaps remain open.
+- Native file-dialog interaction, IME, geometry, pixels, visual equivalence, performance, and packaging remain unexecuted.
+- Production security, deployment, release controls, public package publication, and quality-budget promotion remain unexecuted or unauthorized.
+- The accepted contract is internal and versioned for downstream compatibility review; public APIs remain experimental and every support state remains unsupported.
+
+Downstream boundary
+- BH-03 is eligible but not authorized.

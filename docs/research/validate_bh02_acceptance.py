@@ -20,6 +20,11 @@ CONTRACT_BASELINE = BASELINE_ROOT / "blazex-bh-02-contract-baseline-v0.1.0.json"
 REVIEW = BASELINE_ROOT / "blazex-bh-02-review-v0.1.0.json"
 OVERLAY = BASELINE_ROOT / "blazex-bh-02-acceptance-overlay-v0.1.0.json"
 CANDIDATE_DECISION = BASELINE_ROOT / "blazex-bh-02-candidate-decision-v0.1.0.json"
+FINAL_OVERLAY = BASELINE_ROOT / "blazex-bh-02-acceptance-overlay-v0.2.0.json"
+FINAL_LEDGER = BASELINE_ROOT / "blazex-bh-02-phase-08-output-ledger-v0.8.0.json"
+FINAL_CONFORMANCE = REPO_ROOT / "integration/conformance/conformance-index-v0.8.0.json"
+FINAL_DECISION = BASELINE_ROOT / "blazex-bh-02-acceptance-decision-v0.1.0.json"
+COMPLETION = BASELINE_ROOT / "blazex-bh-02-phase-08-completion-v0.1.0.json"
 ENTRY = RESEARCH_ROOT / "assets/bh-01-release/blazex-bh-02-entry-manifest-v0.1.0.json"
 REGISTRY = RESEARCH_ROOT / "assets/quality-acceptance/blazex-acceptance-registry-v0.1.0.json"
 CONFORMANCE = REPO_ROOT / "integration/conformance/conformance-index-v0.7.0.json"
@@ -240,6 +245,57 @@ def validate_package_metadata(repo_root: Path = REPO_ROOT) -> None:
         _require("experiments/native_renderer_spike" not in metadata.get("dependencies", []), f"production boundary depends on native experiment: {path}")
 
 
+def validate_final_closure(
+    phase_contract: dict[str, Any],
+    reconciliation: dict[str, Any],
+    registry: dict[str, Any],
+    overlay: dict[str, Any],
+    ledger: dict[str, Any],
+    conformance: dict[str, Any],
+    decision: dict[str, Any],
+    completion: dict[str, Any],
+    repo_root: Path = REPO_ROOT,
+) -> None:
+    canonical_rows = {row["id"] for row in registry.get("acceptance_conditions", [])}
+    updates = overlay.get("condition_updates", [])
+    _require([row.get("id") for row in updates] == OVERLAY_IDS and all(row["id"] in canonical_rows for row in updates), "final acceptance overlay conditions diverge")
+    _require(overlay.get("canonical_registry", {}).get("mutation") == "none", "final overlay mutates the canonical registry")
+    canonical_path = _resolve(overlay["canonical_registry"]["path"], repo_root)
+    _require(_sha256(canonical_path) == overlay["canonical_registry"]["sha256"], "final overlay has a stale canonical registry")
+    _require((updates[0].get("status"), updates[0].get("implementation_state"), updates[0].get("verification_state")) == ("passed", "implemented", "passed"), "final BH-02 roadmap condition is not passed")
+    _require(len(updates[0].get("evidence_ids", [])) == 4, "final BH-02 roadmap pass lacks final evidence")
+    _require((updates[1].get("status"), updates[1].get("verification_state"), updates[1].get("evidence_ids")) == ("implemented", "not-executed", []), "final UI-tree package state is overclaimed")
+    for row in updates[2:]:
+        _require((row.get("status"), row.get("implementation_state"), row.get("verification_state"), row.get("evidence_ids")) == ("planned", "not-started", "not-executed", []), f"final accessibility state is overclaimed: {row.get('id')}")
+    _require(overlay.get("waivers") == [] and overlay.get("bh03_state") == "eligible-not-authorized", "final overlay contains a waiver or authorizes BH-03")
+    _require(overlay.get("api_state") == "experimental-not-stable" and overlay.get("support_state") == "unsupported", "final overlay promotes stability or support")
+
+    outputs = ledger.get("required_outputs", [])
+    _require([row.get("id") for row in outputs] == OUTPUT_IDS, "final output ledger is incomplete")
+    _require(all(str(row.get("state", "")).startswith("accepted") for row in outputs), "final output ledger contains an unaccepted output")
+    _require(ledger.get("next_milestone", {}).get("state") == "eligible-not-authorized", "final ledger authorizes BH-03")
+    _validate_bindings(conformance.get("acceptance_inputs", []), repo_root)
+    _require(conformance.get("representative_slice") == SLICE_IDS, "final conformance slice diverges")
+    _require([row.get("result") for row in conformance.get("backend_results", [])] and len(conformance["backend_results"]) == 3, "final backend results are incomplete")
+    _require(conformance.get("final_reproduction", {}).get("result") == "passed", "final reproduction did not pass")
+    _require(conformance.get("api_state") == "experimental-not-stable" and conformance.get("support_state") == "unsupported", "final conformance promotes stability or support")
+
+    _validate_bindings(decision.get("bindings", []), repo_root)
+    checks = decision.get("checks", [])
+    _require([row.get("id") for row in checks] == phase_contract.get("acceptance_checks", []), "final checks are incomplete")
+    _require(all(str(row.get("result", "")).startswith("passed") for row in checks), "final acceptance check did not pass")
+    _require(decision.get("state") == "accepted-with-bounded-conditions", "final decision is not accepted")
+    _require(set(decision.get("open_findings", [])) == {row["id"] for row in reconciliation["findings"]}, "final decision hides a finding")
+    _require(decision.get("active_blockers") == [] and decision.get("waivers") == [], "final decision has a blocker or waiver")
+    downstream = decision.get("downstream", {})
+    _require(downstream.get("bh03_eligible") is True and downstream.get("bh03_authorized") is False, "final decision prematurely authorizes BH-03")
+
+    _validate_bindings(completion.get("artifact_hashes", []), repo_root)
+    _require(completion.get("state") == "passed", "Phase 8 completion did not pass")
+    _require(completion.get("outcome", {}).get("active_blockers") == 0, "Phase 8 completion has blockers")
+    _require(completion.get("next_authorized_work") is None and completion.get("next_eligible_milestone") == "BH-03", "Phase 8 completion over-authorizes downstream work")
+
+
 def validate(repo_root: Path = REPO_ROOT, research_root: Path = RESEARCH_ROOT) -> None:
     phase_contract = _load(research_root / PHASE_CONTRACT.relative_to(RESEARCH_ROOT))
     reconciliation = _load(research_root / RECONCILIATION.relative_to(RESEARCH_ROOT))
@@ -247,6 +303,11 @@ def validate(repo_root: Path = REPO_ROOT, research_root: Path = RESEARCH_ROOT) -
     review = _load(research_root / REVIEW.relative_to(RESEARCH_ROOT))
     overlay = _load(research_root / OVERLAY.relative_to(RESEARCH_ROOT))
     decision = _load(research_root / CANDIDATE_DECISION.relative_to(RESEARCH_ROOT))
+    final_overlay = _load(research_root / FINAL_OVERLAY.relative_to(RESEARCH_ROOT))
+    final_ledger = _load(research_root / FINAL_LEDGER.relative_to(RESEARCH_ROOT))
+    final_conformance = _load(repo_root / FINAL_CONFORMANCE.relative_to(REPO_ROOT))
+    final_decision = _load(research_root / FINAL_DECISION.relative_to(RESEARCH_ROOT))
+    completion = _load(research_root / COMPLETION.relative_to(RESEARCH_ROOT))
     entry = _load(research_root / ENTRY.relative_to(RESEARCH_ROOT))
     registry = _load(research_root / REGISTRY.relative_to(RESEARCH_ROOT))
     conformance = _load(repo_root / CONFORMANCE.relative_to(REPO_ROOT))
@@ -257,6 +318,7 @@ def validate(repo_root: Path = REPO_ROOT, research_root: Path = RESEARCH_ROOT) -
     validate_overlay(overlay, registry, repo_root)
     validate_candidate_decision(decision, phase_contract, repo_root)
     validate_package_metadata(repo_root)
+    validate_final_closure(phase_contract, reconciliation, registry, final_overlay, final_ledger, final_conformance, final_decision, completion, repo_root)
 
 
 def main() -> int:
@@ -265,7 +327,7 @@ def main() -> int:
     except ValidationError as exc:
         print(f"BH-02 acceptance validation failed: {exc}", file=sys.stderr)
         return 1
-    print("BH-02 acceptance candidate passed: 7 phases, 9 outputs, 9 interactions, 7 review lenses, exact deferrals, immutable registry overlay, and unsupported experimental boundaries verified.")
+    print("BH-02 final acceptance passed: 7 phases, 9 outputs, 9 interactions, 7 review lenses, complete reproduction, exact deferrals, immutable registry overlays, and BH-03 eligibility without authorization verified.")
     return 0
 
 

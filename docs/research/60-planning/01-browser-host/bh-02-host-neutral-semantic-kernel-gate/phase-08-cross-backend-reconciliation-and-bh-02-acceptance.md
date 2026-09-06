@@ -17,7 +17,7 @@ aliases:
 
 Back to milestone: [README](README.md)
 
-- [ ] 8 Phase - Cross-Backend Reconciliation and BH-02 Acceptance.
+- [x] 8 Phase - Cross-Backend Reconciliation and BH-02 Acceptance.
 
   Reconcile the seven implementation phases against the original BH-02 entry,
   test the complete candidate through evidence-first analytical review lenses,
@@ -66,19 +66,19 @@ Back to milestone: [README](README.md)
       - [x] 8.3.2.2 Subtask - Add fail-closed negative tests for missing outputs, stale evidence, hidden findings, false qualification, public stability, and premature BH-03 authorization.
       - [x] 8.3.2.3 Subtask - Emit an acceptance overlay and candidate decision without editing the canonical planned registry.
 
-  - [ ] 8.4 Section - Run the complete inherited gate and publish BH-02 closure.
+  - [x] 8.4 Section - Run the complete inherited gate and publish BH-02 closure.
 
-    - [ ] 8.4.1 Task - Reproduce the implementation and governance candidate.
+    - [x] 8.4.1 Task - Reproduce the implementation and governance candidate.
 
-      - [ ] 8.4.1.1 Subtask - Run all activated Mix tests/formats, DOM build/Node/browser matrix, direct GTK execution, Phase 1–8 validators, archive/BH-00/BH-01/generated checks, JSON checks, and patch hygiene.
-      - [ ] 8.4.1.2 Subtask - Record exact versions, commands, counts, unavailable environments, open findings, and evidence limitations.
-      - [ ] 8.4.1.3 Subtask - Confirm the native experiment remains disposable and no production profile depends on it.
+      - [x] 8.4.1.1 Subtask - Run all activated Mix tests/formats, DOM build/Node/browser matrix, direct GTK execution, Phase 1–8 validators, archive/BH-00/BH-01/generated checks, JSON checks, and patch hygiene.
+      - [x] 8.4.1.2 Subtask - Record exact versions, commands, counts, unavailable environments, open findings, and evidence limitations.
+      - [x] 8.4.1.3 Subtask - Confirm the native experiment remains disposable and no production profile depends on it.
 
-    - [ ] 8.4.2 Task - Publish the final BH-02 decision and downstream boundary.
+    - [x] 8.4.2 Task - Publish the final BH-02 decision and downstream boundary.
 
-      - [ ] 8.4.2.1 Subtask - Accept with bounded conditions only if all active exit checks pass and no blocker remains; otherwise record revise or blocked.
-      - [ ] 8.4.2.2 Subtask - Publish the immutable BH-02 release index, implementation evidence, validation log, and completion decision.
-      - [ ] 8.4.2.3 Subtask - Mark BH-03 eligible but not authorized only after acceptance; preserve every deferred or later release obligation.
+      - [x] 8.4.2.1 Subtask - Accept with bounded conditions only if all active exit checks pass and no blocker remains; otherwise record revise or blocked.
+      - [x] 8.4.2.2 Subtask - Publish the immutable BH-02 release index, implementation evidence, validation log, and completion decision.
+      - [x] 8.4.2.3 Subtask - Mark BH-03 eligible but not authorized only after acceptance; preserve every deferred or later release obligation.
 
 ## Section delivery rule
 

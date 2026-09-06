@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0.0",
+  "record_id": "BX-BH02-DECISION-PHASE-08-ACCEPTED",
+  "state": "passed",
+  "decided_at": "2026-09-05",
+  "authorization_ref": "BX-BH02-PHASE-08-AUTHORIZATION-0.1",
+  "section_commits": [
+    {"section": "8.1", "commit": "a66ded8"},
+    {"section": "8.2", "commit": "904f7ba"},
+    {"section": "8.3", "commit": "872bf88"},
+    {"section": "8.4", "commit": "resolve-from-this-records-git-commit"}
+  ],
+  "artifact_hashes": [
+    {"path": "docs/research/assets/bh-02-baseline/blazex-bh-02-acceptance-decision-v0.1.0.json", "sha256": "bf93cbeb752b3c77d4b6c93177f4de320c371043ec9e65246f1d9c854d02dcbf"},
+    {"path": "docs/research/assets/bh-02-baseline/blazex-bh-02-implementation-evidence-v0-1-0.md", "sha256": "5a2814c5d59a98e2031e44daeb35ea0980b81f7f59339b30309e61234f402065"},
+    {"path": "docs/research/assets/bh-02-baseline/blazex-bh-02-release-index-v0-1-0.md", "sha256": "9b63912c9b61938dd856ecd6b9e525ca9c72ccd467c1da9b7571932f2763b419"},
+    {"path": "docs/research/assets/bh-02-baseline/blazex-bh-02-phase-08-output-ledger-v0.8.0.json", "sha256": "86cc05663c49266c2bdecc15f682c276944e1d03fa41ac58749850d5973bc17f"},
+    {"path": "docs/research/assets/bh-02-baseline/blazex-bh-02-acceptance-overlay-v0.2.0.json", "sha256": "2500495f20ec4df0e432e57bd09c52a1e13450287f2284231e0b456ff94d9870"},
+    {"path": "integration/conformance/conformance-index-v0.8.0.json", "sha256": "0ec1def42d8b1cc6a2e95dde66ff0c74bd93b11730fc52837f633a71b7bec1a5"},
+    {"path": "docs/research/assets/bh-02-baseline/blazex-bh-02-phase-08-validation-log-v0.1.0.txt", "sha256": "bba8723ccae6179d39c69795720956395473d4c80ced41ade40a1ecf331587a3"}
+  ],
+  "outcome": {
+    "summary": "BH-02 and Phase 8 completed with an accepted-with-bounded-conditions decision. The internal versioned host-neutral contract baseline is accepted; BH-03 is eligible but not authorized.",
+    "required_outputs": "nine-of-nine accepted-internal-experimental",
+    "representative_slice": "nine-of-nine reconciled across headless, DOM, and native-spike contracts with declared provider/platform bounds",
+    "final_gate": "passed",
+    "review_lenses": "seven-of-seven completed",
+    "active_blockers": 0,
+    "public_api_state": "experimental-not-stable",
+    "support_state": "unsupported",
+    "bh03": "eligible-not-authorized"
+  },
+  "validation_counts": {"mix_projects": 10, "mix_tests": 91, "node_tests": 7, "python_tests": 218, "browser_targets": 2, "direct_native_targets": 1, "deferred_native_targets": 2},
+  "limitations": [
+    "The acceptance evidence ran on one Linux x86-64 development host.",
+    "Windows and macOS direct native execution remains deferred.",
+    "Manual assistive-technology, physical mobile, Safari, and second-host qualification remains deferred.",
+    "GTK role gaps and native file-dialog interaction remain open findings.",
+    "Geometry, pixels, visual equivalence, IME, performance, payload/reachability, production security/deployment, packaging, publication, and release controls are unexecuted.",
+    "The accepted baseline is internal and versioned; no public SemVer stability or support claim exists."
+  ],
+  "next_authorized_work": null,
+  "next_eligible_milestone": "BH-03"
+}
