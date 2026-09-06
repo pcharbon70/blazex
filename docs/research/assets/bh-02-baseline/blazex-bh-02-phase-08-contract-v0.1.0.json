@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0.0",
+  "contract_id": "BX-BH02-PHASE-08-CONTRACT-0.1",
+  "status": "authorized-acceptance-gate",
+  "authorization_ref": "BX-BH02-PHASE-08-AUTHORIZATION-0.1",
+  "candidate_phase_decisions": [
+    {"phase": 1, "path": "docs/research/assets/bh-02-baseline/blazex-bh-02-phase-01-completion-v0.1.0.json", "sha256": "402ba7aa8c1a5a36edf7552a6db664611eb6871e82173ceabbbdc2828cde8702"},
+    {"phase": 2, "path": "docs/research/assets/bh-02-baseline/blazex-bh-02-phase-02-completion-v0.1.0.json", "sha256": "1f71039ed1acdcbac27e5503d7a2348f2c8cece974862b44d38a6b6e5e1bb09c"},
+    {"phase": 3, "path": "docs/research/assets/bh-02-baseline/blazex-bh-02-phase-03-completion-v0.1.0.json", "sha256": "6abcbd9ce4bb5e1d50ba47c71b2597f6a6e5fcc6d98430ba827cda0f3b74d23c"},
+    {"phase": 4, "path": "docs/research/assets/bh-02-baseline/blazex-bh-02-phase-04-completion-v0.1.0.json", "sha256": "01466036257379c96bc95962e8d2a9fb039042b5f2fa3e9eed059b0647e89f8e"},
+    {"phase": 5, "path": "docs/research/assets/bh-02-baseline/blazex-bh-02-phase-05-completion-v0.1.0.json", "sha256": "b8158ec9ac181ab0ddd99690a49c5b31cb3cc8e93cf85d44a67a1d06da853041"},
+    {"phase": 6, "path": "docs/research/assets/bh-02-baseline/blazex-bh-02-phase-06-completion-v0.1.0.json", "sha256": "bcfe7c0a61e5a42baa97ca953022bcf9ba6c7e38269e743365e596d53e16e73e"},
+    {"phase": 7, "path": "docs/research/assets/bh-02-baseline/blazex-bh-02-phase-07-completion-v0.1.0.json", "sha256": "e5f4906e82638087bc53809361dc21b033ecffc67ea8226f027742a02896aff1"}
+  ],
+  "required_output_ids": [
+    "semantic-ui-node-identity",
+    "event-action-contract",
+    "effect-capability-resource-contract",
+    "layout-token-accessibility-focus-selection-file-intent",
+    "renderer-lifecycle-capability-negotiation",
+    "deterministic-headless-renderer-traces",
+    "minimal-dom-lowering",
+    "limited-direct-native-control-spike",
+    "forbidden-dependency-leakage-checks"
+  ],
+  "representative_slice": ["layout", "action", "field", "selection", "keyed-list", "surface", "focus", "file-choice", "disposal"],
+  "renderer_evidence": [
+    "headless-deterministic-local-beam",
+    "standalone-dom-local-beam-node-chrome-firefox",
+    "direct-native-local-beam-gtk4-xvfb"
+  ],
+  "acceptance_checks": [
+    "all-phase-decisions-pass-and-bind-current-artifacts",
+    "all-nine-required-outputs-implemented-experimental",
+    "representative-slice-reconciled-across-headless-dom-native",
+    "portable-project-graph-has-no-host-or-toolkit-leakage",
+    "native-experiment-remains-disposable-and-outward-only",
+    "inherited-conditions-repeat-obligations-and-deferrals-preserved",
+    "findings-have-explicit-dispositions-and-no-hidden-blocker",
+    "analytical-review-lenses-complete",
+    "complete-reproducible-gate-passes",
+    "public-api-and-support-states-remain-unpromoted"
+  ],
+  "review_lenses": ["architecture", "implementation", "conformance", "accessibility", "security", "packaging", "provenance"],
+  "review_independence": "Separate evidence-first analytical lenses within the authorized Codex task; not external human or professional certification.",
+  "decision_vocabulary": ["accepted-with-bounded-conditions", "revise", "blocked"],
+  "accepted_baseline_semantics": "eligible-for-internal-BH03-consumption-with-change-control",
+  "public_api_state": "experimental-not-stable",
+  "support_state": "unsupported",
+  "downstream_if_accepted": "BH-03-eligible-but-not-authorized",
+  "canonical_acceptance_registry": "immutable-planned-source; execution evidence is a separate BH-02 overlay"
+}

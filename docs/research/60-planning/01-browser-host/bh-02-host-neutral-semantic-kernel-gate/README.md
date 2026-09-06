@@ -30,10 +30,9 @@ component families, production accessibility, or release readiness.
 
 ## Authorization status
 
-The repository owner explicitly authorized BH-02 Phase 7 on 2026-09-05 after
-Phase 6 passed and merged. Phase 7 is complete under the same four-section,
-single-PR, synchronized-main cleanup rules. Phase 8 remains planned and
-unauthorized. The completed gates
+The repository owner explicitly authorized BH-02 Phase 8 on 2026-09-05 after
+Phase 7 passed and merged. Phase 8 is active under the same four-section,
+single-PR, synchronized-main cleanup rules. The completed gates
 are preserved in the [Phase 1 implementation
 evidence](phase-01-implementation-evidence.md), [Phase 2 implementation
 evidence](phase-02-implementation-evidence.md), [Phase 3 implementation
@@ -79,7 +78,7 @@ milestone work.
 | [5 — Renderer Lifecycle and Deterministic Headless Oracle](phase-05-renderer-lifecycle-and-deterministic-headless-oracle.md) | complete — gate passed | Implement renderer negotiation, mount/update/dispose behavior, canonical normalization, and trace fixtures. | Phases 2–4 |
 | [6 — Standalone DOM Lowering and Browser Conformance](phase-06-standalone-dom-lowering-and-browser-conformance.md) | complete — gate passed | Replace disposable BH-01 DOM operations with a conforming renderer adapter and browser evidence. | Phase 5 |
 | [7 — Direct Native-Control Portability Spike](phase-07-direct-native-control-portability-spike.md) | complete — gate passed in active Linux scope | Exercise the same slice through direct Win32, AppKit, and GTK adapters; unavailable target execution remains deferred under policy. | Phase 5 |
-| 8 — Cross-Backend Reconciliation and BH-02 Acceptance | planned — not authorized | Resolve semantic leaks, review every required output and condition, and accept, revise, or block later framework work. | Phases 6–7 |
+| [8 — Cross-Backend Reconciliation and BH-02 Acceptance](phase-08-cross-backend-reconciliation-and-bh-02-acceptance.md) | active — explicitly authorized | Resolve semantic leaks, review every required output and condition, and accept, revise, or block later framework work. | Phases 6–7 |
 
 ## Shared delivery rules
 
@@ -133,6 +132,7 @@ first portable contract version without making a support claim.
 - [Phase 6 — Implementation Evidence](phase-06-implementation-evidence.md)
 - [Phase 7 — Direct Native-Control Portability Spike](phase-07-direct-native-control-portability-spike.md)
 - [Phase 7 — Implementation Evidence](phase-07-implementation-evidence.md)
+- [Phase 8 — Cross-Backend Reconciliation and BH-02 Acceptance](phase-08-cross-backend-reconciliation-and-bh-02-acceptance.md)
 
 ## Maintaining this index
 

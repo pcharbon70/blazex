@@ -74,6 +74,8 @@ not belong here.
 - [BH-02 Phase 7 output ledger](blazex-bh-02-phase-07-output-ledger-v0.7.0.json)
 - [BH-02 Phase 7 completion decision](blazex-bh-02-phase-07-completion-v0.1.0.json)
 - [BH-02 Phase 7 normalized validation log](blazex-bh-02-phase-07-validation-log-v0.1.0.txt)
+- [BH-02 Phase 8 authorization](blazex-bh-02-phase-08-authorization-v0.1.0.json)
+- [BH-02 Phase 8 contract envelope](blazex-bh-02-phase-08-contract-v0.1.0.json)
 
 ## Maintaining this index
 
