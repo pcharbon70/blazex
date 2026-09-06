@@ -51,19 +51,19 @@ Back to milestone: [README](README.md)
       - [x] 4.2.2.2 Subtask - Prove concurrent coalescing, ready reuse, scope isolation, mismatch, and sticky failure behavior.
       - [x] 4.2.2.3 Subtask - Keep root operations and all browser/measurement/acceptance evidence empty.
 
-  - [ ] 4.3 Section - Implement independent root registration and lifecycle.
+  - [x] 4.3 Section - Implement independent root registration and lifecycle.
 
-    - [ ] 4.3.1 Task - Execute the closed root operation set.
+    - [x] 4.3.1 Task - Execute the closed root operation set.
 
-      - [ ] 4.3.1.1 Subtask - Reserve unique bounded root identifiers and acknowledge registration before returning handles.
-      - [ ] 4.3.1.2 Subtask - Serialize mount, update, move, dispose, and remount per root while different roots progress independently.
-      - [ ] 4.3.1.3 Subtask - Require matching root identifier and generation acknowledgements before committing each state transition.
+      - [x] 4.3.1.1 Subtask - Reserve unique bounded root identifiers and acknowledge registration before returning handles.
+      - [x] 4.3.1.2 Subtask - Serialize mount, update, move, dispose, and remount per root while different roots progress independently.
+      - [x] 4.3.1.3 Subtask - Require matching root identifier and generation acknowledgements before committing each state transition.
 
-    - [ ] 4.3.2 Task - Enforce independence and ownership.
+    - [x] 4.3.2 Task - Enforce independence and ownership.
 
-      - [ ] 4.3.2.1 Subtask - Reject duplicate roots, illegal transitions, stale generations, and foreign-root acknowledgements atomically.
-      - [ ] 4.3.2.2 Subtask - Prove one root's failure or disposal cannot mutate, block, or dispose another root.
-      - [ ] 4.3.2.3 Subtask - Add versioned conformance fixtures and expose root/registry snapshots without renderer or runtime ownership.
+      - [x] 4.3.2.1 Subtask - Reject duplicate roots, illegal transitions, stale generations, and foreign-root acknowledgements atomically.
+      - [x] 4.3.2.2 Subtask - Prove one root's failure or disposal cannot mutate, block, or dispose another root.
+      - [x] 4.3.2.3 Subtask - Add versioned conformance fixtures and expose root/registry snapshots without renderer or runtime ownership.
 
   - [ ] 4.4 Section - Run the inherited gate and publish completion evidence.
 

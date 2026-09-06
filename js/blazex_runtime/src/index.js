@@ -5,6 +5,7 @@ export { fetchHostManifest, inspectHostManifest, validateHostManifest } from "./
 export { acquireHostArtifacts, BH03_ARTIFACT_LIMITS, BH03_ARTIFACT_ROLES } from "./artifact-acquisition.js";
 export { BH03_RUNTIME_STARTUP, BrowserRuntimeStartup } from "./runtime-startup.js";
 export { BH03_RUNTIME_REGISTRY_LIMITS, BrowserRuntimeScope, SharedRuntimeRegistry } from "./runtime-registry.js";
+export { BH03_ROOT_LIMITS, BrowserRootHandle, BrowserRootRegistry } from "./root-lifecycle.js";
 export {
   acquireDeclaredArtifacts,
   fetchDeclaredArtifact,

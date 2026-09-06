@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0.0",
+  "index_id": "BX-BH03-INTEGRATION-INDEX-0.4",
+  "status": "phase-4-shared-runtime-root-unit-conformance",
+  "activation_phase": "BH-03 Phase 1",
+  "current_phase": "BH-03 Phase 4",
+  "owner_role": "quality-owner",
+  "planned_scope": ["compatibility-identities", "discovery", "prerequisites", "manifest-validation", "artifact-acquisition", "runtime-startup", "readiness", "shared-runtime-registry", "independent-root-lifecycle", "shutdown", "runtime-loss", "mismatch", "fallback", "diagnostics", "resource-and-reliability-measurement"],
+  "fixture_sets": [
+    {"id": "BX-BH03-PHASE-02-PRE-ACQUISITION-FIXTURES-0.1", "path": "integration/bh-03/phase-02/pre-acquisition-fixtures-v0.1.0.json", "state": "immutable-predecessor"},
+    {"id": "BX-BH03-PHASE-03-STARTUP-FIXTURES-0.1", "path": "integration/bh-03/phase-03/startup-fixtures-v0.1.0.json", "state": "immutable-predecessor"},
+    {"id": "BX-BH03-PHASE-04-SHARED-RUNTIME-ROOT-FIXTURES-0.1", "path": "integration/bh-03/phase-04/shared-runtime-root-fixtures-v0.1.0.json", "state": "implemented-unit-conformance"}
+  ],
+  "scenarios": ["compatibility-exact-match", "manifest-discovery", "prerequisite-evaluation", "strict-manifest-validation", "verified-artifact-acquisition", "isolated-runtime-startup", "application-bundle-load", "bounded-correlated-readiness", "concurrent-startup-coalescing", "ready-runtime-reuse", "incompatible-scope-reuse", "sticky-startup-failure", "unique-root-registration", "independent-root-queues", "mount-update-move-dispose-remount", "root-acknowledgement-validation"],
+  "browser_results": [],
+  "shutdown_results": [],
+  "runtime_loss_results": [],
+  "recovery_results": [],
+  "fallback_results": [],
+  "measurements": [],
+  "acceptance_evidence": [],
+  "next_authorized_work": null,
+  "api_state": "experimental-not-stable",
+  "support_state": "unsupported"
+}

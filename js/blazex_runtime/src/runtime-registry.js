@@ -1,11 +1,12 @@
 import { BrowserHostBridge } from "./host-bridge.js";
 import { negotiateCompatibility } from "./compatibility.js";
 import { BlazeXHostError, errorRecord } from "./internal/errors.js";
+import { BH03_ROOT_LIMITS, BrowserRootRegistry } from "./root-lifecycle.js";
 import { BrowserRuntimeStartup } from "./runtime-startup.js";
 
 export const BH03_RUNTIME_REGISTRY_LIMITS = Object.freeze({
   max_scopes: 16,
-  max_roots_per_scope: 64,
+  max_roots_per_scope: BH03_ROOT_LIMITS.max_roots_per_scope,
 });
 
 const ID = /^[a-z][a-z0-9-]{0,63}$/;
@@ -112,6 +113,7 @@ export class BrowserRuntimeScope {
   #entry;
   #onEvent;
   #ready;
+  #roots;
 
   constructor({ entry, ready, onEvent }) {
     this.#entry = entry;
@@ -132,13 +134,20 @@ export class BrowserRuntimeScope {
     });
   }
 
-  createRootBridge(rootId) {
-    return new BrowserHostBridge({
-      transport: this.#ready.transport,
-      generation: this.#ready.attempt_generation,
-      scenarioId: `root:${this.#entry.scopeId}:${rootId}`,
-      onTrace: this.#onEvent,
-    });
+  roots() {
+    if (!this.#roots) {
+      this.#roots = new BrowserRootRegistry({
+        createBridge: (rootId) => new BrowserHostBridge({
+          transport: this.#ready.transport,
+          generation: this.#ready.attempt_generation,
+          scenarioId: `root:${this.#entry.scopeId}:${rootId}`,
+          onTrace: this.#onEvent,
+        }),
+        onEvent: this.#onEvent,
+        scopeId: this.#entry.scopeId,
+      });
+    }
+    return this.#roots;
   }
 }
 
