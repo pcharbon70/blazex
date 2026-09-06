@@ -1,0 +1,72 @@
+{
+  "schema_version": "1.0.0",
+  "contract_id": "BX-BH03-PHASE-02-CONTRACT-0.1",
+  "status": "authorized-experimental",
+  "authorization_ref": "BX-BH03-PHASE-02-AUTHORIZATION-0.1",
+  "compatibility": {
+    "matching": "exact-opaque-identity",
+    "required": {
+      "browser_host": "blazex.browser-host/1",
+      "runtime_adapter": "blazex.popcorn-runtime-adapter/1",
+      "runtime_loader": "blazex.browser-runtime-loader/1",
+      "profile_manifest": "blazex.browser-profile-manifest/1",
+      "root_lifecycle": "blazex.browser-root-lifecycle/1",
+      "semantic_tree": "blazex.ui-tree/1",
+      "renderer": "blazex.renderer/1",
+      "dom_projection": "blazex.dom-projection/1"
+    },
+    "missing_unknown_duplicate_or_mismatch": "identity-mismatch-before-artifact-acquisition",
+    "partial_match": "forbidden"
+  },
+  "discovery": {
+    "sources": ["explicit-option", "link-rel-blazex-runtime-manifest", "meta-name-blazex-runtime-manifest"],
+    "precedence": "explicit-option-then-single-equivalent-document-declaration",
+    "absence": "manifest-invalid",
+    "conflicting_or_duplicate_declaration": "manifest-invalid",
+    "url_policy": "http-or-https-same-origin-no-credentials-no-fragment"
+  },
+  "prerequisites": {
+    "browser_required": ["webassembly", "workers", "module-scripts", "fetch", "abort-controller", "subtle-crypto"],
+    "deployment_required": ["secure-context", "cross-origin-isolation", "same-origin-artifacts"],
+    "optional": ["wasm-streaming"],
+    "decisions": ["compatible", "alternate-loading", "unsupported-prerequisite"],
+    "alternate_loading_only_when": "wasm-streaming-is-the-only-missing-optional-capability"
+  },
+  "manifest": {
+    "schema_version": "1.0.0",
+    "contract_identity": "blazex.browser-profile-manifest/1",
+    "top_level_fields": ["schema_version", "manifest_id", "generation", "profile_id", "compatibility", "prerequisites", "artifacts"],
+    "artifact_roles": ["runtime-module", "runtime-wasm", "application-bundle"],
+    "artifact_fields": ["id", "role", "path", "mime", "bytes", "sha256"],
+    "strict_unknown_fields": true,
+    "generation": "positive-safe-integer",
+    "profile_id": "lowercase-kebab-identifier",
+    "artifact_url_policy": "http-or-https-same-origin-no-credentials-no-fragment",
+    "artifact_declarations_only": true
+  },
+  "failure_classes": ["identity-mismatch", "unsupported-prerequisite", "manifest-invalid"],
+  "owners": {
+    "runtime_adapter_identity": "packages/blazex_runtime_popcorn",
+    "host_identity_and_negotiation": "packages/blazex_host_browser",
+    "browser_discovery_prerequisites_and_manifest_validation": "js/blazex_runtime",
+    "profile_manifest_composition": "profiles/browser_phoenix",
+    "conformance_fixtures": "integration/bh-03"
+  },
+  "explicitly_deferred": [
+    "artifact-acquisition",
+    "artifact-integrity-execution",
+    "runtime-startup",
+    "bundle-load",
+    "readiness",
+    "shared-runtime-registry",
+    "root-lifecycle",
+    "shutdown",
+    "runtime-loss",
+    "fallback-execution",
+    "measurements",
+    "browser-results",
+    "acceptance-evidence"
+  ],
+  "api_state": "experimental-not-stable",
+  "support_state": "unsupported"
+}

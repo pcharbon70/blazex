@@ -262,4 +262,10 @@ vocabulary, browser-host/runtime boundary activation, empty integration index,
 or Phase 1 evidence changes, also run `python3 validate_bh03_activation.py` and
 `python3 -m unittest test_validate_bh03_activation.py`.
 
+When BH-03 Phase 2 authorization, compatibility identities, manifest discovery,
+browser/deployment prerequisites, profile-manifest declarations, pre-acquisition
+fixtures, or Phase 2 evidence changes, also run
+`python3 validate_bh03_compatibility.py` and
+`python3 -m unittest test_validate_bh03_compatibility.py`.
+
 Do not commit, push, publish, or open a pull request unless the user asks.

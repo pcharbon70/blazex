@@ -1,4 +1,7 @@
 export { BlazeXHostError, errorRecord, redactDiagnostic } from "./internal/errors.js";
+export { REQUIRED_COMPATIBILITY, negotiateCompatibility } from "./compatibility.js";
+export { discoverHostManifest, resolveHostUrl } from "./discovery.js";
+export { fetchHostManifest, inspectHostManifest, validateHostManifest } from "./host-manifest.js";
 export {
   acquireDeclaredArtifacts,
   fetchDeclaredArtifact,
@@ -24,7 +27,15 @@ export { BrowserRuntimeLifecycle, LIFECYCLE_STATES, classifyLifecycleFailure } f
 export { BrowserRecoveryCoordinator, RECOVERY_TERMINAL_STATES } from "./recovery-coordinator.js";
 export { ResourceLedger } from "./resource-ledger.js";
 export { DiagnosticCollector } from "./diagnostic-collector.js";
-export { detectBrowserPrerequisites, mayActivate } from "./prerequisites.js";
+export {
+  BH03_BROWSER_REQUIRED,
+  BH03_DEPLOYMENT_REQUIRED,
+  BH03_OPTIONAL,
+  detectBrowserPrerequisites,
+  evaluateHostPrerequisites,
+  mayActivate,
+  mayProceedToAcquisition,
+} from "./prerequisites.js";
 
 export const __bh01BoundaryProbe = Object.freeze({
   scope: "browser-host-loader-only",

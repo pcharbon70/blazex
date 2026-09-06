@@ -50,3 +50,10 @@ endpoint, and `PORT` selects its localhost port (default 4101). The endpoint
 applies the cross-origin isolation and content-security policies required by
 the pinned threaded Wasm runtime. `deployment-contract.json` records the exact
 feasibility behavior and known security debt.
+
+BH-03 Phase 2 publishes `priv/static/bh01/bh03-runtime-manifest.json` as the
+strict experimental profile manifest. It declares exact compatibility,
+prerequisite, and artifact metadata while leaving artifact acquisition and
+runtime startup to later authorized work. The asset plug serves this manifest
+with `no-store`; the declared immutable artifacts remain historical BH-01
+outputs until Phase 3 decides how acquisition is implemented.

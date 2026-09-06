@@ -15,6 +15,7 @@ defmodule BlazeXBrowserPhoenix.DeploymentTest do
     File.mkdir_p!(Path.join(root, "artifacts"))
     File.write!(Path.join(root, "index.html"), "<!doctype html><title>fallback</title>")
     File.write!(Path.join(root, "runtime-manifest.json"), ~s({"schema_version":"1.0.0"}))
+    File.write!(Path.join(root, "bh03-runtime-manifest.json"), ~s({"schema_version":"1.0.0"}))
     File.write!(Path.join(root, "artifacts/runtime.wasm"), <<0, 97, 115, 109, 1, 0, 0, 0>>)
     previous = Application.get_env(:blazex_browser_phoenix, :static_root)
     Application.put_env(:blazex_browser_phoenix, :static_root, root)
@@ -41,6 +42,13 @@ defmodule BlazeXBrowserPhoenix.DeploymentTest do
 
     assert get_resp_header(response, "content-security-policy") |> hd() =~
              "worker-src 'self' blob:"
+  end
+
+  test "serves the BH-03 compatibility manifest without caching" do
+    response = request("/bh01/bh03-runtime-manifest.json")
+    assert response.status == 200
+    assert get_resp_header(response, "content-type") == ["application/json; charset=utf-8"]
+    assert get_resp_header(response, "cache-control") == ["no-store"]
   end
 
   test "serves immutable artifacts with ETag validation and byte ranges" do

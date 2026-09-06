@@ -11,10 +11,10 @@ contracts.
   profiles.
 - `benchmarks` tracks performance and payload budgets against recorded
   baselines.
-- `bh-03` owns browser-host/runtime lifecycle fixtures and evidence; Phase 1
-  activates only its empty versioned index.
+- `bh-03` owns browser-host/runtime lifecycle fixtures and evidence; Phase 2
+  currently contains pure pre-acquisition contract fixtures.
 
 BH-01 activates governed fixture and benchmark evidence. BH-02 owns accepted
-internal cross-renderer conformance. BH-03 Phase 1 activates an empty lifecycle
-integration index; empty means no host fixture, browser/runtime/root result,
-measurement, or acceptance evidence exists yet.
+internal cross-renderer conformance. BH-03 Phase 2 implements compatibility,
+discovery, prerequisite, and strict-manifest fixtures while browser, runtime,
+root, failure-execution, measurement, and acceptance result sets remain empty.

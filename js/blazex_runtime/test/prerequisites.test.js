@@ -1,7 +1,15 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { detectBrowserPrerequisites, mayActivate } from "../src/index.js";
+import {
+  BH03_BROWSER_REQUIRED,
+  BH03_DEPLOYMENT_REQUIRED,
+  BH03_OPTIONAL,
+  detectBrowserPrerequisites,
+  evaluateHostPrerequisites,
+  mayActivate,
+  mayProceedToAcquisition,
+} from "../src/index.js";
 
 function environment(overrides = {}) {
   return {
@@ -36,4 +44,36 @@ test("distinguishes deployment policy from browser capability failure", () => {
   assert.equal(browser.decision, "static-server-fallback");
   assert.match(browser.message, /Server-rendered fallback/);
   assert.equal(mayActivate(browser), false);
+});
+
+test("evaluates the exact BH-03 manifest-declared prerequisite contract", () => {
+  const requirements = {
+    browser_required: [...BH03_BROWSER_REQUIRED],
+    deployment_required: [...BH03_DEPLOYMENT_REQUIRED],
+    optional: [...BH03_OPTIONAL],
+  };
+  const compatible = evaluateHostPrerequisites(requirements, environment(), { sameOriginArtifacts: true });
+  assert.equal(compatible.decision, "compatible");
+  assert.equal(mayProceedToAcquisition(compatible), true);
+
+  const buffered = evaluateHostPrerequisites(
+    requirements,
+    environment({ WebAssembly: { validate: WebAssembly.validate, Memory: WebAssembly.Memory } }),
+    { sameOriginArtifacts: true },
+  );
+  assert.equal(buffered.decision, "alternate-loading");
+  assert.equal(mayProceedToAcquisition(buffered), true);
+});
+
+test("rejects missing browser or deployment prerequisites before acquisition", () => {
+  const requirements = {
+    browser_required: [...BH03_BROWSER_REQUIRED],
+    deployment_required: [...BH03_DEPLOYMENT_REQUIRED],
+    optional: [...BH03_OPTIONAL],
+  };
+  const result = evaluateHostPrerequisites(requirements, environment({ Worker: undefined }), { sameOriginArtifacts: false });
+  assert.equal(result.decision, "unsupported-prerequisite");
+  assert.equal(result.failure_class, "unsupported-prerequisite");
+  assert.deepEqual(result.missing, ["workers", "same-origin-artifacts"]);
+  assert.equal(mayProceedToAcquisition(result), false);
 });

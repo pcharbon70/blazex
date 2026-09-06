@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0.0",
+  "index_id": "BX-BH03-INTEGRATION-INDEX-0.2",
+  "status": "phase-2-pre-acquisition-contract-fixtures",
+  "activation_phase": "BH-03 Phase 1",
+  "current_phase": "BH-03 Phase 2",
+  "owner_role": "quality-owner",
+  "planned_scope": ["compatibility-identities", "discovery", "prerequisites", "manifest-validation", "artifact-acquisition", "runtime-startup", "readiness", "shared-runtime-registry", "independent-root-lifecycle", "shutdown", "runtime-loss", "mismatch", "fallback", "diagnostics", "resource-and-reliability-measurement"],
+  "fixture_sets": [
+    {"id": "BX-BH03-PHASE-02-PRE-ACQUISITION-FIXTURES-0.1", "path": "integration/bh-03/phase-02/pre-acquisition-fixtures-v0.1.0.json", "state": "implemented-unit-conformance"}
+  ],
+  "scenarios": ["compatibility-exact-match", "manifest-discovery", "prerequisite-evaluation", "strict-manifest-validation"],
+  "browser_results": [],
+  "runtime_results": [],
+  "root_results": [],
+  "failure_results": [],
+  "measurements": [],
+  "acceptance_evidence": [],
+  "next_authorized_work": null,
+  "api_state": "experimental-not-stable",
+  "support_state": "unsupported"
+}
