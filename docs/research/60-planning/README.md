@@ -44,7 +44,7 @@ renumbered.
 
 - [01 — Browser host](01-browser-host/README.md) — active first implementation
   stream: BH-00 through BH-02 and BH-03 Phase 1 are complete; BH-03 Phase 2 is
-  eligible but remains unauthorized.
+  explicitly authorized and active.
 
 ### Documents
 

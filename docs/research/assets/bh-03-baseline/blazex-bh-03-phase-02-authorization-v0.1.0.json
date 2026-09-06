@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0.0",
+  "authorization_id": "BX-BH03-PHASE-02-AUTHORIZATION-0.1",
+  "status": "approved-phase-2-only",
+  "approved_at": "2026-09-06",
+  "approved_by": {
+    "identity": "repository-user",
+    "role": "repository-owner",
+    "evidence": "Explicit request to implement the next BH-03 phase section by section, merge one pull request, synchronize main, and delete the feature branch."
+  },
+  "activation": {
+    "base_branch": "main",
+    "base_revision": "0d4d70231ecc2b0f6ca839b72a5ba55bea36e590",
+    "base_remote_revision": "0d4d70231ecc2b0f6ca839b72a5ba55bea36e590",
+    "main_synchronized_before_branch": true,
+    "working_branch": "codex/bh-03-phase-02-compatibility-manifest",
+    "phase": "BH-03 Phase 2"
+  },
+  "approval_basis": [
+    {"path": "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-01-completion-v0.1.0.json", "sha256": "8c4b175fbaa7ef97e94967b40c8856bb6cf05d56743b53742724194e03e373a5"},
+    {"path": "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-01-contract-v0.1.0.json", "sha256": "44cd9dc05a528e7847c09868566b365d34d087f57116a44d8a23ff907ea562eb"},
+    {"path": "docs/research/assets/bh-03-baseline/blazex-bh-03-entry-ledger-v0.1.0.json", "sha256": "b9c41a106e1a041c89d2c0a38716d432f1388ea8e27ea915baa042e2240225a8"},
+    {"path": "docs/research/assets/bh-02-baseline/blazex-bh-02-contract-baseline-v0.1.0.json", "sha256": "b1969f57f707adc834fd221b5758c2cfb41683a9ab8aaf1439f355f883bd430a"},
+    {"path": "docs/research/60-planning/development-environment-and-deferred-qualification-policy.md", "sha256": "5d50cded3d70e95d47359df2a003a6979d92b8745fab012824646cc1e6bc8cfa"}
+  ],
+  "authorized_scope": [
+    "Implement the five Phase 1 BH-03 compatibility identities and exact-match negotiation.",
+    "Preserve and negotiate inherited BH-02 semantic-tree and renderer identities.",
+    "Implement deterministic same-origin manifest discovery and bounded manifest fetch.",
+    "Implement browser and deployment prerequisite evaluation.",
+    "Implement strict profile-manifest validation and versioned conformance fixtures.",
+    "Publish Phase 2 fail-closed validation and completion evidence."
+  ],
+  "delivery_rules": {
+    "sections_in_order": true,
+    "commit_per_section": true,
+    "section_count": 4,
+    "single_pull_request": true,
+    "merge_pull_request": true,
+    "return_to_synchronized_main_after_delivery": true,
+    "delete_local_feature_branch_after_delivery": true,
+    "delete_remote_feature_branch_after_delivery": true
+  },
+  "not_authorized": [
+    "BH-03 Phase 3 or later implementation",
+    "runtime artifact acquisition or integrity execution",
+    "runtime startup, readiness, shared runtime registry, root lifecycle, shutdown, recovery, or fallback execution",
+    "renderer, component, Phoenix, Plug, or server command behavior",
+    "public API stability or package publication",
+    "browser, runtime, platform, accessibility, security, performance, or release support claims",
+    "editing the canonical generated acceptance registry as execution evidence"
+  ]
+}

@@ -32,8 +32,10 @@ API stability. Those remain BH-04 and later work.
 The repository owner explicitly authorized Phase 1 on 2026-09-05, and its
 activation gate passed on 2026-09-06. The accepted handoff, milestone plan,
 lifecycle vocabulary, existing reusable boundaries, empty integration suite,
-and fail-closed validation are now recorded. Phase 2 is eligible but remains
-unauthorized; runtime lifecycle behavior is still unimplemented.
+and fail-closed validation are now recorded. The repository owner explicitly
+authorized Phase 2 on 2026-09-06. Phase 2 may implement compatibility identity,
+discovery, prerequisite evaluation, and manifest validation only; artifact
+acquisition and runtime startup remain unauthorized.
 
 ## What belongs here
 
@@ -54,7 +56,7 @@ host delivery do not belong here.
 | Phase | Status | Delivery | Dependency |
 | --- | --- | --- | --- |
 | [1 — Authorization, Handoff Reconciliation, and Boundary Activation](phase-01-authorization-handoff-reconciliation-and-boundary-activation.md) | complete — gate passed | Bound BH-02 acceptance and inherited conditions, froze the eight-phase plan, activated reusable boundaries and empty evidence locations, and proved the initial dependency/evidence boundary. | Accepted BH-02 and explicit authorization |
-| 2 — Compatibility Identity, Discovery, Prerequisites, and Manifest Contract | planned — unauthorized | Define versioned runtime/host/profile identities, discovery, prerequisite detection, and fail-closed manifest validation. | Phase 1 |
+| [2 — Compatibility Identity, Discovery, Prerequisites, and Manifest Contract](phase-02-compatibility-identity-discovery-prerequisites-and-manifest.md) | active — explicitly authorized | Define and implement versioned runtime/host/profile identities, deterministic discovery, prerequisite detection, and fail-closed manifest validation. | Phase 1 |
 | 3 — Artifact Acquisition, Runtime Startup, and Readiness | planned — unauthorized | Validate and acquire exact artifacts, start the pinned runtime, load the application bundle, and expose bounded readiness. | Phase 2 |
 | 4 — Shared Runtime Registry and Independent Root Lifecycle | planned — unauthorized | Reuse one compatible runtime while roots register, mount, update, move, dispose, and remount independently. | Phase 3 |
 | 5 — Shutdown, Runtime Loss, Mismatch, and Fallback | planned — unauthorized | Implement deterministic shutdown and intentional recovery/fallback paths without partial activation. | Phases 3–4 |
@@ -99,6 +101,7 @@ making a support or public-stability claim.
 
 - [Phase 1 — Authorization, Handoff Reconciliation, and Boundary Activation](phase-01-authorization-handoff-reconciliation-and-boundary-activation.md)
 - [Phase 1 implementation evidence](phase-01-implementation-evidence.md)
+- [Phase 2 — Compatibility Identity, Discovery, Prerequisites, and Manifest Contract](phase-02-compatibility-identity-discovery-prerequisites-and-manifest.md)
 
 ## Maintaining this index
 
