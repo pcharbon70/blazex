@@ -37,19 +37,19 @@ Back to milestone: [README](README.md)
       - [x] 4.1.2.2 Subtask - Define root identities, limits, states, transitions, independent queues, generation acknowledgements, and duplicate/stale/ownership failures.
       - [x] 4.1.2.3 Subtask - Define runtime-versus-root ownership, bounded bridge operations, remount semantics, evidence boundaries, and the Phase 5 handoff.
 
-  - [ ] 4.2 Section - Implement the exact-compatible shared runtime registry.
+  - [x] 4.2 Section - Implement the exact-compatible shared runtime registry.
 
-    - [ ] 4.2.1 Task - Coalesce startup per host scope.
+    - [x] 4.2.1 Task - Coalesce startup per host scope.
 
-      - [ ] 4.2.1.1 Subtask - Validate the complete compatibility identity table and normalized scope identifier before creating registry state.
-      - [ ] 4.2.1.2 Subtask - Share one in-flight and ready startup result for equivalent callers without exposing runtime release ownership.
-      - [ ] 4.2.1.3 Subtask - Start different scopes independently and reject incompatible reuse before a second startup occurs.
+      - [x] 4.2.1.1 Subtask - Validate the complete compatibility identity table and normalized scope identifier before creating registry state.
+      - [x] 4.2.1.2 Subtask - Share one in-flight and ready startup result for equivalent callers without exposing runtime release ownership.
+      - [x] 4.2.1.3 Subtask - Start different scopes independently and reject incompatible reuse before a second startup occurs.
 
-    - [ ] 4.2.2 Task - Make registry outcomes deterministic.
+    - [x] 4.2.2 Task - Make registry outcomes deterministic.
 
-      - [ ] 4.2.2.1 Subtask - Retain failed scope tombstones without retry or fallback and report bounded state snapshots and counters.
-      - [ ] 4.2.2.2 Subtask - Prove concurrent coalescing, ready reuse, scope isolation, mismatch, and sticky failure behavior.
-      - [ ] 4.2.2.3 Subtask - Keep root operations and all browser/measurement/acceptance evidence empty.
+      - [x] 4.2.2.1 Subtask - Retain failed scope tombstones without retry or fallback and report bounded state snapshots and counters.
+      - [x] 4.2.2.2 Subtask - Prove concurrent coalescing, ready reuse, scope isolation, mismatch, and sticky failure behavior.
+      - [x] 4.2.2.3 Subtask - Keep root operations and all browser/measurement/acceptance evidence empty.
 
   - [ ] 4.3 Section - Implement independent root registration and lifecycle.
 

@@ -4,6 +4,7 @@ export { discoverHostManifest, resolveHostUrl } from "./discovery.js";
 export { fetchHostManifest, inspectHostManifest, validateHostManifest } from "./host-manifest.js";
 export { acquireHostArtifacts, BH03_ARTIFACT_LIMITS, BH03_ARTIFACT_ROLES } from "./artifact-acquisition.js";
 export { BH03_RUNTIME_STARTUP, BrowserRuntimeStartup } from "./runtime-startup.js";
+export { BH03_RUNTIME_REGISTRY_LIMITS, BrowserRuntimeScope, SharedRuntimeRegistry } from "./runtime-registry.js";
 export {
   acquireDeclaredArtifacts,
   fetchDeclaredArtifact,
