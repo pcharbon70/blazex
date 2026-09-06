@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0.0",
+  "contract_id": "BX-BH03-PHASE-01-CONTRACT-0.1",
+  "status": "authorized-planned-unimplemented",
+  "authorization_ref": "BX-BH03-PHASE-01-AUTHORIZATION-0.1",
+  "compatibility_identities": [
+    {"id": "blazex.browser-host/1", "owner": "packages/blazex_host_browser", "state": "planned-unimplemented"},
+    {"id": "blazex.popcorn-runtime-adapter/1", "owner": "packages/blazex_runtime_popcorn", "state": "planned-unimplemented"},
+    {"id": "blazex.browser-runtime-loader/1", "owner": "js/blazex_runtime", "state": "planned-unimplemented"},
+    {"id": "blazex.browser-profile-manifest/1", "owner": "profiles/browser_phoenix", "state": "planned-unimplemented"},
+    {"id": "blazex.browser-root-lifecycle/1", "owner": "packages/blazex_host_browser", "state": "planned-unimplemented"}
+  ],
+  "host_states": ["inactive", "discovering", "validating", "acquiring", "starting", "ready", "stopping", "stopped", "failed"],
+  "root_states": ["unregistered", "registered", "mounting", "ready", "moving", "disposing", "disposed", "failed"],
+  "failure_classes": ["unsupported-prerequisite", "manifest-invalid", "identity-mismatch", "artifact-integrity", "artifact-unavailable", "runtime-startup", "bundle-load", "readiness-timeout", "duplicate-root", "stale-generation", "runtime-loss", "shutdown-timeout", "ownership-violation"],
+  "ownership_rules": ["one compatible host scope owns at most one runtime instance", "roots register with host scope and never own the runtime", "one root cannot mutate or dispose another root", "runtime adapter cannot own browser root or renderer semantics", "JavaScript loader cannot own component or server-authority behavior", "executable profile composes and configures reusable boundaries without absorbing ownership"],
+  "version_negotiation": {"inputs": ["host-contract", "runtime-adapter", "runtime-artifact", "application-bundle", "root-lifecycle", "renderer-contract", "profile-manifest"], "unknown_version": "reject-before-acquisition-or-activation", "incompatible_identity": "intentional-fallback-and-bounded-diagnostic", "partial_activation": "forbidden", "state": "planned-unimplemented"},
+  "repository_boundaries": [
+    {"id": "blazex_runtime_popcorn", "path": "packages/blazex_runtime_popcorn", "kind": "elixir-package", "manifest": "mix.exs", "dependencies": []},
+    {"id": "blazex_host_browser", "path": "packages/blazex_host_browser", "kind": "elixir-package", "manifest": "mix.exs", "dependencies": []},
+    {"id": "js/blazex_runtime", "path": "js/blazex_runtime", "kind": "javascript-package", "manifest": "package.json", "dependencies": []},
+    {"id": "profiles/browser_phoenix", "path": "profiles/browser_phoenix", "kind": "executable-profile", "manifest": "mix.exs", "dependencies": []},
+    {"id": "integration/bh-03", "path": "integration/bh-03", "kind": "integration-suite", "manifest": "integration-index-v0.1.0.json", "dependencies": []}
+  ],
+  "forbidden_owned_behavior": ["portable-component-semantics", "generic-dom-rendering", "native-renderer-behavior", "phoenix-or-plug-command-authority", "liveview-private-render-data", "production-deployment-policy", "arbitrary-script-or-network-escape"],
+  "evidence_boundary": {"contract_terms": "planned-only", "implementation": "unimplemented", "fixtures": 0, "scenarios": 0, "browser_results": 0, "measurements": 0, "acceptance_evidence": 0, "public_api_state": "experimental-not-stable", "support_state": "unsupported", "later_phases": "not-authorized"}
+}

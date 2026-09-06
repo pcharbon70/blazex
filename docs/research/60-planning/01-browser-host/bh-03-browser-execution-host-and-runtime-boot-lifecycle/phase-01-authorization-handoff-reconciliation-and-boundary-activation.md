@@ -37,19 +37,19 @@ Back to milestone: [README](README.md)
       - [x] 1.1.2.2 Subtask - Freeze runtime adapter, browser host, JavaScript loader, profile, and integration-suite ownership with forbidden dependency directions.
       - [x] 1.1.2.3 Subtask - Publish the eight-phase decomposition and milestone exit without claiming implementation.
 
-  - [ ] 1.2 Section - Freeze lifecycle vocabulary and activate repository boundaries.
+  - [x] 1.2 Section - Freeze lifecycle vocabulary and activate repository boundaries.
 
-    - [ ] 1.2.1 Task - Define the Phase 1 contract envelope.
+    - [x] 1.2.1 Task - Define the Phase 1 contract envelope.
 
-      - [ ] 1.2.1.1 Subtask - Freeze compatibility identities, lifecycle states, root states, failure classes, ownership rules, and version-negotiation policy as planned contracts.
-      - [ ] 1.2.1.2 Subtask - Record exact package/profile/integration ownership and dependencies without importing renderer, server, or component semantics.
-      - [ ] 1.2.1.3 Subtask - Keep behavior, browser evidence, budgets, and support unimplemented or unexecuted.
+      - [x] 1.2.1.1 Subtask - Freeze compatibility identities, lifecycle states, root states, failure classes, ownership rules, and version-negotiation policy as planned contracts.
+      - [x] 1.2.1.2 Subtask - Record exact package/profile/integration ownership and dependencies without importing renderer, server, or component semantics.
+      - [x] 1.2.1.3 Subtask - Keep behavior, browser evidence, budgets, and support unimplemented or unexecuted.
 
-    - [ ] 1.2.2 Task - Activate versioned repository evidence boundaries.
+    - [x] 1.2.2 Task - Activate versioned repository evidence boundaries.
 
-      - [ ] 1.2.2.1 Subtask - Update the four existing project manifests with a truthful BH-03 Phase 1 activation state while preserving their BH-01 origin.
-      - [ ] 1.2.2.2 Subtask - Create an empty versioned `integration/bh-03` index with no fixtures, scenarios, results, or support claims.
-      - [ ] 1.2.2.3 Subtask - Update all directory indexes and reject unowned activation paths.
+      - [x] 1.2.2.1 Subtask - Update the four existing project manifests with a truthful BH-03 Phase 1 activation state while preserving their BH-01 origin.
+      - [x] 1.2.2.2 Subtask - Create an empty versioned `integration/bh-03` index with no fixtures, scenarios, results, or support claims.
+      - [x] 1.2.2.3 Subtask - Update all directory indexes and reject unowned activation paths.
 
   - [ ] 1.3 Section - Implement fail-closed activation validation.
 

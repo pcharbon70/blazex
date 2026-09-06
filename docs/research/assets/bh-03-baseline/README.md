@@ -40,6 +40,8 @@ integration directories.
 
 - [BH-03 Phase 1 authorization](blazex-bh-03-phase-01-authorization-v0.1.0.json)
 - [BH-03 entry ledger](blazex-bh-03-entry-ledger-v0.1.0.json)
+- [BH-03 Phase 1 lifecycle contract](blazex-bh-03-phase-01-contract-v0.1.0.json)
+- [BH-03 repository activation](blazex-bh-03-repository-activation-v0.1.0.json)
 
 ## Maintaining this index
 
