@@ -43,9 +43,8 @@ renumbered.
 ### Subdirectories
 
 - [01 — Browser host](01-browser-host/README.md) — active first implementation
-  stream: BH-00 and BH-01 are complete, BH-02 Phases 1–7 have validated the
-  neutral foundation through standalone DOM and direct-native conformance, and
-  Phase 8 reconciliation and acceptance is explicitly authorized and active.
+  stream: BH-00 through BH-02 and BH-03 Phase 1 are complete; BH-03 Phase 2 is
+  eligible but remains unauthorized.
 
 ### Documents
 

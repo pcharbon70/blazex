@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0.0",
+  "index_id": "BX-BH03-INTEGRATION-INDEX-0.1",
+  "status": "activated-no-lifecycle-fixtures-or-results",
+  "activation_phase": "BH-03 Phase 1",
+  "owner_role": "quality-owner",
+  "planned_scope": ["compatibility-identities", "discovery", "prerequisites", "manifest-validation", "artifact-acquisition", "runtime-startup", "readiness", "shared-runtime-registry", "independent-root-lifecycle", "shutdown", "runtime-loss", "mismatch", "fallback", "diagnostics", "resource-and-reliability-measurement"],
+  "fixture_sets": [],
+  "scenarios": [],
+  "browser_results": [],
+  "runtime_results": [],
+  "root_results": [],
+  "failure_results": [],
+  "measurements": [],
+  "acceptance_evidence": [],
+  "next_authorized_work": null,
+  "api_state": "experimental-not-stable",
+  "support_state": "unsupported"
+}

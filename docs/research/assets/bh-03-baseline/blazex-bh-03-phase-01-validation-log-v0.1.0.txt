@@ -1,0 +1,45 @@
+BH-03 Phase 1 normalized validation log
+Recorded: 2026-09-06T04:05:26Z
+Base: 65797d7ea05cc112e45cab1a091baea621ba6b6e
+Branch: codex/bh-03-phase-01-activation
+
+PASS pinned Elixir 1.17.3 / OTP 26 mix format --check-formatted and mix test
+  packages/blazex_runtime_popcorn: 2 tests, 0 failures
+  packages/blazex_host_browser: 1 test, 0 failures
+  profiles/browser_phoenix: 12 tests, 0 failures
+  total: 3 projects, 15 tests, 0 failures
+  image: docker.io/hexpm/elixir@sha256:8d03cfb52e3fa3f5d83d749942b7c45c966dda48a7c4ba4f069390379b59fc39
+  image ID: sha256:a2386c21edd5c612b4ed6e2731daba806177dba55baf977ee456c6e194f60d9f
+PASS npm run build and npm test in js/blazex_runtime: 10 tests, 0 failures
+PASS python3 packages/blazex_runtime_popcorn/runtime/verify_runtime_build.py
+PASS runtime Python unit tests: 9 tests, 0 failures
+PASS python3 -m unittest test_*.py in docs/research: 228 tests, 0 failures
+PASS validate_archive.py: 191 documents, 24 directories, 1432 links, 50 sources
+PASS 16 research validators: archive, browser envelope, component catalog,
+  component classification, quality acceptance, BH-00, BH-01, all eight BH-02
+  validators, and BH-03 Phase 1 activation
+PASS 4 deterministic generators in --check mode: component catalog, component
+  classification, acceptance registry, and BH-00 release
+PASS all repository JSON documents parse with jq 1.7
+PASS git diff --check
+
+BH-03 Phase 1 negative cases exercised:
+- missing repository-owner authorization
+- stale immutable input hash
+- changed required-output set
+- duplicate activation boundary
+- prematurely implemented lifecycle contract
+- nonempty execution evidence
+- support promotion
+- BH-03 Phase 2 authorization
+- divergent completion outcome or bound artifact hash
+
+Evidence boundary:
+- lifecycle behavior remains unimplemented
+- integration/bh-03 contains no fixtures, scenarios, results, or measurements
+- ten BH-03 acceptance conditions remain planned with no executed evidence
+- no public API stability, package publication, or support claim
+- Phase 2 is eligible but not authorized
+
+Final archive counts and every bound artifact hash were rechecked by the
+evidence commit gate.

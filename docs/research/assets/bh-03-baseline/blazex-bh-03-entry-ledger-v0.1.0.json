@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0.0",
+  "ledger_id": "BX-BH03-ENTRY-LEDGER-0.1",
+  "status": "phase-1-authorized-lifecycle-unimplemented",
+  "authorization_ref": "BX-BH03-PHASE-01-AUTHORIZATION-0.1",
+  "accepted_predecessor": {"path": "docs/research/assets/bh-02-baseline/blazex-bh-02-acceptance-decision-v0.1.0.json", "sha256": "bf93cbeb752b3c77d4b6c93177f4de320c371043ec9e65246f1d9c854d02dcbf", "state": "accepted-with-bounded-conditions"},
+  "required_outputs": [
+    {"id": "runtime-host-compatibility-identities", "state": "planned-unimplemented", "phase": 2},
+    {"id": "runtime-discovery-prerequisite-and-manifest-validation", "state": "planned-unimplemented", "phase": 2},
+    {"id": "artifact-acquisition-bundle-load-startup-and-readiness", "state": "planned-unimplemented", "phase": 3},
+    {"id": "shared-compatible-runtime-instance-registry", "state": "planned-unimplemented", "phase": 4},
+    {"id": "independent-root-register-mount-update-move-dispose-remount", "state": "planned-unimplemented", "phase": 4},
+    {"id": "deterministic-shutdown-runtime-loss-and-cleanup", "state": "planned-unimplemented", "phase": 5},
+    {"id": "mismatch-unsupported-and-fallback-diagnostics", "state": "planned-unimplemented", "phase": 5},
+    {"id": "active-browser-profile-integration", "state": "planned-unimplemented", "phase": 6},
+    {"id": "root-readiness-memory-growth-and-reliability-evidence", "state": "planned-unimplemented", "phase": 7}
+  ],
+  "first_responsible_acceptance_ids": ["BX-ACC-BUDGET-BX-BUD-RELIABILITY-ROOT-COUNT", "BX-ACC-BUDGET-BX-BUD-RESOURCE-MEMORY-GROWTH-MIB", "BX-ACC-BUDGET-BX-BUD-STARTUP-ROOT-READINESS-MS", "BX-ACC-FAILURE-BX-FAIL-DEPLOYMENT-MISMATCH", "BX-ACC-FAILURE-BX-FAIL-RUNTIME-LOSS", "BX-ACC-GATE-BX-GREQ-COMPAT-IDENTITIES", "BX-ACC-GATE-BX-GREQ-COMPAT-MISMATCH", "BX-ACC-GATE-BX-GREQ-COMPAT-SUPPORT-MATRIX", "BX-ACC-GATE-BX-GREQ-COMPAT-UPGRADE", "BX-ACC-ROADMAP-BH-03"],
+  "inherited_condition_ids": ["BX-BH01-CONDITION-AVM-REACHABILITY", "BX-BH01-CONDITION-BROTLI-SERVING", "BX-BH01-CONDITION-FIREFOX-TIMER", "BX-BH01-CONDITION-PRIVATE-API-PINS", "BX-BH01-CONDITION-RUNTIME-REPEAT", "BX-BH01-CONDITION-PRODUCTION-SECURITY", "BX-BH01-CONDITION-BH22-QUALIFICATION", "BX-BH01-CONDITION-RELEASE-CONTROLS"],
+  "satisfied_predecessor_condition": "BX-BH01-CONDITION-FIXTURE-DISPOSABILITY",
+  "inherited_open_finding_ids": ["BX-BH02-FINDING-GTK-ROLE-GAPS", "BX-BH02-FINDING-NATIVE-TARGETS-DEFERRED", "BX-BH02-FINDING-MANUAL-AT-UNEXECUTED", "BX-BH02-FINDING-NATIVE-FILE-DIALOG-UNEXECUTED", "BX-BH02-FINDING-PUBLIC-API-EXPERIMENTAL", "BX-BH02-FINDING-RELEASE-CONTROLS-UNEXECUTED"],
+  "deferred_qualification_ids": ["BX-BH01-DEFER-ANDROID-PHYSICAL-0.1", "BX-BH01-DEFER-APPLE-MOBILE-0.1", "BX-BH01-DEFER-MACOS-SAFARI-0.1", "BX-BH01-DEFER-WINDOWS-DESKTOP-0.1", "BX-BH01-DEFER-SECOND-LINUX-HOST-0.1", "BX-BH01-DEFER-MANUAL-AT-0.1"],
+  "activation_boundaries": [
+    {"id": "blazex_runtime_popcorn", "path": "packages/blazex_runtime_popcorn", "owner_role": "runtime-owner", "kind": "elixir-package"},
+    {"id": "blazex_host_browser", "path": "packages/blazex_host_browser", "owner_role": "browser-host-owner", "kind": "elixir-package"},
+    {"id": "js/blazex_runtime", "path": "js/blazex_runtime", "owner_role": "browser-host-owner", "kind": "javascript-package"},
+    {"id": "profiles/browser_phoenix", "path": "profiles/browser_phoenix", "owner_role": "browser-profile-owner", "kind": "executable-profile"},
+    {"id": "integration/bh-03", "path": "integration/bh-03", "owner_role": "quality-owner", "kind": "integration-suite"}
+  ],
+  "ownership_rules": ["blazex_runtime_popcorn owns replaceable Popcorn/AtomVM adapter behavior, not browser lifecycle or component semantics", "blazex_host_browser owns reusable host and root lifecycle contracts, not renderer semantics or server authority", "js/blazex_runtime owns browser-side loading and runtime control, not portable components, generic DOM rendering, or server commands", "profiles/browser_phoenix composes reusable packages and may not own them", "integration/bh-03 owns cross-boundary fixtures and evidence, not product implementation"],
+  "forbidden_dependency_directions": ["runtime-or-host-to-profile", "runtime-or-host-to-phoenix-plug-liveview", "runtime-or-host-to-renderer-implementation", "runtime-or-host-to-component-package", "portable-contract-to-browser-javascript-or-popcorn", "production-boundary-to-native-renderer-experiment"],
+  "evidence_boundary": {"lifecycle_contracts": "planned-unimplemented", "runtime_behavior": "unimplemented", "multiple_roots": "unimplemented", "browser_integration": "unexecuted", "failure_recovery": "unexecuted", "budgets": "unexecuted", "acceptance_conditions": "planned", "public_api": "experimental-not-stable", "support": "unsupported", "next_phase": "eligible-after-phase-1-not-authorized"}
+}

@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0.0",
+  "authorization_id": "BX-BH03-PHASE-01-AUTHORIZATION-0.1",
+  "status": "approved-phase-1-only",
+  "approved_at": "2026-09-05",
+  "approved_by": {"identity": "repository-user", "role": "repository-owner", "evidence": "Explicit user authorization after BH-02 closure."},
+  "activation": {"base_revision": "65797d7ea05cc112e45cab1a091baea621ba6b6e", "base_remote_revision": "65797d7ea05cc112e45cab1a091baea621ba6b6e", "main_synchronized_before_branch": true, "working_branch": "codex/bh-03-phase-01-activation"},
+  "delivery_rules": {"sections_in_order": true, "commit_per_section": true, "section_count": 4, "single_pull_request": true, "merge_pull_request": true, "return_to_synchronized_main_after_delivery": true, "delete_local_feature_branch_after_delivery": true, "delete_remote_feature_branch_after_delivery": true},
+  "approval_basis": [
+    {"path": "docs/research/assets/bh-02-baseline/blazex-bh-02-acceptance-decision-v0.1.0.json", "sha256": "bf93cbeb752b3c77d4b6c93177f4de320c371043ec9e65246f1d9c854d02dcbf"},
+    {"path": "docs/research/assets/bh-02-baseline/blazex-bh-02-phase-08-completion-v0.1.0.json", "sha256": "3335c329c5af8f768d28bef55ade5db7ab8800618dbbdd46903ddf8e1ee82fbc"},
+    {"path": "docs/research/assets/bh-02-baseline/blazex-bh-02-contract-baseline-v0.1.0.json", "sha256": "b1969f57f707adc834fd221b5758c2cfb41683a9ab8aaf1439f355f883bd430a"},
+    {"path": "docs/research/assets/bh-02-baseline/blazex-bh-02-release-index-v0-1-0.md", "sha256": "9b63912c9b61938dd856ecd6b9e525ca9c72ccd467c1da9b7571932f2763b419"},
+    {"path": "docs/research/assets/quality-acceptance/blazex-acceptance-registry-v0.1.0.json", "sha256": "43025d17513f068eb1ac0838a381da4c132bf41b74aa602bffdc130e411368ed"},
+    {"path": "docs/research/20-notes/browser-host-implementation-milestones.md", "sha256": "a23f08ce1bf6021a6d1e9d1dd5998f85e37a7604d23bc032e0618f1c5facddb0"},
+    {"path": "docs/research/60-planning/development-environment-and-deferred-qualification-policy.md", "sha256": "5d50cded3d70e95d47359df2a003a6979d92b8745fab012824646cc1e6bc8cfa"}
+  ],
+  "authorized": ["Create and execute the four sections of BH-03 Phase 1.", "Reconcile immutable BH-02 acceptance and inherited conditions into a BH-03 entry ledger.", "Freeze the milestone phase decomposition and planned lifecycle vocabulary.", "Activate existing runtime, host, JavaScript loader, profile, and empty integration evidence boundaries.", "Implement fail-closed Phase 1 validation and publish completion evidence.", "Open and merge one PR, synchronize main, and delete the feature branch."],
+  "not_authorized": ["BH-03 Phase 2 or later implementation", "runtime discovery, startup, root registry, readiness, shutdown, recovery, or fallback behavior", "changing the accepted BH-02 portable contract baseline", "public API stability or package publication", "browser, runtime, platform, accessibility, security, performance, or release support claims", "editing the canonical generated acceptance registry as execution evidence"]
+}

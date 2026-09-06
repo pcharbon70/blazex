@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0.0",
+  "activation_id": "BX-BH03-REPOSITORY-ACTIVATION-0.1",
+  "status": "phase-1-boundaries-activated-no-lifecycle-behavior",
+  "authorization_ref": "BX-BH03-PHASE-01-AUTHORIZATION-0.1",
+  "contract_ref": "BX-BH03-PHASE-01-CONTRACT-0.1",
+  "boundaries": [
+    {"id": "blazex_runtime_popcorn", "path": "packages/blazex_runtime_popcorn", "owner_role": "runtime-owner", "kind": "elixir-package", "origin_activation": "BH-01 Phase 1", "current_phase": "BH-03 Phase 1", "status": "experimental-bh03-phase1-activated-runtime-adapter"},
+    {"id": "blazex_host_browser", "path": "packages/blazex_host_browser", "owner_role": "browser-host-owner", "kind": "elixir-package", "origin_activation": "BH-01 Phase 1", "current_phase": "BH-03 Phase 1", "status": "experimental-bh03-phase1-activated-browser-host"},
+    {"id": "js/blazex_runtime", "path": "js/blazex_runtime", "owner_role": "browser-host-owner", "kind": "javascript-package", "origin_activation": "BH-01 Phase 1", "current_phase": "BH-03 Phase 1", "status": "experimental-bh03-phase1-activated-browser-loader"},
+    {"id": "profiles/browser_phoenix", "path": "profiles/browser_phoenix", "owner_role": "browser-profile-owner", "kind": "executable-profile", "origin_activation": "BH-01 Phase 1", "current_phase": "BH-03 Phase 1", "status": "experimental-bh03-phase1-activated-composition"},
+    {"id": "integration/bh-03", "path": "integration/bh-03", "owner_role": "quality-owner", "kind": "integration-suite", "origin_activation": null, "current_phase": "BH-03 Phase 1", "status": "activated-no-lifecycle-fixtures-or-results"}
+  ],
+  "actual_dependency_edges": ["profiles/browser_phoenix -> blazex_phoenix", "profiles/browser_phoenix -> blazex_renderer_dom_liveview"],
+  "profile_external_dependency_pins": ["phoenix==1.8.13", "phoenix_live_view==1.2.11", "local_live_view==0.1.0", "bandit==1.12.5", "igniter==0.7.9-build-only"],
+  "javascript_runtime_dependencies": [],
+  "javascript_development_dependencies": ["esbuild==0.28.2", "playwright-core==1.62.1"],
+  "planned_profile_composition": ["blazex_runtime_popcorn", "blazex_host_browser", "blazex_renderer_dom", "blazex_renderer_dom_liveview", "blazex_phoenix", "js/blazex_runtime"],
+  "evidence_index": {"path": "integration/bh-03/integration-index-v0.1.0.json", "state": "empty-activation"},
+  "lifecycle_behavior": "unimplemented",
+  "api_state": "experimental-not-stable",
+  "support_state": "unsupported",
+  "next_authorized_work": null
+}

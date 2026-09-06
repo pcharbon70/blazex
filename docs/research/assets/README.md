@@ -37,6 +37,9 @@ insufficient. Record source, creator, license, provenance, and use.
 - [BH-02 semantic-kernel baseline](bh-02-baseline/README.md) — explicit Phase
   1 authorization, inherited-entry ledger, activation, validation, and phase
   evidence without rewriting the BH-01 release.
+- [BH-03 browser-host baseline](bh-03-baseline/README.md) — authorization,
+  inherited BH-02 handoff, lifecycle-boundary activation, validation, and
+  phase evidence without rewriting predecessor baselines.
 - [Component catalog](component-catalog/README.md) — pinned upstream reference,
   raw extraction inputs, BlazeX catalog schema/data, and deterministic reports.
 - [Quality and acceptance](quality-acceptance/README.md) — versioned quality

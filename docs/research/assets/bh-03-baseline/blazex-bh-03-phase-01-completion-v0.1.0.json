@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0.0",
+  "record_id": "BX-BH03-DECISION-PHASE-01-GO",
+  "record_type": "decision",
+  "state": "passed",
+  "recorded_at": "2026-09-06T04:05:26Z",
+  "authorization_ref": "BX-BH03-PHASE-01-AUTHORIZATION-0.1",
+  "section_commits": [
+    {"section": "1.1", "commit": "fa68b22"},
+    {"section": "1.2", "commit": "5252f8b"},
+    {"section": "1.3", "commit": "334f047"},
+    {"section": "1.4", "commit": "resolve-from-this-records-git-commit"}
+  ],
+  "artifact_hashes": [
+    {"path": "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-01-authorization-v0.1.0.json", "sha256": "f12f41d50d7d43892bb266e675f0aa1494e91f3738e99c5a1bfc583ac6ba7574"},
+    {"path": "docs/research/assets/bh-03-baseline/blazex-bh-03-entry-ledger-v0.1.0.json", "sha256": "b9c41a106e1a041c89d2c0a38716d432f1388ea8e27ea915baa042e2240225a8"},
+    {"path": "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-01-contract-v0.1.0.json", "sha256": "44cd9dc05a528e7847c09868566b365d34d087f57116a44d8a23ff907ea562eb"},
+    {"path": "docs/research/assets/bh-03-baseline/blazex-bh-03-repository-activation-v0.1.0.json", "sha256": "75471a39821710cea0e5f16d63633985f9f61c6ce5809349be5443e44a1c69a6"},
+    {"path": "integration/bh-03/integration-index-v0.1.0.json", "sha256": "3fc0947fec76cfa24c3bc023f564458c5dc0c73ee42ca54769c022eb6879b0b1"},
+    {"path": "docs/research/60-planning/01-browser-host/bh-03-browser-execution-host-and-runtime-boot-lifecycle/phase-01-implementation-evidence.md", "sha256": "d1da808db34dfee80a77ef09aad8f35da439fee540c7e53743625247f5553b10"},
+    {"path": "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-01-validation-log-v0.1.0.txt", "sha256": "21d79513bc1bee71fa4882cb31132cf53a2d476ae3578ee6bf4d0319cf93335c"}
+  ],
+  "outcome": {
+    "summary": "BH-03 Phase 1 authorization, handoff reconciliation, lifecycle vocabulary, boundary activation, and fail-closed gate passed.",
+    "activated_boundaries": 5,
+    "required_outputs": "nine-of-nine-planned-unimplemented",
+    "acceptance_conditions": "ten-of-ten-planned-unexecuted",
+    "lifecycle_behavior": "unimplemented",
+    "integration_evidence": "empty",
+    "public_api_state": "experimental-not-stable",
+    "support_state": "unsupported",
+    "next_phase": "BH-03 Phase 2 eligible but not authorized"
+  },
+  "validation_counts": {
+    "mix_projects": 3,
+    "mix_tests": 15,
+    "node_tests": 10,
+    "runtime_python_tests": 9,
+    "research_python_tests": 228,
+    "research_validators": 16,
+    "generator_checks": 4,
+    "bh03_negative_cases": 9
+  },
+  "limitations": [
+    "Phase 1 proves authorization, immutable handoff, planned vocabulary, repository ownership, dependency direction, and fail-closed evidence governance only.",
+    "Discovery, manifest validation, acquisition, startup, readiness, shared runtime/root lifecycle, shutdown, recovery, fallback, conformance, and measurements remain unimplemented or unexecuted.",
+    "The integration index contains no fixtures, scenarios, results, measurements, or acceptance evidence.",
+    "Unavailable platforms, Safari, physical devices, second-host work, and manual assistive-technology qualification retain their governed deferrals.",
+    "No public API stability, package publication, or support claim exists."
+  ],
+  "next_authorized_work": null,
+  "next_eligible_phase": "BH-03 Phase 2"
+}
