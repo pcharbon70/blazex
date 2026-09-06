@@ -184,7 +184,9 @@ def validate_implementation(repo_root: Path = REPO_ROOT) -> None:
     _require("chromium, firefox" in runner and "scenarioSet" in runner, "active matrix runner diverges")
     for path in ("js/blazex_runtime", "profiles/browser_phoenix"):
         metadata = _load(repo_root / path / "blazex.project.json")
-        _require(metadata.get("current_phase") == "BH-03 Phase 6" and metadata.get("status") == "experimental-bh03-phase6-browser-profile", f"Phase 6 metadata diverges: {path}")
+        phase6 = metadata.get("current_phase") == "BH-03 Phase 6" and metadata.get("status") == "experimental-bh03-phase6-browser-profile"
+        phase7 = PHASE7_AUTHORIZATION.is_file() and metadata.get("current_phase") == "BH-03 Phase 7" and metadata.get("status") == "experimental-bh03-phase7-measurements"
+        _require(phase6 or phase7, f"Phase 6 metadata diverges without an authorized Phase 7 successor: {path}")
         _require(metadata.get("public_api_state") == "experimental-not-stable", f"public API was promoted: {path}")
 
 

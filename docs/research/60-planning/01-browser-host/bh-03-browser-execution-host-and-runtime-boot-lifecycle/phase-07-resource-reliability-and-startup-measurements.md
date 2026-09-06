@@ -16,7 +16,7 @@ aliases:
 
 Back to milestone: [README](README.md)
 
-- [ ] 7 Phase - Resource, Reliability, and Startup Measurements.
+- [x] 7 Phase - Resource, Reliability, and Startup Measurements.
 
   Measure the active `/bh03/` profile's startup, root fan-out, cleanup,
   repetition, failure convergence, and available memory signals in Linux
@@ -65,19 +65,19 @@ Back to milestone: [README](README.md)
       - [x] 7.3.2.2 Subtask - Record unavailable Safari, mobile, device, second-host, and manual assistive-technology rows as deferred without pass credit.
       - [x] 7.3.2.3 Subtask - Keep timing and memory values non-normative, every browser unsupported, and all BH-03 acceptance evidence empty.
 
-  - [ ] 7.4 Section - Run the inherited gate and publish completion evidence.
+  - [x] 7.4 Section - Run the inherited gate and publish completion evidence.
 
-    - [ ] 7.4.1 Task - Execute the active Phase 7 checks.
+    - [x] 7.4.1 Task - Execute the active Phase 7 checks.
 
-      - [ ] 7.4.1.1 Subtask - Run project-local Mix/Node tests and builds, profile verification, active measurement scenarios, Phase 1 through Phase 7 validators/tests, inherited validators/generators, JSON, archive, tracked-file, and patch hygiene.
-      - [ ] 7.4.1.2 Subtask - Confirm predecessor completion-bound artifacts and `/bh01/` remain unchanged and acceptance result sets remain empty.
-      - [ ] 7.4.1.3 Subtask - Record exact commands, counts, negative outcomes, environment, browser versions, observations, and limitations.
+      - [x] 7.4.1.1 Subtask - Run project-local Mix/Node tests and builds, profile verification, active measurement scenarios, Phase 1 through Phase 7 validators/tests, inherited validators/generators, JSON, archive, tracked-file, and patch hygiene.
+      - [x] 7.4.1.2 Subtask - Confirm predecessor completion-bound artifacts and `/bh01/` remain unchanged and acceptance result sets remain empty.
+      - [x] 7.4.1.3 Subtask - Record exact commands, counts, negative outcomes, environment, browser versions, observations, and limitations.
 
-    - [ ] 7.4.2 Task - Publish the Phase 7 decision.
+    - [x] 7.4.2 Task - Publish the Phase 7 decision.
 
-      - [ ] 7.4.2.1 Subtask - Emit a versioned validation log, implementation-evidence note, validator, tests, and completion decision bound to tracked artifacts.
-      - [ ] 7.4.2.2 Subtask - Mark Phase 7 complete only if every active repetition and inherited gate passes without a budget or support overclaim.
-      - [ ] 7.4.2.3 Subtask - Leave Phase 8 eligible but unauthorized.
+      - [x] 7.4.2.1 Subtask - Emit a versioned validation log, implementation-evidence note, validator, tests, and completion decision bound to tracked artifacts.
+      - [x] 7.4.2.2 Subtask - Mark Phase 7 complete only if every active repetition and inherited gate passes without a budget or support overclaim.
+      - [x] 7.4.2.3 Subtask - Leave Phase 8 eligible but unauthorized.
 
 ## Section delivery rule
 
@@ -93,3 +93,4 @@ implementation authority.
 - [Phase 6 implementation evidence](phase-06-implementation-evidence.md)
 - [Development environment and deferred qualification policy](../../development-environment-and-deferred-qualification-policy.md)
 - [BH-03 Phase 7 executable contract](../../../assets/bh-03-baseline/blazex-bh-03-phase-07-contract-v0.1.0.json)
+- [Phase 7 implementation evidence](phase-07-implementation-evidence.md)
