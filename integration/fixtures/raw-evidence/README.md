@@ -1,4 +1,4 @@
-# BH-01 Fixture Raw Evidence
+# Browser-Host Fixture Raw Evidence
 
 Immutable logs, traces, and observations from governed fixture execution are
 retained here or referenced through content-addressed records. The Phase 3
@@ -49,3 +49,7 @@ is not browser evidence.
   execution of the same client compatibility scenarios; not Safari evidence.
 - `bh01-phase8-browser-matrix.json` — aggregate immutable-profile execution
   counts, raw record hashes, proof outcomes, blockers, and final decision.
+- `bh03-phase6-browser-matrix.json` — the identical five-scenario `/bh03/`
+  profile suite passing in active Linux Chrome 140.0.7339.80 and Firefox 153.0,
+  including actual AtomVM/Elixir root acknowledgements and shutdown. It keeps
+  browser support unsupported and unavailable qualification rows deferred.

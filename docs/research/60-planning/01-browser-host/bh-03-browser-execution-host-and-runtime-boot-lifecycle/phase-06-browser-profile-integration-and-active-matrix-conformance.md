@@ -51,19 +51,19 @@ Back to milestone: [README](README.md)
       - [x] 6.2.2.2 Subtask - Register, mount, update, move, dispose, and remount two independent roots through the retained runtime transport.
       - [x] 6.2.2.3 Subtask - Expose bounded profile snapshots and user-invokable restart/stop controls without declaring a stable API.
 
-  - [ ] 6.3 Section - Execute the active Chrome and Firefox matrix.
+  - [x] 6.3 Section - Execute the active Chrome and Firefox matrix.
 
-    - [ ] 6.3.1 Task - Add one browser-independent scenario runner.
+    - [x] 6.3.1 Task - Add one browser-independent scenario runner.
 
-      - [ ] 6.3.1.1 Subtask - Drive exact-match startup, runtime sharing, two-root lifecycle isolation, fallback, and shutdown scenarios from one runner.
-      - [ ] 6.3.1.2 Subtask - Record exact executable, browser version, host environment, scenario result, and bounded diagnostics for each active row.
-      - [ ] 6.3.1.3 Subtask - Reject absent rows, divergent scenario sets, profile drift, or browser failures.
+      - [x] 6.3.1.1 Subtask - Drive exact-match startup, runtime sharing, two-root lifecycle isolation, fallback, and shutdown scenarios from one runner.
+      - [x] 6.3.1.2 Subtask - Record exact executable, browser version, host environment, scenario result, and bounded diagnostics for each active row.
+      - [x] 6.3.1.3 Subtask - Reject absent rows, divergent scenario sets, profile drift, or browser failures.
 
-    - [ ] 6.3.2 Task - Retain honest active-matrix evidence.
+    - [x] 6.3.2 Task - Retain honest active-matrix evidence.
 
-      - [ ] 6.3.2.1 Subtask - Execute Linux Chrome and Firefox against the Phoenix-served `/bh03/` profile.
-      - [ ] 6.3.2.2 Subtask - Record unavailable Safari, mobile, device, second-host, and manual assistive-technology rows as deferred under policy, never passed.
-      - [ ] 6.3.2.3 Subtask - Keep all browser support states unsupported and carry observations, not release budgets, into Phase 7.
+      - [x] 6.3.2.1 Subtask - Execute Linux Chrome and Firefox against the Phoenix-served `/bh03/` profile.
+      - [x] 6.3.2.2 Subtask - Record unavailable Safari, mobile, device, second-host, and manual assistive-technology rows as deferred under policy, never passed.
+      - [x] 6.3.2.3 Subtask - Keep all browser support states unsupported and carry observations, not release budgets, into Phase 7.
 
   - [ ] 6.4 Section - Run the inherited gate and publish completion evidence.
 

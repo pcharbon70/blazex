@@ -119,7 +119,8 @@ async function start() {
     show("ready", "Shared AtomVM/Elixir runtime ready; two root lifecycles passed");
     publish();
   } catch (error) {
-    const fallback = registry?.fallbackFor({ scopeId: "page-runtime", error, runtimeGeneration: scope?.snapshot().runtime_generation ?? 0 });
+    const fallbackRegistry = registry ?? new SharedRuntimeRegistry();
+    const fallback = fallbackRegistry.fallbackFor({ scopeId: "page-runtime", error, runtimeGeneration: scope?.snapshot().runtime_generation ?? 0 });
     Object.assign(state, {
       state: fallback ? "fallback" : "failed",
       error: boundedError(error),

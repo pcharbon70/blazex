@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0.0",
+  "fixture_id": "BX-BH03-PHASE-06-BROWSER-PROFILE-FIXTURES-0.1",
+  "profile_path": "/bh03/",
+  "active_matrix": [
+    {"platform": "linux", "browser": "chrome", "required": true},
+    {"platform": "linux", "browser": "firefox", "required": true}
+  ],
+  "scenario_set": [
+    "verified-profile-startup",
+    "shared-runtime-two-root-lifecycle",
+    "identity-mismatch-fallback",
+    "unsupported-prerequisite-fallback",
+    "registry-owned-shutdown"
+  ],
+  "ready_checks": [
+    "exact-manifest-and-prerequisites",
+    "one-shared-runtime",
+    "two-independent-root-registrations",
+    "independent-mount",
+    "update-and-move-isolation",
+    "dispose-and-remount-isolation",
+    "intentional-fallback-decisions",
+    "elixir-runtime-root-acknowledgements"
+  ],
+  "expected": {
+    "runtime_starts": 1,
+    "compatible_open_calls": 2,
+    "root_states_before_shutdown": {"primary-root": "ready", "secondary-root": "ready"},
+    "root_states_after_shutdown": {"primary-root": "disposed", "secondary-root": "disposed"},
+    "runtime_acknowledgements_before_shutdown": 8,
+    "runtime_acknowledgements_after_shutdown": 11,
+    "fallback_actions": {"identity-mismatch": "deployment-action", "unsupported-prerequisite": "static-content"},
+    "support_state": "unsupported"
+  }
+}
