@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0.0",
+  "overlay_id": "BX-EVIDENCE-BH02-ACCEPTANCE-OVERLAY-0.1",
+  "status": "candidate",
+  "canonical_registry": {"path": "docs/research/assets/quality-acceptance/blazex-acceptance-registry-v0.1.0.json", "sha256": "43025d17513f068eb1ac0838a381da4c132bf41b74aa602bffdc130e411368ed", "mutation": "none"},
+  "scope": "BH-02 execution state only; this overlay does not rewrite the generated planned registry.",
+  "condition_updates": [
+    {"id": "BX-ACC-ROADMAP-BH-02", "status": "passed", "support_status": "unsupported", "implementation_state": "implemented", "verification_state": "passed", "evidence_ids": ["BX-EVIDENCE-BH02-RECONCILIATION-0.1", "BX-EVIDENCE-BH02-REVIEW-0.1", "BX-EVIDENCE-BH02-GATE-0.1"], "qualification": "internal-experimental-milestone-only"},
+    {"id": "BX-ACC-PACKAGE-BLAZEX-UI-TREE", "status": "implemented", "support_status": "unsupported", "implementation_state": "implemented", "verification_state": "not-executed", "evidence_ids": [], "reason": "Package boundary exists and direction is checked, but its required shared-UI payload budget and publication/reachability gate have not executed."},
+    {"id": "BX-ACC-GATE-BX-GREQ-A11Y-ANNOUNCEMENT", "status": "planned", "support_status": "candidate", "implementation_state": "not-started", "verification_state": "not-executed", "evidence_ids": [], "reason": "Product-wide manual and asynchronous-family scope is unavailable."},
+    {"id": "BX-ACC-GATE-BX-GREQ-A11Y-FALLBACK", "status": "planned", "support_status": "candidate", "implementation_state": "not-started", "verification_state": "not-executed", "evidence_ids": [], "reason": "All classified families, fallbacks, supported profiles, and manual checks are unavailable."},
+    {"id": "BX-ACC-GATE-BX-GREQ-A11Y-INPUT-MODES", "status": "planned", "support_status": "candidate", "implementation_state": "not-started", "verification_state": "not-executed", "evidence_ids": [], "reason": "Touch, physical keyboard, and manual input-mode qualification is unavailable."},
+    {"id": "BX-ACC-GATE-BX-GREQ-A11Y-KEYBOARD-FOCUS", "status": "planned", "support_status": "candidate", "implementation_state": "not-started", "verification_state": "not-executed", "evidence_ids": [], "reason": "BH-02 has bounded focus observations, not product-wide automated/browser/manual qualification."},
+    {"id": "BX-ACC-GATE-BX-GREQ-A11Y-SEMANTICS", "status": "planned", "support_status": "candidate", "implementation_state": "not-started", "verification_state": "not-executed", "evidence_ids": [], "reason": "GTK role gaps and absent manual assistive-technology evidence prohibit a pass."},
+    {"id": "BX-ACC-GATE-BX-GREQ-A11Y-VISUAL-ADAPTATION", "status": "planned", "support_status": "candidate", "implementation_state": "not-started", "verification_state": "not-executed", "evidence_ids": [], "reason": "Zoom, reflow, forced colors, reduced motion, direction, and text-spacing matrices are unexecuted."}
+  ],
+  "waivers": [],
+  "supersessions": [],
+  "bh03_state": "not-authorized",
+  "api_state": "experimental-not-stable",
+  "support_state": "unsupported"
+}

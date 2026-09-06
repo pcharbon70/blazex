@@ -74,6 +74,21 @@ not belong here.
 - [BH-02 Phase 7 output ledger](blazex-bh-02-phase-07-output-ledger-v0.7.0.json)
 - [BH-02 Phase 7 completion decision](blazex-bh-02-phase-07-completion-v0.1.0.json)
 - [BH-02 Phase 7 normalized validation log](blazex-bh-02-phase-07-validation-log-v0.1.0.txt)
+- [BH-02 Phase 8 authorization](blazex-bh-02-phase-08-authorization-v0.1.0.json)
+- [BH-02 Phase 8 contract envelope](blazex-bh-02-phase-08-contract-v0.1.0.json)
+- [BH-02 cross-backend reconciliation](blazex-bh-02-reconciliation-v0.1.0.json)
+- [BH-02 candidate internal contract baseline](blazex-bh-02-contract-baseline-v0.1.0.json)
+- [BH-02 machine-readable multidisciplinary review](blazex-bh-02-review-v0.1.0.json)
+- [BH-02 multidisciplinary review](blazex-bh-02-multidisciplinary-review-v0-1-0.md)
+- [BH-02 acceptance execution overlay](blazex-bh-02-acceptance-overlay-v0.1.0.json)
+- [BH-02 candidate acceptance decision](blazex-bh-02-candidate-decision-v0.1.0.json)
+- [BH-02 final acceptance overlay](blazex-bh-02-acceptance-overlay-v0.2.0.json)
+- [BH-02 Phase 8 output ledger](blazex-bh-02-phase-08-output-ledger-v0.8.0.json)
+- [BH-02 Phase 8 normalized validation log](blazex-bh-02-phase-08-validation-log-v0.1.0.txt)
+- [BH-02 final acceptance decision](blazex-bh-02-acceptance-decision-v0.1.0.json)
+- [BH-02 implementation evidence](blazex-bh-02-implementation-evidence-v0-1-0.md)
+- [BH-02 release index](blazex-bh-02-release-index-v0-1-0.md)
+- [BH-02 Phase 8 completion decision](blazex-bh-02-phase-08-completion-v0.1.0.json)
 
 ## Maintaining this index
 

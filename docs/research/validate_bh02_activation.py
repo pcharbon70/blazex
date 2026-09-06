@@ -46,6 +46,11 @@ FORBIDDEN_SOURCE_PATTERNS = {
     ),
 }
 
+ALLOWED_PACKAGE_LIFECYCLE_STATES = {
+    ("experimental-activation-skeleton", "experimental-unimplemented"),
+    ("implemented-experimental-bh02-candidate", "experimental-not-stable"),
+}
+
 
 class ValidationError(Exception):
     """Raised when BH-02 activation must fail closed."""
@@ -153,7 +158,11 @@ def validate_activation(activation: dict[str, Any], repo_root: Path = REPO_ROOT)
         for key in ("id", "path", "kind", "owner_role", "manifest", "dependencies"):
             _require(metadata.get(key) == boundary.get(key), f"activation metadata differs for {boundary['id']}: {key}")
         _require(metadata.get("activation_phase") == "BH-02 Phase 1", f"wrong activation phase: {boundary['id']}")
-        _require(metadata.get("public_api_state") == "experimental-unimplemented", f"API state overclaim: {boundary['id']}")
+        lifecycle_state = (metadata.get("status"), metadata.get("public_api_state"))
+        _require(
+            lifecycle_state in ALLOWED_PACKAGE_LIFECYCLE_STATES,
+            f"invalid package lifecycle state: {boundary['id']} {lifecycle_state}",
+        )
         validate_mix_dependencies(path, boundary["dependencies"])
         scan_forbidden_sources(path)
     evidence = activation.get("evidence_boundary", {})

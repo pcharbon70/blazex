@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0.0",
+  "baseline_id": "BX-BH02-CONTRACT-BASELINE-0.1",
+  "status": "candidate-internal-baseline-pending-acceptance",
+  "authorization_ref": "BX-BH02-PHASE-08-AUTHORIZATION-0.1",
+  "reconciliation_ref": "BX-BH02-RECONCILIATION-0.1",
+  "compatibility_scope": "internal-BH03-consumption-after-BH02-acceptance",
+  "surfaces": [
+    {"id": "semantic-component-and-evaluation-v1", "owner": "packages/blazex_core", "modules": ["BlazeX.Core.Component", "BlazeX.Core.Context", "BlazeX.Core.Evaluation", "BlazeX.Core.Evaluator", "BlazeX.Core.Event", "BlazeX.Core.Identity", "BlazeX.Core.Portable"], "compatibility_identity": "blazex.core/1"},
+    {"id": "event-effect-capability-resource-v1", "owner": "packages/blazex_effects", "modules": ["BlazeX.Effects.Capability", "BlazeX.Effects.Effect", "BlazeX.Effects.Error", "BlazeX.Effects.Negotiation", "BlazeX.Effects.Provider", "BlazeX.Effects.Resource", "BlazeX.Effects.Result", "BlazeX.Effects.Tracker"], "compatibility_identity": "blazex.effects/1"},
+    {"id": "semantic-ui-and-presentation-intent-v1", "owner": "packages/blazex_ui_tree", "modules": ["BlazeX.UITree.Accessibility", "BlazeX.UITree.Binding", "BlazeX.UITree.ComponentEvaluator", "BlazeX.UITree.Document", "BlazeX.UITree.Focus", "BlazeX.UITree.IntentSet", "BlazeX.UITree.Layout", "BlazeX.UITree.Metric", "BlazeX.UITree.Node", "BlazeX.UITree.Selection", "BlazeX.UITree.TokenRef", "BlazeX.UITree.ValidationError"], "compatibility_identity": "blazex.ui-tree/1"},
+    {"id": "renderer-lifecycle-and-negotiation-v1", "owner": "packages/blazex_renderer", "modules": ["BlazeX.Renderer.Artifact", "BlazeX.Renderer.Backend", "BlazeX.Renderer.Capabilities", "BlazeX.Renderer.Context", "BlazeX.Renderer.Diagnostic", "BlazeX.Renderer.Negotiation", "BlazeX.Renderer.Requirements", "BlazeX.Renderer.Session"], "compatibility_identity": "blazex.renderer/1"},
+    {"id": "headless-snapshot-and-trace-v1", "owner": "packages/blazex_renderer_headless", "modules": ["BlazeX.Renderer.Headless", "BlazeX.Renderer.Headless.Normalizer", "BlazeX.Renderer.Headless.Snapshot", "BlazeX.Renderer.Headless.State", "BlazeX.Renderer.Headless.Trace"], "compatibility_identity": "blazex.renderer-headless/1"},
+    {"id": "dom-full-projection-batch-v1", "owner": "packages/blazex_renderer_dom", "modules": ["BlazeX.Renderer.DOM", "BlazeX.Renderer.DOM.Batch", "BlazeX.Renderer.DOM.FocusIntent", "BlazeX.Renderer.DOM.Listener", "BlazeX.Renderer.DOM.Lowerer", "BlazeX.Renderer.DOM.Portable", "BlazeX.Renderer.DOM.Projection", "BlazeX.Renderer.DOM.SelectionIntent", "BlazeX.Renderer.DOM.State"], "compatibility_identity": "blazex.dom-projection/1"},
+    {"id": "native-full-projection-batch-v1", "owner": "experiments/native_renderer_spike", "modules": ["BlazeX.NativeSpike", "BlazeX.NativeSpike.Batch", "BlazeX.NativeSpike.Fixture", "BlazeX.NativeSpike.Lowerer", "BlazeX.NativeSpike.Node", "BlazeX.NativeSpike.Portable", "BlazeX.NativeSpike.State", "BlazeX.NativeSpike.Wire"], "compatibility_identity": "blazex.native-experiment/1", "experiment_only": true},
+    {"id": "cross-renderer-conformance-v1", "owner": "integration/conformance", "fixtures": ["semantic-kernel-fixtures-v0.1.0.json", "event-effect-resource-fixtures-v0.1.0.json", "presentation-intent-fixtures-v0.1.0.json", "renderer-headless-fixtures-v0.1.0.json", "dom-renderer-fixtures-v0.1.0.json", "native-control-fixtures-v0.1.0.json"], "compatibility_identity": "blazex.bh02.conformance/1"}
+  ],
+  "portable_contract_boundary": ["semantic-component-and-evaluation-v1", "event-effect-capability-resource-v1", "semantic-ui-and-presentation-intent-v1", "renderer-lifecycle-and-negotiation-v1"],
+  "backend_private_contracts": ["headless-snapshot-and-trace-v1", "dom-full-projection-batch-v1", "native-full-projection-batch-v1"],
+  "native_experiment_boundary": {"outward_dependency_only": true, "production_profiles_may_depend_on_experiment": false, "toolkit_objects_in_portable_contracts": false, "excluded_systems": ["qt", "wxwidgets"]},
+  "stability": {"internal_contract": "candidate-versioned", "public_api": "experimental-not-stable", "support": "unsupported", "semver_promise": "none", "package_publication": "not-authorized"},
+  "material_change_control": {"required": ["superseding-architecture-decision-record", "compatibility-impact-review", "updated-versioned-conformance-fixtures", "affected-backend-reexecution", "new-BH02-baseline-or-authorized-downstream-supersession"], "silent_breaking_change": "forbidden"},
+  "explicit_noncontracts": ["backend-generated-identifiers", "DOM-node-and-browser-event-objects", "GTK-Win32-AppKit-handles", "native-wire-encoding-as-portable-api", "BH01-fixture-messages-routes-and-json", "pixel-or-geometry-equivalence", "production-provider-behavior"],
+  "acceptance_effect": "This candidate becomes the accepted internal BH-02 baseline only through the Phase 8 final decision; this record alone grants no downstream authorization."
+}

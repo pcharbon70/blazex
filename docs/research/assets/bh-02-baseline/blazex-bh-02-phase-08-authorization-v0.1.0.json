@@ -1,0 +1,59 @@
+{
+  "schema_version": "1.0.0",
+  "authorization_id": "BX-BH02-PHASE-08-AUTHORIZATION-0.1",
+  "status": "approved-phase-8-only",
+  "approved_at": "2026-09-05",
+  "approved_by": {
+    "identity": "pcharbon70",
+    "name": "Pascal Charbonneau",
+    "role": "repository-owner",
+    "approval_record": "Repository-owner request in the BlazeX Codex task to implement the next BH-02 phase section by section with one commit per section, one pull request, merge, synchronized-main cleanup, and feature-branch deletion."
+  },
+  "activation": {
+    "base_branch": "main",
+    "base_revision": "666aeed4a3cdfb4d5985d38a2664a8ed321a187c",
+    "base_remote_revision": "666aeed4a3cdfb4d5985d38a2664a8ed321a187c",
+    "main_synchronized_before_branch": true,
+    "working_branch": "codex/bh-02-phase-08-acceptance",
+    "phase": "BH-02 Phase 8"
+  },
+  "approval_basis": [
+    {"path": "docs/research/assets/bh-02-baseline/blazex-bh-02-phase-07-completion-v0.1.0.json", "sha256": "e5f4906e82638087bc53809361dc21b033ecffc67ea8226f027742a02896aff1"},
+    {"path": "docs/research/assets/bh-02-baseline/blazex-bh-02-entry-ledger-v0.1.0.json", "sha256": "761514204143b8685a7ce58df1aa24fb5333f91bcb8f9bb762b0251006923717"},
+    {"path": "docs/research/20-notes/browser-host-implementation-milestones.md", "sha256": "a23f08ce1bf6021a6d1e9d1dd5998f85e37a7604d23bc032e0618f1c5facddb0"},
+    {"path": "docs/research/20-notes/architecture-decisions/adr-0001-host-neutral-semantic-component-kernel.md", "sha256": "b99fb71e09caad0f00f27b8d945f573eca749e2c2f336b21dd9f42de8742f329"},
+    {"path": "docs/research/20-notes/architecture-decisions/adr-0004-renderer-backend-separation.md", "sha256": "c221548f8c42a4e2560293b66fdaa2ae5d254a433acef11799906e4243d35354"},
+    {"path": "docs/research/20-notes/architecture-decisions/adr-0007-native-control-portability-gate.md", "sha256": "4ebd2feb853a08c258141479726f14a60ed409b98cabdd5f0537ff9f02784343"},
+    {"path": "integration/conformance/conformance-index-v0.7.0.json", "sha256": "e163e595a4e24b1d6a22d380dcf5c2e9bd96b0af5e01a13ae0f1b9f3736d92b5"},
+    {"path": "docs/research/assets/quality-acceptance/blazex-acceptance-registry-v0.1.0.json", "sha256": "43025d17513f068eb1ac0838a381da4c132bf41b74aa602bffdc130e411368ed"},
+    {"path": "docs/research/20-notes/blazex-acceptance-traceability-and-evidence-policy.md", "sha256": "a009c39bfc4911364fc4c3247150926ce0543d95d7b1ad51fe33d6bc063d0554"}
+  ],
+  "authorized_scope": [
+    "Reconcile all seven BH-02 phase decisions, nine required outputs, inherited conditions, repeat obligations, deferrals, findings, and cross-backend evidence.",
+    "Implement a deterministic BH-02 acceptance gate and immutable evidence overlay without rewriting the canonical planned acceptance registry.",
+    "Run separate architecture, implementation, conformance, accessibility, security, packaging, and provenance analytical review lenses within this authorized task.",
+    "Resolve portable-contract leakage findings or retain them as explicit blockers or bounded follow-up conditions.",
+    "Accept, revise, or block the BH-02 internal contract baseline and decide only whether BH-03 is eligible for separate authorization.",
+    "Publish the final BH-02 release index, acceptance decision, validation evidence, and downstream handoff."
+  ],
+  "delivery_rules": {
+    "sections_in_order": true,
+    "commit_per_section": true,
+    "section_count": 4,
+    "single_pull_request": true,
+    "merge_pull_request": true,
+    "return_to_synchronized_main_after_delivery": true,
+    "delete_local_feature_branch_after_delivery": true,
+    "delete_remote_feature_branch_after_delivery": true
+  },
+  "not_authorized": [
+    "BH-03 implementation or any later milestone work",
+    "public or SemVer-stable component, renderer, wire, host, effect, or native-control APIs",
+    "production native renderer or desktop host promotion",
+    "browser, operating-system, accessibility, security, performance, deployment, release, or support qualification",
+    "conversion of unavailable Windows, macOS, Safari, mobile, second-machine, or manual assistive-technology work into passing evidence",
+    "editing the canonical generated acceptance registry to impersonate execution evidence",
+    "waiving non-waivable blockers or hiding unresolved findings",
+    "Qt or wxWidgets directly or transitively"
+  ]
+}

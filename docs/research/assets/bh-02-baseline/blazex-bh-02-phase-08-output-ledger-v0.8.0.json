@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0.0",
+  "ledger_id": "BX-BH02-OUTPUT-LEDGER-0.8",
+  "status": "bh02-accepted-internal-experimental-baseline",
+  "authorization_ref": "BX-BH02-PHASE-08-AUTHORIZATION-0.1",
+  "supersedes": {"path": "docs/research/assets/bh-02-baseline/blazex-bh-02-phase-07-output-ledger-v0.7.0.json", "sha256": "2d953c2ab3cae82a134209a06372632b223953d5c8a0d32e7135044f5023388b", "preserved_unchanged": true},
+  "required_outputs": [
+    {"id": "semantic-ui-node-identity", "state": "accepted-internal-experimental", "phase": 2},
+    {"id": "event-action-contract", "state": "accepted-internal-experimental", "phase": 3},
+    {"id": "effect-capability-resource-contract", "state": "accepted-internal-experimental", "phase": 3},
+    {"id": "layout-token-accessibility-focus-selection-file-intent", "state": "accepted-internal-experimental", "phase": 4},
+    {"id": "renderer-lifecycle-capability-negotiation", "state": "accepted-internal-experimental", "phase": 5},
+    {"id": "deterministic-headless-renderer-traces", "state": "accepted-internal-experimental", "phase": 5},
+    {"id": "minimal-dom-lowering", "state": "accepted-internal-experimental", "phase": 6},
+    {"id": "limited-direct-native-control-spike", "state": "accepted-internal-experimental-one-target-two-deferred", "phase": 7},
+    {"id": "forbidden-dependency-leakage-checks", "state": "accepted-and-repeated-through-phase-8", "phase": 1}
+  ],
+  "acceptance": {"outcome": "accepted-with-bounded-conditions", "internal_contract_baseline": "BX-BH02-CONTRACT-BASELINE-0.1", "public_api_state": "experimental-not-stable", "support_state": "unsupported"},
+  "evidence_boundary": {"headless": "passed-local", "dom": "passed-local-node-chrome-firefox", "native": "passed-local-direct-gtk4-xvfb", "windows_native": "deferred", "macos_native": "deferred", "manual_accessibility": "unexecuted", "production_security": "unexecuted", "package_publication": "not-authorized", "quality_budgets": "unpassed"},
+  "inherited_handoff": {"conditions": "preserved", "repeat_obligations": "preserved", "deferred_qualification": "preserved", "repository_boundaries": "preserved", "forbidden_leakage": "preserved"},
+  "next_milestone": {"id": "BH-03", "state": "eligible-not-authorized"}
+}

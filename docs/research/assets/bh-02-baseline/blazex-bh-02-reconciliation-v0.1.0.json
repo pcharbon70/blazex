@@ -1,0 +1,83 @@
+{
+  "schema_version": "1.0.0",
+  "record_id": "BX-BH02-RECONCILIATION-0.1",
+  "status": "candidate-reconciled",
+  "authorization_ref": "BX-BH02-PHASE-08-AUTHORIZATION-0.1",
+  "contract_ref": "BX-BH02-PHASE-08-CONTRACT-0.1",
+  "historical_evidence_policy": "Completed phase records are immutable; this record binds and interprets them without rewriting them.",
+  "phase_decisions": [
+    {"phase": 1, "record_id": "BX-BH02-PHASE-01-COMPLETION-0.1", "path": "docs/research/assets/bh-02-baseline/blazex-bh-02-phase-01-completion-v0.1.0.json", "sha256": "402ba7aa8c1a5a36edf7552a6db664611eb6871e82173ceabbbdc2828cde8702", "result": "passed"},
+    {"phase": 2, "record_id": "BX-BH02-PHASE-02-COMPLETION-0.1", "path": "docs/research/assets/bh-02-baseline/blazex-bh-02-phase-02-completion-v0.1.0.json", "sha256": "1f71039ed1acdcbac27e5503d7a2348f2c8cece974862b44d38a6b6e5e1bb09c", "result": "passed"},
+    {"phase": 3, "record_id": "BX-BH02-PHASE-03-COMPLETION-0.1", "path": "docs/research/assets/bh-02-baseline/blazex-bh-02-phase-03-completion-v0.1.0.json", "sha256": "6abcbd9ce4bb5e1d50ba47c71b2597f6a6e5fcc6d98430ba827cda0f3b74d23c", "result": "passed"},
+    {"phase": 4, "record_id": "BX-BH02-PHASE-04-COMPLETION-0.1", "path": "docs/research/assets/bh-02-baseline/blazex-bh-02-phase-04-completion-v0.1.0.json", "sha256": "01466036257379c96bc95962e8d2a9fb039042b5f2fa3e9eed059b0647e89f8e", "result": "passed"},
+    {"phase": 5, "record_id": "BX-BH02-PHASE-05-COMPLETION-0.1", "path": "docs/research/assets/bh-02-baseline/blazex-bh-02-phase-05-completion-v0.1.0.json", "sha256": "b8158ec9ac181ab0ddd99690a49c5b31cb3cc8e93cf85d44a67a1d06da853041", "result": "passed"},
+    {"phase": 6, "record_id": "BX-BH02-PHASE-06-COMPLETION-0.1", "path": "docs/research/assets/bh-02-baseline/blazex-bh-02-phase-06-completion-v0.1.0.json", "sha256": "bcfe7c0a61e5a42baa97ca953022bcf9ba6c7e38269e743365e596d53e16e73e", "result": "passed"},
+    {"phase": 7, "record_id": "BX-BH02-PHASE-07-COMPLETION-0.1", "path": "docs/research/assets/bh-02-baseline/blazex-bh-02-phase-07-completion-v0.1.0.json", "sha256": "e5f4906e82638087bc53809361dc21b033ecffc67ea8226f027742a02896aff1", "result": "passed"}
+  ],
+  "required_outputs": [
+    {"id": "semantic-ui-node-identity", "phase": 2, "state": "implemented-experimental", "implementation": ["packages/blazex_core/lib/blazex/core/identity.ex", "packages/blazex_ui_tree/lib/blazex/ui_tree/node.ex", "packages/blazex_ui_tree/lib/blazex/ui_tree/document.ex"], "conformance": "BX-BH02-SEMANTIC-KERNEL-FIXTURES-0.1"},
+    {"id": "event-action-contract", "phase": 3, "state": "implemented-experimental", "implementation": ["packages/blazex_core/lib/blazex/core/event.ex", "packages/blazex_core/lib/blazex/core/evaluator.ex"], "conformance": "BX-BH02-EVENT-EFFECT-RESOURCE-FIXTURES-0.1"},
+    {"id": "effect-capability-resource-contract", "phase": 3, "state": "implemented-experimental", "implementation": ["packages/blazex_effects/lib/blazex/effects/effect.ex", "packages/blazex_effects/lib/blazex/effects/capability.ex", "packages/blazex_effects/lib/blazex/effects/resource.ex"], "conformance": "BX-BH02-EVENT-EFFECT-RESOURCE-FIXTURES-0.1"},
+    {"id": "layout-token-accessibility-focus-selection-file-intent", "phase": 4, "state": "implemented-experimental", "implementation": ["packages/blazex_ui_tree/lib/blazex/ui_tree/layout.ex", "packages/blazex_ui_tree/lib/blazex/ui_tree/token_ref.ex", "packages/blazex_ui_tree/lib/blazex/ui_tree/accessibility.ex", "packages/blazex_ui_tree/lib/blazex/ui_tree/focus.ex", "packages/blazex_ui_tree/lib/blazex/ui_tree/selection.ex", "packages/blazex_ui_tree/lib/blazex/ui_tree/intent_set.ex"], "conformance": "BX-BH02-PRESENTATION-INTENT-FIXTURES-0.1"},
+    {"id": "renderer-lifecycle-capability-negotiation", "phase": 5, "state": "implemented-experimental", "implementation": ["packages/blazex_renderer/lib/blazex/renderer/backend.ex", "packages/blazex_renderer/lib/blazex/renderer/session.ex", "packages/blazex_renderer/lib/blazex/renderer/negotiation.ex"], "conformance": "BX-BH02-RENDERER-HEADLESS-FIXTURES-0.1"},
+    {"id": "deterministic-headless-renderer-traces", "phase": 5, "state": "implemented-experimental", "implementation": ["packages/blazex_renderer_headless/lib/blazex/renderer/headless/snapshot.ex", "packages/blazex_renderer_headless/lib/blazex/renderer/headless/trace.ex", "packages/blazex_renderer_headless/lib/blazex/renderer/headless/normalizer.ex"], "conformance": "BX-BH02-RENDERER-HEADLESS-FIXTURES-0.1"},
+    {"id": "minimal-dom-lowering", "phase": 6, "state": "implemented-experimental", "implementation": ["packages/blazex_renderer_dom/lib/blazex/renderer/dom/lowerer.ex", "packages/blazex_renderer_dom/lib/blazex/renderer/dom/projection.ex", "packages/blazex_renderer_dom/js/dom-driver.js"], "conformance": "BX-BH02-DOM-RENDERER-FIXTURES-0.1"},
+    {"id": "limited-direct-native-control-spike", "phase": 7, "state": "implemented-experimental-one-target-two-deferred", "implementation": ["experiments/native_renderer_spike/lib/blazex/native_spike.ex", "experiments/native_renderer_spike/platform/gtk4_adapter.c"], "conformance": "BX-BH02-NATIVE-CONTROL-FIXTURES-0.1"},
+    {"id": "forbidden-dependency-leakage-checks", "phase": 1, "state": "implemented-and-repeated-through-phase-7", "implementation": ["docs/research/validate_bh02_activation.py", "docs/research/validate_bh02_dom.py", "docs/research/validate_bh02_native.py"], "conformance": "phase-1-through-phase-7-validation-logs"}
+  ],
+  "representative_slice": [
+    {"id": "layout", "headless": "passed-logical-structure", "dom": "passed-logical-lowering", "native": "passed-logical-stack-no-geometry-equivalence"},
+    {"id": "action", "headless": "passed-semantic-action", "dom": "passed-button-event", "native": "passed-direct-gtk-button-event"},
+    {"id": "field", "headless": "passed-controlled-field", "dom": "passed-input-and-stale-rejection", "native": "passed-direct-gtk-entry-and-stale-rejection"},
+    {"id": "selection", "headless": "passed-selection-intent", "dom": "passed-checkbox-and-selection", "native": "passed-checkbox-and-list-selection"},
+    {"id": "keyed-list", "headless": "passed-identity-and-order", "dom": "passed-keyed-projection", "native": "passed-keyed-list-projection"},
+    {"id": "surface", "headless": "passed-semantic-surface", "dom": "passed-dialog-semantics", "native": "passed-direct-gtk-window-projection"},
+    {"id": "focus", "headless": "passed-focus-intent", "dom": "passed-focus-restoration", "native": "passed-focus-restoration"},
+    {"id": "file-choice", "headless": "passed-effect-intent", "dom": "passed-portable-effect-boundary-no-dialog-provider", "native": "mapped-to-gtk-file-dialog-interaction-deferred"},
+    {"id": "disposal", "headless": "passed-idempotent-disposal", "dom": "passed-focus-and-listener-cleanup", "native": "passed-idempotent-control-disposal"}
+  ],
+  "inherited_conditions": [
+    {"id": "BX-BH01-CONDITION-AVM-REACHABILITY", "owner": "build-owner", "disposition": "preserved-not-triggered-by-bh02", "blocks": ["release readiness", "application payload pass"]},
+    {"id": "BX-BH01-CONDITION-BROTLI-SERVING", "owner": "browser-profile-owner", "disposition": "preserved-not-triggered-by-bh02", "blocks": ["production deployment", "transfer-size claim"]},
+    {"id": "BX-BH01-CONDITION-FIREFOX-TIMER", "owner": "quality-owner", "disposition": "preserved-not-triggered-by-bh02", "blocks": ["Firefox support", "local interaction budget pass"]},
+    {"id": "BX-BH01-CONDITION-PRIVATE-API-PINS", "owner": "liveview-adapter-owner", "disposition": "preserved-standalone-dom-has-no-private-adapter-dependency", "blocks": ["optional adapter compatibility", "package upgrade"]},
+    {"id": "BX-BH01-CONDITION-RUNTIME-REPEAT", "owner": "runtime-owner", "disposition": "preserved-no-named-runtime-or-toolchain-change", "blocks": ["baseline supersession", "runtime compatibility claim"]},
+    {"id": "BX-BH01-CONDITION-PRODUCTION-SECURITY", "owner": "security-owner", "disposition": "preserved-production-out-of-scope", "blocks": ["production security", "production deployment"]},
+    {"id": "BX-BH01-CONDITION-BH22-QUALIFICATION", "owner": "quality-owner", "disposition": "preserved-all-six-deferrals-open", "blocks": ["browser support", "mobile viability", "cross-platform support", "accessibility conformance", "release readiness"]},
+    {"id": "BX-BH01-CONDITION-FIXTURE-DISPOSABILITY", "owner": "architecture-owner", "disposition": "candidate-satisfied-pending-bh02-acceptance", "blocks": ["public API stabilization", "host-neutral contract acceptance"]},
+    {"id": "BX-BH01-CONDITION-RELEASE-CONTROLS", "owner": "build-owner", "disposition": "preserved-publication-and-release-out-of-scope", "blocks": ["package publication", "release readiness"]}
+  ],
+  "repeat_obligations": [
+    {"id": "BX-BH01-PROOF-ARTIFACT-ACCOUNTING", "disposition": "preserved-trigger-bound"},
+    {"id": "BX-BH01-PROOF-AUTHENTICATED-COMMAND", "disposition": "preserved-trigger-bound"},
+    {"id": "BX-BH01-PROOF-BROWSER-FALLBACK", "disposition": "preserved-trigger-bound"},
+    {"id": "BX-BH01-PROOF-BUILD-REPRODUCIBILITY", "disposition": "preserved-trigger-bound"},
+    {"id": "BX-BH01-PROOF-DOM-UPDATE", "disposition": "preserved-and-bh02-analogue-repeated"},
+    {"id": "BX-BH01-PROOF-FORM-EVENT", "disposition": "preserved-and-bh02-analogue-repeated"},
+    {"id": "BX-BH01-PROOF-NESTED-STATE", "disposition": "preserved-and-bh02-analogue-repeated"},
+    {"id": "BX-BH01-PROOF-RUNTIME-BOOT", "disposition": "preserved-trigger-bound"},
+    {"id": "BX-BH01-PROOF-TIMER-MESSAGE", "disposition": "preserved-trigger-bound"}
+  ],
+  "deferred_qualification": [
+    {"id": "BX-BH01-DEFER-ANDROID-PHYSICAL-0.1", "status": "deferred-unchanged", "reactivation": "BH-22-or-earlier-when-available"},
+    {"id": "BX-BH01-DEFER-APPLE-MOBILE-0.1", "status": "deferred-unchanged", "reactivation": "BH-22-or-earlier-when-available"},
+    {"id": "BX-BH01-DEFER-MACOS-SAFARI-0.1", "status": "deferred-unchanged", "reactivation": "BH-22-or-earlier-when-available"},
+    {"id": "BX-BH01-DEFER-WINDOWS-DESKTOP-0.1", "status": "deferred-unchanged", "reactivation": "BH-22-or-earlier-when-available"},
+    {"id": "BX-BH01-DEFER-SECOND-LINUX-HOST-0.1", "status": "deferred-unchanged", "reactivation": "BH-22-or-earlier-when-available"},
+    {"id": "BX-BH01-DEFER-MANUAL-AT-0.1", "status": "deferred-unchanged", "reactivation": "BH-22-or-earlier-when-available"}
+  ],
+  "repository_boundaries": ["packages/blazex_core", "packages/blazex_effects", "packages/blazex_ui_tree", "packages/blazex_renderer", "packages/blazex_renderer_headless", "packages/blazex_renderer_dom", "packages/blazex_test", "profiles/headless", "integration/conformance", "integration/fixtures", "experiments/native_renderer_spike"],
+  "forbidden_leakage": ["HTML or DOM node types in portable packages", "browser event or JavaScript callback objects in semantic APIs", "Phoenix, Plug, LiveView, or LocalLiveView dependencies in portable packages", "Popcorn or AtomVM types in semantic packages", "BH-01 fixture message tuples, route paths, command strings, or JSON shapes as public contracts", "private LiveView renderer data outside its optional adapter", "native toolkit handles or widget classes in portable component code"],
+  "findings": [
+    {"id": "BX-BH02-FINDING-GTK-ROLE-GAPS", "severity": "medium", "owner": "native-renderer-owner", "disposition": "accepted-follow-up", "due": "before-native-accessibility-qualification", "stop_boundary": "blocks-native-accessibility-conformance-not-bh02-host-neutral-acceptance"},
+    {"id": "BX-BH02-FINDING-NATIVE-TARGETS-DEFERRED", "severity": "medium", "owner": "quality-owner", "disposition": "deferred-qualified-environments", "due": "BH-22-or-earlier-when-windows-and-macos-available", "stop_boundary": "blocks-cross-platform-support-not-bh02-bounded-experiment"},
+    {"id": "BX-BH02-FINDING-MANUAL-AT-UNEXECUTED", "severity": "high", "owner": "accessibility-owner", "disposition": "deferred-qualified-environments", "due": "BH-22", "stop_boundary": "blocks-accessibility-conformance-not-bh02-semantic-intent"},
+    {"id": "BX-BH02-FINDING-NATIVE-FILE-DIALOG-UNEXECUTED", "severity": "medium", "owner": "native-renderer-owner", "disposition": "accepted-follow-up", "due": "before-native-provider-or-file-choice-claim", "stop_boundary": "blocks-file-dialog-provider-claim-not-file-choice-effect-contract"},
+    {"id": "BX-BH02-FINDING-PUBLIC-API-EXPERIMENTAL", "severity": "informational", "owner": "architecture-owner", "disposition": "intentional-bh02-boundary", "due": "future-explicit-api-stability-milestone", "stop_boundary": "blocks-public-stability-claim-not-internal-baseline"},
+    {"id": "BX-BH02-FINDING-RELEASE-CONTROLS-UNEXECUTED", "severity": "high", "owner": "build-owner", "disposition": "outside-bh02-preserved-condition", "due": "before-package-publication-or-release-readiness", "stop_boundary": "blocks-publication-and-release-not-internal-baseline"}
+  ],
+  "active_blockers": [],
+  "api_state": "experimental-not-stable",
+  "support_state": "unsupported",
+  "next_decision": "BH-02 Phase 8 acceptance gate"
+}

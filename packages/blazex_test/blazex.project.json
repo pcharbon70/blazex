@@ -4,7 +4,7 @@
   "path": "packages/blazex_test",
   "kind": "elixir-package",
   "activation_phase": "BH-02 Phase 1",
-  "status": "experimental-activation-skeleton",
+  "status": "implemented-experimental-bh02-candidate",
   "owner_role": "test-support-owner",
   "module_roots": ["BlazeX.Test"],
   "manifest": "mix.exs",
@@ -12,5 +12,5 @@
   "dependencies": ["blazex_core", "blazex_effects", "blazex_ui_tree", "blazex_renderer"],
   "must_not_own": ["production-runtime", "portable-contract-source-of-truth", "single-profile-assumptions"],
   "forbidden_dependencies": ["phoenix", "plug", "live_view", "local_live_view", "popcorn", "atomvm", "blazex_renderer_dom", "blazex_host_browser", "qt", "wxwidgets"],
-  "public_api_state": "experimental-unimplemented"
+  "public_api_state": "experimental-not-stable"
 }

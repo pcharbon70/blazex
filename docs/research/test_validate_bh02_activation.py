@@ -38,6 +38,29 @@ class BH02ActivationValidatorTest(unittest.TestCase):
         with self.assertRaisesRegex(validator.ValidationError, "exactly nine"):
             validator.validate_activation(activation)
 
+    def test_rejects_public_api_promotion(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            activation = copy.deepcopy(self.activation)
+            activation["boundaries"] = [copy.deepcopy(activation["boundaries"][0]) for _ in range(9)]
+            for index, boundary in enumerate(activation["boundaries"]):
+                boundary["id"] = f"boundary-{index}"
+                boundary["path"] = f"boundary-{index}"
+                boundary["dependencies"] = []
+                project = root / boundary["path"]
+                (project / "lib").mkdir(parents=True)
+                (project / "test").mkdir()
+                (project / "mix.exs").write_text("defmodule Candidate.MixProject do\nend\n", encoding="utf-8")
+                metadata = copy.deepcopy(boundary)
+                metadata.update(
+                    activation_phase="BH-02 Phase 1",
+                    status="implemented-experimental-bh02-candidate",
+                    public_api_state="stable",
+                )
+                (project / "blazex.project.json").write_text(json.dumps(metadata), encoding="utf-8")
+            with self.assertRaisesRegex(validator.ValidationError, "invalid package lifecycle state"):
+                validator.validate_activation(activation, root)
+
     def test_rejects_forbidden_portable_source(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             project = Path(temporary)
