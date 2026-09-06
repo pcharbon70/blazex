@@ -3,6 +3,7 @@ export { REQUIRED_COMPATIBILITY, negotiateCompatibility } from "./compatibility.
 export { discoverHostManifest, resolveHostUrl } from "./discovery.js";
 export { fetchHostManifest, inspectHostManifest, validateHostManifest } from "./host-manifest.js";
 export { acquireHostArtifacts, BH03_ARTIFACT_LIMITS, BH03_ARTIFACT_ROLES } from "./artifact-acquisition.js";
+export { BH03_RUNTIME_STARTUP, BrowserRuntimeStartup } from "./runtime-startup.js";
 export {
   acquireDeclaredArtifacts,
   fetchDeclaredArtifact,

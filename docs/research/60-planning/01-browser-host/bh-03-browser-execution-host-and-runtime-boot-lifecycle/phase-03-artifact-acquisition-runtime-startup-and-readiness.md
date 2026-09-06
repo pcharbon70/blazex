@@ -51,19 +51,19 @@ Back to milestone: [README](README.md)
       - [x] 3.2.2.2 Subtask - Normalize failures to the Phase 1 artifact-integrity or artifact-unavailable vocabulary.
       - [x] 3.2.2.3 Subtask - Keep runtime starts and all later evidence at zero.
 
-  - [ ] 3.3 Section - Implement isolated runtime startup, bundle load, and readiness.
+  - [x] 3.3 Section - Implement isolated runtime startup, bundle load, and readiness.
 
-    - [ ] 3.3.1 Task - Start one isolated runtime attempt.
+    - [x] 3.3.1 Task - Start one isolated runtime attempt.
 
-      - [ ] 3.3.1.1 Subtask - Publish the adapter-owned startup descriptor and transfer verified artifact bytes through the runtime transport.
-      - [ ] 3.3.1.2 Subtask - Load the application bundle at the fixed virtual path and correlate startup events by attempt and manifest generation.
-      - [ ] 3.3.1.3 Subtask - Resolve only for the exact readiness event; reject stale, duplicate, failed, cancelled, and timed-out attempts.
+      - [x] 3.3.1.1 Subtask - Publish the adapter-owned startup descriptor and transfer verified artifact bytes through the runtime transport.
+      - [x] 3.3.1.2 Subtask - Load the application bundle at the fixed virtual path and correlate startup events by attempt and manifest generation.
+      - [x] 3.3.1.3 Subtask - Resolve only for the exact readiness event; reject stale, duplicate, failed, cancelled, and timed-out attempts.
 
-    - [ ] 3.3.2 Task - Prove cleanup and ownership limits.
+    - [x] 3.3.2 Task - Prove cleanup and ownership limits.
 
-      - [ ] 3.3.2.1 Subtask - Release transports, listeners, abort controllers, timers, and unpublished artifact bytes on every terminal failure.
-      - [ ] 3.3.2.2 Subtask - Add versioned success and negative fixtures plus deterministic unit/conformance tests.
-      - [ ] 3.3.2.3 Subtask - Return an attempt-scoped ready handle without implementing runtime sharing, roots, recovery, or browser-profile composition.
+      - [x] 3.3.2.1 Subtask - Release transports, listeners, abort controllers, timers, and unpublished artifact bytes on every terminal failure.
+      - [x] 3.3.2.2 Subtask - Add versioned success and negative fixtures plus deterministic unit/conformance tests.
+      - [x] 3.3.2.3 Subtask - Return an attempt-scoped ready handle without implementing runtime sharing, roots, recovery, or browser-profile composition.
 
   - [ ] 3.4 Section - Run the inherited gate and publish completion evidence.
 

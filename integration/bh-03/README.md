@@ -5,10 +5,10 @@ discovery, startup, shared runtime ownership, independent roots, shutdown,
 failure, fallback, and resource behavior.
 
 Phase 2 adds pure pre-acquisition contract fixtures for compatibility,
-discovery, prerequisites, and manifest validation. They contain no browser
-result, artifact bytes, runtime result, root result, failure-execution result,
-measurement, or acceptance evidence. Later content requires separate phase
-authorization.
+discovery, prerequisites, and manifest validation. Phase 3 adds verified-byte
+and injected-transport startup conformance fixtures. Browser, shared-runtime,
+root, measurement, and acceptance result sets remain empty. Later content
+requires separate phase authorization.
 
 Versioned records:
 
@@ -16,3 +16,6 @@ Versioned records:
 - `integration-index-v0.2.0.json` — Phase 2 fixture index with empty execution
   result sets.
 - `phase-02/` — Phase 2 pre-acquisition contract fixtures.
+- `integration-index-v0.3.0.json` — Phase 3 acquisition and isolated-startup
+  conformance index with later result sets empty.
+- `phase-03/` — Phase 3 verified-byte and startup protocol fixtures.

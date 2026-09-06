@@ -2,8 +2,9 @@ defmodule BlazeX.Host.Browser do
   @moduledoc """
   Experimental ownership boundary for browser host lifecycle work.
 
-  BH-03 Phase 2 exposes compatibility negotiation only. It does not acquire
-  artifacts, start a runtime, register roots, or provide a stable API.
+  BH-03 Phase 3 keeps compatibility negotiation here while browser-side
+  acquisition and isolated startup live in `js/blazex_runtime`. It does not
+  share runtimes, register roots, or provide a stable API.
   """
 
   alias BlazeX.Host.Browser.Compatibility
