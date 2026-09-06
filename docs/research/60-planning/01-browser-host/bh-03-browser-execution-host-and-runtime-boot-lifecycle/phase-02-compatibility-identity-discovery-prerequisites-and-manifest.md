@@ -51,19 +51,19 @@ Back to milestone: [README](README.md)
       - [x] 2.2.2.2 Subtask - Verify failures classify as `identity-mismatch` before acquisition or activation.
       - [x] 2.2.2.3 Subtask - Keep APIs experimental and component, renderer, server, and root behavior outside these modules.
 
-  - [ ] 2.3 Section - Implement discovery, prerequisites, manifest validation, and fixtures.
+  - [x] 2.3 Section - Implement discovery, prerequisites, manifest validation, and fixtures.
 
-    - [ ] 2.3.1 Task - Implement the pre-acquisition browser gate.
+    - [x] 2.3.1 Task - Implement the pre-acquisition browser gate.
 
-      - [ ] 2.3.1.1 Subtask - Resolve explicit, link, or meta manifest declarations deterministically and reject absence, ambiguity, credentials, fragments, cross-origin URLs, and unsupported schemes.
-      - [ ] 2.3.1.2 Subtask - Evaluate the manifest-declared browser and deployment prerequisites with explicit `compatible`, `alternate-loading`, and `unsupported-prerequisite` outcomes.
-      - [ ] 2.3.1.3 Subtask - Fetch only the manifest with bounded no-store, same-origin, no-redirect behavior and strictly validate its fields and artifact declarations.
+      - [x] 2.3.1.1 Subtask - Resolve explicit, link, or meta manifest declarations deterministically and reject absence, ambiguity, credentials, fragments, cross-origin URLs, and unsupported schemes.
+      - [x] 2.3.1.2 Subtask - Evaluate the manifest-declared browser and deployment prerequisites with explicit `compatible`, `alternate-loading`, and `unsupported-prerequisite` outcomes.
+      - [x] 2.3.1.3 Subtask - Fetch only the manifest with bounded no-store, same-origin, no-redirect behavior and strictly validate its fields and artifact declarations.
 
-    - [ ] 2.3.2 Task - Publish conformance fixtures and evidence boundaries.
+    - [x] 2.3.2 Task - Publish conformance fixtures and evidence boundaries.
 
-      - [ ] 2.3.2.1 Subtask - Add versioned valid and invalid identity, discovery, prerequisite, and manifest fixtures under `integration/bh-03`.
-      - [ ] 2.3.2.2 Subtask - Add unit/conformance tests proving deterministic normalized outputs and atomic rejection.
-      - [ ] 2.3.2.3 Subtask - Keep browser results, artifact bytes, startup, roots, measurements, and acceptance evidence empty.
+      - [x] 2.3.2.1 Subtask - Add versioned valid and invalid identity, discovery, prerequisite, and manifest fixtures under `integration/bh-03`.
+      - [x] 2.3.2.2 Subtask - Add unit/conformance tests proving deterministic normalized outputs and atomic rejection.
+      - [x] 2.3.2.3 Subtask - Keep browser results, artifact bytes, startup, roots, measurements, and acceptance evidence empty.
 
   - [ ] 2.4 Section - Run the inherited gate and publish completion evidence.
 

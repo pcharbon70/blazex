@@ -65,7 +65,7 @@ class BH03ActivationValidatorTest(unittest.TestCase):
             directory.mkdir(parents=True)
             (directory / "README.md").touch()
             (directory / "integration-index-v0.1.0.json").touch()
-            with self.assertRaisesRegex(validator.ValidationError, "not empty"):
+            with self.assertRaisesRegex(validator.ValidationError, "not the immutable empty"):
                 validator.validate_integration(index, root)
 
     def test_rejects_support_promotion(self) -> None:

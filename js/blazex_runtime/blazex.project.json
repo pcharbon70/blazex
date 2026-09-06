@@ -10,7 +10,7 @@
   "owner_role": "browser-host-owner",
   "module_roots": ["src/index.js"],
   "manifest": "package.json",
-  "test_entrypoints": ["test/compatibility.test.js", "test/manifest-loader.test.js", "test/prerequisites.test.js"],
+  "test_entrypoints": ["test/compatibility.test.js", "test/discovery.test.js", "test/host-manifest.test.js", "test/prerequisites.test.js"],
   "dependencies": [],
   "planned_dependencies": [],
   "must_not_own": ["component-logic", "server-authorization", "generic-dom-rendering", "arbitrary-script-escape"],

@@ -149,8 +149,9 @@ defmodule BlazeXBrowserPhoenix.AssetPlug do
   defp content_type(relative),
     do: Map.get(@content_types, Path.extname(relative), "application/octet-stream")
 
-  defp cache_control(relative) when relative in ["index.html", "runtime-manifest.json"],
-    do: "no-store"
+  defp cache_control(relative)
+       when relative in ["index.html", "runtime-manifest.json", "bh03-runtime-manifest.json"],
+       do: "no-store"
 
   defp cache_control(_relative), do: "public, max-age=31536000, immutable"
 end

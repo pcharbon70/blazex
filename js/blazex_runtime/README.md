@@ -11,7 +11,10 @@ its bridge.
 Status: experimental BH-03 Phase 2 browser loader using the pinned
 package-manager declaration `npm@11.19.0`. It publishes the same eight exact
 compatibility identities as the Elixir browser host and fails closed on missing,
-unknown, duplicate, malformed, or mismatched inputs before acquisition. The
+unknown, duplicate, malformed, or mismatched inputs before acquisition. It also
+resolves one same-origin manifest declaration, fetches only bounded no-store
+JSON, validates the strict profile envelope, and returns explicit prerequisite
+decisions without acquiring any declared artifact. The
 historical BH-01 loader accepts and verifies its disposable fixture manifest;
 that evidence is not the BH-03 profile-manifest contract. The package has no
 component logic, renderer, Phoenix authority, or stable public API.

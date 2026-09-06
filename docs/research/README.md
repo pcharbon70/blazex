@@ -156,6 +156,7 @@ identifiers.
 - [`test_validate_bh02_native.py`](test_validate_bh02_native.py) — focused BH-02 Phase 7 native surface, direct-platform evidence, dependency, fixture, deferral, leakage, and overclaim tests
 - [`test_validate_bh02_acceptance.py`](test_validate_bh02_acceptance.py) — focused BH-02 Phase 8 reconciliation, review, overlay, stability, deferral, and downstream-authorization fail-closed tests
 - [`test_validate_bh03_activation.py`](test_validate_bh03_activation.py) — focused BH-03 Phase 1 authority, handoff, lifecycle vocabulary, boundary, dependency, empty-evidence, completion-binding, and overclaim tests
+- [`test_validate_bh03_compatibility.py`](test_validate_bh03_compatibility.py) — focused BH-03 Phase 2 identity, discovery, prerequisite, manifest, fixture, declaration, evidence-boundary, and overclaim tests
 - [`test_validate_quality_acceptance.py`](test_validate_quality_acceptance.py) — focused Phase 5 quality-budget and acceptance-traceability validator tests
 - [`test_validate_archive.py`](test_validate_archive.py) — focused validator tests
 - [`validate_browser_product_envelope.py`](validate_browser_product_envelope.py) — deterministic BH-00 browser-envelope checks
@@ -172,5 +173,6 @@ identifiers.
 - [`validate_bh02_native.py`](validate_bh02_native.py) — fail-closed BH-02 Phase 7 portable native lowering, direct adapters, GTK execution, cross-renderer fixtures, deferrals, and support-limit checks
 - [`validate_bh02_acceptance.py`](validate_bh02_acceptance.py) — fail-closed BH-02 Phase 8 phase binding, reconciliation, contract, review, acceptance-overlay, and candidate-decision checks
 - [`validate_bh03_activation.py`](validate_bh03_activation.py) — fail-closed BH-03 Phase 1 authorization, accepted-handoff, lifecycle-contract, repository-activation, dependency, empty-evidence, and completion-binding checks
+- [`validate_bh03_compatibility.py`](validate_bh03_compatibility.py) — fail-closed BH-03 Phase 2 compatibility identity, discovery, prerequisite, strict manifest, profile declaration, fixture, and evidence-state checks
 - [`validate_quality_acceptance.py`](validate_quality_acceptance.py) — deterministic BH-00 quality-budget and acceptance-traceability checks
 - [`validate_archive.py`](validate_archive.py) — deterministic archive checks

@@ -195,13 +195,18 @@ def validate_phase2_authorization(auth: dict[str, Any], repo_root: Path = REPO_R
     _require(result.returncode == 0, "current work does not descend from the Phase 2 authorized base")
 
 
-def validate_integration(index: dict[str, Any], repo_root: Path = REPO_ROOT) -> None:
-    _require(index.get("status") == "activated-no-lifecycle-fixtures-or-results", "integration index overclaims lifecycle evidence")
-    _require(all(index.get(key) == [] for key in EMPTY_EVIDENCE_FIELDS), "integration index is not empty")
+def validate_integration(index: dict[str, Any], repo_root: Path = REPO_ROOT, phase2_authorized: bool = False) -> None:
+    phase1_state = index.get("status") == "activated-no-lifecycle-fixtures-or-results" and all(index.get(key) == [] for key in EMPTY_EVIDENCE_FIELDS)
+    _require(phase1_state, "integration index is not the immutable empty Phase 1 activation")
     _require(index.get("next_authorized_work") is None, "integration index authorizes later work")
     _require(index.get("api_state") == "experimental-not-stable" and index.get("support_state") == "unsupported", "integration index promotes stability or support")
+    successor_index = repo_root / "integration/bh-03/integration-index-v0.2.0.json"
+    successor_state = phase2_authorized and successor_index.is_file()
     files = {path.name for path in (repo_root / "integration/bh-03").iterdir() if path.is_file()}
-    _require(files == {"README.md", "integration-index-v0.1.0.json"}, "unowned BH-03 integration artifact exists")
+    expected_files = {"README.md", "integration-index-v0.1.0.json", "integration-index-v0.2.0.json"} if successor_state else {"README.md", "integration-index-v0.1.0.json"}
+    _require(files == expected_files, "unowned BH-03 integration artifact exists")
+    directories = {path.name for path in (repo_root / "integration/bh-03").iterdir() if path.is_dir()}
+    _require(directories == ({"phase-02"} if successor_state else set()), "unowned BH-03 integration directory exists")
 
 
 def validate_completion(completion: dict[str, Any], repo_root: Path = REPO_ROOT) -> None:
@@ -241,7 +246,7 @@ def validate(repo_root: Path = REPO_ROOT, research_root: Path = RESEARCH_ROOT) -
     validate_contract(contract)
     validate_phase2_authorization(phase2_authorization, repo_root)
     validate_activation(activation, contract, repo_root, phase2_authorized=True)
-    validate_integration(index, repo_root)
+    validate_integration(index, repo_root, phase2_authorized=True)
     validate_completion(completion, repo_root)
 
 
