@@ -7,6 +7,7 @@ export const BH03_ROOT_LIMITS = Object.freeze({ max_roots_per_scope: 64 });
 
 export class BrowserRootRegistry {
   #createBridge;
+  #accepting = true;
   #onEvent;
   #roots = new Map();
   #scopeId;
@@ -21,6 +22,9 @@ export class BrowserRootRegistry {
 
   register(rootId) {
     validateId(rootId, "invalid-root-or-target-id");
+    if (!this.#accepting) {
+      return Promise.reject(new BlazeXHostError("root-lifecycle", "The root registry is not accepting registrations", { reason: "scope-not-ready", scope_id: this.#scopeId }));
+    }
     if (this.#roots.has(rootId)) {
       return Promise.reject(new BlazeXHostError("duplicate-root", "The root identity is already registered or reserved", { reason: "existing-or-reserved-root-id", root_id: rootId }));
     }
@@ -53,7 +57,25 @@ export class BrowserRootRegistry {
       states: Object.freeze(states),
       owns_runtime: false,
       owns_runtime_release: false,
+      accepting: this.#accepting,
     });
+  }
+
+  async shutdown({ reason = "runtime-shutdown", signal, timeoutMs = 5_000 } = {}) {
+    this.#accepting = false;
+    const results = await Promise.allSettled(
+      [...this.#roots.values()].map((root) => root.dispose({ signal, timeoutMs })),
+    );
+    for (const root of this.#roots.values()) root.stop(reason);
+    return Object.freeze({
+      root_count: results.length,
+      failures: results.filter((result) => result.status === "rejected").length,
+    });
+  }
+
+  forceStop(reason = "runtime-stopped") {
+    this.#accepting = false;
+    for (const root of this.#roots.values()) root.stop(reason);
   }
 }
 
@@ -67,6 +89,7 @@ export class BrowserRootHandle {
   #scopeId;
   #state = "unregistered";
   #tail = Promise.resolve();
+  #terminal = false;
 
   constructor({ bridge, onEvent = () => {}, rootId, scopeId }) {
     if (!bridge?.request || !bridge?.metrics) throw new TypeError("A bounded root bridge is required");
@@ -98,8 +121,18 @@ export class BrowserRootHandle {
     return this.#enqueue("root.move", ["ready"], "ready", () => ({ target_id: targetId }), "moving");
   }
 
-  dispose() {
-    return this.#enqueue("root.dispose", ["registered", "ready", "failed"], "disposed", () => ({}), "disposing", true);
+  dispose(options = {}) {
+    return this.#enqueue("root.dispose", ["registered", "ready", "failed"], "disposed", () => ({}), "disposing", true, options);
+  }
+
+  stop(reason = "runtime-stopped") {
+    if (this.#terminal) return;
+    this.#terminal = true;
+    this.#bridge.stop(reason);
+    if (this.#state !== "disposed") {
+      this.#failure = errorRecord(new BlazeXHostError("runtime-shutdown", "The owning runtime stopped", { reason: "scope-stopped" }));
+      this.#transition("failed", "runtime.stop");
+    }
   }
 
   snapshot() {
@@ -116,10 +149,13 @@ export class BrowserRootHandle {
     });
   }
 
-  #enqueue(operation, allowed, successState, payload, transientState = null, idempotentDisposed = false) {
+  #enqueue(operation, allowed, successState, payload, transientState = null, idempotentDisposed = false, bridgeOptions = {}) {
     this.#pending += 1;
     const task = this.#tail.then(async () => {
       if (idempotentDisposed && this.#state === "disposed") return this.snapshot();
+      if (this.#terminal) {
+        throw new BlazeXHostError("root-lifecycle", "The owning runtime is stopped", { reason: "scope-stopped", root_id: this.#rootId });
+      }
       if (!allowed.includes(this.#state)) {
         throw new BlazeXHostError("root-lifecycle", "The root operation is not valid in its current state", {
           reason: "illegal-transition",
@@ -137,7 +173,7 @@ export class BrowserRootHandle {
       if (transientState) this.#transition(transientState, operation);
 
       try {
-        const result = await this.#bridge.request(operation, requestPayload);
+        const result = await this.#bridge.request(operation, requestPayload, bridgeOptions);
         validateAcknowledgement(result, this.#rootId, generation);
         this.#transition(successState, operation);
         return this.snapshot();

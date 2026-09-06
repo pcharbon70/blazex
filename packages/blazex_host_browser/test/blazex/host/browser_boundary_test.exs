@@ -48,7 +48,7 @@ defmodule BlazeX.Host.BrowserBoundaryTest do
              |> BlazeX.Host.Browser.negotiate_compatibility()
   end
 
-  test "publishes the closed independent-root lifecycle without runtime ownership" do
+  test "publishes registry-owned bounded shutdown without granting roots runtime ownership" do
     contract = BlazeX.Host.Browser.root_lifecycle_contract()
 
     assert contract.protocol == "blazex.root-lifecycle/1"
@@ -61,5 +61,18 @@ defmodule BlazeX.Host.BrowserBoundaryTest do
     assert contract.cross_root_progress == :independent
     assert contract.runtime_owner == :runtime_registry
     refute contract.root_owns_runtime_release
+
+    assert contract.runtime_states ==
+             [:starting, :ready, :stopping, :stopped, :recovering, :failed, :fallback]
+
+    assert contract.shutdown == %{
+             protocol: "blazex.runtime-shutdown/1",
+             operation: "runtime.shutdown",
+             acknowledgement: [:scope_id, :runtime_generation],
+             default_timeout_ms: 5_000,
+             max_timeout_ms: 10_000,
+             release: :registry_owned_exactly_once,
+             terminal_record: :stopped_tombstone
+           }
   end
 end

@@ -2,10 +2,10 @@ defmodule BlazeX.Host.Browser do
   @moduledoc """
   Experimental ownership boundary for browser host lifecycle work.
 
-  BH-03 Phase 4 keeps compatibility negotiation here while browser-side
+  BH-03 Phase 5 keeps compatibility negotiation here while browser-side
   acquisition, startup, exact-compatible runtime sharing, and independent root
-  queues live in `js/blazex_runtime`. It does not implement shutdown or provide
-  a stable API.
+  queues live in `js/blazex_runtime`. Registry-owned shutdown is implemented;
+  browser-profile composition and a stable API remain absent.
   """
 
   alias BlazeX.Host.Browser.Compatibility
@@ -20,7 +20,7 @@ defmodule BlazeX.Host.Browser do
           {:ok, map()} | {:error, map()}
   defdelegate negotiate_compatibility(observed), to: Compatibility, as: :negotiate
 
-  @doc "Returns the closed Phase 4 root lifecycle contract."
+  @doc "Returns the closed Phase 5 root and runtime lifecycle contract."
   @spec root_lifecycle_contract() :: map()
   defdelegate root_lifecycle_contract(), to: Lifecycle, as: :contract
 end

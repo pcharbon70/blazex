@@ -9,9 +9,10 @@ own transports and server facilities through separate adapters. It implements
 browser capabilities declared by `blazex_effects` without exposing Web API
 handles to portable components.
 
-Status: experimental BH-03 Phase 4 shared-runtime and root-lifecycle boundary.
+Status: experimental BH-03 Phase 5 shutdown and recovery boundary.
 The dependency-free package publishes the host's eight exact required
-identities and the closed root lifecycle vocabulary. The browser runtime
-package implements compatible runtime sharing and independent root queues;
-shutdown and runtime-loss behavior remain unimplemented. Its modules are not a
-stable public API.
+identities and the closed root/runtime lifecycle vocabulary. The browser
+runtime package implements compatible runtime sharing, independent root queues,
+and registry-owned bounded shutdown. Runtime-loss recovery and bounded fallback
+decisions are completed in the next section. Its modules are not a stable public
+API.

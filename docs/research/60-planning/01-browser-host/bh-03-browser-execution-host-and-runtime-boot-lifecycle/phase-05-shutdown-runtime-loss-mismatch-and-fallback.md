@@ -38,19 +38,19 @@ Back to milestone: [README](README.md)
       - [x] 5.1.2.2 Subtask - Define generation-bound loss reports, root quiescence, one replacement, same-handle atomic replay, and failure convergence.
       - [x] 5.1.2.3 Subtask - Define bounded non-DOM fallback decisions for mismatch, unsupported prerequisites, startup failure, runtime loss, and recovery exhaustion.
 
-  - [ ] 5.2 Section - Implement deterministic shutdown and terminal ownership.
+  - [x] 5.2 Section - Implement deterministic shutdown and terminal ownership.
 
-    - [ ] 5.2.1 Task - Quiesce roots and stop one shared runtime.
+    - [x] 5.2.1 Task - Quiesce roots and stop one shared runtime.
 
-      - [ ] 5.2.1.1 Subtask - Reject new roots, drain per-root queues, dispose registrations independently, and stop every root bridge.
-      - [ ] 5.2.1.2 Subtask - Require matching scope and runtime-generation shutdown acknowledgement before success.
-      - [ ] 5.2.1.3 Subtask - Release the registry-owned runtime exactly once on success, rejection, or timeout and retain a stopped tombstone.
+      - [x] 5.2.1.1 Subtask - Reject new roots, drain per-root queues, dispose registrations independently, and stop every root bridge.
+      - [x] 5.2.1.2 Subtask - Require matching scope and runtime-generation shutdown acknowledgement before success.
+      - [x] 5.2.1.3 Subtask - Release the registry-owned runtime exactly once on success, rejection, or timeout and retain a stopped tombstone.
 
-    - [ ] 5.2.2 Task - Make shutdown bounded and idempotent.
+    - [x] 5.2.2 Task - Make shutdown bounded and idempotent.
 
-      - [ ] 5.2.2.1 Subtask - Coalesce concurrent close requests and return the stopped snapshot on later close calls.
-      - [ ] 5.2.2.2 Subtask - Force-stop root bridges and classify timeout, stale acknowledgement, foreign acknowledgement, and remote rejection deterministically.
-      - [ ] 5.2.2.3 Subtask - Prove roots and scope handles cannot release or revive the runtime after registry shutdown.
+      - [x] 5.2.2.1 Subtask - Coalesce concurrent close requests and return the stopped snapshot on later close calls.
+      - [x] 5.2.2.2 Subtask - Force-stop root bridges and classify timeout, stale acknowledgement, foreign acknowledgement, and remote rejection deterministically.
+      - [x] 5.2.2.3 Subtask - Prove roots and scope handles cannot release or revive the runtime after registry shutdown.
 
   - [ ] 5.3 Section - Implement runtime-loss recovery and bounded fallback decisions.
 
