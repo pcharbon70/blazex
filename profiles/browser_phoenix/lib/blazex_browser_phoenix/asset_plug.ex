@@ -6,6 +6,7 @@ defmodule BlazeXBrowserPhoenix.AssetPlug do
     ".html" => "text/html; charset=utf-8",
     ".js" => "text/javascript; charset=utf-8",
     ".mjs" => "text/javascript; charset=utf-8",
+    ".css" => "text/css; charset=utf-8",
     ".json" => "application/json; charset=utf-8",
     ".wasm" => "application/wasm",
     ".avm" => "application/vnd.atomvm.avm"
@@ -13,21 +14,23 @@ defmodule BlazeXBrowserPhoenix.AssetPlug do
 
   def init(options), do: options
 
-  def call(%Plug.Conn{method: method, request_path: "/bh01"} = conn, _options)
-      when method in ["GET", "HEAD"] do
+  def call(%Plug.Conn{method: method, request_path: path} = conn, _options)
+      when path in ["/bh01", "/bh03"] and method in ["GET", "HEAD"] do
+    profile = String.trim_leading(path, "/")
+
     conn
-    |> put_resp_header("location", "/bh01/")
+    |> put_resp_header("location", "/#{profile}/")
     |> put_resp_header("cache-control", "no-store")
     |> send_resp(308, "")
     |> halt()
   end
 
-  def call(%Plug.Conn{method: method, path_info: ["bh01" | segments]} = conn, _options)
-      when method in ["GET", "HEAD"] do
+  def call(%Plug.Conn{method: method, path_info: [profile | segments]} = conn, _options)
+      when profile in ["bh01", "bh03"] and method in ["GET", "HEAD"] do
     relative = if segments == [], do: "index.html", else: Enum.join(segments, "/")
 
     with true <- safe_relative?(relative),
-         root <- static_root(),
+         root <- static_root(profile),
          path <- Path.expand(relative, root),
          true <- inside?(path, root),
          {:ok, stat} <- File.stat(path),
@@ -137,7 +140,7 @@ defmodule BlazeXBrowserPhoenix.AssetPlug do
 
   defp inside?(path, root), do: path == root or String.starts_with?(path, root <> "/")
 
-  defp static_root do
+  defp static_root("bh01") do
     Application.get_env(
       :blazex_browser_phoenix,
       :static_root,
@@ -146,11 +149,25 @@ defmodule BlazeXBrowserPhoenix.AssetPlug do
     |> Path.expand()
   end
 
+  defp static_root("bh03") do
+    Application.get_env(
+      :blazex_browser_phoenix,
+      :bh03_static_root,
+      Application.app_dir(:blazex_browser_phoenix, "priv/static/bh03")
+    )
+    |> Path.expand()
+  end
+
   defp content_type(relative),
     do: Map.get(@content_types, Path.extname(relative), "application/octet-stream")
 
   defp cache_control(relative)
-       when relative in ["index.html", "runtime-manifest.json", "bh03-runtime-manifest.json"],
+       when relative in [
+              "index.html",
+              "runtime-manifest.json",
+              "bh03-runtime-manifest.json",
+              "profile-assets-manifest.json"
+            ],
        do: "no-store"
 
   defp cache_control(_relative), do: "public, max-age=31536000, immutable"

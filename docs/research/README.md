@@ -134,6 +134,8 @@ python3 validate_bh03_roots.py
 python3 -m unittest test_validate_bh03_roots.py
 python3 validate_bh03_resilience.py
 python3 -m unittest test_validate_bh03_resilience.py
+python3 validate_bh03_profile.py
+python3 -m unittest test_validate_bh03_profile.py
 ```
 
 The validator checks metadata, placeholders, filenames, local links,
@@ -168,6 +170,7 @@ identifiers.
 - [`test_validate_bh03_startup.py`](test_validate_bh03_startup.py) — focused BH-03 Phase 3 authorization, artifact-limit, integrity, startup, readiness, fixture, completion-binding, and later-phase overclaim tests
 - [`test_validate_bh03_roots.py`](test_validate_bh03_roots.py) — focused BH-03 Phase 4 authorization, exact runtime sharing, independent roots, acknowledgement, fixture, completion-binding, and later-phase overclaim tests
 - [`test_validate_bh03_resilience.py`](test_validate_bh03_resilience.py) — focused BH-03 Phase 5 shutdown, loss-generation, bounded recovery, atomic replay, fallback, completion-binding, and overclaim tests
+- [`test_validate_bh03_profile.py`](test_validate_bh03_profile.py) — focused BH-03 Phase 6 profile separation, active Chrome/Firefox rows, actual runtime acknowledgements, fallback, shutdown, deferral, and overclaim tests
 - [`test_validate_quality_acceptance.py`](test_validate_quality_acceptance.py) — focused Phase 5 quality-budget and acceptance-traceability validator tests
 - [`test_validate_archive.py`](test_validate_archive.py) — focused validator tests
 - [`validate_browser_product_envelope.py`](validate_browser_product_envelope.py) — deterministic BH-00 browser-envelope checks
@@ -188,5 +191,6 @@ identifiers.
 - [`validate_bh03_startup.py`](validate_bh03_startup.py) — fail-closed BH-03 Phase 3 artifact acquisition, startup descriptor, isolated transport, bundle-load, readiness, ownership, fixture, and evidence-state checks
 - [`validate_bh03_roots.py`](validate_bh03_roots.py) — fail-closed BH-03 Phase 4 exact-compatible runtime registry, independent root lifecycle, generation acknowledgement, ownership, fixture, and evidence-state checks
 - [`validate_bh03_resilience.py`](validate_bh03_resilience.py) — fail-closed BH-03 Phase 5 registry-owned shutdown, exact-generation loss, one replacement, same-handle replay, non-DOM fallback, fixture, and evidence-state checks
+- [`validate_bh03_profile.py`](validate_bh03_profile.py) — fail-closed BH-03 Phase 6 Phoenix profile, actual AtomVM/Elixir root lifecycle, active Chrome/Firefox matrix, fallback, shutdown, deferral, and evidence-state checks
 - [`validate_quality_acceptance.py`](validate_quality_acceptance.py) — deterministic BH-00 quality-budget and acceptance-traceability checks
 - [`validate_archive.py`](validate_archive.py) — deterministic archive checks

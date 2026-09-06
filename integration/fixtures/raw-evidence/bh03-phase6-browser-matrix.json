@@ -1,0 +1,140 @@
+{
+  "schema_version": "1.0.0",
+  "evidence_id": "BX-BH03-PHASE-06-ACTIVE-BROWSER-MATRIX-0.1",
+  "captured_at": "2026-09-06T13:14:49.139Z",
+  "implementation_revision": "fbb078e95b7f8eaaa014c9d01602b1a3102ca83c",
+  "platform": "linux 6.8.0-51-generic x64",
+  "node_version": "v24.3.0",
+  "playwright_core_version": "1.62.1",
+  "profile_url": "http://127.0.0.1:4197/bh03/",
+  "scenario_set": [
+    "verified-profile-startup",
+    "shared-runtime-two-root-lifecycle",
+    "identity-mismatch-fallback",
+    "unsupported-prerequisite-fallback",
+    "registry-owned-shutdown"
+  ],
+  "results": [
+    {
+      "browser": "chrome",
+      "executable": "/usr/bin/google-chrome",
+      "browser_version": "140.0.7339.80",
+      "scenario_set": [
+        "verified-profile-startup",
+        "shared-runtime-two-root-lifecycle",
+        "identity-mismatch-fallback",
+        "unsupported-prerequisite-fallback",
+        "registry-owned-shutdown"
+      ],
+      "result": "passed",
+      "observations": {
+        "positive": {
+          "profile_manifest_id": "BX-BH03-PHASE-06-PROFILE-ASSETS-0.1",
+          "governed_files": 29,
+          "runtime_starts": 1,
+          "shared_opens": 2,
+          "roots": {
+            "primary-root": "ready",
+            "secondary-root": "ready"
+          },
+          "runtime_acknowledgements_before_shutdown": 8,
+          "runtime_acknowledgements_after_shutdown": 11,
+          "shutdown": {
+            "protocol": "blazex.runtime-shutdown/1",
+            "scope_id": "page-runtime",
+            "runtime_generation": 1,
+            "state": "stopped",
+            "acknowledged": true,
+            "root_failures": 0,
+            "released": true
+          },
+          "range_status": 206,
+          "etag_status": 304
+        },
+        "identity_mismatch": {
+          "state": "fallback",
+          "failure_class": "identity-mismatch",
+          "action": "deployment-action"
+        },
+        "unsupported_prerequisite": {
+          "state": "fallback",
+          "failure_class": "unsupported-prerequisite",
+          "action": "static-content"
+        }
+      },
+      "failures": []
+    },
+    {
+      "browser": "firefox",
+      "executable": "/home/ducky/.cache/ms-playwright/firefox-1538/firefox/firefox",
+      "browser_version": "153.0",
+      "scenario_set": [
+        "verified-profile-startup",
+        "shared-runtime-two-root-lifecycle",
+        "identity-mismatch-fallback",
+        "unsupported-prerequisite-fallback",
+        "registry-owned-shutdown"
+      ],
+      "result": "passed",
+      "observations": {
+        "positive": {
+          "profile_manifest_id": "BX-BH03-PHASE-06-PROFILE-ASSETS-0.1",
+          "governed_files": 29,
+          "runtime_starts": 1,
+          "shared_opens": 2,
+          "roots": {
+            "primary-root": "ready",
+            "secondary-root": "ready"
+          },
+          "runtime_acknowledgements_before_shutdown": 8,
+          "runtime_acknowledgements_after_shutdown": 11,
+          "shutdown": {
+            "protocol": "blazex.runtime-shutdown/1",
+            "scope_id": "page-runtime",
+            "runtime_generation": 1,
+            "state": "stopped",
+            "acknowledged": true,
+            "root_failures": 0,
+            "released": true
+          },
+          "range_status": 206,
+          "etag_status": 304
+        },
+        "identity_mismatch": {
+          "state": "fallback",
+          "failure_class": "identity-mismatch",
+          "action": "deployment-action"
+        },
+        "unsupported_prerequisite": {
+          "state": "fallback",
+          "failure_class": "unsupported-prerequisite",
+          "action": "static-content"
+        }
+      },
+      "failures": []
+    }
+  ],
+  "deferred": [
+    {
+      "environment": "safari",
+      "state": "deferred-unavailable"
+    },
+    {
+      "environment": "mobile",
+      "state": "deferred-unavailable"
+    },
+    {
+      "environment": "physical-devices",
+      "state": "deferred-unavailable"
+    },
+    {
+      "environment": "second-host",
+      "state": "deferred-unavailable"
+    },
+    {
+      "environment": "manual-assistive-technology",
+      "state": "deferred-unavailable"
+    }
+  ],
+  "support_state": "unsupported"
+}

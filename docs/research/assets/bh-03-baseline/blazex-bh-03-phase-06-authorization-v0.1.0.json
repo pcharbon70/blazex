@@ -1,0 +1,50 @@
+{
+  "schema_version": "1.0.0",
+  "authorization_id": "BX-BH03-PHASE-06-AUTHORIZATION-0.1",
+  "status": "approved-phase-6-only",
+  "approved_at": "2026-09-06",
+  "approved_by": {
+    "identity": "repository-user",
+    "role": "repository-owner",
+    "evidence": "Explicit request to implement the next BH-03 phase section by section, merge one pull request, synchronize main, and delete the feature branch."
+  },
+  "activation": {
+    "base_branch": "main",
+    "base_revision": "8aee16c17a8e4c3130a638457ec43afe9f48fdee",
+    "base_remote_revision": "8aee16c17a8e4c3130a638457ec43afe9f48fdee",
+    "main_synchronized_before_branch": true,
+    "working_branch": "codex/bh-03-phase-06-browser-profile",
+    "phase": "BH-03 Phase 6"
+  },
+  "approval_basis": [
+    {"path": "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-05-completion-v0.1.0.json", "sha256": "6d5076eff015a5dc57565c1e9d0f2d8587e872486b13574dfeadf3bea96b1031"},
+    {"path": "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-05-contract-v0.1.0.json", "sha256": "b0dbbfa1d9fe574c628cfec29d32302fbb238f2d70eee53124cc01dde3511743"},
+    {"path": "docs/research/60-planning/01-browser-host/bh-03-browser-execution-host-and-runtime-boot-lifecycle/phase-05-implementation-evidence.md", "sha256": "1d42226b2f08036c363081144b5e211605939da5b30d177f28a8110eb18bca03"},
+    {"path": "integration/bh-03/integration-index-v0.5.0.json", "sha256": "8fae9d62af27f502ee51b39000c94ce7aac718ca6a2f07b2bfdcbd917fa72653"},
+    {"path": "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-01-contract-v0.1.0.json", "sha256": "44cd9dc05a528e7847c09868566b365d34d087f57116a44d8a23ff907ea562eb"}
+  ],
+  "authorized_scope": [
+    "Compose BH-03 reusable runtime startup, registry, root lifecycle, shutdown, recovery, and fallback boundaries in a separate Phoenix development profile.",
+    "Preserve the immutable BH-01 profile while serving a governed same-origin BH-03 asset inventory.",
+    "Exercise exact compatibility, verified startup, one shared runtime, two independent roots, fallback, and shutdown in active Linux Chrome and Firefox.",
+    "Publish versioned Phase 6 fixtures, browser evidence, validation, and completion evidence."
+  ],
+  "delivery_rules": {
+    "sections_in_order": true,
+    "commit_per_section": true,
+    "section_count": 4,
+    "single_pull_request": true,
+    "merge_pull_request": true,
+    "return_to_synchronized_main_after_delivery": true,
+    "delete_local_feature_branch_after_delivery": true,
+    "delete_remote_feature_branch_after_delivery": true
+  },
+  "not_authorized": [
+    "BH-03 Phase 7 or later implementation",
+    "resource, reliability, or startup measurement budgets",
+    "BH-03 milestone acceptance or BH-04 authorization",
+    "reference DOM interaction transport, Phoenix command authority, product components, or native host delivery",
+    "Safari, mobile, device, second-host, or assistive-technology qualification",
+    "public API stability, package publication, or support claims"
+  ]
+}

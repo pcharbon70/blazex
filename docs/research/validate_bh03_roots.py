@@ -21,6 +21,7 @@ FIXTURES = REPO_ROOT / "integration/bh-03/phase-04/shared-runtime-root-fixtures-
 INTEGRATION_INDEX = REPO_ROOT / "integration/bh-03/integration-index-v0.4.0.json"
 COMPLETION = BASELINE_ROOT / "blazex-bh-03-phase-04-completion-v0.1.0.json"
 PHASE5_AUTHORIZATION = BASELINE_ROOT / "blazex-bh-03-phase-05-authorization-v0.1.0.json"
+PHASE6_AUTHORIZATION = BASELINE_ROOT / "blazex-bh-03-phase-06-authorization-v0.1.0.json"
 PHASE5_BASE = "a4b3f1d78f98434ae2d0a20b87be5421b9f53ada"
 
 SCOPE_STATES = ["starting", "ready", "failed"]
@@ -168,6 +169,7 @@ def validate_implementation(repo_root: Path = REPO_ROOT) -> None:
     for operation in OPERATIONS:
         _require(f'"{operation}"' in roots and f'"{operation}"' in bridge and f'"{operation}"' in host, f"root operation is missing: {operation}")
     phase5_authorized = PHASE5_AUTHORIZATION.is_file() and _load(PHASE5_AUTHORIZATION).get("status") == "approved-phase-5-only"
+    phase6_authorized = PHASE6_AUTHORIZATION.is_file() and _load(PHASE6_AUTHORIZATION).get("status") == "approved-phase-6-only"
     _require(".release(" not in roots, "a root acquired runtime release ownership")
     _require((phase5_authorized and "runtime.shutdown" in registry) or (not phase5_authorized and "runtime.shutdown" not in roots + registry), "registry shutdown differs without an authorized Phase 5 successor")
     metadata_expectations = {
@@ -180,7 +182,8 @@ def validate_implementation(repo_root: Path = REPO_ROOT) -> None:
         metadata = _load(repo_root / path / "blazex.project.json")
         current = metadata.get("current_phase") == phase and metadata.get("status") == status
         phase5_successor = phase5_authorized and path in {"packages/blazex_host_browser", "js/blazex_runtime"} and metadata.get("current_phase") == "BH-03 Phase 5" and metadata.get("status") == "experimental-bh03-phase5-recovery-fallback"
-        _require(current or phase5_successor, f"Phase 4 metadata diverges: {path}")
+        phase6_successor = phase6_authorized and path in {"js/blazex_runtime", "profiles/browser_phoenix"} and metadata.get("current_phase") == "BH-03 Phase 6" and metadata.get("status") == "experimental-bh03-phase6-browser-profile"
+        _require(current or phase5_successor or phase6_successor, f"Phase 4 metadata diverges: {path}")
         _require(metadata.get("public_api_state") == "experimental-not-stable", f"public API was promoted: {path}")
     _require(_mix_dependencies(repo_root / "packages/blazex_runtime_popcorn") == [], "runtime adapter acquired a dependency")
     _require(_mix_dependencies(repo_root / "packages/blazex_host_browser") == [], "browser host acquired a dependency")

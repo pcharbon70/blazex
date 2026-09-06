@@ -18,7 +18,9 @@ defmodule BlazeXBrowserPhoenix.DeploymentTest do
     File.write!(Path.join(root, "bh03-runtime-manifest.json"), ~s({"schema_version":"1.0.0"}))
     File.write!(Path.join(root, "artifacts/runtime.wasm"), <<0, 97, 115, 109, 1, 0, 0, 0>>)
     previous = Application.get_env(:blazex_browser_phoenix, :static_root)
+    previous_bh03 = Application.get_env(:blazex_browser_phoenix, :bh03_static_root)
     Application.put_env(:blazex_browser_phoenix, :static_root, root)
+    Application.put_env(:blazex_browser_phoenix, :bh03_static_root, root)
 
     on_exit(fn ->
       File.rm_rf!(root)
@@ -26,6 +28,10 @@ defmodule BlazeXBrowserPhoenix.DeploymentTest do
       if previous,
         do: Application.put_env(:blazex_browser_phoenix, :static_root, previous),
         else: Application.delete_env(:blazex_browser_phoenix, :static_root)
+
+      if previous_bh03,
+        do: Application.put_env(:blazex_browser_phoenix, :bh03_static_root, previous_bh03),
+        else: Application.delete_env(:blazex_browser_phoenix, :bh03_static_root)
     end)
 
     :ok
@@ -42,6 +48,17 @@ defmodule BlazeXBrowserPhoenix.DeploymentTest do
 
     assert get_resp_header(response, "content-security-policy") |> hd() =~
              "worker-src 'self' blob:"
+  end
+
+  test "serves the separate BH-03 profile with the same deployment guarantees" do
+    response = request("/bh03/runtime-manifest.json")
+    assert response.status == 200
+    assert get_resp_header(response, "content-type") == ["application/json; charset=utf-8"]
+    assert get_resp_header(response, "cache-control") == ["no-store"]
+    assert get_resp_header(response, "cross-origin-opener-policy") == ["same-origin"]
+    assert get_resp_header(response, "cross-origin-embedder-policy") == ["require-corp"]
+    assert request("/bh03").status == 308
+    assert get_resp_header(request("/bh03"), "location") == ["/bh03/"]
   end
 
   test "serves the BH-03 compatibility manifest without caching" do

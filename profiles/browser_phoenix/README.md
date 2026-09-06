@@ -57,3 +57,13 @@ prerequisite, and artifact metadata while leaving artifact acquisition and
 runtime startup to later authorized work. The asset plug serves this manifest
 with `no-store`; the declared immutable artifacts remain historical BH-01
 outputs until Phase 3 decides how acquisition is implemented.
+
+BH-03 Phase 6 adds a separate generated profile at `/bh03/`. It composes the
+strict manifest gate, verified artifact acquisition, isolated AtomVM/Elixir
+startup, shared runtime registry, and two independent root lifecycles. Build
+the disposable AVM first, then run
+`assets/phase6/build_profile.py --output priv/static/bh03`. The profile is an
+active Linux Chrome/Firefox development fixture only: its root presentation is
+profile-owned diagnostic HTML, not the BH-04 DOM interaction transport, and it
+makes no support or stable-API claim. The historical `/bh01/` profile remains
+separate and unchanged.

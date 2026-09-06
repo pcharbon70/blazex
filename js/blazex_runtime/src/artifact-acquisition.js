@@ -30,7 +30,7 @@ export async function acquireHostArtifacts(gate, options = {}) {
       const declaration = manifest.artifacts.find((artifact) => artifact.role === role);
       acquired.push(await fetchArtifact(declaration, {
         cryptoImpl: options.cryptoImpl ?? globalThis.crypto,
-        fetchImpl: options.fetchImpl ?? globalThis.fetch,
+        fetchImpl: options.fetchImpl ?? globalThis.fetch?.bind(globalThis),
         signal: options.signal,
         timeoutMs,
         webAssemblyImpl: options.webAssemblyImpl ?? globalThis.WebAssembly,

@@ -17,3 +17,4 @@ packages/blazex_runtime_popcorn/runtime/generated/
 integration/fixtures/runtime_smoke/generated/
 integration/fixtures/browser_host/generated/
 profiles/browser_phoenix/priv/static/bh01/
+profiles/browser_phoenix/priv/static/bh03/
