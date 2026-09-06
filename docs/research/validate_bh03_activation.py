@@ -1,0 +1,201 @@
+#!/usr/bin/env python3
+"""Validate BH-03 Phase 1 authorization, handoff, contracts, and activation."""
+
+from __future__ import annotations
+
+import hashlib
+import json
+import re
+import subprocess
+import sys
+from pathlib import Path
+from typing import Any
+
+
+RESEARCH_ROOT = Path(__file__).resolve().parent
+REPO_ROOT = RESEARCH_ROOT.parent.parent
+BASELINE_ROOT = RESEARCH_ROOT / "assets/bh-03-baseline"
+AUTHORIZATION = BASELINE_ROOT / "blazex-bh-03-phase-01-authorization-v0.1.0.json"
+LEDGER = BASELINE_ROOT / "blazex-bh-03-entry-ledger-v0.1.0.json"
+CONTRACT = BASELINE_ROOT / "blazex-bh-03-phase-01-contract-v0.1.0.json"
+ACTIVATION = BASELINE_ROOT / "blazex-bh-03-repository-activation-v0.1.0.json"
+INTEGRATION_INDEX = REPO_ROOT / "integration/bh-03/integration-index-v0.1.0.json"
+REGISTRY = RESEARCH_ROOT / "assets/quality-acceptance/blazex-acceptance-registry-v0.1.0.json"
+BH02_DECISION = RESEARCH_ROOT / "assets/bh-02-baseline/blazex-bh-02-acceptance-decision-v0.1.0.json"
+BH02_RECONCILIATION = RESEARCH_ROOT / "assets/bh-02-baseline/blazex-bh-02-reconciliation-v0.1.0.json"
+
+OUTPUT_IDS = [
+    "runtime-host-compatibility-identities",
+    "runtime-discovery-prerequisite-and-manifest-validation",
+    "artifact-acquisition-bundle-load-startup-and-readiness",
+    "shared-compatible-runtime-instance-registry",
+    "independent-root-register-mount-update-move-dispose-remount",
+    "deterministic-shutdown-runtime-loss-and-cleanup",
+    "mismatch-unsupported-and-fallback-diagnostics",
+    "active-browser-profile-integration",
+    "root-readiness-memory-growth-and-reliability-evidence",
+]
+BOUNDARY_IDS = ["blazex_runtime_popcorn", "blazex_host_browser", "js/blazex_runtime", "profiles/browser_phoenix", "integration/bh-03"]
+COMPATIBILITY_IDS = ["blazex.browser-host/1", "blazex.popcorn-runtime-adapter/1", "blazex.browser-runtime-loader/1", "blazex.browser-profile-manifest/1", "blazex.browser-root-lifecycle/1"]
+HOST_STATES = ["inactive", "discovering", "validating", "acquiring", "starting", "ready", "stopping", "stopped", "failed"]
+ROOT_STATES = ["unregistered", "registered", "mounting", "ready", "moving", "disposing", "disposed", "failed"]
+FAILURE_CLASSES = ["unsupported-prerequisite", "manifest-invalid", "identity-mismatch", "artifact-integrity", "artifact-unavailable", "runtime-startup", "bundle-load", "readiness-timeout", "duplicate-root", "stale-generation", "runtime-loss", "shutdown-timeout", "ownership-violation"]
+EMPTY_EVIDENCE_FIELDS = ["fixture_sets", "scenarios", "browser_results", "runtime_results", "root_results", "failure_results", "measurements", "acceptance_evidence"]
+
+
+class ValidationError(Exception):
+    """Raised when BH-03 activation must fail closed."""
+
+
+def _load(path: Path) -> dict[str, Any]:
+    try:
+        value = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise ValidationError(f"cannot load {path}: {exc}") from exc
+    if not isinstance(value, dict):
+        raise ValidationError(f"{path} must contain an object")
+    return value
+
+
+def _sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def _require(condition: bool, message: str) -> None:
+    if not condition:
+        raise ValidationError(message)
+
+
+def validate_authorization(auth: dict[str, Any], repo_root: Path = REPO_ROOT) -> None:
+    _require(auth.get("authorization_id") == "BX-BH03-PHASE-01-AUTHORIZATION-0.1", "authorization ID is missing")
+    _require(auth.get("status") == "approved-phase-1-only", "BH-03 Phase 1 lacks explicit approval")
+    approver = auth.get("approved_by", {})
+    _require(approver.get("identity") and approver.get("role") == "repository-owner", "repository-owner approval is incomplete")
+    activation = auth.get("activation", {})
+    base = str(activation.get("base_revision", ""))
+    _require(len(base) == 40 and base == activation.get("base_remote_revision"), "synchronized base is invalid")
+    _require(activation.get("main_synchronized_before_branch") is True, "main synchronization is not recorded")
+    _require(activation.get("working_branch") == "codex/bh-03-phase-01-activation", "working branch is invalid")
+    rules = auth.get("delivery_rules", {})
+    for key in ("sections_in_order", "commit_per_section", "single_pull_request", "merge_pull_request", "return_to_synchronized_main_after_delivery", "delete_local_feature_branch_after_delivery", "delete_remote_feature_branch_after_delivery"):
+        _require(rules.get(key) is True, f"delivery rule is missing: {key}")
+    _require(rules.get("section_count") == 4, "Phase 1 must have four section commits")
+    for binding in auth.get("approval_basis", []):
+        path = repo_root / str(binding.get("path", ""))
+        _require(path.is_file(), f"authorization input is missing: {path}")
+        _require(_sha256(path) == binding.get("sha256"), f"authorization input is stale: {path}")
+    excluded = " ".join(auth.get("not_authorized", [])).lower()
+    for phrase in ("phase 2", "runtime discovery", "public api stability", "support claims", "canonical generated acceptance registry"):
+        _require(phrase in excluded, f"authorization does not exclude {phrase}")
+    result = subprocess.run(["git", "merge-base", "--is-ancestor", base, "HEAD"], cwd=repo_root, capture_output=True, text=True, check=False)
+    _require(result.returncode == 0, "current work does not descend from the authorized base")
+
+
+def validate_ledger(ledger: dict[str, Any], registry: dict[str, Any], decision: dict[str, Any], reconciliation: dict[str, Any]) -> None:
+    _require(ledger.get("authorization_ref") == "BX-BH03-PHASE-01-AUTHORIZATION-0.1", "ledger authorization is missing")
+    outputs = ledger.get("required_outputs", [])
+    _require([row.get("id") for row in outputs] == OUTPUT_IDS, "required outputs are incomplete or reordered")
+    _require(all(row.get("state") == "planned-unimplemented" for row in outputs), "required output overclaims implementation")
+    expected_acceptance = [row["id"] for row in registry.get("acceptance_conditions", []) if row.get("responsible_milestone") == "BH-03"]
+    _require(ledger.get("first_responsible_acceptance_ids") == expected_acceptance and len(expected_acceptance) == 10, "BH-03 acceptance handoff diverges")
+    expected_conditions = [row["id"] for row in decision.get("conditions", []) if row.get("disposition") == "preserved"]
+    _require(ledger.get("inherited_condition_ids") == expected_conditions, "inherited conditions diverge")
+    _require(ledger.get("satisfied_predecessor_condition") == "BX-BH01-CONDITION-FIXTURE-DISPOSABILITY", "satisfied predecessor condition is missing")
+    _require(ledger.get("inherited_open_finding_ids") == decision.get("open_findings"), "open findings diverge")
+    _require(ledger.get("deferred_qualification_ids") == [row["id"] for row in reconciliation.get("deferred_qualification", [])], "deferred qualifications diverge")
+    _require([row.get("id") for row in ledger.get("activation_boundaries", [])] == BOUNDARY_IDS, "activation boundaries diverge")
+    evidence = ledger.get("evidence_boundary", {})
+    _require(evidence.get("lifecycle_contracts") == "planned-unimplemented" and evidence.get("runtime_behavior") == "unimplemented", "ledger overclaims lifecycle implementation")
+    _require(evidence.get("acceptance_conditions") == "planned" and evidence.get("support") == "unsupported", "ledger overclaims acceptance or support")
+    _require(evidence.get("next_phase") == "eligible-after-phase-1-not-authorized", "ledger authorizes Phase 2")
+
+
+def validate_contract(contract: dict[str, Any]) -> None:
+    _require(contract.get("status") == "authorized-planned-unimplemented", "contract overclaims implementation")
+    _require([row.get("id") for row in contract.get("compatibility_identities", [])] == COMPATIBILITY_IDS, "compatibility identities diverge")
+    _require(all(row.get("state") == "planned-unimplemented" for row in contract["compatibility_identities"]), "compatibility identity overclaims implementation")
+    _require(contract.get("host_states") == HOST_STATES, "host lifecycle vocabulary diverges")
+    _require(contract.get("root_states") == ROOT_STATES, "root lifecycle vocabulary diverges")
+    _require(contract.get("failure_classes") == FAILURE_CLASSES, "failure vocabulary diverges")
+    _require([row.get("id") for row in contract.get("repository_boundaries", [])] == BOUNDARY_IDS, "contract boundaries diverge")
+    negotiation = contract.get("version_negotiation", {})
+    _require(negotiation.get("state") == "planned-unimplemented" and negotiation.get("partial_activation") == "forbidden", "version negotiation overclaims behavior")
+    evidence = contract.get("evidence_boundary", {})
+    _require(all(evidence.get(key) == 0 for key in ("fixtures", "scenarios", "browser_results", "measurements", "acceptance_evidence")), "contract contains premature evidence")
+    _require(evidence.get("implementation") == "unimplemented" and evidence.get("later_phases") == "not-authorized", "contract implements or authorizes later work")
+    _require(evidence.get("public_api_state") == "experimental-not-stable" and evidence.get("support_state") == "unsupported", "contract promotes stability or support")
+    serialized = json.dumps(contract).lower()
+    for phrase in ("boot_fixture", "dispatch_fixture_message", "dispose_fixture"):
+        _require(phrase not in serialized, f"disposable BH-01 fixture protocol leaked into BH-03 contract: {phrase}")
+
+
+def _mix_dependencies(path: Path) -> list[str]:
+    text = (path / "mix.exs").read_text(encoding="utf-8")
+    return re.findall(r"\{:\s*([a-z0-9_]+)\s*,", text)
+
+
+def validate_activation(activation: dict[str, Any], contract: dict[str, Any], repo_root: Path = REPO_ROOT) -> None:
+    boundaries = activation.get("boundaries", [])
+    _require([row.get("id") for row in boundaries] == BOUNDARY_IDS and len({row.get("id") for row in boundaries}) == 5, "activation boundaries are incomplete or duplicated")
+    contract_rows = {row["id"]: row for row in contract.get("repository_boundaries", [])}
+    for row in boundaries:
+        path = repo_root / row["path"]
+        _require(path.is_dir(), f"activation path is missing: {path}")
+        metadata_path = path / "blazex.project.json"
+        if metadata_path.is_file():
+            metadata = _load(metadata_path)
+            for key in ("id", "path", "kind", "owner_role", "current_phase", "status"):
+                _require(metadata.get(key) == row.get(key), f"activation metadata differs: {row['id']} {key}")
+            _require(metadata.get("activation_phase") == row.get("origin_activation"), f"origin activation was rewritten: {row['id']}")
+            _require(metadata.get("public_api_state") == "experimental-not-stable", f"public API was promoted: {row['id']}")
+        manifest = path / contract_rows[row["id"]]["manifest"]
+        _require(manifest.is_file(), f"activation manifest is missing: {manifest}")
+    _require(_mix_dependencies(repo_root / "packages/blazex_runtime_popcorn") == [], "runtime adapter acquired a dependency")
+    _require(_mix_dependencies(repo_root / "packages/blazex_host_browser") == [], "browser host acquired a dependency")
+    expected_profile = contract_rows["profiles/browser_phoenix"]["dependencies"]
+    _require(_mix_dependencies(repo_root / "profiles/browser_phoenix") == expected_profile, "profile dependency inventory is stale")
+    package = _load(repo_root / "js/blazex_runtime/package.json")
+    _require(package.get("dependencies") == {}, "browser loader acquired a runtime dependency")
+    _require(package.get("devDependencies") == {"esbuild": "0.28.2", "playwright-core": "1.62.1"}, "browser loader development pins changed")
+    _require(activation.get("actual_dependency_edges") == ["profiles/browser_phoenix -> blazex_phoenix", "profiles/browser_phoenix -> blazex_renderer_dom_liveview"], "actual dependency edges are stale")
+    _require(activation.get("lifecycle_behavior") == "unimplemented" and activation.get("next_authorized_work") is None, "activation overclaims behavior or later authority")
+    _require(activation.get("api_state") == "experimental-not-stable" and activation.get("support_state") == "unsupported", "activation promotes stability or support")
+
+
+def validate_integration(index: dict[str, Any], repo_root: Path = REPO_ROOT) -> None:
+    _require(index.get("status") == "activated-no-lifecycle-fixtures-or-results", "integration index overclaims lifecycle evidence")
+    _require(all(index.get(key) == [] for key in EMPTY_EVIDENCE_FIELDS), "integration index is not empty")
+    _require(index.get("next_authorized_work") is None, "integration index authorizes later work")
+    _require(index.get("api_state") == "experimental-not-stable" and index.get("support_state") == "unsupported", "integration index promotes stability or support")
+    files = {path.name for path in (repo_root / "integration/bh-03").iterdir() if path.is_file()}
+    _require(files == {"README.md", "integration-index-v0.1.0.json"}, "unowned BH-03 integration artifact exists")
+
+
+def validate(repo_root: Path = REPO_ROOT, research_root: Path = RESEARCH_ROOT) -> None:
+    auth = _load(research_root / AUTHORIZATION.relative_to(RESEARCH_ROOT))
+    ledger = _load(research_root / LEDGER.relative_to(RESEARCH_ROOT))
+    contract = _load(research_root / CONTRACT.relative_to(RESEARCH_ROOT))
+    activation = _load(research_root / ACTIVATION.relative_to(RESEARCH_ROOT))
+    index = _load(repo_root / INTEGRATION_INDEX.relative_to(REPO_ROOT))
+    registry = _load(research_root / REGISTRY.relative_to(RESEARCH_ROOT))
+    decision = _load(research_root / BH02_DECISION.relative_to(RESEARCH_ROOT))
+    reconciliation = _load(research_root / BH02_RECONCILIATION.relative_to(RESEARCH_ROOT))
+    validate_authorization(auth, repo_root)
+    validate_ledger(ledger, registry, decision, reconciliation)
+    validate_contract(contract)
+    validate_activation(activation, contract, repo_root)
+    validate_integration(index, repo_root)
+
+
+def main() -> int:
+    try:
+        validate()
+    except ValidationError as exc:
+        print(f"BH-03 activation validation failed: {exc}", file=sys.stderr)
+        return 1
+    print("BH-03 Phase 1 activation passed: authority, BH-02 handoff, 9 outputs, 10 acceptance conditions, lifecycle vocabulary, 5 boundaries, empty evidence, and unsupported experimental state verified.")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

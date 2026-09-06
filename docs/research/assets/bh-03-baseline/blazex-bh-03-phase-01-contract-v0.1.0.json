@@ -19,7 +19,7 @@
     {"id": "blazex_runtime_popcorn", "path": "packages/blazex_runtime_popcorn", "kind": "elixir-package", "manifest": "mix.exs", "dependencies": []},
     {"id": "blazex_host_browser", "path": "packages/blazex_host_browser", "kind": "elixir-package", "manifest": "mix.exs", "dependencies": []},
     {"id": "js/blazex_runtime", "path": "js/blazex_runtime", "kind": "javascript-package", "manifest": "package.json", "dependencies": []},
-    {"id": "profiles/browser_phoenix", "path": "profiles/browser_phoenix", "kind": "executable-profile", "manifest": "mix.exs", "dependencies": []},
+    {"id": "profiles/browser_phoenix", "path": "profiles/browser_phoenix", "kind": "executable-profile", "manifest": "mix.exs", "dependencies": ["blazex_phoenix", "blazex_renderer_dom_liveview", "phoenix", "phoenix_live_view", "local_live_view", "bandit", "igniter"]},
     {"id": "integration/bh-03", "path": "integration/bh-03", "kind": "integration-suite", "manifest": "integration-index-v0.1.0.json", "dependencies": []}
   ],
   "forbidden_owned_behavior": ["portable-component-semantics", "generic-dom-rendering", "native-renderer-behavior", "phoenix-or-plug-command-authority", "liveview-private-render-data", "production-deployment-policy", "arbitrary-script-or-network-escape"],

@@ -51,19 +51,19 @@ Back to milestone: [README](README.md)
       - [x] 1.2.2.2 Subtask - Create an empty versioned `integration/bh-03` index with no fixtures, scenarios, results, or support claims.
       - [x] 1.2.2.3 Subtask - Update all directory indexes and reject unowned activation paths.
 
-  - [ ] 1.3 Section - Implement fail-closed activation validation.
+  - [x] 1.3 Section - Implement fail-closed activation validation.
 
-    - [ ] 1.3.1 Task - Validate authorization, handoff, plan, and boundaries.
+    - [x] 1.3.1 Task - Validate authorization, handoff, plan, and boundaries.
 
-      - [ ] 1.3.1.1 Subtask - Verify exact hashes, output/condition identities, lifecycle vocabulary, package metadata, dependencies, empty evidence, and synchronized-base ancestry.
-      - [ ] 1.3.1.2 Subtask - Scan reusable host/runtime sources for component, renderer, server-authority, native-toolkit, or disposable BH-01 protocol leakage.
-      - [ ] 1.3.1.3 Subtask - Reject any implementation, passing evidence, browser support, public stability, or Phase 2 authorization claim.
+      - [x] 1.3.1.1 Subtask - Verify exact hashes, output/condition identities, lifecycle vocabulary, package metadata, dependencies, empty evidence, and synchronized-base ancestry.
+      - [x] 1.3.1.2 Subtask - Scan reusable host/runtime sources for component, renderer, server-authority, native-toolkit, or disposable BH-01 protocol leakage.
+      - [x] 1.3.1.3 Subtask - Reject any implementation, passing evidence, browser support, public stability, or Phase 2 authorization claim.
 
-    - [ ] 1.3.2 Task - Add focused negative tests.
+    - [x] 1.3.2 Task - Add focused negative tests.
 
-      - [ ] 1.3.2.1 Subtask - Reject missing authority, stale inputs, changed output/condition sets, duplicate boundaries, or forbidden dependencies.
-      - [ ] 1.3.2.2 Subtask - Reject lifecycle implementation, nonempty results, support/stability promotion, and later-phase authorization.
-      - [ ] 1.3.2.3 Subtask - Prove current repository state passes deterministically.
+      - [x] 1.3.2.1 Subtask - Reject missing authority, stale inputs, changed output/condition sets, duplicate boundaries, or forbidden dependencies.
+      - [x] 1.3.2.2 Subtask - Reject lifecycle implementation, nonempty results, support/stability promotion, and later-phase authorization.
+      - [x] 1.3.2.3 Subtask - Prove current repository state passes deterministically.
 
   - [ ] 1.4 Section - Run the inherited gate and publish completion evidence.
 
