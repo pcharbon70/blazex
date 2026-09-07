@@ -47,29 +47,29 @@ Back to milestone: [README](README.md)
       - [x] 1.1.2.2 Subtask - Register `BX-ACC-ROADMAP-BH-04`, the three first-measurement budgets, and `BX-ACC-FAILURE-BX-FAIL-RENDERER` with owner, phase, suite, and closure expectations.
       - [x] 1.1.2.3 Subtask - Record entry, stop, revise, defer, and completion decision rules and leave BH-05 ineligible.
 
-  - [ ] 1.2 Section - Freeze ownership and activate repository boundaries.
+  - [x] 1.2 Section - Freeze ownership and activate repository boundaries.
 
     Make the neutral renderer, standalone DOM renderer, optional LiveView
     adapter, JavaScript applicator, and integration suites independently
     auditable before their behavior changes.
 
-    - [ ] 1.2.1 Task - Freeze package and dependency ownership.
+    - [x] 1.2.1 Task - Freeze package and dependency ownership.
 
       Define one accountable owner for every contract and prohibit reverse or
       framework-specific edges into reusable packages.
 
-      - [ ] 1.2.1.1 Subtask - Record the allowed inward graph from semantic contracts through `blazex_renderer` to `blazex_renderer_dom`, with the LiveView adapter depending outward on standalone DOM only.
-      - [ ] 1.2.1.2 Subtask - Record `js/blazex_runtime` ownership of validation, DOM application, browser normalization, and cleanup while forbidding component and server-authority behavior.
-      - [ ] 1.2.1.3 Subtask - Prohibit Phoenix, Plug, LiveView, LocalLiveView, Popcorn, AtomVM host-lifecycle, and native-toolkit objects from portable renderer contracts.
+      - [x] 1.2.1.1 Subtask - Record the allowed inward graph from semantic contracts through `blazex_renderer` to `blazex_renderer_dom`, with the LiveView adapter depending outward on standalone DOM only.
+      - [x] 1.2.1.2 Subtask - Record `js/blazex_runtime` ownership of validation, DOM application, browser normalization, and cleanup while forbidding component and server-authority behavior.
+      - [x] 1.2.1.3 Subtask - Prohibit Phoenix, Plug, LiveView, LocalLiveView, Popcorn, AtomVM host-lifecycle, and native-toolkit objects from portable renderer contracts.
 
-    - [ ] 1.2.2 Task - Activate versioned BH-04 evidence locations.
+    - [x] 1.2.2 Task - Activate versioned BH-04 evidence locations.
 
       Create empty, schema-bound locations for future conformance, browser,
       failure, benchmark, and acceptance records without claiming results.
 
-      - [ ] 1.2.2.1 Subtask - Activate `integration/bh-04` with an empty versioned index and declared transaction, interaction, browser, failure, measurement, and review evidence classes.
-      - [ ] 1.2.2.2 Subtask - Update package and integration indexes with truthful Phase 1 activation status and no implemented or passing renderer behavior.
-      - [ ] 1.2.2.3 Subtask - Preserve historical BH-02 full-root fixtures and mark their reuse, supersession, and immutability boundaries explicitly.
+      - [x] 1.2.2.1 Subtask - Activate `integration/bh-04` with an empty versioned index and declared transaction, interaction, browser, failure, measurement, and review evidence classes.
+      - [x] 1.2.2.2 Subtask - Update package and integration indexes with truthful Phase 1 activation status and no implemented or passing renderer behavior.
+      - [x] 1.2.2.3 Subtask - Preserve historical BH-02 full-root fixtures and mark their reuse, supersession, and immutability boundaries explicitly.
 
   - [ ] 1.3 Section - Implement fail-closed activation governance.
 

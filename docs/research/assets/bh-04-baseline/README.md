@@ -27,6 +27,8 @@ None.
 
 ### Files
 
+- [Repository activation](blazex-bh-04-repository-activation-v0.1.0.json) — ownership, dependencies and immutable source inventory.
+
 - [Authorization](blazex-bh-04-phase-01-authorization-v0.1.0.json) — owner authority and bound inputs.
 - [Entry ledger](blazex-bh-04-entry-ledger-v0.1.0.json) — complete accepted handoff and five canonical obligations.
 

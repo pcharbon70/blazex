@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "record_id": "BH-04-ACTIVATION-INDEX",
+  "phase": 1,
+  "state": "activated-unimplemented",
+  "support_state": "unsupported",
+  "api_state": "experimental-not-stable",
+  "phase2_authorized": false,
+  "bh05_eligible": false,
+  "evidence_classes": [
+    "transaction",
+    "reconciliation",
+    "interaction",
+    "browser",
+    "liveview-adapter",
+    "failure",
+    "measurement",
+    "review",
+    "acceptance"
+  ],
+  "results": {
+    "transaction": [],
+    "reconciliation": [],
+    "interaction": [],
+    "browser": [],
+    "liveview-adapter": [],
+    "failure": [],
+    "measurement": [],
+    "review": [],
+    "acceptance": []
+  }
+}
