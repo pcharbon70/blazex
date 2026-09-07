@@ -25,6 +25,10 @@ implementation milestones](../../20-notes/browser-host-implementation-milestones
 
 ## What belongs here
 
+BH-04 Phase 1 is explicitly authorized on 2026-09-07 after accepted BH-03
+Phase 9. Its [ten-phase plan](bh-04-dom-renderer-and-interaction-transport/README.md)
+does not authorize subsequent phases or establish renderer support.
+
 - Future phase documents for browser-host implementation.
 - Shared planning status, dependency, and evidence conventions for those
   phases.

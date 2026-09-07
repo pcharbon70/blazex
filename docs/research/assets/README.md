@@ -25,6 +25,8 @@ insufficient. Record source, creator, license, provenance, and use.
 
 ### Subdirectories
 
+- [BH-04 activation](bh-04-baseline/README.md) — accepted handoff and bounded renderer governance.
+
 - [BH-00 release](bh-00-release/README.md) — source-bound governance,
   reconciliation, multidisciplinary review, risk, release-index, and BH-01
   entry-decision artifacts.

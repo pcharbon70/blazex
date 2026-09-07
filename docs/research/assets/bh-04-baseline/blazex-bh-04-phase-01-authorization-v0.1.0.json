@@ -1,0 +1,80 @@
+{
+  "schema_version": "1.0.0",
+  "record_id": "BH-04-PHASE-01-AUTHORIZATION",
+  "authorized_by": "repository-owner",
+  "authorization": "Explicit request to implement the next phase of BH-04, section by section, then create and merge one PR, synchronize main, and delete the feature branch.",
+  "recorded_at": "2026-09-07",
+  "milestone": "BH-04",
+  "authorized_phase": 1,
+  "base_branch": "main",
+  "base_revision": "12158e343a4634e65d58a8743bc53903620dc834",
+  "feature_branch": "codex/bh04-phase1-activation",
+  "delivery": {
+    "section_commits": [
+      "1.1",
+      "1.2",
+      "1.3",
+      "1.4"
+    ],
+    "pull_requests": 1,
+    "merge": "merge-commit-after-green-gates",
+    "cleanup": [
+      "checkout-main",
+      "fetch-origin",
+      "pull-ff-only",
+      "verify-main-equals-origin",
+      "delete-feature-branch"
+    ]
+  },
+  "source_bindings": {
+    "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-09-acceptance-v0.1.0.json": "59b5af334c46e0e53afd6e3e5e10b6c73107825b2b47a252e47af078f0ef8402",
+    "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-09-completion-v0.1.0.json": "96c6a02c541748e62854b6eb3741450fd13354aeca59b45059ac8a1ecc71265b",
+    "docs/research/assets/bh-02-baseline/blazex-bh-02-contract-baseline-v0.1.0.json": "b1969f57f707adc834fd221b5758c2cfb41683a9ab8aaf1439f355f883bd430a",
+    "docs/research/20-notes/browser-host-implementation-milestones.md": "a23f08ce1bf6021a6d1e9d1dd5998f85e37a7604d23bc032e0618f1c5facddb0",
+    "docs/research/assets/quality-acceptance/blazex-acceptance-registry-v0.1.0.json": "43025d17513f068eb1ac0838a381da4c132bf41b74aa602bffdc130e411368ed",
+    "docs/research/60-planning/development-environment-and-deferred-qualification-policy.md": "5d50cded3d70e95d47359df2a003a6979d92b8745fab012824646cc1e6bc8cfa",
+    "docs/research/20-notes/architecture-decisions/adr-0001-host-neutral-semantic-component-kernel.md": "b99fb71e09caad0f00f27b8d945f573eca749e2c2f336b21dd9f42de8742f329",
+    "docs/research/20-notes/architecture-decisions/adr-0002-versioned-semantic-ui-tree.md": "9d5fa9d3bae06e93836ad46fff79c2301456ee912263906e613b18f085283745",
+    "docs/research/20-notes/architecture-decisions/adr-0003-host-neutral-effects-capabilities-and-resources.md": "2c99891c5f780afddbb85083d4300c2e1b5d453536c5198ff32a88037522df74",
+    "docs/research/20-notes/architecture-decisions/adr-0004-renderer-backend-separation.md": "c221548f8c42a4e2560293b66fdaa2ae5d254a433acef11799906e4243d35354",
+    "docs/research/20-notes/architecture-decisions/adr-0005-server-adapter-and-trust-boundary.md": "5f2d34113308a36192d5d88bd36850d79d810a95b28d57d2e5a49c6c0f803766",
+    "docs/research/20-notes/architecture-decisions/adr-0006-profile-composition.md": "da459efa3ccde1137ecd6b9989ae06a999d8d903e55e4ef3c24bbe049e08c571",
+    "docs/research/20-notes/architecture-decisions/adr-0007-native-control-portability-gate.md": "4ebd2feb853a08c258141479726f14a60ed409b98cabdd5f0537ff9f02784343",
+    "docs/research/20-notes/architecture-decisions/adr-0008-no-dotnet-compatibility-contract.md": "02a86ccdb315f46003acdbb5ede8e40e4ffd9463ef66c06e6f355424ff6abad7"
+  },
+  "planned_phases": [
+    "docs/research/60-planning/01-browser-host/bh-04-dom-renderer-and-interaction-transport/phase-01-authorization-handoff-reconciliation-and-renderer-boundary-activation.md",
+    "docs/research/60-planning/01-browser-host/bh-04-dom-renderer-and-interaction-transport/phase-02-versioned-render-transaction-and-patch-protocol.md",
+    "docs/research/60-planning/01-browser-host/bh-04-dom-renderer-and-interaction-transport/phase-03-keyed-incremental-reconciliation-and-deterministic-diffing.md",
+    "docs/research/60-planning/01-browser-host/bh-04-dom-renderer-and-interaction-transport/phase-04-atomic-dom-application-root-queues-and-stale-rejection.md",
+    "docs/research/60-planning/01-browser-host/bh-04-dom-renderer-and-interaction-transport/phase-05-semantic-event-normalization-and-interaction-transport.md",
+    "docs/research/60-planning/01-browser-host/bh-04-dom-renderer-and-interaction-transport/phase-06-form-value-focus-and-selection-continuity.md",
+    "docs/research/60-planning/01-browser-host/bh-04-dom-renderer-and-interaction-transport/phase-07-effect-ordering-resources-disposal-and-failure-isolation.md",
+    "docs/research/60-planning/01-browser-host/bh-04-dom-renderer-and-interaction-transport/phase-08-liveview-and-local-liveview-adapter-isolation.md",
+    "docs/research/60-planning/01-browser-host/bh-04-dom-renderer-and-interaction-transport/phase-09-cross-path-accessibility-and-browser-conformance.md",
+    "docs/research/60-planning/01-browser-host/bh-04-dom-renderer-and-interaction-transport/phase-10-measurement-review-and-bh-04-acceptance.md"
+  ],
+  "later_plan_bindings": {
+    "docs/research/60-planning/01-browser-host/bh-04-dom-renderer-and-interaction-transport/phase-02-versioned-render-transaction-and-patch-protocol.md": "5214cf17ca5abb5ea7b038736804f131907f16db59e48150f41265eb43f44e07",
+    "docs/research/60-planning/01-browser-host/bh-04-dom-renderer-and-interaction-transport/phase-03-keyed-incremental-reconciliation-and-deterministic-diffing.md": "4ebb1b099ceb3d38485ca8c56b6b6cfc6b22673428c34acc01b4bc3fe60ea3b0",
+    "docs/research/60-planning/01-browser-host/bh-04-dom-renderer-and-interaction-transport/phase-04-atomic-dom-application-root-queues-and-stale-rejection.md": "e26cef1042bf53b3de584d67242ac53ec72971e63673e63fc7d41089f3dcac38",
+    "docs/research/60-planning/01-browser-host/bh-04-dom-renderer-and-interaction-transport/phase-05-semantic-event-normalization-and-interaction-transport.md": "0c5f3e9c9dfce6083214f2bf312422ff93c2595df601a8b35f8ca6e37fc82c13",
+    "docs/research/60-planning/01-browser-host/bh-04-dom-renderer-and-interaction-transport/phase-06-form-value-focus-and-selection-continuity.md": "dbd41f24a37724cf16bbc0794722803403df337420ed998fc0335b3b2f98cdd9",
+    "docs/research/60-planning/01-browser-host/bh-04-dom-renderer-and-interaction-transport/phase-07-effect-ordering-resources-disposal-and-failure-isolation.md": "c3ba09bf76cf7d1e785d4b7395dddb4560821c099644a13850d39d23f5750d97",
+    "docs/research/60-planning/01-browser-host/bh-04-dom-renderer-and-interaction-transport/phase-08-liveview-and-local-liveview-adapter-isolation.md": "2329d980ec3af691f2a703ffe21928a8ddbd3f0882a4000ddf4ff4ee75d85e38",
+    "docs/research/60-planning/01-browser-host/bh-04-dom-renderer-and-interaction-transport/phase-09-cross-path-accessibility-and-browser-conformance.md": "d3f04cf940bb7fc4f8f036b2c34e317ffcf26a9f0079a32e091a92f74eb8c8d4",
+    "docs/research/60-planning/01-browser-host/bh-04-dom-renderer-and-interaction-transport/phase-10-measurement-review-and-bh-04-acceptance.md": "7569e32fa2a387d07724c8d9e9d329f47704b9438c757939741410221522eeb8"
+  },
+  "release_index_resolution": "BH-03 Phase 9 acceptance source_bindings is the accepted candidate/source index. There is no separate BH-03 release-index file; older fixture indexes are not acceptance authority.",
+  "scope": [
+    "handoff-reconciliation",
+    "boundary-activation",
+    "fail-closed-governance",
+    "completion-evidence"
+  ],
+  "renderer_behavior": "unchanged",
+  "support_state": "unsupported",
+  "api_state": "experimental-not-stable",
+  "phase2_authorized": false,
+  "bh05_eligible": false
+}
