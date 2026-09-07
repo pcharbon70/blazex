@@ -17,7 +17,7 @@ aliases:
 
 Back to milestone: [README](README.md)
 
-- [ ] 1 Phase - Authorization, Handoff Reconciliation, and Renderer Boundary Activation.
+- [x] 1 Phase - Authorization, Handoff Reconciliation, and Renderer Boundary Activation.
 
   Establish the exact BH-04 authority, bind the accepted BH-03 handoff and
   inherited renderer contracts, activate only the named renderer evidence
@@ -94,28 +94,28 @@ Back to milestone: [README](README.md)
       - [x] 1.3.2.2 Subtask - Reject historical-evidence rewrites, fabricated browser rows, hidden deferrals, premature behavior, and public/support promotion.
       - [x] 1.3.2.3 Subtask - Prove the unimplemented Phase 1 candidate passes deterministically from a clean checkout.
 
-  - [ ] 1.4 Section - Phase 1 Integration Tests and Completion Evidence.
+  - [x] 1.4 Section - Phase 1 Integration Tests and Completion Evidence.
 
     Run the complete inherited activation gate and publish a bounded decision
     before Phase 2 can become eligible.
 
-    - [ ] 1.4.1 Task - Execute the active Phase 1 integration gate.
+    - [x] 1.4.1 Task - Execute the active Phase 1 integration gate.
 
       Reproduce all inherited and newly activated checks with exact commands,
       versions, counts, and negative cases.
 
-      - [ ] 1.4.1.1 Subtask - Run package-local tests and formats, BH-03 release checks, the BH-04 activation validator/tests, archive and inherited governance validators/generators, JSON validation, dependency audit, and patch hygiene.
-      - [ ] 1.4.1.2 Subtask - Confirm transaction, reconciliation, browser, LiveView adapter, measurement, and acceptance result sets remain empty and later behavior remains unauthorized.
-      - [ ] 1.4.1.3 Subtask - Record exact environment, commands, output counts, expected negative failures, limitations, and deferred qualifications.
+      - [x] 1.4.1.1 Subtask - Run package-local tests and formats, BH-03 release checks, the BH-04 activation validator/tests, archive and inherited governance validators/generators, JSON validation, dependency audit, and patch hygiene.
+      - [x] 1.4.1.2 Subtask - Confirm transaction, reconciliation, browser, LiveView adapter, measurement, and acceptance result sets remain empty and later behavior remains unauthorized.
+      - [x] 1.4.1.3 Subtask - Record exact environment, commands, output counts, expected negative failures, limitations, and deferred qualifications.
 
-    - [ ] 1.4.2 Task - Publish Phase 1 completion evidence.
+    - [x] 1.4.2 Task - Publish Phase 1 completion evidence.
 
       Bind the activation decision to immutable inputs and make no renderer
       implementation claim.
 
-      - [ ] 1.4.2.1 Subtask - Publish the validation log, implementation-evidence note, and completion decision with exact artifact hashes.
-      - [ ] 1.4.2.2 Subtask - Mark Phase 1 complete only if every active gate passes and no stop condition is open.
-      - [ ] 1.4.2.3 Subtask - Make Phase 2 eligible but unauthorized; keep BH-05 ineligible.
+      - [x] 1.4.2.1 Subtask - Publish the validation log, implementation-evidence note, and completion decision with exact artifact hashes.
+      - [x] 1.4.2.2 Subtask - Mark Phase 1 complete only if every active gate passes and no stop condition is open.
+      - [x] 1.4.2.3 Subtask - Make Phase 2 eligible but unauthorized; keep BH-05 ineligible.
 
 ## Section delivery rule
 

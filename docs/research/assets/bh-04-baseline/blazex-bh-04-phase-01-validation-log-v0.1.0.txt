@@ -1,0 +1,237 @@
+BH-04 Phase 1 activation validation — 2026-09-07
+
+Scope: governance only; no new renderer/browser/measurement result rows.
+Base: 12158e343a4634e65d58a8743bc53903620dc834
+Section 1.3 clean candidate: 058d61b60a0b4e61d5dc5b59904bf36a206b7b50
+Environment: Linux; Python 3.12.12; Node 24.3.0; npm 11.4.2; Git 2.49.0.
+Pinned package test image a2386c21edd5: Elixir 1.17.3, OTP 26 (erts 14.0.2).
+Host Elixir 1.18.4/OTP27 was inspected but not used for pinned adapter tests.
+
+
+$ cd docs/research && python3 -m unittest discover -p 'test_*.py'
+exit_code: 0
+......................................................................................................................................................................................................................................................................................................................................
+----------------------------------------------------------------------
+Ran 326 tests in 10.087s
+
+OK
+
+
+$ cd docs/research; for gate in validate_*.py; do if [ "$gate" = validate_bh04_activation.py ]; then python3 "$gate" --candidate; else python3 "$gate"; fi || exit 1; done; for generator in generate_*.py; do python3 "$generator" --check || exit 1; done
+exit_code: 0
+Archive validation passed: 232 completed documents, 27 directories, 1766 local links, and 50 source notes checked.
+BH-00 governance validation passed: stage complete; status accepted-conditionally-ready; 17 sources; 6 axes; 18 packages; 3 profiles; 17 reconciliation checks; 8 reviews; 8 findings; 8 risks; product evidence remains unexecuted.
+BH-01 authorization, inherited ledger, evidence governance, activation, and Phase 1 completion are valid.
+BH-02 final acceptance passed: 7 phases, 9 outputs, 9 interactions, 7 review lenses, complete reproduction, exact deferrals, immutable registry overlays, and BH-03 eligibility without authorization verified.
+BH-02 activation validation passed: authorization, handoff, nine boundaries, dependency graph, leakage scans, and evidence limits checked.
+BH-02 Phase 6 DOM validation passed: authorization, lowering, driver, browsers, fixtures, leakage, and evidence limits checked.
+BH-02 Phase 3 effect validation passed: authorization, event vocabulary, capabilities, effects, resources, fixtures, leakage, and support limits checked.
+BH-02 Phase 4 intent validation passed: authorization, tokens, layout, accessibility, focus, selection, ownership, fixtures, leakage, and support limits checked.
+BH-02 Phase 7 native validation passed: authority, direct adapters, GTK execution, parity, deferrals, leakage, and evidence limits checked.
+BH-02 Phase 5 renderer validation passed: authorization, vocabularies, lifecycle, deterministic oracle, fixtures, leakage, and evidence limits checked.
+BH-02 Phase 2 semantic validation passed: authorization, contract, identity, node surface, evaluation boundary, fixtures, and support limits checked.
+BH-03 review record valid: revise; BH-04 ineligible; unsupported experimental state.
+BH-03 Phase 1 activation passed: authority, BH-02 handoff, 9 outputs, 10 acceptance conditions, lifecycle vocabulary, 5 boundaries, empty evidence, completion bindings, and unsupported experimental state verified.
+BH-03 Phase 2 compatibility validation passed: 8 exact identities, 3 discovery sources, 10 prerequisites, 3 artifact declarations, 27 conformance cases, completion bindings, empty later-phase results, and unsupported experimental state verified.
+BH-03 Phase 9: accepted-with-bounded-conditions; BH-04 eligible, not authorized; unsupported experimental state.
+BH-03 Phase 7 measurement validation passed: repeated active Chrome/Firefox startup, ten-root lifecycle, cleanup, failure convergence, capability-aware memory evidence, empty release budgets, deferred qualification, and unsupported experimental state verified.
+BH-03 Phase 6 browser-profile validation passed: separate Phoenix profile, actual AtomVM/Elixir acknowledgements, identical active Chrome/Firefox scenarios, closed fallback, registry-owned shutdown, deferred qualification, and unsupported experimental state verified.
+BH-03 Phase 5 resilience validation passed: bounded registry shutdown, exact-generation loss handling, one replacement, same-handle atomic replay, closed non-DOM fallback, completion bindings, empty browser/measurement/acceptance evidence, and unsupported experimental state verified.
+BH-03 Phase 4 shared-runtime/root validation passed: exact compatible reuse, one coalesced startup per scope, 12 registry/root cases, independent FIFO roots, generation/ownership failures, completion bindings, empty later evidence, and unsupported experimental state verified.
+BH-03 Phase 3 startup validation passed: 3 bounded artifact roles, 10 acquisition/startup cases, immutable adapter agreement, pinned profile artifact declarations, completion bindings, empty later-phase results, and unsupported experimental state verified.
+BH-04 Phase 1 activation passed; renderer unchanged; unsupported; Phase 2 not authorized; BH-05 ineligible.
+Browser product envelope validation passed: stage complete; 5 browser configurations, 10 evidence classes, 11 toolchain inputs, and 6 BH-01 records, 6 rendering modes, 3 profiles, and 12 profile capabilities, 9 trust boundaries, 12 deployment prerequisites, and 7 fallback categories, 8 paper scenarios, and 5 forbidden claims checked.
+Component catalog validation passed: reference mudblazor-v9.9.0; 83 locked source families; catalog schema 1.0.0; 83 normalized families in 7 categories; 12 source-closure exceptions; 168 reviewed source identifiers; 15 reviewed exception paths; 83 unresolved product dispositions; fresh generated view.
+Component classification validation passed: stage complete; 83 families; 12 exceptions; dispositions {'adapt-concept': 28, 'build-natively': 43, 'renderer-specific-extension': 1, 'replace-with-platform-pattern': 11}; tiers {'F0': 13, 'F1': 26, 'F2': 21, 'F3': 18, 'F4': 5}; packages {'blazex_charts': 1, 'blazex_data': 6, 'blazex_forms': 18, 'blazex_surfaces': 9, 'blazex_ui': 47, 'blazex_ui_tree': 2}; remote {'local-only': 73, 'optional-remote': 7, 'phoenix-enhanced': 3}; fallbacks {'alternative-interaction': 30, 'explicit-unavailable': 2, 'in-app-substitute': 14, 'nonvisual-representation': 1, 'omission': 1, 'server-round-trip': 5, 'static-content': 30}; capability references 204 required/77 optional; portability {'custom-scene': 1, 'portable-semantic': 24, 'portable-with-capabilities': 57, 'renderer-extension': 1}; native {'custom-drawn': 2, 'native-composite': 58, 'native-preferred': 15, 'not-applicable': 8}; visual profiles {'blazex-material': 2, 'hybrid': 58, 'not-applicable': 8, 'platform-native': 15}.
+Quality/acceptance validation passed: stage complete; 6 environments; 31 budgets {'build': 1, 'interaction': 3, 'payload': 10, 'reliability': 9, 'resource': 3, 'startup': 5}; 8 failure scenarios; 7 unwaivable blockers; 4 cross-cutting gates; 290 acceptance requirements {'browser-envelope': 95, 'catalog-family': 83, 'cross-cutting-obligation': 7, 'non-goal': 8, 'package-boundary': 6, 'quality-budget': 31, 'quality-failure': 8, 'quality-gate': 21, 'quality-release-blocker': 7, 'roadmap-milestone': 24}; zero executed evidence.
+Acceptance generation matches committed outputs: 290 requirements, 290 conditions, zero executed evidence; historical roadmap snapshot retained by bounded planning amendment.
+BH-00 release generation matches the committed baseline and BH-01 entry manifest.
+Component catalog generation matches /home/ducky/code/blazex/docs/research/assets/component-catalog/blazex-component-catalog-v0-1-0-generated.md: 83 families, 12 exceptions.
+Component classification generation matches /home/ducky/code/blazex/docs/research/assets/component-catalog/blazex-component-classification-v0-1-0-generated.md: 83 families, 12 exceptions, stage complete.
+
+
+$ docker run --rm --network none -v /home/ducky/code/blazex:/workspace -w /workspace a2386c21edd5 sh -lc 'elixir --version && for p in blazex_core blazex_effects blazex_ui_tree blazex_renderer blazex_renderer_dom blazex_renderer_dom_liveview blazex_renderer_headless; do cd /workspace/packages/$p && mix format --check-formatted && mix test || exit 1; done'
+exit_code: 0
+Erlang/OTP 26 [erts-14.0.2] [source] [64-bit] [smp:20:20] [ds:20:20:10] [async-threads:1] [jit:ns]
+
+Elixir 1.17.3 (compiled with Erlang/OTP 26)
+Compiling 9 files (.ex)
+Generated blazex_core app
+Running ExUnit with seed: 737346, max_cases: 40
+
+.............
+Finished in 0.1 seconds (0.1s async, 0.00s sync)
+13 tests, 0 failures
+==> blazex_core
+Compiling 9 files (.ex)
+Generated blazex_core app
+==> blazex_effects
+Compiling 9 files (.ex)
+Generated blazex_effects app
+Running ExUnit with seed: 968349, max_cases: 40
+
+.........
+Finished in 0.1 seconds (0.1s async, 0.00s sync)
+9 tests, 0 failures
+==> blazex_core
+Compiling 9 files (.ex)
+Generated blazex_core app
+==> blazex_ui_tree
+Compiling 13 files (.ex)
+Generated blazex_ui_tree app
+Running ExUnit with seed: 163310, max_cases: 40
+
+.......................
+Finished in 0.1 seconds (0.1s async, 0.00s sync)
+23 tests, 0 failures
+==> blazex_core
+Compiling 9 files (.ex)
+Generated blazex_core app
+==> blazex_effects
+Compiling 9 files (.ex)
+Generated blazex_effects app
+==> blazex_ui_tree
+Compiling 13 files (.ex)
+Generated blazex_ui_tree app
+==> blazex_renderer
+Compiling 9 files (.ex)
+Generated blazex_renderer app
+Running ExUnit with seed: 583497, max_cases: 40
+
+........
+Finished in 0.1 seconds (0.1s async, 0.00s sync)
+8 tests, 0 failures
+==> blazex_core
+Compiling 9 files (.ex)
+Generated blazex_core app
+==> blazex_effects
+Compiling 9 files (.ex)
+Generated blazex_effects app
+==> blazex_ui_tree
+Compiling 13 files (.ex)
+Generated blazex_ui_tree app
+==> blazex_renderer
+Compiling 9 files (.ex)
+Generated blazex_renderer app
+==> blazex_renderer_dom
+Compiling 9 files (.ex)
+Generated blazex_renderer_dom app
+Running ExUnit with seed: 161268, max_cases: 40
+
+........
+Finished in 0.1 seconds (0.1s async, 0.00s sync)
+8 tests, 0 failures
+Running ExUnit with seed: 53763, max_cases: 40
+
+....
+Finished in 0.06 seconds (0.06s async, 0.00s sync)
+4 tests, 0 failures
+==> blazex_core
+Compiling 9 files (.ex)
+Generated blazex_core app
+==> blazex_effects
+Compiling 9 files (.ex)
+Generated blazex_effects app
+==> blazex_ui_tree
+Compiling 13 files (.ex)
+Generated blazex_ui_tree app
+==> blazex_renderer
+Compiling 9 files (.ex)
+Generated blazex_renderer app
+==> blazex_renderer_headless
+Compiling 5 files (.ex)
+Generated blazex_renderer_headless app
+Running ExUnit with seed: 453324, max_cases: 40
+
+......
+Finished in 0.08 seconds (0.08s async, 0.00s sync)
+6 tests, 0 failures
+
+
+$ cd js/blazex_runtime && npm run build && npm test
+exit_code: 0
+
+> @blazex/runtime-browser-experimental@0.0.0-bh01 build
+> node --check src/index.js && node --check src/internal/errors.js && node --check src/compatibility.js && node --check src/discovery.js && node --check src/host-manifest.js && node --check src/artifact-acquisition.js && node --check src/runtime-startup.js && node --check src/runtime-registry.js && node --check src/root-lifecycle.js && node --check src/manifest-loader.js && node --check src/bridge-protocol.js && node --check src/host-bridge.js && node --check src/lifecycle.js && node --check src/recovery-coordinator.js && node --check src/resource-ledger.js && node --check src/diagnostic-collector.js && node --check src/prerequisites.js && node --check src/runtime-frame-port.js && node --check src/runtime-loader.js && node --check ../../profiles/browser_phoenix/assets/phase4/runtime-frame.js && node --check ../../profiles/browser_phoenix/assets/phase4/host.js && node --check ../../profiles/browser_phoenix/assets/phase6/runtime-frame.js && node --check ../../profiles/browser_phoenix/assets/phase6/host.js && node --check test/support/bh03-measurement.mjs && node --check test/browser/bh03-phase6.integration.mjs && node --check test/browser/bh03-phase7-measurement.integration.mjs && node --check test/browser/phase5.integration.mjs && node --check test/browser/phase6.integration.mjs && node --check test/browser/phase7.integration.mjs && node --check test/browser/phase8-prerequisites.integration.mjs && node --check test/browser/phase8-behavior.integration.mjs && node --check test/browser/phase8-accessibility.integration.mjs && node --check test/browser/phase8-compatibility.integration.mjs && node --check test/browser/phase9-measurement.integration.mjs
+
+
+> @blazex/runtime-browser-experimental@0.0.0-bh01 test
+> node --test test/*.test.js
+
+✔ test/adversarial-boundaries.test.js (108.986618ms)
+✔ test/artifact-acquisition.test.js (107.88811ms)
+✔ test/boundary.test.js (63.654099ms)
+✔ test/compatibility.test.js (65.303417ms)
+✔ test/diagnostic-collector.test.js (64.23648ms)
+✔ test/discovery.test.js (61.772438ms)
+✔ test/host-bridge.test.js (86.004023ms)
+✔ test/host-manifest.test.js (88.694502ms)
+✔ test/lifecycle.test.js (57.282653ms)
+✔ test/manifest-loader.test.js (80.985777ms)
+✔ test/measurement.test.js (60.049249ms)
+✔ test/prerequisites.test.js (62.147479ms)
+✔ test/recovery-coordinator.test.js (74.267006ms)
+✔ test/resource-ledger.test.js (85.046279ms)
+✔ test/root-lifecycle.test.js (73.888343ms)
+✔ test/runtime-loader.test.js (85.436973ms)
+✔ test/runtime-loss-observation.test.js (111.234825ms)
+✔ test/runtime-recovery.test.js (76.738264ms)
+✔ test/runtime-registry.test.js (67.591097ms)
+✔ test/runtime-shutdown.test.js (76.364565ms)
+✔ test/runtime-startup.test.js (175.570089ms)
+ℹ tests 21
+ℹ suites 0
+ℹ pass 21
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 252.811175
+
+
+$ cd packages/blazex_renderer_dom && npm run build && npm test
+exit_code: 0
+
+> @blazex/renderer-dom-experimental@0.0.0-bh02 build
+> node --check js/dom-protocol.js && node --check js/dom-driver.js && node --check js/browser-conformance.js
+
+
+> @blazex/renderer-dom-experimental@0.0.0-bh02 test
+> node js/test/dom-driver.test.js
+
+✔ validates and atomically applies one closed full-root projection (1.989685ms)
+✔ normalizes bounded semantic events without retaining browser objects (0.49738ms)
+✔ applies autofocus, restores same-ID update focus, and controls text selection (0.338712ms)
+✔ rejects stale and malformed batches before mutating the accepted root (0.598405ms)
+✔ accepts next-generation replacement and disposes roots/listeners idempotently (0.382037ms)
+✔ rejects undeclared fields, attributes, mappings, relationships, and disposal roots (0.91646ms)
+✔ driver source has no generic markup, selector, style, global, network, or code escape (1.973613ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 13.385262
+
+
+$ Clean committed archive: git archive HEAD | tar -x -C "$task_bh04_clean"; GIT_DIR=/home/ducky/code/blazex/.git GIT_WORK_TREE="$task_bh04_clean" python3 "$task_bh04_clean/docs/research/validate_bh04_activation.py" --candidate
+exit_code: 0
+BH-04 Phase 1 activation passed; renderer unchanged; unsupported; Phase 2 not authorized; BH-05 ineligible.
+/tmp/blazex-bh04-clean.paQh1o
+
+
+$ git ls-files -z -- '*.json' | xargs -0 -n 1 jq empty; for file in docs/research/assets/bh-04-baseline/*.json integration/bh-04/*.json; do jq empty "$file" || exit 1; done; git diff --check
+exit_code: 0
+
+
+The validator run above preceded completion publication (archive 232 documents).
+Final completion/archive checks must run again after publishing evidence.
+The historical BH-03 Phase 8 revise output is expected, not current entry authority;
+Phase 9 correction is accepted-with-bounded-conditions and the bound current gate.
+27 focused BH-04 tests include mutations for stale authority, missing owner/identity,
+direct/transitive leakage, historical rebinding/rewrites, extra source/evidence/authority,
+false browser/measurement rows, hidden deferrals, support/stability and future authority.
+All are expected rejection tests, not product behavior or qualification evidence.
+No BH-04 release-budget pass or incremental renderer claim is made.

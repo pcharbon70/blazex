@@ -181,6 +181,11 @@ def validate(root=ROOT, require_completion=True):
               "Phase 2 authority forbidden")
         check(auth["bh05_eligible"] is False and index["bh05_eligible"] is False,
               "BH-05 eligibility forbidden")
+        allowed_assets = {Path(p).name for p in (AUTH, LEDGER, ACTIVATION, COMPLETION)}
+        allowed_assets |= {"README.md", "blazex-bh-04-phase-01-validation-log-v0.1.0.txt"}
+        actual_assets = {p.name for p in (root / ASSETS).iterdir()}
+        check(actual_assets <= allowed_assets,
+              "unindexed BH-04 authority or evidence artifact")
         if require_completion:
             validate_completion(root, check)
     except (OSError, ValueError, KeyError, TypeError, IndexError,
@@ -199,6 +204,7 @@ def validate_completion(root, check):
           and completion["next_authorized_work"] is None
           and completion["bh05_eligible"] is False
           and completion["support_state"] == "unsupported"
+          and completion["api_state"] == "experimental-not-stable"
           and completion["renderer_behavior"] == "unchanged",
           "completion promotes unauthorized behavior or support")
     required = set(PINS) | {
@@ -218,6 +224,20 @@ def validate_completion(root, check):
           "completion contains failures or fabricated results")
     check([r["section"] for r in completion["section_commits"]] == ["1.1", "1.2", "1.3", "1.4"],
           "section delivery provenance incomplete")
+    for row in completion["section_commits"][:3]:
+        subject = git(root, "show", "-s", "--format=%s", row["commit"]).decode().strip()
+        check(subject.startswith("BH-04 " + row["section"] + ":"),
+              "section commit identity mismatch")
+        subprocess.run(["git", "-C", str(root), "merge-base", "--is-ancestor",
+                        row["commit"], "HEAD"], check=True, capture_output=True)
+    check(completion["section_commits"][3]["commit"] == "resolve-from-completion-record-commit",
+          "final section must resolve from the commit introducing completion")
+    required_gates = {"research-tests", "validators", "generators", "package-tests-and-formats",
+                      "runtime-js-build-and-tests", "dom-js-build-and-tests", "clean-candidate",
+                      "json-parse", "patch-hygiene"}
+    check(set(completion["gates"]) == required_gates
+          and all(value["exit_code"] == 0 for value in completion["gates"].values()),
+          "completion active gate inventory incomplete or failed")
 
 
 if __name__ == "__main__":

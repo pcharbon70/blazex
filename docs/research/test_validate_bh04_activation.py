@@ -192,6 +192,12 @@ class ActivationTests(unittest.TestCase):
             self.assertIn("unindexed or missing phase plan",
                           "\n".join(gate.validate(self.root, require_completion=False)))
 
+    def test_new_authority_file_is_rejected(self):
+        path = gate.ASSETS + "blazex-bh-04-phase-02-authorization-v0.1.0.json"
+        with self.changed(path, lambda _: b'{"authorized": true}'):
+            self.assertIn("unindexed BH-04 authority",
+                          "\n".join(gate.validate(self.root, require_completion=False)))
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -27,6 +27,9 @@ None.
 
 ### Files
 
+- [Completion](blazex-bh-04-phase-01-completion-v0.1.0.json) — Phase 1 gate and next-phase limits.
+- [Validation log](blazex-bh-04-phase-01-validation-log-v0.1.0.txt) — commands, versions and captured outputs.
+
 - [Repository activation](blazex-bh-04-repository-activation-v0.1.0.json) — ownership, dependencies and immutable source inventory.
 
 - [Authorization](blazex-bh-04-phase-01-authorization-v0.1.0.json) — owner authority and bound inputs.
