@@ -71,28 +71,28 @@ Back to milestone: [README](README.md)
       - [x] 1.2.2.2 Subtask - Update package and integration indexes with truthful Phase 1 activation status and no implemented or passing renderer behavior.
       - [x] 1.2.2.3 Subtask - Preserve historical BH-02 full-root fixtures and mark their reuse, supersession, and immutability boundaries explicitly.
 
-  - [ ] 1.3 Section - Implement fail-closed activation governance.
+  - [x] 1.3 Section - Implement fail-closed activation governance.
 
     Detect stale authority, incomplete handoff, ownership leakage, premature
     behavior, and false evidence before any renderer transaction is accepted.
 
-    - [ ] 1.3.1 Task - Implement the Phase 1 validator.
+    - [x] 1.3.1 Task - Implement the Phase 1 validator.
 
       Validate exact identities and repository boundaries rather than relying
       on prose status labels.
 
-      - [ ] 1.3.1.1 Subtask - Verify authorization, bound input hashes, all five acceptance records, phase decomposition, evidence schemas, owner assignments, and synchronized-base ancestry.
-      - [ ] 1.3.1.2 Subtask - Audit direct and transitive dependencies plus reusable source tokens for server-framework, host-lifecycle, browser-object, and native-toolkit leakage.
-      - [ ] 1.3.1.3 Subtask - Reject nonempty results, incremental protocol implementation, passing measurements, stable APIs, support claims, or Phase 2 authorization.
+      - [x] 1.3.1.1 Subtask - Verify authorization, bound input hashes, all five acceptance records, phase decomposition, evidence schemas, owner assignments, and synchronized-base ancestry.
+      - [x] 1.3.1.2 Subtask - Audit direct and transitive dependencies plus reusable source tokens for server-framework, host-lifecycle, browser-object, and native-toolkit leakage.
+      - [x] 1.3.1.3 Subtask - Reject nonempty results, incremental protocol implementation, passing measurements, stable APIs, support claims, or Phase 2 authorization.
 
-    - [ ] 1.3.2 Task - Add focused negative governance tests.
+    - [x] 1.3.2 Task - Add focused negative governance tests.
 
       Prove the gate fails with actionable diagnostics for every material
       activation error.
 
-      - [ ] 1.3.2.1 Subtask - Reject missing authority, stale BH-03 handoff, changed acceptance identities, absent owners, unauthorized dependency edges, or unindexed files.
-      - [ ] 1.3.2.2 Subtask - Reject historical-evidence rewrites, fabricated browser rows, hidden deferrals, premature behavior, and public/support promotion.
-      - [ ] 1.3.2.3 Subtask - Prove the unimplemented Phase 1 candidate passes deterministically from a clean checkout.
+      - [x] 1.3.2.1 Subtask - Reject missing authority, stale BH-03 handoff, changed acceptance identities, absent owners, unauthorized dependency edges, or unindexed files.
+      - [x] 1.3.2.2 Subtask - Reject historical-evidence rewrites, fabricated browser rows, hidden deferrals, premature behavior, and public/support promotion.
+      - [x] 1.3.2.3 Subtask - Prove the unimplemented Phase 1 candidate passes deterministically from a clean checkout.
 
   - [ ] 1.4 Section - Phase 1 Integration Tests and Completion Evidence.
 
