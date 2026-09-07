@@ -69,6 +69,19 @@ integration directories.
 - [BH-03 Phase 7 validation log](blazex-bh-03-phase-07-validation-log-v0.1.0.txt)
 - [BH-03 Phase 7 completion decision](blazex-bh-03-phase-07-completion-v0.1.0.json)
 
+- [BH-03 Phase 8 authorization](blazex-bh-03-phase-08-authorization-v0.1.0.json)
+- [BH-03 Phase 8 acceptance contract](blazex-bh-03-phase-08-contract-v0.1.0.json)
+
+- [BH-03 Phase 8 reconciliation](blazex-bh-03-phase-08-reconciliation-v0.1.0.json)
+
+- [BH-03 Phase 8 analytical review and findings](blazex-bh-03-phase-08-review-v0.1.0.json)
+
+- [BH-03 Phase 8 repeated browser evidence](blazex-bh-03-phase-08-browser-repeat-v0.1.0.json)
+- [BH-03 Phase 8 repeated measurements](blazex-bh-03-phase-08-measurement-repeat-v0.1.0.json)
+
+- [BH-03 Phase 8 validation log](blazex-bh-03-phase-08-validation-log-v0.1.0.txt)
+- [BH-03 Phase 8 completion decision — revise](blazex-bh-03-phase-08-completion-v0.1.0.json)
+
 ## Maintaining this index
 
 Index every direct asset, preserve prior versions, bind evidence by hash, and

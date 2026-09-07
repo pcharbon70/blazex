@@ -1,0 +1,115 @@
+{
+  "schema_version": "1.0.0",
+  "review_id": "BX-BH03-PHASE-08-REVIEW-0.1",
+  "reviewed_at": "2026-09-07",
+  "candidate_revision": "34822e271ebb04f30bbfe93131c2288dc23d3057",
+  "independence": "Single implementing agent; seven analytical lenses, not independent reviewers or external approval.",
+  "lenses": [
+    {
+      "id": "architecture",
+      "state": "reviewed",
+      "conclusion": "Reusable runtime, host, loader, and profile boundaries remain distinct; the display is a bounded fixture, not BH-04 rendering.",
+      "evidence": [
+        "packages/blazex_host_browser/mix.exs"
+      ]
+    },
+    {
+      "id": "implementation",
+      "state": "reviewed",
+      "conclusion": "Confirmed startup/registry state divergence with the real classes and an injected frame; explicit reportRuntimeLoss tests do not close automatic propagation.",
+      "evidence": [
+        "js/blazex_runtime/test/review/bh03-phase8-runtime-loss.mjs"
+      ]
+    },
+    {
+      "id": "conformance",
+      "state": "reviewed",
+      "conclusion": "Phase 6 covers five browser scenarios but not actual post-readiness exit propagation. Existing green suites therefore do not establish the milestone exit.",
+      "evidence": [
+        "js/blazex_runtime/test/browser/bh03-phase6.integration.mjs"
+      ]
+    },
+    {
+      "id": "accessibility",
+      "state": "reviewed",
+      "conclusion": "Host lifecycle review does not close manual AT or native role gaps; BH-02 automated semantics remain historical evidence only.",
+      "evidence": [
+        "docs/research/assets/bh-03-baseline/blazex-bh-03-entry-ledger-v0.1.0.json"
+      ]
+    },
+    {
+      "id": "security",
+      "state": "reviewed",
+      "conclusion": "Acquisition checks same-origin, redirect, MIME, exact bytes and SHA-256 before activation; this is not production threat-model closure. Stale-ready state blocks lifecycle acceptance.",
+      "evidence": [
+        "js/blazex_runtime/src/artifact-acquisition.js"
+      ]
+    },
+    {
+      "id": "packaging",
+      "state": "reviewed",
+      "conclusion": "No new production dependency, toolkit, renderer, or server authority introduced; runtime remains pinned experimental AtomVM executing AVM, not an AOT UI binary.",
+      "evidence": [
+        "packages/blazex_runtime_popcorn/runtime/verify_runtime_build.py"
+      ]
+    },
+    {
+      "id": "provenance",
+      "state": "reviewed",
+      "conclusion": "Immutable predecessor decisions are preserved. Phase 7 revision-only provenance and coarse/fresh-context measurement limitations remain explicit.",
+      "evidence": [
+        "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-07-completion-v0.1.0.json"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "id": "BX-BH03-FINDING-UNREPORTED-RUNTIME-LOSS",
+      "severity": "blocking",
+      "state": "open",
+      "owner": "browser-host-owner",
+      "due": "BH-03 corrective phase before BH-04",
+      "evidence": [
+        "js/blazex_runtime/test/review/bh03-phase8-runtime-loss.mjs",
+        "profiles/browser_phoenix/assets/phase6/host.js",
+        "js/blazex_runtime/src/runtime-startup.js",
+        "js/blazex_runtime/src/runtime-registry.js"
+      ],
+      "observation": "A correlated runtime-exited event after readiness fails/releases startup but leaves the registry scope ready. Subsequent compatible open returns the stale scope. Profile record() never calls reportRuntimeLoss.",
+      "required_resolution": "Wire active-generation startup loss into registry-owned recovery/fallback. Prove stale-event rejection, intentional shutdown exclusion, single replacement, root replay, and repeated loss convergence in both active browsers; repeat acceptance.",
+      "pass_credit": false
+    },
+    {
+      "id": "BX-BH03-FINDING-MEMORY-EVIDENCE-BOUNDED",
+      "severity": "limitation",
+      "state": "carried-forward",
+      "owner": "performance-owner",
+      "due": "BH-22 before release budgets",
+      "evidence": [
+        "js/blazex_runtime/test/browser/bh03-phase7-measurement.integration.mjs"
+      ],
+      "observation": "Fresh browser contexts and coarse Chrome heap observations cannot prove long-lived page leak freedom. Firefox heap measurement is unavailable.",
+      "required_resolution": "Long-duration same-page resource accounting and qualified memory evidence before resource guarantees.",
+      "pass_credit": false
+    },
+    {
+      "id": "BX-BH03-FINDING-HISTORICAL-RUNNER-PROVENANCE",
+      "severity": "limitation",
+      "state": "carried-forward",
+      "owner": "quality-owner",
+      "due": "BH-03 corrective acceptance",
+      "evidence": [
+        "integration/fixtures/raw-evidence/bh03-phase7-measurements.json",
+        "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-07-completion-v0.1.0.json"
+      ],
+      "observation": "Phase 7 raw evidence names instrumentation commit 2a04d3a, while the final runner/helper was committed in 407bbcd. Completion hashes bind the final runner; the raw revision alone does not identify the complete harness.",
+      "required_resolution": "Retain historical records; bind exact complete candidate source and fresh repeat evidence in subsequent decisions.",
+      "pass_credit": false
+    }
+  ],
+  "decision": "revise",
+  "bh04_eligible": false,
+  "next_authorized_work": null,
+  "api_state": "experimental-not-stable",
+  "support_state": "unsupported"
+}

@@ -1,0 +1,70 @@
+BH-03 Phase 8 validation log — 2026-09-07
+Candidate: 34822e271ebb04f30bbfe93131c2288dc23d3057 (merged Phase 7, complete runner)
+Review implementation: 7c3838fafa7ccff95192b0e184a311b0a7b9a0c7
+Branch: codex/bh03-phase8-acceptance
+Tools: Linux 6.8.0-51-generic x86_64; Node v24.3.0; npm 11.4.2;
+Python 3.12.12; Git 2.49.0; jq 1.7; playwright-core 1.62.1.
+Runtime: cached Docker image a2386c21edd5, Elixir 1.17.3 / Erlang OTP 26 (erts-14.0.2).
+Local Elixir 1.18.4 / OTP 27 was not substituted for the pinned build.
+
+PASS docker exec blazex-bh03-phase8-server:
+  unset PHX_SERVER PORT
+  for project in packages/blazex_runtime_popcorn packages/blazex_host_browser profiles/browser_phoenix:
+    cd /workspace/<project>; mix format --check-formatted; mix test
+  cd /workspace/integration/fixtures/browser_host; mix test
+  Counts: 4 + 4 + 14 + 17 = 39 tests, zero failures.
+  Fixture has no configured formatter inputs; no fixture formatter pass claimed.
+
+PASS python3 profiles/browser_phoenix/assets/phase6/build_profile.py --output profiles/browser_phoenix/priv/static/bh03
+PASS python3 profiles/browser_phoenix/assets/phase6/verify_profile.py profiles/browser_phoenix/priv/static/bh03
+  29 governed files, 3 exact runtime artifacts.
+PASS cd js/blazex_runtime; npm run build; npm test
+  20 test files, no failures.
+PASS browser reruns from js/blazex_runtime:
+  BLAZEX_BASE_URL=http://127.0.0.1:4197/bh03/
+  BLAZEX_CHROME_PATH=/usr/bin/google-chrome
+  BLAZEX_FIREFOX_PATH=/home/ducky/.cache/ms-playwright/firefox-1538/firefox/firefox
+  BLAZEX_REVISION=34822e271ebb04f30bbfe93131c2288dc23d3057
+  BLAZEX_EVIDENCE_PATH=/tmp/bh03-phase8-browser-repeat.json npm run test:browser:bh03-phase6
+  BLAZEX_EVIDENCE_PATH=/tmp/bh03-phase8-measurement-repeat.json npm run test:browser:bh03-phase7
+  Chrome 140.0.7339.80 and Firefox 153.0: five conformance scenarios each.
+  Both: one discarded warm-up, five retained samples, ten roots, 43 acknowledgements,
+  ten disposed roots, zero runtime iframes after shutdown; three failure cases each.
+  Exact raw repetitions retained in Phase 8 baseline assets, leaving Phase 6/7 evidence unchanged.
+
+PASS cd packages/blazex_runtime_popcorn/runtime:
+  python3 verify_runtime_build.py
+  python3 -m unittest discover -s tests -p 'test_*.py'
+  9 tests, no failures.
+PASS cd docs/research:
+  python3 -m unittest discover -p 'test_*.py'
+  293 tests, no failures (includes 17 reconciliation mutation subcases and 8 browser mutation subcases).
+  Every validate_*.py script; 23 validators including acceptance record validation.
+  Every generate_*.py script with --check; 4 deterministic generators.
+PASS repository JSON parse with jq; git diff --check.
+
+EXPECTED BLOCKER:
+  node js/blazex_runtime/test/review/bh03-phase8-runtime-loss.mjs
+  result: blocker-reproduced; startup failed; scope ready; transport stopped once;
+  loss_reports 0; subsequent compatible open returns stale scope.
+  This is an injected-frame reproduction with real startup/registry, not an actual browser crash.
+EXPECTED REJECTION:
+  python3 docs/research/validate_bh03_acceptance.py --require-accepted
+  exit 1: BH-03 requires revision; BH-04 is ineligible.
+  Default validator success means the review RECORD is consistent, not milestone acceptance.
+
+Setup and validation retries:
+- First pinned container lacked Hex. A temporary container installed Hex 2.5.1 and Rebar.
+- Non-root container encountered pre-existing root-owned generated build files.
+  Final pinned container used their owning UID; no source permission changes.
+- A probe initially placed in integration/bh-03 triggered its historical exact inventory guard.
+  Moved the new review probe to js/blazex_runtime/test/review; historical guard unchanged.
+- Archive checks caught unindexed new validators; navigation was added before final validation.
+- Full gate rerun after corrections; no failing active check is relabeled deferred.
+
+Decision: review-complete-milestone-revise. One open blocking runtime-loss finding.
+No automatic browser crash/recovery pass, leak proof, release budget, public stability,
+or support claim. Firefox heap API unavailable; Chrome signal coarse, contexts fresh.
+[DEFERRED] Safari, mobile, physical devices, second host, manual AT: no pass credit,
+qualification owners retained, reactivation by BH-22.
+Historical Phase 1–7 decisions, BH-01/BH-02 records, and canonical acceptance registry unchanged.
