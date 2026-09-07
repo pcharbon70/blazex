@@ -158,6 +158,8 @@ public stability or browser support.
 
 ### Documents
 
+- [Phase 2 protocol design](phase-02-protocol-design.md) — internal envelope, limits, canonical bytes and exclusions.
+
 - [Phase 1 implementation evidence](phase-01-implementation-evidence.md) — activation gate, immutable handoff and bounded completion.
 
 - [Phase 1 — Authorization, Handoff Reconciliation, and Renderer Boundary Activation](phase-01-authorization-handoff-reconciliation-and-renderer-boundary-activation.md)

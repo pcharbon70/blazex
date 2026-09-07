@@ -24,27 +24,27 @@ Back to milestone: [README](README.md)
   acknowledgements, diagnostics, limits, compatibility, and failure semantics
   without becoming a public component API or exposing browser objects.
 
-  - [ ] 2.1 Section - Authorize and freeze the Phase 2 protocol envelope.
+  - [x] 2.1 Section - Authorize and freeze the Phase 2 protocol envelope.
 
     Bind Phase 1 completion and decide the exact protocol questions Phase 2 may
     answer before implementing either reconciliation or DOM mutation.
 
-    - [ ] 2.1.1 Task - Record bounded Phase 2 authority.
+    - [x] 2.1.1 Task - Record bounded Phase 2 authority.
 
       Establish provenance, dependencies, and exclusions for protocol work.
 
-      - [ ] 2.1.1.1 Subtask - Record synchronized base, feature branch, section commits, single PR, cleanup, Phase 1 completion identity, and explicit Phase 2 authorization.
-      - [ ] 2.1.1.2 Subtask - Bind renderer lifecycle, semantic identity, event/effect/resource, presentation-intent, BH-03 root/generation, and BH-02 DOM projection contracts by version and hash.
-      - [ ] 2.1.1.3 Subtask - Exclude reconciliation algorithms, live DOM mutation, framework adapter behavior, product components, public stability, and support qualification.
+      - [x] 2.1.1.1 Subtask - Record synchronized base, feature branch, section commits, single PR, cleanup, Phase 1 completion identity, and explicit Phase 2 authorization.
+      - [x] 2.1.1.2 Subtask - Bind renderer lifecycle, semantic identity, event/effect/resource, presentation-intent, BH-03 root/generation, and BH-02 DOM projection contracts by version and hash.
+      - [x] 2.1.1.3 Subtask - Exclude reconciliation algorithms, live DOM mutation, framework adapter behavior, product components, public stability, and support qualification.
 
-    - [ ] 2.1.2 Task - Freeze protocol design invariants.
+    - [x] 2.1.2 Task - Freeze protocol design invariants.
 
       Make compatibility, ownership, ordering, bounds, and atomicity explicit
       before selecting operation encodings.
 
-      - [ ] 2.1.2.1 Subtask - Define protocol and schema identities, version negotiation, feature/capability declaration, compatibility outcomes, and upgrade/rejection rules.
-      - [ ] 2.1.2.2 Subtask - Define root owner, generation, base revision, target revision, transaction ID, digest, operation ordering, acknowledgement, and diagnostic correlation invariants.
-      - [ ] 2.1.2.3 Subtask - Define bounded depth, nodes, operations, listeners, attributes, values, text, queue, and message size limits plus fail-closed overflow behavior.
+      - [x] 2.1.2.1 Subtask - Define protocol and schema identities, version negotiation, feature/capability declaration, compatibility outcomes, and upgrade/rejection rules.
+      - [x] 2.1.2.2 Subtask - Define root owner, generation, base revision, target revision, transaction ID, digest, operation ordering, acknowledgement, and diagnostic correlation invariants.
+      - [x] 2.1.2.3 Subtask - Define bounded depth, nodes, operations, listeners, attributes, values, text, queue, and message size limits plus fail-closed overflow behavior.
 
   - [ ] 2.2 Section - Define the closed render-transaction vocabulary.
 
