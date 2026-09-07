@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Validate the BH-03 review record; valid records need not accept the milestone."""
 import argparse
+from bh03_history import phase9_historical_binding
 import hashlib
 import json
 import math
@@ -55,7 +56,8 @@ def bindings(rows, expected=None):
     for row in rows:
         target = (ROOT / row["path"]).resolve()
         require(target.is_relative_to(ROOT) and target.is_file(), "invalid evidence path")
-        require(hashlib.sha256(target.read_bytes()).hexdigest() == row["sha256"],
+        require(hashlib.sha256(target.read_bytes()).hexdigest() == row["sha256"]
+                or phase9_historical_binding(ROOT, row["path"], row["sha256"]),
                 f"stale evidence: {row['path']}")
 
 

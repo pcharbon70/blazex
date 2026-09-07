@@ -27,6 +27,7 @@ export class BrowserRuntimeStartup {
   #readinessObserved = false;
   #runtimeMemoryPages = null;
   #state = "inactive";
+  #lossSignal = null;
 
   constructor({ frameFactory = (options) => new BrowserRuntimeFrame(options), onEvent = () => {} } = {}) {
     this.frameFactory = frameFactory;
@@ -41,6 +42,7 @@ export class BrowserRuntimeStartup {
     this.#failure = null;
     this.#readinessObserved = false;
     this.#runtimeMemoryPages = null;
+    const lossSignal = this.#lossSignal = { failure: null, listeners: new Set(), closed: false };
     this.#controller = new AbortController();
     this.#externalSignal = signal ?? null;
     this.#externalAbort = () => this.#controller?.abort(signal?.reason ?? new DOMException("Cancelled", "AbortError"));
@@ -83,6 +85,12 @@ export class BrowserRuntimeStartup {
         runtime_memory_pages: this.#runtimeMemoryPages,
         startup: BH03_RUNTIME_STARTUP,
         transport: this.#frame,
+        subscribeLoss: (listener) => {
+          if (typeof listener !== "function") throw new TypeError("A runtime loss listener is required");
+          if (lossSignal.failure) listener(lossSignal.failure);
+          else if (!lossSignal.closed) lossSignal.listeners.add(listener);
+          return () => lossSignal.listeners.delete(listener);
+        },
         release: (reason = "owner-release") => this.release(reason),
       });
     } catch (error) {
@@ -96,8 +104,12 @@ export class BrowserRuntimeStartup {
 
   release(reason = "owner-release") {
     if (!this.#controller && this.#state === "stopped") return this.snapshot();
-    this.#releaseOwned(reason);
     this.#state = "stopped";
+    if (this.#lossSignal) {
+      this.#lossSignal.closed = true;
+      this.#lossSignal.listeners.clear();
+    }
+    this.#releaseOwned(reason);
     this.#emit("stopped", { reason });
     return this.snapshot();
   }
@@ -115,6 +127,7 @@ export class BrowserRuntimeStartup {
   }
 
   #handleFrameEvent(event) {
+    if (!["starting", "ready"].includes(this.#state)) return;
     if (event?.protocol !== BH03_RUNTIME_STARTUP.transport_protocol) return;
     if (event.generation !== this.#attempt || event.manifest_generation !== this.#manifestGeneration) {
       this.#emit("stale-event-rejected", { event_type: event.type });
@@ -158,8 +171,17 @@ export class BrowserRuntimeStartup {
     if (this.#state === "ready") {
       this.#failure = errorRecord(error);
       this.#state = "failed";
-      this.#emit("failed", { failure: this.#failure });
+      const signal = this.#lossSignal;
+      signal.failure = this.#failure;
+      signal.closed = true;
+      const listeners = [...signal.listeners];
+      signal.listeners.clear();
       this.#releaseOwned("post-readiness-protocol-failure");
+      // Notify ownership before diagnostics; observers must never leave a known-dead scope ready.
+      for (const listener of listeners) {
+        try { listener(signal.failure); } catch { /* One observer cannot suppress another. */ }
+      }
+      this.#emit("failed", { failure: this.#failure });
       return;
     }
     this.#ready?.reject(error);

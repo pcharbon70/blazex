@@ -3,6 +3,8 @@
 
 from __future__ import annotations
 
+from bh03_history import phase9_historical_binding
+
 import hashlib
 import json
 import re
@@ -211,7 +213,7 @@ def validate_completion(completion: dict[str, Any], repo_root: Path = REPO_ROOT)
         path = repo_root / relative
         current = path.is_file() and _sha256(path) == binding.get("sha256")
         authorized_successor = relative in phase5_mutable and _sha256_at_revision(repo_root, PHASE5_BASE, relative) == binding.get("sha256")
-        _require(current or authorized_successor, f"completion artifact is stale: {path}")
+        _require(current or authorized_successor or phase9_historical_binding(repo_root, relative, binding.get("sha256")), f"completion artifact is stale: {path}")
     outcome = completion.get("outcome", {})
     _require(outcome.get("max_scopes") == 16 and outcome.get("max_roots_per_scope") == 64 and outcome.get("conformance_cases") == 12, "completion contract counts diverge")
     _require(outcome.get("runtime_root_evidence") == "injected-transport-unit-conformance", "completion overclaims runtime/root evidence")

@@ -84,5 +84,14 @@ integration directories.
 
 ## Maintaining this index
 
+Phase 9: [corrective authorization](blazex-bh-03-phase-09-authorization-v0.1.0.json).
+
+- [Phase 9 superseding acceptance](blazex-bh-03-phase-09-acceptance-v0.1.0.json)
+- [Phase 9 active recovery evidence](blazex-bh-03-phase-09-recovery-v0.1.0.json)
+- [Phase 9 inherited profile repetition](blazex-bh-03-phase-09-profile-v0.1.0.json)
+- [Phase 9 repeated measurements](blazex-bh-03-phase-09-measurements-v0.1.0.json)
+- [Phase 9 validation log](blazex-bh-03-phase-09-validation-log-v0.1.0.txt)
+- [Phase 9 completion decision](blazex-bh-03-phase-09-completion-v0.1.0.json)
+
 Index every direct asset, preserve prior versions, bind evidence by hash, and
 never convert a planned or deferred state into execution evidence.

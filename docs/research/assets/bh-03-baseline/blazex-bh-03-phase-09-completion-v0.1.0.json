@@ -1,0 +1,91 @@
+{
+  "schema_version": "1.0.0",
+  "record_id": "BX-BH03-PHASE-09-COMPLETE",
+  "state": "passed",
+  "recorded_at": "2026-09-07",
+  "decision": "accepted-with-bounded-conditions",
+  "next_eligible_milestone": "BH-04",
+  "next_authorized_work": null,
+  "api_state": "experimental-not-stable",
+  "support_state": "unsupported",
+  "section_commits": [
+    "fd16b2a13fd5a2ba18549f499d59448f86fe1536",
+    "fb2838054abf23c59af5f4dba23e501068b8d1f2",
+    "72d398017d9fe67b7017d71bfb65356ce7f7b73a",
+    "resolve-from-this-records-git-commit"
+  ],
+  "artifact_hashes": [
+    {
+      "path": "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-09-authorization-v0.1.0.json",
+      "sha256": "b6d598854429c2a8431b0ffb8b06540464bb68e1afde972eec1b127430c31135"
+    },
+    {
+      "path": "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-09-acceptance-v0.1.0.json",
+      "sha256": "59b5af334c46e0e53afd6e3e5e10b6c73107825b2b47a252e47af078f0ef8402"
+    },
+    {
+      "path": "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-09-recovery-v0.1.0.json",
+      "sha256": "9ed4d89aa8de80799e20f0bf6c1ad14cbf0d836e4e452bef2c0b29027fef6815"
+    },
+    {
+      "path": "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-09-profile-v0.1.0.json",
+      "sha256": "8047365e2443cab8ec2a85e080a69563af7cac9ceac30cee1a59a6969545a322"
+    },
+    {
+      "path": "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-09-measurements-v0.1.0.json",
+      "sha256": "93d01712a98ec42d12b3369fce4545da1daa399d35ca84598ab837ae1e7fb1d8"
+    },
+    {
+      "path": "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-09-validation-log-v0.1.0.txt",
+      "sha256": "dcabb2c70db6c7833248b446993d5b85190f5efd928fcaecd1cc399ccf83f543"
+    },
+    {
+      "path": "docs/research/validate_bh03_correction.py",
+      "sha256": "ca480c3177a3b2e247df71a58d711896f5288755e8fd2c003664fa17be18e93a"
+    },
+    {
+      "path": "docs/research/test_validate_bh03_correction.py",
+      "sha256": "13b509a371107a263d0cde7b70575241b6c8c14d3f387150c5c99cf771690c39"
+    },
+    {
+      "path": "docs/research/bh03_history.py",
+      "sha256": "f2214b0b2d1e50a6a224eadf702131eb75421b3e08cbedfd417552717f1e0e14"
+    },
+    {
+      "path": "docs/research/test_bh03_history.py",
+      "sha256": "cf17b53f131591d9dd4322de4781f9a2fb27285dedf31954c6574d0f643b05a1"
+    },
+    {
+      "path": "docs/research/validate_bh03_startup.py",
+      "sha256": "80e3450aa3a23b480a44a9ff9dbcbbb47038b0ec96afee943c00c00964e14e91"
+    },
+    {
+      "path": "docs/research/validate_bh03_roots.py",
+      "sha256": "42604a9c3d97a8ad05a934ef9ec22fff543605ed9d3c5a351fae578410f75830"
+    },
+    {
+      "path": "docs/research/validate_bh03_resilience.py",
+      "sha256": "16b52530b38c125d449542f9da6cb584cb4af67598b53c5c81f5f118c2c0c896"
+    },
+    {
+      "path": "docs/research/validate_bh03_profile.py",
+      "sha256": "37c5eeaff4268ba685f65526ddefade140f6724792d7cdb74249ed9075b75b22"
+    },
+    {
+      "path": "docs/research/validate_bh03_measurements.py",
+      "sha256": "d9346c8e75ed09dde5f13490d8076043c9ce141b4d3939e82f38a22b8338dbc3"
+    },
+    {
+      "path": "docs/research/validate_bh03_acceptance.py",
+      "sha256": "6dae93fa6dc77e38aade9b2d28f77dd7a7444d754cc2e034572118387116646d"
+    },
+    {
+      "path": "docs/research/60-planning/01-browser-host/bh-03-browser-execution-host-and-runtime-boot-lifecycle/phase-09-runtime-loss-correction-and-renewed-acceptance.md",
+      "sha256": "6b77bf029c0bbdbecc8334c8ecda1f518b95f0c641efa3286860ca75718bab71"
+    },
+    {
+      "path": "docs/research/60-planning/01-browser-host/bh-03-browser-execution-host-and-runtime-boot-lifecycle/phase-09-implementation-evidence.md",
+      "sha256": "b6a5cba162326195e53418df2d8637738a44c95e75d93c6fb91fd0145aac0920"
+    }
+  ]
+}

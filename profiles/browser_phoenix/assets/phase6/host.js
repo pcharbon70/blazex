@@ -213,6 +213,25 @@ async function measureRoots() {
 
 function record(event) {
   if (events.length < 256) events.push(event);
+  if (event?.protocol === "blazex.runtime-registry/1") {
+    const states = {
+      "scope-runtime-lost": "recovering",
+      "scope-recovered": "ready",
+      "scope-fallback": "fallback",
+    };
+    const next = states[event.stage];
+    if (next) {
+      state.state = next;
+      // Let the registry finish its atomic transition before observing roots.
+      queueMicrotask(() => {
+        state.fallback = registry?.snapshot().scopes.find(item => item.scope_id === "page-runtime")?.fallback ?? null;
+        show(state.state, state.state === "ready" ? "Runtime recovered; retained roots replayed" :
+          state.state === "recovering" ? "Runtime lost; bounded replacement in progress" :
+          "Runtime recovery exhausted; reload required");
+        publish();
+      });
+    }
+  }
   const marker = event?.protocol === "blazex.bridge.trace/1" && event.kind === "response"
     ? event.value?.result?.runtime_fixture
     : null;
@@ -251,6 +270,7 @@ function publish() {
     scope: scope?.snapshot() ?? null,
     roots: scope?.rootsSnapshot() ?? null,
     fallbacks: state.fallbacks ?? [],
+    fallback: state.fallback ?? null,
     shutdown: state.shutdown ?? null,
     error: state.error ?? null,
     runtime_acknowledgement_count: runtimeAcknowledgements.length,

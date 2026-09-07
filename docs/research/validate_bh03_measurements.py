@@ -3,6 +3,8 @@
 
 from __future__ import annotations
 
+from bh03_history import phase9_historical_binding
+
 import hashlib
 import json
 import statistics
@@ -150,9 +152,9 @@ def _validate_sample(sample: dict[str, Any], iteration: int, browser: str) -> No
         _require(memory == {"available": False, "reason": "browser-memory-api-unavailable"}, "Firefox memory unavailability diverges")
 
 
-def validate_evidence(evidence: dict[str, Any]) -> None:
+def validate_evidence(evidence: dict[str, Any], expected_revision: str = IMPLEMENTATION_REVISION) -> None:
     _require(evidence.get("evidence_id") == "BX-BH03-PHASE-07-ACTIVE-MEASUREMENTS-0.1", "evidence ID is invalid")
-    _require(evidence.get("implementation_revision") == IMPLEMENTATION_REVISION, "implementation revision diverges")
+    _require(evidence.get("implementation_revision") == expected_revision, "implementation revision diverges")
     _require(evidence.get("scenario_set") == SCENARIOS, "scenario set diverges")
     _require(evidence.get("sampling") == {"warmup_repetitions_per_browser": 1, "retained_repetitions_per_browser": 5, "profile_roots": 2, "additional_measurement_roots": 8}, "sampling evidence diverges")
     results = evidence.get("results", [])
@@ -222,7 +224,7 @@ def validate_completion(completion: dict[str, Any], repo_root: Path = REPO_ROOT)
     _require(len(bindings) == 20 and len({row.get("path") for row in bindings}) == 20, "completion artifact bindings diverge")
     for binding in bindings:
         path = repo_root / str(binding.get("path", ""))
-        _require(path.is_file() and _sha256(path) == binding.get("sha256"), f"completion artifact is stale: {path}")
+        _require(path.is_file() and (_sha256(path) == binding.get("sha256") or phase9_historical_binding(repo_root, binding["path"], binding.get("sha256"))), f"completion artifact is stale: {path}")
     outcome = completion.get("outcome", {})
     _require(outcome.get("active_browser_rows") == 2 and outcome.get("warmups_per_browser") == 1 and outcome.get("retained_samples_per_browser") == 5, "completion repetition counts diverge")
     _require(outcome.get("roots_per_sample") == 10 and outcome.get("cleanup_passes") == 10 and outcome.get("declared_failure_passes") == 6, "completion reliability counts diverge")

@@ -1,0 +1,1427 @@
+{
+  "schema_version": "1.0.0",
+  "evidence_id": "BX-BH03-PHASE-09-RECOVERY-0.1",
+  "captured_at": "2026-09-07T12:14:12.362Z",
+  "implementation_revision": "72d398017d9fe67b7017d71bfb65356ce7f7b73a",
+  "platform": "linux 6.8.0-51-generic x64",
+  "node_version": "v24.3.0",
+  "scenario_set": [
+    "stale-event-rejection",
+    "exit-replacement-root-replay",
+    "abort-replacement-root-replay",
+    "second-loss-fallback",
+    "intentional-shutdown-no-replacement"
+  ],
+  "injection": "test-response-only real-runtime onExit/onAbort callback; not an OS crash",
+  "harness_sha256": "b0d1c9dbdbdb9cccd59bacc30a674d0a35b3b841ee99ba16d25408c9b726277f",
+  "results": [
+    {
+      "browser": "chrome",
+      "executable": "/usr/bin/google-chrome",
+      "result": "passed",
+      "observations": [
+        {
+          "kind": "exit",
+          "recovered": {
+            "protocol": "blazex.bh03.browser-profile/1",
+            "state": "ready",
+            "support_state": "unsupported",
+            "runtime_starts": 2,
+            "checks": [
+              "exact-manifest-and-prerequisites",
+              "one-shared-runtime",
+              "two-independent-root-registrations",
+              "independent-mount",
+              "update-and-move-isolation",
+              "dispose-and-remount-isolation",
+              "intentional-fallback-decisions",
+              "elixir-runtime-root-acknowledgements"
+            ],
+            "registry": {
+              "protocol": "blazex.runtime-registry/1",
+              "scopes": [
+                {
+                  "scope_id": "page-runtime",
+                  "generation": 2,
+                  "state": "ready",
+                  "failure": null,
+                  "fallback": null,
+                  "restart_count": 1
+                }
+              ],
+              "metrics": {
+                "starts": 1,
+                "shares": 1,
+                "failures": 0,
+                "mismatches": 1,
+                "shutdowns": 0,
+                "shutdown_failures": 0,
+                "losses": 1,
+                "recoveries": 1,
+                "recovery_failures": 0,
+                "fallbacks": 0,
+                "scope_count": 1
+              }
+            },
+            "scope": {
+              "protocol": "blazex.runtime-scope/1",
+              "scope_id": "page-runtime",
+              "runtime_generation": 2,
+              "attempt_generation": 1,
+              "manifest_id": "BX-BH03-PHASE-06-BROWSER-PROFILE",
+              "manifest_generation": 6,
+              "state": "ready",
+              "owns_runtime_release": false
+            },
+            "roots": {
+              "protocol": "blazex.root-lifecycle/1",
+              "scope_id": "page-runtime",
+              "root_count": 2,
+              "max_roots": 64,
+              "roots": [
+                {
+                  "protocol": "blazex.root-lifecycle/1",
+                  "scope_id": "page-runtime",
+                  "root_id": "primary-root",
+                  "root_generation": 7,
+                  "state": "ready",
+                  "pending": 0,
+                  "failure": null,
+                  "owns_runtime": false,
+                  "owns_runtime_release": false
+                },
+                {
+                  "protocol": "blazex.root-lifecycle/1",
+                  "scope_id": "page-runtime",
+                  "root_id": "secondary-root",
+                  "root_generation": 5,
+                  "state": "ready",
+                  "pending": 0,
+                  "failure": null,
+                  "owns_runtime": false,
+                  "owns_runtime_release": false
+                }
+              ],
+              "states": {
+                "primary-root": "ready",
+                "secondary-root": "ready"
+              },
+              "owns_runtime": false,
+              "owns_runtime_release": false,
+              "accepting": true
+            },
+            "fallbacks": [
+              {
+                "protocol": "blazex.runtime-fallback/1",
+                "decision": "fallback",
+                "scope_id": "page-runtime",
+                "runtime_generation": 1,
+                "failure_class": "identity-mismatch",
+                "action": "deployment-action",
+                "diagnostic": {
+                  "code": "identity-mismatch",
+                  "message": "Browser-host compatibility identities do not match",
+                  "details": {
+                    "reason": "mismatch",
+                    "phase": "before-artifact-acquisition",
+                    "identities": [
+                      {
+                        "key": "renderer",
+                        "expected": "blazex.renderer/1",
+                        "observed": "blazex.renderer/999"
+                      }
+                    ]
+                  }
+                },
+                "partial_activation": false,
+                "presentation": "non-dom-decision-only"
+              },
+              {
+                "protocol": "blazex.runtime-fallback/1",
+                "decision": "fallback",
+                "scope_id": "unsupported-profile",
+                "runtime_generation": 0,
+                "failure_class": "unsupported-prerequisite",
+                "action": "static-content",
+                "diagnostic": {
+                  "code": "unsupported-prerequisite",
+                  "message": "A required browser capability is unavailable",
+                  "details": {
+                    "reason": "fixture-prerequisite"
+                  }
+                },
+                "partial_activation": false,
+                "presentation": "non-dom-decision-only"
+              }
+            ],
+            "fallback": null,
+            "shutdown": null,
+            "error": null,
+            "runtime_acknowledgement_count": 12,
+            "measurement": {
+              "protocol": "blazex.bh03.measurement/1",
+              "startup_to_ready_ms": 276.72,
+              "runtime_memory_pages": 256,
+              "memory_ready": {
+                "available": true,
+                "api": "performance.memory.usedJSHeapSize",
+                "bytes": 34342190
+              },
+              "root_cycle": null,
+              "shutdown_ms": null,
+              "memory_after_shutdown": null
+            }
+          },
+          "terminal": {
+            "protocol": "blazex.bh03.browser-profile/1",
+            "state": "fallback",
+            "support_state": "unsupported",
+            "runtime_starts": 2,
+            "checks": [
+              "exact-manifest-and-prerequisites",
+              "one-shared-runtime",
+              "two-independent-root-registrations",
+              "independent-mount",
+              "update-and-move-isolation",
+              "dispose-and-remount-isolation",
+              "intentional-fallback-decisions",
+              "elixir-runtime-root-acknowledgements"
+            ],
+            "registry": {
+              "protocol": "blazex.runtime-registry/1",
+              "scopes": [
+                {
+                  "scope_id": "page-runtime",
+                  "generation": 2,
+                  "state": "fallback",
+                  "failure": {
+                    "code": "recovery-exhausted",
+                    "message": "Runtime recovery did not converge",
+                    "details": {
+                      "reason": "replacement-limit",
+                      "cause": {
+                        "code": "runtime-loss",
+                        "message": "The runtime replacement limit is exhausted",
+                        "details": {
+                          "reason": "observed-post-readiness-runtime-loss"
+                        }
+                      }
+                    }
+                  },
+                  "fallback": {
+                    "protocol": "blazex.runtime-fallback/1",
+                    "decision": "fallback",
+                    "scope_id": "page-runtime",
+                    "runtime_generation": 2,
+                    "failure_class": "recovery-exhausted",
+                    "action": "user-action",
+                    "diagnostic": {
+                      "code": "recovery-exhausted",
+                      "message": "Runtime recovery did not converge",
+                      "details": {
+                        "reason": "replacement-limit",
+                        "cause": {
+                          "code": "runtime-loss",
+                          "message": "The runtime replacement limit is exhausted",
+                          "details": {
+                            "reason": "observed-post-readiness-runtime-loss"
+                          }
+                        }
+                      }
+                    },
+                    "partial_activation": false,
+                    "presentation": "non-dom-decision-only"
+                  },
+                  "restart_count": 1
+                }
+              ],
+              "metrics": {
+                "starts": 1,
+                "shares": 1,
+                "failures": 0,
+                "mismatches": 1,
+                "shutdowns": 0,
+                "shutdown_failures": 0,
+                "losses": 2,
+                "recoveries": 1,
+                "recovery_failures": 1,
+                "fallbacks": 1,
+                "scope_count": 1
+              }
+            },
+            "scope": {
+              "protocol": "blazex.runtime-scope/1",
+              "scope_id": "page-runtime",
+              "runtime_generation": 2,
+              "attempt_generation": 1,
+              "manifest_id": "BX-BH03-PHASE-06-BROWSER-PROFILE",
+              "manifest_generation": 6,
+              "state": "fallback",
+              "owns_runtime_release": false
+            },
+            "roots": {
+              "protocol": "blazex.root-lifecycle/1",
+              "scope_id": "page-runtime",
+              "root_count": 2,
+              "max_roots": 64,
+              "roots": [
+                {
+                  "protocol": "blazex.root-lifecycle/1",
+                  "scope_id": "page-runtime",
+                  "root_id": "primary-root",
+                  "root_generation": 7,
+                  "state": "failed",
+                  "pending": 0,
+                  "failure": {
+                    "code": "runtime-loss",
+                    "message": "The active runtime generation was lost",
+                    "details": {
+                      "reason": "observed-post-readiness-runtime-loss"
+                    }
+                  },
+                  "owns_runtime": false,
+                  "owns_runtime_release": false
+                },
+                {
+                  "protocol": "blazex.root-lifecycle/1",
+                  "scope_id": "page-runtime",
+                  "root_id": "secondary-root",
+                  "root_generation": 5,
+                  "state": "failed",
+                  "pending": 0,
+                  "failure": {
+                    "code": "runtime-loss",
+                    "message": "The active runtime generation was lost",
+                    "details": {
+                      "reason": "observed-post-readiness-runtime-loss"
+                    }
+                  },
+                  "owns_runtime": false,
+                  "owns_runtime_release": false
+                }
+              ],
+              "states": {
+                "primary-root": "failed",
+                "secondary-root": "failed"
+              },
+              "owns_runtime": false,
+              "owns_runtime_release": false,
+              "accepting": false
+            },
+            "fallbacks": [
+              {
+                "protocol": "blazex.runtime-fallback/1",
+                "decision": "fallback",
+                "scope_id": "page-runtime",
+                "runtime_generation": 1,
+                "failure_class": "identity-mismatch",
+                "action": "deployment-action",
+                "diagnostic": {
+                  "code": "identity-mismatch",
+                  "message": "Browser-host compatibility identities do not match",
+                  "details": {
+                    "reason": "mismatch",
+                    "phase": "before-artifact-acquisition",
+                    "identities": [
+                      {
+                        "key": "renderer",
+                        "expected": "blazex.renderer/1",
+                        "observed": "blazex.renderer/999"
+                      }
+                    ]
+                  }
+                },
+                "partial_activation": false,
+                "presentation": "non-dom-decision-only"
+              },
+              {
+                "protocol": "blazex.runtime-fallback/1",
+                "decision": "fallback",
+                "scope_id": "unsupported-profile",
+                "runtime_generation": 0,
+                "failure_class": "unsupported-prerequisite",
+                "action": "static-content",
+                "diagnostic": {
+                  "code": "unsupported-prerequisite",
+                  "message": "A required browser capability is unavailable",
+                  "details": {
+                    "reason": "fixture-prerequisite"
+                  }
+                },
+                "partial_activation": false,
+                "presentation": "non-dom-decision-only"
+              }
+            ],
+            "fallback": {
+              "protocol": "blazex.runtime-fallback/1",
+              "decision": "fallback",
+              "scope_id": "page-runtime",
+              "runtime_generation": 2,
+              "failure_class": "recovery-exhausted",
+              "action": "user-action",
+              "diagnostic": {
+                "code": "recovery-exhausted",
+                "message": "Runtime recovery did not converge",
+                "details": {
+                  "reason": "replacement-limit",
+                  "cause": {
+                    "code": "runtime-loss",
+                    "message": "The runtime replacement limit is exhausted",
+                    "details": {
+                      "reason": "observed-post-readiness-runtime-loss"
+                    }
+                  }
+                }
+              },
+              "partial_activation": false,
+              "presentation": "non-dom-decision-only"
+            },
+            "shutdown": null,
+            "error": null,
+            "runtime_acknowledgement_count": 12,
+            "measurement": {
+              "protocol": "blazex.bh03.measurement/1",
+              "startup_to_ready_ms": 276.72,
+              "runtime_memory_pages": 256,
+              "memory_ready": {
+                "available": true,
+                "api": "performance.memory.usedJSHeapSize",
+                "bytes": 34342190
+              },
+              "root_cycle": null,
+              "shutdown_ms": null,
+              "memory_after_shutdown": null
+            }
+          },
+          "frames_after_terminal": 0
+        },
+        {
+          "kind": "abort",
+          "recovered": {
+            "protocol": "blazex.bh03.browser-profile/1",
+            "state": "ready",
+            "support_state": "unsupported",
+            "runtime_starts": 2,
+            "checks": [
+              "exact-manifest-and-prerequisites",
+              "one-shared-runtime",
+              "two-independent-root-registrations",
+              "independent-mount",
+              "update-and-move-isolation",
+              "dispose-and-remount-isolation",
+              "intentional-fallback-decisions",
+              "elixir-runtime-root-acknowledgements"
+            ],
+            "registry": {
+              "protocol": "blazex.runtime-registry/1",
+              "scopes": [
+                {
+                  "scope_id": "page-runtime",
+                  "generation": 2,
+                  "state": "ready",
+                  "failure": null,
+                  "fallback": null,
+                  "restart_count": 1
+                }
+              ],
+              "metrics": {
+                "starts": 1,
+                "shares": 1,
+                "failures": 0,
+                "mismatches": 1,
+                "shutdowns": 0,
+                "shutdown_failures": 0,
+                "losses": 1,
+                "recoveries": 1,
+                "recovery_failures": 0,
+                "fallbacks": 0,
+                "scope_count": 1
+              }
+            },
+            "scope": {
+              "protocol": "blazex.runtime-scope/1",
+              "scope_id": "page-runtime",
+              "runtime_generation": 2,
+              "attempt_generation": 1,
+              "manifest_id": "BX-BH03-PHASE-06-BROWSER-PROFILE",
+              "manifest_generation": 6,
+              "state": "ready",
+              "owns_runtime_release": false
+            },
+            "roots": {
+              "protocol": "blazex.root-lifecycle/1",
+              "scope_id": "page-runtime",
+              "root_count": 2,
+              "max_roots": 64,
+              "roots": [
+                {
+                  "protocol": "blazex.root-lifecycle/1",
+                  "scope_id": "page-runtime",
+                  "root_id": "primary-root",
+                  "root_generation": 7,
+                  "state": "ready",
+                  "pending": 0,
+                  "failure": null,
+                  "owns_runtime": false,
+                  "owns_runtime_release": false
+                },
+                {
+                  "protocol": "blazex.root-lifecycle/1",
+                  "scope_id": "page-runtime",
+                  "root_id": "secondary-root",
+                  "root_generation": 5,
+                  "state": "ready",
+                  "pending": 0,
+                  "failure": null,
+                  "owns_runtime": false,
+                  "owns_runtime_release": false
+                }
+              ],
+              "states": {
+                "primary-root": "ready",
+                "secondary-root": "ready"
+              },
+              "owns_runtime": false,
+              "owns_runtime_release": false,
+              "accepting": true
+            },
+            "fallbacks": [
+              {
+                "protocol": "blazex.runtime-fallback/1",
+                "decision": "fallback",
+                "scope_id": "page-runtime",
+                "runtime_generation": 1,
+                "failure_class": "identity-mismatch",
+                "action": "deployment-action",
+                "diagnostic": {
+                  "code": "identity-mismatch",
+                  "message": "Browser-host compatibility identities do not match",
+                  "details": {
+                    "reason": "mismatch",
+                    "phase": "before-artifact-acquisition",
+                    "identities": [
+                      {
+                        "key": "renderer",
+                        "expected": "blazex.renderer/1",
+                        "observed": "blazex.renderer/999"
+                      }
+                    ]
+                  }
+                },
+                "partial_activation": false,
+                "presentation": "non-dom-decision-only"
+              },
+              {
+                "protocol": "blazex.runtime-fallback/1",
+                "decision": "fallback",
+                "scope_id": "unsupported-profile",
+                "runtime_generation": 0,
+                "failure_class": "unsupported-prerequisite",
+                "action": "static-content",
+                "diagnostic": {
+                  "code": "unsupported-prerequisite",
+                  "message": "A required browser capability is unavailable",
+                  "details": {
+                    "reason": "fixture-prerequisite"
+                  }
+                },
+                "partial_activation": false,
+                "presentation": "non-dom-decision-only"
+              }
+            ],
+            "fallback": null,
+            "shutdown": null,
+            "error": null,
+            "runtime_acknowledgement_count": 12,
+            "measurement": {
+              "protocol": "blazex.bh03.measurement/1",
+              "startup_to_ready_ms": 288.45,
+              "runtime_memory_pages": 256,
+              "memory_ready": {
+                "available": true,
+                "api": "performance.memory.usedJSHeapSize",
+                "bytes": 34335538
+              },
+              "root_cycle": null,
+              "shutdown_ms": null,
+              "memory_after_shutdown": null
+            }
+          },
+          "terminal": {
+            "protocol": "blazex.bh03.browser-profile/1",
+            "state": "stopped",
+            "support_state": "unsupported",
+            "runtime_starts": 2,
+            "checks": [
+              "exact-manifest-and-prerequisites",
+              "one-shared-runtime",
+              "two-independent-root-registrations",
+              "independent-mount",
+              "update-and-move-isolation",
+              "dispose-and-remount-isolation",
+              "intentional-fallback-decisions",
+              "elixir-runtime-root-acknowledgements",
+              "registry-owned-shutdown"
+            ],
+            "registry": {
+              "protocol": "blazex.runtime-registry/1",
+              "scopes": [
+                {
+                  "scope_id": "page-runtime",
+                  "generation": 2,
+                  "state": "stopped",
+                  "failure": null,
+                  "fallback": null,
+                  "restart_count": 1
+                }
+              ],
+              "metrics": {
+                "starts": 1,
+                "shares": 1,
+                "failures": 0,
+                "mismatches": 1,
+                "shutdowns": 1,
+                "shutdown_failures": 0,
+                "losses": 1,
+                "recoveries": 1,
+                "recovery_failures": 0,
+                "fallbacks": 0,
+                "scope_count": 1
+              }
+            },
+            "scope": {
+              "protocol": "blazex.runtime-scope/1",
+              "scope_id": "page-runtime",
+              "runtime_generation": 2,
+              "attempt_generation": 1,
+              "manifest_id": "BX-BH03-PHASE-06-BROWSER-PROFILE",
+              "manifest_generation": 6,
+              "state": "stopped",
+              "owns_runtime_release": false
+            },
+            "roots": {
+              "protocol": "blazex.root-lifecycle/1",
+              "scope_id": "page-runtime",
+              "root_count": 2,
+              "max_roots": 64,
+              "roots": [
+                {
+                  "protocol": "blazex.root-lifecycle/1",
+                  "scope_id": "page-runtime",
+                  "root_id": "primary-root",
+                  "root_generation": 8,
+                  "state": "disposed",
+                  "pending": 0,
+                  "failure": null,
+                  "owns_runtime": false,
+                  "owns_runtime_release": false
+                },
+                {
+                  "protocol": "blazex.root-lifecycle/1",
+                  "scope_id": "page-runtime",
+                  "root_id": "secondary-root",
+                  "root_generation": 6,
+                  "state": "disposed",
+                  "pending": 0,
+                  "failure": null,
+                  "owns_runtime": false,
+                  "owns_runtime_release": false
+                }
+              ],
+              "states": {
+                "primary-root": "disposed",
+                "secondary-root": "disposed"
+              },
+              "owns_runtime": false,
+              "owns_runtime_release": false,
+              "accepting": false
+            },
+            "fallbacks": [
+              {
+                "protocol": "blazex.runtime-fallback/1",
+                "decision": "fallback",
+                "scope_id": "page-runtime",
+                "runtime_generation": 1,
+                "failure_class": "identity-mismatch",
+                "action": "deployment-action",
+                "diagnostic": {
+                  "code": "identity-mismatch",
+                  "message": "Browser-host compatibility identities do not match",
+                  "details": {
+                    "reason": "mismatch",
+                    "phase": "before-artifact-acquisition",
+                    "identities": [
+                      {
+                        "key": "renderer",
+                        "expected": "blazex.renderer/1",
+                        "observed": "blazex.renderer/999"
+                      }
+                    ]
+                  }
+                },
+                "partial_activation": false,
+                "presentation": "non-dom-decision-only"
+              },
+              {
+                "protocol": "blazex.runtime-fallback/1",
+                "decision": "fallback",
+                "scope_id": "unsupported-profile",
+                "runtime_generation": 0,
+                "failure_class": "unsupported-prerequisite",
+                "action": "static-content",
+                "diagnostic": {
+                  "code": "unsupported-prerequisite",
+                  "message": "A required browser capability is unavailable",
+                  "details": {
+                    "reason": "fixture-prerequisite"
+                  }
+                },
+                "partial_activation": false,
+                "presentation": "non-dom-decision-only"
+              }
+            ],
+            "fallback": null,
+            "shutdown": {
+              "protocol": "blazex.runtime-shutdown/1",
+              "scope_id": "page-runtime",
+              "runtime_generation": 2,
+              "state": "stopped",
+              "acknowledged": true,
+              "root_failures": 0,
+              "released": true
+            },
+            "error": null,
+            "runtime_acknowledgement_count": 15,
+            "measurement": {
+              "protocol": "blazex.bh03.measurement/1",
+              "startup_to_ready_ms": 288.45,
+              "runtime_memory_pages": 256,
+              "memory_ready": {
+                "available": true,
+                "api": "performance.memory.usedJSHeapSize",
+                "bytes": 34335538
+              },
+              "root_cycle": null,
+              "shutdown_ms": 20.045,
+              "memory_after_shutdown": {
+                "available": true,
+                "api": "performance.memory.usedJSHeapSize",
+                "bytes": 64557578
+              },
+              "runtime_iframes_after_shutdown": 0
+            }
+          },
+          "frames_after_terminal": 0
+        }
+      ],
+      "failures": [],
+      "browser_version": "140.0.7339.80"
+    },
+    {
+      "browser": "firefox",
+      "executable": "/home/ducky/.cache/ms-playwright/firefox-1538/firefox/firefox",
+      "result": "passed",
+      "observations": [
+        {
+          "kind": "exit",
+          "recovered": {
+            "protocol": "blazex.bh03.browser-profile/1",
+            "state": "ready",
+            "support_state": "unsupported",
+            "runtime_starts": 2,
+            "checks": [
+              "exact-manifest-and-prerequisites",
+              "one-shared-runtime",
+              "two-independent-root-registrations",
+              "independent-mount",
+              "update-and-move-isolation",
+              "dispose-and-remount-isolation",
+              "intentional-fallback-decisions",
+              "elixir-runtime-root-acknowledgements"
+            ],
+            "registry": {
+              "protocol": "blazex.runtime-registry/1",
+              "scopes": [
+                {
+                  "scope_id": "page-runtime",
+                  "generation": 2,
+                  "state": "ready",
+                  "failure": null,
+                  "fallback": null,
+                  "restart_count": 1
+                }
+              ],
+              "metrics": {
+                "starts": 1,
+                "shares": 1,
+                "failures": 0,
+                "mismatches": 1,
+                "shutdowns": 0,
+                "shutdown_failures": 0,
+                "losses": 1,
+                "recoveries": 1,
+                "recovery_failures": 0,
+                "fallbacks": 0,
+                "scope_count": 1
+              }
+            },
+            "scope": {
+              "protocol": "blazex.runtime-scope/1",
+              "scope_id": "page-runtime",
+              "runtime_generation": 2,
+              "attempt_generation": 1,
+              "manifest_id": "BX-BH03-PHASE-06-BROWSER-PROFILE",
+              "manifest_generation": 6,
+              "state": "ready",
+              "owns_runtime_release": false
+            },
+            "roots": {
+              "protocol": "blazex.root-lifecycle/1",
+              "scope_id": "page-runtime",
+              "root_count": 2,
+              "max_roots": 64,
+              "roots": [
+                {
+                  "protocol": "blazex.root-lifecycle/1",
+                  "scope_id": "page-runtime",
+                  "root_id": "primary-root",
+                  "root_generation": 7,
+                  "state": "ready",
+                  "pending": 0,
+                  "failure": null,
+                  "owns_runtime": false,
+                  "owns_runtime_release": false
+                },
+                {
+                  "protocol": "blazex.root-lifecycle/1",
+                  "scope_id": "page-runtime",
+                  "root_id": "secondary-root",
+                  "root_generation": 5,
+                  "state": "ready",
+                  "pending": 0,
+                  "failure": null,
+                  "owns_runtime": false,
+                  "owns_runtime_release": false
+                }
+              ],
+              "states": {
+                "primary-root": "ready",
+                "secondary-root": "ready"
+              },
+              "owns_runtime": false,
+              "owns_runtime_release": false,
+              "accepting": true
+            },
+            "fallbacks": [
+              {
+                "protocol": "blazex.runtime-fallback/1",
+                "decision": "fallback",
+                "scope_id": "page-runtime",
+                "runtime_generation": 1,
+                "failure_class": "identity-mismatch",
+                "action": "deployment-action",
+                "diagnostic": {
+                  "code": "identity-mismatch",
+                  "message": "Browser-host compatibility identities do not match",
+                  "details": {
+                    "reason": "mismatch",
+                    "phase": "before-artifact-acquisition",
+                    "identities": [
+                      {
+                        "key": "renderer",
+                        "expected": "blazex.renderer/1",
+                        "observed": "blazex.renderer/999"
+                      }
+                    ]
+                  }
+                },
+                "partial_activation": false,
+                "presentation": "non-dom-decision-only"
+              },
+              {
+                "protocol": "blazex.runtime-fallback/1",
+                "decision": "fallback",
+                "scope_id": "unsupported-profile",
+                "runtime_generation": 0,
+                "failure_class": "unsupported-prerequisite",
+                "action": "static-content",
+                "diagnostic": {
+                  "code": "unsupported-prerequisite",
+                  "message": "A required browser capability is unavailable",
+                  "details": {
+                    "reason": "fixture-prerequisite"
+                  }
+                },
+                "partial_activation": false,
+                "presentation": "non-dom-decision-only"
+              }
+            ],
+            "fallback": null,
+            "shutdown": null,
+            "error": null,
+            "runtime_acknowledgement_count": 12,
+            "measurement": {
+              "protocol": "blazex.bh03.measurement/1",
+              "startup_to_ready_ms": 536.04,
+              "runtime_memory_pages": 256,
+              "memory_ready": {
+                "available": false,
+                "reason": "browser-memory-api-unavailable"
+              },
+              "root_cycle": null,
+              "shutdown_ms": null,
+              "memory_after_shutdown": null
+            }
+          },
+          "terminal": {
+            "protocol": "blazex.bh03.browser-profile/1",
+            "state": "fallback",
+            "support_state": "unsupported",
+            "runtime_starts": 2,
+            "checks": [
+              "exact-manifest-and-prerequisites",
+              "one-shared-runtime",
+              "two-independent-root-registrations",
+              "independent-mount",
+              "update-and-move-isolation",
+              "dispose-and-remount-isolation",
+              "intentional-fallback-decisions",
+              "elixir-runtime-root-acknowledgements"
+            ],
+            "registry": {
+              "protocol": "blazex.runtime-registry/1",
+              "scopes": [
+                {
+                  "scope_id": "page-runtime",
+                  "generation": 2,
+                  "state": "fallback",
+                  "failure": {
+                    "code": "recovery-exhausted",
+                    "message": "Runtime recovery did not converge",
+                    "details": {
+                      "reason": "replacement-limit",
+                      "cause": {
+                        "code": "runtime-loss",
+                        "message": "The runtime replacement limit is exhausted",
+                        "details": {
+                          "reason": "observed-post-readiness-runtime-loss"
+                        }
+                      }
+                    }
+                  },
+                  "fallback": {
+                    "protocol": "blazex.runtime-fallback/1",
+                    "decision": "fallback",
+                    "scope_id": "page-runtime",
+                    "runtime_generation": 2,
+                    "failure_class": "recovery-exhausted",
+                    "action": "user-action",
+                    "diagnostic": {
+                      "code": "recovery-exhausted",
+                      "message": "Runtime recovery did not converge",
+                      "details": {
+                        "reason": "replacement-limit",
+                        "cause": {
+                          "code": "runtime-loss",
+                          "message": "The runtime replacement limit is exhausted",
+                          "details": {
+                            "reason": "observed-post-readiness-runtime-loss"
+                          }
+                        }
+                      }
+                    },
+                    "partial_activation": false,
+                    "presentation": "non-dom-decision-only"
+                  },
+                  "restart_count": 1
+                }
+              ],
+              "metrics": {
+                "starts": 1,
+                "shares": 1,
+                "failures": 0,
+                "mismatches": 1,
+                "shutdowns": 0,
+                "shutdown_failures": 0,
+                "losses": 2,
+                "recoveries": 1,
+                "recovery_failures": 1,
+                "fallbacks": 1,
+                "scope_count": 1
+              }
+            },
+            "scope": {
+              "protocol": "blazex.runtime-scope/1",
+              "scope_id": "page-runtime",
+              "runtime_generation": 2,
+              "attempt_generation": 1,
+              "manifest_id": "BX-BH03-PHASE-06-BROWSER-PROFILE",
+              "manifest_generation": 6,
+              "state": "fallback",
+              "owns_runtime_release": false
+            },
+            "roots": {
+              "protocol": "blazex.root-lifecycle/1",
+              "scope_id": "page-runtime",
+              "root_count": 2,
+              "max_roots": 64,
+              "roots": [
+                {
+                  "protocol": "blazex.root-lifecycle/1",
+                  "scope_id": "page-runtime",
+                  "root_id": "primary-root",
+                  "root_generation": 7,
+                  "state": "failed",
+                  "pending": 0,
+                  "failure": {
+                    "code": "runtime-loss",
+                    "message": "The active runtime generation was lost",
+                    "details": {
+                      "reason": "observed-post-readiness-runtime-loss"
+                    }
+                  },
+                  "owns_runtime": false,
+                  "owns_runtime_release": false
+                },
+                {
+                  "protocol": "blazex.root-lifecycle/1",
+                  "scope_id": "page-runtime",
+                  "root_id": "secondary-root",
+                  "root_generation": 5,
+                  "state": "failed",
+                  "pending": 0,
+                  "failure": {
+                    "code": "runtime-loss",
+                    "message": "The active runtime generation was lost",
+                    "details": {
+                      "reason": "observed-post-readiness-runtime-loss"
+                    }
+                  },
+                  "owns_runtime": false,
+                  "owns_runtime_release": false
+                }
+              ],
+              "states": {
+                "primary-root": "failed",
+                "secondary-root": "failed"
+              },
+              "owns_runtime": false,
+              "owns_runtime_release": false,
+              "accepting": false
+            },
+            "fallbacks": [
+              {
+                "protocol": "blazex.runtime-fallback/1",
+                "decision": "fallback",
+                "scope_id": "page-runtime",
+                "runtime_generation": 1,
+                "failure_class": "identity-mismatch",
+                "action": "deployment-action",
+                "diagnostic": {
+                  "code": "identity-mismatch",
+                  "message": "Browser-host compatibility identities do not match",
+                  "details": {
+                    "reason": "mismatch",
+                    "phase": "before-artifact-acquisition",
+                    "identities": [
+                      {
+                        "key": "renderer",
+                        "expected": "blazex.renderer/1",
+                        "observed": "blazex.renderer/999"
+                      }
+                    ]
+                  }
+                },
+                "partial_activation": false,
+                "presentation": "non-dom-decision-only"
+              },
+              {
+                "protocol": "blazex.runtime-fallback/1",
+                "decision": "fallback",
+                "scope_id": "unsupported-profile",
+                "runtime_generation": 0,
+                "failure_class": "unsupported-prerequisite",
+                "action": "static-content",
+                "diagnostic": {
+                  "code": "unsupported-prerequisite",
+                  "message": "A required browser capability is unavailable",
+                  "details": {
+                    "reason": "fixture-prerequisite"
+                  }
+                },
+                "partial_activation": false,
+                "presentation": "non-dom-decision-only"
+              }
+            ],
+            "fallback": {
+              "protocol": "blazex.runtime-fallback/1",
+              "decision": "fallback",
+              "scope_id": "page-runtime",
+              "runtime_generation": 2,
+              "failure_class": "recovery-exhausted",
+              "action": "user-action",
+              "diagnostic": {
+                "code": "recovery-exhausted",
+                "message": "Runtime recovery did not converge",
+                "details": {
+                  "reason": "replacement-limit",
+                  "cause": {
+                    "code": "runtime-loss",
+                    "message": "The runtime replacement limit is exhausted",
+                    "details": {
+                      "reason": "observed-post-readiness-runtime-loss"
+                    }
+                  }
+                }
+              },
+              "partial_activation": false,
+              "presentation": "non-dom-decision-only"
+            },
+            "shutdown": null,
+            "error": null,
+            "runtime_acknowledgement_count": 12,
+            "measurement": {
+              "protocol": "blazex.bh03.measurement/1",
+              "startup_to_ready_ms": 536.04,
+              "runtime_memory_pages": 256,
+              "memory_ready": {
+                "available": false,
+                "reason": "browser-memory-api-unavailable"
+              },
+              "root_cycle": null,
+              "shutdown_ms": null,
+              "memory_after_shutdown": null
+            }
+          },
+          "frames_after_terminal": 0
+        },
+        {
+          "kind": "abort",
+          "recovered": {
+            "protocol": "blazex.bh03.browser-profile/1",
+            "state": "ready",
+            "support_state": "unsupported",
+            "runtime_starts": 2,
+            "checks": [
+              "exact-manifest-and-prerequisites",
+              "one-shared-runtime",
+              "two-independent-root-registrations",
+              "independent-mount",
+              "update-and-move-isolation",
+              "dispose-and-remount-isolation",
+              "intentional-fallback-decisions",
+              "elixir-runtime-root-acknowledgements"
+            ],
+            "registry": {
+              "protocol": "blazex.runtime-registry/1",
+              "scopes": [
+                {
+                  "scope_id": "page-runtime",
+                  "generation": 2,
+                  "state": "ready",
+                  "failure": null,
+                  "fallback": null,
+                  "restart_count": 1
+                }
+              ],
+              "metrics": {
+                "starts": 1,
+                "shares": 1,
+                "failures": 0,
+                "mismatches": 1,
+                "shutdowns": 0,
+                "shutdown_failures": 0,
+                "losses": 1,
+                "recoveries": 1,
+                "recovery_failures": 0,
+                "fallbacks": 0,
+                "scope_count": 1
+              }
+            },
+            "scope": {
+              "protocol": "blazex.runtime-scope/1",
+              "scope_id": "page-runtime",
+              "runtime_generation": 2,
+              "attempt_generation": 1,
+              "manifest_id": "BX-BH03-PHASE-06-BROWSER-PROFILE",
+              "manifest_generation": 6,
+              "state": "ready",
+              "owns_runtime_release": false
+            },
+            "roots": {
+              "protocol": "blazex.root-lifecycle/1",
+              "scope_id": "page-runtime",
+              "root_count": 2,
+              "max_roots": 64,
+              "roots": [
+                {
+                  "protocol": "blazex.root-lifecycle/1",
+                  "scope_id": "page-runtime",
+                  "root_id": "primary-root",
+                  "root_generation": 7,
+                  "state": "ready",
+                  "pending": 0,
+                  "failure": null,
+                  "owns_runtime": false,
+                  "owns_runtime_release": false
+                },
+                {
+                  "protocol": "blazex.root-lifecycle/1",
+                  "scope_id": "page-runtime",
+                  "root_id": "secondary-root",
+                  "root_generation": 5,
+                  "state": "ready",
+                  "pending": 0,
+                  "failure": null,
+                  "owns_runtime": false,
+                  "owns_runtime_release": false
+                }
+              ],
+              "states": {
+                "primary-root": "ready",
+                "secondary-root": "ready"
+              },
+              "owns_runtime": false,
+              "owns_runtime_release": false,
+              "accepting": true
+            },
+            "fallbacks": [
+              {
+                "protocol": "blazex.runtime-fallback/1",
+                "decision": "fallback",
+                "scope_id": "page-runtime",
+                "runtime_generation": 1,
+                "failure_class": "identity-mismatch",
+                "action": "deployment-action",
+                "diagnostic": {
+                  "code": "identity-mismatch",
+                  "message": "Browser-host compatibility identities do not match",
+                  "details": {
+                    "reason": "mismatch",
+                    "phase": "before-artifact-acquisition",
+                    "identities": [
+                      {
+                        "key": "renderer",
+                        "expected": "blazex.renderer/1",
+                        "observed": "blazex.renderer/999"
+                      }
+                    ]
+                  }
+                },
+                "partial_activation": false,
+                "presentation": "non-dom-decision-only"
+              },
+              {
+                "protocol": "blazex.runtime-fallback/1",
+                "decision": "fallback",
+                "scope_id": "unsupported-profile",
+                "runtime_generation": 0,
+                "failure_class": "unsupported-prerequisite",
+                "action": "static-content",
+                "diagnostic": {
+                  "code": "unsupported-prerequisite",
+                  "message": "A required browser capability is unavailable",
+                  "details": {
+                    "reason": "fixture-prerequisite"
+                  }
+                },
+                "partial_activation": false,
+                "presentation": "non-dom-decision-only"
+              }
+            ],
+            "fallback": null,
+            "shutdown": null,
+            "error": null,
+            "runtime_acknowledgement_count": 12,
+            "measurement": {
+              "protocol": "blazex.bh03.measurement/1",
+              "startup_to_ready_ms": 428.2,
+              "runtime_memory_pages": 256,
+              "memory_ready": {
+                "available": false,
+                "reason": "browser-memory-api-unavailable"
+              },
+              "root_cycle": null,
+              "shutdown_ms": null,
+              "memory_after_shutdown": null
+            }
+          },
+          "terminal": {
+            "protocol": "blazex.bh03.browser-profile/1",
+            "state": "stopped",
+            "support_state": "unsupported",
+            "runtime_starts": 2,
+            "checks": [
+              "exact-manifest-and-prerequisites",
+              "one-shared-runtime",
+              "two-independent-root-registrations",
+              "independent-mount",
+              "update-and-move-isolation",
+              "dispose-and-remount-isolation",
+              "intentional-fallback-decisions",
+              "elixir-runtime-root-acknowledgements",
+              "registry-owned-shutdown"
+            ],
+            "registry": {
+              "protocol": "blazex.runtime-registry/1",
+              "scopes": [
+                {
+                  "scope_id": "page-runtime",
+                  "generation": 2,
+                  "state": "stopped",
+                  "failure": null,
+                  "fallback": null,
+                  "restart_count": 1
+                }
+              ],
+              "metrics": {
+                "starts": 1,
+                "shares": 1,
+                "failures": 0,
+                "mismatches": 1,
+                "shutdowns": 1,
+                "shutdown_failures": 0,
+                "losses": 1,
+                "recoveries": 1,
+                "recovery_failures": 0,
+                "fallbacks": 0,
+                "scope_count": 1
+              }
+            },
+            "scope": {
+              "protocol": "blazex.runtime-scope/1",
+              "scope_id": "page-runtime",
+              "runtime_generation": 2,
+              "attempt_generation": 1,
+              "manifest_id": "BX-BH03-PHASE-06-BROWSER-PROFILE",
+              "manifest_generation": 6,
+              "state": "stopped",
+              "owns_runtime_release": false
+            },
+            "roots": {
+              "protocol": "blazex.root-lifecycle/1",
+              "scope_id": "page-runtime",
+              "root_count": 2,
+              "max_roots": 64,
+              "roots": [
+                {
+                  "protocol": "blazex.root-lifecycle/1",
+                  "scope_id": "page-runtime",
+                  "root_id": "primary-root",
+                  "root_generation": 8,
+                  "state": "disposed",
+                  "pending": 0,
+                  "failure": null,
+                  "owns_runtime": false,
+                  "owns_runtime_release": false
+                },
+                {
+                  "protocol": "blazex.root-lifecycle/1",
+                  "scope_id": "page-runtime",
+                  "root_id": "secondary-root",
+                  "root_generation": 6,
+                  "state": "disposed",
+                  "pending": 0,
+                  "failure": null,
+                  "owns_runtime": false,
+                  "owns_runtime_release": false
+                }
+              ],
+              "states": {
+                "primary-root": "disposed",
+                "secondary-root": "disposed"
+              },
+              "owns_runtime": false,
+              "owns_runtime_release": false,
+              "accepting": false
+            },
+            "fallbacks": [
+              {
+                "protocol": "blazex.runtime-fallback/1",
+                "decision": "fallback",
+                "scope_id": "page-runtime",
+                "runtime_generation": 1,
+                "failure_class": "identity-mismatch",
+                "action": "deployment-action",
+                "diagnostic": {
+                  "code": "identity-mismatch",
+                  "message": "Browser-host compatibility identities do not match",
+                  "details": {
+                    "reason": "mismatch",
+                    "phase": "before-artifact-acquisition",
+                    "identities": [
+                      {
+                        "key": "renderer",
+                        "expected": "blazex.renderer/1",
+                        "observed": "blazex.renderer/999"
+                      }
+                    ]
+                  }
+                },
+                "partial_activation": false,
+                "presentation": "non-dom-decision-only"
+              },
+              {
+                "protocol": "blazex.runtime-fallback/1",
+                "decision": "fallback",
+                "scope_id": "unsupported-profile",
+                "runtime_generation": 0,
+                "failure_class": "unsupported-prerequisite",
+                "action": "static-content",
+                "diagnostic": {
+                  "code": "unsupported-prerequisite",
+                  "message": "A required browser capability is unavailable",
+                  "details": {
+                    "reason": "fixture-prerequisite"
+                  }
+                },
+                "partial_activation": false,
+                "presentation": "non-dom-decision-only"
+              }
+            ],
+            "fallback": null,
+            "shutdown": {
+              "protocol": "blazex.runtime-shutdown/1",
+              "scope_id": "page-runtime",
+              "runtime_generation": 2,
+              "state": "stopped",
+              "acknowledged": true,
+              "root_failures": 0,
+              "released": true
+            },
+            "error": null,
+            "runtime_acknowledgement_count": 15,
+            "measurement": {
+              "protocol": "blazex.bh03.measurement/1",
+              "startup_to_ready_ms": 428.2,
+              "runtime_memory_pages": 256,
+              "memory_ready": {
+                "available": false,
+                "reason": "browser-memory-api-unavailable"
+              },
+              "root_cycle": null,
+              "shutdown_ms": 56.92,
+              "memory_after_shutdown": {
+                "available": false,
+                "reason": "browser-memory-api-unavailable"
+              },
+              "runtime_iframes_after_shutdown": 0
+            }
+          },
+          "frames_after_terminal": 0
+        }
+      ],
+      "failures": [],
+      "browser_version": "153.0"
+    }
+  ],
+  "support_state": "unsupported",
+  "api_state": "experimental-not-stable",
+  "deferred": [
+    "safari",
+    "mobile",
+    "physical-devices",
+    "second-host",
+    "manual-assistive-technology"
+  ]
+}

@@ -140,6 +140,11 @@ python3 validate_bh03_measurements.py
 python3 -m unittest test_validate_bh03_measurements.py
 python3 validate_bh03_acceptance.py
 python3 -m unittest test_validate_bh03_acceptance.py
+python3 validate_bh03_correction.py
+python3 -m unittest test_validate_bh03_correction.py
+
+# Phase 8 remains a historical revise record. Its source exceptions are
+# restricted by Phase 9 authorization; renewed acceptance uses Phase 9.
 ```
 
 The validator checks metadata, placeholders, filenames, local links,
@@ -177,6 +182,10 @@ identifiers.
 - [`test_validate_bh03_profile.py`](test_validate_bh03_profile.py) — focused BH-03 Phase 6 profile separation, active Chrome/Firefox rows, actual runtime acknowledgements, fallback, shutdown, deferral, and overclaim tests
 - [`test_validate_bh03_measurements.py`](test_validate_bh03_measurements.py) — focused BH-03 Phase 7 authorization, repetition, root cleanup, timing, memory capability, failure convergence, budget, support, and acceptance-boundary tests
 - [BH-03 Phase 8 acceptance validator](validate_bh03_acceptance.py) — validates review records; use `--require-accepted` to gate downstream work (currently fails with revise).
+- [BH-03 historical binding helper](bh03_history.py) — exact authorized Phase 9 source exceptions; not current implementation acceptance.
+- [Historical binding tests](test_bh03_history.py) — reject widened, missing, stale, or unauthorized source exceptions.
+- [BH-03 Phase 9 current acceptance gate](validate_bh03_correction.py) — superseding acceptance with strict current source, recovery and regression evidence.
+- [BH-03 Phase 9 gate tests](test_validate_bh03_correction.py) — reject stale sources, missing replay, false cleanup, hidden obligations and premature support.
 - [BH-03 Phase 8 acceptance tests](test_validate_bh03_acceptance.py) — rejects missing evidence, hidden blockers, false deferral passes, and premature acceptance.
 - [`test_validate_quality_acceptance.py`](test_validate_quality_acceptance.py) — focused Phase 5 quality-budget and acceptance-traceability validator tests
 - [`test_validate_archive.py`](test_validate_archive.py) — focused validator tests

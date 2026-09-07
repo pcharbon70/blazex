@@ -66,8 +66,9 @@ and fallback, and Phase 6 passed the separate `/bh03/` Phoenix profile in the
 active Linux Chrome/Firefox matrix on 2026-09-06. Phase 7 completed repeated
 startup, ten-root lifecycle, cleanup, declared-failure, and capability-aware
 memory observations on 2026-09-06. Phase 8 completed its review on 2026-09-07
-with a revise decision: unreported runtime exit can leave a stale ready scope.
-BH-03 requires correction and renewed acceptance; BH-04 remains ineligible. The
+with a revise decision. Corrective Phase 9 closed the unreported runtime-loss
+defect and accepted BH-03 with bounded conditions on 2026-09-07.
+BH-04 is eligible but requires separate implementation authorization. The
 twelve-phase BH-05 component programming model decomposition is approved as
 planning, but implementation remains ineligible and unauthorized until BH-04
 is accepted and its handoff is reconciled.
@@ -79,7 +80,7 @@ is accepted and its handoff is reconciled.
 - [BH-00 — Product Boundary, Catalog, and Acceptance Contract](bh-00-product-boundary-catalog-and-acceptance-contract/README.md) — six-phase plan that freezes vocabulary, product scope, catalog dispositions, quality budgets, and acceptance traceability before BH-01 implementation begins.
 - [BH-01 — Reproducible Browser Feasibility Baseline](bh-01-reproducible-browser-feasibility-baseline/README.md) — completed need-driven plan with a proceed-with-bounded-conditions decision; external browser qualification remains deferred, and its immutable entry artifact records the pre-authorization BH-02 state.
 - [BH-02 — Host-Neutral Semantic Kernel Gate](bh-02-host-neutral-semantic-kernel-gate/README.md) — completed eight-phase contract and cross-renderer proof plan accepted for internal experimental use.
-- [BH-03 — Browser Execution-Host and Runtime Boot Lifecycle](bh-03-browser-execution-host-and-runtime-boot-lifecycle/README.md) — eight-phase runtime/host lifecycle plan; Phase 8 review is complete with a revise decision. BH-03 is not accepted and BH-04 is ineligible pending correction.
+- [BH-03 — Browser Execution-Host and Runtime Boot Lifecycle](bh-03-browser-execution-host-and-runtime-boot-lifecycle/README.md) — original eight-phase plan plus corrective Phase 9; accepted with bounded conditions. BH-04 is eligible but not authorized.
 - [BH-05 — Component Programming Model and Lifecycle](bh-05-component-programming-model-and-lifecycle/README.md) — twelve-phase plan for pure composition, nested stateful identity, process-root local views, scheduling, effects, resources, context, failure recovery, cross-runtime conformance, and acceptance; implementation awaits an accepted BH-04 handoff.
 
 ### Documents

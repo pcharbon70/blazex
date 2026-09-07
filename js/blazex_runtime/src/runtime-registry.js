@@ -56,7 +56,7 @@ export class SharedRuntimeRegistry {
         throw failureFromRecord(existing.failure);
       }
       if (existing.state === "fallback") throw failureFromRecord(existing.failure);
-      if (["stopping", "stopped"].includes(existing.state)) {
+      if (existing.closePromise || ["stopping", "stopped"].includes(existing.state)) {
         throw new BlazeXHostError("runtime-shutdown", "The runtime scope is closing or stopped", { reason: "scope-not-open", scope_id: scopeId });
       }
       this.#metrics.shares += 1;
@@ -81,6 +81,9 @@ export class SharedRuntimeRegistry {
       scopeId,
       startupOptions,
       state: "starting",
+      lossToken: null,
+      lossUnsubscribe: null,
+      observedLoss: null,
     };
     this.#entries.set(scopeId, entry);
     this.#metrics.starts += 1;
@@ -90,12 +93,18 @@ export class SharedRuntimeRegistry {
       .then((ready) => {
         validateReadyHandle(ready);
         entry.ready = ready;
+        this.#observeReady(entry, ready);
+        if (entry.observedLoss) {
+          ready.release("lost-before-scope-ready");
+          throw observedRuntimeLoss();
+        }
         entry.scope = new BrowserRuntimeScope({ entry, ready, onEvent: this.#onEvent });
         entry.state = "ready";
         this.#emit("scope-ready", entry);
         return entry.scope;
       })
       .catch((error) => {
+        this.#unobserve(entry);
         const normalized = normalizeStartupFailure(error);
         entry.failure = errorRecord(normalized);
         entry.state = "failed";
@@ -189,6 +198,31 @@ export class SharedRuntimeRegistry {
     }));
   }
 
+  #unobserve(entry) {
+    entry.lossToken = null;
+    entry.lossUnsubscribe?.();
+    entry.lossUnsubscribe = null;
+  }
+
+  #observeReady(entry, ready) {
+    this.#unobserve(entry);
+    const token = entry.lossToken = {};
+    entry.observedLoss = null;
+    entry.lossUnsubscribe = ready.subscribeLoss?.((failure) => {
+      if (entry.lossToken !== token || ["stopping", "stopped", "fallback", "failed"].includes(entry.state)) return;
+      entry.observedLoss = failure;
+      if (entry.state === "recovering") {
+        // Interrupt pending replay; the recovery gate must not publish this generation.
+        RUNTIME_SCOPE_OWNERS.get(entry.scope)?.runtimeLost("replacement-runtime-lost");
+      } else if (entry.state === "ready" && !entry.closePromise) {
+        this.reportRuntimeLoss({
+          scopeId: entry.scopeId, runtimeGeneration: entry.generation,
+          reason: "observed-post-readiness-runtime-loss",
+        }).catch(() => {}); // Registry owns the terminal fallback and diagnostic.
+      }
+    }) ?? null;
+  }
+
   async #closeEntry(entry, options) {
     if (entry.state === "starting") {
       try {
@@ -215,6 +249,7 @@ export class SharedRuntimeRegistry {
     }
 
     entry.state = "stopping";
+    this.#unobserve(entry);
     this.#emit("scope-stopping", entry);
     try {
       const result = await RUNTIME_SCOPE_OWNERS.get(entry.scope).shutdown(options);
@@ -236,6 +271,7 @@ export class SharedRuntimeRegistry {
   }
 
   async #recoverEntry(entry, { reason, retryable }) {
+    this.#unobserve(entry);
     try {
       RUNTIME_SCOPE_OWNERS.get(entry.scope).runtimeLost(reason);
     } catch (error) {
@@ -253,7 +289,13 @@ export class SharedRuntimeRegistry {
       validateReadyHandle(ready);
       entry.generation = ++this.#generation;
       entry.ready = ready;
+      this.#observeReady(entry, ready);
+      if (entry.observedLoss) {
+        ready.release("lost-before-root-replay");
+        throw observedRuntimeLoss();
+      }
       await RUNTIME_SCOPE_OWNERS.get(entry.scope).recover(ready);
+      if (entry.observedLoss) throw observedRuntimeLoss();
       entry.failure = null;
       entry.fallback = null;
       entry.state = "ready";
@@ -266,6 +308,11 @@ export class SharedRuntimeRegistry {
   }
 
   #recordRecoveryFailure(entry, error, reason) {
+    this.#unobserve(entry);
+    // A loss can arrive on the final replay acknowledgement, before recover()
+    // re-enables registrations. Reassert terminal ownership at the fallback gate.
+    try { RUNTIME_SCOPE_OWNERS.get(entry.scope)?.runtimeLost(reason); }
+    catch { /* Cleanup diagnostics must not prevent terminal fallback. */ }
     this.#metrics.recovery_failures += 1;
     const exhausted = new BlazeXHostError("recovery-exhausted", "Runtime recovery did not converge", { reason, cause: errorRecord(error) });
     return this.#recordFallback(entry, entry.scopeId, exhausted);
@@ -414,10 +461,15 @@ function validateReadyHandle(ready) {
     ready.attempt_generation < 1 ||
     typeof ready.transport?.request !== "function" ||
     typeof ready.transport?.cancel !== "function" ||
-    typeof ready.release !== "function"
+    typeof ready.release !== "function" ||
+    (ready.subscribeLoss !== undefined && typeof ready.subscribeLoss !== "function")
   ) {
     throw new BlazeXHostError("runtime-startup", "Runtime startup did not return a valid ready handle", { reason: "ready-handle-invalid" });
   }
+}
+
+function observedRuntimeLoss() {
+  return new BlazeXHostError("runtime-loss", "Runtime was lost before ownership became ready", { reason: "lost-during-activation" });
 }
 
 function normalizeStartupFailure(error) {
