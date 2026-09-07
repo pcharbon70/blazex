@@ -2,14 +2,24 @@
 
 ## Purpose
 
-Current status: Phase 2 has a pure internal protocol and 75 shared contract
-fixtures. The Phase 1 empty index below remains historical and immutable.
-No incremental renderer or live application behavior is implemented here.
+Current status: Phase 3 adds pure keyed reconciliation with replay-before-
+publication. Its v2 wire correction preserves the full existing projection.
+The Phase 2 v1 protocol and 75 shared fixtures remain historical and immutable.
+No live DOM application or browser qualification is claimed.
 
 Phase 1 activates evidence governance only. No incremental renderer behavior,
 benchmark pass, browser qualification, or support is claimed.
 
 ## Index
+
+- [Phase 3 trace evidence](reconciliation-fixtures-v0.1.0.txt) — 50 canonical callback traces with before/after projections and acknowledgements.
+- [Independent replay and fixture checker](reconciliation-fixtures.mjs) — Node data replay, negative cases and exact Elixir report comparison.
+- [Phase 3 protocol fixtures](reconciliation-protocol-fixtures-v0.1.0.txt) — 116 positive/negative v2 records and trusted contexts.
+- [Phase 3 protocol results](reconciliation-protocol-results-v0.1.0.txt) — canonical bytes, digests and rejection classes.
+
+- [Incremental lifecycle usage](reconciliation-usage.md) — pending/accepted facade, retry semantics and unchanged full-root migration path.
+
+- [Phase 3 v2 record schema](render-transaction-v2.schema.json) — extended closed attributes and complete canonical intent cells; incompatible with v1 consumers.
 
 - [Fixture definitions](protocol-cases.mjs) — deterministic positive, negative and boundary records.
 - [Fixture generator/checker](protocol-fixtures.mjs) — checks generated freshness and exact cross-language reports.
@@ -30,4 +40,5 @@ benchmark pass, browser qualification, or support is claimed.
 The bh-04-owner owns this boundary. BH-02 full-root fixtures and all BH-03
 artifacts remain immutable; reuse is reference evidence, not incremental pass
 credit. Later evidence requires separate authorization, a new version and
-explicit supersession links. Phase 2 is not authorized; BH-05 is ineligible.
+explicit supersession links. Phase 3 is authorized; Phase 4 remains unauthorized
+and BH-05 is ineligible.
