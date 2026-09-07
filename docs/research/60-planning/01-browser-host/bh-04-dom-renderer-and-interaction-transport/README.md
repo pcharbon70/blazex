@@ -164,6 +164,8 @@ public stability or browser support.
 
 ### Documents
 
+- [Phase 4 atomic DOM contract](phase-04-atomic-dom-contract.md) — ownership, queue, commit, rollback and fallback policy.
+
 - [Phase 3 implementation evidence](phase-03-implementation-evidence.md) — deterministic replay, cross-renderer parity, acknowledgement lifecycle and bounded completion.
 
 - [Phase 3 reconciliation contract](phase-03-reconciliation-contract.md) — identity, bounds, protocol correction and acknowledgement policy.
