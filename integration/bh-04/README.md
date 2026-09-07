@@ -2,15 +2,21 @@
 
 ## Purpose
 
-Current status: Phase 3 adds pure keyed reconciliation with replay-before-
-publication. Its v2 wire correction preserves the full existing projection.
-The Phase 2 v1 protocol and 75 shared fixtures remain historical and immutable.
-No live DOM application or browser qualification is claimed.
+Current status: Phase 4 adds atomic DOM application through owned BH-03 roots,
+bounded queues and rollback/fallback isolation. The Phase 3 reconciler and Phase 2
+v1 protocol remain immutable. Active Linux browser evidence is developmental,
+not browser qualification or support.
 
 Phase 1 activates evidence governance only. No incremental renderer behavior,
 benchmark pass, browser qualification, or support is claimed.
 
 ## Index
+
+- [Atomic DOM usage](atomic-dom-usage.md) — owner capabilities, queues, rollback and limitations.
+- [Atomic DOM fixture generator](support/atomic_dom_runner.exs) — actual Phase 3 setup and transition transactions.
+- [Atomic DOM fixtures](atomic-dom-fixtures-v0.1.0.txt) — 50 canonical setup/transition traces.
+- [Shared atomic DOM scenarios](atomic-dom-scenarios.js) — fake DOM and active-browser failure/stale/queue/lifecycle checks.
+- [Active browser runner](atomic-dom-browser.mjs) — loopback Chrome/Firefox execution and raw evidence capture.
 
 - [Phase 3 trace evidence](reconciliation-fixtures-v0.1.0.txt) — 50 canonical callback traces with before/after projections and acknowledgements.
 - [Independent replay and fixture checker](reconciliation-fixtures.mjs) — Node data replay, negative cases and exact Elixir report comparison.
@@ -40,5 +46,5 @@ benchmark pass, browser qualification, or support is claimed.
 The bh-04-owner owns this boundary. BH-02 full-root fixtures and all BH-03
 artifacts remain immutable; reuse is reference evidence, not incremental pass
 credit. Later evidence requires separate authorization, a new version and
-explicit supersession links. Phase 3 is authorized; Phase 4 remains unauthorized
+explicit supersession links. Phase 4 is authorized; Phase 5 remains unauthorized
 and BH-05 is ineligible.

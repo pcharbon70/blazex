@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 4,
+  "milestone": "BH-04",
+  "date": "2026-09-07",
+  "base_revision": "781e6c4ff870ad89ab803d84d488a2271c9e521c",
+  "branch": "codex/bh04-phase4-atomic-dom",
+  "authority": "User explicitly requested the next BH-04 phase, one commit per section, one PR, merge, main synchronization and feature-branch deletion.",
+  "sections": [
+    "4.1",
+    "4.2",
+    "4.3",
+    "4.4"
+  ],
+  "source_bindings": {
+    "js/blazex_runtime/src/root-lifecycle.js": "9ba5c518f802b188def31508916f03888b43f581a6b36a849222ca96e2d4a7b6",
+    "js/blazex_runtime/src/runtime-registry.js": "fa9b33b49d4df7b9b648647528d1b514402f6849df36e1168346eca287467865",
+    "js/blazex_runtime/src/render-transaction-v2.js": "628389038ed687288bb1777ea4602f4c8a009c4ff94b45c6efeb025a53e0c23d",
+    "integration/bh-04/render-transaction-v2.schema.json": "c150d066880db9cf83b89fcbc50a02011a6715bbcaecabf04bf6412ac0795a73",
+    "packages/blazex_renderer_dom/lib/blazex/renderer/dom/incremental.ex": "0f48e9482504a22ef3d47e6d6af3ee7c05287ad9a84bfa6425179d8f19cdb885",
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-03-completion-v0.1.0.json": "13c2cf4dfd3caa5bd8defa1ad6c4997f7904d6377b2588e1627791d02afd704d"
+  },
+  "queue_capacity": 64,
+  "coalescing": "none: v2 revisions are dependent and not supersedable",
+  "excluded": [
+    "browser-event delivery",
+    "form/focus continuity beyond existing intent",
+    "effect execution",
+    "LiveView patching",
+    "product controls",
+    "support promotion"
+  ],
+  "delivery": {
+    "pull_requests": 1,
+    "merge": true,
+    "sync_main_before_branch_deletion": true,
+    "preserve_unrelated_work": true
+  },
+  "next_authorized_work": null
+}

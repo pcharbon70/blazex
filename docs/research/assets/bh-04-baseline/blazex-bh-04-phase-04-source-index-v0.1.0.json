@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 4,
+  "base_revision": "781e6c4ff870ad89ab803d84d488a2271c9e521c",
+  "source_bindings": {
+    "js/blazex_runtime/src/dom-transaction-plan.js": "236701c98d25d0521c5a8ef0d878fa4b30d479d3749e4f5cb71bb450130be3ae",
+    "js/blazex_runtime/src/dom-root-queue.js": "e8c6a40542021805631afbf21a91069b71ff327cb6378ff9e8201b8c497c8db8",
+    "js/blazex_runtime/src/atomic-dom.js": "36cfb07743c579239f8e1d3003d15ce377ab4488d175c9312a7eff03eaf20b64",
+    "js/blazex_runtime/test/dom-root-queue.test.js": "89b19f05ea8da8f54ef021c9c336a0104ef8589063ae9f949ba222a090eb0c92",
+    "js/blazex_runtime/test/atomic-dom.test.js": "8e63e84710dc9e995cad38c1cc4c5d5a203fb50c82c365a49277acec721b1a5e",
+    "js/blazex_runtime/test/atomic-dom-integration.test.js": "27c81c61003f9e5fa865aed7182ae914f2c9ae20062cfd4c620db40344030c99",
+    "js/blazex_runtime/test/support/atomic-fake-dom.js": "fb148a10567d90e96990a62228b211df805f578dab936a5ca771b4b51677919a",
+    "integration/bh-04/atomic-dom-fixtures-v0.1.0.txt": "78786159a02c6252c4bcf570aedac41d11acb15e0a222d3320cf8b769fb3f1a8",
+    "integration/bh-04/atomic-dom-scenarios.js": "32a196e1896d7cba42b592fc38aebaca86e56b257ae815e1e6fbb52397ed207e",
+    "integration/bh-04/atomic-dom-browser.mjs": "b72e66cd58dd0139c69fe78f39590464e53a3f06f70e3327f81251edab833c45",
+    "integration/bh-04/atomic-dom-usage.md": "8fe73bc7f40322b3834e27a5aa46efb805b92ecbfae8170a0e0ad87bbc0d0cb0",
+    "integration/bh-04/support/atomic_dom_runner.exs": "dab842d454bd1a47ccd558b4cf15d0ffd4978ba531e0394ef949047f97e4bb9c",
+    "integration/bh-04/README.md": "51ae22d1ae24bc0fb54fa73fac74a831692ed5d86760bafa598bc1dc504663fc",
+    "integration/bh-04/support/README.md": "65d2b2a82c0d737f876734cdffb5550dc57aee12386f393a760515003093da73",
+    "docs/research/bh04_phase4_history.py": "7f7fd37761a837daa7d427600966bf01cca227e17a9181628484323b5a421689",
+    "docs/research/validate_bh04_reconciliation.py": "32038a2611c265583dbc128c05b32a4ecb56491c5c1e35f864d73b652970e99d",
+    "docs/research/test_validate_bh04_reconciliation.py": "ce8e369e5d980fc6c103de8e8573afa7d636084e74bbfb658a1fe95becb4ae6e",
+    "docs/research/validate_bh04_dom_application.py": "1e87609d08cd733d1d61cc8ae862a547b153f655c64d48cd543102a4ab970915",
+    "docs/research/test_validate_bh04_dom_application.py": "c0a9088129d5bfe1952bccb06510317640c2713179361c7e04767227453ff244"
+  },
+  "browser_sha256": "01cf28546ebbd46a652e9048beb2dda0ef0cfed02a30f6ced6981f20a1c9fda3"
+}
