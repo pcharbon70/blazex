@@ -21,11 +21,11 @@ remains an immutable revise decision.
     - [x] 9.1.1 Task - Bind Phase 8 findings and synchronized main.
       - [x] 9.1.1.1 Subtask - Preserve user work and use four section commits in one PR.
       - [x] 9.1.1.2 Subtask - Freeze bounded loss/recovery, historical-source exceptions, and nonclaims.
-  - [ ] 9.2 Section - Implement registry-owned loss observation.
-    - [ ] 9.2.1 Task - Observe correlated post-readiness exit/failure without stale ready reuse.
-      - [ ] 9.2.1.1 Subtask - Bind observers to each ready handle; latch loss before subscription.
-      - [ ] 9.2.1.2 Subtask - Exclude stale callbacks and intentional shutdown, clean subscriptions and transport.
-      - [ ] 9.2.1.3 Subtask - Preserve one replacement, reject loss during replay, and test races.
+  - [x] 9.2 Section - Implement registry-owned loss observation.
+    - [x] 9.2.1 Task - Observe correlated post-readiness exit/failure without stale ready reuse.
+      - [x] 9.2.1.1 Subtask - Bind observers to each ready handle; latch loss before subscription.
+      - [x] 9.2.1.2 Subtask - Exclude stale callbacks and intentional shutdown, clean subscriptions and transport.
+      - [x] 9.2.1.3 Subtask - Preserve one replacement, reject loss during replay, and test races.
   - [ ] 9.3 Section - Integrate and exercise active browser correction.
     - [ ] 9.3.1 Task - Repeat the real profile lifecycle with controlled runtime failures.
       - [ ] 9.3.1.1 Subtask - Prove two-root replay, stale-event rejection, repeated-loss fallback, and shutdown in Chrome and Firefox.
