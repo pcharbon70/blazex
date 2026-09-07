@@ -1,0 +1,72 @@
+{
+  "schema_version": "1.0.0",
+  "authorization_id": "BX-BH03-PHASE-08-AUTHORIZATION-0.1",
+  "status": "approved-phase-8-only",
+  "approved_at": "2026-09-07",
+  "approved_by": {
+    "role": "repository-owner",
+    "basis": "Explicit request to implement the next BH-03 phase, commit each section, merge one PR, synchronize main, and delete the feature branch."
+  },
+  "activation": {
+    "base_revision": "34822e271ebb04f30bbfe93131c2288dc23d3057",
+    "base_remote_revision": "34822e271ebb04f30bbfe93131c2288dc23d3057",
+    "main_synchronized_before_branch": true,
+    "working_branch": "codex/bh03-phase8-acceptance"
+  },
+  "approval_basis": [
+    {
+      "path": "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-01-completion-v0.1.0.json",
+      "sha256": "8c4b175fbaa7ef97e94967b40c8856bb6cf05d56743b53742724194e03e373a5"
+    },
+    {
+      "path": "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-02-completion-v0.1.0.json",
+      "sha256": "bc63c32f9fb17ee680f491ef2dba60355ea54f8d9d0d069dec582daa8e5b1df2"
+    },
+    {
+      "path": "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-03-completion-v0.1.0.json",
+      "sha256": "354ecfd265e8b6a60d13a881a70ce6a2955cafb283b1c2be554643700988fea9"
+    },
+    {
+      "path": "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-04-completion-v0.1.0.json",
+      "sha256": "053f251b5436f49a775c8a93c6106f31e4a16915b5b8a3689256780845575d54"
+    },
+    {
+      "path": "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-05-completion-v0.1.0.json",
+      "sha256": "6d5076eff015a5dc57565c1e9d0f2d8587e872486b13574dfeadf3bea96b1031"
+    },
+    {
+      "path": "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-06-completion-v0.1.0.json",
+      "sha256": "f5255c0f665b77fe126ae0e45b7f6e6dc63827126def64d0375e0f1057ac62ef"
+    },
+    {
+      "path": "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-07-completion-v0.1.0.json",
+      "sha256": "c0bb4939d4d13e25d736da91bb40dbf4ee8db96c27da1be478aa0f21af066089"
+    },
+    {
+      "path": "docs/research/assets/bh-03-baseline/blazex-bh-03-entry-ledger-v0.1.0.json",
+      "sha256": "b9c41a106e1a041c89d2c0a38716d432f1388ea8e27ea915baa042e2240225a8"
+    },
+    {
+      "path": "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-01-contract-v0.1.0.json",
+      "sha256": "44cd9dc05a528e7847c09868566b365d34d087f57116a44d8a23ff907ea562eb"
+    },
+    {
+      "path": "docs/research/60-planning/development-environment-and-deferred-qualification-policy.md",
+      "sha256": "5d50cded3d70e95d47359df2a003a6979d92b8745fab012824646cc1e6bc8cfa"
+    }
+  ],
+  "delivery": {
+    "section_count": 4,
+    "commit_per_section": true,
+    "single_pr": true,
+    "merge_pr": true,
+    "sync_main_before_branch_deletion": true
+  },
+  "not_authorized": [
+    "BH-04 implementation",
+    "public API stability",
+    "support qualification",
+    "release budgets",
+    "rewriting historical BH-01/BH-02/BH-03 evidence"
+  ]
+}

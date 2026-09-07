@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0.0",
+  "contract_id": "BX-BH03-PHASE-08-CONTRACT-0.1",
+  "authorization_ref": "BX-BH03-PHASE-08-AUTHORIZATION-0.1",
+  "sections": [
+    "8.1-authorize",
+    "8.2-reconcile",
+    "8.3-review-and-gate",
+    "8.4-publish-decision"
+  ],
+  "required_outputs": "exact IDs from immutable BH-03 entry ledger",
+  "review_lenses": [
+    "architecture",
+    "implementation",
+    "conformance",
+    "accessibility",
+    "security",
+    "packaging",
+    "provenance"
+  ],
+  "review_independence": "One implementing agent; analytical lenses are not independent reviewers.",
+  "decisions": {
+    "accepted": "All active requirements evidenced and no open blocking finding; BH-04 eligible, not authorized.",
+    "revise": "Reproducible in-scope gap; BH-04 ineligible pending corrective implementation and a superseding review.",
+    "blocked": "Required active evidence unavailable or invalid; BH-04 ineligible."
+  },
+  "rules": [
+    "Hash-bind all seven completion decisions and current implementation/test evidence.",
+    "Reconcile every inherited condition, finding, acceptance ID, and deferral explicitly.",
+    "Run inherited validators, research tests/generators, JavaScript, pinned Mix/runtime checks, active Chrome/Firefox scenarios and measurements.",
+    "Retain corrective findings rather than changing requirements to obtain acceptance.",
+    "Do not count an unavailable platform, coarse memory observation, or injected transport as production qualification."
+  ],
+  "api_state": "experimental-not-stable",
+  "support_state": "unsupported",
+  "next_authorized_work": null
+}
