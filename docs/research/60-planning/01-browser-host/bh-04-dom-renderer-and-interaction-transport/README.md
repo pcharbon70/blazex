@@ -41,9 +41,9 @@ behavior, support, public API stability, or BH-05 eligibility.
 
 The owner subsequently authorized Phases 2 and 3 on 2026-09-07, explicitly
 approving the v2 protocol correction needed to retain complete projection intent.
-Both the protocol and pure keyed-reconciliation gates are complete. Phase 4 is
-eligible but requires separate authorization; no browser application or support
-is claimed.
+Both the protocol and pure keyed-reconciliation gates are complete. The owner
+then authorized Phase 4 on 2026-09-07. Its atomic DOM and active Linux browser
+gates are complete; Phase 5 is eligible but unauthorized. No support is claimed.
 
 ## What belongs here
 
@@ -157,6 +157,8 @@ records. Acceptance may make BH-05 eligible but does not authorize it or grant
 public stability or browser support.
 
 ## Index
+
+- [Phase 4 implementation evidence](phase-04-implementation-evidence.md) — atomic DOM, queue, stale, rollback and browser verification.
 
 ### Subdirectories
 

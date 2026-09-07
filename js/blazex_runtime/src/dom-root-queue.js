@@ -59,6 +59,7 @@ export class DOMRootQueues {
       requireDOM(!preflight || typeof preflight.then !== "function");
       this.#emit(job.tx, "accepted");
       requireDOM(!job.settled && job.epoch === state.epoch && !state.disposed, "disposed-root");
+      state.preflight({ previous: state.projection, next: planned.projection, transaction: job.tx });
       applying = true;
       const result = state.apply({ previous: state.projection, next: planned.projection, transaction: job.tx });
       requireDOM(result && typeof result.then !== "function" && ["committed", "rolled-back", "fallback"].includes(result.state));

@@ -38,6 +38,7 @@ export async function planTransaction(state, tx) {
   requireDOM(tx.kind === "replace" ? tx.generation === state.generation + 1 : tx.generation === state.generation, "stale");
   const context = transactionContext(state, tx);
   await validate(tx, context);
+  requireDOM(tx.operations.every(op => op.type !== "effect_barrier" || op.resources.length === 0), "incompatible");
   if (tx.kind === "dispose") return { projection: null, context };
   const nodes = new Map((state.projection?.nodes ?? []).map(n => [n.id, decode(encode(n))]));
   let root = state.projection?.root ?? null;

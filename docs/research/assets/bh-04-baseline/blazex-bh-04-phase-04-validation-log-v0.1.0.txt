@@ -1,0 +1,97 @@
+BH-04 Phase 4 validation log — 2026-09-07
+Base: 781e6c4ff870ad89ab803d84d488a2271c9e521c
+Branch: codex/bh04-phase4-atomic-dom
+
+Environment
+  Linux; Node v24.3.0; npm 11.4.2; Python 3.12.12; jsonschema 4.25.1.
+  Pinned offline Docker image a2386c21edd5: Elixir 1.17.3 / OTP 26.
+  Fresh container-local MIX_BUILD_PATH per run; no host mixed-version build reuse.
+  Chrome /usr/bin/google-chrome, version 140.0.7339.80.
+  Firefox /home/ducky/.cache/ms-playwright/firefox-1538/firefox/firefox,
+    version 153.0; Playwright-core 1.62.1. Exact user agents in raw JSON.
+
+Active browsers
+  node integration/bh-04/atomic-dom-browser.mjs <output-json>
+  Result: Chrome passed; Firefox passed, each with 50 actual reconciler traces,
+    1204 injected operation boundaries rolled back with old Element identity,
+    100 seeded stale messages rejected without mutation, queue maximum 64,
+    no coalescing, incoming overflow rejection and independent sibling progress.
+  Exactly-once checks cover all 1254 primary successful/failure-injection
+    attempts and all 66 queue-pressure terminal outcomes.
+  Additional negative owner/digest/target/type, unknown capability, external
+    mutation, overlapping container, property commit/rollback, scoped DOM IDs
+    and accessibility references, fallback/reconstruction/inert fallback,
+    sibling progress, runtime loss/shutdown and remount checks passed.
+  Cleanup: 1263 fixture shutdowns per browser, empty owned containers/node maps.
+  Controlled bridge acknowledgements flow through real BH-03 root handles.
+    This is not new AtomVM/Wasm runtime execution evidence.
+
+JavaScript
+  npm run build && npm test (js/blazex_runtime): passed, 26 test files.
+  node --test js/blazex_runtime/test/*.test.js: passed after integration repairs.
+  Same full browser scenario matrix passes in the strict fake DOM.
+  npm run build && npm test (packages/blazex_renderer_dom): passed, 7 tests.
+
+Elixir / conformance / fixture regeneration
+  docker run --rm --network none -e MIX_BUILD_PATH=/tmp/bh04-phase4-all-tests
+    -v /home/ducky/code/blazex:/workspace -w /workspace a2386c21edd5 sh -lc
+    '<for each activated package: mix test; then integration/conformance: mix test;
+      mix run ../bh-04/support/atomic_dom_runner.exs;
+      mix run ../bh-04/support/reconciliation_runner.exs>'
+  Package counts: core 13, effects 9, ui_tree 23, renderer 8, renderer_dom 110,
+    renderer_dom_liveview 4, renderer_headless 6; total 173, zero failures.
+  Integration/conformance: 56 tests, zero failures.
+  Both 50-row fixture generators match exact committed bytes.
+  Separate pinned-container runs:
+    mix run ../bh-04/support/protocol_runner.exs /evidence/v1-results.txt
+    mix run ../bh-04/support/reconciliation_protocol_runner.exs /evidence/v2-results.txt
+  node integration/bh-04/protocol-fixtures.mjs --compare <v1-results.txt>
+    75 cases: 34 positive, 41 negative; exact bytes, hashes and errors.
+  node integration/bh-04/reconciliation-fixtures.mjs --compare <v2-results.txt>
+    50 traces, 116 cases: 100 positive, 16 negative; exact independent replay,
+    full-root projection parity, canonical bytes, hashes and errors.
+
+Research, governance, dependencies and boundaries
+  python3 -m unittest discover -p 'test_*.py' (docs/research): 363 tests passed.
+  for gate in validate_*.py; do python3 "$gate" || exit 1; done
+    28 validators passed, including current Phase 4 completion and archive.
+  for generator in generate_*.py; do python3 "$generator" --check || exit 1; done
+    All 4 match committed outputs.
+  Phase 4 current gate binds all 19 declared sources plus raw browser hashes.
+  Prior gates/tests reproduce exact independent accepted Git snapshots.
+  All previous package/JS/integration/profile/experiment files are immutable
+    except the two explicitly indexed integration README additions.
+  No dependencies, manifests, runtime/kernel/server/native behavior changed.
+  Application leakage audit rejects markup setters, eval/Function, network,
+    dispatch/transport, selectors and Phoenix/LiveView calls in new sources.
+  Tests reject altered source inventory, history, browser outcomes, missing
+    browsers, rollback omissions, stale acceptance, queue overflow and gates.
+
+JSON and patch hygiene
+  jsonschema.Draft202012Validator.check_schema for v1 and v2: passed.
+  Decode canonical positive fixtures using Node codec, validate records and
+    trusted contexts with Python jsonschema: 134 positive pairs passed.
+  Parse every tracked/unignored repository JSON with json.loads: passed;
+    367 files before final completion record, 368 after it.
+  git diff --check and staged patch hygiene: passed.
+
+Development failures, repairs and limitations
+  Same-ID remove/recreate detached preparation corrected before section 4.3.
+  Browser rollback exposed button value/attribute reflection: restore changed
+    properties before exact attributes; entire matrix rerun successfully.
+  Final integration repeats DOM preflight after observers, prohibits effect
+    resources even for disposal, validates property/type applicability, and
+    namespaces actual DOM IDs and accessibility ID references per capability.
+  Negative fixture IDs are distinct so duplicate detection cannot mask tests.
+  A version-inspection command initially used the DOM package cwd with a root-
+    relative path; rerun from repository root. No test was waived.
+  Archive temporarily reported links to not-yet-published completion/log files;
+    final linked artifacts and archive gate are checked together.
+  Atomic means settled synchronous state; MutationObservers see intermediate
+    records. No arbitrary same-origin-code security isolation is claimed.
+  No event delivery, effects, user-value/focus continuity, LiveView patches,
+    products, new runtime execution, heap profiling or performance qualification.
+  Review is implementation-agent review, not independent review.
+  [DEFERRED] Unavailable OS/browser/device/manual-AT qualification remains with
+    inherited qualification owners and reactivates by BH-22; not pass credit.
+  Unsupported, experimental; Phase 5 eligible but unauthorized; BH-05 ineligible.

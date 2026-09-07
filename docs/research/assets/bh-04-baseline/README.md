@@ -27,6 +27,11 @@ None.
 
 ### Files
 
+- [Phase 4 source index](blazex-bh-04-phase-04-source-index-v0.1.0.json) — exact additive implementation and browser evidence hashes.
+- [Phase 4 browser results](blazex-bh-04-phase-04-browser-results-v0.1.0.json) — active Chrome/Firefox raw scenario, rollback, stale, queue and lifecycle outcomes.
+- [Phase 4 validation log](blazex-bh-04-phase-04-validation-log-v0.1.0.txt) — reproducible commands, results, repairs and limitations.
+- [Phase 4 completion](blazex-bh-04-phase-04-completion-v0.1.0.json) — bounded completion and section provenance; Phase 5 unauthorized.
+
 - [Phase 4 authorization](blazex-bh-04-phase-04-authorization-v0.1.0.json) — atomic DOM scope and inherited source bindings.
 
 - [Phase 3 completion](blazex-bh-04-phase-03-completion-v0.1.0.json) — bounded reconciliation decision and Phase 4 eligibility only.

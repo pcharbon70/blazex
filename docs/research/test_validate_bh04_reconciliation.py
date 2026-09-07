@@ -6,25 +6,29 @@ import shutil
 import tempfile
 import unittest
 import validate_bh04_reconciliation as gate
+from bh04_phase4_history import snapshot
 
 
 class ReconciliationGovernanceTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
+        cls.history = snapshot(gate.ROOT)
+        cls.source_root = cls.history.__enter__()
         cls.temp = tempfile.TemporaryDirectory(prefix="bh04-reconciliation-governance-")
         cls.root = Path(cls.temp.name)
-        for name in gate.git(gate.ROOT, "ls-files", "--cached", "--others", "--exclude-standard").decode().splitlines():
-            source = gate.ROOT / name
+        for name in gate.git(cls.source_root, "ls-files", "--cached", "--others", "--exclude-standard").decode().splitlines():
+            source = cls.source_root / name
             if source.is_file():
                 target = cls.root / name
                 target.parent.mkdir(parents=True, exist_ok=True)
                 shutil.copy2(source, target)
-        directory = gate.git(gate.ROOT, "rev-parse", "--absolute-git-dir").decode().strip()
+        directory = gate.git(cls.source_root, "rev-parse", "--absolute-git-dir").decode().strip()
         (cls.root / ".git").write_text("gitdir: " + directory + "\n")
 
     @classmethod
     def tearDownClass(cls):
         cls.temp.cleanup()
+        cls.history.__exit__(None, None, None)
 
     @contextlib.contextmanager
     def change(self, path, content):

@@ -1,0 +1,104 @@
+{
+  "schema_version": "1.0.0",
+  "milestone": "BH-04",
+  "phase": 4,
+  "decision": "passed",
+  "base_revision": "781e6c4ff870ad89ab803d84d488a2271c9e521c",
+  "branch": "codex/bh04-phase4-atomic-dom",
+  "next_eligible_phase": 5,
+  "next_authorized_work": null,
+  "bh05_eligible": false,
+  "support_state": "unsupported",
+  "api_state": "experimental-not-stable",
+  "section_commits": [
+    {
+      "section": "4.1",
+      "commit": "59e688f4e280a98bce432e0a8bf0adea9dff2a31"
+    },
+    {
+      "section": "4.2",
+      "commit": "731cceaab195728076a812633471a935827d54fe"
+    },
+    {
+      "section": "4.3",
+      "commit": "1911a2d781c857c280ecefad1acc041ff5928022"
+    },
+    {
+      "section": "4.4",
+      "commit": "the commit introducing this completion record"
+    }
+  ],
+  "gates": [
+    {
+      "name": "active-browsers",
+      "exit_code": 0
+    },
+    {
+      "name": "boundary-audit",
+      "exit_code": 0
+    },
+    {
+      "name": "cross-language",
+      "exit_code": 0
+    },
+    {
+      "name": "cross-renderer",
+      "exit_code": 0
+    },
+    {
+      "name": "dom-js",
+      "exit_code": 0
+    },
+    {
+      "name": "elixir-packages",
+      "exit_code": 0
+    },
+    {
+      "name": "generators",
+      "exit_code": 0
+    },
+    {
+      "name": "governance-validators",
+      "exit_code": 0
+    },
+    {
+      "name": "json-schema",
+      "exit_code": 0
+    },
+    {
+      "name": "patch-hygiene",
+      "exit_code": 0
+    },
+    {
+      "name": "research-tests",
+      "exit_code": 0
+    },
+    {
+      "name": "runtime-js",
+      "exit_code": 0
+    }
+  ],
+  "artifact_hashes": {
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-04-authorization-v0.1.0.json": "9cc176df06c8bc8db9168f12737fdf7e3c637f1b7a2aeb10556ba271135e3b0b",
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-04-source-index-v0.1.0.json": "31ec11d90501e42b8a9727ddf378236edc656515d9489776406333cea3083bea",
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-04-browser-results-v0.1.0.json": "01cf28546ebbd46a652e9048beb2dda0ef0cfed02a30f6ced6981f20a1c9fda3",
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-04-validation-log-v0.1.0.txt": "3d27ee6632a6c9d49970482321e12a16bf3350c9931aa89097d7832089213c5c",
+    "docs/research/60-planning/01-browser-host/bh-04-dom-renderer-and-interaction-transport/phase-04-implementation-evidence.md": "dfdebb4a3bc99b191a407fec2cc25fc9e5ac653f1f44569a290a4d5e455b1088",
+    "docs/research/60-planning/01-browser-host/bh-04-dom-renderer-and-interaction-transport/phase-04-atomic-dom-contract.md": "0174921a3eec157a4a726424613406b0bcd3a58f4088bd62ead6db5330a77ee9"
+  },
+  "limitations": [
+    "Settled atomicity, not MutationObserver invisibility",
+    "Controlled bridge acknowledgements with real BH-03 root handles; no new Wasm runtime evidence",
+    "No event delivery, effects, form/focus continuity, LiveView or products",
+    "Unavailable platform/device/manual-AT qualification deferred to respective owners by BH-22",
+    "Implementation-agent review, not independent review"
+  ],
+  "delivery": {
+    "pull_requests": 1,
+    "merge_requested": true,
+    "checkout_main": true,
+    "sync_origin": true,
+    "delete_feature_branch_after_sync": true,
+    "restore_unrelated_work": true
+  }
+}

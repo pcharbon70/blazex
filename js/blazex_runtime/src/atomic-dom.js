@@ -27,6 +27,7 @@ export class AtomicDOMRoots {
 }
 
 class AtomicDOM {
+  #prefix = "bx-dom-" + crypto.randomUUID() + "-";
   #container; #document; #nodes = new Map(); #listeners = []; #accepted = []; #fault; #released = false;
   constructor(container, fault) {
     requireDOM(container?.nodeType === 1 && container.ownerDocument?.createElement && typeof fault === "function", "ownership");
@@ -50,8 +51,14 @@ class AtomicDOM {
     for (const node of next?.nodes ?? []) {
       const type = node.attributes.find(c => c.name === "type")?.value;
       requireDOM(type === undefined || (node.tag === "input" && type === "text") || (node.tag === "button" && type === "button"), "incompatible");
+      const allowed = node.tag === "input" ? ["value", "checked", "disabled", "readOnly"] : node.tag === "button" ? ["value", "disabled"] : [];
+      requireDOM(node.properties.every(cell => allowed.includes(cell.name)), "incompatible");
     }
     for (const op of transaction.operations) if (op.type === "attribute" && op.name === "type") requireDOM(op.new === null || ["text", "button"].includes(op.new), "incompatible");
+    for (const op of transaction.operations) if (op.type === "property") {
+      const tag = transaction.operations.find(o => o.type === "create" && o.target === op.target)?.tag ?? this.#nodes.get(op.target)?.tagName.toLowerCase();
+      requireDOM((tag === "input" ? ["value", "checked", "disabled", "readOnly"] : tag === "button" ? ["value", "disabled"] : []).includes(op.name), "incompatible");
+    }
   }
   #unbind() { for (const { element, native, handler } of this.#listeners) element.removeEventListener(native, handler); this.#listeners = []; }
   #bind(element, encoded) {
@@ -78,10 +85,14 @@ class AtomicDOM {
   }
   #create(node) {
     const element = this.#document.createElement(node.tag);
-    element.setAttribute("id", node.id);
+    element.setAttribute("id", this.#prefix + node.id);
     if (node.tag === "button") element.setAttribute("type", "button");
     if (node.text !== null) element.textContent = node.text;
     return element;
+  }
+  #attribute(element, name, value) {
+    const relationships = ["aria-labelledby", "aria-describedby", "aria-controls", "aria-owns", "aria-errormessage"];
+    element.setAttribute(name, relationships.includes(name) ? value.split(" ").map(id => this.#prefix + id).join(" ") : value);
   }
   #finishProjection(projection) {
     this.#unbind();
@@ -96,7 +107,7 @@ class AtomicDOM {
     this.#unbind(); this.#nodes = new Map();
     for (const node of projection?.nodes ?? []) {
       const element = this.#create(node); this.#nodes.set(node.id, element);
-      for (const { name, value } of node.attributes) element.setAttribute(name, value);
+      for (const { name, value } of node.attributes) this.#attribute(element, name, value);
       for (const { name, value } of node.properties) element[name] = value;
     }
     for (const node of projection?.nodes ?? []) for (const child of node.children) this.#nodes.get(node.id).append(this.#nodes.get(child));
@@ -108,7 +119,7 @@ class AtomicDOM {
     requireDOM(this.#container.childNodes.length === (projection ? 1 : 0) && (!projection || this.#container.firstChild === this.#nodes.get(projection.root)), "apply");
     for (const node of projection?.nodes ?? []) {
       const element = this.#nodes.get(node.id), expected = this.#create(node);
-      for (const { name, value } of node.attributes) expected.setAttribute(name, value);
+      for (const { name, value } of node.attributes) this.#attribute(expected, name, value);
       for (const { name, value } of node.properties) expected[name] = value;
       this.#intent(expected, node);
       requireDOM(element.tagName === expected.tagName && same(attrs(element), attrs(expected)) && properties.every(name => element[name] === expected[name]) && same(selection(element), selection(expected)), "apply");
@@ -130,8 +141,11 @@ class AtomicDOM {
         else if (op.type === "remove") { element.remove(); this.#nodes.delete(op.target); }
         else if (op.type === "replace") { element.remove(); this.#nodes.delete(op.target); (op.parent === null ? this.#container : this.#nodes.get(op.parent)).insertBefore(this.#nodes.get(op.value), op.anchor === null ? null : this.#nodes.get(op.anchor)); }
         else if (op.type === "text") element.textContent = op.new ?? "";
-        else if (op.type === "attribute") { if (op.new === null) { if (op.name === "type" && element.tagName === "BUTTON") element.setAttribute("type", "button"); else element.removeAttribute(op.name); } else element.setAttribute(op.name, op.new); }
-        else if (op.type === "property") element[op.name] = op.new ?? defaults[op.name];
+        else if (op.type === "attribute") { if (op.new === null) { if (op.name === "type" && element.tagName === "BUTTON") element.setAttribute("type", "button"); else element.removeAttribute(op.name); } else this.#attribute(element, op.name, op.new); }
+        else if (op.type === "property") {
+          if (op.name === "value" && element.tagName === "BUTTON" && op.new === null) element.removeAttribute("value");
+          else element[op.name] = op.new ?? defaults[op.name];
+        }
         // Intent binding is finalized once, after structural mutations; effects remain prohibited.
         this.#fault("after", op.op_id);
       }
@@ -143,9 +157,9 @@ class AtomicDOM {
       try {
         this.#fault("rollback", -1); this.#unbind(); this.#nodes = oldNodes;
         for (const r of journal) {
+          properties.forEach((name, i) => { if (r.props[i] !== undefined && r.element[name] !== r.props[i]) r.element[name] = r.props[i]; });
           for (const name of r.element.getAttributeNames()) r.element.removeAttribute(name);
           for (const [name, value] of r.attributes) r.element.setAttribute(name, value);
-          properties.forEach((name, i) => { if (r.props[i] !== undefined) r.element[name] = r.props[i]; });
           r.children.forEach((child, i) => { if (child.nodeType === 3) child.data = r.text[i]; });
           r.element.replaceChildren(...r.children);
           if (r.selection) r.element.setSelectionRange(...r.selection);

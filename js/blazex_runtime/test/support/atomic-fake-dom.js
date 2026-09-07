@@ -7,9 +7,11 @@ class Text {
 export class Element {
   constructor(tag, document) {
     this.nodeType = 1; this.tagName = tag.toUpperCase(); this.ownerDocument = document; this.parentNode = null; this.childNodes = []; this.attributes = new Map(); this.listeners = new Map();
-    this.value = ""; this.checked = false; this.selectionStart = tag === "input" ? 0 : null; this.selectionEnd = this.selectionStart; this.selectionDirection = tag === "input" ? "none" : null;
+    this.value = ""; if (tag === "button") this.removeAttribute("value"); this.checked = false; this.selectionStart = tag === "input" ? 0 : null; this.selectionEnd = this.selectionStart; this.selectionDirection = tag === "input" ? "none" : null;
   }
   get firstChild() { return this.childNodes[0] ?? null; }
+  get value() { return this.tagName === "BUTTON" ? this.getAttribute("value") ?? "" : this._value; }
+  set value(value) { if (this.tagName === "BUTTON") this.setAttribute("value", value); else this._value = value; }
   get children() { return this.childNodes.filter(n => n.nodeType === 1); }
   get textContent() { return this.childNodes.map(n => n.textContent).join(""); }
   set textContent(value) { this.replaceChildren(...(value === "" ? [] : [new Text(String(value), this.ownerDocument)])); }
