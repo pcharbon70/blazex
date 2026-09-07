@@ -25,9 +25,14 @@ const manifest = validateHostManifest({
 const gate = { protocol: "blazex.pre-acquisition-gate/1", decision: "eligible-for-artifact-acquisition", manifest };
 import test from "node:test";
 
-function fixture({ lossBeforeReturn = 0, lossDuringReplay = false, exitOnStop = false } = {}) {
+function fixture({ lossBeforeReturn = 0, lossDuringReplay = false, lossAtReplayReady = false, exitOnStop = false } = {}) {
   const runtimes = [];
   const registry = new SharedRuntimeRegistry({
+    onEvent: event => {
+      if (lossAtReplayReady && runtimes.length === 2 && event.operation === "root.mount" && event.state === "ready") {
+        runtimes[1].emit("runtime-exited");
+      }
+    },
     wait: async () => {},
     startRuntime: async (options) => {
       const record = { stops: 0, operations: [], emit: null };
@@ -155,6 +160,19 @@ test("intentional stop ignores synchronous exit and later callbacks", async () =
   assert.equal(f.registry.snapshot().scopes[0].state, "stopped");
   assert.equal(f.registry.snapshot().metrics.losses, 0);
   assert.equal(f.runtimes.length, 1);
+});
+
+test("loss at final replay acknowledgement cannot reopen root registration", async () => {
+  const f = fixture({ lossAtReplayReady: true });
+  const scope = await f.registry.open(f.open);
+  const roots = scope.roots();
+  const root = await roots.register("root");
+  await root.mount({ targetId: "target", tree: {} });
+  f.runtimes[0].emit("runtime-exited");
+  assert.equal((await settle(f)).decision, "fallback");
+  assert.equal(roots.snapshot().accepting, false);
+  await assert.rejects(roots.register("after-loss"));
+  assert.deepEqual(f.runtimes.map(r => r.stops), [1, 1]);
 });
 
 test("close during automatic recovery prevents subsequent opens and converges", async () => {

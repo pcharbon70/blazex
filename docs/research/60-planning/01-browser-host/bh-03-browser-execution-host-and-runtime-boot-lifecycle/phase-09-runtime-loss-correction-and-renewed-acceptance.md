@@ -26,10 +26,10 @@ remains an immutable revise decision.
       - [x] 9.2.1.1 Subtask - Bind observers to each ready handle; latch loss before subscription.
       - [x] 9.2.1.2 Subtask - Exclude stale callbacks and intentional shutdown, clean subscriptions and transport.
       - [x] 9.2.1.3 Subtask - Preserve one replacement, reject loss during replay, and test races.
-  - [ ] 9.3 Section - Integrate and exercise active browser correction.
-    - [ ] 9.3.1 Task - Repeat the real profile lifecycle with controlled runtime failures.
-      - [ ] 9.3.1.1 Subtask - Prove two-root replay, stale-event rejection, repeated-loss fallback, and shutdown in Chrome and Firefox.
-      - [ ] 9.3.1.2 Subtask - Preserve prior evidence with exact historical bindings and current-source validation.
+  - [x] 9.3 Section - Integrate and exercise active browser correction.
+    - [x] 9.3.1 Task - Repeat the real profile lifecycle with controlled runtime failures.
+      - [x] 9.3.1.1 Subtask - Prove two-root replay, stale-event rejection, repeated-loss fallback, and shutdown in Chrome and Firefox.
+      - [x] 9.3.1.2 Subtask - Preserve prior evidence with exact historical bindings and current-source validation.
   - [ ] 9.4 Section - Run integration gate and publish superseding acceptance.
     - [ ] 9.4.1 Task - Run JavaScript, pinned Mix/runtime, active browsers/measurements, research validators/tests/generators, JSON and archive checks.
       - [ ] 9.4.1.1 Subtask - Reconcile the blocker and all inherited obligations; bind exact source, evidence, commands, and limitations.

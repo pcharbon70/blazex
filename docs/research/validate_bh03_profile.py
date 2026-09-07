@@ -3,6 +3,8 @@
 
 from __future__ import annotations
 
+from bh03_history import phase9_historical_binding
+
 import hashlib
 import json
 import re
@@ -207,7 +209,7 @@ def validate_completion(completion: dict[str, Any], repo_root: Path = REPO_ROOT)
         path = repo_root / relative
         current = path.is_file() and _sha256(path) == binding.get("sha256")
         authorized_successor = phase7_authorized and relative in phase7_mutable and _sha256_at_revision(repo_root, PHASE7_BASE, relative) == binding.get("sha256")
-        _require(current or authorized_successor, f"completion artifact is stale: {path}")
+        _require(current or authorized_successor or phase9_historical_binding(repo_root, relative, binding.get("sha256")), f"completion artifact is stale: {path}")
     outcome = completion.get("outcome", {})
     _require(outcome.get("active_browser_rows") == 2 and outcome.get("scenarios_per_browser") == 5 and outcome.get("profile_governed_files") == 29, "completion browser counts diverge")
     _require(outcome.get("runtime_starts_per_browser") == 1 and outcome.get("roots_per_browser") == 2, "completion runtime/root counts diverge")

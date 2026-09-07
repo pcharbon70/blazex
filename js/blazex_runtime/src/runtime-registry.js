@@ -309,6 +309,10 @@ export class SharedRuntimeRegistry {
 
   #recordRecoveryFailure(entry, error, reason) {
     this.#unobserve(entry);
+    // A loss can arrive on the final replay acknowledgement, before recover()
+    // re-enables registrations. Reassert terminal ownership at the fallback gate.
+    try { RUNTIME_SCOPE_OWNERS.get(entry.scope)?.runtimeLost(reason); }
+    catch { /* Cleanup diagnostics must not prevent terminal fallback. */ }
     this.#metrics.recovery_failures += 1;
     const exhausted = new BlazeXHostError("recovery-exhausted", "Runtime recovery did not converge", { reason, cause: errorRecord(error) });
     return this.#recordFallback(entry, entry.scopeId, exhausted);

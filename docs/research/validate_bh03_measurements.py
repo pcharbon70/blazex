@@ -3,6 +3,8 @@
 
 from __future__ import annotations
 
+from bh03_history import phase9_historical_binding
+
 import hashlib
 import json
 import statistics
@@ -222,7 +224,7 @@ def validate_completion(completion: dict[str, Any], repo_root: Path = REPO_ROOT)
     _require(len(bindings) == 20 and len({row.get("path") for row in bindings}) == 20, "completion artifact bindings diverge")
     for binding in bindings:
         path = repo_root / str(binding.get("path", ""))
-        _require(path.is_file() and _sha256(path) == binding.get("sha256"), f"completion artifact is stale: {path}")
+        _require(path.is_file() and (_sha256(path) == binding.get("sha256") or phase9_historical_binding(repo_root, binding["path"], binding.get("sha256"))), f"completion artifact is stale: {path}")
     outcome = completion.get("outcome", {})
     _require(outcome.get("active_browser_rows") == 2 and outcome.get("warmups_per_browser") == 1 and outcome.get("retained_samples_per_browser") == 5, "completion repetition counts diverge")
     _require(outcome.get("roots_per_sample") == 10 and outcome.get("cleanup_passes") == 10 and outcome.get("declared_failure_passes") == 6, "completion reliability counts diverge")
