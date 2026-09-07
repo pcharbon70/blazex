@@ -58,3 +58,10 @@ incremental renderer. The [activation ledger](../docs/research/assets/bh-04-base
 records exact owners, inward dependency edges and source hashes. The optional
 LiveView adapter currently has no dependencies; its future standalone-DOM edge
 requires Phase 8 authority. No public API or support promotion is implied.
+# BH-04 Phase 2 protocol status
+
+The standalone DOM package now owns an experimental canonical data codec and
+strict transaction preflight. Its existing full-root renderer is unchanged.
+The matching pure validator lives in the runtime JS package; neither performs
+incremental rendering or browser mutation. See the
+[protocol evidence](../docs/research/60-planning/01-browser-host/bh-04-dom-renderer-and-interaction-transport/phase-02-implementation-evidence.md).

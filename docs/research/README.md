@@ -19,6 +19,11 @@ maintenance conventions are defined in [`AGENTS.md`](AGENTS.md).
 
 ## Structure
 
+- [BH-04 protocol validator](validate_bh04_protocol.py) — current Phase 2 bindings, scope and schema agreement.
+- [BH-04 protocol tests](test_validate_bh04_protocol.py) — isolated negative governance checks.
+
+- [BH-04 history](bh04_history.py) — exact authorized Phase 1 snapshot reproduction, never current protocol validation.
+
 - [BH-04 activation validator](validate_bh04_activation.py) — immutable handoff, dependency and empty-evidence gate.
 - [BH-04 activation tests](test_validate_bh04_activation.py) — mutation tests for fail-closed governance.
 

@@ -1,0 +1,66 @@
+{
+  "schema_version": "1.0.0",
+  "record_id": "BH-04-PHASE-02-AUTHORIZATION",
+  "authorized_by": "repository-owner",
+  "authorization": "Explicit request to implement the next BH-04 phase with one commit per section, one PR, merge, checkout main, sync origin then delete feature branch.",
+  "phase": 2,
+  "base_revision": "ccc2c358f837bfe9997a147a33f51353ce663dd7",
+  "feature_branch": "codex/bh04-phase2-protocol",
+  "section_commits": [
+    "2.1",
+    "2.2",
+    "2.3",
+    "2.4"
+  ],
+  "pull_requests": 1,
+  "delivery": [
+    "merge-after-green-gates",
+    "checkout-main",
+    "fetch-and-pull-ff-only",
+    "verify-main-equals-origin",
+    "delete-local-and-remote-feature-branch"
+  ],
+  "source_bindings": {
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-01-completion-v0.1.0.json": "a28148ce3089a01841e6116604a8a741ff248356064c2e206b52e02493eed534",
+    "packages/blazex_renderer/lib/blazex/renderer/context.ex": "743dc0410fd99cc0cf5e9a6cdc1a4387c34708b131571b80702271aa992037fa",
+    "packages/blazex_core/lib/blazex/core/identity.ex": "46d62a903ba4e3df049ecf94efc174009c4b2c5c54f29f8507a042d18356e8c4",
+    "integration/conformance/event-effect-resource-fixtures-v0.1.0.json": "e5372f49136fdf3b049c478fedcdc4c0171d1e7331a386b8d7ff6e3e85b4982d",
+    "integration/conformance/presentation-intent-fixtures-v0.1.0.json": "86998ccbd9be44100e0be87a4249540022eaab6784433b4600ad4ca423c36665",
+    "integration/conformance/renderer-headless-fixtures-v0.1.0.json": "56c5ef67550d9a5adee03e37e34a507046d1990cf4caf4ee32c36e25b2fdf1d3",
+    "integration/conformance/dom-renderer-fixtures-v0.1.0.json": "c2ea66f720dbfdc7325dc15596e3f431cb0d85c4a2df1852cb27891c1e5a6124",
+    "packages/blazex_renderer_dom/lib/blazex/renderer/dom/batch.ex": "7603be8e5ec190a93b3aee64f81ae86270adf738351cb99cf18ea3e2dc48dc24",
+    "js/blazex_runtime/src/root-lifecycle.js": "9ba5c518f802b188def31508916f03888b43f581a6b36a849222ca96e2d4a7b6",
+    "docs/research/assets/bh-02-baseline/blazex-bh-02-contract-baseline-v0.1.0.json": "b1969f57f707adc834fd221b5758c2cfb41683a9ab8aaf1439f355f883bd430a",
+    "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-09-acceptance-v0.1.0.json": "59b5af334c46e0e53afd6e3e5e10b6c73107825b2b47a252e47af078f0ef8402"
+  },
+  "compatibility": [
+    "renderer/1",
+    "ui-tree/1",
+    "effects/1",
+    "dom-projection/1",
+    "blazex.browser-root-lifecycle/1"
+  ],
+  "scope": [
+    "versioned-transaction-data",
+    "closed-operation-vocabulary",
+    "pure-preflight",
+    "canonical-codecs",
+    "cross-language-fixtures"
+  ],
+  "excludes": [
+    "reconciliation",
+    "DOM-mutation",
+    "event-transport",
+    "LiveView-adapter-behavior",
+    "product-components",
+    "support-qualification"
+  ],
+  "historical_gate": {
+    "revision": "ccc2c358f837bfe9997a147a33f51353ce663dd7",
+    "reason": "Phase 1 intentionally rejects later authority and source additions. Execute its original gate and tests on its accepted Git snapshot; the Phase 2 gate separately validates current sources and exact permitted deltas."
+  },
+  "phase3_authorized": false,
+  "bh05_eligible": false,
+  "support_state": "unsupported",
+  "api_state": "experimental-not-stable"
+}

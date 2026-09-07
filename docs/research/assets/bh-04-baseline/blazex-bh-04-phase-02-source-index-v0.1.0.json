@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0.0",
+  "record_id": "BH-04-PHASE-02-SOURCE-INDEX",
+  "base_revision": "ccc2c358f837bfe9997a147a33f51353ce663dd7",
+  "source_bindings": {
+    "integration/bh-04/render-transaction.schema.json": "634f1e2d482845e3984624a842c27ac15f64eb1fff386407bf7ca88570a34807",
+    "integration/bh-04/protocol-inventory-v0.1.0.json": "6b33c1a0c31136a44394bd54a9c98ffd822cc6e7ad2eb6013f3727616ad42bee",
+    "integration/bh-04/protocol-cases.mjs": "89aa7158d812418b51cb50c3ecbe0bec14026fa910d1a00aed05731320c12d77",
+    "integration/bh-04/protocol-fixtures.mjs": "46e0659a8693b91cfe6f1214ce3575cce89ffb1b00276db7edc5e508d8fcc807",
+    "integration/bh-04/protocol-fixtures-v0.1.0.txt": "6698589912800c95c0025e73b4c3045b677c18484a57224032b1b666841c2e37",
+    "integration/bh-04/protocol-results-v0.1.0.txt": "bdf708a88d6103d481f13b7b23b9980d00c5338bed5a7ab9cc259119bd7e4d4e",
+    "integration/bh-04/support/protocol_runner.exs": "b6b1b344b5a1367637df690d3f1dd2af5d5b1b1e3b5f676682a848b2460867ce",
+    "js/blazex_runtime/src/render-transaction-codec.js": "f4a4e20ae9ba3bc6f63694efe760ed1d8f3820948b942d625f975f31027b29d7",
+    "js/blazex_runtime/src/render-transaction-schema.js": "e680229c85d322c9f144dc4b82439b91d0777e7bcca40e1c5bf4f4014a8d5a2c",
+    "js/blazex_runtime/src/render-transaction.js": "4775e7bbc45f89249990b9dfbe3b16e618f0da2948ebb4cc79b0be5eae8f2739",
+    "js/blazex_runtime/test/render-transaction.test.js": "1e47f7d912c80d5317804ec25fa21bc788fbc6235f051ad7e22072f6c5108acf",
+    "packages/blazex_renderer_dom/lib/blazex/renderer/dom/protocol.ex": "22201a7d6366f44eb46252c956293911710aa6c85f23370ea6b4f4680454a8a2",
+    "packages/blazex_renderer_dom/lib/blazex/renderer/dom/protocol/codec.ex": "d3be8004ac6697fc09147a6a981a8ecaaf3e0973b2228b502290d343312cb377",
+    "packages/blazex_renderer_dom/lib/blazex/renderer/dom/protocol/schema.ex": "08abc46b3ecf97cd1496122a2c365179c50c4468c65dda395c8f42777b899a17",
+    "packages/blazex_renderer_dom/test/protocol_test.exs": "0d4ae9524de8a15b3b3ce0783a437971e748ff2987612bb43c70390a31a6e2ec",
+    "docs/research/bh04_history.py": "65907a2b36197d90ae2b21d1e00a38c0ee9fbcc593825844a90ea9ed6715c4a9",
+    "docs/research/validate_bh04_activation.py": "61fa25d9cf5e3cbbebe11a35fec6525a416382bf3337c259b208cb3455bda9d8",
+    "docs/research/test_validate_bh04_activation.py": "bffcde761409e1ef3de23afa0c37fcb5b52e7d298a063fa0c85f92986db649a8",
+    "docs/research/validate_bh04_protocol.py": "f364636ce759da19f2a98a6b87d8b7f69ed6adddeb3f88777d448294887fb880",
+    "docs/research/test_validate_bh04_protocol.py": "7299ecc4a360f202dce56f001901cc21061f4fb774fff635799aa3d01d7de03c"
+  }
+}

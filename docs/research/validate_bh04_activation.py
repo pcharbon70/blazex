@@ -241,6 +241,11 @@ def validate_completion(root, check):
 
 
 if __name__ == "__main__":
+    from bh04_history import enabled, run_phase1
+
+    if enabled(ROOT):
+        run_phase1(ROOT)
+        sys.exit(0)
     errors = validate(require_completion="--candidate" not in sys.argv)
     if errors:
         print("\n".join("BH-04 activation: " + error for error in errors))

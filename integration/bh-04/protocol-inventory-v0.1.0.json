@@ -1,0 +1,76 @@
+{
+  "schema_version": "1.0.0",
+  "protocol": "blazex.dom-transaction/1",
+  "schema": "1.0.0",
+  "state": "protocol-defined-not-executed",
+  "transaction_kinds": [
+    "initial",
+    "patch",
+    "replace",
+    "dispose"
+  ],
+  "operations": [
+    "create",
+    "insert",
+    "move",
+    "remove",
+    "replace",
+    "text",
+    "attribute",
+    "property",
+    "listener",
+    "focus",
+    "selection",
+    "effect_barrier"
+  ],
+  "acknowledgements": [
+    "preflight",
+    "accepted",
+    "committed",
+    "rejected",
+    "rolled-back",
+    "fallback",
+    "disposed"
+  ],
+  "diagnostics": [
+    "malformed",
+    "incompatible",
+    "stale",
+    "duplicate",
+    "missing-target",
+    "ownership",
+    "limit",
+    "apply",
+    "rollback",
+    "disposed-root"
+  ],
+  "limits": {
+    "depth": 32,
+    "nodes": 128,
+    "operations": 512,
+    "listeners": 256,
+    "attributes": 32,
+    "text_bytes": 4096,
+    "value_bytes": 2048,
+    "queue": 64,
+    "message_bytes": 131072
+  },
+  "owners": {
+    "neutral_lifecycle": "packages/blazex_renderer (unchanged)",
+    "records": "packages/blazex_renderer_dom",
+    "browser_validation": "js/blazex_runtime",
+    "fixtures": "integration/bh-04"
+  },
+  "historical_input": "BH-02 full-root batch/1 is immutable reference-only, no implicit migration.",
+  "results": {
+    "browser": [],
+    "measurement": [],
+    "reconciliation": [],
+    "dom_application": [],
+    "event_transport": [],
+    "liveview_adapter": []
+  },
+  "phase3_authorized": false,
+  "support_state": "unsupported",
+  "api_state": "experimental-not-stable"
+}
