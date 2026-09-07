@@ -19,10 +19,10 @@ Back to [milestone](README.md).
     - [x] 8.1.1 Task - Bind synchronized main, seven phase decisions, entry obligations, and development policy.
       - [x] 8.1.1.1 Subtask - Preserve unrelated work; use four section commits and one merged PR.
       - [x] 8.1.1.2 Subtask - Freeze accept, revise, and blocked outcomes without support promotion or BH-04 authority.
-  - [ ] 8.2 Section - Reconcile implementation and inherited obligations.
-    - [ ] 8.2.1 Task - Resolve all nine outputs and every inherited identity.
-      - [ ] 8.2.1.1 Subtask - Bind implementation, tests, evidence classes, and limitations.
-      - [ ] 8.2.1.2 Subtask - Retain owners and due points for conditions, findings, and [DEFERRED] qualification.
+  - [x] 8.2 Section - Reconcile implementation and inherited obligations.
+    - [x] 8.2.1 Task - Resolve all nine outputs and every inherited identity.
+      - [x] 8.2.1.1 Subtask - Bind implementation, tests, evidence classes, and limitations.
+      - [x] 8.2.1.2 Subtask - Retain owners and due points for conditions, findings, and [DEFERRED] qualification.
   - [ ] 8.3 Section - Review and implement the acceptance gate.
     - [ ] 8.3.1 Task - Execute architecture, implementation, conformance, accessibility, security, packaging, and provenance lenses.
       - [ ] 8.3.1.1 Subtask - Reproduce material findings and record review independence limits.

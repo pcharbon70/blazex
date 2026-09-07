@@ -1,0 +1,870 @@
+{
+  "schema_version": "1.0.0",
+  "ledger_id": "BX-BH03-PHASE-08-RECONCILIATION-0.1",
+  "candidate_revision": "34822e271ebb04f30bbfe93131c2288dc23d3057",
+  "source_bindings": [
+    {
+      "path": "integration/bh-03/README.md",
+      "sha256": "138f2d6e36cc3da4c4b12fb7b186c4b588469338b57453dd1dcf9fba0d07830d"
+    },
+    {
+      "path": "integration/bh-03/integration-index-v0.1.0.json",
+      "sha256": "3fc0947fec76cfa24c3bc023f564458c5dc0c73ee42ca54769c022eb6879b0b1"
+    },
+    {
+      "path": "integration/bh-03/integration-index-v0.2.0.json",
+      "sha256": "aa754155be5e211fc240622ff4b5d2265a9f770a9054c794a29b4c8dfda480b3"
+    },
+    {
+      "path": "integration/bh-03/integration-index-v0.3.0.json",
+      "sha256": "b71a76933b18dd2be60c7ac9a4d4533121f9723ca8ff5157e3ac468340628e97"
+    },
+    {
+      "path": "integration/bh-03/integration-index-v0.4.0.json",
+      "sha256": "c309db041bf09bfb7831cb516609e1a655433159144d22d5f881317d4f9ad42d"
+    },
+    {
+      "path": "integration/bh-03/integration-index-v0.5.0.json",
+      "sha256": "8fae9d62af27f502ee51b39000c94ce7aac718ca6a2f07b2bfdcbd917fa72653"
+    },
+    {
+      "path": "integration/bh-03/integration-index-v0.6.0.json",
+      "sha256": "4869301427445fd9a92f97d11775e3cfc1b38388b511bcfd93e293cfba4cbf70"
+    },
+    {
+      "path": "integration/bh-03/integration-index-v0.7.0.json",
+      "sha256": "6f86687155e584fe7fc619eba79fbd9c8a58b74a5a955d7666ab72c939a851aa"
+    },
+    {
+      "path": "integration/bh-03/phase-02/README.md",
+      "sha256": "4c6bf2bad739ab4df6f0a72ae34db9d297807eab47f091bfa3f66121986ef2ed"
+    },
+    {
+      "path": "integration/bh-03/phase-02/pre-acquisition-fixtures-v0.1.0.json",
+      "sha256": "3d4a46fbd15bfc3c7809f99e615650bd1c0c7c05e6909932242ea284b52f3d25"
+    },
+    {
+      "path": "integration/bh-03/phase-03/startup-fixtures-v0.1.0.json",
+      "sha256": "f9052c3d34ed49835ddc5e660a18a6d9cc3b6dbe8f11678fbc27814f7a3c80e9"
+    },
+    {
+      "path": "integration/bh-03/phase-04/shared-runtime-root-fixtures-v0.1.0.json",
+      "sha256": "2b1f4662592f4bbc5f662aa3303ab8174b734263da5f754af15a7a2cbc2fdf25"
+    },
+    {
+      "path": "integration/bh-03/phase-05/resilience-fixtures-v0.1.0.json",
+      "sha256": "cec0d05f0c04683ce7169ffee5610d28644b6744a99be07a2a90df9679b5ac92"
+    },
+    {
+      "path": "integration/bh-03/phase-06/browser-profile-fixtures-v0.1.0.json",
+      "sha256": "7e088bcd864a7de0de47938af13c72924a0edd77826c4e51607bb4345293f3c2"
+    },
+    {
+      "path": "integration/bh-03/phase-07/measurement-fixtures-v0.1.0.json",
+      "sha256": "cf3325a6532cebcd2e5268dae789d830bc64b9120db48d907f426f6903750e7e"
+    },
+    {
+      "path": "integration/fixtures/raw-evidence/bh03-phase6-browser-matrix.json",
+      "sha256": "47214bde6218bbc28ec9541361197dab70725b2a5aebef9f23c937fa6520cee7"
+    },
+    {
+      "path": "integration/fixtures/raw-evidence/bh03-phase7-measurements.json",
+      "sha256": "0c0cb5e6f0e8e9ec5bc876c1f184f77a17e9adeecc34a4b6a49bccaf308736d0"
+    },
+    {
+      "path": "js/blazex_runtime/src/artifact-acquisition.js",
+      "sha256": "6620ac5c6eaf23b3047ebe02b2366cff9ce4a4630c89156e016b07c53345f205"
+    },
+    {
+      "path": "js/blazex_runtime/src/bridge-protocol.js",
+      "sha256": "d55f746f486af4d25e053e94fe07a6c5d9e0b0033c0950e29a85ebce0f6d2efa"
+    },
+    {
+      "path": "js/blazex_runtime/src/compatibility.js",
+      "sha256": "1e61fbc4cf2cb1cb726bc517fdec515cd95e063da900dec7e514b7b351275c00"
+    },
+    {
+      "path": "js/blazex_runtime/src/diagnostic-collector.js",
+      "sha256": "98d2527ed01793a552a8a1425b8b4079553fcf82108e26a3959bd8c29dc9611b"
+    },
+    {
+      "path": "js/blazex_runtime/src/discovery.js",
+      "sha256": "5a9c764d4d96309a6c45d15e7661c2f6771e7e965e2d4e9259816cba775060d7"
+    },
+    {
+      "path": "js/blazex_runtime/src/host-bridge.js",
+      "sha256": "d1e287676bd4f324eea4b1e28fe8caccbed07a46797a8dd0ebd13835e4ac0478"
+    },
+    {
+      "path": "js/blazex_runtime/src/host-manifest.js",
+      "sha256": "3e6db892bd505c5aaba9e4ba460420199d8ec17b6c1e2e9ebde91e6b11916710"
+    },
+    {
+      "path": "js/blazex_runtime/src/index.js",
+      "sha256": "dcf5bd93db73b1eed10984576af1f3c3b5e1c67a625cfb9efa6c45877f54182f"
+    },
+    {
+      "path": "js/blazex_runtime/src/internal/errors.js",
+      "sha256": "72325b832d8eda4323815ec5dfe7a68f05dc4795643a33c023a0c5aaab2cca2b"
+    },
+    {
+      "path": "js/blazex_runtime/src/lifecycle.js",
+      "sha256": "ad8b73603f8fbe8f788a60e4461a879f885e681add79cc7f14965c7dec67441e"
+    },
+    {
+      "path": "js/blazex_runtime/src/manifest-loader.js",
+      "sha256": "64fcf2f80a095c5ab586ec7ad483814837fcb2a0b786f324f67e1fffd4c08114"
+    },
+    {
+      "path": "js/blazex_runtime/src/prerequisites.js",
+      "sha256": "0201c5be456c3213be2ef2ac41f3ffec780048e717ad467445c9b8ab1b39ccc8"
+    },
+    {
+      "path": "js/blazex_runtime/src/recovery-coordinator.js",
+      "sha256": "0186a76fe591ef24de513d1a7c7cba3fea7b752177031badb9888959e5cdc84c"
+    },
+    {
+      "path": "js/blazex_runtime/src/resource-ledger.js",
+      "sha256": "025690623f1a04d53c2acbba5142698e4fa1eed54e3c9bc5b21c37ace3d6d5d8"
+    },
+    {
+      "path": "js/blazex_runtime/src/root-lifecycle.js",
+      "sha256": "9ba5c518f802b188def31508916f03888b43f581a6b36a849222ca96e2d4a7b6"
+    },
+    {
+      "path": "js/blazex_runtime/src/runtime-frame-port.js",
+      "sha256": "d2935978d645e7528913980ccd64f2c65e9149b47499814f74b9a19a0c324f8e"
+    },
+    {
+      "path": "js/blazex_runtime/src/runtime-loader.js",
+      "sha256": "d23445f72dd73533db3957390f4d869abdf81e0b29655c1a7c9f9e2069b2460f"
+    },
+    {
+      "path": "js/blazex_runtime/src/runtime-registry.js",
+      "sha256": "225081ba2df00867bb4aa7ad630e82ceb883a43b9cee1180fb0bf2ab0b763711"
+    },
+    {
+      "path": "js/blazex_runtime/src/runtime-startup.js",
+      "sha256": "e45ea4cff1cb8f859b0c991a5f38545c8adecd22495c09122afdacb117779db5"
+    },
+    {
+      "path": "js/blazex_runtime/test/adversarial-boundaries.test.js",
+      "sha256": "3e57f01a5fc9749a083a51704534845054dd9a6e7d94a84747a5f50922704c54"
+    },
+    {
+      "path": "js/blazex_runtime/test/artifact-acquisition.test.js",
+      "sha256": "7182d34595e9e6b34a26542c1cb443dfad701c908b922b02d081b2e78aed6f9e"
+    },
+    {
+      "path": "js/blazex_runtime/test/boundary.test.js",
+      "sha256": "a7a4546471c629662db940904a5d9502508e10546da21215e658c7964066fd8d"
+    },
+    {
+      "path": "js/blazex_runtime/test/browser/bh03-phase6.integration.mjs",
+      "sha256": "6ab01eeb92c3407a68fda0271180bdbf48991c5195710de093eb3546e074846a"
+    },
+    {
+      "path": "js/blazex_runtime/test/browser/bh03-phase7-measurement.integration.mjs",
+      "sha256": "a946c5fea9bee7f4a0a91164fe2aafbdb7e3090c467334ca3c4c8b1d3f9a5753"
+    },
+    {
+      "path": "js/blazex_runtime/test/browser/phase4.integration.mjs",
+      "sha256": "9b0d87c3f078b3b70816c7593a2ca37f9a3f83a23dc08887964ac30225ea17f7"
+    },
+    {
+      "path": "js/blazex_runtime/test/browser/phase5.integration.mjs",
+      "sha256": "99a552882bd13247f98a8251dffd266943a4169db14a2b82cc461b591fc39cfd"
+    },
+    {
+      "path": "js/blazex_runtime/test/browser/phase6.integration.mjs",
+      "sha256": "cdfd3139a3f5f3832862723bbb8e2f87a293c5cafcbb0b42e4d130b9328bf2ee"
+    },
+    {
+      "path": "js/blazex_runtime/test/browser/phase7.integration.mjs",
+      "sha256": "c83b0b354c0c28f86e7c8fbe4400144a102b068974f8765db3110dd92091b09b"
+    },
+    {
+      "path": "js/blazex_runtime/test/browser/phase8-accessibility.integration.mjs",
+      "sha256": "50ffa19e998cd37fdd73c10fd3efc136feb79586187ec48916dd5a1aa2577483"
+    },
+    {
+      "path": "js/blazex_runtime/test/browser/phase8-behavior.integration.mjs",
+      "sha256": "1adc9d0e514a1581dcabd83f3296bfdd003b462ecb693a69726e60a62c5bee47"
+    },
+    {
+      "path": "js/blazex_runtime/test/browser/phase8-compatibility.integration.mjs",
+      "sha256": "8319812f0804983ee9713bac6bb78d843555d0f64a9ada7f15baaec00be191ce"
+    },
+    {
+      "path": "js/blazex_runtime/test/browser/phase8-prerequisites.integration.mjs",
+      "sha256": "e0af8f87d418ece68eda3abd68cf3d182ea1116a95f471ba4ed22abc3db5de35"
+    },
+    {
+      "path": "js/blazex_runtime/test/browser/phase9-measurement.integration.mjs",
+      "sha256": "12e56ceaa916a313241de0345e5c3012e06af6c279171481f12ac847192904df"
+    },
+    {
+      "path": "js/blazex_runtime/test/compatibility.test.js",
+      "sha256": "bf8f211967dba2ab1f882a72905d1bfde350f425ececaf9edaf984b41ab5c614"
+    },
+    {
+      "path": "js/blazex_runtime/test/diagnostic-collector.test.js",
+      "sha256": "2459250c3d2962de6be35d215ca57252690b621f2da0b791c4fd6d81d905f48a"
+    },
+    {
+      "path": "js/blazex_runtime/test/discovery.test.js",
+      "sha256": "e555f38ce21a1df5cdc1765c100363fa758a68f4d6a330bdf37c36cffe3ef80d"
+    },
+    {
+      "path": "js/blazex_runtime/test/host-bridge.test.js",
+      "sha256": "108c7afaa717d3d89cabf68743750335623bc383c70056bcebd295bfc52ede9f"
+    },
+    {
+      "path": "js/blazex_runtime/test/host-manifest.test.js",
+      "sha256": "7e573f84e7fc74edfc6b4a72dcfe2c30dbb1f07e18d9825ea4630d1ff3fb9837"
+    },
+    {
+      "path": "js/blazex_runtime/test/lifecycle.test.js",
+      "sha256": "76951c99d844fb8c648598673c26b0f5311d712316609f2fac7bdbf5d64031cd"
+    },
+    {
+      "path": "js/blazex_runtime/test/manifest-loader.test.js",
+      "sha256": "823df2d9eaf37fa7a4aaaeda37836becd4fbdc3d9c4698abe5266dc952f412ed"
+    },
+    {
+      "path": "js/blazex_runtime/test/measurement.test.js",
+      "sha256": "7c378e7cae866b437efc3d7eab5bc96be930fe8c6c1e9b5d612a6ef1683de7da"
+    },
+    {
+      "path": "js/blazex_runtime/test/prerequisites.test.js",
+      "sha256": "7ea073dbff6e7af4cead8523c2786656edc9735c7d0172808a52e32417b1aa6a"
+    },
+    {
+      "path": "js/blazex_runtime/test/recovery-coordinator.test.js",
+      "sha256": "1c5b8e357915b1559c363331c5ee35f65ef2b968fa6da9e2f8950a806c19c761"
+    },
+    {
+      "path": "js/blazex_runtime/test/resource-ledger.test.js",
+      "sha256": "81056bbceedbd750752eb7cd47aeec12e3fd3e2f42fd73613f9104f9b3c9f0e5"
+    },
+    {
+      "path": "js/blazex_runtime/test/root-lifecycle.test.js",
+      "sha256": "56586f318d4d98e47ab7ec155e2c34653626347171cb964de0afb2aced8aa537"
+    },
+    {
+      "path": "js/blazex_runtime/test/runtime-loader.test.js",
+      "sha256": "34495b205253351c709576273c3235ffae0729905f664107875a9738ce3e9e62"
+    },
+    {
+      "path": "js/blazex_runtime/test/runtime-recovery.test.js",
+      "sha256": "8c31e4fc73d817d989b701505d4aac7ab4e96fedd7f0a7122485875e4f8b6e03"
+    },
+    {
+      "path": "js/blazex_runtime/test/runtime-registry.test.js",
+      "sha256": "4616668eb6809ce923e7b08078edddad2012c63e65919ab464fc6e30e93f53e4"
+    },
+    {
+      "path": "js/blazex_runtime/test/runtime-shutdown.test.js",
+      "sha256": "a15eb1a59b8a4e0723674c3ea5c325a0cde4e2540633b476fe770e3d769fa855"
+    },
+    {
+      "path": "js/blazex_runtime/test/runtime-startup.test.js",
+      "sha256": "b4e25fc29e06f917aad9e33b3194373a1e128dc4c3303ec45ecccf8216385248"
+    },
+    {
+      "path": "js/blazex_runtime/test/support/bh03-measurement.mjs",
+      "sha256": "03df2b8c2f0598c14e6d0a910c0fab278a253fda89a72712e21091d736d8151a"
+    },
+    {
+      "path": "packages/blazex_host_browser/.formatter.exs",
+      "sha256": "43c4cba33f14cbf6e3377bafee0f12aabf9c44e5fc755b2b4ca5055932d79f76"
+    },
+    {
+      "path": "packages/blazex_host_browser/README.md",
+      "sha256": "879e240b0c5d66afbc63b93ed58ab2cf56cc2b2f75170b8e503df2f02687c8ea"
+    },
+    {
+      "path": "packages/blazex_host_browser/blazex.project.json",
+      "sha256": "12e4e2c177d5a5b386829b429bd7f584cb25e6d6f83d0d6068554cdc45315e07"
+    },
+    {
+      "path": "packages/blazex_host_browser/lib/blazex/host/browser.ex",
+      "sha256": "c3fe974768d278c397b620bee4e48308e448d0708c8a18c045728136f903806f"
+    },
+    {
+      "path": "packages/blazex_host_browser/lib/blazex/host/browser/compatibility.ex",
+      "sha256": "00dd6d2141facfd7f4d03d1f6aafa12189e4610f833ca6af36b50d64b6cd9055"
+    },
+    {
+      "path": "packages/blazex_host_browser/lib/blazex/host/browser/lifecycle.ex",
+      "sha256": "de2de03335b0eda4c10bf21d92f9d7a68a7f3c09d3e7b267fb4fc1962d0f0644"
+    },
+    {
+      "path": "packages/blazex_host_browser/mix.exs",
+      "sha256": "985ea50712ee702e53994ada38eea8525d27edac7aaa3ce4fc4202b3ebf17ec8"
+    },
+    {
+      "path": "packages/blazex_host_browser/test/blazex/host/browser_boundary_test.exs",
+      "sha256": "687044fc2ab16ebc9d917a611acc30f926cd28df643ae54134bce2372d1cf763"
+    },
+    {
+      "path": "packages/blazex_host_browser/test/test_helper.exs",
+      "sha256": "b086ec47f0c6c7aaeb4cffca5ae5243dd05e0dc96ab761ced93325d5315f4b12"
+    },
+    {
+      "path": "packages/blazex_runtime_popcorn/.formatter.exs",
+      "sha256": "43c4cba33f14cbf6e3377bafee0f12aabf9c44e5fc755b2b4ca5055932d79f76"
+    },
+    {
+      "path": "packages/blazex_runtime_popcorn/README.md",
+      "sha256": "c5929b47844edda24ca089aa6b912abd329111fce01144b01e56018807c2c52e"
+    },
+    {
+      "path": "packages/blazex_runtime_popcorn/blazex.project.json",
+      "sha256": "35eca94bc4f59c5ecd1eddd6a803434961b653ddfa5437fb02e4251aa57d8cc9"
+    },
+    {
+      "path": "packages/blazex_runtime_popcorn/lib/blazex/runtime/popcorn.ex",
+      "sha256": "54d86d3f6ed4e86ae60263ada8acdaf86bd9b18373aa11d0afcf1947a3adcaf6"
+    },
+    {
+      "path": "packages/blazex_runtime_popcorn/lib/blazex/runtime/popcorn/identity.ex",
+      "sha256": "5b485cdf7e9b4b2361a6e455a8f2fc20e18057824eacc5c90227203b9b1a9397"
+    },
+    {
+      "path": "packages/blazex_runtime_popcorn/lib/blazex/runtime/popcorn/startup.ex",
+      "sha256": "3ff2c414d2c2b0fcc4d56d737dac85a4c42eaa3646a610974622c3efc052fc2d"
+    },
+    {
+      "path": "packages/blazex_runtime_popcorn/mix.exs",
+      "sha256": "f9b3810501532fbf50256557575c5fada825f0977a578b2ea42ceab2ede054dd"
+    },
+    {
+      "path": "packages/blazex_runtime_popcorn/runtime/README.md",
+      "sha256": "a7059028a9c2c14cc980a88ee3543e8d3a4d7487169c27ecf92f274d5c5a4e85"
+    },
+    {
+      "path": "packages/blazex_runtime_popcorn/runtime/THIRD_PARTY_NOTICES.md",
+      "sha256": "6ed3c145c74707df469e91f120bea1201476852f7f48976ca92954e65100f898"
+    },
+    {
+      "path": "packages/blazex_runtime_popcorn/runtime/adapter-classification.json",
+      "sha256": "e5dcd32429260579f641855bf970d1f2e26a12bfbc43ae8611c53b3bd801a2aa"
+    },
+    {
+      "path": "packages/blazex_runtime_popcorn/runtime/build-contract.json",
+      "sha256": "ae2f87845d612ac3ba9b23517389df5ddee4d1bda7f99bb9c024c47fea366980"
+    },
+    {
+      "path": "packages/blazex_runtime_popcorn/runtime/build_runtime.py",
+      "sha256": "76f4ffac7932b8c40a0d389f04cc4347760df18c050a2a904da53c299317cfc9"
+    },
+    {
+      "path": "packages/blazex_runtime_popcorn/runtime/generate_manifest.py",
+      "sha256": "4062568cab326cd031fae6984db7e7fa77a58d1f631bc70d8c134d00353d3c23"
+    },
+    {
+      "path": "packages/blazex_runtime_popcorn/runtime/inspect_wasm.py",
+      "sha256": "158c2a7147c98d2552f21975113ccd179d3a204b5a1806b5304760e16faf7239"
+    },
+    {
+      "path": "packages/blazex_runtime_popcorn/runtime/patches/manifest.json",
+      "sha256": "24ada6398debc71e9ebb3c7e3b81b4948f0bff0efaac7331fcf469514d41055d"
+    },
+    {
+      "path": "packages/blazex_runtime_popcorn/runtime/runtime-binary-manifest.json",
+      "sha256": "8db2038a7eb98aeaa772460101776b6b60c9114a88701c9cb1067ca3609b6c11"
+    },
+    {
+      "path": "packages/blazex_runtime_popcorn/runtime/tests/test_runtime_build.py",
+      "sha256": "7c74dd6c7d206f97408e6c051cf2f4543dbdab89f4e066241dd1252d4f776625"
+    },
+    {
+      "path": "packages/blazex_runtime_popcorn/runtime/verify_runtime_build.py",
+      "sha256": "a5e0a14e28278d07bf470b93e524122747016cc9b1f167ac853e4286dde21b3b"
+    },
+    {
+      "path": "packages/blazex_runtime_popcorn/test/blazex/runtime/popcorn_boundary_test.exs",
+      "sha256": "0cb54bf3e9691a189c317f0f641fe1cb1a75fca160b3a2e705526adb5e18f230"
+    },
+    {
+      "path": "packages/blazex_runtime_popcorn/test/test_helper.exs",
+      "sha256": "b086ec47f0c6c7aaeb4cffca5ae5243dd05e0dc96ab761ced93325d5315f4b12"
+    },
+    {
+      "path": "profiles/browser_phoenix/assets/phase6/build_profile.py",
+      "sha256": "4c31956c480d33d5ac025102db3e56c2a971b9116ad33d731a4897ee16a30aa3"
+    },
+    {
+      "path": "profiles/browser_phoenix/assets/phase6/deployment-contract.json",
+      "sha256": "395582811cfea13d52feb542c4af727df728dc0370797a0d0d5a7e487d0a3d83"
+    },
+    {
+      "path": "profiles/browser_phoenix/assets/phase6/host.js",
+      "sha256": "79ba7d70e9a6f9b690cb849cea16d2e152829076fadaba386718b79109a83ccd"
+    },
+    {
+      "path": "profiles/browser_phoenix/assets/phase6/index.html",
+      "sha256": "dbd66efdcf933b1478d8779c76adacec6b090e2b7c29d357c1a3d07f405cc0fc"
+    },
+    {
+      "path": "profiles/browser_phoenix/assets/phase6/profile.css",
+      "sha256": "be99d88661727399c48134c2c37ae24726de0be1456508178aef45e420de029f"
+    },
+    {
+      "path": "profiles/browser_phoenix/assets/phase6/runtime-frame.js",
+      "sha256": "6f7a8905d9e48a59fecc67980827b4cc7d976a7a349f8d465e4e3ccb9e6a832e"
+    },
+    {
+      "path": "profiles/browser_phoenix/assets/phase6/runtime-manifest.template.json",
+      "sha256": "d888eade92e990fcc3c461534bf0dae6f9f1fa6c2c53d40ce20ceb3bb00d3ade"
+    },
+    {
+      "path": "profiles/browser_phoenix/assets/phase6/verify_profile.py",
+      "sha256": "65bdfa608083cbe7f49188ffefe30bee50bceaa41081904876163918511a1303"
+    },
+    {
+      "path": "profiles/browser_phoenix/lib/blazex_browser_phoenix.ex",
+      "sha256": "5daa5b07af4552acca907b7f5b3343472f6709f90b458cbbaf22ddb1c67093ba"
+    },
+    {
+      "path": "profiles/browser_phoenix/lib/blazex_browser_phoenix/application.ex",
+      "sha256": "6deea6765dada12d298c489ae543e13e0fd5a72c2a9222c258c59690a3fe6944"
+    },
+    {
+      "path": "profiles/browser_phoenix/lib/blazex_browser_phoenix/asset_plug.ex",
+      "sha256": "2068e49af2a842d21f3df1092b4236e02cf3a98e9fbddccc0f22e35bd7a91e03"
+    },
+    {
+      "path": "profiles/browser_phoenix/lib/blazex_browser_phoenix/command_plug.ex",
+      "sha256": "0d7c1acecf245e0b6ad2104ba52970a75b7789986c802267bf4aefd2f15424ca"
+    },
+    {
+      "path": "profiles/browser_phoenix/lib/blazex_browser_phoenix/composition_boundary.ex",
+      "sha256": "e830b43102842c3f4cacac948402b8cef61c4674aa927c2f481d800edd3639f4"
+    },
+    {
+      "path": "profiles/browser_phoenix/lib/blazex_browser_phoenix/control_plug.ex",
+      "sha256": "1ad961a7c1e2765f65deeee1c174bbde160cd2425423f6db021b18be36c0aa2d"
+    },
+    {
+      "path": "profiles/browser_phoenix/lib/blazex_browser_phoenix/deployment_headers.ex",
+      "sha256": "2514292748d655e601f7c2b426843178fcb91661c041646ce9f217a644b77e8b"
+    },
+    {
+      "path": "profiles/browser_phoenix/lib/blazex_browser_phoenix/endpoint.ex",
+      "sha256": "d8abdb8cdf5b5069b867632215f99fb47603fc0b5835d8d346bc3148ad3788fe"
+    },
+    {
+      "path": "profiles/browser_phoenix/lib/blazex_browser_phoenix/endpoint_boundary.ex",
+      "sha256": "8f6d883d000bc6314d4c1581e1423b18ade3bd674c78fefc83180bf0f2d5c872"
+    },
+    {
+      "path": "profiles/browser_phoenix/lib/blazex_browser_phoenix/not_found_plug.ex",
+      "sha256": "6bc5212d93f701c8c3d39a512ed3fc468f3e13dbcae41dfddb8f5a017f025a00"
+    },
+    {
+      "path": "profiles/browser_phoenix/lib/blazex_browser_phoenix/teardown_boundary.ex",
+      "sha256": "08bd3288997307b73ef34c7e3a268f0a7ce5887d79059c3dbb1f21858cd0e88a"
+    }
+  ],
+  "outputs": [
+    {
+      "id": "runtime-host-compatibility-identities",
+      "phase": 2,
+      "implementation": "js/blazex_runtime/src/compatibility.js",
+      "conformance": "js/blazex_runtime/test/compatibility.test.js",
+      "state": "implemented-bounded",
+      "evidence_class": "injected-transport-or-unit",
+      "limitation": "Experimental internal contract, not product qualification."
+    },
+    {
+      "id": "runtime-discovery-prerequisite-and-manifest-validation",
+      "phase": 2,
+      "implementation": "js/blazex_runtime/src/host-manifest.js",
+      "conformance": "js/blazex_runtime/test/host-manifest.test.js",
+      "state": "implemented-bounded",
+      "evidence_class": "injected-transport-or-unit",
+      "limitation": "Experimental internal contract, not product qualification."
+    },
+    {
+      "id": "artifact-acquisition-bundle-load-startup-and-readiness",
+      "phase": 3,
+      "implementation": "js/blazex_runtime/src/runtime-startup.js",
+      "conformance": "js/blazex_runtime/test/runtime-startup.test.js",
+      "state": "implemented-bounded",
+      "evidence_class": "injected-transport-or-unit",
+      "limitation": "Experimental internal contract, not product qualification."
+    },
+    {
+      "id": "shared-compatible-runtime-instance-registry",
+      "phase": 4,
+      "implementation": "js/blazex_runtime/src/runtime-registry.js",
+      "conformance": "js/blazex_runtime/test/runtime-registry.test.js",
+      "state": "implemented-bounded",
+      "evidence_class": "injected-transport-or-unit",
+      "limitation": "Experimental internal contract, not product qualification."
+    },
+    {
+      "id": "independent-root-register-mount-update-move-dispose-remount",
+      "phase": 4,
+      "implementation": "js/blazex_runtime/src/root-lifecycle.js",
+      "conformance": "js/blazex_runtime/test/root-lifecycle.test.js",
+      "state": "implemented-bounded",
+      "evidence_class": "injected-transport-or-unit",
+      "limitation": "Experimental internal contract, not product qualification."
+    },
+    {
+      "id": "deterministic-shutdown-runtime-loss-and-cleanup",
+      "phase": 5,
+      "implementation": "js/blazex_runtime/src/runtime-registry.js",
+      "conformance": "js/blazex_runtime/test/runtime-recovery.test.js",
+      "state": "review-gap",
+      "evidence_class": "injected-transport-or-unit",
+      "limitation": "Runtime loss is externally reported; automatic profile-to-registry failure convergence requires review."
+    },
+    {
+      "id": "mismatch-unsupported-and-fallback-diagnostics",
+      "phase": 5,
+      "implementation": "js/blazex_runtime/src/runtime-registry.js",
+      "conformance": "js/blazex_runtime/test/runtime-shutdown.test.js",
+      "state": "implemented-bounded",
+      "evidence_class": "injected-transport-or-unit",
+      "limitation": "Experimental internal contract, not product qualification."
+    },
+    {
+      "id": "active-browser-profile-integration",
+      "phase": 6,
+      "implementation": "profiles/browser_phoenix/assets/phase6/host.js",
+      "conformance": "js/blazex_runtime/test/browser/bh03-phase6.integration.mjs",
+      "state": "implemented-bounded",
+      "evidence_class": "active-linux-browser",
+      "limitation": "Experimental internal contract, not product qualification."
+    },
+    {
+      "id": "root-readiness-memory-growth-and-reliability-evidence",
+      "phase": 7,
+      "implementation": "js/blazex_runtime/test/support/bh03-measurement.mjs",
+      "conformance": "js/blazex_runtime/test/browser/bh03-phase7-measurement.integration.mjs",
+      "state": "implemented-bounded",
+      "evidence_class": "active-linux-browser",
+      "limitation": "Five fresh contexts per browser; coarse Chrome heap signal and unavailable Firefox heap API are not leak proof or budgets."
+    }
+  ],
+  "obligations": [
+    {
+      "id": "BX-BH01-CONDITION-AVM-REACHABILITY",
+      "category": "inherited-condition",
+      "state": "repeat-required",
+      "owner": "runtime-owner",
+      "reactivate_by": "BH-04 and every runtime/bundle change",
+      "disposition": "Existing real AVM execution retained; repeat after bundle/compiler changes.",
+      "pass_credit": false
+    },
+    {
+      "id": "BX-BH01-CONDITION-BROTLI-SERVING",
+      "category": "inherited-condition",
+      "state": "carried-forward",
+      "owner": "browser-profile-owner",
+      "reactivate_by": "before compressed deployment; no later than BH-22",
+      "disposition": "BH-03 intentionally serves verified identity bytes; Brotli production serving is not qualified.",
+      "pass_credit": false
+    },
+    {
+      "id": "BX-BH01-CONDITION-FIREFOX-TIMER",
+      "category": "inherited-condition",
+      "state": "repeat-required",
+      "owner": "runtime-owner",
+      "reactivate_by": "each runtime change; no later than BH-22",
+      "disposition": "Active Firefox startup reproduced by Phase 7; timer workaround remains pinned, not portable proof.",
+      "pass_credit": false
+    },
+    {
+      "id": "BX-BH01-CONDITION-PRIVATE-API-PINS",
+      "category": "inherited-condition",
+      "state": "repeat-required",
+      "owner": "runtime-owner",
+      "reactivate_by": "each dependency upgrade",
+      "disposition": "Pinned Popcorn/AtomVM/private integration requires compatibility review and reruns.",
+      "pass_credit": false
+    },
+    {
+      "id": "BX-BH01-CONDITION-RUNTIME-REPEAT",
+      "category": "inherited-condition",
+      "state": "repeat-required",
+      "owner": "quality-owner",
+      "reactivate_by": "every downstream runtime change",
+      "disposition": "Do not inherit a historical browser pass for changed runtime bytes.",
+      "pass_credit": false
+    },
+    {
+      "id": "BX-BH01-CONDITION-PRODUCTION-SECURITY",
+      "category": "inherited-condition",
+      "state": "carried-forward",
+      "owner": "security-owner",
+      "reactivate_by": "BH-22 before release",
+      "disposition": "Local integrity and isolation tests do not establish production authority or threat-model closure.",
+      "pass_credit": false
+    },
+    {
+      "id": "BX-BH01-CONDITION-BH22-QUALIFICATION",
+      "category": "inherited-condition",
+      "state": "deferred-unavailable",
+      "owner": "qualification-owner",
+      "reactivate_by": "BH-22",
+      "disposition": "Unavailable platform/device/AT work gets no pass credit.",
+      "pass_credit": false
+    },
+    {
+      "id": "BX-BH01-CONDITION-RELEASE-CONTROLS",
+      "category": "inherited-condition",
+      "state": "carried-forward",
+      "owner": "release-owner",
+      "reactivate_by": "BH-22 before publication",
+      "disposition": "Signing, SBOM, licensing and release reproducibility remain release obligations.",
+      "pass_credit": false
+    },
+    {
+      "id": "BX-BH02-FINDING-GTK-ROLE-GAPS",
+      "category": "inherited-finding",
+      "state": "carried-forward",
+      "owner": "native-renderer-owner",
+      "reactivate_by": "BH-22 or earlier owning native/component milestone",
+      "disposition": "BH-03 host lifecycle does not close this accepted BH-02 limitation; original finding remains authoritative.",
+      "pass_credit": false
+    },
+    {
+      "id": "BX-BH02-FINDING-NATIVE-TARGETS-DEFERRED",
+      "category": "inherited-finding",
+      "state": "carried-forward",
+      "owner": "accessibility-owner",
+      "reactivate_by": "BH-22 or earlier owning native/component milestone",
+      "disposition": "BH-03 host lifecycle does not close this accepted BH-02 limitation; original finding remains authoritative.",
+      "pass_credit": false
+    },
+    {
+      "id": "BX-BH02-FINDING-MANUAL-AT-UNEXECUTED",
+      "category": "inherited-finding",
+      "state": "carried-forward",
+      "owner": "accessibility-owner",
+      "reactivate_by": "BH-22 or earlier owning native/component milestone",
+      "disposition": "BH-03 host lifecycle does not close this accepted BH-02 limitation; original finding remains authoritative.",
+      "pass_credit": false
+    },
+    {
+      "id": "BX-BH02-FINDING-NATIVE-FILE-DIALOG-UNEXECUTED",
+      "category": "inherited-finding",
+      "state": "carried-forward",
+      "owner": "accessibility-owner",
+      "reactivate_by": "BH-22 or earlier owning native/component milestone",
+      "disposition": "BH-03 host lifecycle does not close this accepted BH-02 limitation; original finding remains authoritative.",
+      "pass_credit": false
+    },
+    {
+      "id": "BX-BH02-FINDING-PUBLIC-API-EXPERIMENTAL",
+      "category": "inherited-finding",
+      "state": "carried-forward",
+      "owner": "architecture-owner",
+      "reactivate_by": "before public stability",
+      "disposition": "BH-03 host lifecycle does not close this accepted BH-02 limitation; original finding remains authoritative.",
+      "pass_credit": false
+    },
+    {
+      "id": "BX-BH02-FINDING-RELEASE-CONTROLS-UNEXECUTED",
+      "category": "inherited-finding",
+      "state": "carried-forward",
+      "owner": "release-owner",
+      "reactivate_by": "BH-22 or earlier owning native/component milestone",
+      "disposition": "BH-03 host lifecycle does not close this accepted BH-02 limitation; original finding remains authoritative.",
+      "pass_credit": false
+    },
+    {
+      "id": "BX-BH01-DEFER-ANDROID-PHYSICAL-0.1",
+      "category": "deferred-qualification",
+      "state": "deferred-unavailable",
+      "owner": "qualification-owner",
+      "reactivate_by": "BH-22",
+      "disposition": "[DEFERRED] Required environment unavailable; retain original evidence and re-run when available.",
+      "pass_credit": false
+    },
+    {
+      "id": "BX-BH01-DEFER-APPLE-MOBILE-0.1",
+      "category": "deferred-qualification",
+      "state": "deferred-unavailable",
+      "owner": "qualification-owner",
+      "reactivate_by": "BH-22",
+      "disposition": "[DEFERRED] Required environment unavailable; retain original evidence and re-run when available.",
+      "pass_credit": false
+    },
+    {
+      "id": "BX-BH01-DEFER-MACOS-SAFARI-0.1",
+      "category": "deferred-qualification",
+      "state": "deferred-unavailable",
+      "owner": "qualification-owner",
+      "reactivate_by": "BH-22",
+      "disposition": "[DEFERRED] Required environment unavailable; retain original evidence and re-run when available.",
+      "pass_credit": false
+    },
+    {
+      "id": "BX-BH01-DEFER-WINDOWS-DESKTOP-0.1",
+      "category": "deferred-qualification",
+      "state": "deferred-unavailable",
+      "owner": "qualification-owner",
+      "reactivate_by": "BH-22",
+      "disposition": "[DEFERRED] Required environment unavailable; retain original evidence and re-run when available.",
+      "pass_credit": false
+    },
+    {
+      "id": "BX-BH01-DEFER-SECOND-LINUX-HOST-0.1",
+      "category": "deferred-qualification",
+      "state": "deferred-unavailable",
+      "owner": "qualification-owner",
+      "reactivate_by": "BH-22",
+      "disposition": "[DEFERRED] Required environment unavailable; retain original evidence and re-run when available.",
+      "pass_credit": false
+    },
+    {
+      "id": "BX-BH01-DEFER-MANUAL-AT-0.1",
+      "category": "deferred-qualification",
+      "state": "deferred-unavailable",
+      "owner": "qualification-owner",
+      "reactivate_by": "BH-22",
+      "disposition": "[DEFERRED] Required environment unavailable; retain original evidence and re-run when available.",
+      "pass_credit": false
+    },
+    {
+      "id": "BX-ACC-BUDGET-BX-BUD-RELIABILITY-ROOT-COUNT",
+      "category": "acceptance-condition",
+      "state": "observation-only",
+      "owner": "performance-owner",
+      "reactivate_by": "BH-22",
+      "disposition": "Phase 7 descriptive measurements only; release thresholds remain unqualified.",
+      "pass_credit": false
+    },
+    {
+      "id": "BX-ACC-BUDGET-BX-BUD-RESOURCE-MEMORY-GROWTH-MIB",
+      "category": "acceptance-condition",
+      "state": "observation-only",
+      "owner": "performance-owner",
+      "reactivate_by": "BH-22",
+      "disposition": "Phase 7 descriptive measurements only; release thresholds remain unqualified.",
+      "pass_credit": false
+    },
+    {
+      "id": "BX-ACC-BUDGET-BX-BUD-STARTUP-ROOT-READINESS-MS",
+      "category": "acceptance-condition",
+      "state": "observation-only",
+      "owner": "performance-owner",
+      "reactivate_by": "BH-22",
+      "disposition": "Phase 7 descriptive measurements only; release thresholds remain unqualified.",
+      "pass_credit": false
+    },
+    {
+      "id": "BX-ACC-FAILURE-BX-FAIL-DEPLOYMENT-MISMATCH",
+      "category": "acceptance-condition",
+      "state": "bounded-evidence",
+      "owner": "browser-host-owner",
+      "reactivate_by": "BH-03 corrective acceptance before BH-04",
+      "disposition": "Reconcile source and tests in Phase 8 review; canonical planned registry remains unchanged.",
+      "pass_credit": false
+    },
+    {
+      "id": "BX-ACC-FAILURE-BX-FAIL-RUNTIME-LOSS",
+      "category": "acceptance-condition",
+      "state": "pending-review",
+      "owner": "browser-host-owner",
+      "reactivate_by": "BH-03 corrective acceptance before BH-04",
+      "disposition": "Reconcile source and tests in Phase 8 review; canonical planned registry remains unchanged.",
+      "pass_credit": false
+    },
+    {
+      "id": "BX-ACC-GATE-BX-GREQ-COMPAT-IDENTITIES",
+      "category": "acceptance-condition",
+      "state": "bounded-evidence",
+      "owner": "browser-host-owner",
+      "reactivate_by": "BH-03 corrective acceptance before BH-04",
+      "disposition": "Reconcile source and tests in Phase 8 review; canonical planned registry remains unchanged.",
+      "pass_credit": false
+    },
+    {
+      "id": "BX-ACC-GATE-BX-GREQ-COMPAT-MISMATCH",
+      "category": "acceptance-condition",
+      "state": "bounded-evidence",
+      "owner": "browser-host-owner",
+      "reactivate_by": "BH-03 corrective acceptance before BH-04",
+      "disposition": "Reconcile source and tests in Phase 8 review; canonical planned registry remains unchanged.",
+      "pass_credit": false
+    },
+    {
+      "id": "BX-ACC-GATE-BX-GREQ-COMPAT-SUPPORT-MATRIX",
+      "category": "acceptance-condition",
+      "state": "bounded-evidence",
+      "owner": "browser-host-owner",
+      "reactivate_by": "BH-22",
+      "disposition": "Reconcile source and tests in Phase 8 review; canonical planned registry remains unchanged.",
+      "pass_credit": false
+    },
+    {
+      "id": "BX-ACC-GATE-BX-GREQ-COMPAT-UPGRADE",
+      "category": "acceptance-condition",
+      "state": "bounded-evidence",
+      "owner": "browser-host-owner",
+      "reactivate_by": "BH-03 corrective acceptance before BH-04",
+      "disposition": "Reconcile source and tests in Phase 8 review; canonical planned registry remains unchanged.",
+      "pass_credit": false
+    },
+    {
+      "id": "BX-ACC-ROADMAP-BH-03",
+      "category": "acceptance-condition",
+      "state": "pending-review",
+      "owner": "browser-host-owner",
+      "reactivate_by": "BH-03 corrective acceptance before BH-04",
+      "disposition": "Reconcile source and tests in Phase 8 review; canonical planned registry remains unchanged.",
+      "pass_credit": false
+    },
+    {
+      "id": "BX-BH01-CONDITION-FIXTURE-DISPOSABILITY",
+      "category": "satisfied-predecessor",
+      "state": "satisfied-in-bh02",
+      "owner": "architecture-owner",
+      "reactivate_by": "any dependency-boundary change",
+      "disposition": "Preserve reusable boundaries and isolation from disposable experiments; no additional platform qualification.",
+      "pass_credit": false
+    }
+  ],
+  "contract_surfaces": [
+    {
+      "id": "blazex_runtime_popcorn",
+      "path": "packages/blazex_runtime_popcorn",
+      "owner_role": "runtime-owner",
+      "kind": "elixir-package"
+    },
+    {
+      "id": "blazex_host_browser",
+      "path": "packages/blazex_host_browser",
+      "owner_role": "browser-host-owner",
+      "kind": "elixir-package"
+    },
+    {
+      "id": "js/blazex_runtime",
+      "path": "js/blazex_runtime",
+      "owner_role": "browser-host-owner",
+      "kind": "javascript-package"
+    },
+    {
+      "id": "profiles/browser_phoenix",
+      "path": "profiles/browser_phoenix",
+      "owner_role": "browser-profile-owner",
+      "kind": "executable-profile"
+    },
+    {
+      "id": "integration/bh-03",
+      "path": "integration/bh-03",
+      "owner_role": "quality-owner",
+      "kind": "integration-suite"
+    }
+  ],
+  "public_api_state": "experimental-not-stable",
+  "support_state": "unsupported",
+  "change_control": "Material changes require a new authorized correction and source-bound superseding review; no silent mutation of historical decisions."
+}

@@ -72,6 +72,8 @@ integration directories.
 - [BH-03 Phase 8 authorization](blazex-bh-03-phase-08-authorization-v0.1.0.json)
 - [BH-03 Phase 8 acceptance contract](blazex-bh-03-phase-08-contract-v0.1.0.json)
 
+- [BH-03 Phase 8 reconciliation](blazex-bh-03-phase-08-reconciliation-v0.1.0.json)
+
 ## Maintaining this index
 
 Index every direct asset, preserve prior versions, bind evidence by hash, and
