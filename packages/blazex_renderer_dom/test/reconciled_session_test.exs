@@ -156,6 +156,11 @@ defmodule BlazeX.Renderer.DOM.ReconciledSessionTest do
              Incremental.update(old.state, tree(), %{context | revision: 9})
   end
 
+  test "an unsupported empty state version is not silently remounted" do
+    facade = %ReconciledSession{state: %Incremental{version: 2}}
+    assert {:error, "incompatible-state"} = ReconciledSession.mount(facade, tree())
+  end
+
   test "corrupt pending data cannot be promoted by a correctly shaped acknowledgement" do
     {:ok, pending} = ReconciledSession.mount(tree())
     bad = put_in(pending.state.pending.projection.fingerprint, "corrupt")

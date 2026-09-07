@@ -27,6 +27,11 @@ None.
 
 ### Files
 
+- [Phase 3 completion](blazex-bh-04-phase-03-completion-v0.1.0.json) — bounded reconciliation decision and Phase 4 eligibility only.
+- [Phase 3 command log](blazex-bh-04-phase-03-validation-log-v0.1.0.txt) — exact commands, counts, hashes and limitations.
+
+- [Phase 3 source index](blazex-bh-04-phase-03-source-index-v0.1.0.json) — exact reconciler, v2 protocol, trace and validator hashes.
+
 - [Phase 3 authorization](blazex-bh-04-phase-03-authorization-v0.1.0.json) — reconciler authority and explicit v2 protocol correction.
 
 - [Phase 2 completion](blazex-bh-04-phase-02-completion-v0.1.0.json) — bounded internal protocol decision.

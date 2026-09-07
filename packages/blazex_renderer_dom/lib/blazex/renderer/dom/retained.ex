@@ -289,6 +289,11 @@ defmodule BlazeX.Renderer.DOM.Retained do
     budget - 1
   end
 
-  defp bounded!(value, _, budget) when is_atom(value) or is_number(value), do: budget - 1
+  defp bounded!(value, _, budget) when is_integer(value) do
+    require!(:erlang.external_size(value) <= 4096, "limit")
+    budget - 1
+  end
+
+  defp bounded!(value, _, budget) when is_atom(value) or is_float(value), do: budget - 1
   defp bounded!(_, _, _), do: throw({:protocol, "invalid-identity"})
 end

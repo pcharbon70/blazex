@@ -1,0 +1,103 @@
+{
+  "schema_version": "1.0.0",
+  "milestone": "BH-04",
+  "phase": 3,
+  "decision": "passed",
+  "base_revision": "980836b8bc34383bde2e1f24a5a9e7d65908d347",
+  "branch": "codex/bh04-phase3-reconciliation",
+  "next_eligible_phase": 4,
+  "next_authorized_work": null,
+  "bh05_eligible": false,
+  "support_state": "unsupported",
+  "api_state": "experimental-not-stable",
+  "cross_language": {
+    "traces": 50,
+    "cases": 116,
+    "positive": 100,
+    "negative": 16,
+    "agreement": "exact"
+  },
+  "section_commits": [
+    {
+      "section": "3.1",
+      "commit": "7a96deebef60887823b73396c27f14600276a4dd"
+    },
+    {
+      "section": "3.2",
+      "commit": "1b58a807d3a457e1254b0117c13dec878ddf9367"
+    },
+    {
+      "section": "3.3",
+      "commit": "50fd89ab49245bb4533be6d90446fd670b58cf7c"
+    },
+    {
+      "section": "3.4",
+      "commit": "the commit introducing this completion record"
+    }
+  ],
+  "gates": [
+    {
+      "name": "research-tests",
+      "exit_code": 0
+    },
+    {
+      "name": "governance-validators",
+      "exit_code": 0
+    },
+    {
+      "name": "generators",
+      "exit_code": 0
+    },
+    {
+      "name": "elixir-packages",
+      "exit_code": 0
+    },
+    {
+      "name": "runtime-js",
+      "exit_code": 0
+    },
+    {
+      "name": "dom-js",
+      "exit_code": 0
+    },
+    {
+      "name": "cross-language",
+      "exit_code": 0
+    },
+    {
+      "name": "cross-renderer",
+      "exit_code": 0
+    },
+    {
+      "name": "json-schema",
+      "exit_code": 0
+    },
+    {
+      "name": "patch-hygiene",
+      "exit_code": 0
+    }
+  ],
+  "artifact_hashes": {
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-03-authorization-v0.1.0.json": "498ec5b5d40f538d2665d3ee1dd987056724887388d05a4dd764d0a4e65b090b",
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-03-source-index-v0.1.0.json": "e0039aeb63325083b965befaff010740458b662502ea572f95a13785793ff601",
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-03-validation-log-v0.1.0.txt": "abe5b4aefe5e92d5777643d5f851afede9206fd5273fd159eec52944e73a3a72",
+    "docs/research/60-planning/01-browser-host/bh-04-dom-renderer-and-interaction-transport/phase-03-implementation-evidence.md": "99e441d5fc3f64c51b61a8ac7055f68ef828a25dbda7d8cc5fb060e086444ec3",
+    "docs/research/60-planning/01-browser-host/bh-04-dom-renderer-and-interaction-transport/phase-03-reconciliation-contract.md": "3e00cc3aa79bbb82d9eaccdbd12c5da0f842c9b8c0c869cdef19dd74035e141a"
+  },
+  "limitations": [
+    "No live DOM application, event transport, focus restoration or effect execution",
+    "Legacy full-root backend remains available; incremental facade is opt-in",
+    "Synthetic acknowledgements are not proof of browser execution",
+    "V2 major protocol requires compatible consumers; V1 unchanged",
+    "Inherited unavailable-platform/manual-AT qualification remains deferred to qualification owners by BH-22",
+    "Implementation-agent review, not independent review"
+  ],
+  "delivery": {
+    "pull_requests": 1,
+    "merge_requested": true,
+    "checkout_main": true,
+    "sync_origin": true,
+    "delete_feature_branch_after_sync": true,
+    "restore_unrelated_work": true
+  }
+}

@@ -32,6 +32,8 @@ defmodule BlazeX.Renderer.DOM.Incremental do
   def retry_mount(%__MODULE__{accepted: nil} = state, output, context),
     do: propose(state, output, context, :mount)
 
+  def retry_mount(_, _, _), do: {:error, "incompatible-state"}
+
   defp propose(
          %__MODULE__{version: 1, disposed: false, pending: nil} = state,
          output,

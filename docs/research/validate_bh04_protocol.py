@@ -157,6 +157,10 @@ def validate(root=ROOT, completion=True):
 
 
 if __name__ == "__main__":
+    from bh04_phase3_history import enabled as phase3_enabled, run_phase2
+    if phase3_enabled(ROOT):
+        run_phase2(ROOT)
+        sys.exit(0)
     errors = validate(completion="--candidate" not in sys.argv)
     if errors:
         print("\n".join(errors))

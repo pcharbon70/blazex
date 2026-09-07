@@ -36,11 +36,14 @@ The repository owner approved this phase decomposition on 2026-09-06 so BH-04
 can be planned in parallel with BH-03. Planning does not authorize BH-04
 implementation. Following the accepted BH-03 Phase 9 handoff, the repository
 owner explicitly authorized Phase 1 on 2026-09-07. Every subsequent phase
-requires separate implementation authorization. No new renderer behavior,
-support, public API stability, or BH-05 eligibility is claimed.
+requires separate implementation authorization. Phase 1 claimed no new renderer
+behavior, support, public API stability, or BH-05 eligibility.
 
-The owner subsequently authorized Phase 2 on 2026-09-07. Its internal protocol
-gate is complete; Phase 3 is now eligible but requires separate authorization.
+The owner subsequently authorized Phases 2 and 3 on 2026-09-07, explicitly
+approving the v2 protocol correction needed to retain complete projection intent.
+Both the protocol and pure keyed-reconciliation gates are complete. Phase 4 is
+eligible but requires separate authorization; no browser application or support
+is claimed.
 
 ## What belongs here
 
@@ -160,6 +163,8 @@ public stability or browser support.
 - None yet.
 
 ### Documents
+
+- [Phase 3 implementation evidence](phase-03-implementation-evidence.md) — deterministic replay, cross-renderer parity, acknowledgement lifecycle and bounded completion.
 
 - [Phase 3 reconciliation contract](phase-03-reconciliation-contract.md) — identity, bounds, protocol correction and acknowledgement policy.
 

@@ -194,6 +194,45 @@ defmodule BlazeX.Renderer.DOM.ReconcilerTest do
     assert Retained.validate(old) == :ok
   end
 
+  test "standalone constructors reject invalid intent and property payloads" do
+    root = project(tree(a: "A")).root
+    base = %{"target" => root, "op_id" => 0, "depends" => [], "old" => nil}
+
+    assert {:error, "malformed"} =
+             ProtocolV2.operation(
+               Map.merge(base, %{
+                 "type" => "intent",
+                 "name" => "focus",
+                 "new" => IntentData.pack(%{"wrong" => true})
+               })
+             )
+
+    assert {:error, "malformed"} =
+             ProtocolV2.operation(
+               Map.merge(base, %{"type" => "property", "name" => "checked", "new" => "true"})
+             )
+  end
+
+  test "cross-parent continuity rejects even a valid materialized topology" do
+    old = project(tree(a: "A", b: "B", c: "C"))
+    [a, b, c] = old.nodes[old.root]["children"]
+
+    nodes =
+      old.nodes
+      |> put_in([old.root, "children"], [a, b])
+      |> put_in([a, "children"], [c])
+      |> put_in([c, "parent"], a)
+
+    {:ok, next} = Retained.new(old.owner, old.root, nodes)
+    assert {:error, "ownership"} = Reconciler.transaction(old, next, "patch", 1, 1)
+  end
+
+  test "oversized integer keys are rejected by the input work bound" do
+    root = tree(a: "A")
+    oversized = %{root | identity: %{root.identity | root: Integer.pow(2, 40_000)}}
+    assert {:error, "limit"} = Retained.check_input(oversized)
+  end
+
   test "120 generated keyed edits reconstruct exactly and replay deterministically" do
     for seed <- 1..120 do
       keys = Enum.to_list(1..12)

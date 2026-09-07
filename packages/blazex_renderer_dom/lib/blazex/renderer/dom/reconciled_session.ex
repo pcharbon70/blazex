@@ -71,9 +71,9 @@ defmodule BlazeX.Renderer.DOM.ReconciledSession do
 
   defp change(_, _, _), do: {:error, "unmounted"}
 
-  defp mount_attempt(%Incremental{attempt: 1}, proposal, _, _),
-    do: {:ok, proposal.backend_state, proposal.artifact}
-
-  defp mount_attempt(state, _, output, context),
-    do: Incremental.retry_mount(state, output, context)
+  defp mount_attempt(state, proposal, output, context) do
+    if state == %Incremental{},
+      do: {:ok, proposal.backend_state, proposal.artifact},
+      else: Incremental.retry_mount(state, output, context)
+  end
 end

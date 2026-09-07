@@ -19,6 +19,10 @@ maintenance conventions are defined in [`AGENTS.md`](AGENTS.md).
 
 ## Structure
 
+- [BH-04 reconciliation validator](validate_bh04_reconciliation.py) — Phase 3 source, scope and completion gates.
+- [BH-04 reconciliation tests](test_validate_bh04_reconciliation.py) — fail-closed mutation coverage.
+- [BH-04 Phase 3 history](bh04_phase3_history.py) — exact Phase 2 snapshot reproduction under explicit supersession.
+
 - [BH-04 protocol validator](validate_bh04_protocol.py) — current Phase 2 bindings, scope and schema agreement.
 - [BH-04 protocol tests](test_validate_bh04_protocol.py) — isolated negative governance checks.
 

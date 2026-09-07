@@ -115,6 +115,22 @@ defmodule BlazeX.Renderer.DOM.ProtocolV2 do
           Enum.all?(record["depends"], &(&1 < record["op_id"]))
       )
 
+      if record["type"] == "intent",
+        do:
+          Enum.each(
+            [record["old"], record["new"]],
+            &require!(IntentData.valid?(record["name"], &1))
+          )
+
+      if record["type"] == "property",
+        do:
+          Enum.each(
+            [record["old"], record["new"]],
+            &require!(
+              is_nil(&1) or if(record["name"] == "value", do: is_binary(&1), else: is_boolean(&1))
+            )
+          )
+
       {:ok, %__MODULE__{record: record}}
     catch
       {:protocol, code} -> {:error, code}

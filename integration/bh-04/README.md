@@ -12,6 +12,11 @@ benchmark pass, browser qualification, or support is claimed.
 
 ## Index
 
+- [Phase 3 trace evidence](reconciliation-fixtures-v0.1.0.txt) — 50 canonical callback traces with before/after projections and acknowledgements.
+- [Independent replay and fixture checker](reconciliation-fixtures.mjs) — Node data replay, negative cases and exact Elixir report comparison.
+- [Phase 3 protocol fixtures](reconciliation-protocol-fixtures-v0.1.0.txt) — 116 positive/negative v2 records and trusted contexts.
+- [Phase 3 protocol results](reconciliation-protocol-results-v0.1.0.txt) — canonical bytes, digests and rejection classes.
+
 - [Incremental lifecycle usage](reconciliation-usage.md) — pending/accepted facade, retry semantics and unchanged full-root migration path.
 
 - [Phase 3 v2 record schema](render-transaction-v2.schema.json) — extended closed attributes and complete canonical intent cells; incompatible with v1 consumers.

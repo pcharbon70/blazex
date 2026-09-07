@@ -1,0 +1,148 @@
+BH-04 Phase 3 active Linux validation — 2026-09-07
+Base: 980836b8bc34383bde2e1f24a5a9e7d65908d347
+Branch: codex/bh04-phase3-reconciliation
+Scope: pure Elixir reconciliation, v2 data protocol, acknowledgement lifecycle.
+No live DOM, browser event, focus restoration, effect execution or support claim.
+
+Environment
+  Cached image a2386c21edd5: Elixir 1.17.3, OTP 26, erts 14.0.2.
+  Node v24.3.0; npm 11.4.2; Python 3.12.12; jsonschema 4.25.1; Git 2.49.0.
+  Container runs: --rm --network none. No dependencies downloaded or changed.
+
+Section 3.1
+  git fetch origin && git pull --ff-only origin main
+  Result: already up to date; base above.
+  python3 validate_archive.py (cwd docs/research)
+  Result: passed; 236 documents, 27 directories.
+  git diff --check
+  Result: exit 0.
+  Commit: 7a96deebef60887823b73396c27f14600276a4dd
+
+Section 3.2
+  docker run --rm --network none -v /home/ducky/code/blazex:/workspace
+    -w /workspace/packages/blazex_renderer_dom a2386c21edd5 sh -lc
+    'mix format lib/blazex/renderer/dom/protocol_v2.ex
+     lib/blazex/renderer/dom/protocol_v2/*.ex lib/blazex/renderer/dom/retained.ex
+     lib/blazex/renderer/dom/reconciler.ex lib/blazex/renderer/dom/replay.ex
+     test/reconciler_test.exs && mix test'
+  Result: 96 tests, 0 failures (85 inherited + 11 new).
+  node test/render-transaction-v2.test.js (cwd js/blazex_runtime)
+  Result: 4 tests, 0 failures.
+  Commit: 1b58a807d3a457e1254b0117c13dec878ddf9367
+
+Section 3.3
+  docker run --rm --network none -v /home/ducky/code/blazex:/workspace
+    -w /workspace/packages/blazex_renderer_dom a2386c21edd5 sh -lc
+    'mix format lib/blazex/renderer/dom/incremental.ex
+     lib/blazex/renderer/dom/reconciled_session.ex lib/blazex/renderer/dom/retained.ex
+     test/reconciled_session_test.exs && mix test'
+  Result: 106 tests, 0 failures.
+  Commit: 50fd89ab49245bb4533be6d90446fd670b58cf7c
+
+Section 3.4 final package and conformance reproduction
+  docker run --rm --network none -e MIX_BUILD_PATH=/tmp/bh04-phase3-final-build
+    -v /home/ducky/code/blazex:/workspace
+    -v /tmp/bh04-phase3-evidence-VJEk1x:/evidence -w /workspace a2386c21edd5 sh -lc
+    'for package in blazex_core blazex_effects blazex_ui_tree blazex_renderer
+     blazex_renderer_dom blazex_renderer_dom_liveview blazex_renderer_headless;
+     do (cd packages/$package && mix test) || exit 1; done;
+     cd integration/conformance && mix test &&
+     mix run ../bh-04/support/reconciliation_runner.exs &&
+     mix run ../bh-04/support/reconciliation_protocol_runner.exs /evidence/v2-results.txt &&
+     mix run ../bh-04/support/protocol_runner.exs /evidence/v1-results.txt'
+  Results:
+    core 13; effects 9; UI tree 23; renderer 8; DOM 110; LiveView adapter 4; headless 6.
+    Total seven-package tests: 173, all passed.
+    Integration conformance: 56 tests, 0 failures (50 new + 6 inherited).
+    Canonical trace freshness: 50 callback traces, exact full-root parity.
+    Unit generated property loop: 120 deterministic keyed-edit seeds.
+    Fixture generated cases: 40 additional trace seeds, independently replayed in Node.
+    No elapsed-time or browser-performance pass is inferred.
+
+Cross-language comparison
+  node integration/bh-04/reconciliation-fixtures.mjs
+    --compare /tmp/bh04-phase3-evidence-VJEk1x/v2-results.txt
+  Result: traces 50; cases 116; positive 100; negative 16;
+    independent_replay exact; result passed.
+  node integration/bh-04/protocol-fixtures.mjs
+    --compare /tmp/bh04-phase3-evidence-VJEk1x/v1-results.txt
+  Result: cases 75; positive 34; negative 41; result passed.
+  Exact bytes, complete-record SHA-256 hashes and rejection classes agree.
+
+JavaScript
+  npm run build && npm test (cwd js/blazex_runtime)
+  node --check src/render-transaction-v2.js && node --check src/render-intent-data.js
+  Result: build passed; 23 test files passed.
+  npm run build && npm test (cwd packages/blazex_renderer_dom)
+  Result: unchanged full-root driver build and 7 tests passed.
+
+Research/governance
+  python3 -m unittest discover -p 'test_*.py' (cwd docs/research)
+  Result: 351 tests, 0 failures; 11 new current-governance mutation tests.
+  for gate in validate_*.py; do python3 "$gate" || exit 1; done
+  Result: 27 validators passed. During pre-completion reproduction the current
+    reconciliation validator used --candidate; final record is checked without it.
+  for generator in generate_*.py; do python3 "$generator" --check || exit 1; done
+  Result: all 4 generators match committed output.
+  Original Phase 1 and Phase 2 gates/tests are reproduced from exact accepted
+    independent Git snapshots. Current Phase 3 source validation is separate.
+  Dependencies and package manifests: byte-identical to the accepted base.
+  Source gate freezes all pre-existing package/JS/integration/profile/experiment
+    files except the explicitly bound additive evidence indexes.
+  Leakage gate: no browser/runtime/server-framework execution in new pure sources.
+
+Schema/JSON and patch hygiene
+  Python jsonschema.Draft202012Validator.check_schema: v1 and v2 passed.
+  Decode positive canonical fixture records with the Node codec, then
+    jsonschema.validate(record, schema) and validate(context, schema["$defs"]["context"]).
+  Result: all 134 positive v1/v2 records and contexts passed JSON Schema.
+  Parse every tracked/unignored repository .json with Python json.loads.
+  Result: passed (363 before the final completion artifact).
+  git diff --check and staged patch hygiene: passed.
+  The canonical codecs also enforce the normative UTF-8 maxBytes extension.
+
+Fixed trace observations (not performance qualification)
+  initial: 35 operations, 6382 bytes.
+  no-op: 1 barrier, 505 bytes.
+  leaf update: 2 operations, 611 bytes.
+  keyed reorder: 3 operations, 893 bytes.
+  nested insert/remove: 9 operations, 1550 bytes.
+  cross-parent new identity: 5 operations, 1059 bytes.
+  listener/layout/relationship/focus/selection update: 8 operations, 2443 bytes.
+  root materialization replacement: 17 operations, 2618 bytes; one explicit subtree decision.
+  generation replacement: kind replace, 40 operations, 7490 bytes.
+  disposal: 0 operations, 415 bytes.
+  Maximum observed trace: 40 operations, 7490 transaction bytes.
+  Governed ceilings remain 128 nodes / depth 32 / 512 operations / 256 listeners /
+    32 attributes per node / 131072 message bytes. They are not support claims.
+
+SHA-256
+  reconciliation-fixtures-v0.1.0.txt:
+    048a858cba6d8d857ad6c991ccaf9fb63cdde63d2f17d290a87557bb7a070f2f
+  reconciliation-protocol-fixtures-v0.1.0.txt:
+    f94a1da861f22794c68df412ca23ef3483a6ad3005a9c0100d30792c223dffaf
+  reconciliation-protocol-results-v0.1.0.txt:
+    354e934999f31137bbc5f9d5c98d6e038b09d3724518df0b6c43ab68b25c3424
+
+Development failures and resolution
+  New bounded traversal initially tried Enum on semantic structs: corrected to
+    Map.to_list before section 3.2. A capturing regex rejected signed keys:
+    corrected to a noncapturing full match. Two test construction mistakes were fixed.
+  Stale mixed-Elixir integration build artifacts triggered the Elixir 1.17
+    type checker; a fresh container-local MIX_BUILD_PATH fixed the run.
+  An initial command used nonexistent blazex_liveview/js DOM paths; corrected
+    to blazex_renderer_dom_liveview and packages/blazex_renderer_dom and rerun.
+  Final review added strict intent/property constructor checks, bounded huge
+    integer keys, cross-parent continuity and unsupported-state regressions.
+  These were repaired, not waived or labeled deferred.
+
+Limits and carried obligations
+  No browser applicator, bridge delivery, effect execution, native execution or
+    LiveView incremental path was added. A synthetic fixture acknowledgement is
+    not evidence of host execution. Browser atomicity and focus continuity remain
+    Phase 4/6 work. V1 consumers reject the explicit v2 major wire version.
+  The legacy full-root backend stays available; the new facade is opt-in.
+  Review was performed by the implementation agent, not an independent reviewer.
+  [DEFERRED] Unavailable OS/browser/device/manual-AT qualification stays with
+    inherited qualification owners and reactivates by BH-22; no pass credit.
+  Phase 4 eligible, not authorized. BH-05 ineligible. Unsupported; experimental.
