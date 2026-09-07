@@ -138,6 +138,8 @@ python3 validate_bh03_profile.py
 python3 -m unittest test_validate_bh03_profile.py
 python3 validate_bh03_measurements.py
 python3 -m unittest test_validate_bh03_measurements.py
+python3 validate_bh03_acceptance.py
+python3 -m unittest test_validate_bh03_acceptance.py
 ```
 
 The validator checks metadata, placeholders, filenames, local links,
@@ -174,6 +176,8 @@ identifiers.
 - [`test_validate_bh03_resilience.py`](test_validate_bh03_resilience.py) — focused BH-03 Phase 5 shutdown, loss-generation, bounded recovery, atomic replay, fallback, completion-binding, and overclaim tests
 - [`test_validate_bh03_profile.py`](test_validate_bh03_profile.py) — focused BH-03 Phase 6 profile separation, active Chrome/Firefox rows, actual runtime acknowledgements, fallback, shutdown, deferral, and overclaim tests
 - [`test_validate_bh03_measurements.py`](test_validate_bh03_measurements.py) — focused BH-03 Phase 7 authorization, repetition, root cleanup, timing, memory capability, failure convergence, budget, support, and acceptance-boundary tests
+- [BH-03 Phase 8 acceptance validator](validate_bh03_acceptance.py) — validates review records; use `--require-accepted` to gate downstream work (currently fails with revise).
+- [BH-03 Phase 8 acceptance tests](test_validate_bh03_acceptance.py) — rejects missing evidence, hidden blockers, false deferral passes, and premature acceptance.
 - [`test_validate_quality_acceptance.py`](test_validate_quality_acceptance.py) — focused Phase 5 quality-budget and acceptance-traceability validator tests
 - [`test_validate_archive.py`](test_validate_archive.py) — focused validator tests
 - [`validate_browser_product_envelope.py`](validate_browser_product_envelope.py) — deterministic BH-00 browser-envelope checks

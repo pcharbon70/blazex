@@ -23,10 +23,10 @@ Back to [milestone](README.md).
     - [x] 8.2.1 Task - Resolve all nine outputs and every inherited identity.
       - [x] 8.2.1.1 Subtask - Bind implementation, tests, evidence classes, and limitations.
       - [x] 8.2.1.2 Subtask - Retain owners and due points for conditions, findings, and [DEFERRED] qualification.
-  - [ ] 8.3 Section - Review and implement the acceptance gate.
-    - [ ] 8.3.1 Task - Execute architecture, implementation, conformance, accessibility, security, packaging, and provenance lenses.
-      - [ ] 8.3.1.1 Subtask - Reproduce material findings and record review independence limits.
-      - [ ] 8.3.1.2 Subtask - Add fail-closed reconciliation and decision validation with negative tests.
+  - [x] 8.3 Section - Review and implement the acceptance gate.
+    - [x] 8.3.1 Task - Execute architecture, implementation, conformance, accessibility, security, packaging, and provenance lenses.
+      - [x] 8.3.1.1 Subtask - Reproduce material findings and record review independence limits.
+      - [x] 8.3.1.2 Subtask - Add fail-closed reconciliation and decision validation with negative tests.
   - [ ] 8.4 Section - Complete integration gate and publish the decision.
     - [ ] 8.4.1 Task - Reproduce inherited checks and active Linux Chrome/Firefox evidence.
       - [ ] 8.4.1.1 Subtask - Record commands, versions, outcomes, immutable evidence bindings, and limitations.
