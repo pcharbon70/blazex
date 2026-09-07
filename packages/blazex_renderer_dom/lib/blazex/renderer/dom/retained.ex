@@ -10,6 +10,18 @@ defmodule BlazeX.Renderer.DOM.Retained do
   defstruct [:owner, :generation, :root, :nodes, :order, :fingerprint, version: 1]
   @relationships ~w(aria-labelledby aria-describedby aria-controls aria-owns aria-errormessage)
 
+  def check_input(output) do
+    try do
+      tree_bound!(semantic_root(output), 0, 0)
+      bounded!(output, 0, 65_536)
+      :ok
+    rescue
+      _ -> {:error, "invalid-identity"}
+    catch
+      {:protocol, code} -> {:error, code}
+    end
+  end
+
   def from_output(output, %Context{} = context) do
     try do
       tree_bound!(semantic_root(output), 0, 0)

@@ -12,6 +12,8 @@ benchmark pass, browser qualification, or support is claimed.
 
 ## Index
 
+- [Incremental lifecycle usage](reconciliation-usage.md) — pending/accepted facade, retry semantics and unchanged full-root migration path.
+
 - [Phase 3 v2 record schema](render-transaction-v2.schema.json) — extended closed attributes and complete canonical intent cells; incompatible with v1 consumers.
 
 - [Fixture definitions](protocol-cases.mjs) — deterministic positive, negative and boundary records.
