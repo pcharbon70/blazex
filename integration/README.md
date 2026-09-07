@@ -18,3 +18,10 @@ BH-01 activates governed fixture and benchmark evidence. BH-02 owns accepted
 internal cross-renderer conformance. BH-03 Phase 2 implements compatibility,
 discovery, prerequisite, and strict-manifest fixtures while browser, runtime,
 root, failure-execution, measurement, and acceptance result sets remain empty.
+# BH-04 activation status
+
+[BH-04](bh-04/README.md) activates an empty, versioned renderer evidence index
+in Phase 1; all result classes remain empty. Historical statements below
+describe earlier activations. The current BH-03 handoff is its accepted Phase 9
+[decision](../docs/research/assets/bh-03-baseline/blazex-bh-03-phase-09-acceptance-v0.1.0.json),
+with bounded limitations and no support promotion.

@@ -51,3 +51,10 @@ Packages must depend toward the host-neutral foundation. No server, runtime, or
 renderer adapter may become part of the public component semantics. The Plug
 profile must not depend on `blazex_renderer_dom_liveview` directly or
 transitively.
+# BH-04 activation status
+
+BH-04 Phase 1 freezes the current experimental implementations, not a new
+incremental renderer. The [activation ledger](../docs/research/assets/bh-04-baseline/blazex-bh-04-repository-activation-v0.1.0.json)
+records exact owners, inward dependency edges and source hashes. The optional
+LiveView adapter currently has no dependencies; its future standalone-DOM edge
+requires Phase 8 authority. No public API or support promotion is implied.

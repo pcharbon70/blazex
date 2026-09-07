@@ -19,6 +19,9 @@ maintenance conventions are defined in [`AGENTS.md`](AGENTS.md).
 
 ## Structure
 
+- [BH-04 activation validator](validate_bh04_activation.py) — immutable handoff, dependency and empty-evidence gate.
+- [BH-04 activation tests](test_validate_bh04_activation.py) — mutation tests for fail-closed governance.
+
 - [`00-inbox/`](00-inbox/README.md) — unprocessed captures
 - [`10-maps/`](10-maps/README.md) — curated paths through subjects and questions
 - [`20-notes/`](20-notes/README.md) — ideas and syntheses in the author's own words

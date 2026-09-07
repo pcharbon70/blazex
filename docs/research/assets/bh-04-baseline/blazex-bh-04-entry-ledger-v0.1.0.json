@@ -1,0 +1,1305 @@
+{
+  "schema_version": "1.0.0",
+  "record_id": "BH-04-ENTRY-LEDGER",
+  "predecessor": "BH-03",
+  "decision": "accepted-with-bounded-conditions",
+  "predecessor_handoff": {
+    "schema_version": "1.0.0",
+    "record_id": "BX-BH03-PHASE-09-ACCEPTANCE-0.1",
+    "recorded_at": "2026-09-07",
+    "decision": "accepted-with-bounded-conditions",
+    "supersedes": "BX-BH03-PHASE-08-REVIEW-COMPLETE-REVISE",
+    "closed_finding": "BX-BH03-FINDING-UNREPORTED-RUNTIME-LOSS",
+    "bh04_eligible": true,
+    "next_authorized_work": null,
+    "api_state": "experimental-not-stable",
+    "support_state": "unsupported",
+    "candidate_revision": "72d398017d9fe67b7017d71bfb65356ce7f7b73a",
+    "source_bindings": [
+      {
+        "path": "integration/bh-03/README.md",
+        "sha256": "138f2d6e36cc3da4c4b12fb7b186c4b588469338b57453dd1dcf9fba0d07830d"
+      },
+      {
+        "path": "integration/bh-03/integration-index-v0.1.0.json",
+        "sha256": "3fc0947fec76cfa24c3bc023f564458c5dc0c73ee42ca54769c022eb6879b0b1"
+      },
+      {
+        "path": "integration/bh-03/integration-index-v0.2.0.json",
+        "sha256": "aa754155be5e211fc240622ff4b5d2265a9f770a9054c794a29b4c8dfda480b3"
+      },
+      {
+        "path": "integration/bh-03/integration-index-v0.3.0.json",
+        "sha256": "b71a76933b18dd2be60c7ac9a4d4533121f9723ca8ff5157e3ac468340628e97"
+      },
+      {
+        "path": "integration/bh-03/integration-index-v0.4.0.json",
+        "sha256": "c309db041bf09bfb7831cb516609e1a655433159144d22d5f881317d4f9ad42d"
+      },
+      {
+        "path": "integration/bh-03/integration-index-v0.5.0.json",
+        "sha256": "8fae9d62af27f502ee51b39000c94ce7aac718ca6a2f07b2bfdcbd917fa72653"
+      },
+      {
+        "path": "integration/bh-03/integration-index-v0.6.0.json",
+        "sha256": "4869301427445fd9a92f97d11775e3cfc1b38388b511bcfd93e293cfba4cbf70"
+      },
+      {
+        "path": "integration/bh-03/integration-index-v0.7.0.json",
+        "sha256": "6f86687155e584fe7fc619eba79fbd9c8a58b74a5a955d7666ab72c939a851aa"
+      },
+      {
+        "path": "integration/bh-03/phase-02/README.md",
+        "sha256": "4c6bf2bad739ab4df6f0a72ae34db9d297807eab47f091bfa3f66121986ef2ed"
+      },
+      {
+        "path": "integration/bh-03/phase-02/pre-acquisition-fixtures-v0.1.0.json",
+        "sha256": "3d4a46fbd15bfc3c7809f99e615650bd1c0c7c05e6909932242ea284b52f3d25"
+      },
+      {
+        "path": "integration/bh-03/phase-03/startup-fixtures-v0.1.0.json",
+        "sha256": "f9052c3d34ed49835ddc5e660a18a6d9cc3b6dbe8f11678fbc27814f7a3c80e9"
+      },
+      {
+        "path": "integration/bh-03/phase-04/shared-runtime-root-fixtures-v0.1.0.json",
+        "sha256": "2b1f4662592f4bbc5f662aa3303ab8174b734263da5f754af15a7a2cbc2fdf25"
+      },
+      {
+        "path": "integration/bh-03/phase-05/resilience-fixtures-v0.1.0.json",
+        "sha256": "cec0d05f0c04683ce7169ffee5610d28644b6744a99be07a2a90df9679b5ac92"
+      },
+      {
+        "path": "integration/bh-03/phase-06/browser-profile-fixtures-v0.1.0.json",
+        "sha256": "7e088bcd864a7de0de47938af13c72924a0edd77826c4e51607bb4345293f3c2"
+      },
+      {
+        "path": "integration/bh-03/phase-07/measurement-fixtures-v0.1.0.json",
+        "sha256": "cf3325a6532cebcd2e5268dae789d830bc64b9120db48d907f426f6903750e7e"
+      },
+      {
+        "path": "js/blazex_runtime/src/artifact-acquisition.js",
+        "sha256": "6620ac5c6eaf23b3047ebe02b2366cff9ce4a4630c89156e016b07c53345f205"
+      },
+      {
+        "path": "js/blazex_runtime/src/bridge-protocol.js",
+        "sha256": "d55f746f486af4d25e053e94fe07a6c5d9e0b0033c0950e29a85ebce0f6d2efa"
+      },
+      {
+        "path": "js/blazex_runtime/src/compatibility.js",
+        "sha256": "1e61fbc4cf2cb1cb726bc517fdec515cd95e063da900dec7e514b7b351275c00"
+      },
+      {
+        "path": "js/blazex_runtime/src/diagnostic-collector.js",
+        "sha256": "98d2527ed01793a552a8a1425b8b4079553fcf82108e26a3959bd8c29dc9611b"
+      },
+      {
+        "path": "js/blazex_runtime/src/discovery.js",
+        "sha256": "5a9c764d4d96309a6c45d15e7661c2f6771e7e965e2d4e9259816cba775060d7"
+      },
+      {
+        "path": "js/blazex_runtime/src/host-bridge.js",
+        "sha256": "d1e287676bd4f324eea4b1e28fe8caccbed07a46797a8dd0ebd13835e4ac0478"
+      },
+      {
+        "path": "js/blazex_runtime/src/host-manifest.js",
+        "sha256": "3e6db892bd505c5aaba9e4ba460420199d8ec17b6c1e2e9ebde91e6b11916710"
+      },
+      {
+        "path": "js/blazex_runtime/src/index.js",
+        "sha256": "dcf5bd93db73b1eed10984576af1f3c3b5e1c67a625cfb9efa6c45877f54182f"
+      },
+      {
+        "path": "js/blazex_runtime/src/internal/errors.js",
+        "sha256": "72325b832d8eda4323815ec5dfe7a68f05dc4795643a33c023a0c5aaab2cca2b"
+      },
+      {
+        "path": "js/blazex_runtime/src/lifecycle.js",
+        "sha256": "ad8b73603f8fbe8f788a60e4461a879f885e681add79cc7f14965c7dec67441e"
+      },
+      {
+        "path": "js/blazex_runtime/src/manifest-loader.js",
+        "sha256": "64fcf2f80a095c5ab586ec7ad483814837fcb2a0b786f324f67e1fffd4c08114"
+      },
+      {
+        "path": "js/blazex_runtime/src/prerequisites.js",
+        "sha256": "0201c5be456c3213be2ef2ac41f3ffec780048e717ad467445c9b8ab1b39ccc8"
+      },
+      {
+        "path": "js/blazex_runtime/src/recovery-coordinator.js",
+        "sha256": "0186a76fe591ef24de513d1a7c7cba3fea7b752177031badb9888959e5cdc84c"
+      },
+      {
+        "path": "js/blazex_runtime/src/resource-ledger.js",
+        "sha256": "025690623f1a04d53c2acbba5142698e4fa1eed54e3c9bc5b21c37ace3d6d5d8"
+      },
+      {
+        "path": "js/blazex_runtime/src/root-lifecycle.js",
+        "sha256": "9ba5c518f802b188def31508916f03888b43f581a6b36a849222ca96e2d4a7b6"
+      },
+      {
+        "path": "js/blazex_runtime/src/runtime-frame-port.js",
+        "sha256": "d2935978d645e7528913980ccd64f2c65e9149b47499814f74b9a19a0c324f8e"
+      },
+      {
+        "path": "js/blazex_runtime/src/runtime-loader.js",
+        "sha256": "d23445f72dd73533db3957390f4d869abdf81e0b29655c1a7c9f9e2069b2460f"
+      },
+      {
+        "path": "js/blazex_runtime/src/runtime-registry.js",
+        "sha256": "fa9b33b49d4df7b9b648647528d1b514402f6849df36e1168346eca287467865"
+      },
+      {
+        "path": "js/blazex_runtime/src/runtime-startup.js",
+        "sha256": "46385519bedfb34905fe93e93d2b930d8f30241a96bfc9ae0b8015b857b2651a"
+      },
+      {
+        "path": "js/blazex_runtime/test/adversarial-boundaries.test.js",
+        "sha256": "3e57f01a5fc9749a083a51704534845054dd9a6e7d94a84747a5f50922704c54"
+      },
+      {
+        "path": "js/blazex_runtime/test/artifact-acquisition.test.js",
+        "sha256": "7182d34595e9e6b34a26542c1cb443dfad701c908b922b02d081b2e78aed6f9e"
+      },
+      {
+        "path": "js/blazex_runtime/test/boundary.test.js",
+        "sha256": "a7a4546471c629662db940904a5d9502508e10546da21215e658c7964066fd8d"
+      },
+      {
+        "path": "js/blazex_runtime/test/browser/bh03-phase6.integration.mjs",
+        "sha256": "6ab01eeb92c3407a68fda0271180bdbf48991c5195710de093eb3546e074846a"
+      },
+      {
+        "path": "js/blazex_runtime/test/browser/bh03-phase7-measurement.integration.mjs",
+        "sha256": "a946c5fea9bee7f4a0a91164fe2aafbdb7e3090c467334ca3c4c8b1d3f9a5753"
+      },
+      {
+        "path": "js/blazex_runtime/test/browser/bh03-phase9-recovery.integration.mjs",
+        "sha256": "b0d1c9dbdbdb9cccd59bacc30a674d0a35b3b841ee99ba16d25408c9b726277f"
+      },
+      {
+        "path": "js/blazex_runtime/test/browser/phase4.integration.mjs",
+        "sha256": "9b0d87c3f078b3b70816c7593a2ca37f9a3f83a23dc08887964ac30225ea17f7"
+      },
+      {
+        "path": "js/blazex_runtime/test/browser/phase5.integration.mjs",
+        "sha256": "99a552882bd13247f98a8251dffd266943a4169db14a2b82cc461b591fc39cfd"
+      },
+      {
+        "path": "js/blazex_runtime/test/browser/phase6.integration.mjs",
+        "sha256": "cdfd3139a3f5f3832862723bbb8e2f87a293c5cafcbb0b42e4d130b9328bf2ee"
+      },
+      {
+        "path": "js/blazex_runtime/test/browser/phase7.integration.mjs",
+        "sha256": "c83b0b354c0c28f86e7c8fbe4400144a102b068974f8765db3110dd92091b09b"
+      },
+      {
+        "path": "js/blazex_runtime/test/browser/phase8-accessibility.integration.mjs",
+        "sha256": "50ffa19e998cd37fdd73c10fd3efc136feb79586187ec48916dd5a1aa2577483"
+      },
+      {
+        "path": "js/blazex_runtime/test/browser/phase8-behavior.integration.mjs",
+        "sha256": "1adc9d0e514a1581dcabd83f3296bfdd003b462ecb693a69726e60a62c5bee47"
+      },
+      {
+        "path": "js/blazex_runtime/test/browser/phase8-compatibility.integration.mjs",
+        "sha256": "8319812f0804983ee9713bac6bb78d843555d0f64a9ada7f15baaec00be191ce"
+      },
+      {
+        "path": "js/blazex_runtime/test/browser/phase8-prerequisites.integration.mjs",
+        "sha256": "e0af8f87d418ece68eda3abd68cf3d182ea1116a95f471ba4ed22abc3db5de35"
+      },
+      {
+        "path": "js/blazex_runtime/test/browser/phase9-measurement.integration.mjs",
+        "sha256": "12e56ceaa916a313241de0345e5c3012e06af6c279171481f12ac847192904df"
+      },
+      {
+        "path": "js/blazex_runtime/test/compatibility.test.js",
+        "sha256": "bf8f211967dba2ab1f882a72905d1bfde350f425ececaf9edaf984b41ab5c614"
+      },
+      {
+        "path": "js/blazex_runtime/test/diagnostic-collector.test.js",
+        "sha256": "2459250c3d2962de6be35d215ca57252690b621f2da0b791c4fd6d81d905f48a"
+      },
+      {
+        "path": "js/blazex_runtime/test/discovery.test.js",
+        "sha256": "e555f38ce21a1df5cdc1765c100363fa758a68f4d6a330bdf37c36cffe3ef80d"
+      },
+      {
+        "path": "js/blazex_runtime/test/host-bridge.test.js",
+        "sha256": "108c7afaa717d3d89cabf68743750335623bc383c70056bcebd295bfc52ede9f"
+      },
+      {
+        "path": "js/blazex_runtime/test/host-manifest.test.js",
+        "sha256": "7e573f84e7fc74edfc6b4a72dcfe2c30dbb1f07e18d9825ea4630d1ff3fb9837"
+      },
+      {
+        "path": "js/blazex_runtime/test/lifecycle.test.js",
+        "sha256": "76951c99d844fb8c648598673c26b0f5311d712316609f2fac7bdbf5d64031cd"
+      },
+      {
+        "path": "js/blazex_runtime/test/manifest-loader.test.js",
+        "sha256": "823df2d9eaf37fa7a4aaaeda37836becd4fbdc3d9c4698abe5266dc952f412ed"
+      },
+      {
+        "path": "js/blazex_runtime/test/measurement.test.js",
+        "sha256": "7c378e7cae866b437efc3d7eab5bc96be930fe8c6c1e9b5d612a6ef1683de7da"
+      },
+      {
+        "path": "js/blazex_runtime/test/prerequisites.test.js",
+        "sha256": "7ea073dbff6e7af4cead8523c2786656edc9735c7d0172808a52e32417b1aa6a"
+      },
+      {
+        "path": "js/blazex_runtime/test/recovery-coordinator.test.js",
+        "sha256": "1c5b8e357915b1559c363331c5ee35f65ef2b968fa6da9e2f8950a806c19c761"
+      },
+      {
+        "path": "js/blazex_runtime/test/resource-ledger.test.js",
+        "sha256": "81056bbceedbd750752eb7cd47aeec12e3fd3e2f42fd73613f9104f9b3c9f0e5"
+      },
+      {
+        "path": "js/blazex_runtime/test/review/bh03-phase8-runtime-loss.mjs",
+        "sha256": "8db204208c568b12a60e102f9fa070f8c2ebc6b2f38b7acaa88b3cc5aaf9d2f8"
+      },
+      {
+        "path": "js/blazex_runtime/test/root-lifecycle.test.js",
+        "sha256": "56586f318d4d98e47ab7ec155e2c34653626347171cb964de0afb2aced8aa537"
+      },
+      {
+        "path": "js/blazex_runtime/test/runtime-loader.test.js",
+        "sha256": "34495b205253351c709576273c3235ffae0729905f664107875a9738ce3e9e62"
+      },
+      {
+        "path": "js/blazex_runtime/test/runtime-loss-observation.test.js",
+        "sha256": "bcf990e3c01ae4b2d191b1f5d45acdd8b8c61b08a5d6a78372f7a6f131d9659d"
+      },
+      {
+        "path": "js/blazex_runtime/test/runtime-recovery.test.js",
+        "sha256": "8c31e4fc73d817d989b701505d4aac7ab4e96fedd7f0a7122485875e4f8b6e03"
+      },
+      {
+        "path": "js/blazex_runtime/test/runtime-registry.test.js",
+        "sha256": "4616668eb6809ce923e7b08078edddad2012c63e65919ab464fc6e30e93f53e4"
+      },
+      {
+        "path": "js/blazex_runtime/test/runtime-shutdown.test.js",
+        "sha256": "a15eb1a59b8a4e0723674c3ea5c325a0cde4e2540633b476fe770e3d769fa855"
+      },
+      {
+        "path": "js/blazex_runtime/test/runtime-startup.test.js",
+        "sha256": "b4e25fc29e06f917aad9e33b3194373a1e128dc4c3303ec45ecccf8216385248"
+      },
+      {
+        "path": "js/blazex_runtime/test/support/bh03-measurement.mjs",
+        "sha256": "03df2b8c2f0598c14e6d0a910c0fab278a253fda89a72712e21091d736d8151a"
+      },
+      {
+        "path": "packages/blazex_host_browser/.formatter.exs",
+        "sha256": "43c4cba33f14cbf6e3377bafee0f12aabf9c44e5fc755b2b4ca5055932d79f76"
+      },
+      {
+        "path": "packages/blazex_host_browser/README.md",
+        "sha256": "879e240b0c5d66afbc63b93ed58ab2cf56cc2b2f75170b8e503df2f02687c8ea"
+      },
+      {
+        "path": "packages/blazex_host_browser/blazex.project.json",
+        "sha256": "12e4e2c177d5a5b386829b429bd7f584cb25e6d6f83d0d6068554cdc45315e07"
+      },
+      {
+        "path": "packages/blazex_host_browser/lib/blazex/host/browser.ex",
+        "sha256": "c3fe974768d278c397b620bee4e48308e448d0708c8a18c045728136f903806f"
+      },
+      {
+        "path": "packages/blazex_host_browser/lib/blazex/host/browser/compatibility.ex",
+        "sha256": "00dd6d2141facfd7f4d03d1f6aafa12189e4610f833ca6af36b50d64b6cd9055"
+      },
+      {
+        "path": "packages/blazex_host_browser/lib/blazex/host/browser/lifecycle.ex",
+        "sha256": "de2de03335b0eda4c10bf21d92f9d7a68a7f3c09d3e7b267fb4fc1962d0f0644"
+      },
+      {
+        "path": "packages/blazex_host_browser/mix.exs",
+        "sha256": "985ea50712ee702e53994ada38eea8525d27edac7aaa3ce4fc4202b3ebf17ec8"
+      },
+      {
+        "path": "packages/blazex_host_browser/test/blazex/host/browser_boundary_test.exs",
+        "sha256": "687044fc2ab16ebc9d917a611acc30f926cd28df643ae54134bce2372d1cf763"
+      },
+      {
+        "path": "packages/blazex_host_browser/test/test_helper.exs",
+        "sha256": "b086ec47f0c6c7aaeb4cffca5ae5243dd05e0dc96ab761ced93325d5315f4b12"
+      },
+      {
+        "path": "packages/blazex_runtime_popcorn/.formatter.exs",
+        "sha256": "43c4cba33f14cbf6e3377bafee0f12aabf9c44e5fc755b2b4ca5055932d79f76"
+      },
+      {
+        "path": "packages/blazex_runtime_popcorn/README.md",
+        "sha256": "c5929b47844edda24ca089aa6b912abd329111fce01144b01e56018807c2c52e"
+      },
+      {
+        "path": "packages/blazex_runtime_popcorn/blazex.project.json",
+        "sha256": "35eca94bc4f59c5ecd1eddd6a803434961b653ddfa5437fb02e4251aa57d8cc9"
+      },
+      {
+        "path": "packages/blazex_runtime_popcorn/lib/blazex/runtime/popcorn.ex",
+        "sha256": "54d86d3f6ed4e86ae60263ada8acdaf86bd9b18373aa11d0afcf1947a3adcaf6"
+      },
+      {
+        "path": "packages/blazex_runtime_popcorn/lib/blazex/runtime/popcorn/identity.ex",
+        "sha256": "5b485cdf7e9b4b2361a6e455a8f2fc20e18057824eacc5c90227203b9b1a9397"
+      },
+      {
+        "path": "packages/blazex_runtime_popcorn/lib/blazex/runtime/popcorn/startup.ex",
+        "sha256": "3ff2c414d2c2b0fcc4d56d737dac85a4c42eaa3646a610974622c3efc052fc2d"
+      },
+      {
+        "path": "packages/blazex_runtime_popcorn/mix.exs",
+        "sha256": "f9b3810501532fbf50256557575c5fada825f0977a578b2ea42ceab2ede054dd"
+      },
+      {
+        "path": "packages/blazex_runtime_popcorn/runtime/README.md",
+        "sha256": "a7059028a9c2c14cc980a88ee3543e8d3a4d7487169c27ecf92f274d5c5a4e85"
+      },
+      {
+        "path": "packages/blazex_runtime_popcorn/runtime/THIRD_PARTY_NOTICES.md",
+        "sha256": "6ed3c145c74707df469e91f120bea1201476852f7f48976ca92954e65100f898"
+      },
+      {
+        "path": "packages/blazex_runtime_popcorn/runtime/adapter-classification.json",
+        "sha256": "e5dcd32429260579f641855bf970d1f2e26a12bfbc43ae8611c53b3bd801a2aa"
+      },
+      {
+        "path": "packages/blazex_runtime_popcorn/runtime/build-contract.json",
+        "sha256": "ae2f87845d612ac3ba9b23517389df5ddee4d1bda7f99bb9c024c47fea366980"
+      },
+      {
+        "path": "packages/blazex_runtime_popcorn/runtime/build_runtime.py",
+        "sha256": "76f4ffac7932b8c40a0d389f04cc4347760df18c050a2a904da53c299317cfc9"
+      },
+      {
+        "path": "packages/blazex_runtime_popcorn/runtime/generate_manifest.py",
+        "sha256": "4062568cab326cd031fae6984db7e7fa77a58d1f631bc70d8c134d00353d3c23"
+      },
+      {
+        "path": "packages/blazex_runtime_popcorn/runtime/inspect_wasm.py",
+        "sha256": "158c2a7147c98d2552f21975113ccd179d3a204b5a1806b5304760e16faf7239"
+      },
+      {
+        "path": "packages/blazex_runtime_popcorn/runtime/patches/manifest.json",
+        "sha256": "24ada6398debc71e9ebb3c7e3b81b4948f0bff0efaac7331fcf469514d41055d"
+      },
+      {
+        "path": "packages/blazex_runtime_popcorn/runtime/runtime-binary-manifest.json",
+        "sha256": "8db2038a7eb98aeaa772460101776b6b60c9114a88701c9cb1067ca3609b6c11"
+      },
+      {
+        "path": "packages/blazex_runtime_popcorn/runtime/tests/test_runtime_build.py",
+        "sha256": "7c74dd6c7d206f97408e6c051cf2f4543dbdab89f4e066241dd1252d4f776625"
+      },
+      {
+        "path": "packages/blazex_runtime_popcorn/runtime/verify_runtime_build.py",
+        "sha256": "a5e0a14e28278d07bf470b93e524122747016cc9b1f167ac853e4286dde21b3b"
+      },
+      {
+        "path": "packages/blazex_runtime_popcorn/test/blazex/runtime/popcorn_boundary_test.exs",
+        "sha256": "0cb54bf3e9691a189c317f0f641fe1cb1a75fca160b3a2e705526adb5e18f230"
+      },
+      {
+        "path": "packages/blazex_runtime_popcorn/test/test_helper.exs",
+        "sha256": "b086ec47f0c6c7aaeb4cffca5ae5243dd05e0dc96ab761ced93325d5315f4b12"
+      },
+      {
+        "path": "profiles/browser_phoenix/assets/phase6/build_profile.py",
+        "sha256": "4c31956c480d33d5ac025102db3e56c2a971b9116ad33d731a4897ee16a30aa3"
+      },
+      {
+        "path": "profiles/browser_phoenix/assets/phase6/deployment-contract.json",
+        "sha256": "395582811cfea13d52feb542c4af727df728dc0370797a0d0d5a7e487d0a3d83"
+      },
+      {
+        "path": "profiles/browser_phoenix/assets/phase6/host.js",
+        "sha256": "89b3ba78603bec89c84bf859c996701b656fbcf2b964f5919378f5de80580645"
+      },
+      {
+        "path": "profiles/browser_phoenix/assets/phase6/index.html",
+        "sha256": "dbd66efdcf933b1478d8779c76adacec6b090e2b7c29d357c1a3d07f405cc0fc"
+      },
+      {
+        "path": "profiles/browser_phoenix/assets/phase6/profile.css",
+        "sha256": "be99d88661727399c48134c2c37ae24726de0be1456508178aef45e420de029f"
+      },
+      {
+        "path": "profiles/browser_phoenix/assets/phase6/runtime-frame.js",
+        "sha256": "6f7a8905d9e48a59fecc67980827b4cc7d976a7a349f8d465e4e3ccb9e6a832e"
+      },
+      {
+        "path": "profiles/browser_phoenix/assets/phase6/runtime-manifest.template.json",
+        "sha256": "d888eade92e990fcc3c461534bf0dae6f9f1fa6c2c53d40ce20ceb3bb00d3ade"
+      },
+      {
+        "path": "profiles/browser_phoenix/assets/phase6/verify_profile.py",
+        "sha256": "65bdfa608083cbe7f49188ffefe30bee50bceaa41081904876163918511a1303"
+      },
+      {
+        "path": "profiles/browser_phoenix/lib/blazex_browser_phoenix.ex",
+        "sha256": "5daa5b07af4552acca907b7f5b3343472f6709f90b458cbbaf22ddb1c67093ba"
+      },
+      {
+        "path": "profiles/browser_phoenix/lib/blazex_browser_phoenix/application.ex",
+        "sha256": "6deea6765dada12d298c489ae543e13e0fd5a72c2a9222c258c59690a3fe6944"
+      },
+      {
+        "path": "profiles/browser_phoenix/lib/blazex_browser_phoenix/asset_plug.ex",
+        "sha256": "2068e49af2a842d21f3df1092b4236e02cf3a98e9fbddccc0f22e35bd7a91e03"
+      },
+      {
+        "path": "profiles/browser_phoenix/lib/blazex_browser_phoenix/command_plug.ex",
+        "sha256": "0d7c1acecf245e0b6ad2104ba52970a75b7789986c802267bf4aefd2f15424ca"
+      },
+      {
+        "path": "profiles/browser_phoenix/lib/blazex_browser_phoenix/composition_boundary.ex",
+        "sha256": "e830b43102842c3f4cacac948402b8cef61c4674aa927c2f481d800edd3639f4"
+      },
+      {
+        "path": "profiles/browser_phoenix/lib/blazex_browser_phoenix/control_plug.ex",
+        "sha256": "1ad961a7c1e2765f65deeee1c174bbde160cd2425423f6db021b18be36c0aa2d"
+      },
+      {
+        "path": "profiles/browser_phoenix/lib/blazex_browser_phoenix/deployment_headers.ex",
+        "sha256": "2514292748d655e601f7c2b426843178fcb91661c041646ce9f217a644b77e8b"
+      },
+      {
+        "path": "profiles/browser_phoenix/lib/blazex_browser_phoenix/endpoint.ex",
+        "sha256": "d8abdb8cdf5b5069b867632215f99fb47603fc0b5835d8d346bc3148ad3788fe"
+      },
+      {
+        "path": "profiles/browser_phoenix/lib/blazex_browser_phoenix/endpoint_boundary.ex",
+        "sha256": "8f6d883d000bc6314d4c1581e1423b18ade3bd674c78fefc83180bf0f2d5c872"
+      },
+      {
+        "path": "profiles/browser_phoenix/lib/blazex_browser_phoenix/not_found_plug.ex",
+        "sha256": "6bc5212d93f701c8c3d39a512ed3fc468f3e13dbcae41dfddb8f5a017f025a00"
+      },
+      {
+        "path": "profiles/browser_phoenix/lib/blazex_browser_phoenix/teardown_boundary.ex",
+        "sha256": "08bd3288997307b73ef34c7e3a268f0a7ce5887d79059c3dbb1f21858cd0e88a"
+      }
+    ],
+    "required_outputs": [
+      "runtime-host-compatibility-identities",
+      "runtime-discovery-prerequisite-and-manifest-validation",
+      "artifact-acquisition-bundle-load-startup-and-readiness",
+      "shared-compatible-runtime-instance-registry",
+      "independent-root-register-mount-update-move-dispose-remount",
+      "deterministic-shutdown-runtime-loss-and-cleanup",
+      "mismatch-unsupported-and-fallback-diagnostics",
+      "active-browser-profile-integration",
+      "root-readiness-memory-growth-and-reliability-evidence"
+    ],
+    "carried_obligations": [
+      {
+        "id": "BX-BH01-CONDITION-AVM-REACHABILITY",
+        "category": "inherited-condition",
+        "state": "repeat-required",
+        "owner": "runtime-owner",
+        "reactivate_by": "BH-04 and every runtime/bundle change",
+        "disposition": "Existing real AVM execution retained; repeat after bundle/compiler changes.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-BH01-CONDITION-BROTLI-SERVING",
+        "category": "inherited-condition",
+        "state": "carried-forward",
+        "owner": "browser-profile-owner",
+        "reactivate_by": "before compressed deployment; no later than BH-22",
+        "disposition": "BH-03 intentionally serves verified identity bytes; Brotli production serving is not qualified.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-BH01-CONDITION-FIREFOX-TIMER",
+        "category": "inherited-condition",
+        "state": "repeat-required",
+        "owner": "runtime-owner",
+        "reactivate_by": "each runtime change; no later than BH-22",
+        "disposition": "Active Firefox startup reproduced by Phase 7; timer workaround remains pinned, not portable proof.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-BH01-CONDITION-PRIVATE-API-PINS",
+        "category": "inherited-condition",
+        "state": "repeat-required",
+        "owner": "runtime-owner",
+        "reactivate_by": "each dependency upgrade",
+        "disposition": "Pinned Popcorn/AtomVM/private integration requires compatibility review and reruns.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-BH01-CONDITION-RUNTIME-REPEAT",
+        "category": "inherited-condition",
+        "state": "repeat-required",
+        "owner": "quality-owner",
+        "reactivate_by": "every downstream runtime change",
+        "disposition": "Do not inherit a historical browser pass for changed runtime bytes.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-BH01-CONDITION-PRODUCTION-SECURITY",
+        "category": "inherited-condition",
+        "state": "carried-forward",
+        "owner": "security-owner",
+        "reactivate_by": "BH-22 before release",
+        "disposition": "Local integrity and isolation tests do not establish production authority or threat-model closure.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-BH01-CONDITION-BH22-QUALIFICATION",
+        "category": "inherited-condition",
+        "state": "deferred-unavailable",
+        "owner": "qualification-owner",
+        "reactivate_by": "BH-22",
+        "disposition": "Unavailable platform/device/AT work gets no pass credit.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-BH01-CONDITION-RELEASE-CONTROLS",
+        "category": "inherited-condition",
+        "state": "carried-forward",
+        "owner": "release-owner",
+        "reactivate_by": "BH-22 before publication",
+        "disposition": "Signing, SBOM, licensing and release reproducibility remain release obligations.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-BH02-FINDING-GTK-ROLE-GAPS",
+        "category": "inherited-finding",
+        "state": "carried-forward",
+        "owner": "native-renderer-owner",
+        "reactivate_by": "BH-22 or earlier owning native/component milestone",
+        "disposition": "BH-03 host lifecycle does not close this accepted BH-02 limitation; original finding remains authoritative.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-BH02-FINDING-NATIVE-TARGETS-DEFERRED",
+        "category": "inherited-finding",
+        "state": "carried-forward",
+        "owner": "accessibility-owner",
+        "reactivate_by": "BH-22 or earlier owning native/component milestone",
+        "disposition": "BH-03 host lifecycle does not close this accepted BH-02 limitation; original finding remains authoritative.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-BH02-FINDING-MANUAL-AT-UNEXECUTED",
+        "category": "inherited-finding",
+        "state": "carried-forward",
+        "owner": "accessibility-owner",
+        "reactivate_by": "BH-22 or earlier owning native/component milestone",
+        "disposition": "BH-03 host lifecycle does not close this accepted BH-02 limitation; original finding remains authoritative.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-BH02-FINDING-NATIVE-FILE-DIALOG-UNEXECUTED",
+        "category": "inherited-finding",
+        "state": "carried-forward",
+        "owner": "accessibility-owner",
+        "reactivate_by": "BH-22 or earlier owning native/component milestone",
+        "disposition": "BH-03 host lifecycle does not close this accepted BH-02 limitation; original finding remains authoritative.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-BH02-FINDING-PUBLIC-API-EXPERIMENTAL",
+        "category": "inherited-finding",
+        "state": "carried-forward",
+        "owner": "architecture-owner",
+        "reactivate_by": "before public stability",
+        "disposition": "BH-03 host lifecycle does not close this accepted BH-02 limitation; original finding remains authoritative.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-BH02-FINDING-RELEASE-CONTROLS-UNEXECUTED",
+        "category": "inherited-finding",
+        "state": "carried-forward",
+        "owner": "release-owner",
+        "reactivate_by": "BH-22 or earlier owning native/component milestone",
+        "disposition": "BH-03 host lifecycle does not close this accepted BH-02 limitation; original finding remains authoritative.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-BH01-DEFER-ANDROID-PHYSICAL-0.1",
+        "category": "deferred-qualification",
+        "state": "deferred-unavailable",
+        "owner": "qualification-owner",
+        "reactivate_by": "BH-22",
+        "disposition": "[DEFERRED] Required environment unavailable; retain original evidence and re-run when available.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-BH01-DEFER-APPLE-MOBILE-0.1",
+        "category": "deferred-qualification",
+        "state": "deferred-unavailable",
+        "owner": "qualification-owner",
+        "reactivate_by": "BH-22",
+        "disposition": "[DEFERRED] Required environment unavailable; retain original evidence and re-run when available.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-BH01-DEFER-MACOS-SAFARI-0.1",
+        "category": "deferred-qualification",
+        "state": "deferred-unavailable",
+        "owner": "qualification-owner",
+        "reactivate_by": "BH-22",
+        "disposition": "[DEFERRED] Required environment unavailable; retain original evidence and re-run when available.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-BH01-DEFER-WINDOWS-DESKTOP-0.1",
+        "category": "deferred-qualification",
+        "state": "deferred-unavailable",
+        "owner": "qualification-owner",
+        "reactivate_by": "BH-22",
+        "disposition": "[DEFERRED] Required environment unavailable; retain original evidence and re-run when available.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-BH01-DEFER-SECOND-LINUX-HOST-0.1",
+        "category": "deferred-qualification",
+        "state": "deferred-unavailable",
+        "owner": "qualification-owner",
+        "reactivate_by": "BH-22",
+        "disposition": "[DEFERRED] Required environment unavailable; retain original evidence and re-run when available.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-BH01-DEFER-MANUAL-AT-0.1",
+        "category": "deferred-qualification",
+        "state": "deferred-unavailable",
+        "owner": "qualification-owner",
+        "reactivate_by": "BH-22",
+        "disposition": "[DEFERRED] Required environment unavailable; retain original evidence and re-run when available.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-ACC-BUDGET-BX-BUD-RELIABILITY-ROOT-COUNT",
+        "category": "acceptance-condition",
+        "state": "observation-only",
+        "owner": "performance-owner",
+        "reactivate_by": "BH-22",
+        "disposition": "Phase 7 descriptive measurements only; release thresholds remain unqualified.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-ACC-BUDGET-BX-BUD-RESOURCE-MEMORY-GROWTH-MIB",
+        "category": "acceptance-condition",
+        "state": "observation-only",
+        "owner": "performance-owner",
+        "reactivate_by": "BH-22",
+        "disposition": "Phase 7 descriptive measurements only; release thresholds remain unqualified.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-ACC-BUDGET-BX-BUD-STARTUP-ROOT-READINESS-MS",
+        "category": "acceptance-condition",
+        "state": "observation-only",
+        "owner": "performance-owner",
+        "reactivate_by": "BH-22",
+        "disposition": "Phase 7 descriptive measurements only; release thresholds remain unqualified.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-ACC-FAILURE-BX-FAIL-DEPLOYMENT-MISMATCH",
+        "category": "acceptance-condition",
+        "state": "bounded-evidence",
+        "owner": "browser-host-owner",
+        "reactivate_by": "BH-03 corrective acceptance before BH-04",
+        "disposition": "Reconcile source and tests in Phase 8 review; canonical planned registry remains unchanged.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-ACC-FAILURE-BX-FAIL-RUNTIME-LOSS",
+        "category": "acceptance-condition",
+        "state": "pending-review",
+        "owner": "browser-host-owner",
+        "reactivate_by": "BH-03 corrective acceptance before BH-04",
+        "disposition": "Reconcile source and tests in Phase 8 review; canonical planned registry remains unchanged.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-ACC-GATE-BX-GREQ-COMPAT-IDENTITIES",
+        "category": "acceptance-condition",
+        "state": "bounded-evidence",
+        "owner": "browser-host-owner",
+        "reactivate_by": "BH-03 corrective acceptance before BH-04",
+        "disposition": "Reconcile source and tests in Phase 8 review; canonical planned registry remains unchanged.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-ACC-GATE-BX-GREQ-COMPAT-MISMATCH",
+        "category": "acceptance-condition",
+        "state": "bounded-evidence",
+        "owner": "browser-host-owner",
+        "reactivate_by": "BH-03 corrective acceptance before BH-04",
+        "disposition": "Reconcile source and tests in Phase 8 review; canonical planned registry remains unchanged.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-ACC-GATE-BX-GREQ-COMPAT-SUPPORT-MATRIX",
+        "category": "acceptance-condition",
+        "state": "bounded-evidence",
+        "owner": "browser-host-owner",
+        "reactivate_by": "BH-22",
+        "disposition": "Reconcile source and tests in Phase 8 review; canonical planned registry remains unchanged.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-ACC-GATE-BX-GREQ-COMPAT-UPGRADE",
+        "category": "acceptance-condition",
+        "state": "bounded-evidence",
+        "owner": "browser-host-owner",
+        "reactivate_by": "BH-03 corrective acceptance before BH-04",
+        "disposition": "Reconcile source and tests in Phase 8 review; canonical planned registry remains unchanged.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-ACC-ROADMAP-BH-03",
+        "category": "acceptance-condition",
+        "state": "pending-review",
+        "owner": "browser-host-owner",
+        "reactivate_by": "BH-03 corrective acceptance before BH-04",
+        "disposition": "Reconcile source and tests in Phase 8 review; canonical planned registry remains unchanged.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-BH01-CONDITION-FIXTURE-DISPOSABILITY",
+        "category": "satisfied-predecessor",
+        "state": "satisfied-in-bh02",
+        "owner": "architecture-owner",
+        "reactivate_by": "any dependency-boundary change",
+        "disposition": "Preserve reusable boundaries and isolation from disposable experiments; no additional platform qualification.",
+        "pass_credit": false
+      }
+    ],
+    "obligation_overlay": "The Phase 8 rows are immutable inherited obligations, not current pass claims. The BH-03 roadmap and runtime-loss pending-review rows are resolved for internal development by this source-bound acceptance. Budget, platform support, upgrades, release controls, and repeat duties retain their owners and due points.",
+    "finding_overlay": {
+      "BX-BH03-FINDING-UNREPORTED-RUNTIME-LOSS": "closed by registry-owned handle observation, race tests, and active browser callback fault injection",
+      "BX-BH03-FINDING-MEMORY-EVIDENCE-BOUNDED": "retained limitation: not long-lived-page leak proof; performance-owner, BH-22",
+      "BX-BH03-FINDING-HISTORICAL-RUNNER-PROVENANCE": "current evidence rebound to complete committed candidate and harness hash; historical raw record remains unchanged"
+    },
+    "review_lenses": {
+      "architecture": "Runtime-ready handle loss observation and registry ownership stay in reusable JavaScript. Profile records transitions; no component, DOM protocol, or server authority added.",
+      "implementation": "Latched loss before subscription rejects activation; active loss synchronously leaves ready; token-bound observers exclude obsolete handles, replacement loss rejects replay, and intentional stop clears observers.",
+      "conformance": "Eight new real-startup/registry injected-frame tests plus five active scenarios per browser; repeated Phase 6 conformance and Phase 7 measurements passed. Controlled failure callbacks are not OS crashes.",
+      "accessibility": "No semantic or focus contract change. Existing BH-02 evidence remains inherited; manual AT and native role gaps remain unclosed.",
+      "security": "Existing acquisition, compatibility and correlated generation checks retained. Test-only browser instrumentation is route-injected, never shipped in profile assets. Production security/release review remains due.",
+      "packaging": "No dependency or toolkit change. AtomVM-in-Wasm executes the pinned AVM bundle; all original artifact checks and pinned Mix/runtime tests repeated.",
+      "provenance": "Each retained run names full Section 9.3 revision. Current runtime sources are checked against that git tree and SHA-256. Historical exception helper is restricted to exact authorized paths and a hash-bound authorization."
+    },
+    "independence": "Single implementing agent using seven analytical lenses; not independent external review.",
+    "release_budgets": [],
+    "limitations": [
+      "Controlled runtime onExit/onAbort callback injection exercises real frame/startup/registry and AVM root replay, not OS-level crashes, worker hangs or device memory pressure.",
+      "Five fresh contexts and coarse Chrome memory observations do not prove absence of long-lived-page leaks; Firefox governed heap API remains unavailable.",
+      "[DEFERRED] Safari, mobile, physical devices, second host and manual AT: qualification-owner; reactivate by BH-22; no pass credit.",
+      "All inherited native/API/release obligations remain in force. Internal acceptance grants neither browser support nor public API stability nor BH-04 implementation authority."
+    ]
+  },
+  "compatibility_baseline": {
+    "schema_version": "1.0.0",
+    "baseline_id": "BX-BH02-CONTRACT-BASELINE-0.1",
+    "status": "candidate-internal-baseline-pending-acceptance",
+    "authorization_ref": "BX-BH02-PHASE-08-AUTHORIZATION-0.1",
+    "reconciliation_ref": "BX-BH02-RECONCILIATION-0.1",
+    "compatibility_scope": "internal-BH03-consumption-after-BH02-acceptance",
+    "surfaces": [
+      {
+        "id": "semantic-component-and-evaluation-v1",
+        "owner": "packages/blazex_core",
+        "modules": [
+          "BlazeX.Core.Component",
+          "BlazeX.Core.Context",
+          "BlazeX.Core.Evaluation",
+          "BlazeX.Core.Evaluator",
+          "BlazeX.Core.Event",
+          "BlazeX.Core.Identity",
+          "BlazeX.Core.Portable"
+        ],
+        "compatibility_identity": "blazex.core/1"
+      },
+      {
+        "id": "event-effect-capability-resource-v1",
+        "owner": "packages/blazex_effects",
+        "modules": [
+          "BlazeX.Effects.Capability",
+          "BlazeX.Effects.Effect",
+          "BlazeX.Effects.Error",
+          "BlazeX.Effects.Negotiation",
+          "BlazeX.Effects.Provider",
+          "BlazeX.Effects.Resource",
+          "BlazeX.Effects.Result",
+          "BlazeX.Effects.Tracker"
+        ],
+        "compatibility_identity": "blazex.effects/1"
+      },
+      {
+        "id": "semantic-ui-and-presentation-intent-v1",
+        "owner": "packages/blazex_ui_tree",
+        "modules": [
+          "BlazeX.UITree.Accessibility",
+          "BlazeX.UITree.Binding",
+          "BlazeX.UITree.ComponentEvaluator",
+          "BlazeX.UITree.Document",
+          "BlazeX.UITree.Focus",
+          "BlazeX.UITree.IntentSet",
+          "BlazeX.UITree.Layout",
+          "BlazeX.UITree.Metric",
+          "BlazeX.UITree.Node",
+          "BlazeX.UITree.Selection",
+          "BlazeX.UITree.TokenRef",
+          "BlazeX.UITree.ValidationError"
+        ],
+        "compatibility_identity": "blazex.ui-tree/1"
+      },
+      {
+        "id": "renderer-lifecycle-and-negotiation-v1",
+        "owner": "packages/blazex_renderer",
+        "modules": [
+          "BlazeX.Renderer.Artifact",
+          "BlazeX.Renderer.Backend",
+          "BlazeX.Renderer.Capabilities",
+          "BlazeX.Renderer.Context",
+          "BlazeX.Renderer.Diagnostic",
+          "BlazeX.Renderer.Negotiation",
+          "BlazeX.Renderer.Requirements",
+          "BlazeX.Renderer.Session"
+        ],
+        "compatibility_identity": "blazex.renderer/1"
+      },
+      {
+        "id": "headless-snapshot-and-trace-v1",
+        "owner": "packages/blazex_renderer_headless",
+        "modules": [
+          "BlazeX.Renderer.Headless",
+          "BlazeX.Renderer.Headless.Normalizer",
+          "BlazeX.Renderer.Headless.Snapshot",
+          "BlazeX.Renderer.Headless.State",
+          "BlazeX.Renderer.Headless.Trace"
+        ],
+        "compatibility_identity": "blazex.renderer-headless/1"
+      },
+      {
+        "id": "dom-full-projection-batch-v1",
+        "owner": "packages/blazex_renderer_dom",
+        "modules": [
+          "BlazeX.Renderer.DOM",
+          "BlazeX.Renderer.DOM.Batch",
+          "BlazeX.Renderer.DOM.FocusIntent",
+          "BlazeX.Renderer.DOM.Listener",
+          "BlazeX.Renderer.DOM.Lowerer",
+          "BlazeX.Renderer.DOM.Portable",
+          "BlazeX.Renderer.DOM.Projection",
+          "BlazeX.Renderer.DOM.SelectionIntent",
+          "BlazeX.Renderer.DOM.State"
+        ],
+        "compatibility_identity": "blazex.dom-projection/1"
+      },
+      {
+        "id": "native-full-projection-batch-v1",
+        "owner": "experiments/native_renderer_spike",
+        "modules": [
+          "BlazeX.NativeSpike",
+          "BlazeX.NativeSpike.Batch",
+          "BlazeX.NativeSpike.Fixture",
+          "BlazeX.NativeSpike.Lowerer",
+          "BlazeX.NativeSpike.Node",
+          "BlazeX.NativeSpike.Portable",
+          "BlazeX.NativeSpike.State",
+          "BlazeX.NativeSpike.Wire"
+        ],
+        "compatibility_identity": "blazex.native-experiment/1",
+        "experiment_only": true
+      },
+      {
+        "id": "cross-renderer-conformance-v1",
+        "owner": "integration/conformance",
+        "fixtures": [
+          "semantic-kernel-fixtures-v0.1.0.json",
+          "event-effect-resource-fixtures-v0.1.0.json",
+          "presentation-intent-fixtures-v0.1.0.json",
+          "renderer-headless-fixtures-v0.1.0.json",
+          "dom-renderer-fixtures-v0.1.0.json",
+          "native-control-fixtures-v0.1.0.json"
+        ],
+        "compatibility_identity": "blazex.bh02.conformance/1"
+      }
+    ],
+    "portable_contract_boundary": [
+      "semantic-component-and-evaluation-v1",
+      "event-effect-capability-resource-v1",
+      "semantic-ui-and-presentation-intent-v1",
+      "renderer-lifecycle-and-negotiation-v1"
+    ],
+    "backend_private_contracts": [
+      "headless-snapshot-and-trace-v1",
+      "dom-full-projection-batch-v1",
+      "native-full-projection-batch-v1"
+    ],
+    "native_experiment_boundary": {
+      "outward_dependency_only": true,
+      "production_profiles_may_depend_on_experiment": false,
+      "toolkit_objects_in_portable_contracts": false,
+      "excluded_systems": [
+        "qt",
+        "wxwidgets"
+      ]
+    },
+    "stability": {
+      "internal_contract": "candidate-versioned",
+      "public_api": "experimental-not-stable",
+      "support": "unsupported",
+      "semver_promise": "none",
+      "package_publication": "not-authorized"
+    },
+    "material_change_control": {
+      "required": [
+        "superseding-architecture-decision-record",
+        "compatibility-impact-review",
+        "updated-versioned-conformance-fixtures",
+        "affected-backend-reexecution",
+        "new-BH02-baseline-or-authorized-downstream-supersession"
+      ],
+      "silent_breaking_change": "forbidden"
+    },
+    "explicit_noncontracts": [
+      "backend-generated-identifiers",
+      "DOM-node-and-browser-event-objects",
+      "GTK-Win32-AppKit-handles",
+      "native-wire-encoding-as-portable-api",
+      "BH01-fixture-messages-routes-and-json",
+      "pixel-or-geometry-equivalence",
+      "production-provider-behavior"
+    ],
+    "acceptance_effect": "This candidate becomes the accepted internal BH-02 baseline only through the Phase 8 final decision; this record alone grants no downstream authorization."
+  },
+  "acceptance_records": [
+    {
+      "id": "BX-ACC-BUDGET-BX-BUD-INTERACTION-DOM-UPDATE-MS",
+      "requirement_ids": [
+        "BX-REQ-BUDGET-BX-BUD-INTERACTION-DOM-UPDATE-MS"
+      ],
+      "subject": "BX-BUD-INTERACTION-DOM-UPDATE-MS",
+      "normative_statement": "normalized renderer update to committed DOM paint is measured as p95 at-most 50 milliseconds in the declared environments.",
+      "mode": "quality-budget",
+      "profiles": [
+        "PROFILE-BROWSER-PHOENIX",
+        "PROFILE-BROWSER-PLUG",
+        "PROFILE-HEADLESS"
+      ],
+      "preconditions": [
+        "The candidate manifest, governed fixture, environment fingerprints, tools, and required minimum sample capacity are available."
+      ],
+      "action": "Replay the governed keyed-update fixture and measure renderer receipt through the next painted frame with browser tracing.",
+      "observable_results": [
+        "Raw samples and statistical report satisfy the proposed threshold, variance, regression, freshness, and exception policies."
+      ],
+      "prohibited_results": [
+        "A desktop-only observation, average without raw samples, stale baseline, or absent measurement is reported as a pass."
+      ],
+      "evidence_types": [
+        "benchmark",
+        "generated",
+        "review"
+      ],
+      "evidence_owner": "dom-renderer-owner",
+      "owner_package_or_profile": "quality-contract",
+      "responsible_milestone": "BH-04",
+      "integration_suite": "integration/benchmarks/bx-bud-interaction-dom-update-ms",
+      "release_gate": "bh-22-quality-budget",
+      "required_budget_ids": [
+        "BX-BUD-INTERACTION-DOM-UPDATE-MS"
+      ],
+      "status": "planned",
+      "support_status": "candidate",
+      "implementation_state": "not-started",
+      "verification_state": "not-executed",
+      "evidence_ids": [],
+      "waiver": null,
+      "supersedes": null
+    },
+    {
+      "id": "BX-ACC-BUDGET-BX-BUD-RELIABILITY-RENDERER-QUEUE-COUNT",
+      "requirement_ids": [
+        "BX-REQ-BUDGET-BX-BUD-RELIABILITY-RENDERER-QUEUE-COUNT"
+      ],
+      "subject": "BX-BUD-RELIABILITY-RENDERER-QUEUE-COUNT",
+      "normative_statement": "queued renderer transactions per root is measured as maximum at-most 64 count in the declared environments.",
+      "mode": "quality-budget",
+      "profiles": [
+        "PROFILE-BROWSER-PHOENIX",
+        "PROFILE-BROWSER-PLUG",
+        "PROFILE-HEADLESS"
+      ],
+      "preconditions": [
+        "The candidate manifest, governed fixture, environment fingerprints, tools, and required minimum sample capacity are available."
+      ],
+      "action": "Drive producer-over-renderer overload and retain queue depth, coalescing, backpressure, rejection, and generation-order traces.",
+      "observable_results": [
+        "Raw samples and statistical report satisfy the proposed threshold, variance, regression, freshness, and exception policies."
+      ],
+      "prohibited_results": [
+        "A desktop-only observation, average without raw samples, stale baseline, or absent measurement is reported as a pass."
+      ],
+      "evidence_types": [
+        "benchmark",
+        "generated",
+        "review"
+      ],
+      "evidence_owner": "renderer-owner",
+      "owner_package_or_profile": "quality-contract",
+      "responsible_milestone": "BH-04",
+      "integration_suite": "integration/benchmarks/bx-bud-reliability-renderer-queue-count",
+      "release_gate": "bh-22-quality-budget",
+      "required_budget_ids": [
+        "BX-BUD-RELIABILITY-RENDERER-QUEUE-COUNT"
+      ],
+      "status": "planned",
+      "support_status": "candidate",
+      "implementation_state": "not-started",
+      "verification_state": "not-executed",
+      "evidence_ids": [],
+      "waiver": null,
+      "supersedes": null
+    },
+    {
+      "id": "BX-ACC-BUDGET-BX-BUD-RELIABILITY-STALE-REJECTION-PERCENT",
+      "requirement_ids": [
+        "BX-REQ-BUDGET-BX-BUD-RELIABILITY-STALE-REJECTION-PERCENT"
+      ],
+      "subject": "BX-BUD-RELIABILITY-STALE-REJECTION-PERCENT",
+      "normative_statement": "stale generation renderer and effect messages rejected is measured as rate exactly 100 percent in the declared environments.",
+      "mode": "quality-budget",
+      "profiles": [
+        "PROFILE-BROWSER-PHOENIX",
+        "PROFILE-BROWSER-PLUG",
+        "PROFILE-HEADLESS"
+      ],
+      "preconditions": [
+        "The candidate manifest, governed fixture, environment fingerprints, tools, and required minimum sample capacity are available."
+      ],
+      "action": "Replay randomized delayed prior-generation renderer and effect messages and assert every one is rejected without state mutation.",
+      "observable_results": [
+        "Raw samples and statistical report satisfy the proposed threshold, variance, regression, freshness, and exception policies."
+      ],
+      "prohibited_results": [
+        "A desktop-only observation, average without raw samples, stale baseline, or absent measurement is reported as a pass."
+      ],
+      "evidence_types": [
+        "benchmark",
+        "generated",
+        "review"
+      ],
+      "evidence_owner": "runtime-owner",
+      "owner_package_or_profile": "quality-contract",
+      "responsible_milestone": "BH-04",
+      "integration_suite": "integration/benchmarks/bx-bud-reliability-stale-rejection-percent",
+      "release_gate": "bh-22-quality-budget",
+      "required_budget_ids": [
+        "BX-BUD-RELIABILITY-STALE-REJECTION-PERCENT"
+      ],
+      "status": "planned",
+      "support_status": "candidate",
+      "implementation_state": "not-started",
+      "verification_state": "not-executed",
+      "evidence_ids": [],
+      "waiver": null,
+      "supersedes": null
+    },
+    {
+      "id": "BX-ACC-FAILURE-BX-FAIL-RENDERER",
+      "requirement_ids": [
+        "BX-REQ-FAILURE-BX-FAIL-RENDERER"
+      ],
+      "subject": "BX-FAIL-RENDERER",
+      "normative_statement": "Reject the transaction atomically, retain last valid generation or bounded fallback, isolate the root, report diagnostics, and release abandoned resources.",
+      "mode": "failure-and-recovery",
+      "profiles": [
+        "PROFILE-BROWSER-PHOENIX",
+        "PROFILE-BROWSER-PLUG",
+        "PROFILE-HEADLESS"
+      ],
+      "preconditions": [
+        "The governed trigger can be injected deterministically: renderer transaction fails or returns malformed traffic."
+      ],
+      "action": "Inject renderer transaction fails or returns malformed traffic and observe isolation, fallback, diagnostics, authority, focus, and cleanup through 1000 milliseconds.",
+      "observable_results": [
+        "Reject the transaction atomically, retain last valid generation or bounded fallback, isolate the root, report diagnostics, and release abandoned resources."
+      ],
+      "prohibited_results": [
+        "Failure is swallowed, retries or queues become unbounded, state authority is confused, or owned resources survive the declared bound."
+      ],
+      "evidence_types": [
+        "automated",
+        "browser",
+        "review"
+      ],
+      "evidence_owner": "renderer-owner",
+      "owner_package_or_profile": "resilience-contract",
+      "responsible_milestone": "BH-04",
+      "integration_suite": "integration/failures/bx-fail-renderer",
+      "release_gate": "bh-22-resilience",
+      "required_budget_ids": [],
+      "status": "planned",
+      "support_status": "candidate",
+      "implementation_state": "not-started",
+      "verification_state": "not-executed",
+      "evidence_ids": [],
+      "waiver": null,
+      "supersedes": null
+    },
+    {
+      "id": "BX-ACC-ROADMAP-BH-04",
+      "requirement_ids": [
+        "BX-REQ-ROADMAP-BH-04"
+      ],
+      "subject": "BH-04 DOM renderer and interaction transport",
+      "normative_statement": "Deterministic renderer fixtures and browser scenarios produce the documented DOM, accessibility, event, focus, and disposal outcomes. Application components depend only on BlazeX contracts. The standalone DOM package has no Phoenix, LiveView, LocalLiveView, or Plug dependency, and the LiveView adapter is the sole package coupled to LiveView patching internals.",
+      "mode": "roadmap-outcome",
+      "profiles": [
+        "PROFILE-BROWSER-PHOENIX",
+        "PROFILE-BROWSER-PLUG",
+        "PROFILE-HEADLESS"
+      ],
+      "preconditions": [
+        "All declared dependencies preceding BH-04 have accepted evidence or an explicit blocking record."
+      ],
+      "action": "Execute and review the complete BH-04 integration and release-gate suite against the candidate revision.",
+      "observable_results": [
+        "Deterministic renderer fixtures and browser scenarios produce the documented DOM, accessibility, event, focus, and disposal outcomes. Application components depend only on BlazeX contracts. The standalone DOM package has no Phoenix, LiveView, LocalLiveView, or Plug dependency, and the LiveView adapter is the sole package coupled to LiveView patching internals."
+      ],
+      "prohibited_results": [
+        "A demonstration, schema-valid record, or success on one profile is reported as completion without the declared evidence."
+      ],
+      "evidence_types": [
+        "automated",
+        "browser",
+        "review"
+      ],
+      "evidence_owner": "bh-04-owner",
+      "owner_package_or_profile": "roadmap-program",
+      "responsible_milestone": "BH-04",
+      "integration_suite": "integration/bh-04",
+      "release_gate": "bh-04-completion",
+      "required_budget_ids": [],
+      "status": "planned",
+      "support_status": "candidate",
+      "implementation_state": "not-started",
+      "verification_state": "not-executed",
+      "evidence_ids": [],
+      "waiver": null,
+      "supersedes": null
+    }
+  ],
+  "schedule": [
+    {
+      "id": "BX-ACC-BUDGET-BX-BUD-INTERACTION-DOM-UPDATE-MS",
+      "owner": "dom-renderer-owner",
+      "suite": "integration/benchmarks/bx-bud-interaction-dom-update-ms",
+      "implementation_phases": [
+        10
+      ],
+      "closure": [
+        "Raw samples and statistical report satisfy the proposed threshold, variance, regression, freshness, and exception policies."
+      ],
+      "stop": [
+        "A desktop-only observation, average without raw samples, stale baseline, or absent measurement is reported as a pass."
+      ],
+      "state": "planned",
+      "pass_credit": false
+    },
+    {
+      "id": "BX-ACC-BUDGET-BX-BUD-RELIABILITY-RENDERER-QUEUE-COUNT",
+      "owner": "renderer-owner",
+      "suite": "integration/benchmarks/bx-bud-reliability-renderer-queue-count",
+      "implementation_phases": [
+        10
+      ],
+      "closure": [
+        "Raw samples and statistical report satisfy the proposed threshold, variance, regression, freshness, and exception policies."
+      ],
+      "stop": [
+        "A desktop-only observation, average without raw samples, stale baseline, or absent measurement is reported as a pass."
+      ],
+      "state": "planned",
+      "pass_credit": false
+    },
+    {
+      "id": "BX-ACC-BUDGET-BX-BUD-RELIABILITY-STALE-REJECTION-PERCENT",
+      "owner": "runtime-owner",
+      "suite": "integration/benchmarks/bx-bud-reliability-stale-rejection-percent",
+      "implementation_phases": [
+        10
+      ],
+      "closure": [
+        "Raw samples and statistical report satisfy the proposed threshold, variance, regression, freshness, and exception policies."
+      ],
+      "stop": [
+        "A desktop-only observation, average without raw samples, stale baseline, or absent measurement is reported as a pass."
+      ],
+      "state": "planned",
+      "pass_credit": false
+    },
+    {
+      "id": "BX-ACC-FAILURE-BX-FAIL-RENDERER",
+      "owner": "renderer-owner",
+      "suite": "integration/failures/bx-fail-renderer",
+      "implementation_phases": [
+        4,
+        7,
+        10
+      ],
+      "closure": [
+        "Reject the transaction atomically, retain last valid generation or bounded fallback, isolate the root, report diagnostics, and release abandoned resources."
+      ],
+      "stop": [
+        "Failure is swallowed, retries or queues become unbounded, state authority is confused, or owned resources survive the declared bound."
+      ],
+      "state": "planned",
+      "pass_credit": false
+    },
+    {
+      "id": "BX-ACC-ROADMAP-BH-04",
+      "owner": "bh-04-owner",
+      "suite": "integration/bh-04",
+      "implementation_phases": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "closure": [
+        "Deterministic renderer fixtures and browser scenarios produce the documented DOM, accessibility, event, focus, and disposal outcomes. Application components depend only on BlazeX contracts. The standalone DOM package has no Phoenix, LiveView, LocalLiveView, or Plug dependency, and the LiveView adapter is the sole package coupled to LiveView patching internals."
+      ],
+      "stop": [
+        "A demonstration, schema-valid record, or success on one profile is reported as completion without the declared evidence."
+      ],
+      "state": "planned",
+      "pass_credit": false
+    }
+  ],
+  "rules": {
+    "entry": "Latest BH-03 acceptance is accepted-with-bounded-conditions with BH-04 eligible and exact source bindings intact.",
+    "stop": "Missing or stale authority, unavailable active gate, false evidence, dependency leakage, or unauthorized behavior blocks completion.",
+    "revise": "Correct the candidate and rerun every affected gate; never rewrite predecessor evidence.",
+    "defer": "Only unavailable policy-qualified environments: preserve owner, reactivation milestone and no pass credit; available failures block.",
+    "completion": "All four Phase 1 sections and active gates pass; Phase 2 eligible but requires separate authorization; BH-04 milestone and BH-05 remain incomplete."
+  },
+  "active_matrix": [
+    "Linux Chrome",
+    "Linux Firefox"
+  ],
+  "qualification": "Inherited carried_obligations and limitations above retain exact owners, states and reactivation points. No new browser qualification is performed in Phase 1.",
+  "phase2_authorized": false,
+  "bh05_eligible": false
+}
