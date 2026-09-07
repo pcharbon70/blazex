@@ -3,6 +3,7 @@
 import argparse
 import hashlib
 import json
+import math
 from pathlib import Path
 import subprocess
 
@@ -154,14 +155,54 @@ def validate(review_only=False):
                      "js/blazex_runtime/test/review/bh03-phase8-runtime-loss.mjs",
                      BASE + "blazex-bh-03-phase-08-browser-repeat-v0.1.0.json",
                      BASE + "blazex-bh-03-phase-08-measurement-repeat-v0.1.0.json"]
+        plan = "docs/research/60-planning/01-browser-host/bh-03-browser-execution-host-and-runtime-boot-lifecycle/"
+        required += [plan + "phase-08-implementation-evidence.md",
+                     plan + "phase-08-reconciliation-review-and-bh-03-acceptance.md"]
         bindings(completion["artifact_hashes"], required)
+        validate_repeat(phase("browser-repeat"), measurement=False)
+        validate_repeat(phase("measurement-repeat"), measurement=True)
         commits = completion["section_commits"]
         require([row["section"] for row in commits] == ["8.1", "8.2", "8.3", "8.4"],
                 "section commit inventory differs")
         for row in commits[:3]:
             git("merge-base", "--is-ancestor", row["commit"], "HEAD")
         require(commits[3]["commit"] == "resolve-from-this-records-git-commit", "final commit binding differs")
+        require("- [ ]" not in (ROOT / plan / "phase-08-reconciliation-review-and-bh-03-acceptance.md").read_text(),
+                "phase review has open tasks")
     return review["decision"]
+
+
+def validate_repeat(evidence, measurement):
+    require(evidence["implementation_revision"] == REVISION, "repeat candidate differs")
+    require(evidence["support_state"] == "unsupported", "repeat promotes support")
+    require(evidence["captured_at"].startswith("2026-09-07"), "repeat capture date differs")
+    rows = evidence["results"]
+    require([row["browser"] for row in rows] == ["chrome", "firefox"], "active matrix missing")
+    for row in rows:
+        require(row["result"] == "passed" and row["failures"] == []
+                and row["browser_version"] and row["executable"], "active row did not pass")
+        require(row["scenario_set"] == evidence["scenario_set"]
+                and len(row["scenario_set"]) == 5, "repeat scenarios differ")
+        if measurement:
+            require(len(row["samples"]) == 5 and row["warmup"]["result"] == "passed-discarded",
+                    "sampling incomplete")
+            for sample in row["samples"]:
+                require(sample["root_count_before_shutdown"] == sample["disposed_root_count_after_shutdown"] == 10
+                        and sample["runtime_iframes_after_shutdown"] == 0
+                        and sample["runtime_acknowledgements"] == 43, "cleanup did not converge")
+                for field in ["startup_to_ready_ms", "measurement_root_cycle_ms", "shutdown_ms"]:
+                    value = sample[field]
+                    require(type(value) in (int, float) and math.isfinite(value) and 0 <= value <= 60000,
+                            "invalid timing observation")
+            require(len(row["failure_scenarios"]) == 3 and all(
+                item["result"] == "passed" and item["partial_activation"] is False
+                for item in row["failure_scenarios"]), "failure convergence missing")
+        else:
+            positive = row["observations"]["positive"]
+            require(positive["runtime_starts"] == 1 and positive["shutdown"]["released"] is True
+                    and positive["shutdown"]["root_failures"] == 0, "profile lifecycle failed")
+    require(len(evidence["deferred"]) == 5 and all(
+        row["state"] == "deferred-unavailable" for row in evidence["deferred"]), "qualification promoted")
 
 
 def main():

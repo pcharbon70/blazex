@@ -14,7 +14,7 @@ aliases: []
 
 Back to [milestone](README.md).
 
-- [ ] 8 Phase - Reconcile and decide BH-03 acceptance.
+- [x] 8 Phase - Reconcile and decide BH-03 acceptance.
   - [x] 8.1 Section - Authorize and freeze the gate.
     - [x] 8.1.1 Task - Bind synchronized main, seven phase decisions, entry obligations, and development policy.
       - [x] 8.1.1.1 Subtask - Preserve unrelated work; use four section commits and one merged PR.
@@ -27,10 +27,10 @@ Back to [milestone](README.md).
     - [x] 8.3.1 Task - Execute architecture, implementation, conformance, accessibility, security, packaging, and provenance lenses.
       - [x] 8.3.1.1 Subtask - Reproduce material findings and record review independence limits.
       - [x] 8.3.1.2 Subtask - Add fail-closed reconciliation and decision validation with negative tests.
-  - [ ] 8.4 Section - Complete integration gate and publish the decision.
-    - [ ] 8.4.1 Task - Reproduce inherited checks and active Linux Chrome/Firefox evidence.
-      - [ ] 8.4.1.1 Subtask - Record commands, versions, outcomes, immutable evidence bindings, and limitations.
-      - [ ] 8.4.1.2 Subtask - Publish accept, revise, or blocked; update navigation and downstream eligibility.
+  - [x] 8.4 Section - Complete integration gate and publish the decision.
+    - [x] 8.4.1 Task - Reproduce inherited checks and active Linux Chrome/Firefox evidence.
+      - [x] 8.4.1.1 Subtask - Record commands, versions, outcomes, immutable evidence bindings, and limitations.
+      - [x] 8.4.1.2 Subtask - Publish accept, revise, or blocked; update navigation and downstream eligibility.
 
 ## Integration gate and completion evidence
 

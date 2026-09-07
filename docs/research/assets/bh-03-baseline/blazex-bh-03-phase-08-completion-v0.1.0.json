@@ -1,0 +1,85 @@
+{
+  "schema_version": "1.0.0",
+  "record_id": "BX-BH03-PHASE-08-REVIEW-COMPLETE-REVISE",
+  "recorded_at": "2026-09-07",
+  "state": "review-complete-milestone-revise",
+  "decision": "revise",
+  "bh04_eligible": false,
+  "next_authorized_work": null,
+  "api_state": "experimental-not-stable",
+  "support_state": "unsupported",
+  "candidate_revision": "34822e271ebb04f30bbfe93131c2288dc23d3057",
+  "source_revision": "7c3838fafa7ccff95192b0e184a311b0a7b9a0c7",
+  "section_commits": [
+    {
+      "section": "8.1",
+      "commit": "5f8f2bde2620c67d62c9d4190bf90faea311b83d"
+    },
+    {
+      "section": "8.2",
+      "commit": "e86ea82e0b2b830baaee07944f5a29619ae8d6ee"
+    },
+    {
+      "section": "8.3",
+      "commit": "7c3838fafa7ccff95192b0e184a311b0a7b9a0c7"
+    },
+    {
+      "section": "8.4",
+      "commit": "resolve-from-this-records-git-commit"
+    }
+  ],
+  "artifact_hashes": [
+    {
+      "path": "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-08-authorization-v0.1.0.json",
+      "sha256": "4be1a0ca89b36f52545ae3429b7838789bcb46e72017615b204d5e2874e42e0f"
+    },
+    {
+      "path": "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-08-browser-repeat-v0.1.0.json",
+      "sha256": "e877d63f361e7f67add5aec0f0dd1ab8121c970b855cc69d05d3500e0579f441"
+    },
+    {
+      "path": "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-08-contract-v0.1.0.json",
+      "sha256": "89eeee7fc2d2b1ca0e0a407ae5671aeb1489a2a9ce8c719b803c7d4e29b2844d"
+    },
+    {
+      "path": "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-08-measurement-repeat-v0.1.0.json",
+      "sha256": "0f17157f13ae7ba57534426b2595fba2ece09293562d312322612ffc553faeba"
+    },
+    {
+      "path": "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-08-reconciliation-v0.1.0.json",
+      "sha256": "4e2999ec6dae995283808120e4acc2f75b16fd6d6fe25a6ebc20050a3aa37232"
+    },
+    {
+      "path": "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-08-review-v0.1.0.json",
+      "sha256": "35b95f5ab6d5759003074fc4c18da38be43c78c432af41440623cdf41eece876"
+    },
+    {
+      "path": "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-08-validation-log-v0.1.0.txt",
+      "sha256": "72bd9b57f3b7f496306ab9041ae7d985d14fb40a6c1f29b43a0ae066d143558e"
+    },
+    {
+      "path": "docs/research/validate_bh03_acceptance.py",
+      "sha256": "a19bc5aaf9c35644d25070a7f59c8410d00f19ee3740b1f75f53925fd705a915"
+    },
+    {
+      "path": "docs/research/test_validate_bh03_acceptance.py",
+      "sha256": "2b7ce3bafd1b56e5bf82b5e24765f2a180c6434764a1c29e122efc3e34da64ec"
+    },
+    {
+      "path": "js/blazex_runtime/test/review/bh03-phase8-runtime-loss.mjs",
+      "sha256": "8db204208c568b12a60e102f9fa070f8c2ebc6b2f38b7acaa88b3cc5aaf9d2f8"
+    },
+    {
+      "path": "docs/research/60-planning/01-browser-host/bh-03-browser-execution-host-and-runtime-boot-lifecycle/phase-08-implementation-evidence.md",
+      "sha256": "c74bb954f93dcf0b8c2a4620c3765b46ff39f0be5a61e17ba48cd0580312087d"
+    },
+    {
+      "path": "docs/research/60-planning/01-browser-host/bh-03-browser-execution-host-and-runtime-boot-lifecycle/phase-08-reconciliation-review-and-bh-03-acceptance.md",
+      "sha256": "b28bb0c2e01d77af245a67a336820930ec0b02d5276fd7571cd4559bae08c762"
+    }
+  ],
+  "open_blockers": [
+    "BX-BH03-FINDING-UNREPORTED-RUNTIME-LOSS"
+  ],
+  "required_next_step": "Separately authorize corrective runtime-loss integration, active-browser recovery coverage, and a superseding BH-03 acceptance review before BH-04."
+}

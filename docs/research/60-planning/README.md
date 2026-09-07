@@ -43,8 +43,8 @@ renumbered.
 ### Subdirectories
 
 - [01 — Browser host](01-browser-host/README.md) — active first implementation
-  stream: BH-00 through BH-02 and BH-03 Phases 1–2 are complete; BH-03 Phase 3
-  is eligible but remains unauthorized.
+  stream: BH-00 through BH-02 are complete; BH-03 Phase 8 review concluded
+  revise. BH-03 correction and renewed acceptance are required before BH-04.
 
 ### Documents
 

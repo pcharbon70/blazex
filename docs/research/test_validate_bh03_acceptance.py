@@ -39,6 +39,21 @@ class AcceptanceTests(unittest.TestCase):
             with self.subTest(rows=rows), self.assertRaises(gate.ValidationError):
                 gate.bindings(rows)
 
+    def test_repeat_evidence_and_negative_rows(self):
+        for kind, measurement in [("browser-repeat", False), ("measurement-repeat", True)]:
+            evidence = gate.phase(kind)
+            gate.validate_repeat(evidence, measurement)
+            for mutate in [
+                lambda e: e["results"].pop(),
+                lambda e: e["results"][0].update(result="failed"),
+                lambda e: e.update(implementation_revision="working-tree"),
+                lambda e: e["deferred"][0].update(state="passed"),
+            ]:
+                changed = copy.deepcopy(evidence)
+                mutate(changed)
+                with self.assertRaises(gate.ValidationError):
+                    gate.validate_repeat(changed, measurement)
+
 
 if __name__ == "__main__":
     unittest.main()
