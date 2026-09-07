@@ -27,6 +27,8 @@ None.
 
 ### Files
 
+- [Phase 3 authorization](blazex-bh-04-phase-03-authorization-v0.1.0.json) — reconciler authority and explicit v2 protocol correction.
+
 - [Phase 2 completion](blazex-bh-04-phase-02-completion-v0.1.0.json) — bounded internal protocol decision.
 - [Phase 2 command log](blazex-bh-04-phase-02-validation-log-v0.1.0.txt) — exact commands, counts and cross-language agreement.
 

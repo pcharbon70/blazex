@@ -1,0 +1,50 @@
+{
+  "schema_version": "1.0.0",
+  "milestone": "BH-04",
+  "phase": 3,
+  "date": "2026-09-07",
+  "base_revision": "980836b8bc34383bde2e1f24a5a9e7d65908d347",
+  "branch": "codex/bh04-phase3-reconciliation",
+  "authority": "User requested the next BH-04 phase with one commit per section, one PR, merge, main synchronization and feature-branch cleanup; user explicitly approved the versioned protocol correction needed to preserve existing accessibility relationships and layout intent.",
+  "section_commits": [
+    "3.1",
+    "3.2",
+    "3.3",
+    "3.4"
+  ],
+  "pull_requests": 1,
+  "merge": true,
+  "cleanup": [
+    "checkout main",
+    "sync origin/main",
+    "verify equality",
+    "delete feature branch",
+    "restore unrelated user work"
+  ],
+  "source_bindings": {
+    "packages/blazex_core/lib/blazex/core/identity.ex": "46d62a903ba4e3df049ecf94efc174009c4b2c5c54f29f8507a042d18356e8c4",
+    "packages/blazex_renderer/lib/blazex/renderer/session.ex": "5d4b075ed9b8675924d422b72300492d08307be3544b487537fc1c1c9b86750d",
+    "packages/blazex_renderer_dom/lib/blazex/renderer/dom/projection.ex": "119e2b76f804c9070445e64dd726074742cfea9d4837e4c9ffc01d15c6b547ad",
+    "packages/blazex_renderer_dom/lib/blazex/renderer/dom/protocol.ex": "22201a7d6366f44eb46252c956293911710aa6c85f23370ea6b4f4680454a8a2",
+    "integration/bh-04/render-transaction.schema.json": "634f1e2d482845e3984624a842c27ac15f64eb1fff386407bf7ca88570a34807",
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-02-completion-v0.1.0.json": "cfcd2a5f1155dbb81d19693f6bdfc3d27f1f98a61a7d0893d0adb30d170340fc",
+    "docs/research/60-planning/development-environment-and-deferred-qualification-policy.md": "5d50cded3d70e95d47359df2a003a6979d92b8745fab012824646cc1e6bc8cfa"
+  },
+  "protocol": {
+    "previous": "blazex.dom-transaction/1",
+    "candidate": "blazex.dom-transaction/2",
+    "schema": "2.0.0",
+    "canonical_codec": "unchanged Phase 2 codec"
+  },
+  "excluded": [
+    "live DOM application",
+    "browser events",
+    "form/focus restoration",
+    "effect execution",
+    "LiveView translation",
+    "support promotion",
+    "public API stability",
+    "BH-05 authority"
+  ],
+  "next_authorized_work": null
+}

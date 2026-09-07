@@ -161,6 +161,8 @@ public stability or browser support.
 
 ### Documents
 
+- [Phase 3 reconciliation contract](phase-03-reconciliation-contract.md) — identity, bounds, protocol correction and acknowledgement policy.
+
 - [Phase 2 implementation evidence](phase-02-implementation-evidence.md) — protocol, codec agreement and bounded completion.
 
 - [Phase 2 protocol design](phase-02-protocol-design.md) — internal envelope, limits, canonical bytes and exclusions.
