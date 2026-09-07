@@ -81,6 +81,19 @@ authentication. Encoding uses no map iteration, process clocks or browser state.
 
 ## Fail-closed policy and next work
 
+The [closed schema](../../../../../integration/bh-04/render-transaction.schema.json)
+defines exact fields for all twelve operation types and the three record classes.
+The [inventory](../../../../../integration/bh-04/protocol-inventory-v0.1.0.json)
+names all kinds, states and diagnostics. Attributes are allowlisted (no arbitrary
+markup, URLs, handlers or styles); properties distinguish text value from booleans.
+Listener IDs are unique within a root. Remove/replace require leaf targets;
+replacement substitutes a detached created node at the asserted parent.
+An effect barrier must be last and only declares post-commit resource ordering.
+All operation old/new assertions are explicit, with no omitted-value coercion.
+Acknowledgements with failure states require a diagnostic; successful states
+forbid one. Disposed acknowledgements require a dispose transaction.
+The schema's maxBytes extension is normative and enforced by both validators.
+
 Malformed, incompatible, stale, duplicate, missing-target, ownership, limit,
 apply, rollback and disposed-root are the closed diagnostic classes.
 Overflow is rejected before dispatch; there is no truncation or coercion.

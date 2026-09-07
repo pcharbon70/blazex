@@ -7,6 +7,9 @@ benchmark pass, browser qualification, or support is claimed.
 
 ## Index
 
+- [Phase 2 record schema](render-transaction.schema.json) — exact transaction, operation, acknowledgement, diagnostic and trusted-context shapes; maxBytes is an enforced UTF-8 extension.
+- [Phase 2 inventory](protocol-inventory-v0.1.0.json) — closed vocabulary, limits and empty behavior results. Phase 2 supersedes activation-only scope with pure protocol work, not DOM behavior.
+
 - [Empty versioned index](integration-index-v0.1.0.json) declares transaction,
   reconciliation, interaction, browser, LiveView adapter, failure, measurement,
   review and acceptance classes with no results.

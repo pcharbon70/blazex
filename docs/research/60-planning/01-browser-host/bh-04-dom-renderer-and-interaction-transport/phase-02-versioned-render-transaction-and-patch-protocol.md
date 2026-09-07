@@ -46,29 +46,29 @@ Back to milestone: [README](README.md)
       - [x] 2.1.2.2 Subtask - Define root owner, generation, base revision, target revision, transaction ID, digest, operation ordering, acknowledgement, and diagnostic correlation invariants.
       - [x] 2.1.2.3 Subtask - Define bounded depth, nodes, operations, listeners, attributes, values, text, queue, and message size limits plus fail-closed overflow behavior.
 
-  - [ ] 2.2 Section - Define the closed render-transaction vocabulary.
+  - [x] 2.2 Section - Define the closed render-transaction vocabulary.
 
     Replace implicit full-root semantics with a canonical transaction model
     that can represent initial materialization, incremental change, replacement,
     and disposal while retaining exact root ownership.
 
-    - [ ] 2.2.1 Task - Define transaction and patch operation records.
+    - [x] 2.2.1 Task - Define transaction and patch operation records.
 
       Give each mutation enough information for preflight validation,
       deterministic execution, diagnostics, and replay testing.
 
-      - [ ] 2.2.1.1 Subtask - Define initial, patch, replace, and dispose transaction kinds and a closed set of create, insert, move, remove, replace, text, attribute, property, listener, focus, selection, and effect-barrier operations.
-      - [ ] 2.2.1.2 Subtask - Define canonical node/listener identities, parent/anchor references, old/new assertions, operation dependencies, and normalized serialization order.
-      - [ ] 2.2.1.3 Subtask - Define transaction digests and deterministic encoding independent of map iteration, process timing, or browser implementation details.
+      - [x] 2.2.1.1 Subtask - Define initial, patch, replace, and dispose transaction kinds and a closed set of create, insert, move, remove, replace, text, attribute, property, listener, focus, selection, and effect-barrier operations.
+      - [x] 2.2.1.2 Subtask - Define canonical node/listener identities, parent/anchor references, old/new assertions, operation dependencies, and normalized serialization order.
+      - [x] 2.2.1.3 Subtask - Define transaction digests and deterministic encoding independent of map iteration, process timing, or browser implementation details.
 
-    - [ ] 2.2.2 Task - Define acknowledgement and failure records.
+    - [x] 2.2.2 Task - Define acknowledgement and failure records.
 
       Make every accepted, rejected, committed, rolled-back, replaced, and
       disposed outcome observable to the owning root.
 
-      - [ ] 2.2.2.1 Subtask - Define preflight, accepted, committed, rejected, rolled-back, fallback, and disposed acknowledgement states with root/generation/revision correlation.
-      - [ ] 2.2.2.2 Subtask - Define malformed, incompatible, stale, duplicate, missing-target, ownership, limit, apply, rollback, and disposed-root diagnostic classes.
-      - [ ] 2.2.2.3 Subtask - Prohibit silent coercion, partial-success acknowledgement, arbitrary exception serialization, and cross-root diagnostic disclosure.
+      - [x] 2.2.2.1 Subtask - Define preflight, accepted, committed, rejected, rolled-back, fallback, and disposed acknowledgement states with root/generation/revision correlation.
+      - [x] 2.2.2.2 Subtask - Define malformed, incompatible, stale, duplicate, missing-target, ownership, limit, apply, rollback, and disposed-root diagnostic classes.
+      - [x] 2.2.2.3 Subtask - Prohibit silent coercion, partial-success acknowledgement, arbitrary exception serialization, and cross-root diagnostic disclosure.
 
   - [ ] 2.3 Section - Implement schemas, codecs, and contract validation.
 
