@@ -744,7 +744,7 @@ defmodule BlazeX.Renderer.DOM.Protocol.Schema do
     do:
       is_binary(value) and String.valid?(value) and byte_size(value) <= schema["maxBytes"] and
         (not Map.has_key?(schema, "pattern") or
-           Regex.match?(Regex.compile!(schema["pattern"]), value))
+           Regex.run(Regex.compile!(schema["pattern"]), value) == [value])
 
   def valid?(value, %{"type" => "array"} = schema),
     do:

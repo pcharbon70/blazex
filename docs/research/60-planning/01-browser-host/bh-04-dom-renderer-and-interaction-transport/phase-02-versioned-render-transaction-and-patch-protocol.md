@@ -17,7 +17,7 @@ aliases:
 
 Back to milestone: [README](README.md)
 
-- [ ] 2 Phase - Versioned Render Transaction and Patch Protocol.
+- [x] 2 Phase - Versioned Render Transaction and Patch Protocol.
 
   Define the internal, versioned language between the renderer backend and the
   browser applicator. The protocol must describe incremental transactions,
@@ -93,27 +93,27 @@ Back to milestone: [README](README.md)
       - [x] 2.3.2.2 Subtask - Publish malformed, unknown-version, extra-field, wrong-owner, stale-base, duplicate-ID, impossible-order, oversized, and digest-mismatch fixtures.
       - [x] 2.3.2.3 Subtask - Round-trip canonical fixtures through Elixir and JavaScript and compare normalized bytes, digests, and error classes.
 
-  - [ ] 2.4 Section - Phase 2 Integration Tests and Completion Evidence.
+  - [x] 2.4 Section - Phase 2 Integration Tests and Completion Evidence.
 
     Execute the protocol gate with no live DOM mutations and publish evidence
     that later behavior remains outside the phase.
 
-    - [ ] 2.4.1 Task - Run deterministic protocol integration tests.
+    - [x] 2.4.1 Task - Run deterministic protocol integration tests.
 
       Exercise the schemas and codecs through their real package boundaries.
 
-      - [ ] 2.4.1.1 Subtask - Run Mix and Node contract suites over all positive, negative, boundary, determinism, version-negotiation, and cross-language fixtures.
-      - [ ] 2.4.1.2 Subtask - Run dependency, forbidden-token, archive, inherited-governance, JSON/schema, generated-freshness, and patch-hygiene checks.
-      - [ ] 2.4.1.3 Subtask - Confirm no reconciler, DOM applicator, event transport, LiveView adapter, browser result, or measurement is implemented or claimed.
+      - [x] 2.4.1.1 Subtask - Run Mix and Node contract suites over all positive, negative, boundary, determinism, version-negotiation, and cross-language fixtures.
+      - [x] 2.4.1.2 Subtask - Run dependency, forbidden-token, archive, inherited-governance, JSON/schema, generated-freshness, and patch-hygiene checks.
+      - [x] 2.4.1.3 Subtask - Confirm no reconciler, DOM applicator, event transport, LiveView adapter, browser result, or measurement is implemented or claimed.
 
-    - [ ] 2.4.2 Task - Publish Phase 2 completion evidence.
+    - [x] 2.4.2 Task - Publish Phase 2 completion evidence.
 
       Record the exact internal protocol candidate and its unresolved
       implementation risks without promoting it publicly.
 
-      - [ ] 2.4.2.1 Subtask - Publish protocol inventory, fixture hashes, command log, negative outcomes, dependency audit, limitations, and implementation-evidence note.
-      - [ ] 2.4.2.2 Subtask - Mark Phase 2 complete only if Elixir/JavaScript agreement is exact and all malformed traffic fails before mutation.
-      - [ ] 2.4.2.3 Subtask - Make Phase 3 eligible but unauthorized and retain protocol change control through BH-04 acceptance.
+      - [x] 2.4.2.1 Subtask - Publish protocol inventory, fixture hashes, command log, negative outcomes, dependency audit, limitations, and implementation-evidence note.
+      - [x] 2.4.2.2 Subtask - Mark Phase 2 complete only if Elixir/JavaScript agreement is exact and all malformed traffic fails before mutation.
+      - [x] 2.4.2.3 Subtask - Make Phase 3 eligible but unauthorized and retain protocol change control through BH-04 acceptance.
 
 ## Section delivery rule
 

@@ -39,7 +39,7 @@ export function encode(value) {
     if (v && Object.getPrototypeOf(v) === Object.prototype) {
       const keys = Object.keys(v).sort();
       if (keys.length > 64 || Reflect.ownKeys(v).length !== keys.length) fail("malformed");
-      if (keys.some(k => !/^[a-z][a-z0-9_]{0,63}$/.test(k))) fail("malformed");
+      if (keys.some(k => /^[a-z][a-z0-9_]{0,63}$/.exec(k)?.[0] !== k)) fail("malformed");
       if (keys.some(k => !Object.hasOwn(Object.getOwnPropertyDescriptor(v, k), "value"))) fail("malformed");
       return emit("m" + keys.length + ":") + keys.map(k => walk(k, depth + 1) + walk(v[k], depth + 1)).join("");
     }
@@ -58,7 +58,7 @@ export function decode(bytes) {
     while (offset < bytes.length && bytes[offset] !== delimiter) offset++;
     if (offset === bytes.length) fail("malformed");
     const token = decoder.decode(bytes.slice(start, offset++));
-    if (!/^(0|[1-9][0-9]*)$/.test(token)) fail("malformed");
+    if (/^(0|[1-9][0-9]*)$/.exec(token)?.[0] !== token) fail("malformed");
     const n = Number(token);
     if (!Number.isSafeInteger(n)) fail("malformed");
     return n;
@@ -84,7 +84,7 @@ export function decode(bytes) {
       const out = {};
       for (let i = 0; i < size; i++) {
         const key = parse(depth + 1);
-        if (typeof key !== "string" || !/^[a-z][a-z0-9_]{0,63}$/.test(key) || Object.hasOwn(out, key)) fail("malformed");
+        if (typeof key !== "string" || /^[a-z][a-z0-9_]{0,63}$/.exec(key)?.[0] !== key || Object.hasOwn(out, key)) fail("malformed");
         Object.defineProperty(out, key, { value: parse(depth + 1), enumerable: true, writable: true });
       }
       return out;

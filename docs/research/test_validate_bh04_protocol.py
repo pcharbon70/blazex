@@ -49,6 +49,20 @@ class ProtocolGovernanceTests(unittest.TestCase):
     def test_candidate(self):
         self.assertEqual([], gate.validate(self.root, completion=False))
 
+    def test_empty_gate_list_is_not_completion(self):
+        self.assertFalse(gate.complete_gates([]))
+
+    def test_failed_gate_is_not_completion(self):
+        gates = [{"name": name, "exit_code": 0} for name in gate.REQUIRED_GATES]
+        gates[0]["exit_code"] = 1
+        self.assertFalse(gate.complete_gates(gates))
+
+    def test_exact_active_gate_inventory(self):
+        gates = [{"name": name, "exit_code": 0} for name in gate.REQUIRED_GATES]
+        self.assertTrue(gate.complete_gates(gates))
+        gates[0]["name"] = "invented"
+        self.assertFalse(gate.complete_gates(gates))
+
     def test_authority(self):
         self.mutate(gate.AUTH, lambda d: d.update(phase=3), "authority")
 

@@ -27,8 +27,9 @@ implementation milestones](../../20-notes/browser-host-implementation-milestones
 
 BH-04 Phase 1 completed its governance-only activation on 2026-09-07 after
 accepted BH-03 Phase 9. Its [ten-phase plan](bh-04-dom-renderer-and-interaction-transport/README.md)
-now makes Phase 2 eligible but unauthorized. BH-05 remains ineligible;
-no new renderer behavior or support is claimed.
+now records Phase 2's completed internal protocol and makes Phase 3 eligible
+but unauthorized. BH-05 remains ineligible; no incremental renderer behavior
+or support is claimed.
 
 - Future phase documents for browser-host implementation.
 - Shared planning status, dependency, and evidence conventions for those
@@ -74,7 +75,7 @@ memory observations on 2026-09-06. Phase 8 completed its review on 2026-09-07
 with a revise decision. Corrective Phase 9 closed the unreported runtime-loss
 defect and accepted BH-03 with bounded conditions on 2026-09-07.
 The repository owner approved the BH-04 ten-phase decomposition on 2026-09-06.
-BH-04 Phase 1 is complete; Phase 2 is eligible but requires separate
+BH-04 Phases 1 and 2 are complete; Phase 3 is eligible but requires separate
 implementation authorization. The twelve-phase BH-05 component programming
 model decomposition is approved as
 planning, but implementation remains ineligible and unauthorized until BH-04
@@ -84,7 +85,7 @@ is accepted and its handoff is reconciled.
 
 ### Subdirectories
 
-- [BH-04 — DOM Renderer and Interaction Transport](bh-04-dom-renderer-and-interaction-transport/README.md) — approved ten-phase plan; Phase 1 governance activation complete, Phase 2 eligible but unauthorized, later behavior and milestone acceptance outstanding.
+- [BH-04 — DOM Renderer and Interaction Transport](bh-04-dom-renderer-and-interaction-transport/README.md) — approved ten-phase plan; Phase 2 internal protocol complete, Phase 3 eligible but unauthorized, later behavior and milestone acceptance outstanding.
 
 - [BH-00 — Product Boundary, Catalog, and Acceptance Contract](bh-00-product-boundary-catalog-and-acceptance-contract/README.md) — six-phase plan that freezes vocabulary, product scope, catalog dispositions, quality budgets, and acceptance traceability before BH-01 implementation begins.
 - [BH-01 — Reproducible Browser Feasibility Baseline](bh-01-reproducible-browser-feasibility-baseline/README.md) — completed need-driven plan with a proceed-with-bounded-conditions decision; external browser qualification remains deferred, and its immutable entry artifact records the pre-authorization BH-02 state.

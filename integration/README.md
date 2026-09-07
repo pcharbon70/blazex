@@ -25,3 +25,8 @@ in Phase 1; all result classes remain empty. Historical statements below
 describe earlier activations. The current BH-03 handoff is its accepted Phase 9
 [decision](../docs/research/assets/bh-03-baseline/blazex-bh-03-phase-09-acceptance-v0.1.0.json),
 with bounded limitations and no support promotion.
+# BH-04 Phase 2 protocol status
+
+[BH-04 protocol fixtures](bh-04/README.md) now compare canonical bytes, hashes
+and rejection classes across Elixir and JavaScript. Browser and performance
+results remain empty; earlier activation descriptions below are historical.

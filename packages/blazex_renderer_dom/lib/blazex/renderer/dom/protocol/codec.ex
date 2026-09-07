@@ -57,7 +57,10 @@ defmodule BlazeX.Renderer.DOM.Protocol.Codec do
   defp write(value, depth) when is_map(value) do
     require!(map_size(value) <= 64)
     keys = Enum.sort(Map.keys(value))
-    require!(Enum.all?(keys, &(is_binary(&1) and Regex.match?(~r/^[a-z][a-z0-9_]{0,63}$/, &1))))
+
+    require!(
+      Enum.all?(keys, &(is_binary(&1) and Regex.run(~r/^[a-z][a-z0-9_]{0,63}$/, &1) == [&1]))
+    )
 
     [
       "m",
@@ -88,7 +91,7 @@ defmodule BlazeX.Renderer.DOM.Protocol.Codec do
       [token, rest] ->
         require!(
           String.valid?(token) and byte_size(token) <= 16 and
-            Regex.match?(~r/^(0|[1-9][0-9]*)$/, token)
+            Regex.run(~r/^(?:0|[1-9][0-9]*)$/, token) == [token]
         )
 
         value = String.to_integer(token)
@@ -139,7 +142,7 @@ defmodule BlazeX.Renderer.DOM.Protocol.Codec do
 
   defp mapping(n, rest, depth, result) do
     {key, rest} = parse(rest, depth + 1)
-    require!(is_binary(key) and Regex.match?(~r/^[a-z][a-z0-9_]{0,63}$/, key))
+    require!(is_binary(key) and Regex.run(~r/^[a-z][a-z0-9_]{0,63}$/, key) == [key])
     require!(not Map.has_key?(result, key))
     {value, rest} = parse(rest, depth + 1)
     mapping(n - 1, rest, depth, Map.put(result, key, value))

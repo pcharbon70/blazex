@@ -24,6 +24,7 @@ version|incompatible||
 schema-version|incompatible||
 extra-field|malformed||
 owner|ownership||
+owner-newline|malformed||
 generation|ownership||
 stale-base|stale||
 target-gap|stale||
@@ -66,6 +67,7 @@ trailing-byte|malformed||
 nonminimal-integer|malformed||
 negative-integer|malformed||
 float|malformed||
+integer-newline|malformed||
 duplicate-map-key|malformed||
 map-order|malformed||
 text-byte-overflow|limit||

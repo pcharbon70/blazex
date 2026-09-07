@@ -37,6 +37,14 @@ SOURCES = [
     "docs/research/test_validate_bh04_protocol.py"
 ]
 BEHAVIORS = ["browser", "measurement", "reconciliation", "dom_application", "event_transport", "liveview_adapter"]
+REQUIRED_GATES = {"research-tests", "governance-validators", "generators", "elixir-packages",
+                  "runtime-js", "dom-js", "cross-language", "json-schema", "patch-hygiene"}
+
+
+def complete_gates(gates):
+    return (isinstance(gates, list) and len(gates) == len(REQUIRED_GATES)
+            and all(isinstance(g, dict) and g.get("exit_code") == 0 for g in gates)
+            and {g.get("name") for g in gates} == REQUIRED_GATES)
 
 
 def sha(data):
@@ -115,7 +123,7 @@ def validate(root=ROOT, completion=True):
                                     (root / path).read_text()), "forbidden execution or framework surface")
         results = (root / "integration/bh-04/protocol-results-v0.1.0.txt").read_text().splitlines()
         fixtures = (root / "integration/bh-04/protocol-fixtures-v0.1.0.txt").read_text().splitlines()
-        check(len(results) == len(fixtures) == 73, "fixture result coverage changed")
+        check(len(results) == len(fixtures) == 75, "fixture result coverage changed")
         check(len({line.split("|")[0] for line in results}) == len(results), "duplicate fixture identity")
         check(sum(line.split("|")[1] == "ok" for line in results) == 34, "positive coverage changed")
         for fixture, result in zip(fixtures, results):
@@ -132,9 +140,17 @@ def validate(root=ROOT, completion=True):
             for path, expected in record["artifact_hashes"].items():
                 check(sha((root / path).read_bytes()) == expected, "completion hash changed: " + path)
             check(record["behavior_results"] == inventory["results"], "completion invented behavior evidence")
-            check(record["cross_language"] == {"cases": 73, "positive": 34, "negative": 39, "agreement": "exact"},
+            check(record["cross_language"] == {"cases": 75, "positive": 34, "negative": 41, "agreement": "exact"},
                   "cross-language evidence incomplete")
-            check(all(gate["exit_code"] == 0 for gate in record["gates"]), "active gate failed")
+            check(complete_gates(record["gates"]), "active gate failed or missing")
+            check(record["base_revision"] == BASE, "completion base mismatch")
+            check([row["section"] for row in record["section_commits"]] == ["2.1", "2.2", "2.3", "2.4"],
+                  "section provenance missing")
+            for row in record["section_commits"][:3]:
+                check(git(root, "show", "-s", "--format=%s", row["commit"]).decode().startswith("BH-04 " + row["section"] + ":"),
+                      "section commit mismatch")
+                subprocess.run(["git", "-C", str(root), "merge-base", "--is-ancestor", row["commit"], "HEAD"],
+                               check=True, capture_output=True)
     except (OSError, ValueError, KeyError, TypeError, IndexError, subprocess.CalledProcessError) as exc:
         errors.append("Cannot establish Phase 2 evidence: " + str(exc))
     return errors

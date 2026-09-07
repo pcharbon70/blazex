@@ -52,6 +52,7 @@ export async function cases() {
     ["schema-version", "incompatible", r => r.schema = "2.0.0"],
     ["extra-field", "malformed", r => r.secret = "forbidden"],
     ["owner", "ownership", r => r.owner = "root-other"],
+    ["owner-newline", "malformed", r => r.owner = "root-demo\n"],
     ["generation", "ownership", r => r.generation = 2],
     ["stale-base", "stale", r => r.base_revision = 0],
     ["target-gap", "stale", r => r.target_revision = 3],
@@ -116,6 +117,7 @@ export async function cases() {
   for (const [name, raw, expected] of [
     ["trailing-byte", "nX", "malformed"], ["nonminimal-integer", "i01;", "malformed"],
     ["negative-integer", "i-1;", "malformed"], ["float", "i1.0;", "malformed"],
+    ["integer-newline", "i1\n;", "malformed"],
     ["duplicate-map-key", "m2:s1:ans1:an", "malformed"],
     ["map-order", "m2:s1:bns1:an", "malformed"],
     ["text-byte-overflow", "s4097:" + "x".repeat(4097), "limit"],

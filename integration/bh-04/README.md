@@ -2,6 +2,10 @@
 
 ## Purpose
 
+Current status: Phase 2 has a pure internal protocol and 75 shared contract
+fixtures. The Phase 1 empty index below remains historical and immutable.
+No incremental renderer or live application behavior is implemented here.
+
 Phase 1 activates evidence governance only. No incremental renderer behavior,
 benchmark pass, browser qualification, or support is claimed.
 

@@ -95,6 +95,11 @@ Listener IDs are unique within a root. Remove/replace require leaf targets;
 replacement substitutes a detached created node at the asserted parent.
 An effect barrier must be last and only declares post-commit resource ordering.
 All operation old/new assertions are explicit, with no omitted-value coercion.
+Selection offsets are UTF-16 code units for the DOM adapter; matching them to
+actual form values is deferred to Phase 4/6. The current fourteen-name attribute
+allowlist is stricter than the declared 32-attribute ceiling. Queue enforcement
+and materialized attribute counts remain Phase 4 work; Phase 2 does not
+represent their declaration as executed queue or browser evidence.
 Acknowledgements with failure states require a diagnostic; successful states
 forbid one. Disposed acknowledgements require a dispose transaction.
 The schema's maxBytes extension is normative and enforced by both validators.

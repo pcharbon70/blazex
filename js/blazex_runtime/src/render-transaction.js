@@ -9,7 +9,7 @@ function shape(value, schema) {
     case "null": return value === null;
     case "boolean": return typeof value === "boolean";
     case "integer": return Number.isSafeInteger(value) && value >= schema.minimum && value <= schema.maximum;
-    case "string": return typeof value === "string" && new TextEncoder().encode(value).length <= schema.maxBytes && (!schema.pattern || new RegExp(schema.pattern).test(value));
+    case "string": return typeof value === "string" && new TextEncoder().encode(value).length <= schema.maxBytes && (!schema.pattern || new RegExp(schema.pattern).exec(value)?.[0] === value);
     case "array": return Array.isArray(value) && value.length >= (schema.minItems ?? 0) && value.length <= schema.maxItems && value.every(x => shape(x, schema.items));
     case "object": return value !== null && Object.getPrototypeOf(value) === Object.prototype && Object.keys(value).length === schema.required.length && schema.required.every(k => Object.hasOwn(value, k) && shape(value[k], schema.properties[k]));
     default: return false;

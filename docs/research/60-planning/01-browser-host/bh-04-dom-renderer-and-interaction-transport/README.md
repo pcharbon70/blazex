@@ -39,6 +39,9 @@ owner explicitly authorized Phase 1 on 2026-09-07. Every subsequent phase
 requires separate implementation authorization. No new renderer behavior,
 support, public API stability, or BH-05 eligibility is claimed.
 
+The owner subsequently authorized Phase 2 on 2026-09-07. Its internal protocol
+gate is complete; Phase 3 is now eligible but requires separate authorization.
+
 ## What belongs here
 
 - The BH-03 handoff and the BH-02 renderer, semantic, event, effect, resource,
@@ -93,8 +96,8 @@ versions; no dependency may point back from the standalone path.
 | Phase | Status | Delivery | Dependency |
 | --- | --- | --- | --- |
 | [1 — Authorization, Handoff Reconciliation, and Renderer Boundary Activation](phase-01-authorization-handoff-reconciliation-and-renderer-boundary-activation.md) | complete — activation only | Bind accepted BH-03 inputs, reconcile the BH-04 ledger, activate only renderer evidence boundaries, and prove fail-closed ownership. | Accepted BH-03 handoff and explicit authorization |
-| [2 — Versioned Render Transaction and Patch Protocol](phase-02-versioned-render-transaction-and-patch-protocol.md) | eligible — unauthorized | Define the closed transaction, patch-operation, acknowledgement, diagnostic, and compatibility contracts used by both DOM paths. | Phase 1 |
-| [3 — Keyed Incremental Reconciliation and Deterministic Diffing](phase-03-keyed-incremental-reconciliation-and-deterministic-diffing.md) | planned — unauthorized | Replace full-root-only updates with bounded keyed reconciliation and canonical operation generation in the standalone DOM package. | Phase 2 |
+| [2 — Versioned Render Transaction and Patch Protocol](phase-02-versioned-render-transaction-and-patch-protocol.md) | complete — internal protocol only | Define the closed transaction, patch-operation, acknowledgement, diagnostic, and compatibility contracts used by both DOM paths. | Phase 1 |
+| [3 — Keyed Incremental Reconciliation and Deterministic Diffing](phase-03-keyed-incremental-reconciliation-and-deterministic-diffing.md) | eligible — unauthorized | Replace full-root-only updates with bounded keyed reconciliation and canonical operation generation in the standalone DOM package. | Phase 2 |
 | [4 — Atomic DOM Application, Root Queues, and Stale Rejection](phase-04-atomic-dom-application-root-queues-and-stale-rejection.md) | planned — unauthorized | Apply validated transactions through isolated per-root queues with atomic failure behavior, rollback/fallback, and exact generation ordering. | Phase 3 and BH-03 root lifecycle |
 | [5 — Semantic Event Normalization and Interaction Transport](phase-05-semantic-event-normalization-and-interaction-transport.md) | planned — unauthorized | Normalize bound browser events into bounded semantic interaction records and deliver them to the correct runtime root without server authority. | Phases 2 and 4 |
 | [6 — Form Value, Focus, and Selection Continuity](phase-06-form-value-focus-and-selection-continuity.md) | planned — unauthorized | Preserve controlled values, form semantics, active element, text selection, composition, and focus intent across incremental updates. | Phases 3–5 |
@@ -157,6 +160,8 @@ public stability or browser support.
 - None yet.
 
 ### Documents
+
+- [Phase 2 implementation evidence](phase-02-implementation-evidence.md) — protocol, codec agreement and bounded completion.
 
 - [Phase 2 protocol design](phase-02-protocol-design.md) — internal envelope, limits, canonical bytes and exclusions.
 
