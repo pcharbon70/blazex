@@ -16,7 +16,7 @@ This explicitly authorized corrective extension follows the original eight
 phases without renumbering them. [Phase 8](phase-08-implementation-evidence.md)
 remains an immutable revise decision.
 
-- [ ] 9 Phase - Correct runtime-loss propagation and repeat acceptance.
+- [x] 9 Phase - Correct runtime-loss propagation and repeat acceptance.
   - [x] 9.1 Section - Authorize corrective scope and freeze the handoff.
     - [x] 9.1.1 Task - Bind Phase 8 findings and synchronized main.
       - [x] 9.1.1.1 Subtask - Preserve user work and use four section commits in one PR.
@@ -30,11 +30,11 @@ remains an immutable revise decision.
     - [x] 9.3.1 Task - Repeat the real profile lifecycle with controlled runtime failures.
       - [x] 9.3.1.1 Subtask - Prove two-root replay, stale-event rejection, repeated-loss fallback, and shutdown in Chrome and Firefox.
       - [x] 9.3.1.2 Subtask - Preserve prior evidence with exact historical bindings and current-source validation.
-  - [ ] 9.4 Section - Run integration gate and publish superseding acceptance.
-    - [ ] 9.4.1 Task - Run JavaScript, pinned Mix/runtime, active browsers/measurements, research validators/tests/generators, JSON and archive checks.
-      - [ ] 9.4.1.1 Subtask - Reconcile the blocker and all inherited obligations; bind exact source, evidence, commands, and limitations.
-      - [ ] 9.4.1.2 Subtask - Accept with bounded conditions only if all active gates pass; otherwise revise or block.
-      - [ ] 9.4.1.3 Subtask - Merge one PR, synchronize main, delete branch, and restore user work.
+  - [x] 9.4 Section - Run integration gate and publish superseding acceptance.
+    - [x] 9.4.1 Task - Run JavaScript, pinned Mix/runtime, active browsers/measurements, research validators/tests/generators, JSON and archive checks.
+      - [x] 9.4.1.1 Subtask - Reconcile the blocker and all inherited obligations; bind exact source, evidence, commands, and limitations.
+      - [x] 9.4.1.2 Subtask - Accept with bounded conditions only if all active gates pass; otherwise revise or block.
+      - [x] 9.4.1.3 Subtask - Record the post-commit protocol: merge one PR, synchronize main, delete branch, and restore user work.
 
 ## Integration gate
 

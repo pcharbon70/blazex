@@ -133,9 +133,9 @@ def validate_fixtures(fixtures: dict[str, Any]) -> None:
     _require(expected.get("support_state") == "unsupported", "fixture promotes browser support")
 
 
-def validate_evidence(evidence: dict[str, Any]) -> None:
+def validate_evidence(evidence: dict[str, Any], expected_revision: str = IMPLEMENTATION_REVISION) -> None:
     _require(evidence.get("evidence_id") == "BX-BH03-PHASE-06-ACTIVE-BROWSER-MATRIX-0.1", "browser evidence ID is invalid")
-    _require(evidence.get("implementation_revision") == IMPLEMENTATION_REVISION, "browser evidence implementation revision diverges")
+    _require(evidence.get("implementation_revision") == expected_revision, "browser evidence implementation revision diverges")
     _require(evidence.get("scenario_set") == SCENARIOS, "browser evidence scenario set diverges")
     results = evidence.get("results", [])
     _require(len(results) == 2, "both active browser rows are required")

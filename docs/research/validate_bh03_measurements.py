@@ -152,9 +152,9 @@ def _validate_sample(sample: dict[str, Any], iteration: int, browser: str) -> No
         _require(memory == {"available": False, "reason": "browser-memory-api-unavailable"}, "Firefox memory unavailability diverges")
 
 
-def validate_evidence(evidence: dict[str, Any]) -> None:
+def validate_evidence(evidence: dict[str, Any], expected_revision: str = IMPLEMENTATION_REVISION) -> None:
     _require(evidence.get("evidence_id") == "BX-BH03-PHASE-07-ACTIVE-MEASUREMENTS-0.1", "evidence ID is invalid")
-    _require(evidence.get("implementation_revision") == IMPLEMENTATION_REVISION, "implementation revision diverges")
+    _require(evidence.get("implementation_revision") == expected_revision, "implementation revision diverges")
     _require(evidence.get("scenario_set") == SCENARIOS, "scenario set diverges")
     _require(evidence.get("sampling") == {"warmup_repetitions_per_browser": 1, "retained_repetitions_per_browser": 5, "profile_roots": 2, "additional_measurement_roots": 8}, "sampling evidence diverges")
     results = evidence.get("results", [])

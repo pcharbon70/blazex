@@ -1,0 +1,85 @@
+BH-03 Phase 9 validation log — 2026-09-07
+Base: 8db4928b9b5e8eb869617ab4bf882df3e1cde6f1
+Final observed candidate: 72d398017d9fe67b7017d71bfb65356ce7f7b73a
+Branch: codex/bh03-phase9-runtime-loss
+Linux 6.8.0-51-generic x86_64; Node v24.3.0; npm 11.4.2;
+Python 3.12.12; Git 2.49.0; jq 1.7; playwright-core 1.62.1.
+Pinned container image: a2386c21edd5, Elixir 1.17.3, OTP 26 (erts-14.0.2).
+No production dependency, toolkit, runtime artifact, or canonical acceptance-registry change.
+
+PASS npm run build && npm test in js/blazex_runtime
+  21 test files; 0 failures.
+  Eight new tests compose real startup and registry with injected frames:
+  exit recovery; abort recovery; loss before initial subscription;
+  loss before replacement subscription; loss during replay;
+  intentional stop/late callbacks; loss on final replay acknowledgement;
+  close during recovery.
+  Both loss-kind cases also prove stale generations, retained root replay,
+  same handle, exact one replacement, second-loss fallback, and cleanup.
+
+PASS docker exec blazex-bh03-phase9-server:
+  unset PHX_SERVER PORT
+  for project in packages/blazex_runtime_popcorn packages/blazex_host_browser profiles/browser_phoenix:
+    cd /workspace/<project>; mix format --check-formatted; mix test
+  cd /workspace/integration/fixtures/browser_host; mix test
+  4 + 4 + 14 + 17 = 39 tests, zero failures.
+  Three configured format checks; fixture has no configured formatter input.
+  Local Elixir 1.18.4 / OTP 27 was not substituted for the pinned runtime.
+
+PASS python3 profiles/browser_phoenix/assets/phase6/build_profile.py --output profiles/browser_phoenix/priv/static/bh03
+PASS python3 profiles/browser_phoenix/assets/phase6/verify_profile.py profiles/browser_phoenix/priv/static/bh03
+  Rebuilt after the final race fix: 29 governed files, 3 exact runtime artifacts.
+
+PASS final browser commands, cwd js/blazex_runtime:
+  export BLAZEX_CHROME_PATH=/usr/bin/google-chrome
+  export BLAZEX_FIREFOX_PATH=/home/ducky/.cache/ms-playwright/firefox-1538/firefox/firefox
+  export BLAZEX_REVISION=72d398017d9fe67b7017d71bfb65356ce7f7b73a
+  BLAZEX_EVIDENCE_PATH=/tmp/bh03-phase9-recovery.json node test/browser/bh03-phase9-recovery.integration.mjs
+  BLAZEX_EVIDENCE_PATH=/tmp/bh03-phase9-profile.json npm run test:browser:bh03-phase6
+  BLAZEX_EVIDENCE_PATH=/tmp/bh03-phase9-measurements.json npm run test:browser:bh03-phase7
+  Default profile URL http://127.0.0.1:4197/bh03/
+  Chrome 140.0.7339.80, Firefox 153.0.
+  Five new scenarios each: stale rejection, exit recovery, abort recovery,
+  repeated-loss fallback, intentional shutdown without replacement.
+  Root replay: 12 real AVM acknowledgements, 2 ready roots, one surviving iframe.
+  Terminal fallback/stop: zero runtime iframes, no third runtime, roots nonaccepting.
+  Both browsers also repeated five inherited profile scenarios.
+  Measurement: one discarded warm-up and five retained 10-root samples,
+  43 acknowledgements and zero iframes after each retained shutdown;
+  three declared failure scenarios per browser.
+
+PASS cd packages/blazex_runtime_popcorn/runtime:
+  python3 verify_runtime_build.py
+  python3 -m unittest discover -s tests -p 'test_*.py'
+  9 tests, no failures.
+
+PASS cd docs/research:
+  python3 -m unittest discover -p 'test_*.py'
+  299 tests, no failures.
+  Every validate_*.py script, including validate_bh03_correction.py: 24 validators.
+  Every generate_*.py script with --check: 4 deterministic generators.
+  New negative coverage: missing/stale/unauthorized historical bindings;
+  9 decision mutations and 10 recovery mutations; strict current hashes.
+PASS repository JSON parsing, archive navigation, and git diff --check.
+
+Review iterations:
+- Initial controlled browser runs passed.
+- Final review identified a final-replay-acknowledgement race that could reopen
+  registrations during fallback; fixed it and added an explicit negative regression.
+- Folded this integration fix into the unpushed Section 9.3 commit to retain
+  one commit per section. Discarded earlier evidence and reran all browser suites
+  from the revised complete committed candidate; evidence was not relabeled.
+- Archive checks temporarily reported the not-yet-created Phase 9 evidence link;
+  the evidence and complete navigation were added before final verification.
+- Historical validators retain exact old decision/source truth using only
+  hash-authorized Phase 9 path exceptions. The new gate has no historical
+  exception for CURRENT sources.
+
+Acceptance: accepted-with-bounded-conditions; BH-04 eligible, not authorized.
+Closes BX-BH03-FINDING-UNREPORTED-RUNTIME-LOSS.
+Controlled runtime callback faults are not OS/process crash qualification.
+Fresh contexts and coarse Chrome memory are not leak proof; Firefox heap API
+unavailable grants no pass credit. No release budget or support/stability claim.
+[DEFERRED] Safari/mobile/physical-device/second-host/manual-AT obligations keep
+qualification ownership and BH-22 reactivation. All 31 inherited obligations
+are retained with explicit lifecycle/provenance overlays, not blanket passes.

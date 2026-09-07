@@ -45,9 +45,10 @@ profile and active Linux Chrome/Firefox conformance gate on 2026-09-06. Phase
 and capability-aware memory observation gate on 2026-09-06. Phase 8 is eligible
 but not authorized by Phase 7. The owner authorized Phase 8 on 2026-09-07;
 Phase 8 review completed on 2026-09-07 with a **revise** decision. The real
-startup/registry composition can retain a ready scope after runtime exit.
-BH-03 is not accepted; corrective lifecycle work and a superseding acceptance
-review are required before BH-04 becomes eligible.
+startup/registry composition could retain a ready scope after runtime exit.
+Corrective Phase 9 completed on 2026-09-07, closing that defect and publishing
+superseding acceptance with bounded conditions. BH-03 is accepted for internal
+experimental development; BH-04 is eligible but not authorized.
 
 ## What belongs here
 
@@ -74,13 +75,14 @@ host delivery do not belong here.
 | [5 — Shutdown, Runtime Loss, Mismatch, and Fallback](phase-05-shutdown-runtime-loss-mismatch-and-fallback.md) | complete — gate passed | Implements deterministic shutdown, one bounded runtime-loss replacement with atomic root replay, and intentional non-DOM fallback decisions without partial activation. | Phases 3–4 |
 | [6 — Browser Profile Integration and Active-Matrix Conformance](phase-06-browser-profile-integration-and-active-matrix-conformance.md) | complete — gate passed | Composed the reusable lifecycle in a separate Phoenix `/bh03/` profile and passed the same five scenarios in active Linux Chrome and Firefox. | Phases 2–5 |
 | [7 — Resource, Reliability, and Startup Measurements](phase-07-resource-reliability-and-startup-measurements.md) | complete — gate passed | Measured repeated startup, ten-root lifecycle cleanup, declared failures, and capability-aware memory observations in active Linux Chrome and Firefox without release budgets. | Phase 6 |
-| [8 — Reconciliation, Review, and BH-03 Acceptance](phase-08-reconciliation-review-and-bh-03-acceptance.md) | review complete — revise | Reconciled outputs and obligations, repeated inherited gates, and reproduced an unreported runtime-exit defect. BH-04 is ineligible. | Phases 1–7 |
+| [8 — Reconciliation, Review, and BH-03 Acceptance](phase-08-reconciliation-review-and-bh-03-acceptance.md) | review complete — historical revise | Reproduced an unreported runtime-exit defect; its downstream decision is superseded by Phase 9. | Phases 1–7 |
+| [9 — Runtime-Loss Correction and Renewed Acceptance](phase-09-runtime-loss-correction-and-renewed-acceptance.md) | complete — accepted with bounded conditions | Observes runtime loss, proves recovery/fallback in active browsers, and makes BH-04 eligible without authorizing implementation. | Phase 8 corrective handoff |
 
 ## Shared delivery rules
 
 The owner authorized a corrective Phase 9 on 2026-09-07, following the Phase 8
 revise decision. [Phase 9 — Runtime-Loss Correction and Renewed Acceptance](phase-09-runtime-loss-correction-and-renewed-acceptance.md)
-is in progress; BH-04 remains ineligible until its gate accepts the correction.
+is complete. BH-04 requires its own explicit implementation authorization.
 
 1. Obtain separate authorization before each phase.
 2. Start from synchronized `main` on a `codex/` feature branch.
@@ -132,6 +134,7 @@ making a support or public-stability claim.
 
 - [Phase 8 — Reconciliation, Review, and BH-03 Acceptance](phase-08-reconciliation-review-and-bh-03-acceptance.md)
 - [Phase 8 implementation evidence and corrective handoff](phase-08-implementation-evidence.md)
+- [Phase 9 implementation evidence and accepted handoff](phase-09-implementation-evidence.md)
 
 ## Maintaining this index
 
