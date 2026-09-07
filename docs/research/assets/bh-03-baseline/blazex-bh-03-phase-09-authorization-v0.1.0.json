@@ -1,0 +1,58 @@
+{
+  "schema_version": "1.0.0",
+  "authorization_id": "BX-BH03-PHASE-09-AUTHORIZATION-0.1",
+  "status": "approved-phase-9-only",
+  "approved_by": "repository-owner explicit next-phase implementation request",
+  "date": "2026-09-07",
+  "base_revision": "8db4928b9b5e8eb869617ab4bf882df3e1cde6f1",
+  "base_remote_revision": "8db4928b9b5e8eb869617ab4bf882df3e1cde6f1",
+  "branch": "codex/bh03-phase9-runtime-loss",
+  "main_synchronized": true,
+  "section_count": 4,
+  "delivery": [
+    "one-commit-per-section",
+    "one-pr",
+    "merge-pr",
+    "sync-main-before-branch-deletion",
+    "restore-user-work"
+  ],
+  "inputs": [
+    {
+      "path": "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-08-completion-v0.1.0.json",
+      "sha256": "1b6f933d6246de89e431ad0abbe7460fd50287fbd339e34d3d6b6be28ea13f71"
+    },
+    {
+      "path": "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-08-review-v0.1.0.json",
+      "sha256": "35b95f5ab6d5759003074fc4c18da38be43c78c432af41440623cdf41eece876"
+    },
+    {
+      "path": "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-08-reconciliation-v0.1.0.json",
+      "sha256": "4e2999ec6dae995283808120e4acc2f75b16fd6d6fe25a6ebc20050a3aa37232"
+    }
+  ],
+  "scope": [
+    "correct-post-readiness-loss-propagation",
+    "exclude-stale-events-and-intentional-stop",
+    "one-replacement-and-atomic-root-replay",
+    "active-browser-failure-injection",
+    "superseding-acceptance-review"
+  ],
+  "mutable_historical_paths": [
+    "js/blazex_runtime/src/runtime-startup.js",
+    "js/blazex_runtime/src/runtime-registry.js",
+    "profiles/browser_phoenix/assets/phase6/host.js",
+    "docs/research/validate_bh03_startup.py",
+    "docs/research/validate_bh03_roots.py",
+    "docs/research/validate_bh03_resilience.py",
+    "docs/research/validate_bh03_profile.py",
+    "docs/research/validate_bh03_measurements.py",
+    "docs/research/validate_bh03_acceptance.py"
+  ],
+  "exclusions": [
+    "BH-04 implementation",
+    "support qualification",
+    "public API stability",
+    "release budgets",
+    "historical decision rewriting"
+  ]
+}

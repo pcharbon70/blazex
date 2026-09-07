@@ -84,5 +84,7 @@ integration directories.
 
 ## Maintaining this index
 
+Phase 9: [corrective authorization](blazex-bh-03-phase-09-authorization-v0.1.0.json).
+
 Index every direct asset, preserve prior versions, bind evidence by hash, and
 never convert a planned or deferred state into execution evidence.

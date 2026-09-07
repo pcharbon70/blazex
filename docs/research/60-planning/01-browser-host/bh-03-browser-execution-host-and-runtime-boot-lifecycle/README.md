@@ -78,6 +78,10 @@ host delivery do not belong here.
 
 ## Shared delivery rules
 
+The owner authorized a corrective Phase 9 on 2026-09-07, following the Phase 8
+revise decision. [Phase 9 — Runtime-Loss Correction and Renewed Acceptance](phase-09-runtime-loss-correction-and-renewed-acceptance.md)
+is in progress; BH-04 remains ineligible until its gate accepts the correction.
+
 1. Obtain separate authorization before each phase.
 2. Start from synchronized `main` on a `codex/` feature branch.
 3. Deliver each section as one commit and each phase through one PR.
