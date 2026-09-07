@@ -55,8 +55,13 @@ multiple roots and excessive depth. Value assertions carry explicit old and new
 values; comparing old text/property/focus values with the actual materialized
 state belongs to Phase 4, not this topology-only context.
 
-Acknowledgements and diagnostics correlate with a validated transaction supplied
-in the trusted context. No arbitrary messages, stack traces, exception values,
+Acknowledgements and diagnostics correlate with a bounded attempt header supplied
+by trusted admission code, not by replaying the attempted transaction. This lets
+rejections describe stale or incompatible attempts without accepting their traffic.
+The context header records the kind and operation count, carries only safe
+correlation fields, and must belong to the current owner and generation. Successful
+acknowledgements additionally require compatible versions and current revisions.
+It is not itself proof that application or rollback occurred. No arbitrary messages, stack traces, exception values,
 partial-success state or foreign-root details may cross this protocol.
 
 ## Bounds and deterministic bytes

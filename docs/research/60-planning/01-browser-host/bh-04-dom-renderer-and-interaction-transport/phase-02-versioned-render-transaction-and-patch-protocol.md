@@ -70,28 +70,28 @@ Back to milestone: [README](README.md)
       - [x] 2.2.2.2 Subtask - Define malformed, incompatible, stale, duplicate, missing-target, ownership, limit, apply, rollback, and disposed-root diagnostic classes.
       - [x] 2.2.2.3 Subtask - Prohibit silent coercion, partial-success acknowledgement, arbitrary exception serialization, and cross-root diagnostic disclosure.
 
-  - [ ] 2.3 Section - Implement schemas, codecs, and contract validation.
+  - [x] 2.3 Section - Implement schemas, codecs, and contract validation.
 
     Publish equivalent Elixir and JavaScript representations and prove they
     agree before either side executes transactions.
 
-    - [ ] 2.3.1 Task - Implement owner-specific protocol modules.
+    - [x] 2.3.1 Task - Implement owner-specific protocol modules.
 
       Keep host-neutral lifecycle additions in `blazex_renderer`, DOM records
       in `blazex_renderer_dom`, and browser validation in `js/blazex_runtime`.
 
-      - [ ] 2.3.1.1 Subtask - Implement immutable Elixir transaction, operation, acknowledgement, limit, compatibility, and diagnostic data with strict constructors.
-      - [ ] 2.3.1.2 Subtask - Implement JavaScript schema constants and pure validators with exact fields, types, bounds, identity formats, and error codes.
-      - [ ] 2.3.1.3 Subtask - Retain the BH-02 full-root batch as an explicitly versioned migration input or superseded fixture rather than silently changing its meaning.
+      - [x] 2.3.1.1 Subtask - Implement immutable Elixir transaction, operation, acknowledgement, limit, compatibility, and diagnostic data with strict constructors.
+      - [x] 2.3.1.2 Subtask - Implement JavaScript schema constants and pure validators with exact fields, types, bounds, identity formats, and error codes.
+      - [x] 2.3.1.3 Subtask - Retain the BH-02 full-root batch as an explicitly versioned migration input or superseded fixture rather than silently changing its meaning.
 
-    - [ ] 2.3.2 Task - Add cross-language protocol fixtures.
+    - [x] 2.3.2 Task - Add cross-language protocol fixtures.
 
       Prove valid records normalize identically and invalid records fail before
       DOM access or runtime dispatch.
 
-      - [ ] 2.3.2.1 Subtask - Publish versioned positive fixtures for every transaction kind, operation, acknowledgement, diagnostic, and declared limit boundary.
-      - [ ] 2.3.2.2 Subtask - Publish malformed, unknown-version, extra-field, wrong-owner, stale-base, duplicate-ID, impossible-order, oversized, and digest-mismatch fixtures.
-      - [ ] 2.3.2.3 Subtask - Round-trip canonical fixtures through Elixir and JavaScript and compare normalized bytes, digests, and error classes.
+      - [x] 2.3.2.1 Subtask - Publish versioned positive fixtures for every transaction kind, operation, acknowledgement, diagnostic, and declared limit boundary.
+      - [x] 2.3.2.2 Subtask - Publish malformed, unknown-version, extra-field, wrong-owner, stale-base, duplicate-ID, impossible-order, oversized, and digest-mismatch fixtures.
+      - [x] 2.3.2.3 Subtask - Round-trip canonical fixtures through Elixir and JavaScript and compare normalized bytes, digests, and error classes.
 
   - [ ] 2.4 Section - Phase 2 Integration Tests and Completion Evidence.
 

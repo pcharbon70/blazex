@@ -27,6 +27,8 @@ None.
 
 ### Files
 
+- [Phase 2 source index](blazex-bh-04-phase-02-source-index-v0.1.0.json) — exact protocol, fixture and gate hashes.
+
 - [Phase 2 authorization](blazex-bh-04-phase-02-authorization-v0.1.0.json) — protocol scope and inherited contracts.
 
 - [Completion](blazex-bh-04-phase-01-completion-v0.1.0.json) — Phase 1 gate and next-phase limits.

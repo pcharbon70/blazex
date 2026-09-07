@@ -7,6 +7,12 @@ benchmark pass, browser qualification, or support is claimed.
 
 ## Index
 
+- [Fixture definitions](protocol-cases.mjs) — deterministic positive, negative and boundary records.
+- [Fixture generator/checker](protocol-fixtures.mjs) — checks generated freshness and exact cross-language reports.
+- [Canonical fixtures](protocol-fixtures-v0.1.0.txt) — name, expected code, canonical context and input bytes in base64.
+- [Canonical results](protocol-results-v0.1.0.txt) — normalized bytes, full-record hashes and rejection classes.
+- [Runner support](support/README.md) — actual Elixir package execution.
+
 - [Phase 2 record schema](render-transaction.schema.json) — exact transaction, operation, acknowledgement, diagnostic and trusted-context shapes; maxBytes is an enforced UTF-8 extension.
 - [Phase 2 inventory](protocol-inventory-v0.1.0.json) — closed vocabulary, limits and empty behavior results. Phase 2 supersedes activation-only scope with pure protocol work, not DOM behavior.
 

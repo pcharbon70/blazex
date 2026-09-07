@@ -7,28 +7,32 @@ import unittest
 from pathlib import Path
 
 import validate_bh04_activation as gate
+from bh04_history import snapshot
 
 
 class ActivationTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
+        cls.history = snapshot(gate.ROOT)
+        cls.source_root = cls.history.__enter__()
         cls.temporary = tempfile.TemporaryDirectory(prefix="bh04-activation-test-")
         cls.root = Path(cls.temporary.name)
         # Copy, never hard-link: mutation tests must not edit user source.
-        files = gate.git(gate.ROOT, "ls-files", "--cached", "--others",
+        files = gate.git(cls.source_root, "ls-files", "--cached", "--others",
                          "--exclude-standard").decode().splitlines()
         for name in files:
-            source = gate.ROOT / name
+            source = cls.source_root / name
             if source.is_file():
                 target = cls.root / name
                 target.parent.mkdir(parents=True, exist_ok=True)
                 shutil.copy2(source, target)
-        git_dir = gate.git(gate.ROOT, "rev-parse", "--absolute-git-dir").decode().strip()
+        git_dir = gate.git(cls.source_root, "rev-parse", "--absolute-git-dir").decode().strip()
         (cls.root / ".git").write_text(f"gitdir: {git_dir}\n")
 
     @classmethod
     def tearDownClass(cls):
         cls.temporary.cleanup()
+        cls.history.__exit__(None, None, None)
 
     @contextlib.contextmanager
     def changed(self, name, transform):
