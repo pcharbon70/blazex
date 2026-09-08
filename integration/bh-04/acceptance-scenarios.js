@@ -10,7 +10,7 @@ const txid = n => "tx-"+n.toString(16).padStart(24,"0");
 const identity = tx => Object.fromEntries(["owner","root","generation","base_revision","target_revision","transaction_id","digest"].map(k=>[k,tx[k]]));
 const assert = (ok, message) => { if(!ok) throw Error(message); };
 const frame = () => new Promise(resolve=>requestAnimationFrame(()=>resolve(performance.now())));
-export async function runAcceptanceScenarios(document, rows, effectFixture, policy) {
+export async function runAcceptanceScenarios(document, rows, effectFixture, policy, injectFailure = false) {
   const keyed=[], queues=[], stale=[], errors=[]; let serial=0;
   async function setup(row, options={}) {
     const container=document.createElement("div"); document.body.append(container);
@@ -20,6 +20,7 @@ export async function runAcceptanceScenarios(document, rows, effectFixture, poli
     if(row.setup) assert((await roots.submit(token,row.setup)).state==="committed","setup");
     return {roots,token,container,close:async()=>{await roots.lifecycle.shutdown();assert(roots.resources(token).disposed&&container.childNodes.length===0,"cleanup");container.remove();}};
   }
+  try {
   const fixture=rows.find(r=>r.name===policy.keyed.scenario);
   for(let i=0;i<=policy.keyed.samples_per_browser;i++) {
     let active=false; const marks={};
@@ -33,6 +34,7 @@ export async function runAcceptanceScenarios(document, rows, effectFixture, poli
     const correct=ack?.state==="committed"&&a.roots.snapshot(a.token).fingerprint===fixture.after.fingerprint&&[...a.container.firstChild.children].every(el=>old.includes(el));
     const trace={sample:i,warmup:i===0,scenario:fixture.name,...identity(fixture.transaction),marks,ack,error,correct,receipt_to_frame_ms:marks.frame2-marks.receipt};
     keyed.push(trace);if(!correct)errors.push("keyed-"+i);await a.close();
+    if(injectFailure&&i===1)throw Error("injected partial-result retention probe");
   }
   for(let run=0;run<policy.queue.runs_per_browser;run++) {
     const tasks=[],a=await setup(rows[0],{schedule:task=>tasks.push(task)}),pending=[],offered=[];
@@ -94,4 +96,10 @@ export async function runAcceptanceScenarios(document, rows, effectFixture, poli
   if(cleanup.resources.active!==0||cleanup.inventory.nodes!==0||cleanup.queued!==0)errors.push("effect-cleanup");
   await roots.lifecycle.shutdown();container.remove();
   return {keyed,queues,stale,cleanup,errors,result:errors.length?"failed":"passed",support_state:"unsupported"};
+  } catch(error) {
+    errors.push(String(error));
+    // Retain every completed observation; the driver closes the entire browser
+    // context to release any root whose setup or teardown threw.
+    return {keyed,queues,stale,cleanup:null,errors,result:"failed",support_state:"unsupported"};
+  }
 }

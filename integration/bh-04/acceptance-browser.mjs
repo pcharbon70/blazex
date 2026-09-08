@@ -2,6 +2,7 @@ import fs from "node:fs";
 import os from "node:os";
 import http from "node:http";
 import path from "node:path";
+import assert from "node:assert/strict";
 import {createHash} from "node:crypto";
 import {fileURLToPath} from "node:url";
 import {chromium,firefox} from "../../js/blazex_runtime/node_modules/playwright-core/index.mjs";
@@ -29,8 +30,11 @@ try{
     const browser=await launcher.launch({executablePath,headless:true,...(name==="chrome"?{args:["--no-sandbox","--disable-dev-shm-usage"]}:{})});
     try{const page=await browser.newPage(),errors=[];page.on("pageerror",e=>errors.push(String(e)));await page.goto(`http://127.0.0.1:${server.address().port}/`);
       const result=await page.evaluate(async({rows,effect,policy})=>{const {runAcceptanceScenarios}=await import("/integration/bh-04/acceptance-scenarios.js");return runAcceptanceScenarios(document,rows,effect,policy);},{rows,effect,policy:auth.metrics});
+      const probe=await page.evaluate(async({rows,effect,policy})=>{const {runAcceptanceScenarios}=await import("/integration/bh-04/acceptance-scenarios.js");return runAcceptanceScenarios(document,rows,effect,policy,true);},{rows,effect,policy:auth.metrics});
+      assert.equal(probe.result,"failed");assert.equal(probe.keyed.length,2);assert.match(probe.errors[0],/injected partial-result/);
       for(const row of [...result.keyed,...result.queues,...result.stale])row.trace_sha256=sha(JSON.stringify(row));
-      output.results.push({browser:name,version:browser.version(),executable:executablePath,page_errors:errors,...result});console.log(name,result.result,result.errors);
+      output.results.push({browser:name,version:browser.version(),executable:executablePath,page_errors:errors,partial_retention_probe:probe,...result});console.log(name,result.result,result.errors);
+      if(result.result!=="passed")process.exitCode=1;
     }finally{await browser.close();}
   }
 }catch(error){output.fatal_error=String(error);process.exitCode=1;}

@@ -7,13 +7,13 @@
       "version": "140.0.7339.80",
       "frame_opportunity_ms": {
         "samples": 100,
-        "min": 21.300000000745058,
-        "max": 46.5,
-        "median": 30,
-        "p95": 30.399999998509884,
-        "p99": 33.900000002235174,
-        "mean": 29.770999999828636,
-        "cv_percent": 7.6141779965059
+        "min": 25.399999998509884,
+        "max": 43.30000000074506,
+        "median": 29.699999999254942,
+        "p95": 30.300000000745058,
+        "p99": 33.599999997764826,
+        "mean": 29.347999999932945,
+        "cv_percent": 6.5141686994707655
       },
       "proxy_within_50ms": true,
       "variance_investigation_required": false,
@@ -27,13 +27,13 @@
       "version": "153.0",
       "frame_opportunity_ms": {
         "samples": 100,
-        "min": 25,
+        "min": 28,
         "max": 33,
-        "median": 30,
+        "median": 31,
         "p95": 32,
         "p99": 32,
-        "mean": 29.95,
-        "cv_percent": 5.329178530721991
+        "mean": 30.55,
+        "cv_percent": 3.3501619460652567
       },
       "proxy_within_50ms": true,
       "variance_investigation_required": false,
@@ -48,6 +48,6 @@
   "support_state": "unsupported",
   "source_hashes": {
     "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-authorization-v0.1.0.json": "69057e3eb97b98437a391cb3f6e403502a1f53b27e32f52d84c162f4ecd953ec",
-    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-measurements-v0.1.0.json": "82c736f43e8cbfdcb591c1c0071aaa43bd6594f997b866caad5148675e6af34e"
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-measurements-v0.1.0.json": "218b6acc1739daffb953aa97046e59672fbd8429c18b7ff73dc1e495accf5f3c"
   }
 }

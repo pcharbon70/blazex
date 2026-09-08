@@ -15,6 +15,7 @@ export function summarize(raw,auth) {
   const browsers=[];
   for(const b of raw.results) {
     assert.ok(b.version&&b.executable);assert.deepEqual(b.page_errors,[]);assert.deepEqual(b.errors,[]);assert.equal(b.result,"passed");
+    assert.equal(b.partial_retention_probe.result,"failed");assert.equal(b.partial_retention_probe.keyed.length,2);assert.match(b.partial_retention_probe.errors[0],/injected partial-result/);
     for(const row of [...b.keyed,...b.queues,...b.stale]) {
       const {trace_sha256,...body}=row;assert.equal(trace_sha256,sha(JSON.stringify(body)),"raw trace hash");assert.equal(row.correct,true,"failed sample");
     }

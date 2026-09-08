@@ -58,6 +58,8 @@ No support or newly packaged Wasm endpoint is claimed.
 
 ## What belongs here
 
+- [Phase 10 implementer review](phase-10-review.md) — all eight lenses, explicit independence limit and blocking re-entry findings.
+
 - [Phase 10 acceptance contract](phase-10-acceptance-contract.md) — frozen methods, review independence and decision rules.
 
 - The BH-03 handoff and the BH-02 renderer, semantic, event, effect, resource,
