@@ -1,0 +1,722 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 10,
+  "results": [
+    {
+      "name": "elixir",
+      "command": [
+        "docker",
+        "run",
+        "--rm",
+        "--network",
+        "none",
+        "-v",
+        "/home/ducky/code/blazex:/workspace",
+        "-e",
+        "MIX_BUILD_PATH=/tmp/bh10-final",
+        "a2386c21edd5",
+        "sh",
+        "-c",
+        "set -e; cd /workspace; mix format --check-formatted integration/bh-04/support/*.exs; for package in blazex_core blazex_effects blazex_ui_tree blazex_renderer blazex_renderer_headless blazex_renderer_dom; do cd /workspace/packages/$package; mix test; done; cd /workspace/integration/conformance; mix test; mix run ../bh-04/support/conformance_runner.exs"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 12707,
+      "stdout": "Compiling 9 files (.ex)\nGenerated blazex_core app\nRunning ExUnit with seed: 270914, max_cases: 40\n\n.............\nFinished in 0.2 seconds (0.2s async, 0.00s sync)\n13 tests, 0 failures\nCompiling 9 files (.ex)\nGenerated blazex_effects app\nRunning ExUnit with seed: 152080, max_cases: 40\n\n.........\nFinished in 0.1 seconds (0.1s async, 0.00s sync)\n9 tests, 0 failures\nCompiling 16 files (.ex)\nGenerated blazex_ui_tree app\nRunning ExUnit with seed: 897762, max_cases: 40\n\n.........................\nFinished in 0.1 seconds (0.1s async, 0.00s sync)\n25 tests, 0 failures\nCompiling 9 files (.ex)\nGenerated blazex_renderer app\nRunning ExUnit with seed: 699352, max_cases: 40\n\n........\nFinished in 0.1 seconds (0.1s async, 0.00s sync)\n8 tests, 0 failures\nCompiling 5 files (.ex)\nGenerated blazex_renderer_headless app\nRunning ExUnit with seed: 466618, max_cases: 40\n\n......\nFinished in 0.08 seconds (0.08s async, 0.00s sync)\n6 tests, 0 failures\nCompiling 24 files (.ex)\nGenerated blazex_renderer_dom app\nRunning ExUnit with seed: 236709, max_cases: 40\n\n....................................................................................................................\nFinished in 1.5 seconds (1.5s async, 0.00s sync)\n116 tests, 0 failures\n==> blazex_native_renderer_spike\nCompiling 8 files (.ex)\nGenerated blazex_native_renderer_spike app\n==> blazex_test\nCompiling 2 files (.ex)\nGenerated blazex_test app\n==> blazex_conformance\nGenerated blazex_conformance app\nRunning ExUnit with seed: 437507, max_cases: 40\n\n........................................................\nFinished in 3.3 seconds (3.3s async, 0.00s sync)\n56 tests, 0 failures\nPhase 9: 51 deterministic semantic/headless/standalone scenarios\n",
+      "stderr": ""
+    },
+    {
+      "name": "javascript",
+      "command": [
+        "bash",
+        "-c",
+        "node --test js/blazex_runtime/test/*.test.js && node packages/blazex_renderer_dom/js/test/dom-driver.test.js && node integration/bh-04/conformance-test.mjs && node integration/bh-04/acceptance-report.test.mjs"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 11685,
+      "stdout": "✔ rejects deterministic hostile bridge families without executing values (2.819119ms)\n✔ retains script and HTML payloads only as inert bounded text (0.350247ms)\n✔ rejects traversal, credentials, downgrade, and missing integrity declarations (1.752332ms)\n✔ fails artifact MIME, compression, size, and integrity before returning bytes (35.862487ms)\n✔ acquires the three accepted artifacts in order and publishes only after verification (41.65049ms)\n✔ binds the host fetch capability when no injected fetch is supplied (5.791203ms)\n✔ rejects missing gates and declaration limits before any fetch (2.349453ms)\n✔ rejects response metadata, truncation, corruption, and invalid WebAssembly atomically (18.937601ms)\n✔ rejects unavailable, timed-out, cancelled, and oversize-stream artifacts (6.270329ms)\n✔ shared browser matrix also passes in the strict fake DOM (11026.223255ms)\n✔ all actual reconciler scenarios commit through real BH-03 handles (425.745223ms)\n✔ every before/after operation boundary restores exact old elements (9585.492023ms)\n✔ unexpected DOM rejects before mutation and failed rollback quarantines (24.859042ms)\n✔ the experimental bridge boundary remains narrow (1.301387ms)\n✔ the loader source owns no component or server behavior (8.005663ms)\n✔ accepts and normalizes the exact BH-03 compatibility table (2.649254ms)\n✔ rejects missing and unknown compatibility identities (1.108413ms)\n✔ rejects duplicate and malformed compatibility identities (1.829526ms)\n✔ rejects mismatched versions before artifact acquisition (0.501201ms)\n✔ emits correlated developer and user summaries without console dependence (2.627353ms)\n✔ redacts keys, credentials, queries, local paths, and stack frames (0.283088ms)\n✔ drops identical diagnostics and counts the duplicate (0.306485ms)\n✔ rejects orphan correlation, unknown classification, and retention overflow (2.824372ms)\n✔ discovers explicit, link, and meta manifest declarations (2.863733ms)\n✔ allows an explicit declaration only with one equivalent document declaration (1.629052ms)\n✔ rejects absent and duplicate document declarations (0.584676ms)\n✔ rejects cross-origin, credentialed, fragmented, and unsupported URLs (0.622276ms)\n✔ real BH-03 handles gate initial, update, dispose and terminal rejection (32.559575ms)\n✔ wrong owner, revision, duplicate and unknown capabilities cannot apply (21.153128ms)\n✔ capacity includes active work and never silently coalesces dependent revisions (514.805404ms)\n✔ slow root does not block a sibling and runtime loss drains work (10.244357ms)\n✔ shutdown, remount and observer exceptions preserve exactly-once outcomes (14.833823ms)\n✔ effects run after DOM commit and all timer leases release before acknowledgement (32.747976ms)\n✔ malformed, ungranted, duplicate and future-dependent effects never mount (51.61279ms)\n✔ timeout fallback and disposal cancel timer work without acknowledgement promotion (43.401091ms)\n✔ cleanup leases report failures instead of hiding leaks and reject cross-root release (0.281538ms)\n✔ apply rollback, failed rollback, effect exceptions and ack loss elect one bounded recovery owner (154.808351ms)\n✔ diagnostics, overload, cleanup and runtime-loss observations are bounded (8.414885ms)\n✔ omit failure results are explicit and failed dependencies never execute (26.303673ms)\n✔ the batch deadline cancels pending timers and actual DOM cleanup errors remain blocking (775.969077ms)\n✔ keyed identity retains backward range; changed explicit range clamps to the new value (4.856178ms)\n✔ focus recovery respects scope order and never steals a sibling root (4.876794ms)\n✔ closed manifests reject foreign choices, missing selection and files (17.252077ms)\n✔ newer drafts survive pending semantic writes and composition never fabricates input (2.680068ms)\n✔ checked, mixed, required and invalid map distinctly and rollback releases composition (0.466985ms)\n✔ readonly choices cancel native toggles before a semantic event (0.41054ms)\n✔ correlates a bounded allowlisted request and records metrics (4.978415ms)\n✔ accepts only the three bounded fixture operations added for Phase 5 (2.51841ms)\n✔ rejects operations, executable values, handles, secrets, and oversized values (0.865407ms)\n✔ times out, cancels transport, and drops a late result (8.888724ms)\n✔ rejects stale responses and makes stop idempotent (0.952232ms)\n✔ defines bounded event, error, readiness, shutdown, and diagnostic signals (0.392572ms)\n✔ normalizes the valid profile manifest without acquiring artifacts (2.153613ms)\n✔ rejects every versioned invalid manifest mutation atomically (3.037211ms)\n✔ fetches only a bounded no-store same-origin JSON manifest (30.97155ms)\n✔ composes discovery, validation, and prerequisites as a pre-acquisition gate (1.975863ms)\n✔ all 13 mappings produce closed bounded immutable semantic payloads (8.091962ms)\n✔ malformed, cyclic, accessor, oversized and unrequested values fail closed (1.801063ms)\n✔ composition, credentials, unknown mapping and cross-target events are rejected (0.670736ms)\n✔ registry orders callbacks, cancels defaults, suspends and removes stale callbacks (2.092057ms)\n✔ actual reconciler listeners register through the atomic DOM node index and clean up (58.473094ms)\n✔ ordered local events and render acknowledgements use only negotiated v2 operations (10.083452ms)\n✔ bounded queue includes active work; independent stream progresses during delay (31.572564ms)\n✔ timeout cancels once, rejects queued work, and ignores late responses (11.889711ms)\n✔ wrong root, stale context, listener and bridge mismatches fail before component dispatch (1.452251ms)\n✔ a new committed revision rejects queued old-revision events without coalescing (1.823344ms)\n✔ follows the monotonic activation state machine (2.846558ms)\n✔ releases owned resources in reverse order and makes stop idempotent (1.381927ms)\n✔ classifies retry, integrity, attempt limits, and stale generations (0.619442ms)\n✔ validates the exact Phase 4 manifest and resolves same-origin assets (2.728552ms)\n✔ fetches a no-store manifest and rejects redirects (22.002192ms)\n✔ verifies artifact bytes, MIME, digest, Wasm, and cancellation (14.990141ms)\n✔ rejects undeclared Wasm imports and missing required exports (6.077698ms)\n✔ describes bounded timing samples deterministically (1.881824ms)\n✔ describes byte samples without applying duration ceilings (0.727313ms)\n✔ normalizes available and unavailable memory without inventing values (3.349613ms)\n✔ summarizes lifecycle observations while keeping budgets and support absent (0.908019ms)\n✔ rejects malformed, unbounded, leaked, and extended observations (0.262185ms)\n✔ classifies full and buffered-only browser prerequisites (2.66275ms)\n✔ distinguishes deployment policy from browser capability failure (0.412986ms)\n✔ evaluates the exact BH-03 manifest-declared prerequisite contract (0.431099ms)\n✔ rejects missing browser or deployment prerequisites before acquisition (0.758277ms)\n✔ coordinates one authority-bearing retry under the browser owner (1.947126ms)\n✔ prohibits a lower-layer authority retry (1.124903ms)\n✔ bounds exhaustion without starting a third operation (0.796975ms)\n✔ drops stale generations and cancels replacement work (0.60034ms)\n✔ converges non-retryable and stopped recovery (0.368572ms)\n✔ V2 schema is exactly the versioned JSON source (2.689372ms)\n✔ every V2 attribute passes the shared strict protocol (87.882972ms)\n✔ focus, selection and listener intent cells use closed canonical data (9.489672ms)\n✔ v1 identity, unknown intent and noncanonical intent are rejected (5.575561ms)\n✔ schema constants equal the versioned source (5.061285ms)\n✔ protocol: initial (5.328544ms)\n✔ protocol: patch-all-value-operations (2.179013ms)\n✔ protocol: remove (1.614248ms)\n✔ protocol: replace-child (1.024896ms)\n✔ protocol: dispose (0.718849ms)\n✔ protocol: ack-preflight (0.523421ms)\n✔ protocol: ack-accepted (0.657452ms)\n✔ protocol: ack-committed (0.808387ms)\n✔ protocol: ack-rejected (0.736721ms)\n✔ protocol: ack-rolled-back (0.626499ms)\n✔ protocol: ack-fallback (0.595782ms)\n✔ protocol: ack-disposed (0.623874ms)\n✔ protocol: diagnostic-malformed (0.69403ms)\n✔ protocol: diagnostic-incompatible (0.807814ms)\n✔ protocol: diagnostic-stale (1.853636ms)\n✔ protocol: diagnostic-duplicate (0.958218ms)\n✔ protocol: diagnostic-missing-target (0.470167ms)\n✔ protocol: diagnostic-ownership (0.56795ms)\n✔ protocol: diagnostic-limit (0.615512ms)\n✔ protocol: diagnostic-apply (0.367844ms)\n✔ protocol: diagnostic-rollback (0.360489ms)\n✔ protocol: diagnostic-disposed-root (0.31235ms)\n✔ protocol: version (0.859988ms)\n✔ protocol: schema-version (0.408949ms)\n✔ protocol: extra-field (0.40866ms)\n✔ protocol: owner (0.416314ms)\n✔ protocol: owner-newline (0.3491ms)\n✔ protocol: generation (0.950977ms)\n✔ protocol: stale-base (0.840754ms)\n✔ protocol: target-gap (0.476452ms)\n✔ protocol: capability (0.408308ms)\n✔ protocol: digest (3.029535ms)\n✔ protocol: operation-id (0.595496ms)\n✔ protocol: forward-dependency (0.482171ms)\n✔ protocol: missing-target (0.385979ms)\n✔ protocol: extra-operation-field (0.574547ms)\n✔ protocol: unknown-operation (1.430091ms)\n✔ protocol: duplicate-transaction (0.735763ms)\n✔ protocol: disposed-root (0.402196ms)\n✔ protocol: duplicate-node (0.383771ms)\n✔ protocol: cycle (0.415162ms)\n✔ protocol: wrong-old-parent (0.376468ms)\n✔ protocol: remove-parent-first (0.348715ms)\n✔ protocol: insert-before-create (0.509437ms)\n✔ protocol: detached-final-node (0.549015ms)\n✔ protocol: wrong-property-type (0.431811ms)\n✔ protocol: selection-reversed (0.368446ms)\n✔ protocol: barrier-not-last (1.52665ms)\n✔ protocol: ack-cross-root (0.486327ms)\n✔ protocol: ack-partial-success (0.392521ms)\n✔ protocol: ack-rejected-stale (0.337347ms)\n✔ protocol: ack-rejected-incompatible (0.368462ms)\n✔ protocol: text-byte-boundary (2.864222ms)\n✔ protocol: value-byte-boundary (0.945426ms)\n✔ protocol: attribute-byte-boundary (1.830614ms)\n✔ protocol: operations-boundary (60.648422ms)\n✔ protocol: nodes-boundary (4.754151ms)\n✔ protocol: nodes-overflow (4.413905ms)\n✔ protocol: depth-boundary (3.208618ms)\n✔ protocol: depth-overflow (1.25427ms)\n✔ protocol: listeners-boundary (3.57374ms)\n✔ protocol: listeners-overflow (1.953005ms)\n✔ protocol: queue-window-boundary (1.150568ms)\n✔ protocol: safe-integer-boundary (0.77159ms)\n✔ protocol: message-byte-boundary (13.037678ms)\n✔ protocol: trailing-byte (0.457968ms)\n✔ protocol: nonminimal-integer (0.178791ms)\n✔ protocol: negative-integer (0.128143ms)\n✔ protocol: float (0.115169ms)\n✔ protocol: integer-newline (0.118433ms)\n✔ protocol: duplicate-map-key (0.168232ms)\n✔ protocol: map-order (0.196703ms)\n✔ protocol: text-byte-overflow (0.192563ms)\n✔ protocol: message-byte-overflow (0.19747ms)\n✔ protocol: invalid-utf8 (0.145308ms)\n✔ canonical map order, unicode and malformed local inputs (0.46852ms)\n✔ no browser or runtime surface is referenced by pure validation (0.404167ms)\n✔ reports baseline, peak, disposed convergence, and explained unknowns (2.286811ms)\n✔ rejects unexplained unknown and invalid counts (2.137419ms)\n✔ detects nonconverging disposal (0.634845ms)\n✔ rejects stale generations and bounded sample overflow (0.406257ms)\n✔ registers, mounts, updates, moves, disposes, and remounts independent roots (15.680208ms)\n✔ serializes each root queue while another root continues (9.33431ms)\n✔ rejects duplicates while registration is reserved and after disposal (2.310031ms)\n✔ rejects stale and foreign acknowledgements without mutating another root (2.178808ms)\n✔ rejects illegal transitions without consuming a generation (1.147212ms)\n✔ bounds root identities and root count (8.631072ms)\n✔ waits for application readiness and converges resources on stop (34.558125ms)\n✔ contains runtime failure and startup cancellation (6.942848ms)\n✔ runtime-exited automatically recovers real startup and replays the same root handle (49.304562ms)\n✔ runtime-failed automatically recovers real startup and replays the same root handle (4.143212ms)\n✔ loss latched before first subscription never publishes ready (1.242548ms)\n✔ loss before replacement subscription converges to fallback (1.437607ms)\n✔ loss during replay cannot publish a ready replacement (2.218088ms)\n✔ intentional stop ignores synchronous exit and later callbacks (1.459136ms)\n✔ loss at final replay acknowledgement cannot reopen root registration (3.594681ms)\n✔ close during automatic recovery prevents subsequent opens and converges (3.056259ms)\n✔ replaces one lost generation and atomically replays roots through the same handles (15.269591ms)\n✔ rejects stale loss reports without changing state or starting a replacement (1.945067ms)\n✔ releases a replacement and exposes no partial ready state when one root replay fails (3.068538ms)\n✔ allows one replacement only and converges a second active loss to fallback (2.517417ms)\n✔ converges non-retryable loss without replacement (1.359762ms)\n✔ isolates recovery to the reported scope (1.196157ms)\n✔ converges replacement startup failure without publishing ready (0.720672ms)\n✔ maps closed mismatch, prerequisite, startup, loss, and exhaustion fallback actions (1.516162ms)\n✔ openOrFallback returns a bounded decision for mismatch and sticky startup failure (0.800384ms)\n✔ coalesces concurrent startup and reuses one ready scope (12.563108ms)\n✔ starts different compatible host scopes independently (0.87104ms)\n✔ rejects incompatible reuse before another startup (2.045879ms)\n✔ retains a failed scope tombstone without retry (1.223802ms)\n✔ bounds scope identifiers and registry size (2.393195ms)\n✔ drains independent roots before an acknowledged registry-owned shutdown (19.959879ms)\n✔ force releases and retains a stopped tombstone after shutdown timeout (12.471379ms)\n✔ classifies foreign and stale shutdown acknowledgements and still releases once (2.130066ms)\n✔ rejects unknown scopes and shutdown timeouts outside the governed range (0.478172ms)\n✔ starts one isolated attempt, loads the bundle contract, and waits for correlated readiness (35.014382ms)\n✔ rejects stale readiness but accepts the correlated event (2.438005ms)\n✔ contains duplicate readiness after success and releases the transport (2.518382ms)\n✔ classifies transport, runtime, bundle, timeout, and cancellation failures and cleans up (108.513869ms)\nℹ tests 211\nℹ suites 0\nℹ pass 211\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 11097.343453\n✔ validates and atomically applies one closed full-root projection (1.909911ms)\n✔ normalizes bounded semantic events without retaining browser objects (0.433424ms)\n✔ applies autofocus, restores same-ID update focus, and controls text selection (0.345684ms)\n✔ rejects stale and malformed batches before mutating the accepted root (0.596349ms)\n✔ accepts next-generation replacement and disposes roots/listeners idempotently (0.396586ms)\n✔ rejects undeclared fields, attributes, mappings, relationships, and disposal roots (1.003102ms)\n✔ driver source has no generic markup, selector, style, global, network, or code escape (2.063513ms)\nℹ tests 7\nℹ suites 0\nℹ pass 7\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 10.080444\n{\"scenarios\":51,\"comparator_negatives\":300,\"result\":\"passed\"}\n✔ nearest-rank statistics retain tail and reject invalid input (6.477093ms)\n✔ candidate is not a paint or acceptance claim (21.448431ms)\n✔ reject missing browser (17.002609ms)\n✔ reject missing sample (23.826885ms)\n✔ reject failed sample (14.804167ms)\n✔ reject raw hash drift (15.053371ms)\n✔ reject missing queue run (24.2066ms)\n✔ reject missing effects (23.547539ms)\n✔ reject forged cleanup (23.354439ms)\n✔ reject page failure (14.668927ms)\n✔ reject duplicate transaction (22.078896ms)\n✔ reject forged ordering with refreshed hash (21.054794ms)\nℹ tests 12\nℹ suites 0\nℹ pass 12\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 236.683117\n",
+      "stderr": ""
+    },
+    {
+      "name": "atomic-browser",
+      "command": [
+        "node",
+        "integration/bh-04/atomic-dom-browser.mjs",
+        "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-atomic-browser-v0.1.0.json"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 29896,
+      "stdout": "chrome {\"scenarios\":50,\"injected_boundaries\":1204,\"stale_rejected\":100,\"max_queue\":64,\"terminal_acks\":1254,\"cleanup\":1263}\nfirefox {\"scenarios\":50,\"injected_boundaries\":1204,\"stale_rejected\":100,\"max_queue\":64,\"terminal_acks\":1254,\"cleanup\":1263}\n",
+      "stderr": ""
+    },
+    {
+      "name": "interaction-browser",
+      "command": [
+        "node",
+        "integration/bh-04/interaction-browser.mjs",
+        "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-interaction-browser-v0.1.0.json"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 6828,
+      "stdout": "chrome {\"mappings\":13,\"rejected\":17,\"roots\":3,\"dom_commits\":18,\"cleanup\":3,\"max_queue\":64,\"trusted_clicks\":1,\"no_render_events\":2}\nfirefox {\"mappings\":13,\"rejected\":17,\"roots\":3,\"dom_commits\":18,\"cleanup\":3,\"max_queue\":64,\"trusted_clicks\":1,\"no_render_events\":2}\n",
+      "stderr": "    warning: the Enumerable protocol has already been consolidated, an implementation for Jason.OrderedObject has no effect. If you want to implement protocols after compilation or during tests, check the \"Consolidation\" section in the Protocol module documentation\n    │\n 89 │ defimpl Enumerable, for: Jason.OrderedObject do\n    │ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    │\n    └─ /workspace/integration/fixtures/browser_host/deps/jason/lib/ordered_object.ex:89: (file)\n\n"
+    },
+    {
+      "name": "interaction-replay",
+      "command": [
+        "node",
+        "integration/bh-04/interaction-conformance.mjs",
+        "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-interaction-browser-v0.1.0.json"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 388,
+      "stdout": "{\"browsers\":2,\"deliveries\":40,\"rejected\":24,\"commits\":42,\"independent_transaction_replay\":\"exact\",\"result\":\"passed\"}\n",
+      "stderr": ""
+    },
+    {
+      "name": "continuity-browser",
+      "command": [
+        "node",
+        "integration/bh-04/continuity-browser.mjs",
+        "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-continuity-browser-v0.1.0.json"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 7779,
+      "stdout": "chrome {\"scenarios\":16,\"roots\":2,\"cleanup\":2}\nfirefox {\"scenarios\":16,\"roots\":2,\"cleanup\":2}\n",
+      "stderr": "    warning: the Enumerable protocol has already been consolidated, an implementation for Jason.OrderedObject has no effect. If you want to implement protocols after compilation or during tests, check the \"Consolidation\" section in the Protocol module documentation\n    │\n 89 │ defimpl Enumerable, for: Jason.OrderedObject do\n    │ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    │\n    └─ /workspace/integration/fixtures/browser_host/deps/jason/lib/ordered_object.ex:89: (file)\n\n"
+    },
+    {
+      "name": "continuity-replay",
+      "command": [
+        "node",
+        "integration/bh-04/continuity-conformance.mjs",
+        "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-continuity-browser-v0.1.0.json"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 539,
+      "stdout": "{\"browsers\":2,\"proposed\":66,\"committed\":64,\"delivered\":22,\"result\":\"passed\",\"independent_replay\":\"exact\"}\n",
+      "stderr": ""
+    },
+    {
+      "name": "effect-browser",
+      "command": [
+        "node",
+        "integration/bh-04/effect-browser.mjs",
+        "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-effect-browser-v0.1.0.json"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 12076,
+      "stdout": "chrome {\"scenarios\":19,\"roots\":24,\"cleanup\":24}\nfirefox {\"scenarios\":19,\"roots\":24,\"cleanup\":24}\n",
+      "stderr": "    warning: the Enumerable protocol has already been consolidated, an implementation for Jason.OrderedObject has no effect. If you want to implement protocols after compilation or during tests, check the \"Consolidation\" section in the Protocol module documentation\n    │\n 89 │ defimpl Enumerable, for: Jason.OrderedObject do\n    │ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    │\n    └─ /workspace/integration/fixtures/browser_host/deps/jason/lib/ordered_object.ex:89: (file)\n\n"
+    },
+    {
+      "name": "effect-replay",
+      "command": [
+        "node",
+        "integration/bh-04/effect-conformance.mjs",
+        "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-effect-browser-v0.1.0.json"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 790,
+      "stdout": "{\"browsers\":2,\"proposed\":188,\"committed\":150,\"delivered\":78,\"results\":40,\"result\":\"passed\",\"independent_replay\":\"exact\"}\n",
+      "stderr": ""
+    },
+    {
+      "name": "semantic-browser",
+      "command": [
+        "node",
+        "integration/bh-04/conformance-browser.mjs",
+        "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-semantic-browser-v0.1.0.json"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 10685,
+      "stdout": "chrome 51 102 passed\nfirefox 51 102 passed\n",
+      "stderr": ""
+    },
+    {
+      "name": "isolation",
+      "command": [
+        "node",
+        "integration/bh-04/conformance-isolation.mjs",
+        "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-isolation-v0.1.0.json"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 4289,
+      "stdout": "{\"result\":\"passed\",\"headless\":6,\"standalone\":116,\"asset_modules\":19}\n",
+      "stderr": ""
+    },
+    {
+      "name": "research-tests",
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-p",
+        "test_*.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 71440,
+      "stdout": "",
+      "stderr": ".......................................................................................................................................................................................................................................................................................................................................................................................................................................\n----------------------------------------------------------------------\nRan 423 tests in 71.275s\n\nOK\n"
+    },
+    {
+      "name": "validate_archive.py",
+      "command": [
+        "python3",
+        "validate_archive.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 1029,
+      "stdout": "Archive validation passed: 251 completed documents, 27 directories, 1999 local links, and 50 source notes checked.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_bh00_governance.py",
+      "command": [
+        "python3",
+        "validate_bh00_governance.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 158,
+      "stdout": "BH-00 governance validation passed: stage complete; status accepted-conditionally-ready; 17 sources; 6 axes; 18 packages; 3 profiles; 17 reconciliation checks; 8 reviews; 8 findings; 8 risks; product evidence remains unexecuted.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_bh01_activation.py",
+      "command": [
+        "python3",
+        "validate_bh01_activation.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 200,
+      "stdout": "BH-01 authorization, inherited ledger, evidence governance, activation, and Phase 1 completion are valid.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_bh02_acceptance.py",
+      "command": [
+        "python3",
+        "validate_bh02_acceptance.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 86,
+      "stdout": "BH-02 final acceptance passed: 7 phases, 9 outputs, 9 interactions, 7 review lenses, complete reproduction, exact deferrals, immutable registry overlays, and BH-03 eligibility without authorization verified.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_bh02_activation.py",
+      "command": [
+        "python3",
+        "validate_bh02_activation.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 58,
+      "stdout": "BH-02 activation validation passed: authorization, handoff, nine boundaries, dependency graph, leakage scans, and evidence limits checked.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_bh02_dom.py",
+      "command": [
+        "python3",
+        "validate_bh02_dom.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 49,
+      "stdout": "BH-02 Phase 6 DOM validation passed: authorization, lowering, driver, browsers, fixtures, leakage, and evidence limits checked.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_bh02_effects.py",
+      "command": [
+        "python3",
+        "validate_bh02_effects.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 45,
+      "stdout": "BH-02 Phase 3 effect validation passed: authorization, event vocabulary, capabilities, effects, resources, fixtures, leakage, and support limits checked.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_bh02_intent.py",
+      "command": [
+        "python3",
+        "validate_bh02_intent.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 46,
+      "stdout": "BH-02 Phase 4 intent validation passed: authorization, tokens, layout, accessibility, focus, selection, ownership, fixtures, leakage, and support limits checked.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_bh02_native.py",
+      "command": [
+        "python3",
+        "validate_bh02_native.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 45,
+      "stdout": "BH-02 Phase 7 native validation passed: authority, direct adapters, GTK execution, parity, deferrals, leakage, and evidence limits checked.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_bh02_renderer.py",
+      "command": [
+        "python3",
+        "validate_bh02_renderer.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 40,
+      "stdout": "BH-02 Phase 5 renderer validation passed: authorization, vocabularies, lifecycle, deterministic oracle, fixtures, leakage, and evidence limits checked.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_bh02_semantics.py",
+      "command": [
+        "python3",
+        "validate_bh02_semantics.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 41,
+      "stdout": "BH-02 Phase 2 semantic validation passed: authorization, contract, identity, node surface, evaluation boundary, fixtures, and support limits checked.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_bh03_acceptance.py",
+      "command": [
+        "python3",
+        "validate_bh03_acceptance.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 234,
+      "stdout": "BH-03 review record valid: revise; BH-04 ineligible; unsupported experimental state.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_bh03_activation.py",
+      "command": [
+        "python3",
+        "validate_bh03_activation.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 50,
+      "stdout": "BH-03 Phase 1 activation passed: authority, BH-02 handoff, 9 outputs, 10 acceptance conditions, lifecycle vocabulary, 5 boundaries, empty evidence, completion bindings, and unsupported experimental state verified.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_bh03_compatibility.py",
+      "command": [
+        "python3",
+        "validate_bh03_compatibility.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 46,
+      "stdout": "BH-03 Phase 2 compatibility validation passed: 8 exact identities, 3 discovery sources, 10 prerequisites, 3 artifact declarations, 27 conformance cases, completion bindings, empty later-phase results, and unsupported experimental state verified.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_bh03_correction.py",
+      "command": [
+        "python3",
+        "validate_bh03_correction.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 377,
+      "stdout": "BH-03 Phase 9: accepted-with-bounded-conditions; BH-04 eligible, not authorized; unsupported experimental state.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_bh03_measurements.py",
+      "command": [
+        "python3",
+        "validate_bh03_measurements.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 51,
+      "stdout": "BH-03 Phase 7 measurement validation passed: repeated active Chrome/Firefox startup, ten-root lifecycle, cleanup, failure convergence, capability-aware memory evidence, empty release budgets, deferred qualification, and unsupported experimental state verified.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_bh03_profile.py",
+      "command": [
+        "python3",
+        "validate_bh03_profile.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 44,
+      "stdout": "BH-03 Phase 6 browser-profile validation passed: separate Phoenix profile, actual AtomVM/Elixir acknowledgements, identical active Chrome/Firefox scenarios, closed fallback, registry-owned shutdown, deferred qualification, and unsupported experimental state verified.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_bh03_resilience.py",
+      "command": [
+        "python3",
+        "validate_bh03_resilience.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 44,
+      "stdout": "BH-03 Phase 5 resilience validation passed: bounded registry shutdown, exact-generation loss handling, one replacement, same-handle atomic replay, closed non-DOM fallback, completion bindings, empty browser/measurement/acceptance evidence, and unsupported experimental state verified.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_bh03_roots.py",
+      "command": [
+        "python3",
+        "validate_bh03_roots.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 49,
+      "stdout": "BH-03 Phase 4 shared-runtime/root validation passed: exact compatible reuse, one coalesced startup per scope, 12 registry/root cases, independent FIFO roots, generation/ownership failures, completion bindings, empty later evidence, and unsupported experimental state verified.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_bh03_startup.py",
+      "command": [
+        "python3",
+        "validate_bh03_startup.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 53,
+      "stdout": "BH-03 Phase 3 startup validation passed: 3 bounded artifact roles, 10 acquisition/startup cases, immutable adapter agreement, pinned profile artifact declarations, completion bindings, empty later-phase results, and unsupported experimental state verified.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_bh04_activation.py",
+      "command": [
+        "python3",
+        "validate_bh04_activation.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 315,
+      "stdout": "BH-04 Phase 1 activation passed; renderer unchanged; unsupported; Phase 2 not authorized; BH-05 ineligible.\nBH-04 Phase 1 reproduced on accepted snapshot; current Phase 2 requires validate_bh04_protocol.py.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_bh04_conformance.py",
+      "command": [
+        "python3",
+        "validate_bh04_conformance.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 2418,
+      "stdout": "BH-04 Phase 9 conformance passed; Phase 10 eligible but unauthorized; framework integration deferred.\nPhase 9 reproduced on accepted merge; current Phase 10 requires validate_bh04_acceptance.py.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_bh04_continuity.py",
+      "command": [
+        "python3",
+        "validate_bh04_continuity.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 2056,
+      "stdout": "BH-04 Phase 6 gate passed; Phase 7 eligible but unauthorized.\nBH-04 Phase 6 reproduced on accepted snapshot; current Phase 7 requires validate_bh04_lifecycle.py.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_bh04_dom_application.py",
+      "command": [
+        "python3",
+        "validate_bh04_dom_application.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 1496,
+      "stdout": "BH-04 Phase 4 gate passed: atomic DOM, exact source/history/browser bindings; Phase 5 unauthorized.\nBH-04 Phase 4 reproduced on accepted snapshot; current Phase 5 requires validate_bh04_interactions.py.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_bh04_interactions.py",
+      "command": [
+        "python3",
+        "validate_bh04_interactions.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 1524,
+      "stdout": "BH-04 Phase 5 gate passed; Phase 6 eligible but unauthorized.\nBH-04 Phase 5 reproduced on accepted snapshot; current Phase 6 requires validate_bh04_continuity.py.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_bh04_lifecycle.py",
+      "command": [
+        "python3",
+        "validate_bh04_lifecycle.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 969,
+      "stdout": "BH-04 Phase 7 gate passed; Phase 8 eligible but unauthorized.\nBH-04 Phase 7 reproduced on accepted snapshot; current Phase 9 requires validate_bh04_conformance.py.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_bh04_protocol.py",
+      "command": [
+        "python3",
+        "validate_bh04_protocol.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 210,
+      "stdout": "BH-04 Phase 2 protocol gate passed: exact source/schema/fixture bindings; no behavior or support promotion.\nBH-04 Phase 2 reproduced on accepted snapshot; current Phase 3 requires validate_bh04_reconciliation.py.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_bh04_reconciliation.py",
+      "command": [
+        "python3",
+        "validate_bh04_reconciliation.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 1545,
+      "stdout": "BH-04 Phase 3 gate passed: exact history/source/schema/fixture bindings; no browser or support promotion.\nBH-04 Phase 3 reproduced on accepted snapshot; current Phase 4 requires validate_bh04_dom_application.py.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_browser_product_envelope.py",
+      "command": [
+        "python3",
+        "validate_browser_product_envelope.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 36,
+      "stdout": "Browser product envelope validation passed: stage complete; 5 browser configurations, 10 evidence classes, 11 toolchain inputs, and 6 BH-01 records, 6 rendering modes, 3 profiles, and 12 profile capabilities, 9 trust boundaries, 12 deployment prerequisites, and 7 fallback categories, 8 paper scenarios, and 5 forbidden claims checked.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_component_catalog.py",
+      "command": [
+        "python3",
+        "validate_component_catalog.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 199,
+      "stdout": "Component catalog validation passed: reference mudblazor-v9.9.0; 83 locked source families; catalog schema 1.0.0; 83 normalized families in 7 categories; 12 source-closure exceptions; 168 reviewed source identifiers; 15 reviewed exception paths; 83 unresolved product dispositions; fresh generated view.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_component_classification.py",
+      "command": [
+        "python3",
+        "validate_component_classification.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 236,
+      "stdout": "Component classification validation passed: stage complete; 83 families; 12 exceptions; dispositions {'adapt-concept': 28, 'build-natively': 43, 'renderer-specific-extension': 1, 'replace-with-platform-pattern': 11}; tiers {'F0': 13, 'F1': 26, 'F2': 21, 'F3': 18, 'F4': 5}; packages {'blazex_charts': 1, 'blazex_data': 6, 'blazex_forms': 18, 'blazex_surfaces': 9, 'blazex_ui': 47, 'blazex_ui_tree': 2}; remote {'local-only': 73, 'optional-remote': 7, 'phoenix-enhanced': 3}; fallbacks {'alternative-interaction': 30, 'explicit-unavailable': 2, 'in-app-substitute': 14, 'nonvisual-representation': 1, 'omission': 1, 'server-round-trip': 5, 'static-content': 30}; capability references 204 required/77 optional; portability {'custom-scene': 1, 'portable-semantic': 24, 'portable-with-capabilities': 57, 'renderer-extension': 1}; native {'custom-drawn': 2, 'native-composite': 58, 'native-preferred': 15, 'not-applicable': 8}; visual profiles {'blazex-material': 2, 'hybrid': 58, 'not-applicable': 8, 'platform-native': 15}.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_quality_acceptance.py",
+      "command": [
+        "python3",
+        "validate_quality_acceptance.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 253,
+      "stdout": "Quality/acceptance validation passed: stage complete; 6 environments; 31 budgets {'build': 1, 'interaction': 3, 'payload': 10, 'reliability': 9, 'resource': 3, 'startup': 5}; 8 failure scenarios; 7 unwaivable blockers; 4 cross-cutting gates; 290 acceptance requirements {'browser-envelope': 95, 'catalog-family': 83, 'cross-cutting-obligation': 7, 'non-goal': 8, 'package-boundary': 6, 'quality-budget': 31, 'quality-failure': 8, 'quality-gate': 21, 'quality-release-blocker': 7, 'roadmap-milestone': 24}; zero executed evidence.\n",
+      "stderr": ""
+    },
+    {
+      "name": "generate_acceptance_registry.py",
+      "command": [
+        "python3",
+        "generate_acceptance_registry.py",
+        "--check"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 68,
+      "stdout": "Acceptance generation matches committed outputs: 290 requirements, 290 conditions, zero executed evidence; historical roadmap snapshot retained by bounded planning amendment.\n",
+      "stderr": ""
+    },
+    {
+      "name": "generate_bh00_release.py",
+      "command": [
+        "python3",
+        "generate_bh00_release.py",
+        "--check"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 37,
+      "stdout": "BH-00 release generation matches the committed baseline and BH-01 entry manifest.\n",
+      "stderr": ""
+    },
+    {
+      "name": "generate_component_catalog.py",
+      "command": [
+        "python3",
+        "generate_component_catalog.py",
+        "--check"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 198,
+      "stdout": "Component catalog generation matches /home/ducky/code/blazex/docs/research/assets/component-catalog/blazex-component-catalog-v0-1-0-generated.md: 83 families, 12 exceptions.\n",
+      "stderr": ""
+    },
+    {
+      "name": "generate_component_classification.py",
+      "command": [
+        "python3",
+        "generate_component_classification.py",
+        "--check"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 39,
+      "stdout": "Component classification generation matches /home/ducky/code/blazex/docs/research/assets/component-catalog/blazex-component-classification-v0-1-0-generated.md: 83 families, 12 exceptions, stage complete.\n",
+      "stderr": ""
+    },
+    {
+      "name": "patch-hygiene",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 16,
+      "stdout": "",
+      "stderr": ""
+    }
+  ]
+}

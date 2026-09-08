@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 10,
+  "browsers": [
+    {
+      "browser": "chrome",
+      "version": "140.0.7339.80",
+      "frame_opportunity_ms": {
+        "samples": 100,
+        "min": 25.399999998509884,
+        "max": 43.30000000074506,
+        "median": 29.699999999254942,
+        "p95": 30.300000000745058,
+        "p99": 33.599999997764826,
+        "mean": 29.347999999932945,
+        "cv_percent": 6.5141686994707655
+      },
+      "proxy_within_50ms": true,
+      "variance_investigation_required": false,
+      "max_queue": 64,
+      "stale_renderer": 1000,
+      "stale_effects": 1000,
+      "rejection_percent": 100
+    },
+    {
+      "browser": "firefox",
+      "version": "153.0",
+      "frame_opportunity_ms": {
+        "samples": 100,
+        "min": 28,
+        "max": 33,
+        "median": 31,
+        "p95": 32,
+        "p99": 32,
+        "mean": 30.55,
+        "cv_percent": 3.3501619460652567
+      },
+      "proxy_within_50ms": true,
+      "variance_investigation_required": false,
+      "max_queue": 64,
+      "stale_renderer": 1000,
+      "stale_effects": 1000,
+      "rejection_percent": 100
+    }
+  ],
+  "paint_budget_state": "unverified-compositor-paint",
+  "result": "measurements-recorded-not-acceptance",
+  "support_state": "unsupported",
+  "source_hashes": {
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-authorization-v0.1.0.json": "69057e3eb97b98437a391cb3f6e403502a1f53b27e32f52d84c162f4ecd953ec",
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-measurements-v0.1.0.json": "218b6acc1739daffb953aa97046e59672fbd8429c18b7ff73dc1e495accf5f3c"
+  }
+}

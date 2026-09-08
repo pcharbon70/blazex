@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 10,
+  "recorded_at": "2026-09-08T14:26:24.231Z",
+  "platform": "linux",
+  "node": "v24.3.0",
+  "environment": {
+    "kernel": "6.8.0-51-generic",
+    "arch": "x64",
+    "cpus": [
+      "12th Gen Intel(R) Core(TM) i7-12700F",
+      "12th Gen Intel(R) Core(TM) i7-12700F",
+      "12th Gen Intel(R) Core(TM) i7-12700F",
+      "12th Gen Intel(R) Core(TM) i7-12700F",
+      "12th Gen Intel(R) Core(TM) i7-12700F",
+      "12th Gen Intel(R) Core(TM) i7-12700F",
+      "12th Gen Intel(R) Core(TM) i7-12700F",
+      "12th Gen Intel(R) Core(TM) i7-12700F",
+      "12th Gen Intel(R) Core(TM) i7-12700F",
+      "12th Gen Intel(R) Core(TM) i7-12700F",
+      "12th Gen Intel(R) Core(TM) i7-12700F",
+      "12th Gen Intel(R) Core(TM) i7-12700F",
+      "12th Gen Intel(R) Core(TM) i7-12700F",
+      "12th Gen Intel(R) Core(TM) i7-12700F",
+      "12th Gen Intel(R) Core(TM) i7-12700F",
+      "12th Gen Intel(R) Core(TM) i7-12700F",
+      "12th Gen Intel(R) Core(TM) i7-12700F",
+      "12th Gen Intel(R) Core(TM) i7-12700F",
+      "12th Gen Intel(R) Core(TM) i7-12700F",
+      "12th Gen Intel(R) Core(TM) i7-12700F"
+    ],
+    "memory_bytes": 67194277888,
+    "load_at_start": [
+      3.28,
+      3.24,
+      3.22
+    ],
+    "headless": true,
+    "network": "localhost",
+    "qualification": "active Linux development; not governed BH-22 hardware"
+  },
+  "source_hashes": {
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-authorization-v0.1.0.json": "69057e3eb97b98437a391cb3f6e403502a1f53b27e32f52d84c162f4ecd953ec",
+    "integration/bh-04/atomic-dom-fixtures-v0.1.0.txt": "78786159a02c6252c4bcf570aedac41d11acb15e0a222d3320cf8b769fb3f1a8",
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-09-effect-browser-v0.1.0.json": "192cef915ac5ea5ed9af664ff1cb5470d2fe8a0afa831f4f322fdb5d0e00b801",
+    "integration/bh-04/acceptance-scenarios.js": "ba11fd64b51c03a12b98f8affe800e3ffa82a62019a08fd89f1bc47af572d650",
+    "integration/bh-04/acceptance-browser.mjs": "1642aaf013588942dba8d02dfd9b95d721e70351abff3efa40daf3afefdfe8dd"
+  },
+  "results": [],
+  "fatal_error": "Error: page.evaluate: Error: effect mount\n    at assert (http://127.0.0.1:41321/integration/bh-04/acceptance-scenarios.js:9:49)\n    at runAcceptanceScenarios (http://127.0.0.1:41321/integration/bh-04/acceptance-scenarios.js:76:3)\n    at async <anonymous>:337:30"
+}

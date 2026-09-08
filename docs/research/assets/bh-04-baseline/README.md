@@ -21,6 +21,31 @@ artifacts are immutable; inherited limitations retain their original state.
 
 ## Index
 
+- [Phase 10 delivery record](blazex-bh-04-phase-10-completion-v0.1.0.json) — five section identities, final artifact hashes and revise decision; not BH-04 acceptance.
+
+- [Phase 10 initial gate attempt](blazex-bh-04-phase-10-first-gate-attempt-v0.1.0.json) — retained formatting and in-progress index failures, followed by corrected final execution.
+
+- [Phase 10 reconciliation](blazex-bh-04-phase-10-reconciliation-v0.1.0.json) — output bindings, complete inherited obligations, findings and deferrals.
+- [Phase 10 acceptance overlay](blazex-bh-04-phase-10-acceptance-overlay-v0.1.0.json) — five explicit outcomes; revise, no canonical registry rewrite.
+- [Phase 10 release candidate](blazex-bh-04-phase-10-release-index-v0.1.0.json) — versioned indexes and blocked BH-05 handoff.
+
+- [Phase 10 review inputs](blazex-bh-04-phase-10-review-v0.1.0.json) — owned findings and explicit lack of independent approval.
+
+- [Phase 10 atomic browser corpus](blazex-bh-04-phase-10-atomic-browser-v0.1.0.json) — fresh atomic and rollback scenarios.
+- [Phase 10 interaction browser corpus](blazex-bh-04-phase-10-interaction-browser-v0.1.0.json) — fresh semantic interaction traces.
+- [Phase 10 continuity browser corpus](blazex-bh-04-phase-10-continuity-browser-v0.1.0.json) — fresh form/focus/selection traces.
+- [Phase 10 semantic browser corpus](blazex-bh-04-phase-10-semantic-browser-v0.1.0.json) — fresh headless/standalone comparisons.
+- [Phase 10 isolation](blazex-bh-04-phase-10-isolation-v0.1.0.json) — clean framework-absent build.
+- [Phase 10 gate log](blazex-bh-04-phase-10-gate-log-v0.1.0.json) — exact commands and outputs.
+- [Phase 10 execution index](blazex-bh-04-phase-10-execution-index-v0.1.0.json) — candidate executable source hashes.
+
+- [Phase 10 raw measurements](blazex-bh-04-phase-10-measurements-v0.1.0.json) — both browsers, all samples and trace hashes.
+- [Phase 10 statistics](blazex-bh-04-phase-10-statistics-v0.1.0.json) — reproducible frame-proxy statistics; not compositor paint credit.
+- [Phase 10 effect/failure evidence](blazex-bh-04-phase-10-effect-browser-v0.1.0.json) — fresh offline runtime and browser observations through 1000 ms.
+- [Phase 10 failed harness attempt](blazex-bh-04-phase-10-failed-attempt-v0.1.0.json) — preserved setup failure; not a passing measurement.
+
+- [Phase 10 authorization](blazex-bh-04-phase-10-authorization-v0.1.0.json) — frozen candidate, methods, thresholds and decision rules.
+
 - [Phase 7 browser evidence](blazex-bh-04-phase-07-browser-results-v0.1.0.json) — active raw effect/failure/cleanup traces.
 - [Phase 7 source index](blazex-bh-04-phase-07-source-index-v0.1.0.json) — current implementation bindings.
 - [Phase 7 validation log](blazex-bh-04-phase-07-validation-log-v0.1.0.txt) — commands, counts and limitations.

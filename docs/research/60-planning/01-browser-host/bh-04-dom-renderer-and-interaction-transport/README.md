@@ -52,10 +52,19 @@ Its bounded effect, resource and failure-isolation gate is complete. On
 2026-09-08 the owner deferred LiveView/LocalLiveView integration, superseding
 the subsequent Phase 8 implementation request. Phase 8 is **[DEFERRED]**;
 Phase 9 was explicitly authorized and its active conformance gate is complete.
-Phase 10 is eligible but unauthorized. See [LiveView integration deferral](../../liveview-integration-deferral.md).
+The owner authorized Phase 10 on 2026-09-08. Its measurement/review candidate
+records **revise**: compositor-paint evidence and independent review remain
+open. BH-04 is not accepted and BH-05 remains ineligible and unauthorized.
+See [LiveView integration deferral](../../liveview-integration-deferral.md).
 No support or newly packaged Wasm endpoint is claimed.
 
 ## What belongs here
+
+- [Phase 10 candidate evidence](phase-10-implementation-evidence.md) — reproducible measurements, final gates, retained failures and revise decision.
+
+- [Phase 10 implementer review](phase-10-review.md) — all eight lenses, explicit independence limit and blocking re-entry findings.
+
+- [Phase 10 acceptance contract](phase-10-acceptance-contract.md) — frozen methods, review independence and decision rules.
 
 - The BH-03 handoff and the BH-02 renderer, semantic, event, effect, resource,
   presentation-intent, and DOM contracts inherited by BH-04.

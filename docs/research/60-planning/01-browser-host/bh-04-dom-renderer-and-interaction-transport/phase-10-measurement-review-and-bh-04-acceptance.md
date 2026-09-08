@@ -23,6 +23,20 @@ as a pass. Standalone dependency isolation remains an active requirement.
 
 Back to milestone: [README](README.md)
 
+Section 10.1 is frozen in the [acceptance contract](phase-10-acceptance-contract.md).
+Section 10.2 has executed its active sample inventory; the
+[raw measurements](../../../assets/bh-04-baseline/blazex-bh-04-phase-10-measurements-v0.1.0.json)
+and [statistics](../../../assets/bh-04-baseline/blazex-bh-04-phase-10-statistics-v0.1.0.json)
+retain a blocking distinction: animation-frame opportunities do not establish
+compositor paint. Therefore 10.2.1.1 and the paint-budget outcome remain open.
+No unchecked acceptance requirement is silently converted into a pass.
+
+The [candidate evidence and revise decision](phase-10-implementation-evidence.md)
+records all five section deliveries. Section 10.3's independent review is also
+open; Section 10.4 publishes a blocked BH-05 handoff, not an entry authorization.
+Section 10.5 validates a truthful revise candidate. The phase and milestone
+acceptance checkboxes remain unchecked until the two active blockers close.
+
 - [ ] 10 Phase - Measurement, Review, and BH-04 Acceptance.
 
   Measure BH-04's first-responsible renderer budgets, reconcile all milestone
@@ -31,28 +45,28 @@ Back to milestone: [README](README.md)
   eligible at most; it grants no implementation authority, public API
   stability, browser support, or release qualification.
 
-  - [ ] 10.1 Section - Authorize and freeze the final candidate gate.
+  - [x] 10.1 Section - Authorize and freeze the final candidate gate.
 
     Bind the active candidate from Phases 1–7 and 9 plus the Phase 8 deferral, measurement methods, review lenses,
     and decision rules before producing final evidence.
 
-    - [ ] 10.1.1 Task - Record bounded Phase 10 authority.
+    - [x] 10.1.1 Task - Record bounded Phase 10 authority.
 
       Establish exact provenance and prohibit post-hoc scope or threshold
       changes that would make the candidate appear to pass.
 
-      - [ ] 10.1.1.1 Subtask - Record synchronized base, branch, section commits, one PR, cleanup, Phase 1–7 and 9 completion identities plus the Phase 8 deferral identity, and explicit Phase 10 authorization.
-      - [ ] 10.1.1.2 Subtask - Bind the BH-04 entry ledger, acceptance registry, quality contract, conformance ledger, dependency inventories, all raw evidence indexes, roadmap, ADRs, and deferral policy by path and SHA-256.
-      - [ ] 10.1.1.3 Subtask - Exclude BH-05 implementation, release-support promotion, hidden waivers, threshold reduction, scenario removal, and deferred-environment substitution.
+      - [x] 10.1.1.1 Subtask - Record synchronized base, branch, section commits, one PR, cleanup, Phase 1–7 and 9 completion identities plus the Phase 8 deferral identity, and explicit Phase 10 authorization.
+      - [x] 10.1.1.2 Subtask - Bind the BH-04 entry ledger, acceptance registry, quality contract, conformance ledger, dependency inventories, all raw evidence indexes, roadmap, ADRs, and deferral policy by path and SHA-256.
+      - [x] 10.1.1.3 Subtask - Exclude BH-05 implementation, release-support promotion, hidden waivers, threshold reduction, scenario removal, and deferred-environment substitution.
 
-    - [ ] 10.1.2 Task - Freeze measurement and acceptance decision rules.
+    - [x] 10.1.2 Task - Freeze measurement and acceptance decision rules.
 
       Define reproducible candidate measurements and the evidence required for
       accept, accept-with-bounded-conditions, revise, or block outcomes.
 
-      - [ ] 10.1.2.1 Subtask - Freeze keyed-update receipt-to-next-paint, per-root queue depth, stale renderer/effect rejection, and failure/cleanup metric boundaries, clocks, sample counts, warmups, statistics, variance, and failure retention.
-      - [ ] 10.1.2.2 Subtask - Require architecture, implementation, renderer/conformance, security, accessibility, performance/reliability, packaging/dependency, and provenance review lenses with named owners and independence limits.
-      - [ ] 10.1.2.3 Subtask - Define acceptance closure for all five BH-04 conditions, active blockers, bounded conditions, deferred qualifications, unresolved findings, and BH-05 handoff restrictions.
+      - [x] 10.1.2.1 Subtask - Freeze keyed-update receipt-to-next-paint, per-root queue depth, stale renderer/effect rejection, and failure/cleanup metric boundaries, clocks, sample counts, warmups, statistics, variance, and failure retention.
+      - [x] 10.1.2.2 Subtask - Require architecture, implementation, renderer/conformance, security, accessibility, performance/reliability, packaging/dependency, and provenance review lenses with named owners and independence limits.
+      - [x] 10.1.2.3 Subtask - Define acceptance closure for all five BH-04 conditions, active blockers, bounded conditions, deferred qualifications, unresolved findings, and BH-05 handoff restrictions.
 
   - [ ] 10.2 Section - Execute governed renderer measurements.
 
