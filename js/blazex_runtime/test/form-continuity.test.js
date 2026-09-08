@@ -46,3 +46,19 @@ test("readonly choices cancel native toggles before a semantic event", () => {
   let cancelled = false; emit(element, "click", { preventDefault() { cancelled = true; } });
   assert.equal(cancelled, true); assert.equal(state.editable(owner), false); state.dispose();
 });
+test("invalid admissions cannot dirty a control or advance its edit fence", () => {
+  for (const kind of ["text", "check"]) {
+    const doc = new Document(), element = doc.createElement("input"), nodes = new Map([[owner, element]]), state = new FormContinuity();
+    const c = { ...control(kind === "text" ? "initial" : true), kind };
+    state.apply({ controls: [c] }, nodes);
+    for (const payload of [null, {}, { value: undefined, checked: false }, { value: "bad", checked: undefined }]) state.admitted(owner, payload, 10);
+    state.admitted(owner, { value: "bad", checked: false }, NaN);
+    state.apply({ controls: [c] }, nodes);
+    assert.equal(kind === "text" ? element.value : element.checked, c.value);
+    state.admitted(owner, { value: "draft", checked: false }, 2);
+    state.admitted(owner, {}, 10);
+    state.apply({ controls: [{ ...c, edit_sequence: 2 }] }, nodes);
+    assert.equal(kind === "text" ? element.value : element.checked, c.value);
+    state.dispose();
+  }
+});

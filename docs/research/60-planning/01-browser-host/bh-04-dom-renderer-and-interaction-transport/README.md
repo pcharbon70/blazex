@@ -61,6 +61,7 @@ No support or newly packaged Wasm endpoint is claimed.
 ## What belongs here
 
 - [Corrective acceptance plan](acceptance-correction-plan.md) — authorized native presentation measurements and independent-review corrections before BH-05.
+- [Corrective acceptance evidence](acceptance-correction-evidence.md) — runtime corrections, native captures and variance investigation; not yet acceptance.
 
 - [Phase 10 candidate evidence](phase-10-implementation-evidence.md) — reproducible measurements, final gates, retained failures and revise decision.
 

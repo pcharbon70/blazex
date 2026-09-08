@@ -25,6 +25,9 @@ insufficient. Record source, creator, license, provenance, and use.
 
 ### Subdirectories
 
+- [BH-04 corrective captures](bh-04-correction/README.md) — native presentation,
+  controlled-draft regression and stronger stale-message evidence.
+
 - [BH-04 activation](bh-04-baseline/README.md) — accepted handoff and bounded renderer governance.
 
 - [BH-00 release](bh-00-release/README.md) — source-bound governance,

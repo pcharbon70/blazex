@@ -11,7 +11,12 @@ export class FormContinuity {
   has(element) { return [...this.#entries.values()].some(e => e.element === element); }
   admitted(source, payload, sequence) {
     const entry = this.#entries.get(source);
-    if (entry) { entry.sequence = sequence; entry.dirty = true; entry.value = payload.value; entry.checked = payload.checked; }
+    // Only normalized edit payloads can become drafts. Other semantic events
+    // carry no form value and must not advance the edit acknowledgement fence.
+    if (!entry || typeof payload?.value !== "string" ||
+        !(entry.text ? payload.checked === null || typeof payload.checked === "boolean" : typeof payload.checked === "boolean") ||
+        !Number.isSafeInteger(sequence) || sequence <= 0) return;
+    entry.sequence = sequence; entry.dirty = true; entry.value = payload.value; entry.checked = payload.checked;
   }
   validate(envelope, projection) {
     requireDOM(!this.#disposed && envelope && envelope.base_control_digest === this.#digest, "stale");

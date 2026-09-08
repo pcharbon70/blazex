@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import { EVENT_MAPPINGS, INTERACTION_PROTOCOL, listenerIdentity, normalizeNative, validateInteraction } from "../src/interaction-record.js";
 import { InteractionListeners } from "../src/interaction-listeners.js";
+import { FormContinuity } from "../src/form-continuity.js";
 import { AtomicDOMRoots } from "../src/atomic-dom.js";
 import { decode } from "../src/render-transaction-v2.js";
 import { Document } from "./support/atomic-fake-dom.js";
@@ -60,4 +61,29 @@ test("actual reconciler listeners register through the atomic DOM node index and
   const action = container.firstChild.children.find(n => n.tagName === "BUTTON");
   const handler = [...action.listeners.get("click")][0]; handler(native("activate", action)); assert.equal(received.length, 1);
   await handle.dispose(); handler(native("activate", action)); assert.equal(received.length, 1); assert.equal(interactions.snapshot().listeners, 0);
+});
+test("non-edit dispatch never creates or replaces controlled text and check drafts", () => {
+  for (const kind of ["text", "check"]) for (const semantic of ["activate", "move", "reorder"]) {
+    const document = new Document(), element = document.createElement("input");
+    const continuity = new FormContinuity(), nodes = new Map([[source, element]]);
+    const control = { owner: source, kind, value: kind === "text" ? "initial" : true, choices: [], edit_sequence: 0, disabled: false, readonly: false, required: false, invalid: false, indeterminate: false };
+    continuity.apply({ controls: [control] }, nodes);
+    const received = [];
+    const registry = new InteractionListeners({ rootId: "one", lifecycleGeneration: 2, owner: context.owner, continuity, receiver: { enqueue: r => { received.push(r); return Promise.resolve({ outcome: "accepted" }); }, setContext() {}, dispose() {} } });
+    registry.setContinuity(continuity);
+    registry.claim({ state: "ready", root_id: "one", root_generation: 2 }, context.owner);
+    const binding = registry.register(source, element, { semantic, native: EVENT_MAPPINGS[semantic], source: { generation: 1 } });
+    registry.publish({ owner: context.owner, generation: 1, target_revision: 1, transaction_id: transaction, digest: context.digest });
+    binding.handler(native(semantic, element));
+    assert.equal(received.length, 1);
+    continuity.apply({ controls: [control] }, nodes);
+    assert.equal(kind === "text" ? element.value : element.checked, control.value);
+    continuity.admitted(source, { value: "draft", checked: false }, 2);
+    binding.handler(native(semantic, element));
+    continuity.apply({ controls: [control] }, nodes);
+    assert.equal(kind === "text" ? element.value : element.checked, kind === "text" ? "draft" : false);
+    continuity.apply({ controls: [{ ...control, edit_sequence: 2 }] }, nodes);
+    assert.equal(kind === "text" ? element.value : element.checked, control.value);
+    registry.dispose(); continuity.dispose();
+  }
 });

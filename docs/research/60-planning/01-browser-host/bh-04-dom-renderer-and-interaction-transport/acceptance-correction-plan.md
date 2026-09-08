@@ -18,7 +18,7 @@ phase. Base: `d61e103b14595acca182611524eb4c7245906f20`; branch:
 ## Ordered sections
 
 - [x] C1 — Freeze corrected measurement and review scope before acceptance runs.
-- [ ] C2 — Repair independent findings and produce native-presentation evidence.
+- [x] C2 — Repair independent findings and produce native-presentation evidence.
 - [ ] C3 — Obtain final independent reviews, bind all obligations and decide.
 - [ ] C4 — Reproduce active gates, publish one PR, merge, sync main, then delete branch.
 

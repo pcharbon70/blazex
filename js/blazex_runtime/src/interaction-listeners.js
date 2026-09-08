@@ -50,8 +50,10 @@ export class InteractionListeners {
       const record = validateInteraction({ ...this.#context, protocol: INTERACTION_PROTOCOL, provenance: "local-event", source: binding.source, listener_id: id, semantic: binding.semantic, sequence: this.#sequence + 1, timestamp: this.#timestamp, payload });
       this.#sequence++;
       const pending = this.#receiver.enqueue(record);
-      this.#continuity?.admitted(binding.source, payload, record.sequence);
-      if (["change", "select"].includes(binding.semantic)) this.#observations.set(binding.source, { source: binding.source, value: payload.value, checked: payload.checked });
+      if (["change", "select"].includes(binding.semantic)) {
+        this.#continuity?.admitted(binding.source, payload, record.sequence);
+        this.#observations.set(binding.source, { source: binding.source, value: payload.value, checked: payload.checked });
+      }
       if (event.cancelable) event.preventDefault(); event.stopPropagation();
       this.#observe(pending, record.sequence);
     } catch (error) { this.#outcome({ outcome: "rejected", diagnostic: interactionDiagnostic(error) }); }

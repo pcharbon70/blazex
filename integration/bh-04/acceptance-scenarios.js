@@ -62,7 +62,9 @@ export async function runAcceptanceScenarios(document, rows, effectFixture, poli
     const random=next(),delay=random%3,tx=await seal({...rows[1].transaction,transaction_id:txid(20000+i),generation:1+random%(state.generation-1)});
     await pause(delay);const start=performance.now();const ack=await a.roots.submit(a.token,tx),after=a.roots.snapshot(a.token);
     const correct=ack.state==="rejected"&&ack.diagnostic==="stale"&&a.container.innerHTML===before&&after.fingerprint===state.fingerprint&&after.revision===state.revision;
-    stale.push({path:"renderer",sample:i,seed:random,delay_ms:delay,...identity(tx),elapsed_ms:performance.now()-start,ack,correct});if(!correct)errors.push("stale-renderer-"+i);
+    stale.push({path:"renderer",sample:i,seed:random,delay_ms:delay,...identity(tx),elapsed_ms:performance.now()-start,ack,correct,
+      before:{generation:state.generation,revision:state.revision,fingerprint:state.fingerprint,html:before},
+      after:{generation:after.generation,revision:after.revision,fingerprint:after.fingerprint,html:a.container.innerHTML}});if(!correct)errors.push("stale-renderer-"+i);
   }
   await a.close();
   // A fresh generation-3 root receives validly sealed generation-1/2 envelopes.
@@ -90,7 +92,9 @@ export async function runAcceptanceScenarios(document, rows, effectFixture, poli
     const raw=await envelope(generation,31000+i,effects);await pause(delay);const start=performance.now();let diagnostic=null;
     try{await roots.submit(token,raw);}catch(e){diagnostic=e.code??String(e);}
     const snapshot=roots.snapshot(token),correct=diagnostic==="stale"&&container.innerHTML===html&&snapshot.fingerprint===baseline.fingerprint&&snapshot.revision===baseline.revision&&snapshot.resources.active===baseline.resources.active&&snapshot.results.length===0;
-    stale.push({path:"effects",sample:i,seed:random,delay_ms:delay,...identity(raw.continuity.transaction),effect_id:id,envelope_digest:raw.digest,elapsed_ms:performance.now()-start,diagnostic,correct});if(!correct)errors.push("stale-effect-"+i);
+    stale.push({path:"effects",sample:i,seed:random,delay_ms:delay,...identity(raw.continuity.transaction),effect_id:id,envelope_digest:raw.digest,elapsed_ms:performance.now()-start,diagnostic,correct,
+      before:{generation:baseline.generation,revision:baseline.revision,fingerprint:baseline.fingerprint,html,active:baseline.resources.active,results:baseline.results},
+      after:{generation:snapshot.generation,revision:snapshot.revision,fingerprint:snapshot.fingerprint,html:container.innerHTML,active:snapshot.resources.active,results:snapshot.results}});if(!correct)errors.push("stale-effect-"+i);
   }
   roots.dispose(token);await pause(policy.failure.observation_ms);const cleanup=roots.snapshot(token);
   if(cleanup.resources.active!==0||cleanup.inventory.nodes!==0||cleanup.queued!==0)errors.push("effect-cleanup");
