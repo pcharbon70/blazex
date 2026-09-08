@@ -27,6 +27,8 @@ None.
 
 ### Files
 
+- [Phase 6 authorization](blazex-bh-04-phase-06-authorization-v0.1.0.json) — explicit continuity and internal form prerequisite scope.
+
 - [Phase 5 source index](blazex-bh-04-phase-05-source-index-v0.1.0.json) — exact source and browser hashes.
 - [Phase 5 browser results](blazex-bh-04-phase-05-browser-results-v0.1.0.json) — native event, ERTS dispatch and DOM acknowledgement traces.
 - [Phase 5 validation log](blazex-bh-04-phase-05-validation-log-v0.1.0.txt) — commands, counts, repairs and limitations.

@@ -160,6 +160,7 @@ public stability or browser support.
 
 ## Index
 
+- [Phase 6 continuity contract](phase-06-continuity-contract.md) — authorized internal form prerequisite, ownership, composition and focus policy.
 - [Phase 5 implementation evidence](phase-05-implementation-evidence.md) — event mappings, ERTS dispatch, DOM acknowledgement and bounded completion.
 - [Phase 5 interaction contract](phase-05-interaction-contract.md) — mapping, privacy, versioned bridge extension, root sequencing and completion boundaries.
 
