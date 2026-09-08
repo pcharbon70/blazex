@@ -20,9 +20,9 @@ for(const [name,script]of [["atomic","atomic-dom"],["interaction","interaction"]
   if(["interaction","continuity","effect"].includes(name))run(name+"-replay","node",["integration/bh-04/"+name+"-conformance.mjs",output]);
 }
 run("isolation","node",["integration/bh-04/conformance-isolation.mjs",prefix+"isolation-v0.1.0.json"]);
-run("research-tests","python3",["-m","unittest","discover","-p","test_*.py"],path.join(directory,"docs/research"));
-for(const script of fs.readdirSync("docs/research").filter(p=>/^validate_.*\.py$/.test(p)&&p!=="validate_bh04_acceptance.py").sort())run(script,"python3",[script],path.join(directory,"docs/research"));
-for(const script of fs.readdirSync("docs/research").filter(p=>/^generate_.*\.py$/.test(p)).sort())run(script,"python3",[script,"--check"],path.join(directory,"docs/research"));
+run("research-tests","python3",["-m","unittest","discover","-p","test_*.py"],path.join(directory,"docs/research/70-tools"));
+for(const script of fs.readdirSync("docs/research/70-tools").filter(p=>/^validate_.*\.py$/.test(p)&&p!=="validate_bh04_acceptance.py").sort())run(script,"python3",[script],path.join(directory,"docs/research/70-tools"));
+for(const script of fs.readdirSync("docs/research/70-tools").filter(p=>/^generate_.*\.py$/.test(p)).sort())run(script,"python3",[script,"--check"],path.join(directory,"docs/research/70-tools"));
 run("patch-hygiene","git",["diff","--check"]);
 const files=execFileSync("git",["ls-files","--cached","--others","--exclude-standard"],{encoding:"utf8"}).trim().split("\n");
 const json=files.filter(p=>p.endsWith(".json"));for(const file of json)JSON.parse(fs.readFileSync(file));
