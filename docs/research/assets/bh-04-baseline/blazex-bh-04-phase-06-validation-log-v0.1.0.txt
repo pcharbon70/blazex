@@ -1,0 +1,105 @@
+BH-04 Phase 6 validation log — 2026-09-08
+Base: c11a0618b66f46b868739c9958f6d9b45249afbf
+Branch: codex/bh04-phase6-continuity
+
+Environment
+  Linux; Node 24.3.0; npm 11.4.2; Python 3.12.12; jsonschema 4.25.1.
+  Offline Docker image a2386c21edd5: Elixir 1.17.3 / OTP 26.
+  Fresh container-local MIX_BUILD_PATH per suite; no mixed host build reuse.
+  Chrome /usr/bin/google-chrome, 140.0.7339.80.
+  Firefox /home/ducky/.cache/ms-playwright/firefox-1538/firefox/firefox, 153.0.
+  Existing Playwright-core 1.62.1 and fixture Jason 1.4.5; no dependency added.
+
+Active browser / actual Elixir
+  node integration/bh-04/continuity-browser.mjs
+    docs/research/assets/bh-04-baseline/blazex-bh-04-phase-06-browser-results-v0.1.0.json
+  Both Chrome and Firefox passed 16 scenarios, two independent roots and two
+    complete cleanups each. Each has 69 raw carrier request/response pairs and
+    18 initial HTML/module GETs. No local interaction HTTP/Phoenix/Plug traffic.
+  Scenarios: typed input; keyed moves/backward caret; zero redundant writes;
+    explicit range clamping; overlapping pending edits; composing and ended
+    drafts; blur; keyboard activation/submit; native checkbox, mixed, required,
+    invalid state; single/multiple stable choices; explicit focus, sibling and
+    hidden-ancestor isolation; removal/replacement/disabled/readonly targets;
+    malformed/digest/stale manifests; file rejection; rollback; disposal/loss.
+  Composition is programmatic native-event automation, not physical IME proof.
+  node integration/bh-04/continuity-conformance.mjs
+    Independent replay passed: 66 proposals, 64 commits, 22 semantic deliveries.
+    Two deliberately rolled-back proposals are discarded at root shutdown.
+  node integration/bh-04/atomic-dom-browser.mjs /tmp/bh04-phase6-phase4-regression.json
+    Both passed the unchanged Phase 4 matrix: 50 scenarios, 1204 rollback
+    boundaries, 100 stale rejections, queue max 64, 1254 terminal acks and 1263
+    cleanups per browser. Historical raw evidence not overwritten.
+  node integration/bh-04/interaction-browser.mjs /tmp/bh04-phase6-phase5-regression.json
+    Both passed unchanged Phase 5: 13 mappings, 17 negative/overflow cases,
+    three roots, 18 event commits, two no-render events, queue 64 and cleanup.
+
+Node and Elixir
+  npm run build && npm test (js/blazex_runtime): 30 test files passed.
+  node --test js/blazex_runtime/test/*.test.js: final full run passed.
+  npm run build && npm test (packages/blazex_renderer_dom): seven tests passed.
+  docker run --rm --network none -e MIX_BUILD_PATH=/tmp/bh04-phase6-final
+    -v /home/ducky/code/blazex:/workspace -w /workspace a2386c21edd5 sh -c
+    'for package in blazex_core blazex_effects blazex_ui_tree blazex_renderer
+      blazex_renderer_dom blazex_renderer_dom_liveview blazex_renderer_headless;
+      do (cd packages/$package && mix test) || exit; done;
+      cd integration/conformance && mix test'
+  Counts: core 13, effects 9, ui_tree 25, renderer 8, renderer_dom 115,
+    renderer_dom_liveview 4, headless 6: 180 tests, zero failures.
+  Integration/conformance: 56 tests, zero failures.
+  The renderer's 115 tests also pass after final malformed-ack and legacy-endpoint
+    rejection coverage; targeted JS tests cover oversize local drafts,
+    readonly toggle cancellation, composition acknowledgements and verification.
+
+Canonical cross-language regression and schema checks
+  From integration/conformance in pinned offline Docker:
+    mix run ../bh-04/support/atomic_dom_runner.exs
+    mix run ../bh-04/support/reconciliation_runner.exs
+    mix run ../bh-04/support/protocol_runner.exs /evidence/bh04-phase6-v1.txt
+    mix run ../bh-04/support/reconciliation_protocol_runner.exs /evidence/bh04-phase6-v2.txt
+  Use repo mount /workspace, /tmp mount /evidence and a fresh MIX_BUILD_PATH.
+  Both 50-row renderer generators match exact committed bytes.
+  node integration/bh-04/protocol-fixtures.mjs --compare /tmp/bh04-phase6-v1.txt
+    75 cases, 34 positive / 41 negative: exact canonical bytes/hashes/errors.
+  node integration/bh-04/reconciliation-fixtures.mjs --compare /tmp/bh04-phase6-v2.txt
+    50 traces, 116 cases, 100 positive / 16 negative: exact independent replay.
+  Decode positive canonical fixtures with render-transaction-codec.js; Python
+    Draft202012Validator validates both schemas and all 134 record/context pairs.
+
+Research, provenance and boundary gates
+  python3 -m unittest discover -p 'test_*.py' (docs/research): 387 tests passed.
+  for gate in validate_*.py; do python3 "$gate" || exit 1; done
+    All 30 validators passed, including archive and current continuity completion.
+  for generator in generate_*.py; do python3 "$generator" --check || exit 1; done
+    Four generated outputs match committed artifacts.
+  Current gate binds 29 exact source/evidence files plus the raw browser hash,
+    explicitly reproduces accepted Phase 5 history and independently replays
+    every recorded continuity envelope. Twelve negative governance cases pass.
+  Existing kernel, semantic/presentation types, v1/v2 transaction schemas,
+    dependency/lockfiles, lowering and profile manifests remain unchanged.
+  New FormState/FormOutput/FormEvaluator are additive neutral contracts; legacy
+    consumers reject the wrapper. No server, dynamic atoms or component JS.
+  Parse all tracked/unignored repository JSON: 376 files after completion record
+    creation (375 before), no errors. Unrelated work is separately preserved.
+  Archive inventory/links, git diff --check and staged patch hygiene passed.
+
+Repairs and retained limits
+  Initial pending-edit assertions retained a deliberate fixture value override;
+    clear it at the intended scenario boundary, then rerun both browsers.
+  Ended composition formerly retained a prior submitted sequence. It now marks
+    an unsubmitted draft until a genuine input, preserving intervening renders.
+  Managed-value verification uses retained intended values, not a fresh DOM read.
+  Reject future edit acknowledgements, malformed compound acks, oversize drafts
+    and legacy endpoint input; readonly choices cancel native toggles.
+  No truncation, fabricated events, replay or silent candidate-state promotion.
+  Existing Jason warns about already-consolidated Enumerable; plain-map JSON
+    execution passes. No new dependency or warning suppression is introduced.
+  Evidence uses real ERTS over test-only DevTools/stdio, not new AtomVM/Wasm
+    packaging. The existing Wasm demo remains unchanged.
+  No product form/validation engine, rich control, file metadata/path/bytes,
+    styling, effects, performance/heap or public API qualification is claimed.
+  Implementation-agent review, not independent review.
+  [DEFERRED] Physical IME, manual assistive technology and unavailable platform/
+    device/browser pairing stay with platform/device/accessibility owners;
+    reactivation no later than BH-22, no pass credit.
+  Unsupported and experimental; Phase 7 eligible but unauthorized; BH-05 ineligible.

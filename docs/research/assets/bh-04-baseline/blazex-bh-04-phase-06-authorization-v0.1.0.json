@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "milestone": "BH-04",
+  "phase": 6,
+  "base_revision": "c11a0618b66f46b868739c9958f6d9b45249afbf",
+  "branch": "codex/bh04-phase6-continuity",
+  "sections": [
+    "6.1",
+    "6.2",
+    "6.3",
+    "6.4"
+  ],
+  "authority": "User requested next BH-04 phase and explicitly approved versioned internal form/selection prerequisite",
+  "source_bindings": {
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-05-completion-v0.1.0.json": "f43f857120769d7380decfc6f620d9fbffaddd5dbce667420d32e7b57ee24d0e",
+    "packages/blazex_ui_tree/lib/blazex/ui_tree/intent_set.ex": "109b9d4927b2ba8b810188092066794f8c2de29e531362f0b601a6cc4ba4642e",
+    "packages/blazex_ui_tree/lib/blazex/ui_tree/selection.ex": "7ace4514d24a45a044111d534a5d705b517b70a3b0bdc4e2574bc5f36e83a416",
+    "packages/blazex_ui_tree/lib/blazex/ui_tree/focus.ex": "c8094a4e1e60a145285a5a368a89608c1220f722fecacb3674dc65c5579c85fc",
+    "packages/blazex_ui_tree/lib/blazex/ui_tree/accessibility.ex": "33ef2d2cb5054180705f39f56568fc0285a2eea433b586c6195035978f64fc0f",
+    "packages/blazex_ui_tree/lib/blazex/ui_tree/binding.ex": "b3e66072b18ea7bc03f4595271c5dd2f56cd419f470a29ea70bb6e7f24d5c145",
+    "js/blazex_runtime/src/atomic-dom.js": "c624708e3e039c4ff4b3ca369b08ad4ca3209afa8de7ac35c41f816f6acf8a15",
+    "js/blazex_runtime/src/interaction-listeners.js": "bf40837c7bc3ffa9b52b7cf09c9b2f07b1ec60fc19c8fdad6e646491abb368a3",
+    "js/blazex_runtime/src/interaction-stream.js": "999a14953c7bc484b21abc6d2113d4da0e9f4fee75ebea162f52cdc43e78bb53",
+    "js/blazex_runtime/src/root-lifecycle.js": "9ba5c518f802b188def31508916f03888b43f581a6b36a849222ca96e2d4a7b6"
+  },
+  "exclusions": [
+    "BH-10 products",
+    "BH-13 rich controls",
+    "BH-14 uploads",
+    "file metadata/paths/bytes",
+    "server authority",
+    "support claims"
+  ],
+  "delivery": {
+    "one_commit_per_section": true,
+    "pull_requests": 1,
+    "merge": true,
+    "sync_main_before_deleting_branch": true
+  }
+}

@@ -2,7 +2,8 @@
 
 ## Purpose
 
-Current status: Phase 5 adds bounded semantic listeners and root-local interaction
+Current status: Phase 6 adds opt-in controlled forms, composition and owned focus/
+selection continuity. Phase 5 adds bounded semantic listeners and root-local interaction
 delivery with actual Elixir dispatch and correlated DOM commits. Phase 4 provides
 atomic application and rollback/fallback isolation. The Phase 3 reconciler and Phase 2
 v1 protocol remain immutable. Active Linux browser evidence is developmental,
@@ -12,6 +13,11 @@ Phase 1 activates evidence governance only. No incremental renderer behavior,
 benchmark pass, browser qualification, or support is claimed.
 
 ## Index
+
+- [Continuity usage](continuity-usage.md) — additive form contract and digest-bound envelope, with runtime limitations.
+- [Continuity browser runner](continuity-browser.mjs) — Chrome/Firefox and real offline ERTS.
+- [Continuity scenarios](continuity-scenarios.js) — controlled drafts, composition, selection, focus and cleanup.
+- [Continuity replay](continuity-conformance.mjs) — independent manifest/digest and transaction replay.
 
 - [Interaction usage](interaction-usage.md) — negotiated v2 companion, ownership and runtime packaging limits.
 - [Interaction browser runner](interaction-browser.mjs) — Chrome/Firefox and offline ERTS with a test-only DevTools/stdio carrier.
@@ -52,5 +58,5 @@ benchmark pass, browser qualification, or support is claimed.
 The bh-04-owner owns this boundary. BH-02 full-root fixtures and all BH-03
 artifacts remain immutable; reuse is reference evidence, not incremental pass
 credit. Later evidence requires separate authorization, a new version and
-explicit supersession links. Phase 5 is complete; Phase 6 remains unauthorized
+explicit supersession links. Phase 6 is authorized; Phase 7 remains unauthorized
 and BH-05 is ineligible.

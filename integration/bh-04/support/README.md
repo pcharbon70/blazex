@@ -1,5 +1,8 @@
 # Protocol test support
 
+- [Continuity component](continuity_component.exs) — real controlled fields and stable single/multiple choices.
+- [Continuity runtime](continuity_runtime.exs) — test-only offline ERTS carrier for the v3 opt-in endpoint.
+
 - [Interaction counter](interaction_counter.exs) — existing semantic callbacks for all 13 mappings, including unchanged-render outcomes.
 - [Interaction runtime](interaction_runtime.exs) — test-only bounded stdio carrier to real Elixir evaluation and reconciliation; not a packaged Wasm endpoint.
 
