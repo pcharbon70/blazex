@@ -94,6 +94,10 @@ def validate(root=ROOT, completion=True):
     return errors
 
 if __name__ == "__main__":
+    from bh04_phase9_history import enabled as phase9_enabled, run_phase7
+    if phase9_enabled(ROOT):
+        run_phase7(ROOT)
+        sys.exit(0)
     errors = validate(completion="--candidate" not in sys.argv)
     if errors: print("\n".join(errors)); sys.exit(1)
     print("BH-04 Phase 7 gate passed; Phase 8 eligible but unauthorized.")

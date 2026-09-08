@@ -114,6 +114,16 @@ def validate_decision(decision):
 
 
 def validate():
+    # Phase 9 conformance changes governance readers, not the accepted BH-03
+    # implementation. Reproduce that exact accepted gate, never rewrite its
+    # completion hashes or treat current source drift as historical evidence.
+    from bh04_phase9_history import enabled, snapshot
+    if enabled(ROOT):
+        with snapshot(ROOT) as historical:
+            subprocess.run([sys.executable, "docs/research/validate_bh03_correction.py"],
+                           cwd=historical, check=True, capture_output=True)
+            return json.loads((historical / ASSETS /
+                "blazex-bh-03-phase-09-acceptance-v0.1.0.json").read_text())["decision"]
     require(digest(AUTH) == AUTH_SHA256, "authority changed")
     auth = read(AUTH)
     require(auth["status"] == "approved-phase-9-only" and auth["base_revision"] == BASE

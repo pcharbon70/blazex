@@ -643,6 +643,17 @@ def historical_registry_for_bound_roadmap_amendment(
     )
     bh01["normative_statement"] = HISTORICAL_BH01_COMPLETION
     bh01["observable_results"] = [HISTORICAL_BH01_COMPLETION]
+    # Keep the accepted registry immutable. The dated framework deferral is a
+    # prospective scope overlay, not retroactive credit or an edited baseline.
+    framework_historical = {
+        "BH-04": "Deterministic renderer fixtures and browser scenarios produce the documented DOM, accessibility, event, focus, and disposal outcomes. Application components depend only on BlazeX contracts. The standalone DOM package has no Phoenix, LiveView, LocalLiveView, or Plug dependency, and the LiveView adapter is the sole package coupled to LiveView patching internals.",
+        "BH-08": "Foundation examples behave consistently under server LiveView and browser-local rendering across theme, direction, responsive, keyboard, and accessibility states. The foundation has a measured payload and does not require arbitrary CSS or DOM access from portable components.",
+    }
+    for record in historical["acceptance_conditions"]:
+        milestone = record["id"].removeprefix("BX-ACC-ROADMAP-")
+        if milestone in framework_historical:
+            record["normative_statement"] = framework_historical[milestone]
+            record["observable_results"] = [framework_historical[milestone]]
     return historical
 
 

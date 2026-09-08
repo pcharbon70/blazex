@@ -13,6 +13,14 @@ aliases:
 
 # Browser Host Implementation Plan (`01-browser-host`)
 
+## [DEFERRED] framework integration
+
+LiveView and LocalLiveView are outside the current host implementation. The
+[2026-09-08 deferral](../liveview-integration-deferral.md) applies throughout
+this stream, including later milestones. Historical framework experiments stay
+historical; they do not impose current implementation or compatibility gates.
+
+
 ## Purpose
 
 This directory is the planning stream for BlazeX's first production host: the
@@ -29,8 +37,7 @@ BH-04 Phase 1 completed its governance-only activation on 2026-09-07 after
 accepted BH-03 Phase 9. Its [ten-phase plan](bh-04-dom-renderer-and-interaction-transport/README.md)
 now records completed Phase 2 protocol, Phase 3 pure keyed reconciliation and
 Phase 4 atomic DOM application and Phase 5 semantic interaction transport.
-Phase 6 controlled form, focus and selection continuity is complete; Phase 7
-is eligible but unauthorized. BH-05
+Phases 6 and 7 are complete. Phase 8 is [DEFERRED]; Phase 9 conformance is complete; Phase 10 is eligible but unauthorized. BH-05
 remains ineligible; no browser support is claimed.
 
 - Future phase documents for browser-host implementation.
@@ -77,8 +84,7 @@ memory observations on 2026-09-06. Phase 8 completed its review on 2026-09-07
 with a revise decision. Corrective Phase 9 closed the unreported runtime-loss
 defect and accepted BH-03 with bounded conditions on 2026-09-07.
 The repository owner approved the BH-04 ten-phase decomposition on 2026-09-06.
-BH-04 Phases 1 through 6 are complete; Phase 7 is eligible but requires separate
-implementation authorization. The twelve-phase BH-05 component programming
+BH-04 Phases 1 through 7 are complete; Phase 8 is [DEFERRED]. Phase 9 conformance is complete; Phase 10 is eligible but requires separate implementation authorization. The twelve-phase BH-05 component programming
 model decomposition is approved as
 planning, but implementation remains ineligible and unauthorized until BH-04
 is accepted and its handoff is reconciled.
@@ -87,12 +93,12 @@ is accepted and its handoff is reconciled.
 
 ### Subdirectories
 
-- [BH-04 — DOM Renderer and Interaction Transport](bh-04-dom-renderer-and-interaction-transport/README.md) — approved ten-phase plan; Phase 6 continuity complete, Phase 7 eligible but unauthorized, milestone acceptance outstanding.
+- [BH-04 — DOM Renderer and Interaction Transport](bh-04-dom-renderer-and-interaction-transport/README.md) — ten numbered phases, nine active; Phases 1–7 complete, Phase 8 [DEFERRED], Phase 9 complete; Phase 10 eligible but unauthorized, milestone acceptance outstanding.
 
 - [BH-00 — Product Boundary, Catalog, and Acceptance Contract](bh-00-product-boundary-catalog-and-acceptance-contract/README.md) — six-phase plan that freezes vocabulary, product scope, catalog dispositions, quality budgets, and acceptance traceability before BH-01 implementation begins.
 - [BH-01 — Reproducible Browser Feasibility Baseline](bh-01-reproducible-browser-feasibility-baseline/README.md) — completed need-driven plan with a proceed-with-bounded-conditions decision; external browser qualification remains deferred, and its immutable entry artifact records the pre-authorization BH-02 state.
 - [BH-02 — Host-Neutral Semantic Kernel Gate](bh-02-host-neutral-semantic-kernel-gate/README.md) — completed eight-phase contract and cross-renderer proof plan accepted for internal experimental use.
-- [BH-03 — Browser Execution-Host and Runtime Boot Lifecycle](bh-03-browser-execution-host-and-runtime-boot-lifecycle/README.md) — original eight-phase plan plus corrective Phase 9; accepted with bounded conditions. BH-04 is eligible but not authorized.
+- [BH-03 — Browser Execution-Host and Runtime Boot Lifecycle](bh-03-browser-execution-host-and-runtime-boot-lifecycle/README.md) — original eight-phase plan plus corrective Phase 9; accepted with bounded conditions. BH-04 is in progress under its revised standalone scope.
 - [BH-05 — Component Programming Model and Lifecycle](bh-05-component-programming-model-and-lifecycle/README.md) — twelve-phase plan for pure composition, nested stateful identity, process-root local views, scheduling, effects, resources, context, failure recovery, cross-runtime conformance, and acceptance; implementation awaits an accepted BH-04 handoff.
 
 ### Documents

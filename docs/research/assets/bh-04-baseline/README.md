@@ -77,6 +77,25 @@ None.
 - [Authorization](blazex-bh-04-phase-01-authorization-v0.1.0.json) — owner authority and bound inputs.
 - [Entry ledger](blazex-bh-04-entry-ledger-v0.1.0.json) — complete accepted handoff and five canonical obligations.
 
+### Phase 9
+
+- [Phase 9 command log](blazex-bh-04-phase-09-validation-log-v0.1.0.txt) — exact final commands, counts and corrected failed attempts.
+- [Phase 9 completion](blazex-bh-04-phase-09-completion-v0.1.0.json) — active conformance decision, deferred scope and Phase 10 eligibility.
+
+- [Phase 9 source index](blazex-bh-04-phase-09-source-index-v0.1.0.json) — exact active package, driver, fixture and validator hashes.
+
+- [Phase 9 conformance ledger](blazex-bh-04-phase-09-conformance-ledger-v0.1.0.json) — 263 active evidence rows and explicit deferred/not-applicable observations.
+
+- [Phase 9 semantic browser results](blazex-bh-04-phase-09-semantic-browser-v0.1.0.json) — computed accessibility and headless/DOM observations, twice per active browser.
+- [Phase 9 atomic browser results](blazex-bh-04-phase-09-atomic-browser-v0.1.0.json) — fresh atomic, stale, rollback and queue evidence.
+- [Phase 9 interaction browser results](blazex-bh-04-phase-09-interaction-browser-v0.1.0.json) — fresh native-event and ERTS dispatch evidence.
+- [Phase 9 continuity browser results](blazex-bh-04-phase-09-continuity-browser-v0.1.0.json) — fresh controlled form/focus/selection evidence.
+- [Phase 9 effect browser results](blazex-bh-04-phase-09-effect-browser-v0.1.0.json) — fresh effect, failure, runtime-loss and cleanup evidence.
+
+- [Phase 9 isolated build](blazex-bh-04-phase-09-isolation-v0.1.0.json) — 6 headless and 116 DOM tests, framework sources absent, 19-module asset closure.
+
+- [Phase 9 authorization](blazex-bh-04-phase-09-authorization-v0.1.0.json) — standalone conformance authority and exact inherited inputs.
+
 ## Maintaining this index
 
 Index every direct child and update bindings with an explicit phase decision.

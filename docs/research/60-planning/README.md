@@ -12,6 +12,14 @@ aliases:
 
 # Implementation Planning (`60-planning`)
 
+## Current scope decision — 2026-09-08
+
+LiveView and LocalLiveView integration are **[DEFERRED]** throughout current
+host and component planning. They are not implementation prerequisites or
+completion gates. The [owned deferral and reactivation ledger](liveview-integration-deferral.md)
+governs active plans and historical references; standalone isolation stays mandatory.
+
+
 ## Purpose
 
 This directory turns BlazeX research conclusions into staged, testable
@@ -44,9 +52,12 @@ renumbered.
 
 - [01 — Browser host](01-browser-host/README.md) — active first implementation
   stream: BH-00 through BH-03 are complete; corrective BH-03 Phase 9 accepted
-  the internal experimental baseline. BH-04 is eligible but not authorized.
+  the internal experimental baseline. BH-04 Phases 1–7 and 9 are complete; Phase 8 is [DEFERRED]; Phase 10 eligible but unauthorized.
 
 ### Documents
+
+- [LiveView integration deferral](liveview-integration-deferral.md) — current
+  host scope, active gate overrides, owners, and separate reactivation rules.
 
 - [Development environment and deferred qualification policy](development-environment-and-deferred-qualification-policy.md)
   — makes Linux Chrome and Firefox the active development matrix while keeping

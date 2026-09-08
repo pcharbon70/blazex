@@ -16,6 +16,16 @@ aliases:
 
 # BH-05 Component Programming Model and Lifecycle
 
+## Current framework scope — 2026-09-08
+
+LiveView and LocalLiveView integration are **[DEFERRED]** under the
+[planning deferral](../../liveview-integration-deferral.md). None of this
+milestone's twelve phases requires their APIs, rendering, lifecycle, transport,
+or compatibility tests. A BlazeX “local view” means a BlazeX process-root
+component, not a LocalLiveView component. BH-05 still requires accepted BH-04
+Phases 1–7, 9 and 10 plus the retained Phase 8 deferral, not Phase 8 implementation.
+
+
 ## Purpose
 
 This plan turns the accepted BH-04 renderer and interaction contracts into an

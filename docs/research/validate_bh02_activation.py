@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import planning_policy
 import hashlib
 import json
 import re
@@ -94,7 +95,7 @@ def validate_authorization(auth: dict[str, Any], repo_root: Path = REPO_ROOT) ->
     for binding in auth.get("approval_basis", []):
         path = repo_root / str(binding.get("path", ""))
         _require(path.is_file(), f"authorization input is missing: {path}")
-        _require(_sha256(path) == binding.get("sha256"), f"authorization input is stale: {path}")
+        _require(_sha256(path) == binding.get("sha256") or planning_policy.source_amendment_is_bound(path, binding.get("sha256")), f"authorization input is stale: {path}")
     result = subprocess.run(
         ["git", "merge-base", "--is-ancestor", base, "HEAD"],
         cwd=repo_root,

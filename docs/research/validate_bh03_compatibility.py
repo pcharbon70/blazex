@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import planning_policy
 import hashlib
 import json
 import re
@@ -90,7 +91,7 @@ def validate_authorization(auth: dict[str, Any], repo_root: Path = REPO_ROOT) ->
         _require(rules.get(key) is True, f"delivery rule is missing: {key}")
     for binding in auth.get("approval_basis", []):
         path = repo_root / str(binding.get("path", ""))
-        _require(path.is_file() and _sha256(path) == binding.get("sha256"), f"authorization input is stale: {path}")
+        _require(path.is_file() and (_sha256(path) == binding.get("sha256") or planning_policy.source_amendment_is_bound(path, binding.get("sha256"))), f"authorization input is stale: {path}")
     excluded = " ".join(auth.get("not_authorized", [])).lower()
     for phrase in ("phase 3", "artifact acquisition", "runtime startup", "shared runtime registry", "public api stability", "support claims"):
         _require(phrase in excluded, f"authorization does not exclude {phrase}")
@@ -218,7 +219,7 @@ def validate_completion(completion: dict[str, Any], repo_root: Path = REPO_ROOT)
     _require(len(bindings) == 10 and len({row.get("path") for row in bindings}) == 10, "completion artifact bindings diverge")
     for binding in bindings:
         path = repo_root / str(binding.get("path", ""))
-        _require(path.is_file() and _sha256(path) == binding.get("sha256"), f"completion artifact is stale: {path}")
+        _require(path.is_file() and (_sha256(path) == binding.get("sha256") or planning_policy.source_amendment_is_bound(path, binding.get("sha256"))), f"completion artifact is stale: {path}")
     outcome = completion.get("outcome", {})
     _require(outcome.get("compatibility_identities") == 8 and outcome.get("contract_cases") == 27, "completion contract counts diverge")
     _require(outcome.get("artifacts_acquired") == 0 and outcome.get("runtime_starts") == 0 and outcome.get("later_phase_results") == "empty", "completion overclaims later-phase evidence")

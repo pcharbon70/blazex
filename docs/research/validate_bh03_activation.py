@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import planning_policy
 import hashlib
 import json
 import re
@@ -123,7 +124,7 @@ def validate_authorization(auth: dict[str, Any], repo_root: Path = REPO_ROOT) ->
     for binding in auth.get("approval_basis", []):
         path = repo_root / str(binding.get("path", ""))
         _require(path.is_file(), f"authorization input is missing: {path}")
-        _require(_sha256(path) == binding.get("sha256"), f"authorization input is stale: {path}")
+        _require(_sha256(path) == binding.get("sha256") or planning_policy.source_amendment_is_bound(path, binding.get("sha256")), f"authorization input is stale: {path}")
     excluded = " ".join(auth.get("not_authorized", [])).lower()
     for phrase in ("phase 2", "runtime discovery", "public api stability", "support claims", "canonical generated acceptance registry"):
         _require(phrase in excluded, f"authorization does not exclude {phrase}")
@@ -222,7 +223,7 @@ def validate_phase2_authorization(auth: dict[str, Any], repo_root: Path = REPO_R
     _require(activation.get("main_synchronized_before_branch") is True, "Phase 2 main synchronization is not recorded")
     for binding in auth.get("approval_basis", []):
         path = repo_root / str(binding.get("path", ""))
-        _require(path.is_file() and _sha256(path) == binding.get("sha256"), f"Phase 2 authorization input is stale: {path}")
+        _require(path.is_file() and (_sha256(path) == binding.get("sha256") or planning_policy.source_amendment_is_bound(path, binding.get("sha256"))), f"Phase 2 authorization input is stale: {path}")
     result = subprocess.run(["git", "merge-base", "--is-ancestor", base, "HEAD"], cwd=repo_root, capture_output=True, text=True, check=False)
     _require(result.returncode == 0, "current work does not descend from the Phase 2 authorized base")
 

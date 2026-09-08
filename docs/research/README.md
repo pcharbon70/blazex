@@ -19,6 +19,10 @@ maintenance conventions are defined in [`AGENTS.md`](AGENTS.md).
 
 ## Structure
 
+- [BH-04 conformance validator](validate_bh04_conformance.py) and [negative tests](test_validate_bh04_conformance.py) — exact Phase 9 sources, raw evidence, active/deferred ledger and replay checks.
+
+- [BH-04 Phase 9 history](bh04_phase9_history.py) — exact accepted Phase 7 replay while Phase 9 adds conformance evidence.
+
 - [BH-04 lifecycle validator](validate_bh04_lifecycle.py) — Phase 7 source, browser, failure and cleanup gate.
 - [BH-04 lifecycle validator tests](test_validate_bh04_lifecycle.py) — negative acceptance evidence cases.
 - [BH-04 Phase 7 history](bh04_phase7_history.py) — immutable accepted Phase 6 reproduction.
@@ -188,6 +192,7 @@ identifiers.
 - [`requirements-validation.txt`](requirements-validation.txt) — validator dependencies
 - [`generate_acceptance_registry.py`](generate_acceptance_registry.py) — deterministic Phase 5 acceptance registry and coverage-report generator
 - [`planning_policy.py`](planning_policy.py) — shared fail-closed validation for explicitly bound research-planning amendments
+- [`test_planning_policy.py`](test_planning_policy.py) — exact roadmap amendment and deferred framework gate regression tests
 - [`test_validate_browser_product_envelope.py`](test_validate_browser_product_envelope.py) — focused browser-envelope validator tests
 - [`test_validate_component_catalog.py`](test_validate_component_catalog.py) — focused component-catalog validator tests
 - [`test_validate_component_classification.py`](test_validate_component_classification.py) — focused Phase 4 classification validator tests

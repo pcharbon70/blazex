@@ -16,6 +16,17 @@ aliases:
 
 # Browser host implementation milestones
 
+## Current scope overlay — 2026-09-08
+
+LiveView and LocalLiveView integration are **[DEFERRED]** throughout this
+roadmap under the [owned planning decision](../60-planning/liveview-integration-deferral.md).
+Framework implementation, embedding, compatibility, parity, packaging and
+qualification are excluded from current host/component completion gates.
+Standalone DOM and headless proofs remain active. Historical BH-01 work is not
+rewritten; later Phoenix or release milestones do not automatically reactivate
+the deferred integration. Separate owner authorization is required.
+
+
 ## Purpose
 
 This roadmap consolidates the current BlazeX research into one ordered program
@@ -202,13 +213,14 @@ behavior.
 updates, keyed identity, event normalization, form value transport, focus and
 selection preservation, effect ordering, stale-message rejection, root
 ownership, and cleanup. Keep the reusable DOM protocol and lowering in
-`blazex_renderer_dom`; isolate all LiveView and LocalLiveView render-data,
-patching, and version coupling in `blazex_renderer_dom_liveview`. Define how
-malformed or incompatible renderer traffic fails in either path.
+`blazex_renderer_dom`. LiveView and LocalLiveView render-data, patching and
+version coupling are [DEFERRED], reserved for a separately authorized optional
+adapter. Define fail-closed behavior for standalone renderer traffic.
 
 **Repository ownership.** `packages/blazex_renderer` owns the backend contract,
 `packages/blazex_renderer_dom` owns standalone DOM behavior, and
-`packages/blazex_renderer_dom_liveview` owns only optional LiveView lowering.
+`packages/blazex_renderer_dom_liveview` is reserved for [DEFERRED] optional
+LiveView/LocalLiveView lowering, not a current implementation obligation.
 `js/blazex_runtime` executes the required browser bridge, while fixtures and
 cross-backend assertions belong in `integration/fixtures` and
 `integration/conformance`.
@@ -217,8 +229,8 @@ cross-backend assertions belong in `integration/fixtures` and
 produce the documented DOM, accessibility, event, focus, and disposal
 outcomes. Application components depend only on BlazeX contracts. The
 standalone DOM package has no Phoenix, LiveView, LocalLiveView, or Plug
-dependency, and the LiveView adapter is the sole package coupled to LiveView
-patching internals.
+dependency. LiveView/LocalLiveView adapter implementation and parity are
+[DEFERRED] and are not prerequisites for BH-04 acceptance.
 
 ### BH-05 — Component programming model and lifecycle
 
@@ -275,12 +287,13 @@ authoritative boundary for protected data and operations.
 **What needs to be accomplished.** Provide application embedding, static asset
 delivery, bootstrap state, sessions, CSRF and origin handling, typed commands,
 replies, server pushes, reconnect, routing ownership, and deployment-version
-coordination. Define how Phoenix controllers and LiveViews host local roots and
-how ordinary application contexts authenticate, validate, authorize, execute,
+coordination. Define how Phoenix controllers host local roots; LiveView and
+LocalLiveView embedding is [DEFERRED]. Define how ordinary application
+contexts authenticate, validate, authorize, execute,
 and audit client requests.
 
 **Repository ownership.** Reusable Phoenix behavior belongs to
-`packages/blazex_phoenix`, optional LiveView renderer coupling belongs to
+`packages/blazex_phoenix`; [DEFERRED] LiveView/LocalLiveView renderer coupling belongs to
 `packages/blazex_renderer_dom_liveview`, and the executable reference
 application belongs to `profiles/browser_phoenix`. Neither package may move
 browser-host, component-kernel, or standalone DOM behavior into the profile.
@@ -311,8 +324,8 @@ belong to `packages/blazex_ui_tree`; portable effects belong to
 to `packages/blazex_ui`. Renderer-specific visual lowering remains in renderer
 packages, with reference scenarios under `profiles/browser_phoenix`.
 
-**Completion signal.** Foundation examples behave consistently under server
-LiveView and browser-local rendering across theme, direction, responsive,
+**Completion signal.** Foundation examples preserve semantic outcomes across headless
+and standalone browser-local rendering across theme, direction, responsive,
 keyboard, and accessibility states. The foundation has a measured payload and
 does not require arbitrary CSS or DOM access from portable components.
 
@@ -533,7 +546,7 @@ identity and build matching, effect suppression during prerender, mismatch
 recovery, no-JavaScript behavior, and family-specific static fallbacks.
 
 **Repository ownership.** Server rendering, activation envelopes, and Phoenix
-integration belong to `packages/blazex_phoenix`; optional LiveView lowering
+integration belong to `packages/blazex_phoenix`; [DEFERRED] LiveView/LocalLiveView lowering
 belongs to `packages/blazex_renderer_dom_liveview`; generic DOM activation
 belongs to `packages/blazex_renderer_dom`. Build matching belongs to
 `packages/blazex_build`, and the executable proof belongs to
