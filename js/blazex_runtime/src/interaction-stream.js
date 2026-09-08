@@ -5,22 +5,23 @@ const identityKeys = ["root_id", "lifecycle_generation", "owner", "generation", 
 /** Negotiated companion to the immutable BH-03 lifecycle bridge, never fixture.event. */
 export class InteractionBridge {
   #transport; #rootId;
+  #protocol;
   constructor({ protocol, rootId, transport }) {
-    requireInteraction(protocol === INTERACTION_BRIDGE, "incompatible");
+    requireInteraction([INTERACTION_BRIDGE, "blazex.host-bridge/3"].includes(protocol), "incompatible");
     requireInteraction(typeof transport?.request === "function" && typeof transport?.cancel === "function");
-    this.#transport = transport; this.#rootId = rootId;
+    this.#transport = transport; this.#rootId = rootId; this.#protocol = protocol;
   }
-  preflight(record) { copyInteractionData({ protocol: INTERACTION_BRIDGE, root_id: this.#rootId, request_id: "00000000-0000-0000-0000-000000000000", operation: "root.interaction", payload: record }); }
+  preflight(record) { copyInteractionData({ protocol: this.#protocol, root_id: this.#rootId, request_id: "00000000-0000-0000-0000-000000000000", operation: "root.interaction", payload: record }); }
   async request(operation, payload, signal) {
     requireInteraction(["root.interaction", "root.render_ack"].includes(operation), "incompatible");
-    const request = copyInteractionData({ protocol: INTERACTION_BRIDGE, root_id: this.#rootId, request_id: crypto.randomUUID(), operation, payload });
+    const request = copyInteractionData({ protocol: this.#protocol, root_id: this.#rootId, request_id: crypto.randomUUID(), operation, payload });
     requireInteraction(!signal.aborted, "cancelled");
-    const cancel = () => { try { this.#transport.cancel({ protocol: INTERACTION_BRIDGE, root_id: this.#rootId, request_id: request.request_id }); } catch { /* Local cancellation remains terminal. */ } };
+    const cancel = () => { try { this.#transport.cancel({ protocol: this.#protocol, root_id: this.#rootId, request_id: request.request_id }); } catch { /* Local cancellation remains terminal. */ } };
     signal.addEventListener("abort", cancel, { once: true });
     try {
       const response = await this.#transport.request(request);
       requireInteraction(!signal.aborted, "cancelled");
-      requireInteraction(response?.protocol === INTERACTION_BRIDGE && response.root_id === this.#rootId && response.request_id === request.request_id, "ownership");
+      requireInteraction(response?.protocol === this.#protocol && response.root_id === this.#rootId && response.request_id === request.request_id, "ownership");
       requireInteraction(Object.keys(response).sort().join(" ") === "protocol request_id result root_id");
       return response.result;
     } finally { signal.removeEventListener("abort", cancel); }

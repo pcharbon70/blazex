@@ -2,6 +2,8 @@ import { EVENT_MAPPINGS, INTERACTION_PROTOCOL, listenerIdentity, normalizeNative
 
 /** A root-local registry. No callback stores an Event, projection or transaction tree. */
 export class InteractionListeners {
+  #continuity = null;
+  setContinuity(controller) { requireInteraction(this.#continuity === null && !this.#claimed, "ownership"); this.#continuity = controller; }
   #bindings = new Map(); #context; #receiver; #clock; #sequence = 0; #timestamp = 0; #suspended = true; #disposed = false; #onOutcome; #claimed = false; #lease = 0; #observations = new Map();
   constructor({ rootId, lifecycleGeneration, owner, receiver, clock = () => performance.now(), onOutcome = () => {} }) {
     requireInteraction(receiver && typeof receiver.enqueue === "function" && typeof receiver.setContext === "function" && typeof receiver.dispose === "function" && typeof clock === "function" && typeof onOutcome === "function");
@@ -45,6 +47,7 @@ export class InteractionListeners {
       const record = validateInteraction({ ...this.#context, protocol: INTERACTION_PROTOCOL, provenance: "local-event", source: binding.source, listener_id: id, semantic: binding.semantic, sequence: this.#sequence + 1, timestamp: this.#timestamp, payload });
       this.#sequence++;
       const pending = this.#receiver.enqueue(record);
+      this.#continuity?.admitted(binding.source, payload, record.sequence);
       if (["change", "select"].includes(binding.semantic)) this.#observations.set(binding.source, { source: binding.source, value: payload.value, checked: payload.checked });
       if (event.cancelable) event.preventDefault(); event.stopPropagation();
       this.#observe(pending, record.sequence);

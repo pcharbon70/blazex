@@ -2,9 +2,11 @@ import { DOMRootQueues } from "./dom-root-queue.js";
 import { decodeIntent } from "./render-intent-data.js";
 import { requireDOM } from "./dom-transaction-plan.js";
 import { InteractionListeners } from "./interaction-listeners.js";
+import { FormContinuity } from "./form-continuity.js";
+import { copyContinuity, verifyContinuity } from "./continuity-wire.js";
 
 const claims = new WeakMap();
-const properties = ["value", "disabled", "readOnly", "hidden", "checked"];
+const properties = ["value", "disabled", "readOnly", "hidden", "checked", "required", "indeterminate"];
 const defaults = { value: "", disabled: false, readOnly: false, hidden: false, checked: false };
 const attrs = element => element.getAttributeNames().sort().map(name => [name, element.getAttribute(name)]);
 const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
@@ -14,29 +16,49 @@ const portable = value => ["atom", "binary", "integer"].includes(value.type) ? S
 /** Only the lifecycle owner can bind a DOM container; callers receive opaque capabilities. */
 export class AtomicDOMRoots {
   #queues;
+  #continuities = new WeakMap();
   constructor(options) { this.#queues = new DOMRootQueues(options); }
   get lifecycle() { return this.#queues.lifecycle; }
   register(rootId) { return this.#queues.register(rootId); }
-  attach(handle, { container, owner, generation, fault = () => {}, interactions = null }) {
+  attach(handle, { container, owner, generation, fault = () => {}, interactions = null, continuity = false }) {
     requireDOM(interactions === null || interactions instanceof InteractionListeners, "ownership");
-    const dom = new AtomicDOM(container, fault, interactions);
+    requireDOM(typeof continuity === "boolean", "ownership");
+    const controller = continuity ? new FormContinuity() : null;
+    if (controller) interactions?.setContinuity(controller);
+    const dom = new AtomicDOM(container, fault, interactions, controller);
     try {
       interactions?.claim(handle.snapshot(), owner);
-      return this.#queues.attach(handle, { owner, generation, preflight: args => dom.preflight(args), apply: args => dom.apply(args), release: () => dom.release() });
+      const token = this.#queues.attach(handle, { owner, generation, preflight: args => dom.preflight(args), apply: args => dom.apply(args), release: () => dom.release(), rejected: () => controller?.rejected() });
+      if (controller) this.#continuities.set(token, controller);
+      return token;
     } catch (error) { dom.release(); throw error; }
   }
-  submit(token, transaction) { return this.#queues.submit(token, transaction); }
+  submit(token, transaction) {
+    const controller = this.#continuities.get(token);
+    if (!controller) return this.#queues.submit(token, transaction);
+    return this.#submitContinuity(token, transaction, controller);
+  }
+  async #submitContinuity(token, raw, controller) {
+    try {
+      const envelope = copyContinuity(raw); await verifyContinuity(envelope);
+      const ack = await this.#queues.submit(token, envelope.transaction, envelope);
+      return Object.freeze({ state: ack.state, ack, continuity_digest: envelope.digest });
+    } catch (error) { controller.rejected(); throw error; }
+  }
+  continuitySnapshot(token) { return this.#continuities.get(token)?.snapshot() ?? null; }
   snapshot(token) { return this.#queues.snapshot(token); }
 }
 
 class AtomicDOM {
+  #continuity;
   #prefix = "bx-dom-" + crypto.randomUUID() + "-";
   #container; #document; #nodes = new Map(); #listeners = []; #accepted = []; #fault; #released = false; #interactions;
-  constructor(container, fault, interactions) {
+  constructor(container, fault, interactions, continuity) {
     requireDOM(container?.nodeType === 1 && container.ownerDocument?.createElement && typeof fault === "function", "ownership");
     requireDOM(container.childNodes.length === 0, "ownership");
     this.#container = container; this.#document = container.ownerDocument; this.#fault = fault;
     this.#interactions = interactions;
+    this.#continuity = continuity;
     const owned = claims.get(this.#document) ?? new Set();
     requireDOM(![...owned].some(other => other === container || other.contains(container) || container.contains(other)), "ownership");
     owned.add(container); claims.set(this.#document, owned);
@@ -48,8 +70,15 @@ class AtomicDOM {
   #matches(records) {
     return records.every(r => same(attrs(r.element), r.attributes) && properties.every((name, i) => r.element[name] === r.props[i]) && same(selection(r.element), r.selection) && r.element.childNodes.length === r.children.length && r.children.every((child, i) => r.element.childNodes[i] === child && (child.nodeType !== 3 || child.data === r.text[i])));
   }
-  preflight({ next, transaction }) {
+  preflight({ next, transaction, metadata }) {
     requireDOM(!this.#released, "disposed-root");
+    if (this.#continuity) {
+      this.#continuity.validate(metadata, next);
+      for (const record of this.#accepted) {
+        if (this.#continuity.has(record.element)) { record.props[0] = record.element.value; record.props[4] = record.element.checked; }
+        record.selection = selection(record.element);
+      }
+    }
     // Only successfully normalized native value reads may update the rollback
     // journal. All attributes, identities and tree structure still match exactly.
     for (const observation of this.#interactions?.takeObservations() ?? []) {
@@ -64,11 +93,11 @@ class AtomicDOM {
     requireDOM([...this.#nodes.values()].every(n => this.#container.contains(n)), "ownership");
     for (const node of next?.nodes ?? []) {
       const type = node.attributes.find(c => c.name === "type")?.value;
-      requireDOM(type === undefined || (node.tag === "input" && type === "text") || (node.tag === "button" && type === "button"), "incompatible");
+      requireDOM(type === undefined || (node.tag === "input" && (type === "text" || (this.#continuity && type === "checkbox"))) || (node.tag === "button" && type === "button"), "incompatible");
       const allowed = node.tag === "input" ? ["value", "checked", "disabled", "readOnly"] : node.tag === "button" ? ["value", "disabled"] : [];
       requireDOM(node.properties.every(cell => allowed.includes(cell.name)), "incompatible");
     }
-    for (const op of transaction.operations) if (op.type === "attribute" && op.name === "type") requireDOM(op.new === null || ["text", "button"].includes(op.new), "incompatible");
+    for (const op of transaction.operations) if (op.type === "attribute" && op.name === "type") requireDOM(op.new === null || ["text", "button", ...(this.#continuity ? ["checkbox"] : [])].includes(op.new), "incompatible");
     for (const op of transaction.operations) if (op.type === "property") {
       const tag = transaction.operations.find(o => o.type === "create" && o.target === op.target)?.tag ?? this.#nodes.get(op.target)?.tagName.toLowerCase();
       requireDOM((tag === "input" ? ["value", "checked", "disabled", "readOnly"] : tag === "button" ? ["value", "disabled"] : []).includes(op.name), "incompatible");
@@ -107,19 +136,22 @@ class AtomicDOM {
     const relationships = ["aria-labelledby", "aria-describedby", "aria-controls", "aria-owns", "aria-errormessage"];
     element.setAttribute(name, relationships.includes(name) ? value.split(" ").map(id => this.#prefix + id).join(" ") : value);
   }
-  #finishProjection(projection) {
+  #finishProjection(projection, metadata = null) {
     this.#unbind();
     for (const node of projection?.nodes ?? []) {
       const element = this.#nodes.get(node.id);
-      if (this.#interactions && node.tag === "input") {
+      if (this.#interactions && !this.#continuity && node.tag === "input") {
         // Phase 6 owns continuity. This phase reapplies declared values/defaults.
         element.value = node.properties.find(c => c.name === "value")?.value ?? "";
         element.checked = node.properties.find(c => c.name === "checked")?.value ?? false;
       }
       this.#intent(element, node); this.#bind(element, node.listeners, node.id);
     }
-    const focused = projection?.nodes.find(node => decodeIntent(node.focus)?.auto_focus);
-    if (focused) this.#nodes.get(focused.id).focus();
+    if (this.#continuity && metadata) this.#continuity.apply(metadata, this.#nodes);
+    if (!this.#continuity) {
+      const focused = projection?.nodes.find(node => decodeIntent(node.focus)?.auto_focus);
+      if (focused) this.#nodes.get(focused.id).focus();
+    }
   }
   #reconstruct(projection) {
     this.#unbind(); this.#nodes = new Map();
@@ -140,13 +172,15 @@ class AtomicDOM {
       for (const { name, value } of node.attributes) this.#attribute(expected, name, value);
       for (const { name, value } of node.properties) expected[name] = value;
       this.#intent(expected, node);
-      requireDOM(element.tagName === expected.tagName && same(attrs(element), attrs(expected)) && properties.every(name => element[name] === expected[name]) && same(selection(element), selection(expected)), "apply");
+      this.#continuity?.expected(expected, node.id);
+      requireDOM(element.tagName === expected.tagName && same(attrs(element), attrs(expected)) && properties.every(name => element[name] === expected[name]) && (this.#continuity || same(selection(element), selection(expected))), "apply");
       requireDOM(element.parentNode === (node.parent === null ? this.#container : this.#nodes.get(node.parent)), "ownership");
       requireDOM(node.text === null ? element.childNodes.length === node.children.length && node.children.every((id, i) => element.childNodes[i] === this.#nodes.get(id)) : element.textContent === node.text && element.children.length === 0, "apply");
     }
   }
-  apply({ previous, next, transaction }) {
+  apply({ previous, next, transaction, metadata }) {
     const oldNodes = new Map(this.#nodes), journal = this.#capture(), active = this.#document.activeElement;
+    const checkpoint = this.#continuity?.checkpoint();
     try {
       this.#interactions?.suspend();
       const created = new Map();
@@ -169,8 +203,9 @@ class AtomicDOM {
         this.#fault("after", op.op_id);
       }
       if (transaction.kind === "dispose") { this.#container.replaceChildren(); this.#nodes.clear(); }
-      this.#finishProjection(next); this.#fault("finalize", transaction.operations.length); this.#verify(next);
+      this.#finishProjection(next, metadata); this.#fault("finalize", transaction.operations.length); this.#verify(next);
       this.#accepted = this.#capture();
+      this.#continuity?.committed(metadata);
       if (next) this.#interactions?.publish(transaction);
       else this.#interactions?.dispose();
       return { state: "committed" };
@@ -188,10 +223,12 @@ class AtomicDOM {
         for (const node of previous?.nodes ?? []) this.#bind(this.#nodes.get(node.id), node.listeners, node.id);
         if (active && this.#container.contains(active)) active.focus();
         requireDOM(this.#matches(journal), "rollback"); this.#accepted = journal;
+        if (checkpoint) this.#continuity.rollback(checkpoint, this.#nodes);
         this.#interactions?.resume();
         return { state: "rolled-back" };
       } catch {
         this.#interactions?.dispose();
+        this.#continuity?.dispose();
         try { this.#fault("fallback", -1); this.#reconstruct(previous); this.#verify(previous); }
         catch { this.#unbind(); this.#nodes.clear(); this.#container.replaceChildren(); }
         this.#accepted = this.#capture();
@@ -201,7 +238,7 @@ class AtomicDOM {
   }
   release() {
     if (this.#released) return;
-    this.#unbind(); this.#interactions?.dispose(); this.#container.replaceChildren(); this.#nodes.clear(); this.#accepted = [];
+    this.#unbind(); this.#interactions?.dispose(); this.#continuity?.dispose(); this.#container.replaceChildren(); this.#nodes.clear(); this.#accepted = [];
     this.#released = true; claims.get(this.#document).delete(this.#container);
   }
 }

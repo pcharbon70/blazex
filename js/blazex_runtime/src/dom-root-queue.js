@@ -15,7 +15,7 @@ export class DOMRootQueues {
   }
   get lifecycle() { return this.#registry; }
   async register(rootId) { const handle = await this.#registry.register(rootId); this.#handles.add(handle); return handle; }
-  attach(handle, { owner, generation, apply, preflight = () => {}, release = () => {} }) {
+  attach(handle, { owner, generation, apply, preflight = () => {}, release = () => {}, rejected = () => {} }) {
     requireDOM(this.#handles.has(handle), "ownership");
     const snapshot = handle.snapshot();
     requireDOM(snapshot.state === "ready", "disposed-root");
@@ -24,10 +24,11 @@ export class DOMRootQueues {
     requireDOM(!this.#bindings.has(handle) || this.#bindings.get(handle).disposed, "duplicate");
     const token = Object.freeze({});
     const state = { handle, owner, generation, projection: null, revision: 0, digest: null, disposed: false, quarantined: false, epoch: 0, lifecycleGeneration: snapshot.root_generation, queue: [], active: null, apply, preflight, release, seen: [], maxDepth: 0 };
+    state.rejected = rejected;
     this.#states.set(token, state); this.#bindings.set(handle, state);
     return token;
   }
-  submit(token, raw) {
+  submit(token, raw, metadata = null) {
     const state = this.#states.get(token);
     requireDOM(state, "ownership");
     const tx = copyTransaction(raw);
@@ -36,7 +37,7 @@ export class DOMRootQueues {
     if (state.seen.includes(tx.transaction_id) || state.active?.tx.transaction_id === tx.transaction_id || state.queue.some(j => j.tx.transaction_id === tx.transaction_id)) return Promise.resolve(this.#emit(tx, "rejected", "duplicate"));
     if (state.queue.length + Number(state.active !== null) >= this.#capacity) return Promise.resolve(this.#emit(tx, "rejected", "limit"));
     return new Promise(resolve => {
-      const job = { tx, resolve, settled: false, epoch: state.epoch };
+      const job = { tx, metadata, resolve, settled: false, epoch: state.epoch };
       state.queue.push(job); state.maxDepth = Math.max(state.maxDepth, state.queue.length + Number(state.active !== null));
       this.#schedulePump(state);
     });
@@ -55,13 +56,13 @@ export class DOMRootQueues {
     try {
       const planned = await planTransaction(state, job.tx);
       requireDOM(!job.settled && job.epoch === state.epoch && !state.disposed && state.handle.snapshot().state === "ready" && state.handle.snapshot().root_generation === state.lifecycleGeneration, "disposed-root");
-      const preflight = state.preflight({ previous: state.projection, next: planned.projection, transaction: job.tx });
+      const preflight = state.preflight({ previous: state.projection, next: planned.projection, transaction: job.tx, metadata: job.metadata });
       requireDOM(!preflight || typeof preflight.then !== "function");
       this.#emit(job.tx, "accepted");
       requireDOM(!job.settled && job.epoch === state.epoch && !state.disposed, "disposed-root");
-      state.preflight({ previous: state.projection, next: planned.projection, transaction: job.tx });
+      state.preflight({ previous: state.projection, next: planned.projection, transaction: job.tx, metadata: job.metadata });
       applying = true;
-      const result = state.apply({ previous: state.projection, next: planned.projection, transaction: job.tx });
+      const result = state.apply({ previous: state.projection, next: planned.projection, transaction: job.tx, metadata: job.metadata });
       requireDOM(result && typeof result.then !== "function" && ["committed", "rolled-back", "fallback"].includes(result.state));
       requireDOM(!job.settled && job.epoch === state.epoch && !state.disposed, "disposed-root");
       if (result.state === "committed") {
@@ -79,7 +80,7 @@ export class DOMRootQueues {
         state.quarantined = true; this.#drain(state, "disposed-root");
         try { state.release(); } catch { /* Quarantine remains terminal even if host cleanup fails. */ }
         this.#finish(job, "fallback", "rollback");
-      } else this.#finish(job, "rejected", code(error));
+      } else { state.rejected(); this.#finish(job, "rejected", code(error)); }
     }
     finally {
       state.seen.push(job.tx.transaction_id); if (state.seen.length > 64) state.seen.shift();
