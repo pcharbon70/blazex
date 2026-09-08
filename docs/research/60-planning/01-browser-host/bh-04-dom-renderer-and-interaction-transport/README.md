@@ -158,6 +158,8 @@ public stability or browser support.
 
 ## Index
 
+- [Phase 5 interaction contract](phase-05-interaction-contract.md) — mapping, privacy, versioned bridge extension, root sequencing and completion boundaries.
+
 - [Phase 4 implementation evidence](phase-04-implementation-evidence.md) — atomic DOM, queue, stale, rollback and browser verification.
 
 ### Subdirectories
