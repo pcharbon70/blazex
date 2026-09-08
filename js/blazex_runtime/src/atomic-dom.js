@@ -249,6 +249,7 @@ class AtomicDOM {
     if (this.#released) return;
     this.#unbind(); this.#interactions?.dispose(); this.#continuity?.dispose(); this.#container.replaceChildren(); this.#nodes.clear(); this.#accepted = [];
     this.#released = true; claims.get(this.#document).delete(this.#container);
+    this.#container = null; this.#document = null; this.#interactions = null; this.#continuity = null; this.#fault = null;
   }
   resources() {
     const form = this.#continuity?.snapshot();

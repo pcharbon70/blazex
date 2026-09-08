@@ -6,11 +6,13 @@ import shutil
 import tempfile
 import unittest
 import validate_bh04_continuity as gate
+from bh04_phase7_history import snapshot
 
 class DOMApplicationGovernanceTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.source_root = gate.ROOT
+        cls.history = snapshot(gate.ROOT)
+        cls.source_root = cls.history.__enter__()
         cls.temp = tempfile.TemporaryDirectory(prefix="bh04-dom-governance-")
         cls.root = Path(cls.temp.name)
         for name in gate.git(cls.source_root, "ls-files", "--cached", "--others", "--exclude-standard").decode().splitlines():
@@ -24,6 +26,7 @@ class DOMApplicationGovernanceTests(unittest.TestCase):
     @classmethod
     def tearDownClass(cls):
         cls.temp.cleanup()
+        cls.history.__exit__(None, None, None)
     @contextlib.contextmanager
     def change(self, name, content):
         path = self.root / name

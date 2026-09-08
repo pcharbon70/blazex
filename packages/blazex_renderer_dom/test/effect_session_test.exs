@@ -77,6 +77,27 @@ defmodule BlazeX.Renderer.DOM.EffectSessionTest do
     assert {:ok, state} = ContinuitySession.acknowledge(state, 0, ack(envelope))
     assert {:ok, pending, response} = ContinuitySession.deliver(state, event(state, owner))
     assert pending.evaluation.state == 0
+
+    assert {:error, _} =
+             ContinuitySession.deliver(
+               %{state | seen_effect_ids: ["tick-1"]},
+               event(state, owner)
+             )
+
+    bridge_ack = %{
+      "protocol" => "blazex.host-bridge/4",
+      "root_id" => "effects",
+      "request_id" => "result-ack",
+      "operation" => "root.render_ack",
+      "payload" => %{
+        "sequence" => 1,
+        "ack" => ack(response["transaction"], [%{"id" => "tick-1", "status" => "ok"}])
+      }
+    }
+
+    assert {:ok, _, %{"result" => %{"outcome" => "committed"}}} =
+             ContinuitySession.handle(pending, bridge_ack)
+
     emitted = response["transaction"]
 
     assert [%{"capability" => "time", "id" => "tick-1"}] =

@@ -19,6 +19,7 @@ defmodule BlazeX.Renderer.DOM.ContinuitySession do
     effect_envelope: nil,
     pending_effects: [],
     effect_results: [],
+    seen_effect_ids: [],
     last_sequence: 0,
     disposed: false
   ]
@@ -76,7 +77,8 @@ defmodule BlazeX.Renderer.DOM.ContinuitySession do
            last_sequence: sequence,
            effect_envelope: nil,
            pending_effects: [],
-           effect_results: results
+           effect_results: results,
+           seen_effect_ids: state.seen_effect_ids ++ Enum.map(state.pending_effects, & &1.id)
        }}
     else
       _ -> {:error, "render"}
@@ -120,7 +122,9 @@ defmodule BlazeX.Renderer.DOM.ContinuitySession do
            FormEvaluator.dispatch(
              state.evaluation,
              event,
-             &EffectBatch.valid?(&1, state.evaluation.identity, state.grants)
+             &(EffectBatch.valid?(&1, state.evaluation.identity, state.grants) and
+                 length(state.seen_effect_ids) + length(&1) <= 256 and
+                 Enum.all?(&1, fn effect -> effect.id not in state.seen_effect_ids end))
            ) do
       if candidate.output == state.evaluation.output and effects == [] do
         {:ok, %{state | evaluation: candidate, last_sequence: record["sequence"]},
@@ -203,7 +207,8 @@ defmodule BlazeX.Renderer.DOM.ContinuitySession do
         pending_sequence: nil,
         pending_effects: [],
         effect_results: [],
-        effect_envelope: nil
+        effect_envelope: nil,
+        seen_effect_ids: []
     }
 
   defp propose(state, effects) do
@@ -327,6 +332,9 @@ defmodule BlazeX.Renderer.DOM.ContinuitySession do
   defp json_size(nil), do: 4
   defp json_size(true), do: 4
   defp json_size(false), do: 5
+
+  defp json_size(v) when is_list(v),
+    do: 2 + max(length(v) - 1, 0) + Enum.reduce(v, 0, fn x, n -> n + json_size(x) end)
 
   defp json_size(v) when is_map(v),
     do:

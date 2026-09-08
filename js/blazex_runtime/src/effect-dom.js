@@ -16,11 +16,12 @@ export class EffectDOMRoots {
     requireDOM(Array.isArray(grants) && grants.length <= 1 && grants.every(g => g === "time"), "incompatible");
     const resources = new RendererResources(options.owner, options.generation);
     requireDOM(options.effectFault === undefined || typeof options.effectFault === "function");
-    const state = { resources, grants: [...grants], busy: false, closed: false, cancel: null, token: null, trace: [], results: [], effectFault: options.effectFault ?? (() => {}) };
+    const state = { resources, grants: [...grants], seen: new Set(), busy: false, closed: false, cancel: null, token: null, trace: [], results: [], effectFault: options.effectFault ?? (() => {}) };
     state.failure = new RendererFailure(() => { state.closed = true; state.cancel?.(); resources.dispose(); });
     const token = this.#dom.attach(handle, { ...options, continuity: true, onRelease: () => {
       if (!state.closed) state.failure.report("lifecycle", "runtime-loss", true);
       state.closed = true; state.cancel?.(); resources.dispose();
+      state.seen.clear();
     } });
     state.token = token;
     // The DOM lease owns its bounded subsystem inventories. Its cleanup is real,
@@ -36,7 +37,7 @@ export class EffectDOMRoots {
   #state(token) { const state = this.#states.get(token); requireDOM(state, "ownership"); return state; }
   snapshot(token) {
     const s = this.#state(token);
-    return { ...this.#dom.snapshot(token), busy: s.busy, closed: s.closed, resources: s.resources.snapshot(), inventory: this.#dom.resources(token), trace: [...s.trace], results: [...s.results], failure: s.failure.snapshot() };
+    return { ...this.#dom.snapshot(token), busy: s.busy, closed: s.closed, resources: s.resources.snapshot(), inventory: this.#dom.resources(token), trace: [...s.trace], results: s.results.map(r => ({ ...r })), failure: s.failure.snapshot() };
   }
   #trace(s, barrier) { s.trace.push(barrier); if (s.trace.length > 32) s.trace.shift(); }
   async submit(token, raw) {
@@ -53,6 +54,8 @@ export class EffectDOMRoots {
       const envelope = await Promise.race([copyEffects(raw, s.grants), abort]);
       requireDOM(envelope && !expired && !s.closed, "disposed-root");
       requireDOM(envelope.continuity.transaction.generation === s.resources.snapshot().generation, "stale");
+      requireDOM(s.seen.size + envelope.effects.length <= 256, "limit");
+      requireDOM(envelope.effects.every(e => !s.seen.has(e.id)), "duplicate");
       const ack = await Promise.race([this.#dom.submit(token, envelope.continuity), abort]);
       requireDOM(ack && !expired && !s.closed, "disposed-root");
       if (ack.state !== "committed") {
@@ -60,6 +63,7 @@ export class EffectDOMRoots {
         return { state: ack.state, ack, effects_digest: envelope.digest, results: [] };
       }
       this.#trace(s, "commit-focus-selection");
+      for (const e of envelope.effects) s.seen.add(e.id);
       for (const effect of envelope.effects) {
         requireDOM(!s.closed && !expired, "disposed-root");
         this.#trace(s, "post-commit:" + effect.id);

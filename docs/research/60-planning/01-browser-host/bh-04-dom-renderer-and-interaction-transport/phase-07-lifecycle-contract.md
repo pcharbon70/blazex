@@ -75,6 +75,12 @@ owner-established lifecycle is required. There is one fallback attempt, zero
 retry attempts, and a 32-record redacted diagnostic ring. Cleanup failures remain
 visible as retained resources, never falsely reported as released.
 
+Generation-scoped effect IDs are single-use across transactions. The replay
+guard retains at most 256 IDs without eviction; exhaustion rejects before DOM
+mutation and requires a fresh owner-established lifecycle. Generational DOM
+replacement likewise requires fresh attachment rather than transferring leases
+between generations implicitly.
+
 Effect failures cannot undo an already committed DOM transaction. This phase
 therefore enables only cancellable bounded timers, not clipboard/storage/files
 or other irreversible operations. A required effect failure invalidates the

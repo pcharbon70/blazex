@@ -17,7 +17,7 @@ aliases:
 
 Back to milestone: [README](README.md)
 
-- [ ] 7 Phase - Effect Ordering, Resources, Disposal, and Failure Isolation.
+- [x] 7 Phase - Effect Ordering, Resources, Disposal, and Failure Isolation.
 
   Complete the renderer lifecycle around DOM commit. Effects execute only at
   declared barriers, every browser-owned resource belongs to one root
@@ -95,28 +95,28 @@ Back to milestone: [README](README.md)
       - [x] 7.3.2.2 Subtask - Verify last-valid/fallback DOM, no stale state advance, no duplicate effect/event, bounded diagnostics/retries/queues, and unaffected sibling roots.
       - [x] 7.3.2.3 Subtask - Verify abandoned resources release within the governed observation window or produce a blocking leak record.
 
-  - [ ] 7.4 Section - Phase 7 Integration Tests and Completion Evidence.
+  - [x] 7.4 Section - Phase 7 Integration Tests and Completion Evidence.
 
     Execute the renderer-failure acceptance scenario and repeated lifecycle
     tests across fake DOM and active browsers.
 
-    - [ ] 7.4.1 Task - Run effect, resource, and failure integration tests.
+    - [x] 7.4.1 Task - Run effect, resource, and failure integration tests.
 
       Drive complete semantic-output-to-DOM cycles under normal and injected
       failure conditions.
 
-      - [ ] 7.4.1.1 Subtask - Test barrier ordering, focus/selection precedence, acknowledgement timing, effect result delivery, supersession, cancellation, timeout, and idempotent disposal.
-      - [ ] 7.4.1.2 Subtask - Repeat mount/update/reorder/fail/replace/dispose/remount across multiple roots and measure listeners, queues, pending work, handles, retained nodes, and cleanup convergence.
-      - [ ] 7.4.1.3 Subtask - Execute `BX-ACC-FAILURE-BX-FAIL-RENDERER` and prove atomic rejection, last-valid or bounded fallback, root isolation, diagnostics, and abandoned-resource release.
+      - [x] 7.4.1.1 Subtask - Test barrier ordering, focus/selection precedence, acknowledgement timing, effect result delivery, supersession, cancellation, timeout, and idempotent disposal.
+      - [x] 7.4.1.2 Subtask - Repeat mount/update/reorder/fail/replace/dispose/remount across multiple roots and measure listeners, queues, pending work, handles, retained nodes, and cleanup convergence.
+      - [x] 7.4.1.3 Subtask - Execute `BX-ACC-FAILURE-BX-FAIL-RENDERER` and prove atomic rejection, last-valid or bounded fallback, root isolation, diagnostics, and abandoned-resource release.
 
-    - [ ] 7.4.2 Task - Publish Phase 7 completion evidence.
+    - [x] 7.4.2 Task - Publish Phase 7 completion evidence.
 
       Preserve all negative and resource observations and distinguish a bounded
       implementation gate from BH-15/BH-22 release resilience.
 
-      - [ ] 7.4.2.1 Subtask - Run Mix/Node/Linux Chrome/Firefox suites, adversarial and repeated-lifecycle scenarios, validators, dependency/leakage audits, archive/generated checks, JSON validation, and patch hygiene.
-      - [ ] 7.4.2.2 Subtask - Publish raw resource/failure traces, browser fingerprints, commands/counts, cleanup timings, retry/queue maxima, failures, and limitations.
-      - [ ] 7.4.2.3 Subtask - Mark Phase 7 complete only if no active leak, stale effect, cross-root failure, or unbounded recovery remains; make Phase 8 eligible but unauthorized.
+      - [x] 7.4.2.1 Subtask - Run Mix/Node/Linux Chrome/Firefox suites, adversarial and repeated-lifecycle scenarios, validators, dependency/leakage audits, archive/generated checks, JSON validation, and patch hygiene.
+      - [x] 7.4.2.2 Subtask - Publish raw resource/failure traces, browser fingerprints, commands/counts, cleanup timings, retry/queue maxima, failures, and limitations.
+      - [x] 7.4.2.3 Subtask - Mark Phase 7 complete only if no active leak, stale effect, cross-root failure, or unbounded recovery remains; make Phase 8 eligible but unauthorized.
 
 ## Section delivery rule
 

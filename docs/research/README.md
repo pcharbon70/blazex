@@ -19,6 +19,10 @@ maintenance conventions are defined in [`AGENTS.md`](AGENTS.md).
 
 ## Structure
 
+- [BH-04 lifecycle validator](validate_bh04_lifecycle.py) — Phase 7 source, browser, failure and cleanup gate.
+- [BH-04 lifecycle validator tests](test_validate_bh04_lifecycle.py) — negative acceptance evidence cases.
+- [BH-04 Phase 7 history](bh04_phase7_history.py) — immutable accepted Phase 6 reproduction.
+
 - [BH-04 continuity validator](validate_bh04_continuity.py) — Phase 6 authority, source, runtime/browser replay and completion gates.
 - [BH-04 continuity validator tests](test_validate_bh04_continuity.py) — negative source and evidence cases.
 - [BH-04 Phase 6 history](bh04_phase6_history.py) — immutable accepted Phase 5 reproduction.
