@@ -18,12 +18,12 @@ aliases:
 Current scope follows the [LiveView integration deferral](../../liveview-integration-deferral.md): LiveView and LocalLiveView
 implementation, compatibility and adapter execution are **[DEFERRED]**. Active
 conformance compares standalone DOM with the headless semantic oracle. Phase 8
-completion is not a prerequisite; Phase 9 was explicitly authorized on 2026-09-08; implementation is in progress.
+completion is not a prerequisite; Phase 9 was explicitly authorized and completed on 2026-09-08. Phase 10 is eligible but separately unauthorized.
 
 
 Back to milestone: [README](README.md)
 
-- [ ] 9 Phase - Cross-Path Accessibility and Browser Conformance.
+- [x] 9 Phase - Cross-Path Accessibility and Browser Conformance.
 
   Reconcile the headless semantic oracle and standalone DOM renderer through
   one governed scenario corpus. Execute
@@ -123,27 +123,27 @@ Back to milestone: [README](README.md)
       - [x] 9.4.2.2 Subtask - Audit application fixtures to prove they depend only on BlazeX semantic/component contracts and not DOM, JavaScript, LiveView, LocalLiveView, or adapter structures.
       - [x] 9.4.2.3 Subtask - Verify the current host path does not activate or require the deferred adapter. Adapter private-surface inventory and mismatch qualification remain [DEFERRED].
 
-  - [ ] 9.5 Section - Phase 9 Integration Tests and Completion Evidence.
+  - [x] 9.5 Section - Phase 9 Integration Tests and Completion Evidence.
 
     Reproduce the complete conformance candidate and publish evidence suitable
     for the final BH-04 review without claiming release qualification.
 
-    - [ ] 9.5.1 Task - Run the complete cross-path integration gate.
+    - [x] 9.5.1 Task - Run the complete cross-path integration gate.
 
       Execute all active scenarios and deterministic generators from a clean
       build while preserving deferred and failed rows.
 
-      - [ ] 9.5.1.1 Subtask - Run all activated Mix/Node suites, Linux Chrome/Firefox scenarios, headless/standalone DOM conformance, accessibility automation, failure/resource tests, validators, dependency audits, archive/generated checks, JSON validation, and patch hygiene.
-      - [ ] 9.5.1.2 Subtask - Regenerate normalized reports twice and verify byte/hash stability, raw-evidence linkage, environment fingerprints, result-state validity, and no accidental support credit.
-      - [ ] 9.5.1.3 Subtask - Confirm all active mismatches are resolved or blocking and every unavailable external/manual row remains explicit, owned, deferred, and excluded from pass rates.
+      - [x] 9.5.1.1 Subtask - Run all activated Mix/Node suites, Linux Chrome/Firefox scenarios, headless/standalone DOM conformance, accessibility automation, failure/resource tests, validators, dependency audits, archive/generated checks, JSON validation, and patch hygiene.
+      - [x] 9.5.1.2 Subtask - Regenerate normalized reports twice and verify byte/hash stability, raw-evidence linkage, environment fingerprints, result-state validity, and no accidental support credit.
+      - [x] 9.5.1.3 Subtask - Confirm all active mismatches are resolved or blocking and every unavailable external/manual row remains explicit, owned, deferred, and excluded from pass rates.
 
-    - [ ] 9.5.2 Task - Publish Phase 9 completion evidence.
+    - [x] 9.5.2 Task - Publish Phase 9 completion evidence.
 
       Summarize exact coverage and limits for final measurement and review.
 
-      - [ ] 9.5.2.1 Subtask - Publish conformance ledger, raw/report hashes, exact commands/counts, browser/tool versions, active outcomes, failures, adapter limits, deferred rows, and review notes.
-      - [ ] 9.5.2.2 Subtask - Mark Phase 9 complete only if every active required scenario has reproducible evidence and architecture/dependency gates remain clean.
-      - [ ] 9.5.2.3 Subtask - Make Phase 10 eligible but unauthorized and retain all product support and public-stability decisions for later milestones.
+      - [x] 9.5.2.1 Subtask - Publish conformance ledger, raw/report hashes, exact commands/counts, browser/tool versions, active outcomes, failures, adapter limits, deferred rows, and review notes.
+      - [x] 9.5.2.2 Subtask - Mark Phase 9 complete only if every active required scenario has reproducible evidence and architecture/dependency gates remain clean.
+      - [x] 9.5.2.3 Subtask - Make Phase 10 eligible but unauthorized and retain all product support and public-stability decisions for later milestones.
 
 ## Section delivery rule
 

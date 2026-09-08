@@ -2,7 +2,9 @@
 
 ## Purpose
 
-Current status: Phase 6 adds opt-in controlled forms, composition and owned focus/
+Current status: Phase 9 completes active standalone/headless conformance; Phase 8
+LiveView/LocalLiveView integration is deferred. Phase 7 orders bounded effects and
+cleanup. Phase 6 adds opt-in controlled forms, composition and owned focus/
 selection continuity. Phase 5 adds bounded semantic listeners and root-local interaction
 delivery with actual Elixir dispatch and correlated DOM commits. Phase 4 provides
 atomic application and rollback/fallback isolation. The Phase 3 reconciler and Phase 2
@@ -66,5 +68,5 @@ benchmark pass, browser qualification, or support is claimed.
 The bh-04-owner owns this boundary. BH-02 full-root fixtures and all BH-03
 artifacts remain immutable; reuse is reference evidence, not incremental pass
 credit. Later evidence requires separate authorization, a new version and
-explicit supersession links. Phase 6 is authorized; Phase 7 remains unauthorized
-and BH-05 is ineligible.
+explicit supersession links. Phase 9 is complete; Phase 10 is eligible but separately unauthorized,
+and BH-05 remains ineligible.

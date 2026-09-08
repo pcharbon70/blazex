@@ -18616,6 +18616,10 @@
         },
         {
           "method": "GET",
+          "path": "/js/blazex_runtime/src/render-transaction-v2-schema.js"
+        },
+        {
+          "method": "GET",
           "path": "/js/blazex_runtime/src/dom-root-queue.js"
         },
         {
@@ -18640,15 +18644,7 @@
         },
         {
           "method": "GET",
-          "path": "/js/blazex_runtime/src/render-transaction-v2-schema.js"
-        },
-        {
-          "method": "GET",
           "path": "/js/blazex_runtime/src/root-lifecycle.js"
-        },
-        {
-          "method": "GET",
-          "path": "/js/blazex_runtime/src/interaction-record.js"
         },
         {
           "method": "GET",
@@ -18657,6 +18653,10 @@
         {
           "method": "GET",
           "path": "/js/blazex_runtime/src/internal/errors.js"
+        },
+        {
+          "method": "GET",
+          "path": "/js/blazex_runtime/src/interaction-record.js"
         }
       ]
     },

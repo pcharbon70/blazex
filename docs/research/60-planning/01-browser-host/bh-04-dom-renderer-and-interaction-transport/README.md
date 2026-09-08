@@ -51,7 +51,8 @@ continuity gate is complete; Phase 7 is eligible but unauthorized. The owner the
 Its bounded effect, resource and failure-isolation gate is complete. On
 2026-09-08 the owner deferred LiveView/LocalLiveView integration, superseding
 the subsequent Phase 8 implementation request. Phase 8 is **[DEFERRED]**;
-Phase 9 is eligible but unauthorized. See [LiveView integration deferral](../../liveview-integration-deferral.md).
+Phase 9 was explicitly authorized and its active conformance gate is complete.
+Phase 10 is eligible but unauthorized. See [LiveView integration deferral](../../liveview-integration-deferral.md).
 No support or newly packaged Wasm endpoint is claimed.
 
 ## What belongs here
@@ -115,8 +116,8 @@ versions; no dependency may point back from the standalone path.
 | [6 — Form Value, Focus, and Selection Continuity](phase-06-form-value-focus-and-selection-continuity.md) | complete — continuity | Preserve controlled values, form semantics, active element, text selection, composition, and focus intent across incremental updates. | Phases 3–5 |
 | [7 — Effect Ordering, Resources, Disposal, and Failure Isolation](phase-07-effect-ordering-resources-disposal-and-failure-isolation.md) | complete — bounded lifecycle | Order DOM commits and browser effects, bound owned resources, isolate malformed/failing roots, and converge cleanup. | Phases 4–6 |
 | [8 — LiveView and LocalLiveView Adapter Isolation](phase-08-liveview-and-local-liveview-adapter-isolation.md) | [DEFERRED] — outside current host scope | Retain the optional adapter design; no implementation or qualification required for current completion. | Separate post-BH-04 framework-integration authorization |
-| [9 — Cross-Path Accessibility and Browser Conformance](phase-09-cross-path-accessibility-and-browser-conformance.md) | eligible — unauthorized | Reconcile standalone DOM outcomes against headless semantics in active Linux Chrome/Firefox scenarios; adapter rows [DEFERRED]. | Phases 1–7 and the Phase 8 deferral |
-| [10 — Measurement, Review, and BH-04 Acceptance](phase-10-measurement-review-and-bh-04-acceptance.md) | planned — unauthorized | Measure the first renderer budgets, execute multidisciplinary review and the complete gate, and accept, revise, or block BH-05 eligibility. | Phases 1–7 and 9; Phase 8 deferral retained |
+| [9 — Cross-Path Accessibility and Browser Conformance](phase-09-cross-path-accessibility-and-browser-conformance.md) | complete — standalone conformance | Reconcile standalone DOM outcomes against headless semantics in active Linux Chrome/Firefox scenarios; adapter rows [DEFERRED]. | Phases 1–7 and the Phase 8 deferral |
+| [10 — Measurement, Review, and BH-04 Acceptance](phase-10-measurement-review-and-bh-04-acceptance.md) | eligible — unauthorized | Measure the first renderer budgets, execute multidisciplinary review and the complete gate, and accept, revise, or block BH-05 eligibility. | Phases 1–7 and 9; Phase 8 deferral retained |
 
 ## Acceptance ownership
 
@@ -166,7 +167,7 @@ records. Acceptance may make BH-05 eligible but does not authorize it or grant
 public stability or browser support.
 
 Phase 8 is excluded from the active denominator: nine active phases retain
-their original numbers (1–7, 9, 10). Seven are complete; Phases 9 and 10 remain.
+their original numbers (1–7, 9, 10). Eight are complete; Phase 10 remains.
 The release and BH-05 entry ledgers must carry the owned framework deferral,
 not require a Phase 8 completion artifact. Historical acceptance artifacts are
 not rewritten; the dated deferral is the explicit scope overlay.
@@ -175,6 +176,8 @@ At full BH-04 acceptance, give the owner the requested prominent **scripts move
 warning**. This reminder does not authorize moving scripts.
 
 ## Index
+
+- [Phase 9 implementation evidence](phase-09-implementation-evidence.md) — semantic/browser conformance, dependency absence, exact gates and limitations.
 
 - [Phase 9 conformance contract](phase-09-conformance-contract.md) — active matrix, semantic comparison rules and owned deferrals.
 

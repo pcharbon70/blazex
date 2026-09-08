@@ -52,7 +52,7 @@ renumbered.
 
 - [01 — Browser host](01-browser-host/README.md) — active first implementation
   stream: BH-00 through BH-03 are complete; corrective BH-03 Phase 9 accepted
-  the internal experimental baseline. BH-04 Phases 1–7 are complete; Phase 8 is [DEFERRED], Phase 9 eligible but unauthorized.
+  the internal experimental baseline. BH-04 Phases 1–7 and 9 are complete; Phase 8 is [DEFERRED]; Phase 10 eligible but unauthorized.
 
 ### Documents
 

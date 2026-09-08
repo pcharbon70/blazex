@@ -4,7 +4,7 @@
   "result": "passed",
   "support_state": "unsupported",
   "source_hashes": {
-    "blazex-bh-04-phase-09-semantic-browser-v0.1.0.json": "d21487361c3dd2f0e997b59ae2c10ee70f67c17ab6ad6acba8d6fc0ea7a2995a",
+    "blazex-bh-04-phase-09-semantic-browser-v0.1.0.json": "0397e2e3d11c2c3c1b4b462db8b73f3cb9bf4cc014ac9fb361a229af5664173b",
     "blazex-bh-04-phase-09-atomic-browser-v0.1.0.json": "605ee9adf14840894e9f7e22e5bca2c0405031fe84dc8be46cfeba28b86501c7",
     "blazex-bh-04-phase-09-interaction-browser-v0.1.0.json": "3f19a11e3a739d53cd4c0f0441ae98528afd4dfae28069d5a3053c095f36db64",
     "blazex-bh-04-phase-09-continuity-browser-v0.1.0.json": "37cf87566c9c7f244381d95c1cd702996b98fcc6ccbe58c7725d456c2fce90a1",

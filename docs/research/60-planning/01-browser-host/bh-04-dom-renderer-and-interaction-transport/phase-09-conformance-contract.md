@@ -59,6 +59,14 @@ Reports must regenerate byte-identically twice from the same raw inputs.
 
 ## Evidence states and completion
 
+The owner-approved environment-policy annotation is bound from historical
+`5d50cded3d70e95d47359df2a003a6979d92b8745fab012824646cc1e6bc8cfa`
+to current
+`124b924dcd53770e55f47d07288f132acab53bed2d16007bb96edc8835c0ea9a`.
+Together with the exact roadmap/deferral hashes, this permits older governance
+validators to retain their original source records while recognizing the
+prospective scope decision. Other source drift remains a failure.
+
 Each required corpus/browser row is passed, failed, blocked, not-applicable or
 deferred. Missing active evidence is blocked; mismatches are failed and block
 completion. Deferred rows retain owner and reactivation rules and are excluded

@@ -1,0 +1,87 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 9,
+  "base_revision": "644055f646392e9daabb396a636249433f09a991",
+  "decision": "passed",
+  "active_rows": 263,
+  "deferred_phase": 8,
+  "next_eligible_phase": 10,
+  "next_authorized_work": null,
+  "bh05_eligible": false,
+  "support_state": "unsupported",
+  "gates": [
+    {
+      "name": "elixir",
+      "exit_code": 0
+    },
+    {
+      "name": "javascript",
+      "exit_code": 0
+    },
+    {
+      "name": "browser-corpora",
+      "exit_code": 0
+    },
+    {
+      "name": "independent-replay",
+      "exit_code": 0
+    },
+    {
+      "name": "isolation",
+      "exit_code": 0
+    },
+    {
+      "name": "research-tests",
+      "exit_code": 0
+    },
+    {
+      "name": "validators",
+      "exit_code": 0
+    },
+    {
+      "name": "generators",
+      "exit_code": 0
+    },
+    {
+      "name": "json-hygiene",
+      "exit_code": 0
+    }
+  ],
+  "artifact_hashes": {
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-09-authorization-v0.1.0.json": "c5af1ffa57a10e1ec3003a018a38aab8d1efe4d212a9c2ae00b1f62463abcbc3",
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-09-source-index-v0.1.0.json": "3e94db9b687fe70a8cc2bc8d43b271719e56c5c98e206f792c008215c866565f",
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-09-conformance-ledger-v0.1.0.json": "6705c7ab161636dc606db527c79a0077f63d3ab6d0dd41dbca2fc04b554e3f75",
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-09-validation-log-v0.1.0.txt": "6a714d915275bd35292885e1b09ebe12ab18add0f10d1210cc403aec20eb0a80",
+    "docs/research/60-planning/01-browser-host/bh-04-dom-renderer-and-interaction-transport/phase-09-implementation-evidence.md": "a41e085b458dc903c9080c8bf966b37afe3d5a63d0083ab3071bcaf3e4730ddc",
+    "docs/research/60-planning/01-browser-host/bh-04-dom-renderer-and-interaction-transport/phase-09-conformance-contract.md": "5944e08fe0d827eb9b666de7f408f472686daaeec71f1503c7afa5038c6d8bfc",
+    "docs/research/60-planning/liveview-integration-deferral.md": "3a2c3790c560191afd60f631576813760c7bbb4c05909a6f6a88058823e61e48"
+  },
+  "section_commits": [
+    {
+      "section": "9.1",
+      "commit": "55fadf3c8203fde4db6f7263c5d2c4983f0ea3a7"
+    },
+    {
+      "section": "9.2",
+      "commit": "b4417498d145d9c2fbd10c1991b17fe9dea78c68"
+    },
+    {
+      "section": "9.3",
+      "commit": "4357b8f9fd328f6337a53bbeb3473b0c687f47af"
+    },
+    {
+      "section": "9.4",
+      "commit": "e3752fade97116bfb4a417db65acdb2fae6296bc"
+    },
+    {
+      "section": "9.5",
+      "commit": "resolve-from-this-records-git-commit"
+    }
+  ],
+  "limits": [
+    "LiveView and LocalLiveView deferred",
+    "ERTS test carrier; no new production Wasm endpoint",
+    "computed accessibility only; manual and external-platform qualification deferred",
+    "scripts-move warning due only at full BH-04 acceptance"
+  ]
+}

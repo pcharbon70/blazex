@@ -77,7 +77,12 @@ None.
 - [Authorization](blazex-bh-04-phase-01-authorization-v0.1.0.json) — owner authority and bound inputs.
 - [Entry ledger](blazex-bh-04-entry-ledger-v0.1.0.json) — complete accepted handoff and five canonical obligations.
 
-## Maintaining this index
+### Phase 9
+
+- [Phase 9 command log](blazex-bh-04-phase-09-validation-log-v0.1.0.txt) — exact final commands, counts and corrected failed attempts.
+- [Phase 9 completion](blazex-bh-04-phase-09-completion-v0.1.0.json) — active conformance decision, deferred scope and Phase 10 eligibility.
+
+- [Phase 9 source index](blazex-bh-04-phase-09-source-index-v0.1.0.json) — exact active package, driver, fixture and validator hashes.
 
 - [Phase 9 conformance ledger](blazex-bh-04-phase-09-conformance-ledger-v0.1.0.json) — 263 active evidence rows and explicit deferred/not-applicable observations.
 
@@ -90,5 +95,7 @@ None.
 - [Phase 9 isolated build](blazex-bh-04-phase-09-isolation-v0.1.0.json) — 6 headless and 116 DOM tests, framework sources absent, 19-module asset closure.
 
 - [Phase 9 authorization](blazex-bh-04-phase-09-authorization-v0.1.0.json) — standalone conformance authority and exact inherited inputs.
+
+## Maintaining this index
 
 Index every direct child and update bindings with an explicit phase decision.

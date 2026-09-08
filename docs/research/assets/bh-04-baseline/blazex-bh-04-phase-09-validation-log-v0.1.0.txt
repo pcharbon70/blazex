@@ -1,0 +1,51 @@
+BH-04 Phase 9 active standalone/headless gate, 2026-09-08
+Repository base: 644055f646392e9daabb396a636249433f09a991
+Elixir 1.17.3 / OTP 26, Docker a2386c21edd5, Node 24.3.0, Python 3.12.12
+Chrome /usr/bin/google-chrome: 140.0.7339.80
+Firefox /home/ducky/.cache/ms-playwright/firefox-1538/firefox/firefox: 153.0
+Playwright core: 1.62.1
+
+COMMAND: docker run --rm --network none -v /home/ducky/code/blazex:/workspace -e MIX_BUILD_PATH=/tmp/bh09-final a2386c21edd5 sh -c 'set -e; cd /workspace; mix format --check-formatted integration/bh-04/support/conformance_runner.exs; for package in blazex_core blazex_effects blazex_ui_tree blazex_renderer blazex_renderer_headless blazex_renderer_dom; do cd /workspace/packages/$package; mix test; done; cd /workspace/integration/conformance; mix test; mix run ../bh-04/support/conformance_runner.exs'
+RESULT: exit 0; package tests 13+9+25+8+6+116 = 177; integration 56; 51 deterministic semantic/headless/standalone scenarios.
+
+COMMAND: node --test js/blazex_runtime/test/*.test.js
+RESULT: exit 0; 31 test files passed, zero failures.
+COMMAND: node packages/blazex_renderer_dom/js/test/dom-driver.test.js
+RESULT: exit 0; seven tests, zero failures.
+COMMAND: node integration/bh-04/conformance-test.mjs
+RESULT: exit 0; 51 scenarios, 300 rejected comparator mutations.
+
+COMMAND: node integration/bh-04/conformance-isolation.mjs /tmp/bh04-phase9-isolation.json
+RESULT: exit 0; physically absent frameworks/profiles/adapter, 6 headless and 116 DOM tests; 19 asset modules. Exact Docker argv, stdout and source hashes are in the published isolation artifact.
+
+COMMANDS (each exit 0; output copied into a new Phase 9 artifact, never old phase evidence):
+node integration/bh-04/atomic-dom-browser.mjs /tmp/bh04-phase9-atomic.json
+node integration/bh-04/interaction-browser.mjs /tmp/bh04-phase9-interaction.json
+node integration/bh-04/continuity-browser.mjs /tmp/bh04-phase9-continuity.json
+node integration/bh-04/effect-browser.mjs /tmp/bh04-phase9-effect.json
+RESULTS per Chrome and Firefox: atomic 50 scenarios/1204 injected boundaries/100 stale/64 max queue; interaction 13 mappings/17 negatives/3 roots; continuity 16 scenarios/2 roots; effects 19 scenarios/24 roots/24 cleanup.
+
+COMMAND: node integration/bh-04/conformance-browser.mjs docs/research/assets/bh-04-baseline/blazex-bh-04-phase-09-semantic-browser-v0.1.0.json
+RESULT: exit 0; chrome 51 102 passed; firefox 51 102 passed. Final run includes exact completed comparator sources, rollback and duplicate accessibility continuity.
+
+COMMANDS (each exit 0):
+node integration/bh-04/interaction-conformance.mjs docs/research/assets/bh-04-baseline/blazex-bh-04-phase-09-interaction-browser-v0.1.0.json
+node integration/bh-04/continuity-conformance.mjs docs/research/assets/bh-04-baseline/blazex-bh-04-phase-09-continuity-browser-v0.1.0.json
+node integration/bh-04/effect-conformance.mjs docs/research/assets/bh-04-baseline/blazex-bh-04-phase-09-effect-browser-v0.1.0.json
+RESULT: interaction 40 deliveries/24 rejections/42 commits; continuity 66 proposals/64 commits/22 events; effect 188 proposals/150 commits/78 events/40 results.
+
+COMMAND: node integration/bh-04/conformance-report.mjs --write
+COMMAND: node integration/bh-04/conformance-report.mjs (twice)
+RESULT: exit 0; 263 active rows, 51 semantic cases, 204 browser observations, two deferral groups. Final ledger SHA-256 6705c7ab161636dc606db527c79a0077f63d3ab6d0dd41dbca2fc04b554e3f75.
+
+COMMAND (docs/research): python3 -m unittest discover -p 'test_*.py'
+RESULT: 412 tests in 114.977s, OK; final rerun after exact planning-test filename correction: 412 tests in 131.745s, OK.
+COMMAND (docs/research): for script in validate_*.py; do if [ "$script" = validate_bh04_conformance.py ]; then python3 "$script" --candidate; else python3 "$script"; fi; done
+RESULT: all 32 validators exit 0; historical gates use exact accepted snapshots where explicitly superseded.
+COMMAND (docs/research): for script in generate_*.py; do python3 "$script" --check; done
+RESULT: all four generators exit 0; immutable acceptance and release outputs unchanged.
+COMMAND: git diff --check
+RESULT: exit 0.
+JSON parse sweep: 399 files valid including final completion record.
+
+Earlier failed attempts retained in the implementation evidence: canonical diagnostic serialization, missing isolated data fixture, rejected duplicate attempt ID, wrong test paths, and stale historical planning bindings. None is omitted as a passing attempt. All final active gates passed after correction.

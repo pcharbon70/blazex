@@ -22,9 +22,21 @@ class PlanningAmendmentTests(unittest.TestCase):
     def test_unknown_historical_source_is_rejected(self):
         self.assertIsNotNone(policy.roadmap_amendment_error("0" * 64, policy.DEFERRED_ROADMAP_SHA256))
 
+    def test_later_accepted_roadmap_binding_is_preserved(self):
+        self.assertIsNone(policy.roadmap_amendment_error(
+            policy.AMENDED_ROADMAP_SHA256, policy.DEFERRED_ROADMAP_SHA256))
+
     def test_environment_policy_still_required(self):
         self.assertIsNotNone(policy.roadmap_amendment_error(
             policy.HISTORICAL_ROADMAP_SHA256, policy.DEFERRED_ROADMAP_SHA256, ""))
+
+    def test_exact_environment_annotation_only(self):
+        self.assertTrue(policy.source_amendment_is_bound(
+            policy.DEVELOPMENT_POLICY_PATH, policy.HISTORICAL_ENVIRONMENT_SHA256))
+        self.assertFalse(policy.source_amendment_is_bound(policy.DEVELOPMENT_POLICY_PATH, "0" * 64))
+        self.assertFalse(policy.source_amendment_is_bound(policy.FRAMEWORK_DEFERRAL_PATH, policy.HISTORICAL_ENVIRONMENT_SHA256))
+        with patch.object(policy, "AMENDED_ENVIRONMENT_SHA256", "0" * 64):
+            self.assertFalse(policy.source_amendment_is_bound(policy.DEVELOPMENT_POLICY_PATH, policy.HISTORICAL_ENVIRONMENT_SHA256))
 
     def test_missing_or_changed_deferral_is_rejected(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -36,9 +48,9 @@ class PlanningAmendmentTests(unittest.TestCase):
 
     def test_active_gates_do_not_require_adapter_completion(self):
         root = policy.ROOT / "60-planning/01-browser-host/bh-04-dom-renderer-and-interaction-transport"
-        phase8 = next(root.glob("phase-08-*.md")).read_text()
-        phase9 = next(root.glob("phase-09-*.md")).read_text()
-        phase10 = next(root.glob("phase-10-*.md")).read_text()
+        phase8 = (root / "phase-08-liveview-and-local-liveview-adapter-isolation.md").read_text()
+        phase9 = (root / "phase-09-cross-path-accessibility-and-browser-conformance.md").read_text()
+        phase10 = (root / "phase-10-measurement-review-and-bh-04-acceptance.md").read_text()
         self.assertIn("[DEFERRED] 8 Phase", phase8)
         self.assertNotIn("Phase 8 completion identity", phase9)
         self.assertNotIn("Phase 1–9 completion identities", phase10)

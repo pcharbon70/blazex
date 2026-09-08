@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import planning_policy
 import hashlib
 import json
 import re
@@ -104,7 +105,7 @@ def _require(condition: bool, message: str) -> None:
 
 def _validate_binding(binding: dict[str, Any], repo_root: Path = REPO_ROOT) -> None:
     path = repo_root / str(binding.get("path", ""))
-    _require(path.is_file() and _sha256(path) == binding.get("sha256"), f"stale evidence binding: {path}")
+    _require(path.is_file() and (_sha256(path) == binding.get("sha256") or planning_policy.source_amendment_is_bound(path, binding.get("sha256"))), f"stale evidence binding: {path}")
 
 
 def validate_authorization(auth: dict[str, Any], repo_root: Path = REPO_ROOT) -> None:

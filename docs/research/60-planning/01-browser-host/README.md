@@ -37,8 +37,7 @@ BH-04 Phase 1 completed its governance-only activation on 2026-09-07 after
 accepted BH-03 Phase 9. Its [ten-phase plan](bh-04-dom-renderer-and-interaction-transport/README.md)
 now records completed Phase 2 protocol, Phase 3 pure keyed reconciliation and
 Phase 4 atomic DOM application and Phase 5 semantic interaction transport.
-Phases 6 and 7 are complete. Phase 8 is [DEFERRED]; Phase 9 is eligible but
-unauthorized. BH-05
+Phases 6 and 7 are complete. Phase 8 is [DEFERRED]; Phase 9 conformance is complete; Phase 10 is eligible but unauthorized. BH-05
 remains ineligible; no browser support is claimed.
 
 - Future phase documents for browser-host implementation.
@@ -85,8 +84,7 @@ memory observations on 2026-09-06. Phase 8 completed its review on 2026-09-07
 with a revise decision. Corrective Phase 9 closed the unreported runtime-loss
 defect and accepted BH-03 with bounded conditions on 2026-09-07.
 The repository owner approved the BH-04 ten-phase decomposition on 2026-09-06.
-BH-04 Phases 1 through 7 are complete; Phase 8 is [DEFERRED]. Phase 9 is
-eligible but requires separate implementation authorization. The twelve-phase BH-05 component programming
+BH-04 Phases 1 through 7 are complete; Phase 8 is [DEFERRED]. Phase 9 conformance is complete; Phase 10 is eligible but requires separate implementation authorization. The twelve-phase BH-05 component programming
 model decomposition is approved as
 planning, but implementation remains ineligible and unauthorized until BH-04
 is accepted and its handoff is reconciled.
@@ -95,7 +93,7 @@ is accepted and its handoff is reconciled.
 
 ### Subdirectories
 
-- [BH-04 — DOM Renderer and Interaction Transport](bh-04-dom-renderer-and-interaction-transport/README.md) — ten numbered phases, nine active; Phases 1–7 complete, Phase 8 [DEFERRED], Phase 9 eligible but unauthorized, milestone acceptance outstanding.
+- [BH-04 — DOM Renderer and Interaction Transport](bh-04-dom-renderer-and-interaction-transport/README.md) — ten numbered phases, nine active; Phases 1–7 complete, Phase 8 [DEFERRED], Phase 9 complete; Phase 10 eligible but unauthorized, milestone acceptance outstanding.
 
 - [BH-00 — Product Boundary, Catalog, and Acceptance Contract](bh-00-product-boundary-catalog-and-acceptance-contract/README.md) — six-phase plan that freezes vocabulary, product scope, catalog dispositions, quality budgets, and acceptance traceability before BH-01 implementation begins.
 - [BH-01 — Reproducible Browser Feasibility Baseline](bh-01-reproducible-browser-feasibility-baseline/README.md) — completed need-driven plan with a proceed-with-bounded-conditions decision; external browser qualification remains deferred, and its immutable entry artifact records the pre-authorization BH-02 state.

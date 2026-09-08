@@ -3,6 +3,7 @@
 import argparse
 from bh03_history import phase9_historical_binding
 import hashlib
+import planning_policy
 import json
 import math
 from pathlib import Path
@@ -57,6 +58,7 @@ def bindings(rows, expected=None):
         target = (ROOT / row["path"]).resolve()
         require(target.is_relative_to(ROOT) and target.is_file(), "invalid evidence path")
         require(hashlib.sha256(target.read_bytes()).hexdigest() == row["sha256"]
+                or planning_policy.source_amendment_is_bound(target, row["sha256"])
                 or phase9_historical_binding(ROOT, row["path"], row["sha256"]),
                 f"stale evidence: {row['path']}")
 
