@@ -1,5 +1,8 @@
 # Protocol test support
 
+- [Interaction counter](interaction_counter.exs) — existing semantic callbacks for all 13 mappings, including unchanged-render outcomes.
+- [Interaction runtime](interaction_runtime.exs) — test-only bounded stdio carrier to real Elixir evaluation and reconciliation; not a packaged Wasm endpoint.
+
 - [Phase 4 atomic DOM fixture runner](atomic_dom_runner.exs) adds real mount transactions to the frozen reconciliation scenarios.
 
 - [Phase 3 cases](reconciliation_cases.exs) define 50 real renderer callback traces and full-root projection parity.

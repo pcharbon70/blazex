@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 5,
+  "base_revision": "f00a9352beb4bc103e8c5ca4e7fc12099f9223fe",
+  "source_bindings": {
+    "js/blazex_runtime/src/interaction-record.js": "9b059fbf7bae73e5617f887c2c666511eb272ecf80ae448f7b34b949a0991aa0",
+    "js/blazex_runtime/src/interaction-listeners.js": "bf40837c7bc3ffa9b52b7cf09c9b2f07b1ec60fc19c8fdad6e646491abb368a3",
+    "js/blazex_runtime/src/interaction-stream.js": "999a14953c7bc484b21abc6d2113d4da0e9f4fee75ebea162f52cdc43e78bb53",
+    "js/blazex_runtime/src/atomic-dom.js": "c624708e3e039c4ff4b3ca369b08ad4ca3209afa8de7ac35c41f816f6acf8a15",
+    "js/blazex_runtime/test/interaction-listeners.test.js": "06dc6c9490bff4912adf7c71b34088206223ebb723371058284dbfd2e8d90cbc",
+    "js/blazex_runtime/test/interaction-stream.test.js": "a5ec1afd21ca4e6903b5aabe8c7f231e8697bbaa47208bd9fca43e828740a174",
+    "packages/blazex_renderer_dom/lib/blazex/renderer/dom/interaction_session.ex": "80f83ffb803f0a803c09f34ad7fc97b40371926b7b722ef93ddbce0ef1f27661",
+    "packages/blazex_renderer_dom/test/interaction_session_test.exs": "7811f88ed3274a25212bfd97420f7eb8585efae37bb1097f4664f33e5fc49395",
+    "integration/bh-04/interaction-browser.mjs": "e08a3bee99c30ca3257c172b285ce1cfc5f2622eaf06d649d743620401837fcc",
+    "integration/bh-04/interaction-scenarios.js": "d5bd96a5760f45c4d771273f87710082dcd0e7d04909cee57abbae652435476e",
+    "integration/bh-04/interaction-conformance.mjs": "2a14ffbdc9d0e9481592b953bbe17cea0c0e75ac13e7fefdcb3a8834b5889d57",
+    "integration/bh-04/support/interaction_counter.exs": "cdbaba74deda3a13e697de83cb5f2111ca802c7f663f23f167710e93622b0d8e",
+    "integration/bh-04/support/interaction_runtime.exs": "ad290bc5d79b863da826af85bc14de7017e1320d7ac7da55cf3c7096e228d799",
+    "integration/bh-04/interaction-usage.md": "2255dd0b3d83fbdfc0e0672f3f7e6d6ab0965440ca309cd5440b440aa95c88f4",
+    "integration/bh-04/README.md": "2706ed73f8abdb36187746142153eea40dfbf731cea4b1480d06cf42b4accb81",
+    "integration/bh-04/support/README.md": "dec5d91a610a6d3c71d573edd143b2cbb211d50a4396c748bc655a9435c396fa",
+    "docs/research/bh04_phase5_history.py": "d3a8b649dc6d36f8415ed5db154da78243900bcb12c1e562109daba92d37f063",
+    "docs/research/validate_bh04_dom_application.py": "6c1784358c2f39656ffdca1c5ebcd26cf35a04d117d320e5f169df1df9e4d6af",
+    "docs/research/test_validate_bh04_dom_application.py": "eb19b6aa23d006308ebe996a161b1938156d5cfe1345692006ac1c01bf58823f",
+    "docs/research/validate_bh04_interactions.py": "11876e860badfdb6f85dc8478ed7dc31b1c514861444a1e850585e0ab0554d0c",
+    "docs/research/test_validate_bh04_interactions.py": "ac6cd1565c211592134683ffa26fe1892678eb99ee974d37d6db80bb704f2e1c"
+  },
+  "browser_sha256": "e17d237340bc783b1fae1d8932eed124b1a0b9ba4cb53d3fb6c2a8ae02e87b97"
+}

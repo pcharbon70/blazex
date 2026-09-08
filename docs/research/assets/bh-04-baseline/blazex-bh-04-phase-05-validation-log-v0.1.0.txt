@@ -1,0 +1,101 @@
+BH-04 Phase 5 validation log — 2026-09-08
+Base: f00a9352beb4bc103e8c5ca4e7fc12099f9223fe
+Branch: codex/bh04-phase5-interactions
+
+Environment
+  Linux; Node 24.3.0; npm 11.4.2; Python 3.12.12; jsonschema 4.25.1.
+  Offline Docker image a2386c21edd5: Elixir 1.17.3 / OTP 26.
+  Fresh container-local MIX_BUILD_PATH; no mixed-version host build reuse.
+  Chrome /usr/bin/google-chrome, 140.0.7339.80.
+  Firefox /home/ducky/.cache/ms-playwright/firefox-1538/firefox/firefox, 153.0.
+  Playwright-core 1.62.1; existing fixture Jason 1.4.5, no new dependency.
+
+Active browser and runtime round trips
+  node integration/bh-04/interaction-browser.mjs
+    docs/research/assets/bh-04-baseline/blazex-bh-04-phase-05-browser-results-v0.1.0.json
+  Chrome and Firefox passed. Per browser: 13 mappings, 17 negative/overflow
+    cases, three roots, 18 event-induced DOM commits, two no-render events,
+    queue maximum 64, three cleanup outcomes, one trusted mouse activation.
+  Other mappings use programmatic browser-native events, not physical devices.
+  75 raw ERTS carrier request/response pairs per browser; 15 initial HTML/module
+    GETs each. No local interaction HTTP, Phoenix or Plug traffic.
+  Queue pressure: active event accepted, 63 queued old-revision events stale,
+    incoming overflow rejected, zero coalescing, independent sibling progress.
+  Privacy/composition, malformed/cyclic/oversize, source/listener/owner/root,
+    revision/generation, duplicate/replay, v1 mismatch, disposal and loss checks.
+  node integration/bh-04/interaction-conformance.mjs
+    Passed independent replay: 40 accepted deliveries, 24 runtime rejections,
+    42 commits including six initial mounts, exact transaction model agreement.
+  node integration/bh-04/atomic-dom-browser.mjs /tmp/bh04-phase5-phase4-regression.json
+    Both browsers passed unchanged Phase 4 matrix: each 50 scenarios, 1204
+    rollback boundaries, 100 stale rejections, max queue 64, 1254 terminal
+    acknowledgements and 1263 cleanups. Historical evidence not overwritten.
+
+JavaScript and Elixir
+  npm run build && npm test (js/blazex_runtime): 28 test files passed.
+  npm run build && npm test (packages/blazex_renderer_dom): seven tests passed.
+  docker run --rm --network none -e MIX_BUILD_PATH=/tmp/bh04-phase5-final
+    -v /home/ducky/code/blazex:/workspace -w /workspace a2386c21edd5 sh -c
+    'for package in blazex_core blazex_effects blazex_ui_tree blazex_renderer
+      blazex_renderer_dom blazex_renderer_dom_liveview blazex_renderer_headless;
+      do (cd packages/$package && mix test) || exit; done;
+      cd integration/conformance && mix test'
+  Counts: core 13, effects 9, ui_tree 23, renderer 8, renderer_dom 114,
+    renderer_dom_liveview 4, headless 6: 177 total, zero failures.
+  Cross-renderer integration/conformance: 56 tests, zero failures.
+  Node tests include timeout cancellation/late completion, stale queued input,
+    closed copying/accessors/cycles, listener lease replacement and isolation.
+
+Cross-language fixture reproduction
+  Pinned offline Docker, MIX_BUILD_PATH=/tmp/bh04-phase5-codecs, cwd
+    /workspace/integration/conformance, repo mounted /workspace and /tmp /evidence:
+    mix run ../bh-04/support/atomic_dom_runner.exs
+    mix run ../bh-04/support/reconciliation_runner.exs
+    mix run ../bh-04/support/protocol_runner.exs /evidence/bh04-phase5-v1.txt
+    mix run ../bh-04/support/reconciliation_protocol_runner.exs /evidence/bh04-phase5-v2.txt
+  Both 50-row generators match exact committed bytes.
+  node integration/bh-04/protocol-fixtures.mjs --compare /tmp/bh04-phase5-v1.txt
+    75 cases: 34 positive / 41 negative, exact canonical bytes/hashes/errors.
+  node integration/bh-04/reconciliation-fixtures.mjs --compare /tmp/bh04-phase5-v2.txt
+    50 traces / 116 cases: 100 positive / 16 negative, exact independent replay.
+
+Research, source integrity and boundaries
+  python3 -m unittest discover -p 'test_*.py' (docs/research): 375 tests passed.
+  for gate in validate_*.py; do python3 "$gate" || exit 1; done
+    All 29 validators passed, including archive and current Phase 5 completion.
+  for generator in generate_*.py; do python3 "$generator" --check || exit 1; done
+    All four outputs match committed artifacts.
+  Phase 5 gate binds 21 current files and exact raw browser evidence hash.
+  Prior Phase 4 gate/tests reproduce independent accepted Git snapshots.
+  All prior executable/package/profile/integration/experiment files stay frozen
+    except the explicitly indexed atomic DOM integration and README additions.
+  No dependency, manifest, kernel, legacy bridge, server or native behavior change.
+  Closed source inventory and leakage checks; 12 negative governance cases.
+  Implementation-agent source/security/privacy review; not independent review.
+
+JSON and patch hygiene
+  Decode positive v1/v2 canonical fixtures with render-transaction-codec.js;
+    validate each record and trusted context using Python Draft202012Validator
+    and the respective committed schema: 134 pairs passed; both schemas valid.
+  json.loads on every tracked/unignored repository JSON: 372 files passed after
+    completion record creation (371 before). User work remains separately stashed.
+  git diff --check and staged diff hygiene passed.
+
+Failures repaired and limitations retained
+  Native input edits exposed Phase 4 strict property preflight. Only normalized,
+    successfully admitted value/checked observations now adjust accepted scalar
+    journal state; attributes/tree still checked. Full browser matrix rerun.
+  An incompatible fixture request initially returned an uncorrelated response;
+    fixed test-carrier fallback and fail-closed pending cleanup, then reran.
+  Closed diagnostics are immutable; malformed UTF-16 rejected; bridge admission
+    checks outer-envelope byte overhead before cancelling native defaults.
+  A DOM-JS command first used a nonexistent cwd; rerun in actual package passed.
+  Existing Jason emits an already-consolidated Enumerable warning; plain-map
+    JSON path passes. No dependency added, no fixture warning counted as a pass.
+  Real ERTS component evaluation uses a test-only DevTools/stdio carrier.
+    Existing Popcorn/Wasm profile remains v1: no new packaged Wasm endpoint claim.
+  No user-edit/focus/selection continuity, effects, component API expansion,
+    server authority, performance/heap qualification, or same-origin sandbox.
+  [DEFERRED] Unavailable OS/browser/device/manual-AT qualification remains with
+    inherited platform/device/accessibility owners, reactivating by BH-22.
+  Unsupported and experimental; Phase 6 eligible but unauthorized; BH-05 ineligible.

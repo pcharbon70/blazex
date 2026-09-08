@@ -1,0 +1,103 @@
+{
+  "schema_version": "1.0.0",
+  "milestone": "BH-04",
+  "phase": 5,
+  "decision": "passed",
+  "base_revision": "f00a9352beb4bc103e8c5ca4e7fc12099f9223fe",
+  "branch": "codex/bh04-phase5-interactions",
+  "next_eligible_phase": 6,
+  "next_authorized_work": null,
+  "bh05_eligible": false,
+  "support_state": "unsupported",
+  "api_state": "experimental-not-stable",
+  "section_commits": [
+    {
+      "section": "5.1",
+      "commit": "0594b36"
+    },
+    {
+      "section": "5.2",
+      "commit": "4c3be64"
+    },
+    {
+      "section": "5.3",
+      "commit": "018021e"
+    },
+    {
+      "section": "5.4",
+      "commit": "the commit introducing this completion record"
+    }
+  ],
+  "gates": [
+    {
+      "name": "active-browsers",
+      "exit_code": 0
+    },
+    {
+      "name": "boundary-audit",
+      "exit_code": 0
+    },
+    {
+      "name": "cross-language",
+      "exit_code": 0
+    },
+    {
+      "name": "cross-renderer",
+      "exit_code": 0
+    },
+    {
+      "name": "dom-js",
+      "exit_code": 0
+    },
+    {
+      "name": "elixir-packages",
+      "exit_code": 0
+    },
+    {
+      "name": "generators",
+      "exit_code": 0
+    },
+    {
+      "name": "governance-validators",
+      "exit_code": 0
+    },
+    {
+      "name": "json-schema",
+      "exit_code": 0
+    },
+    {
+      "name": "patch-hygiene",
+      "exit_code": 0
+    },
+    {
+      "name": "research-tests",
+      "exit_code": 0
+    },
+    {
+      "name": "runtime-js",
+      "exit_code": 0
+    }
+  ],
+  "artifact_hashes": {
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-05-authorization-v0.1.0.json": "acf37316c80a944fe7145af58e00363382f2b6291cb706b9c7d02d816be913f7",
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-05-source-index-v0.1.0.json": "dfd91826d505b4cfe2e80a84e3798f563e4ae8d365a44b9ae348cce352c30f38",
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-05-browser-results-v0.1.0.json": "e17d237340bc783b1fae1d8932eed124b1a0b9ba4cb53d3fb6c2a8ae02e87b97",
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-05-validation-log-v0.1.0.txt": "a106fe443092622506d7dd37774a921e804101408697e8e7361a2af619ff766b",
+    "docs/research/60-planning/01-browser-host/bh-04-dom-renderer-and-interaction-transport/phase-05-implementation-evidence.md": "c4bde0a4c53d10c6e2e4f4359fa9afd3d7e2b49a8e2b1e0c97a26b1f99e81dca",
+    "docs/research/60-planning/01-browser-host/bh-04-dom-renderer-and-interaction-transport/phase-05-interaction-contract.md": "60f1932e167c1b86265d36c60ea628f7682e52b3448900a70153cd9331ff83ab"
+  },
+  "limitations": [
+    "Real ERTS dispatch via test-only DevTools/stdio carrier, not a newly packaged Wasm endpoint",
+    "No Phase 6 continuity, effects, server commands or public component API",
+    "Unavailable qualification deferred to inherited owners by BH-22; no support claim",
+    "Implementation-agent review, not independent review"
+  ],
+  "delivery": {
+    "pull_requests": 1,
+    "merge_requested": true,
+    "checkout_main": true,
+    "sync_origin": true,
+    "delete_feature_branch_after_sync": true,
+    "restore_unrelated_work": true
+  }
+}

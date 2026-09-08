@@ -1,4 +1,4 @@
-import { copyInteractionData, requireInteraction, validateInteraction, InteractionError } from "./interaction-record.js";
+import { copyInteractionData, requireInteraction, validateInteraction, InteractionError, INTERACTION_DIAGNOSTICS, interactionDiagnostic } from "./interaction-record.js";
 
 export const INTERACTION_BRIDGE = "blazex.host-bridge/2";
 const identityKeys = ["root_id", "lifecycle_generation", "owner", "generation", "revision", "transaction_id", "digest"];
@@ -10,6 +10,7 @@ export class InteractionBridge {
     requireInteraction(typeof transport?.request === "function" && typeof transport?.cancel === "function");
     this.#transport = transport; this.#rootId = rootId;
   }
+  preflight(record) { copyInteractionData({ protocol: INTERACTION_BRIDGE, root_id: this.#rootId, request_id: "00000000-0000-0000-0000-000000000000", operation: "root.interaction", payload: record }); }
   async request(operation, payload, signal) {
     requireInteraction(["root.interaction", "root.render_ack"].includes(operation), "incompatible");
     const request = copyInteractionData({ protocol: INTERACTION_BRIDGE, root_id: this.#rootId, request_id: crypto.randomUUID(), operation, payload });
@@ -45,6 +46,7 @@ export class InteractionStream {
   }
   enqueue(raw) {
     const record = validateInteraction(raw); this.#validateContext(record);
+    this.#bridge.preflight(record);
     requireInteraction(record.sequence > this.#lastSequence, "duplicate");
     requireInteraction(this.#queue.length + Number(this.#active !== null) < 64, "limit");
     this.#lastSequence = record.sequence;
@@ -80,7 +82,7 @@ export class InteractionStream {
       requireInteraction(identityKeys.concat("sequence", "listener_id").every(k => ack[k] === job.record[k]), "ownership");
       requireInteraction(Object.keys(ack).sort().join(" ") === [...identityKeys, "sequence", "listener_id", "outcome", "diagnostic"].sort().join(" "));
       requireInteraction(["accepted", "rejected"].includes(ack.outcome));
-      if (ack.outcome === "rejected") { requireInteraction(typeof ack.diagnostic === "string" && ack.diagnostic.length <= 64); this.#finish(job, "rejected", ack.diagnostic); return; }
+      if (ack.outcome === "rejected") { requireInteraction(INTERACTION_DIAGNOSTICS.includes(ack.diagnostic)); this.#finish(job, "rejected", ack.diagnostic); return; }
       requireInteraction(ack.diagnostic === null);
       if (result.transaction !== null) {
         requireInteraction(this.#dom !== null, "unmounted");
@@ -91,7 +93,7 @@ export class InteractionStream {
       }
       this.#finish(job, "accepted");
     } catch (error) {
-      this.#finish(job, "rejected", error instanceof InteractionError ? error.code : "transport"); this.dispose();
+      this.#finish(job, "rejected", error instanceof InteractionError ? interactionDiagnostic(error) : "transport"); this.dispose();
     } finally { this.#active = null; if (!this.#closed) queueMicrotask(() => this.#pump()); }
   }
   dispose() {

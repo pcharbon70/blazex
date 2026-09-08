@@ -43,7 +43,9 @@ The owner subsequently authorized Phases 2 and 3 on 2026-09-07, explicitly
 approving the v2 protocol correction needed to retain complete projection intent.
 Both the protocol and pure keyed-reconciliation gates are complete. The owner
 then authorized Phase 4 on 2026-09-07. Its atomic DOM and active Linux browser
-gates are complete; Phase 5 is eligible but unauthorized. No support is claimed.
+gates are complete. The owner authorized Phase 5 on 2026-09-08; its local
+semantic interaction and active Linux browser gates are complete. Phase 6 is
+eligible but unauthorized. No support or newly packaged Wasm endpoint is claimed.
 
 ## What belongs here
 
@@ -100,10 +102,10 @@ versions; no dependency may point back from the standalone path.
 | --- | --- | --- | --- |
 | [1 — Authorization, Handoff Reconciliation, and Renderer Boundary Activation](phase-01-authorization-handoff-reconciliation-and-renderer-boundary-activation.md) | complete — activation only | Bind accepted BH-03 inputs, reconcile the BH-04 ledger, activate only renderer evidence boundaries, and prove fail-closed ownership. | Accepted BH-03 handoff and explicit authorization |
 | [2 — Versioned Render Transaction and Patch Protocol](phase-02-versioned-render-transaction-and-patch-protocol.md) | complete — internal protocol only | Define the closed transaction, patch-operation, acknowledgement, diagnostic, and compatibility contracts used by both DOM paths. | Phase 1 |
-| [3 — Keyed Incremental Reconciliation and Deterministic Diffing](phase-03-keyed-incremental-reconciliation-and-deterministic-diffing.md) | eligible — unauthorized | Replace full-root-only updates with bounded keyed reconciliation and canonical operation generation in the standalone DOM package. | Phase 2 |
-| [4 — Atomic DOM Application, Root Queues, and Stale Rejection](phase-04-atomic-dom-application-root-queues-and-stale-rejection.md) | planned — unauthorized | Apply validated transactions through isolated per-root queues with atomic failure behavior, rollback/fallback, and exact generation ordering. | Phase 3 and BH-03 root lifecycle |
-| [5 — Semantic Event Normalization and Interaction Transport](phase-05-semantic-event-normalization-and-interaction-transport.md) | planned — unauthorized | Normalize bound browser events into bounded semantic interaction records and deliver them to the correct runtime root without server authority. | Phases 2 and 4 |
-| [6 — Form Value, Focus, and Selection Continuity](phase-06-form-value-focus-and-selection-continuity.md) | planned — unauthorized | Preserve controlled values, form semantics, active element, text selection, composition, and focus intent across incremental updates. | Phases 3–5 |
+| [3 — Keyed Incremental Reconciliation and Deterministic Diffing](phase-03-keyed-incremental-reconciliation-and-deterministic-diffing.md) | complete — keyed reconciliation | Replace full-root-only updates with bounded keyed reconciliation and canonical operation generation in the standalone DOM package. | Phase 2 |
+| [4 — Atomic DOM Application, Root Queues, and Stale Rejection](phase-04-atomic-dom-application-root-queues-and-stale-rejection.md) | complete — atomic DOM | Apply validated transactions through isolated per-root queues with atomic failure behavior, rollback/fallback, and exact generation ordering. | Phase 3 and BH-03 root lifecycle |
+| [5 — Semantic Event Normalization and Interaction Transport](phase-05-semantic-event-normalization-and-interaction-transport.md) | complete — local interactions | Normalize bound browser events into bounded semantic interaction records and deliver them to the correct runtime root without server authority. | Phases 2 and 4 |
+| [6 — Form Value, Focus, and Selection Continuity](phase-06-form-value-focus-and-selection-continuity.md) | eligible — unauthorized | Preserve controlled values, form semantics, active element, text selection, composition, and focus intent across incremental updates. | Phases 3–5 |
 | [7 — Effect Ordering, Resources, Disposal, and Failure Isolation](phase-07-effect-ordering-resources-disposal-and-failure-isolation.md) | planned — unauthorized | Order DOM commits and browser effects, bound owned resources, isolate malformed/failing roots, and converge cleanup. | Phases 4–6 |
 | [8 — LiveView and LocalLiveView Adapter Isolation](phase-08-liveview-and-local-liveview-adapter-isolation.md) | planned — unauthorized | Implement the optional version-pinned adapter and prove all framework coupling remains outside the standalone DOM and Plug graphs. | Phases 2–7 and compatible pinned framework inputs |
 | [9 — Cross-Path Accessibility and Browser Conformance](phase-09-cross-path-accessibility-and-browser-conformance.md) | planned — unauthorized | Reconcile standalone and optional LiveView outcomes against headless semantics in active Linux Chrome/Firefox scenarios. | Phases 3–8 |
@@ -158,6 +160,7 @@ public stability or browser support.
 
 ## Index
 
+- [Phase 5 implementation evidence](phase-05-implementation-evidence.md) — event mappings, ERTS dispatch, DOM acknowledgement and bounded completion.
 - [Phase 5 interaction contract](phase-05-interaction-contract.md) — mapping, privacy, versioned bridge extension, root sequencing and completion boundaries.
 
 - [Phase 4 implementation evidence](phase-04-implementation-evidence.md) — atomic DOM, queue, stale, rollback and browser verification.

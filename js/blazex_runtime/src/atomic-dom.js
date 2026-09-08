@@ -50,6 +50,16 @@ class AtomicDOM {
   }
   preflight({ next, transaction }) {
     requireDOM(!this.#released, "disposed-root");
+    // Only successfully normalized native value reads may update the rollback
+    // journal. All attributes, identities and tree structure still match exactly.
+    for (const observation of this.#interactions?.takeObservations() ?? []) {
+      const element = this.#nodes.get(observation.source), old = this.#accepted.find(r => r.element === element);
+      if (old && element.value === observation.value && (observation.checked === null || element.checked === observation.checked)) {
+        old.props = [...old.props]; old.props[0] = observation.value;
+        if (observation.checked !== null) old.props[4] = observation.checked;
+        old.selection = selection(element);
+      }
+    }
     requireDOM(this.#matches(this.#accepted), "stale");
     requireDOM([...this.#nodes.values()].every(n => this.#container.contains(n)), "ownership");
     for (const node of next?.nodes ?? []) {
@@ -101,6 +111,11 @@ class AtomicDOM {
     this.#unbind();
     for (const node of projection?.nodes ?? []) {
       const element = this.#nodes.get(node.id);
+      if (this.#interactions && node.tag === "input") {
+        // Phase 6 owns continuity. This phase reapplies declared values/defaults.
+        element.value = node.properties.find(c => c.name === "value")?.value ?? "";
+        element.checked = node.properties.find(c => c.name === "checked")?.value ?? false;
+      }
       this.#intent(element, node); this.#bind(element, node.listeners, node.id);
     }
     const focused = projection?.nodes.find(node => decodeIntent(node.focus)?.auto_focus);

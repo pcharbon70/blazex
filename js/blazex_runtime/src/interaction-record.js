@@ -2,6 +2,8 @@ export const INTERACTION_PROTOCOL = "blazex.interaction/1";
 export const INTERACTION_LIMITS = Object.freeze({ bytes: 8192, string: 2048, items: 64, depth: 6, queue: 64, coordinate: 1000000 });
 export const EVENT_MAPPINGS = Object.freeze({ activate: "click", change: "input", submit: "submit", select: "change", expand: "click", dismiss: "click", move: "pointermove", reorder: "drop", increment: "click", decrement: "click", request_open: "click", request_close: "click", request_page: "click" });
 export class InteractionError extends Error { constructor(code) { super(code); this.code = code; } }
+export const INTERACTION_DIAGNOSTICS = Object.freeze(["malformed", "incompatible", "ownership", "listener", "limit", "privacy", "composition", "clock", "disposed-root", "stale", "duplicate", "cancelled", "timeout", "transport", "unmounted", "render", "stale-or-unbound", "mount"]);
+export const interactionDiagnostic = error => INTERACTION_DIAGNOSTICS.includes(error?.code) ? error.code : "malformed";
 export const requireInteraction = (value, code = "malformed") => { if (!value) throw new InteractionError(code); };
 const utf8 = value => new TextEncoder().encode(value).length;
 export function copyInteractionData(value) {
@@ -9,7 +11,7 @@ export function copyInteractionData(value) {
   function copy(v, depth) {
     requireInteraction(depth <= 6, "limit");
     if (v === null || typeof v === "boolean") return v;
-    if (typeof v === "string") { requireInteraction(utf8(v) <= 2048, "limit"); return v; }
+    if (typeof v === "string") { requireInteraction(v.isWellFormed(), "malformed"); requireInteraction(utf8(v) <= 2048, "limit"); return v; }
     if (typeof v === "number") { requireInteraction(Number.isFinite(v) && Math.abs(v) <= Number.MAX_SAFE_INTEGER); return Object.is(v, -0) ? 0 : v; }
     requireInteraction(v !== null && typeof v === "object" && (Array.isArray(v) || Object.getPrototypeOf(v) === Object.prototype));
     const descriptors = Object.getOwnPropertyDescriptors(v), names = Reflect.ownKeys(v).filter(k => !(Array.isArray(v) && k === "length"));
