@@ -79,6 +79,8 @@ None.
 
 ## Maintaining this index
 
+- [Phase 9 conformance ledger](blazex-bh-04-phase-09-conformance-ledger-v0.1.0.json) — 263 active evidence rows and explicit deferred/not-applicable observations.
+
 - [Phase 9 semantic browser results](blazex-bh-04-phase-09-semantic-browser-v0.1.0.json) — computed accessibility and headless/DOM observations, twice per active browser.
 - [Phase 9 atomic browser results](blazex-bh-04-phase-09-atomic-browser-v0.1.0.json) — fresh atomic, stale, rollback and queue evidence.
 - [Phase 9 interaction browser results](blazex-bh-04-phase-09-interaction-browser-v0.1.0.json) — fresh native-event and ERTS dispatch evidence.

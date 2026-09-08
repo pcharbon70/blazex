@@ -100,28 +100,28 @@ Back to milestone: [README](README.md)
       - [x] 9.3.2.2 Subtask - Test accessibility continuity across keyed move, dynamic insert/remove, validation change, dialog/surface replacement, stale update, failure fallback, and root disposal.
       - [x] 9.3.2.3 Subtask - Record tooling limits and all manual screen-reader/switch/voice-control pairings as `[DEFERRED]` to BH-22 rather than passing or blocking active implementation.
 
-  - [ ] 9.4 Section - Reconcile outcomes and dependency isolation.
+  - [x] 9.4 Section - Reconcile outcomes and dependency isolation.
 
     Resolve every path/browser/scenario row and verify the implementation still
     obeys neutral and optional-adapter boundaries after integration.
 
-    - [ ] 9.4.1 Task - Produce the conformance reconciliation ledger.
+    - [x] 9.4.1 Task - Produce the conformance reconciliation ledger.
 
       Connect each expected outcome to raw evidence, owner, status, and any
       blocking or deferred disposition.
 
-      - [ ] 9.4.1.1 Subtask - Reconcile DOM, accessibility, interaction, form, focus, selection, effect, stale, failure, and disposal outcomes across headless and standalone paths; retain adapter equivalence as [DEFERRED].
-      - [ ] 9.4.1.2 Subtask - Classify differences as allowed backend representation, defect, unsupported adapter combination, deferred qualification, or contract-change request with accountable owner.
-      - [ ] 9.4.1.3 Subtask - Require resolution or explicit blocking for every active mismatch and prohibit hidden exceptions or path-specific semantic redefinition.
+      - [x] 9.4.1.1 Subtask - Reconcile DOM, accessibility, interaction, form, focus, selection, effect, stale, failure, and disposal outcomes across headless and standalone paths; retain adapter equivalence as [DEFERRED].
+      - [x] 9.4.1.2 Subtask - Classify differences as allowed backend representation, defect, unsupported adapter combination, deferred qualification, or contract-change request with accountable owner.
+      - [x] 9.4.1.3 Subtask - Require resolution or explicit blocking for every active mismatch and prohibit hidden exceptions or path-specific semantic redefinition.
 
-    - [ ] 9.4.2 Task - Re-run architecture and dependency gates.
+    - [x] 9.4.2 Task - Re-run architecture and dependency gates.
 
       Verify integration has not introduced component, server-framework,
       runtime-host, native, or browser-object leakage.
 
-      - [ ] 9.4.2.1 Subtask - Audit compile/lock/asset/runtime dependency closures and source surfaces for forbidden standalone and headless edges.
-      - [ ] 9.4.2.2 Subtask - Audit application fixtures to prove they depend only on BlazeX semantic/component contracts and not DOM, JavaScript, LiveView, LocalLiveView, or adapter structures.
-      - [ ] 9.4.2.3 Subtask - Verify the current host path does not activate or require the deferred adapter. Adapter private-surface inventory and mismatch qualification remain [DEFERRED].
+      - [x] 9.4.2.1 Subtask - Audit compile/lock/asset/runtime dependency closures and source surfaces for forbidden standalone and headless edges.
+      - [x] 9.4.2.2 Subtask - Audit application fixtures to prove they depend only on BlazeX semantic/component contracts and not DOM, JavaScript, LiveView, LocalLiveView, or adapter structures.
+      - [x] 9.4.2.3 Subtask - Verify the current host path does not activate or require the deferred adapter. Adapter private-surface inventory and mismatch qualification remain [DEFERRED].
 
   - [ ] 9.5 Section - Phase 9 Integration Tests and Completion Evidence.
 

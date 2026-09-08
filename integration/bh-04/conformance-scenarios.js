@@ -8,6 +8,16 @@ const bridge = () => ({ request: async (_op, p) => ({ root_id: p.root_id, root_g
 const id = element => element.id.match(/bx-[0-9a-f]{24}$/)?.[0] ?? null;
 const relationships = new Set(["aria-labelledby", "aria-describedby", "aria-controls", "aria-owns", "aria-errormessage"]);
 
+export function compareBindings(row) {
+  if (!row.after) return true;
+  const portable = value => [value.type, Array.isArray(value.value) ? value.value.map(portable) : String(value.value)];
+  const identity = value => ["identity", portable(value.root), value.path.map(portable), String(value.generation)];
+  const actual = row.after.nodes.flatMap(node => (decodeIntent(node.listeners) ?? []).map(binding =>
+    ["binding", binding.semantic, identity(binding.owner), identity(binding.source)]));
+  check(same(actual.map(JSON.stringify).sort(), row.headless_after.bindings.map(JSON.stringify).sort()), row.name + ": headless binding mismatch");
+  return true;
+}
+
 export function observe(container) {
   return [...container.querySelectorAll("[id]")].map(element => ({
     id: id(element), tag: element.tagName.toLowerCase(),
@@ -41,6 +51,13 @@ export function compare(row, observed) {
     for (const {name, value} of node.attributes) check(actual.attributes[name] === value, row.name + ": attribute " + name);
     const focus = decodeIntent(node.focus);
     if (focus?.behavior === "target") check(actual.attributes.tabindex === String(focus.order), row.name + ": focus order");
+    const allowed = new Set(node.attributes.map(cell => cell.name)); allowed.add("id");
+    if (node.tag === "button") allowed.add("type");
+    if (focus?.behavior === "target") allowed.add("tabindex");
+    const selection = decodeIntent(node.selection);
+    if (selection && selection.kind !== "none") allowed.add("data-bx-selection-kind");
+    if (selection?.kind === "multiple") allowed.add("data-bx-selection-count");
+    check(Object.keys(actual.attributes).every(key => allowed.has(key)), row.name + ": unexpected attribute");
     for (const key of relationships) if (actual.attributes[key]) for (const target of actual.attributes[key].split(" ")) check(observed.some(n => n.id === target), row.name + ": broken relationship");
   }
   return true;
