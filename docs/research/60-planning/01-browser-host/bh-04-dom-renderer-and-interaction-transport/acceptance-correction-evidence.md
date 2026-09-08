@@ -113,3 +113,19 @@ The old sealed `check_all.py` remains a historical-snapshot sweep, not a way to
 validate changed implementation bytes against old acceptance. No bound tool or
 old record was silently rehashed. The scripts-move warning was delivered to the
 owner: corpus Python now lives in `docs/research/70-tools`.
+
+## C4 delivery checkpoint
+
+The current validator and deterministic generator check both pass after the
+C3 commit, as do archive validation and patch hygiene. Implementation sections
+are committed separately: C1 `9e35f3c`, C2 `4c9fdb7`, C3 `d2e18f9`, followed by
+this C4 delivery checkpoint. One corrective PR will contain the four commits.
+The PR must be merged before returning to main, fast-forwarding from origin,
+and deleting its feature branch. Publication/merge/cleanup are deliberately
+not marked complete in this pre-publication record; the PR and final delivery
+message record those external actions. Unrelated user work remains preserved
+in stash `04f1fcd5aef6f74c9093a22cb85bca33e6e7ba61` until return to main.
+
+Public capture disclosure: native evidence includes browser/environment and
+local path metadata, as detailed in the captures index. No support or human
+review qualification is inferred from publication.
