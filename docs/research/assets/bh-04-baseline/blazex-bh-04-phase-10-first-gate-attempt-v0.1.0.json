@@ -1,0 +1,722 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 10,
+  "results": [
+    {
+      "name": "elixir",
+      "command": [
+        "docker",
+        "run",
+        "--rm",
+        "--network",
+        "none",
+        "-v",
+        "/home/ducky/code/blazex:/workspace",
+        "-e",
+        "MIX_BUILD_PATH=/tmp/bh10-final",
+        "a2386c21edd5",
+        "sh",
+        "-c",
+        "set -e; cd /workspace; mix format --check-formatted integration/bh-04/support/*.exs; for package in blazex_core blazex_effects blazex_ui_tree blazex_renderer blazex_renderer_headless blazex_renderer_dom; do cd /workspace/packages/$package; mix test; done; cd /workspace/integration/conformance; mix test; mix run ../bh-04/support/conformance_runner.exs"
+      ],
+      "cwd": ".",
+      "exit_code": 1,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 639,
+      "stdout": "",
+      "stderr": "** (Mix) mix format failed due to --check-formatted.\nThe following files are not formatted:\n\n\u001b[1m\u001b[31m/workspace/integration/bh-04/support/continuity_component.exs\n\u001b[0m\n         |\n  2   2  |  @behaviour BlazeX.Core.Component\n  3   3  |  alias BlazeX.Core.Identity\n  4     -|  alias BlazeX.UITree.{Node, Document, Binding, IntentSet, FormState, FormOutput, Accessibility, Focus, Selection}\n      4 +|\n      5 +|  alias BlazeX.UITree.{\n      6 +|    Node,\n      7 +|    Document,\n      8 +|    Binding,\n      9 +|    IntentSet,\n     10 +|    FormState,\n     11 +|    FormOutput,\n     12 +|    Accessibility,\n     13 +|    Focus,\n     14 +|    Selection\n     15 +|  }\n     16 +|\n  5  17  |  def mode, do: :stateful\n  6     -|  def init(_, _), do: {:ok, %{value: \"initial\", checked: false, selected: [\"alpha\"], single: \"alpha\", sequence: 0, count: 0}}\n     18 +|\n     19 +|  def init(_, _),\n     20 +|    do:\n     21 +|      {:ok,\n     22 +|       %{\n     23 +|         value: \"initial\",\n     24 +|         checked: false,\n     25 +|         selected: [\"alpha\"],\n     26 +|         single: \"alpha\",\n     27 +|         sequence: 0,\n     28 +|         count: 0\n     29 +|       }}\n     30 +|\n  7  31  |  def update(_, state, _), do: {:ok, state}\n     32 +|\n  8  33  |  def handle_event(event, _, state, _) do\n  9  34  |    key = List.last(event.source.path)\n 10     -|    next = cond do\n 11     -|      key in [:field, :replacement] -> %{state | value: event.payload[\"value\"]}\n 12     -|      key == :check -> %{state | checked: event.payload[\"checked\"]}\n 13     -|      key in [:alpha, :beta] -> %{state | selected: if(event.payload[\"checked\"], do: Enum.uniq(state.selected ++ [event.payload[\"value\"]]), else: List.delete(state.selected, event.payload[\"value\"]))}\n 14     -|      key in [:single_alpha, :single_beta] -> %{state | single: if(event.payload[\"checked\"], do: event.payload[\"value\"], else: nil)}\n 15     -|      true -> state\n 16     -|    end\n     35 +|\n     36 +|    next =\n     37 +|      cond do\n     38 +|        key in [:field, :replacement] ->\n     39 +|          %{state | value: event.payload[\"value\"]}\n     40 +|\n     41 +|        key == :check ->\n     42 +|          %{state | checked: event.payload[\"checked\"]}\n     43 +|\n     44 +|        key in [:alpha, :beta] ->\n     45 +|          %{\n     46 +|            state\n     47 +|            | selected:\n     48 +|                if(event.payload[\"checked\"],\n     49 +|                  do: Enum.uniq(state.selected ++ [event.payload[\"value\"]]),\n     50 +|                  else: List.delete(state.selected, event.payload[\"value\"])\n     51 +|                )\n     52 +|          }\n     53 +|\n     54 +|        key in [:single_alpha, :single_beta] ->\n     55 +|          %{state | single: if(event.payload[\"checked\"], do: event.payload[\"value\"], else: nil)}\n     56 +|\n     57 +|        true ->\n     58 +|          state\n     59 +|      end\n     60 +|\n 17  61  |    {:ok, %{next | sequence: event.sequence, count: state.count + 1}, []}\n 18  62  |  end\n     63 +|\n 19  64  |  def render(props, state, context) do\n 20  65  |    owner = context.identity\n 21     -|    id = fn key -> {:ok, value} = Identity.child(owner, key); value end\n     66 +|\n     67 +|    id = fn key ->\n     68 +|      {:ok, value} = Identity.child(owner, key)\n     69 +|      value\n     70 +|    end\n     71 +|\n 22  72  |    field_key = if props[\"replace\"], do: :replacement, else: :field\n 23  73  |    field_id = id.(field_key)\n         |\n 27  77  |    {:ok, label} = Node.text(id.(:label), \"Events: #{state.count}\", key: :label)\n 28  78  |    {multiple, choices} = collection(id.(:multiple), [:alpha, :beta], props[\"reverse\"])\n 29     -|    {single, single_choices} = collection(id.(:single), [:single_alpha, :single_beta], props[\"reverse\"])\n 30     -|    children = if props[\"remove\"], do: [check, multiple, single, action, label], else: [field, check, multiple, single, action, label]\n     79 +|\n     80 +|    {single, single_choices} =\n     81 +|      collection(id.(:single), [:single_alpha, :single_beta], props[\"reverse\"])\n     82 +|\n     83 +|    children =\n     84 +|      if props[\"remove\"],\n     85 +|        do: [check, multiple, single, action, label],\n     86 +|        else: [field, check, multiple, single, action, label]\n     87 +|\n 31  88  |    children = if props[\"reverse\"], do: Enum.reverse(children), else: children\n 32  89  |    {:ok, root} = Node.container(:group, owner, children)\n 33     -|    forms = [form(id.(:check), :check, state.checked, state.sequence, indeterminate: props[\"mixed\"] || false),\n     90 +|\n     91 +|    forms = [\n     92 +|      form(id.(:check), :check, state.checked, state.sequence,\n     93 +|        indeterminate: props[\"mixed\"] || false\n     94 +|      ),\n 34  95  |      form(id.(:multiple), :multiple, state.selected, state.sequence, choices: choices),\n 35     -|      form(id.(:single), :single, state.single, state.sequence, choices: single_choices)]\n 36     -|    forms = if props[\"remove\"], do: forms, else: [form(field_id, :text, props[\"value\"] || state.value, state.sequence, disabled: props[\"disabled\"] || false, readonly: props[\"readonly\"] || false, required: true, invalid: props[\"invalid\"] || false) | forms]\n 37     -|    sources = [{:select, id.(:check)}, {:activate, id.(:action)}, {:submit, id.(:action)}] ++ Enum.map(choices ++ single_choices, &{:select, &1.owner})\n     96 +|      form(id.(:single), :single, state.single, state.sequence, choices: single_choices)\n     97 +|    ]\n     98 +|\n     99 +|    forms =\n    100 +|      if props[\"remove\"],\n    101 +|        do: forms,\n    102 +|        else: [\n    103 +|          form(field_id, :text, props[\"value\"] || state.value, state.sequence,\n    104 +|            disabled: props[\"disabled\"] || false,\n    105 +|            readonly: props[\"readonly\"] || false,\n    106 +|            required: true,\n    107 +|            invalid: props[\"invalid\"] || false\n    108 +|          )\n    109 +|          | forms\n    110 +|        ]\n    111 +|\n    112 +|    sources =\n    113 +|      [{:select, id.(:check)}, {:activate, id.(:action)}, {:submit, id.(:action)}] ++\n    114 +|        Enum.map(choices ++ single_choices, &{:select, &1.owner})\n    115 +|\n 38 116  |    sources = if props[\"remove\"], do: sources, else: [{:change, field_id} | sources]\n 39     -|    bindings = Enum.map(sources, fn {name, source} -> {:ok, b} = Binding.new(name, owner, source); b end)\n    117 +|\n    118 +|    bindings =\n    119 +|      Enum.map(sources, fn {name, source} ->\n    120 +|        {:ok, b} = Binding.new(name, owner, source)\n    121 +|        b\n    122 +|      end)\n    123 +|\n 40 124  |    {:ok, doc} = Document.new(root, bindings)\n 41     -|    accessibility = Enum.map([id.(:check) | Enum.map(choices ++ single_choices, & &1.owner)], fn target -> {:ok, a} = Accessibility.new(target, :checkbox); a end)\n    125 +|\n    126 +|    accessibility =\n    127 +|      Enum.map([id.(:check) | Enum.map(choices ++ single_choices, & &1.owner)], fn target ->\n    128 +|        {:ok, a} = Accessibility.new(target, :checkbox)\n    129 +|        a\n    130 +|      end)\n    131 +|\n 42 132  |    {:ok, scope} = Focus.new(owner, :scope, restore: :previous, wrap: props[\"wrap\"] || false)\n 43     -|    targets = [{id.(:check), 1}, {id.(:action), 6}] ++ Enum.with_index(Enum.map(choices ++ single_choices, & &1.owner), 2)\n    133 +|\n    134 +|    targets =\n    135 +|      [{id.(:check), 1}, {id.(:action), 6}] ++\n    136 +|        Enum.with_index(Enum.map(choices ++ single_choices, & &1.owner), 2)\n    137 +|\n 44 138  |    targets = if props[\"remove\"], do: targets, else: [{field_id, 0} | targets]\n 45     -|    focus = Enum.map(targets, fn {target, order} -> {:ok, f} = Focus.new(target, :target, order: order, auto_focus: if(props[\"focus_action\"], do: target == id.(:action), else: target == field_id)); f end)\n 46     -|    selections = if props[\"range\"] && !props[\"remove\"] do\n 47     -|      {:ok, s} = Selection.new(field_id, :text_range, %{anchor: props[\"range\"][\"anchor\"], focus: props[\"range\"][\"focus\"], direction: if(props[\"range\"][\"backward\"], do: :backward, else: :forward)}); [s]\n 48     -|    else [] end\n 49     -|    {:ok, intent} = IntentSet.new(doc, accessibility: accessibility, focus: [scope | focus], selections: selections)\n    139 +|\n    140 +|    focus =\n    141 +|      Enum.map(targets, fn {target, order} ->\n    142 +|        {:ok, f} =\n    143 +|          Focus.new(target, :target,\n    144 +|            order: order,\n    145 +|            auto_focus:\n    146 +|              if(props[\"focus_action\"], do: target == id.(:action), else: target == field_id)\n    147 +|          )\n    148 +|\n    149 +|        f\n    150 +|      end)\n    151 +|\n    152 +|    selections =\n    153 +|      if props[\"range\"] && !props[\"remove\"] do\n    154 +|        {:ok, s} =\n    155 +|          Selection.new(field_id, :text_range, %{\n    156 +|            anchor: props[\"range\"][\"anchor\"],\n    157 +|            focus: props[\"range\"][\"focus\"],\n    158 +|            direction: if(props[\"range\"][\"backward\"], do: :backward, else: :forward)\n    159 +|          })\n    160 +|\n    161 +|        [s]\n    162 +|      else\n    163 +|        []\n    164 +|      end\n    165 +|\n    166 +|    {:ok, intent} =\n    167 +|      IntentSet.new(doc,\n    168 +|        accessibility: accessibility,\n    169 +|        focus: [scope | focus],\n    170 +|        selections: selections\n    171 +|      )\n    172 +|\n 50 173  |    FormOutput.new(intent, forms)\n 51 174  |  end\n    175 +|\n 52 176  |  defp form(owner, kind, value, sequence, options) do\n 53     -|    {:ok, form} = FormState.new(owner, kind, value, [{:edit_sequence, sequence} | options]); form\n    177 +|    {:ok, form} = FormState.new(owner, kind, value, [{:edit_sequence, sequence} | options])\n    178 +|    form\n 54 179  |  end\n    180 +|\n 55 181  |  defp collection(owner, keys, reverse) do\n 56 182  |    pairs = Enum.zip(keys, [\"alpha\", \"beta\"])\n 57 183  |    pairs = if reverse, do: Enum.reverse(pairs), else: pairs\n 58     -|    choices = Enum.map(pairs, fn {key, value} -> {:ok, id} = Identity.child(owner, key); %{value: value, owner: id} end)\n 59     -|    children = Enum.map(Enum.zip(pairs, choices), fn {{key, _}, choice} -> {:ok, n} = Node.new(:selection, choice.owner, key: key); n end)\n 60     -|    {:ok, root} = Node.container(:collection, owner, children, key: List.last(owner.path)); {root, choices}\n    184 +|\n    185 +|    choices =\n    186 +|      Enum.map(pairs, fn {key, value} ->\n    187 +|        {:ok, id} = Identity.child(owner, key)\n    188 +|        %{value: value, owner: id}\n    189 +|      end)\n    190 +|\n    191 +|    children =\n    192 +|      Enum.map(Enum.zip(pairs, choices), fn {{key, _}, choice} ->\n    193 +|        {:ok, n} = Node.new(:selection, choice.owner, key: key)\n    194 +|        n\n    195 +|      end)\n    196 +|\n    197 +|    {:ok, root} = Node.container(:collection, owner, children, key: List.last(owner.path))\n    198 +|    {root, choices}\n 61 199  |  end\n 62 200  |end\n         |\n\n\u001b[1m\u001b[31m/workspace/integration/bh-04/support/continuity_runtime.exs\n\u001b[0m\n       |\n 8  8  |  alias BlazeX.Core.{Event, Identity}\n 9  9  |  alias BlazeX.Renderer.DOM.ContinuitySession\n   10 +|\n10 11  |  def run(states \\\\ %{}) do\n11 12  |    case IO.read(:stdio, :line) do\n12    -|      :eof -> :ok\n13    -|      {:error, _} -> :ok\n   13 +|      :eof ->\n   14 +|        :ok\n   15 +|\n   16 +|      {:error, _} ->\n   17 +|        :ok\n   18 +|\n14 19  |      line ->\n15    -|        {next, output, id} = try do\n16    -|          true = byte_size(line) <= 16384\n17    -|          %{\"id\" => id, \"request\" => request} = Jason.decode!(line)\n18    -|          {next, output} = execute(states, request)\n19    -|          {next, output, id}\n20    -|        rescue\n21    -|          _ -> {states, %{\"error\" => \"fixture-invalid\"}, nil}\n22    -|        end\n   20 +|        {next, output, id} =\n   21 +|          try do\n   22 +|            true = byte_size(line) <= 16384\n   23 +|            %{\"id\" => id, \"request\" => request} = Jason.decode!(line)\n   24 +|            {next, output} = execute(states, request)\n   25 +|            {next, output, id}\n   26 +|          rescue\n   27 +|            _ -> {states, %{\"error\" => \"fixture-invalid\"}, nil}\n   28 +|          end\n   29 +|\n23 30  |        IO.puts(\"BH06:\" <> Jason.encode!(%{\"id\" => id, \"result\" => output}))\n24 31  |        run(next)\n25 32  |    end\n26 33  |  end\n27    -|  defp execute(states, %{\"control\" => \"init\", \"root_id\" => root, \"lifecycle_generation\" => generation}) do\n   34 +|\n   35 +|  defp execute(states, %{\n   36 +|         \"control\" => \"init\",\n   37 +|         \"root_id\" => root,\n   38 +|         \"lifecycle_generation\" => generation\n   39 +|       }) do\n28 40  |    true = map_size(states) < 64 or Map.has_key?(states, root)\n29 41  |    true = not Map.has_key?(states, root) or states[root].disposed\n30 42  |    {:ok, owner} = Identity.new(root)\n31    -|    {:ok, state, tx} = ContinuitySession.mount(root, generation, BlazeX.BH04.ContinuityComponent, owner, %{})\n32    -|    {Map.put(states, root, state), %{\"transaction\" => tx, \"events\" => Enum.map(Event.names(), &Atom.to_string/1)}}\n   43 +|\n   44 +|    {:ok, state, tx} =\n   45 +|      ContinuitySession.mount(root, generation, BlazeX.BH04.ContinuityComponent, owner, %{})\n   46 +|\n   47 +|    {Map.put(states, root, state),\n   48 +|     %{\"transaction\" => tx, \"events\" => Enum.map(Event.names(), &Atom.to_string/1)}}\n33 49  |  end\n   50 +|\n34 51  |  defp execute(states, %{\"control\" => \"initial_ack\", \"root_id\" => root, \"ack\" => ack}) do\n35 52  |    {:ok, state} = ContinuitySession.acknowledge(Map.fetch!(states, root), 0, ack)\n36 53  |    {Map.put(states, root, state), %{\"outcome\" => \"committed\"}}\n37 54  |  end\n   55 +|\n38 56  |  defp execute(states, %{\"control\" => \"update\", \"root_id\" => root, \"props\" => props}) do\n39 57  |    case ContinuitySession.update(Map.fetch!(states, root), props) do\n       |\n42 60  |    end\n43 61  |  end\n   62 +|\n44 63  |  defp execute(states, %{\"control\" => \"update_ack\", \"root_id\" => root, \"ack\" => ack}) do\n45 64  |    state = Map.fetch!(states, root)\n       |\n47 66  |    {Map.put(states, root, state), %{\"outcome\" => \"committed\"}}\n48 67  |  end\n   68 +|\n49 69  |  defp execute(states, %{\"control\" => \"stop\", \"root_id\" => root}) do\n50 70  |    state = ContinuitySession.stop(Map.fetch!(states, root))\n51 71  |    {Map.put(states, root, state), %{\"outcome\" => \"disposed\"}}\n52 72  |  end\n   73 +|\n53 74  |  defp execute(states, %{\"control\" => \"snapshot\", \"root_id\" => root}) do\n54 75  |    state = Map.fetch!(states, root)\n55    -|    {states, %{\"count\" => if(state.evaluation, do: state.evaluation.state, else: nil), \"sequence\" => state.last_sequence, \"revision\" => if(state.context, do: state.context[\"revision\"], else: nil), \"disposed\" => state.disposed, \"pending\" => state.pending_sequence}}\n   76 +|\n   77 +|    {states,\n   78 +|     %{\n   79 +|       \"count\" => if(state.evaluation, do: state.evaluation.state, else: nil),\n   80 +|       \"sequence\" => state.last_sequence,\n   81 +|       \"revision\" => if(state.context, do: state.context[\"revision\"], else: nil),\n   82 +|       \"disposed\" => state.disposed,\n   83 +|       \"pending\" => state.pending_sequence\n   84 +|     }}\n56 85  |  end\n   86 +|\n57 87  |  defp execute(states, %{\"protocol\" => \"blazex.host-bridge/3\", \"root_id\" => root} = request) do\n58 88  |    case ContinuitySession.handle(Map.fetch!(states, root), request) do\n       |\n61 91  |    end\n62 92  |  end\n   93 +|\n63 94  |  defp execute(states, _), do: {states, %{\"error\" => \"fixture-incompatible\"}}\n64 95  |end\n   96 +|\n65 97  |IO.puts(\"BH06:ready\")\n66 98  |BlazeX.BH04.ContinuityRuntime.run()\n       |\n\n\u001b[1m\u001b[31m/workspace/integration/bh-04/support/interaction_runtime.exs\n\u001b[0m\n       |\n 8  8  |  alias BlazeX.Core.{Event, Identity}\n 9  9  |  alias BlazeX.Renderer.DOM.InteractionSession\n   10 +|\n10 11  |  def run(states \\\\ %{}) do\n11 12  |    case IO.read(:stdio, :line) do\n12    -|      :eof -> :ok\n13    -|      {:error, _} -> :ok\n   13 +|      :eof ->\n   14 +|        :ok\n   15 +|\n   16 +|      {:error, _} ->\n   17 +|        :ok\n   18 +|\n14 19  |      line ->\n15    -|        {next, output, id} = try do\n16    -|          true = byte_size(line) <= 16384\n17    -|          %{\"id\" => id, \"request\" => request} = Jason.decode!(line)\n18    -|          {next, output} = execute(states, request)\n19    -|          {next, output, id}\n20    -|        rescue\n21    -|          _ -> {states, %{\"error\" => \"fixture-invalid\"}, nil}\n22    -|        end\n   20 +|        {next, output, id} =\n   21 +|          try do\n   22 +|            true = byte_size(line) <= 16384\n   23 +|            %{\"id\" => id, \"request\" => request} = Jason.decode!(line)\n   24 +|            {next, output} = execute(states, request)\n   25 +|            {next, output, id}\n   26 +|          rescue\n   27 +|            _ -> {states, %{\"error\" => \"fixture-invalid\"}, nil}\n   28 +|          end\n   29 +|\n23 30  |        IO.puts(\"BH05:\" <> Jason.encode!(%{\"id\" => id, \"result\" => output}))\n24 31  |        run(next)\n25 32  |    end\n26 33  |  end\n27    -|  defp execute(states, %{\"control\" => \"init\", \"root_id\" => root, \"lifecycle_generation\" => generation}) do\n   34 +|\n   35 +|  defp execute(states, %{\n   36 +|         \"control\" => \"init\",\n   37 +|         \"root_id\" => root,\n   38 +|         \"lifecycle_generation\" => generation\n   39 +|       }) do\n28 40  |    true = map_size(states) < 64 or Map.has_key?(states, root)\n29 41  |    true = not Map.has_key?(states, root) or states[root].disposed\n30 42  |    {:ok, owner} = Identity.new(root)\n31    -|    {:ok, state, tx} = InteractionSession.mount(root, generation, BlazeX.BH04.InteractionCounter, owner, %{quiet: root == \"root-quiet\"})\n32    -|    {Map.put(states, root, state), %{\"transaction\" => tx, \"events\" => Enum.map(Event.names(), &Atom.to_string/1)}}\n   43 +|\n   44 +|    {:ok, state, tx} =\n   45 +|      InteractionSession.mount(root, generation, BlazeX.BH04.InteractionCounter, owner, %{\n   46 +|        quiet: root == \"root-quiet\"\n   47 +|      })\n   48 +|\n   49 +|    {Map.put(states, root, state),\n   50 +|     %{\"transaction\" => tx, \"events\" => Enum.map(Event.names(), &Atom.to_string/1)}}\n33 51  |  end\n   52 +|\n34 53  |  defp execute(states, %{\"control\" => \"initial_ack\", \"root_id\" => root, \"ack\" => ack}) do\n35 54  |    {:ok, state} = InteractionSession.acknowledge(Map.fetch!(states, root), 0, ack)\n36 55  |    {Map.put(states, root, state), %{\"outcome\" => \"committed\"}}\n37 56  |  end\n   57 +|\n38 58  |  defp execute(states, %{\"control\" => \"stop\", \"root_id\" => root}) do\n39 59  |    state = InteractionSession.stop(Map.fetch!(states, root))\n40 60  |    {Map.put(states, root, state), %{\"outcome\" => \"disposed\"}}\n41 61  |  end\n   62 +|\n42 63  |  defp execute(states, %{\"control\" => \"snapshot\", \"root_id\" => root}) do\n43 64  |    state = Map.fetch!(states, root)\n44    -|    {states, %{\"count\" => if(state.evaluation, do: state.evaluation.state, else: nil), \"sequence\" => state.last_sequence, \"revision\" => if(state.context, do: state.context[\"revision\"], else: nil), \"disposed\" => state.disposed, \"pending\" => state.pending_sequence}}\n   65 +|\n   66 +|    {states,\n   67 +|     %{\n   68 +|       \"count\" => if(state.evaluation, do: state.evaluation.state, else: nil),\n   69 +|       \"sequence\" => state.last_sequence,\n   70 +|       \"revision\" => if(state.context, do: state.context[\"revision\"], else: nil),\n   71 +|       \"disposed\" => state.disposed,\n   72 +|       \"pending\" => state.pending_sequence\n   73 +|     }}\n45 74  |  end\n   75 +|\n46 76  |  defp execute(states, %{\"protocol\" => \"blazex.host-bridge/2\", \"root_id\" => root} = request) do\n47 77  |    case InteractionSession.handle(Map.fetch!(states, root), request) do\n       |\n50 80  |    end\n51 81  |  end\n   82 +|\n52 83  |  defp execute(states, _), do: {states, %{\"error\" => \"fixture-incompatible\"}}\n53 84  |end\n   85 +|\n54 86  |IO.puts(\"BH05:ready\")\n55 87  |BlazeX.BH04.InteractionRuntime.run()\n       |\n\n\u001b[1m\u001b[31m/workspace/integration/bh-04/support/protocol_runner.exs\n\u001b[0m\n       |\n 3  3  |\n 4  4  |path = Path.expand(\"../protocol-fixtures-v0.1.0.txt\", __DIR__)\n 5    -|results = for line <- File.stream!(path, [], :line) do\n 6    -|  [name, expected, context64, record64] = line |> String.trim() |> String.split(\"|\")\n 7    -|  {:ok, context} = context64 |> Base.decode64!() |> Codec.decode()\n 8    -|  result = with {:ok, record} <- record64 |> Base.decode64!() |> Codec.decode(),\n 9    -|                {:ok, value} <- Protocol.new(record, context), do: {:ok, Protocol.to_wire(value)}\n10    -|  {actual, canonical, hash} =\n11    -|    case result do\n12    -|      {:ok, value} -> {\"ok\", Base.encode64(Codec.encode!(value)), Codec.digest(value)}\n13    -|      {:error, code} -> {code, \"\", \"\"}\n14    -|    end\n15    -|  if actual != expected, do: raise(\"fixture mismatch #{name}: #{actual} != #{expected}\")\n16    -|  Enum.join([name, actual, canonical, hash], \"|\")\n17    -|end\n    5 +|\n    6 +|results =\n    7 +|  for line <- File.stream!(path, [], :line) do\n    8 +|    [name, expected, context64, record64] = line |> String.trim() |> String.split(\"|\")\n    9 +|    {:ok, context} = context64 |> Base.decode64!() |> Codec.decode()\n   10 +|\n   11 +|    result =\n   12 +|      with {:ok, record} <- record64 |> Base.decode64!() |> Codec.decode(),\n   13 +|           {:ok, value} <- Protocol.new(record, context),\n   14 +|           do: {:ok, Protocol.to_wire(value)}\n   15 +|\n   16 +|    {actual, canonical, hash} =\n   17 +|      case result do\n   18 +|        {:ok, value} -> {\"ok\", Base.encode64(Codec.encode!(value)), Codec.digest(value)}\n   19 +|        {:error, code} -> {code, \"\", \"\"}\n   20 +|      end\n   21 +|\n   22 +|    if actual != expected, do: raise(\"fixture mismatch #{name}: #{actual} != #{expected}\")\n   23 +|    Enum.join([name, actual, canonical, hash], \"|\")\n   24 +|  end\n   25 +|\n18 26  |report = Enum.join(results, \"\\n\") <> \"\\n\"\n   27 +|\n19 28  |case System.argv() do\n20 29  |  [output] -> File.write!(output, report)\n       |\n\n\u001b[1m\u001b[31m/workspace/integration/bh-04/support/reconciliation_protocol_runner.exs\n\u001b[0m\n       |\n 3  3  |\n 4  4  |path = Path.expand(\"../reconciliation-protocol-fixtures-v0.1.0.txt\", __DIR__)\n 5    -|results = for line <- File.stream!(path, [], :line) do\n 6    -|  [name, expected, context64, record64] = line |> String.trim() |> String.split(\"|\")\n 7    -|  {:ok, context} = context64 |> Base.decode64!() |> Codec.decode()\n 8    -|  result = with {:ok, record} <- record64 |> Base.decode64!() |> Codec.decode(),\n 9    -|                {:ok, value} <- Protocol.new(record, context), do: {:ok, Protocol.to_wire(value)}\n10    -|  {actual, canonical, hash} =\n11    -|    case result do\n12    -|      {:ok, value} -> {\"ok\", Base.encode64(Codec.encode!(value)), Codec.digest(value)}\n13    -|      {:error, code} -> {code, \"\", \"\"}\n14    -|    end\n15    -|  if actual != expected, do: raise(\"fixture mismatch #{name}: #{actual} != #{expected}\")\n16    -|  Enum.join([name, actual, canonical, hash], \"|\")\n17    -|end\n    5 +|\n    6 +|results =\n    7 +|  for line <- File.stream!(path, [], :line) do\n    8 +|    [name, expected, context64, record64] = line |> String.trim() |> String.split(\"|\")\n    9 +|    {:ok, context} = context64 |> Base.decode64!() |> Codec.decode()\n   10 +|\n   11 +|    result =\n   12 +|      with {:ok, record} <- record64 |> Base.decode64!() |> Codec.decode(),\n   13 +|           {:ok, value} <- Protocol.new(record, context),\n   14 +|           do: {:ok, Protocol.to_wire(value)}\n   15 +|\n   16 +|    {actual, canonical, hash} =\n   17 +|      case result do\n   18 +|        {:ok, value} -> {\"ok\", Base.encode64(Codec.encode!(value)), Codec.digest(value)}\n   19 +|        {:error, code} -> {code, \"\", \"\"}\n   20 +|      end\n   21 +|\n   22 +|    if actual != expected, do: raise(\"fixture mismatch #{name}: #{actual} != #{expected}\")\n   23 +|    Enum.join([name, actual, canonical, hash], \"|\")\n   24 +|  end\n   25 +|\n18 26  |report = Enum.join(results, \"\\n\") <> \"\\n\"\n   27 +|\n19 28  |case System.argv() do\n20 29  |  [output] -> File.write!(output, report)\n       |\n\n\u001b[1m\u001b[31m/workspace/integration/bh-04/support/atomic_dom_runner.exs\n\u001b[0m\n       |\n 4  4  |alias BlazeX.Renderer.DOM.ReconciledSession\n 5  5  |\n 6    -|rows = Enum.map(ReconciliationCases.scenarios(), fn {_, old, _, _} = scenario ->\n 7    -|  setup = if old do\n 8    -|    {:ok, mounted} = ReconciledSession.mount(old)\n 9    -|    ReconciledSession.transaction(mounted)\n10    -|  else\n11    -|    nil\n12    -|  end\n13    -|  Map.put(ReconciliationCases.execute(scenario), \"setup\", setup)\n14    -|end)\n    6 +|rows =\n    7 +|  Enum.map(ReconciliationCases.scenarios(), fn {_, old, _, _} = scenario ->\n    8 +|    setup =\n    9 +|      if old do\n   10 +|        {:ok, mounted} = ReconciledSession.mount(old)\n   11 +|        ReconciledSession.transaction(mounted)\n   12 +|      else\n   13 +|        nil\n   14 +|      end\n15 15  |\n16    -|bytes = Enum.map_join(rows, \"\", fn row ->\n17    -|  row[\"name\"] <> \"|\" <> Base.encode64(Codec.encode!(row)) <> \"|\" <> Codec.digest(row) <> \"\\n\"\n18    -|end)\n   16 +|    Map.put(ReconciliationCases.execute(scenario), \"setup\", setup)\n   17 +|  end)\n   18 +|\n   19 +|bytes =\n   20 +|  Enum.map_join(rows, \"\", fn row ->\n   21 +|    row[\"name\"] <> \"|\" <> Base.encode64(Codec.encode!(row)) <> \"|\" <> Codec.digest(row) <> \"\\n\"\n   22 +|  end)\n   23 +|\n19 24  |path = Path.expand(\"../atomic-dom-fixtures-v0.1.0.txt\", __DIR__)\n20    -|if System.argv() == [\"--write\"], do: File.write!(path, bytes), else: true = File.read!(path) == bytes\n21    -|IO.puts(\"BH-04 Phase 4: #{length(rows)} actual reconciler scenarios with initial setup transactions\")\n22 25  |\n   26 +|if System.argv() == [\"--write\"],\n   27 +|  do: File.write!(path, bytes),\n   28 +|  else: true = File.read!(path) == bytes\n   29 +|\n   30 +|IO.puts(\n   31 +|  \"BH-04 Phase 4: #{length(rows)} actual reconciler scenarios with initial setup transactions\"\n   32 +|)\n   33 +|\n\n\u001b[1m\u001b[31m/workspace/integration/bh-04/support/interaction_counter.exs\n\u001b[0m\n       |\n 8  8  |  def update(_, state, _), do: {:ok, state}\n 9  9  |  def handle_event(_, _, state, _), do: {:ok, state + 1, []}\n   10 +|\n10 11  |  def render(props, state, context) do\n11 12  |    state = if Map.get(props, :quiet, false), do: 0, else: state\n12 13  |    {:ok, label_id} = Identity.child(context.identity, :label)\n13 14  |    {:ok, label} = Node.text(label_id, \"Events: #{state}\", key: :label)\n14    -|    controls = Enum.map(Event.names(), fn event ->\n15    -|      {:ok, id} = Identity.child(context.identity, event)\n16    -|      {:ok, node} = Node.new(if(event in [:change, :select], do: :field, else: :action), id, key: event)\n17    -|      node\n18    -|    end)\n   15 +|\n   16 +|    controls =\n   17 +|      Enum.map(Event.names(), fn event ->\n   18 +|        {:ok, id} = Identity.child(context.identity, event)\n   19 +|\n   20 +|        {:ok, node} =\n   21 +|          Node.new(if(event in [:change, :select], do: :field, else: :action), id, key: event)\n   22 +|\n   23 +|        node\n   24 +|      end)\n   25 +|\n19 26  |    {:ok, root} = Node.container(:group, context.identity, [label | controls])\n20    -|    bindings = Enum.map(Event.names(), fn event ->\n21    -|      {:ok, id} = Identity.child(context.identity, event)\n22    -|      {:ok, binding} = Binding.new(event, context.identity, id)\n23    -|      binding\n24    -|    end)\n   27 +|\n   28 +|    bindings =\n   29 +|      Enum.map(Event.names(), fn event ->\n   30 +|        {:ok, id} = Identity.child(context.identity, event)\n   31 +|        {:ok, binding} = Binding.new(event, context.identity, id)\n   32 +|        binding\n   33 +|      end)\n   34 +|\n25 35  |    Document.new(root, bindings)\n26 36  |  end\n       |\n\n\n\n"
+    },
+    {
+      "name": "javascript",
+      "command": [
+        "bash",
+        "-c",
+        "node --test js/blazex_runtime/test/*.test.js && node packages/blazex_renderer_dom/js/test/dom-driver.test.js && node integration/bh-04/conformance-test.mjs && node integration/bh-04/acceptance-report.test.mjs"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 11926,
+      "stdout": "✔ rejects deterministic hostile bridge families without executing values (1.479653ms)\n✔ retains script and HTML payloads only as inert bounded text (0.279735ms)\n✔ rejects traversal, credentials, downgrade, and missing integrity declarations (1.518418ms)\n✔ fails artifact MIME, compression, size, and integrity before returning bytes (32.936727ms)\n✔ acquires the three accepted artifacts in order and publishes only after verification (42.996083ms)\n✔ binds the host fetch capability when no injected fetch is supplied (4.92782ms)\n✔ rejects missing gates and declaration limits before any fetch (1.783015ms)\n✔ rejects response metadata, truncation, corruption, and invalid WebAssembly atomically (13.714771ms)\n✔ rejects unavailable, timed-out, cancelled, and oversize-stream artifacts (5.312944ms)\n✔ shared browser matrix also passes in the strict fake DOM (11230.998635ms)\n✔ all actual reconciler scenarios commit through real BH-03 handles (409.839105ms)\n✔ every before/after operation boundary restores exact old elements (9805.431651ms)\n✔ unexpected DOM rejects before mutation and failed rollback quarantines (20.589858ms)\n✔ the experimental bridge boundary remains narrow (2.879506ms)\n✔ the loader source owns no component or server behavior (5.34426ms)\n✔ accepts and normalizes the exact BH-03 compatibility table (2.005114ms)\n✔ rejects missing and unknown compatibility identities (1.663186ms)\n✔ rejects duplicate and malformed compatibility identities (0.57509ms)\n✔ rejects mismatched versions before artifact acquisition (1.501321ms)\n✔ emits correlated developer and user summaries without console dependence (2.492459ms)\n✔ redacts keys, credentials, queries, local paths, and stack frames (0.410764ms)\n✔ drops identical diagnostics and counts the duplicate (0.391917ms)\n✔ rejects orphan correlation, unknown classification, and retention overflow (2.20814ms)\n✔ discovers explicit, link, and meta manifest declarations (2.067954ms)\n✔ allows an explicit declaration only with one equivalent document declaration (2.357709ms)\n✔ rejects absent and duplicate document declarations (0.339499ms)\n✔ rejects cross-origin, credentialed, fragmented, and unsupported URLs (0.489924ms)\n✔ real BH-03 handles gate initial, update, dispose and terminal rejection (29.181154ms)\n✔ wrong owner, revision, duplicate and unknown capabilities cannot apply (15.974384ms)\n✔ capacity includes active work and never silently coalesces dependent revisions (498.974492ms)\n✔ slow root does not block a sibling and runtime loss drains work (9.50483ms)\n✔ shutdown, remount and observer exceptions preserve exactly-once outcomes (15.934751ms)\n✔ effects run after DOM commit and all timer leases release before acknowledgement (30.600973ms)\n✔ malformed, ungranted, duplicate and future-dependent effects never mount (41.504605ms)\n✔ timeout fallback and disposal cancel timer work without acknowledgement promotion (41.301319ms)\n✔ cleanup leases report failures instead of hiding leaks and reject cross-root release (0.593771ms)\n✔ apply rollback, failed rollback, effect exceptions and ack loss elect one bounded recovery owner (148.15458ms)\n✔ diagnostics, overload, cleanup and runtime-loss observations are bounded (8.442686ms)\n✔ omit failure results are explicit and failed dependencies never execute (21.709869ms)\n✔ the batch deadline cancels pending timers and actual DOM cleanup errors remain blocking (770.487042ms)\n✔ keyed identity retains backward range; changed explicit range clamps to the new value (5.640397ms)\n✔ focus recovery respects scope order and never steals a sibling root (3.084794ms)\n✔ closed manifests reject foreign choices, missing selection and files (19.646653ms)\n✔ newer drafts survive pending semantic writes and composition never fabricates input (3.160356ms)\n✔ checked, mixed, required and invalid map distinctly and rollback releases composition (0.546082ms)\n✔ readonly choices cancel native toggles before a semantic event (0.541445ms)\n✔ correlates a bounded allowlisted request and records metrics (4.481813ms)\n✔ accepts only the three bounded fixture operations added for Phase 5 (1.476117ms)\n✔ rejects operations, executable values, handles, secrets, and oversized values (0.900803ms)\n✔ times out, cancels transport, and drops a late result (8.205017ms)\n✔ rejects stale responses and makes stop idempotent (0.866216ms)\n✔ defines bounded event, error, readiness, shutdown, and diagnostic signals (0.406494ms)\n✔ normalizes the valid profile manifest without acquiring artifacts (2.22493ms)\n✔ rejects every versioned invalid manifest mutation atomically (2.423365ms)\n✔ fetches only a bounded no-store same-origin JSON manifest (26.285629ms)\n✔ composes discovery, validation, and prerequisites as a pre-acquisition gate (1.806552ms)\n✔ all 13 mappings produce closed bounded immutable semantic payloads (3.656331ms)\n✔ malformed, cyclic, accessor, oversized and unrequested values fail closed (1.049131ms)\n✔ composition, credentials, unknown mapping and cross-target events are rejected (0.390583ms)\n✔ registry orders callbacks, cancels defaults, suspends and removes stale callbacks (1.541716ms)\n✔ actual reconciler listeners register through the atomic DOM node index and clean up (66.808875ms)\n✔ ordered local events and render acknowledgements use only negotiated v2 operations (7.43468ms)\n✔ bounded queue includes active work; independent stream progresses during delay (12.50718ms)\n✔ timeout cancels once, rejects queued work, and ignores late responses (10.73058ms)\n✔ wrong root, stale context, listener and bridge mismatches fail before component dispatch (0.948517ms)\n✔ a new committed revision rejects queued old-revision events without coalescing (0.796067ms)\n✔ follows the monotonic activation state machine (2.783792ms)\n✔ releases owned resources in reverse order and makes stop idempotent (1.439163ms)\n✔ classifies retry, integrity, attempt limits, and stale generations (0.737076ms)\n✔ validates the exact Phase 4 manifest and resolves same-origin assets (2.49674ms)\n✔ fetches a no-store manifest and rejects redirects (22.377457ms)\n✔ verifies artifact bytes, MIME, digest, Wasm, and cancellation (11.639461ms)\n✔ rejects undeclared Wasm imports and missing required exports (5.021727ms)\n✔ describes bounded timing samples deterministically (2.152ms)\n✔ describes byte samples without applying duration ceilings (0.551177ms)\n✔ normalizes available and unavailable memory without inventing values (1.666735ms)\n✔ summarizes lifecycle observations while keeping budgets and support absent (0.751033ms)\n✔ rejects malformed, unbounded, leaked, and extended observations (0.450899ms)\n✔ classifies full and buffered-only browser prerequisites (2.917354ms)\n✔ distinguishes deployment policy from browser capability failure (0.483357ms)\n✔ evaluates the exact BH-03 manifest-declared prerequisite contract (0.559493ms)\n✔ rejects missing browser or deployment prerequisites before acquisition (0.842467ms)\n✔ coordinates one authority-bearing retry under the browser owner (2.501964ms)\n✔ prohibits a lower-layer authority retry (0.979975ms)\n✔ bounds exhaustion without starting a third operation (1.021425ms)\n✔ drops stale generations and cancels replacement work (2.292206ms)\n✔ converges non-retryable and stopped recovery (0.447715ms)\n✔ V2 schema is exactly the versioned JSON source (2.380131ms)\n✔ every V2 attribute passes the shared strict protocol (77.470015ms)\n✔ focus, selection and listener intent cells use closed canonical data (7.82468ms)\n✔ v1 identity, unknown intent and noncanonical intent are rejected (3.529054ms)\n✔ schema constants equal the versioned source (5.275072ms)\n✔ protocol: initial (5.424606ms)\n✔ protocol: patch-all-value-operations (2.341382ms)\n✔ protocol: remove (1.630375ms)\n✔ protocol: replace-child (1.273921ms)\n✔ protocol: dispose (0.879172ms)\n✔ protocol: ack-preflight (0.560837ms)\n✔ protocol: ack-accepted (0.385033ms)\n✔ protocol: ack-committed (0.484612ms)\n✔ protocol: ack-rejected (0.426408ms)\n✔ protocol: ack-rolled-back (0.342411ms)\n✔ protocol: ack-fallback (0.3451ms)\n✔ protocol: ack-disposed (0.347134ms)\n✔ protocol: diagnostic-malformed (0.36254ms)\n✔ protocol: diagnostic-incompatible (0.366882ms)\n✔ protocol: diagnostic-stale (1.385391ms)\n✔ protocol: diagnostic-duplicate (0.873652ms)\n✔ protocol: diagnostic-missing-target (0.344895ms)\n✔ protocol: diagnostic-ownership (0.314497ms)\n✔ protocol: diagnostic-limit (0.325102ms)\n✔ protocol: diagnostic-apply (0.325306ms)\n✔ protocol: diagnostic-rollback (0.335792ms)\n✔ protocol: diagnostic-disposed-root (0.317492ms)\n✔ protocol: version (0.836187ms)\n✔ protocol: schema-version (0.477678ms)\n✔ protocol: extra-field (0.588859ms)\n✔ protocol: owner (0.749519ms)\n✔ protocol: owner-newline (1.197015ms)\n✔ protocol: generation (0.788265ms)\n✔ protocol: stale-base (1.429004ms)\n✔ protocol: target-gap (0.548593ms)\n✔ protocol: capability (0.482234ms)\n✔ protocol: digest (2.725069ms)\n✔ protocol: operation-id (0.494876ms)\n✔ protocol: forward-dependency (0.42078ms)\n✔ protocol: missing-target (0.369117ms)\n✔ protocol: extra-operation-field (0.365417ms)\n✔ protocol: unknown-operation (1.271504ms)\n✔ protocol: duplicate-transaction (0.651414ms)\n✔ protocol: disposed-root (0.514622ms)\n✔ protocol: duplicate-node (0.388721ms)\n✔ protocol: cycle (0.423421ms)\n✔ protocol: wrong-old-parent (0.382939ms)\n✔ protocol: remove-parent-first (0.569716ms)\n✔ protocol: insert-before-create (0.714419ms)\n✔ protocol: detached-final-node (0.466862ms)\n✔ protocol: wrong-property-type (0.381338ms)\n✔ protocol: selection-reversed (0.395218ms)\n✔ protocol: barrier-not-last (1.245291ms)\n✔ protocol: ack-cross-root (0.586641ms)\n✔ protocol: ack-partial-success (0.367202ms)\n✔ protocol: ack-rejected-stale (0.32641ms)\n✔ protocol: ack-rejected-incompatible (0.325075ms)\n✔ protocol: text-byte-boundary (2.881756ms)\n✔ protocol: value-byte-boundary (0.969403ms)\n✔ protocol: attribute-byte-boundary (1.3605ms)\n✔ protocol: operations-boundary (52.736856ms)\n✔ protocol: nodes-boundary (5.653884ms)\n✔ protocol: nodes-overflow (3.544799ms)\n✔ protocol: depth-boundary (3.490038ms)\n✔ protocol: depth-overflow (1.137122ms)\n✔ protocol: listeners-boundary (2.075768ms)\n✔ protocol: listeners-overflow (2.051785ms)\n✔ protocol: queue-window-boundary (1.558843ms)\n✔ protocol: safe-integer-boundary (0.703921ms)\n✔ protocol: message-byte-boundary (9.570925ms)\n✔ protocol: trailing-byte (0.244991ms)\n✔ protocol: nonminimal-integer (0.105676ms)\n✔ protocol: negative-integer (0.071588ms)\n✔ protocol: float (0.054722ms)\n✔ protocol: integer-newline (0.071921ms)\n✔ protocol: duplicate-map-key (0.078046ms)\n✔ protocol: map-order (0.103055ms)\n✔ protocol: text-byte-overflow (0.099891ms)\n✔ protocol: message-byte-overflow (0.205357ms)\n✔ protocol: invalid-utf8 (0.101557ms)\n✔ canonical map order, unicode and malformed local inputs (0.377827ms)\n✔ no browser or runtime surface is referenced by pure validation (0.348237ms)\n✔ reports baseline, peak, disposed convergence, and explained unknowns (2.156899ms)\n✔ rejects unexplained unknown and invalid counts (1.244707ms)\n✔ detects nonconverging disposal (0.434833ms)\n✔ rejects stale generations and bounded sample overflow (0.546119ms)\n✔ registers, mounts, updates, moves, disposes, and remounts independent roots (15.801336ms)\n✔ serializes each root queue while another root continues (4.962068ms)\n✔ rejects duplicates while registration is reserved and after disposal (1.886389ms)\n✔ rejects stale and foreign acknowledgements without mutating another root (1.428723ms)\n✔ rejects illegal transitions without consuming a generation (0.733717ms)\n✔ bounds root identities and root count (8.095171ms)\n✔ waits for application readiness and converges resources on stop (39.702946ms)\n✔ contains runtime failure and startup cancellation (7.511732ms)\n✔ runtime-exited automatically recovers real startup and replays the same root handle (34.3134ms)\n✔ runtime-failed automatically recovers real startup and replays the same root handle (5.493085ms)\n✔ loss latched before first subscription never publishes ready (1.481925ms)\n✔ loss before replacement subscription converges to fallback (1.480945ms)\n✔ loss during replay cannot publish a ready replacement (1.967358ms)\n✔ intentional stop ignores synchronous exit and later callbacks (1.339548ms)\n✔ loss at final replay acknowledgement cannot reopen root registration (3.796434ms)\n✔ close during automatic recovery prevents subsequent opens and converges (2.883008ms)\n✔ replaces one lost generation and atomically replays roots through the same handles (17.031218ms)\n✔ rejects stale loss reports without changing state or starting a replacement (1.398331ms)\n✔ releases a replacement and exposes no partial ready state when one root replay fails (2.381723ms)\n✔ allows one replacement only and converges a second active loss to fallback (1.804529ms)\n✔ converges non-retryable loss without replacement (0.738302ms)\n✔ isolates recovery to the reported scope (0.60243ms)\n✔ converges replacement startup failure without publishing ready (0.454656ms)\n✔ maps closed mismatch, prerequisite, startup, loss, and exhaustion fallback actions (1.037452ms)\n✔ openOrFallback returns a bounded decision for mismatch and sticky startup failure (0.54615ms)\n✔ coalesces concurrent startup and reuses one ready scope (14.146156ms)\n✔ starts different compatible host scopes independently (0.63442ms)\n✔ rejects incompatible reuse before another startup (1.414891ms)\n✔ retains a failed scope tombstone without retry (0.723605ms)\n✔ bounds scope identifiers and registry size (1.867566ms)\n✔ drains independent roots before an acknowledged registry-owned shutdown (15.800387ms)\n✔ force releases and retains a stopped tombstone after shutdown timeout (11.289071ms)\n✔ classifies foreign and stale shutdown acknowledgements and still releases once (1.001031ms)\n✔ rejects unknown scopes and shutdown timeouts outside the governed range (0.196962ms)\n✔ starts one isolated attempt, loads the bundle contract, and waits for correlated readiness (24.513168ms)\n✔ rejects stale readiness but accepts the correlated event (4.028722ms)\n✔ contains duplicate readiness after success and releases the transport (4.061608ms)\n✔ classifies transport, runtime, bundle, timeout, and cancellation failures and cleans up (111.997716ms)\nℹ tests 211\nℹ suites 0\nℹ pass 211\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 11316.883085\n✔ validates and atomically applies one closed full-root projection (1.900207ms)\n✔ normalizes bounded semantic events without retaining browser objects (0.448599ms)\n✔ applies autofocus, restores same-ID update focus, and controls text selection (0.358045ms)\n✔ rejects stale and malformed batches before mutating the accepted root (0.59191ms)\n✔ accepts next-generation replacement and disposes roots/listeners idempotently (0.401166ms)\n✔ rejects undeclared fields, attributes, mappings, relationships, and disposal roots (0.945527ms)\n✔ driver source has no generic markup, selector, style, global, network, or code escape (2.140579ms)\nℹ tests 7\nℹ suites 0\nℹ pass 7\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 10.133535\n{\"scenarios\":51,\"comparator_negatives\":300,\"result\":\"passed\"}\n✔ nearest-rank statistics retain tail and reject invalid input (6.201137ms)\n✔ candidate is not a paint or acceptance claim (21.538376ms)\n✔ reject missing browser (16.360247ms)\n✔ reject missing sample (24.123752ms)\n✔ reject failed sample (14.938114ms)\n✔ reject raw hash drift (14.391407ms)\n✔ reject missing queue run (26.035215ms)\n✔ reject missing effects (22.779954ms)\n✔ reject forged cleanup (23.624577ms)\n✔ reject page failure (14.712424ms)\n✔ reject duplicate transaction (22.92779ms)\n✔ reject forged ordering with refreshed hash (22.270347ms)\nℹ tests 12\nℹ suites 0\nℹ pass 12\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 239.507497\n",
+      "stderr": ""
+    },
+    {
+      "name": "atomic-browser",
+      "command": [
+        "node",
+        "integration/bh-04/atomic-dom-browser.mjs",
+        "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-atomic-browser-v0.1.0.json"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 26072,
+      "stdout": "chrome {\"scenarios\":50,\"injected_boundaries\":1204,\"stale_rejected\":100,\"max_queue\":64,\"terminal_acks\":1254,\"cleanup\":1263}\nfirefox {\"scenarios\":50,\"injected_boundaries\":1204,\"stale_rejected\":100,\"max_queue\":64,\"terminal_acks\":1254,\"cleanup\":1263}\n",
+      "stderr": ""
+    },
+    {
+      "name": "interaction-browser",
+      "command": [
+        "node",
+        "integration/bh-04/interaction-browser.mjs",
+        "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-interaction-browser-v0.1.0.json"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 6504,
+      "stdout": "chrome {\"mappings\":13,\"rejected\":17,\"roots\":3,\"dom_commits\":18,\"cleanup\":3,\"max_queue\":64,\"trusted_clicks\":1,\"no_render_events\":2}\nfirefox {\"mappings\":13,\"rejected\":17,\"roots\":3,\"dom_commits\":18,\"cleanup\":3,\"max_queue\":64,\"trusted_clicks\":1,\"no_render_events\":2}\n",
+      "stderr": "    warning: the Enumerable protocol has already been consolidated, an implementation for Jason.OrderedObject has no effect. If you want to implement protocols after compilation or during tests, check the \"Consolidation\" section in the Protocol module documentation\n    │\n 89 │ defimpl Enumerable, for: Jason.OrderedObject do\n    │ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    │\n    └─ /workspace/integration/fixtures/browser_host/deps/jason/lib/ordered_object.ex:89: (file)\n\n"
+    },
+    {
+      "name": "interaction-replay",
+      "command": [
+        "node",
+        "integration/bh-04/interaction-conformance.mjs",
+        "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-interaction-browser-v0.1.0.json"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 379,
+      "stdout": "{\"browsers\":2,\"deliveries\":40,\"rejected\":24,\"commits\":42,\"independent_transaction_replay\":\"exact\",\"result\":\"passed\"}\n",
+      "stderr": ""
+    },
+    {
+      "name": "continuity-browser",
+      "command": [
+        "node",
+        "integration/bh-04/continuity-browser.mjs",
+        "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-continuity-browser-v0.1.0.json"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 7783,
+      "stdout": "chrome {\"scenarios\":16,\"roots\":2,\"cleanup\":2}\nfirefox {\"scenarios\":16,\"roots\":2,\"cleanup\":2}\n",
+      "stderr": "    warning: the Enumerable protocol has already been consolidated, an implementation for Jason.OrderedObject has no effect. If you want to implement protocols after compilation or during tests, check the \"Consolidation\" section in the Protocol module documentation\n    │\n 89 │ defimpl Enumerable, for: Jason.OrderedObject do\n    │ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    │\n    └─ /workspace/integration/fixtures/browser_host/deps/jason/lib/ordered_object.ex:89: (file)\n\n"
+    },
+    {
+      "name": "continuity-replay",
+      "command": [
+        "node",
+        "integration/bh-04/continuity-conformance.mjs",
+        "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-continuity-browser-v0.1.0.json"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 615,
+      "stdout": "{\"browsers\":2,\"proposed\":66,\"committed\":64,\"delivered\":22,\"result\":\"passed\",\"independent_replay\":\"exact\"}\n",
+      "stderr": ""
+    },
+    {
+      "name": "effect-browser",
+      "command": [
+        "node",
+        "integration/bh-04/effect-browser.mjs",
+        "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-effect-browser-v0.1.0.json"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 12592,
+      "stdout": "chrome {\"scenarios\":19,\"roots\":24,\"cleanup\":24}\nfirefox {\"scenarios\":19,\"roots\":24,\"cleanup\":24}\n",
+      "stderr": "    warning: the Enumerable protocol has already been consolidated, an implementation for Jason.OrderedObject has no effect. If you want to implement protocols after compilation or during tests, check the \"Consolidation\" section in the Protocol module documentation\n    │\n 89 │ defimpl Enumerable, for: Jason.OrderedObject do\n    │ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    │\n    └─ /workspace/integration/fixtures/browser_host/deps/jason/lib/ordered_object.ex:89: (file)\n\n"
+    },
+    {
+      "name": "effect-replay",
+      "command": [
+        "node",
+        "integration/bh-04/effect-conformance.mjs",
+        "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-effect-browser-v0.1.0.json"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 710,
+      "stdout": "{\"browsers\":2,\"proposed\":188,\"committed\":150,\"delivered\":78,\"results\":40,\"result\":\"passed\",\"independent_replay\":\"exact\"}\n",
+      "stderr": ""
+    },
+    {
+      "name": "semantic-browser",
+      "command": [
+        "node",
+        "integration/bh-04/conformance-browser.mjs",
+        "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-semantic-browser-v0.1.0.json"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 9254,
+      "stdout": "chrome 51 102 passed\nfirefox 51 102 passed\n",
+      "stderr": ""
+    },
+    {
+      "name": "isolation",
+      "command": [
+        "node",
+        "integration/bh-04/conformance-isolation.mjs",
+        "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-isolation-v0.1.0.json"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 4793,
+      "stdout": "{\"result\":\"passed\",\"headless\":6,\"standalone\":116,\"asset_modules\":19}\n",
+      "stderr": ""
+    },
+    {
+      "name": "research-tests",
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-p",
+        "test_*.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 70708,
+      "stdout": "",
+      "stderr": "............................................................................................................................................................................................................................................................................................................................................................................................................................\n----------------------------------------------------------------------\nRan 412 tests in 70.508s\n\nOK\n"
+    },
+    {
+      "name": "validate_archive.py",
+      "command": [
+        "python3",
+        "validate_archive.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 1,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 1022,
+      "stdout": "Archive validation failed with 6 error(s):\n- assets/bh-04-baseline/README.md: unindexed direct child 'blazex-bh-04-phase-10-atomic-browser-v0.1.0.json'\n- assets/bh-04-baseline/README.md: unindexed direct child 'blazex-bh-04-phase-10-continuity-browser-v0.1.0.json'\n- assets/bh-04-baseline/README.md: unindexed direct child 'blazex-bh-04-phase-10-gate-log-v0.1.0.json'\n- assets/bh-04-baseline/README.md: unindexed direct child 'blazex-bh-04-phase-10-interaction-browser-v0.1.0.json'\n- assets/bh-04-baseline/README.md: unindexed direct child 'blazex-bh-04-phase-10-isolation-v0.1.0.json'\n- assets/bh-04-baseline/README.md: unindexed direct child 'blazex-bh-04-phase-10-semantic-browser-v0.1.0.json'\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_bh00_governance.py",
+      "command": [
+        "python3",
+        "validate_bh00_governance.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 157,
+      "stdout": "BH-00 governance validation passed: stage complete; status accepted-conditionally-ready; 17 sources; 6 axes; 18 packages; 3 profiles; 17 reconciliation checks; 8 reviews; 8 findings; 8 risks; product evidence remains unexecuted.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_bh01_activation.py",
+      "command": [
+        "python3",
+        "validate_bh01_activation.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 201,
+      "stdout": "BH-01 authorization, inherited ledger, evidence governance, activation, and Phase 1 completion are valid.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_bh02_acceptance.py",
+      "command": [
+        "python3",
+        "validate_bh02_acceptance.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 89,
+      "stdout": "BH-02 final acceptance passed: 7 phases, 9 outputs, 9 interactions, 7 review lenses, complete reproduction, exact deferrals, immutable registry overlays, and BH-03 eligibility without authorization verified.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_bh02_activation.py",
+      "command": [
+        "python3",
+        "validate_bh02_activation.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 58,
+      "stdout": "BH-02 activation validation passed: authorization, handoff, nine boundaries, dependency graph, leakage scans, and evidence limits checked.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_bh02_dom.py",
+      "command": [
+        "python3",
+        "validate_bh02_dom.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 47,
+      "stdout": "BH-02 Phase 6 DOM validation passed: authorization, lowering, driver, browsers, fixtures, leakage, and evidence limits checked.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_bh02_effects.py",
+      "command": [
+        "python3",
+        "validate_bh02_effects.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 44,
+      "stdout": "BH-02 Phase 3 effect validation passed: authorization, event vocabulary, capabilities, effects, resources, fixtures, leakage, and support limits checked.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_bh02_intent.py",
+      "command": [
+        "python3",
+        "validate_bh02_intent.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 46,
+      "stdout": "BH-02 Phase 4 intent validation passed: authorization, tokens, layout, accessibility, focus, selection, ownership, fixtures, leakage, and support limits checked.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_bh02_native.py",
+      "command": [
+        "python3",
+        "validate_bh02_native.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 43,
+      "stdout": "BH-02 Phase 7 native validation passed: authority, direct adapters, GTK execution, parity, deferrals, leakage, and evidence limits checked.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_bh02_renderer.py",
+      "command": [
+        "python3",
+        "validate_bh02_renderer.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 40,
+      "stdout": "BH-02 Phase 5 renderer validation passed: authorization, vocabularies, lifecycle, deterministic oracle, fixtures, leakage, and evidence limits checked.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_bh02_semantics.py",
+      "command": [
+        "python3",
+        "validate_bh02_semantics.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 41,
+      "stdout": "BH-02 Phase 2 semantic validation passed: authorization, contract, identity, node surface, evaluation boundary, fixtures, and support limits checked.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_bh03_acceptance.py",
+      "command": [
+        "python3",
+        "validate_bh03_acceptance.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 227,
+      "stdout": "BH-03 review record valid: revise; BH-04 ineligible; unsupported experimental state.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_bh03_activation.py",
+      "command": [
+        "python3",
+        "validate_bh03_activation.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 46,
+      "stdout": "BH-03 Phase 1 activation passed: authority, BH-02 handoff, 9 outputs, 10 acceptance conditions, lifecycle vocabulary, 5 boundaries, empty evidence, completion bindings, and unsupported experimental state verified.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_bh03_compatibility.py",
+      "command": [
+        "python3",
+        "validate_bh03_compatibility.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 45,
+      "stdout": "BH-03 Phase 2 compatibility validation passed: 8 exact identities, 3 discovery sources, 10 prerequisites, 3 artifact declarations, 27 conformance cases, completion bindings, empty later-phase results, and unsupported experimental state verified.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_bh03_correction.py",
+      "command": [
+        "python3",
+        "validate_bh03_correction.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 369,
+      "stdout": "BH-03 Phase 9: accepted-with-bounded-conditions; BH-04 eligible, not authorized; unsupported experimental state.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_bh03_measurements.py",
+      "command": [
+        "python3",
+        "validate_bh03_measurements.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 53,
+      "stdout": "BH-03 Phase 7 measurement validation passed: repeated active Chrome/Firefox startup, ten-root lifecycle, cleanup, failure convergence, capability-aware memory evidence, empty release budgets, deferred qualification, and unsupported experimental state verified.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_bh03_profile.py",
+      "command": [
+        "python3",
+        "validate_bh03_profile.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 43,
+      "stdout": "BH-03 Phase 6 browser-profile validation passed: separate Phoenix profile, actual AtomVM/Elixir acknowledgements, identical active Chrome/Firefox scenarios, closed fallback, registry-owned shutdown, deferred qualification, and unsupported experimental state verified.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_bh03_resilience.py",
+      "command": [
+        "python3",
+        "validate_bh03_resilience.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 41,
+      "stdout": "BH-03 Phase 5 resilience validation passed: bounded registry shutdown, exact-generation loss handling, one replacement, same-handle atomic replay, closed non-DOM fallback, completion bindings, empty browser/measurement/acceptance evidence, and unsupported experimental state verified.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_bh03_roots.py",
+      "command": [
+        "python3",
+        "validate_bh03_roots.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 47,
+      "stdout": "BH-03 Phase 4 shared-runtime/root validation passed: exact compatible reuse, one coalesced startup per scope, 12 registry/root cases, independent FIFO roots, generation/ownership failures, completion bindings, empty later evidence, and unsupported experimental state verified.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_bh03_startup.py",
+      "command": [
+        "python3",
+        "validate_bh03_startup.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 53,
+      "stdout": "BH-03 Phase 3 startup validation passed: 3 bounded artifact roles, 10 acquisition/startup cases, immutable adapter agreement, pinned profile artifact declarations, completion bindings, empty later-phase results, and unsupported experimental state verified.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_bh04_activation.py",
+      "command": [
+        "python3",
+        "validate_bh04_activation.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 299,
+      "stdout": "BH-04 Phase 1 activation passed; renderer unchanged; unsupported; Phase 2 not authorized; BH-05 ineligible.\nBH-04 Phase 1 reproduced on accepted snapshot; current Phase 2 requires validate_bh04_protocol.py.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_bh04_conformance.py",
+      "command": [
+        "python3",
+        "validate_bh04_conformance.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 2418,
+      "stdout": "BH-04 Phase 9 conformance passed; Phase 10 eligible but unauthorized; framework integration deferred.\nPhase 9 reproduced on accepted merge; current Phase 10 requires validate_bh04_acceptance.py.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_bh04_continuity.py",
+      "command": [
+        "python3",
+        "validate_bh04_continuity.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 2065,
+      "stdout": "BH-04 Phase 6 gate passed; Phase 7 eligible but unauthorized.\nBH-04 Phase 6 reproduced on accepted snapshot; current Phase 7 requires validate_bh04_lifecycle.py.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_bh04_dom_application.py",
+      "command": [
+        "python3",
+        "validate_bh04_dom_application.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 1470,
+      "stdout": "BH-04 Phase 4 gate passed: atomic DOM, exact source/history/browser bindings; Phase 5 unauthorized.\nBH-04 Phase 4 reproduced on accepted snapshot; current Phase 5 requires validate_bh04_interactions.py.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_bh04_interactions.py",
+      "command": [
+        "python3",
+        "validate_bh04_interactions.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 1520,
+      "stdout": "BH-04 Phase 5 gate passed; Phase 6 eligible but unauthorized.\nBH-04 Phase 5 reproduced on accepted snapshot; current Phase 6 requires validate_bh04_continuity.py.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_bh04_lifecycle.py",
+      "command": [
+        "python3",
+        "validate_bh04_lifecycle.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 980,
+      "stdout": "BH-04 Phase 7 gate passed; Phase 8 eligible but unauthorized.\nBH-04 Phase 7 reproduced on accepted snapshot; current Phase 9 requires validate_bh04_conformance.py.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_bh04_protocol.py",
+      "command": [
+        "python3",
+        "validate_bh04_protocol.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 215,
+      "stdout": "BH-04 Phase 2 protocol gate passed: exact source/schema/fixture bindings; no behavior or support promotion.\nBH-04 Phase 2 reproduced on accepted snapshot; current Phase 3 requires validate_bh04_reconciliation.py.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_bh04_reconciliation.py",
+      "command": [
+        "python3",
+        "validate_bh04_reconciliation.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 1551,
+      "stdout": "BH-04 Phase 3 gate passed: exact history/source/schema/fixture bindings; no browser or support promotion.\nBH-04 Phase 3 reproduced on accepted snapshot; current Phase 4 requires validate_bh04_dom_application.py.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_browser_product_envelope.py",
+      "command": [
+        "python3",
+        "validate_browser_product_envelope.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 34,
+      "stdout": "Browser product envelope validation passed: stage complete; 5 browser configurations, 10 evidence classes, 11 toolchain inputs, and 6 BH-01 records, 6 rendering modes, 3 profiles, and 12 profile capabilities, 9 trust boundaries, 12 deployment prerequisites, and 7 fallback categories, 8 paper scenarios, and 5 forbidden claims checked.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_component_catalog.py",
+      "command": [
+        "python3",
+        "validate_component_catalog.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 200,
+      "stdout": "Component catalog validation passed: reference mudblazor-v9.9.0; 83 locked source families; catalog schema 1.0.0; 83 normalized families in 7 categories; 12 source-closure exceptions; 168 reviewed source identifiers; 15 reviewed exception paths; 83 unresolved product dispositions; fresh generated view.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_component_classification.py",
+      "command": [
+        "python3",
+        "validate_component_classification.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 232,
+      "stdout": "Component classification validation passed: stage complete; 83 families; 12 exceptions; dispositions {'adapt-concept': 28, 'build-natively': 43, 'renderer-specific-extension': 1, 'replace-with-platform-pattern': 11}; tiers {'F0': 13, 'F1': 26, 'F2': 21, 'F3': 18, 'F4': 5}; packages {'blazex_charts': 1, 'blazex_data': 6, 'blazex_forms': 18, 'blazex_surfaces': 9, 'blazex_ui': 47, 'blazex_ui_tree': 2}; remote {'local-only': 73, 'optional-remote': 7, 'phoenix-enhanced': 3}; fallbacks {'alternative-interaction': 30, 'explicit-unavailable': 2, 'in-app-substitute': 14, 'nonvisual-representation': 1, 'omission': 1, 'server-round-trip': 5, 'static-content': 30}; capability references 204 required/77 optional; portability {'custom-scene': 1, 'portable-semantic': 24, 'portable-with-capabilities': 57, 'renderer-extension': 1}; native {'custom-drawn': 2, 'native-composite': 58, 'native-preferred': 15, 'not-applicable': 8}; visual profiles {'blazex-material': 2, 'hybrid': 58, 'not-applicable': 8, 'platform-native': 15}.\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate_quality_acceptance.py",
+      "command": [
+        "python3",
+        "validate_quality_acceptance.py"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 260,
+      "stdout": "Quality/acceptance validation passed: stage complete; 6 environments; 31 budgets {'build': 1, 'interaction': 3, 'payload': 10, 'reliability': 9, 'resource': 3, 'startup': 5}; 8 failure scenarios; 7 unwaivable blockers; 4 cross-cutting gates; 290 acceptance requirements {'browser-envelope': 95, 'catalog-family': 83, 'cross-cutting-obligation': 7, 'non-goal': 8, 'package-boundary': 6, 'quality-budget': 31, 'quality-failure': 8, 'quality-gate': 21, 'quality-release-blocker': 7, 'roadmap-milestone': 24}; zero executed evidence.\n",
+      "stderr": ""
+    },
+    {
+      "name": "generate_acceptance_registry.py",
+      "command": [
+        "python3",
+        "generate_acceptance_registry.py",
+        "--check"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 61,
+      "stdout": "Acceptance generation matches committed outputs: 290 requirements, 290 conditions, zero executed evidence; historical roadmap snapshot retained by bounded planning amendment.\n",
+      "stderr": ""
+    },
+    {
+      "name": "generate_bh00_release.py",
+      "command": [
+        "python3",
+        "generate_bh00_release.py",
+        "--check"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 36,
+      "stdout": "BH-00 release generation matches the committed baseline and BH-01 entry manifest.\n",
+      "stderr": ""
+    },
+    {
+      "name": "generate_component_catalog.py",
+      "command": [
+        "python3",
+        "generate_component_catalog.py",
+        "--check"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 179,
+      "stdout": "Component catalog generation matches /home/ducky/code/blazex/docs/research/assets/component-catalog/blazex-component-catalog-v0-1-0-generated.md: 83 families, 12 exceptions.\n",
+      "stderr": ""
+    },
+    {
+      "name": "generate_component_classification.py",
+      "command": [
+        "python3",
+        "generate_component_classification.py",
+        "--check"
+      ],
+      "cwd": "docs/research",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 37,
+      "stdout": "Component classification generation matches /home/ducky/code/blazex/docs/research/assets/component-catalog/blazex-component-classification-v0-1-0-generated.md: 83 families, 12 exceptions, stage complete.\n",
+      "stderr": ""
+    },
+    {
+      "name": "patch-hygiene",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 18,
+      "stdout": "",
+      "stderr": ""
+    }
+  ]
+}

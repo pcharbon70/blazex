@@ -31,6 +31,12 @@ retain a blocking distinction: animation-frame opportunities do not establish
 compositor paint. Therefore 10.2.1.1 and the paint-budget outcome remain open.
 No unchecked acceptance requirement is silently converted into a pass.
 
+The [candidate evidence and revise decision](phase-10-implementation-evidence.md)
+records all five section deliveries. Section 10.3's independent review is also
+open; Section 10.4 publishes a blocked BH-05 handoff, not an entry authorization.
+Section 10.5 validates a truthful revise candidate. The phase and milestone
+acceptance checkboxes remain unchecked until the two active blockers close.
+
 - [ ] 10 Phase - Measurement, Review, and BH-04 Acceptance.
 
   Measure BH-04's first-responsible renderer budgets, reconcile all milestone

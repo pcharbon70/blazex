@@ -56,10 +56,10 @@
       "js/blazex_runtime/src/renderer-resources.js": "1d880641d1d2173a6a83de0a09d0219e316bd6bfb271b94b690f6e89da6ddc44"
     },
     "conformance": {
-      "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-atomic-browser-v0.1.0.json": "d1d51eb0cba1aa776c71f74bc32eb3c81c82edb269cab77d961b4909c7ac85b6",
-      "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-continuity-browser-v0.1.0.json": "2259112d65eed4203a3869e5089cef6af4d0a05abfedf0092728504aea46c906",
-      "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-effect-browser-v0.1.0.json": "f453cca56456a869749ff1106907777cde5671a8355b426e6c7eb674dd7d2a70",
-      "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-interaction-browser-v0.1.0.json": "b2b3f81c5c5193134a0d175c5fddae247ec9ccb09c46e51e04560df31814d7f4",
+      "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-atomic-browser-v0.1.0.json": "b065fd545307b5a8ce2443e92d8c903351d9bb306ebb035a793e7d8a16f3cdea",
+      "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-continuity-browser-v0.1.0.json": "24d108042eb564ef9d4b84788a24e9ad3ae619755c55a461e60c3e9fad34bf11",
+      "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-effect-browser-v0.1.0.json": "040af42060d236b91393c0b35b4e5859a54c6d90d04c2d9b1bd97535905e21a9",
+      "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-interaction-browser-v0.1.0.json": "9021a462939fbd49c69eca68cc693479304c76f2d8c97d9d3c7a09992dd25009",
       "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-semantic-browser-v0.1.0.json": "c09bb6ae9dc75d1a4bd6acb4911f62bca5c88490adee9b35bd3ff6465c1afa77"
     },
     "dependency": {
@@ -97,9 +97,9 @@
   },
   "source_hashes": {
     "docs/research/60-planning/01-browser-host/bh-04-dom-renderer-and-interaction-transport/phase-10-review.md": "b838dc94045568dfd217f226d4e1564214f73e5d4e8528027cb29b58bb7c88b1",
-    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-acceptance-overlay-v0.1.0.json": "034eb1a314b3f7a702e5d954cec9e2b936a97d34af4b0b8ffa96684aed809f93",
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-acceptance-overlay-v0.1.0.json": "81a4e142f9937c35691684e6b9b2a493cc6c47eac9eec977d2c572d680e7d1f1",
     "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-authorization-v0.1.0.json": "69057e3eb97b98437a391cb3f6e403502a1f53b27e32f52d84c162f4ecd953ec",
-    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-reconciliation-v0.1.0.json": "443d95027fe50023cd2adde541e176ab5a8efc5e0294ac326f80351dda8b69bb",
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-reconciliation-v0.1.0.json": "4ff0b70f8e28f18bde1489684086a759c9f17d18631beb5f66e6047263a0be56",
     "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-review-v0.1.0.json": "6d3ab2ba3cda384b976f9dbde44f4be6bed48bcbad421c0e6a24d1af9bce9b76",
     "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-statistics-v0.1.0.json": "faded35a1c310d9f79a852d2ead2eb58f06dc7407c901f9d01103e0f0fa63ff1"
   },

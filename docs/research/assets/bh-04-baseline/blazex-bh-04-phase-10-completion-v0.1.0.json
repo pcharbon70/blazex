@@ -1,0 +1,261 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 10,
+  "base_revision": "23176db2ff608084e9f779943eadcd0eed1926af",
+  "executable_candidate": "a8b37cc9e667995f72a46906f57534d4d7a9d6b1",
+  "decision": "revise",
+  "bh04_accepted": false,
+  "bh05_eligible": false,
+  "next_authorized_work": null,
+  "support_state": "unsupported",
+  "gates": [
+    {
+      "name": "elixir",
+      "exit_code": 0
+    },
+    {
+      "name": "javascript",
+      "exit_code": 0
+    },
+    {
+      "name": "atomic-browser",
+      "exit_code": 0
+    },
+    {
+      "name": "interaction-browser",
+      "exit_code": 0
+    },
+    {
+      "name": "interaction-replay",
+      "exit_code": 0
+    },
+    {
+      "name": "continuity-browser",
+      "exit_code": 0
+    },
+    {
+      "name": "continuity-replay",
+      "exit_code": 0
+    },
+    {
+      "name": "effect-browser",
+      "exit_code": 0
+    },
+    {
+      "name": "effect-replay",
+      "exit_code": 0
+    },
+    {
+      "name": "semantic-browser",
+      "exit_code": 0
+    },
+    {
+      "name": "isolation",
+      "exit_code": 0
+    },
+    {
+      "name": "research-tests",
+      "exit_code": 0
+    },
+    {
+      "name": "validate_archive.py",
+      "exit_code": 0
+    },
+    {
+      "name": "validate_bh00_governance.py",
+      "exit_code": 0
+    },
+    {
+      "name": "validate_bh01_activation.py",
+      "exit_code": 0
+    },
+    {
+      "name": "validate_bh02_acceptance.py",
+      "exit_code": 0
+    },
+    {
+      "name": "validate_bh02_activation.py",
+      "exit_code": 0
+    },
+    {
+      "name": "validate_bh02_dom.py",
+      "exit_code": 0
+    },
+    {
+      "name": "validate_bh02_effects.py",
+      "exit_code": 0
+    },
+    {
+      "name": "validate_bh02_intent.py",
+      "exit_code": 0
+    },
+    {
+      "name": "validate_bh02_native.py",
+      "exit_code": 0
+    },
+    {
+      "name": "validate_bh02_renderer.py",
+      "exit_code": 0
+    },
+    {
+      "name": "validate_bh02_semantics.py",
+      "exit_code": 0
+    },
+    {
+      "name": "validate_bh03_acceptance.py",
+      "exit_code": 0
+    },
+    {
+      "name": "validate_bh03_activation.py",
+      "exit_code": 0
+    },
+    {
+      "name": "validate_bh03_compatibility.py",
+      "exit_code": 0
+    },
+    {
+      "name": "validate_bh03_correction.py",
+      "exit_code": 0
+    },
+    {
+      "name": "validate_bh03_measurements.py",
+      "exit_code": 0
+    },
+    {
+      "name": "validate_bh03_profile.py",
+      "exit_code": 0
+    },
+    {
+      "name": "validate_bh03_resilience.py",
+      "exit_code": 0
+    },
+    {
+      "name": "validate_bh03_roots.py",
+      "exit_code": 0
+    },
+    {
+      "name": "validate_bh03_startup.py",
+      "exit_code": 0
+    },
+    {
+      "name": "validate_bh04_activation.py",
+      "exit_code": 0
+    },
+    {
+      "name": "validate_bh04_conformance.py",
+      "exit_code": 0
+    },
+    {
+      "name": "validate_bh04_continuity.py",
+      "exit_code": 0
+    },
+    {
+      "name": "validate_bh04_dom_application.py",
+      "exit_code": 0
+    },
+    {
+      "name": "validate_bh04_interactions.py",
+      "exit_code": 0
+    },
+    {
+      "name": "validate_bh04_lifecycle.py",
+      "exit_code": 0
+    },
+    {
+      "name": "validate_bh04_protocol.py",
+      "exit_code": 0
+    },
+    {
+      "name": "validate_bh04_reconciliation.py",
+      "exit_code": 0
+    },
+    {
+      "name": "validate_browser_product_envelope.py",
+      "exit_code": 0
+    },
+    {
+      "name": "validate_component_catalog.py",
+      "exit_code": 0
+    },
+    {
+      "name": "validate_component_classification.py",
+      "exit_code": 0
+    },
+    {
+      "name": "validate_quality_acceptance.py",
+      "exit_code": 0
+    },
+    {
+      "name": "generate_acceptance_registry.py",
+      "exit_code": 0
+    },
+    {
+      "name": "generate_bh00_release.py",
+      "exit_code": 0
+    },
+    {
+      "name": "generate_component_catalog.py",
+      "exit_code": 0
+    },
+    {
+      "name": "generate_component_classification.py",
+      "exit_code": 0
+    },
+    {
+      "name": "patch-hygiene",
+      "exit_code": 0
+    }
+  ],
+  "artifact_hashes": {
+    "docs/research/60-planning/01-browser-host/bh-04-dom-renderer-and-interaction-transport/phase-10-acceptance-contract.md": "9325873b826dff09c8d07d9e1b567e51da970a128fd6c1e98d32963b79bfa620",
+    "docs/research/60-planning/01-browser-host/bh-04-dom-renderer-and-interaction-transport/phase-10-implementation-evidence.md": "c202e3efc2dbdff10fd63faf63ba3cb725420fd8e2b74ca7864c4d73defb4643",
+    "docs/research/60-planning/01-browser-host/bh-04-dom-renderer-and-interaction-transport/phase-10-review.md": "b838dc94045568dfd217f226d4e1564214f73e5d4e8528027cb29b58bb7c88b1",
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-acceptance-overlay-v0.1.0.json": "81a4e142f9937c35691684e6b9b2a493cc6c47eac9eec977d2c572d680e7d1f1",
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-atomic-browser-v0.1.0.json": "b065fd545307b5a8ce2443e92d8c903351d9bb306ebb035a793e7d8a16f3cdea",
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-authorization-v0.1.0.json": "69057e3eb97b98437a391cb3f6e403502a1f53b27e32f52d84c162f4ecd953ec",
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-continuity-browser-v0.1.0.json": "24d108042eb564ef9d4b84788a24e9ad3ae619755c55a461e60c3e9fad34bf11",
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-effect-browser-v0.1.0.json": "040af42060d236b91393c0b35b4e5859a54c6d90d04c2d9b1bd97535905e21a9",
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-execution-index-v0.1.0.json": "ee1941939482acfaaf9dc88cba9e473dd3ab954b0543e31fcde5ac5547c25b1e",
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-failed-attempt-v0.1.0.json": "a2e79122452ed130fb2d970a473ce19ac5847f9d6b1be2dba54b1427c99385fa",
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-first-gate-attempt-v0.1.0.json": "8f38794fc5f7f438d7df59c3ca6f5d1934f329321ce8328bcc024a7a78a25cbe",
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-gate-log-v0.1.0.json": "e64eb34c513e0905cee0c06c91973b555cb0d0c049fbdd05d7e7a2f2a218714f",
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-interaction-browser-v0.1.0.json": "9021a462939fbd49c69eca68cc693479304c76f2d8c97d9d3c7a09992dd25009",
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-isolation-v0.1.0.json": "190bf3d3d9b230167c7da6e97eea3ee2c1a89913ed8d4e870655316bbdf8e497",
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-measurements-v0.1.0.json": "218b6acc1739daffb953aa97046e59672fbd8429c18b7ff73dc1e495accf5f3c",
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-reconciliation-v0.1.0.json": "4ff0b70f8e28f18bde1489684086a759c9f17d18631beb5f66e6047263a0be56",
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-release-index-v0.1.0.json": "c555f57d58188cd29e31982da8137b27f21cddc8712da2eb4635e16249b7b8bf",
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-review-v0.1.0.json": "6d3ab2ba3cda384b976f9dbde44f4be6bed48bcbad421c0e6a24d1af9bce9b76",
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-semantic-browser-v0.1.0.json": "c09bb6ae9dc75d1a4bd6acb4911f62bca5c88490adee9b35bd3ff6465c1afa77",
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-statistics-v0.1.0.json": "faded35a1c310d9f79a852d2ead2eb58f06dc7407c901f9d01103e0f0fa63ff1",
+    "docs/research/bh04_phase10_history.py": "b84efd23f421d04eb1dcb90235f918e56bc2c7eeef2cf56ba8c9291dc87fe658",
+    "docs/research/test_validate_bh04_acceptance.py": "ca2b37c5057c1c9e460a2223a57f5eec905246dfa9ce269fe7e7f5ae3087dffc",
+    "docs/research/validate_bh04_acceptance.py": "0d6ea3d56f8d7b9042ab1f5e64ddd70dbc52e27e54f8085522e6996c7c161e04"
+  },
+  "section_commits": [
+    {
+      "section": "10.1",
+      "commit": "38e271bab17911a503e8a4838b11c3a57e462a96"
+    },
+    {
+      "section": "10.2",
+      "commit": "2ffebefc2af6d4c7d6c881a819dcb1d2def74723"
+    },
+    {
+      "section": "10.3",
+      "commit": "c6528edbd12336ad542b79fea3ecf0c74dc53aa1"
+    },
+    {
+      "section": "10.4",
+      "commit": "a8b37cc9e667995f72a46906f57534d4d7a9d6b1"
+    },
+    {
+      "section": "10.5",
+      "commit": "resolve-from-this-records-git-commit"
+    }
+  ],
+  "open_blockers": [
+    "BH04-10-PAINT",
+    "BH04-10-INDEPENDENCE"
+  ],
+  "scripts_move": "No relocation authorized or performed; prominent warning due at actual BH-04 acceptance"
+}

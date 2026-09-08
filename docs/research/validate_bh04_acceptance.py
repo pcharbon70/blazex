@@ -75,6 +75,9 @@ def validate(root=ROOT, final=True):
             execution = read(root, "execution-index")
             check(execution["result"] == "passed", "execution not passed")
             bindings(execution["source_hashes"])
+            files = subprocess.check_output(["git", "ls-files", "--cached", "--others", "--exclude-standard", "--", "packages", "js", "integration"], cwd=root, text=True).splitlines()
+            current_sources = {p for p in files if "node_modules" not in p and (root / p).is_file()}
+            check(current_sources == set(execution["source_hashes"]), "unindexed executable source")
             completion = read(root, "completion")
             check(completion["decision"] == "revise" and not completion["bh04_accepted"] and not completion["bh05_eligible"], "false completion")
             bindings(completion["artifact_hashes"])

@@ -21,6 +21,10 @@ artifacts are immutable; inherited limitations retain their original state.
 
 ## Index
 
+- [Phase 10 delivery record](blazex-bh-04-phase-10-completion-v0.1.0.json) — five section identities, final artifact hashes and revise decision; not BH-04 acceptance.
+
+- [Phase 10 initial gate attempt](blazex-bh-04-phase-10-first-gate-attempt-v0.1.0.json) — retained formatting and in-progress index failures, followed by corrected final execution.
+
 - [Phase 10 reconciliation](blazex-bh-04-phase-10-reconciliation-v0.1.0.json) — output bindings, complete inherited obligations, findings and deferrals.
 - [Phase 10 acceptance overlay](blazex-bh-04-phase-10-acceptance-overlay-v0.1.0.json) — five explicit outcomes; revise, no canonical registry rewrite.
 - [Phase 10 release candidate](blazex-bh-04-phase-10-release-index-v0.1.0.json) — versioned indexes and blocked BH-05 handoff.

@@ -73,10 +73,10 @@
     },
     "conformance": {
       "source_hashes": {
-        "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-atomic-browser-v0.1.0.json": "d1d51eb0cba1aa776c71f74bc32eb3c81c82edb269cab77d961b4909c7ac85b6",
-        "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-continuity-browser-v0.1.0.json": "2259112d65eed4203a3869e5089cef6af4d0a05abfedf0092728504aea46c906",
-        "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-effect-browser-v0.1.0.json": "f453cca56456a869749ff1106907777cde5671a8355b426e6c7eb674dd7d2a70",
-        "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-interaction-browser-v0.1.0.json": "b2b3f81c5c5193134a0d175c5fddae247ec9ccb09c46e51e04560df31814d7f4",
+        "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-atomic-browser-v0.1.0.json": "b065fd545307b5a8ce2443e92d8c903351d9bb306ebb035a793e7d8a16f3cdea",
+        "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-continuity-browser-v0.1.0.json": "24d108042eb564ef9d4b84788a24e9ad3ae619755c55a461e60c3e9fad34bf11",
+        "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-effect-browser-v0.1.0.json": "040af42060d236b91393c0b35b4e5859a54c6d90d04c2d9b1bd97535905e21a9",
+        "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-interaction-browser-v0.1.0.json": "9021a462939fbd49c69eca68cc693479304c76f2d8c97d9d3c7a09992dd25009",
         "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-semantic-browser-v0.1.0.json": "c09bb6ae9dc75d1a4bd6acb4911f62bca5c88490adee9b35bd3ff6465c1afa77"
       },
       "disposition": "candidate-evidence-not-milestone-acceptance"
