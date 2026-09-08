@@ -11,12 +11,16 @@ defmodule BlazeX.UITree.FormEvaluator do
     with {:ok, candidate} <- Evaluator.update(evaluation, props), do: accept(candidate)
   end
 
-  def dispatch(evaluation, event) do
+  def dispatch(evaluation, event), do: dispatch(evaluation, event, &(&1 == []))
+
+  # Outward adapters validate typed emissions; UI-tree does not depend on providers.
+  def dispatch(evaluation, event, validate_emissions) when is_function(validate_emissions, 1) do
     with {:ok, _} <- Document.resolve(evaluation.output.intent.document, event),
          true <- allowed?(evaluation.output.forms, event),
-         {:ok, candidate, []} <- Evaluator.dispatch(evaluation, event),
+         {:ok, candidate, emissions} <- Evaluator.dispatch(evaluation, event),
+         true <- validate_emissions.(emissions),
          {:ok, candidate} <- accept(candidate) do
-      {:ok, candidate, []}
+      {:ok, candidate, emissions}
     else
       _ -> {:error, :invalid_form_event}
     end

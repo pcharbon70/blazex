@@ -18,10 +18,12 @@ const portable = value => ["atom", "binary", "integer"].includes(value.type) ? S
 export class AtomicDOMRoots {
   #queues;
   #continuities = new WeakMap();
+  #doms = new WeakMap();
   constructor(options) { this.#queues = new DOMRootQueues(options); }
   get lifecycle() { return this.#queues.lifecycle; }
   register(rootId) { return this.#queues.register(rootId); }
-  attach(handle, { container, owner, generation, fault = () => {}, interactions = null, continuity = false }) {
+  attach(handle, { container, owner, generation, fault = () => {}, interactions = null, continuity = false, onRelease = () => {} }) {
+    requireDOM(typeof onRelease === "function");
     requireDOM(interactions === null || interactions instanceof InteractionListeners, "ownership");
     requireDOM(typeof continuity === "boolean", "ownership");
     const controller = continuity ? new FormContinuity() : null;
@@ -29,7 +31,8 @@ export class AtomicDOMRoots {
     const dom = new AtomicDOM(container, fault, interactions, controller);
     try {
       interactions?.claim(handle.snapshot(), owner);
-      const token = this.#queues.attach(handle, { owner, generation, preflight: args => dom.preflight(args), apply: args => dom.apply(args), release: () => dom.release(), rejected: () => controller?.rejected() });
+      const token = this.#queues.attach(handle, { owner, generation, preflight: args => dom.preflight(args), apply: args => dom.apply(args), release: () => { try { dom.release(); } finally { onRelease(); } }, rejected: () => controller?.rejected() });
+      this.#doms.set(token, dom);
       if (controller) this.#continuities.set(token, controller);
       return token;
     } catch (error) { dom.release(); throw error; }
@@ -48,6 +51,8 @@ export class AtomicDOMRoots {
   }
   continuitySnapshot(token) { return this.#continuities.get(token)?.snapshot() ?? null; }
   snapshot(token) { return this.#queues.snapshot(token); }
+  resources(token) { const dom = this.#doms.get(token); requireDOM(dom, "ownership"); return dom.resources(); }
+  dispose(token) { return this.#queues.dispose(token); }
 }
 
 class AtomicDOM {
@@ -244,5 +249,14 @@ class AtomicDOM {
     if (this.#released) return;
     this.#unbind(); this.#interactions?.dispose(); this.#continuity?.dispose(); this.#container.replaceChildren(); this.#nodes.clear(); this.#accepted = [];
     this.#released = true; claims.get(this.#document).delete(this.#container);
+    this.#container = null; this.#document = null; this.#interactions = null; this.#continuity = null; this.#fault = null;
+  }
+  resources() {
+    const form = this.#continuity?.snapshot();
+    return { nodes: this.#nodes.size, listeners: this.#listeners.length,
+      rollback_records: this.#accepted.length, form_records: form?.controls ?? 0,
+      composition_records: form?.composing ?? 0, form_listeners: form?.listeners ?? 0,
+      interaction: this.#interactions?.resources() ?? { queued: 0, timers: 0, callbacks: 0, observations: 0 },
+      disposed: this.#released };
   }
 }

@@ -1,0 +1,78 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 7,
+  "decision": "passed",
+  "base_revision": "e924d1cff826515d9a689091b8873180e39cc55f",
+  "next_eligible_phase": 8,
+  "next_authorized_work": null,
+  "bh05_eligible": false,
+  "support_state": "unsupported",
+  "section_commits": [
+    {
+      "section": "7.1",
+      "commit": "b703172883bcd27e792b720767ee3153f8240c93"
+    },
+    {
+      "section": "7.2",
+      "commit": "a79d5a99f81a0b5d8421c98c10cc8af2770bb2ef"
+    },
+    {
+      "section": "7.3",
+      "commit": "7a19aca02cf3185aa82c5f760dcc259cc78008ab"
+    },
+    {
+      "section": "7.4",
+      "commit": "containing completion commit; exact SHA recorded by Git and the single PR"
+    }
+  ],
+  "gates": [
+    {
+      "name": "elixir",
+      "exit_code": 0
+    },
+    {
+      "name": "runtime-js",
+      "exit_code": 0
+    },
+    {
+      "name": "dom-js",
+      "exit_code": 0
+    },
+    {
+      "name": "active-browsers",
+      "exit_code": 0
+    },
+    {
+      "name": "regression-browsers",
+      "exit_code": 0
+    },
+    {
+      "name": "independent-replay",
+      "exit_code": 0
+    },
+    {
+      "name": "research-tests",
+      "exit_code": 0
+    },
+    {
+      "name": "validators",
+      "exit_code": 0
+    },
+    {
+      "name": "generators",
+      "exit_code": 0
+    },
+    {
+      "name": "boundary-json-hygiene",
+      "exit_code": 0
+    }
+  ],
+  "artifact_hashes": {
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-07-authorization-v0.1.0.json": "b375a5a175e7d2b0f8ef06700be3b9615496308caf7762a16be974d762e77b4d",
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-07-source-index-v0.1.0.json": "78dcaa74f35449f79c0be29e8d832bb719d5cd7b3ace35529db115d40b879717",
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-07-browser-results-v0.1.0.json": "43d140de1a2ea27ef7411ecd9dfea55f04cf8348747fdb1adb26c905275b24cf",
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-07-validation-log-v0.1.0.txt": "95412b67b66ab4f4b2114f2315d9332df60f36ef8c223f86646c8b2dd716d126",
+    "docs/research/60-planning/01-browser-host/bh-04-dom-renderer-and-interaction-transport/phase-07-lifecycle-contract.md": "6a569bff7451360b566c0b6ced2c9a187035a27de9a9e2cd9de7becfa1e878c6",
+    "docs/research/60-planning/01-browser-host/bh-04-dom-renderer-and-interaction-transport/phase-07-implementation-evidence.md": "fcfff976bed2827f816aef62a5c484a3f2bba040dc3032514cbeca7b5892a810"
+  }
+}

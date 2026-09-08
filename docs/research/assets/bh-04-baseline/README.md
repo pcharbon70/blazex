@@ -21,6 +21,13 @@ artifacts are immutable; inherited limitations retain their original state.
 
 ## Index
 
+- [Phase 7 browser evidence](blazex-bh-04-phase-07-browser-results-v0.1.0.json) — active raw effect/failure/cleanup traces.
+- [Phase 7 source index](blazex-bh-04-phase-07-source-index-v0.1.0.json) — current implementation bindings.
+- [Phase 7 validation log](blazex-bh-04-phase-07-validation-log-v0.1.0.txt) — commands, counts and limitations.
+- [Phase 7 completion](blazex-bh-04-phase-07-completion-v0.1.0.json) — bounded lifecycle gate.
+
+- [Phase 7 authorization](blazex-bh-04-phase-07-authorization-v0.1.0.json) — explicit lifecycle and effect-emission authority.
+
 ### Subdirectories
 
 None.

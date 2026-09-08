@@ -1,5 +1,7 @@
 # Protocol test support
 
+- [Phase 7 component](effect_component.exs) and [test-only runtime carrier](effect_runtime.exs) execute real Elixir emissions and acknowledgements without Phoenix/Plug or new Wasm packaging.
+
 - [Continuity component](continuity_component.exs) — real controlled fields and stable single/multiple choices.
 - [Continuity runtime](continuity_runtime.exs) — test-only offline ERTS carrier for the v3 opt-in endpoint.
 

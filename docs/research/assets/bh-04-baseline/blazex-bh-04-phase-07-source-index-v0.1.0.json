@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 7,
+  "base_revision": "e924d1cff826515d9a689091b8873180e39cc55f",
+  "source_bindings": {
+    "docs/research/bh04_phase7_history.py": "e8a508f4bf3966ca4530a41978240f5dfdd604a898c715b0a3def70bc71b70ed",
+    "docs/research/test_validate_bh04_continuity.py": "7293709c7073a7a8335e17d7223c280379be579eb6620b04234afd42a7173c3b",
+    "docs/research/test_validate_bh04_lifecycle.py": "86ffb30f0459020c9821f8911c0fc04827cd021dd8b88fdc3ca13a355b2bfde1",
+    "docs/research/validate_bh04_continuity.py": "3c8e85745c0e78d99df269cddd453e8489499d948df08909d14bd04a72bcf3fa",
+    "docs/research/validate_bh04_lifecycle.py": "b909cc06df00be6ee8128dc0e5d4ceaa6eef5a9dc18295cdfeb0bf41e9a9ee46",
+    "integration/bh-04/README.md": "023961bb7af3979992c0fa052e444ee47ab385e57b9c2ad2aea04c56c4b52c42",
+    "integration/bh-04/effect-browser.mjs": "8e66c19a34483828c7f389e735fe632312433895334551b0987266cfe772b7eb",
+    "integration/bh-04/effect-conformance.mjs": "5442c44d713aea6d6572d65d5a09badd3cda29cdbc887d9f1b85770ec116e3cf",
+    "integration/bh-04/effect-scenarios.js": "e8b08cb35c391600e2abefb099e4d617191c950878fee08e6cd6b0869f1cddd2",
+    "integration/bh-04/support/README.md": "af8b1a3632b95c11e05a863d7966b8bcea21699b96a2a072315a631f719b449d",
+    "integration/bh-04/support/effect_component.exs": "22bf4a6b7b9185f115325b8e877c3070ffa291d9466b3fd2e499ea149c50f7a2",
+    "integration/bh-04/support/effect_runtime.exs": "fececcde00f8c76ac28a81ee6f19b8056350d568f117c07db850b35a008773ca",
+    "js/blazex_runtime/src/atomic-dom.js": "c0312c1843d481dfb260d590821681b4a602eddb194acacbf7326d6ecd12faec",
+    "js/blazex_runtime/src/dom-root-queue.js": "5bce1903b5ba04e4406a3ed72c10038dc20bb2d02d5b05f6bee5e9f0a1317f8e",
+    "js/blazex_runtime/src/effect-dom.js": "1c0a6a32152a4566b656def1b421ada570c75caf5b7a74241b3178f02ffbc55b",
+    "js/blazex_runtime/src/effect-wire.js": "9ee6514782ef6894cc6e9dbec7401f1c41b62b4ac3ba280e9baa1a0ab7c44dcf",
+    "js/blazex_runtime/src/interaction-listeners.js": "1a2e336e7ca16dfbe9239ef04bc57cda0ca9c26622ebb35c2a2902daf2bcfbec",
+    "js/blazex_runtime/src/interaction-stream.js": "277daac8b65a07fccd383fe46ef83615dec01195219703467b7e5be346d711b1",
+    "js/blazex_runtime/src/renderer-failure.js": "f0a376c8b229adcc0a087baa66fd1f52b3f0a2aa3e73d58ab3ced07bda447491",
+    "js/blazex_runtime/src/renderer-resources.js": "1d880641d1d2173a6a83de0a09d0219e316bd6bfb271b94b690f6e89da6ddc44",
+    "js/blazex_runtime/test/effect-dom.test.js": "d5a2462fc70b75425aa80b049bfb683c1738c407ef89fe898a50b7553c4feefa",
+    "packages/blazex_renderer_dom/lib/blazex/renderer/dom/continuity_session.ex": "6517434f402e600b7ddd0447ca14aa28c5fab005644eecabab3892cdd9986d52",
+    "packages/blazex_renderer_dom/lib/blazex/renderer/dom/effect_batch.ex": "f22c825e01bc2092894c7e5acd46d350e38f17cf7cccff5e1c471e59dff9d933",
+    "packages/blazex_renderer_dom/test/effect_session_test.exs": "7ffbb0aa6ae10e22f31ed6dae884168f6e765efcd05fbe80d9bfd35f1c900940",
+    "packages/blazex_ui_tree/lib/blazex/ui_tree/form_evaluator.ex": "f215aabbb5acdbd0bfa1c6a453d7e8ae374453c4c4b7648d111778a6237f105d"
+  },
+  "browser_sha256": "43d140de1a2ea27ef7411ecd9dfea55f04cf8348747fdb1adb26c905275b24cf"
+}

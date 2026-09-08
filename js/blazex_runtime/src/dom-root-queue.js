@@ -46,6 +46,13 @@ export class DOMRootQueues {
     const s = this.#states.get(token); requireDOM(s, "ownership");
     return Object.freeze({ owner: s.owner, generation: s.generation, revision: s.revision, digest: s.digest, disposed: s.disposed, quarantined: s.quarantined, queued: s.queue.length + Number(s.active !== null), max_depth: s.maxDepth, nodes: s.projection?.nodes.length ?? 0, fingerprint: s.projection?.fingerprint ?? null });
   }
+  dispose(token) {
+    const state = this.#states.get(token); requireDOM(state, "ownership");
+    if (state.disposed) return;
+    state.epoch++; state.disposed = true; this.#drain(state, "disposed-root");
+    if (state.active) this.#finish(state.active, "rejected", "disposed-root");
+    try { state.release(); } finally { state.projection = null; }
+  }
   #emit(tx, state, diagnostic = null) { const ack = acknowledgement(tx, state, diagnostic); try { this.#onAck(ack); } catch { /* Observers have no commit authority. */ } return ack; }
   #finish(job, outcome, diagnostic = null) { if (job.settled) return; job.settled = true; job.resolve(this.#emit(job.tx, outcome, diagnostic)); }
   #schedulePump(state) { try { this.#schedule(() => this.#pump(state)); } catch { this.#drain(state, "apply"); } }

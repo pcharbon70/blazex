@@ -14,6 +14,8 @@ benchmark pass, browser qualification, or support is claimed.
 
 ## Index
 
+- [Phase 7 browser driver](effect-browser.mjs), [scenarios](effect-scenarios.js), and [independent replay](effect-conformance.mjs) exercise explicitly negotiated bounded timer effects, failure isolation and owned cleanup.
+
 - [Continuity usage](continuity-usage.md) — additive form contract and digest-bound envelope, with runtime limitations.
 - [Continuity browser runner](continuity-browser.mjs) — Chrome/Firefox and real offline ERTS.
 - [Continuity scenarios](continuity-scenarios.js) — controlled drafts, composition, selection, focus and cleanup.

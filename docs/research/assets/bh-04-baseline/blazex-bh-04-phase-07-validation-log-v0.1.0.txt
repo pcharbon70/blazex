@@ -1,0 +1,90 @@
+BH-04 Phase 7 validation log — 2026-09-08
+Base: e924d1cff826515d9a689091b8873180e39cc55f
+Branch: codex/bh04-phase7-lifecycle
+
+Environment: Linux; Node 24.3.0; pinned offline Docker a2386c21edd5,
+Elixir 1.17.3 / OTP 26, existing Playwright-core 1.62.1 and Jason fixture.
+Chrome /usr/bin/google-chrome: 140.0.7339.80.
+Firefox /home/ducky/.cache/ms-playwright/firefox-1538/firefox/firefox: 153.0.
+No dependency, lockfile, profile or Wasm demo changes.
+
+Active browser gate
+  node integration/bh-04/effect-browser.mjs
+    docs/research/assets/bh-04-baseline/blazex-bh-04-phase-07-browser-results-v0.1.0.json
+  Both browsers passed 19 scenarios and 24 root cleanups, including twelve
+  repeated lifecycle cycles with an independent sibling, runtime loss, 65-event
+  overload (maximum accepted queue 64), lost acknowledgement, apply/rollback
+  exceptions, required timer failure/timeout, explicit omit result, malformed,
+  stale, duplicate, foreign and unsupported requests, focus/range preservation
+  and keyed replacement. Each has 215 raw runtime request/response pairs and
+  22 initial GET requests. No interaction network traffic or Phoenix/Plug.
+  Both include an additional 1000 ms late-resource observation: zero owned
+  resources, retained DOM nodes, queued interactions or pending DOM jobs.
+  Max observed cleanup: Chrome 5.2 ms; Firefox 5 ms.
+  Max observed failure scenario: Chrome 818.6 ms; Firefox 795 ms.
+  Peak cleanup leases: 4; diagnostic ring <=32; fallback attempts <=1; retries 0.
+  node integration/bh-04/effect-conformance.mjs <browser-results>
+  Independent exact replay: 188 proposals, 150 commits, 78 semantic deliveries,
+  40 acknowledged effect results. Unacknowledged candidates discard on stop.
+
+Unchanged browser regression gates (both Chrome and Firefox)
+  node integration/bh-04/atomic-dom-browser.mjs /tmp/bh04-phase7-atomic-regression.json
+    50 scenarios, 1204 injected rollback boundaries, 100 stale rejections,
+    maximum queue 64, 1254 terminal acknowledgements, 1263 cleanups per browser.
+  node integration/bh-04/interaction-browser.mjs /tmp/bh04-phase7-interaction-regression.json
+    13 mappings, 17 negative cases, three roots, 18 commits, two no-render events,
+    maximum queue 64 and complete cleanup per browser.
+  node integration/bh-04/continuity-browser.mjs /tmp/bh04-phase7-continuity-regression.json
+    All 16 Phase 6 scenarios and both roots cleaned per browser.
+  node integration/bh-04/continuity-conformance.mjs /tmp/bh04-phase7-continuity-regression.json
+    66 proposals, 64 commits, 22 semantic deliveries, exact independent replay.
+
+Elixir and JS gates
+  Pinned Docker, --network none, repo mount /workspace, fresh container-local
+  MIX_BUILD_PATH. Run mix test in packages/blazex_core, blazex_effects,
+  blazex_ui_tree, blazex_renderer, blazex_renderer_dom,
+  blazex_renderer_dom_liveview, blazex_renderer_headless, integration/conformance.
+  Counts: 13 + 9 + 25 + 8 + 116 + 4 + 6 = 181 package tests, zero failures.
+  Cross-renderer conformance: 56 tests, zero failures.
+  Final renderer suite rerun after bridge-array and replay-guard regressions:
+  116 tests, zero failures. Pinned mix format applied to changed Elixir files.
+  npm --prefix js/blazex_runtime run build
+  node --test js/blazex_runtime/test/*.test.js
+    31 test files passed, including cancellation/deadline/leak/failure injection.
+  npm --prefix packages/blazex_renderer_dom run build
+  npm --prefix packages/blazex_renderer_dom test
+    Seven standalone DOM tests passed.
+
+Research and boundary gates
+  python3 -m unittest discover -p 'test_*.py' in docs/research:
+    396 tests passed, including nine negative Phase 7 evidence tests.
+  All 31 validate_*.py scripts passed (Phase 7 candidate gate before publication,
+  full completion gate after completion bindings). Four generate_*.py --check
+  outputs unchanged. Prior phases reproduce on exact accepted Git snapshots.
+  Archive: 245 completed documents, 27 directories, 1900 local links, 50 sources.
+  380 repository JSON files parsed. Both immutable transaction JSON schemas
+  passed Draft202012Validator.check_schema. Existing v1/v2 protocol tests and
+  cross-renderer suites remain passing; no schema/protocol baseline rewrite.
+  Current source index binds 25 implementation/evidence/governance files and
+  raw browser evidence. Full outgoing executable inventory is checked.
+  Dependency/lockfile/profile/user README/BH-05/demo diff is empty.
+  New provider sources contain no network, generic markup, dynamic code or
+  Phoenix/Plug/LiveView escape. git diff --check passed.
+
+Corrections and limits
+  Corrected required focus order in the synthetic fixture and array-size
+  accounting for effect-result acknowledgements; added bridge regression.
+  Added single-use generation-scoped effect IDs (maximum 256; no eviction),
+  defensive result snapshots and cleared DOM container/document references.
+  Initial diagnostic fixtures are not counted as passing browser evidence;
+  both active browsers were rerun successfully after corrections.
+  Existing consolidated Enumerable/Jason warning remains visible and harmless
+  for the plain-map test carrier; no new dependency or warning suppression.
+  Cleanup injection deliberately verifies retained blocking leak records.
+  Browser inventories are not heap-profiler proof. Effects are bounded timers
+  only; no irreversible clipboard/storage/file operation is enabled.
+  Test-only DevTools/stdio executes actual ERTS, not new AtomVM/Wasm packaging.
+  Physical IME/manual assistive technology and unavailable platforms remain
+  [DEFERRED] to platform/accessibility owners at BH-22. No support credit.
+  Implementation-agent review only; no independent review claim.
+  Phase 8 eligible but unauthorized. BH-04 and BH-05 acceptance not complete.
