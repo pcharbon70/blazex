@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "milestone": "BH-04",
+  "phase": 7,
+  "base_revision": "e924d1cff826515d9a689091b8873180e39cc55f",
+  "branch": "codex/bh04-phase7-lifecycle",
+  "sections": [
+    "7.1",
+    "7.2",
+    "7.3",
+    "7.4"
+  ],
+  "authority": "Owner explicitly requested BH-04 Phase 7 and required effect-emission integration in this phase.",
+  "source_bindings": {
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-06-completion-v0.1.0.json": "0e3b9fe4d4b261dac77004875d9ca37d8c859313b0e3af258d0c9025552fd46c",
+    "packages/blazex_effects/lib/blazex/effects/effect.ex": "2a4f2fb486f43b322d6288571436d35320c6b7d2bb7203f80a762424eb46d540",
+    "packages/blazex_effects/lib/blazex/effects/resource.ex": "4b5045f402331ccfdb9c8ea1cb3c7aa3934d32fe1b842cfcfba9e25d4e4e9742",
+    "packages/blazex_effects/lib/blazex/effects/result.ex": "126a619658302a70c1c8f946ce0df820c9a6d79fc6db268b170f5f098af59816",
+    "packages/blazex_renderer_dom/lib/blazex/renderer/dom/protocol_v2/schema.ex": "ca0311acbc1d6fc7d4df7753036d2f366257669710e452a43294d1f042e29f88",
+    "js/blazex_runtime/src/atomic-dom.js": "4b9468c68edf48db6149203053ab332623e41090ac79f5aa2ad2d1465a6dc279",
+    "js/blazex_runtime/src/focus-continuity.js": "9eb250b1926793a62ec29084abaf39cce228774f722ab71e4d925a7e186d5ea7",
+    "js/blazex_runtime/src/root-lifecycle.js": "9ba5c518f802b188def31508916f03888b43f581a6b36a849222ca96e2d4a7b6",
+    "docs/research/assets/quality-acceptance/blazex-acceptance-registry-v0.1.0.json": "43025d17513f068eb1ac0838a381da4c132bf41b74aa602bffdc130e411368ed"
+  },
+  "delivery": {
+    "one_commit_per_section": true,
+    "pull_requests": 1,
+    "merge": true,
+    "sync_main_before_deleting_branch": true
+  },
+  "exclusions": [
+    "BH-13 broad capabilities",
+    "BH-15 offline recovery",
+    "BH-18 activation",
+    "product controls",
+    "automatic retries",
+    "support claims",
+    "new Wasm endpoint"
+  ]
+}

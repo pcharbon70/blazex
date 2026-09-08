@@ -163,6 +163,8 @@ public stability or browser support.
 
 ## Index
 
+- [Phase 7 lifecycle contract](phase-07-lifecycle-contract.md) — effect negotiation, ordering, ownership, failure and cleanup policy.
+
 - [Phase 6 implementation evidence](phase-06-implementation-evidence.md) — controlled values, composition, focus, selection and browser/runtime completion.
 - [Phase 6 continuity contract](phase-06-continuity-contract.md) — authorized internal form prerequisite, ownership, composition and focus policy.
 - [Phase 5 implementation evidence](phase-05-implementation-evidence.md) — event mappings, ERTS dispatch, DOM acknowledgement and bounded completion.

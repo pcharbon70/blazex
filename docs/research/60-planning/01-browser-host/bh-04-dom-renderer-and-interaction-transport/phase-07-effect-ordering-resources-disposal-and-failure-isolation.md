@@ -25,28 +25,28 @@ Back to milestone: [README](README.md)
   cannot corrupt sibling roots or grow retries, queues, listeners, and retained
   state without bound.
 
-  - [ ] 7.1 Section - Authorize and freeze ordering and ownership policy.
+  - [x] 7.1 Section - Authorize and freeze ordering and ownership policy.
 
     Bind accepted effects/resources and DOM commit semantics before enabling
     browser side effects or failure recovery.
 
-    - [ ] 7.1.1 Task - Record bounded Phase 7 authority.
+    - [x] 7.1.1 Task - Record bounded Phase 7 authority.
 
       Establish exact inputs and exclude later capability and resilience
       product features.
 
-      - [ ] 7.1.1.1 Subtask - Record synchronized base, branch, section commits, one PR, cleanup, Phase 6 completion identity, and explicit Phase 7 authorization.
-      - [ ] 7.1.1.2 Subtask - Bind effect phases, resource handles, generation/revision ownership, transaction barriers, focus/selection ordering, BH-03 shutdown/runtime-loss, and renderer failure acceptance by version and hash.
-      - [ ] 7.1.1.3 Subtask - Exclude BH-13 broad browser capabilities, BH-15 offline recovery, BH-18 activation, unbounded automatic retry, product components, and support claims.
+      - [x] 7.1.1.1 Subtask - Record synchronized base, branch, section commits, one PR, cleanup, Phase 6 completion identity, and explicit Phase 7 authorization.
+      - [x] 7.1.1.2 Subtask - Bind effect phases, resource handles, generation/revision ownership, transaction barriers, focus/selection ordering, BH-03 shutdown/runtime-loss, and renderer failure acceptance by version and hash.
+      - [x] 7.1.1.3 Subtask - Exclude BH-13 broad browser capabilities, BH-15 offline recovery, BH-18 activation, unbounded automatic retry, product components, and support claims.
 
-    - [ ] 7.1.2 Task - Freeze commit/effect and resource lifecycle rules.
+    - [x] 7.1.2 Task - Freeze commit/effect and resource lifecycle rules.
 
       Make execution points, cancellation, diagnostics, and cleanup deadlines
       explicit for every renderer-owned resource class.
 
-      - [ ] 7.1.2.1 Subtask - Define preflight, pre-commit, commit, focus/selection restore, post-commit, paint-observation, acknowledgement, and disposal barriers with legal effect classes at each point.
-      - [ ] 7.1.2.2 Subtask - Define ownership and replacement rules for listeners, pending transactions, queued interactions, timers used by the renderer, observers, focus/composition records, rollback journals, and diagnostics.
-      - [ ] 7.1.2.3 Subtask - Define timeout, cancellation, retry eligibility, maximum attempts, failure escalation, fallback, and cleanup convergence against the 1000 ms renderer-failure observation window.
+      - [x] 7.1.2.1 Subtask - Define preflight, pre-commit, commit, focus/selection restore, post-commit, paint-observation, acknowledgement, and disposal barriers with legal effect classes at each point.
+      - [x] 7.1.2.2 Subtask - Define ownership and replacement rules for listeners, pending transactions, queued interactions, timers used by the renderer, observers, focus/composition records, rollback journals, and diagnostics.
+      - [x] 7.1.2.3 Subtask - Define timeout, cancellation, retry eligibility, maximum attempts, failure escalation, fallback, and cleanup convergence against the 1000 ms renderer-failure observation window.
 
   - [ ] 7.2 Section - Implement ordered effects and resource accounting.
 

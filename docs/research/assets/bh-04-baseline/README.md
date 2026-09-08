@@ -21,6 +21,8 @@ artifacts are immutable; inherited limitations retain their original state.
 
 ## Index
 
+- [Phase 7 authorization](blazex-bh-04-phase-07-authorization-v0.1.0.json) — explicit lifecycle and effect-emission authority.
+
 ### Subdirectories
 
 None.
