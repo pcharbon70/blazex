@@ -106,6 +106,8 @@ milestone acceptance.
 
 - [BH-05 activation record generator](generate_bh05_activation.py)
 - [BH-05 boundary record generator](generate_bh05_boundary.py)
+- [BH-05 activation validator](validate_bh05_activation.py)
+- [BH-05 negative activation tests](test_validate_bh05_activation.py)
 
 - [BH-04 corrective acceptance validator](validate_bh04_correction.py)
 - [BH-04 corrective decision generator](generate_bh04_correction.py)

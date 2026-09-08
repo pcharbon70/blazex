@@ -70,28 +70,28 @@ Back to milestone: [README](README.md)
       - [x] 1.2.2.2 Subtask - Update package, profile, integration, and corpus indexes with truthful Phase 1 activation and no implemented BH-05 behavior.
       - [x] 1.2.2.3 Subtask - Inventory existing BH-02 Core APIs as inherited experimental inputs and identify every surface requiring preservation, supersession, migration, or rejection.
 
-  - [ ] 1.3 Section - Implement fail-closed activation governance.
+  - [x] 1.3 Section - Implement fail-closed activation governance.
 
     Reject stale handoff, ownership leakage, premature behavior, fabricated
     evidence, and ungoverned public API expansion before implementation starts.
 
-    - [ ] 1.3.1 Task - Implement the Phase 1 activation validator.
+    - [x] 1.3.1 Task - Implement the Phase 1 activation validator.
 
       Validate machine-readable identities, hashes, package graph, empty
       evidence, and status rather than trusting prose labels.
 
-      - [ ] 1.3.1.1 Subtask - Verify authorization, BH-04 handoff hashes, all nine acceptance IDs, twelve-phase plan, evidence schemas, owners, stop rules, and synchronized-base ancestry.
-      - [ ] 1.3.1.2 Subtask - Audit direct/transitive dependencies and source tokens for renderer, host, server-framework, browser-object, runtime-private, .NET/Razor, and native-toolkit leakage.
-      - [ ] 1.3.1.3 Subtask - Reject new callbacks/macros/processes, nonempty results, passing measurements, public stability, support claims, or Phase 2 authorization.
+      - [x] 1.3.1.1 Subtask - Verify authorization, BH-04 handoff hashes, all nine acceptance IDs, twelve-phase plan, evidence schemas, owners, stop rules, and synchronized-base ancestry.
+      - [x] 1.3.1.2 Subtask - Audit direct/transitive dependencies and source tokens for renderer, host, server-framework, browser-object, runtime-private, .NET/Razor, and native-toolkit leakage.
+      - [x] 1.3.1.3 Subtask - Reject new callbacks/macros/processes, nonempty results, passing measurements, public stability, support claims, or Phase 2 authorization.
 
-    - [ ] 1.3.2 Task - Add focused negative governance tests.
+    - [x] 1.3.2 Task - Add focused negative governance tests.
 
       Exercise every material activation failure and require actionable,
       deterministic diagnostics.
 
-      - [ ] 1.3.2.1 Subtask - Reject missing authority, stale/missing BH-04 input, altered acceptance set, absent owner, broken plan link, forbidden dependency, or unindexed evidence path.
-      - [ ] 1.3.2.2 Subtask - Reject rewritten historical evidence, hidden deferral, fabricated ERTS/AtomVM parity, arbitrary dynamic dispatch, generic unbounded emissions, or unsupported compatibility claims.
-      - [ ] 1.3.2.3 Subtask - Prove the unimplemented Phase 1 candidate passes deterministically from a clean checkout.
+      - [x] 1.3.2.1 Subtask - Reject missing authority, stale/missing BH-04 input, altered acceptance set, absent owner, broken plan link, forbidden dependency, or unindexed evidence path.
+      - [x] 1.3.2.2 Subtask - Reject rewritten historical evidence, hidden deferral, fabricated ERTS/AtomVM parity, arbitrary dynamic dispatch, generic unbounded emissions, or unsupported compatibility claims.
+      - [x] 1.3.2.3 Subtask - Prove the unimplemented Phase 1 candidate passes deterministically from a clean checkout.
 
   - [ ] 1.4 Section - Phase 1 Integration Tests and Completion Evidence.
 
