@@ -48,28 +48,28 @@ Back to milestone: [README](README.md)
       - [x] 7.1.2.2 Subtask - Define ownership and replacement rules for listeners, pending transactions, queued interactions, timers used by the renderer, observers, focus/composition records, rollback journals, and diagnostics.
       - [x] 7.1.2.3 Subtask - Define timeout, cancellation, retry eligibility, maximum attempts, failure escalation, fallback, and cleanup convergence against the 1000 ms renderer-failure observation window.
 
-  - [ ] 7.2 Section - Implement ordered effects and resource accounting.
+  - [x] 7.2 Section - Implement ordered effects and resource accounting.
 
     Execute only negotiated renderer effects and track every acquired resource
     in a generation-scoped ledger.
 
-    - [ ] 7.2.1 Task - Implement transaction effect barriers.
+    - [x] 7.2.1 Task - Implement transaction effect barriers.
 
       Ensure effects cannot observe or act on an uncommitted, rolled-back,
       stale, or disposed root.
 
-      - [ ] 7.2.1.1 Subtask - Validate effect identity, capability, owner, generation, revision, barrier, dependencies, payload bounds, timeout, and fallback before scheduling.
-      - [ ] 7.2.1.2 Subtask - Execute focus/selection and permitted browser effects in deterministic barrier order and correlate results with transaction acknowledgements.
-      - [ ] 7.2.1.3 Subtask - Reject or cancel stale, duplicate, unsupported, post-failure, and post-disposal effects without browser mutation or semantic state advancement.
+      - [x] 7.2.1.1 Subtask - Validate effect identity, capability, owner, generation, revision, barrier, dependencies, payload bounds, timeout, and fallback before scheduling.
+      - [x] 7.2.1.2 Subtask - Execute focus/selection and permitted browser effects in deterministic barrier order and correlate results with transaction acknowledgements.
+      - [x] 7.2.1.3 Subtask - Reject or cancel stale, duplicate, unsupported, post-failure, and post-disposal effects without browser mutation or semantic state advancement.
 
-    - [ ] 7.2.2 Task - Implement renderer resource ledger and disposal.
+    - [x] 7.2.2 Task - Implement renderer resource ledger and disposal.
 
       Account for creation, replacement, cancellation, release, and leak checks
       independently for each root generation.
 
-      - [ ] 7.2.2.1 Subtask - Register all renderer-owned listeners, queues, pending records, callbacks, observers, rollback state, timers, and effect handles with stable owner identities.
-      - [ ] 7.2.2.2 Subtask - Release superseded resources on node removal/replacement, generation replacement, transaction rejection, root disposal, runtime loss, shutdown, and fallback.
-      - [ ] 7.2.2.3 Subtask - Make disposal idempotent and observable, reject cross-root release, and report retained resources after the declared convergence bound.
+      - [x] 7.2.2.1 Subtask - Register all renderer-owned listeners, queues, pending records, callbacks, observers, rollback state, timers, and effect handles with stable owner identities.
+      - [x] 7.2.2.2 Subtask - Release superseded resources on node removal/replacement, generation replacement, transaction rejection, root disposal, runtime loss, shutdown, and fallback.
+      - [x] 7.2.2.3 Subtask - Make disposal idempotent and observable, reject cross-root release, and report retained resources after the declared convergence bound.
 
   - [ ] 7.3 Section - Implement renderer failure isolation and recovery.
 

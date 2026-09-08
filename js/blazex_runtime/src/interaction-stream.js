@@ -7,7 +7,7 @@ export class InteractionBridge {
   #transport; #rootId;
   #protocol;
   constructor({ protocol, rootId, transport }) {
-    requireInteraction([INTERACTION_BRIDGE, "blazex.host-bridge/3"].includes(protocol), "incompatible");
+    requireInteraction([INTERACTION_BRIDGE, "blazex.host-bridge/3", "blazex.host-bridge/4"].includes(protocol), "incompatible");
     requireInteraction(typeof transport?.request === "function" && typeof transport?.cancel === "function");
     this.#transport = transport; this.#rootId = rootId; this.#protocol = protocol;
   }
@@ -59,6 +59,7 @@ export class InteractionStream {
     });
   }
   snapshot() { return Object.freeze({ queued: this.#queue.length + Number(this.#active !== null), max_depth: this.#maximum, disposed: this.#closed, last_sequence: this.#lastSequence }); }
+  resources() { const jobs = [...this.#queue, ...(this.#active ? [this.#active] : [])].filter(j => !j.settled); return { queued: jobs.length, timers: jobs.length, callbacks: jobs.length }; }
   #validateContext(record) {
     requireInteraction(!this.#closed && this.#context && this.#handle.snapshot().state === "ready", "disposed-root");
     requireInteraction(this.#handle.snapshot().root_id === record.root_id && this.#handle.snapshot().root_generation === record.lifecycle_generation, "stale");

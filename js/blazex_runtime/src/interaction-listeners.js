@@ -33,6 +33,7 @@ export class InteractionListeners {
   takeObservations() { const values = [...this.#observations.values()]; this.#observations.clear(); return values; }
   dispose() { if (this.#disposed) return; this.#disposed = true; this.#suspended = true; this.#bindings.clear(); this.#observations.clear(); this.#receiver.dispose(); this.#context = null; }
   snapshot() { return Object.freeze({ listeners: this.#bindings.size, sequence: this.#sequence, suspended: this.#suspended, disposed: this.#disposed }); }
+  resources() { return { ...(this.#receiver.resources?.() ?? { queued: 0, timers: 0, callbacks: 0 }), observations: this.#observations.size }; }
   #outcome(value) { try { this.#onOutcome(Object.freeze(value)); } catch { /* Observation has no dispatch authority. */ } }
   #observe(pending, sequence) {
     Promise.resolve(pending).then(outcome => this.#outcome(outcome), () => this.#outcome({ outcome: "rejected", diagnostic: "transport", sequence }));
