@@ -3,8 +3,14 @@ title: "Phase 8 - Effects, Resources, and Typed Command Intent"
 kind: note
 created: "2026-09-06"
 maturity: developing
-tags: [bh-05, effects, resources, commands, implementation-planning]
-aliases: ["BH-05 phase 8"]
+tags:
+  - bh-05
+  - commands
+  - effects
+  - implementation-planning
+  - resources
+aliases:
+  - "BH-05 phase 8"
 ---
 
 # Phase 8 - Effects, Resources, and Typed Command Intent
@@ -13,108 +19,120 @@ Back to milestone: [README](README.md)
 
 - [ ] 8 Phase - Effects, Resources, and Typed Command Intent.
 
-  Turn callback intent into capability-checked asynchronous effects and owned
-  resources while keeping protected server authority outside the browser.
+  Replace generic component emissions with closed local-message, timer,
+  capability-effect, resource, and remote-command intent records. Enforce
+  admission, ordering, ownership, cancellation, timeout, stale-result, and
+  trust boundaries while reserving actual browser providers and server command
+  execution for their owning adapters.
 
-  - [ ] 8.1 Section - Define effect intent and execution contracts.
+  - [ ] 8.1 Section - Authorize and freeze action and authority semantics.
 
-    Specify a closed, versioned effect vocabulary and the boundary between pure
-    transition evaluation and host execution.
+    Bind scheduler and effects contracts and define every action/result class
+    before integrating providers or command adapters.
 
-    - [ ] 8.1.1 Task - Specify effect descriptors and capabilities.
+    - [ ] 8.1.1 Task - Record bounded Phase 8 authority.
 
-      Define effect type, portable arguments, owner, generation, correlation,
-      timeout, cancellation, and expected result schema.
+      Establish provenance and prohibit concrete server/browser implementation
+      or trust from entering Core.
 
-      - [ ] 8.1.1.1 Subtask - Permit only registered effect types declared by the active capability manifest.
-      - [ ] 8.1.1.2 Subtask - Validate and bound arguments/results without carrying executable functions or host objects.
-      - [ ] 8.1.1.3 Subtask - Reject unknown, unavailable, stale, malformed, or unauthorized effect intent before execution.
+      - [ ] 8.1.1.1 Subtask - Record synchronized base, branch, section commits, one PR, cleanup, Phase 7 completion identity, and explicit Phase 8 authorization.
+      - [ ] 8.1.1.2 Subtask - Bind callback result algebra, scheduler, effect/capability/resource contracts, server trust ADR, renderer barriers, diagnostics, and pending/resource budgets by version and hash.
+      - [ ] 8.1.1.3 Subtask - Exclude concrete Web API providers, Phoenix/Plug command transport/authorization, uploads, navigation, persistence, arbitrary tasks, and support claims.
 
-    - [ ] 8.1.2 Task - Specify result delivery and transition ordering.
+    - [ ] 8.1.2 Task - Freeze typed action and result vocabulary.
 
-      Return success, failure, timeout, cancellation, and host-loss results as
-      ordinary scheduler stimuli.
+      Distinguish local work, host capability requests, resource leases, and
+      remote authority crossings in both data and lifecycle.
 
-      - [ ] 8.1.2.1 Subtask - Define correlation and at-most-one terminal result per accepted effect generation.
-      - [ ] 8.1.2.2 Subtask - Define when pending effects may be superseded or cancelled.
-      - [ ] 8.1.2.3 Subtask - Keep effect completion unable to bypass prop/state validation or atomic commit.
+      - [ ] 8.1.2.1 Subtask - Define closed action records for local message, timer start/cancel, effect request/cancel, resource transfer/release, and typed command intent with stable IDs and schema versions.
+      - [ ] 8.1.2.2 Subtask - Define effect/command accepted, denied, completed, failed, timed-out, canceled, stale, and disconnected results plus resource acquired/transferred/released/lost states.
+      - [ ] 8.1.2.3 Subtask - Define ordering relative to semantic and renderer commit, idempotency/replay policy, root/component/generation ownership, payload bounds, redaction, and maximum 128 pending effects/512 leases.
 
-  - [ ] 8.2 Section - Implement effect scheduling and bounded concurrency.
+  - [ ] 8.2 Section - Implement typed action validation and effect scheduling.
 
-    Bridge validated intent to injected executors while preserving root
-    isolation, deterministic accounting, and explicit overload behavior.
+    Validate candidate actions before state/output commit and submit accepted
+    post-commit work only to negotiated abstract providers.
 
-    - [ ] 8.2.1 Task - Implement the executor boundary.
+    - [ ] 8.2.1 Task - Implement action constructors and callback validation.
 
-      Dispatch descriptors to host-supplied adapters and normalize all adapter
-      outcomes into portable result records.
+      Replace `[term()]` emissions with versioned records that cannot conceal
+      browser objects, server work, PIDs, or arbitrary functions.
 
-      - [ ] 8.2.1.1 Subtask - Define executor registration, version negotiation, capability lookup, and fail-closed defaults.
-      - [ ] 8.2.1.2 Subtask - Isolate executor crashes, malformed results, duplicate completion, and late completion.
-      - [ ] 8.2.1.3 Subtask - Trace accepted, started, completed, failed, timed-out, cancelled, and discarded outcomes.
+      - [ ] 8.2.1.1 Subtask - Implement strict typed constructors, schemas, counts, payload bounds, owner/source correlation, capability/command IDs, timeout, cancellation, and fallback metadata.
+      - [ ] 8.2.1.2 Subtask - Validate all candidate actions together with state/output and reject unknown, malformed, excessive, wrong-owner, nonportable, unauthorized, or duplicate identities atomically.
+      - [ ] 8.2.1.3 Subtask - Preserve action metadata for BH-06 build reachability and BH-07 command registration without resolving arbitrary modules or transports at runtime.
 
-    - [ ] 8.2.2 Task - Enforce pending-effect limits and cleanup.
+    - [ ] 8.2.2 Task - Integrate effect admission and result scheduling.
 
-      Cap pending effects at 128 per root and make overload/release behavior
-      observable and deterministic.
+      Submit effects only after the accepted commit barrier and route bounded
+      results back through the root scheduler.
 
-      - [ ] 8.2.2.1 Subtask - Account pending slots from acceptance through one terminal outcome.
-      - [ ] 8.2.2.2 Subtask - Reject excess effects explicitly without executing partial batches.
-      - [ ] 8.2.2.3 Subtask - Cancel or drain owned effects during replacement, root stop, and runtime loss.
+      - [ ] 8.2.2.1 Subtask - Negotiate declared capabilities deny-by-default, admit no more than 128 pending effects per root, and record provider/fallback selection without exposing provider handles.
+      - [ ] 8.2.2.2 Subtask - Schedule accepted results/timeouts/cancellations as typed generation-scoped work and reject duplicate, late, stale, wrong-owner, or post-disposal results before callbacks.
+      - [ ] 8.2.2.3 Subtask - Never automatically replay non-idempotent effects after renderer rejection, root crash/retry, runtime loss, or reconnect.
 
-  - [ ] 8.3 Section - Implement resource ownership and typed commands.
+  - [ ] 8.3 Section - Implement resource and command-intent boundaries.
 
-    Represent longer-lived host facilities and remote operation requests as
-    separate explicit contracts.
+    Track opaque resource leases and represent remote work as untrusted intent
+    awaiting a future authenticated server adapter.
 
-    - [ ] 8.3.1 Task - Implement generation-scoped resource ownership.
+    - [ ] 8.3.1 Task - Integrate resource leases with component ownership.
 
-      Track acquisition, use, replacement, release, and failure without exposing
-      native handles to application components.
+      Give every resource one root generation and component owner with explicit
+      transfer/release and terminal state.
 
-      - [ ] 8.3.1.1 Subtask - Allocate opaque resource identities under component/root ownership and declared capability type.
-      - [ ] 8.3.1.2 Subtask - Cap active resources at 512 per root with explicit acquisition rejection.
-      - [ ] 8.3.1.3 Subtask - Release child-owned resources before parents and make repeated release idempotent.
+      - [ ] 8.3.1.1 Subtask - Admit at most 512 simultaneous leases per root and inventory kind, opaque ID, owner, generation, acquisition effect, transfer history, release request, and terminal outcome.
+      - [ ] 8.3.1.2 Subtask - Validate transfers within declared ownership rules and reject cross-root, stale-generation, duplicate, unknown, or post-disposal release/result operations.
+      - [ ] 8.3.1.3 Subtask - Queue release/cancellation on nested removal/replacement and root shutdown/failure for Phase 10 disposal coordination.
 
-    - [ ] 8.3.2 Task - Define typed remote-command intent.
+    - [ ] 8.3.2 Task - Implement typed remote-command intent.
 
-      Allow a component to request a declared server operation without treating
-      browser state, command construction, or local validation as authorization.
+      Define what a component may request without granting client state any
+      server authority or implementing a transport.
 
-      - [ ] 8.3.2.1 Subtask - Define versioned command name, public arguments, correlation, reply schema, timeout, and cancellation intent.
-      - [ ] 8.3.2.2 Subtask - Keep sessions, credentials, authorization decisions, protected data, and transport details outside the component contract.
-      - [ ] 8.3.2.3 Subtask - Route command replies through ordinary effect-result scheduling while leaving BH-07 transport unimplemented.
+      - [ ] 8.3.2.1 Subtask - Define stable command ID, schema version, public payload, correlation/idempotency key, timeout, optimistic-state metadata, and expected public result/error schema.
+      - [ ] 8.3.2.2 Subtask - Mark every command intent as untrusted client input and require future server authentication, authorization, validation, idempotency, auditing, and result normalization.
+      - [ ] 8.3.2.3 Subtask - Reject arbitrary module/function targets, server PIDs/sockets, credentials/secrets, client authorization decisions, and direct transport selection in portable component code.
 
-  - [ ] 8.4 Section - Integration Tests and Completion Evidence.
+  - [ ] 8.4 Section - Phase 8 Integration Tests and Completion Evidence.
 
-    Exercise effect, resource, and command-intent lifecycle through injected
-    executors without requiring Phoenix command transport.
+    Exercise delayed/denied effects, lease-heavy components, command intents,
+    stale results, bounds, and commit ordering through deterministic providers
+    and server-adapter doubles.
 
-    - [ ] 8.4.1 Task - Run effect/resource conformance scenarios.
+    - [ ] 8.4.1 Task - Run effects/resources/commands integration tests.
 
-      Cover success, failure, timeout, cancellation, overload, replacement,
-      stop, host loss, malformed adapters, and stale completion.
+      Verify typed action traces and final state without invoking real
+      privileged browser or server behavior.
 
-      - [ ] 8.4.1.1 Subtask - Compare scheduler and ownership traces across ERTS and browser-compatible paths.
-      - [ ] 8.4.1.2 Subtask - Exercise exactly 128 pending effects and 512 resources, then verify explicit rejection above each bound.
-      - [ ] 8.4.1.3 Subtask - Prove terminal disposal leaves zero pending effects and zero owned resources.
+      - [ ] 8.4.1.1 Subtask - Test capability allow/deny/fallback, effect completion/failure/timeout/cancel, post-commit submission, delayed result, nested owner removal, resource acquire/transfer/release, and command-intent creation.
+      - [ ] 8.4.1.2 Subtask - Drive more than 128 pending effects and 512 leases and prove bounded rejection; test stale/duplicate/late/wrong-owner results and non-idempotent no-replay behavior.
+      - [ ] 8.4.1.3 Subtask - Prove command records remain untrusted declarative intent, contain no transport/server authority, and can be denied by a deterministic future-adapter double without corrupting local state.
 
-    - [ ] 8.4.2 Task - Publish completion evidence.
+    - [ ] 8.4.2 Task - Publish Phase 8 completion evidence.
 
-      Record capability coverage, limits, cleanup outcomes, and the unimplemented
-      trusted-command transport boundary.
+      Record action schemas, pending/resource maxima, trust analysis, and
+      unresolved concrete-provider/command work.
 
-      - [ ] 8.4.2.1 Subtask - Publish fixtures, traces, peak counts, timings, commands, and injected-failure outcomes.
-      - [ ] 8.4.2.2 Subtask - Confirm no secret, server authority, raw host handle, or transport dependency enters public component code.
-      - [ ] 8.4.2.3 Subtask - Mark Phase 9 eligible but unauthorized only after the complete gate passes.
+      - [ ] 8.4.2.1 Subtask - Run Core/effects/UI-tree/renderer/test suites, delayed/denied/lease/command fixtures, validators, dependency/security audits, archive/generated checks, JSON validation, and patch hygiene.
+      - [ ] 8.4.2.2 Subtask - Publish action/result inventories, raw pending/resource traces, fixture hashes, exact commands/counts, denial/timeout/cancel outcomes, failures, and limitations.
+      - [ ] 8.4.2.3 Subtask - Mark Phase 8 complete only if all work is typed, bounded, generation-scoped, and authority-correct; make Phase 9 eligible but unauthorized.
 
 ## Section delivery rule
 
 Complete and verify each section before its commit. Open one pull request only
-after Section 8.4 passes or records a truthful stop decision.
+after Section 8.4 passes or records a stop decision. Generic emissions,
+provider/server handles, client-granted authority, unbounded pending work, or
+automatic non-idempotent replay blocks completion.
 
 ## Connections
 
 - [BH-05 plan](README.md)
-- [Phase 7 — Event, Message, Timer, and Transition Scheduling](phase-07-event-message-timer-and-transition-scheduling.md)
-- [Browser-host milestone roadmap](../../../20-notes/browser-host-implementation-milestones.md)
+- [Phase 7](phase-07-event-message-timer-and-transition-scheduling.md)
+- [Host-neutral effects, capabilities, and resources](../../../20-notes/architecture-decisions/adr-0003-host-neutral-effects-capabilities-and-resources.md)
+- [Server adapter and trust boundary](../../../20-notes/architecture-decisions/adr-0005-server-adapter-and-trust-boundary.md)
+
+## Sources
+
+- [BH-02 event/effect/resource fixtures](../../../../../integration/conformance/event-effect-resource-fixtures-v0.1.0.json)
+- [Canonical acceptance registry](../../../assets/quality-acceptance/blazex-acceptance-registry-v0.1.0.json)

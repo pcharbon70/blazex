@@ -3,8 +3,14 @@ title: "Phase 10 - Failure Containment, Retry, Replacement, and Disposal"
 kind: note
 created: "2026-09-06"
 maturity: developing
-tags: [bh-05, failures, retry, disposal, implementation-planning]
-aliases: ["BH-05 phase 10"]
+tags:
+  - bh-05
+  - disposal
+  - failure-recovery
+  - implementation-planning
+  - lifecycle
+aliases:
+  - "BH-05 phase 10"
 ---
 
 # Phase 10 - Failure Containment, Retry, Replacement, and Disposal
@@ -13,108 +19,120 @@ Back to milestone: [README](README.md)
 
 - [ ] 10 Phase - Failure Containment, Retry, Replacement, and Disposal.
 
-  Contain application failures at declared boundaries, prevent retry storms,
-  replace failed subtrees safely, and make terminal cleanup deterministic even
-  when cleanup itself fails.
+  Complete the honest process-root failure boundary. Component callback or
+  contract failures must contain to the owning local-view root, preserve
+  sibling roots, render an accessible fallback, bound automatic retry, create
+  new generations on replacement, and dispose events, timers, effects,
+  resources, context, renderer state, and process ownership deterministically.
 
-  - [ ] 10.1 Section - Define failure classification and containment policy.
+  - [ ] 10.1 Section - Authorize and freeze failure and disposal policy.
 
-    Turn every callback, scheduler, effect, resource, renderer, and invariant
-    failure into a bounded record with an explicit containment scope.
+    Bind the complete component lifecycle and classify failure sources,
+    containment boundaries, fallback, retry, generation, and cleanup rules.
 
-    - [ ] 10.1.1 Task - Specify failure records and disclosure rules.
+    - [ ] 10.1.1 Task - Record bounded Phase 10 authority.
 
-      Preserve actionable provenance while excluding secrets, oversized values,
-      host objects, and unstable exception formatting.
+      Establish provenance and reserve whole-runtime recovery and offline
+      product behavior for their owning milestones.
 
-      - [ ] 10.1.1.1 Subtask - Define class, phase, root/component identity, generation, source path, correlation, retryability, and cause fields.
-      - [ ] 10.1.1.2 Subtask - Normalize exceptions, exits, throws, timeouts, invalid results, executor faults, and invariant violations.
-      - [ ] 10.1.1.3 Subtask - Bound stack/context capture and redact component props, state, messages, and command data by policy.
+      - [ ] 10.1.1.1 Subtask - Record synchronized base, branch, section commits, one PR, cleanup, Phase 9 completion identity, and explicit Phase 10 authorization.
+      - [ ] 10.1.1.2 Subtask - Bind callback/scheduler/effect/resource/context/registry contracts, BH-04 renderer failure behavior, BH-03 runtime/root loss, accessibility intent, and failure/reliability budgets by version and hash.
+      - [ ] 10.1.1.3 Subtask - Exclude BH-15 offline/state recovery, whole-VM automatic policy, subtree isolation without a process root, command replay, production error reporting, and support claims.
 
-    - [ ] 10.1.2 Task - Specify containment boundaries and fallback outcomes.
+    - [ ] 10.1.2 Task - Freeze failure taxonomy and recovery rules.
 
-      Decide whether a failure preserves last-good output, replaces a subtree,
-      stops a root, or escalates host/runtime loss.
+      Select one accountable boundary and outcome for each failure without
+      hiding defects behind retries or misleading nested error boundaries.
 
-      - [ ] 10.1.2.1 Subtask - Define component-local, subtree, root, renderer, and runtime failure scopes.
-      - [ ] 10.1.2.2 Subtask - Define optional declared error boundaries as ordinary components with restricted failure input.
-      - [ ] 10.1.2.3 Subtask - Prohibit one failed root from disposing siblings or the shared compatible runtime.
+      - [ ] 10.1.2.1 Subtask - Classify declaration/schema, mount/update/event/message/render, semantic output, scheduling overload, effect/result/resource, context/registry, renderer/commit, timeout, crash, and disposal failures.
+      - [ ] 10.1.2.2 Subtask - Define handled rejection, transition rollback, root failure, accessible fallback, terminal stop, user/host retry, automatic retry eligibility, and whole-runtime escalation.
+      - [ ] 10.1.2.3 Subtask - Limit automatic root/component-boundary restarts to three within five seconds, fingerprint repeated failure, prohibit render-loop retry and non-idempotent effect/command replay, and require terminal fallback afterward.
 
-  - [ ] 10.2 Section - Implement bounded retry and replacement.
+  - [ ] 10.2 Section - Implement root failure containment and accessible fallback.
 
-    Make recovery an explicit policy decision with deterministic budgets rather
-    than implicit supervisor or callback loops.
+    Convert failures into stable root-scoped state and semantic fallback output
+    while keeping sibling processes and previously unrelated roots operational.
 
-    - [ ] 10.2.1 Task - Implement retry accounting and scheduling.
+    - [ ] 10.2.1 Task - Implement failure coordination and diagnostics.
 
-      Cap root/component recovery at three attempts in any rolling five-second
-      window and preserve the failure chain across attempts.
+      Normalize failure at one coordinator and prevent evaluator, scheduler,
+      renderer, provider, and supervisor layers from racing to recover.
 
-      - [ ] 10.2.1.1 Subtask - Define retry keys, monotonic timing, attempt counting, backoff, cancellation, and success reset.
-      - [ ] 10.2.1.2 Subtask - Route authorized retries through the root scheduler without overtaking accepted earlier work.
-      - [ ] 10.2.1.3 Subtask - Stop or surface fallback deterministically when the three-per-five-second budget is exhausted.
+      - [ ] 10.2.1.1 Subtask - Correlate failure code/stage with root/component identity, generation/revision/transition, crash fingerprint, retry count, cleanup state, and redacted diagnostic context.
+      - [ ] 10.2.1.2 Subtask - Elect one recovery owner, reject new ordinary work, invalidate candidate transitions, cancel queued work, and notify runtime/host supervision exactly once.
+      - [ ] 10.2.1.3 Subtask - Preserve sibling roots and prohibit raw exceptions, props/state/messages, server data, secrets, module internals, or host handles in public fallback/diagnostic data.
 
-    - [ ] 10.2.2 Task - Implement failed-subtree replacement.
+    - [ ] 10.2.2 Task - Implement accessible fallback and retry entry.
 
-      Dispose the failed generation completely before a fresh instance can own
-      identity, state, effects, resources, or renderer output.
+      Materialize a minimal semantic fallback through the ordinary renderer
+      path when available and retain a host-owned static fallback otherwise.
 
-      - [ ] 10.2.2.1 Subtask - Preserve last-good output or publish declared error output according to boundary policy.
-      - [ ] 10.2.2.2 Subtask - Allocate a fresh generation and prohibit failed local state/resource inheritance.
-      - [ ] 10.2.2.3 Subtask - Correlate replacement success/failure with the original failure and retry ledger.
+      - [ ] 10.2.2.1 Subtask - Define fallback semantic role/name/status, safe diagnostic code, retry/reload action visibility, focus target/restoration, and no dependency on failing application callbacks.
+      - [ ] 10.2.2.2 Subtask - Commit fallback under a dedicated failure transition and handle renderer-unavailable failure through the BH-03/BH-04 host fallback without partial ownership.
+      - [ ] 10.2.2.3 Subtask - Admit retry only from declared user event, host policy, or changed build/input; reject automatic hot loops and stale retry requests.
 
-  - [ ] 10.3 Section - Implement deterministic disposal under failure.
+  - [ ] 10.3 Section - Implement generation replacement, retry limits, and disposal.
 
-    Guarantee bounded child-first cleanup and a terminal report even when
-    callbacks, cancellation, release, or renderer disposal fail.
+    Start every retry/replacement with a new generation and converge all prior
+    work and resources to terminal states before or within the governed bound.
 
-    - [ ] 10.3.1 Task - Define and implement the disposal ledger.
+    - [ ] 10.3.1 Task - Implement restart-intensity and generation policy.
 
-      Snapshot all owned children, timers, effects, resources, and registrations
-      before cleanup begins and terminally account for each one.
+      Track attempts independently per root identity and make terminal fallback
+      observable after the allowed budget is exhausted.
 
-      - [ ] 10.3.1.1 Subtask - Execute child-first component cleanup followed by timers, effects, resources, renderer registration, and root teardown.
-      - [ ] 10.3.1.2 Subtask - Continue independent cleanup after individual failures while preventing duplicate successful release.
-      - [ ] 10.3.1.3 Subtask - Emit one bounded aggregate report containing every failed and unresolved cleanup item.
+      - [ ] 10.3.1.1 Subtask - Record automatic/user/host attempt source, monotonic time window, failure fingerprint, generation, backoff, admission decision, and terminal reason.
+      - [ ] 10.3.1.2 Subtask - Permit at most three automatic restarts within five seconds, create a fresh generation for each admitted retry, and prevent stale state/output/actions from being reused implicitly.
+      - [ ] 10.3.1.3 Subtask - Reject stale events/messages/timers/effect results/command results/renderer acknowledgements/context notifications from prior generations before callback or state mutation.
 
-    - [ ] 10.3.2 Task - Enforce cleanup deadlines and terminal invariants.
+    - [ ] 10.3.2 Task - Implement deterministic root and nested disposal.
 
-      Target a cleanup p95 no greater than 1000 ms in active measurement while
-      making timeout behavior explicit and leak detection mandatory.
+      Release work deepest-first and idempotently across normal removal,
+      replacement, handled failure, crash, retry, runtime loss, and shutdown.
 
-      - [ ] 10.3.2.1 Subtask - Define per-item and aggregate deadlines, cancellation escalation, and forced-detach policy.
-      - [ ] 10.3.2.2 Subtask - Ensure disposed identities reject all late events, messages, timers, effects, replies, and renderer acknowledgements.
-      - [ ] 10.3.2.3 Subtask - Verify final ledgers expose zero live owned items or explicit unresolved leak findings.
+      - [ ] 10.3.2.1 Subtask - Invalidate ingress; cancel queued transitions, timers, pending effects/commands, subscriptions, and candidate records; then dispose nested components, resource leases, renderer root, and root process ownership in declared order.
+      - [ ] 10.3.2.2 Subtask - Track requested/completed/failed/timed-out release for every owner and permit forced adapter cleanup without reviving disposed component callbacks.
+      - [ ] 10.3.2.3 Subtask - Make repeated disposal a no-op with the same terminal result, restore or redirect focus according to accepted intent, and diagnose any resource surviving 1000 ms.
 
-  - [ ] 10.4 Section - Integration Tests and Completion Evidence.
+  - [ ] 10.4 Section - Phase 10 Integration Tests and Completion Evidence.
 
-    Exercise declared component-failure and resource-cleanup-failure scenarios,
-    retry exhaustion, replacement, sibling isolation, and terminal disposal.
+    Execute component and resource-cleanup failure gates plus restart/disposal
+    stress across independent roots.
 
-    - [ ] 10.4.1 Task - Run failure and recovery integration scenarios.
+    - [ ] 10.4.1 Task - Run failure, retry, and cleanup integration tests.
 
-      Inject failure at every lifecycle stage and compare containment, retry,
-      output, ownership, and terminal traces.
+      Inject failures at every callback and lifecycle boundary and inspect
+      fallback, siblings, generations, final state, and owned-resource release.
 
-      - [ ] 10.4.1.1 Subtask - Execute the component-failure acceptance scenario from callback failure through bounded replacement or root stop.
-      - [ ] 10.4.1.2 Subtask - Execute the resource-cleanup-failure acceptance scenario and verify aggregate reporting plus continued cleanup.
-      - [ ] 10.4.1.3 Subtask - Drive four attempts inside five seconds and verify the fourth recovery is rejected without a restart storm.
+      - [ ] 10.4.1.1 Subtask - Execute `BX-ACC-FAILURE-BX-FAIL-COMPONENT` for callback raise/reject/invalid result/state/output and prove root containment, accessible fallback, sibling survival, diagnostics, and cleanup.
+      - [ ] 10.4.1.2 Subtask - Execute `BX-ACC-FAILURE-BX-FAIL-RESOURCE-CLEANUP` for removal/replacement/crash and prove generation invalidation, cancellation, idempotent release, focus restoration/redirection, and late-result rejection.
+      - [ ] 10.4.1.3 Subtask - Inject persistent identical failure and prove at most three automatic restarts in five seconds, terminal fallback, no non-idempotent replay, and no cross-root restart or disposal.
 
-    - [ ] 10.4.2 Task - Publish completion evidence.
+    - [ ] 10.4.2 Task - Publish Phase 10 completion evidence.
 
-      Record exact recovery and cleanup outcomes before cross-runtime
-      conformance can award equivalence credit.
+      Preserve raw failure/retry/resource traces and all leaks or timeouts for
+      cross-runtime and final measurement phases.
 
-      - [ ] 10.4.2.1 Subtask - Publish traces, retry windows, cleanup timings, final ledgers, commands, digests, and injected failures.
-      - [ ] 10.4.2.2 Subtask - Record any unresolved leak or non-determinism as a blocking finding for active targets.
-      - [ ] 10.4.2.3 Subtask - Mark Phase 11 eligible but unauthorized only after the complete gate passes.
+      - [ ] 10.4.2.1 Subtask - Run Core/effects/UI-tree/renderer/test suites, failure injection and repeated lifecycle scenarios, validators, dependency/security audits, archive/generated checks, JSON validation, and patch hygiene.
+      - [ ] 10.4.2.2 Subtask - Publish taxonomy, fallback/retry/disposal contracts, raw trace hashes, commands/counts, restart maxima, cleanup timings, leaks/timeouts, failures, and limitations.
+      - [ ] 10.4.2.3 Subtask - Mark Phase 10 complete only if active failures contain, retry remains bounded, and cleanup has no unresolved active leak; make Phase 11 eligible but unauthorized.
 
 ## Section delivery rule
 
 Complete and verify each section before its commit. Open one pull request only
-after Section 10.4 passes or records a truthful stop decision.
+after Section 10.4 passes or records a stop decision. A swallowed failure,
+misleading nested isolation, retry loop, stale generation mutation,
+non-idempotent replay, cross-root impact, or active resource leak blocks
+completion.
 
 ## Connections
 
 - [BH-05 plan](README.md)
-- [Phase 8 — Effects, Resources, and Typed Command Intent](phase-08-effects-resources-and-typed-command-intent.md)
+- [Phase 9](phase-09-scoped-context-and-manifest-bounded-dynamic-components.md)
+- [Host-neutral component-kernel decision](../../../20-notes/architecture-decisions/adr-0001-host-neutral-semantic-component-kernel.md)
+- [Browser trust, deployment, and fallback policy](../../../20-notes/blazex-browser-trust-deployment-and-fallback-policy.md)
+
+## Sources
+
+- [Blazor framework semantics beneath BlazeX](../../../20-notes/blazor-framework-semantics-beneath-blazex.md)
+- [Canonical acceptance registry](../../../assets/quality-acceptance/blazex-acceptance-registry-v0.1.0.json)

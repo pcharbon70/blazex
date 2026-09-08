@@ -6,11 +6,35 @@
   "activation_phase": "BH-02 Phase 1",
   "status": "implemented-experimental-bh02-candidate",
   "owner_role": "core-owner",
-  "module_roots": ["BlazeX.Core"],
+  "module_roots": [
+    "BlazeX.Core"
+  ],
   "manifest": "mix.exs",
-  "test_entrypoints": ["test"],
+  "test_entrypoints": [
+    "test"
+  ],
   "dependencies": [],
-  "must_not_own": ["semantic-tree-representation", "effect-implementation", "renderer-implementation", "server-authority"],
-  "forbidden_dependencies": ["phoenix", "plug", "live_view", "local_live_view", "popcorn", "atomvm", "blazex_renderer_dom", "qt", "wxwidgets"],
-  "public_api_state": "experimental-not-stable"
+  "must_not_own": [
+    "semantic-tree-representation",
+    "effect-implementation",
+    "renderer-implementation",
+    "server-authority"
+  ],
+  "forbidden_dependencies": [
+    "phoenix",
+    "plug",
+    "live_view",
+    "local_live_view",
+    "popcorn",
+    "atomvm",
+    "blazex_renderer_dom",
+    "qt",
+    "wxwidgets"
+  ],
+  "public_api_state": "experimental-not-stable",
+  "bh05_activation": {
+    "phase": 1,
+    "state": "governance-only",
+    "behavior_implemented": false
+  }
 }

@@ -3,8 +3,14 @@ title: "Phase 2 - Component Roles, Authoring Facade, and Callback Algebra"
 kind: note
 created: "2026-09-06"
 maturity: developing
-tags: [bh-05, component-model, authoring, callbacks, implementation-planning]
-aliases: ["BH-05 phase 2"]
+tags:
+  - authoring
+  - bh-05
+  - component-model
+  - elixir
+  - implementation-planning
+aliases:
+  - "BH-05 phase 2"
 ---
 
 # Phase 2 - Component Roles, Authoring Facade, and Callback Algebra
@@ -13,107 +19,117 @@ Back to milestone: [README](README.md)
 
 - [ ] 2 Phase - Component Roles, Authoring Facade, and Callback Algebra.
 
-  Define the smallest idiomatic Elixir surface for declaring components while
-  keeping evaluation explicit, deterministic, host-neutral, and inspectable.
+  Define the public-facing Elixir module shape for pure components, nested
+  stateful components, and process-root local views. Freeze callback inputs,
+  transition names, return forms, diagnostics, and metadata introspection
+  before implementing prop/slot schemas or runtime scheduling.
 
-  - [ ] 2.1 Section - Specify the three public component roles.
+  - [ ] 2.1 Section - Authorize and freeze the authoring envelope.
 
-    Give each role a distinct responsibility and lifecycle cost so authors do
-    not accidentally introduce processes or state where composition suffices.
+    Bind Phase 1 and accepted kernel inputs, then state what Phoenix familiarity
+    means without importing Phoenix or HEEx semantics.
 
-    - [ ] 2.1.1 Task - Define pure and nested-stateful roles.
+    - [ ] 2.1.1 Task - Record bounded Phase 2 authority.
 
-      Specify their inputs, outputs, permitted state, identity needs, and
-      callback participation.
+      Establish provenance, allowed modules, and explicit exclusions.
 
-      - [ ] 2.1.1.1 Subtask - Define pure components as deterministic composition with no owned local state or resources.
-      - [ ] 2.1.1.2 Subtask - Define nested stateful components as reconciled values owned by a root scheduler rather than individual processes.
-      - [ ] 2.1.1.3 Subtask - Define legal promotion, replacement, and composition relationships between the roles.
+      - [ ] 2.1.1.1 Subtask - Record synchronized base, branch, section commits, one PR, cleanup, Phase 1 completion identity, and explicit Phase 2 authorization.
+      - [ ] 2.1.1.2 Subtask - Bind inherited Component/Evaluator/Context/Evaluation/Diagnostic contracts, semantic output versions, ADR-0001, and AtomVM compatibility conditions by hash.
+      - [ ] 2.1.1.3 Subtask - Exclude prop/slot validation implementation, nested state retention, process startup, event/effect execution, renderer changes, forms, and support claims.
 
-    - [ ] 2.1.2 Task - Define process-root local views.
+    - [ ] 2.1.2 Task - Freeze authoring principles and compatibility policy.
 
-      Establish explicit process ownership for independently supervised local
-      application roots without leaking process mechanics into children.
+      Preserve idiomatic modules, pattern matching, explicit data, and familiar
+      lifecycle vocabulary without copying Blazor classes or Phoenix sockets.
 
-      - [ ] 2.1.2.1 Subtask - Define root creation, initial state, identity, mailbox, supervisor ownership, and terminal disposal.
-      - [ ] 2.1.2.2 Subtask - Define what roots may supervise and what nested components may never own directly.
-      - [ ] 2.1.2.3 Subtask - Reject implicit process-per-component semantics.
+      - [ ] 2.1.2.1 Subtask - Define documented public namespaces, `use`/behaviour responsibilities, compile metadata, reflection limits, version identities, and deprecation/change-control rules.
+      - [ ] 2.1.2.2 Subtask - Define Phoenix-familiar naming where semantics match and explicitly document divergences for mutable assigns, component references, arbitrary callbacks, `StateHasChanged`, DI, Razor, and render modes.
+      - [ ] 2.1.2.3 Subtask - Require public application code to depend only on facade contracts while keeping implementation modules private and renderer/runtime adapters replaceable.
 
-  - [ ] 2.2 Section - Design the public Elixir authoring facade.
+  - [ ] 2.2 Section - Define component roles and lifecycle vocabulary.
 
-    Provide familiar module declarations and compile-time metadata without
-    exposing runtime or renderer implementation modules.
+    Give each unit an honest state, scheduling, identity, failure, and ownership
+    model that cannot be confused with another unit.
 
-    - [ ] 2.2.1 Task - Define declarations and generated metadata.
+    - [ ] 2.2.1 Task - Define pure and nested-stateful roles.
 
-      Specify macros or behaviours that remain analyzable by the browser build
-      pipeline and usable under both ERTS and AtomVM constraints.
+      Specify caller-owned pure evaluation and root-owned retained nested state
+      without implying independent processes.
 
-      - [ ] 2.2.1.1 Subtask - Define component role declarations, prop/slot declarations, callback declarations, and stable component identifiers.
-      - [ ] 2.2.1.2 Subtask - Generate deterministic metadata without evaluating application callbacks at compile time.
-      - [ ] 2.2.1.3 Subtask - Keep the facade optional beneath a direct behaviour-based API for tooling and testing.
+      - [ ] 2.2.1.1 Subtask - Define pure component declaration, inputs, deterministic render callback, semantic output, no retained state, no mailbox, and owning-root failure behavior.
+      - [ ] 2.2.1.2 Subtask - Define nested-stateful declaration, initialization, prop update, local event/message transition, render, replacement, and disposal callbacks within the owning root scheduler.
+      - [ ] 2.2.1.3 Subtask - Define stable module/instance identity and document that nested components share process, transition, failure, effect, and renderer commit boundaries with their root.
 
-    - [ ] 2.2.2 Task - Define diagnostics and compatibility rules.
+    - [ ] 2.2.2 Task - Define process-root local-view role.
 
-      Make invalid declarations actionable and prevent host-only features from
-      entering portable modules unnoticed.
+      Specify the only BH-05 unit with an independent process, mailbox,
+      generation, renderer root, fallback, and supervised retry boundary.
 
-      - [ ] 2.2.2.1 Subtask - Produce source-located diagnostics for duplicate declarations, invalid roles, callback conflicts, and unsupported options.
-      - [ ] 2.2.2.2 Subtask - Define metadata/schema version negotiation and unknown-version rejection.
-      - [ ] 2.2.2.3 Subtask - Add static checks for forbidden private, renderer, browser, and server dependencies.
+      - [ ] 2.2.2.1 Subtask - Define mount, host-prop update, local event, local message/info, render, commit acknowledgement, effect result, failure, retry, replace, and terminate/dispose transitions.
+      - [ ] 2.2.2.2 Subtask - Define root identity, generation, revision, sequence, scheduler, mailbox, renderer ownership, effect/resource ownership, and host lifecycle correlation.
+      - [ ] 2.2.2.3 Subtask - Prohibit arbitrary nested render-mode switching, server process/PID transfer, mutable component instance handles, and direct renderer or browser access.
 
-  - [ ] 2.3 Section - Define callback inputs, results, and transition algebra.
+  - [ ] 2.3 Section - Define and implement closed callback contracts.
 
-    Replace hidden mutation with a closed set of explicit results that the
-    lifecycle engine can validate and schedule consistently.
+    Replace generic callback values and emissions with explicit candidate
+    transition results that can be validated before state is committed.
 
-    - [ ] 2.3.1 Task - Specify callback families and contexts.
+    - [ ] 2.3.1 Task - Define callback arguments and immutable contexts.
 
-      Define initialization, rendering, update, event, message, effect-result,
-      error, and disposal callbacks with minimal typed contexts.
+      Supply only the component's declared inputs and portable transition
+      metadata at each lifecycle stage.
 
-      - [ ] 2.3.1.1 Subtask - Define required and optional callbacks for each component role.
-      - [ ] 2.3.1.2 Subtask - Expose only public identifiers, validated input, state, context snapshots, and capability handles.
-      - [ ] 2.3.1.3 Subtask - Reject host objects, renderer nodes, raw JavaScript values, PIDs, and trusted server state at portable boundaries.
+      - [ ] 2.3.1.1 Subtask - Define props, slots, prior state, semantic event/message, root/component identity, generation/revision/sequence, transition, capability summary, and context access for each callback.
+      - [ ] 2.3.1.2 Subtask - Define which arguments are available to pure, nested-stateful, and process-root roles and reject context fields that expose host, renderer, server, process internals, secrets, or mutable objects.
+      - [ ] 2.3.1.3 Subtask - Define portable diagnostic redaction so raw exceptions, props, state, messages, command payloads, and opaque resources do not leak by default.
 
-    - [ ] 2.3.2 Task - Specify the closed callback-result algebra.
+    - [ ] 2.3.2 Task - Define callback result algebra and facade metadata.
 
-      Describe no-change, state transition, semantic output, effect intent,
-      command intent, stop, and failure results with deterministic ordering.
+      Make candidate state, semantic output, typed actions, no-op/stop intent,
+      and handled failure distinguishable and bounded.
 
-      - [ ] 2.3.2.1 Subtask - Define legal result shapes and composition rules per callback family.
-      - [ ] 2.3.2.2 Subtask - Define validation order, canonical normalization, and explicit rejection behavior.
-      - [ ] 2.3.2.3 Subtask - Prove that results contain data and intent only, never executable host closures or private objects.
+      - [ ] 2.3.2.1 Subtask - Define closed success, no-change, state/output candidate, action-emitting, stop, retry-request, and rejected result forms per callback.
+      - [ ] 2.3.2.2 Subtask - Reject malformed tuples, unsupported actions, nonportable boundary values, excessive action counts, direct DOM/host values, and ambiguous state/output ownership.
+      - [ ] 2.3.2.3 Subtask - Implement deterministic facade metadata exposing role, callback set, contract version, declared schemas/capabilities/registry entries, and public/private status for later phases and BH-06.
 
-  - [ ] 2.4 Section - Integration Tests and Completion Evidence.
+  - [ ] 2.4 Section - Phase 2 Integration Tests and Completion Evidence.
 
-    Exercise declarations, metadata, callback contracts, diagnostics, and
-    forbidden edges through both direct and facade-based component fixtures.
+    Prove compile-time and runtime authoring contracts without starting a root
+    process or executing later lifecycle behavior.
 
-    - [ ] 2.4.1 Task - Build the authoring-contract conformance suite.
+    - [ ] 2.4.1 Task - Run facade and callback-contract integration tests.
 
-      Cover each role and callback result with positive, boundary, and negative
-      fixtures that produce canonical evidence.
+      Compile representative valid and invalid modules and inspect exact
+      metadata, callbacks, warnings, and diagnostics.
 
-      - [ ] 2.4.1.1 Subtask - Compile valid pure, stateful, and local-view examples through both APIs and compare metadata.
-      - [ ] 2.4.1.2 Subtask - Reject invalid declarations, results, versions, private imports, and role/callback mismatches.
-      - [ ] 2.4.1.3 Subtask - Run the same contract fixtures on available ERTS and browser-compatible compilation paths.
+      - [ ] 2.4.1.1 Subtask - Test pure, nested-stateful, and local-view declarations, required callback presence, optional callbacks, role separation, metadata determinism, and documented examples.
+      - [ ] 2.4.1.2 Subtask - Reject conflicting roles, missing callbacks, invalid arity/result, unsupported metadata, private-module exposure, host/renderer/server imports, Blazor/Razor compatibility surfaces, and mutable references.
+      - [ ] 2.4.1.3 Subtask - Verify facade modules compile under the supported ERTS toolchain and their runtime subset remains compatible with the pinned AtomVM compiler/analyzer without claiming execution parity.
 
-    - [ ] 2.4.2 Task - Publish completion evidence.
+    - [ ] 2.4.2 Task - Publish Phase 2 completion evidence.
 
-      Bind the accepted public shape and all known limitations before value
-      validation and evaluation are added.
+      Record the exact candidate surface and unresolved ergonomics/runtime
+      questions while retaining pre-1.0 change control.
 
-      - [ ] 2.4.2.1 Subtask - Record API inventory, fixture digests, diagnostics, commands, and environment versions.
-      - [ ] 2.4.2.2 Subtask - Confirm no renderer, lifecycle engine, product catalog, or support claim was introduced.
-      - [ ] 2.4.2.3 Subtask - Mark Phase 3 eligible but unauthorized only after the complete gate passes.
+      - [ ] 2.4.2.1 Subtask - Run Core/UI-tree/effects/test package suites, facade compile fixtures, boundary audits, validators, archive/generated checks, JSON validation, and patch hygiene.
+      - [ ] 2.4.2.2 Subtask - Publish API/metadata inventory, valid/invalid fixture hashes, exact commands/counts, warnings/diagnostics, dependency audit, failures, and limitations.
+      - [ ] 2.4.2.3 Subtask - Mark Phase 2 complete only if all three roles and callback results are unambiguous and host-neutral; make Phase 3 eligible but unauthorized.
 
 ## Section delivery rule
 
 Complete and verify each section before its commit. Open one pull request only
-after Section 2.4 passes or records a truthful stop decision.
+after Section 2.4 passes or records a stop decision. Phase 2 defines candidate
+authoring contracts only; it does not authorize full lifecycle execution or
+public stability.
 
 ## Connections
 
 - [BH-05 plan](README.md)
-- [BH-02 semantic-kernel plan](../bh-02-host-neutral-semantic-kernel-gate/README.md)
+- [Phase 1](phase-01-authorization-bh-04-handoff-reconciliation-and-boundary-activation.md)
+- [Host-neutral component-kernel decision](../../../20-notes/architecture-decisions/adr-0001-host-neutral-semantic-component-kernel.md)
+- [Blazor framework semantics beneath BlazeX](../../../20-notes/blazor-framework-semantics-beneath-blazex.md)
+
+## Sources
+
+- [BH-02 internal contract baseline](../../../assets/bh-02-baseline/blazex-bh-02-contract-baseline-v0.1.0.json)
+- [Foundational component-semantics inquiry](../../../40-inquiries/which-foundational-component-semantics-does-blazex-need.md)

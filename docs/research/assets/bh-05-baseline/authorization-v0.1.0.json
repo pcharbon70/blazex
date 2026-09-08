@@ -1,0 +1,69 @@
+{
+  "schema_version": "1.0.0",
+  "milestone": "BH-05",
+  "phase": 1,
+  "base_revision": "506c254ddd4a14dd8d1d4cbdba8fcf9556bd15cb",
+  "branch": "codex/bh05-phase1-activation",
+  "authorization": "Owner requested the next BH-05 phase with section commits, one PR, merge, synchronized main and feature-branch deletion; approved prerequisite BH-04 publication.",
+  "authorized_work": [
+    "reconciliation",
+    "ownership",
+    "empty-evidence-activation",
+    "validation",
+    "completion-evidence"
+  ],
+  "phase2_authorized": false,
+  "behavior_implemented": false,
+  "public_api_stable": false,
+  "support_state": "unsupported",
+  "bh06_eligible": false,
+  "delivery": {
+    "sections": [
+      "1.1",
+      "1.2",
+      "1.3",
+      "1.4"
+    ],
+    "pr_count": 1,
+    "merge": "merge-commit",
+    "cleanup_order": [
+      "merge-pr",
+      "checkout-main",
+      "sync-origin",
+      "delete-feature-branch"
+    ]
+  },
+  "source_bindings": {
+    "docs/research/assets/bh-04-correction/decision.json": "9158a66af6d376cdec5c957b0f64fed72d307c98ff38a4bf43d094cfda5d3179",
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-entry-ledger-v0.1.0.json": "7bba11ac034d81a6db1b753b3f99ab3b2747667bf784d0fc41d3634e744f8f56",
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-completion-v0.1.0.json": "9b8f0e20a734532d2eb6a5eb4899b5dcd4bbf17f193287fc1ddfa2c76abe7f5a",
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-release-index-v0.1.0.json": "c555f57d58188cd29e31982da8137b27f21cddc8712da2eb4635e16249b7b8bf",
+    "docs/research/assets/bh-02-baseline/blazex-bh-02-contract-baseline-v0.1.0.json": "b1969f57f707adc834fd221b5758c2cfb41683a9ab8aaf1439f355f883bd430a",
+    "docs/research/assets/quality-acceptance/blazex-acceptance-registry-v0.1.0.json": "43025d17513f068eb1ac0838a381da4c132bf41b74aa602bffdc130e411368ed",
+    "docs/research/assets/quality-acceptance/blazex-quality-contract-v0.1.0.json": "21d69d966ed4888ca0f09b957f3a74edfda843af0de23ec4098237ef3d759326",
+    "docs/research/20-notes/browser-host-implementation-milestones.md": "57a77bae8e6f8bd76292c06c839d1c8716ebe53d41cb0fac7e475b0c404f36d2",
+    "docs/research/60-planning/development-environment-and-deferred-qualification-policy.md": "124b924dcd53770e55f47d07288f132acab53bed2d16007bb96edc8835c0ea9a",
+    "docs/research/60-planning/liveview-integration-deferral.md": "3a2c3790c560191afd60f631576813760c7bbb4c05909a6f6a88058823e61e48",
+    "docs/research/20-notes/architecture-decisions/adr-0001-host-neutral-semantic-component-kernel.md": "b99fb71e09caad0f00f27b8d945f573eca749e2c2f336b21dd9f42de8742f329",
+    "docs/research/20-notes/architecture-decisions/adr-0002-versioned-semantic-ui-tree.md": "9d5fa9d3bae06e93836ad46fff79c2301456ee912263906e613b18f085283745",
+    "docs/research/20-notes/architecture-decisions/adr-0003-host-neutral-effects-capabilities-and-resources.md": "2c99891c5f780afddbb85083d4300c2e1b5d453536c5198ff32a88037522df74",
+    "docs/research/20-notes/architecture-decisions/adr-0004-renderer-backend-separation.md": "c221548f8c42a4e2560293b66fdaa2ae5d254a433acef11799906e4243d35354",
+    "docs/research/20-notes/architecture-decisions/adr-0005-server-adapter-and-trust-boundary.md": "5f2d34113308a36192d5d88bd36850d79d810a95b28d57d2e5a49c6c0f803766"
+  },
+  "phase_plan_hashes": {
+    "docs/research/60-planning/01-browser-host/bh-05-component-programming-model-and-lifecycle/phase-01-authorization-bh-04-handoff-reconciliation-and-boundary-activation.md": "77540869ebc52cd17b4f2fd186244024908505b3baaa7f7aa0e6d1619001959d",
+    "docs/research/60-planning/01-browser-host/bh-05-component-programming-model-and-lifecycle/phase-02-component-roles-authoring-facade-and-callback-algebra.md": "c1550f2ad4703466df5e121205d68486dd71a242f45504fa35c275c957e830f6",
+    "docs/research/60-planning/01-browser-host/bh-05-component-programming-model-and-lifecycle/phase-03-prop-slot-and-host-boundary-contracts.md": "a94c42872addabc27f50d1d62d7a4349509ef180f5da180987e4c1e49ab72051",
+    "docs/research/60-planning/01-browser-host/bh-05-component-programming-model-and-lifecycle/phase-04-pure-composition-and-atomic-semantic-evaluation.md": "a77f31b07abf8a572ac1ecd04dd7efc28d08523ef42dbb24bdb42467f7e2d263",
+    "docs/research/60-planning/01-browser-host/bh-05-component-programming-model-and-lifecycle/phase-05-nested-stateful-identity-and-update-reconciliation.md": "e6e7d026856e26fe2fcb2b8768ab053e4d07e3581d6ea1ec1ff2b46006b7b994",
+    "docs/research/60-planning/01-browser-host/bh-05-component-programming-model-and-lifecycle/phase-06-process-root-local-view-lifecycle-and-supervision.md": "d1436d0521e913846075fb95fdf1f4796f84991060b9a40a73c07a05b68056e7",
+    "docs/research/60-planning/01-browser-host/bh-05-component-programming-model-and-lifecycle/phase-07-event-message-timer-and-transition-scheduling.md": "a093692d7a61fce0d7ad6b299ee0d6d02148044002a874aed3a1e3d331b90c91",
+    "docs/research/60-planning/01-browser-host/bh-05-component-programming-model-and-lifecycle/phase-08-effects-resources-and-typed-command-intent.md": "490875ffb0adc2729cae4219e5a6bf80cc24e7e755e039b76fcc0de384da2fcb",
+    "docs/research/60-planning/01-browser-host/bh-05-component-programming-model-and-lifecycle/phase-09-scoped-context-and-manifest-bounded-dynamic-components.md": "f339f64d5350e6974b7dc6f21cb97c14515cb37124416a9bd688727056b64d26",
+    "docs/research/60-planning/01-browser-host/bh-05-component-programming-model-and-lifecycle/phase-10-failure-containment-retry-replacement-and-disposal.md": "5bcf6ad70cb9121d602cb1888c59648679801f00873423a61fefc31bc0687013",
+    "docs/research/60-planning/01-browser-host/bh-05-component-programming-model-and-lifecycle/phase-11-erts-browser-atomvm-and-cross-backend-conformance.md": "56dc3ae50c533dc6368f2ca7d1dbdb9408e30fc98acd6a3dbef76122e4c4da44",
+    "docs/research/60-planning/01-browser-host/bh-05-component-programming-model-and-lifecycle/phase-12-reliability-measurement-review-and-bh-05-acceptance.md": "5534773516e5cd806a0e953f5a38bd21324faacb658d33e1479267f32d9779a9"
+  },
+  "plan_hash_normalization": "checkbox-only [x] to [ ]; no other content normalization",
+  "planning_origin": "Restored owner-authored BH-05 revisions; demo and root README excluded"
+}

@@ -25,6 +25,9 @@ insufficient. Record source, creator, license, provenance, and use.
 
 ### Subdirectories
 
+- [BH-05 activation baseline](bh-05-baseline/README.md) — governance-only entry,
+  inherited obligations and nine planned acceptance conditions.
+
 - [BH-04 corrective captures](bh-04-correction/README.md) — native presentation,
   controlled-draft regression and stronger stale-message evidence.
 

@@ -5,6 +5,9 @@ package boundaries. Package-local unit tests remain with their package; suites
 here exercise supported compositions and compare implementations against shared
 contracts.
 
+- [BH-05](bh-05/README.md) activates fourteen empty, schema-bound component-model
+  evidence classes. Phase 1 is governance-only, not component conformance.
+
 - `fixtures` contains deterministic shared applications, trees, events, and
   expected outcomes.
 - `conformance` verifies behavioral contracts across runtimes, renderers, and

@@ -1,0 +1,253 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 1,
+  "base_revision": "506c254ddd4a14dd8d1d4cbdba8fcf9556bd15cb",
+  "status": "governance-only",
+  "support_state": "unsupported",
+  "dependency_graph": {
+    "blazex_core": [],
+    "blazex_effects": [
+      "blazex_core"
+    ],
+    "blazex_ui_tree": [
+      "blazex_core"
+    ],
+    "blazex_renderer": [
+      "blazex_core",
+      "blazex_effects",
+      "blazex_ui_tree"
+    ],
+    "blazex_test": [
+      "blazex_core",
+      "blazex_effects",
+      "blazex_ui_tree",
+      "blazex_renderer"
+    ]
+  },
+  "owners": {
+    "blazex_core": [
+      "facade-metadata",
+      "schemas",
+      "lifecycle",
+      "identity",
+      "state",
+      "scheduling",
+      "context",
+      "registry",
+      "command-intent",
+      "diagnostics",
+      "root-process-contract"
+    ],
+    "blazex_ui_tree": [
+      "semantic-composition",
+      "output-validation"
+    ],
+    "blazex_effects": [
+      "typed-effects",
+      "capabilities",
+      "results",
+      "resource-leases",
+      "cancellation",
+      "timeout",
+      "disposal"
+    ],
+    "blazex_test": [
+      "public-fixtures",
+      "deterministic-schedulers",
+      "trace-normalization",
+      "cross-runtime-assertions"
+    ]
+  },
+  "roles": {
+    "pure": {
+      "retained_state": false,
+      "own_process": false,
+      "failure_owner": "process-root"
+    },
+    "nested-stateful": {
+      "retained_state": true,
+      "own_process": false,
+      "failure_owner": "process-root"
+    },
+    "process-root-local-view": {
+      "retained_state": true,
+      "own_process": true,
+      "failure_owner": "self"
+    }
+  },
+  "vocabulary_state": "planned-not-implemented",
+  "lifecycle": [
+    "unmounted",
+    "mounting",
+    "mounted",
+    "updating",
+    "committing",
+    "failed",
+    "replacing",
+    "disposing",
+    "disposed"
+  ],
+  "terminal_outcomes": [
+    "committed",
+    "rejected",
+    "failed",
+    "disposed"
+  ],
+  "values": {
+    "props": "parent-controlled input",
+    "slots": "declared semantic composition",
+    "local_state": "unit-owned retained data",
+    "context": "root-scoped named read contracts",
+    "messages": "root-mailbox input",
+    "events": "normalized local semantic input",
+    "effects": "capability-gated intent/results",
+    "resources": "owned cancellable leases",
+    "commands": "typed untrusted remote intent, no server authority"
+  },
+  "adapter_policy": "Runtime, hosts and renderers consume neutral contracts; they do not define component roles or callbacks. Server authorization remains outside local component state.",
+  "framework_deferral": "LiveView and LocalLiveView deferred; local-view means a BlazeX process-root, not either framework",
+  "inherited_api_inventory": [
+    {
+      "module": "BlazeX.Core.Component",
+      "path": "packages/blazex_core/lib/blazex/core/component.ex",
+      "sha256": "668682b943c4df1c590f3905d6d217a4efcdbfffded6e0c496272e2ddbbb8b7e",
+      "state": "inherited-experimental-not-bh05",
+      "owner": "core-owner",
+      "migration_phase": 2,
+      "disposition": "preserve experimental callbacks; supersede with three-role callback algebra; migrate generic emissions in Phase 8",
+      "public_declarations": [
+        "@callback mode() :: mode()",
+        "@callback render(props(), Context.t()) :: {:ok, output()} | {:error, term()}",
+        "@callback init(props(), Context.t()) :: {:ok, state()} | {:error, term()}",
+        "@callback update(props(), state(), Context.t()) :: {:ok, state()} | {:error, term()}",
+        "@callback render(props(), state(), Context.t()) :: {:ok, output()} | {:error, term()}",
+        "@callback handle_event(Event.t(), props(), state(), Context.t()) ::"
+      ]
+    },
+    {
+      "module": "BlazeX.Core.Context",
+      "path": "packages/blazex_core/lib/blazex/core/context.ex",
+      "sha256": "9a2ae58d583ed2dade930b7c7db7ef629e6e3ac68c28a467dab99808dd8b58a3",
+      "state": "inherited-experimental-not-bh05",
+      "owner": "core-owner",
+      "migration_phase": 9,
+      "disposition": "preserve per-evaluation context; migrate to root-scoped named context",
+      "public_declarations": [
+        "defstruct [:identity, :revision, :transition]"
+      ]
+    },
+    {
+      "module": "BlazeX.Core.Diagnostic",
+      "path": "packages/blazex_core/lib/blazex/core/diagnostic.ex",
+      "sha256": "c1bdfe12a4b3491a7b07e395fd31fbe884f4be8b6cfddfab5a9e08ed4de3a071",
+      "state": "inherited-experimental-not-bh05",
+      "owner": "core-owner",
+      "migration_phase": 10,
+      "disposition": "preserve redaction; extend governed failure diagnostics without leaking callback values",
+      "public_declarations": [
+        "defstruct [:code, :stage, :component, :detail]"
+      ]
+    },
+    {
+      "module": "BlazeX.Core.Evaluation",
+      "path": "packages/blazex_core/lib/blazex/core/evaluation.ex",
+      "sha256": "3b0f3d8b1f2ba8805c710864074c387d7aba402a6fc080c13cdd088b4ac60b94",
+      "state": "inherited-experimental-not-bh05",
+      "owner": "core-owner",
+      "migration_phase": 5,
+      "disposition": "preserve internal accepted evaluation; migrate nested state and root ownership",
+      "public_declarations": [
+        "defstruct ["
+      ]
+    },
+    {
+      "module": "BlazeX.Core.Evaluator",
+      "path": "packages/blazex_core/lib/blazex/core/evaluator.ex",
+      "sha256": "5ddc15afe7eb2888635c8c7086562fcc1389f6966afe6248b103e8b15ad77e18",
+      "state": "inherited-experimental-not-bh05",
+      "owner": "core-owner",
+      "migration_phase": 4,
+      "disposition": "preserve bounded experimental evaluator; migrate composition and scheduling in Phases 4-7, replace generic emissions in Phase 8 and arbitrary module selection in Phase 9",
+      "public_declarations": [
+        "def mount(component, identity, props), do: do_mount(component, identity, props, :mount)",
+        "def update(%Evaluation{} = evaluation, props) do",
+        "def update(value, _props), do: diagnostic(:invalid_evaluation, :update, component_of(value))",
+        "def dispatch(%Evaluation{} = evaluation, %Event{} = event) do",
+        "def dispatch(%Evaluation{} = evaluation, _event),",
+        "def dispatch(value, _event), do: diagnostic(:invalid_evaluation, :event, component_of(value))",
+        "def replace(%Evaluation{} = evaluation, props) do",
+        "def replace(value, _props), do: diagnostic(:invalid_evaluation, :replace, component_of(value))"
+      ]
+    },
+    {
+      "module": "BlazeX.Core.Event",
+      "path": "packages/blazex_core/lib/blazex/core/event.ex",
+      "sha256": "8ee5bfe1cdcfa974e75545c8de62a6d58009678fbb4ebc21e8acb11f30a6f221",
+      "state": "inherited-experimental-not-bh05",
+      "owner": "core-owner",
+      "migration_phase": 7,
+      "disposition": "preserve versioned semantic envelope; reconcile root transition scheduling",
+      "public_declarations": [
+        "defstruct [:version, :name, :owner, :source, :payload, :sequence]",
+        "def version, do: @version",
+        "def names, do: @names",
+        "def name?(name), do: name in @names",
+        "def new(name, owner, source, payload \\\\ %{}, sequence \\\\ 1) do",
+        "def valid?(%__MODULE__{} = event) do",
+        "def valid?(_event), do: false"
+      ]
+    },
+    {
+      "module": "BlazeX.Core.Identity",
+      "path": "packages/blazex_core/lib/blazex/core/identity.ex",
+      "sha256": "46d62a903ba4e3df049ecf94efc174009c4b2c5c54f29f8507a042d18356e8c4",
+      "state": "inherited-experimental-not-bh05",
+      "owner": "core-owner",
+      "migration_phase": 5,
+      "disposition": "preserve root/path/generation identity; reconcile nested keyed lifetime",
+      "public_declarations": [
+        "defstruct [:root, :path, :generation]",
+        "def new(root, generation \\\\ 1) do",
+        "def child(%__MODULE__{} = parent, key) do",
+        "def child(_parent, _key), do: {:error, :invalid_identity}",
+        "def replace(%__MODULE__{} = identity) do",
+        "def replace(_identity), do: {:error, :invalid_identity}",
+        "def contains?(%__MODULE__{} = owner, %__MODULE__{} = candidate) do",
+        "def contains?(_owner, _candidate), do: false",
+        "def valid?(%__MODULE__{root: root, path: path, generation: generation}) do",
+        "def valid?(_identity), do: false",
+        "def portable_key?(term), do: portable_key?(term, 0)"
+      ]
+    },
+    {
+      "module": "BlazeX.Core.Portable",
+      "path": "packages/blazex_core/lib/blazex/core/portable.ex",
+      "sha256": "ad04e12be48577a768d254d809a0fb5621bc795bf1ca0d3f034335852ed9f10b",
+      "state": "inherited-experimental-not-bh05",
+      "owner": "core-owner",
+      "migration_phase": 3,
+      "disposition": "preserve bounded portable-value validation; reconcile prop and host-boundary schemas",
+      "public_declarations": [
+        "def valid?(term), do: valid?(term, 0)"
+      ]
+    },
+    {
+      "module": "BlazeX.Core",
+      "path": "packages/blazex_core/lib/blazex/core.ex",
+      "sha256": "0de587fe28a3a79c1db2c09978868114a3cac88c47f0d2a56761d065e12be58c",
+      "state": "inherited-experimental-not-bh05",
+      "owner": "core-owner",
+      "migration_phase": 2,
+      "disposition": "preserve namespace; supersede documentation with the future facade",
+      "public_declarations": []
+    }
+  ],
+  "forbidden_new_surfaces": [
+    "arbitrary module dispatch",
+    "unbounded generic emissions",
+    "private runtime imports",
+    "mutable instance handles",
+    "native toolkit types",
+    "server authority"
+  ]
+}

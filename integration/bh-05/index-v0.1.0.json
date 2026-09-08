@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0.0",
+  "milestone": "BH-05",
+  "phase": 1,
+  "status": "activated-empty",
+  "support_state": "unsupported",
+  "groups": {
+    "facade": [],
+    "schemas": [],
+    "composition": [],
+    "state": [],
+    "roots": [],
+    "scheduling": [],
+    "effects": [],
+    "context": [],
+    "registry": [],
+    "failure": [],
+    "runtime": [],
+    "measurement": [],
+    "review": [],
+    "acceptance": []
+  }
+}

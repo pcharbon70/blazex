@@ -1,118 +1,137 @@
 ---
-title: "Phase 6 - Process-Root Local-View Lifecycle and Supervision"
+title: "Phase 6 - Process-Root Local View Lifecycle and Supervision"
 kind: note
 created: "2026-09-06"
 maturity: developing
-tags: [bh-05, local-view, processes, supervision, implementation-planning]
-aliases: ["BH-05 phase 6"]
+tags:
+  - bh-05
+  - component-model
+  - implementation-planning
+  - local-view
+  - supervision
+aliases:
+  - "BH-05 phase 6"
 ---
 
-# Phase 6 - Process-Root Local-View Lifecycle and Supervision
+# Phase 6 - Process-Root Local View Lifecycle and Supervision
 
 Back to milestone: [README](README.md)
 
-- [ ] 6 Phase - Process-Root Local-View Lifecycle and Supervision.
+- [ ] 6 Phase - Process-Root Local View Lifecycle and Supervision.
 
-  Give independently mounted local views explicit BEAM/AtomVM process roots,
-  supervision, and termination semantics while nested components remain values.
+  Implement the independently supervised local-view root that owns one
+  component tree, mailbox, generation, transition coordinator, renderer root,
+  effects/resources, fallback, and final state. Preserve dependency direction
+  through abstract evaluator and commit ports rather than importing concrete
+  UI-tree, renderer, host, or runtime implementations into Core.
 
-  - [ ] 6.1 Section - Specify root process and supervisor contracts.
+  - [ ] 6.1 Section - Authorize and freeze root lifecycle semantics.
 
-    Define the smallest portable process boundary and the host responsibilities
-    required to start, observe, and stop it.
+    Bind nested component state plus BH-03/BH-04 root and renderer contracts,
+    then define process states and commit ownership before starting processes.
 
-    - [ ] 6.1.1 Task - Define local-view root ownership.
+    - [ ] 6.1.1 Task - Record bounded Phase 6 authority.
 
-      Bind one root identity to one lifecycle process, one component tree, one
-      serialized queue, and one renderer registration.
+      Establish provenance and keep full event/message/effect scheduling and
+      retry policy outside this phase.
 
-      - [ ] 6.1.1.1 Subtask - Define root startup arguments, validated bootstrap state, component entrypoint, and compatibility identity.
-      - [ ] 6.1.1.2 Subtask - Define owner, supervisor, monitor, renderer, and host relationships without exposing raw PIDs publicly.
-      - [ ] 6.1.1.3 Subtask - Prohibit a nested component from creating an implicit root or supervisor.
+      - [ ] 6.1.1.1 Subtask - Record synchronized base, branch, section commits, one PR, cleanup, Phase 5 completion, accepted BH-03/BH-04 contract identities, and explicit Phase 6 authorization.
+      - [ ] 6.1.1.2 Subtask - Bind local-view role, nested state, host/root lifecycle, renderer transaction/acknowledgement, semantic evaluator, diagnostics, and supervision assumptions by version and hash.
+      - [ ] 6.1.1.3 Subtask - Exclude general event backlog, user `handle_info`, timers, effect/command execution, context/registry, automatic retry, and support claims.
 
-    - [ ] 6.1.2 Task - Define root lifecycle states and transitions.
+    - [ ] 6.1.2 Task - Freeze process, transition, and commit states.
 
-      Specify created, initializing, mounted, updating, stopping, disposed, and
-      failed behavior with generation-scoped correlation.
+      Define legal root states and ensure candidate component state becomes
+      final only after semantic and renderer acceptance.
 
-      - [ ] 6.1.2.1 Subtask - Define legal transitions, idempotent requests, stale request rejection, and terminal invariants.
-      - [ ] 6.1.2.2 Subtask - Define mount readiness only after initial semantic publication succeeds.
-      - [ ] 6.1.2.3 Subtask - Define stop precedence over queued work and renderer/runtime loss.
+      - [ ] 6.1.2.1 Subtask - Define dormant, starting, mounting, evaluating, awaiting-commit, ready, updating, replacing, stopping, disposed, and failed states with legal transitions.
+      - [ ] 6.1.2.2 Subtask - Define root instance/generation/revision/sequence, accepted and candidate component tables, semantic output, renderer root/transaction correlation, and final-state digest ownership.
+      - [ ] 6.1.2.3 Subtask - Define process start/registration, one in-flight state transition, semantic reject, renderer reject/rollback, commit, host removal, shutdown, crash, and terminal acknowledgement behavior.
 
-  - [ ] 6.2 Section - Implement root startup, mount, update, and stop.
+  - [ ] 6.2 Section - Define evaluator, renderer-commit, and host lifecycle ports.
 
-    Build the process-root lifecycle on shared contracts without coupling the
-    core package to browser host or renderer modules.
+    Preserve the inward package graph by defining narrow Core-facing contracts
+    implemented by UI-tree, renderer/runtime, and host packages outwardly.
 
-    - [ ] 6.2.1 Task - Implement supervised root startup and readiness.
+    - [ ] 6.2.1 Task - Define the evaluator and commit interfaces.
 
-      Validate entrypoint and inputs, initialize the component tree, and publish
-      correlated readiness or a bounded failure.
+      Pass immutable portable transition envelopes and receive validated,
+      correlated results without concrete adapter types.
 
-      - [ ] 6.2.1.1 Subtask - Allocate root identity and generation before callback execution.
-      - [ ] 6.2.1.2 Subtask - Stage initial state/output and register the renderer only after complete success.
-      - [ ] 6.2.1.3 Subtask - Normalize startup exceptions, exits, timeouts, and invalid results without partial activation.
+      - [ ] 6.2.1.1 Subtask - Define evaluator requests/results for mount, parent-prop update, candidate render, replacement, and disposal planning over public Core records.
+      - [ ] 6.2.1.2 Subtask - Define semantic acceptance and renderer submission/acknowledgement interfaces with root/generation/revision/transaction correlation and stable failure classes.
+      - [ ] 6.2.1.3 Subtask - Prohibit callback modules from receiving port implementations, PIDs, renderer objects, DOM handles, host instances, or framework state.
 
-    - [ ] 6.2.2 Task - Implement serialized update and terminal stop.
+    - [ ] 6.2.2 Task - Define host and supervision interfaces.
 
-      Route root-owned work through one deterministic transition loop and make
-      stopping reject new work immediately.
+      Let runtime/host compositions start and stop roots while Core retains the
+      portable lifecycle meaning.
 
-      - [ ] 6.2.2.1 Subtask - Apply validated prop/context updates as monotonic root generations.
-      - [ ] 6.2.2.2 Subtask - Expose bounded status and diagnostics without component state disclosure.
-      - [ ] 6.2.2.3 Subtask - Dispose descendants, release renderer registration, acknowledge stop, and terminate exactly once.
+      - [ ] 6.2.2.1 Subtask - Define root start specification, validated bootstrap props, public component ID/module, root identity, fallback contract, capability summary, and owner correlation.
+      - [ ] 6.2.2.2 Subtask - Define root registration/readiness/removal/shutdown/crash notifications and supervisor child identity without binding to browser or Popcorn structures.
+      - [ ] 6.2.2.3 Subtask - Define monitoring/introspection records with bounded redacted state and prohibit public exposure of root PIDs as mutable component references.
 
-  - [ ] 6.3 Section - Implement supervision and root isolation.
+  - [ ] 6.3 Section - Implement the root process and basic supervised lifecycle.
 
-    Ensure one failed root cannot corrupt sibling roots, the shared runtime, or
-    another root's renderer registration.
+    Start, mount, update, commit, replace, and stop one root through the abstract
+    ports while preserving accepted state on failed candidates.
 
-    - [ ] 6.3.1 Task - Define and implement restart policy boundaries.
+    - [ ] 6.3.1 Task - Implement root startup and transition coordination.
 
-      Keep automatic restart conservative until later retry and recovery policy
-      is available.
+      Own one immutable lifecycle state and execute callbacks only through the
+      selected public component/evaluator contracts.
 
-      - [ ] 6.3.1.1 Subtask - Distinguish normal stop, application failure, invariant failure, host loss, and supervisor shutdown.
-      - [ ] 6.3.1.2 Subtask - Default fail closed without unbounded automatic restart or state resurrection.
-      - [ ] 6.3.1.3 Subtask - Preserve failure reports and cleanup obligations across process termination.
+      - [ ] 6.3.1.1 Subtask - Validate start input, initialize generation/revision, invoke mount evaluation, submit accepted semantic output, and publish readiness only after correlated renderer commit.
+      - [ ] 6.3.1.2 Subtask - Process validated parent-prop updates and explicit replacement as serialized candidate transitions with no state advance before commit.
+      - [ ] 6.3.1.3 Subtask - Handle semantic rejection, renderer rejection/rollback, stale/duplicate acknowledgement, host removal, and startup timeout without publishing false readiness or partial final state.
 
-    - [ ] 6.3.2 Task - Prove sibling and runtime isolation.
+    - [ ] 6.3.2 Task - Implement supervision and deterministic stop.
 
-      Exercise multiple roots with independent identities, queues, component
-      trees, renderer registrations, and terminal outcomes.
+      Integrate with ERTS and AtomVM-supported supervision primitives while
+      keeping policy and restart execution separately governed.
 
-      - [ ] 6.3.2.1 Subtask - Mount, update, stop, and remount roots independently through one compatible runtime.
-      - [ ] 6.3.2.2 Subtask - Crash one root and verify sibling state, output, and queue ordering remain unchanged.
-      - [ ] 6.3.2.3 Subtask - Reject cross-root messages, updates, state handles, and disposal requests.
+      - [ ] 6.3.2.1 Subtask - Provide a deterministic child specification and runtime-facing start/stop interface for uniquely identified roots.
+      - [ ] 6.3.2.2 Subtask - On normal stop/replacement/removal, invalidate admission, reject new work, coordinate renderer disposal, run nested disposal planning, and terminate exactly once.
+      - [ ] 6.3.2.3 Subtask - On crash, preserve redacted crash/generation metadata for the supervisor and ensure sibling roots/processes remain alive without automatically replaying work.
 
-  - [ ] 6.4 Section - Integration Tests and Completion Evidence.
+  - [ ] 6.4 Section - Phase 6 Integration Tests and Completion Evidence.
 
-    Run process lifecycle and supervision scenarios on available ERTS and the
-    browser-compatible runtime path without yet adding events or effects.
+    Exercise basic supervised root lifecycle with deterministic evaluator and
+    renderer doubles plus accepted BH-04 integration where available.
 
-    - [ ] 6.4.1 Task - Execute root-lifecycle integration scenarios.
+    - [ ] 6.4.1 Task - Run local-view lifecycle integration tests.
 
-      Cover startup, readiness, update, sibling isolation, crash, stop, repeated
-      stop, renderer loss, and remount.
+      Cover success, rejection, stale acknowledgement, process crash, sibling
+      isolation, and normal stop through public runtime-facing contracts.
 
-      - [ ] 6.4.1.1 Subtask - Compare lifecycle/state/output traces and terminal reports across execution targets.
-      - [ ] 6.4.1.2 Subtask - Verify no root, monitor, registration, or descendant survives terminal disposal.
-      - [ ] 6.4.1.3 Subtask - Verify nested component counts do not produce equivalent process-count growth.
+      - [ ] 6.4.1.1 Subtask - Test start/mount/commit/readiness, parent update/no-op/commit, replace/new generation, host removal, renderer disposal, stop, and remount.
+      - [ ] 6.4.1.2 Subtask - Test invalid bootstrap, mount/update/render failure, semantic rejection, renderer rejection/rollback, acknowledgement loss/duplicate/stale, startup timeout, and crash before/after commit.
+      - [ ] 6.4.1.3 Subtask - Prove accepted state/output/final digest advances only on commit, sibling roots survive, no public PID/adapter object leaks, and stop is idempotent.
 
-    - [ ] 6.4.2 Task - Publish completion evidence.
+    - [ ] 6.4.2 Task - Publish Phase 6 completion evidence.
 
-      Record the accepted process boundary and any runtime-specific deviation.
+      Record the lifecycle state machine, port contracts, supervision subset,
+      and unresolved scheduling/retry/resource behavior.
 
-      - [ ] 6.4.2.1 Subtask - Publish process/resource counts, traces, commands, versions, and injected-failure results.
-      - [ ] 6.4.2.2 Subtask - Mark unavailable external runtime/host qualification `[DEFERRED]` rather than passing or blocking.
-      - [ ] 6.4.2.3 Subtask - Mark Phase 7 eligible but unauthorized only after the complete gate passes.
+      - [ ] 6.4.2.1 Subtask - Run Core/UI-tree/renderer/headless/test and applicable BH-04 suites, lifecycle fixtures, dependency audits, validators, archive/generated checks, JSON validation, and patch hygiene.
+      - [ ] 6.4.2.2 Subtask - Publish transition tables, public contract inventories, trace hashes, exact commands/counts, crash/rejection outcomes, ERTS/AtomVM compatibility analysis, failures, and limitations.
+      - [ ] 6.4.2.3 Subtask - Mark Phase 6 complete only if final state and readiness are commit-correlated and roots are independently supervised; make Phase 7 eligible but unauthorized.
 
 ## Section delivery rule
 
 Complete and verify each section before its commit. Open one pull request only
-after Section 6.4 passes or records a truthful stop decision.
+after Section 6.4 passes or records a stop decision. A ready root with an
+uncommitted renderer state, cross-root crash, reverse dependency, or public
+mutable PID/adapter handle blocks completion.
 
 ## Connections
 
 - [BH-05 plan](README.md)
-- [BH-03 browser-host plan](../bh-03-browser-execution-host-and-runtime-boot-lifecycle/README.md)
+- [Phase 5](phase-05-nested-stateful-identity-and-update-reconciliation.md)
+- [Host-neutral component-kernel decision](../../../20-notes/architecture-decisions/adr-0001-host-neutral-semantic-component-kernel.md)
+- [Renderer backend separation](../../../20-notes/architecture-decisions/adr-0004-renderer-backend-separation.md)
+
+## Sources
+
+- [BH-02 renderer lifecycle fixtures](../../../../../integration/conformance/renderer-headless-fixtures-v0.1.0.json)
+- [Foundational component-semantics inquiry](../../../40-inquiries/which-foundational-component-semantics-does-blazex-need.md)

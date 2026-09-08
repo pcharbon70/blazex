@@ -8,9 +8,13 @@
   "current_phase": "BH-03 Phase 7",
   "bh03_role": "executable-composition-only",
   "owner_role": "browser-profile-owner",
-  "module_roots": ["BlazeXBrowserPhoenix"],
+  "module_roots": [
+    "BlazeXBrowserPhoenix"
+  ],
   "manifest": "mix.exs",
-  "test_entrypoints": ["test"],
+  "test_entrypoints": [
+    "test"
+  ],
   "dependencies": [],
   "planned_dependencies": [
     "blazex_runtime_popcorn",
@@ -20,7 +24,25 @@
     "blazex_phoenix",
     "js/blazex_runtime"
   ],
-  "must_not_own": ["reusable-component-logic", "runtime-internals", "generic-dom-lowering", "server-authority-rules"],
-  "forbidden_dependencies": ["blazex_core", "blazex_effects", "blazex_ui_tree", "blazex_renderer", "blazex_renderer_headless", "blazex_plug", "native-renderer"],
-  "public_api_state": "experimental-not-stable"
+  "must_not_own": [
+    "reusable-component-logic",
+    "runtime-internals",
+    "generic-dom-lowering",
+    "server-authority-rules"
+  ],
+  "forbidden_dependencies": [
+    "blazex_core",
+    "blazex_effects",
+    "blazex_ui_tree",
+    "blazex_renderer",
+    "blazex_renderer_headless",
+    "blazex_plug",
+    "native-renderer"
+  ],
+  "public_api_state": "experimental-not-stable",
+  "bh05_activation": {
+    "phase": 1,
+    "state": "governance-only",
+    "behavior_implemented": false
+  }
 }

@@ -3,8 +3,14 @@ title: "Phase 4 - Pure Composition and Atomic Semantic Evaluation"
 kind: note
 created: "2026-09-06"
 maturity: developing
-tags: [bh-05, pure-components, evaluation, semantic-tree, implementation-planning]
-aliases: ["BH-05 phase 4"]
+tags:
+  - bh-05
+  - component-model
+  - composition
+  - implementation-planning
+  - semantic-ui
+aliases:
+  - "BH-05 phase 4"
 ---
 
 # Phase 4 - Pure Composition and Atomic Semantic Evaluation
@@ -13,108 +19,117 @@ Back to milestone: [README](README.md)
 
 - [ ] 4 Phase - Pure Composition and Atomic Semantic Evaluation.
 
-  Implement deterministic pure-component expansion into validated semantic
-  output and publish output atomically so partial evaluation never reaches a
-  renderer.
+  Implement deterministic nested pure-component composition over validated
+  props and slots. Derive stable structural identity, evaluate children in a
+  canonical order, and accept one complete semantic output atomically without
+  retaining state, invoking host effects, or accessing a renderer.
 
-  - [ ] 4.1 Section - Specify evaluation context and composition rules.
+  - [ ] 4.1 Section - Authorize and freeze pure composition semantics.
 
-    Define the closed inputs, recursion model, identity path, and work limits
-    for pure evaluation.
+    Bind schema and semantic-tree inputs and define invocation, identity,
+    recursion, error, and output-acceptance rules before execution.
 
-    - [ ] 4.1.1 Task - Define the pure evaluation contract.
+    - [ ] 4.1.1 Task - Record bounded Phase 4 authority.
 
-      Establish callback ordering, child expansion, slot invocation, and the
-      absence of owned mutable state, effects, resources, and processes.
+      Establish exact provenance and keep retained state and process lifecycle
+      outside the phase.
 
-      - [ ] 4.1.1.1 Subtask - Define canonical input, context snapshot, component path, and output forms.
-      - [ ] 4.1.1.2 Subtask - Define deterministic depth-first expansion and source-order preservation.
-      - [ ] 4.1.1.3 Subtask - Reject effects, commands, timers, messages, resources, or state transitions from pure components.
+      - [ ] 4.1.1.1 Subtask - Record synchronized base, branch, section commits, one PR, cleanup, Phase 3 completion identity, and explicit Phase 4 authorization.
+      - [ ] 4.1.1.2 Subtask - Bind pure role, prop/slot schemas, structural identity, semantic tree/document/intent-set validation, limits, and diagnostics by version and hash.
+      - [ ] 4.1.1.3 Subtask - Exclude nested retained state, local-view processes, events/messages/effects, dynamic registry, renderer execution, HEEx/DOM output, and support claims.
 
-    - [ ] 4.1.2 Task - Define bounded evaluation and cycle handling.
+    - [ ] 4.1.2 Task - Freeze composition and atomicity rules.
 
-      Ensure malformed or recursive composition cannot monopolize the root
-      scheduler or produce partially committed output.
+      Define how call sites, explicit keys, slot entries, contextual values,
+      and child results form one deterministic semantic tree.
 
-      - [ ] 4.1.2.1 Subtask - Set depth, node-count, slot-expansion, callback-step, and output-size limits.
-      - [ ] 4.1.2.2 Subtask - Detect declaration and runtime composition cycles with stable paths.
-      - [ ] 4.1.2.3 Subtask - Define deterministic failure precedence when multiple limits or errors occur.
+      - [ ] 4.1.2.1 Subtask - Define child identity from root, parent path, component public identity, call-site identity, explicit sibling key, slot name, and generation without runtime-assigned randomness.
+      - [ ] 4.1.2.2 Subtask - Define canonical parent/slot/child evaluation order, duplicate identity rejection, recursion/depth/node/invocation bounds, and cycle diagnostics.
+      - [ ] 4.1.2.3 Subtask - Define candidate-output validation and require all-or-nothing acceptance so a failed descendant leaves no partial semantic output or state.
 
-  - [ ] 4.2 Section - Implement the pure evaluator and canonical output.
+  - [ ] 4.2 Section - Implement pure component invocation and composition.
 
-    Build a host-neutral evaluator over public component metadata and BH-02
-    semantic nodes.
+    Extend the evaluator from one opaque component output to an explicit tree
+    of validated pure invocations and semantic nodes.
 
-    - [ ] 4.2.1 Task - Implement validated recursive expansion.
+    - [ ] 4.2.1 Task - Implement invocation planning and identity derivation.
 
-      Resolve declared components, validate inputs, invoke callbacks, expand
-      slots, and normalize semantic output without renderer knowledge.
+      Normalize the full invocation graph before executing child callbacks.
 
-      - [ ] 4.2.1.1 Subtask - Implement path-scoped component resolution and prop/slot validation.
-      - [ ] 4.2.1.2 Subtask - Normalize fragments, empty output, keyed children, text, and semantic nodes.
-      - [ ] 4.2.1.3 Subtask - Return closed success/failure records with source and component paths.
+      - [ ] 4.2.1.1 Subtask - Build immutable invocation records from public facade calls with normalized props, slots, call-site/key identity, parent ownership, and declared output contract.
+      - [ ] 4.2.1.2 Subtask - Validate role, schema version, identity uniqueness, ownership, recursion, graph bounds, and prohibited local/host crossings before callback invocation.
+      - [ ] 4.2.1.3 Subtask - Produce deterministic traversal and diagnostic paths independent of map order, scheduler timing, module load order, or renderer behavior.
 
-    - [ ] 4.2.2 Task - Implement deterministic evaluation traces.
+    - [ ] 4.2.2 Task - Implement pure evaluation and slot expansion.
 
-      Expose testable traces without leaking sensitive values or making traces
-      part of renderer behavior.
+      Evaluate pure callbacks and caller-owned contextual slots into semantic
+      output without ambient mutation or side effects.
 
-      - [ ] 4.2.2.1 Subtask - Record callback entry/exit, validation, expansion, normalization, and failure steps.
-      - [ ] 4.2.2.2 Subtask - Canonicalize trace identifiers and redact disallowed payloads.
-      - [ ] 4.2.2.3 Subtask - Prove equivalent inputs produce equivalent output and trace digests.
+      - [ ] 4.2.2.1 Subtask - Invoke pure render callbacks with normalized props/slots/context and reject attempts to retain state, emit effects/commands, send messages, or access process/host/renderer handles.
+      - [ ] 4.2.2.2 Subtask - Expand default/named/contextual slots in caller scope with stable entry keys and semantic ancestry while preserving component diagnostic ownership.
+      - [ ] 4.2.2.3 Subtask - Memoize or skip nothing by implicit policy; any later optimization must preserve exact callbacks, diagnostics, output, and ordering or be separately governed.
 
-  - [ ] 4.3 Section - Implement transactional publication and failure isolation.
+  - [ ] 4.3 Section - Implement atomic semantic output acceptance.
 
-    Stage complete semantic output before committing it to a renderer-facing
-    generation.
+    Validate the composed tree, bindings, layout, accessibility, focus,
+    selection, effects references, and root identity before returning success.
 
-    - [ ] 4.3.1 Task - Add atomic evaluation generations.
+    - [ ] 4.3.1 Task - Compose and validate complete semantic output.
 
-      Separate working output from the last accepted generation and publish one
-      complete generation only after validation.
+      Merge child outputs through UI-tree-owned constructors rather than direct
+      struct manipulation in application code.
 
-      - [ ] 4.3.1.1 Subtask - Allocate monotonic root-scoped evaluation generations.
-      - [ ] 4.3.1.2 Subtask - Commit complete normalized output and metadata as one immutable result.
-      - [ ] 4.3.1.3 Subtask - Preserve the prior accepted generation after callback, validation, or limit failure.
+      - [ ] 4.3.1.1 Subtask - Compose semantic nodes/documents/intent sets while preserving derived identity, binding ownership, relationship targets, child order, and declared capabilities.
+      - [ ] 4.3.1.2 Subtask - Validate the entire output for identity, bounds, semantics, accessibility relationships, focus/selection targets, and opaque resource references before acceptance.
+      - [ ] 4.3.1.3 Subtask - Return one accepted output or one redacted deterministic diagnostic and discard every candidate-only invocation/output record on failure.
 
-    - [ ] 4.3.2 Task - Add deterministic failure surfaces.
+    - [ ] 4.3.2 Task - Add deterministic pure-composition traces.
 
-      Keep application failure data neutral and ready for later containment
-      policy without invoking a renderer or retry loop.
+      Record enough public observations to compare runtimes and backends later
+      without exposing private evaluator internals.
 
-      - [ ] 4.3.2.1 Subtask - Classify validation, callback, output, cycle, and budget failures.
-      - [ ] 4.3.2.2 Subtask - Normalize exceptions, throws, exits, and malformed returns into bounded failure records.
-      - [ ] 4.3.2.3 Subtask - Prove failed evaluations produce no renderer batch, effects, resources, or commands.
+      - [ ] 4.3.2.1 Subtask - Emit normalized invocation-enter/exit, slot expansion, semantic-node acceptance, callback rejection/failure, and final-output digest trace events.
+      - [ ] 4.3.2.2 Subtask - Exclude wall-clock/process IDs, stack traces, raw props/state, module-private names, and host/renderer data from canonical traces.
+      - [ ] 4.3.2.3 Subtask - Ensure identical validated inputs produce identical output and trace digests across repeated ERTS executions.
 
-  - [ ] 4.4 Section - Integration Tests and Completion Evidence.
+  - [ ] 4.4 Section - Phase 4 Integration Tests and Completion Evidence.
 
-    Prove deterministic pure composition and atomic publication through the
-    headless oracle and available execution targets.
+    Exercise representative and adversarial pure trees through the public
+    facade and compare accepted output with the headless semantic oracle.
 
-    - [ ] 4.4.1 Task - Execute pure-component integration scenarios.
+    - [ ] 4.4.1 Task - Run pure-composition integration tests.
 
-      Cover nested composition, slots, keys, limits, failures, repeated input,
-      and last-good-output preservation.
+      Cover nested props/slots, keys, semantic intent, failures, limits, and
+      deterministic replay.
 
-      - [ ] 4.4.1.1 Subtask - Compare semantic output and trace digests across repeated ERTS runs and browser-compatible execution.
-      - [ ] 4.4.1.2 Subtask - Inject callback, cycle, malformed-output, and budget failures and verify atomic rollback.
-      - [ ] 4.4.1.3 Subtask - Confirm public examples import no private runtime or renderer modules.
+      - [ ] 4.4.1.1 Subtask - Test nested pure layout/action/field/selection/list/surface composition, default/named/contextual slots, explicit keys, repeated calls, and complete semantic intent.
+      - [ ] 4.4.1.2 Subtask - Test missing/invalid props/slots, duplicate keys, recursive cycles, depth/node/invocation overflow, wrong root/relationship, callback exception/rejection, and prohibited emissions.
+      - [ ] 4.4.1.3 Subtask - Replay all fixtures repeatedly and compare output/trace digests plus headless normalized semantics with no private package imports in application code.
 
-    - [ ] 4.4.2 Task - Publish completion evidence.
+    - [ ] 4.4.2 Task - Publish Phase 4 completion evidence.
 
-      Record the exact evaluator contract and maintain later lifecycle work as
-      visibly absent.
+      Record the pure composition contract, fixture coverage, determinism, and
+      all unresolved stateful/runtime questions.
 
-      - [ ] 4.4.2.1 Subtask - Publish canonical fixtures, hashes, command logs, counts, and expected negative results.
-      - [ ] 4.4.2.2 Subtask - Confirm no stateful reconciliation, process lifecycle, scheduling, effects, or retries were introduced.
-      - [ ] 4.4.2.3 Subtask - Mark Phase 5 eligible but unauthorized only after the complete gate passes.
+      - [ ] 4.4.2.1 Subtask - Run Core/UI-tree/headless/test suites, composition fixtures, boundary audits, validators, archive/generated checks, JSON validation, and patch hygiene.
+      - [ ] 4.4.2.2 Subtask - Publish public example sources, normalized output/trace hashes, commands/counts, negative diagnostics, dependency audit, failures, and limitations.
+      - [ ] 4.4.2.3 Subtask - Mark Phase 4 complete only if complete pure trees accept atomically and deterministically; make Phase 5 eligible but unauthorized.
 
 ## Section delivery rule
 
 Complete and verify each section before its commit. Open one pull request only
-after Section 4.4 passes or records a truthful stop decision.
+after Section 4.4 passes or records a stop decision. Pure composition may not
+retain state, emit work, access a host/renderer, or claim independent failure
+isolation.
 
 ## Connections
 
 - [BH-05 plan](README.md)
-- [BH-02 semantic-kernel plan](../bh-02-host-neutral-semantic-kernel-gate/README.md)
+- [Phase 3](phase-03-prop-slot-and-host-boundary-contracts.md)
+- [Versioned semantic UI tree](../../../20-notes/architecture-decisions/adr-0002-versioned-semantic-ui-tree.md)
+- [Host-neutral component-kernel decision](../../../20-notes/architecture-decisions/adr-0001-host-neutral-semantic-component-kernel.md)
+
+## Sources
+
+- [BH-02 semantic-kernel fixtures](../../../../../integration/conformance/semantic-kernel-fixtures-v0.1.0.json)
+- [BH-02 headless fixtures](../../../../../integration/conformance/renderer-headless-fixtures-v0.1.0.json)
