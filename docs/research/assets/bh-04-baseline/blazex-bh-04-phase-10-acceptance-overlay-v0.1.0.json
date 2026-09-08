@@ -1,0 +1,100 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 10,
+  "decision": "revise",
+  "conditions": [
+    {
+      "id": "BX-ACC-BUDGET-BX-BUD-INTERACTION-DOM-UPDATE-MS",
+      "subject": "BX-BUD-INTERACTION-DOM-UPDATE-MS",
+      "owner": "dom-renderer-owner",
+      "state": "blocked-missing-paint-evidence",
+      "release_pass_credit": false,
+      "source_registry_state": "planned",
+      "evidence": [
+        "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-measurements-v0.1.0.json",
+        "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-statistics-v0.1.0.json"
+      ]
+    },
+    {
+      "id": "BX-ACC-BUDGET-BX-BUD-RELIABILITY-RENDERER-QUEUE-COUNT",
+      "subject": "BX-BUD-RELIABILITY-RENDERER-QUEUE-COUNT",
+      "owner": "renderer-owner",
+      "state": "active-development-evidence-release-unqualified",
+      "release_pass_credit": false,
+      "source_registry_state": "planned",
+      "evidence": [
+        "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-measurements-v0.1.0.json",
+        "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-statistics-v0.1.0.json"
+      ]
+    },
+    {
+      "id": "BX-ACC-BUDGET-BX-BUD-RELIABILITY-STALE-REJECTION-PERCENT",
+      "subject": "BX-BUD-RELIABILITY-STALE-REJECTION-PERCENT",
+      "owner": "runtime-owner",
+      "state": "active-development-evidence-release-unqualified",
+      "release_pass_credit": false,
+      "source_registry_state": "planned",
+      "evidence": [
+        "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-measurements-v0.1.0.json",
+        "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-statistics-v0.1.0.json"
+      ]
+    },
+    {
+      "id": "BX-ACC-FAILURE-BX-FAIL-RENDERER",
+      "subject": "BX-FAIL-RENDERER",
+      "owner": "renderer-owner",
+      "state": "active-development-evidence-release-unqualified",
+      "release_pass_credit": false,
+      "source_registry_state": "planned",
+      "evidence": [
+        "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-effect-browser-v0.1.0.json",
+        "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-atomic-browser-v0.1.0.json"
+      ]
+    },
+    {
+      "id": "BX-ACC-ROADMAP-BH-04",
+      "subject": "BH-04 DOM renderer and interaction transport",
+      "owner": "bh-04-owner",
+      "state": "blocked-independent-review-and-measurement",
+      "release_pass_credit": false,
+      "source_registry_state": "planned",
+      "evidence": [
+        "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-reconciliation-v0.1.0.json"
+      ]
+    }
+  ],
+  "open_blockers": [
+    {
+      "id": "BH04-10-PAINT",
+      "severity": "high",
+      "owner": "performance-owner",
+      "state": "open",
+      "blocks_acceptance": true,
+      "blocks_bh05": true,
+      "due": "before BH-04 acceptance",
+      "mitigation": "Add actual correlated compositor paint traces in both active browsers; freeze corrected method before new full measurement. No proxy-to-paint promotion.",
+      "review_trigger": "measurement method implemented"
+    },
+    {
+      "id": "BH04-10-INDEPENDENCE",
+      "severity": "high",
+      "owner": "quality-owner",
+      "state": "open",
+      "blocks_acceptance": true,
+      "blocks_bh05": true,
+      "due": "before BH-04 acceptance",
+      "mitigation": "Obtain separately authorized independent reviewers for all eight lenses; retain disagreements and resolve blockers against the final exact candidate.",
+      "review_trigger": "review authorization and reviewer availability"
+    }
+  ],
+  "source_hashes": {
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-authorization-v0.1.0.json": "69057e3eb97b98437a391cb3f6e403502a1f53b27e32f52d84c162f4ecd953ec",
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-reconciliation-v0.1.0.json": "443d95027fe50023cd2adde541e176ab5a8efc5e0294ac326f80351dda8b69bb",
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-review-v0.1.0.json": "6d3ab2ba3cda384b976f9dbde44f4be6bed48bcbad421c0e6a24d1af9bce9b76",
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-statistics-v0.1.0.json": "faded35a1c310d9f79a852d2ead2eb58f06dc7407c901f9d01103e0f0fa63ff1"
+  },
+  "canonical_registry_modified": false,
+  "bh05_eligible": false,
+  "next_authorized_work": null,
+  "support_state": "unsupported"
+}

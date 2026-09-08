@@ -1,0 +1,199 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 10,
+  "base_revision": "23176db2ff608084e9f779943eadcd0eed1926af",
+  "decision": "revise",
+  "bh04_accepted": false,
+  "bh05_eligible": false,
+  "next_authorized_work": null,
+  "support_state": "unsupported",
+  "api_state": "experimental-not-stable",
+  "indexes": {
+    "protocol": {
+      "integration/bh-04/protocol-cases.mjs": "89aa7158d812418b51cb50c3ecbe0bec14026fa910d1a00aed05731320c12d77",
+      "integration/bh-04/protocol-fixtures-v0.1.0.txt": "6698589912800c95c0025e73b4c3045b677c18484a57224032b1b666841c2e37",
+      "integration/bh-04/protocol-fixtures.mjs": "46e0659a8693b91cfe6f1214ce3575cce89ffb1b00276db7edc5e508d8fcc807",
+      "integration/bh-04/protocol-inventory-v0.1.0.json": "6b33c1a0c31136a44394bd54a9c98ffd822cc6e7ad2eb6013f3727616ad42bee",
+      "integration/bh-04/protocol-results-v0.1.0.txt": "bdf708a88d6103d481f13b7b23b9980d00c5338bed5a7ab9cc259119bd7e4d4e",
+      "integration/bh-04/reconciliation-protocol-fixtures-v0.1.0.txt": "f94a1da861f22794c68df412ca23ef3483a6ad3005a9c0100d30792c223dffaf",
+      "integration/bh-04/reconciliation-protocol-results-v0.1.0.txt": "354e934999f31137bbc5f9d5c98d6e038b09d3724518df0b6c43ab68b25c3424",
+      "integration/bh-04/render-transaction-v2.schema.json": "c150d066880db9cf83b89fcbc50a02011a6715bbcaecabf04bf6412ac0795a73",
+      "integration/bh-04/render-transaction.schema.json": "634f1e2d482845e3984624a842c27ac15f64eb1fff386407bf7ca88570a34807",
+      "integration/bh-04/support/protocol_runner.exs": "33d131e3e52ad0d95e8b24d68bc42f663aeadbd3f7f48607cc6253b7e18455c0",
+      "integration/bh-04/support/reconciliation_protocol_runner.exs": "62ecb50d20b4f96b51ec1c4f6e121bafb97a0da4e2d3c9c990a17520e3ab86ab",
+      "js/blazex_runtime/src/render-transaction-codec.js": "f4a4e20ae9ba3bc6f63694efe760ed1d8f3820948b942d625f975f31027b29d7",
+      "js/blazex_runtime/src/render-transaction-schema.js": "e680229c85d322c9f144dc4b82439b91d0777e7bcca40e1c5bf4f4014a8d5a2c",
+      "js/blazex_runtime/src/render-transaction-v2-schema.js": "a8dfe3cf43a4a152a4bbe91fb43a57470c7fae8d75481f17e011408e2221a10a",
+      "js/blazex_runtime/src/render-transaction-v2.js": "628389038ed687288bb1777ea4602f4c8a009c4ff94b45c6efeb025a53e0c23d",
+      "js/blazex_runtime/src/render-transaction.js": "4775e7bbc45f89249990b9dfbe3b16e618f0da2948ebb4cc79b0be5eae8f2739"
+    },
+    "reconciliation": {
+      "packages/blazex_renderer_dom/lib/blazex/renderer/dom/reconciled_session.ex": "1d4b82e8d9c71b724151a22247c1cc6f64cf05891effa31369b83ccdf85b6003",
+      "packages/blazex_renderer_dom/lib/blazex/renderer/dom/reconciler.ex": "8b09a9cafc5d0d2c26e5e1ed2f902c74fcbab9b3c7eb88c059d2ade486d802ca",
+      "packages/blazex_renderer_dom/lib/blazex/renderer/dom/retained.ex": "602d1b62b24fc28da5dfee6bd6a25c0370b138d22aa3070985b7c3beb896b0d9",
+      "packages/blazex_renderer_dom/test/reconciled_session_test.exs": "f3d6d6ea402f3b6caea1cc74fb0d868694cd86c888af777344c74aafef892960",
+      "packages/blazex_renderer_dom/test/reconciler_test.exs": "0190d5f3ddb500d47cc72a5d960e8deed4c5cdc0be2426a73c8c4a39df1291e2"
+    },
+    "dom": {
+      "js/blazex_runtime/src/atomic-dom.js": "c0312c1843d481dfb260d590821681b4a602eddb194acacbf7326d6ecd12faec",
+      "js/blazex_runtime/src/dom-root-queue.js": "5bce1903b5ba04e4406a3ed72c10038dc20bb2d02d5b05f6bee5e9f0a1317f8e",
+      "js/blazex_runtime/src/dom-transaction-plan.js": "236701c98d25d0521c5a8ef0d878fa4b30d479d3749e4f5cb71bb450130be3ae"
+    },
+    "interaction": {
+      "js/blazex_runtime/src/interaction-listeners.js": "1a2e336e7ca16dfbe9239ef04bc57cda0ca9c26622ebb35c2a2902daf2bcfbec",
+      "js/blazex_runtime/src/interaction-record.js": "9b059fbf7bae73e5617f887c2c666511eb272ecf80ae448f7b34b949a0991aa0",
+      "js/blazex_runtime/src/interaction-stream.js": "277daac8b65a07fccd383fe46ef83615dec01195219703467b7e5be346d711b1"
+    },
+    "continuity": {
+      "js/blazex_runtime/src/continuity-wire.js": "158fe76a3cbcb82068976ce810068cf998785e3d9d6ecc20a5cef7d48779fc2b",
+      "js/blazex_runtime/src/focus-continuity.js": "9eb250b1926793a62ec29084abaf39cce228774f722ab71e4d925a7e186d5ea7",
+      "js/blazex_runtime/src/form-continuity.js": "e223ce5d668eb1ea8a789dd191abe551fd847b51fc748d1830610a893dc79306"
+    },
+    "effects": {
+      "js/blazex_runtime/src/effect-dom.js": "1c0a6a32152a4566b656def1b421ada570c75caf5b7a74241b3178f02ffbc55b",
+      "js/blazex_runtime/src/effect-wire.js": "9ee6514782ef6894cc6e9dbec7401f1c41b62b4ac3ba280e9baa1a0ab7c44dcf",
+      "js/blazex_runtime/src/renderer-failure.js": "f0a376c8b229adcc0a087baa66fd1f52b3f0a2aa3e73d58ab3ced07bda447491",
+      "js/blazex_runtime/src/renderer-resources.js": "1d880641d1d2173a6a83de0a09d0219e316bd6bfb271b94b690f6e89da6ddc44"
+    },
+    "conformance": {
+      "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-atomic-browser-v0.1.0.json": "d1d51eb0cba1aa776c71f74bc32eb3c81c82edb269cab77d961b4909c7ac85b6",
+      "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-continuity-browser-v0.1.0.json": "2259112d65eed4203a3869e5089cef6af4d0a05abfedf0092728504aea46c906",
+      "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-effect-browser-v0.1.0.json": "f453cca56456a869749ff1106907777cde5671a8355b426e6c7eb674dd7d2a70",
+      "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-interaction-browser-v0.1.0.json": "b2b3f81c5c5193134a0d175c5fddae247ec9ccb09c46e51e04560df31814d7f4",
+      "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-semantic-browser-v0.1.0.json": "c09bb6ae9dc75d1a4bd6acb4911f62bca5c88490adee9b35bd3ff6465c1afa77"
+    },
+    "dependency": {
+      "experiments/native_renderer_spike/mix.exs": "7c41b791b1a4340eb8055743e449ba3972380246c2af763d2500460de9bec138",
+      "integration/conformance/mix.exs": "7b7ca7f00c486b131e650cb9ea5de482c494c4adafb29d7abe9134c624c1a8f0",
+      "integration/fixtures/browser_host/mix.exs": "44c3c6963767694615bdcc7ca88e3dc7ab650d202631c6c2f6ff3cf0dbad39c6",
+      "integration/fixtures/browser_host/mix.lock": "22269a9764b2b7ec4a93aaa007040313f4a924b3031e91c72494dd19f9084c98",
+      "integration/fixtures/runtime_smoke/mix.exs": "b033f77656b3c24ed1f0da75c78c39e4d68b04386dbd5fd553eecf2f68b9acb3",
+      "integration/fixtures/runtime_smoke/mix.lock": "22269a9764b2b7ec4a93aaa007040313f4a924b3031e91c72494dd19f9084c98",
+      "js/blazex_runtime/package-lock.json": "0ccbfd5ac1486cf1cedb54f27c9890e091f38aac3d6bff046553eff55f1f47de",
+      "js/blazex_runtime/package.json": "5b079347089c9f83beb3d5392111f5591e57363ffed0cb03f6c5b2118b6bf135",
+      "packages/blazex_core/mix.exs": "c0f93a4b7f68ec6d282dec514c70d0ab02708278c65b08ddcf404bb7528a94dc",
+      "packages/blazex_effects/mix.exs": "bb8064d8458fc4f55f2a173a182fcf9f8299d92711bbee9ab1199dd69ddfcb29",
+      "packages/blazex_host_browser/mix.exs": "985ea50712ee702e53994ada38eea8525d27edac7aaa3ce4fc4202b3ebf17ec8",
+      "packages/blazex_phoenix/mix.exs": "20076870c7c66438b80e4fc44d44e806c4b0ebf7dbaf56eab38952f51aa1df3e",
+      "packages/blazex_renderer/mix.exs": "9c3ab132590f55b232a3d3326d92788ba4d39afd848e1feedae0186ffc9f9848",
+      "packages/blazex_renderer_dom/mix.exs": "bed51981a05189ba5a103ed1cc27a9427eafdfe6c90040ed8b5a8088667ae278",
+      "packages/blazex_renderer_dom/package.json": "b45ebf5071071220e206e9491a956bb61d9b15c289dacace5df88b73594849a8",
+      "packages/blazex_renderer_dom_liveview/mix.exs": "be2bcc6d1520fb327475c36695e0b03c91563ee71a160b9fa186499b509be9cc",
+      "packages/blazex_renderer_headless/mix.exs": "72e2484a39cde53557bc16eb89f6ffc9a2dc1bbf3217a1a89f20d1a3210cc6a5",
+      "packages/blazex_runtime_popcorn/mix.exs": "f9b3810501532fbf50256557575c5fada825f0977a578b2ea42ceab2ede054dd",
+      "packages/blazex_test/mix.exs": "f1a6a2800cb4dbbbab4c3f6fb3beb6ff8e5badef38106b103e2e82e2540cacf8",
+      "packages/blazex_ui_tree/mix.exs": "45093474bb98d4f2e75928aedc1fea691f51d02b3606d63ce82df7b6c5226e37",
+      "profiles/browser_phoenix/mix.exs": "325f4ff935747f81ffa9755f2078abd44ae45b77471732a4d26880469326b593",
+      "profiles/browser_phoenix/mix.lock": "3a510b25251ad87bf1c4bb4d62c6e42c718fcd885a776ca0301fad6e71d0ca86",
+      "profiles/headless/mix.exs": "f6bb41d18c226b3ec5d7d7867cf3f1f314a5e560be6a26e450559b9a2a6c9933"
+    },
+    "measurement": {
+      "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-measurements-v0.1.0.json": "218b6acc1739daffb953aa97046e59672fbd8429c18b7ff73dc1e495accf5f3c",
+      "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-statistics-v0.1.0.json": "faded35a1c310d9f79a852d2ead2eb58f06dc7407c901f9d01103e0f0fa63ff1"
+    },
+    "deferred_adapter": {
+      "docs/research/60-planning/liveview-integration-deferral.md": "3a2c3790c560191afd60f631576813760c7bbb4c05909a6f6a88058823e61e48"
+    }
+  },
+  "source_hashes": {
+    "docs/research/60-planning/01-browser-host/bh-04-dom-renderer-and-interaction-transport/phase-10-review.md": "b838dc94045568dfd217f226d4e1564214f73e5d4e8528027cb29b58bb7c88b1",
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-acceptance-overlay-v0.1.0.json": "034eb1a314b3f7a702e5d954cec9e2b936a97d34af4b0b8ffa96684aed809f93",
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-authorization-v0.1.0.json": "69057e3eb97b98437a391cb3f6e403502a1f53b27e32f52d84c162f4ecd953ec",
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-reconciliation-v0.1.0.json": "443d95027fe50023cd2adde541e176ab5a8efc5e0294ac326f80351dda8b69bb",
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-review-v0.1.0.json": "6d3ab2ba3cda384b976f9dbde44f4be6bed48bcbad421c0e6a24d1af9bce9b76",
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-statistics-v0.1.0.json": "faded35a1c310d9f79a852d2ead2eb58f06dc7407c901f9d01103e0f0fa63ff1"
+  },
+  "findings": [
+    {
+      "id": "BH04-10-PAINT",
+      "severity": "high",
+      "owner": "performance-owner",
+      "state": "open",
+      "blocks_acceptance": true,
+      "blocks_bh05": true,
+      "due": "before BH-04 acceptance",
+      "mitigation": "Add actual correlated compositor paint traces in both active browsers; freeze corrected method before new full measurement. No proxy-to-paint promotion.",
+      "review_trigger": "measurement method implemented"
+    },
+    {
+      "id": "BH04-10-INDEPENDENCE",
+      "severity": "high",
+      "owner": "quality-owner",
+      "state": "open",
+      "blocks_acceptance": true,
+      "blocks_bh05": true,
+      "due": "before BH-04 acceptance",
+      "mitigation": "Obtain separately authorized independent reviewers for all eight lenses; retain disagreements and resolve blockers against the final exact candidate.",
+      "review_trigger": "review authorization and reviewer availability"
+    },
+    {
+      "id": "BH04-10-ATTEMPT-RETENTION",
+      "severity": "medium",
+      "owner": "renderer-owner",
+      "state": "corrected-pending-final-gate",
+      "blocks_acceptance": false,
+      "blocks_bh05": false,
+      "due": "Phase 10 final gate",
+      "mitigation": "Exception path returns completed raw rows; both browsers must demonstrate a forced-failure probe retaining two keyed rows. First aborted attempt has no pass credit.",
+      "review_trigger": "harness exception handling change"
+    },
+    {
+      "id": "BH04-10-FORMATTING",
+      "severity": "low",
+      "owner": "renderer-owner",
+      "state": "corrected-pending-final-gate",
+      "blocks_acceptance": false,
+      "blocks_bh05": false,
+      "due": "Phase 10 final gate",
+      "mitigation": "Pinned formatter applied to seven support fixtures; regenerate and rerun active suite.",
+      "review_trigger": "fixture source change"
+    },
+    {
+      "id": "BH04-10-CLEAN-HOST",
+      "severity": "medium",
+      "owner": "qualification-owner",
+      "state": "bounded-condition",
+      "blocks_acceptance": false,
+      "blocks_bh05": false,
+      "due": "BH-22 before qualification",
+      "mitigation": "Repeat representative clean subset on independently controlled host; current offline Docker is clean build isolation, not a different operator or machine.",
+      "review_trigger": "independent host available"
+    }
+  ],
+  "deferred": [
+    {
+      "scope": "LiveView and LocalLiveView implementation and qualification",
+      "owner": "liveview-adapter-owner",
+      "state": "deferred",
+      "pass_credit": false,
+      "reactivation": "Separate explicit optional-integration authorization after BH-04; no automatic downstream activation"
+    },
+    {
+      "scope": "Unavailable external operating systems, physical devices and manual AT",
+      "owner": "qualification-owner",
+      "state": "deferred",
+      "pass_credit": false,
+      "reactivation": "BH-22 or earlier owning qualification milestone"
+    }
+  ],
+  "limits": [
+    "ERTS test-only DevTools/stdio carrier; no production Wasm endpoint",
+    "Computed accessibility is not native platform AX or manual AT qualification",
+    "Existing Popcorn/AtomVM private API pins remain inherited obligations",
+    "No public API, package release, Plug execution, server authority or browser support credit"
+  ],
+  "handoff": {
+    "state": "blocked-no-entry-manifest",
+    "required": "Resolve active findings, freeze corrected measurement method, rerun affected gates and independent reviews; only a new accepted decision can make BH-05 eligible",
+    "prohibited": [
+      "BH-05 implementation",
+      "public API stability",
+      "product controls",
+      "server authority",
+      "Plug support",
+      "prerender activation",
+      "release qualification"
+    ],
+    "separate_authorization_required": true
+  }
+}

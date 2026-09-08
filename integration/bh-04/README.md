@@ -16,6 +16,8 @@ benchmark pass, browser qualification, or support is claimed.
 
 ## Index
 
+- [Phase 10 fresh corpus checker](acceptance-corpora.mjs) — independently checks recorded browser counts, semantic observations, rollback, cleanup and isolation.
+
 - [Phase 10 reconciliation/release generator](acceptance-release.mjs) and [complete gate recorder](acceptance-gates.mjs) — reproducible decision overlays and retained command outputs.
 
 - [Phase 10 authorization freezer](acceptance-authorize.mjs), [browser measurements](acceptance-browser.mjs), [scenarios](acceptance-scenarios.js), [statistical reporter](acceptance-report.mjs) and [negative tests](acceptance-report.test.mjs) — final candidate measurements, explicitly distinguishing frame-opportunity timing from compositor paint.

@@ -19,6 +19,8 @@ maintenance conventions are defined in [`AGENTS.md`](AGENTS.md).
 
 ## Structure
 
+- [BH-04 Phase 10 acceptance validator](validate_bh04_acceptance.py) and [negative tests](test_validate_bh04_acceptance.py) — validates truthful revise evidence; `--require-accepted` blocks downstream entry.
+
 - [BH-04 Phase 10 history](bh04_phase10_history.py) — immutable accepted Phase 9 replay; never current acceptance credit.
 
 - [BH-04 conformance validator](validate_bh04_conformance.py) and [negative tests](test_validate_bh04_conformance.py) — exact Phase 9 sources, raw evidence, active/deferred ledger and replay checks.
