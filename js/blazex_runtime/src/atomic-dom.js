@@ -1,6 +1,7 @@
 import { DOMRootQueues } from "./dom-root-queue.js";
 import { decodeIntent } from "./render-intent-data.js";
 import { requireDOM } from "./dom-transaction-plan.js";
+import { InteractionListeners } from "./interaction-listeners.js";
 
 const claims = new WeakMap();
 const properties = ["value", "disabled", "readOnly", "hidden", "checked"];
@@ -16,9 +17,11 @@ export class AtomicDOMRoots {
   constructor(options) { this.#queues = new DOMRootQueues(options); }
   get lifecycle() { return this.#queues.lifecycle; }
   register(rootId) { return this.#queues.register(rootId); }
-  attach(handle, { container, owner, generation, fault = () => {} }) {
-    const dom = new AtomicDOM(container, fault);
+  attach(handle, { container, owner, generation, fault = () => {}, interactions = null }) {
+    requireDOM(interactions === null || interactions instanceof InteractionListeners, "ownership");
+    const dom = new AtomicDOM(container, fault, interactions);
     try {
+      interactions?.claim(handle.snapshot(), owner);
       return this.#queues.attach(handle, { owner, generation, preflight: args => dom.preflight(args), apply: args => dom.apply(args), release: () => dom.release() });
     } catch (error) { dom.release(); throw error; }
   }
@@ -28,11 +31,12 @@ export class AtomicDOMRoots {
 
 class AtomicDOM {
   #prefix = "bx-dom-" + crypto.randomUUID() + "-";
-  #container; #document; #nodes = new Map(); #listeners = []; #accepted = []; #fault; #released = false;
-  constructor(container, fault) {
+  #container; #document; #nodes = new Map(); #listeners = []; #accepted = []; #fault; #released = false; #interactions;
+  constructor(container, fault, interactions) {
     requireDOM(container?.nodeType === 1 && container.ownerDocument?.createElement && typeof fault === "function", "ownership");
     requireDOM(container.childNodes.length === 0, "ownership");
     this.#container = container; this.#document = container.ownerDocument; this.#fault = fault;
+    this.#interactions = interactions;
     const owned = claims.get(this.#document) ?? new Set();
     requireDOM(![...owned].some(other => other === container || other.contains(container) || container.contains(other)), "ownership");
     owned.add(container); claims.set(this.#document, owned);
@@ -60,13 +64,12 @@ class AtomicDOM {
       requireDOM((tag === "input" ? ["value", "checked", "disabled", "readOnly"] : tag === "button" ? ["value", "disabled"] : []).includes(op.name), "incompatible");
     }
   }
-  #unbind() { for (const { element, native, handler } of this.#listeners) element.removeEventListener(native, handler); this.#listeners = []; }
-  #bind(element, encoded) {
+  #unbind() { for (const { element, native, handler, id } of this.#listeners) { element.removeEventListener(native, handler); if (id) this.#interactions?.unregister(id); } this.#listeners = []; }
+  #bind(element, encoded, source) {
     for (const listener of decodeIntent(encoded) ?? []) {
-      // Phase 4 establishes listener ownership only. No event transport or effects.
-      const handler = () => {};
-      element.addEventListener(listener.native, handler);
-      this.#listeners.push({ element, native: listener.native, handler });
+      const registration = this.#interactions && !this.#interactions.snapshot().disposed ? this.#interactions.register(source, element, listener) : { handler: () => {}, id: null };
+      element.addEventListener(listener.native, registration.handler, { capture: false, passive: false });
+      this.#listeners.push({ element, native: listener.native, ...registration });
     }
   }
   #intent(element, node) {
@@ -98,7 +101,7 @@ class AtomicDOM {
     this.#unbind();
     for (const node of projection?.nodes ?? []) {
       const element = this.#nodes.get(node.id);
-      this.#intent(element, node); this.#bind(element, node.listeners);
+      this.#intent(element, node); this.#bind(element, node.listeners, node.id);
     }
     const focused = projection?.nodes.find(node => decodeIntent(node.focus)?.auto_focus);
     if (focused) this.#nodes.get(focused.id).focus();
@@ -130,6 +133,7 @@ class AtomicDOM {
   apply({ previous, next, transaction }) {
     const oldNodes = new Map(this.#nodes), journal = this.#capture(), active = this.#document.activeElement;
     try {
+      this.#interactions?.suspend();
       const created = new Map();
       // All allocations are detached and validated by the pure transaction plan first.
       for (const op of transaction.operations) if (op.type === "create") { requireDOM(!created.has(op.target), "duplicate"); created.set(op.target, this.#create({ id: op.target, tag: op.tag, text: op.text })); }
@@ -152,6 +156,8 @@ class AtomicDOM {
       if (transaction.kind === "dispose") { this.#container.replaceChildren(); this.#nodes.clear(); }
       this.#finishProjection(next); this.#fault("finalize", transaction.operations.length); this.#verify(next);
       this.#accepted = this.#capture();
+      if (next) this.#interactions?.publish(transaction);
+      else this.#interactions?.dispose();
       return { state: "committed" };
     } catch {
       try {
@@ -164,11 +170,13 @@ class AtomicDOM {
           r.element.replaceChildren(...r.children);
           if (r.selection) r.element.setSelectionRange(...r.selection);
         }
-        for (const node of previous?.nodes ?? []) this.#bind(this.#nodes.get(node.id), node.listeners);
+        for (const node of previous?.nodes ?? []) this.#bind(this.#nodes.get(node.id), node.listeners, node.id);
         if (active && this.#container.contains(active)) active.focus();
         requireDOM(this.#matches(journal), "rollback"); this.#accepted = journal;
+        this.#interactions?.resume();
         return { state: "rolled-back" };
       } catch {
+        this.#interactions?.dispose();
         try { this.#fault("fallback", -1); this.#reconstruct(previous); this.#verify(previous); }
         catch { this.#unbind(); this.#nodes.clear(); this.#container.replaceChildren(); }
         this.#accepted = this.#capture();
@@ -178,7 +186,7 @@ class AtomicDOM {
   }
   release() {
     if (this.#released) return;
-    this.#unbind(); this.#container.replaceChildren(); this.#nodes.clear(); this.#accepted = [];
+    this.#unbind(); this.#interactions?.dispose(); this.#container.replaceChildren(); this.#nodes.clear(); this.#accepted = [];
     this.#released = true; claims.get(this.#document).delete(this.#container);
   }
 }
