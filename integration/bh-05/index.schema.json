@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "milestone",
+    "phase",
+    "status",
+    "support_state",
+    "groups"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "milestone": {
+      "const": "BH-05"
+    },
+    "phase": {
+      "const": 1
+    },
+    "status": {
+      "const": "activated-empty"
+    },
+    "support_state": {
+      "const": "unsupported"
+    },
+    "groups": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "facade",
+        "schemas",
+        "composition",
+        "state",
+        "roots",
+        "scheduling",
+        "effects",
+        "context",
+        "registry",
+        "failure",
+        "runtime",
+        "measurement",
+        "review",
+        "acceptance"
+      ],
+      "properties": {
+        "facade": {
+          "type": "array",
+          "maxItems": 0
+        },
+        "schemas": {
+          "type": "array",
+          "maxItems": 0
+        },
+        "composition": {
+          "type": "array",
+          "maxItems": 0
+        },
+        "state": {
+          "type": "array",
+          "maxItems": 0
+        },
+        "roots": {
+          "type": "array",
+          "maxItems": 0
+        },
+        "scheduling": {
+          "type": "array",
+          "maxItems": 0
+        },
+        "effects": {
+          "type": "array",
+          "maxItems": 0
+        },
+        "context": {
+          "type": "array",
+          "maxItems": 0
+        },
+        "registry": {
+          "type": "array",
+          "maxItems": 0
+        },
+        "failure": {
+          "type": "array",
+          "maxItems": 0
+        },
+        "runtime": {
+          "type": "array",
+          "maxItems": 0
+        },
+        "measurement": {
+          "type": "array",
+          "maxItems": 0
+        },
+        "review": {
+          "type": "array",
+          "maxItems": 0
+        },
+        "acceptance": {
+          "type": "array",
+          "maxItems": 0
+        }
+      }
+    }
+  }
+}

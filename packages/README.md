@@ -19,6 +19,10 @@ build, and Plug packages remain inactive.
 
 ## Host-neutral foundation
 
+BH-05 Phase 1 records governance-only ownership in Core, Effects, UI Tree and
+Test. Existing experimental implementations remain unchanged; no BH-05
+callback, facade or process exists yet. See the [ownership inventory](../docs/research/assets/bh-05-baseline/ownership-v0.1.0.json).
+
 - `blazex_core` — component model, lifecycle, identity, state, and events.
 - `blazex_effects` — host-neutral effects, capabilities, and resource ownership.
 - `blazex_ui_tree` — versioned semantic UI representation.

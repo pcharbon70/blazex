@@ -47,28 +47,28 @@ Back to milestone: [README](README.md)
       - [x] 1.1.2.2 Subtask - Register the roadmap outcome, six first-measurement budgets, and two failure conditions with exact evidence owners and closure phases.
       - [x] 1.1.2.3 Subtask - Record entry, stop, revise, defer, and acceptance outcomes and leave BH-06 implementation ineligible.
 
-  - [ ] 1.2 Section - Freeze unit ownership and activate repository boundaries.
+  - [x] 1.2 Section - Freeze unit ownership and activate repository boundaries.
 
     Make public facade, core lifecycle, semantic output, effects, test harness,
     runtime consumption, and integration evidence independently auditable.
 
-    - [ ] 1.2.1 Task - Freeze package and unit boundaries.
+    - [x] 1.2.1 Task - Freeze package and unit boundaries.
 
       Define exact ownership for pure, nested-stateful, and process-root units
       and prohibit outward implementation dependencies in the kernel.
 
-      - [ ] 1.2.1.1 Subtask - Record `blazex_core` ownership of facade metadata, schemas, lifecycle, state, scheduling, context, registry, command intent, diagnostics, and root-process contracts.
-      - [ ] 1.2.1.2 Subtask - Record `blazex_ui_tree`, `blazex_effects`, and `blazex_test` ownership and the allowed inward dependency graph among them.
-      - [ ] 1.2.1.3 Subtask - Prohibit Phoenix, Plug, HEEx/HTML, DOM/JavaScript, Popcorn internals, concrete renderer/host, server authority, and native-toolkit dependencies from portable component code.
+      - [x] 1.2.1.1 Subtask - Record `blazex_core` ownership of facade metadata, schemas, lifecycle, state, scheduling, context, registry, command intent, diagnostics, and root-process contracts.
+      - [x] 1.2.1.2 Subtask - Record `blazex_ui_tree`, `blazex_effects`, and `blazex_test` ownership and the allowed inward dependency graph among them.
+      - [x] 1.2.1.3 Subtask - Prohibit Phoenix, Plug, HEEx/HTML, DOM/JavaScript, Popcorn internals, concrete renderer/host, server authority, and native-toolkit dependencies from portable component code.
 
-    - [ ] 1.2.2 Task - Activate BH-05 evidence locations.
+    - [x] 1.2.2 Task - Activate BH-05 evidence locations.
 
       Create empty schema-bound locations for future contracts, traces,
       failures, measurements, reviews, and acceptance without claiming results.
 
-      - [ ] 1.2.2.1 Subtask - Activate `integration/bh-05` with an empty versioned index covering facade, schemas, composition, state, roots, scheduling, effects, context, registry, failure, runtime, measurement, and review evidence.
-      - [ ] 1.2.2.2 Subtask - Update package, profile, integration, and corpus indexes with truthful Phase 1 activation and no implemented BH-05 behavior.
-      - [ ] 1.2.2.3 Subtask - Inventory existing BH-02 Core APIs as inherited experimental inputs and identify every surface requiring preservation, supersession, migration, or rejection.
+      - [x] 1.2.2.1 Subtask - Activate `integration/bh-05` with an empty versioned index covering facade, schemas, composition, state, roots, scheduling, effects, context, registry, failure, runtime, measurement, and review evidence.
+      - [x] 1.2.2.2 Subtask - Update package, profile, integration, and corpus indexes with truthful Phase 1 activation and no implemented BH-05 behavior.
+      - [x] 1.2.2.3 Subtask - Inventory existing BH-02 Core APIs as inherited experimental inputs and identify every surface requiring preservation, supersession, migration, or rejection.
 
   - [ ] 1.3 Section - Implement fail-closed activation governance.
 

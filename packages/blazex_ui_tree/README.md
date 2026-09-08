@@ -19,3 +19,11 @@ token references, logical layout, accessibility roles/states/relationships,
 focus participation/restoration, controlled selection, and a composed intent
 set without calculating geometry or invoking a platform API. Stable public
 APIs remain deferred.
+
+## BH-05 Phase 1 activation
+
+Governance only: existing experimental behavior is preserved, with no new
+BH-05 callbacks, facade, process or support claim. Package ownership and API
+migration decisions are recorded in `docs/research/assets/bh-05-baseline`.
+Runtime/host profiles consume neutral contracts; LiveView and LocalLiveView
+integration remain explicitly deferred.

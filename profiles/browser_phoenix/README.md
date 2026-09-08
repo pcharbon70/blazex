@@ -67,3 +67,11 @@ active Linux Chrome/Firefox development fixture only: its root presentation is
 profile-owned diagnostic HTML, not the BH-04 DOM interaction transport, and it
 makes no support or stable-API claim. The historical `/bh01/` profile remains
 separate and unchanged.
+
+## BH-05 Phase 1 activation
+
+Governance only: existing experimental behavior is preserved, with no new
+BH-05 callbacks, facade, process or support claim. Package ownership and API
+migration decisions are recorded in `docs/research/assets/bh-05-baseline`.
+Runtime/host profiles consume neutral contracts; LiveView and LocalLiveView
+integration remain explicitly deferred.

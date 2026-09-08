@@ -14,3 +14,11 @@ deny-by-default negotiation, typed effect requests/results, a provider
 behaviour, deterministic pending-effect tracking, and generation-scoped opaque
 resource ownership/transfer/disposal are implemented. No concrete provider or
 support claim exists.
+
+## BH-05 Phase 1 activation
+
+Governance only: existing experimental behavior is preserved, with no new
+BH-05 callbacks, facade, process or support claim. Package ownership and API
+migration decisions are recorded in `docs/research/assets/bh-05-baseline`.
+Runtime/host profiles consume neutral contracts; LiveView and LocalLiveView
+integration remain explicitly deferred.
