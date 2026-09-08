@@ -14,6 +14,10 @@ benchmark pass, browser qualification, or support is claimed.
 
 ## Index
 
+- [Phase 9 isolation build](conformance-isolation.mjs) tests the headless and standalone packages with framework/adapter/profile directories physically absent and audits the standalone asset closure.
+
+- [Phase 9 semantic fixture generator](support/conformance_runner.exs), [canonical fixtures](conformance-fixtures-v0.1.0.txt), [browser runner](conformance-browser.mjs), [observations](conformance-scenarios.js), and [comparator negatives](conformance-test.mjs) compare actual headless semantics and standalone DOM with framework integration deferred.
+
 - [Phase 7 browser driver](effect-browser.mjs), [scenarios](effect-scenarios.js), and [independent replay](effect-conformance.mjs) exercise explicitly negotiated bounded timer effects, failure isolation and owned cleanup.
 
 - [Continuity usage](continuity-usage.md) — additive form contract and digest-bound envelope, with runtime limitations.

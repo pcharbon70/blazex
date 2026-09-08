@@ -79,6 +79,8 @@ None.
 
 ## Maintaining this index
 
+- [Phase 9 isolated build](blazex-bh-04-phase-09-isolation-v0.1.0.json) — 6 headless and 116 DOM tests, framework sources absent, 19-module asset closure.
+
 - [Phase 9 authorization](blazex-bh-04-phase-09-authorization-v0.1.0.json) — standalone conformance authority and exact inherited inputs.
 
 Index every direct child and update bindings with an explicit phase decision.

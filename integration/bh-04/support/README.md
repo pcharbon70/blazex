@@ -1,5 +1,7 @@
 # Protocol test support
 
+- [Phase 9 conformance runner](conformance_runner.exs) generates actual headless and standalone observations from shared semantic inputs, including accessibility state and live updates.
+
 - [Phase 7 component](effect_component.exs) and [test-only runtime carrier](effect_runtime.exs) execute real Elixir emissions and acknowledgements without Phoenix/Plug or new Wasm packaging.
 
 - [Continuity component](continuity_component.exs) — real controlled fields and stable single/multiple choices.

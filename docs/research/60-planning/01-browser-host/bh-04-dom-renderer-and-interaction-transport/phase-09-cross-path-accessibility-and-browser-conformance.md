@@ -54,28 +54,28 @@ Back to milestone: [README](README.md)
       - [x] 9.1.2.2 Subtask - Define canonical semantic traces, normalized DOM observations, accessibility-tree or computed accessibility observations where available, event/effect/resource traces, and path-specific allowances.
       - [x] 9.1.2.3 Subtask - Define pass, fail, blocked, not-applicable, and deferred states and prohibit a result from one browser/path or schema validity alone from closing another row.
 
-  - [ ] 9.2 Section - Build the governed cross-path conformance corpus.
+  - [x] 9.2 Section - Build the governed cross-path conformance corpus.
 
     Publish reusable fixtures and drivers that exercise the same semantic
     scenario through each applicable rendering path.
 
-    - [ ] 9.2.1 Task - Implement canonical scenario fixtures and oracles.
+    - [x] 9.2.1 Task - Implement canonical scenario fixtures and oracles.
 
       Make inputs deterministic and expected outcomes explicit at each
       observable boundary.
 
-      - [ ] 9.2.1.1 Subtask - Add versioned semantic inputs, interaction sequences, expected renderer transactions, normalized DOM states, accessibility states, focus/selection states, acknowledgements, diagnostics, and resource outcomes.
-      - [ ] 9.2.1.2 Subtask - Add stable normalization for browser-generated details without masking meaningful tag, role, attribute, property, order, focus, selection, listener, or lifecycle differences.
-      - [ ] 9.2.1.3 Subtask - Include adversarial malformed, stale, replayed, oversized, queue-overload, failed-effect, runtime-loss, and disposal-race scenarios.
+      - [x] 9.2.1.1 Subtask - Add versioned semantic inputs, interaction sequences, expected renderer transactions, normalized DOM states, accessibility states, focus/selection states, acknowledgements, diagnostics, and resource outcomes.
+      - [x] 9.2.1.2 Subtask - Add stable normalization for browser-generated details without masking meaningful tag, role, attribute, property, order, focus, selection, listener, or lifecycle differences.
+      - [x] 9.2.1.3 Subtask - Include adversarial malformed, stale, replayed, oversized, queue-overload, failed-effect, runtime-loss, and disposal-race scenarios.
 
-    - [ ] 9.2.2 Task - Implement path-independent conformance drivers.
+    - [x] 9.2.2 Task - Implement path-independent conformance drivers.
 
       Drive headless and standalone DOM paths through one
       scenario contract while keeping each backend's internal data private.
 
-      - [ ] 9.2.2.1 Subtask - Implement deterministic setup, root registration, input replay, transaction/event capture, observation checkpoints, disposal, and cleanup for each path.
-      - [ ] 9.2.2.2 Subtask - Compare semantic outcomes and declared browser observations with exact mismatch diagnostics and no golden-file auto-acceptance.
-      - [ ] 9.2.2.3 Subtask - Prove the standalone driver runs with LiveView/LocalLiveView absent and the headless driver runs with browser/runtime/framework dependencies absent.
+      - [x] 9.2.2.1 Subtask - Implement deterministic setup, root registration, input replay, transaction/event capture, observation checkpoints, disposal, and cleanup for each path.
+      - [x] 9.2.2.2 Subtask - Compare semantic outcomes and declared browser observations with exact mismatch diagnostics and no golden-file auto-acceptance.
+      - [x] 9.2.2.3 Subtask - Prove the standalone driver runs with LiveView/LocalLiveView absent and the headless driver runs with browser/runtime/framework dependencies absent.
 
   - [ ] 9.3 Section - Execute active browser accessibility and behavior scenarios.
 
