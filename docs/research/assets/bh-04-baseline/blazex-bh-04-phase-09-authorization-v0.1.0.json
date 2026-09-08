@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 9,
+  "base_revision": "644055f646392e9daabb396a636249433f09a991",
+  "branch": "codex/bh04-phase9-conformance",
+  "authorization": "Repository owner explicitly requested BH-04 Phase 9 implementation, one commit per section, one PR, merge, sync main, then delete feature branch.",
+  "section_order": [
+    "9.1",
+    "9.2",
+    "9.3",
+    "9.4",
+    "9.5"
+  ],
+  "source_bindings": {
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-07-completion-v0.1.0.json": "44e60a9d878f3306fac95497b9ac05e269a6a5cf7d405d47e324ef101ad5a884",
+    "docs/research/60-planning/liveview-integration-deferral.md": "3a2c3790c560191afd60f631576813760c7bbb4c05909a6f6a88058823e61e48",
+    "docs/research/60-planning/development-environment-and-deferred-qualification-policy.md": "124b924dcd53770e55f47d07288f132acab53bed2d16007bb96edc8835c0ea9a",
+    "docs/research/assets/quality-acceptance/blazex-acceptance-registry-v0.1.0.json": "43025d17513f068eb1ac0838a381da4c132bf41b74aa602bffdc130e411368ed",
+    "packages/blazex_renderer_headless/lib/blazex/renderer/headless.ex": "9f86467006994d0b58c65a6d0288cb4a420e77c9a9e310e4f1d14dac53e4c73b",
+    "packages/blazex_renderer_dom/lib/blazex/renderer/dom/reconciler.ex": "8b09a9cafc5d0d2c26e5e1ed2f902c74fcbab9b3c7eb88c059d2ade486d802ca",
+    "js/blazex_runtime/src/atomic-dom.js": "c0312c1843d481dfb260d590821681b4a602eddb194acacbf7326d6ecd12faec"
+  },
+  "active_paths": [
+    "headless",
+    "standalone-dom"
+  ],
+  "active_browsers": [
+    "chrome-linux",
+    "firefox-linux"
+  ],
+  "deferred": [
+    "liveview",
+    "local-live-view",
+    "manual-assistive-technology",
+    "external-platforms"
+  ],
+  "next_authorized_work": null,
+  "support_state": "unsupported"
+}

@@ -15,6 +15,12 @@ aliases:
 
 # Phase 10 - Measurement, Review, and BH-04 Acceptance
 
+The [LiveView integration deferral](../../liveview-integration-deferral.md) governs this acceptance gate. LiveView and LocalLiveView
+implementation and qualification are **[DEFERRED]**, not required evidence.
+Carry the deferral into the release ledger and BH-05 handoff without treating it
+as a pass. Standalone dependency isolation remains an active requirement.
+
+
 Back to milestone: [README](README.md)
 
 - [ ] 10 Phase - Measurement, Review, and BH-04 Acceptance.
@@ -27,7 +33,7 @@ Back to milestone: [README](README.md)
 
   - [ ] 10.1 Section - Authorize and freeze the final candidate gate.
 
-    Bind the complete nine-phase candidate, measurement methods, review lenses,
+    Bind the active candidate from Phases 1–7 and 9 plus the Phase 8 deferral, measurement methods, review lenses,
     and decision rules before producing final evidence.
 
     - [ ] 10.1.1 Task - Record bounded Phase 10 authority.
@@ -35,7 +41,7 @@ Back to milestone: [README](README.md)
       Establish exact provenance and prohibit post-hoc scope or threshold
       changes that would make the candidate appear to pass.
 
-      - [ ] 10.1.1.1 Subtask - Record synchronized base, branch, section commits, one PR, cleanup, Phase 1–9 completion identities, and explicit Phase 10 authorization.
+      - [ ] 10.1.1.1 Subtask - Record synchronized base, branch, section commits, one PR, cleanup, Phase 1–7 and 9 completion identities plus the Phase 8 deferral identity, and explicit Phase 10 authorization.
       - [ ] 10.1.1.2 Subtask - Bind the BH-04 entry ledger, acceptance registry, quality contract, conformance ledger, dependency inventories, all raw evidence indexes, roadmap, ADRs, and deferral policy by path and SHA-256.
       - [ ] 10.1.1.3 Subtask - Exclude BH-05 implementation, release-support promotion, hidden waivers, threshold reduction, scenario removal, and deferred-environment substitution.
 
@@ -82,7 +88,7 @@ Back to milestone: [README](README.md)
       Give each obligation one accountable disposition and prevent missing or
       stale evidence from disappearing in summary reports.
 
-      - [ ] 10.3.1.1 Subtask - Map protocol, reconciliation, DOM application, interaction, forms/focus/selection, effects/resources/failures, adapter, conformance, dependency, and measurement outputs to implementation and evidence hashes.
+      - [ ] 10.3.1.1 Subtask - Map protocol, reconciliation, DOM application, interaction, forms/focus/selection, effects/resources/failures, deferred adapter disposition, conformance, dependency, and measurement outputs to implementation and evidence hashes.
       - [ ] 10.3.1.2 Subtask - Reconcile all five acceptance conditions, inherited BH-03 conditions, active failures, repeat obligations, private coupling, compatibility limits, deferred qualifications, and prohibited support claims.
       - [ ] 10.3.1.3 Subtask - Record finding severity, owner, disposition, mitigation, expiry/review trigger, downstream due milestone, and whether it blocks acceptance or BH-05 entry.
 
@@ -92,7 +98,7 @@ Back to milestone: [README](README.md)
       disagreements and negative findings.
 
       - [ ] 10.3.2.1 Subtask - Review semantic neutrality, renderer layering, root/generation atomicity, protocol/reconciler correctness, browser security, and client-untrusted boundaries.
-      - [ ] 10.3.2.2 Subtask - Review automated accessibility, form/focus/selection behavior, performance/reliability statistics, resource cleanup, framework compatibility burden, and deferred qualification truthfulness.
+      - [ ] 10.3.2.2 Subtask - Review automated accessibility, form/focus/selection behavior, performance/reliability statistics, resource cleanup, deferred framework scope and standalone isolation, and deferred qualification truthfulness.
       - [ ] 10.3.2.3 Subtask - Review direct/transitive dependencies, source/asset provenance, generated artifacts, API exposure, package ownership, reproducibility, and absence of unsupported compatibility/support claims.
 
   - [ ] 10.4 Section - Build the versioned BH-04 release and handoff candidate.
@@ -128,7 +134,7 @@ Back to milestone: [README](README.md)
       Reproduce every active implementation, browser, failure, measurement,
       governance, and dependency check from a clean candidate revision.
 
-      - [ ] 10.5.1.1 Subtask - Run all activated Mix/Node tests and formatting/build checks, Linux Chrome/Firefox scenarios, headless/standalone/adapter conformance, failure/resource tests, benchmarks, Phase 1–10 validators, inherited validators/generators, archive/JSON/dependency checks, and patch hygiene.
+      - [ ] 10.5.1.1 Subtask - Run all activated Mix/Node tests and formatting/build checks, Linux Chrome/Firefox scenarios, headless/standalone conformance, failure/resource tests, benchmarks, active-phase validators and the Phase 8 deferral check, inherited validators/generators, archive/JSON/dependency checks, and patch hygiene.
       - [ ] 10.5.1.2 Subtask - Verify source/evidence freshness, release regeneration, review coverage, all five acceptance outcomes, exact active/deferred classification, no hidden blocker, and no public/support overclaim.
       - [ ] 10.5.1.3 Subtask - Repeat a clean-build representative subset in an independent clean execution context when available; otherwise record that repeat as an owned bounded condition, not a fabricated pass.
 

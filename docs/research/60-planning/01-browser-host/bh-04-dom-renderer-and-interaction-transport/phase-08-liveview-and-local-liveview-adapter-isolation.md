@@ -15,9 +15,26 @@ aliases:
 
 # Phase 8 - LiveView and LocalLiveView Adapter Isolation
 
+## [DEFERRED] — owner-directed scope decision, 2026-09-08
+
+This entire phase, including every section, task, subtask and integration gate
+below, is **[DEFERRED]**, not completed or failed. It is outside the current
+browser-host implementation and excluded from active BH-04 completion counts.
+The prior request to implement Phase 8 is superseded by this planning decision.
+
+Owner: `liveview-adapter-owner`, with architecture/product owners. Reactivation:
+separately authorized optional framework-integration work after BH-04 acceptance;
+no existing milestone automatically activates it. See [LiveView integration deferral](../../liveview-integration-deferral.md).
+
+The retained checklist is a future design outline, not an active dependency.
+Phase 9 may proceed from completed Phases 1–7 and this deferral record, with
+separate implementation authorization. Neither LiveView nor LocalLiveView is
+required for BlazeX component execution in AtomVM/WebAssembly.
+
+
 Back to milestone: [README](README.md)
 
-- [ ] 8 Phase - LiveView and LocalLiveView Adapter Isolation.
+- [ ] [DEFERRED] 8 Phase - LiveView and LocalLiveView Adapter Isolation.
 
   Replace the disposable BH-01 compatibility fixture with an optional,
   version-pinned adapter that translates only the selected LiveView and

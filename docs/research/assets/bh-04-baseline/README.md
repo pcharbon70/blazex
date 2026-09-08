@@ -79,4 +79,6 @@ None.
 
 ## Maintaining this index
 
+- [Phase 9 authorization](blazex-bh-04-phase-09-authorization-v0.1.0.json) — standalone conformance authority and exact inherited inputs.
+
 Index every direct child and update bindings with an explicit phase decision.

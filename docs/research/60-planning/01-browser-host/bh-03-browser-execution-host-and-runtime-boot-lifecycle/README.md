@@ -15,6 +15,14 @@ aliases:
 
 # BH-03 Browser Execution-Host and Runtime Boot Lifecycle
 
+## Current planning scope — 2026-09-08
+
+LiveView and LocalLiveView integration are **[DEFERRED]** under the
+[planning scope decision](../../liveview-integration-deferral.md). Completed
+checklists and evidence below describe historical experiments; they are not
+requirements to implement or qualify those frameworks in the current host.
+
+
 ## Purpose
 
 This plan turns the accepted internal BH-02 contracts and the disposable BH-01

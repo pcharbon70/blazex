@@ -48,8 +48,11 @@ semantic interaction and active Linux browser gates are complete. Phase 6 is
 eligible but unauthorized at that handoff. The owner then authorized Phase 6
 and its versioned internal form/selection prerequisite on 2026-09-08. Its active
 continuity gate is complete; Phase 7 is eligible but unauthorized. The owner then authorized Phase 7 and effect-emission integration on 2026-09-08.
-Its bounded effect, resource and failure-isolation gate is complete; Phase 8 is
-eligible but unauthorized. No support or newly packaged Wasm endpoint is claimed.
+Its bounded effect, resource and failure-isolation gate is complete. On
+2026-09-08 the owner deferred LiveView/LocalLiveView integration, superseding
+the subsequent Phase 8 implementation request. Phase 8 is **[DEFERRED]**;
+Phase 9 is eligible but unauthorized. See [LiveView integration deferral](../../liveview-integration-deferral.md).
+No support or newly packaged Wasm endpoint is claimed.
 
 ## What belongs here
 
@@ -63,8 +66,8 @@ eligible but unauthorized. No support or newly packaged Wasm endpoint is claimed
   `packages/blazex_renderer_dom` and `js/blazex_runtime`.
 - Event normalization, form-value transport, focus and selection continuity,
   post-commit effect ordering, and resource disposal.
-- All LiveView and LocalLiveView render-data, patching, transport, and version
-  coupling isolated in `packages/blazex_renderer_dom_liveview`.
+- [DEFERRED] LiveView and LocalLiveView integration, retained only as a future
+  isolated adapter plan; it is not a current host implementation concern.
 - Deterministic fixtures, active Linux Chrome/Firefox browser scenarios,
   measurements, failure injection, and milestone acceptance evidence.
 
@@ -90,7 +93,7 @@ qualification remain later milestone work.
 | --- | --- | --- |
 | `packages/blazex_renderer` | Host-neutral backend lifecycle, transaction capability requirements, diagnostics, and renderer-facing contracts | DOM nodes, browser events, LiveView data, Phoenix/Plug transport, or application component behavior |
 | `packages/blazex_renderer_dom` | DOM lowering, incremental reconciliation, DOM transaction and interaction schemas, accessibility mapping, focus/selection intent, and standalone adapter state | Phoenix, Plug, LiveView, LocalLiveView, server authority, or direct browser objects in Elixir data |
-| `packages/blazex_renderer_dom_liveview` | Optional pinned LiveView/LocalLiveView compatibility, render-data and patch translation, and adapter-specific lifecycle | Portable component semantics, standalone DOM ownership, Plug profile inclusion, or server authorization decisions |
+| `packages/blazex_renderer_dom_liveview` | [DEFERRED] Future pinned LiveView/LocalLiveView integration; existing fixture is historical, not a current host requirement | Portable component semantics, standalone DOM ownership, Plug profile inclusion, or server authorization decisions |
 | `js/blazex_runtime` | Strict wire validation, per-root transaction application, browser-event normalization, interaction delivery, focus/selection application, and browser-owned cleanup | Component state machine, semantic reconciliation policy, Phoenix authority, or a second component framework |
 | `integration/conformance` | Cross-renderer and cross-path semantic outcome fixtures | Product-specific snapshots or support claims |
 | `integration/bh-04` | BH-04 transactions, interactions, browser scenarios, failures, measurements, and acceptance overlays | Rewriting historical BH-01/BH-02/BH-03 evidence |
@@ -105,21 +108,21 @@ versions; no dependency may point back from the standalone path.
 | Phase | Status | Delivery | Dependency |
 | --- | --- | --- | --- |
 | [1 — Authorization, Handoff Reconciliation, and Renderer Boundary Activation](phase-01-authorization-handoff-reconciliation-and-renderer-boundary-activation.md) | complete — activation only | Bind accepted BH-03 inputs, reconcile the BH-04 ledger, activate only renderer evidence boundaries, and prove fail-closed ownership. | Accepted BH-03 handoff and explicit authorization |
-| [2 — Versioned Render Transaction and Patch Protocol](phase-02-versioned-render-transaction-and-patch-protocol.md) | complete — internal protocol only | Define the closed transaction, patch-operation, acknowledgement, diagnostic, and compatibility contracts used by both DOM paths. | Phase 1 |
+| [2 — Versioned Render Transaction and Patch Protocol](phase-02-versioned-render-transaction-and-patch-protocol.md) | complete — internal protocol only | Define the closed transaction, patch-operation, acknowledgement, diagnostic, and compatibility contracts used by standalone DOM; future adapters must reuse them. | Phase 1 |
 | [3 — Keyed Incremental Reconciliation and Deterministic Diffing](phase-03-keyed-incremental-reconciliation-and-deterministic-diffing.md) | complete — keyed reconciliation | Replace full-root-only updates with bounded keyed reconciliation and canonical operation generation in the standalone DOM package. | Phase 2 |
 | [4 — Atomic DOM Application, Root Queues, and Stale Rejection](phase-04-atomic-dom-application-root-queues-and-stale-rejection.md) | complete — atomic DOM | Apply validated transactions through isolated per-root queues with atomic failure behavior, rollback/fallback, and exact generation ordering. | Phase 3 and BH-03 root lifecycle |
 | [5 — Semantic Event Normalization and Interaction Transport](phase-05-semantic-event-normalization-and-interaction-transport.md) | complete — local interactions | Normalize bound browser events into bounded semantic interaction records and deliver them to the correct runtime root without server authority. | Phases 2 and 4 |
 | [6 — Form Value, Focus, and Selection Continuity](phase-06-form-value-focus-and-selection-continuity.md) | complete — continuity | Preserve controlled values, form semantics, active element, text selection, composition, and focus intent across incremental updates. | Phases 3–5 |
 | [7 — Effect Ordering, Resources, Disposal, and Failure Isolation](phase-07-effect-ordering-resources-disposal-and-failure-isolation.md) | complete — bounded lifecycle | Order DOM commits and browser effects, bound owned resources, isolate malformed/failing roots, and converge cleanup. | Phases 4–6 |
-| [8 — LiveView and LocalLiveView Adapter Isolation](phase-08-liveview-and-local-liveview-adapter-isolation.md) | eligible — unauthorized | Implement the optional version-pinned adapter and prove all framework coupling remains outside the standalone DOM and Plug graphs. | Phases 2–7 and compatible pinned framework inputs |
-| [9 — Cross-Path Accessibility and Browser Conformance](phase-09-cross-path-accessibility-and-browser-conformance.md) | planned — unauthorized | Reconcile standalone and optional LiveView outcomes against headless semantics in active Linux Chrome/Firefox scenarios. | Phases 3–8 |
-| [10 — Measurement, Review, and BH-04 Acceptance](phase-10-measurement-review-and-bh-04-acceptance.md) | planned — unauthorized | Measure the first renderer budgets, execute multidisciplinary review and the complete gate, and accept, revise, or block BH-05 eligibility. | Phases 1–9 |
+| [8 — LiveView and LocalLiveView Adapter Isolation](phase-08-liveview-and-local-liveview-adapter-isolation.md) | [DEFERRED] — outside current host scope | Retain the optional adapter design; no implementation or qualification required for current completion. | Separate post-BH-04 framework-integration authorization |
+| [9 — Cross-Path Accessibility and Browser Conformance](phase-09-cross-path-accessibility-and-browser-conformance.md) | eligible — unauthorized | Reconcile standalone DOM outcomes against headless semantics in active Linux Chrome/Firefox scenarios; adapter rows [DEFERRED]. | Phases 1–7 and the Phase 8 deferral |
+| [10 — Measurement, Review, and BH-04 Acceptance](phase-10-measurement-review-and-bh-04-acceptance.md) | planned — unauthorized | Measure the first renderer budgets, execute multidisciplinary review and the complete gate, and accept, revise, or block BH-05 eligibility. | Phases 1–7 and 9; Phase 8 deferral retained |
 
 ## Acceptance ownership
 
 | Acceptance condition | BH-04 obligation |
 | --- | --- |
-| `BX-ACC-ROADMAP-BH-04` | Prove deterministic DOM, accessibility, event, focus, and disposal outcomes; neutral application dependencies; and exact standalone/LiveView package separation. |
+| `BX-ACC-ROADMAP-BH-04` | Prove deterministic DOM, accessibility, event, focus, and disposal outcomes; neutral application dependencies; and standalone isolation; LiveView/LocalLiveView adapter implementation and equivalence are [DEFERRED]. |
 | `BX-ACC-BUDGET-BX-BUD-INTERACTION-DOM-UPDATE-MS` | Produce the first governed keyed-update receipt-to-paint samples against the proposed 50 ms p95 budget without claiming release qualification. |
 | `BX-ACC-BUDGET-BX-BUD-RELIABILITY-RENDERER-QUEUE-COUNT` | Prove each root's queued transaction count is bounded at 64 or fewer under the governed overload scenario. |
 | `BX-ACC-BUDGET-BX-BUD-RELIABILITY-STALE-REJECTION-PERCENT` | Reject 100% of governed stale generation renderer/effect messages without DOM or state mutation. |
@@ -153,8 +156,8 @@ versions; no dependency may point back from the standalone path.
 ## Milestone exit
 
 BH-04 exits only when deterministic fixtures and active browser scenarios show
-equivalent documented semantic outcomes across the standalone DOM path and
-the optional compatible LiveView path; keyed incremental updates preserve
+equivalent documented semantic outcomes across standalone DOM and the
+headless semantic oracle; keyed incremental updates preserve
 identity, form values, accessibility, focus, and selection; malformed, stale,
 overloaded, and failing traffic is bounded and root-isolated; resources
 converge after disposal; the standalone dependency audit is clean; and the
@@ -162,7 +165,18 @@ five BH-04 acceptance conditions have truthful evidence or explicit blocking
 records. Acceptance may make BH-05 eligible but does not authorize it or grant
 public stability or browser support.
 
+Phase 8 is excluded from the active denominator: nine active phases retain
+their original numbers (1–7, 9, 10). Seven are complete; Phases 9 and 10 remain.
+The release and BH-05 entry ledgers must carry the owned framework deferral,
+not require a Phase 8 completion artifact. Historical acceptance artifacts are
+not rewritten; the dated deferral is the explicit scope overlay.
+
+At full BH-04 acceptance, give the owner the requested prominent **scripts move
+warning**. This reminder does not authorize moving scripts.
+
 ## Index
+
+- [Phase 9 conformance contract](phase-09-conformance-contract.md) — active matrix, semantic comparison rules and owned deferrals.
 
 - [Phase 7 implementation evidence](phase-07-implementation-evidence.md) — ordered emissions, root failure isolation and cleanup qualification.
 

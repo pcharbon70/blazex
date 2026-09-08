@@ -15,38 +15,44 @@ aliases:
 
 # Phase 9 - Cross-Path Accessibility and Browser Conformance
 
+Current scope follows the [LiveView integration deferral](../../liveview-integration-deferral.md): LiveView and LocalLiveView
+implementation, compatibility and adapter execution are **[DEFERRED]**. Active
+conformance compares standalone DOM with the headless semantic oracle. Phase 8
+completion is not a prerequisite; Phase 9 was explicitly authorized on 2026-09-08; implementation is in progress.
+
+
 Back to milestone: [README](README.md)
 
 - [ ] 9 Phase - Cross-Path Accessibility and Browser Conformance.
 
-  Reconcile the headless semantic oracle, standalone DOM renderer, and optional
-  compatible LiveView adapter through one governed scenario corpus. Execute
+  Reconcile the headless semantic oracle and standalone DOM renderer through
+  one governed scenario corpus. Execute
   active behavior in Linux Chrome and Firefox, retain unavailable platform and
   manual assistive-technology work as explicit deferrals, and make no browser
   support claim.
 
-  - [ ] 9.1 Section - Authorize and freeze the conformance matrix.
+  - [x] 9.1 Section - Authorize and freeze the conformance matrix.
 
     Bind all implemented paths and define the observable outcomes that must
     agree without requiring backend-internal representation equality.
 
-    - [ ] 9.1.1 Task - Record bounded Phase 9 authority.
+    - [x] 9.1.1 Task - Record bounded Phase 9 authority.
 
       Establish exact candidate identities, active environments, deferred
       environments, and exclusions.
 
-      - [ ] 9.1.1.1 Subtask - Record synchronized base, branch, section commits, one PR, cleanup, Phase 8 completion identity, and explicit Phase 9 authorization.
-      - [ ] 9.1.1.2 Subtask - Bind the headless oracle, standalone DOM path, optional compatible adapter path, BH-03 browser host, acceptance registry, and deferred-environment policy by version and hash.
-      - [ ] 9.1.1.3 Subtask - Declare Linux Chrome/Firefox as active; mark unavailable Safari/macOS, Windows, mobile/physical devices, and manual assistive-technology pairings `[DEFERRED]` to BH-22 with owners and reactivation rules.
+      - [x] 9.1.1.1 Subtask - Record synchronized base, branch, section commits, one PR, cleanup, Phase 7 completion identity and the dated LiveView integration deferral, and explicit Phase 9 authorization.
+      - [x] 9.1.1.2 Subtask - Bind the headless oracle, standalone DOM path, deferred-integration record, BH-03 browser host, acceptance registry, and deferred-environment policy by version and hash.
+      - [x] 9.1.1.3 Subtask - Declare Linux Chrome/Firefox as active; mark unavailable Safari/macOS, Windows, mobile/physical devices, and manual assistive-technology pairings `[DEFERRED]` to BH-22 with owners and reactivation rules.
 
-    - [ ] 9.1.2 Task - Freeze scenario, oracle, and comparison rules.
+    - [x] 9.1.2 Task - Freeze scenario, oracle, and comparison rules.
 
       Define semantic, DOM, accessibility, interaction, focus, selection,
       lifecycle, failure, and resource observations for each applicable path.
 
-      - [ ] 9.1.2.1 Subtask - Define required scenarios for initial render, incremental update, nested/keyed change, every accepted event family, forms, accessibility relationships/state/live intent, focus/selection, effects, failure, fallback, and disposal.
-      - [ ] 9.1.2.2 Subtask - Define canonical semantic traces, normalized DOM observations, accessibility-tree or computed accessibility observations where available, event/effect/resource traces, and path-specific allowances.
-      - [ ] 9.1.2.3 Subtask - Define pass, fail, blocked, not-applicable, and deferred states and prohibit a result from one browser/path or schema validity alone from closing another row.
+      - [x] 9.1.2.1 Subtask - Define required scenarios for initial render, incremental update, nested/keyed change, every accepted event family, forms, accessibility relationships/state/live intent, focus/selection, effects, failure, fallback, and disposal.
+      - [x] 9.1.2.2 Subtask - Define canonical semantic traces, normalized DOM observations, accessibility-tree or computed accessibility observations where available, event/effect/resource traces, and path-specific allowances.
+      - [x] 9.1.2.3 Subtask - Define pass, fail, blocked, not-applicable, and deferred states and prohibit a result from one browser/path or schema validity alone from closing another row.
 
   - [ ] 9.2 Section - Build the governed cross-path conformance corpus.
 
@@ -64,7 +70,7 @@ Back to milestone: [README](README.md)
 
     - [ ] 9.2.2 Task - Implement path-independent conformance drivers.
 
-      Drive headless, standalone DOM, and optional adapter paths through one
+      Drive headless and standalone DOM paths through one
       scenario contract while keeping each backend's internal data private.
 
       - [ ] 9.2.2.1 Subtask - Implement deterministic setup, root registration, input replay, transaction/event capture, observation checkpoints, disposal, and cleanup for each path.
@@ -76,13 +82,13 @@ Back to milestone: [README](README.md)
     Run the corpus in the available development matrix with exact browser and
     environment fingerprints and preserve all failures.
 
-    - [ ] 9.3.1 Task - Execute standalone and adapter browser scenarios.
+    - [ ] 9.3.1 Task - Execute standalone browser scenarios; retain deferred adapter work.
 
       Cover behavior under initial, repeated, concurrent, failure, and cleanup
       conditions in both active engines.
 
       - [ ] 9.3.1.1 Subtask - Execute the standalone path in Linux Chrome and Firefox for every applicable scenario and retain raw transactions, interactions, DOM snapshots, diagnostics, and resource traces.
-      - [ ] 9.3.1.2 Subtask - Execute the optional adapter path in the same browsers when the exact pinned pair is compatible; otherwise retain a truthful adapter stop/revise record without blocking the standalone evidence.
+      - [ ] 9.3.1.2 Subtask - [DEFERRED] LiveView/LocalLiveView adapter execution and equivalence testing; retain the owned deferral record, exclude this row from active counts, and do not probe or activate an adapter.
       - [ ] 9.3.1.3 Subtask - Repeat representative multi-root, rapid-input, keyed-reorder, focus, failure, and dispose/remount scenarios to expose nondeterminism or retained state.
 
     - [ ] 9.3.2 Task - Evaluate automated accessibility outcomes.
@@ -104,7 +110,7 @@ Back to milestone: [README](README.md)
       Connect each expected outcome to raw evidence, owner, status, and any
       blocking or deferred disposition.
 
-      - [ ] 9.4.1.1 Subtask - Reconcile DOM, accessibility, interaction, form, focus, selection, effect, stale, failure, and disposal outcomes across headless, standalone, and adapter paths.
+      - [ ] 9.4.1.1 Subtask - Reconcile DOM, accessibility, interaction, form, focus, selection, effect, stale, failure, and disposal outcomes across headless and standalone paths; retain adapter equivalence as [DEFERRED].
       - [ ] 9.4.1.2 Subtask - Classify differences as allowed backend representation, defect, unsupported adapter combination, deferred qualification, or contract-change request with accountable owner.
       - [ ] 9.4.1.3 Subtask - Require resolution or explicit blocking for every active mismatch and prohibit hidden exceptions or path-specific semantic redefinition.
 
@@ -115,7 +121,7 @@ Back to milestone: [README](README.md)
 
       - [ ] 9.4.2.1 Subtask - Audit compile/lock/asset/runtime dependency closures and source surfaces for forbidden standalone and headless edges.
       - [ ] 9.4.2.2 Subtask - Audit application fixtures to prove they depend only on BlazeX semantic/component contracts and not DOM, JavaScript, LiveView, LocalLiveView, or adapter structures.
-      - [ ] 9.4.2.3 Subtask - Audit every version-sensitive framework use for one-to-one coverage in the optional adapter inventory and mismatch tests.
+      - [ ] 9.4.2.3 Subtask - Verify the current host path does not activate or require the deferred adapter. Adapter private-surface inventory and mismatch qualification remain [DEFERRED].
 
   - [ ] 9.5 Section - Phase 9 Integration Tests and Completion Evidence.
 
@@ -127,7 +133,7 @@ Back to milestone: [README](README.md)
       Execute all active scenarios and deterministic generators from a clean
       build while preserving deferred and failed rows.
 
-      - [ ] 9.5.1.1 Subtask - Run all activated Mix/Node suites, Linux Chrome/Firefox scenarios, headless/DOM/adapter conformance, accessibility automation, failure/resource tests, validators, dependency audits, archive/generated checks, JSON validation, and patch hygiene.
+      - [ ] 9.5.1.1 Subtask - Run all activated Mix/Node suites, Linux Chrome/Firefox scenarios, headless/standalone DOM conformance, accessibility automation, failure/resource tests, validators, dependency audits, archive/generated checks, JSON validation, and patch hygiene.
       - [ ] 9.5.1.2 Subtask - Regenerate normalized reports twice and verify byte/hash stability, raw-evidence linkage, environment fingerprints, result-state validity, and no accidental support credit.
       - [ ] 9.5.1.3 Subtask - Confirm all active mismatches are resolved or blocking and every unavailable external/manual row remains explicit, owned, deferred, and excluded from pass rates.
 
@@ -144,7 +150,8 @@ Back to milestone: [README](README.md)
 Complete and verify each section before its commit. Open one pull request only
 after Section 9.5 passes or records a stop decision. Unavailable external
 environments are deferred under policy; failures in active applicable Chrome,
-Firefox, headless, standalone, or compatible-adapter rows remain blocking.
+Firefox, headless, or standalone rows remain blocking. Deferred adapter rows
+are excluded from active gates and grant no pass or compatibility credit.
 
 ## Connections
 

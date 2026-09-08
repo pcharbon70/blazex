@@ -15,6 +15,14 @@ aliases:
 
 # BH-01 Reproducible Browser Feasibility Baseline
 
+## Current planning scope — 2026-09-08
+
+LiveView and LocalLiveView integration are **[DEFERRED]** under the
+[planning scope decision](../../liveview-integration-deferral.md). Completed
+checklists and evidence below describe historical experiments; they are not
+requirements to implement or qualify those frameworks in the current host.
+
+
 ## Purpose
 
 This plan decomposes BH-01 into ten ordered implementation phases that test

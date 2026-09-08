@@ -15,6 +15,14 @@ aliases:
 
 # Development Environment and Deferred Qualification Policy
 
+## Separate product-scope deferral
+
+The [LiveView and LocalLiveView deferral](liveview-integration-deferral.md) is
+an explicit owner-directed scope decision, not an unavailable-environment
+exception. It has no automatic BH-22 activation and does not waive any active
+standalone correctness, security, accessibility or dependency-isolation gate.
+
+
 ## Decision
 
 BlazeX framework development must be able to proceed using the environments
