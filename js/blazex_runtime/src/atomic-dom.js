@@ -4,6 +4,7 @@ import { requireDOM } from "./dom-transaction-plan.js";
 import { InteractionListeners } from "./interaction-listeners.js";
 import { FormContinuity } from "./form-continuity.js";
 import { copyContinuity, verifyContinuity } from "./continuity-wire.js";
+import { captureContinuity, restoreContinuity } from "./focus-continuity.js";
 
 const claims = new WeakMap();
 const properties = ["value", "disabled", "readOnly", "hidden", "checked", "required", "indeterminate"];
@@ -117,12 +118,13 @@ class AtomicDOM {
     if (focus?.behavior === "target") element.setAttribute("tabindex", String(focus.order));
     else if (focus?.behavior === "scope") {
       element.setAttribute("data-bx-focus-scope", "true"); element.setAttribute("data-bx-focus-restore", focus.restore); element.setAttribute("data-bx-focus-wrap", String(focus.wrap));
+      if (this.#continuity) element.setAttribute("tabindex", "-1");
     }
     if (selected) {
       element.setAttribute("data-bx-selection-kind", selected.kind);
       if (selected.kind === "single") element.value = portable(selected.value);
       else if (selected.kind === "multiple") element.setAttribute("data-bx-selection-count", String(selected.value.length));
-      else if (selected.kind === "text_range" && typeof element.setSelectionRange === "function") element.setSelectionRange(Number(selected.value.anchor), Number(selected.value.focus), selected.value.direction);
+      else if (!this.#continuity && selected.kind === "text_range" && typeof element.setSelectionRange === "function") element.setSelectionRange(Number(selected.value.anchor), Number(selected.value.focus), selected.value.direction);
     }
   }
   #create(node) {
@@ -181,6 +183,7 @@ class AtomicDOM {
   apply({ previous, next, transaction, metadata }) {
     const oldNodes = new Map(this.#nodes), journal = this.#capture(), active = this.#document.activeElement;
     const checkpoint = this.#continuity?.checkpoint();
+    const observation = this.#continuity ? captureContinuity(this.#container, this.#nodes) : null;
     try {
       this.#interactions?.suspend();
       const created = new Map();
@@ -204,6 +207,7 @@ class AtomicDOM {
       }
       if (transaction.kind === "dispose") { this.#container.replaceChildren(); this.#nodes.clear(); }
       this.#finishProjection(next, metadata); this.#fault("finalize", transaction.operations.length); this.#verify(next);
+      if (observation) restoreContinuity(this.#container, this.#nodes, previous, next, observation);
       this.#accepted = this.#capture();
       this.#continuity?.committed(metadata);
       if (next) this.#interactions?.publish(transaction);
