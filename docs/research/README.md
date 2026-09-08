@@ -19,56 +19,20 @@ maintenance conventions are defined in [`AGENTS.md`](AGENTS.md).
 
 ## Structure
 
-- [BH-04 Phase 10 acceptance validator](validate_bh04_acceptance.py) and [negative tests](test_validate_bh04_acceptance.py) — validates truthful revise evidence; `--require-accepted` blocks downstream entry.
-
-- [BH-04 Phase 10 history](bh04_phase10_history.py) — immutable accepted Phase 9 replay; never current acceptance credit.
-
-- [BH-04 conformance validator](validate_bh04_conformance.py) and [negative tests](test_validate_bh04_conformance.py) — exact Phase 9 sources, raw evidence, active/deferred ledger and replay checks.
-
-- [BH-04 Phase 9 history](bh04_phase9_history.py) — exact accepted Phase 7 replay while Phase 9 adds conformance evidence.
-
-- [BH-04 lifecycle validator](validate_bh04_lifecycle.py) — Phase 7 source, browser, failure and cleanup gate.
-- [BH-04 lifecycle validator tests](test_validate_bh04_lifecycle.py) — negative acceptance evidence cases.
-- [BH-04 Phase 7 history](bh04_phase7_history.py) — immutable accepted Phase 6 reproduction.
-
-- [BH-04 continuity validator](validate_bh04_continuity.py) — Phase 6 authority, source, runtime/browser replay and completion gates.
-- [BH-04 continuity validator tests](test_validate_bh04_continuity.py) — negative source and evidence cases.
-- [BH-04 Phase 6 history](bh04_phase6_history.py) — immutable accepted Phase 5 reproduction.
-
-- [BH-04 interaction validator](validate_bh04_interactions.py) — exact Phase 5 authority, source and browser evidence gates.
-- [BH-04 interaction validator tests](test_validate_bh04_interactions.py) — negative governance cases.
-- [BH-04 Phase 5 history](bh04_phase5_history.py) — immutable Phase 4 snapshot reproduction.
-
-- [BH-04 atomic DOM validator](validate_bh04_dom_application.py) — Phase 4 source/history/browser and completion gates.
-- [BH-04 atomic DOM tests](test_validate_bh04_dom_application.py) — fail-closed source, browser, stale and queue mutation tests.
-- [BH-04 Phase 4 history](bh04_phase4_history.py) — immutable Phase 3 snapshot reproduction.
-- [BH-04 reconciliation validator](validate_bh04_reconciliation.py) — Phase 3 source, scope and completion gates.
-- [BH-04 reconciliation tests](test_validate_bh04_reconciliation.py) — fail-closed mutation coverage.
-- [BH-04 Phase 3 history](bh04_phase3_history.py) — exact Phase 2 snapshot reproduction under explicit supersession.
-
-- [BH-04 protocol validator](validate_bh04_protocol.py) — current Phase 2 bindings, scope and schema agreement.
-- [BH-04 protocol tests](test_validate_bh04_protocol.py) — isolated negative governance checks.
-
-- [BH-04 history](bh04_history.py) — exact authorized Phase 1 snapshot reproduction, never current protocol validation.
-
-- [BH-04 activation validator](validate_bh04_activation.py) — immutable handoff, dependency and empty-evidence gate.
-- [BH-04 activation tests](test_validate_bh04_activation.py) — mutation tests for fail-closed governance.
-
 - [`00-inbox/`](00-inbox/README.md) — unprocessed captures
 - [`10-maps/`](10-maps/README.md) — curated paths through subjects and questions
 - [`20-notes/`](20-notes/README.md) — ideas and syntheses in the author's own words
 - [`30-sources/`](30-sources/README.md) — reading notes and bibliographic records
 - [`40-inquiries/`](40-inquiries/README.md) — active research questions
 - [`50-journal/`](50-journal/README.md) — dated observations and experiments
-- [`60-planning/`](60-planning/README.md) — numbered implementation roadmaps
-  and completion evidence
+- [`60-planning/`](60-planning/README.md) — implementation plans and completion evidence
+- [`70-tools/`](70-tools/README.md) — Python validators, generators, shared helpers, and their tests
 - [`90-archive/`](90-archive/README.md) — inactive or superseded material
 - [`assets/`](assets/README.md) — durable research attachments
 - [`templates/`](templates/README.md) — document and directory scaffolds
 
-Folders describe what a document is doing. Links, maps, and tags describe what
-it is about. Directory READMEs are complete local inventories; maps are
-selective conceptual paths.
+Folders describe what a document is doing. Directory READMEs inventory their
+own direct children; the tooling index contains the individual script list.
 
 ## Research boundary
 
@@ -125,125 +89,26 @@ From this directory:
 
 ```bash
 python3 -m pip install -r requirements-validation.txt
-python3 validate_archive.py
-python3 -m unittest test_validate_archive.py
-python3 validate_browser_product_envelope.py
-python3 -m unittest test_validate_browser_product_envelope.py
-python3 validate_component_catalog.py
-python3 -m unittest test_validate_component_catalog.py
-python3 generate_component_catalog.py --check
-python3 validate_component_classification.py
-python3 -m unittest test_validate_component_classification.py
-python3 generate_component_classification.py --check
-python3 validate_quality_acceptance.py
-python3 -m unittest test_validate_quality_acceptance.py
-python3 generate_acceptance_registry.py --check
-python3 validate_bh00_governance.py
-python3 -m unittest test_validate_bh00_governance.py
-python3 generate_bh00_release.py --check
-python3 validate_bh01_activation.py
-python3 -m unittest test_validate_bh01_activation.py
-python3 validate_bh02_activation.py
-python3 -m unittest test_validate_bh02_activation.py
-python3 validate_bh02_semantics.py
-python3 -m unittest test_validate_bh02_semantics.py
-python3 validate_bh02_effects.py
-python3 -m unittest test_validate_bh02_effects.py
-python3 validate_bh02_intent.py
-python3 -m unittest test_validate_bh02_intent.py
-python3 validate_bh02_renderer.py
-python3 -m unittest test_validate_bh02_renderer.py
-python3 validate_bh02_dom.py
-python3 -m unittest test_validate_bh02_dom.py
-python3 validate_bh02_native.py
-python3 -m unittest test_validate_bh02_native.py
-python3 validate_bh02_acceptance.py
-python3 -m unittest test_validate_bh02_acceptance.py
-python3 validate_bh03_activation.py
-python3 -m unittest test_validate_bh03_activation.py
-python3 validate_bh03_compatibility.py
-python3 -m unittest test_validate_bh03_compatibility.py
-python3 validate_bh03_startup.py
-python3 -m unittest test_validate_bh03_startup.py
-python3 validate_bh03_roots.py
-python3 -m unittest test_validate_bh03_roots.py
-python3 validate_bh03_resilience.py
-python3 -m unittest test_validate_bh03_resilience.py
-python3 validate_bh03_profile.py
-python3 -m unittest test_validate_bh03_profile.py
-python3 validate_bh03_measurements.py
-python3 -m unittest test_validate_bh03_measurements.py
-python3 validate_bh03_acceptance.py
-python3 -m unittest test_validate_bh03_acceptance.py
-python3 validate_bh03_correction.py
-python3 -m unittest test_validate_bh03_correction.py
-
-# Phase 8 remains a historical revise record. Its source exceptions are
-# restricted by Phase 9 authorization; renewed acceptance uses Phase 9.
+python3 70-tools/check_all.py --report /tmp/blazex-research-checks.json
 ```
 
-The validator checks metadata, placeholders, filenames, local links,
-directory inventories, conceptual connections, and duplicate source
-identifiers.
+For a focused check:
+
+```bash
+python3 70-tools/validate_archive.py
+python3 -m unittest discover -s 70-tools -p 'test_validate_archive.py'
+python3 70-tools/generate_component_catalog.py --check
+```
+
+The [tooling guide and inventory](70-tools/README.md) explains execution from
+other directories, prerequisites, historical replay, and the migration binding.
+Current commands use `70-tools`; historical logs and pinned Git snapshots keep
+the original command paths. A successful validator execution is not necessarily
+milestone acceptance: the BH-04 Phase 10 candidate remains **revise**, and
+`--require-accepted` continues to refuse downstream work.
 
 ## Archive files
 
-- [`AGENTS.md`](AGENTS.md) — research, authoring, and maintenance instructions
-- [`frontmatter.schema.json`](frontmatter.schema.json) — metadata schema
-- [`generate_component_catalog.py`](generate_component_catalog.py) — deterministic Markdown view generation from the canonical component catalog
-- [`generate_component_classification.py`](generate_component_classification.py) — deterministic joined view generation from the locked catalog and Phase 4 classification
-- [`generate_bh00_release.py`](generate_bh00_release.py) — deterministic BH-00 baseline index and conditional BH-01 entry-manifest generator
-- [`requirements-validation.txt`](requirements-validation.txt) — validator dependencies
-- [`generate_acceptance_registry.py`](generate_acceptance_registry.py) — deterministic Phase 5 acceptance registry and coverage-report generator
-- [`planning_policy.py`](planning_policy.py) — shared fail-closed validation for explicitly bound research-planning amendments
-- [`test_planning_policy.py`](test_planning_policy.py) — exact roadmap amendment and deferred framework gate regression tests
-- [`test_validate_browser_product_envelope.py`](test_validate_browser_product_envelope.py) — focused browser-envelope validator tests
-- [`test_validate_component_catalog.py`](test_validate_component_catalog.py) — focused component-catalog validator tests
-- [`test_validate_component_classification.py`](test_validate_component_classification.py) — focused Phase 4 classification validator tests
-- [`test_validate_bh00_governance.py`](test_validate_bh00_governance.py) — focused Phase 6 reconciliation, review, release, and BH-01 entry validator tests
-- [`test_validate_bh01_activation.py`](test_validate_bh01_activation.py) — focused BH-01 approval, evidence-governance, boundary-graph, inactive-slice, and no-dependency fail-closed tests
-- [`test_validate_bh02_activation.py`](test_validate_bh02_activation.py) — focused BH-02 authorization, handoff-equivalence, project-graph, forbidden-leakage, and evidence-boundary fail-closed tests
-- [`test_validate_bh02_semantics.py`](test_validate_bh02_semantics.py) — focused BH-02 Phase 2 authorization, semantic vocabulary, identity, evaluation, fixture, leakage, and overclaim tests
-- [`test_validate_bh02_effects.py`](test_validate_bh02_effects.py) — focused BH-02 Phase 3 event, capability, effect, resource, fixture, leakage, and overclaim tests
-- [`test_validate_bh02_intent.py`](test_validate_bh02_intent.py) — focused BH-02 Phase 4 token, layout, accessibility, focus, selection, fixture, leakage, and overclaim tests
-- [`test_validate_bh02_renderer.py`](test_validate_bh02_renderer.py) — focused BH-02 Phase 5 renderer capability, lifecycle, headless snapshot, trace, fixture, leakage, and overclaim tests
-- [`test_validate_bh02_dom.py`](test_validate_bh02_dom.py) — focused BH-02 Phase 6 DOM surface, browser evidence, dependency, fixture, leakage, and overclaim tests
-- [`test_validate_bh02_native.py`](test_validate_bh02_native.py) — focused BH-02 Phase 7 native surface, direct-platform evidence, dependency, fixture, deferral, leakage, and overclaim tests
-- [`test_validate_bh02_acceptance.py`](test_validate_bh02_acceptance.py) — focused BH-02 Phase 8 reconciliation, review, overlay, stability, deferral, and downstream-authorization fail-closed tests
-- [`test_validate_bh03_activation.py`](test_validate_bh03_activation.py) — focused BH-03 Phase 1 authority, handoff, lifecycle vocabulary, boundary, dependency, empty-evidence, completion-binding, and overclaim tests
-- [`test_validate_bh03_compatibility.py`](test_validate_bh03_compatibility.py) — focused BH-03 Phase 2 identity, discovery, prerequisite, manifest, fixture, declaration, evidence-boundary, and overclaim tests
-- [`test_validate_bh03_startup.py`](test_validate_bh03_startup.py) — focused BH-03 Phase 3 authorization, artifact-limit, integrity, startup, readiness, fixture, completion-binding, and later-phase overclaim tests
-- [`test_validate_bh03_roots.py`](test_validate_bh03_roots.py) — focused BH-03 Phase 4 authorization, exact runtime sharing, independent roots, acknowledgement, fixture, completion-binding, and later-phase overclaim tests
-- [`test_validate_bh03_resilience.py`](test_validate_bh03_resilience.py) — focused BH-03 Phase 5 shutdown, loss-generation, bounded recovery, atomic replay, fallback, completion-binding, and overclaim tests
-- [`test_validate_bh03_profile.py`](test_validate_bh03_profile.py) — focused BH-03 Phase 6 profile separation, active Chrome/Firefox rows, actual runtime acknowledgements, fallback, shutdown, deferral, and overclaim tests
-- [`test_validate_bh03_measurements.py`](test_validate_bh03_measurements.py) — focused BH-03 Phase 7 authorization, repetition, root cleanup, timing, memory capability, failure convergence, budget, support, and acceptance-boundary tests
-- [BH-03 Phase 8 acceptance validator](validate_bh03_acceptance.py) — validates review records; use `--require-accepted` to gate downstream work (currently fails with revise).
-- [BH-03 historical binding helper](bh03_history.py) — exact authorized Phase 9 source exceptions; not current implementation acceptance.
-- [Historical binding tests](test_bh03_history.py) — reject widened, missing, stale, or unauthorized source exceptions.
-- [BH-03 Phase 9 current acceptance gate](validate_bh03_correction.py) — superseding acceptance with strict current source, recovery and regression evidence.
-- [BH-03 Phase 9 gate tests](test_validate_bh03_correction.py) — reject stale sources, missing replay, false cleanup, hidden obligations and premature support.
-- [BH-03 Phase 8 acceptance tests](test_validate_bh03_acceptance.py) — rejects missing evidence, hidden blockers, false deferral passes, and premature acceptance.
-- [`test_validate_quality_acceptance.py`](test_validate_quality_acceptance.py) — focused Phase 5 quality-budget and acceptance-traceability validator tests
-- [`test_validate_archive.py`](test_validate_archive.py) — focused validator tests
-- [`validate_browser_product_envelope.py`](validate_browser_product_envelope.py) — deterministic BH-00 browser-envelope checks
-- [`validate_component_catalog.py`](validate_component_catalog.py) — deterministic BH-00 reference and component-catalog checks
-- [`validate_component_classification.py`](validate_component_classification.py) — deterministic BH-00 product/package/capability/portability classification checks
-- [`validate_bh00_governance.py`](validate_bh00_governance.py) — deterministic BH-00 source-binding, reconciliation, review, release, and readiness checks
-- [`validate_bh01_activation.py`](validate_bh01_activation.py) — fail-closed BH-01 approval, inherited-baseline, milestone-ledger, evidence-governance, and repository-activation checks
-- [`validate_bh02_activation.py`](validate_bh02_activation.py) — fail-closed BH-02 Phase 1 authorization, inherited-entry, foundation-activation, dependency, leakage, and evidence-state checks
-- [`validate_bh02_semantics.py`](validate_bh02_semantics.py) — fail-closed BH-02 Phase 2 semantic-tree, identity, component-evaluation, fixture, and support-limit checks
-- [`validate_bh02_effects.py`](validate_bh02_effects.py) — fail-closed BH-02 Phase 3 semantic-event, capability, effect, resource-lifecycle, fixture, and support-limit checks
-- [`validate_bh02_intent.py`](validate_bh02_intent.py) — fail-closed BH-02 Phase 4 presentation-intent, ownership, fixture, and support-limit checks
-- [`validate_bh02_renderer.py`](validate_bh02_renderer.py) — fail-closed BH-02 Phase 5 renderer lifecycle, deterministic-headless, trace, fixture, and support-limit checks
-- [`validate_bh02_dom.py`](validate_bh02_dom.py) — fail-closed BH-02 Phase 6 standalone-DOM lowering, browser-driver, browser-matrix, fixture, and support-limit checks
-- [`validate_bh02_native.py`](validate_bh02_native.py) — fail-closed BH-02 Phase 7 portable native lowering, direct adapters, GTK execution, cross-renderer fixtures, deferrals, and support-limit checks
-- [`validate_bh02_acceptance.py`](validate_bh02_acceptance.py) — fail-closed BH-02 Phase 8 phase binding, reconciliation, contract, review, acceptance-overlay, and candidate-decision checks
-- [`validate_bh03_activation.py`](validate_bh03_activation.py) — fail-closed BH-03 Phase 1 authorization, accepted-handoff, lifecycle-contract, repository-activation, dependency, empty-evidence, and completion-binding checks
-- [`validate_bh03_compatibility.py`](validate_bh03_compatibility.py) — fail-closed BH-03 Phase 2 compatibility identity, discovery, prerequisite, strict manifest, profile declaration, fixture, and evidence-state checks
-- [`validate_bh03_startup.py`](validate_bh03_startup.py) — fail-closed BH-03 Phase 3 artifact acquisition, startup descriptor, isolated transport, bundle-load, readiness, ownership, fixture, and evidence-state checks
-- [`validate_bh03_roots.py`](validate_bh03_roots.py) — fail-closed BH-03 Phase 4 exact-compatible runtime registry, independent root lifecycle, generation acknowledgement, ownership, fixture, and evidence-state checks
-- [`validate_bh03_resilience.py`](validate_bh03_resilience.py) — fail-closed BH-03 Phase 5 registry-owned shutdown, exact-generation loss, one replacement, same-handle replay, non-DOM fallback, fixture, and evidence-state checks
-- [`validate_bh03_profile.py`](validate_bh03_profile.py) — fail-closed BH-03 Phase 6 Phoenix profile, actual AtomVM/Elixir root lifecycle, active Chrome/Firefox matrix, fallback, shutdown, deferral, and evidence-state checks
-- [`validate_bh03_measurements.py`](validate_bh03_measurements.py) — fail-closed BH-03 Phase 7 active-browser repetition, ten-root lifecycle, timing, memory capability, cleanup, declared-failure, budget, deferral, and evidence-state checks
-- [`validate_quality_acceptance.py`](validate_quality_acceptance.py) — deterministic BH-00 quality-budget and acceptance-traceability checks
-- [`validate_archive.py`](validate_archive.py) — deterministic archive checks
+- [`AGENTS.md`](AGENTS.md) — research and maintenance instructions
+- [`frontmatter.schema.json`](frontmatter.schema.json) — document metadata schema
+- [`requirements-validation.txt`](requirements-validation.txt) — pinned Python validation dependencies

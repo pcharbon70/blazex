@@ -125,7 +125,7 @@ def main() -> int:
         [sys.executable, str(ROOT / "integration/fixtures/runtime_smoke/verify_semantics.py")],
         [sys.executable, str(ROOT / "integration/fixtures/runtime_smoke/verify_artifact_accounting.py")],
         [sys.executable, str(ROOT / "integration/fixtures/runtime_smoke/verify_negative_probes.py")],
-        [sys.executable, str(ROOT / "docs/research/validate_bh01_activation.py")],
+        [sys.executable, str(ROOT / "docs/research/70-tools/validate_bh01_activation.py")],
     ]
     for command in commands:
         result = subprocess.run(command, cwd=ROOT, capture_output=True, text=True, check=False)

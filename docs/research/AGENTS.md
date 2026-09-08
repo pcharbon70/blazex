@@ -53,6 +53,7 @@ frameworks.
 40-inquiries/   Active questions and research workbenches
 50-journal/     Dated observations and research-session evidence
 60-planning/    Numbered implementation roadmaps and phase evidence
+70-tools/       Python validators, generators, helpers, and tests
 90-archive/     Inactive or superseded material worth retaining
 assets/         Images, PDFs, diagrams, datasets, and attachments
 templates/      Starting points for documents and directory indexes
@@ -189,93 +190,110 @@ the plan says they are gates.
 Before reporting archive work complete:
 
 1. inspect repository status and preserve unrelated changes;
-2. run `python3 validate_archive.py` from this directory;
-3. run `python3 -m unittest test_validate_archive.py` if validation behavior changed;
-4. run `python3 validate_browser_product_envelope.py` and
-   `python3 -m unittest test_validate_browser_product_envelope.py` when the
+2. run `python3 70-tools/validate_archive.py` from this directory;
+3. run `python3 -m unittest discover -s 70-tools -p 'test_validate_archive.py'` if validation behavior changed;
+4. run `python3 70-tools/validate_browser_product_envelope.py` and
+   `python3 -m unittest discover -s 70-tools -p 'test_validate_browser_product_envelope.py'` when the
    browser product envelope or its validator changes;
-5. run `python3 validate_component_catalog.py` and
-   `python3 -m unittest test_validate_component_catalog.py` plus
-   `python3 generate_component_catalog.py --check` when the catalog lock,
+5. run `python3 70-tools/validate_component_catalog.py` and
+   `python3 -m unittest discover -s 70-tools -p 'test_validate_component_catalog.py'` plus
+   `python3 70-tools/generate_component_catalog.py --check` when the catalog lock,
    schema, authored inventory, generated views, generator, or validator changes;
-6. run `python3 validate_component_classification.py`,
-   `python3 -m unittest test_validate_component_classification.py`, and
-   `python3 generate_component_classification.py --check` when Phase 4 product,
+6. run `python3 70-tools/validate_component_classification.py`,
+   `python3 -m unittest discover -s 70-tools -p 'test_validate_component_classification.py'`, and
+   `python3 70-tools/generate_component_classification.py --check` when Phase 4 product,
    package, capability, fallback, remote, portability, or generated
    classification artifacts change;
-7. run `python3 validate_quality_acceptance.py` and
-   `python3 -m unittest test_validate_quality_acceptance.py` plus
-   `python3 generate_acceptance_registry.py --check` when Phase 5 quality
+7. run `python3 70-tools/validate_quality_acceptance.py` and
+   `python3 -m unittest discover -s 70-tools -p 'test_validate_quality_acceptance.py'` plus
+   `python3 70-tools/generate_acceptance_registry.py --check` when Phase 5 quality
    budgets, cross-cutting gates, acceptance conditions, coverage, or generated
    traceability artifacts change;
 8. verify new external citations against primary sources;
-9. run `python3 validate_bh00_governance.py` and
-   `python3 -m unittest test_validate_bh00_governance.py` plus
-   `python3 generate_bh00_release.py --check` when Phase 6 source bindings,
+9. run `python3 70-tools/validate_bh00_governance.py` and
+   `python3 -m unittest discover -s 70-tools -p 'test_validate_bh00_governance.py'` plus
+   `python3 70-tools/generate_bh00_release.py --check` when Phase 6 source bindings,
    reconciliation, reviews, findings, risks, release records, generated
    indexes, or BH-01 entry decisions change;
 10. run `git diff --check` from the project root; and
-11. run `python3 validate_bh01_activation.py` and
-    `python3 -m unittest test_validate_bh01_activation.py` when BH-01
+11. run `python3 70-tools/validate_bh01_activation.py` and
+    `python3 -m unittest discover -s 70-tools -p 'test_validate_bh01_activation.py'` when BH-01
     authorization, evidence governance, activated boundaries, fixture or
     benchmark indexes, or Phase 1 evidence changes; and
 12. inspect the complete change for stale paths and accidental rewrites.
 
 When BH-02 authorization, inherited-entry reconciliation, foundation project
 activation, conformance/native experiment indexes, or Phase 1 evidence changes,
-also run `python3 validate_bh02_activation.py` and
-`python3 -m unittest test_validate_bh02_activation.py`.
+also run `python3 70-tools/validate_bh02_activation.py` and
+`python3 -m unittest discover -s 70-tools -p 'test_validate_bh02_activation.py'`.
 
 When BH-02 Phase 2 authorization, semantic-tree or identity contracts,
 component evaluation, semantic conformance fixtures, or Phase 2 evidence
-changes, also run `python3 validate_bh02_semantics.py` and
-`python3 -m unittest test_validate_bh02_semantics.py`.
+changes, also run `python3 70-tools/validate_bh02_semantics.py` and
+`python3 -m unittest discover -s 70-tools -p 'test_validate_bh02_semantics.py'`.
 
 When BH-02 Phase 3 authorization, semantic events or bindings, capability and
 effect contracts, resource ownership, Phase 3 conformance fixtures, or Phase 3
-evidence changes, also run `python3 validate_bh02_effects.py` and
-`python3 -m unittest test_validate_bh02_effects.py`.
+evidence changes, also run `python3 70-tools/validate_bh02_effects.py` and
+`python3 -m unittest discover -s 70-tools -p 'test_validate_bh02_effects.py'`.
 
 When BH-02 Phase 4 authorization, token or logical-layout intent,
 accessibility/focus/selection intent, Phase 4 conformance fixtures, or Phase 4
-evidence changes, also run `python3 validate_bh02_intent.py` and
-`python3 -m unittest test_validate_bh02_intent.py`.
+evidence changes, also run `python3 70-tools/validate_bh02_intent.py` and
+`python3 -m unittest discover -s 70-tools -p 'test_validate_bh02_intent.py'`.
 
 When BH-02 Phase 5 authorization, renderer capability or lifecycle contracts,
 headless snapshots or traces, Phase 5 conformance fixtures, or Phase 5 evidence
-changes, also run `python3 validate_bh02_renderer.py` and
-`python3 -m unittest test_validate_bh02_renderer.py`.
+changes, also run `python3 70-tools/validate_bh02_renderer.py` and
+`python3 -m unittest discover -s 70-tools -p 'test_validate_bh02_renderer.py'`.
 
 When BH-02 Phase 6 authorization, standalone DOM lowering, the browser driver,
 Chrome/Firefox evidence, cross-renderer conformance, Phase 6 fixtures, or Phase
-6 evidence changes, also run `python3 validate_bh02_dom.py` and
-`python3 -m unittest test_validate_bh02_dom.py`.
+6 evidence changes, also run `python3 70-tools/validate_bh02_dom.py` and
+`python3 -m unittest discover -s 70-tools -p 'test_validate_bh02_dom.py'`.
 
 When BH-02 Phase 7 authorization, portable native lowering, direct Win32,
 AppKit, or GTK adapter sources, GTK execution evidence, native conformance
 fixtures, governed platform deferrals, or Phase 7 evidence changes, also run
-`python3 validate_bh02_native.py` and
-`python3 -m unittest test_validate_bh02_native.py`.
+`python3 70-tools/validate_bh02_native.py` and
+`python3 -m unittest discover -s 70-tools -p 'test_validate_bh02_native.py'`.
 
 When BH-03 Phase 1 authorization, accepted-handoff reconciliation, lifecycle
 vocabulary, browser-host/runtime boundary activation, empty integration index,
-or Phase 1 evidence changes, also run `python3 validate_bh03_activation.py` and
-`python3 -m unittest test_validate_bh03_activation.py`.
+or Phase 1 evidence changes, also run `python3 70-tools/validate_bh03_activation.py` and
+`python3 -m unittest discover -s 70-tools -p 'test_validate_bh03_activation.py'`.
 
 When BH-03 Phase 2 authorization, compatibility identities, manifest discovery,
 browser/deployment prerequisites, profile-manifest declarations, pre-acquisition
 fixtures, or Phase 2 evidence changes, also run
-`python3 validate_bh03_compatibility.py` and
-`python3 -m unittest test_validate_bh03_compatibility.py`.
+`python3 70-tools/validate_bh03_compatibility.py` and
+`python3 -m unittest discover -s 70-tools -p 'test_validate_bh03_compatibility.py'`.
 
 When BH-03 Phase 3 authorization, artifact acquisition, runtime startup,
 bundle-load, readiness, startup fixtures, or Phase 3 evidence changes, also run
-`python3 validate_bh03_startup.py` and
-`python3 -m unittest test_validate_bh03_startup.py`.
+`python3 70-tools/validate_bh03_startup.py` and
+`python3 -m unittest discover -s 70-tools -p 'test_validate_bh03_startup.py'`.
 
 When BH-03 Phase 4 authorization, shared-runtime ownership, root registration
 or lifecycle, generation acknowledgement, Phase 4 fixtures, or Phase 4 evidence
-changes, also run `python3 validate_bh03_roots.py` and
-`python3 -m unittest test_validate_bh03_roots.py`.
+changes, also run `python3 70-tools/validate_bh03_roots.py` and
+`python3 -m unittest discover -s 70-tools -p 'test_validate_bh03_roots.py'`.
 
 Do not commit, push, publish, or open a pull request unless the user asks.
+
+## Research tooling
+
+Keep corpus Python programs and tests under `70-tools/`; do not add new Python
+files to the archive root. Use `research_paths.py` for repository/research-root
+lookup instead of duplicating assumptions about `__file__` or the working
+directory. Keep each new tool indexed in `70-tools/README.md`.
+
+Run `python3 70-tools/check_all.py` from the research root for the complete
+Python test, validator, and generator-check sweep. Use an output path outside
+immutable evidence for execution logs. Historical replay helpers intentionally
+use old script paths inside pinned Git snapshots; do not rewrite those paths,
+historical commands, accepted JSON source hashes, or completion records.
+
+The sealed tooling migration explicitly binds old and relocated sources.
+Changes to a bound tool or caller require a reviewed successor migration or
+superseding evidence, not a widened exception or silent rehash of old records.

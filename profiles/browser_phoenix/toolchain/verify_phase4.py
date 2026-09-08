@@ -187,7 +187,7 @@ def main() -> int:
     errors: list[str] = []
     for command in (
         [sys.executable, str(HERE / "verify_phase3.py")],
-        [sys.executable, str(ROOT / "docs/research/validate_bh01_activation.py")],
+        [sys.executable, str(ROOT / "docs/research/70-tools/validate_bh01_activation.py")],
     ):
         result = subprocess.run(command, cwd=ROOT, capture_output=True, text=True, check=False)
         if result.returncode != 0:
