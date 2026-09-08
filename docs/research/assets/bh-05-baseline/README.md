@@ -24,6 +24,8 @@ Versioned authority, ownership, empty evidence, validation and completion record
 - [Phase 1 authorization](authorization-v0.1.0.json)
 - [Inherited entry and nine-condition ledger](entry-ledger-v0.1.0.json)
 - [Ownership, dependency graph and inherited API inventory](ownership-v0.1.0.json)
+- [Source-frozen Phase 1 execution](phase-01-gates-v0.1.0.json)
+- [Governance-only Phase 1 completion](phase-01-completion-v0.1.0.json)
 
 ### Subdirectories
 

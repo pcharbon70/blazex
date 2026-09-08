@@ -17,7 +17,7 @@ aliases:
 
 Back to milestone: [README](README.md)
 
-- [ ] 1 Phase - Authorization, BH-04 Handoff Reconciliation, and Boundary Activation.
+- [x] 1 Phase - Authorization, BH-04 Handoff Reconciliation, and Boundary Activation.
 
   Establish exact BH-05 implementation authority, bind the accepted BH-04
   renderer handoff and inherited neutral contracts, activate only component
@@ -93,28 +93,28 @@ Back to milestone: [README](README.md)
       - [x] 1.3.2.2 Subtask - Reject rewritten historical evidence, hidden deferral, fabricated ERTS/AtomVM parity, arbitrary dynamic dispatch, generic unbounded emissions, or unsupported compatibility claims.
       - [x] 1.3.2.3 Subtask - Prove the unimplemented Phase 1 candidate passes deterministically from a clean checkout.
 
-  - [ ] 1.4 Section - Phase 1 Integration Tests and Completion Evidence.
+  - [x] 1.4 Section - Phase 1 Integration Tests and Completion Evidence.
 
     Execute the inherited activation gate and publish a bounded decision before
     authoring-facade design becomes eligible.
 
-    - [ ] 1.4.1 Task - Run the active Phase 1 integration gate.
+    - [x] 1.4.1 Task - Run the active Phase 1 integration gate.
 
       Reproduce all inherited and activated checks with exact commands,
       versions, counts, and negative cases.
 
-      - [ ] 1.4.1.1 Subtask - Run package-local tests/formats, BH-04 release checks, BH-05 activation validator/tests, inherited validators/generators, archive/JSON/dependency checks, and patch hygiene.
-      - [ ] 1.4.1.2 Subtask - Confirm facade, schema, lifecycle, scheduling, effects, registry, runtime, failure, measurement, and acceptance result sets remain empty and later phases unauthorized.
-      - [ ] 1.4.1.3 Subtask - Record environment, tools, exact commands/counts, expected negative failures, input hashes, limitations, and deferred qualifications.
+      - [x] 1.4.1.1 Subtask - Run package-local tests/formats, BH-04 release checks, BH-05 activation validator/tests, inherited validators/generators, archive/JSON/dependency checks, and patch hygiene.
+      - [x] 1.4.1.2 Subtask - Confirm facade, schema, lifecycle, scheduling, effects, registry, runtime, failure, measurement, and acceptance result sets remain empty and later phases unauthorized.
+      - [x] 1.4.1.3 Subtask - Record environment, tools, exact commands/counts, expected negative failures, input hashes, limitations, and deferred qualifications.
 
-    - [ ] 1.4.2 Task - Publish Phase 1 completion evidence.
+    - [x] 1.4.2 Task - Publish Phase 1 completion evidence.
 
       Bind the activation result to immutable inputs and make no component
       implementation claim.
 
-      - [ ] 1.4.2.1 Subtask - Publish the validation log, implementation-evidence note, and completion decision with exact artifact hashes.
-      - [ ] 1.4.2.2 Subtask - Mark Phase 1 complete only if every active gate passes and no stop condition remains open.
-      - [ ] 1.4.2.3 Subtask - Make Phase 2 eligible but unauthorized and keep BH-06 ineligible.
+      - [x] 1.4.2.1 Subtask - Publish the validation log, implementation-evidence note, and completion decision with exact artifact hashes.
+      - [x] 1.4.2.2 Subtask - Mark Phase 1 complete only if every active gate passes and no stop condition remains open.
+      - [x] 1.4.2.3 Subtask - Make Phase 2 eligible but unauthorized and keep BH-06 ineligible.
 
 ## Section delivery rule
 

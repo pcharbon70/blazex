@@ -49,6 +49,8 @@ Planning alone does not authorize implementation. The owner authorized Phase 1
 after the accepted BH-04 corrective handoff merged in PR #51 at
 `506c254ddd4a14dd8d1d4cbdba8fcf9556bd15cb`. Phase 1 activates governance only;
 every later phase still requires separate explicit implementation authorization.
+Phase 1 is now complete: all activation gates pass without new component
+behavior. Phase 2 is eligible but unauthorized; BH-06 remains ineligible.
 
 ## What belongs here
 
@@ -125,8 +127,8 @@ adapter modules are forbidden even when available in the monorepo.
 
 | Phase | Status | Delivery | Dependency |
 | --- | --- | --- | --- |
-| [1 — Authorization, BH-04 Handoff Reconciliation, and Boundary Activation](phase-01-authorization-bh-04-handoff-reconciliation-and-boundary-activation.md) | authorized — in progress, governance only | Bind accepted BH-04 evidence, reconcile nine BH-05 acceptance obligations, activate component evidence boundaries, and prove fail-closed ownership. | Accepted BH-04 and explicit authorization |
-| [2 — Component Roles, Authoring Facade, and Callback Algebra](phase-02-component-roles-authoring-facade-and-callback-algebra.md) | planned — unauthorized | Define the Phoenix-familiar but host-neutral module facade, three component roles, lifecycle vocabulary, callback inputs, and closed return forms. | Phase 1 |
+| [1 — Authorization, BH-04 Handoff Reconciliation, and Boundary Activation](phase-01-authorization-bh-04-handoff-reconciliation-and-boundary-activation.md) | complete — governance only | Bind accepted BH-04 evidence, reconcile nine BH-05 acceptance obligations, activate component evidence boundaries, and prove fail-closed ownership. | Accepted BH-04 and explicit authorization |
+| [2 — Component Roles, Authoring Facade, and Callback Algebra](phase-02-component-roles-authoring-facade-and-callback-algebra.md) | eligible — unauthorized | Define the Phoenix-familiar but host-neutral module facade, three component roles, lifecycle vocabulary, callback inputs, and closed return forms. | Phase 1 |
 | [3 — Prop, Slot, and Host-Boundary Contracts](phase-03-prop-slot-and-host-boundary-contracts.md) | planned — unauthorized | Implement schema declarations, defaults, required/cardinality rules, contextual slots, local/host boundary validation, and diagnostics. | Phase 2 |
 | [4 — Pure Composition and Atomic Semantic Evaluation](phase-04-pure-composition-and-atomic-semantic-evaluation.md) | planned — unauthorized | Evaluate pure nested composition deterministically and accept output only after complete semantic validation. | Phase 3 |
 | [5 — Nested Stateful Identity and Update Reconciliation](phase-05-nested-stateful-identity-and-update-reconciliation.md) | planned — unauthorized | Retain keyed nested state, reconcile insert/move/update/remove/replace operations, and define controlled-prop versus local-state ownership. | Phase 4 |
@@ -198,6 +200,8 @@ Phoenix, browser, native-host, or release compatibility.
 - None yet.
 
 ### Documents
+
+- [Phase 1 implementation evidence](activation-evidence.md)
 
 - [Phase 1 — Authorization, BH-04 Handoff Reconciliation, and Boundary Activation](phase-01-authorization-bh-04-handoff-reconciliation-and-boundary-activation.md)
 - [Phase 2 — Component Roles, Authoring Facade, and Callback Algebra](phase-02-component-roles-authoring-facade-and-callback-algebra.md)

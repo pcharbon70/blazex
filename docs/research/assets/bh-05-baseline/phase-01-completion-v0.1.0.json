@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 1,
+  "decision": "phase-1-complete-governance-only",
+  "phase2_eligible": true,
+  "phase2_authorized": false,
+  "bh06_eligible": false,
+  "support_state": "unsupported",
+  "behavior_implemented": false,
+  "runtime_results": [],
+  "artifact_hashes": {
+    "docs/research/assets/bh-05-baseline/authorization-v0.1.0.json": "40abdba6bd157dd48b5573fa836b1a03dd37946a71a448b5df0d6e49fc4a571c",
+    "docs/research/assets/bh-05-baseline/entry-ledger-v0.1.0.json": "55876e3f26cfb411515d16a699302cc62ce2e8ee33a0f487825ba2ed6a1df8fa",
+    "docs/research/assets/bh-05-baseline/ownership-v0.1.0.json": "034a236b336ac88481f44d405c82978928bc16db22eefbcb7d996b3864910707",
+    "docs/research/assets/bh-05-baseline/phase-01-gates-v0.1.0.json": "82491b77807ef48ed11515a2a7bf59a196b39a5e12136fda66ee31496c043763",
+    "integration/bh-05/index-v0.1.0.json": "a78786d1c6a455187377a0b9066deaac7d07ad5ed9ed2fccec0b37021d9a77a2",
+    "integration/bh-05/index.schema.json": "bb55b2f52d1a2c3b78f28a7cbd15aecd28408f6e6751c531a1ccd9cafeb475d6"
+  },
+  "delivery": "One commit per section; one PR after the gate, merge, checkout main, sync origin, then delete feature branch. External delivery remains pending at record creation."
+}
