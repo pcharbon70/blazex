@@ -100,6 +100,10 @@ def validate(root=ROOT, completion=True):
     return errors
 
 if __name__ == "__main__":
+    from bh04_phase10_history import enabled as phase10_enabled, run_phase9
+    if phase10_enabled(ROOT):
+        run_phase9(ROOT)
+        sys.exit(0)
     errors = validate(completion="--candidate" not in sys.argv)
     if errors:
         print("\n".join(errors)); sys.exit(1)

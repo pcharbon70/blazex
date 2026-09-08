@@ -21,6 +21,11 @@ artifacts are immutable; inherited limitations retain their original state.
 
 ## Index
 
+- [Phase 10 raw measurements](blazex-bh-04-phase-10-measurements-v0.1.0.json) — both browsers, all samples and trace hashes.
+- [Phase 10 statistics](blazex-bh-04-phase-10-statistics-v0.1.0.json) — reproducible frame-proxy statistics; not compositor paint credit.
+- [Phase 10 effect/failure evidence](blazex-bh-04-phase-10-effect-browser-v0.1.0.json) — fresh offline runtime and browser observations through 1000 ms.
+- [Phase 10 failed harness attempt](blazex-bh-04-phase-10-failed-attempt-v0.1.0.json) — preserved setup failure; not a passing measurement.
+
 - [Phase 10 authorization](blazex-bh-04-phase-10-authorization-v0.1.0.json) — frozen candidate, methods, thresholds and decision rules.
 
 - [Phase 7 browser evidence](blazex-bh-04-phase-07-browser-results-v0.1.0.json) — active raw effect/failure/cleanup traces.

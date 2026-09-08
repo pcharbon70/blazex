@@ -23,6 +23,14 @@ as a pass. Standalone dependency isolation remains an active requirement.
 
 Back to milestone: [README](README.md)
 
+Section 10.1 is frozen in the [acceptance contract](phase-10-acceptance-contract.md).
+Section 10.2 has executed its active sample inventory; the
+[raw measurements](../../../assets/bh-04-baseline/blazex-bh-04-phase-10-measurements-v0.1.0.json)
+and [statistics](../../../assets/bh-04-baseline/blazex-bh-04-phase-10-statistics-v0.1.0.json)
+retain a blocking distinction: animation-frame opportunities do not establish
+compositor paint. Therefore 10.2.1.1 and the paint-budget outcome remain open.
+No unchecked acceptance requirement is silently converted into a pass.
+
 - [ ] 10 Phase - Measurement, Review, and BH-04 Acceptance.
 
   Measure BH-04's first-responsible renderer budgets, reconcile all milestone

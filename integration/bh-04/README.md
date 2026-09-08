@@ -16,6 +16,8 @@ benchmark pass, browser qualification, or support is claimed.
 
 ## Index
 
+- [Phase 10 authorization freezer](acceptance-authorize.mjs), [browser measurements](acceptance-browser.mjs), [scenarios](acceptance-scenarios.js), [statistical reporter](acceptance-report.mjs) and [negative tests](acceptance-report.test.mjs) — final candidate measurements, explicitly distinguishing frame-opportunity timing from compositor paint.
+
 - [Phase 9 reconciliation report](conformance-report.mjs) verifies raw observations, headless bindings, cross-engine/repeat equality and raw hashes before generating the deterministic active/deferred ledger.
 
 - [Phase 9 isolation build](conformance-isolation.mjs) tests the headless and standalone packages with framework/adapter/profile directories physically absent and audits the standalone asset closure.
