@@ -77,28 +77,28 @@ Back to milestone: [README](README.md)
       - [x] 9.2.2.2 Subtask - Compare semantic outcomes and declared browser observations with exact mismatch diagnostics and no golden-file auto-acceptance.
       - [x] 9.2.2.3 Subtask - Prove the standalone driver runs with LiveView/LocalLiveView absent and the headless driver runs with browser/runtime/framework dependencies absent.
 
-  - [ ] 9.3 Section - Execute active browser accessibility and behavior scenarios.
+  - [x] 9.3 Section - Execute active browser accessibility and behavior scenarios.
 
     Run the corpus in the available development matrix with exact browser and
     environment fingerprints and preserve all failures.
 
-    - [ ] 9.3.1 Task - Execute standalone browser scenarios; retain deferred adapter work.
+    - [x] 9.3.1 Task - Execute standalone browser scenarios; retain deferred adapter work.
 
       Cover behavior under initial, repeated, concurrent, failure, and cleanup
       conditions in both active engines.
 
-      - [ ] 9.3.1.1 Subtask - Execute the standalone path in Linux Chrome and Firefox for every applicable scenario and retain raw transactions, interactions, DOM snapshots, diagnostics, and resource traces.
+      - [x] 9.3.1.1 Subtask - Execute the standalone path in Linux Chrome and Firefox for every applicable scenario and retain raw transactions, interactions, DOM snapshots, diagnostics, and resource traces.
       - [ ] 9.3.1.2 Subtask - [DEFERRED] LiveView/LocalLiveView adapter execution and equivalence testing; retain the owned deferral record, exclude this row from active counts, and do not probe or activate an adapter.
-      - [ ] 9.3.1.3 Subtask - Repeat representative multi-root, rapid-input, keyed-reorder, focus, failure, and dispose/remount scenarios to expose nondeterminism or retained state.
+      - [x] 9.3.1.3 Subtask - Repeat representative multi-root, rapid-input, keyed-reorder, focus, failure, and dispose/remount scenarios to expose nondeterminism or retained state.
 
-    - [ ] 9.3.2 Task - Evaluate automated accessibility outcomes.
+    - [x] 9.3.2 Task - Evaluate automated accessibility outcomes.
 
       Inspect programmatically observable semantics and keyboard/focus behavior
       without treating automation as manual assistive-technology validation.
 
-      - [ ] 9.3.2.1 Subtask - Verify roles, names/descriptions, states, relationships, live-region attributes, reading/DOM order, keyboard activation, focus order, restoration, and no duplicate IDs.
-      - [ ] 9.3.2.2 Subtask - Test accessibility continuity across keyed move, dynamic insert/remove, validation change, dialog/surface replacement, stale update, failure fallback, and root disposal.
-      - [ ] 9.3.2.3 Subtask - Record tooling limits and all manual screen-reader/switch/voice-control pairings as `[DEFERRED]` to BH-22 rather than passing or blocking active implementation.
+      - [x] 9.3.2.1 Subtask - Verify roles, names/descriptions, states, relationships, live-region attributes, reading/DOM order, keyboard activation, focus order, restoration, and no duplicate IDs.
+      - [x] 9.3.2.2 Subtask - Test accessibility continuity across keyed move, dynamic insert/remove, validation change, dialog/surface replacement, stale update, failure fallback, and root disposal.
+      - [x] 9.3.2.3 Subtask - Record tooling limits and all manual screen-reader/switch/voice-control pairings as `[DEFERRED]` to BH-22 rather than passing or blocking active implementation.
 
   - [ ] 9.4 Section - Reconcile outcomes and dependency isolation.
 

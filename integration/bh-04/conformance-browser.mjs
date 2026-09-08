@@ -21,7 +21,8 @@ const server = http.createServer((request, response) => {
   try { response.setHeader("content-type", "text/javascript"); response.end(fs.readFileSync(file)); } catch { response.writeHead(404).end(); }
 });
 await new Promise(resolve => server.listen(0, "127.0.0.1", resolve));
-const output = { schema_version: "1.0.0", phase: 9, platform: process.platform, node: process.version, results: [] };
+const output = { schema_version: "1.0.0", phase: 9, platform: process.platform, node: process.version,
+  accessibility_method: "Playwright ariaSnapshot computed role/name tree; not platform accessibility API or assistive-technology qualification", results: [] };
 try {
   for (const [name, launcher, executablePath] of [["chrome", chromium, "/usr/bin/google-chrome"], ["firefox", firefox, process.env.BH04_FIREFOX ?? "/home/ducky/.cache/ms-playwright/firefox-1538/firefox/firefox"]]) {
     const browser = await launcher.launch({ executablePath, headless: true, ...(name === "chrome" ? { args: ["--no-sandbox", "--disable-dev-shm-usage"] } : {}) });

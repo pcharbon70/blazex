@@ -79,6 +79,12 @@ None.
 
 ## Maintaining this index
 
+- [Phase 9 semantic browser results](blazex-bh-04-phase-09-semantic-browser-v0.1.0.json) — computed accessibility and headless/DOM observations, twice per active browser.
+- [Phase 9 atomic browser results](blazex-bh-04-phase-09-atomic-browser-v0.1.0.json) — fresh atomic, stale, rollback and queue evidence.
+- [Phase 9 interaction browser results](blazex-bh-04-phase-09-interaction-browser-v0.1.0.json) — fresh native-event and ERTS dispatch evidence.
+- [Phase 9 continuity browser results](blazex-bh-04-phase-09-continuity-browser-v0.1.0.json) — fresh controlled form/focus/selection evidence.
+- [Phase 9 effect browser results](blazex-bh-04-phase-09-effect-browser-v0.1.0.json) — fresh effect, failure, runtime-loss and cleanup evidence.
+
 - [Phase 9 isolated build](blazex-bh-04-phase-09-isolation-v0.1.0.json) — 6 headless and 116 DOM tests, framework sources absent, 19-module asset closure.
 
 - [Phase 9 authorization](blazex-bh-04-phase-09-authorization-v0.1.0.json) — standalone conformance authority and exact inherited inputs.

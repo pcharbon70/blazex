@@ -1,5 +1,6 @@
 import { AtomicDOMRoots } from "../../js/blazex_runtime/src/atomic-dom.js";
 import { decodeIntent } from "../../js/blazex_runtime/src/render-intent-data.js";
+import { seal } from "../../js/blazex_runtime/src/render-transaction-v2.js";
 
 const check = (ok, message) => { if (!ok) throw new Error(message); };
 const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
@@ -51,10 +52,21 @@ export async function runConformanceScenarios(document, rows, accessibility) {
     const container = document.createElement("div"); container.setAttribute("data-conformance", "active"); document.body.append(container);
     const roots = new AtomicDOMRoots({ scopeId: "conformance", createBridge: bridge });
     const handle = await roots.register("root"); await handle.mount({ targetId: "owned", tree: {} });
-    const token = roots.attach(handle, { owner: row.transaction.owner, generation: 1, container });
+    let injected = false;
+    const token = roots.attach(handle, { owner: row.transaction.owner, generation: 1, container,
+      fault: (stage, operation) => { if (injected && stage === "before" && operation === 0) throw new Error("conformance fault"); } });
     try {
       if (row.setup) check((await roots.submit(token, row.setup)).state === "committed", "setup");
       const previous = new Map([...container.querySelectorAll("[id]")].map(e => [id(e), e]));
+      let rollback = null;
+      if (row.setup && row.transaction.operations.length) {
+        const before = observe(container), beforeAccessibility = await accessibility();
+        injected = true;
+        rollback = await roots.submit(token, await seal({...row.transaction, transaction_id: "tx-" + "f".repeat(24)}));
+        injected = false;
+        check(rollback.state === "rolled-back" && same(before, observe(container)), row.name + ": failure continuity");
+        check(beforeAccessibility === await accessibility(), row.name + ": failure accessibility continuity");
+      }
       const ack = await roots.submit(token, row.transaction);
       check(ack.state === (row.after ? "committed" : "disposed"), row.name + ": acknowledgement");
       const observed = observe(container); compare(row, observed);
@@ -66,10 +78,16 @@ export async function runConformanceScenarios(document, rows, accessibility) {
         check(ax.includes("textbox") && ax.includes("Name"), row.name + ": accessible textbox/name");
         check(ax.includes("dialog"), row.name + ": accessible dialog");
       }
+      let duplicate = null;
+      if (row.after) {
+        duplicate = await roots.submit(token, row.transaction);
+        check(duplicate.state === "rejected" && same(observed, observe(container)), row.name + ": replay mutation");
+        check(ax === await accessibility(), row.name + ": replay accessibility continuity");
+      }
       await roots.lifecycle.shutdown();
       const cleanup = {...roots.snapshot(token), ...roots.resources(token)};
       check(container.childNodes.length === 0 && cleanup.nodes === 0 && cleanup.listeners === 0, row.name + ": cleanup");
-      traces.push({ scenario: row.scenario_id, repeat, ack, observed, accessibility: ax, cleanup, result: "passed" });
+      traces.push({ scenario: row.scenario_id, repeat, ack, rollback, duplicate, observed, accessibility: ax, cleanup, result: "passed" });
     } finally { await roots.lifecycle.shutdown(); container.remove(); }
   }
   return { result: "passed", support_state: "unsupported", scenarios: rows.length, repetitions: 2, traces };
