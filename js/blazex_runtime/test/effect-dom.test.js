@@ -14,12 +14,12 @@ export async function envelope(tx, effects = [], base = null) {
   return { ...payload, digest: await digest(payload) };
 }
 const effect = (tx, extra = {}) => ({ id: "timer-1", owner: tx.root, generation: tx.generation, revision: tx.target_revision, capability: "time", operation: "schedule", payload: { delay_ms: 1 }, timeout_ms: 100, fallback: "fail", barrier: "post-commit", depends: [], ...extra });
-async function setup() {
+async function setup(options = {}) {
   const document = new Document(), container = document.createElement("div"); document.body.append(container);
   const roots = new EffectDOMRoots({ scopeId: "test", createBridge: bridge });
   const handle = await roots.register("root"); await handle.mount({ targetId: "owned", tree: {} });
   const tx = rows[0].setup ?? rows[0].transaction;
-  const token = roots.attach(handle, { container, owner: tx.owner, generation: 1, grants: ["time"] });
+  const token = roots.attach(handle, { container, owner: tx.owner, generation: 1, grants: ["time"], ...options });
   return { roots, token, tx, container };
 }
 test("effects run after DOM commit and all timer leases release before acknowledgement", async () => {
@@ -55,4 +55,56 @@ test("cleanup leases report failures instead of hiding leaks and reject cross-ro
   const lease = ledger.acquire("dom", () => { throw Error("cleanup"); });
   assert.throws(() => ledger.release(lease, "root-b", 1));
   assert.equal(ledger.dispose().active, 1); assert.equal(ledger.dispose().failures, 1);
+  const other = new RendererResources("root-b", 1);
+  assert.throws(() => other.release(lease));
+});
+test("apply rollback, failed rollback, effect exceptions and ack loss elect one bounded recovery owner", async () => {
+  for (const failure of ["apply", "rollback", "effect", "ack"]) {
+    const a = await setup({ fault: stage => { if (failure === "apply" && stage === "finalize" || failure === "rollback" && ["finalize", "rollback"].includes(stage)) throw Error("injected"); }, effectFault: () => { if (failure === "effect") throw Error("injected"); } });
+    const b = await setup();
+    const result = await a.roots.submit(a.token, await envelope(a.tx, [effect(a.tx)]));
+    if (failure === "ack") { a.roots.interactionFailure(a.token, "timeout"); a.roots.interactionFailure(a.token, "timeout"); }
+    assert.equal(result.state, { apply: "rolled-back", rollback: "fallback", effect: "failed", ack: "committed" }[failure]);
+    assert.equal((await b.roots.submit(b.token, await envelope(b.tx))).state, "committed");
+    assert.equal(a.roots.snapshot(a.token).failure.retry_attempts, 0);
+    assert.ok(a.roots.snapshot(a.token).failure.fallback_attempts <= 1);
+    a.roots.dispose(a.token); b.roots.dispose(b.token);
+    assert.equal(a.roots.snapshot(a.token).resources.active, 0);
+    assert.equal(b.roots.snapshot(b.token).resources.active, 0);
+  }
+});
+test("diagnostics, overload, cleanup and runtime-loss observations are bounded", async () => {
+  const a = await setup();
+  for (let i = 0; i < 100; i++) await assert.rejects(a.roots.submit(a.token, {}));
+  assert.equal(a.roots.snapshot(a.token).failure.diagnostics.length, 32);
+  assert.equal(a.roots.snapshot(a.token).failure.diagnostic_count, 100);
+  const pending = a.roots.submit(a.token, await envelope(a.tx, [effect(a.tx, { payload: { delay_ms: 200 }, timeout_ms: 250 })]));
+  await assert.rejects(a.roots.submit(a.token, {}), error => error.code === "limit");
+  await a.roots.lifecycle.shutdown();
+  await assert.rejects(pending);
+  assert.equal(a.roots.snapshot(a.token).resources.active, 0);
+});
+test("omit failure results are explicit and failed dependencies never execute", async () => {
+  let calls = 0;
+  const a = await setup({ effectFault() { calls++; throw Error("injected"); } });
+  const result = await a.roots.submit(a.token, await envelope(a.tx, [effect(a.tx, { fallback: "omit" }), effect(a.tx, { id: "timer-2", depends: ["timer-1"], fallback: "component" })]));
+  assert.equal(result.state, "committed"); assert.equal(calls, 1);
+  assert.deepEqual(result.results.map(r => r.status), ["failed", "cancelled"]);
+  a.roots.dispose(a.token);
+});
+test("the batch deadline cancels pending timers and actual DOM cleanup errors remain blocking", async () => {
+  const a = await setup();
+  const effects = Array.from({ length: 16 }, (_, i) => effect(a.tx, { id: "timer-" + i, payload: { delay_ms: 100 }, timeout_ms: 200 }));
+  const start = performance.now();
+  await assert.rejects(a.roots.submit(a.token, await envelope(a.tx, effects)));
+  assert.ok(performance.now() - start < 1000);
+  assert.equal(a.roots.snapshot(a.token).resources.active, 0);
+  const b = await setup();
+  await b.roots.submit(b.token, await envelope(b.tx));
+  const replace = b.container.replaceChildren;
+  b.container.replaceChildren = () => { throw Error("cleanup injection"); };
+  b.roots.dispose(b.token);
+  assert.equal(b.roots.snapshot(b.token).resources.failures, 1);
+  assert.equal(b.roots.snapshot(b.token).resources.active, 1);
+  b.container.replaceChildren = replace;
 });

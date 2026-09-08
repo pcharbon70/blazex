@@ -71,29 +71,29 @@ Back to milestone: [README](README.md)
       - [x] 7.2.2.2 Subtask - Release superseded resources on node removal/replacement, generation replacement, transaction rejection, root disposal, runtime loss, shutdown, and fallback.
       - [x] 7.2.2.3 Subtask - Make disposal idempotent and observable, reject cross-root release, and report retained resources after the declared convergence bound.
 
-  - [ ] 7.3 Section - Implement renderer failure isolation and recovery.
+  - [x] 7.3 Section - Implement renderer failure isolation and recovery.
 
     Apply the canonical renderer-failure contract consistently across protocol,
     reconciliation, apply, interaction, effect, acknowledgement, and cleanup
     failures.
 
-    - [ ] 7.3.1 Task - Implement root-scoped failure coordination.
+    - [x] 7.3.1 Task - Implement root-scoped failure coordination.
 
       Select one deterministic outcome without allowing independent layers to
       retry or replace the same root concurrently.
 
-      - [ ] 7.3.1.1 Subtask - Normalize failure origin/severity into stable root-scoped diagnostics and elect one recovery owner per failed transaction.
-      - [ ] 7.3.1.2 Subtask - Reject atomically, retain/reconstruct the last valid generation where safe, otherwise install the bounded fallback and quarantine only the affected root.
-      - [ ] 7.3.1.3 Subtask - Bound retry count, delay, queue retention, diagnostic volume, and fallback attempts; require explicit owner action after terminal failure.
+      - [x] 7.3.1.1 Subtask - Normalize failure origin/severity into stable root-scoped diagnostics and elect one recovery owner per failed transaction.
+      - [x] 7.3.1.2 Subtask - Reject atomically, retain/reconstruct the last valid generation where safe, otherwise install the bounded fallback and quarantine only the affected root.
+      - [x] 7.3.1.3 Subtask - Bound retry count, delay, queue retention, diagnostic volume, and fallback attempts; require explicit owner action after terminal failure.
 
-    - [ ] 7.3.2 Task - Add adversarial lifecycle coverage.
+    - [x] 7.3.2 Task - Add adversarial lifecycle coverage.
 
       Exercise failures at every boundary and verify state, authority, focus,
       interaction, and cleanup outcomes.
 
-      - [ ] 7.3.2.1 Subtask - Inject malformed transaction, diff failure, apply exception, rollback failure, lost acknowledgement, effect failure/timeout, event overload, runtime loss, and disposal race.
-      - [ ] 7.3.2.2 Subtask - Verify last-valid/fallback DOM, no stale state advance, no duplicate effect/event, bounded diagnostics/retries/queues, and unaffected sibling roots.
-      - [ ] 7.3.2.3 Subtask - Verify abandoned resources release within the governed observation window or produce a blocking leak record.
+      - [x] 7.3.2.1 Subtask - Inject malformed transaction, diff failure, apply exception, rollback failure, lost acknowledgement, effect failure/timeout, event overload, runtime loss, and disposal race.
+      - [x] 7.3.2.2 Subtask - Verify last-valid/fallback DOM, no stale state advance, no duplicate effect/event, bounded diagnostics/retries/queues, and unaffected sibling roots.
+      - [x] 7.3.2.3 Subtask - Verify abandoned resources release within the governed observation window or produce a blocking leak record.
 
   - [ ] 7.4 Section - Phase 7 Integration Tests and Completion Evidence.
 

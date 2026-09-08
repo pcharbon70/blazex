@@ -36,7 +36,7 @@ export class InteractionStream {
     requireInteraction(Number.isInteger(timeoutMs) && timeoutMs >= 1 && timeoutMs <= 10000, "limit");
     this.#bridge = bridge; this.#handle = rootHandle; this.#timeout = timeoutMs;
   }
-  bindDOM(dom, token) { requireInteraction(this.#dom === null && typeof dom?.submit === "function"); this.#dom = dom; this.#token = token; }
+  bindDOM(dom, token) { requireInteraction(this.#dom === null && typeof dom?.submit === "function"); this.#dom = dom; this.#token = token; if (dom.deadlineMs) this.#timeout = Math.min(this.#timeout, dom.deadlineMs); }
   setContext(context) {
     requireInteraction(!this.#closed, "disposed-root");
     // Listener inventory is separately bounded; it need not fit one event's item budget.
@@ -49,12 +49,12 @@ export class InteractionStream {
     const record = validateInteraction(raw); this.#validateContext(record);
     this.#bridge.preflight(record);
     requireInteraction(record.sequence > this.#lastSequence, "duplicate");
-    requireInteraction(this.#queue.length + Number(this.#active !== null) < 64, "limit");
+    if (this.#queue.length + Number(this.#active !== null) >= 64) { this.#dom?.interactionFailure?.(this.#token, "limit", false); requireInteraction(false, "limit"); }
     this.#lastSequence = record.sequence;
     return new Promise(resolve => {
       const job = { record, resolve, settled: false, controller: new AbortController(), timer: null };
       this.#queue.push(job); this.#maximum = Math.max(this.#maximum, this.#queue.length + Number(this.#active !== null));
-      job.timer = setTimeout(() => { this.#finish(job, "rejected", "timeout"); this.dispose(); }, this.#timeout);
+      job.timer = setTimeout(() => { this.#finish(job, "rejected", "timeout"); this.#dom?.interactionFailure?.(this.#token, "timeout"); this.dispose(); }, this.#timeout);
       queueMicrotask(() => this.#pump());
     });
   }
@@ -95,7 +95,8 @@ export class InteractionStream {
       }
       this.#finish(job, "accepted");
     } catch (error) {
-      this.#finish(job, "rejected", error instanceof InteractionError ? interactionDiagnostic(error) : "transport"); this.dispose();
+      const diagnostic = error instanceof InteractionError ? interactionDiagnostic(error) : "transport";
+      this.#finish(job, "rejected", diagnostic); this.#dom?.interactionFailure?.(this.#token, diagnostic); this.dispose();
     } finally { this.#active = null; if (!this.#closed) queueMicrotask(() => this.#pump()); }
   }
   dispose() {
