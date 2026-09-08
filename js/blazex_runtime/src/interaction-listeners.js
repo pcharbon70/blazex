@@ -41,6 +41,8 @@ export class InteractionListeners {
     try {
       requireInteraction(!this.#disposed && !this.#suspended, "disposed-root");
       const binding = this.#bindings.get(id); requireInteraction(binding && binding.lease === lease && binding.generation === this.#context.generation, "listener");
+      requireInteraction(!this.#continuity?.isComposing(binding.source), "composition");
+      requireInteraction(this.#continuity?.editable(binding.source) !== false, "listener");
       const payload = normalizeNative(binding.semantic, binding.source, binding.element, event);
       const time = this.#clock(); requireInteraction(Number.isFinite(time) && time >= 0 && time <= Number.MAX_SAFE_INTEGER, "clock");
       this.#timestamp = Math.max(this.#timestamp, Math.floor(time));

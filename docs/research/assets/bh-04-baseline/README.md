@@ -27,6 +27,11 @@ None.
 
 ### Files
 
+- [Phase 6 source index](blazex-bh-04-phase-06-source-index-v0.1.0.json) — exact current source and browser hashes.
+- [Phase 6 browser results](blazex-bh-04-phase-06-browser-results-v0.1.0.json) — controlled state, focus, selection, composition and runtime traces.
+- [Phase 6 validation log](blazex-bh-04-phase-06-validation-log-v0.1.0.txt) — commands, counts, repairs and limits.
+- [Phase 6 completion](blazex-bh-04-phase-06-completion-v0.1.0.json) — section provenance; Phase 7 eligible but unauthorized.
+
 - [Phase 6 authorization](blazex-bh-04-phase-06-authorization-v0.1.0.json) — explicit continuity and internal form prerequisite scope.
 
 - [Phase 5 source index](blazex-bh-04-phase-05-source-index-v0.1.0.json) — exact source and browser hashes.

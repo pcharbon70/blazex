@@ -75,6 +75,17 @@ defmodule BlazeX.Renderer.DOM.ContinuitySession do
 
   def acknowledge(_, _, _), do: {:error, "stale"}
 
+  def update(%__MODULE__{disposed: false, pending_sequence: nil} = state, props) do
+    with {:ok, candidate} <- FormEvaluator.update(state.evaluation, props),
+         {:ok, renderer} <- ContinuityRenderer.update(state.renderer, candidate.output) do
+      {:ok,
+       %{state | renderer: renderer, candidate: candidate, pending_sequence: state.last_sequence},
+       ContinuityRenderer.transaction(renderer)}
+    end
+  end
+
+  def update(_, _), do: {:error, "stale"}
+
   def deliver(%__MODULE__{} = state, record) do
     with :ok <- validate(record),
          true <- not state.disposed and state.context != nil and state.pending_sequence == nil,

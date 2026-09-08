@@ -6,6 +6,8 @@ const set = (element, key, value) => { if (element[key] !== value) element[key] 
 export class FormContinuity {
   #entries = new Map(); #controls = []; #digest = null; #disposed = false;
   get digest() { return this.#digest; }
+  isComposing(source) { return this.#entries.get(source)?.composing ?? false; }
+  editable(source) { const c = this.#targets(this.#controls).find(c => c.owner === source); return !c || (!c.disabled && !c.readonly); }
   has(element) { return [...this.#entries.values()].some(e => e.element === element); }
   admitted(source, payload, sequence) {
     const entry = this.#entries.get(source);
@@ -13,6 +15,7 @@ export class FormContinuity {
   }
   validate(envelope, projection) {
     requireDOM(!this.#disposed && envelope && envelope.base_control_digest === this.#digest, "stale");
+    requireDOM(![...this.#entries.values()].some(e => e.text && new TextEncoder().encode(e.element.value).length > 2048), "limit");
     const nodes = new Map((projection?.nodes ?? []).map(n => [n.id, n]));
     for (const control of envelope.controls) {
       const owner = nodes.get(control.owner); requireDOM(owner, "missing-target");
@@ -30,12 +33,14 @@ export class FormContinuity {
   #listen(source, element, text) {
     const entry = { element, text, composing: false, dirty: false, sequence: 0, value: element.value, checked: element.checked, listeners: [] };
     const listen = (name, fn) => { element.addEventListener(name, fn); entry.listeners.push([name, fn]); };
+    const readText = () => { const value = element.value; if (new TextEncoder().encode(value).length <= 2048) entry.value = value; };
+    if (!text) listen("click", event => { if (event.target === element && !this.editable(source)) event.preventDefault(); });
     if (text) {
-      listen("compositionstart", () => { entry.composing = true; entry.dirty = true; });
-      listen("compositionupdate", () => { entry.value = element.value; });
-      listen("compositionend", () => { entry.composing = false; entry.value = element.value; });
+      listen("compositionstart", () => { entry.composing = true; entry.dirty = true; entry.sequence = 0; });
+      listen("compositionupdate", readText);
+      listen("compositionend", () => { entry.composing = false; readText(); });
       listen("blur", () => { entry.composing = false; });
-      listen("input", event => { if (event.target === element) { entry.value = element.value; entry.dirty = true; if (event.isComposing) entry.composing = true; } });
+      listen("input", event => { if (event.target === element) { readText(); entry.dirty = true; if (event.isComposing) entry.composing = true; } });
     }
     this.#entries.set(source, entry); return entry;
   }
@@ -77,7 +82,7 @@ export class FormContinuity {
     const control = this.#targets(this.#controls).find(c => c.owner === source);
     if (control) {
       const entry = this.#entries.get(source);
-      this.decorate(element, control, entry ? { value: entry.element.value, checked: entry.element.checked } : null);
+      this.decorate(element, control, entry ? { value: entry.value, checked: entry.checked } : null);
     }
   }
   committed(envelope) { this.#digest = envelope.control_digest; }

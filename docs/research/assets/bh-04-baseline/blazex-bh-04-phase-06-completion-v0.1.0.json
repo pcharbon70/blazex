@@ -1,0 +1,104 @@
+{
+  "schema_version": "1.0.0",
+  "milestone": "BH-04",
+  "phase": 6,
+  "decision": "passed",
+  "base_revision": "c11a0618b66f46b868739c9958f6d9b45249afbf",
+  "branch": "codex/bh04-phase6-continuity",
+  "next_eligible_phase": 7,
+  "next_authorized_work": null,
+  "bh05_eligible": false,
+  "support_state": "unsupported",
+  "api_state": "experimental-not-stable",
+  "section_commits": [
+    {
+      "section": "6.1",
+      "commit": "2908f926e11d1cbf9ce0c0224f78072855852bf5"
+    },
+    {
+      "section": "6.2",
+      "commit": "0e0c94301f04a39bedb6c79eb4908fc6a2ddddbf"
+    },
+    {
+      "section": "6.3",
+      "commit": "42f379b569490f98b6c21ccf1cd459eb732b1224"
+    },
+    {
+      "section": "6.4",
+      "commit": "the commit introducing this completion record"
+    }
+  ],
+  "gates": [
+    {
+      "name": "active-browsers",
+      "exit_code": 0
+    },
+    {
+      "name": "boundary-audit",
+      "exit_code": 0
+    },
+    {
+      "name": "cross-language",
+      "exit_code": 0
+    },
+    {
+      "name": "cross-renderer",
+      "exit_code": 0
+    },
+    {
+      "name": "dom-js",
+      "exit_code": 0
+    },
+    {
+      "name": "elixir-packages",
+      "exit_code": 0
+    },
+    {
+      "name": "generators",
+      "exit_code": 0
+    },
+    {
+      "name": "governance-validators",
+      "exit_code": 0
+    },
+    {
+      "name": "json-schema",
+      "exit_code": 0
+    },
+    {
+      "name": "patch-hygiene",
+      "exit_code": 0
+    },
+    {
+      "name": "research-tests",
+      "exit_code": 0
+    },
+    {
+      "name": "runtime-js",
+      "exit_code": 0
+    }
+  ],
+  "artifact_hashes": {
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-06-authorization-v0.1.0.json": "7ac0d0c705a44de7cef406868dd61971402fa14811eae4e868cdc35b23466afd",
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-06-source-index-v0.1.0.json": "2ffc8f805594092242076a3ff0a331bec30db86f3cbb2683bae4bf5a317d3676",
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-06-browser-results-v0.1.0.json": "b2d8eb74538d9e3e702760c02ae47d4918e327f0f1dc0a054cffd1c405966709",
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-06-validation-log-v0.1.0.txt": "7b7fc4668ad5d6f5bda341de40513f791836d423979bdaedd6337b1164eb77dc",
+    "docs/research/60-planning/01-browser-host/bh-04-dom-renderer-and-interaction-transport/phase-06-implementation-evidence.md": "394ef19f12ef121d0abefe7ccbc9e6320f04c132c2e01697ce232086e8403bb3",
+    "docs/research/60-planning/01-browser-host/bh-04-dom-renderer-and-interaction-transport/phase-06-continuity-contract.md": "d172bef501fef35ba4b3e132c9a45ff202d85b1cf71378516b657ddff768e7b2"
+  },
+  "limitations": [
+    "Additive experimental form contracts; legacy consumers reject them",
+    "Real ERTS via test-only DevTools/stdio, not newly packaged AtomVM/Wasm",
+    "Physical IME/manual AT and unavailable qualification deferred to owners by BH-22",
+    "No product forms, uploads, effects, public API or support qualification",
+    "Implementation-agent review, not independent review"
+  ],
+  "delivery": {
+    "pull_requests": 1,
+    "merge_requested": true,
+    "checkout_main": true,
+    "sync_origin": true,
+    "delete_feature_branch_after_sync": true,
+    "restore_unrelated_work": true
+  }
+}

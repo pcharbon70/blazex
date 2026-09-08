@@ -37,6 +37,11 @@ digest binds both halves; a base-control digest prevents stale manifest replay.
 Acknowledgement binds the envelope digest and the ordinary v2 DOM acknowledgement.
 Only explicitly attached continuity roots accept this envelope. No silent
 reinterpretation of existing v1/v2 protocols, fixture.event, or Wasm profile.
+The root endpoint is explicitly negotiated as `blazex.host-bridge/3`; the
+interaction payload stays the Phase 5 closed `blazex.interaction/1` record.
+Choices use the reference checkbox-group mapping: checked properties and
+aria-selected carry stable selection identity. This does not add HTML
+select/option elements or a product selection widget.
 
 ## Values and composition
 
@@ -47,6 +52,9 @@ check state maps to indeterminate. Options use stable identities, not indexes.
 Unchanged values are never redundantly assigned. A native edit newer than the
 semantic edit acknowledgement is retained; a matching/newer acknowledgement
 may accept or replace it. Rejected stale input is not automatically replayed.
+Oversize native text is not copied into retained drafts or transported; renders
+reject rather than truncate or overwrite that browser-owned text. A genuine
+in-limit edit or fresh root lifecycle is required to resolve it.
 
 Composition start/update/end is browser-local. Composing input does not emit a
 semantic change; only an actual non-composing input does. Compatible rendering

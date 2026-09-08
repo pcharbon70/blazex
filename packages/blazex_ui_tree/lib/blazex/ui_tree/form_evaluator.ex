@@ -55,7 +55,12 @@ defmodule BlazeX.UITree.FormEvaluator do
 
   defp accept(evaluation) do
     with :ok <- FormOutput.validate(evaluation.output),
-         true <- evaluation.output.intent.document.root.identity == evaluation.identity do
+         true <- evaluation.output.intent.document.root.identity == evaluation.identity,
+         true <-
+           Enum.all?(
+             evaluation.output.forms,
+             &(&1.edit_sequence <= evaluation.last_event_sequence)
+           ) do
       {:ok, evaluation}
     else
       _ -> {:error, :invalid_form_output}

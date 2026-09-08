@@ -45,7 +45,10 @@ Both the protocol and pure keyed-reconciliation gates are complete. The owner
 then authorized Phase 4 on 2026-09-07. Its atomic DOM and active Linux browser
 gates are complete. The owner authorized Phase 5 on 2026-09-08; its local
 semantic interaction and active Linux browser gates are complete. Phase 6 is
-eligible but unauthorized. No support or newly packaged Wasm endpoint is claimed.
+eligible but unauthorized at that handoff. The owner then authorized Phase 6
+and its versioned internal form/selection prerequisite on 2026-09-08. Its active
+continuity gate is complete; Phase 7 is eligible but unauthorized. No support
+or newly packaged Wasm endpoint is claimed.
 
 ## What belongs here
 
@@ -105,8 +108,8 @@ versions; no dependency may point back from the standalone path.
 | [3 — Keyed Incremental Reconciliation and Deterministic Diffing](phase-03-keyed-incremental-reconciliation-and-deterministic-diffing.md) | complete — keyed reconciliation | Replace full-root-only updates with bounded keyed reconciliation and canonical operation generation in the standalone DOM package. | Phase 2 |
 | [4 — Atomic DOM Application, Root Queues, and Stale Rejection](phase-04-atomic-dom-application-root-queues-and-stale-rejection.md) | complete — atomic DOM | Apply validated transactions through isolated per-root queues with atomic failure behavior, rollback/fallback, and exact generation ordering. | Phase 3 and BH-03 root lifecycle |
 | [5 — Semantic Event Normalization and Interaction Transport](phase-05-semantic-event-normalization-and-interaction-transport.md) | complete — local interactions | Normalize bound browser events into bounded semantic interaction records and deliver them to the correct runtime root without server authority. | Phases 2 and 4 |
-| [6 — Form Value, Focus, and Selection Continuity](phase-06-form-value-focus-and-selection-continuity.md) | eligible — unauthorized | Preserve controlled values, form semantics, active element, text selection, composition, and focus intent across incremental updates. | Phases 3–5 |
-| [7 — Effect Ordering, Resources, Disposal, and Failure Isolation](phase-07-effect-ordering-resources-disposal-and-failure-isolation.md) | planned — unauthorized | Order DOM commits and browser effects, bound owned resources, isolate malformed/failing roots, and converge cleanup. | Phases 4–6 |
+| [6 — Form Value, Focus, and Selection Continuity](phase-06-form-value-focus-and-selection-continuity.md) | complete — continuity | Preserve controlled values, form semantics, active element, text selection, composition, and focus intent across incremental updates. | Phases 3–5 |
+| [7 — Effect Ordering, Resources, Disposal, and Failure Isolation](phase-07-effect-ordering-resources-disposal-and-failure-isolation.md) | eligible — unauthorized | Order DOM commits and browser effects, bound owned resources, isolate malformed/failing roots, and converge cleanup. | Phases 4–6 |
 | [8 — LiveView and LocalLiveView Adapter Isolation](phase-08-liveview-and-local-liveview-adapter-isolation.md) | planned — unauthorized | Implement the optional version-pinned adapter and prove all framework coupling remains outside the standalone DOM and Plug graphs. | Phases 2–7 and compatible pinned framework inputs |
 | [9 — Cross-Path Accessibility and Browser Conformance](phase-09-cross-path-accessibility-and-browser-conformance.md) | planned — unauthorized | Reconcile standalone and optional LiveView outcomes against headless semantics in active Linux Chrome/Firefox scenarios. | Phases 3–8 |
 | [10 — Measurement, Review, and BH-04 Acceptance](phase-10-measurement-review-and-bh-04-acceptance.md) | planned — unauthorized | Measure the first renderer budgets, execute multidisciplinary review and the complete gate, and accept, revise, or block BH-05 eligibility. | Phases 1–9 |
@@ -160,6 +163,7 @@ public stability or browser support.
 
 ## Index
 
+- [Phase 6 implementation evidence](phase-06-implementation-evidence.md) — controlled values, composition, focus, selection and browser/runtime completion.
 - [Phase 6 continuity contract](phase-06-continuity-contract.md) — authorized internal form prerequisite, ownership, composition and focus policy.
 - [Phase 5 implementation evidence](phase-05-implementation-evidence.md) — event mappings, ERTS dispatch, DOM acknowledgement and bounded completion.
 - [Phase 5 interaction contract](phase-05-interaction-contract.md) — mapping, privacy, versioned bridge extension, root sequencing and completion boundaries.

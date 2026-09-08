@@ -28,7 +28,7 @@ defmodule BlazeX.Renderer.DOM.ContinuityRenderer do
            is_map(response) and Enum.sort(Map.keys(response)) == ~w(ack continuity_digest state),
          true <-
            response["continuity_digest"] == pending["digest"] and response["state"] == "committed",
-         true <- response["ack"]["state"] == "committed",
+         true <- is_map(response["ack"]) and response["ack"]["state"] == "committed",
          {:ok, inner} <- ReconciledSession.acknowledge(state.inner, response["ack"]),
          true <- inner.pending == nil do
       {:ok, %{state | inner: inner, pending: nil, control_digest: pending["control_digest"]}}
@@ -70,5 +70,9 @@ defmodule BlazeX.Renderer.DOM.ContinuityRenderer do
     }
 
     {:ok, %{state | pending: Map.put(envelope, "digest", Codec.digest(envelope))}}
+  rescue
+    _ -> {:error, "limit"}
+  catch
+    {:protocol, code} -> {:error, code}
   end
 end

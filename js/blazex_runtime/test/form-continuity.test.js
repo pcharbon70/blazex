@@ -25,6 +25,12 @@ test("newer drafts survive pending semantic writes and composition never fabrica
   emit(element, "compositionstart"); element.value = "composing"; emit(element, "compositionupdate");
   state.apply(envelope("conflict", 3), nodes); assert.equal(element.value, "composing");
   assert.equal(state.snapshot().composing, 1); emit(element, "compositionend"); assert.equal(state.snapshot().composing, 0);
+  state.apply(envelope("still not acknowledged", 3), nodes); assert.equal(element.value, "composing");
+  element.value = "unobserved mutation";
+  const expected = doc.createElement("input"); state.expected(expected, owner); assert.equal(expected.value, "composing");
+  element.value = "x".repeat(2049); emit(element, "input");
+  assert.throws(() => state.validate({ base_control_digest: null }, null), error => error.code === "limit");
+  state.expected(expected, owner); assert.equal(expected.value, "composing");
   state.rejected(); state.dispose(); state.dispose(); assert.deepEqual(state.snapshot(), { controls: 0, composing: 0, listeners: 0, disposed: true });
 });
 test("checked, mixed, required and invalid map distinctly and rollback releases composition", () => {
@@ -33,4 +39,10 @@ test("checked, mixed, required and invalid map distinctly and rollback releases 
   state.apply({ controls: [c] }, nodes);
   assert.equal(element.checked, true); assert.equal(element.indeterminate, true); assert.equal(element.required, true); assert.equal(element.getAttribute("aria-invalid"), "true");
   const checkpoint = state.checkpoint(); state.rollback(checkpoint, nodes); assert.equal(state.snapshot().composing, 0); state.dispose();
+});
+test("readonly choices cancel native toggles before a semantic event", () => {
+  const doc = new Document(), element = doc.createElement("input"), nodes = new Map([[owner, element]]), state = new FormContinuity();
+  state.apply({ controls: [{ ...control(false), kind: "check", readonly: true }] }, nodes);
+  let cancelled = false; emit(element, "click", { preventDefault() { cancelled = true; } });
+  assert.equal(cancelled, true); assert.equal(state.editable(owner), false); state.dispose();
 });

@@ -50,6 +50,16 @@ defmodule BlazeX.Renderer.DOM.ContinuitySessionTest do
              })
 
     assert {:ok, state} = ContinuitySession.acknowledge(state, 0, ack(envelope))
+
+    assert {:error, _} =
+             ContinuitySession.handle(state, %{
+               "protocol" => "blazex.host-bridge/2",
+               "root_id" => "form",
+               "request_id" => "legacy",
+               "operation" => "root.interaction",
+               "payload" => %{}
+             })
+
     {:ok, source} = Identity.child(owner, :field)
     source = Portable.id(source)
 
