@@ -205,6 +205,10 @@ UI and diagnostics rather than partial operation.
 
 ### BH-04 — DOM renderer and interaction transport
 
+Current status: [corrective acceptance](../60-planning/01-browser-host/bh-04-dom-renderer-and-interaction-transport/acceptance-correction-evidence.md)
+passed for bounded development on 2026-09-08. BH-05 entry is eligible; release
+support and framework integration remain unqualified/deferred.
+
 **Goal.** Establish the browser's reference renderer as a versioned,
 server-framework-independent adapter from BlazeX semantics to accessible DOM
 behavior.

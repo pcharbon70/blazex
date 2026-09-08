@@ -1,0 +1,16 @@
+{
+  "independent_agents": ["review_architecture", "review_qa", "review_security"],
+  "implementation_by_reviewers": false,
+  "human_review_claim": false,
+  "lenses": ["architecture", "implementation", "renderer/conformance", "security", "accessibility", "performance/reliability", "packaging/dependency", "provenance"],
+  "open_blockers": [],
+  "final_delta_approved": true,
+  "approval_condition": "Successful source-frozen gates and final successor validation; not approval of an unexecuted candidate",
+  "variance": {
+    "disposition": "bounded-development-only",
+    "owner": "performance-qualification-owner",
+    "repeat_at": ["BH-22 governed hardware qualification", "material renderer/runtime changes"],
+    "stable_performance_claim": false,
+    "physical_display_credit": false
+  }
+}
