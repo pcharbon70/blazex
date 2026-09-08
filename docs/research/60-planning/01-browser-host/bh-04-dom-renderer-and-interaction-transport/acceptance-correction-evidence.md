@@ -9,8 +9,11 @@ aliases: []
 
 # BH-04 corrective acceptance evidence
 
-Status: corrective measurements recorded; **not yet accepted**. C3 review
-closure and C4 source-bound integration gates remain unfinished.
+Status: **accepted for bounded development** by the source-bound
+[corrective decision](../../../assets/bh-04-correction/decision.json).
+Independent review closure and current/historical execution gates pass. C4 PR
+delivery and branch cleanup remain to be completed. Release support remains
+unsupported; BH-05 Phase 1 is eligible under the owner's separate request.
 
 ## C2 runtime and checker corrections
 
@@ -83,6 +86,30 @@ root. Full compressed native traces and the report are written without
 overwriting an existing run. Browser paths are recorded in the driver.
 
 Run `node --test integration/bh-04/presentation-trace.test.mjs integration/bh-04/corrective-report.test.mjs`
-for native-chain negatives and stale-evidence mutations. Historical acceptance
-remains revise until a current source-bound successor is completed. No BH-05
-entry credit is granted here.
+for native-chain negatives and stale-evidence mutations. The immutable historical
+Phase 10 decision remains revise; this successor closes its blockers without
+rewriting that record.
+
+## C3 source-bound decision and independent closure
+
+All three independent reviewer agents approved the final delta conditional on
+passing unchanged-source gates. The [cumulative review](../../../../../.spec/reviews/2026-09-08T13-01-15-0400-parallel-code-review-bh04-correction.md)
+retains original findings, corrections, disagreement resolution and limitations.
+The final execution log binds identical before/after/current source closures;
+four successor Python tests include stale execution and inherited-input tampering.
+All inherited non-Markdown assets match their frozen Git blobs. All five
+acceptance conditions and every inherited obligation/deferral remain present.
+
+The complete historical sweep at `d61e103b14595acca182611524eb4c7245906f20`
+passes 438 tests and every validator/generator check. The current 15-command
+sweep passes offline package/conformance tests, JavaScript, current-tool tests,
+both browsers, replays, isolation, archive, migration and hygiene checks.
+Earlier missing-artifact/bootstrap and incomplete-index attempts are retained;
+they receive no passing credit. Native and stale observations independently
+reparse from raw captures. Exact commands and outputs remain in the gate logs.
+
+Current command: `python3 docs/research/70-tools/validate_bh04_correction.py`.
+The old sealed `check_all.py` remains a historical-snapshot sweep, not a way to
+validate changed implementation bytes against old acceptance. No bound tool or
+old record was silently rehashed. The scripts-move warning was delivered to the
+owner: corpus Python now lives in `docs/research/70-tools`.

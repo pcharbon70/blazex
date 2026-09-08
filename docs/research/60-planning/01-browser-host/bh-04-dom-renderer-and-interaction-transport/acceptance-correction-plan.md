@@ -19,7 +19,7 @@ phase. Base: `d61e103b14595acca182611524eb4c7245906f20`; branch:
 
 - [x] C1 — Freeze corrected measurement and review scope before acceptance runs.
 - [x] C2 — Repair independent findings and produce native-presentation evidence.
-- [ ] C3 — Obtain final independent reviews, bind all obligations and decide.
+- [x] C3 — Obtain final independent reviews, bind all obligations and decide.
 - [ ] C4 — Reproduce active gates, publish one PR, merge, sync main, then delete branch.
 
 One commit per section. A blocker stays blocking; no threshold reduction,

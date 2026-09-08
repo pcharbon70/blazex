@@ -53,15 +53,18 @@ Its bounded effect, resource and failure-isolation gate is complete. On
 the subsequent Phase 8 implementation request. Phase 8 is **[DEFERRED]**;
 Phase 9 was explicitly authorized and its active conformance gate is complete.
 The owner authorized Phase 10 on 2026-09-08. Its measurement/review candidate
-records **revise**: compositor-paint evidence and independent review remain
-open. BH-04 is not accepted and BH-05 remains ineligible and unauthorized.
+records **revise** historically. The owner authorized corrective acceptance
+work and independent reviewers on 2026-09-08. Its source-bound successor now
+accepts BH-04 for bounded development: native compositor measurements and
+independent review close those blockers. BH-05 Phase 1 is eligible under the
+owner's separate implementation request; release support remains unsupported.
 See [LiveView integration deferral](../../liveview-integration-deferral.md).
 No support or newly packaged Wasm endpoint is claimed.
 
 ## What belongs here
 
 - [Corrective acceptance plan](acceptance-correction-plan.md) — authorized native presentation measurements and independent-review corrections before BH-05.
-- [Corrective acceptance evidence](acceptance-correction-evidence.md) — runtime corrections, native captures and variance investigation; not yet acceptance.
+- [Corrective acceptance evidence](acceptance-correction-evidence.md) — accepted development successor, runtime corrections, native captures and variance investigation.
 
 - [Phase 10 candidate evidence](phase-10-implementation-evidence.md) — reproducible measurements, final gates, retained failures and revise decision.
 
@@ -129,7 +132,7 @@ versions; no dependency may point back from the standalone path.
 | [7 — Effect Ordering, Resources, Disposal, and Failure Isolation](phase-07-effect-ordering-resources-disposal-and-failure-isolation.md) | complete — bounded lifecycle | Order DOM commits and browser effects, bound owned resources, isolate malformed/failing roots, and converge cleanup. | Phases 4–6 |
 | [8 — LiveView and LocalLiveView Adapter Isolation](phase-08-liveview-and-local-liveview-adapter-isolation.md) | [DEFERRED] — outside current host scope | Retain the optional adapter design; no implementation or qualification required for current completion. | Separate post-BH-04 framework-integration authorization |
 | [9 — Cross-Path Accessibility and Browser Conformance](phase-09-cross-path-accessibility-and-browser-conformance.md) | complete — standalone conformance | Reconcile standalone DOM outcomes against headless semantics in active Linux Chrome/Firefox scenarios; adapter rows [DEFERRED]. | Phases 1–7 and the Phase 8 deferral |
-| [10 — Measurement, Review, and BH-04 Acceptance](phase-10-measurement-review-and-bh-04-acceptance.md) | eligible — unauthorized | Measure the first renderer budgets, execute multidisciplinary review and the complete gate, and accept, revise, or block BH-05 eligibility. | Phases 1–7 and 9; Phase 8 deferral retained |
+| [10 — Measurement, Review, and BH-04 Acceptance](phase-10-measurement-review-and-bh-04-acceptance.md) | historical revise; corrective successor accepted for development | Measure renderer budgets, complete independent review and preserve qualification limits. | Phases 1–7 and 9; Phase 8 deferral retained |
 
 ## Acceptance ownership
 

@@ -37,6 +37,14 @@ at the research root as forwarding stubs.
 
 ## Running the tools
 
+The BH-04 corrective successor uses `validate_bh04_correction.py` for current
+acceptance. The sealed `check_all.py`/Phase 10 sweep must run at its frozen
+`d61e103b14595acca182611524eb4c7245906f20` baseline with the pinned ignored runtime
+artifacts present. It intentionally cannot treat corrected runtime bytes as
+the old accepted snapshot. Current executable integration is reproduced with
+`node integration/bh-04/corrective-gates.mjs <temporary-directory>`; native
+captures and source closure are checked separately by the successor validator.
+
 From the repository root:
 
 ```bash
@@ -95,6 +103,10 @@ binding checks, or count expected `--require-accepted` rejection as a pass for
 milestone acceptance.
 
 ## Index
+
+- [BH-04 corrective acceptance validator](validate_bh04_correction.py)
+- [BH-04 corrective decision generator](generate_bh04_correction.py)
+- [BH-04 corrective gate tests](test_validate_bh04_correction.py)
 
 ### Migration verification — 2026-09-08
 

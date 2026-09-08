@@ -1,0 +1,483 @@
+{
+  "revision": "d61e103b14595acca182611524eb4c7245906f20",
+  "results": [
+    {
+      "name": "tests",
+      "command": [
+        "/home/ducky/.asdf/installs/python/3.12.12/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/tmp/bh04-historical-ZBBlOk/docs/research/70-tools",
+        "-p",
+        "test_*.py"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "......................................................................................................................................................................................................................................................................................................................................................................................................................................................\n----------------------------------------------------------------------\nRan 438 tests in 122.618s\n\nOK\n",
+      "error": null,
+      "elapsed_seconds": 122.766
+    },
+    {
+      "name": "validate_archive.py",
+      "command": [
+        "/home/ducky/.asdf/installs/python/3.12.12/bin/python3",
+        "/tmp/bh04-historical-ZBBlOk/docs/research/70-tools/validate_archive.py"
+      ],
+      "exit_code": 0,
+      "stdout": "Archive validation passed: 252 completed documents, 28 directories, 2011 local links, and 50 source notes checked.\n",
+      "stderr": "",
+      "error": null,
+      "elapsed_seconds": 0.993
+    },
+    {
+      "name": "validate_bh00_governance.py",
+      "command": [
+        "/home/ducky/.asdf/installs/python/3.12.12/bin/python3",
+        "/tmp/bh04-historical-ZBBlOk/docs/research/70-tools/validate_bh00_governance.py"
+      ],
+      "exit_code": 0,
+      "stdout": "BH-00 governance validation passed: stage complete; status accepted-conditionally-ready; 17 sources; 6 axes; 18 packages; 3 profiles; 17 reconciliation checks; 8 reviews; 8 findings; 8 risks; product evidence remains unexecuted.\n",
+      "stderr": "",
+      "error": null,
+      "elapsed_seconds": 0.162
+    },
+    {
+      "name": "validate_bh01_activation.py",
+      "command": [
+        "/home/ducky/.asdf/installs/python/3.12.12/bin/python3",
+        "/tmp/bh04-historical-ZBBlOk/docs/research/70-tools/validate_bh01_activation.py"
+      ],
+      "exit_code": 0,
+      "stdout": "BH-01 authorization, inherited ledger, evidence governance, activation, and Phase 1 completion are valid.\n",
+      "stderr": "",
+      "error": null,
+      "elapsed_seconds": 0.194
+    },
+    {
+      "name": "validate_bh02_acceptance.py",
+      "command": [
+        "/home/ducky/.asdf/installs/python/3.12.12/bin/python3",
+        "/tmp/bh04-historical-ZBBlOk/docs/research/70-tools/validate_bh02_acceptance.py"
+      ],
+      "exit_code": 0,
+      "stdout": "BH-02 final acceptance passed: 7 phases, 9 outputs, 9 interactions, 7 review lenses, complete reproduction, exact deferrals, immutable registry overlays, and BH-03 eligibility without authorization verified.\n",
+      "stderr": "",
+      "error": null,
+      "elapsed_seconds": 0.059
+    },
+    {
+      "name": "validate_bh02_activation.py",
+      "command": [
+        "/home/ducky/.asdf/installs/python/3.12.12/bin/python3",
+        "/tmp/bh04-historical-ZBBlOk/docs/research/70-tools/validate_bh02_activation.py"
+      ],
+      "exit_code": 0,
+      "stdout": "BH-02 activation validation passed: authorization, handoff, nine boundaries, dependency graph, leakage scans, and evidence limits checked.\n",
+      "stderr": "",
+      "error": null,
+      "elapsed_seconds": 0.051
+    },
+    {
+      "name": "validate_bh02_dom.py",
+      "command": [
+        "/home/ducky/.asdf/installs/python/3.12.12/bin/python3",
+        "/tmp/bh04-historical-ZBBlOk/docs/research/70-tools/validate_bh02_dom.py"
+      ],
+      "exit_code": 0,
+      "stdout": "BH-02 Phase 6 DOM validation passed: authorization, lowering, driver, browsers, fixtures, leakage, and evidence limits checked.\n",
+      "stderr": "",
+      "error": null,
+      "elapsed_seconds": 0.042
+    },
+    {
+      "name": "validate_bh02_effects.py",
+      "command": [
+        "/home/ducky/.asdf/installs/python/3.12.12/bin/python3",
+        "/tmp/bh04-historical-ZBBlOk/docs/research/70-tools/validate_bh02_effects.py"
+      ],
+      "exit_code": 0,
+      "stdout": "BH-02 Phase 3 effect validation passed: authorization, event vocabulary, capabilities, effects, resources, fixtures, leakage, and support limits checked.\n",
+      "stderr": "",
+      "error": null,
+      "elapsed_seconds": 0.043
+    },
+    {
+      "name": "validate_bh02_intent.py",
+      "command": [
+        "/home/ducky/.asdf/installs/python/3.12.12/bin/python3",
+        "/tmp/bh04-historical-ZBBlOk/docs/research/70-tools/validate_bh02_intent.py"
+      ],
+      "exit_code": 0,
+      "stdout": "BH-02 Phase 4 intent validation passed: authorization, tokens, layout, accessibility, focus, selection, ownership, fixtures, leakage, and support limits checked.\n",
+      "stderr": "",
+      "error": null,
+      "elapsed_seconds": 0.055
+    },
+    {
+      "name": "validate_bh02_native.py",
+      "command": [
+        "/home/ducky/.asdf/installs/python/3.12.12/bin/python3",
+        "/tmp/bh04-historical-ZBBlOk/docs/research/70-tools/validate_bh02_native.py"
+      ],
+      "exit_code": 0,
+      "stdout": "BH-02 Phase 7 native validation passed: authority, direct adapters, GTK execution, parity, deferrals, leakage, and evidence limits checked.\n",
+      "stderr": "",
+      "error": null,
+      "elapsed_seconds": 0.037
+    },
+    {
+      "name": "validate_bh02_renderer.py",
+      "command": [
+        "/home/ducky/.asdf/installs/python/3.12.12/bin/python3",
+        "/tmp/bh04-historical-ZBBlOk/docs/research/70-tools/validate_bh02_renderer.py"
+      ],
+      "exit_code": 0,
+      "stdout": "BH-02 Phase 5 renderer validation passed: authorization, vocabularies, lifecycle, deterministic oracle, fixtures, leakage, and evidence limits checked.\n",
+      "stderr": "",
+      "error": null,
+      "elapsed_seconds": 0.038
+    },
+    {
+      "name": "validate_bh02_semantics.py",
+      "command": [
+        "/home/ducky/.asdf/installs/python/3.12.12/bin/python3",
+        "/tmp/bh04-historical-ZBBlOk/docs/research/70-tools/validate_bh02_semantics.py"
+      ],
+      "exit_code": 0,
+      "stdout": "BH-02 Phase 2 semantic validation passed: authorization, contract, identity, node surface, evaluation boundary, fixtures, and support limits checked.\n",
+      "stderr": "",
+      "error": null,
+      "elapsed_seconds": 0.043
+    },
+    {
+      "name": "validate_bh03_acceptance.py",
+      "command": [
+        "/home/ducky/.asdf/installs/python/3.12.12/bin/python3",
+        "/tmp/bh04-historical-ZBBlOk/docs/research/70-tools/validate_bh03_acceptance.py"
+      ],
+      "exit_code": 0,
+      "stdout": "BH-03 review record valid: revise; BH-04 ineligible; unsupported experimental state.\n",
+      "stderr": "",
+      "error": null,
+      "elapsed_seconds": 0.552
+    },
+    {
+      "name": "validate_bh03_activation.py",
+      "command": [
+        "/home/ducky/.asdf/installs/python/3.12.12/bin/python3",
+        "/tmp/bh04-historical-ZBBlOk/docs/research/70-tools/validate_bh03_activation.py"
+      ],
+      "exit_code": 0,
+      "stdout": "BH-03 Phase 1 activation passed: authority, BH-02 handoff, 9 outputs, 10 acceptance conditions, lifecycle vocabulary, 5 boundaries, empty evidence, completion bindings, and unsupported experimental state verified.\n",
+      "stderr": "",
+      "error": null,
+      "elapsed_seconds": 0.056
+    },
+    {
+      "name": "validate_bh03_compatibility.py",
+      "command": [
+        "/home/ducky/.asdf/installs/python/3.12.12/bin/python3",
+        "/tmp/bh04-historical-ZBBlOk/docs/research/70-tools/validate_bh03_compatibility.py"
+      ],
+      "exit_code": 0,
+      "stdout": "BH-03 Phase 2 compatibility validation passed: 8 exact identities, 3 discovery sources, 10 prerequisites, 3 artifact declarations, 27 conformance cases, completion bindings, empty later-phase results, and unsupported experimental state verified.\n",
+      "stderr": "",
+      "error": null,
+      "elapsed_seconds": 0.043
+    },
+    {
+      "name": "validate_bh03_correction.py",
+      "command": [
+        "/home/ducky/.asdf/installs/python/3.12.12/bin/python3",
+        "/tmp/bh04-historical-ZBBlOk/docs/research/70-tools/validate_bh03_correction.py"
+      ],
+      "exit_code": 0,
+      "stdout": "BH-03 Phase 9: accepted-with-bounded-conditions; BH-04 eligible, not authorized; unsupported experimental state.\n",
+      "stderr": "",
+      "error": null,
+      "elapsed_seconds": 0.662
+    },
+    {
+      "name": "validate_bh03_measurements.py",
+      "command": [
+        "/home/ducky/.asdf/installs/python/3.12.12/bin/python3",
+        "/tmp/bh04-historical-ZBBlOk/docs/research/70-tools/validate_bh03_measurements.py"
+      ],
+      "exit_code": 0,
+      "stdout": "BH-03 Phase 7 measurement validation passed: repeated active Chrome/Firefox startup, ten-root lifecycle, cleanup, failure convergence, capability-aware memory evidence, empty release budgets, deferred qualification, and unsupported experimental state verified.\n",
+      "stderr": "",
+      "error": null,
+      "elapsed_seconds": 0.069
+    },
+    {
+      "name": "validate_bh03_profile.py",
+      "command": [
+        "/home/ducky/.asdf/installs/python/3.12.12/bin/python3",
+        "/tmp/bh04-historical-ZBBlOk/docs/research/70-tools/validate_bh03_profile.py"
+      ],
+      "exit_code": 0,
+      "stdout": "BH-03 Phase 6 browser-profile validation passed: separate Phoenix profile, actual AtomVM/Elixir acknowledgements, identical active Chrome/Firefox scenarios, closed fallback, registry-owned shutdown, deferred qualification, and unsupported experimental state verified.\n",
+      "stderr": "",
+      "error": null,
+      "elapsed_seconds": 0.079
+    },
+    {
+      "name": "validate_bh03_resilience.py",
+      "command": [
+        "/home/ducky/.asdf/installs/python/3.12.12/bin/python3",
+        "/tmp/bh04-historical-ZBBlOk/docs/research/70-tools/validate_bh03_resilience.py"
+      ],
+      "exit_code": 0,
+      "stdout": "BH-03 Phase 5 resilience validation passed: bounded registry shutdown, exact-generation loss handling, one replacement, same-handle atomic replay, closed non-DOM fallback, completion bindings, empty browser/measurement/acceptance evidence, and unsupported experimental state verified.\n",
+      "stderr": "",
+      "error": null,
+      "elapsed_seconds": 0.052
+    },
+    {
+      "name": "validate_bh03_roots.py",
+      "command": [
+        "/home/ducky/.asdf/installs/python/3.12.12/bin/python3",
+        "/tmp/bh04-historical-ZBBlOk/docs/research/70-tools/validate_bh03_roots.py"
+      ],
+      "exit_code": 0,
+      "stdout": "BH-03 Phase 4 shared-runtime/root validation passed: exact compatible reuse, one coalesced startup per scope, 12 registry/root cases, independent FIFO roots, generation/ownership failures, completion bindings, empty later evidence, and unsupported experimental state verified.\n",
+      "stderr": "",
+      "error": null,
+      "elapsed_seconds": 0.054
+    },
+    {
+      "name": "validate_bh03_startup.py",
+      "command": [
+        "/home/ducky/.asdf/installs/python/3.12.12/bin/python3",
+        "/tmp/bh04-historical-ZBBlOk/docs/research/70-tools/validate_bh03_startup.py"
+      ],
+      "exit_code": 0,
+      "stdout": "BH-03 Phase 3 startup validation passed: 3 bounded artifact roles, 10 acquisition/startup cases, immutable adapter agreement, pinned profile artifact declarations, completion bindings, empty later-phase results, and unsupported experimental state verified.\n",
+      "stderr": "",
+      "error": null,
+      "elapsed_seconds": 0.056
+    },
+    {
+      "name": "validate_bh04_acceptance.py",
+      "command": [
+        "/home/ducky/.asdf/installs/python/3.12.12/bin/python3",
+        "/tmp/bh04-historical-ZBBlOk/docs/research/70-tools/validate_bh04_acceptance.py"
+      ],
+      "exit_code": 0,
+      "stdout": "Phase 10 evidence candidate valid: REVISE; BH-04 not accepted; BH-05 ineligible and unauthorized.\n",
+      "stderr": "",
+      "error": null,
+      "elapsed_seconds": 0.716
+    },
+    {
+      "name": "validate_bh04_activation.py",
+      "command": [
+        "/home/ducky/.asdf/installs/python/3.12.12/bin/python3",
+        "/tmp/bh04-historical-ZBBlOk/docs/research/70-tools/validate_bh04_activation.py"
+      ],
+      "exit_code": 0,
+      "stdout": "BH-04 Phase 1 activation passed; renderer unchanged; unsupported; Phase 2 not authorized; BH-05 ineligible.\nBH-04 Phase 1 reproduced on accepted snapshot; current Phase 2 requires validate_bh04_protocol.py.\n",
+      "stderr": "",
+      "error": null,
+      "elapsed_seconds": 0.366
+    },
+    {
+      "name": "validate_bh04_conformance.py",
+      "command": [
+        "/home/ducky/.asdf/installs/python/3.12.12/bin/python3",
+        "/tmp/bh04-historical-ZBBlOk/docs/research/70-tools/validate_bh04_conformance.py"
+      ],
+      "exit_code": 0,
+      "stdout": "BH-04 Phase 9 conformance passed; Phase 10 eligible but unauthorized; framework integration deferred.\nPhase 9 reproduced on accepted merge; current Phase 10 requires validate_bh04_acceptance.py.\n",
+      "stderr": "",
+      "error": null,
+      "elapsed_seconds": 2.401
+    },
+    {
+      "name": "validate_bh04_continuity.py",
+      "command": [
+        "/home/ducky/.asdf/installs/python/3.12.12/bin/python3",
+        "/tmp/bh04-historical-ZBBlOk/docs/research/70-tools/validate_bh04_continuity.py"
+      ],
+      "exit_code": 0,
+      "stdout": "BH-04 Phase 6 gate passed; Phase 7 eligible but unauthorized.\nBH-04 Phase 6 reproduced on accepted snapshot; current Phase 7 requires validate_bh04_lifecycle.py.\n",
+      "stderr": "",
+      "error": null,
+      "elapsed_seconds": 4.433
+    },
+    {
+      "name": "validate_bh04_dom_application.py",
+      "command": [
+        "/home/ducky/.asdf/installs/python/3.12.12/bin/python3",
+        "/tmp/bh04-historical-ZBBlOk/docs/research/70-tools/validate_bh04_dom_application.py"
+      ],
+      "exit_code": 0,
+      "stdout": "BH-04 Phase 4 gate passed: atomic DOM, exact source/history/browser bindings; Phase 5 unauthorized.\nBH-04 Phase 4 reproduced on accepted snapshot; current Phase 5 requires validate_bh04_interactions.py.\n",
+      "stderr": "",
+      "error": null,
+      "elapsed_seconds": 3.714
+    },
+    {
+      "name": "validate_bh04_interactions.py",
+      "command": [
+        "/home/ducky/.asdf/installs/python/3.12.12/bin/python3",
+        "/tmp/bh04-historical-ZBBlOk/docs/research/70-tools/validate_bh04_interactions.py"
+      ],
+      "exit_code": 0,
+      "stdout": "BH-04 Phase 5 gate passed; Phase 6 eligible but unauthorized.\nBH-04 Phase 5 reproduced on accepted snapshot; current Phase 6 requires validate_bh04_continuity.py.\n",
+      "stderr": "",
+      "error": null,
+      "elapsed_seconds": 3.796
+    },
+    {
+      "name": "validate_bh04_lifecycle.py",
+      "command": [
+        "/home/ducky/.asdf/installs/python/3.12.12/bin/python3",
+        "/tmp/bh04-historical-ZBBlOk/docs/research/70-tools/validate_bh04_lifecycle.py"
+      ],
+      "exit_code": 0,
+      "stdout": "BH-04 Phase 7 gate passed; Phase 8 eligible but unauthorized.\nBH-04 Phase 7 reproduced on accepted snapshot; current Phase 9 requires validate_bh04_conformance.py.\n",
+      "stderr": "",
+      "error": null,
+      "elapsed_seconds": 0.955
+    },
+    {
+      "name": "validate_bh04_protocol.py",
+      "command": [
+        "/home/ducky/.asdf/installs/python/3.12.12/bin/python3",
+        "/tmp/bh04-historical-ZBBlOk/docs/research/70-tools/validate_bh04_protocol.py"
+      ],
+      "exit_code": 0,
+      "stdout": "BH-04 Phase 2 protocol gate passed: exact source/schema/fixture bindings; no behavior or support promotion.\nBH-04 Phase 2 reproduced on accepted snapshot; current Phase 3 requires validate_bh04_reconciliation.py.\n",
+      "stderr": "",
+      "error": null,
+      "elapsed_seconds": 0.266
+    },
+    {
+      "name": "validate_bh04_reconciliation.py",
+      "command": [
+        "/home/ducky/.asdf/installs/python/3.12.12/bin/python3",
+        "/tmp/bh04-historical-ZBBlOk/docs/research/70-tools/validate_bh04_reconciliation.py"
+      ],
+      "exit_code": 0,
+      "stdout": "BH-04 Phase 3 gate passed: exact history/source/schema/fixture bindings; no browser or support promotion.\nBH-04 Phase 3 reproduced on accepted snapshot; current Phase 4 requires validate_bh04_dom_application.py.\n",
+      "stderr": "",
+      "error": null,
+      "elapsed_seconds": 3.632
+    },
+    {
+      "name": "validate_browser_product_envelope.py",
+      "command": [
+        "/home/ducky/.asdf/installs/python/3.12.12/bin/python3",
+        "/tmp/bh04-historical-ZBBlOk/docs/research/70-tools/validate_browser_product_envelope.py"
+      ],
+      "exit_code": 0,
+      "stdout": "Browser product envelope validation passed: stage complete; 5 browser configurations, 10 evidence classes, 11 toolchain inputs, and 6 BH-01 records, 6 rendering modes, 3 profiles, and 12 profile capabilities, 9 trust boundaries, 12 deployment prerequisites, and 7 fallback categories, 8 paper scenarios, and 5 forbidden claims checked.\n",
+      "stderr": "",
+      "error": null,
+      "elapsed_seconds": 0.028
+    },
+    {
+      "name": "validate_component_catalog.py",
+      "command": [
+        "/home/ducky/.asdf/installs/python/3.12.12/bin/python3",
+        "/tmp/bh04-historical-ZBBlOk/docs/research/70-tools/validate_component_catalog.py"
+      ],
+      "exit_code": 0,
+      "stdout": "Component catalog validation passed: reference mudblazor-v9.9.0; 83 locked source families; catalog schema 1.0.0; 83 normalized families in 7 categories; 12 source-closure exceptions; 168 reviewed source identifiers; 15 reviewed exception paths; 83 unresolved product dispositions; fresh generated view.\n",
+      "stderr": "",
+      "error": null,
+      "elapsed_seconds": 0.197
+    },
+    {
+      "name": "validate_component_classification.py",
+      "command": [
+        "/home/ducky/.asdf/installs/python/3.12.12/bin/python3",
+        "/tmp/bh04-historical-ZBBlOk/docs/research/70-tools/validate_component_classification.py"
+      ],
+      "exit_code": 0,
+      "stdout": "Component classification validation passed: stage complete; 83 families; 12 exceptions; dispositions {'adapt-concept': 28, 'build-natively': 43, 'renderer-specific-extension': 1, 'replace-with-platform-pattern': 11}; tiers {'F0': 13, 'F1': 26, 'F2': 21, 'F3': 18, 'F4': 5}; packages {'blazex_charts': 1, 'blazex_data': 6, 'blazex_forms': 18, 'blazex_surfaces': 9, 'blazex_ui': 47, 'blazex_ui_tree': 2}; remote {'local-only': 73, 'optional-remote': 7, 'phoenix-enhanced': 3}; fallbacks {'alternative-interaction': 30, 'explicit-unavailable': 2, 'in-app-substitute': 14, 'nonvisual-representation': 1, 'omission': 1, 'server-round-trip': 5, 'static-content': 30}; capability references 204 required/77 optional; portability {'custom-scene': 1, 'portable-semantic': 24, 'portable-with-capabilities': 57, 'renderer-extension': 1}; native {'custom-drawn': 2, 'native-composite': 58, 'native-preferred': 15, 'not-applicable': 8}; visual profiles {'blazex-material': 2, 'hybrid': 58, 'not-applicable': 8, 'platform-native': 15}.\n",
+      "stderr": "",
+      "error": null,
+      "elapsed_seconds": 0.231
+    },
+    {
+      "name": "validate_quality_acceptance.py",
+      "command": [
+        "/home/ducky/.asdf/installs/python/3.12.12/bin/python3",
+        "/tmp/bh04-historical-ZBBlOk/docs/research/70-tools/validate_quality_acceptance.py"
+      ],
+      "exit_code": 0,
+      "stdout": "Quality/acceptance validation passed: stage complete; 6 environments; 31 budgets {'build': 1, 'interaction': 3, 'payload': 10, 'reliability': 9, 'resource': 3, 'startup': 5}; 8 failure scenarios; 7 unwaivable blockers; 4 cross-cutting gates; 290 acceptance requirements {'browser-envelope': 95, 'catalog-family': 83, 'cross-cutting-obligation': 7, 'non-goal': 8, 'package-boundary': 6, 'quality-budget': 31, 'quality-failure': 8, 'quality-gate': 21, 'quality-release-blocker': 7, 'roadmap-milestone': 24}; zero executed evidence.\n",
+      "stderr": "",
+      "error": null,
+      "elapsed_seconds": 0.251
+    },
+    {
+      "name": "validate_tooling_migration.py",
+      "command": [
+        "/home/ducky/.asdf/installs/python/3.12.12/bin/python3",
+        "/tmp/bh04-historical-ZBBlOk/docs/research/70-tools/validate_tooling_migration.py"
+      ],
+      "exit_code": 0,
+      "stdout": "Tooling migration validated: {'moved_tools': 82, 'updated_callers': 4}\n",
+      "stderr": "",
+      "error": null,
+      "elapsed_seconds": 0.203
+    },
+    {
+      "name": "generate_acceptance_registry.py",
+      "command": [
+        "/home/ducky/.asdf/installs/python/3.12.12/bin/python3",
+        "/tmp/bh04-historical-ZBBlOk/docs/research/70-tools/generate_acceptance_registry.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "stdout": "Acceptance generation matches committed outputs: 290 requirements, 290 conditions, zero executed evidence; historical roadmap snapshot retained by bounded planning amendment.\n",
+      "stderr": "",
+      "error": null,
+      "elapsed_seconds": 0.054
+    },
+    {
+      "name": "generate_bh00_release.py",
+      "command": [
+        "/home/ducky/.asdf/installs/python/3.12.12/bin/python3",
+        "/tmp/bh04-historical-ZBBlOk/docs/research/70-tools/generate_bh00_release.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "stdout": "BH-00 release generation matches the committed baseline and BH-01 entry manifest.\n",
+      "stderr": "",
+      "error": null,
+      "elapsed_seconds": 0.03
+    },
+    {
+      "name": "generate_component_catalog.py",
+      "command": [
+        "/home/ducky/.asdf/installs/python/3.12.12/bin/python3",
+        "/tmp/bh04-historical-ZBBlOk/docs/research/70-tools/generate_component_catalog.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "stdout": "Component catalog generation matches /tmp/bh04-historical-ZBBlOk/docs/research/assets/component-catalog/blazex-component-catalog-v0-1-0-generated.md: 83 families, 12 exceptions.\n",
+      "stderr": "",
+      "error": null,
+      "elapsed_seconds": 0.176
+    },
+    {
+      "name": "generate_component_classification.py",
+      "command": [
+        "/home/ducky/.asdf/installs/python/3.12.12/bin/python3",
+        "/tmp/bh04-historical-ZBBlOk/docs/research/70-tools/generate_component_classification.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "stdout": "Component classification generation matches /tmp/bh04-historical-ZBBlOk/docs/research/assets/component-catalog/blazex-component-classification-v0-1-0-generated.md: 83 families, 12 exceptions, stage complete.\n",
+      "stderr": "",
+      "error": null,
+      "elapsed_seconds": 0.034
+    }
+  ]
+}

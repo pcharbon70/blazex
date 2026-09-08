@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import {decode} from "../../js/blazex_runtime/src/render-transaction-v2.js";
 import {compare,compareBindings} from "./conformance-scenarios.js";
 import {sha} from "./acceptance-report.mjs";
-const prefix="docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-";
+const prefix=process.argv[2]??"docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-";
 const expected={atomic:{scenarios:50,injected_boundaries:1204,stale_rejected:100,max_queue:64,terminal_acks:1254,cleanup:1263},interaction:{mappings:13,rejected:17,roots:3,dom_commits:18,cleanup:3,max_queue:64,trusted_clicks:1,no_render_events:2},continuity:{scenarios:16,roots:2,cleanup:2},effect:{scenarios:19,roots:24,cleanup:24}};
 for(const [name,counters]of Object.entries(expected)){
   const raw=JSON.parse(fs.readFileSync(prefix+name+"-browser-v0.1.0.json"));
