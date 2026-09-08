@@ -3,8 +3,14 @@ title: "Phase 9 - Scoped Context and Manifest-Bounded Dynamic Components"
 kind: note
 created: "2026-09-06"
 maturity: developing
-tags: [bh-05, context, dynamic-components, manifests, implementation-planning]
-aliases: ["BH-05 phase 9"]
+tags:
+  - bh-05
+  - component-model
+  - context
+  - dynamic-components
+  - implementation-planning
+aliases:
+  - "BH-05 phase 9"
 ---
 
 # Phase 9 - Scoped Context and Manifest-Bounded Dynamic Components
@@ -13,107 +19,120 @@ Back to milestone: [README](README.md)
 
 - [ ] 9 Phase - Scoped Context and Manifest-Bounded Dynamic Components.
 
-  Add explicit tree-scoped context and analyzable dynamic component selection
-  without open-ended module lookup, ambient global state, or trust escalation.
+  Implement small root-scoped named context for genuinely cross-cutting public
+  values and a deterministic stable-ID component registry for bounded dynamic
+  selection. Prevent ambient global state, hidden server/local crossings,
+  arbitrary module dispatch, and uninspectable reachability.
 
-  - [ ] 9.1 Section - Define scoped context contracts.
+  - [ ] 9.1 Section - Authorize and freeze context and registry semantics.
 
-    Specify how validated portable values flow from providers to descendants
-    and when context changes trigger reevaluation.
+    Bind the public schemas, component roles, scheduler, and action contracts,
+    then define scope, subscriptions, registration, lookup, and compatibility.
 
-    - [ ] 9.1.1 Task - Specify providers, keys, consumers, and snapshots.
+    - [ ] 9.1.1 Task - Record bounded Phase 9 authority.
 
-      Make context declarations versioned, typed, lexical, and visible to build
-      analysis.
+      Establish provenance and reserve bundle/lazy-loading implementation for
+      BH-06.
 
-      - [ ] 9.1.1.1 Subtask - Define declared context keys, schemas, defaults, provider identity, and consumer requirements.
-      - [ ] 9.1.1.2 Subtask - Define nearest-provider lookup, shadowing, slot scope, and explicit absence behavior.
-      - [ ] 9.1.1.3 Subtask - Prohibit process dictionaries, application environment, browser globals, and trusted server state as implicit context.
+      - [ ] 9.1.1.1 Subtask - Record synchronized base, branch, section commits, one PR, cleanup, Phase 8 completion identity, and explicit Phase 9 authorization.
+      - [ ] 9.1.1.2 Subtask - Bind prop/slot schemas, component/public IDs, root/nested identity, scheduler, effect/capability metadata, trust boundary, and dynamic reachability requirements by version and hash.
+      - [ ] 9.1.1.3 Subtask - Exclude BH-06 reachability/bundle generation, theme/form/auth product providers, Phoenix session propagation, arbitrary plugins, remote code loading, and support claims.
 
-    - [ ] 9.1.2 Task - Define context change and lifecycle semantics.
+    - [ ] 9.1.2 Task - Freeze root-scoped context policy.
 
-      Integrate context with identity, state preservation, atomic evaluation, and
-      disposal without treating every provider change as root replacement.
+      Define a narrow facility for theme, locale, form state, advisory public
+      auth state, capability summary, and future outlet registries without
+      silently making every assign ambient.
 
-      - [ ] 9.1.2.1 Subtask - Define snapshot versioning and consumer dependency tracking.
-      - [ ] 9.1.2.2 Subtask - Define reevaluation order for changed, removed, shadowed, and equivalent provider values.
-      - [ ] 9.1.2.3 Subtask - Reject stale context snapshots and preserve last-good output after invalid changes.
+      - [ ] 9.1.2.1 Subtask - Define stable context name, schema/version, owner/provider identity, root/generation scope, fixed or tracked mode, value boundary, default/absence behavior, and visibility.
+      - [ ] 9.1.2.2 Subtask - Define lexical nearest-provider resolution, subscription identity, update/change comparison, deterministic invalidation order, provider removal/replacement, and cycle/breadth bounds.
+      - [ ] 9.1.2.3 Subtask - Prohibit process dictionary/application environment/global registry as component context, cross-root subscription, silent server/local crossing, secrets, and authoritative client auth state.
 
-  - [ ] 9.2 Section - Implement context propagation and selective reevaluation.
+  - [ ] 9.2 Section - Implement scoped context declaration and propagation.
 
-    Carry immutable snapshots through component evaluation and update only the
-    consumers whose declared dependencies changed.
+    Expose explicit provider/consumer declarations and schedule affected
+    component updates through the existing root transition coordinator.
 
-    - [ ] 9.2.1 Task - Implement provider/consumer resolution.
+    - [ ] 9.2.1 Task - Implement context schemas and provider state.
 
-      Resolve context by component path and produce canonical dependency records
-      without renderer involvement.
+      Validate values at their declared local or host boundary and retain one
+      immutable provider record per scoped identity.
 
-      - [ ] 9.2.1.1 Subtask - Validate provider values once and attach versioned snapshots to descendant evaluation contexts.
-      - [ ] 9.2.1.2 Subtask - Record declared reads and reject undeclared or unknown context access.
-      - [ ] 9.2.1.3 Subtask - Preserve lexical scope across fragments, slots, moves, and keyed reconciliation.
+      - [ ] 9.2.1.1 Subtask - Implement context declarations with name, schema/version, boundary, fixed/tracked mode, default, documentation, and public/advisory markers.
+      - [ ] 9.2.1.2 Subtask - Validate provider values before descendant evaluation and reject duplicate same-scope providers, invalid schemas, nonportable host values, secret-marked fields, or unsupported versions.
+      - [ ] 9.2.1.3 Subtask - Track provider ancestry, accepted value digest, subscribers, revision, generation, and removal state without retaining component/renderer/host objects.
 
-    - [ ] 9.2.2 Task - Implement bounded context invalidation.
+    - [ ] 9.2.2 Task - Implement consumption and deterministic invalidation.
 
-      Compute deterministic invalidation plans and stage them in the root's next
-      atomic transition.
+      Resolve named values explicitly and update only tracked consumers whose
+      accepted dependency changed.
 
-      - [ ] 9.2.2.1 Subtask - Compare canonical provider values and invalidate only dependent consumers.
-      - [ ] 9.2.2.2 Subtask - Bound provider count, consumer subscriptions, value size, and invalidation work.
-      - [ ] 9.2.2.3 Subtask - Include context updates in trace ordering and rollback behavior.
+      - [ ] 9.2.2.1 Subtask - Resolve nearest visible provider or declared default and record consumer/provider identity, schema, mode, and accepted digest during evaluation.
+      - [ ] 9.2.2.2 Subtask - Schedule tracked consumer updates in canonical tree order after provider commit while fixed context rejects later mutation by policy.
+      - [ ] 9.2.2.3 Subtask - Remove subscriptions on consumer/provider replacement/disposal and reject stale/cross-root update notifications before callbacks.
 
-  - [ ] 9.3 Section - Define and implement dynamic component registration.
+  - [ ] 9.3 Section - Implement manifest-bounded dynamic component registration.
 
-    Permit runtime selection only from a closed manifest assembled by the build
-    pipeline, never from arbitrary module names supplied at runtime.
+    Map stable public IDs to declared modules and contract metadata without
+    deriving modules from browser/server strings or scanning arbitrary code.
 
-    - [ ] 9.3.1 Task - Specify the dynamic-component manifest.
+    - [ ] 9.3.1 Task - Define and implement component registry records.
 
-      Map stable public identifiers to compatible component metadata and
-      expected role/input/output versions.
+      Make every dynamic target deterministic, versioned, inspectable, and
+      usable as a later build reachability root.
 
-      - [ ] 9.3.1.1 Subtask - Define manifest identity, schema version, component identifier, module binding, role, and contract digest.
-      - [ ] 9.3.1.2 Subtask - Define deterministic duplicate, unknown, unavailable, and incompatible-entry rejection.
-      - [ ] 9.3.1.3 Subtask - Prohibit atom creation, filesystem/network lookup, reflection, and arbitrary module invocation from runtime input.
+      - [ ] 9.3.1.1 Subtask - Define public component ID, module, role, contract/schema versions, supported runtime subset, declared capabilities/contexts/actions, package, visibility, and optional feature-bundle ID.
+      - [ ] 9.3.1.2 Subtask - Build deterministic compile/package/root registry composition with conflict, duplicate, unknown-version, incompatible-role, unavailable-capability, and missing-module diagnostics.
+      - [ ] 9.3.1.3 Subtask - Export stable registry metadata for BH-06 while prohibiting unrestricted reflection, `Module.concat` from input, dynamic atom creation, arbitrary `apply`, remote module names, and undeclared code loading.
 
-    - [ ] 9.3.2 Task - Implement bounded resolution and replacement.
+    - [ ] 9.3.2 Task - Implement dynamic lookup and invocation.
 
-      Resolve declared identifiers before evaluation and integrate type changes
-      with normal component replacement/disposal semantics.
+      Resolve only registered IDs and pass the resulting target through the
+      same prop/slot, identity, lifecycle, and reconciliation contracts.
 
-      - [ ] 9.3.2.1 Subtask - Validate the complete manifest before root activation and freeze it for the root generation.
-      - [ ] 9.3.2.2 Subtask - Resolve identifier plus contract version in deterministic constant/bounded time.
-      - [ ] 9.3.2.3 Subtask - Treat selection changes as retain or replace decisions according to stable component identity and type.
+      - [ ] 9.3.2.1 Subtask - Validate requested public ID, expected role, schema/version, props/slots, capability/context requirements, and current registry generation before lookup.
+      - [ ] 9.3.2.2 Subtask - Invoke registered pure or nested-stateful targets with stable identity and define compatible same-ID updates versus explicit replacement when ID/contract changes.
+      - [ ] 9.3.2.3 Subtask - Reject unknown/unavailable/stale/unauthorized IDs before callback invocation and render the caller-declared semantic fallback or diagnostic without revealing module names.
 
-  - [ ] 9.4 Section - Integration Tests and Completion Evidence.
+  - [ ] 9.4 Section - Phase 9 Integration Tests and Completion Evidence.
 
-    Exercise context scoping, invalidation, dynamic resolution, replacement,
-    malicious identifiers, and manifest mismatch across available runtimes.
+    Exercise context propagation and dynamic selection through public fixtures,
+    including adversarial host input, conflicts, updates, replacements, and
+    disposal.
 
-    - [ ] 9.4.1 Task - Run context and dynamic-component scenarios.
+    - [ ] 9.4.1 Task - Run context and registry integration tests.
 
-      Compare consumer outputs, state retention, evaluation order, disposal, and
-      diagnostics under nested providers and changing selections.
+      Cover nested providers/consumers, tracked/fixed updates, dynamic roles,
+      scheduler interaction, and fail-closed lookup.
 
-      - [ ] 9.4.1.1 Subtask - Cover provider shadowing/removal, slot scope, selective invalidation, keyed moves, and rollback.
-      - [ ] 9.4.1.2 Subtask - Cover valid selection, unknown identifier, version mismatch, duplicate manifest entry, and type replacement.
-      - [ ] 9.4.1.3 Subtask - Prove arbitrary module names, new atoms, host lookup, and server-only components cannot be reached.
+      - [ ] 9.4.1.1 Subtask - Test default/nearest/nested/fixed/tracked context, contextual slots, provider update/removal/replacement, canonical consumer invalidation, and cleanup.
+      - [ ] 9.4.1.2 Subtask - Test registry composition, pure/stateful lookup, dynamic update/replacement, metadata export, capability/context requirements, unknown/conflicting IDs, stale registry, and declared fallback.
+      - [ ] 9.4.1.3 Subtask - Test forged host IDs, dynamic atom/module attempts, arbitrary apply/reflection, secret/advisory-auth misuse, cross-root context, subscription leaks, and deterministic replay.
 
-    - [ ] 9.4.2 Task - Publish completion evidence.
+    - [ ] 9.4.2 Task - Publish Phase 9 completion evidence.
 
-      Bind the accepted context and registry envelope before failure recovery is
-      added.
+      Record the bounded public contracts and exact handoff metadata required
+      by BH-06 without implementing bundles.
 
-      - [ ] 9.4.2.1 Subtask - Publish manifests, canonical traces, limits, commands, digests, and expected failures.
-      - [ ] 9.4.2.2 Subtask - Confirm build-pipeline integration remains BH-06 work and server authority remains BH-07 work.
-      - [ ] 9.4.2.3 Subtask - Mark Phase 10 eligible but unauthorized only after the complete gate passes.
+      - [ ] 9.4.2.1 Subtask - Run Core/UI-tree/effects/test suites, context/registry fixtures, security and dependency audits, validators, archive/generated checks, JSON validation, and patch hygiene.
+      - [ ] 9.4.2.2 Subtask - Publish context/registry schemas, metadata and trace hashes, exact commands/counts, conflicts/rejections, subscription cleanup, failures, and limitations.
+      - [ ] 9.4.2.3 Subtask - Mark Phase 9 complete only if context is root-scoped and dynamic dispatch is manifest-bounded; make Phase 10 eligible but unauthorized.
 
 ## Section delivery rule
 
 Complete and verify each section before its commit. Open one pull request only
-after Section 9.4 passes or records a truthful stop decision.
+after Section 9.4 passes or records a stop decision. Ambient global context,
+cross-root subscription, arbitrary module dispatch, dynamic atom creation, or
+client authorization authority blocks completion.
 
 ## Connections
 
 - [BH-05 plan](README.md)
-- [Phase 5 — Nested Stateful Identity and Update Reconciliation](phase-05-nested-stateful-identity-and-update-reconciliation.md)
+- [Phase 8](phase-08-effects-resources-and-typed-command-intent.md)
+- [Host-neutral component-kernel decision](../../../20-notes/architecture-decisions/adr-0001-host-neutral-semantic-component-kernel.md)
+- [Server adapter and trust boundary](../../../20-notes/architecture-decisions/adr-0005-server-adapter-and-trust-boundary.md)
+
+## Sources
+
+- [Blazor framework semantics beneath BlazeX](../../../20-notes/blazor-framework-semantics-beneath-blazex.md)
+- [Foundational component-semantics inquiry](../../../40-inquiries/which-foundational-component-semantics-does-blazex-need.md)

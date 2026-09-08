@@ -3,8 +3,14 @@ title: "Phase 1 - Authorization, BH-04 Handoff Reconciliation, and Boundary Acti
 kind: note
 created: "2026-09-06"
 maturity: developing
-tags: [bh-05, authorization, component-model, implementation-planning]
-aliases: ["BH-05 phase 1"]
+tags:
+  - authorization
+  - bh-05
+  - component-model
+  - implementation-planning
+  - lifecycle
+aliases:
+  - "BH-05 phase 1"
 ---
 
 # Phase 1 - Authorization, BH-04 Handoff Reconciliation, and Boundary Activation
@@ -13,107 +19,117 @@ Back to milestone: [README](README.md)
 
 - [ ] 1 Phase - Authorization, BH-04 Handoff Reconciliation, and Boundary Activation.
 
-  Establish the exact authority, immutable inputs, ownership boundaries,
-  vocabulary, and evidence rules for BH-05. This phase activates component-model
-  work but implements no component behavior.
+  Establish exact BH-05 implementation authority, bind the accepted BH-04
+  renderer handoff and inherited neutral contracts, activate only component
+  model evidence boundaries, and prove fail-closed ownership. This phase does
+  not implement a new callback, macro, state machine, or process.
 
-  - [ ] 1.1 Section - Authorize entry and reconcile the BH-04 handoff.
+  - [x] 1.1 Section - Authorize Phase 1 and reconcile milestone entry.
 
-    Bind BH-05 to an accepted renderer/interaction baseline and preserve every
-    inherited condition, finding, and deferral without silently resolving it.
+    Convert BH-04 acceptance into a versioned BH-05 ledger without inferring
+    authority from existing experimental Core modules.
 
-    - [ ] 1.1.1 Task - Record authority and delivery provenance.
+    - [x] 1.1.1 Task - Bind authority and delivery provenance.
 
-      Define the authorized scope and reproducible branch-to-PR workflow.
+      Record the exact base, authorizing request, immutable inputs, and
+      section-by-section delivery rules.
 
-      - [ ] 1.1.1.1 Subtask - Record synchronized base, feature branch, section commits, one PR, merge, synchronized-main return, and branch cleanup expectations.
-      - [ ] 1.1.1.2 Subtask - Bind the accepted BH-04 release index, decision, roadmap, acceptance registry, and environment policy by path and digest.
-      - [ ] 1.1.1.3 Subtask - Prohibit Phase 2 behavior, stable API claims, catalog work, and support promotion.
+      - [x] 1.1.1.1 Subtask - Record synchronized `main`, feature branch, planned section commits, one-PR rule, merge policy, synchronized-main return, and branch cleanup.
+      - [x] 1.1.1.2 Subtask - Bind BH-04 acceptance/completion/release/entry artifacts, BH-02 kernel baseline, roadmap, accepted ADRs, acceptance registry, quality contract, and deferral policy by path and SHA-256.
+      - [x] 1.1.1.3 Subtask - Limit authority to Phase 1 reconciliation, activation, validation, and evidence; prohibit Phase 2 API work and all support/public-stability claims.
 
-    - [ ] 1.1.2 Task - Publish the milestone entry ledger.
+    - [x] 1.1.2 Task - Publish the BH-05 entry and acceptance ledger.
 
-      Translate the BH-04 exit state into explicit BH-05 inputs and unresolved
-      obligations.
+      Preserve inherited conditions and assign all nine BH-05 obligations to
+      phases, suites, owners, and stop rules.
 
-      - [ ] 1.1.2.1 Subtask - Inventory accepted renderer, interaction, focus, event, patch, and disposal contracts.
-      - [ ] 1.1.2.2 Subtask - Carry forward open findings, retained failures, deferred environments, and compatibility caveats unchanged.
-      - [ ] 1.1.2.3 Subtask - Map all BH-05 outputs and acceptance conditions to first-responsible phases.
+      - [x] 1.1.2.1 Subtask - Import BH-04 conditions, renderer compatibility requirements, unresolved findings, private-coupling limits, deferred qualifications, and downstream restrictions unchanged.
+      - [x] 1.1.2.2 Subtask - Register the roadmap outcome, six first-measurement budgets, and two failure conditions with exact evidence owners and closure phases.
+      - [x] 1.1.2.3 Subtask - Record entry, stop, revise, defer, and acceptance outcomes and leave BH-06 implementation ineligible.
 
-  - [ ] 1.2 Section - Freeze terminology, roles, and ownership boundaries.
+  - [ ] 1.2 Section - Freeze unit ownership and activate repository boundaries.
 
-    Establish one vocabulary and dependency direction before public component
-    behavior can emerge in competing packages.
+    Make public facade, core lifecycle, semantic output, effects, test harness,
+    runtime consumption, and integration evidence independently auditable.
 
-    - [ ] 1.2.1 Task - Freeze the planned component lifecycle vocabulary.
+    - [ ] 1.2.1 Task - Freeze package and unit boundaries.
 
-      Name component roles, identities, generations, transitions, effects,
-      resources, failures, replacement, and disposal precisely.
+      Define exact ownership for pure, nested-stateful, and process-root units
+      and prohibit outward implementation dependencies in the kernel.
 
-      - [ ] 1.2.1.1 Subtask - Distinguish pure components, nested stateful components, and process-root local views.
-      - [ ] 1.2.1.2 Subtask - Distinguish props, slots, controlled state, local state, context, messages, events, effects, resources, and commands.
-      - [ ] 1.2.1.3 Subtask - Define planned lifecycle states and terminal outcomes without implementation claims.
+      - [ ] 1.2.1.1 Subtask - Record `blazex_core` ownership of facade metadata, schemas, lifecycle, state, scheduling, context, registry, command intent, diagnostics, and root-process contracts.
+      - [ ] 1.2.1.2 Subtask - Record `blazex_ui_tree`, `blazex_effects`, and `blazex_test` ownership and the allowed inward dependency graph among them.
+      - [ ] 1.2.1.3 Subtask - Prohibit Phoenix, Plug, HEEx/HTML, DOM/JavaScript, Popcorn internals, concrete renderer/host, server authority, and native-toolkit dependencies from portable component code.
 
-    - [ ] 1.2.2 Task - Freeze repository ownership and forbidden edges.
+    - [ ] 1.2.2 Task - Activate BH-05 evidence locations.
 
-      Assign each contract to one package and prevent profiles or renderers from
-      defining the programming model.
+      Create empty schema-bound locations for future contracts, traces,
+      failures, measurements, reviews, and acceptance without claiming results.
 
-      - [ ] 1.2.2.1 Subtask - Assign authoring and lifecycle contracts to `blazex_core`, semantic output to `blazex_ui_tree`, effects/resources to `blazex_effects`, and shared harnesses to `blazex_test`.
-      - [ ] 1.2.2.2 Subtask - Prohibit public application dependencies on private runtime, renderer, Phoenix, LiveView, DOM, JavaScript, or platform modules.
-      - [ ] 1.2.2.3 Subtask - Keep host adapters as consumers of versioned neutral contracts.
+      - [ ] 1.2.2.1 Subtask - Activate `integration/bh-05` with an empty versioned index covering facade, schemas, composition, state, roots, scheduling, effects, context, registry, failure, runtime, measurement, and review evidence.
+      - [ ] 1.2.2.2 Subtask - Update package, profile, integration, and corpus indexes with truthful Phase 1 activation and no implemented BH-05 behavior.
+      - [ ] 1.2.2.3 Subtask - Inventory existing BH-02 Core APIs as inherited experimental inputs and identify every surface requiring preservation, supersession, migration, or rejection.
 
-  - [ ] 1.3 Section - Activate fail-closed planning and evidence boundaries.
+  - [ ] 1.3 Section - Implement fail-closed activation governance.
 
-    Create only the minimum versioned locations needed for later work and make
-    premature implementation or overclaiming mechanically visible.
+    Reject stale handoff, ownership leakage, premature behavior, fabricated
+    evidence, and ungoverned public API expansion before implementation starts.
 
-    - [ ] 1.3.1 Task - Activate package and integration evidence locations.
+    - [ ] 1.3.1 Task - Implement the Phase 1 activation validator.
 
-      Prepare truthful indexes and empty fixture/result boundaries.
+      Validate machine-readable identities, hashes, package graph, empty
+      evidence, and status rather than trusting prose labels.
 
-      - [ ] 1.3.1.1 Subtask - Update package manifests with a BH-05 Phase 1 activation state that does not imply behavior.
-      - [ ] 1.3.1.2 Subtask - Create an indexed `integration/bh-05` boundary with no passing scenarios or results.
-      - [ ] 1.3.1.3 Subtask - Update planning and repository indexes with exact ownership and status.
+      - [ ] 1.3.1.1 Subtask - Verify authorization, BH-04 handoff hashes, all nine acceptance IDs, twelve-phase plan, evidence schemas, owners, stop rules, and synchronized-base ancestry.
+      - [ ] 1.3.1.2 Subtask - Audit direct/transitive dependencies and source tokens for renderer, host, server-framework, browser-object, runtime-private, .NET/Razor, and native-toolkit leakage.
+      - [ ] 1.3.1.3 Subtask - Reject new callbacks/macros/processes, nonempty results, passing measurements, public stability, support claims, or Phase 2 authorization.
 
-    - [ ] 1.3.2 Task - Implement activation validation and negative cases.
+    - [ ] 1.3.2 Task - Add focused negative governance tests.
 
-      Reject stale inputs, forbidden dependencies, missing acceptance mappings,
-      and claims that exceed the authorized phase.
+      Exercise every material activation failure and require actionable,
+      deterministic diagnostics.
 
-      - [ ] 1.3.2.1 Subtask - Validate authority, hashes, phase count, dependency order, package ownership, and evidence emptiness.
-      - [ ] 1.3.2.2 Subtask - Scan activated boundaries for renderer, host, server-authority, and private-runtime leakage.
-      - [ ] 1.3.2.3 Subtask - Prove deterministic rejection of missing authority, mutated inputs, implementation artifacts, or support claims.
+      - [ ] 1.3.2.1 Subtask - Reject missing authority, stale/missing BH-04 input, altered acceptance set, absent owner, broken plan link, forbidden dependency, or unindexed evidence path.
+      - [ ] 1.3.2.2 Subtask - Reject rewritten historical evidence, hidden deferral, fabricated ERTS/AtomVM parity, arbitrary dynamic dispatch, generic unbounded emissions, or unsupported compatibility claims.
+      - [ ] 1.3.2.3 Subtask - Prove the unimplemented Phase 1 candidate passes deterministically from a clean checkout.
 
-  - [ ] 1.4 Section - Integration Tests and Completion Evidence.
+  - [ ] 1.4 Section - Phase 1 Integration Tests and Completion Evidence.
 
-    Run the complete inherited and Phase 1 gate and publish a reproducible
-    decision before any component API is authorized.
+    Execute the inherited activation gate and publish a bounded decision before
+    authoring-facade design becomes eligible.
 
-    - [ ] 1.4.1 Task - Execute the activation integration gate.
+    - [ ] 1.4.1 Task - Run the active Phase 1 integration gate.
 
-      Verify the archive, packages, planning map, validators, and negative
-      fixtures as one coherent repository state.
+      Reproduce all inherited and activated checks with exact commands,
+      versions, counts, and negative cases.
 
-      - [ ] 1.4.1.1 Subtask - Run active Mix/Node checks, inherited validators, archive validation, generated-file checks, JSON checks, and patch hygiene.
-      - [ ] 1.4.1.2 Subtask - Confirm no component runtime behavior or passing support evidence exists.
-      - [ ] 1.4.1.3 Subtask - Record commands, versions, counts, hashes, and expected negative outcomes.
+      - [ ] 1.4.1.1 Subtask - Run package-local tests/formats, BH-04 release checks, BH-05 activation validator/tests, inherited validators/generators, archive/JSON/dependency checks, and patch hygiene.
+      - [ ] 1.4.1.2 Subtask - Confirm facade, schema, lifecycle, scheduling, effects, registry, runtime, failure, measurement, and acceptance result sets remain empty and later phases unauthorized.
+      - [ ] 1.4.1.3 Subtask - Record environment, tools, exact commands/counts, expected negative failures, input hashes, limitations, and deferred qualifications.
 
-    - [ ] 1.4.2 Task - Publish the Phase 1 decision.
+    - [ ] 1.4.2 Task - Publish Phase 1 completion evidence.
 
-      Close the phase only from immutable evidence and leave later work visibly
-      unauthorized.
+      Bind the activation result to immutable inputs and make no component
+      implementation claim.
 
-      - [ ] 1.4.2.1 Subtask - Publish a versioned validation log and implementation-evidence note.
-      - [ ] 1.4.2.2 Subtask - Mark Phase 1 complete only when every active gate passes without overclaim.
-      - [ ] 1.4.2.3 Subtask - Leave Phase 2 eligible but unauthorized.
+      - [ ] 1.4.2.1 Subtask - Publish the validation log, implementation-evidence note, and completion decision with exact artifact hashes.
+      - [ ] 1.4.2.2 Subtask - Mark Phase 1 complete only if every active gate passes and no stop condition remains open.
+      - [ ] 1.4.2.3 Subtask - Make Phase 2 eligible but unauthorized and keep BH-06 ineligible.
 
 ## Section delivery rule
 
 Complete and verify each section before its commit. Open one pull request only
-after Section 1.4 passes or records a truthful stop decision.
+after Section 1.4 passes or records a truthful stop decision. Phase 1 activates
+governance and evidence only; it may not implement component behavior.
 
 ## Connections
 
 - [BH-05 plan](README.md)
 - [Browser-host milestone roadmap](../../../20-notes/browser-host-implementation-milestones.md)
+- [Host-neutral component-kernel decision](../../../20-notes/architecture-decisions/adr-0001-host-neutral-semantic-component-kernel.md)
 - [Development environment and deferred qualification policy](../../development-environment-and-deferred-qualification-policy.md)
+
+## Sources
+
+- [BH-02 internal contract baseline](../../../assets/bh-02-baseline/blazex-bh-02-contract-baseline-v0.1.0.json)
+- [Canonical acceptance registry](../../../assets/quality-acceptance/blazex-acceptance-registry-v0.1.0.json)

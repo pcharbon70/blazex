@@ -1,0 +1,882 @@
+{
+  "schema_version": "1.0.0",
+  "milestone": "BH-05",
+  "phase": 1,
+  "entry": "accepted-governance-only",
+  "support_state": "unsupported",
+  "bh06_eligible": false,
+  "predecessor": {
+    "revision": "506c254ddd4a14dd8d1d4cbdba8fcf9556bd15cb",
+    "decision_path": "docs/research/assets/bh-04-correction/decision.json",
+    "decision_sha256": "9158a66af6d376cdec5c957b0f64fed72d307c98ff38a4bf43d094cfda5d3179",
+    "conditions": [
+      {
+        "id": "BX-ACC-BUDGET-BX-BUD-INTERACTION-DOM-UPDATE-MS",
+        "subject": "BX-BUD-INTERACTION-DOM-UPDATE-MS",
+        "owner": "dom-renderer-owner",
+        "state": "active-development-evidence-release-unqualified",
+        "release_pass_credit": false,
+        "source_registry_state": "planned",
+        "evidence": [
+          "docs/research/assets/bh-04-correction/presentation.json",
+          "docs/research/assets/bh-04-correction/stale-queue.json.gz",
+          "docs/research/assets/bh-04-correction/current-gates.json",
+          ".spec/reviews/2026-09-08T13-01-15-0400-parallel-code-review-bh04-correction.md"
+        ]
+      },
+      {
+        "id": "BX-ACC-BUDGET-BX-BUD-RELIABILITY-RENDERER-QUEUE-COUNT",
+        "subject": "BX-BUD-RELIABILITY-RENDERER-QUEUE-COUNT",
+        "owner": "renderer-owner",
+        "state": "active-development-evidence-release-unqualified",
+        "release_pass_credit": false,
+        "source_registry_state": "planned",
+        "evidence": [
+          "docs/research/assets/bh-04-correction/presentation.json",
+          "docs/research/assets/bh-04-correction/stale-queue.json.gz",
+          "docs/research/assets/bh-04-correction/current-gates.json",
+          ".spec/reviews/2026-09-08T13-01-15-0400-parallel-code-review-bh04-correction.md"
+        ]
+      },
+      {
+        "id": "BX-ACC-BUDGET-BX-BUD-RELIABILITY-STALE-REJECTION-PERCENT",
+        "subject": "BX-BUD-RELIABILITY-STALE-REJECTION-PERCENT",
+        "owner": "runtime-owner",
+        "state": "active-development-evidence-release-unqualified",
+        "release_pass_credit": false,
+        "source_registry_state": "planned",
+        "evidence": [
+          "docs/research/assets/bh-04-correction/presentation.json",
+          "docs/research/assets/bh-04-correction/stale-queue.json.gz",
+          "docs/research/assets/bh-04-correction/current-gates.json",
+          ".spec/reviews/2026-09-08T13-01-15-0400-parallel-code-review-bh04-correction.md"
+        ]
+      },
+      {
+        "id": "BX-ACC-FAILURE-BX-FAIL-RENDERER",
+        "subject": "BX-FAIL-RENDERER",
+        "owner": "renderer-owner",
+        "state": "active-development-evidence-release-unqualified",
+        "release_pass_credit": false,
+        "source_registry_state": "planned",
+        "evidence": [
+          "docs/research/assets/bh-04-correction/presentation.json",
+          "docs/research/assets/bh-04-correction/stale-queue.json.gz",
+          "docs/research/assets/bh-04-correction/current-gates.json",
+          ".spec/reviews/2026-09-08T13-01-15-0400-parallel-code-review-bh04-correction.md"
+        ]
+      },
+      {
+        "id": "BX-ACC-ROADMAP-BH-04",
+        "subject": "BH-04 DOM renderer and interaction transport",
+        "owner": "bh-04-owner",
+        "state": "active-development-evidence-release-unqualified",
+        "release_pass_credit": false,
+        "source_registry_state": "planned",
+        "evidence": [
+          "docs/research/assets/bh-04-correction/presentation.json",
+          "docs/research/assets/bh-04-correction/stale-queue.json.gz",
+          "docs/research/assets/bh-04-correction/current-gates.json",
+          ".spec/reviews/2026-09-08T13-01-15-0400-parallel-code-review-bh04-correction.md"
+        ]
+      }
+    ],
+    "inherited_obligations": [
+      {
+        "id": "BX-BH01-CONDITION-AVM-REACHABILITY",
+        "category": "inherited-condition",
+        "state": "repeat-required",
+        "owner": "runtime-owner",
+        "reactivate_by": "BH-04 and every runtime/bundle change",
+        "disposition": "Existing real AVM execution retained; repeat after bundle/compiler changes.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-BH01-CONDITION-BROTLI-SERVING",
+        "category": "inherited-condition",
+        "state": "carried-forward",
+        "owner": "browser-profile-owner",
+        "reactivate_by": "before compressed deployment; no later than BH-22",
+        "disposition": "BH-03 intentionally serves verified identity bytes; Brotli production serving is not qualified.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-BH01-CONDITION-FIREFOX-TIMER",
+        "category": "inherited-condition",
+        "state": "repeat-required",
+        "owner": "runtime-owner",
+        "reactivate_by": "each runtime change; no later than BH-22",
+        "disposition": "Active Firefox startup reproduced by Phase 7; timer workaround remains pinned, not portable proof.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-BH01-CONDITION-PRIVATE-API-PINS",
+        "category": "inherited-condition",
+        "state": "repeat-required",
+        "owner": "runtime-owner",
+        "reactivate_by": "each dependency upgrade",
+        "disposition": "Pinned Popcorn/AtomVM/private integration requires compatibility review and reruns.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-BH01-CONDITION-RUNTIME-REPEAT",
+        "category": "inherited-condition",
+        "state": "repeat-required",
+        "owner": "quality-owner",
+        "reactivate_by": "every downstream runtime change",
+        "disposition": "Do not inherit a historical browser pass for changed runtime bytes.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-BH01-CONDITION-PRODUCTION-SECURITY",
+        "category": "inherited-condition",
+        "state": "carried-forward",
+        "owner": "security-owner",
+        "reactivate_by": "BH-22 before release",
+        "disposition": "Local integrity and isolation tests do not establish production authority or threat-model closure.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-BH01-CONDITION-BH22-QUALIFICATION",
+        "category": "inherited-condition",
+        "state": "deferred-unavailable",
+        "owner": "qualification-owner",
+        "reactivate_by": "BH-22",
+        "disposition": "Unavailable platform/device/AT work gets no pass credit.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-BH01-CONDITION-RELEASE-CONTROLS",
+        "category": "inherited-condition",
+        "state": "carried-forward",
+        "owner": "release-owner",
+        "reactivate_by": "BH-22 before publication",
+        "disposition": "Signing, SBOM, licensing and release reproducibility remain release obligations.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-BH02-FINDING-GTK-ROLE-GAPS",
+        "category": "inherited-finding",
+        "state": "carried-forward",
+        "owner": "native-renderer-owner",
+        "reactivate_by": "BH-22 or earlier owning native/component milestone",
+        "disposition": "BH-03 host lifecycle does not close this accepted BH-02 limitation; original finding remains authoritative.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-BH02-FINDING-NATIVE-TARGETS-DEFERRED",
+        "category": "inherited-finding",
+        "state": "carried-forward",
+        "owner": "accessibility-owner",
+        "reactivate_by": "BH-22 or earlier owning native/component milestone",
+        "disposition": "BH-03 host lifecycle does not close this accepted BH-02 limitation; original finding remains authoritative.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-BH02-FINDING-MANUAL-AT-UNEXECUTED",
+        "category": "inherited-finding",
+        "state": "carried-forward",
+        "owner": "accessibility-owner",
+        "reactivate_by": "BH-22 or earlier owning native/component milestone",
+        "disposition": "BH-03 host lifecycle does not close this accepted BH-02 limitation; original finding remains authoritative.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-BH02-FINDING-NATIVE-FILE-DIALOG-UNEXECUTED",
+        "category": "inherited-finding",
+        "state": "carried-forward",
+        "owner": "accessibility-owner",
+        "reactivate_by": "BH-22 or earlier owning native/component milestone",
+        "disposition": "BH-03 host lifecycle does not close this accepted BH-02 limitation; original finding remains authoritative.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-BH02-FINDING-PUBLIC-API-EXPERIMENTAL",
+        "category": "inherited-finding",
+        "state": "carried-forward",
+        "owner": "architecture-owner",
+        "reactivate_by": "before public stability",
+        "disposition": "BH-03 host lifecycle does not close this accepted BH-02 limitation; original finding remains authoritative.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-BH02-FINDING-RELEASE-CONTROLS-UNEXECUTED",
+        "category": "inherited-finding",
+        "state": "carried-forward",
+        "owner": "release-owner",
+        "reactivate_by": "BH-22 or earlier owning native/component milestone",
+        "disposition": "BH-03 host lifecycle does not close this accepted BH-02 limitation; original finding remains authoritative.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-BH01-DEFER-ANDROID-PHYSICAL-0.1",
+        "category": "deferred-qualification",
+        "state": "deferred-unavailable",
+        "owner": "qualification-owner",
+        "reactivate_by": "BH-22",
+        "disposition": "[DEFERRED] Required environment unavailable; retain original evidence and re-run when available.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-BH01-DEFER-APPLE-MOBILE-0.1",
+        "category": "deferred-qualification",
+        "state": "deferred-unavailable",
+        "owner": "qualification-owner",
+        "reactivate_by": "BH-22",
+        "disposition": "[DEFERRED] Required environment unavailable; retain original evidence and re-run when available.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-BH01-DEFER-MACOS-SAFARI-0.1",
+        "category": "deferred-qualification",
+        "state": "deferred-unavailable",
+        "owner": "qualification-owner",
+        "reactivate_by": "BH-22",
+        "disposition": "[DEFERRED] Required environment unavailable; retain original evidence and re-run when available.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-BH01-DEFER-WINDOWS-DESKTOP-0.1",
+        "category": "deferred-qualification",
+        "state": "deferred-unavailable",
+        "owner": "qualification-owner",
+        "reactivate_by": "BH-22",
+        "disposition": "[DEFERRED] Required environment unavailable; retain original evidence and re-run when available.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-BH01-DEFER-SECOND-LINUX-HOST-0.1",
+        "category": "deferred-qualification",
+        "state": "deferred-unavailable",
+        "owner": "qualification-owner",
+        "reactivate_by": "BH-22",
+        "disposition": "[DEFERRED] Required environment unavailable; retain original evidence and re-run when available.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-BH01-DEFER-MANUAL-AT-0.1",
+        "category": "deferred-qualification",
+        "state": "deferred-unavailable",
+        "owner": "qualification-owner",
+        "reactivate_by": "BH-22",
+        "disposition": "[DEFERRED] Required environment unavailable; retain original evidence and re-run when available.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-ACC-BUDGET-BX-BUD-RELIABILITY-ROOT-COUNT",
+        "category": "acceptance-condition",
+        "state": "observation-only",
+        "owner": "performance-owner",
+        "reactivate_by": "BH-22",
+        "disposition": "Phase 7 descriptive measurements only; release thresholds remain unqualified.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-ACC-BUDGET-BX-BUD-RESOURCE-MEMORY-GROWTH-MIB",
+        "category": "acceptance-condition",
+        "state": "observation-only",
+        "owner": "performance-owner",
+        "reactivate_by": "BH-22",
+        "disposition": "Phase 7 descriptive measurements only; release thresholds remain unqualified.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-ACC-BUDGET-BX-BUD-STARTUP-ROOT-READINESS-MS",
+        "category": "acceptance-condition",
+        "state": "observation-only",
+        "owner": "performance-owner",
+        "reactivate_by": "BH-22",
+        "disposition": "Phase 7 descriptive measurements only; release thresholds remain unqualified.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-ACC-FAILURE-BX-FAIL-DEPLOYMENT-MISMATCH",
+        "category": "acceptance-condition",
+        "state": "bounded-evidence",
+        "owner": "browser-host-owner",
+        "reactivate_by": "BH-03 corrective acceptance before BH-04",
+        "disposition": "Reconcile source and tests in Phase 8 review; canonical planned registry remains unchanged.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-ACC-FAILURE-BX-FAIL-RUNTIME-LOSS",
+        "category": "acceptance-condition",
+        "state": "pending-review",
+        "owner": "browser-host-owner",
+        "reactivate_by": "BH-03 corrective acceptance before BH-04",
+        "disposition": "Reconcile source and tests in Phase 8 review; canonical planned registry remains unchanged.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-ACC-GATE-BX-GREQ-COMPAT-IDENTITIES",
+        "category": "acceptance-condition",
+        "state": "bounded-evidence",
+        "owner": "browser-host-owner",
+        "reactivate_by": "BH-03 corrective acceptance before BH-04",
+        "disposition": "Reconcile source and tests in Phase 8 review; canonical planned registry remains unchanged.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-ACC-GATE-BX-GREQ-COMPAT-MISMATCH",
+        "category": "acceptance-condition",
+        "state": "bounded-evidence",
+        "owner": "browser-host-owner",
+        "reactivate_by": "BH-03 corrective acceptance before BH-04",
+        "disposition": "Reconcile source and tests in Phase 8 review; canonical planned registry remains unchanged.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-ACC-GATE-BX-GREQ-COMPAT-SUPPORT-MATRIX",
+        "category": "acceptance-condition",
+        "state": "bounded-evidence",
+        "owner": "browser-host-owner",
+        "reactivate_by": "BH-22",
+        "disposition": "Reconcile source and tests in Phase 8 review; canonical planned registry remains unchanged.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-ACC-GATE-BX-GREQ-COMPAT-UPGRADE",
+        "category": "acceptance-condition",
+        "state": "bounded-evidence",
+        "owner": "browser-host-owner",
+        "reactivate_by": "BH-03 corrective acceptance before BH-04",
+        "disposition": "Reconcile source and tests in Phase 8 review; canonical planned registry remains unchanged.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-ACC-ROADMAP-BH-03",
+        "category": "acceptance-condition",
+        "state": "pending-review",
+        "owner": "browser-host-owner",
+        "reactivate_by": "BH-03 corrective acceptance before BH-04",
+        "disposition": "Reconcile source and tests in Phase 8 review; canonical planned registry remains unchanged.",
+        "pass_credit": false
+      },
+      {
+        "id": "BX-BH01-CONDITION-FIXTURE-DISPOSABILITY",
+        "category": "satisfied-predecessor",
+        "state": "satisfied-in-bh02",
+        "owner": "architecture-owner",
+        "reactivate_by": "any dependency-boundary change",
+        "disposition": "Preserve reusable boundaries and isolation from disposable experiments; no additional platform qualification.",
+        "pass_credit": false
+      }
+    ],
+    "deferred": [
+      {
+        "scope": "LiveView and LocalLiveView implementation and qualification",
+        "owner": "liveview-adapter-owner",
+        "state": "deferred",
+        "pass_credit": false,
+        "reactivation": "Separate explicit optional-integration authorization after BH-04; no automatic downstream activation"
+      },
+      {
+        "scope": "Unavailable external operating systems, physical devices and manual AT",
+        "owner": "qualification-owner",
+        "state": "deferred",
+        "pass_credit": false,
+        "reactivation": "BH-22 or earlier owning qualification milestone"
+      }
+    ],
+    "open_blockers": [],
+    "variance_obligation": {
+      "disposition": "bounded-development-only",
+      "owner": "performance-qualification-owner",
+      "repeat_at": [
+        "BH-22 governed hardware qualification",
+        "material renderer/runtime changes"
+      ],
+      "stable_performance_claim": false,
+      "physical_display_credit": false
+    }
+  },
+  "historical_release": "Original Phase 10 completion/release records remain revise; the corrective decision is the accepted successor, not a rewritten original release.",
+  "restrictions": [
+    "no Phase 2 facade or callbacks",
+    "no stable API or support promotion",
+    "no BH-06 implementation",
+    "no private runtime/renderer imports by application code",
+    "no production Wasm or ERTS/AtomVM parity claim",
+    "LiveView/LocalLiveView deferred by separate scope decision"
+  ],
+  "outcomes": {
+    "entry": "all inherited bindings valid",
+    "stop": "authority, ownership, identity or evidence violation",
+    "revise": "active failure requires a corrective decision",
+    "defer": "owned unavailable qualification only; no pass credit",
+    "acceptance": "Phase 1 governance only; Phase 2 eligible but unauthorized after final gate"
+  },
+  "acceptance": [
+    {
+      "canonical": {
+        "id": "BX-ACC-BUDGET-BX-BUD-RELIABILITY-EVENT-BACKLOG-COUNT",
+        "requirement_ids": [
+          "BX-REQ-BUDGET-BX-BUD-RELIABILITY-EVENT-BACKLOG-COUNT"
+        ],
+        "subject": "BX-BUD-RELIABILITY-EVENT-BACKLOG-COUNT",
+        "normative_statement": "per-root normalized event backlog is measured as maximum at-most 256 count in the declared environments.",
+        "mode": "quality-budget",
+        "profiles": [
+          "PROFILE-BROWSER-PHOENIX",
+          "PROFILE-BROWSER-PLUG",
+          "PROFILE-HEADLESS"
+        ],
+        "preconditions": [
+          "The candidate manifest, governed fixture, environment fingerprints, tools, and required minimum sample capacity are available."
+        ],
+        "action": "Drive the overload fixture above consumer rate and assert bounded admission, explicit coalescing or rejection, and retained ordering traces.",
+        "observable_results": [
+          "Raw samples and statistical report satisfy the proposed threshold, variance, regression, freshness, and exception policies."
+        ],
+        "prohibited_results": [
+          "A desktop-only observation, average without raw samples, stale baseline, or absent measurement is reported as a pass."
+        ],
+        "evidence_types": [
+          "benchmark",
+          "generated",
+          "review"
+        ],
+        "evidence_owner": "component-runtime-owner",
+        "owner_package_or_profile": "quality-contract",
+        "responsible_milestone": "BH-05",
+        "integration_suite": "integration/benchmarks/bx-bud-reliability-event-backlog-count",
+        "release_gate": "bh-22-quality-budget",
+        "required_budget_ids": [
+          "BX-BUD-RELIABILITY-EVENT-BACKLOG-COUNT"
+        ],
+        "status": "planned",
+        "support_status": "candidate",
+        "implementation_state": "not-started",
+        "verification_state": "not-executed",
+        "evidence_ids": [],
+        "waiver": null,
+        "supersedes": null
+      },
+      "first_phase": 7,
+      "closure_phase": 12,
+      "owner": "component-runtime-owner",
+      "suite": "integration/bh-05",
+      "stop_rule": "missing, divergent, unbounded, unauthorized or fabricated evidence blocks closure",
+      "state": "planned",
+      "evidence": []
+    },
+    {
+      "canonical": {
+        "id": "BX-ACC-BUDGET-BX-BUD-RELIABILITY-PENDING-EFFECTS-COUNT",
+        "requirement_ids": [
+          "BX-REQ-BUDGET-BX-BUD-RELIABILITY-PENDING-EFFECTS-COUNT"
+        ],
+        "subject": "BX-BUD-RELIABILITY-PENDING-EFFECTS-COUNT",
+        "normative_statement": "pending effects per root is measured as maximum at-most 128 count in the declared environments.",
+        "mode": "quality-budget",
+        "profiles": [
+          "PROFILE-BROWSER-PHOENIX",
+          "PROFILE-BROWSER-PLUG",
+          "PROFILE-HEADLESS"
+        ],
+        "preconditions": [
+          "The candidate manifest, governed fixture, environment fingerprints, tools, and required minimum sample capacity are available."
+        ],
+        "action": "Drive delayed and denied capability fixtures while recording effect admission, timeout, cancellation, and cleanup transitions.",
+        "observable_results": [
+          "Raw samples and statistical report satisfy the proposed threshold, variance, regression, freshness, and exception policies."
+        ],
+        "prohibited_results": [
+          "A desktop-only observation, average without raw samples, stale baseline, or absent measurement is reported as a pass."
+        ],
+        "evidence_types": [
+          "benchmark",
+          "generated",
+          "review"
+        ],
+        "evidence_owner": "effects-owner",
+        "owner_package_or_profile": "quality-contract",
+        "responsible_milestone": "BH-05",
+        "integration_suite": "integration/benchmarks/bx-bud-reliability-pending-effects-count",
+        "release_gate": "bh-22-quality-budget",
+        "required_budget_ids": [
+          "BX-BUD-RELIABILITY-PENDING-EFFECTS-COUNT"
+        ],
+        "status": "planned",
+        "support_status": "candidate",
+        "implementation_state": "not-started",
+        "verification_state": "not-executed",
+        "evidence_ids": [],
+        "waiver": null,
+        "supersedes": null
+      },
+      "first_phase": 8,
+      "closure_phase": 12,
+      "owner": "effects-owner",
+      "suite": "integration/bh-05",
+      "stop_rule": "missing, divergent, unbounded, unauthorized or fabricated evidence blocks closure",
+      "state": "planned",
+      "evidence": []
+    },
+    {
+      "canonical": {
+        "id": "BX-ACC-BUDGET-BX-BUD-RELIABILITY-RESOURCE-COUNT",
+        "requirement_ids": [
+          "BX-REQ-BUDGET-BX-BUD-RELIABILITY-RESOURCE-COUNT"
+        ],
+        "subject": "BX-BUD-RELIABILITY-RESOURCE-COUNT",
+        "normative_statement": "simultaneously leased resources per root is measured as maximum at-most 512 count in the declared environments.",
+        "mode": "quality-budget",
+        "profiles": [
+          "PROFILE-BROWSER-PHOENIX",
+          "PROFILE-BROWSER-PLUG",
+          "PROFILE-HEADLESS"
+        ],
+        "preconditions": [
+          "The candidate manifest, governed fixture, environment fingerprints, tools, and required minimum sample capacity are available."
+        ],
+        "action": "Drive the resource-heavy fixture while inventorying every lease by owner, kind, generation, acquisition, release, and terminal state.",
+        "observable_results": [
+          "Raw samples and statistical report satisfy the proposed threshold, variance, regression, freshness, and exception policies."
+        ],
+        "prohibited_results": [
+          "A desktop-only observation, average without raw samples, stale baseline, or absent measurement is reported as a pass."
+        ],
+        "evidence_types": [
+          "benchmark",
+          "generated",
+          "review"
+        ],
+        "evidence_owner": "effects-owner",
+        "owner_package_or_profile": "quality-contract",
+        "responsible_milestone": "BH-05",
+        "integration_suite": "integration/benchmarks/bx-bud-reliability-resource-count",
+        "release_gate": "bh-22-quality-budget",
+        "required_budget_ids": [
+          "BX-BUD-RELIABILITY-RESOURCE-COUNT"
+        ],
+        "status": "planned",
+        "support_status": "candidate",
+        "implementation_state": "not-started",
+        "verification_state": "not-executed",
+        "evidence_ids": [],
+        "waiver": null,
+        "supersedes": null
+      },
+      "first_phase": 8,
+      "closure_phase": 12,
+      "owner": "effects-owner",
+      "suite": "integration/bh-05",
+      "stop_rule": "missing, divergent, unbounded, unauthorized or fabricated evidence blocks closure",
+      "state": "planned",
+      "evidence": []
+    },
+    {
+      "canonical": {
+        "id": "BX-ACC-BUDGET-BX-BUD-RELIABILITY-RESTART-INTENSITY",
+        "requirement_ids": [
+          "BX-REQ-BUDGET-BX-BUD-RELIABILITY-RESTART-INTENSITY"
+        ],
+        "subject": "BX-BUD-RELIABILITY-RESTART-INTENSITY",
+        "normative_statement": "automatic runtime or component-boundary restarts within five seconds is measured as maximum at-most 3 count in the declared environments.",
+        "mode": "quality-budget",
+        "profiles": [
+          "PROFILE-BROWSER-PHOENIX",
+          "PROFILE-BROWSER-PLUG",
+          "PROFILE-HEADLESS"
+        ],
+        "preconditions": [
+          "The candidate manifest, governed fixture, environment fingerprints, tools, and required minimum sample capacity are available."
+        ],
+        "action": "Inject persistent deterministic failure and assert restart admission, five-second intensity accounting, terminal stop, diagnostics, and fallback.",
+        "observable_results": [
+          "Raw samples and statistical report satisfy the proposed threshold, variance, regression, freshness, and exception policies."
+        ],
+        "prohibited_results": [
+          "A desktop-only observation, average without raw samples, stale baseline, or absent measurement is reported as a pass."
+        ],
+        "evidence_types": [
+          "benchmark",
+          "generated",
+          "review"
+        ],
+        "evidence_owner": "component-runtime-owner",
+        "owner_package_or_profile": "quality-contract",
+        "responsible_milestone": "BH-05",
+        "integration_suite": "integration/benchmarks/bx-bud-reliability-restart-intensity",
+        "release_gate": "bh-22-quality-budget",
+        "required_budget_ids": [
+          "BX-BUD-RELIABILITY-RESTART-INTENSITY"
+        ],
+        "status": "planned",
+        "support_status": "candidate",
+        "implementation_state": "not-started",
+        "verification_state": "not-executed",
+        "evidence_ids": [],
+        "waiver": null,
+        "supersedes": null
+      },
+      "first_phase": 10,
+      "closure_phase": 12,
+      "owner": "component-runtime-owner",
+      "suite": "integration/bh-05",
+      "stop_rule": "missing, divergent, unbounded, unauthorized or fabricated evidence blocks closure",
+      "state": "planned",
+      "evidence": []
+    },
+    {
+      "canonical": {
+        "id": "BX-ACC-BUDGET-BX-BUD-RESOURCE-CLEANUP-MS",
+        "requirement_ids": [
+          "BX-REQ-BUDGET-BX-BUD-RESOURCE-CLEANUP-MS"
+        ],
+        "subject": "BX-BUD-RESOURCE-CLEANUP-MS",
+        "normative_statement": "root disposal through resource release is measured as p95 at-most 1000 milliseconds in the declared environments.",
+        "mode": "quality-budget",
+        "profiles": [
+          "PROFILE-BROWSER-PHOENIX",
+          "PROFILE-BROWSER-PLUG",
+          "PROFILE-HEADLESS"
+        ],
+        "preconditions": [
+          "The candidate manifest, governed fixture, environment fingerprints, tools, and required minimum sample capacity are available."
+        ],
+        "action": "Dispose the governed resource-heavy root and measure through idempotent release of subscriptions, timers, surfaces, files, and effect handles.",
+        "observable_results": [
+          "Raw samples and statistical report satisfy the proposed threshold, variance, regression, freshness, and exception policies."
+        ],
+        "prohibited_results": [
+          "A desktop-only observation, average without raw samples, stale baseline, or absent measurement is reported as a pass."
+        ],
+        "evidence_types": [
+          "benchmark",
+          "generated",
+          "review"
+        ],
+        "evidence_owner": "effects-owner",
+        "owner_package_or_profile": "quality-contract",
+        "responsible_milestone": "BH-05",
+        "integration_suite": "integration/benchmarks/bx-bud-resource-cleanup-ms",
+        "release_gate": "bh-22-quality-budget",
+        "required_budget_ids": [
+          "BX-BUD-RESOURCE-CLEANUP-MS"
+        ],
+        "status": "planned",
+        "support_status": "candidate",
+        "implementation_state": "not-started",
+        "verification_state": "not-executed",
+        "evidence_ids": [],
+        "waiver": null,
+        "supersedes": null
+      },
+      "first_phase": 10,
+      "closure_phase": 12,
+      "owner": "effects-owner",
+      "suite": "integration/bh-05",
+      "stop_rule": "missing, divergent, unbounded, unauthorized or fabricated evidence blocks closure",
+      "state": "planned",
+      "evidence": []
+    },
+    {
+      "canonical": {
+        "id": "BX-ACC-BUDGET-BX-BUD-RESOURCE-PROCESS-GROWTH-COUNT",
+        "requirement_ids": [
+          "BX-REQ-BUDGET-BX-BUD-RESOURCE-PROCESS-GROWTH-COUNT"
+        ],
+        "subject": "BX-BUD-RESOURCE-PROCESS-GROWTH-COUNT",
+        "normative_statement": "live BEAM process growth after one hundred root lifecycle cycles is measured as maximum exactly 0 count in the declared environments.",
+        "mode": "quality-budget",
+        "profiles": [
+          "PROFILE-BROWSER-PHOENIX",
+          "PROFILE-BROWSER-PLUG",
+          "PROFILE-HEADLESS"
+        ],
+        "preconditions": [
+          "The candidate manifest, governed fixture, environment fingerprints, tools, and required minimum sample capacity are available."
+        ],
+        "action": "Compare supervised live-process inventories before and after one hundred mount-use-dispose cycles once expected persistent services are excluded.",
+        "observable_results": [
+          "Raw samples and statistical report satisfy the proposed threshold, variance, regression, freshness, and exception policies."
+        ],
+        "prohibited_results": [
+          "A desktop-only observation, average without raw samples, stale baseline, or absent measurement is reported as a pass."
+        ],
+        "evidence_types": [
+          "benchmark",
+          "generated",
+          "review"
+        ],
+        "evidence_owner": "component-runtime-owner",
+        "owner_package_or_profile": "quality-contract",
+        "responsible_milestone": "BH-05",
+        "integration_suite": "integration/benchmarks/bx-bud-resource-process-growth-count",
+        "release_gate": "bh-22-quality-budget",
+        "required_budget_ids": [
+          "BX-BUD-RESOURCE-PROCESS-GROWTH-COUNT"
+        ],
+        "status": "planned",
+        "support_status": "candidate",
+        "implementation_state": "not-started",
+        "verification_state": "not-executed",
+        "evidence_ids": [],
+        "waiver": null,
+        "supersedes": null
+      },
+      "first_phase": 6,
+      "closure_phase": 12,
+      "owner": "component-runtime-owner",
+      "suite": "integration/bh-05",
+      "stop_rule": "missing, divergent, unbounded, unauthorized or fabricated evidence blocks closure",
+      "state": "planned",
+      "evidence": []
+    },
+    {
+      "canonical": {
+        "id": "BX-ACC-FAILURE-BX-FAIL-COMPONENT",
+        "requirement_ids": [
+          "BX-REQ-FAILURE-BX-FAIL-COMPONENT"
+        ],
+        "subject": "BX-FAIL-COMPONENT",
+        "normative_statement": "Contain failure to the governed boundary, render an accessible fallback, preserve sibling roots, report diagnostics, and dispose owned resources.",
+        "mode": "failure-and-recovery",
+        "profiles": [
+          "PROFILE-BROWSER-PHOENIX",
+          "PROFILE-BROWSER-PLUG",
+          "PROFILE-HEADLESS"
+        ],
+        "preconditions": [
+          "The governed trigger can be injected deterministically: component evaluation raises or violates its contract."
+        ],
+        "action": "Inject component evaluation raises or violates its contract and observe isolation, fallback, diagnostics, authority, focus, and cleanup through 1000 milliseconds.",
+        "observable_results": [
+          "Contain failure to the governed boundary, render an accessible fallback, preserve sibling roots, report diagnostics, and dispose owned resources."
+        ],
+        "prohibited_results": [
+          "Failure is swallowed, retries or queues become unbounded, state authority is confused, or owned resources survive the declared bound."
+        ],
+        "evidence_types": [
+          "automated",
+          "browser",
+          "review"
+        ],
+        "evidence_owner": "component-runtime-owner",
+        "owner_package_or_profile": "resilience-contract",
+        "responsible_milestone": "BH-05",
+        "integration_suite": "integration/failures/bx-fail-component",
+        "release_gate": "bh-22-resilience",
+        "required_budget_ids": [],
+        "status": "planned",
+        "support_status": "candidate",
+        "implementation_state": "not-started",
+        "verification_state": "not-executed",
+        "evidence_ids": [],
+        "waiver": null,
+        "supersedes": null
+      },
+      "first_phase": 10,
+      "closure_phase": 12,
+      "owner": "component-runtime-owner",
+      "suite": "integration/bh-05",
+      "stop_rule": "missing, divergent, unbounded, unauthorized or fabricated evidence blocks closure",
+      "state": "planned",
+      "evidence": []
+    },
+    {
+      "canonical": {
+        "id": "BX-ACC-FAILURE-BX-FAIL-RESOURCE-CLEANUP",
+        "requirement_ids": [
+          "BX-REQ-FAILURE-BX-FAIL-RESOURCE-CLEANUP"
+        ],
+        "subject": "BX-FAIL-RESOURCE-CLEANUP",
+        "normative_statement": "Invalidate its generation, cancel pending work, release every lease idempotently, restore or redirect focus, and reject late completions.",
+        "mode": "failure-and-recovery",
+        "profiles": [
+          "PROFILE-BROWSER-PHOENIX",
+          "PROFILE-BROWSER-PLUG",
+          "PROFILE-HEADLESS"
+        ],
+        "preconditions": [
+          "The governed trigger can be injected deterministically: root or resource owner is disposed, replaced, or crashes."
+        ],
+        "action": "Inject root or resource owner is disposed, replaced, or crashes and observe isolation, fallback, diagnostics, authority, focus, and cleanup through 1000 milliseconds.",
+        "observable_results": [
+          "Invalidate its generation, cancel pending work, release every lease idempotently, restore or redirect focus, and reject late completions."
+        ],
+        "prohibited_results": [
+          "Failure is swallowed, retries or queues become unbounded, state authority is confused, or owned resources survive the declared bound."
+        ],
+        "evidence_types": [
+          "automated",
+          "browser",
+          "review"
+        ],
+        "evidence_owner": "effects-owner",
+        "owner_package_or_profile": "resilience-contract",
+        "responsible_milestone": "BH-05",
+        "integration_suite": "integration/failures/bx-fail-resource-cleanup",
+        "release_gate": "bh-22-resilience",
+        "required_budget_ids": [],
+        "status": "planned",
+        "support_status": "candidate",
+        "implementation_state": "not-started",
+        "verification_state": "not-executed",
+        "evidence_ids": [],
+        "waiver": null,
+        "supersedes": null
+      },
+      "first_phase": 10,
+      "closure_phase": 12,
+      "owner": "effects-owner",
+      "suite": "integration/bh-05",
+      "stop_rule": "missing, divergent, unbounded, unauthorized or fabricated evidence blocks closure",
+      "state": "planned",
+      "evidence": []
+    },
+    {
+      "canonical": {
+        "id": "BX-ACC-ROADMAP-BH-05",
+        "requirement_ids": [
+          "BX-REQ-ROADMAP-BH-05"
+        ],
+        "subject": "BH-05 Component programming model and lifecycle",
+        "normative_statement": "The supported component semantics have matching BEAM and browser-AtomVM contract evidence, including ordering, identity, updates, failures, and final state. Public application code does not import private runtime or renderer modules.",
+        "mode": "roadmap-outcome",
+        "profiles": [
+          "PROFILE-BROWSER-PHOENIX",
+          "PROFILE-BROWSER-PLUG",
+          "PROFILE-HEADLESS"
+        ],
+        "preconditions": [
+          "All declared dependencies preceding BH-05 have accepted evidence or an explicit blocking record."
+        ],
+        "action": "Execute and review the complete BH-05 integration and release-gate suite against the candidate revision.",
+        "observable_results": [
+          "The supported component semantics have matching BEAM and browser-AtomVM contract evidence, including ordering, identity, updates, failures, and final state. Public application code does not import private runtime or renderer modules."
+        ],
+        "prohibited_results": [
+          "A demonstration, schema-valid record, or success on one profile is reported as completion without the declared evidence."
+        ],
+        "evidence_types": [
+          "automated",
+          "browser",
+          "review"
+        ],
+        "evidence_owner": "bh-05-owner",
+        "owner_package_or_profile": "roadmap-program",
+        "responsible_milestone": "BH-05",
+        "integration_suite": "integration/bh-05",
+        "release_gate": "bh-05-completion",
+        "required_budget_ids": [],
+        "status": "planned",
+        "support_status": "candidate",
+        "implementation_state": "not-started",
+        "verification_state": "not-executed",
+        "evidence_ids": [],
+        "waiver": null,
+        "supersedes": null
+      },
+      "first_phase": 2,
+      "closure_phase": 12,
+      "owner": "bh-05-owner",
+      "suite": "integration/bh-05",
+      "stop_rule": "missing, divergent, unbounded, unauthorized or fabricated evidence blocks closure",
+      "state": "planned",
+      "evidence": []
+    }
+  ]
+}

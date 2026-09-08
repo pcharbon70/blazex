@@ -1,144 +1,162 @@
 ---
-title: "Phase 11 - ERTS, Browser AtomVM, and Cross-Backend Conformance"
+title: "Phase 11 - ERTS, Browser-AtomVM, and Cross-Backend Conformance"
 kind: note
 created: "2026-09-06"
 maturity: developing
-tags: [bh-05, erts, atomvm, browser, conformance, implementation-planning]
-aliases: ["BH-05 phase 11"]
+tags:
+  - atomvm
+  - bh-05
+  - browser
+  - conformance
+  - implementation-planning
+aliases:
+  - "BH-05 phase 11"
 ---
 
-# Phase 11 - ERTS, Browser AtomVM, and Cross-Backend Conformance
+# Phase 11 - ERTS, Browser-AtomVM, and Cross-Backend Conformance
 
 Back to milestone: [README](README.md)
 
-- [ ] 11 Phase - ERTS, Browser AtomVM, and Cross-Backend Conformance.
+- [ ] 11 Phase - ERTS, Browser-AtomVM, and Cross-Backend Conformance.
 
-  Prove that the supported component semantics have matching observable
-  behavior on ERTS and the active browser AtomVM profile, with the headless
-  oracle as arbiter and unavailable environments retained as deferrals.
+  Execute one public BlazeX application corpus under local ERTS/headless and
+  browser AtomVM/DOM and compare callback ordering, identity, state, output,
+  actions, failures, disposal, and final state. Re-run the retained direct GTK
+  portability slice for changed public semantics without claiming native-host
+  or browser support.
 
-  - [ ] 11.1 Section - Freeze the conformance model and fixture corpus.
+  - [ ] 11.1 Section - Authorize and freeze the conformance matrix.
 
-    Define exactly which inputs, traces, outputs, errors, and final states must
-    agree and which host timings may differ without changing semantics.
+    Bind all BH-05 contracts plus accepted runtime/renderer paths and define
+    exact portable observations, allowed runtime variation, active rows, and
+    deferrals.
 
-    - [ ] 11.1.1 Task - Specify canonical scenario and observation schemas.
+    - [ ] 11.1.1 Task - Record bounded Phase 11 authority.
 
-      Represent component declarations, stimuli, expected semantic output,
-      state checkpoints, effects, resources, failures, and disposal outcomes.
+      Establish candidate, environment, and delivery provenance without
+      implying general build/package or platform support.
 
-      - [ ] 11.1.1.1 Subtask - Version the scenario, trace, environment, and result schemas.
-      - [ ] 11.1.1.2 Subtask - Define equality for ordering, identity, updates, final state, and terminal ownership.
-      - [ ] 11.1.1.3 Subtask - Define tolerated host metadata/timing differences separately from semantic equivalence.
+      - [ ] 11.1.1.1 Subtask - Record synchronized base, branch, section commits, one PR, cleanup, Phase 1–10 completion identities, and explicit Phase 11 authorization.
+      - [ ] 11.1.1.2 Subtask - Bind public facade/schemas/lifecycle/scheduler/effects/context/registry/failure contracts, BH-03 runtime, accepted BH-04 renderer, headless oracle, native spike, and runtime compatibility baseline by version and hash.
+      - [ ] 11.1.1.3 Subtask - Declare local ERTS/headless and Linux Chrome/Firefox browser AtomVM/DOM active; mark unavailable operating systems, Safari, physical devices, and manual assistive-technology pairings `[DEFERRED]` to BH-22.
 
-    - [ ] 11.1.2 Task - Build representative and adversarial fixtures.
+    - [ ] 11.1.2 Task - Freeze trace and equivalence rules.
 
-      Cover every supported role and lifecycle feature in both isolated and
-      composed scenarios.
+      Compare public semantic behavior while excluding runtime-specific noise
+      that is not part of the component contract.
 
-      - [ ] 11.1.2.1 Subtask - Include pure, nested-stateful, local-view, props, slots, context, dynamic selection, and controlled/local state.
-      - [ ] 11.1.2.2 Subtask - Include events, messages, timers, transitions, effects, resources, commands, failures, retries, replacement, and disposal.
-      - [ ] 11.1.2.3 Subtask - Include boundary, maximum, stale, malformed, overload, crash, and cleanup-failure cases.
+      - [ ] 11.1.2.1 Subtask - Define canonical declaration/schema, callback enter/exit, identity, accepted/candidate state, semantic output, event/message/timer, action/result, context/registry, commit, failure/retry, disposal, and final-state observations.
+      - [ ] 11.1.2.2 Subtask - Exclude PIDs, references, monotonic clock origins, scheduler reductions, stack traces, adapter-internal transactions, browser-generated IDs, and private module names from equality while retaining their bounded diagnostic evidence separately.
+      - [ ] 11.1.2.3 Subtask - Define exact-match, allowed-runtime-variation, fail, blocked, not-applicable, and deferred states and prohibit manual normalization that hides semantic divergence.
 
-  - [ ] 11.2 Section - Implement the ERTS reference runner and headless oracle.
+  - [ ] 11.2 Section - Build the public conformance application corpus.
 
-    Produce canonical expected behavior under the full BEAM toolchain without
-    allowing implementation-specific scheduling to define the contract.
+    Create representative applications that import only documented public
+    BlazeX contracts and exercise every supported BH-05 semantic dimension.
 
-    - [ ] 11.2.1 Task - Build isolated deterministic ERTS execution.
+    - [ ] 11.2.1 Task - Implement canonical application scenarios.
 
-      Run each fixture from a clean supervised context with controlled time,
-      injected executors, and complete ownership accounting.
+      Cover simple and composed behavior with deterministic input scripts and
+      expected public traces.
 
-      - [ ] 11.2.1.1 Subtask - Reset registries, clocks, manifests, roots, effects, resources, and trace collectors per scenario.
-      - [ ] 11.2.1.2 Subtask - Capture normalized output, ordering, identity, states, failures, timings, and terminal ledgers.
-      - [ ] 11.2.1.3 Subtask - Repeat each deterministic fixture and fail on within-target drift.
+      - [ ] 11.2.1.1 Subtask - Add pure/nested-stateful/process-root components using required/default/local/host props, default/named/contextual slots, controlled props, local state, keyed insert/move/remove/replace, and semantic accessibility output.
+      - [ ] 11.2.1.2 Subtask - Add event, self/child/parent message, timer, delayed/denied effect, resource lease/transfer/release, command intent, tracked/fixed context, dynamic registry, and multi-root scenarios.
+      - [ ] 11.2.1.3 Subtask - Add callback/schema/output failure, renderer reject, persistent retry, stale work/result, root crash, removal/replacement, fallback, disposal, and remount scenarios.
 
-    - [ ] 11.2.2 Task - Bind results to the headless oracle.
+    - [ ] 11.2.2 Task - Implement deterministic runners and trace normalization.
 
-      Compare renderer-independent semantic output and component lifecycle
-      observations before browser execution is considered.
+      Use one scenario description and expected outcome model across ERTS,
+      browser AtomVM, headless, DOM, and the bounded portability check.
 
-      - [ ] 11.2.2.1 Subtask - Validate every ERTS trace against the canonical schema and expected invariants.
-      - [ ] 11.2.2.2 Subtask - Separate semantic failures from harness, environment, or measurement failures.
-      - [ ] 11.2.2.3 Subtask - Publish immutable ERTS result digests as cross-target comparison inputs.
+      - [ ] 11.2.2.1 Subtask - Define setup, bootstrap, root registration, input/effect/result/failure injection, checkpoints, final-state capture, disposal, and cleanup independent of concrete runtime and renderer internals.
+      - [ ] 11.2.2.2 Subtask - Implement stable trace encoding/digests and exact mismatch reports linked to scenario, step, root/component identity, generation/revision, and public contract version.
+      - [ ] 11.2.2.3 Subtask - Audit fixtures for private runtime/renderer/host/server imports, direct process manipulation, framework structs, DOM/JavaScript values, and runtime-conditional semantic branches.
 
-  - [ ] 11.3 Section - Implement browser AtomVM conformance execution.
+  - [ ] 11.3 Section - Execute local ERTS and headless/backend conformance.
 
-    Run the same portable fixture bundles through the BH-03 host and BH-04 DOM
-    integration on active Linux Chrome and Firefox.
+    Establish the deterministic reference traces under the supported local
+    ERTS environment before comparing browser AtomVM.
 
-    - [ ] 11.3.1 Task - Assemble and launch browser fixture profiles.
+    - [ ] 11.3.1 Task - Run ERTS component and headless scenarios.
 
-      Use versioned manifests and one compatible runtime while keeping each
-      scenario/root isolated and correlated.
+      Execute normal, adversarial, repeated, and multi-root fixtures with
+      deterministic providers and renderer ports.
 
-      - [ ] 11.3.1.1 Subtask - Build fixture bundles from public entrypoints without private/runtime imports in application code.
-      - [ ] 11.3.1.2 Subtask - Run through the standard loader, root lifecycle, renderer, event, and executor boundaries.
-      - [ ] 11.3.1.3 Subtask - Capture canonical lifecycle traces plus browser environment and artifact identities.
+      - [ ] 11.3.1.1 Subtask - Run every applicable scenario under ERTS with the headless renderer and retain raw callback/state/action/failure/disposal/final-state traces.
+      - [ ] 11.3.1.2 Subtask - Run the accepted standalone DOM path in the local browser harness where needed to separate runtime from renderer behavior and compare normalized semantic outcomes.
+      - [ ] 11.3.1.3 Subtask - Repeat scenarios under varied legal scheduler timing and delayed acknowledgements/results to prove contract order and final state do not depend on incidental process scheduling.
 
-    - [ ] 11.3.2 Task - Execute the active browser matrix.
+    - [ ] 11.3.2 Task - Re-run cross-backend portability checks.
 
-      Treat Linux Chrome and Firefox as development evidence, not broad browser
-      support or release qualification.
+      Ensure BH-05 public semantics remain expressible by the existing neutral
+      tree/effect contracts and retained native-control experiment.
 
-      - [ ] 11.3.2.1 Subtask - Run every automated fixture in available Chrome and Firefox configurations.
-      - [ ] 11.3.2.2 Subtask - Repeat clean-context runs and detect target-local drift, stale assets, and cross-root contamination.
-      - [ ] 11.3.2.3 Subtask - Mark Safari, Windows, macOS, mobile, physical-device, and unavailable browser rows `[DEFERRED]`.
+      - [ ] 11.3.2.1 Subtask - Run the supported semantic subset through headless, standalone DOM, and direct GTK experiment using public component fixtures rather than private evaluator data.
+      - [ ] 11.3.2.2 Subtask - Compare layout/action/field/selection/keyed-list/surface/focus/file-choice/disposal outcomes and identify any new component semantic that lacks a backend-neutral representation.
+      - [ ] 11.3.2.3 Subtask - Treat GTK as a portability gate only and retain Windows/AppKit execution as `[DEFERRED]`; grant no native package/profile/support claim.
 
-  - [ ] 11.4 Section - Reconcile cross-runtime and cross-renderer outcomes.
+  - [ ] 11.4 Section - Execute browser AtomVM conformance.
 
-    Compare semantics directly, classify every difference, and prevent an
-    environment-specific quirk from silently becoming framework behavior.
+    Build the fixed governed fixture bundle through the accepted runtime path
+    and run the same scenarios in active Linux Chrome and Firefox.
 
-    - [ ] 11.4.1 Task - Compare canonical result ledgers.
+    - [ ] 11.4.1 Task - Run browser-AtomVM application scenarios.
 
-      Require matching ordering, identity, state, output, callback outcomes,
-      ownership, and terminal state for all active targets.
+      Preserve exact runtime/browser/toolchain identities and every failed,
+      timed-out, or divergent sample.
 
-      - [ ] 11.4.1.1 Subtask - Produce field-level diffs for ERTS, Chrome AtomVM, Firefox AtomVM, and headless oracle results.
-      - [ ] 11.4.1.2 Subtask - Classify differences as semantic defects, adapter defects, harness defects, tolerated host metadata, or deferred qualification.
-      - [ ] 11.4.1.3 Subtask - Reject unexplained, nondeterministic, or normalized-away semantic differences.
+      - [ ] 11.4.1.1 Subtask - Compile/package the declared fixed fixture roots under the accepted pinned AtomVM/Popcorn path without claiming BH-06 general reachability or build support.
+      - [ ] 11.4.1.2 Subtask - Execute every applicable scenario in Linux Chrome and Firefox, including multi-root, delayed scheduling, failure/retry, stale result, disposal, and remount behavior.
+      - [ ] 11.4.1.3 Subtask - Capture raw public traces, DOM/renderer outcomes, diagnostics, browser/runtime logs, resource/process inventories, and final-state digests with exact environment fingerprints.
 
-    - [ ] 11.4.2 Task - Verify public boundary and portability constraints.
+    - [ ] 11.4.2 Task - Compare ERTS and browser-AtomVM outcomes.
 
-      Ensure equivalent behavior was achieved through public contracts rather
-      than target conditionals in application components.
+      Resolve every trace field and final state against the frozen equivalence
+      policy and retain all runtime limitations.
 
-      - [ ] 11.4.2.1 Subtask - Scan application fixtures for private runtime, renderer, DOM, JavaScript, Phoenix, Plug, and platform imports.
-      - [ ] 11.4.2.2 Subtask - Account for target-specific code only inside declared host/renderer/executor adapters.
-      - [ ] 11.4.2.3 Subtask - Record AtomVM compatibility exceptions as explicit findings for BH-06 rather than hidden branches.
+      - [ ] 11.4.2.1 Subtask - Compare callback order, identity, props/slots, state revisions, semantic output, events/messages/timers, actions/results, context/registry, failures/retries, disposal, and final-state digests.
+      - [ ] 11.4.2.2 Subtask - Classify each difference as allowed runtime variation, harness defect, component contract defect, unsupported AtomVM semantic, or blocking divergence with owner and reproduction.
+      - [ ] 11.4.2.3 Subtask - Require resolution or explicit BH-05 stop/revise for every active semantic divergence and prohibit browser-specific code in public fixtures as a workaround.
 
-  - [ ] 11.5 Section - Integration Tests and Completion Evidence.
+  - [ ] 11.5 Section - Phase 11 Integration Tests and Completion Evidence.
 
-    Run the complete cross-backend matrix from clean artifacts and publish a
-    reproducible conformance decision.
+    Reproduce all active runtime/backend rows and publish the canonical
+    cross-runtime conformance ledger for final measurement and review.
 
-    - [ ] 11.5.1 Task - Execute the milestone-wide conformance gate.
+    - [ ] 11.5.1 Task - Run the complete conformance gate.
 
-      Combine contract, archive, package, browser, trace, failure, limit, and
-      dependency checks in one versioned run.
+      Execute clean builds, deterministic reports, runtime/browser scenarios,
+      backend checks, and architecture guards together.
 
-      - [ ] 11.5.1.1 Subtask - Run all Phase 1–11 validators/tests, clean builds, Chrome/Firefox scenarios, archive checks, JSON checks, and patch hygiene.
-      - [ ] 11.5.1.2 Subtask - Verify every supported semantic row has matching active-target evidence or an explicit active-target failure.
-      - [ ] 11.5.1.3 Subtask - Verify unavailable environment rows remain deferred and award no support credit.
+      - [ ] 11.5.1.1 Subtask - Run all activated Mix/Node tests and formats, ERTS/headless suites, Linux Chrome/Firefox AtomVM/DOM scenarios, GTK portability checks, runtime/renderer validators, dependency/API audits, archive/generated checks, JSON validation, and patch hygiene.
+      - [ ] 11.5.1.2 Subtask - Regenerate normalized traces/reports twice and compare bytes/hashes, raw-evidence links, environment identities, result states, and active/deferred classification.
+      - [ ] 11.5.1.3 Subtask - Confirm public fixture imports are clean, all active differences are resolved or blocking, and deferred rows remain explicit and excluded from pass rates.
 
-    - [ ] 11.5.2 Task - Publish completion evidence.
+    - [ ] 11.5.2 Task - Publish Phase 11 completion evidence.
 
-      Preserve inputs, artifacts, traces, comparisons, findings, and the exact
-      scope of the resulting claim.
+      Record exact supported candidate semantics and limitations without
+      converting development conformance into product support.
 
-      - [ ] 11.5.2.1 Subtask - Publish release-indexed fixture/result manifests, hashes, versions, commands, and cross-target diffs.
-      - [ ] 11.5.2.2 Subtask - Stop on active semantic drift, public-boundary leakage, nondeterminism, or unresolved terminal ownership.
-      - [ ] 11.5.2.3 Subtask - Mark Phase 12 eligible but unauthorized only after the complete gate passes.
+      - [ ] 11.5.2.1 Subtask - Publish conformance ledger, raw/normalized trace hashes, exact commands/counts, runtime/browser/tool versions, active outcomes, differences, failures, deferred rows, and reviews.
+      - [ ] 11.5.2.2 Subtask - Mark Phase 11 complete only if every active supported semantic has matching ERTS/browser-AtomVM evidence and backend neutrality remains intact.
+      - [ ] 11.5.2.3 Subtask - Make Phase 12 eligible but unauthorized and retain all public stability, broad platform, and release-support decisions for later milestones.
 
 ## Section delivery rule
 
 Complete and verify each section before its commit. Open one pull request only
-after Section 11.5 passes or records a truthful stop decision.
+after Section 11.5 passes or records a stop decision. Missing external
+environments remain deferred, but any unresolved active ERTS/AtomVM semantic
+divergence, private application import, or browser-specific public workaround
+blocks completion.
 
 ## Connections
 
 - [BH-05 plan](README.md)
+- [Phase 10](phase-10-failure-containment-retry-replacement-and-disposal.md)
+- [Host-neutral component-kernel decision](../../../20-notes/architecture-decisions/adr-0001-host-neutral-semantic-component-kernel.md)
 - [Development environment and deferred qualification policy](../../development-environment-and-deferred-qualification-policy.md)
-- [BH-03 browser-host plan](../bh-03-browser-execution-host-and-runtime-boot-lifecycle/README.md)
+
+## Sources
+
+- [BH-02 semantic-kernel fixtures](../../../../../integration/conformance/semantic-kernel-fixtures-v0.1.0.json)
+- [BH-01 feasibility baseline](../../../assets/bh-01-release/blazex-bh-01-feasibility-baseline-v0.1.0.json)

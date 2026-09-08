@@ -3,8 +3,14 @@ title: "Phase 5 - Nested Stateful Identity and Update Reconciliation"
 kind: note
 created: "2026-09-06"
 maturity: developing
-tags: [bh-05, stateful-components, identity, reconciliation, implementation-planning]
-aliases: ["BH-05 phase 5"]
+tags:
+  - bh-05
+  - component-model
+  - identity
+  - implementation-planning
+  - state
+aliases:
+  - "BH-05 phase 5"
 ---
 
 # Phase 5 - Nested Stateful Identity and Update Reconciliation
@@ -13,107 +19,118 @@ Back to milestone: [README](README.md)
 
 - [ ] 5 Phase - Nested Stateful Identity and Update Reconciliation.
 
-  Add lightweight nested state with stable identity and deterministic update,
-  move, replacement, and cleanup semantics under one root-owned evaluator.
+  Implement root-owned retained state for keyed nested components. Preserve
+  local state across compatible parent renders and keyed moves, apply new props
+  through explicit updates, initialize inserted identities, dispose removed
+  identities, and replace incompatible generations without pretending nested
+  components are independently supervised processes.
 
-  - [ ] 5.1 Section - Define controlled state, local state, and ownership.
+  - [ ] 5.1 Section - Authorize and freeze nested-state semantics.
 
-    Separate parent-owned values from component-owned local state and make every
-    synchronization decision explicit.
+    Bind pure composition and define controlled props, local state, identity,
+    transition, and reconciliation rules before retaining component instances.
 
-    - [ ] 5.1.1 Task - Specify state initialization and validation.
+    - [ ] 5.1.1 Task - Record bounded Phase 5 authority.
 
-      Define how initial local state is derived, validated, versioned, and kept
-      distinct from incoming controlled props.
+      Establish provenance and keep process roots, mailbox scheduling, and host
+      effects outside the phase.
 
-      - [ ] 5.1.1.1 Subtask - Define one-time local-state initialization from validated inputs and context.
-      - [ ] 5.1.1.2 Subtask - Define controlled values, change notifications, and parent-authoritative updates without two-way hidden mutation.
-      - [ ] 5.1.1.3 Subtask - Reject nonportable, oversized, or schema-invalid state before commit.
+      - [ ] 5.1.1.1 Subtask - Record synchronized base, branch, section commits, one PR, cleanup, Phase 4 completion identity, and explicit Phase 5 authorization.
+      - [ ] 5.1.1.2 Subtask - Bind stateful role, validated invocation, structural identity, existing evaluation/event contracts, semantic output, and disposal diagnostics by version and hash.
+      - [ ] 5.1.1.3 Subtask - Exclude GenServer/root startup, external messages/timers, concrete effects/commands, renderer commit, context/registry, independent subtree recovery, and support claims.
 
-    - [ ] 5.1.2 Task - Specify transition and update decisions.
+    - [ ] 5.1.2 Task - Freeze controlled and local state ownership.
 
-      Make state replacement, merge-free transitions, no-change, rerender, and
-      stop outcomes explicit in the callback-result algebra.
+      Define how parent input and component-retained state interact without
+      mutation, hidden two-way binding, or stale overwrite.
 
-      - [ ] 5.1.2.1 Subtask - Define atomic old-state/input to new-state/output transitions.
-      - [ ] 5.1.2.2 Subtask - Define when prop changes preserve, reinitialize, replace, or reject local state.
-      - [ ] 5.1.2.3 Subtask - Require explicit equality/change policy and prohibit hidden mutable cells.
+      - [ ] 5.1.2.1 Subtask - Define normalized props as parent-controlled snapshots and local state as component-owned portable data changed only by accepted stateful transitions.
+      - [ ] 5.1.2.2 Subtask - Define mount, compatible prop update, local event candidate, no-change, render, remove, replace, and dispose ordering plus legal callback results.
+      - [ ] 5.1.2.3 Subtask - Define child-to-parent notification as typed event/message intent and prohibit mutable parent props, shared state references, arbitrary closures, and direct child-instance calls.
 
-  - [ ] 5.2 Section - Define nested identity and reconciliation.
+  - [ ] 5.2 Section - Implement the root-owned nested component table.
 
-    Preserve state for the same logical component and discard it predictably
-    when type, key, owner, or generation changes.
+    Store immutable accepted state and invocation data by stable nested identity
+    within one owning root candidate.
 
-    - [ ] 5.2.1 Task - Specify identity allocation and matching.
+    - [ ] 5.2.1 Task - Implement state records and identity indexes.
 
-      Combine root, owner path, component type, declared key, and occurrence
-      information into stable non-host identity.
+      Track enough data for deterministic update/reconciliation and later
+      disposal without exposing runtime process or renderer objects.
 
-      - [ ] 5.2.1.1 Subtask - Define keyed and unkeyed sibling identity with duplicate-key rejection.
-      - [ ] 5.2.1.2 Subtask - Define identity across insert, delete, reorder, move, conditional output, and slot expansion.
-      - [ ] 5.2.1.3 Subtask - Define generation and owner boundaries that prevent state migration across roots.
+      - [ ] 5.2.1.1 Subtask - Define nested record identity, component module/public ID, schema/contract version, props, slots/invocation digest, state, output digest, generation, revision, event sequence, status, and owned action references.
+      - [ ] 5.2.1.2 Subtask - Validate unique identity, component/role compatibility, portable state, revision monotonicity, parent/root ownership, and declared bounds.
+      - [ ] 5.2.1.3 Subtask - Separate accepted and candidate tables so failed callbacks/output validation cannot partially mutate retained state.
 
-    - [ ] 5.2.2 Task - Implement deterministic tree reconciliation.
+    - [ ] 5.2.2 Task - Implement mount and compatible update transitions.
 
-      Match old and new component instances before state callbacks or semantic
-      output are committed.
+      Initialize new identities and update existing identities in canonical tree
+      order using only validated invocation input.
 
-      - [ ] 5.2.2.1 Subtask - Produce retain, update, move, create, replace, and dispose decisions in canonical order.
-      - [ ] 5.2.2.2 Subtask - Reconcile children and slots with bounded time, memory, and diagnostic paths.
-      - [ ] 5.2.2.3 Subtask - Reject ambiguous identity, stale generations, and cross-root ownership.
+      - [ ] 5.2.2.1 Subtask - Invoke initialization and render for new nested identities, validate state/output/actions, and add them only to the candidate table.
+      - [ ] 5.2.2.2 Subtask - Invoke prop update only when the accepted contract says input changed, preserve state on no-op updates, and render the resulting candidate deterministically.
+      - [ ] 5.2.2.3 Subtask - Reject stale schema/contract versions, invalid state/action/output, wrong role, and callback failures with the previously accepted table intact.
 
-  - [ ] 5.3 Section - Implement update evaluation and cleanup ordering.
+  - [ ] 5.3 Section - Implement keyed reconciliation, replacement, and disposal planning.
 
-    Apply state transitions and semantic publication atomically while ensuring
-    replaced or removed children are cleaned up in deterministic order.
+    Compare accepted and next invocation graphs to retain, move, insert,
+    replace, or remove nested component state deterministically.
 
-    - [ ] 5.3.1 Task - Implement stateful update transactions.
+    - [ ] 5.3.1 Task - Implement nested identity reconciliation.
 
-      Stage reconciliation, callbacks, state, and semantic output as one root
-      generation.
+      Preserve logical identity independently of child position while keeping
+      identity scoped to its declared parent/root boundary.
 
-      - [ ] 5.3.1.1 Subtask - Evaluate retained children with prior state and validated new input.
-      - [ ] 5.3.1.2 Subtask - Initialize created/replaced children and preserve untouched children without callback execution.
-      - [ ] 5.3.1.3 Subtask - Roll back all staged state and output after any precommit failure.
+      - [ ] 5.3.1.1 Subtask - Retain accepted state for unchanged compatible keys, apply prop updates, and move keyed components without reinitialization when parent-scope rules permit.
+      - [ ] 5.3.1.2 Subtask - Initialize insertions, plan deepest-first removals, and replace identities when module/public ID, role, schema, parent scope, or generation becomes incompatible.
+      - [ ] 5.3.1.3 Subtask - Reject duplicate/unstable keys, cross-root moves, impossible ancestry, unauthorized component changes, and reconciliation overflow atomically.
 
-    - [ ] 5.3.2 Task - Implement deterministic replacement and disposal plans.
+    - [ ] 5.3.2 Task - Implement candidate commit and disposal plans.
 
-      Separate logical removal from later effect/resource execution while
-      preserving child-first ownership semantics.
+      Couple accepted state advancement to validated complete semantic output
+      while retaining deterministic cleanup work for removed candidates.
 
-      - [ ] 5.3.2.1 Subtask - Produce child-before-parent disposal intent in stable reverse ownership order.
-      - [ ] 5.3.2.2 Subtask - Ensure replacement cannot observe or inherit the removed instance's local state.
-      - [ ] 5.3.2.3 Subtask - Make repeated disposal planning idempotent and generation scoped.
+      - [ ] 5.3.2.1 Subtask - Validate composed semantic output and all nested records/actions before publishing one candidate state/output transition.
+      - [ ] 5.3.2.2 Subtask - Emit ordered disposal plans for removed/replaced components and ensure candidate-only resources/actions are discarded after rejection.
+      - [ ] 5.3.2.3 Subtask - Define final-state and trace digests for accepted, rejected, replaced, and removed nested transitions without requiring a renderer commit yet.
 
-  - [ ] 5.4 Section - Integration Tests and Completion Evidence.
+  - [ ] 5.4 Section - Phase 5 Integration Tests and Completion Evidence.
 
-    Exercise long-lived keyed and unkeyed component trees through update,
-    reorder, replacement, failure, and cleanup scenarios.
+    Exercise nested state, identity, update, reorder, failure, and removal
+    through deterministic in-memory transitions and semantic validation.
 
-    - [ ] 5.4.1 Task - Run state and identity conformance scenarios.
+    - [ ] 5.4.1 Task - Run nested-state reconciliation integration tests.
 
-      Compare state histories, reconciliation plans, semantic output, and final
-      cleanup intent through the headless oracle.
+      Use public application fixtures with multiple levels of pure and
+      stateful children and exact expected state/output traces.
 
-      - [ ] 5.4.1.1 Subtask - Cover controlled/local state, insertion, deletion, reorder, move, key collision, type change, and root change.
-      - [ ] 5.4.1.2 Subtask - Inject initialization/update/output failures and verify last-good state and output remain intact.
-      - [ ] 5.4.1.3 Subtask - Repeat traces to prove deterministic identity and zero cross-root state leakage.
+      - [ ] 5.4.1.1 Subtask - Test initialize/update/no-op/local candidate, keyed reorder, insertion/removal, nested removal, module/schema replacement, parent replacement, and generation replacement.
+      - [ ] 5.4.1.2 Subtask - Test invalid/duplicate keys, nonportable state, callback rejection/raise, malformed action/output, cross-root identity, stale event sequence, overflow, and atomic rollback.
+      - [ ] 5.4.1.3 Subtask - Repeat traces to prove deterministic callback order, retained state, disposal plan, final state, semantic output, diagnostics, and digests.
 
-    - [ ] 5.4.2 Task - Publish completion evidence.
+    - [ ] 5.4.2 Task - Publish Phase 5 completion evidence.
 
-      Bind the accepted nested lifecycle before adding process roots or
-      asynchronous scheduling.
+      Record the exact nested-state contract and explicitly document its shared
+      process/failure boundary.
 
-      - [ ] 5.4.2.1 Subtask - Publish fixtures, trace digests, commands, counts, and expected failures.
-      - [ ] 5.4.2.2 Subtask - Confirm nested components own no processes, mailboxes, timers, effects, or host resources.
-      - [ ] 5.4.2.3 Subtask - Mark Phase 6 eligible but unauthorized only after the complete gate passes.
+      - [ ] 5.4.2.1 Subtask - Run Core/UI-tree/headless/test suites, nested fixtures, property/determinism tests, dependency audits, validators, archive/generated checks, JSON validation, and patch hygiene.
+      - [ ] 5.4.2.2 Subtask - Publish state-machine/identity inventories, fixture and trace hashes, exact commands/counts, disposal plans, negative outcomes, failures, and limitations.
+      - [ ] 5.4.2.3 Subtask - Mark Phase 5 complete only if retained state and output reconcile atomically by stable identity; make Phase 6 eligible but unauthorized.
 
 ## Section delivery rule
 
 Complete and verify each section before its commit. Open one pull request only
-after Section 5.4 passes or records a truthful stop decision.
+after Section 5.4 passes or records a stop decision. Nested state remains owned
+by one future root process and has no independent crash/restart guarantee.
 
 ## Connections
 
 - [BH-05 plan](README.md)
-- [Phase 4 — Pure Composition and Atomic Semantic Evaluation](phase-04-pure-composition-and-atomic-semantic-evaluation.md)
+- [Phase 4](phase-04-pure-composition-and-atomic-semantic-evaluation.md)
+- [Host-neutral component-kernel decision](../../../20-notes/architecture-decisions/adr-0001-host-neutral-semantic-component-kernel.md)
+- [Blazor framework semantics beneath BlazeX](../../../20-notes/blazor-framework-semantics-beneath-blazex.md)
+
+## Sources
+
+- [BH-02 semantic-kernel fixtures](../../../../../integration/conformance/semantic-kernel-fixtures-v0.1.0.json)
+- [Foundational component-semantics inquiry](../../../40-inquiries/which-foundational-component-semantics-does-blazex-need.md)

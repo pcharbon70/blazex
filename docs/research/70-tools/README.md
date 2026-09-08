@@ -104,6 +104,8 @@ milestone acceptance.
 
 ## Index
 
+- [BH-05 activation record generator](generate_bh05_activation.py)
+
 - [BH-04 corrective acceptance validator](validate_bh04_correction.py)
 - [BH-04 corrective decision generator](generate_bh04_correction.py)
 - [BH-04 corrective gate tests](test_validate_bh04_correction.py)
