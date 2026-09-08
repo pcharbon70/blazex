@@ -27,6 +27,13 @@ None.
 
 ### Files
 
+- [Phase 5 source index](blazex-bh-04-phase-05-source-index-v0.1.0.json) — exact source and browser hashes.
+- [Phase 5 browser results](blazex-bh-04-phase-05-browser-results-v0.1.0.json) — native event, ERTS dispatch and DOM acknowledgement traces.
+- [Phase 5 validation log](blazex-bh-04-phase-05-validation-log-v0.1.0.txt) — commands, counts, repairs and limitations.
+- [Phase 5 completion](blazex-bh-04-phase-05-completion-v0.1.0.json) — section provenance; Phase 6 eligible but unauthorized.
+
+- [Phase 5 authorization](blazex-bh-04-phase-05-authorization-v0.1.0.json) — bounded local interaction authority and immutable inherited inputs.
+
 - [Phase 4 source index](blazex-bh-04-phase-04-source-index-v0.1.0.json) — exact additive implementation and browser evidence hashes.
 - [Phase 4 browser results](blazex-bh-04-phase-04-browser-results-v0.1.0.json) — active Chrome/Firefox raw scenario, rollback, stale, queue and lifecycle outcomes.
 - [Phase 4 validation log](blazex-bh-04-phase-04-validation-log-v0.1.0.txt) — reproducible commands, results, repairs and limitations.

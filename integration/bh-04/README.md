@@ -2,8 +2,9 @@
 
 ## Purpose
 
-Current status: Phase 4 adds atomic DOM application through owned BH-03 roots,
-bounded queues and rollback/fallback isolation. The Phase 3 reconciler and Phase 2
+Current status: Phase 5 adds bounded semantic listeners and root-local interaction
+delivery with actual Elixir dispatch and correlated DOM commits. Phase 4 provides
+atomic application and rollback/fallback isolation. The Phase 3 reconciler and Phase 2
 v1 protocol remain immutable. Active Linux browser evidence is developmental,
 not browser qualification or support.
 
@@ -11,6 +12,11 @@ Phase 1 activates evidence governance only. No incremental renderer behavior,
 benchmark pass, browser qualification, or support is claimed.
 
 ## Index
+
+- [Interaction usage](interaction-usage.md) — negotiated v2 companion, ownership and runtime packaging limits.
+- [Interaction browser runner](interaction-browser.mjs) — Chrome/Firefox and offline ERTS with a test-only DevTools/stdio carrier.
+- [Interaction scenarios](interaction-scenarios.js) — all 13 mappings, native events, adversarial inputs, queue pressure and cleanup.
+- [Independent interaction replay](interaction-conformance.mjs) — validates raw Elixir/browser records against the JS transaction model.
 
 - [Atomic DOM usage](atomic-dom-usage.md) — owner capabilities, queues, rollback and limitations.
 - [Atomic DOM fixture generator](support/atomic_dom_runner.exs) — actual Phase 3 setup and transition transactions.
@@ -46,5 +52,5 @@ benchmark pass, browser qualification, or support is claimed.
 The bh-04-owner owns this boundary. BH-02 full-root fixtures and all BH-03
 artifacts remain immutable; reuse is reference evidence, not incremental pass
 credit. Later evidence requires separate authorization, a new version and
-explicit supersession links. Phase 4 is authorized; Phase 5 remains unauthorized
+explicit supersession links. Phase 5 is complete; Phase 6 remains unauthorized
 and BH-05 is ineligible.

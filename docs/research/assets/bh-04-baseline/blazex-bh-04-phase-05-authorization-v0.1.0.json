@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0.0",
+  "milestone": "BH-04",
+  "phase": 5,
+  "date": "2026-09-08",
+  "base_revision": "f00a9352beb4bc103e8c5ca4e7fc12099f9223fe",
+  "branch": "codex/bh04-phase5-interactions",
+  "authority": "User explicitly requested the next phase, a commit per section, a single PR, merge, main synchronization and branch cleanup.",
+  "sections": [
+    "5.1",
+    "5.2",
+    "5.3",
+    "5.4"
+  ],
+  "source_bindings": {
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-04-completion-v0.1.0.json": "ba23cd0fcac50610938095942546debcbc2543b6d59c78832067698ed0abcd03",
+    "js/blazex_runtime/src/atomic-dom.js": "36cfb07743c579239f8e1d3003d15ce377ab4488d175c9312a7eff03eaf20b64",
+    "js/blazex_runtime/src/dom-root-queue.js": "e8c6a40542021805631afbf21a91069b71ff327cb6378ff9e8201b8c497c8db8",
+    "js/blazex_runtime/src/bridge-protocol.js": "d55f746f486af4d25e053e94fe07a6c5d9e0b0033c0950e29a85ebce0f6d2efa",
+    "js/blazex_runtime/src/host-bridge.js": "d1e287676bd4f324eea4b1e28fe8caccbed07a46797a8dd0ebd13835e4ac0478",
+    "js/blazex_runtime/src/root-lifecycle.js": "9ba5c518f802b188def31508916f03888b43f581a6b36a849222ca96e2d4a7b6",
+    "packages/blazex_core/lib/blazex/core/event.ex": "8ee5bfe1cdcfa974e75545c8de62a6d58009678fbb4ebc21e8acb11f30a6f221",
+    "packages/blazex_ui_tree/lib/blazex/ui_tree/binding.ex": "b3e66072b18ea7bc03f4595271c5dd2f56cd419f470a29ea70bb6e7f24d5c145",
+    "packages/blazex_ui_tree/lib/blazex/ui_tree/component_evaluator.ex": "23520fedb861b93279b10e15cacf406c28f5e23c7819fd53abc82c4cd4c8c968",
+    "packages/blazex_renderer_dom/lib/blazex/renderer/dom/reconciled_session.ex": "1d4b82e8d9c71b724151a22247c1cc6f64cf05891effa31369b83ccdf85b6003"
+  },
+  "excluded": [
+    "Phoenix/Plug commands",
+    "server authorization",
+    "arbitrary JavaScript component callbacks",
+    "new public component callbacks",
+    "file bytes or paths",
+    "support promotion"
+  ],
+  "next_authorized_work": null
+}

@@ -1,18 +1,16 @@
-"""Negative Phase 4 governance tests; never modify the user's source tree."""
+"""Negative Phase 5 governance tests; never modify the user's source tree."""
 import contextlib
 import json
 from pathlib import Path
 import shutil
 import tempfile
 import unittest
-import validate_bh04_dom_application as gate
-from bh04_phase5_history import snapshot
+import validate_bh04_interactions as gate
 
 class DOMApplicationGovernanceTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.history = snapshot(gate.ROOT)
-        cls.source_root = cls.history.__enter__()
+        cls.source_root = gate.ROOT
         cls.temp = tempfile.TemporaryDirectory(prefix="bh04-dom-governance-")
         cls.root = Path(cls.temp.name)
         for name in gate.git(cls.source_root, "ls-files", "--cached", "--others", "--exclude-standard").decode().splitlines():
@@ -26,7 +24,6 @@ class DOMApplicationGovernanceTests(unittest.TestCase):
     @classmethod
     def tearDownClass(cls):
         cls.temp.cleanup()
-        cls.history.__exit__(None, None, None)
     @contextlib.contextmanager
     def change(self, name, content):
         path = self.root / name
@@ -47,7 +44,7 @@ class DOMApplicationGovernanceTests(unittest.TestCase):
     def test_candidate(self):
         self.assertEqual([], gate.validate(self.root, completion=False))
     def test_authority(self):
-        self.mutate(gate.AUTH, lambda d: d.update(phase=5), "authority")
+        self.mutate(gate.AUTH, lambda d: d.update(phase=6), "authority")
     def test_index_inventory(self):
         self.mutate(gate.INDEX, lambda d: d["source_bindings"].pop(gate.SOURCES[0]), "inventory incomplete")
     def test_source_hash(self):
@@ -63,12 +60,10 @@ class DOMApplicationGovernanceTests(unittest.TestCase):
         self.mutate(gate.BROWSERS, lambda d: d["results"].pop(), "matrix incomplete")
     def test_browser_failure(self):
         self.mutate(gate.BROWSERS, lambda d: d["results"][0].update(result="failed"), "result/support invalid")
-    def test_stale_pass(self):
-        def mutate(d):
-            next(t for t in d["results"][0]["traces"] if t["name"] == "random-delayed")["state"] = "committed"
-        self.mutate(gate.BROWSERS, mutate, "stale rejection evidence incomplete")
-    def test_rollback_omission(self):
-        self.mutate(gate.BROWSERS, lambda d: d["results"][0]["traces"].pop(1), "atomic rollback evidence incomplete")
+    def test_mapping_omission(self):
+        self.mutate(gate.BROWSERS, lambda d: d["results"][0]["traces"].pop(0), "mapping evidence incomplete")
+    def test_cleanup_omission(self):
+        self.mutate(gate.BROWSERS, lambda d: d["results"][0]["listener_cleanup"][0].update(listeners=1), "listener cleanup incomplete")
     def test_queue_overflow(self):
         self.mutate(gate.BROWSERS, lambda d: d["results"][0]["counters"].update(max_queue=65), "counters incomplete")
     def test_gate_inventory(self):
