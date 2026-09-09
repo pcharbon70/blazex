@@ -25,28 +25,28 @@ Back to milestone: [README](README.md)
   new generations on replacement, and dispose events, timers, effects,
   resources, context, renderer state, and process ownership deterministically.
 
-  - [ ] 10.1 Section - Authorize and freeze failure and disposal policy.
+  - [x] 10.1 Section - Authorize and freeze failure and disposal policy.
 
     Bind the complete component lifecycle and classify failure sources,
     containment boundaries, fallback, retry, generation, and cleanup rules.
 
-    - [ ] 10.1.1 Task - Record bounded Phase 10 authority.
+    - [x] 10.1.1 Task - Record bounded Phase 10 authority.
 
       Establish provenance and reserve whole-runtime recovery and offline
       product behavior for their owning milestones.
 
-      - [ ] 10.1.1.1 Subtask - Record synchronized base, branch, section commits, one PR, cleanup, Phase 9 completion identity, and explicit Phase 10 authorization.
-      - [ ] 10.1.1.2 Subtask - Bind callback/scheduler/effect/resource/context/registry contracts, BH-04 renderer failure behavior, BH-03 runtime/root loss, accessibility intent, and failure/reliability budgets by version and hash.
-      - [ ] 10.1.1.3 Subtask - Exclude BH-15 offline/state recovery, whole-VM automatic policy, subtree isolation without a process root, command replay, production error reporting, and support claims.
+      - [x] 10.1.1.1 Subtask - Record synchronized base, branch, section commits, one PR, cleanup, Phase 9 completion identity, and explicit Phase 10 authorization.
+      - [x] 10.1.1.2 Subtask - Bind callback/scheduler/effect/resource/context/registry contracts, BH-04 renderer failure behavior, BH-03 runtime/root loss, accessibility intent, and failure/reliability budgets by version and hash.
+      - [x] 10.1.1.3 Subtask - Exclude BH-15 offline/state recovery, whole-VM automatic policy, subtree isolation without a process root, command replay, production error reporting, and support claims.
 
-    - [ ] 10.1.2 Task - Freeze failure taxonomy and recovery rules.
+    - [x] 10.1.2 Task - Freeze failure taxonomy and recovery rules.
 
       Select one accountable boundary and outcome for each failure without
       hiding defects behind retries or misleading nested error boundaries.
 
-      - [ ] 10.1.2.1 Subtask - Classify declaration/schema, mount/update/event/message/render, semantic output, scheduling overload, effect/result/resource, context/registry, renderer/commit, timeout, crash, and disposal failures.
-      - [ ] 10.1.2.2 Subtask - Define handled rejection, transition rollback, root failure, accessible fallback, terminal stop, user/host retry, automatic retry eligibility, and whole-runtime escalation.
-      - [ ] 10.1.2.3 Subtask - Limit automatic root/component-boundary restarts to three within five seconds, fingerprint repeated failure, prohibit render-loop retry and non-idempotent effect/command replay, and require terminal fallback afterward.
+      - [x] 10.1.2.1 Subtask - Classify declaration/schema, mount/update/event/message/render, semantic output, scheduling overload, effect/result/resource, context/registry, renderer/commit, timeout, crash, and disposal failures.
+      - [x] 10.1.2.2 Subtask - Define handled rejection, transition rollback, root failure, accessible fallback, terminal stop, user/host retry, automatic retry eligibility, and whole-runtime escalation.
+      - [x] 10.1.2.3 Subtask - Limit automatic root/component-boundary restarts to three within five seconds, fingerprint repeated failure, prohibit render-loop retry and non-idempotent effect/command replay, and require terminal fallback afterward.
 
   - [ ] 10.2 Section - Implement root failure containment and accessible fallback.
 

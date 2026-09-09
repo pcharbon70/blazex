@@ -289,3 +289,4 @@ reporting a tooling change complete.
 - [Scope validator tests](test_validate_bh05_scopes.py) — Isolated authority, inventory and gate tampering rejection.
 - [Scope subset audit](check_bh05_scope_subset.py) — Context/registry dependency and pinned runtime analysis, not Wasm execution.
 - [Phase 9 recorder](record_bh05_phase9.py) — Twenty source-frozen gates and exclusive-create publication.
+- [Recovery authority generator](generate_bh05_recovery.py) — Phase 10 bounded recovery and lifecycle/acceptance bindings.

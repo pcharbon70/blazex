@@ -253,3 +253,4 @@ proof of another host.
 - [Action evidence](action-evidence.md) — Phase 8 integration, pending/lease stress, authority analysis and source-frozen gate method.
 - [Scope contract](scope-contract.md) — Phase 9 context visibility, commit-gated invalidation and manifest-bounded registry.
 - [Scope evidence](scope-evidence.md) — Phase 9 context/registry fixtures, exact bounds, normalized hashes and frozen replay method.
+- [Recovery contract](recovery-contract.md) — Phase 10 failure containment, fallback, retry and disposal authority.
