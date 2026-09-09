@@ -278,3 +278,4 @@ reporting a tooling change complete.
 - [`test_validate_bh05_scheduling.py`](test_validate_bh05_scheduling.py) — Isolated authority and scheduling evidence mutation tests.
 - [`check_bh05_scheduling_subset.py`](check_bh05_scheduling_subset.py) — Pinned supervision and owned-timer subset analysis, not Wasm execution parity.
 - [`record_bh05_phase7.py`](record_bh05_phase7.py) — Eighteen source-frozen current and historical scheduling gates and guarded publication.
+- [`generate_bh05_actions.py`](generate_bh05_actions.py) — Phase 8 authority bound to scheduling, effect/resource contracts and server trust.

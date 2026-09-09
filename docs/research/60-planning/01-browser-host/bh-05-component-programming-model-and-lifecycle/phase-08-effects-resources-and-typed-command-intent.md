@@ -25,28 +25,28 @@ Back to milestone: [README](README.md)
   trust boundaries while reserving actual browser providers and server command
   execution for their owning adapters.
 
-  - [ ] 8.1 Section - Authorize and freeze action and authority semantics.
+  - [x] 8.1 Section - Authorize and freeze action and authority semantics.
 
     Bind scheduler and effects contracts and define every action/result class
     before integrating providers or command adapters.
 
-    - [ ] 8.1.1 Task - Record bounded Phase 8 authority.
+    - [x] 8.1.1 Task - Record bounded Phase 8 authority.
 
       Establish provenance and prohibit concrete server/browser implementation
       or trust from entering Core.
 
-      - [ ] 8.1.1.1 Subtask - Record synchronized base, branch, section commits, one PR, cleanup, Phase 7 completion identity, and explicit Phase 8 authorization.
-      - [ ] 8.1.1.2 Subtask - Bind callback result algebra, scheduler, effect/capability/resource contracts, server trust ADR, renderer barriers, diagnostics, and pending/resource budgets by version and hash.
-      - [ ] 8.1.1.3 Subtask - Exclude concrete Web API providers, Phoenix/Plug command transport/authorization, uploads, navigation, persistence, arbitrary tasks, and support claims.
+      - [x] 8.1.1.1 Subtask - Record synchronized base, branch, section commits, one PR, cleanup, Phase 7 completion identity, and explicit Phase 8 authorization.
+      - [x] 8.1.1.2 Subtask - Bind callback result algebra, scheduler, effect/capability/resource contracts, server trust ADR, renderer barriers, diagnostics, and pending/resource budgets by version and hash.
+      - [x] 8.1.1.3 Subtask - Exclude concrete Web API providers, Phoenix/Plug command transport/authorization, uploads, navigation, persistence, arbitrary tasks, and support claims.
 
-    - [ ] 8.1.2 Task - Freeze typed action and result vocabulary.
+    - [x] 8.1.2 Task - Freeze typed action and result vocabulary.
 
       Distinguish local work, host capability requests, resource leases, and
       remote authority crossings in both data and lifecycle.
 
-      - [ ] 8.1.2.1 Subtask - Define closed action records for local message, timer start/cancel, effect request/cancel, resource transfer/release, and typed command intent with stable IDs and schema versions.
-      - [ ] 8.1.2.2 Subtask - Define effect/command accepted, denied, completed, failed, timed-out, canceled, stale, and disconnected results plus resource acquired/transferred/released/lost states.
-      - [ ] 8.1.2.3 Subtask - Define ordering relative to semantic and renderer commit, idempotency/replay policy, root/component/generation ownership, payload bounds, redaction, and maximum 128 pending effects/512 leases.
+      - [x] 8.1.2.1 Subtask - Define closed action records for local message, timer start/cancel, effect request/cancel, resource transfer/release, and typed command intent with stable IDs and schema versions.
+      - [x] 8.1.2.2 Subtask - Define effect/command accepted, denied, completed, failed, timed-out, canceled, stale, and disconnected results plus resource acquired/transferred/released/lost states.
+      - [x] 8.1.2.3 Subtask - Define ordering relative to semantic and renderer commit, idempotency/replay policy, root/component/generation ownership, payload bounds, redaction, and maximum 128 pending effects/512 leases.
 
   - [ ] 8.2 Section - Implement typed action validation and effect scheduling.
 

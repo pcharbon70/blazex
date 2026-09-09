@@ -248,3 +248,4 @@ proof of another host.
 
 - [Scheduling contract](scheduling-contract.md) — Phase 7 bounded ingress, ordering, typed messages and owned timers.
 - [Scheduling evidence](scheduling-evidence.md) — Phase 7 typed callbacks, owned timers, backlog stress and source-frozen gate method.
+- [Action contract](action-contract.md) — Phase 8 typed actions, provider results, resource leases and untrusted command intent.
