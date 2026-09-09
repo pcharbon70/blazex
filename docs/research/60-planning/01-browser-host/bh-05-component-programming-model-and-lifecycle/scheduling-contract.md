@@ -52,7 +52,10 @@ cannot starve behind newer work. Each root schedules independently.
 
 The hard total budget is **256**, counting queued work, one active application
 transition and candidate-reserved follow-up messages. Event work may use that
-budget; updates, messages and timer ticks additionally have per-class bounds.
+budget; updates, messages and timer ticks have per-class bounds of 64, 128 and
+32 respectively. Envelopes are at most 16,384 encoded bytes; static policy is at
+most 65,536 encoded bytes. Bounds refer to local admission sizing, not a browser
+wire encoding or a cross-VM byte-for-byte claim.
 There are at most 32 active owned timers. Every admitted envelope and policy
 schema is closed and size-bounded. Overload rejects explicitly before callbacks.
 Metrics expose current/max depths, per-class depths, coalesced/rejected counts,

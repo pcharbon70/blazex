@@ -1,12 +1,15 @@
 defmodule BlazeX.Component.RootProcess do
   @moduledoc false
   use GenServer
-  alias BlazeX.Component.RootPort
+  alias BlazeX.Component.{RootPort, RootSchedule}
 
   def start_link(input), do: GenServer.start_link(__MODULE__, input)
 
   @impl true
-  def init({guardian, spec, ports}) do
+  def init({guardian, spec, ports}), do: init({guardian, spec, ports, nil})
+
+  def init({guardian, spec, ports, policy}) do
+    {:ok, schedule} = RootSchedule.new(policy)
     send(self(), :boot)
 
     {:ok,
@@ -18,7 +21,9 @@ defmodule BlazeX.Component.RootProcess do
        pending: nil,
        status: :starting,
        attempt: 0,
-       error: nil
+       error: nil,
+       schedule: schedule,
+       active_correlation: nil
      }}
   end
 
@@ -26,19 +31,31 @@ defmodule BlazeX.Component.RootProcess do
   def handle_info(:boot, state) do
     notify(state, :registered)
     {_reply, next} = begin(state, state.spec, :mount)
-    info_result(next)
+    info_result(settle(next))
   end
 
   def handle_info({:deadline, correlation}, %{pending: %{correlation: correlation}} = state) do
     {_reply, next} = abandon(state, :timeout)
-    info_result(next)
+    info_result(settle(next))
   end
 
-  def handle_info(_, state), do: {:noreply, state}
+  def handle_info(:drain, %{schedule: schedule, status: :ready, pending: nil} = state)
+      when schedule != nil,
+      do: info_result(run_next(state))
+
+  def handle_info(:drain, state), do: {:noreply, state}
+  def handle_info(_, %{schedule: nil} = state), do: {:noreply, state}
+
+  def handle_info(_, state) do
+    next = %{state | schedule: %{state.schedule | rejected: state.schedule.rejected + 1}}
+    notify(next, :unknown_mailbox)
+    {:noreply, next}
+  end
 
   @impl true
   def handle_call(operation, _from, state) do
     {reply, next} = dispatch(operation, state)
+    next = settle(next)
 
     if next.status in [:disposed, :failed],
       do: {:stop, :normal, {reply, snapshot(next)}, next},
@@ -59,11 +76,36 @@ defmodule BlazeX.Component.RootProcess do
   defp dispatch(:snapshot, state), do: {{:ok, snapshot(state)}, state}
   defp dispatch({:ack, acknowledgement}, state), do: acknowledge(state, acknowledgement)
 
+  defp dispatch({:enqueue, envelope}, %{schedule: schedule, status: status} = state)
+       when schedule != nil and status in [:ready, :awaiting_commit] and state.accepted != nil do
+    case RootSchedule.admit(schedule, envelope, state.accepted, state.spec) do
+      {:ok, item, superseded, next_schedule} ->
+        if RootPort.call(state.ports.evaluator, :admit, [item, state.accepted]) == :ok do
+          next = %{state | schedule: next_schedule}
+          if superseded, do: outcome(next, superseded, :coalesced, nil)
+          notify(next, :admitted)
+          send(self(), :drain)
+          {{:ok, %{receipt: item.receipt, sequence: item.sequence}}, next}
+        else
+          {{:error, :invalid_ingress},
+           %{state | schedule: %{schedule | rejected: schedule.rejected + 1}}}
+        end
+
+      {:error, code, next_schedule} ->
+        {{:error, code}, %{state | schedule: next_schedule}}
+    end
+  end
+
+  defp dispatch({:enqueue, _}, state), do: {{:error, :invalid_ingress}, state}
+
   defp dispatch({:stop, reason}, state) when reason in [:shutdown, :removal],
     do: stopping(state, reason)
 
   defp dispatch(_operation, %{status: status} = state) when status != :ready,
     do: {{:error, :busy}, state}
+
+  defp dispatch({:update, _, _, _}, %{schedule: schedule} = state) when schedule != nil,
+    do: {{:error, :scheduled_ingress_required}, state}
 
   defp dispatch({:update, revision, props, slots}, state) do
     if revision == state.accepted.correlation.revision,
@@ -87,7 +129,7 @@ defmodule BlazeX.Component.RootProcess do
     end
   end
 
-  defp begin(state, spec, operation) do
+  defp begin(state, spec, operation, work \\ nil) do
     old = if state.accepted, do: state.accepted.correlation, else: %{generation: 1, revision: 0}
     generation = old.generation + if(operation == :replace, do: 1, else: 0)
     revision = if operation == :replace, do: 1, else: old.revision + 1
@@ -97,9 +139,17 @@ defmodule BlazeX.Component.RootProcess do
         state = %{state | status: phase(operation), attempt: correlation.sequence, error: nil}
         notify(state, :evaluating)
         request = %{spec: spec, operation: operation, correlation: correlation}
+        request = if work, do: Map.put(request, :work, work), else: request
         state = %{state | status: :evaluating}
+        state = if work, do: %{state | active_correlation: correlation}, else: state
+        callback = if work, do: :prepare_scheduled, else: :prepare
 
-        case RootPort.call(state.ports.evaluator, :prepare, [request, state.accepted]) do
+        case RootPort.call(state.ports.evaluator, callback, [request, state.accepted]) do
+          {:ok, candidate, []} when work != nil ->
+            if RootPort.candidate?(candidate, correlation),
+              do: submit(state, spec, correlation, candidate, nil),
+              else: rejected(state, :semantic_rejected)
+
           {:ok, candidate} ->
             if RootPort.candidate?(candidate, correlation),
               do: submit(state, spec, correlation, candidate, nil),
@@ -192,6 +242,7 @@ defmodule BlazeX.Component.RootProcess do
   defp stopping(%{status: :stopping} = state, _), do: {{:ok, state.pending.correlation}, state}
 
   defp stopping(state, reason) do
+    state = close_schedule(state, reason)
     cancel_timer(state)
 
     cancelled =
@@ -260,7 +311,7 @@ defmodule BlazeX.Component.RootProcess do
   defp phase(:replace), do: :replacing
 
   defp snapshot(state) do
-    %{
+    value = %{
       contract: RootPort.version(),
       handle: RootPort.handle(state.spec),
       status: state.status,
@@ -269,6 +320,94 @@ defmodule BlazeX.Component.RootProcess do
       attempt: state.attempt,
       error: state.error
     }
+
+    if state.schedule,
+      do: Map.put(value, :scheduling, RootSchedule.metrics(state.schedule)),
+      else: value
+  end
+
+  defp run_next(state) do
+    case RootSchedule.select(state.schedule) do
+      {:ok, work, schedule} ->
+        next = %{state | schedule: schedule}
+
+        if RootSchedule.valid_dispatch?(work, state.accepted) and
+             RootPort.call(state.ports.evaluator, :admit, [work, state.accepted]) == :ok do
+          spec =
+            if work.kind == :update, do: Map.merge(state.spec, work.payload), else: state.spec
+
+          {_reply, next} = begin(next, spec, :update, work)
+          settle(next)
+        else
+          outcome(next, work, :rejected, :stale_target)
+          send(self(), :drain)
+          %{next | schedule: RootSchedule.finish(schedule)}
+        end
+
+      {:empty, _} ->
+        state
+    end
+  end
+
+  defp settle(%{schedule: nil} = state), do: state
+
+  defp settle(state) do
+    state =
+      if state.pending == nil and state.schedule.active != nil do
+        committed =
+          state.accepted != nil and state.accepted.correlation == state.active_correlation
+
+        outcome(
+          state,
+          state.schedule.active,
+          if(committed, do: :committed, else: :rejected),
+          state.error
+        )
+
+        %{state | schedule: RootSchedule.finish(state.schedule), active_correlation: nil}
+      else
+        state
+      end
+
+    cond do
+      state.status in [:failed, :disposed] ->
+        close_schedule(state, state.status)
+
+      state.status == :ready and state.pending == nil and state.schedule.queue != [] ->
+        send(self(), :drain)
+        state
+
+      true ->
+        state
+    end
+  end
+
+  defp close_schedule(%{schedule: nil} = state, _), do: state
+
+  defp close_schedule(state, reason) do
+    work =
+      state.schedule.queue ++ if(state.schedule.active, do: [state.schedule.active], else: [])
+
+    Enum.each(work, &outcome(state, &1, :canceled, reason))
+
+    %{
+      state
+      | schedule: %{RootSchedule.finish(state.schedule) | queue: []},
+        active_correlation: nil
+    }
+  end
+
+  defp outcome(state, item, result, reason) do
+    record =
+      Map.merge(snapshot(state), %{
+        event: :work_outcome,
+        work: Map.take(item, [:receipt, :class, :producer, :sequence]),
+        result: result,
+        reason: reason,
+        correlation: state.active_correlation
+      })
+
+    RootPort.call(state.ports.host, :notify, [record])
   end
 
   defp notify(state, event) do

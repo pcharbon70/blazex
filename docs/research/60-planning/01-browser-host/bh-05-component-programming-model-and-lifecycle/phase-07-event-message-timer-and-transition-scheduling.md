@@ -47,29 +47,29 @@ Back to milestone: [README](README.md)
       - [x] 7.1.2.2 Subtask - Define deterministic priority/fairness, one in-flight transition, per-class and total bounds, event backlog maximum 256, admission, coalescing, rejection, and diagnostics.
       - [x] 7.1.2.3 Subtask - Define generation/revision/owner/source validation, stale/duplicate/replay rejection, timer cancellation, shutdown drain/drop policy, and sibling-root independence.
 
-  - [ ] 7.2 Section - Implement root ingress and bounded scheduling.
+  - [x] 7.2 Section - Implement root ingress and bounded scheduling.
 
     Route all supported work through explicit public APIs and an internal
     scheduler rather than allowing unbounded arbitrary messages to become
     component callbacks.
 
-    - [ ] 7.2.1 Task - Implement validated ingress and queues.
+    - [x] 7.2.1 Task - Implement validated ingress and queues.
 
       Normalize and classify work before it can enter the component transition
       pipeline.
 
-      - [ ] 7.2.1.1 Subtask - Implement event/update/message/timer/control ingress with exact root, generation, sequence, schema, payload, sender capability, and size validation.
-      - [ ] 7.2.1.2 Subtask - Implement bounded immutable queues, queue metrics, accepted coalescing for explicitly supersedable events/updates, and fail-closed overload rejection.
-      - [ ] 7.2.1.3 Subtask - Reject direct unknown mailbox values, stale/duplicate/replayed work, invalid owner/source, cross-root targets, oversized payloads, and post-disposal ingress without callback invocation.
+      - [x] 7.2.1.1 Subtask - Implement event/update/message/timer/control ingress with exact root, generation, sequence, schema, payload, sender capability, and size validation.
+      - [x] 7.2.1.2 Subtask - Implement bounded immutable queues, queue metrics, accepted coalescing for explicitly supersedable events/updates, and fail-closed overload rejection.
+      - [x] 7.2.1.3 Subtask - Reject direct unknown mailbox values, stale/duplicate/replayed work, invalid owner/source, cross-root targets, oversized payloads, and post-disposal ingress without callback invocation.
 
-    - [ ] 7.2.2 Task - Implement scheduler selection and transition correlation.
+    - [x] 7.2.2 Task - Implement scheduler selection and transition correlation.
 
       Choose the next legal work item deterministically and hold later work
       while a semantic/render commit is unresolved.
 
-      - [ ] 7.2.2.1 Subtask - Implement priority and fairness rules with stable ordering by accepted sequence and no starvation of lifecycle/cleanup work.
-      - [ ] 7.2.2.2 Subtask - Correlate each work item with candidate state/output, renderer transaction, commit/reject, final state, diagnostics, and acknowledgement where applicable.
-      - [ ] 7.2.2.3 Subtask - Resume scheduling only after commit/rejection reaches a terminal transition outcome and release candidate-only work on failure.
+      - [x] 7.2.2.1 Subtask - Implement priority and fairness rules with stable ordering by accepted sequence and no starvation of lifecycle/cleanup work.
+      - [x] 7.2.2.2 Subtask - Correlate each work item with candidate state/output, renderer transaction, commit/reject, final state, diagnostics, and acknowledgement where applicable.
+      - [x] 7.2.2.3 Subtask - Resume scheduling only after commit/rejection reaches a terminal transition outcome and release candidate-only work on failure.
 
   - [ ] 7.3 Section - Implement local events, messages, and owned timers.
 

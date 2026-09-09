@@ -52,6 +52,14 @@ Schema normalization does not retrofit the BH-02 evaluator: Phase 4 owns
 evaluation admission. Process execution and runtime parity remain deferred.
 # Phase 6 candidate root ports
 
+## Phase 7 opt-in scheduling
+
+`BlazeX.Component.ScheduledView` opts a root into typed, capability-bound ingress.
+`RootSchedule` owns immutable FIFO admission, explicit tail coalescing and the
+256-work ceiling (including active and candidate-reserved work). `SchedulingPort`
+keeps semantic binding admission/evaluation outward. Default LocalView behavior
+remains unchanged; scheduled roots reject unsequenced legacy update calls.
+
 `BlazeX.Component.RootPort` validates schema-normalized root start records,
 identity-only handles, complete renderer correlations and integrity-bound
 candidate summaries. Its Evaluator, Renderer and Host behaviours are outward

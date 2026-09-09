@@ -1,15 +1,20 @@
 defmodule BlazeX.Component.RootGuardian do
   @moduledoc false
   use GenServer
-  alias BlazeX.Component.{RootPort, RootProcess}
+  alias BlazeX.Component.{RootPort, RootProcess, RootSchedule, SchedulingPort}
 
   def start_link(input), do: GenServer.start_link(__MODULE__, input)
 
   @impl true
-  def init({spec, ports}) do
-    with {:ok, spec} <- RootPort.normalize(spec), true <- RootPort.ports?(ports) do
+  def init({spec, ports}), do: init({spec, ports, nil})
+
+  def init({spec, ports, policy}) do
+    with {:ok, spec} <- RootPort.normalize(spec),
+         true <- RootPort.ports?(ports),
+         {:ok, _} <- RootSchedule.new(policy),
+         true <- policy == nil or SchedulingPort.supported?(ports.evaluator) do
       Process.flag(:trap_exit, true)
-      {:ok, worker} = RootProcess.start_link({self(), spec, ports})
+      {:ok, worker} = RootProcess.start_link({self(), spec, ports, policy})
       {:ok, %{worker: worker, ports: ports, handle: RootPort.handle(spec), snapshot: nil}}
     else
       _ -> {:stop, :invalid_start}
