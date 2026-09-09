@@ -204,6 +204,8 @@ Phoenix, browser, native-host, or release compatibility.
 
 ### Documents
 
+- [Nested state and reconciliation contract](nested-contract.md)
+
 - [Pure composition contract](composition-contract.md)
 - [Phase 4 pure composition implementation evidence](composition-evidence.md)
 - [Prop and slot schema contract](schema-contract.md)

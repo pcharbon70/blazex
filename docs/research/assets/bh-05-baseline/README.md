@@ -21,6 +21,8 @@ Versioned authority, ownership, empty evidence, validation and completion record
 
 ### Files
 
+- [Phase 5 nested state authority](nested-authorization-v0.1.0.json)
+
 - [Phase 4 composition authority](composition-authorization-v0.1.0.json)
 - [Phase 4 source-frozen gates](composition-gates-v0.1.0.json)
 - [Phase 4 pure composition completion](composition-completion-v0.1.0.json)
