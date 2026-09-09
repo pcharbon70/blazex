@@ -48,28 +48,28 @@ Back to milestone: [README](README.md)
       - [x] 10.1.2.2 Subtask - Define handled rejection, transition rollback, root failure, accessible fallback, terminal stop, user/host retry, automatic retry eligibility, and whole-runtime escalation.
       - [x] 10.1.2.3 Subtask - Limit automatic root/component-boundary restarts to three within five seconds, fingerprint repeated failure, prohibit render-loop retry and non-idempotent effect/command replay, and require terminal fallback afterward.
 
-  - [ ] 10.2 Section - Implement root failure containment and accessible fallback.
+  - [x] 10.2 Section - Implement root failure containment and accessible fallback.
 
     Convert failures into stable root-scoped state and semantic fallback output
     while keeping sibling processes and previously unrelated roots operational.
 
-    - [ ] 10.2.1 Task - Implement failure coordination and diagnostics.
+    - [x] 10.2.1 Task - Implement failure coordination and diagnostics.
 
       Normalize failure at one coordinator and prevent evaluator, scheduler,
       renderer, provider, and supervisor layers from racing to recover.
 
-      - [ ] 10.2.1.1 Subtask - Correlate failure code/stage with root/component identity, generation/revision/transition, crash fingerprint, retry count, cleanup state, and redacted diagnostic context.
-      - [ ] 10.2.1.2 Subtask - Elect one recovery owner, reject new ordinary work, invalidate candidate transitions, cancel queued work, and notify runtime/host supervision exactly once.
-      - [ ] 10.2.1.3 Subtask - Preserve sibling roots and prohibit raw exceptions, props/state/messages, server data, secrets, module internals, or host handles in public fallback/diagnostic data.
+      - [x] 10.2.1.1 Subtask - Correlate failure code/stage with root/component identity, generation/revision/transition, crash fingerprint, retry count, cleanup state, and redacted diagnostic context.
+      - [x] 10.2.1.2 Subtask - Elect one recovery owner, reject new ordinary work, invalidate candidate transitions, cancel queued work, and notify runtime/host supervision exactly once.
+      - [x] 10.2.1.3 Subtask - Preserve sibling roots and prohibit raw exceptions, props/state/messages, server data, secrets, module internals, or host handles in public fallback/diagnostic data.
 
-    - [ ] 10.2.2 Task - Implement accessible fallback and retry entry.
+    - [x] 10.2.2 Task - Implement accessible fallback and retry entry.
 
       Materialize a minimal semantic fallback through the ordinary renderer
       path when available and retain a host-owned static fallback otherwise.
 
-      - [ ] 10.2.2.1 Subtask - Define fallback semantic role/name/status, safe diagnostic code, retry/reload action visibility, focus target/restoration, and no dependency on failing application callbacks.
-      - [ ] 10.2.2.2 Subtask - Commit fallback under a dedicated failure transition and handle renderer-unavailable failure through the BH-03/BH-04 host fallback without partial ownership.
-      - [ ] 10.2.2.3 Subtask - Admit retry only from declared user event, host policy, or changed build/input; reject automatic hot loops and stale retry requests.
+      - [x] 10.2.2.1 Subtask - Define fallback semantic role/name/status, safe diagnostic code, retry/reload action visibility, focus target/restoration, and no dependency on failing application callbacks.
+      - [x] 10.2.2.2 Subtask - Commit fallback under a dedicated failure transition and handle renderer-unavailable failure through the BH-03/BH-04 host fallback without partial ownership.
+      - [x] 10.2.2.3 Subtask - Admit retry only from declared user event, host policy, or changed build/input; reject automatic hot loops and stale retry requests.
 
   - [ ] 10.3 Section - Implement generation replacement, retry limits, and disposal.
 

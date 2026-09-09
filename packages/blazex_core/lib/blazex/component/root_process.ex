@@ -14,6 +14,16 @@ defmodule BlazeX.Component.RootProcess do
   def start_link(input), do: GenServer.start_link(__MODULE__, input)
 
   @impl true
+  def init({:recovery_crash, state}) do
+    send(self(), :recover_crash)
+    {:ok, state}
+  end
+
+  def init({guardian, spec, ports, policy, actions, recovery}) do
+    {:ok, state} = init({guardian, spec, ports, policy, actions})
+    {:ok, %{state | recovery: recovery, attempt: recovery.sequence}}
+  end
+
   def init({guardian, spec, ports}), do: init({guardian, spec, ports, nil})
 
   def init({guardian, spec, ports, policy}), do: init({guardian, spec, ports, policy, nil})
@@ -39,11 +49,17 @@ defmodule BlazeX.Component.RootProcess do
        candidate_intents: [],
        actions: actions,
        action_plan: nil,
-       scope_intents: []
+       scope_intents: [],
+       recovery: nil
      }}
   end
 
   @impl true
+  def handle_info(:recover_crash, state) do
+    {_, next} = BlazeX.Component.RecoveryRuntime.fail(state, :crashed)
+    info_result(next)
+  end
+
   def handle_info(:boot, state) do
     notify(state, :registered)
     {_reply, next} = begin(state, state.spec, :mount)
@@ -242,7 +258,14 @@ defmodule BlazeX.Component.RootProcess do
   end
 
   defp begin(state, spec, operation, work \\ nil) do
-    old = if state.accepted, do: state.accepted.correlation, else: %{generation: 1, revision: 0}
+    old =
+      if state.accepted,
+        do: state.accepted.correlation,
+        else: %{
+          generation: if(state.recovery, do: state.recovery.generation, else: 1),
+          revision: 0
+        }
+
     generation = old.generation + if(operation == :replace, do: 1, else: 0)
     revision = if operation == :replace, do: 1, else: old.revision + 1
 
@@ -342,6 +365,10 @@ defmodule BlazeX.Component.RootProcess do
     end
   end
 
+  defp committed(%{recovery: recovery, pending: %{correlation: %{operation: :failure}}} = state)
+       when recovery != nil,
+       do: BlazeX.Component.RecoveryRuntime.fallback_committed(state)
+
   defp committed(%{pending: %{reason: reason}} = state) when reason != nil do
     result = cleanup(state, state.accepted, reason)
 
@@ -431,6 +458,9 @@ defmodule BlazeX.Component.RootProcess do
       else: failed(state, :rollback_failed)
   end
 
+  defp rejected(%{recovery: recovery} = state, code) when recovery != nil,
+    do: BlazeX.Component.RecoveryRuntime.fail(state, code)
+
   defp rejected(state, code) do
     if state.accepted == nil or state.status == :stopping do
       failed(state, code)
@@ -440,6 +470,9 @@ defmodule BlazeX.Component.RootProcess do
       {{:error, RootPort.failure(code)}, next}
     end
   end
+
+  defp failed(%{recovery: recovery} = state, code) when recovery != nil,
+    do: BlazeX.Component.RecoveryRuntime.fail(state, code)
 
   defp failed(state, code) do
     next = %{state | pending: nil, status: :failed, error: RootPort.failure(code)}
@@ -470,6 +503,16 @@ defmodule BlazeX.Component.RootProcess do
       attempt: state.attempt,
       error: state.error
     }
+
+    value =
+      if state.recovery,
+        do:
+          Map.put(
+            value,
+            :recovery,
+            Map.take(state.recovery, [:generation, :retry_count, :failure, :cleanup])
+          ),
+        else: value
 
     value =
       if state.actions,
@@ -741,9 +784,14 @@ defmodule BlazeX.Component.RootProcess do
     :ok
   end
 
-  defp checkpoint(%{schedule: nil}), do: :ok
-
   defp checkpoint(state) do
+    if state.recovery, do: send(state.guardian, {:recovery_checkpoint, self(), state})
+    checkpoint_work(state)
+  end
+
+  defp checkpoint_work(%{schedule: nil}), do: :ok
+
+  defp checkpoint_work(state) do
     if state.actions != nil, do: send(state.guardian, {:root_actions, self(), state.actions})
 
     work =
@@ -799,4 +847,10 @@ defmodule BlazeX.Component.RootProcess do
 
     %{state | actions: actions, schedule: schedule}
   end
+
+  def recovery_submit(state, correlation, candidate),
+    do: submit(state, state.spec, correlation, candidate, nil)
+
+  def recovery_close(state, reason), do: close_schedule(state, reason)
+  def recovery_notify(state, event), do: notify(state, event)
 end
