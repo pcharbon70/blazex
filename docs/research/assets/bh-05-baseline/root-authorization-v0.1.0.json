@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 6,
+  "base": "f2fdc745118f0ad84e5b3ab53ea9e5221310f957",
+  "authorization": "Owner requested next BH-05 phase; Phase 6 only.",
+  "branch": "codex/bh05-phase6-root-lifecycle",
+  "sections": [
+    "6.1",
+    "6.2",
+    "6.3",
+    "6.4"
+  ],
+  "delivery": [
+    "verified section commits",
+    "single PR",
+    "merge",
+    "checkout main",
+    "sync origin",
+    "delete feature branch"
+  ],
+  "contract": "0.1.0-bh05-root-lifecycle",
+  "schema_contract": "0.2.0-bh05-schema-candidate",
+  "input_hashes": {
+    "docs/research/assets/bh-05-baseline/nested-completion-v0.1.0.json": "460311d92bbea7d7d89f569cd961f0d9f43e6b245e4022e8d916bdac517b3883",
+    "docs/research/assets/bh-05-baseline/nested-gates-v0.1.0.json": "f40ab82eeba4434b8a63e1fa6859ee994766aedd622a83971ba6bae927345f68",
+    "docs/research/60-planning/01-browser-host/bh-05-component-programming-model-and-lifecycle/nested-contract.md": "079ff2f465a597e221709e0f8f3fe5a428380b61b75aef16a2a26f54ec6724ac",
+    "packages/blazex_ui_tree/lib/blazex/ui_tree/composition_plan.ex": "f5295d8ffd2633512b14e6036cea4e92490725ccc52a1ad5afd464da577f94c9",
+    "packages/blazex_ui_tree/lib/blazex/ui_tree/nested_candidates.ex": "e9b2d5412d70cf5b5774dcd594f474743868ef06584613433565a43f0fe3a86e",
+    "packages/blazex_core/lib/blazex/component/root.ex": "41e918ddf9a01190132cae34c10268b3bece0bf46218b48a93928ac96fd6e429",
+    "packages/blazex_core/lib/blazex/component/contract.ex": "8e8037755b83e0180823b1b10379db1e7f543b5da3861245e8c168eb64575853",
+    "packages/blazex_core/lib/blazex/component/input.ex": "ffde05831a020e1727642f2711fa732535dddf65a83d661b3af64cdc200fe036",
+    "packages/blazex_core/lib/blazex/component/result.ex": "3261eaaf15b368cadfeaefba2dcb1aadd85616abfe6000bfa819e85c561a73ef",
+    "packages/blazex_core/lib/blazex/component/schema.ex": "0c38aeaf182a5d813a9f1d416bcc10e27fc334de2752d336e2330b47fd0ce5d7",
+    "packages/blazex_core/lib/blazex/component/invocation.ex": "627459e7501fcb1dfa6c359b22b022e23481b34d6c8ba0a57481e713fc8f018f",
+    "packages/blazex_core/lib/blazex/component/nested_table.ex": "30448640f0c112bfb64245f5fa2a2d1455bd7eeee79490ba6cd7cc03b65e6daf",
+    "packages/blazex_ui_tree/lib/blazex/ui_tree/semantic_acceptance.ex": "afe0d81fadadd3c2dc059cd7ae505a3877d518560d7c12c8aeff201f16276219",
+    "packages/blazex_renderer/lib/blazex/renderer/session.ex": "5d4b075ed9b8675924d422b72300492d08307be3544b487537fc1c1c9b86750d",
+    "js/blazex_runtime/src/root-lifecycle.js": "9ba5c518f802b188def31508916f03888b43f581a6b36a849222ca96e2d4a7b6",
+    "js/blazex_runtime/src/render-transaction-v2.js": "628389038ed687288bb1777ea4602f4c8a009c4ff94b45c6efeb025a53e0c23d",
+    "js/blazex_runtime/src/atomic-dom.js": "c0312c1843d481dfb260d590821681b4a602eddb194acacbf7326d6ecd12faec",
+    "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-04-completion-v0.1.0.json": "053f251b5436f49a775c8a93c6106f31e4a16915b5b8a3689256780845575d54",
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-completion-v0.1.0.json": "9b8f0e20a734532d2eb6a5eb4899b5dcd4bbf17f193287fc1ddfa2c76abe7f5a"
+  },
+  "reviewed_successor_changes": {
+    "packages/blazex_ui_tree/lib/blazex/ui_tree/composition_plan.ex": "Explicit root-role mode; inherited default behavior unchanged.",
+    "packages/blazex_ui_tree/lib/blazex/ui_tree/nested_candidates.ex": "Explicit root-role mode; inherited default behavior unchanged."
+  },
+  "limits": {
+    "depth": 12,
+    "nodes": 256,
+    "invocations": 128,
+    "counter": 9007199254740991,
+    "in_flight": 1
+  },
+  "excluded": [
+    "event backlog",
+    "user handle_info",
+    "application timers",
+    "effects/commands",
+    "context registry resolution",
+    "automatic retry",
+    "LiveView",
+    "LocalLiveView",
+    "support claims"
+  ],
+  "support_state": "unsupported"
+}

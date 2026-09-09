@@ -53,3 +53,9 @@ The [nested contract](../../docs/research/60-planning/01-browser-host/bh-05-comp
 and [public fixtures](../../integration/bh-05/nested-fixtures.exs) define the bounded
 API and deterministic examples. No root processes, effects or renderer commit
 are introduced. Default Phase 4 pure-only composition remains unchanged.
+# Phase 6 root evaluator
+
+`BlazeX.UITree.RootEvaluator` implements the Core evaluator port for a trusted
+static graph with a root-role entry and pure/stateful descendants. It returns
+semantically accepted candidates without disposing prior state; cleanup is a
+separate post-renderer-commit operation. Phase 4/5 defaults remain unchanged.

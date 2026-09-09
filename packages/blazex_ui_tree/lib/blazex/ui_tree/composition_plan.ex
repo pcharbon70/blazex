@@ -5,7 +5,7 @@ defmodule BlazeX.UITree.CompositionPlan do
   @keys [:module, :public_id, :site, :key, :props, :slots, :children]
 
   def build(root, generation, reference, graph, boundary, capabilities, roles \\ [:pure]) do
-    require!(roles in [[:pure], [:pure, :stateful]], :roles, [])
+    require!(roles in [[:pure], [:pure, :stateful], [:root, :pure, :stateful]], :roles, [])
     require!(Schema.boundary?(boundary) and boundary.root == root, :boundary, [])
     require!(BlazeX.Component.Input.names?(capabilities), :capabilities, [])
     require!(is_integer(generation) and generation in 1..9_007_199_254_740_991, :generation, [])
@@ -81,7 +81,7 @@ defmodule BlazeX.UITree.CompositionPlan do
 
     require!(
       is_map(metadata) and metadata.role in state.roles and metadata.version == Schema.version() and
-        valid_callbacks?(metadata) and (metadata.role == :pure or identity.path != []),
+        valid_callbacks?(metadata) and role_location?(metadata.role, identity.path, state.roles),
       :pure_contract,
       path
     )
@@ -235,7 +235,18 @@ defmodule BlazeX.UITree.CompositionPlan do
       Enum.all?(callbacks, &(&1 in (required ++ optional)))
   end
 
+  defp valid_callbacks?(%{role: :root, callbacks: callbacks}) do
+    %{required: required, optional: optional} = BlazeX.Component.Contract.callbacks(:root)
+
+    Enum.all?(required, &({&1, 1} in callbacks)) and
+      Enum.all?(callbacks, fn {name, arity} -> arity == 1 and name in (required ++ optional) end)
+  end
+
   defp valid_callbacks?(_), do: false
+
+  defp role_location?(role, [], [:root, :pure, :stateful]), do: role == :root
+  defp role_location?(:root, _, _), do: false
+  defp role_location?(role, path, _), do: role == :pure or path != []
 
   defp child_identity(parent, spec, slot, key, path) do
     require!(Schema.name?(spec[:public_id]) and Schema.name?(spec[:site]), :call_identity, path)

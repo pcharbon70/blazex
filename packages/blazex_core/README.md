@@ -50,3 +50,15 @@ callables never cross host/persistence/command/renderer boundaries. Custom
 schemas are versioned declarative aliases, not executable validators.
 Schema normalization does not retrofit the BH-02 evaluator: Phase 4 owns
 evaluation admission. Process execution and runtime parity remain deferred.
+# Phase 6 candidate root ports
+
+`BlazeX.Component.RootPort` validates schema-normalized root start records,
+identity-only handles, complete renderer correlations and integrity-bound
+candidate summaries. Its Evaluator, Renderer and Host behaviours are outward
+implementation seams; private tokens/configuration never reach components.
+Root action execution and support claims remain deferred.
+
+`BlazeX.Component.LocalView` starts independently supervised roots through
+`LocalView.Supervisor`, admits one candidate at a time, and exposes identity-only
+handles for update, replacement, acknowledgement, stop and redacted inspection.
+Temporary guardians retain terminal metadata without replaying crashed work.

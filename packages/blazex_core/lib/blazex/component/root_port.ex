@@ -1,0 +1,184 @@
+defmodule BlazeX.Component.RootPort do
+  @moduledoc """
+  Versioned, renderer-neutral root lifecycle records. Private port configuration
+  and candidate tokens are runtime-owned and must never enter callback inputs.
+  Correlation is integrity checking inside a trusted runtime, not authentication.
+  """
+  alias BlazeX.Component.{Input, Invocation, NestedTable, Schema}
+
+  @keys [
+    :root,
+    :instance,
+    :owner,
+    :component,
+    :public_id,
+    :props,
+    :slots,
+    :capabilities,
+    :fallback,
+    :timeout_ms
+  ]
+  @correlation [
+    :root,
+    :instance,
+    :owner,
+    :generation,
+    :revision,
+    :sequence,
+    :operation,
+    :transaction
+  ]
+  @failures [
+    :invalid_start,
+    :invalid_request,
+    :busy,
+    :stale,
+    :semantic_rejected,
+    :renderer_rejected,
+    :rollback_failed,
+    :timeout,
+    :cleanup_failed,
+    :port_failed,
+    :crashed,
+    :terminal
+  ]
+
+  def version, do: "0.1.0-bh05-root-lifecycle"
+  def failures, do: @failures
+  def failure(code), do: if(code in @failures, do: code, else: :port_failed)
+  def handle(spec), do: Map.take(spec, [:root, :instance, :owner])
+
+  def handle?(value),
+    do: keys?(value, [:root, :instance, :owner]) and Enum.all?(Map.values(value), &Schema.name?/1)
+
+  def normalize(spec) do
+    with true <- keys?(spec, @keys),
+         true <- handle?(handle(spec)) and Schema.name?(spec.public_id),
+         true <- is_atom(spec.component) and Code.ensure_loaded?(spec.component),
+         true <- function_exported?(spec.component, :__blazex_component__, 0),
+         metadata <- spec.component.__blazex_component__(),
+         true <- metadata.role == :root and metadata.version == Schema.version(),
+         true <- Input.names?(spec.capabilities),
+         true <- Enum.all?(metadata.declarations.capabilities, &(&1 in spec.capabilities)),
+         true <- fallback?(spec.fallback),
+         true <- is_integer(spec.timeout_ms) and spec.timeout_ms in 10..60_000,
+         {:ok, invocation} <-
+           Invocation.normalize(metadata.schema.declarations, spec.props, spec.slots, %{
+             kind: :host,
+             root: spec.root,
+             owner: spec.root
+           }),
+         true <- Input.portable?(%{props: invocation.props, slots: Map.new(invocation.slots)}) do
+      {:ok, %{spec | props: invocation.props, slots: Map.new(invocation.slots)}}
+    else
+      _ -> {:error, :invalid_start}
+    end
+  rescue
+    _ -> {:error, :invalid_start}
+  catch
+    _, _ -> {:error, :invalid_start}
+  end
+
+  def ports?(ports) do
+    keys?(ports, [:evaluator, :renderer, :host]) and
+      port?(ports.evaluator, prepare: 3, cleanup: 3) and
+      port?(ports.renderer, submit: 3, cancel: 2) and port?(ports.host, notify: 2)
+  end
+
+  def correlation(spec, generation, revision, sequence, operation) do
+    value =
+      Map.merge(handle(spec), %{
+        generation: generation,
+        revision: revision,
+        sequence: sequence,
+        operation: operation,
+        transaction: spec.instance <> ":" <> Integer.to_string(sequence)
+      })
+
+    if correlation?(value), do: {:ok, value}, else: {:error, :invalid_request}
+  end
+
+  def correlation?(value) do
+    keys?(value, @correlation) and handle?(handle(value)) and
+      Enum.all?(
+        [value.generation, value.revision, value.sequence],
+        &(NestedTable.counter?(&1) and &1 > 0)
+      ) and
+      value.operation in [:mount, :update, :replace, :dispose] and
+      value.transaction == value.instance <> ":" <> Integer.to_string(value.sequence)
+  end
+
+  def candidate(correlation, state, output_digest, token) do
+    if correlation?(correlation) and Input.portable?(state) and hash?(output_digest) do
+      {:ok,
+       %{
+         correlation: correlation,
+         state: state,
+         state_digest: NestedTable.digest(state),
+         output_digest: output_digest,
+         final_digest: NestedTable.digest({correlation, state, output_digest}),
+         token: token
+       }}
+    else
+      {:error, :semantic_rejected}
+    end
+  end
+
+  def candidate?(value, correlation) do
+    keys?(value, [:correlation, :state, :state_digest, :output_digest, :final_digest, :token]) and
+      value.correlation == correlation and
+      candidate(correlation, value.state, value.output_digest, value.token) == {:ok, value}
+  end
+
+  def acknowledgement?(value, expected) do
+    keys?(value, [:correlation, :result]) and value.correlation == expected and
+      correlation?(expected) and value.result in [:committed, :rejected, :rolled_back]
+  end
+
+  def summary(nil), do: nil
+
+  def summary(value),
+    do: Map.take(value, [:correlation, :state_digest, :output_digest, :final_digest])
+
+  def call({module, config}, callback, arguments) do
+    apply(module, callback, [config | arguments])
+  rescue
+    _ -> {:error, :port_failed}
+  catch
+    _, _ -> {:error, :port_failed}
+  end
+
+  defp keys?(value, keys),
+    do: is_map(value) and not is_struct(value) and Enum.sort(Map.keys(value)) == Enum.sort(keys)
+
+  defp fallback?(:none), do: true
+  defp fallback?({:static, id}), do: Schema.name?(id)
+  defp fallback?(_), do: false
+
+  defp hash?(value),
+    do: is_binary(value) and byte_size(value) == 64 and String.match?(value, ~r/\A[0-9a-f]+\z/)
+
+  defp port?({module, _config}, callbacks) when is_atom(module),
+    do:
+      Code.ensure_loaded?(module) and
+        Enum.all?(callbacks, fn {name, arity} -> function_exported?(module, name, arity) end)
+
+  defp port?(_, _), do: false
+end
+
+defmodule BlazeX.Component.RootPort.Evaluator do
+  @moduledoc "Trusted outward evaluator; requests contain spec, operation and correlation. Cleanup consumes an old private candidate after renderer disposal/replace."
+  @callback prepare(term(), map(), map() | nil) :: {:ok, map()} | {:error, atom()}
+  @callback cleanup(term(), map(), :replace | :shutdown | :removal) :: :ok | {:error, atom()}
+end
+
+defmodule BlazeX.Component.RootPort.Renderer do
+  @moduledoc "Trusted outward transaction port. :ok means submitted, never committed. Cancellation must confirm rollback before returning :ok."
+  @callback submit(term(), map(), map() | nil) :: :ok | {:error, atom()}
+  @callback cancel(term(), map()) :: :ok | {:error, atom()}
+end
+
+defmodule BlazeX.Component.RootPort.Host do
+  @moduledoc "Receives bounded identity/counter/digest lifecycle observations, never callback state or private adapter tokens."
+  @callback notify(term(), map()) :: :ok | {:error, atom()}
+end

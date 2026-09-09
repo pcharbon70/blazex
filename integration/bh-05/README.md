@@ -51,3 +51,6 @@ local event candidates, notification/disposal plans and complete semantic output
 reconcile atomically under one future root process/failure boundary. No process,
 external message, effect or renderer commit occurs. Current check:
 `python3 docs/research/70-tools/validate_bh05_nested.py --final`.
+
+- [Root lifecycle fixtures](root-fixtures.exs) — Public root and nested components with an independent semantic oracle.
+- [Root lifecycle index](root-index-v0.1.0.json) — Root API, source hashes, normalized trace/state digests and qualification limits.

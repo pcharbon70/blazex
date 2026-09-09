@@ -67,3 +67,5 @@ Versioned records:
 - `conformance-index-v0.8.0.json` — Phase 8 accepted internal experimental
   baseline with final reproduction counts, declared exceptions, and BH-03
   eligibility without authorization.
+
+- [BH-05 root lifecycle tests](test/bh05_root_test.exs) — Supervised final-state commit correlation, independent headless parity, rollback and cleanup failure.

@@ -265,3 +265,10 @@ shared root discovery for new programs. Preserve the distinction between
 historical evidence and current checks. Run the full tooling sweep, verify
 migration negative tests and archive links, and inspect patch hygiene before
 reporting a tooling change complete.
+
+- [`generate_bh05_roots.py`](generate_bh05_roots.py) — Phase 6 root lifecycle authority generator and check.
+
+- [`validate_bh05_roots.py`](validate_bh05_roots.py) — Phase 6 root boundary, public fixture inventory and frozen completion checks.
+- [`test_validate_bh05_roots.py`](test_validate_bh05_roots.py) — Isolated root authority and gate mutation tests.
+- [`check_bh05_root_subset.py`](check_bh05_root_subset.py) — Pinned Popcorn supervision patches and API subset analysis, not VM parity.
+- [`record_bh05_phase6.py`](record_bh05_phase6.py) — Source-frozen root lifecycle gates and guarded publication.
