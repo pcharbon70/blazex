@@ -1,0 +1,81 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 9,
+  "contract": "0.1.0-bh05-scopes",
+  "support_state": "unsupported",
+  "public": [
+    "BlazeX.Component.ScopedContext",
+    "BlazeX.Component.ScopedView",
+    "BlazeX.Component.ComponentRegistry",
+    "BlazeX.UITree.ScopedEvaluator"
+  ],
+  "coverage": [
+    "nearest-default-provider",
+    "fixed-tracked-context",
+    "commit-gated-canonical-invalidation",
+    "contextual-slots",
+    "root-generation-isolation",
+    "provider-removal",
+    "registry-pure-stateful-selection",
+    "same-id-retention",
+    "id-replacement",
+    "declared-fallback",
+    "redacted-rejection",
+    "independent-headless-oracle",
+    "bounded-subscriptions",
+    "disposal"
+  ],
+  "normalized_digests": {
+    "SCOPE_TRACE_SHA256": "f81d105271527cdefe53c1400a24ccd02dbea897f9b3db617a45e13f7c1aeefc",
+    "SCOPE_FINAL_STATE_SHA256": "efbe66ec3d3e5506c78a4f92da60f79db23e8d9922b8149b0ef16ef61a81e026",
+    "SCOPE_REGISTRY_SHA256": "e9aecaf638f74a9995fde721a25f6eb295926efe6d6de908dd436778498b3302",
+    "ACTION_FINAL_STATE_SHA256": "61fe1070e22766c9eb2e002d5c8593d77aa0ebaec012c4e23bae83f98d0808ee",
+    "ACTION_PENDING_SHA256": "14c87a8ba3714c21136dd57d6645d637ab410aa26ddf23d82efbe0f81fa1446b",
+    "ACTION_LEASE_SHA256": "94809597b6e80115851b6bd5951dbaaf2bcea6ab7c39aaaa3a5349f599d4cdba",
+    "ROOT_SCRIPT_SHA256": "4eacd556df14a281187e78ae51edb4a2312f4897aa0553aaacc2c150f85f9138",
+    "ROOT_TRACE_SHA256": "e062e88cee0a7866964aff1fa1695577bf70660cef031c139d262afd99c9c9e7",
+    "ROOT_FINAL_STATE_SHA256": "937d347b5a168a432c2a0a6eb45c1b2acaa5ae8440884617906445420aee400d",
+    "SCHEDULING_SAMPLE_SHA256": "384aec1f071fbfd8e24382f908b98ea87400dcd0ca3764ea78b692f888027764",
+    "SCHEDULING_TRACE_SHA256": "35cb4e2c103c987180e5a1af4949a169f194faf2efe93b4e565eb12d90b93b74",
+    "SCHEDULING_FINAL_STATE_SHA256": "3b2d037102c2f2cc0924d679ed166e850eab0370808e16a2c1817a351eae78f4"
+  },
+  "files": {
+    "integration/bh-05/scope-fixtures.exs": "71f3deb9d3f9394dc081d9ea1e2276709e4dd17a3050f8b24277d92e1bfe58b7",
+    "integration/conformance/test/bh05_scopes_test.exs": "18b6938f2fbf7ae42ac5f0df142248681235814fb6c547b954dc450bfea5dd96",
+    "packages/blazex_core/lib/blazex/component/component_registry.ex": "d139453ac4df988014249f6d110c3c0b3589fd6af5f0621b1e1cf09f10f41908",
+    "packages/blazex_core/lib/blazex/component/input.ex": "3b6514bba255681356a3a46064634c09b4e0bee0992eee938cf1c04509b2afbe",
+    "packages/blazex_core/lib/blazex/component/root_process.ex": "3a86ad4e6c0d2e5533544d13c0b168d274a5ce409fc376369c5471cf3f76b6f0",
+    "packages/blazex_core/lib/blazex/component/scoped_context.ex": "4d676c261f286e1d686acfd08207eaa0f639569e6e9ad93991dda183cb52faac",
+    "packages/blazex_core/lib/blazex/component/scoped_view.ex": "b14298d3905bfaf73431d924b170ed027c9230bf64f12f648fcb4800bfeb17b2",
+    "packages/blazex_core/test/blazex/component_registry_test.exs": "9a4682db2038dcef4e64e48a0cdf929322fb9ec88ab0dcb9cc98cdd23ef2e447",
+    "packages/blazex_core/test/blazex/scoped_context_test.exs": "37f5ef270b3cc11857301b969a6ff00ca849bf4b3e22946ab7904e88d32f21d1",
+    "packages/blazex_ui_tree/lib/blazex/ui_tree/nested_candidates.ex": "b305776725417ca023b559c7c3148fc9f14b199336bd04ff2e81ef3f44fc0ad1",
+    "packages/blazex_ui_tree/lib/blazex/ui_tree/registry_plan.ex": "3eb580d2d86bc3c547b9ca1a5cef01730393c68938549706b672d9d2713e36f5",
+    "packages/blazex_ui_tree/lib/blazex/ui_tree/root_evaluator.ex": "88536e58263456d7138eca4e532515d3491c32aab27ab8121e99397e12658a6a",
+    "packages/blazex_ui_tree/lib/blazex/ui_tree/scoped_evaluator.ex": "84b36e2e4b2ffd513103e21ffe293356b37d462eae10813d406cf32314bb23a1",
+    "packages/blazex_ui_tree/lib/blazex/ui_tree/scoped_plan.ex": "13f02a2a2caed69b6f5e1742b9fce9d4052f3afe682fb0bc350549d5879424b7",
+    "packages/blazex_ui_tree/test/blazex/registry_evaluator_test.exs": "8455e55695afcaafeff520012293df89dac1294b9301a6ca10c82bfa585936ba",
+    "packages/blazex_ui_tree/test/blazex/scoped_evaluator_test.exs": "8e2d96d75e39bcc417dd1dda46a7d361d8dcf57729e398ff2463443868b3b897"
+  },
+  "bounds": {
+    "total_work": 256,
+    "message_work": 128,
+    "definitions": 16,
+    "providers": 32,
+    "subscriptions": 128,
+    "components": 128,
+    "registry_entries": 128,
+    "composition_depth": 12
+  },
+  "process_startup": true,
+  "commit_correlated": true,
+  "runtime_parity": false,
+  "later_evidence": [],
+  "limitations": [
+    "trusted terminating callbacks and ports; not a raw VM mailbox bound or preemptive sandbox",
+    "public advisory context is not authentication or secret storage",
+    "ERTS scoped runtime only; Wasm parity and packaging deferred to Phase 11",
+    "BH-06 bundle/reachability generation and concrete product providers excluded",
+    "LiveView and LocalLiveView deferred"
+  ]
+}

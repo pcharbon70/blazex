@@ -93,3 +93,21 @@ which delegates to `Action.new/5` without expanding the frozen compiler allowlis
 Resource references contain only an opaque ID and acquisition correlation; provider
 objects remain private. Leases are limited to 512, requests to 128, and every command
 remains untrusted. Cleanup is bounded and must be idempotent across crash uncertainty.
+
+## Phase 9 scoped context and component registry
+
+`ScopedContext` validates explicit public provider/consumer grants, resolves the
+nearest same-root/generation provider or declared default, and retains immutable
+dependency snapshots. Fixed bindings reject change; tracked consumers invalidate
+in tree order only after provider commit. Limits are 16 definitions, 32 providers
+and 128 subscriptions. `ScopedView.change/5` submits generation/revision-bound
+provider changes; `ScopedView.select/6` submits bounded public-ID selection.
+Both use the existing scheduled root queue and reserve follow-up capacity.
+
+`ComponentRegistry.new/2` composes explicit compile/package/root entry lists.
+Only already-loaded declared modules qualify; public lookup checks stable ID,
+role, schema, allowed targets and registry generation. Exported metadata strips
+module names and retains declaration hashes for later BH-06 analysis. There is
+no dynamic atom creation, arbitrary module loading, global context, server auth,
+bundle generation or Wasm execution claim. See the
+[scope contract](../../docs/research/60-planning/01-browser-host/bh-05-component-programming-model-and-lifecycle/scope-contract.md).

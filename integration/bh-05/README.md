@@ -65,4 +65,11 @@ Earlier phase checks run at their accepted frozen snapshots.
 - [Action index](action-index-v0.1.0.json) — Phase 8 inventory, raw pending/lease samples, hashes and limits.
 
 Phase 8 successor check: `python3 docs/research/70-tools/validate_bh05_actions.py --final`.
+
+- [Scope fixtures](scope-fixtures.exs) — Public scoped root, stateful/pure registry targets, contextual slot and independent headless oracle.
+- [Scope index](scope-index-v0.1.0.json) — Phase 9 source inventory, bounds and twelve retained/new normalized digests.
+
+Phase 9 successor check: `python3 docs/research/70-tools/validate_bh05_scopes.py --final`.
+Earlier phase validators replay their frozen accepted revisions; they do not
+grant current-source evidence for authorized successor changes.
 Phase 7 and earlier validators remain frozen and run at accepted snapshots.

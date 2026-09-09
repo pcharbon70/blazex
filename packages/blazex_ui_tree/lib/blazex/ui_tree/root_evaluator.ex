@@ -17,7 +17,16 @@ defmodule BlazeX.UITree.RootEvaluator do
   @impl true
   def prepare_scheduled(config, request, prior) do
     with :ok <- admit(config, request.work, prior),
-         true <- request.work.kind in [:event, :message, :timer_tick, :update, :action_result] do
+         true <-
+           request.work.kind in [
+             :event,
+             :message,
+             :timer_tick,
+             :update,
+             :action_result,
+             :scope_change,
+             :scope_invalidation
+           ] do
       prepare_candidate(config, request, prior, true)
     else
       _ -> {:error, :semantic_rejected}
@@ -25,14 +34,28 @@ defmodule BlazeX.UITree.RootEvaluator do
   end
 
   @impl true
-  def admit(_config, work, accepted) do
+  def admit(config, work, accepted) do
     guarded(fn ->
       validate_candidate(accepted)
       CompositionPlan.require!(RootSchedule.valid_dispatch?(work, accepted), :stale, [])
       target = Enum.find(accepted.token.records, &(Map.from_struct(&1.identity) == work.target))
       callback = callback_name(work, target.role)
 
-      if work.kind not in [:update, :timer_cancel],
+      if work.kind in [:scope_change, :scope_invalidation] do
+        CompositionPlan.require!(Map.has_key?(config, :scope), :scope, [])
+
+        if work.kind == :scope_change do
+          :ok = BlazeX.UITree.ScopedPlan.validate_change!(config.scope, work.payload, accepted)
+        else
+          CompositionPlan.require!(
+            BlazeX.UITree.ScopedPlan.valid_notice?(accepted, work.payload),
+            :stale_scope,
+            []
+          )
+        end
+      end
+
+      if work.kind not in [:update, :timer_cancel, :scope_change, :scope_invalidation],
         do:
           CompositionPlan.require!(
             function_exported?(target.module, callback, 1),
@@ -116,10 +139,16 @@ defmodule BlazeX.UITree.RootEvaluator do
       {:ok, ^spec} = RootPort.normalize(spec)
       CompositionPlan.require!(RootPort.handle(spec) == RootPort.handle(correlation), :owner, [])
       validate_prior(prior, correlation, operation)
-      template = Map.fetch!(config.graph, config.reference)
+
+      {resolved_graph, registry} =
+        if Map.has_key?(config, :scope),
+          do: BlazeX.UITree.RegistryPlan.resolve(config, request, prior),
+          else: {config.graph, nil}
+
+      template = Map.fetch!(resolved_graph, config.reference)
 
       graph =
-        Map.put(config.graph, config.reference, %{
+        Map.put(resolved_graph, config.reference, %{
           template
           | module: spec.component,
             public_id: spec.public_id,
@@ -138,6 +167,11 @@ defmodule BlazeX.UITree.RootEvaluator do
           [:root, :pure, :stateful]
         )
         |> NestedCandidates.preflight()
+
+      {plan, scope} =
+        if Map.has_key?(config, :scope),
+          do: BlazeX.UITree.ScopedPlan.prepare(plan, config.scope, request, prior),
+          else: {plan, nil}
 
       old_index =
         if operation == :update, do: Map.new(prior.token.records, &{&1.identity, &1}), else: %{}
@@ -174,6 +208,8 @@ defmodule BlazeX.UITree.RootEvaluator do
         trace: trace ++ semantic_trace,
         disposals: disposal_plan(records)
       }
+
+      token = if scope, do: Map.put(token, :scope, Map.merge(scope, registry)), else: token
 
       {:ok, accepted} =
         RootPort.candidate(correlation, state(records), NestedTable.digest(output), token)
@@ -243,7 +279,8 @@ defmodule BlazeX.UITree.RootEvaluator do
     end)
   end
 
-  defp dispatch_event(%{kind: :update}), do: nil
+  defp dispatch_event(%{kind: kind}) when kind in [:update, :scope_change, :scope_invalidation],
+    do: nil
 
   defp dispatch_event(%{kind: :action_result} = work) do
     %{
