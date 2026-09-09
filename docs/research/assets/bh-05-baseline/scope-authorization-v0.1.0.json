@@ -1,0 +1,69 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 9,
+  "base": "8e26ed110e1de2ab3be8039f27e5efaf7dea4117",
+  "authorization": "Owner requested next BH-05 phase after accepted Phase 8 PR 59; Phase 9 only.",
+  "branch": "codex/bh05-phase9-scopes",
+  "sections": [
+    "9.1",
+    "9.2",
+    "9.3",
+    "9.4"
+  ],
+  "delivery": [
+    "verified section commits",
+    "single PR",
+    "merge",
+    "checkout main",
+    "sync origin",
+    "delete feature branch"
+  ],
+  "contract": "0.1.0-bh05-scopes",
+  "schema_contract": "0.2.0-bh05-schema-candidate",
+  "input_hashes": {
+    "docs/research/assets/bh-05-baseline/action-completion-v0.1.0.json": "e1a6fbac8348ff8e2493a57f3a09baff836df9ebc148a3a4570295d4e9735726",
+    "docs/research/assets/bh-05-baseline/action-gates-v0.1.0.json": "93dd75479e6938acc459285bfe730787704169cc3d2323c69b1c1dac1009c417",
+    "docs/research/60-planning/01-browser-host/bh-05-component-programming-model-and-lifecycle/action-contract.md": "fa51100322c9f73e15f5985a61735239c606a67282c5b66ccaf0474ae6d416de",
+    "docs/research/60-planning/01-browser-host/bh-05-component-programming-model-and-lifecycle/root-supervision-compatibility.md": "583c8220c41b3d5611ebd0f00167768c5fa083209cfebcd2cffdfaa221c2956f",
+    "packages/blazex_core/lib/blazex/component/input.ex": "ffde05831a020e1727642f2711fa732535dddf65a83d661b3af64cdc200fe036",
+    "packages/blazex_core/lib/blazex/component/root_process.ex": "4e56696a568dc7a856154517c67b2c77a306a8ca948b05a29238d69a2c8363c5",
+    "packages/blazex_ui_tree/lib/blazex/ui_tree/root_evaluator.ex": "7859d9346b327bd0e32876acf7cc1f5105b843995861a8349e78404f8c6c2469",
+    "packages/blazex_ui_tree/lib/blazex/ui_tree/nested_candidates.ex": "713a0393c858ffb5971a3c1b4f77ef1b42811eabf23a5a0b6b0c7c4b6770cdfd",
+    "packages/blazex_core/lib/blazex/component/root_port.ex": "949d120f2d9e2446e7faa50be45dc1b9b3f1baf4dbdfd36eb342f86e695b9241",
+    "packages/blazex_core/lib/blazex/component/contract.ex": "8e8037755b83e0180823b1b10379db1e7f543b5da3861245e8c168eb64575853",
+    "packages/blazex_core/lib/blazex/component/schema.ex": "0c38aeaf182a5d813a9f1d416bcc10e27fc334de2752d336e2330b47fd0ce5d7",
+    "packages/blazex_core/lib/blazex/component/invocation.ex": "627459e7501fcb1dfa6c359b22b022e23481b34d6c8ba0a57481e713fc8f018f",
+    "packages/blazex_core/lib/blazex/component/nested_table.ex": "30448640f0c112bfb64245f5fa2a2d1455bd7eeee79490ba6cd7cc03b65e6daf",
+    "packages/blazex_core/lib/blazex/component/root_schedule.ex": "26fda646f5705ca6f5320d6efeccfbc4040933b9458b8c30728b22e37992242c",
+    "packages/blazex_core/lib/blazex/component/action.ex": "5d34791979f145fcf8ee081d137dea3700d609fdfb2d286e6bab9ec9d4cbb883",
+    "packages/blazex_core/lib/blazex/component/action_manifest.ex": "fc2e996d6a85a13287e64955c4bf79583953a62713ea4f8d009fea763e51e90c",
+    "packages/blazex_core/lib/blazex/core/authoring.ex": "4456db9e5fd32538f5d97985a9323b4c466c54a90bc2f196cf9673f7279d9b8b",
+    "packages/blazex_ui_tree/lib/blazex/ui_tree/composition_plan.ex": "2b5d01aaaae06040c4517cdaae60c7b1a582151e0a791e2b65186812189e3cc0",
+    "docs/research/20-notes/architecture-decisions/adr-0005-server-adapter-and-trust-boundary.md": "5f2d34113308a36192d5d88bd36850d79d810a95b28d57d2e5a49c6c0f803766"
+  },
+  "reviewed_successor_changes": {
+    "packages/blazex_core/lib/blazex/component/input.ex": "Explicit action-enabled successor; Phase 6/7 defaults and normalized traces retained.",
+    "packages/blazex_core/lib/blazex/component/root_process.ex": "Explicit action-enabled successor; Phase 6/7 defaults and normalized traces retained.",
+    "packages/blazex_ui_tree/lib/blazex/ui_tree/root_evaluator.ex": "Explicit action-enabled successor; Phase 6/7 defaults and normalized traces retained.",
+    "packages/blazex_ui_tree/lib/blazex/ui_tree/nested_candidates.ex": "Explicit action-enabled successor; Phase 6/7 defaults and normalized traces retained."
+  },
+  "limits": {
+    "total_work": 256,
+    "contexts": 16,
+    "providers": 32,
+    "subscriptions": 128,
+    "registry_entries": 128,
+    "composition_depth": 12
+  },
+  "excluded": [
+    "BH-06 bundles and lazy loading",
+    "theme/form/auth product providers",
+    "Phoenix sessions",
+    "arbitrary plugins",
+    "remote code loading",
+    "LiveView",
+    "LocalLiveView",
+    "support claims"
+  ],
+  "support_state": "unsupported"
+}

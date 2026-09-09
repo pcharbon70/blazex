@@ -284,3 +284,4 @@ reporting a tooling change complete.
 - [Action validator tests](test_validate_bh05_actions.py) — Authority, inventory and frozen-evidence mutation tests.
 - [Action subset audit](check_bh05_action_subset.py) — Pinned runtime API analysis without Wasm execution credit.
 - [Phase 8 recorder](record_bh05_phase8.py) — Nineteen source-frozen gates and guarded completion publication.
+- [Scope authority generator](generate_bh05_scopes.py) — Phase 9 authorization and inherited context/registry contract bindings.

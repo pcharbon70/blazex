@@ -24,29 +24,29 @@ Back to milestone: [README](README.md)
   selection. Prevent ambient global state, hidden server/local crossings,
   arbitrary module dispatch, and uninspectable reachability.
 
-  - [ ] 9.1 Section - Authorize and freeze context and registry semantics.
+  - [x] 9.1 Section - Authorize and freeze context and registry semantics.
 
     Bind the public schemas, component roles, scheduler, and action contracts,
     then define scope, subscriptions, registration, lookup, and compatibility.
 
-    - [ ] 9.1.1 Task - Record bounded Phase 9 authority.
+    - [x] 9.1.1 Task - Record bounded Phase 9 authority.
 
       Establish provenance and reserve bundle/lazy-loading implementation for
       BH-06.
 
-      - [ ] 9.1.1.1 Subtask - Record synchronized base, branch, section commits, one PR, cleanup, Phase 8 completion identity, and explicit Phase 9 authorization.
-      - [ ] 9.1.1.2 Subtask - Bind prop/slot schemas, component/public IDs, root/nested identity, scheduler, effect/capability metadata, trust boundary, and dynamic reachability requirements by version and hash.
-      - [ ] 9.1.1.3 Subtask - Exclude BH-06 reachability/bundle generation, theme/form/auth product providers, Phoenix session propagation, arbitrary plugins, remote code loading, and support claims.
+      - [x] 9.1.1.1 Subtask - Record synchronized base, branch, section commits, one PR, cleanup, Phase 8 completion identity, and explicit Phase 9 authorization.
+      - [x] 9.1.1.2 Subtask - Bind prop/slot schemas, component/public IDs, root/nested identity, scheduler, effect/capability metadata, trust boundary, and dynamic reachability requirements by version and hash.
+      - [x] 9.1.1.3 Subtask - Exclude BH-06 reachability/bundle generation, theme/form/auth product providers, Phoenix session propagation, arbitrary plugins, remote code loading, and support claims.
 
-    - [ ] 9.1.2 Task - Freeze root-scoped context policy.
+    - [x] 9.1.2 Task - Freeze root-scoped context policy.
 
       Define a narrow facility for theme, locale, form state, advisory public
       auth state, capability summary, and future outlet registries without
       silently making every assign ambient.
 
-      - [ ] 9.1.2.1 Subtask - Define stable context name, schema/version, owner/provider identity, root/generation scope, fixed or tracked mode, value boundary, default/absence behavior, and visibility.
-      - [ ] 9.1.2.2 Subtask - Define lexical nearest-provider resolution, subscription identity, update/change comparison, deterministic invalidation order, provider removal/replacement, and cycle/breadth bounds.
-      - [ ] 9.1.2.3 Subtask - Prohibit process dictionary/application environment/global registry as component context, cross-root subscription, silent server/local crossing, secrets, and authoritative client auth state.
+      - [x] 9.1.2.1 Subtask - Define stable context name, schema/version, owner/provider identity, root/generation scope, fixed or tracked mode, value boundary, default/absence behavior, and visibility.
+      - [x] 9.1.2.2 Subtask - Define lexical nearest-provider resolution, subscription identity, update/change comparison, deterministic invalidation order, provider removal/replacement, and cycle/breadth bounds.
+      - [x] 9.1.2.3 Subtask - Prohibit process dictionary/application environment/global registry as component context, cross-root subscription, silent server/local crossing, secrets, and authoritative client auth state.
 
   - [ ] 9.2 Section - Implement scoped context declaration and propagation.
 

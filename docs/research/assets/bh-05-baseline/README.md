@@ -60,3 +60,4 @@ bindings. No measurement or runtime result may claim Phase 1 pass credit.
 - [Action authority](action-authorization-v0.1.0.json) — Bounded Phase 8 authorization and inherited source hashes.
 - [Action gates](action-gates-v0.1.0.json) — Nineteen passing frozen-source gates, raw pending/lease traces and exact test counts.
 - [Action completion](action-completion-v0.1.0.json) — Typed ERTS action/resource/command-intent completion; Phase 9 eligible, unauthorized.
+- [Scope authority](scope-authorization-v0.1.0.json) — Phase 9 bounded authorization and accepted Phase 8 inputs.

@@ -250,3 +250,4 @@ proof of another host.
 - [Scheduling evidence](scheduling-evidence.md) — Phase 7 typed callbacks, owned timers, backlog stress and source-frozen gate method.
 - [Action contract](action-contract.md) — Phase 8 typed actions, provider results, resource leases and untrusted command intent.
 - [Action evidence](action-evidence.md) — Phase 8 integration, pending/lease stress, authority analysis and source-frozen gate method.
+- [Scope contract](scope-contract.md) — Phase 9 context visibility, commit-gated invalidation and manifest-bounded registry.
