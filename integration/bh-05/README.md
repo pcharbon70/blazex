@@ -27,3 +27,11 @@ unimplemented here.
 
 Current command: `python3 docs/research/70-tools/validate_bh05_authoring.py --final`.
 The source-frozen runner and individual checks are indexed under research tools.
+
+Phase 3 adds the [schema inventory](schema-index-v0.1.0.json),
+[public schema fixtures](schema-fixtures.exs),
+[schema/codec integration checks](schema-check.exs) and
+[compiler-roundtrip comparison](schema-subset.exs). Earlier indexes remain
+historical. Props/slots normalize without component or slot body execution;
+host/local boundaries, redaction, ownership and atomic invalid updates are tested.
+Current completion check: `python3 docs/research/70-tools/validate_bh05_schema.py --final`.

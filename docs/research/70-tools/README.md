@@ -238,6 +238,12 @@ independent-review blockers, as intended.
 
 ## Maintaining this index
 
+- [`generate_bh05_schema.py`](generate_bh05_schema.py) — Phase 3 authority and accepted facade bindings.
+- [`check_bh05_schema_subset.py`](check_bh05_schema_subset.py) — Pinned schema compiler/analyzer roundtrip, preserving the Phase 2 runner unchanged.
+- [`validate_bh05_schema.py`](validate_bh05_schema.py) — Schema inventory, immutable predecessor and source-frozen gate checks.
+- [`test_validate_bh05_schema.py`](test_validate_bh05_schema.py) — Isolated schema evidence mutation tests.
+- [`record_bh05_phase3.py`](record_bh05_phase3.py) — Full current and historical schema gate recording and publication.
+
 - [`generate_bh05_authoring.py`](generate_bh05_authoring.py) — Phase 2 authority bound to accepted Phase 1.
 - [`check_bh05_subset.py`](check_bh05_subset.py) — SHA-pinned Popcorn authoring compiler/analyzer subset check (not execution parity).
 - [`validate_bh05_authoring.py`](validate_bh05_authoring.py) — Phase 2 immutable predecessors, facade inventory and source-bound completion.
