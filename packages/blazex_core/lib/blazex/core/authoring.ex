@@ -1,20 +1,33 @@
 defmodule BlazeX.Core.Authoring do
   @moduledoc false
   alias BlazeX.Component.{Contract, Input}
-  @options [:role, :props, :slots, :capabilities, :registry, :context]
+  @options [:role, :props, :slots, :capabilities, :registry, :context, :schema]
 
   def declare!(environment, options) do
+    options =
+      if Macro.quoted_literal?(options),
+        do: elem(Code.eval_quoted(options), 0),
+        else: fail!(:invalid_declaration)
+
     valid =
       Keyword.keyword?(options) and
         Enum.all?(Keyword.keys(options), &(&1 in @options)) and
         length(Keyword.keys(options)) == length(Enum.uniq(Keyword.keys(options))) and
         Keyword.get(options, :role) in Contract.roles() and
-        Enum.all?(@options -- [:role], &Input.names?(Keyword.get(options, &1, [])))
+        Enum.all?(@options -- [:role, :schema], &Input.names?(Keyword.get(options, &1, [])))
 
     if not valid or Module.has_attribute?(environment.module, :blazex_authoring),
       do: fail!(:invalid_declaration)
 
     metadata = Map.new(options)
+
+    if Map.has_key?(metadata, :schema) do
+      if Map.has_key?(metadata, :props) or Map.has_key?(metadata, :slots),
+        do: fail!(:ambiguous_schema)
+
+      validate_schema!(metadata.schema)
+    end
+
     Module.put_attribute(environment.module, :blazex_authoring, metadata)
 
     behaviour =
@@ -50,11 +63,35 @@ defmodule BlazeX.Core.Authoring do
       callbacks: Enum.sort(functions),
       required: required,
       optional: optional,
-      declarations: Map.new(@options -- [:role], &{&1, Map.get(options, &1, [])})
+      declarations: Map.new(@options -- [:role, :schema], &{&1, Map.get(options, &1, [])})
     }
+
+    metadata =
+      if Map.has_key?(options, :schema) do
+        Map.merge(metadata, %{
+          version: BlazeX.Component.Schema.version(),
+          schema: validate_schema!(options.schema)
+        })
+      else
+        metadata
+      end
 
     quote do
       def __blazex_component__, do: unquote(Macro.escape(metadata))
+    end
+  end
+
+  defp validate_schema!(schema) do
+    if not Keyword.keyword?(schema) or Keyword.keys(schema) != [:props, :slots],
+      do: fail!(:invalid_schema)
+
+    case BlazeX.Component.Props.declare(schema[:props]) do
+      {:ok, props} ->
+        if schema[:slots] != [], do: fail!(:invalid_schema)
+        %{version: 1, props: props, slots: [], declarations: schema}
+
+      _ ->
+        fail!(:invalid_schema)
     end
   end
 
