@@ -71,28 +71,28 @@ Back to milestone: [README](README.md)
       - [x] 10.2.2.2 Subtask - Commit fallback under a dedicated failure transition and handle renderer-unavailable failure through the BH-03/BH-04 host fallback without partial ownership.
       - [x] 10.2.2.3 Subtask - Admit retry only from declared user event, host policy, or changed build/input; reject automatic hot loops and stale retry requests.
 
-  - [ ] 10.3 Section - Implement generation replacement, retry limits, and disposal.
+  - [x] 10.3 Section - Implement generation replacement, retry limits, and disposal.
 
     Start every retry/replacement with a new generation and converge all prior
     work and resources to terminal states before or within the governed bound.
 
-    - [ ] 10.3.1 Task - Implement restart-intensity and generation policy.
+    - [x] 10.3.1 Task - Implement restart-intensity and generation policy.
 
       Track attempts independently per root identity and make terminal fallback
       observable after the allowed budget is exhausted.
 
-      - [ ] 10.3.1.1 Subtask - Record automatic/user/host attempt source, monotonic time window, failure fingerprint, generation, backoff, admission decision, and terminal reason.
-      - [ ] 10.3.1.2 Subtask - Permit at most three automatic restarts within five seconds, create a fresh generation for each admitted retry, and prevent stale state/output/actions from being reused implicitly.
-      - [ ] 10.3.1.3 Subtask - Reject stale events/messages/timers/effect results/command results/renderer acknowledgements/context notifications from prior generations before callback or state mutation.
+      - [x] 10.3.1.1 Subtask - Record automatic/user/host attempt source, monotonic time window, failure fingerprint, generation, backoff, admission decision, and terminal reason.
+      - [x] 10.3.1.2 Subtask - Permit at most three automatic restarts within five seconds, create a fresh generation for each admitted retry, and prevent stale state/output/actions from being reused implicitly.
+      - [x] 10.3.1.3 Subtask - Reject stale events/messages/timers/effect results/command results/renderer acknowledgements/context notifications from prior generations before callback or state mutation.
 
-    - [ ] 10.3.2 Task - Implement deterministic root and nested disposal.
+    - [x] 10.3.2 Task - Implement deterministic root and nested disposal.
 
       Release work deepest-first and idempotently across normal removal,
       replacement, handled failure, crash, retry, runtime loss, and shutdown.
 
-      - [ ] 10.3.2.1 Subtask - Invalidate ingress; cancel queued transitions, timers, pending effects/commands, subscriptions, and candidate records; then dispose nested components, resource leases, renderer root, and root process ownership in declared order.
-      - [ ] 10.3.2.2 Subtask - Track requested/completed/failed/timed-out release for every owner and permit forced adapter cleanup without reviving disposed component callbacks.
-      - [ ] 10.3.2.3 Subtask - Make repeated disposal a no-op with the same terminal result, restore or redirect focus according to accepted intent, and diagnose any resource surviving 1000 ms.
+      - [x] 10.3.2.1 Subtask - Invalidate ingress; cancel queued transitions, timers, pending effects/commands, subscriptions, and candidate records; then dispose nested components, resource leases, renderer root, and root process ownership in declared order.
+      - [x] 10.3.2.2 Subtask - Track requested/completed/failed/timed-out release for every owner and permit forced adapter cleanup without reviving disposed component callbacks.
+      - [x] 10.3.2.3 Subtask - Make repeated disposal a no-op with the same terminal result, restore or redirect focus according to accepted intent, and diagnose any resource surviving 1000 ms.
 
   - [ ] 10.4 Section - Phase 10 Integration Tests and Completion Evidence.
 

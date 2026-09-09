@@ -17,10 +17,17 @@ defmodule BlazeX.Component.RecoveryPort do
 
     receive do
       {^token, result} ->
-        Process.demonitor(monitor, [:flush])
+        Process.unlink(pid)
+
+        receive do
+          {:DOWN, ^monitor, :process, ^pid, _} -> :ok
+        end
+
+        flush_exit(pid)
         result
 
       {:DOWN, ^monitor, :process, ^pid, _} ->
+        flush_exit(pid)
         {:error, :port_failed}
     after
       timeout ->
@@ -30,6 +37,8 @@ defmodule BlazeX.Component.RecoveryPort do
         receive do
           {:DOWN, ^monitor, :process, ^pid, _} -> :ok
         end
+
+        flush_exit(pid)
 
         receive do
           {^token, _} -> :ok
@@ -43,7 +52,24 @@ defmodule BlazeX.Component.RecoveryPort do
 
   def call(_, _, _, _), do: {:error, :timed_out}
 
-  for {name, arity} <- [submit: 2, cancel: 1, notify: 1, dispose: 1, force_cleanup: 1, release: 1] do
+  defp flush_exit(pid) do
+    receive do
+      {:EXIT, ^pid, _} -> :ok
+    after
+      0 -> :ok
+    end
+  end
+
+  for {name, arity} <- [
+        submit: 2,
+        submit: 1,
+        select: 1,
+        cancel: 1,
+        notify: 1,
+        dispose: 1,
+        force_cleanup: 1,
+        release: 1
+      ] do
     args = Macro.generate_arguments(arity, __MODULE__)
 
     def unquote(name)({port, timeout}, unquote_splicing(args)),

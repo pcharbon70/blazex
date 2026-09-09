@@ -1,29 +1,20 @@
 defmodule BlazeX.Component.RecoveryRuntime do
   @moduledoc false
-  alias BlazeX.Component.{RecoveryPolicy, RootPort, RootProcess}
+  alias BlazeX.Component.{RecoveryCleanup, RecoveryPolicy, RootPort, RootProcess}
 
-  def fail(%{recovery: %{failure: failure}} = state, _) when failure != nil,
-    do: terminal(state, :static)
+  def fail(%{recovery: %{failure: failure}} = state, _) when failure != nil do
+    next = RecoveryCleanup.run(%{state | accepted: nil}, :fallback_failed)
+    terminal(next, :static)
+  end
 
   def fail(state, code) do
     failure = RecoveryPolicy.failure(state, code)
 
-    if state.pending do
-      if state.pending.timer, do: Process.cancel_timer(state.pending.timer)
-      RootPort.call(state.ports.renderer, :cancel, [state.pending.correlation])
-    end
-
-    state = RootProcess.recovery_close(state, :failure)
-
-    cleanup =
-      if state.accepted,
-        do: RootPort.call(state.ports.evaluator, :cleanup, [state.accepted, :shutdown]),
-        else: :ok
-
-    cleanup = %{status: if(cleanup == :ok, do: :completed, else: :failed)}
+    state = RecoveryCleanup.run(state, :failure)
+    cleanup = state.recovery.cleanup
     failure = %{failure | cleanup: cleanup.status}
     recovery = %{state.recovery | failure: failure, cleanup: cleanup}
-    state = %{state | recovery: recovery, pending: nil, error: failure.code}
+    state = %{state | recovery: recovery, pending: nil, accepted: nil, error: failure.code}
     correlation = failure.correlation
 
     {:ok, correlation} =
@@ -46,9 +37,22 @@ defmodule BlazeX.Component.RecoveryRuntime do
 
   def fallback_committed(state), do: terminal(state, :committed)
 
+  def stop(state, reason) do
+    next = RecoveryCleanup.run(state, reason)
+    error = if next.recovery.cleanup.unresolved == 0, do: nil, else: :cleanup_failed
+    next = %{next | status: :disposed, pending: nil, accepted: nil, error: error}
+    RootProcess.recovery_notify(next, :disposed)
+    {if(error, do: {:error, error}, else: :ok), next}
+  end
+
   defp terminal(state, fallback) do
     if state.pending && state.pending.timer, do: Process.cancel_timer(state.pending.timer)
-    failure = %{state.recovery.failure | fallback: fallback}
+
+    failure = %{
+      state.recovery.failure
+      | fallback: fallback,
+        cleanup: state.recovery.cleanup.status
+    }
 
     next = %{
       state

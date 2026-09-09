@@ -15,13 +15,17 @@ defmodule BlazeX.Component.RootProcess do
 
   @impl true
   def init({:recovery_crash, state}) do
+    Process.flag(:trap_exit, true)
     send(self(), :recover_crash)
     {:ok, state}
   end
 
   def init({guardian, spec, ports, policy, actions, recovery}) do
+    Process.flag(:trap_exit, true)
     {:ok, state} = init({guardian, spec, ports, policy, actions})
-    {:ok, %{state | recovery: recovery, attempt: recovery.sequence}}
+    state = %{state | recovery: recovery, attempt: recovery.sequence}
+    send(guardian, {:recovery_checkpoint, self(), state})
+    {:ok, state}
   end
 
   def init({guardian, spec, ports}), do: init({guardian, spec, ports, nil})
@@ -195,8 +199,37 @@ defmodule BlazeX.Component.RootProcess do
 
   defp dispatch({:enqueue, _}, state), do: {{:error, :invalid_ingress}, state}
 
+  defp dispatch({:stop, reason}, %{recovery: recovery} = state)
+       when recovery != nil and reason in [:shutdown, :removal],
+       do: BlazeX.Component.RecoveryRuntime.stop(state, reason)
+
+  defp dispatch({:replace, revision, spec}, %{recovery: recovery, accepted: accepted} = state)
+       when recovery != nil and accepted != nil do
+    with true <- revision == accepted.correlation.revision,
+         {:ok, spec} <- RootPort.normalize(spec),
+         true <- RootPort.handle(spec) == RootPort.handle(state.spec) do
+      next = BlazeX.Component.RecoveryCleanup.run(state, :replace)
+
+      if next.recovery.cleanup.unresolved == 0 do
+        next = %{
+          next
+          | recovery: %{next.recovery | generation: accepted.correlation.generation + 1}
+        }
+
+        begin(next, spec, :replace)
+      else
+        BlazeX.Component.RecoveryRuntime.fail(%{next | accepted: nil}, :cleanup_failed)
+      end
+    else
+      _ -> {{:error, :stale}, state}
+    end
+  end
+
   defp dispatch({:stop, reason}, state) when reason in [:shutdown, :removal],
     do: stopping(state, reason)
+
+  defp dispatch(:runtime_loss, %{recovery: recovery} = state) when recovery != nil,
+    do: BlazeX.Component.RecoveryRuntime.fail(state, :runtime_loss)
 
   defp dispatch(:runtime_loss, %{schedule: schedule} = state) when schedule != nil do
     state = close_schedule(state, :runtime_loss)
@@ -271,6 +304,11 @@ defmodule BlazeX.Component.RootProcess do
 
     case RootPort.correlation(spec, generation, revision, state.attempt + 1, operation) do
       {:ok, correlation} ->
+        state =
+          if state.recovery,
+            do: %{state | recovery: %{state.recovery | correlation: correlation}},
+            else: state
+
         state = %{state | status: phase(operation), attempt: correlation.sequence, error: nil}
         notify(state, :evaluating)
         request = %{spec: spec, operation: operation, correlation: correlation}
@@ -393,19 +431,45 @@ defmodule BlazeX.Component.RootProcess do
         error: nil
     }
 
-    cleanup_result =
-      cond do
-        pending.correlation.operation == :replace ->
-          cleanup(state, state.accepted, :replace)
-
-        state.schedule != nil and state.accepted != nil ->
-          RootPort.call(state.ports.evaluator, :cleanup_removed, [
-            state.accepted,
+    {next, cleanup_result} =
+      if state.recovery != nil and state.accepted != nil and
+           pending.correlation.operation != :replace do
+        cleaned =
+          BlazeX.Component.RecoveryCleanup.run(
+            %{state | pending: nil},
+            :removal,
             pending.candidate
-          ])
+          )
 
-        true ->
-          :ok
+        next = %{next | recovery: cleaned.recovery, actions: cleaned.actions}
+
+        {next,
+         if(
+           cleaned.recovery.cleanup.unresolved == 0 and cleaned.recovery.cleanup.failed == 0 and
+             cleaned.recovery.cleanup.timed_out == 0,
+           do: :ok,
+           else: {:error, :cleanup_failed}
+         )}
+      else
+        result =
+          cond do
+            pending.correlation.operation == :replace and state.recovery != nil ->
+              :ok
+
+            pending.correlation.operation == :replace ->
+              cleanup(state, state.accepted, :replace)
+
+            state.schedule != nil and state.accepted != nil ->
+              RootPort.call(state.ports.evaluator, :cleanup_removed, [
+                state.accepted,
+                pending.candidate
+              ])
+
+            true ->
+              :ok
+          end
+
+        {next, result}
       end
 
     if cleanup_result == :ok do
@@ -851,6 +915,22 @@ defmodule BlazeX.Component.RootProcess do
   def recovery_submit(state, correlation, candidate),
     do: submit(state, state.spec, correlation, candidate, nil)
 
-  def recovery_close(state, reason), do: close_schedule(state, reason)
+  def recovery_close(state, _reason) do
+    if state.schedule do
+      %{
+        state
+        | schedule: %{RootSchedule.finish(state.schedule) | queue: [], result_slots: 0},
+          active_correlation: nil,
+          candidate_intents: [],
+          scope_intents: [],
+          action_plan: nil,
+          timers: RootTimers.cancel_all(state.timers)
+      }
+    else
+      state
+    end
+  end
+
   def recovery_notify(state, event), do: notify(state, event)
+  def recovery_snapshot(state), do: snapshot(state)
 end

@@ -1,7 +1,16 @@
 defmodule BlazeX.Component.RecoveryGuardian do
   @moduledoc false
   use GenServer
-  alias BlazeX.Component.{Action, RecoveryPolicy, RecoveryPort, RootPort, RootProcess}
+
+  alias BlazeX.Component.{
+    Action,
+    RecoveryCleanup,
+    RecoveryPolicy,
+    RecoveryPort,
+    RecoveryRuntime,
+    RootPort,
+    RootProcess
+  }
 
   def start_link(input), do: GenServer.start_link(__MODULE__, input)
 
@@ -9,6 +18,20 @@ defmodule BlazeX.Component.RecoveryGuardian do
   def init({spec, ports, policy, actions, config}) do
     true = RecoveryPolicy.validate(config)
     true = function_exported?(elem(ports.evaluator, 0), :fallback, 3)
+
+    true =
+      Enum.all?([dispose: 2, force_cleanup: 2], fn {name, arity} ->
+        function_exported?(elem(ports.renderer, 0), name, arity)
+      end)
+
+    actions =
+      if actions do
+        true = function_exported?(elem(actions.port, 0), :force_cleanup, 2)
+        %{actions | port: {RecoveryPort, {actions.port, config.port_timeout_ms}}}
+      else
+        nil
+      end
+
     Process.flag(:trap_exit, true)
 
     ports = %{
@@ -23,7 +46,9 @@ defmodule BlazeX.Component.RecoveryGuardian do
       sequence: 0,
       retry_count: 0,
       failure: nil,
-      cleanup: nil
+      cleanup: nil,
+      correlation: nil,
+      cleaned_generation: nil
     }
 
     {:ok, worker} = RootProcess.start_link({self(), spec, ports, policy, actions, recovery})
@@ -38,7 +63,9 @@ defmodule BlazeX.Component.RecoveryGuardian do
        recovery: recovery,
        snapshot: nil,
        checkpoint: nil,
-       actions: nil
+       actions: nil,
+       ledger: RecoveryPolicy.ledger(),
+       automatic_timer: nil
      }}
   end
 
@@ -56,10 +83,25 @@ defmodule BlazeX.Component.RecoveryGuardian do
         {:reply, reply, next}
 
       operation == :snapshot and terminal?(state) ->
-        {:reply, {:ok, state.snapshot}, state}
+        {:reply, {:ok, decorate(state.snapshot, state)}, state}
 
       match?({:stop, _}, operation) and terminal?(state) ->
-        {:reply, :ok, state}
+        if state.snapshot.status == :disposed do
+          {:reply, if(state.snapshot.error, do: {:error, state.snapshot.error}, else: :ok), state}
+        else
+          cancel_automatic(state)
+          if is_pid(state.worker), do: Process.exit(state.worker, :kill)
+          {reply, checkpoint} = RecoveryRuntime.stop(state.checkpoint, elem(operation, 1))
+
+          {:reply, reply,
+           %{
+             state
+             | worker: nil,
+               checkpoint: checkpoint,
+               snapshot: RootProcess.recovery_snapshot(checkpoint),
+               automatic_timer: nil
+           }}
+        end
 
       terminal?(state) ->
         {:reply, {:error, :terminal}, state}
@@ -68,9 +110,25 @@ defmodule BlazeX.Component.RecoveryGuardian do
         try do
           {reply, snapshot} = GenServer.call(state.worker, operation, 5000)
           state = drain(state)
-          {:reply, reply, %{state | snapshot: snapshot}}
+          state = schedule_automatic(%{state | snapshot: snapshot})
+          reply = if operation == :snapshot, do: {:ok, decorate(snapshot, state)}, else: reply
+          {:reply, reply, state}
         catch
-          :exit, _ -> {:reply, {:error, :crashed}, crashed(drain(state))}
+          :exit, _ ->
+            next = drain(state)
+
+            if terminal?(next) do
+              next = schedule_automatic(%{next | worker: nil})
+
+              reply =
+                if operation == :snapshot,
+                  do: {:ok, decorate(next.snapshot, next)},
+                  else: {:error, :terminal}
+
+              {:reply, reply, next}
+            else
+              {:reply, {:error, :crashed}, crashed(next)}
+            end
         end
     end
   end
@@ -80,7 +138,7 @@ defmodule BlazeX.Component.RecoveryGuardian do
     do: {:noreply, %{state | checkpoint: checkpoint}}
 
   def handle_info({:root_snapshot, worker, snapshot}, %{worker: worker} = state),
-    do: {:noreply, %{state | snapshot: snapshot}}
+    do: {:noreply, schedule_automatic(%{state | snapshot: snapshot})}
 
   def handle_info({:root_actions, worker, actions}, %{worker: worker} = state),
     do: {:noreply, %{state | actions: actions}}
@@ -90,11 +148,34 @@ defmodule BlazeX.Component.RecoveryGuardian do
     {:noreply, if(terminal?(state), do: %{state | worker: nil}, else: crashed(state))}
   end
 
+  def handle_info(
+        {:automatic_retry, token, generation, fingerprint},
+        %{automatic_timer: {_, token}} = state
+      ) do
+    {_, next} =
+      retry(
+        %{state | automatic_timer: nil},
+        %{generation: generation, fingerprint: fingerprint, source: :automatic, spec: state.spec},
+        true
+      )
+
+    {:noreply, next}
+  end
+
   def handle_info(_, state), do: {:noreply, state}
 
   @impl true
   def terminate(_, state) do
-    if is_pid(state.worker), do: Process.exit(state.worker, :shutdown)
+    cancel_automatic(state)
+    if is_pid(state.worker), do: Process.exit(state.worker, :kill)
+
+    if state.checkpoint && (not terminal?(state) or state.snapshot.status != :disposed) do
+      RecoveryCleanup.run(
+        %{state.checkpoint | actions: state.actions || state.checkpoint.actions},
+        :shutdown
+      )
+    end
+
     :ok
   end
 
@@ -108,7 +189,7 @@ defmodule BlazeX.Component.RecoveryGuardian do
   defp terminal?(%{snapshot: %{status: status}}), do: status in [:disposed, :failed]
   defp terminal?(_), do: false
 
-  defp retry(state, request) do
+  defp retry(state, request, automatic \\ false) do
     true = terminal?(state) and state.snapshot.status == :failed
     true = Action.keys?(request, [:generation, :fingerprint, :source, :spec])
     failure = state.snapshot.recovery.failure
@@ -118,7 +199,7 @@ defmodule BlazeX.Component.RecoveryGuardian do
         request.fingerprint == failure.fingerprint
 
     true =
-      request.source in [:user, :host, :changed] and
+      (request.source in [:user, :host, :changed] or (automatic and request.source == :automatic)) and
         Map.fetch!(state.recovery.config, request.source)
 
     true = failure.cleanup == :completed and failure.code != :runtime_loss
@@ -127,35 +208,93 @@ defmodule BlazeX.Component.RecoveryGuardian do
     generation = failure.correlation.generation + 1
     true = Action.positive?(generation)
 
-    recovery = %{
-      state.recovery
-      | generation: generation,
-        sequence: state.snapshot.attempt,
-        retry_count: state.snapshot.recovery.retry_count + 1,
-        failure: nil,
-        cleanup: nil
-    }
-
-    if is_pid(state.worker), do: Process.exit(state.worker, :kill)
-
-    {:ok, worker} =
-      RootProcess.start_link(
-        {self(), spec, state.ports, state.policy, state.actions_config, recovery}
+    {decision, ledger} =
+      RecoveryPolicy.admit(
+        state.ledger,
+        request.source,
+        request.fingerprint,
+        generation,
+        System.monotonic_time(:millisecond),
+        state.recovery.config.backoff_ms
       )
 
-    {{:ok, %{generation: generation, source: request.source}},
-     %{
-       state
-       | worker: worker,
-         spec: spec,
-         snapshot: nil,
-         checkpoint: nil,
-         actions: nil,
-         recovery: recovery
-     }}
+    if decision == :admitted do
+      restart(%{state | ledger: ledger}, spec, generation, request.source)
+    else
+      {{:error, decision}, %{state | ledger: ledger}}
+    end
   rescue
     _ -> {{:error, :retry_rejected}, state}
   end
+
+  defp restart(state, spec, generation, source) do
+    cancel_automatic(state)
+    if is_pid(state.worker), do: Process.exit(state.worker, :kill)
+    checkpoint = RecoveryCleanup.run(%{state.checkpoint | accepted: nil}, :retry)
+
+    if checkpoint.recovery.cleanup.unresolved != 0 do
+      {{:error, :cleanup_failed},
+       %{
+         state
+         | worker: nil,
+           automatic_timer: nil,
+           checkpoint: checkpoint,
+           snapshot: RootProcess.recovery_snapshot(checkpoint)
+       }}
+    else
+      recovery = %{
+        state.recovery
+        | generation: generation,
+          sequence: state.snapshot.attempt,
+          retry_count: state.snapshot.recovery.retry_count + 1,
+          failure: nil,
+          cleanup: nil
+      }
+
+      {:ok, worker} =
+        RootProcess.start_link(
+          {self(), spec, state.ports, state.policy, state.actions_config, recovery}
+        )
+
+      {{:ok, %{generation: generation, source: source}},
+       %{
+         state
+         | worker: worker,
+           spec: spec,
+           snapshot: nil,
+           checkpoint: nil,
+           actions: nil,
+           recovery: recovery,
+           automatic_timer: nil
+       }}
+    end
+  end
+
+  defp decorate(snapshot, state), do: put_in(snapshot, [:recovery, :restart], state.ledger)
+  defp cancel_automatic(%{automatic_timer: {reference, _}}), do: Process.cancel_timer(reference)
+  defp cancel_automatic(_), do: :ok
+
+  defp schedule_automatic(%{snapshot: %{status: :failed}, automatic_timer: nil} = state) do
+    failure = state.snapshot.recovery.failure
+
+    if state.recovery.config.automatic and state.ledger.terminal == nil and
+         failure != nil and failure.cleanup == :completed and failure.code != :runtime_loss do
+      token = make_ref()
+
+      reference =
+        Process.send_after(
+          self(),
+          {:automatic_retry, token, failure.correlation.generation, failure.fingerprint},
+          state.recovery.config.backoff_ms
+        )
+
+      %{state | automatic_timer: {reference, token}}
+    else
+      state
+    end
+  end
+
+  defp schedule_automatic(state), do: state
 
   defp crashed(%{checkpoint: checkpoint} = state) when checkpoint != nil do
     if is_pid(state.worker), do: Process.exit(state.worker, :kill)

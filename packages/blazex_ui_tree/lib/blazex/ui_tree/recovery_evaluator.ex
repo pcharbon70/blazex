@@ -53,4 +53,37 @@ defmodule BlazeX.UITree.RecoveryEvaluator do
       %{output: output, recovery_fallback: true}
     )
   end
+
+  def cleanup_owners(_, %{token: %{recovery_fallback: true}}), do: []
+
+  def cleanup_owners(_, candidate),
+    do: Enum.map(candidate.token.disposals, &Map.from_struct(&1.identity))
+
+  def cleanup_owner(_, candidate, owner, reason) do
+    true = RootPort.candidate?(candidate, candidate.correlation)
+    item = Enum.find(candidate.token.disposals, &(Map.from_struct(&1.identity) == owner))
+
+    plan =
+      Enum.find(
+        BlazeX.UITree.NestedCandidates.flatten(candidate.token.plan),
+        &(&1.identity == item.identity)
+      )
+
+    record = Enum.find(candidate.token.records, &(&1.identity == item.identity))
+
+    if function_exported?(plan.module, item.callback, 1) do
+      input = %{
+        plan.input
+        | transition: item.callback,
+          state: record.state,
+          payload: {:present, %{reason: reason}},
+          revision: record.revision,
+          sequence: record.sequence
+      }
+
+      BlazeX.UITree.NestedCandidates.callback(plan, item.callback, input, true)
+    else
+      :ok
+    end
+  end
 end

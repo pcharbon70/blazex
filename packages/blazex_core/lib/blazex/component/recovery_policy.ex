@@ -1,6 +1,50 @@
 defmodule BlazeX.Component.RecoveryPolicy do
   @moduledoc "Closed root recovery policy and redacted failure identity."
   alias BlazeX.Component.{Action, NestedTable, RootPort}
+  def ledger, do: %{automatic: [], attempts: [], terminal: nil, maximum: 0}
+
+  def admit(ledger, source, fingerprint, generation, now, backoff) do
+    true = source in [:automatic, :user, :host, :changed]
+    automatic = Enum.filter(ledger.automatic, &(now - &1 < 5000))
+
+    reason =
+      cond do
+        source == :automatic and ledger.terminal != nil ->
+          ledger.terminal
+
+        source == :automatic and length(automatic) >= 3 ->
+          :restart_intensity
+
+        source == :automatic and automatic != [] and now - List.last(automatic) < backoff ->
+          :backoff
+
+        true ->
+          :admitted
+      end
+
+    automatic =
+      if source == :automatic and reason == :admitted, do: automatic ++ [now], else: automatic
+
+    row = %{
+      source: source,
+      fingerprint: fingerprint,
+      generation: generation,
+      monotonic_ms: now,
+      backoff_ms: backoff,
+      decision: reason,
+      automatic_in_window: length(automatic)
+    }
+
+    ledger = %{
+      ledger
+      | automatic: automatic,
+        attempts: Enum.take(ledger.attempts ++ [row], -128),
+        terminal: if(reason == :restart_intensity, do: reason, else: ledger.terminal),
+        maximum: max(ledger.maximum, length(automatic))
+    }
+
+    {reason, ledger}
+  end
 
   def validate(config) do
     Action.keys?(config, [:automatic, :user, :host, :changed, :backoff_ms, :port_timeout_ms]) and
@@ -19,6 +63,9 @@ defmodule BlazeX.Component.RecoveryPolicy do
 
         state.active_correlation ->
           state.active_correlation
+
+        state.recovery.correlation ->
+          state.recovery.correlation
 
         state.accepted ->
           state.accepted.correlation

@@ -16,6 +16,17 @@ defmodule BlazeX.RecoveryEvaluatorTest do
   defmodule Unavailable do
     def submit(_, _, _), do: {:error, :unavailable}
     def cancel(_, _), do: :ok
+    def dispose(_, _), do: :ok
+    def force_cleanup(_, _), do: :ok
+  end
+
+  defmodule Port do
+    def submit(pid, correlation, candidate),
+      do: BlazeX.ScopedEvaluatorTest.Port.submit(pid, correlation, candidate)
+
+    def cancel(_, _), do: :ok
+    def dispose(_, _), do: :ok
+    def force_cleanup(_, _), do: :ok
   end
 
   def config,
@@ -28,7 +39,7 @@ defmodule BlazeX.RecoveryEvaluatorTest do
       port_timeout_ms: 50
     }
 
-  def ports(renderer \\ {F.Port, self()}),
+  def ports(renderer \\ {Port, self()}),
     do: %{
       evaluator: {RecoveryEvaluator, {{ScopedEvaluator, F.config()}, 50}},
       renderer: renderer,
@@ -61,7 +72,6 @@ defmodule BlazeX.RecoveryEvaluatorTest do
     {:ok, snapshot} = LocalView.inspect_root(supervisor, handle)
     assert snapshot.status == :failed and snapshot.recovery.failure.fallback == :committed
     assert {:error, _} = LocalView.enqueue(supervisor, handle, %{})
-    assert :ok = LocalView.stop(supervisor, handle)
 
     sibling_config =
       put_in(F.config(), [:scope, :providers], [
@@ -93,6 +103,8 @@ defmodule BlazeX.RecoveryEvaluatorTest do
 
     assert {:ok, %{status: :ready}} = LocalView.inspect_root(supervisor, sibling)
     assert {:ok, ^snapshot} = LocalView.inspect_root(supervisor, handle)
+    assert :ok = LocalView.stop(supervisor, handle)
+    assert :ok = LocalView.stop(supervisor, handle)
   end
 
   test "retry requires declared source and exact failed generation and fingerprint" do
@@ -150,5 +162,90 @@ defmodule BlazeX.RecoveryEvaluatorTest do
     {:ok, snapshot} = LocalView.inspect_root(supervisor, handle)
     assert snapshot.status == :failed and snapshot.recovery.failure.fallback == :static
     assert snapshot.attempt <= 2
+  end
+
+  test "persistent failure has exactly three automatic fresh-generation restarts then terminal fallback" do
+    supervisor = start_supervised!(LocalView.Supervisor)
+
+    {:ok, handle} =
+      RecoveryView.start(supervisor, %{F.spec() | component: Broken}, ports(), F.policy(), %{
+        config()
+        | automatic: true
+      })
+
+    fingerprints =
+      for generation <- 1..4 do
+        assert_receive {:submission, failure, candidate}, 1000
+        assert failure.generation == generation and failure.operation == :failure
+
+        :ok =
+          LocalView.acknowledge(supervisor, handle, %{correlation: failure, result: :committed})
+
+        candidate.state.failure.fingerprint
+      end
+
+    Process.sleep(150)
+    {:ok, snapshot} = LocalView.inspect_root(supervisor, handle)
+    assert snapshot.status == :failed
+    assert snapshot.recovery.restart.maximum == 3
+    assert snapshot.recovery.restart.terminal == :restart_intensity
+
+    assert Enum.map(snapshot.recovery.restart.attempts, & &1.decision) == [
+             :admitted,
+             :admitted,
+             :admitted,
+             :restart_intensity
+           ]
+
+    assert Enum.uniq(fingerprints) |> length() == 1
+    refute_receive {:submission, _, _}, 150
+  end
+
+  test "hard worker crash contains one root and cleanup releases its accepted owners" do
+    supervisor = start_supervised!(LocalView.Supervisor)
+    {:ok, handle} = RecoveryView.start(supervisor, F.spec(), ports(), F.policy(), config())
+    assert_receive {:submission, mount, _}, 1000
+    :ok = LocalView.acknowledge(supervisor, handle, %{correlation: mount, result: :committed})
+    [{_, guardian, _, _}] = Supervisor.which_children(supervisor)
+    Process.exit(:sys.get_state(guardian).worker, :kill)
+    assert_receive {:submission, failure, candidate}, 1000
+    assert candidate.state.failure.code == :crashed
+    :ok = LocalView.acknowledge(supervisor, handle, %{correlation: failure, result: :committed})
+    {:ok, snapshot} = LocalView.inspect_root(supervisor, handle)
+    rows = List.flatten(snapshot.recovery.cleanup.pages)
+    assert Enum.map(Enum.filter(rows, &(&1.kind == :component)), &length(&1.owner.path)) == [1, 0]
+    assert snapshot.recovery.cleanup.unresolved == 0
+  end
+
+  test "replacement and repeated shutdown clean each generation and reject old scope work" do
+    supervisor = start_supervised!(LocalView.Supervisor)
+    {:ok, handle} = RecoveryView.start(supervisor, F.spec(), ports(), F.policy(), config())
+    assert_receive {:submission, mount, _}, 1000
+    :ok = LocalView.acknowledge(supervisor, handle, %{correlation: mount, result: :committed})
+    assert {:ok, replace} = LocalView.replace(supervisor, handle, 1, F.spec())
+    assert_receive {:submission, ^replace, candidate}, 1000
+    assert replace.generation == 2
+    assert Enum.all?(candidate.token.scope.context.bindings, &(&1.consumer.generation == 2))
+    {:ok, pending} = LocalView.inspect_root(supervisor, handle)
+
+    assert Enum.map(List.flatten(pending.recovery.cleanup.pages), & &1.kind) == [
+             :component,
+             :component,
+             :renderer
+           ]
+
+    :ok = LocalView.acknowledge(supervisor, handle, %{correlation: replace, result: :committed})
+
+    assert {:error, _} =
+             BlazeX.Component.ScopedView.change(supervisor, handle, 1, 1, F.providers("stale"))
+
+    assert {:error, :stale} =
+             LocalView.acknowledge(supervisor, handle, %{correlation: mount, result: :committed})
+
+    assert :ok = LocalView.stop(supervisor, handle)
+    {:ok, disposed} = LocalView.inspect_root(supervisor, handle)
+    assert disposed.status == :disposed and disposed.recovery.cleanup.unresolved == 0
+    assert :ok = LocalView.stop(supervisor, handle)
+    assert {:ok, ^disposed} = LocalView.inspect_root(supervisor, handle)
   end
 end
