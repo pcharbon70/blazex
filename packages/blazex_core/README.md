@@ -32,3 +32,15 @@ closed portable envelopes without invoking callbacks or committing state.
 The inherited evaluator is unchanged. Schema execution, state retention,
 processes, effects, context resolution, runtime parity and stable APIs remain
 deferred. See the authoring contract in the BH-05 planning directory.
+
+## BH-05 Phase 3 schema candidate
+
+Opt into `schema: [props: [...], slots: [...]]` in the facade declaration to
+emit version `0.2.0-bh05-schema-candidate`; legacy declarations are unchanged.
+`BlazeX.Component.Schema`, `.Props`, `.Slots` and `.Invocation` supply bounded
+schema validation, JSON-compatible wire terms, caller-owned slot descriptors
+and atomic invocation updates. No component/slot body is executed. Local-only
+callables never cross host/persistence/command/renderer boundaries. Custom
+schemas are versioned declarative aliases, not executable validators.
+Schema normalization does not retrofit the BH-02 evaluator: Phase 4 owns
+evaluation admission. Process execution and runtime parity remain deferred.

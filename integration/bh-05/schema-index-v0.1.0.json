@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 3,
+  "contract": "0.2.0-bh05-schema-candidate",
+  "support_state": "unsupported",
+  "schema_forms": [
+    "boolean",
+    "integer",
+    "float",
+    "string",
+    "opaque_id",
+    "integer-range",
+    "bounded-string",
+    "enum",
+    "tuple",
+    "list",
+    "map",
+    "record",
+    "nullable",
+    "semantic-v1",
+    "local-callable",
+    "custom-versioned-alias"
+  ],
+  "public": [
+    "BlazeX.Component.Schema",
+    "BlazeX.Component.Props",
+    "BlazeX.Component.Slots",
+    "BlazeX.Component.Invocation"
+  ],
+  "boundaries": [
+    "local-same-root",
+    "host",
+    "persistence",
+    "command",
+    "renderer"
+  ],
+  "normalized_fixture_sha256": "65d528b4de5a0ec3b7256d80d2dfc363cfbd7c7b588ab21dcfeb4f73c561eb3c",
+  "files": {
+    "integration/bh-05/schema-check.exs": "909928a46bb36836a8cac8e55608ad9d7a1572202337b2fd6f05eb812197358b",
+    "integration/bh-05/schema-fixtures.exs": "185220262ad6729a9c5a769c8b032d07c9d246f9f10f6b86803805be9adba765",
+    "integration/bh-05/schema-subset.exs": "d86d15a796f95caa06c36806fc99e48cc28bfec2baf615d5eaa8c1695202d41d",
+    "packages/blazex_core/lib/blazex/component/invocation.ex": "627459e7501fcb1dfa6c359b22b022e23481b34d6c8ba0a57481e713fc8f018f",
+    "packages/blazex_core/lib/blazex/component/props.ex": "6105997f07f66699872a9a12daa9b8962a3fd38f8ce020f36d94077693d499b4",
+    "packages/blazex_core/lib/blazex/component/schema.ex": "0c38aeaf182a5d813a9f1d416bcc10e27fc334de2752d336e2330b47fd0ce5d7",
+    "packages/blazex_core/lib/blazex/component/slots.ex": "a30195d55dfd0e979369459246a59312579d997d9fe6bafe502c6a72a02b2860",
+    "packages/blazex_core/lib/blazex/core/authoring.ex": "4456db9e5fd32538f5d97985a9323b4c466c54a90bc2f196cf9673f7279d9b8b",
+    "packages/blazex_core/test/blazex/schema_test.exs": "1e55592034f43fa34b694770ad417ee2cbf2d043b5ca268bb566cf8ace75a7ab",
+    "packages/blazex_core/test/blazex/slots_test.exs": "e9bf4e6fdb68d9d72e3df2ba15fd6548db69c15fe7c6e207191d8ff6a8f35a29"
+  },
+  "component_execution": false,
+  "runtime_parity": false,
+  "schema_execution": true,
+  "later_evidence": [],
+  "limits": [
+    "depth 8",
+    "64 declarations",
+    "256 collection entries",
+    "4096 binary bytes",
+    "local uncaptured external callable only",
+    "JSON-compatible wire terms, not JSON bytes",
+    "no component or slot body execution",
+    "ERTS compiler roundtrip, not AtomVM execution",
+    "LiveView and LocalLiveView deferred"
+  ]
+}

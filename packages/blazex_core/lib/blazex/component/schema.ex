@@ -96,7 +96,10 @@ defmodule BlazeX.Component.Schema do
   defp check({:custom, _id, _version, type}, value, b, p), do: check(type, value, b, p)
 
   defp check({:tuple, types}, value, b, p) do
-    values = if b.kind == :local and is_tuple(value), do: Tuple.to_list(value), else: value
+    values =
+      if b.kind == :local and is_tuple(value) and tuple_size(value) <= 64,
+        do: Tuple.to_list(value),
+        else: value
 
     if list?(values, 64) and length(values) == length(types) do
       Enum.zip(types, values)
