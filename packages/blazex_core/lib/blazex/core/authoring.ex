@@ -87,8 +87,10 @@ defmodule BlazeX.Core.Authoring do
 
     case BlazeX.Component.Props.declare(schema[:props]) do
       {:ok, props} ->
-        if schema[:slots] != [], do: fail!(:invalid_schema)
-        %{version: 1, props: props, slots: [], declarations: schema}
+        case BlazeX.Component.Slots.declare(schema[:slots]) do
+          {:ok, slots} -> %{version: 1, props: props, slots: slots, declarations: schema}
+          _ -> fail!(:invalid_schema)
+        end
 
       _ ->
         fail!(:invalid_schema)
