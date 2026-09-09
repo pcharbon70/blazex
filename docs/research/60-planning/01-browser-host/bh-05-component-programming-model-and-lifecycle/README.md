@@ -201,6 +201,8 @@ Phoenix, browser, native-host, or release compatibility.
 
 ### Documents
 
+- [Candidate authoring contract](authoring-contract.md)
+- [Phase 2 authoring implementation evidence](authoring-evidence.md)
 - [Phase 1 implementation evidence](activation-evidence.md)
 
 - [Phase 1 — Authorization, BH-04 Handoff Reconciliation, and Boundary Activation](phase-01-authorization-bh-04-handoff-reconciliation-and-boundary-activation.md)

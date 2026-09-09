@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 2,
+  "decision": "candidate-authoring-contract-complete",
+  "phase3_eligible": true,
+  "phase3_authorized": false,
+  "bh06_eligible": false,
+  "support_state": "unsupported",
+  "runtime_execution": false,
+  "artifact_hashes": {
+    "docs/research/assets/bh-05-baseline/authoring-authorization-v0.1.0.json": "db5cec039ef1c8281e91bf18ead135f0b5370e4c94bfbabb2f9f78ab7e6ac390",
+    "docs/research/assets/bh-05-baseline/authoring-gates-v0.1.0.json": "e24b73337ef9b589b72dc8d3df2ec2a6ad705b620e875ac7f0a2bdaf7ddc5c30",
+    "integration/bh-05/authoring-index-v0.1.0.json": "384f42dde5b554d13a63a219a884d0d0451aedac49aa0597667e0ce55759d1d8"
+  },
+  "delivery": "2.1, 2.2, 2.3, 2.4 separate commits; one PR; merge then main sync before branch deletion. External delivery pending at record creation."
+}

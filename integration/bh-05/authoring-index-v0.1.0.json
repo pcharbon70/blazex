@@ -1,0 +1,83 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 2,
+  "status": "candidate-contract-only",
+  "support_state": "unsupported",
+  "version": "0.1.0-bh05-candidate",
+  "public": [
+    "BlazeX.Component",
+    "BlazeX.Component.Contract",
+    "BlazeX.Component.Input",
+    "BlazeX.Component.Result",
+    "BlazeX.Component.Pure",
+    "BlazeX.Component.Stateful",
+    "BlazeX.Component.Root"
+  ],
+  "private_build": [
+    "BlazeX.Core.Authoring"
+  ],
+  "roles": {
+    "pure": {
+      "required": [
+        "render"
+      ],
+      "optional": []
+    },
+    "stateful": {
+      "required": [
+        "init",
+        "render"
+      ],
+      "optional": [
+        "update",
+        "handle_event",
+        "handle_info",
+        "replace",
+        "dispose"
+      ]
+    },
+    "root": {
+      "required": [
+        "mount",
+        "render"
+      ],
+      "optional": [
+        "update",
+        "handle_event",
+        "handle_info",
+        "commit_ack",
+        "effect_result",
+        "failure",
+        "retry",
+        "replace",
+        "terminate"
+      ]
+    }
+  },
+  "files": {
+    "integration/bh-05/authoring-check.exs": "d1a38382cf5c1eec9ae90bc4ce7ef34e4a83ea675fdbd87369df9b25cd83926a",
+    "integration/bh-05/authoring-fixtures.exs": "e049dc317d1065bdb946ed0fce42d8ba95c90a79108c6f42ebc4784ac032502d",
+    "integration/bh-05/authoring-subset.exs": "59f70979311389835b8b119d3a40a9c17a00a8437e644424d255f9b14569cf98",
+    "packages/blazex_core/lib/blazex/component.ex": "0cd48cbc4a1d3505e01579b38ce881d4a754bb7bd1010571b0425d061c9c2bd2",
+    "packages/blazex_core/lib/blazex/component/contract.ex": "8e8037755b83e0180823b1b10379db1e7f543b5da3861245e8c168eb64575853",
+    "packages/blazex_core/lib/blazex/component/input.ex": "ffde05831a020e1727642f2711fa732535dddf65a83d661b3af64cdc200fe036",
+    "packages/blazex_core/lib/blazex/component/pure.ex": "bcb1b9f5587aeb24e0b7cac05608a46b035c14c3750b9ae9e5b74b4402b0266d",
+    "packages/blazex_core/lib/blazex/component/result.ex": "3261eaaf15b368cadfeaefba2dcb1aadd85616abfe6000bfa819e85c561a73ef",
+    "packages/blazex_core/lib/blazex/component/root.ex": "41e918ddf9a01190132cae34c10268b3bece0bf46218b48a93928ac96fd6e429",
+    "packages/blazex_core/lib/blazex/component/stateful.ex": "fe6139b07e264ea809433e5274983e6ba82e3e0442c45b4e2cfdcaa0ba4e1f76",
+    "packages/blazex_core/lib/blazex/core/authoring.ex": "febe6e1bc575f3a9b0720cf8f842e233db19c576b819ca3cb37e1490e8b0fe20",
+    "packages/blazex_core/test/blazex/authoring_test.exs": "da94850b434756bcd6a78407702c62790c03a7387a29ad9788e9f2307eff9135",
+    "packages/blazex_core/test/blazex/component_contract_test.exs": "3c171ce93446be75d76ff944f8e760154a8b97ad6d44a29511d20ea3ef846ac8"
+  },
+  "runtime_execution": false,
+  "schema_execution": false,
+  "effect_execution": false,
+  "later_evidence": [],
+  "limits": [
+    "128 candidate actions",
+    "portable shape is not a semantic tree or schema pass",
+    "compiler/analyzer is not AtomVM execution parity",
+    "compile-time macros are trusted build code",
+    "LiveView and LocalLiveView deferred"
+  ]
+}
