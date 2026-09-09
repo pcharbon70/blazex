@@ -9,7 +9,10 @@ defmodule BlazeX.UITree.NestedCandidates do
 
   def invocation(plan),
     do:
-      if(plan.input, do: Map.take(plan.input, [:props, :slots]), else: %{props: %{}, slots: %{}})
+      if(plan.input,
+        do: Map.take(plan.input, [:props, :slots, :contexts]),
+        else: %{props: %{}, slots: %{}}
+      )
 
   def role(plan), do: if(plan.input, do: plan.input.role, else: :pure)
 

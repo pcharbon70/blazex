@@ -30,6 +30,13 @@ defmodule BlazeX.Component.Input do
     if valid?(input), do: :ok, else: error(:invalid_input)
   end
 
+  defp valid?(%{contexts: contexts} = input) when map_size(input) == length(@keys) + 1 do
+    is_map(contexts) and map_size(contexts) <= 16 and
+      BlazeX.Component.Action.public?(contexts) and
+      Enum.all?(Map.keys(contexts), &(&1 in input.context_keys)) and
+      valid?(Map.delete(input, :contexts))
+  end
+
   defp valid?(input) when is_map(input) and map_size(input) == length(@keys) do
     with true <- Enum.all?(@keys, &Map.has_key?(input, &1)),
          true <- Contract.callback?(input.role, input.transition),

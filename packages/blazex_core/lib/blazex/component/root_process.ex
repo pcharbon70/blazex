@@ -1,7 +1,15 @@
 defmodule BlazeX.Component.RootProcess do
   @moduledoc false
   use GenServer
-  alias BlazeX.Component.{ActionRuntime, RootPort, RootSchedule, RootTimers, SchedulingIntents}
+
+  alias BlazeX.Component.{
+    ActionRuntime,
+    RootPort,
+    RootSchedule,
+    RootTimers,
+    SchedulingIntents,
+    ScopedView
+  }
 
   def start_link(input), do: GenServer.start_link(__MODULE__, input)
 
@@ -30,7 +38,8 @@ defmodule BlazeX.Component.RootProcess do
        timers: %RootTimers{},
        candidate_intents: [],
        actions: actions,
-       action_plan: nil
+       action_plan: nil,
+       scope_intents: []
      }}
   end
 
@@ -132,6 +141,21 @@ defmodule BlazeX.Component.RootProcess do
   end
 
   defp dispatch({:action_result, _}, state), do: {{:error, :invalid_or_stale_result}, state}
+
+  defp dispatch(
+         {:enqueue, %{scope_version: _} = payload},
+         %{schedule: schedule, status: status} = state
+       )
+       when schedule != nil and status in [:ready, :awaiting_commit] and state.accepted != nil do
+    with work when is_map(work) <-
+           RootPort.call(state.ports.evaluator, :scope_ingress, [payload, state.accepted]),
+         true <- ScopedView.valid_work?(work, state.accepted),
+         {:ok, item, schedule} <- RootSchedule.internal(schedule, work) do
+      {{:ok, %{receipt: item.receipt}}, %{state | schedule: schedule}}
+    else
+      _ -> {{:error, :invalid_scope_change}, state}
+    end
+  end
 
   defp dispatch({:enqueue, envelope}, %{schedule: schedule, status: status} = state)
        when schedule != nil and status in [:ready, :awaiting_commit] and state.accepted != nil do
@@ -243,17 +267,19 @@ defmodule BlazeX.Component.RootProcess do
                      &(RootPort.call(state.ports.evaluator, :admit, [&1, candidate]) == :ok)
                    ),
                  :ok <- RootTimers.preflight(state.timers, intents),
+                 {:ok, scope_intents} <- ScopedView.followups(state.ports.evaluator, candidate),
                  {:ok, schedule} <-
                    RootSchedule.reserve(
                      state.schedule,
-                     reservations
+                     reservations ++ scope_intents
                    ) do
               submit(
                 %{
                   state
                   | schedule: schedule,
                     candidate_intents: intents,
-                    action_plan: action_plan
+                    action_plan: action_plan,
+                    scope_intents: scope_intents
                 },
                 spec,
                 correlation,
@@ -531,7 +557,17 @@ defmodule BlazeX.Component.RootProcess do
             next
           end
 
-        %{next | candidate_intents: [], action_plan: nil}
+        next =
+          if committed and state.status == :ready do
+            Enum.reduce(state.scope_intents, next, fn work, acc ->
+              {:ok, _, schedule} = RootSchedule.internal(acc.schedule, work)
+              %{acc | schedule: schedule}
+            end)
+          else
+            next
+          end
+
+        %{next | candidate_intents: [], action_plan: nil, scope_intents: []}
       else
         state
       end
@@ -591,7 +627,8 @@ defmodule BlazeX.Component.RootProcess do
         candidate_intents: [],
         timers: RootTimers.cancel_all(state.timers),
         actions: ActionRuntime.close(state.actions, reason),
-        action_plan: nil
+        action_plan: nil,
+        scope_intents: []
     }
   end
 
@@ -647,7 +684,8 @@ defmodule BlazeX.Component.RootProcess do
           | schedule: RootSchedule.finish(state.schedule),
             active_correlation: nil,
             candidate_intents: [],
-            action_plan: nil
+            action_plan: nil,
+            scope_intents: []
         }
 
         if next.pending do

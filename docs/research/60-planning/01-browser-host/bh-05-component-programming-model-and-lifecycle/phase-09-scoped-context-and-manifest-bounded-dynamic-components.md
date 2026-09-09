@@ -48,28 +48,28 @@ Back to milestone: [README](README.md)
       - [x] 9.1.2.2 Subtask - Define lexical nearest-provider resolution, subscription identity, update/change comparison, deterministic invalidation order, provider removal/replacement, and cycle/breadth bounds.
       - [x] 9.1.2.3 Subtask - Prohibit process dictionary/application environment/global registry as component context, cross-root subscription, silent server/local crossing, secrets, and authoritative client auth state.
 
-  - [ ] 9.2 Section - Implement scoped context declaration and propagation.
+  - [x] 9.2 Section - Implement scoped context declaration and propagation.
 
     Expose explicit provider/consumer declarations and schedule affected
     component updates through the existing root transition coordinator.
 
-    - [ ] 9.2.1 Task - Implement context schemas and provider state.
+    - [x] 9.2.1 Task - Implement context schemas and provider state.
 
       Validate values at their declared local or host boundary and retain one
       immutable provider record per scoped identity.
 
-      - [ ] 9.2.1.1 Subtask - Implement context declarations with name, schema/version, boundary, fixed/tracked mode, default, documentation, and public/advisory markers.
-      - [ ] 9.2.1.2 Subtask - Validate provider values before descendant evaluation and reject duplicate same-scope providers, invalid schemas, nonportable host values, secret-marked fields, or unsupported versions.
-      - [ ] 9.2.1.3 Subtask - Track provider ancestry, accepted value digest, subscribers, revision, generation, and removal state without retaining component/renderer/host objects.
+      - [x] 9.2.1.1 Subtask - Implement context declarations with name, schema/version, boundary, fixed/tracked mode, default, documentation, and public/advisory markers.
+      - [x] 9.2.1.2 Subtask - Validate provider values before descendant evaluation and reject duplicate same-scope providers, invalid schemas, nonportable host values, secret-marked fields, or unsupported versions.
+      - [x] 9.2.1.3 Subtask - Track provider ancestry, accepted value digest, subscribers, revision, generation, and removal state without retaining component/renderer/host objects.
 
-    - [ ] 9.2.2 Task - Implement consumption and deterministic invalidation.
+    - [x] 9.2.2 Task - Implement consumption and deterministic invalidation.
 
       Resolve named values explicitly and update only tracked consumers whose
       accepted dependency changed.
 
-      - [ ] 9.2.2.1 Subtask - Resolve nearest visible provider or declared default and record consumer/provider identity, schema, mode, and accepted digest during evaluation.
-      - [ ] 9.2.2.2 Subtask - Schedule tracked consumer updates in canonical tree order after provider commit while fixed context rejects later mutation by policy.
-      - [ ] 9.2.2.3 Subtask - Remove subscriptions on consumer/provider replacement/disposal and reject stale/cross-root update notifications before callbacks.
+      - [x] 9.2.2.1 Subtask - Resolve nearest visible provider or declared default and record consumer/provider identity, schema, mode, and accepted digest during evaluation.
+      - [x] 9.2.2.2 Subtask - Schedule tracked consumer updates in canonical tree order after provider commit while fixed context rejects later mutation by policy.
+      - [x] 9.2.2.3 Subtask - Remove subscriptions on consumer/provider replacement/disposal and reject stale/cross-root update notifications before callbacks.
 
   - [ ] 9.3 Section - Implement manifest-bounded dynamic component registration.
 
