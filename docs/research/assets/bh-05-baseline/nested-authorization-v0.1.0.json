@@ -1,0 +1,64 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 5,
+  "base": "ea09d05a2709a163ff0c8776c4039f1a712a95de",
+  "authorization": "Owner requested next BH-05 phase; Phase 5 only.",
+  "branch": "codex/bh05-phase5-nested-state",
+  "sections": [
+    "5.1",
+    "5.2",
+    "5.3",
+    "5.4"
+  ],
+  "delivery": [
+    "verified section commits",
+    "single PR",
+    "merge",
+    "checkout main",
+    "sync origin",
+    "delete feature branch"
+  ],
+  "contract": "0.1.0-bh05-nested-state",
+  "schema_contract": "0.2.0-bh05-schema-candidate",
+  "input_hashes": {
+    "docs/research/assets/bh-05-baseline/composition-completion-v0.1.0.json": "f0ba2eb75591ca5df0e69a84b84ef593ccadcd8f2c861e924c1966014a70f12d",
+    "docs/research/assets/bh-05-baseline/composition-gates-v0.1.0.json": "e09203e71a63b13fe35dadbcb828d0aa7467a502e117ca3b5e32ac6e417606c7",
+    "docs/research/60-planning/01-browser-host/bh-05-component-programming-model-and-lifecycle/composition-contract.md": "cff46e40b4520e08f5e90650cb5c7e9a323de644e34609e8ece8b3a49f647d24",
+    "packages/blazex_ui_tree/lib/blazex/ui_tree/composition_plan.ex": "ba3ccabd9c0f7a9481b8c27f29bd4c654ab0428cfee342c30040c3c1a6d14b6e",
+    "packages/blazex_core/lib/blazex/component/stateful.ex": "fe6139b07e264ea809433e5274983e6ba82e3e0442c45b4e2cfdcaa0ba4e1f76",
+    "packages/blazex_core/lib/blazex/component/contract.ex": "8e8037755b83e0180823b1b10379db1e7f543b5da3861245e8c168eb64575853",
+    "packages/blazex_core/lib/blazex/component/input.ex": "ffde05831a020e1727642f2711fa732535dddf65a83d661b3af64cdc200fe036",
+    "packages/blazex_core/lib/blazex/component/result.ex": "3261eaaf15b368cadfeaefba2dcb1aadd85616abfe6000bfa819e85c561a73ef",
+    "packages/blazex_core/lib/blazex/component/schema.ex": "0c38aeaf182a5d813a9f1d416bcc10e27fc334de2752d336e2330b47fd0ce5d7",
+    "packages/blazex_core/lib/blazex/component/invocation.ex": "627459e7501fcb1dfa6c359b22b022e23481b34d6c8ba0a57481e713fc8f018f",
+    "packages/blazex_core/lib/blazex/core/identity.ex": "46d62a903ba4e3df049ecf94efc174009c4b2c5c54f29f8507a042d18356e8c4",
+    "packages/blazex_core/lib/blazex/core/event.ex": "8ee5bfe1cdcfa974e75545c8de62a6d58009678fbb4ebc21e8acb11f30a6f221",
+    "packages/blazex_core/lib/blazex/core/evaluator.ex": "5ddc15afe7eb2888635c8c7086562fcc1389f6966afe6248b103e8b15ad77e18",
+    "packages/blazex_ui_tree/lib/blazex/ui_tree/semantic_acceptance.ex": "afe0d81fadadd3c2dc059cd7ae505a3877d518560d7c12c8aeff201f16276219",
+    "packages/blazex_ui_tree/lib/blazex/ui_tree/node.ex": "e32bb3b37a01a1ed87a165380aceb00d2e34434f0c83fbb73006faa475e00ce0",
+    "packages/blazex_ui_tree/lib/blazex/ui_tree/document.ex": "d4d8b6958ebbdda201785caa2b2d3b49b1267b03897131e4cda3266323dea32f",
+    "packages/blazex_ui_tree/lib/blazex/ui_tree/intent_set.ex": "109b9d4927b2ba8b810188092066794f8c2de29e531362f0b601a6cc4ba4642e"
+  },
+  "reviewed_successor_changes": {
+    "packages/blazex_ui_tree/lib/blazex/ui_tree/composition_plan.ex": "Optional internal mixed-role planning; default Phase 4 pure behavior unchanged."
+  },
+  "limits": {
+    "depth": 12,
+    "nodes": 256,
+    "invocations": 128,
+    "counter": 9007199254740991,
+    "notifications": 128
+  },
+  "excluded": [
+    "root processes",
+    "external messages/timers",
+    "effects/commands",
+    "renderer commit",
+    "context registry resolution",
+    "independent recovery",
+    "LiveView",
+    "LocalLiveView",
+    "support claims"
+  ],
+  "support_state": "unsupported"
+}

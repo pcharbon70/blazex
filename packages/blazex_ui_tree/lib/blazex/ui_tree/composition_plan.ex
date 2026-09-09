@@ -4,7 +4,8 @@ defmodule BlazeX.UITree.CompositionPlan do
   alias BlazeX.Core.Identity
   @keys [:module, :public_id, :site, :key, :props, :slots, :children]
 
-  def build(root, generation, reference, graph, boundary, capabilities) do
+  def build(root, generation, reference, graph, boundary, capabilities, roles \\ [:pure]) do
+    require!(roles in [[:pure], [:pure, :stateful]], :roles, [])
     require!(Schema.boundary?(boundary) and boundary.root == root, :boundary, [])
     require!(BlazeX.Component.Input.names?(capabilities), :capabilities, [])
     require!(is_integer(generation) and generation in 1..9_007_199_254_740_991, :generation, [])
@@ -23,7 +24,7 @@ defmodule BlazeX.UITree.CompositionPlan do
         [],
         nil,
         %{},
-        %{count: 0, nodes: 0, seen: MapSet.new(), used: MapSet.new()},
+        %{count: 0, nodes: 0, seen: MapSet.new(), used: MapSet.new(), roles: roles},
         nil
       )
 
@@ -79,8 +80,8 @@ defmodule BlazeX.UITree.CompositionPlan do
     metadata = spec.module.__blazex_component__()
 
     require!(
-      is_map(metadata) and metadata.role == :pure and metadata.version == Schema.version() and
-        metadata.callbacks == [render: 1],
+      is_map(metadata) and metadata.role in state.roles and metadata.version == Schema.version() and
+        valid_callbacks?(metadata) and (metadata.role == :pure or identity.path != []),
       :pure_contract,
       path
     )
@@ -194,7 +195,7 @@ defmodule BlazeX.UITree.CompositionPlan do
       end)
 
     input = %{
-      role: :pure,
+      role: metadata.role,
       transition: :render,
       props: invocation.props,
       slots: Map.new(invocation.slots),
@@ -211,6 +212,7 @@ defmodule BlazeX.UITree.CompositionPlan do
 
     {%{
        module: spec.module,
+       metadata: metadata,
        public_id: spec.public_id,
        identity: identity,
        input: input,
@@ -222,6 +224,18 @@ defmodule BlazeX.UITree.CompositionPlan do
   end
 
   defp key?(key), do: is_binary(key) and byte_size(key) in 1..128 and String.valid?(key)
+
+  defp valid_callbacks?(%{role: :pure, callbacks: callbacks}), do: callbacks == [render: 1]
+
+  defp valid_callbacks?(%{role: :stateful, callbacks: callbacks}) do
+    {required, optional} =
+      {[init: 1, render: 1], [update: 1, handle_event: 1, handle_info: 1, replace: 1, dispose: 1]}
+
+    Enum.all?(required, &(&1 in callbacks)) and
+      Enum.all?(callbacks, &(&1 in (required ++ optional)))
+  end
+
+  defp valid_callbacks?(_), do: false
 
   defp child_identity(parent, spec, slot, key, path) do
     require!(Schema.name?(spec[:public_id]) and Schema.name?(spec[:site]), :call_identity, path)
@@ -239,6 +253,7 @@ defmodule BlazeX.UITree.CompositionPlan do
 
     value = %{
       module: nil,
+      metadata: nil,
       public_id: "slot",
       identity: identity,
       input: nil,

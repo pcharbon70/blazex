@@ -238,6 +238,11 @@ independent-review blockers, as intended.
 
 ## Maintaining this index
 
+- [`generate_bh05_nested.py`](generate_bh05_nested.py) — Phase 5 authority, state/event/semantic bindings and bounded planner successor.
+- [`validate_bh05_nested.py`](validate_bh05_nested.py) — Nested state inventory, ownership and source-frozen completion checks.
+- [`test_validate_bh05_nested.py`](test_validate_bh05_nested.py) — Isolated negative authority, boundary, fixture and gate tests.
+- [`record_bh05_phase5.py`](record_bh05_phase5.py) — Current nested-state and frozen historical gate recording/publication.
+
 - [`generate_bh05_composition.py`](generate_bh05_composition.py) — Phase 4 authority and semantic input bindings.
 - [`validate_bh05_composition.py`](validate_bh05_composition.py) — Phase 4 immutable predecessor, ownership, fixture and source-frozen evidence checks.
 - [`test_validate_bh05_composition.py`](test_validate_bh05_composition.py) — Isolated composition evidence mutation tests.

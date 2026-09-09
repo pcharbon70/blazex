@@ -40,3 +40,16 @@ deterministic; no state, effects or renderer execution is introduced.
 See the [contract](../../docs/research/60-planning/01-browser-host/bh-05-component-programming-model-and-lifecycle/composition-contract.md)
 and [public example](../../integration/bh-05/composition-fixtures.exs).
 The implementation does not sandbox arbitrary Elixir or claim Wasm parity.
+
+## BH-05 Phase 5 nested state
+
+`BlazeX.UITree.Nested` owns in-memory mount, reconcile and local event candidates.
+Its opaque session couples a Core `NestedTable` with complete accepted semantic
+output. Keyed reorder retains state; explicit incompatible replacement starts
+fresh state; removals dispose deepest-first. Every rejection preserves the exact
+prior session. Typed parent notifications are data only, not delivered messages.
+
+The [nested contract](../../docs/research/60-planning/01-browser-host/bh-05-component-programming-model-and-lifecycle/nested-contract.md)
+and [public fixtures](../../integration/bh-05/nested-fixtures.exs) define the bounded
+API and deterministic examples. No root processes, effects or renderer commit
+are introduced. Default Phase 4 pure-only composition remains unchanged.

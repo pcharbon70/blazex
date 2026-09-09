@@ -1,0 +1,76 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 5,
+  "contract": "0.1.0-bh05-nested-state",
+  "support_state": "unsupported",
+  "public": [
+    "BlazeX.Component.NestedTable",
+    "BlazeX.UITree.Nested"
+  ],
+  "transitions": [
+    "mount",
+    "compatible-update",
+    "no-change",
+    "local-event-candidate",
+    "keyed-move",
+    "insert",
+    "remove",
+    "explicit-replacement",
+    "generation-replacement",
+    "dispose"
+  ],
+  "coverage": [
+    "parent-controlled-props",
+    "retained-local-state",
+    "independent-headless-oracle",
+    "nested-pure-stateful-children",
+    "permutation-replay",
+    "parent-scope-removal-insertion",
+    "module-schema-parent-generation-replacement",
+    "deepest-first-disposal",
+    "callback-state-output-action-failure-rollback",
+    "stale-event-revision",
+    "wrong-root",
+    "duplicate-unstable-keys",
+    "128-notifications-and-overflow",
+    "graph-and-counter-overflow",
+    "accepted-table-integrity"
+  ],
+  "normalized_digests": {
+    "NESTED_SCRIPT_SHA256": "ed90bfc7d1cbc3c485d1b99f2f90eec810bf505f02bb54a5e5c307c90dd51c17",
+    "NESTED_HEADLESS_SHA256": "125fe6ba87e98d99e43b211a2019eff9c295fab9a99a7fc9f88d63918dc4aff0",
+    "NESTED_FINAL_STATE_SHA256": "0e1ae9c08b27aee2981875873ef3b33536867976adf5a92b9988fb0ff2740b07"
+  },
+  "files": {
+    "integration/bh-05/nested-fixtures.exs": "9ce61eb745a622614aab819f7041e95ba3756bda163f69cc414887ad1201b0dc",
+    "integration/conformance/test/bh05_nested_test.exs": "b8a2b4c6467f215aca0611050aace9c7563107843032a06dfe4a2a44b80e6139",
+    "packages/blazex_core/lib/blazex/component/nested_table.ex": "30448640f0c112bfb64245f5fa2a2d1455bd7eeee79490ba6cd7cc03b65e6daf",
+    "packages/blazex_ui_tree/lib/blazex/ui_tree/composition_plan.ex": "f5295d8ffd2633512b14e6036cea4e92490725ccc52a1ad5afd464da577f94c9",
+    "packages/blazex_ui_tree/lib/blazex/ui_tree/nested.ex": "98c809a7e8a11eec45774cec01e4d6b09772bca71af544451c015f9cf98134f3",
+    "packages/blazex_ui_tree/lib/blazex/ui_tree/nested_candidates.ex": "e9b2d5412d70cf5b5774dcd594f474743868ef06584613433565a43f0fe3a86e",
+    "packages/blazex_ui_tree/test/blazex/nested_candidates_test.exs": "a9cdba6ac9902a178c6bf4ad66dbbf52e47dc2b73676666f4b366d20d23ab9b5",
+    "packages/blazex_ui_tree/test/blazex/nested_test.exs": "822cafc5a2d895fcf239081cc8bf3c23273ad5e3f4695f3505b59e18917e2909"
+  },
+  "retained_state": true,
+  "process_startup": false,
+  "effects_execution": false,
+  "runtime_parity": false,
+  "limits": {
+    "depth": 12,
+    "invocations": 128,
+    "nodes": 256,
+    "notifications": 128,
+    "counter": 9007199254740991
+  },
+  "later_evidence": [],
+  "limitations": [
+    "trusted opaque in-memory sessions; digests are not authentication",
+    "no closures in retained invocations/state",
+    "one shared future root process/failure boundary",
+    "typed parent notifications are data only",
+    "no external disposal side effects or rollback guarantee",
+    "ERTS term encoding; Wasm parity remains Phase 11",
+    "no timers, effects, renderer commits, registry/context resolution",
+    "LiveView and LocalLiveView deferred"
+  ]
+}

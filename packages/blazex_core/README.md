@@ -1,5 +1,11 @@
 # BlazeX Core
 
+BH-05 Phase 5 adds `BlazeX.Component.NestedTable`, the immutable accepted
+root/revision/sequence and instance-record contract. It validates portable state,
+identity/parent ownership and integrity digests without depending on UI Tree or
+a renderer. Semantic acceptance and in-memory candidate orchestration belong to
+`BlazeX.UITree.Nested`. There is no process startup, mailbox or effect execution.
+
 Defines the host-neutral component programming model: component behaviours,
 lifecycle, stable identity, state transitions, semantic events, commands, and
 the contracts used to evaluate a component tree.
