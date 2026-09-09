@@ -49,8 +49,11 @@ Planning alone does not authorize implementation. The owner authorized Phase 1
 after the accepted BH-04 corrective handoff merged in PR #51 at
 `506c254ddd4a14dd8d1d4cbdba8fcf9556bd15cb`. Phase 1 activates governance only;
 every later phase still requires separate explicit implementation authorization.
-Phase 1 is now complete: all activation gates pass without new component
-behavior. Phase 2 is eligible but unauthorized; BH-06 remains ineligible.
+Phases 1–4 are complete: governance activation, the candidate authoring facade,
+prop/slot schemas and bounded pure composition have accepted, separately bound
+evidence. Phase 5 is eligible but unauthorized; BH-06 remains ineligible.
+The current [Phase 4 evidence](composition-evidence.md) records ERTS/headless
+acceptance only, without retained state, effects execution or Wasm parity.
 
 ## What belongs here
 
@@ -128,10 +131,10 @@ adapter modules are forbidden even when available in the monorepo.
 | Phase | Status | Delivery | Dependency |
 | --- | --- | --- | --- |
 | [1 — Authorization, BH-04 Handoff Reconciliation, and Boundary Activation](phase-01-authorization-bh-04-handoff-reconciliation-and-boundary-activation.md) | complete — governance only | Bind accepted BH-04 evidence, reconcile nine BH-05 acceptance obligations, activate component evidence boundaries, and prove fail-closed ownership. | Accepted BH-04 and explicit authorization |
-| [2 — Component Roles, Authoring Facade, and Callback Algebra](phase-02-component-roles-authoring-facade-and-callback-algebra.md) | eligible — unauthorized | Define the Phoenix-familiar but host-neutral module facade, three component roles, lifecycle vocabulary, callback inputs, and closed return forms. | Phase 1 |
-| [3 — Prop, Slot, and Host-Boundary Contracts](phase-03-prop-slot-and-host-boundary-contracts.md) | planned — unauthorized | Implement schema declarations, defaults, required/cardinality rules, contextual slots, local/host boundary validation, and diagnostics. | Phase 2 |
-| [4 — Pure Composition and Atomic Semantic Evaluation](phase-04-pure-composition-and-atomic-semantic-evaluation.md) | planned — unauthorized | Evaluate pure nested composition deterministically and accept output only after complete semantic validation. | Phase 3 |
-| [5 — Nested Stateful Identity and Update Reconciliation](phase-05-nested-stateful-identity-and-update-reconciliation.md) | planned — unauthorized | Retain keyed nested state, reconcile insert/move/update/remove/replace operations, and define controlled-prop versus local-state ownership. | Phase 4 |
+| [2 — Component Roles, Authoring Facade, and Callback Algebra](phase-02-component-roles-authoring-facade-and-callback-algebra.md) | complete — candidate facade | Define the Phoenix-familiar but host-neutral module facade, three component roles, lifecycle vocabulary, callback inputs, and closed return forms. | Phase 1 |
+| [3 — Prop, Slot, and Host-Boundary Contracts](phase-03-prop-slot-and-host-boundary-contracts.md) | complete — schema normalization | Implement schema declarations, defaults, required/cardinality rules, contextual slots, local/host boundary validation, and diagnostics. | Phase 2 |
+| [4 — Pure Composition and Atomic Semantic Evaluation](phase-04-pure-composition-and-atomic-semantic-evaluation.md) | complete — bounded pure composition | Evaluate pure nested composition deterministically and accept output only after complete semantic validation. | Phase 3 |
+| [5 — Nested Stateful Identity and Update Reconciliation](phase-05-nested-stateful-identity-and-update-reconciliation.md) | eligible — unauthorized | Retain keyed nested state, reconcile insert/move/update/remove/replace operations, and define controlled-prop versus local-state ownership. | Phase 4 |
 | [6 — Process-Root Local View Lifecycle and Supervision](phase-06-process-root-local-view-lifecycle-and-supervision.md) | planned — unauthorized | Implement the independent local-view process, mount/update/render/commit/info/terminate lifecycle, root generation, and supervision boundary. | Phase 5 and accepted BH-03/BH-04 contracts |
 | [7 — Event, Message, Timer, and Transition Scheduling](phase-07-event-message-timer-and-transition-scheduling.md) | planned — unauthorized | Serialize root transitions, route local events and messages, bound backlogs, reject stale work, and make rendering/final-state ordering explicit. | Phase 6 |
 | [8 — Effects, Resources, and Typed Command Intent](phase-08-effects-resources-and-typed-command-intent.md) | planned — unauthorized | Replace generic emissions with typed effects/resources/command intents and enforce authority, result, cancellation, timeout, and ownership boundaries. | Phases 6–7 |
@@ -202,6 +205,7 @@ Phoenix, browser, native-host, or release compatibility.
 ### Documents
 
 - [Pure composition contract](composition-contract.md)
+- [Phase 4 pure composition implementation evidence](composition-evidence.md)
 - [Prop and slot schema contract](schema-contract.md)
 - [Phase 3 schema implementation evidence](schema-evidence.md)
 - [Candidate authoring contract](authoring-contract.md)

@@ -27,3 +27,16 @@ BH-05 callbacks, facade, process or support claim. Package ownership and API
 migration decisions are recorded in `docs/research/assets/bh-05-baseline`.
 Runtime/host profiles consume neutral contracts; LiveView and LocalLiveView
 integration remain explicitly deferred.
+
+## BH-05 Phase 4 pure composition
+
+`BlazeX.UITree.Composition.evaluate(root, generation, reference, graph, boundary,
+capabilities)` accepts trusted build-authored graphs of schema-aware pure
+components. It plans the whole bounded graph before invoking callbacks, then
+accepts one complete `IntentSet` through existing constructors. A failure returns
+only a redacted diagnostic. Graph keys, lexical slots, ordering and traces are
+deterministic; no state, effects or renderer execution is introduced.
+
+See the [contract](../../docs/research/60-planning/01-browser-host/bh-05-component-programming-model-and-lifecycle/composition-contract.md)
+and [public example](../../integration/bh-05/composition-fixtures.exs).
+The implementation does not sandbox arbitrary Elixir or claim Wasm parity.

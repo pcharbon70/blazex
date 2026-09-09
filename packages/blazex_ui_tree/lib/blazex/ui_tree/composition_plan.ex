@@ -44,7 +44,12 @@ defmodule BlazeX.UITree.CompositionPlan do
          state,
          override
        ) do
-    require!(length(identity.path) <= 12 and state.count < 128 and state.nodes < 256, :limit, path)
+    require!(
+      length(identity.path) <= 12 and state.count < 128 and state.nodes < 256,
+      :limit,
+      path
+    )
+
     require!(ref not in stack, :cycle, path)
     spec = Map.get(graph, ref)
 
