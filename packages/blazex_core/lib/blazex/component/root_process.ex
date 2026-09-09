@@ -1,7 +1,7 @@
 defmodule BlazeX.Component.RootProcess do
   @moduledoc false
   use GenServer
-  alias BlazeX.Component.{RootPort, RootSchedule}
+  alias BlazeX.Component.{RootPort, RootSchedule, RootTimers, SchedulingIntents}
 
   def start_link(input), do: GenServer.start_link(__MODULE__, input)
 
@@ -23,7 +23,9 @@ defmodule BlazeX.Component.RootProcess do
        attempt: 0,
        error: nil,
        schedule: schedule,
-       active_correlation: nil
+       active_correlation: nil,
+       timers: %RootTimers{},
+       candidate_intents: []
      }}
   end
 
@@ -44,6 +46,24 @@ defmodule BlazeX.Component.RootProcess do
       do: info_result(run_next(state))
 
   def handle_info(:drain, state), do: {:noreply, state}
+
+  def handle_info({:owned_tick, key, epoch, token}, %{schedule: schedule} = state)
+      when schedule != nil do
+    next =
+      case RootTimers.wake(state.timers, key, epoch, token, state.accepted) do
+        {:ok, item, timers} ->
+          case RootSchedule.internal(schedule, item) do
+            {:ok, _item, next_schedule} -> %{state | timers: timers, schedule: next_schedule}
+            {:error, _} -> %{state | timers: RootTimers.finish(timers, item)}
+          end
+
+        {:error, timers} ->
+          %{state | timers: timers}
+      end
+
+    info_result(settle(next))
+  end
+
   def handle_info(_, %{schedule: nil} = state), do: {:noreply, state}
 
   def handle_info(_, state) do
@@ -56,6 +76,7 @@ defmodule BlazeX.Component.RootProcess do
   def handle_call(operation, _from, state) do
     {reply, next} = dispatch(operation, state)
     next = settle(next)
+    checkpoint(next)
 
     if next.status in [:disposed, :failed],
       do: {:stop, :normal, {reply, snapshot(next)}, next},
@@ -70,6 +91,7 @@ defmodule BlazeX.Component.RootProcess do
       end)
 
   defp info_result(state) do
+    checkpoint(state)
     if state.status in [:disposed, :failed], do: {:stop, :normal, state}, else: {:noreply, state}
   end
 
@@ -83,6 +105,7 @@ defmodule BlazeX.Component.RootProcess do
         if RootPort.call(state.ports.evaluator, :admit, [item, state.accepted]) == :ok do
           next = %{state | schedule: next_schedule}
           if superseded, do: outcome(next, superseded, :coalesced, nil)
+          next = if item.kind == :timer_cancel, do: cancel_owned(next, item), else: next
           notify(next, :admitted)
           send(self(), :drain)
           {{:ok, %{receipt: item.receipt, sequence: item.sequence}}, next}
@@ -100,6 +123,37 @@ defmodule BlazeX.Component.RootProcess do
 
   defp dispatch({:stop, reason}, state) when reason in [:shutdown, :removal],
     do: stopping(state, reason)
+
+  defp dispatch(:runtime_loss, %{schedule: schedule} = state) when schedule != nil do
+    state = close_schedule(state, :runtime_loss)
+    cancel_timer(state)
+
+    if state.pending,
+      do: RootPort.call(state.ports.renderer, :cancel, [state.pending.correlation])
+
+    failed(state, :runtime_loss)
+  end
+
+  defp dispatch({:replace, revision, spec}, %{schedule: schedule, accepted: accepted} = state)
+       when schedule != nil and accepted != nil do
+    with true <- revision == accepted.correlation.revision,
+         {:ok, spec} <- RootPort.normalize(spec),
+         true <- RootPort.handle(spec) == RootPort.handle(state.spec) do
+      next = close_schedule(state, :replace)
+      cancel_timer(next)
+
+      cancelled =
+        if next.pending,
+          do: RootPort.call(next.ports.renderer, :cancel, [next.pending.correlation]),
+          else: :ok
+
+      if cancelled == :ok,
+        do: begin(%{next | pending: nil}, spec, :replace),
+        else: failed(next, :rollback_failed)
+    else
+      _ -> {{:error, :stale}, state}
+    end
+  end
 
   defp dispatch(_operation, %{status: status} = state) when status != :ready,
     do: {{:error, :busy}, state}
@@ -145,10 +199,31 @@ defmodule BlazeX.Component.RootProcess do
         callback = if work, do: :prepare_scheduled, else: :prepare
 
         case RootPort.call(state.ports.evaluator, callback, [request, state.accepted]) do
-          {:ok, candidate, []} when work != nil ->
-            if RootPort.candidate?(candidate, correlation),
-              do: submit(state, spec, correlation, candidate, nil),
-              else: rejected(state, :semantic_rejected)
+          {:ok, candidate, groups} when work != nil ->
+            with true <- RootPort.candidate?(candidate, correlation),
+                 {:ok, intents} <-
+                   SchedulingIntents.normalize(state.schedule.policy, groups, candidate, spec),
+                 true <-
+                   Enum.all?(
+                     intents,
+                     &(RootPort.call(state.ports.evaluator, :admit, [&1, candidate]) == :ok)
+                   ),
+                 :ok <- RootTimers.preflight(state.timers, intents),
+                 {:ok, schedule} <-
+                   RootSchedule.reserve(
+                     state.schedule,
+                     Enum.filter(intents, &(&1.kind == :message))
+                   ) do
+              submit(
+                %{state | schedule: schedule, candidate_intents: intents},
+                spec,
+                correlation,
+                candidate,
+                nil
+              )
+            else
+              _ -> rejected(state, :semantic_rejected)
+            end
 
           {:ok, candidate} ->
             if RootPort.candidate?(candidate, correlation),
@@ -227,9 +302,19 @@ defmodule BlazeX.Component.RootProcess do
     }
 
     cleanup_result =
-      if pending.correlation.operation == :replace,
-        do: cleanup(state, state.accepted, :replace),
-        else: :ok
+      cond do
+        pending.correlation.operation == :replace ->
+          cleanup(state, state.accepted, :replace)
+
+        state.schedule != nil and state.accepted != nil ->
+          RootPort.call(state.ports.evaluator, :cleanup_removed, [
+            state.accepted,
+            pending.candidate
+          ])
+
+        true ->
+          :ok
+      end
 
     if cleanup_result == :ok do
       notify(next, :ready)
@@ -322,7 +407,10 @@ defmodule BlazeX.Component.RootProcess do
     }
 
     if state.schedule,
-      do: Map.put(value, :scheduling, RootSchedule.metrics(state.schedule)),
+      do:
+        value
+        |> Map.put(:scheduling, RootSchedule.metrics(state.schedule))
+        |> Map.put(:timers, RootTimers.inventory(state.timers)),
       else: value
   end
 
@@ -332,16 +420,26 @@ defmodule BlazeX.Component.RootProcess do
         next = %{state | schedule: schedule}
 
         if RootSchedule.valid_dispatch?(work, state.accepted) and
+             RootTimers.valid_tick?(state.timers, work) and
              RootPort.call(state.ports.evaluator, :admit, [work, state.accepted]) == :ok do
-          spec =
-            if work.kind == :update, do: Map.merge(state.spec, work.payload), else: state.spec
+          if work.kind in [:timer_start, :timer_cancel] do
+            timer_control(next, work)
+          else
+            spec =
+              if work.kind == :update, do: Map.merge(state.spec, work.payload), else: state.spec
 
-          {_reply, next} = begin(next, spec, :update, work)
-          settle(next)
+            {_reply, next} = begin(next, spec, :update, work)
+            settle(next)
+          end
         else
           outcome(next, work, :rejected, :stale_target)
           send(self(), :drain)
-          %{next | schedule: RootSchedule.finish(schedule)}
+
+          %{
+            next
+            | schedule: RootSchedule.finish(schedule),
+              timers: RootTimers.finish(next.timers, work)
+          }
         end
 
       {:empty, _} ->
@@ -364,7 +462,36 @@ defmodule BlazeX.Component.RootProcess do
           state.error
         )
 
-        %{state | schedule: RootSchedule.finish(state.schedule), active_correlation: nil}
+        next = %{
+          state
+          | schedule: RootSchedule.finish(state.schedule),
+            active_correlation: nil,
+            timers: RootTimers.finish(state.timers, state.schedule.active)
+        }
+
+        next =
+          if committed and state.status == :ready,
+            do: apply_intents(next, state.candidate_intents),
+            else: next
+
+        %{next | candidate_intents: []}
+      else
+        state
+      end
+
+    state =
+      if state.accepted != nil do
+        timers = RootTimers.prune(state.timers, state.accepted)
+
+        {removed, schedule} =
+          RootSchedule.drop(
+            state.schedule,
+            &(not RootSchedule.valid_dispatch?(&1, state.accepted) or
+                not RootTimers.valid_tick?(timers, &1))
+          )
+
+        Enum.each(removed, &outcome(state, &1, :canceled, :removed_target))
+        %{state | timers: timers, schedule: schedule}
       else
         state
       end
@@ -393,8 +520,74 @@ defmodule BlazeX.Component.RootProcess do
     %{
       state
       | schedule: %{RootSchedule.finish(state.schedule) | queue: []},
-        active_correlation: nil
+        active_correlation: nil,
+        candidate_intents: [],
+        timers: RootTimers.cancel_all(state.timers)
     }
+  end
+
+  defp timer_control(state, work) do
+    result =
+      case work.kind do
+        :timer_start -> RootTimers.install(state.timers, work)
+        :timer_cancel -> {:ok, RootTimers.cancel(state.timers, RootTimers.key(work))}
+      end
+
+    {result, reason, timers} =
+      case result do
+        {:ok, timers} -> {:committed, nil, timers}
+        {:error, reason} -> {:rejected, reason, state.timers}
+      end
+
+    outcome(state, work, result, reason)
+    settle(%{state | timers: timers, schedule: RootSchedule.finish(state.schedule)})
+  end
+
+  defp cancel_owned(state, item) do
+    key = RootTimers.key(item)
+    state = %{state | timers: RootTimers.cancel(state.timers, key)}
+    active = state.schedule.active
+
+    state =
+      if active != nil and active.kind == :timer_tick and RootTimers.key(active) == key do
+        outcome(state, active, :canceled, :timer_cancel)
+
+        next = %{
+          state
+          | schedule: RootSchedule.finish(state.schedule),
+            active_correlation: nil,
+            candidate_intents: []
+        }
+
+        if next.pending do
+          {_reply, next} = abandon(next, :timer_canceled)
+          next
+        else
+          next
+        end
+      else
+        state
+      end
+
+    outcome(state, item, :committed, nil)
+    state
+  end
+
+  defp apply_intents(state, intents) do
+    Enum.reduce(intents, state, fn item, acc ->
+      case item.kind do
+        :message ->
+          {:ok, schedule, _items} = RootSchedule.followups(acc.schedule, [item])
+          %{acc | schedule: schedule}
+
+        :timer_start ->
+          {:ok, timers} = RootTimers.install(acc.timers, item)
+          %{acc | timers: timers}
+
+        :timer_cancel ->
+          %{acc | timers: RootTimers.cancel(acc.timers, RootTimers.key(item))}
+      end
+    end)
   end
 
   defp outcome(state, item, result, reason) do
@@ -407,13 +600,26 @@ defmodule BlazeX.Component.RootProcess do
         correlation: state.active_correlation
       })
 
+    send(state.guardian, {:root_work_done, self(), item.receipt})
     RootPort.call(state.ports.host, :notify, [record])
   end
 
   defp notify(state, event) do
+    checkpoint(state)
     snapshot = snapshot(state)
     send(state.guardian, {:root_snapshot, self(), snapshot})
     RootPort.call(state.ports.host, :notify, [Map.put(snapshot, :event, event)])
+    :ok
+  end
+
+  defp checkpoint(%{schedule: nil}), do: :ok
+
+  defp checkpoint(state) do
+    work =
+      state.schedule.queue ++ if(state.schedule.active, do: [state.schedule.active], else: [])
+
+    work = Enum.map(work, &Map.take(&1, [:receipt, :class, :producer, :sequence]))
+    send(state.guardian, {:root_work, self(), work, RootTimers.refs(state.timers)})
     :ok
   end
 end

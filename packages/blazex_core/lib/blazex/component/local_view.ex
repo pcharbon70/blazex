@@ -43,6 +43,8 @@ defmodule BlazeX.Component.LocalView do
 
   def enqueue(supervisor, handle, envelope), do: request(supervisor, handle, {:enqueue, envelope})
 
+  def runtime_loss(supervisor, handle), do: request(supervisor, handle, :runtime_loss)
+
   def update(supervisor, handle, revision, props, slots \\ %{}),
     do: request(supervisor, handle, {:update, revision, props, slots})
 

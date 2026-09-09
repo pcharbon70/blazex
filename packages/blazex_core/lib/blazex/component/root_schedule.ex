@@ -91,7 +91,7 @@ defmodule BlazeX.Component.RootSchedule do
       next =
         %{
           next
-          | queue: next.queue ++ [item],
+          | queue: if(item.kind == :timer_cancel, do: next.queue, else: next.queue ++ [item]),
             receipt: item.receipt,
             producers: Map.put(next.producers, item.producer, item.sequence),
             admitted: next.admitted + 1,
@@ -123,6 +123,7 @@ defmodule BlazeX.Component.RootSchedule do
          source when is_map(source) <- component(accepted, envelope.source),
          target when is_map(target) <- component(accepted, envelope.target),
          true <- source.public_id == grant.component and target.role in [:root, :stateful],
+         true <- envelope.class != :timer or source.role in [:root, :stateful],
          true <- route?(envelope.route, source.identity, target.identity, accepted),
          {:ok, payload} <- payload(policy, envelope, source, target, spec),
          true <- timer?(envelope) do
@@ -162,7 +163,11 @@ defmodule BlazeX.Component.RootSchedule do
 
   def reserve(schedule, items) do
     next = %{schedule | reserved: items}
-    if length(items) <= 16 and within?(next), do: {:ok, sample(next)}, else: {:error, :overload}
+
+    if length(items) <= 16 and NestedTable.counter?(schedule.receipt + length(items)) and
+         within?(next),
+       do: {:ok, sample(next)},
+       else: {:error, :overload}
   end
 
   def followups(schedule, items) do
@@ -283,6 +288,8 @@ defmodule BlazeX.Component.RootSchedule do
   defp kind(%{class: :timer, timer: %{operation: :start}}), do: :timer_start
   defp kind(%{class: :timer, timer: %{operation: :cancel}}), do: :timer_cancel
   defp kind(item), do: item.class
+
+  defp insert(schedule, %{kind: :timer_cancel}), do: {:ok, schedule, nil}
 
   defp insert(schedule, item) do
     tail = List.last(schedule.queue)

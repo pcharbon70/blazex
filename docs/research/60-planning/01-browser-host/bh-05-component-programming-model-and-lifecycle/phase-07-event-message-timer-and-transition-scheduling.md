@@ -71,28 +71,28 @@ Back to milestone: [README](README.md)
       - [x] 7.2.2.2 Subtask - Correlate each work item with candidate state/output, renderer transaction, commit/reject, final state, diagnostics, and acknowledgement where applicable.
       - [x] 7.2.2.3 Subtask - Resume scheduling only after commit/rejection reaches a terminal transition outcome and release candidate-only work on failure.
 
-  - [ ] 7.3 Section - Implement local events, messages, and owned timers.
+  - [x] 7.3 Section - Implement local events, messages, and owned timers.
 
     Invoke the declared callback for each normalized work class and preserve
     root/nested identity, output, action, and final-state ordering.
 
-    - [ ] 7.3.1 Task - Implement event and component-message dispatch.
+    - [x] 7.3.1 Task - Implement event and component-message dispatch.
 
       Route semantic events to the bound owner and typed local messages only to
       declared root/nested targets.
 
-      - [ ] 7.3.1.1 Subtask - Resolve committed event bindings, validate owner/source/sequence, invoke the correct stateful callback, and reject events targeting pure, missing, replaced, or unbound identities.
-      - [ ] 7.3.1.2 Subtask - Define and dispatch typed self/child/parent/root local messages with declared schemas and no arbitrary closure, PID, cross-root, or server transport.
-      - [ ] 7.3.1.3 Subtask - Commit state/output only after complete semantic and renderer acceptance and emit one correlated event/message outcome.
+      - [x] 7.3.1.1 Subtask - Resolve committed event bindings, validate owner/source/sequence, invoke the correct stateful callback, and reject events targeting pure, missing, replaced, or unbound identities.
+      - [x] 7.3.1.2 Subtask - Define and dispatch typed self/child/parent/root local messages with declared schemas and no arbitrary closure, PID, cross-root, or server transport.
+      - [x] 7.3.1.3 Subtask - Commit state/output only after complete semantic and renderer acceptance and emit one correlated event/message outcome.
 
-    - [ ] 7.3.2 Task - Implement owned timers and lifecycle messages.
+    - [x] 7.3.2 Task - Implement owned timers and lifecycle messages.
 
       Give timers stable owner/generation identities and deterministic
       cancellation so late ticks cannot mutate replaced state.
 
-      - [ ] 7.3.2.1 Subtask - Implement one-shot/repeating timer intent with delay/interval bounds, stable timer ID, owner, generation, message schema, admission, and cancellation.
-      - [ ] 7.3.2.2 Subtask - Route accepted ticks through the same scheduler and reject late, duplicate, canceled, wrong-generation, or post-disposal ticks before callbacks.
-      - [ ] 7.3.2.3 Subtask - Cancel timers on owner removal/replacement, root failure/disposal, runtime loss, or explicit cancellation and account for every terminal state.
+      - [x] 7.3.2.1 Subtask - Implement one-shot/repeating timer intent with delay/interval bounds, stable timer ID, owner, generation, message schema, admission, and cancellation.
+      - [x] 7.3.2.2 Subtask - Route accepted ticks through the same scheduler and reject late, duplicate, canceled, wrong-generation, or post-disposal ticks before callbacks.
+      - [x] 7.3.2.3 Subtask - Cancel timers on owner removal/replacement, root failure/disposal, runtime loss, or explicit cancellation and account for every terminal state.
 
   - [ ] 7.4 Section - Phase 7 Integration Tests and Completion Evidence.
 

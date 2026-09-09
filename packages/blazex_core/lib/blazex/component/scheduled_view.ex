@@ -3,6 +3,7 @@ defmodule BlazeX.Component.ScheduledView do
   alias BlazeX.Component.LocalView
   def start(supervisor, spec, ports, policy), do: LocalView.start(supervisor, spec, ports, policy)
   def enqueue(supervisor, handle, envelope), do: LocalView.enqueue(supervisor, handle, envelope)
+  def runtime_loss(supervisor, handle), do: LocalView.runtime_loss(supervisor, handle)
 
   for class <- [:event, :update, :message, :timer] do
     def unquote(class)(supervisor, handle, %{class: unquote(class)} = envelope),

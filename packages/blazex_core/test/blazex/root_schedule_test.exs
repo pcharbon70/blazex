@@ -303,3 +303,324 @@ defmodule BlazeX.RootScheduleTest do
     refute_receive {:observation, %{event: :work_outcome}}
   end
 end
+
+defmodule BlazeX.ScheduledIntentsTest do
+  use ExUnit.Case, async: true
+  alias BlazeX.Component.{LocalView, ScheduledView}
+  alias BlazeX.RootScheduleTest, as: F
+
+  defmodule Ports do
+    def prepare({pid, _}, request, old),
+      do: BlazeX.RootScheduleTest.Ports.prepare(pid, request, old)
+
+    def admit(_, _, _), do: :ok
+
+    def prepare_scheduled({pid, mode}, request, old) do
+      {:ok, candidate, []} = BlazeX.RootScheduleTest.Ports.prepare_scheduled(pid, request, old)
+
+      actions =
+        case {request.work.receipt, mode} do
+          {1, :message} ->
+            [
+              {:message, "self",
+               %{target: BlazeX.RootScheduleTest.root(), name: "tick", payload: %{"delta" => 1}}}
+            ]
+
+          {1, :timer} ->
+            [
+              {:timer, "clock",
+               %{
+                 operation: :start,
+                 route: :self,
+                 target: BlazeX.RootScheduleTest.root(),
+                 name: "tick",
+                 payload: %{"delta" => 1},
+                 delay: 10,
+                 interval: nil
+               }}
+            ]
+
+          {1, :effect} ->
+            [{:effect, "provider", %{}}]
+
+          _ ->
+            []
+        end
+
+      {:ok, candidate, [%{source: BlazeX.RootScheduleTest.root(), actions: actions}]}
+    end
+
+    def cleanup(_, _, _), do: :ok
+    def cleanup_removed(_, _, _), do: :ok
+
+    def submit({pid, _}, correlation, candidate),
+      do: BlazeX.RootScheduleTest.Ports.submit(pid, correlation, candidate)
+
+    def cancel(_, _), do: :ok
+    def notify({pid, _}, record), do: BlazeX.RootScheduleTest.Ports.notify(pid, record)
+  end
+
+  defp start(mode) do
+    supervisor = start_supervised!({LocalView.Supervisor, []}, id: mode)
+
+    ports = %{
+      evaluator: {Ports, {self(), mode}},
+      renderer: {Ports, {self(), mode}},
+      host: {Ports, {self(), mode}}
+    }
+
+    {:ok, handle} = ScheduledView.start(supervisor, F.spec(), ports, F.policy())
+    assert_receive {:submitted, mount}
+    :ok = LocalView.acknowledge(supervisor, handle, %{correlation: mount, result: :committed})
+    {supervisor, handle, mount}
+  end
+
+  test "candidate-only messages and timers start only after commit" do
+    for mode <- [:message, :timer] do
+      {supervisor, handle, _} = start(mode)
+      {:ok, _} = ScheduledView.event(supervisor, handle, F.envelope())
+      assert_receive {:dispatch, 1}
+      assert_receive {:submitted, event}
+      refute_receive {:dispatch, 2}, 30
+      {:ok, pending} = LocalView.inspect_root(supervisor, handle)
+      assert pending.timers.active == 0
+      assert pending.scheduling.reserved == if(mode == :message, do: 1, else: 0)
+      :ok = LocalView.acknowledge(supervisor, handle, %{correlation: event, result: :committed})
+      assert_receive {:dispatch, 2}
+      assert_receive {:submitted, followup}
+
+      :ok =
+        LocalView.acknowledge(supervisor, handle, %{correlation: followup, result: :committed})
+
+      {:ok, done} = LocalView.inspect_root(supervisor, handle)
+      assert done.scheduling.depth == 0 and done.timers.active == 0
+    end
+  end
+
+  test "rejected candidates discard every action and prohibited effects never reach renderer" do
+    for mode <- [:message, :timer, :effect] do
+      {supervisor, handle, mount} = start(mode)
+      {:ok, _} = ScheduledView.event(supervisor, handle, F.envelope())
+      assert_receive {:dispatch, 1}
+
+      if mode == :effect do
+        refute_receive {:submitted, _}, 30
+      else
+        assert_receive {:submitted, event}
+
+        assert {:error, :renderer_rejected} =
+                 LocalView.acknowledge(supervisor, handle, %{
+                   correlation: event,
+                   result: :rejected
+                 })
+      end
+
+      refute_receive {:dispatch, 2}, 30
+      {:ok, done} = LocalView.inspect_root(supervisor, handle)
+      assert done.accepted.correlation == mount
+      assert done.scheduling.depth == 0 and done.timers.active == 0
+    end
+  end
+
+  test "replacement cancels queued work and rejects old acknowledgements and generation" do
+    {supervisor, handle, _} = start(:message)
+    {:ok, _} = ScheduledView.event(supervisor, handle, F.envelope())
+    assert_receive {:submitted, event}
+    {:ok, _} = ScheduledView.event(supervisor, handle, F.envelope(2))
+    assert {:ok, replacement} = LocalView.replace(supervisor, handle, 1, F.spec())
+    assert_receive {:submitted, ^replacement}
+    assert replacement.generation == 2
+
+    assert {:error, :stale} =
+             LocalView.acknowledge(supervisor, handle, %{correlation: event, result: :committed})
+
+    :ok =
+      LocalView.acknowledge(supervisor, handle, %{correlation: replacement, result: :committed})
+
+    {:ok, snapshot} = LocalView.inspect_root(supervisor, handle)
+    assert snapshot.scheduling.depth == 0 and snapshot.timers.active == 0
+    assert {:error, :invalid_ingress} = ScheduledView.event(supervisor, handle, F.envelope(3))
+  end
+
+  test "runtime loss and shutdown drop queued and candidate-only work" do
+    for mode <- [:message, :timer] do
+      {supervisor, handle, _} = start(mode)
+      {:ok, _} = ScheduledView.event(supervisor, handle, F.envelope())
+      assert_receive {:submitted, event}
+      {:ok, _} = ScheduledView.event(supervisor, handle, F.envelope(2))
+
+      if mode == :message do
+        assert {:error, _} = ScheduledView.runtime_loss(supervisor, handle)
+      else
+        {:ok, disposal} = LocalView.stop(supervisor, handle)
+        assert_receive {:submitted, ^disposal}
+
+        :ok =
+          LocalView.acknowledge(supervisor, handle, %{correlation: disposal, result: :committed})
+      end
+
+      assert {:error, _} =
+               LocalView.acknowledge(supervisor, handle, %{correlation: event, result: :committed})
+
+      {:ok, snapshot} = LocalView.inspect_root(supervisor, handle)
+      assert snapshot.status in [:failed, :disposed]
+      assert snapshot.scheduling.depth == 0 and snapshot.timers.active == 0
+    end
+  end
+end
+
+defmodule BlazeX.RootTimersTest do
+  use ExUnit.Case, async: true
+  alias BlazeX.Component.{LocalView, RootSchedule, RootTimers, ScheduledView, SchedulingIntents}
+  alias BlazeX.RootScheduleTest, as: F
+
+  defp timer(sequence \\ 1, changes \\ %{}) do
+    F.envelope(
+      sequence,
+      Map.merge(
+        %{
+          class: :timer,
+          name: "tick",
+          timer: %{operation: :start, id: "clock", delay: 10, interval: nil}
+        },
+        changes
+      )
+    )
+  end
+
+  test "one-shot tokens reject forged, duplicate and canceled wakes" do
+    {:ok, item} = RootSchedule.normalize(F.policy(), timer(), F.accepted(), F.spec())
+    {:ok, timers} = RootTimers.install(%RootTimers{}, item)
+    assert {:error, _} = RootTimers.install(timers, item)
+
+    assert {:error, _} =
+             RootTimers.wake(timers, RootTimers.key(item), 1, make_ref(), F.accepted())
+
+    assert_receive {:owned_tick, key, epoch, token}
+    assert {:ok, tick, firing} = RootTimers.wake(timers, key, epoch, token, F.accepted())
+    assert RootTimers.valid_tick?(firing, tick)
+    assert {:error, _} = RootTimers.wake(firing, key, epoch, token, F.accepted())
+    done = RootTimers.finish(firing, tick)
+    assert RootTimers.inventory(done).active == 0
+    assert RootTimers.inventory(done).completed == 1
+    refute RootTimers.valid_tick?(done, tick)
+    {:ok, restarted} = RootTimers.install(done, item)
+    assert {:error, _} = RootTimers.wake(restarted, key, epoch, token, F.accepted())
+    assert RootTimers.inventory(RootTimers.cancel_all(restarted)).canceled == 1
+  end
+
+  test "repeating timers wait for the previous tick outcome and owner replacement cancels them" do
+    {:ok, item} =
+      RootSchedule.normalize(
+        F.policy(),
+        timer(1, %{timer: %{operation: :start, id: "clock", delay: 10, interval: 10}}),
+        F.accepted(),
+        F.spec()
+      )
+
+    {:ok, timers} = RootTimers.install(%RootTimers{}, item)
+    assert_receive {:owned_tick, key, epoch, token}
+    {:ok, tick, timers} = RootTimers.wake(timers, key, epoch, token, F.accepted())
+    refute_receive {:owned_tick, _, _, _}, 30
+    timers = RootTimers.finish(timers, tick)
+    assert_receive {:owned_tick, ^key, ^epoch, second_token}
+    refute second_token == token
+    replaced = put_in(F.accepted(), [:correlation, :generation], 2)
+    timers = RootTimers.prune(timers, replaced)
+    assert RootTimers.inventory(timers).active == 0
+    assert {:error, _} = RootTimers.wake(timers, key, epoch, second_token, replaced)
+  end
+
+  test "timer registry is bounded and intent validation rejects non-local actions" do
+    {:ok, item} = RootSchedule.normalize(F.policy(), timer(), F.accepted(), F.spec())
+
+    timers =
+      Enum.reduce(1..32, %RootTimers{}, fn n, timers ->
+        {:ok, next} = RootTimers.install(timers, put_in(item, [:timer, :id], "clock_#{n}"))
+        next
+      end)
+
+    assert {:error, _} = RootTimers.install(timers, item)
+    assert RootTimers.inventory(RootTimers.cancel_all(timers)).canceled == 32
+    message = {:message, "self", %{target: F.root(), name: "tick", payload: %{"delta" => 1}}}
+
+    assert {:ok, [%{kind: :message, origin: :component}]} =
+             SchedulingIntents.normalize(
+               F.policy(),
+               [%{source: F.root(), actions: [message]}],
+               F.accepted(),
+               F.spec()
+             )
+
+    for action <- [
+          {:effect, "fetch", %{}},
+          {:command, "remote", %{}},
+          {:release, "resource", %{}},
+          {:message, "self", %{target: F.root(), name: "tick", payload: self()}}
+        ] do
+      assert {:error, :invalid_intent} =
+               SchedulingIntents.normalize(
+                 F.policy(),
+                 [%{source: F.root(), actions: [action]}],
+                 F.accepted(),
+                 F.spec()
+               )
+    end
+  end
+
+  test "cancel ingress bypasses a full application queue without increasing its depth" do
+    {:ok, queue} = RootSchedule.new(F.policy())
+
+    full =
+      Enum.reduce(1..256, queue, fn n, q ->
+        {:ok, _, _, q} = RootSchedule.admit(q, F.envelope(n), F.accepted(), F.spec())
+        q
+      end)
+
+    assert {:ok, %{kind: :timer_cancel, receipt: 257}, nil, next} =
+             RootSchedule.admit(
+               full,
+               timer(257, %{timer: %{operation: :cancel, id: "clock"}}),
+               F.accepted(),
+               F.spec()
+             )
+
+    assert next.queue == full.queue
+    assert RootSchedule.metrics(next).depth == 256
+  end
+
+  test "explicit cancellation aborts an in-flight timer tick and rejects its late acknowledgement" do
+    supervisor = start_supervised!(LocalView.Supervisor)
+    ports = %{evaluator: {F.Ports, self()}, renderer: {F.Ports, self()}, host: {F.Ports, self()}}
+    {:ok, handle} = ScheduledView.start(supervisor, F.spec(), ports, F.policy())
+    assert_receive {:submitted, mount}
+    :ok = LocalView.acknowledge(supervisor, handle, %{correlation: mount, result: :committed})
+    assert {:ok, %{receipt: 1}} = ScheduledView.timer(supervisor, handle, timer())
+
+    assert_receive {:observation,
+                    %{event: :work_outcome, work: %{receipt: 1}, result: :committed}}
+
+    assert_receive {:dispatch, 2}
+    assert_receive {:submitted, tick}
+
+    assert {:ok, %{receipt: 3}} =
+             ScheduledView.timer(
+               supervisor,
+               handle,
+               timer(2, %{timer: %{operation: :cancel, id: "clock"}})
+             )
+
+    assert_receive {:observation, %{event: :work_outcome, work: %{receipt: 2}, result: :canceled}}
+
+    assert_receive {:observation,
+                    %{event: :work_outcome, work: %{receipt: 3}, result: :committed}}
+
+    assert {:error, :stale} =
+             LocalView.acknowledge(supervisor, handle, %{correlation: tick, result: :committed})
+
+    {:ok, snapshot} = LocalView.inspect_root(supervisor, handle)
+    assert snapshot.accepted.correlation == mount
+    assert snapshot.timers.active == 0 and snapshot.scheduling.depth == 0
+    refute_receive {:observation, %{event: :work_outcome}}
+  end
+end

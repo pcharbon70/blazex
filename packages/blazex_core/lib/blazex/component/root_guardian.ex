@@ -15,7 +15,16 @@ defmodule BlazeX.Component.RootGuardian do
          true <- policy == nil or SchedulingPort.supported?(ports.evaluator) do
       Process.flag(:trap_exit, true)
       {:ok, worker} = RootProcess.start_link({self(), spec, ports, policy})
-      {:ok, %{worker: worker, ports: ports, handle: RootPort.handle(spec), snapshot: nil}}
+
+      {:ok,
+       %{
+         worker: worker,
+         ports: ports,
+         handle: RootPort.handle(spec),
+         snapshot: nil,
+         work: [],
+         timer_refs: []
+       }}
     else
       _ -> {:stop, :invalid_start}
     end
@@ -53,6 +62,12 @@ defmodule BlazeX.Component.RootGuardian do
   end
 
   @impl true
+  def handle_info({:root_work, worker, work, refs}, %{worker: worker} = state),
+    do: {:noreply, %{state | work: work, timer_refs: refs}}
+
+  def handle_info({:root_work_done, worker, receipt}, %{worker: worker} = state),
+    do: {:noreply, %{state | work: Enum.reject(state.work, &(&1.receipt == receipt))}}
+
   def handle_info({:root_snapshot, worker, snapshot}, %{worker: worker} = state) do
     if terminal?(state), do: {:noreply, state}, else: {:noreply, %{state | snapshot: snapshot}}
   end
@@ -65,6 +80,7 @@ defmodule BlazeX.Component.RootGuardian do
 
   @impl true
   def terminate(_, state) do
+    Enum.each(state.timer_refs, &Process.cancel_timer/1)
     if is_pid(state.worker), do: :erlang.exit(state.worker, :shutdown)
     :ok
   end
@@ -80,6 +96,9 @@ defmodule BlazeX.Component.RootGuardian do
   defp terminal?(_), do: false
 
   defp crashed(state) do
+    state = drain_checkpoints(state)
+    Enum.each(state.timer_refs, &Process.cancel_timer/1)
+
     snapshot =
       state.snapshot ||
         %{
@@ -92,9 +111,59 @@ defmodule BlazeX.Component.RootGuardian do
           error: nil
         }
 
+    correlation = snapshot.pending
     snapshot = %{snapshot | status: :failed, pending: nil, error: :crashed}
+
+    snapshot =
+      if Map.has_key?(snapshot, :scheduling) do
+        snapshot
+        |> Map.update!(:scheduling, fn metrics ->
+          %{
+            metrics
+            | depth: 0,
+              queued: 0,
+              active: 0,
+              reserved: 0,
+              queued_receipts: [],
+              classes: Map.new(metrics.classes, fn {key, _} -> {key, 0} end)
+          }
+        end)
+        |> Map.update!(:timers, fn timers ->
+          %{timers | active: 0, entries: [], canceled: timers.canceled + timers.active}
+        end)
+      else
+        snapshot
+      end
+
+    Enum.each(state.work, fn work ->
+      RootPort.call(state.ports.host, :notify, [
+        Map.merge(snapshot, %{
+          event: :work_outcome,
+          work: work,
+          result: :canceled,
+          reason: :crashed,
+          correlation: correlation
+        })
+      ])
+    end)
+
     RootPort.call(state.ports.host, :notify, [Map.put(snapshot, :event, :crashed)])
     if is_pid(state.worker), do: :erlang.exit(state.worker, :kill)
-    %{state | snapshot: snapshot, worker: nil}
+    %{state | snapshot: snapshot, worker: nil, work: [], timer_refs: []}
+  end
+
+  defp drain_checkpoints(%{worker: worker} = state) do
+    receive do
+      {:root_work, ^worker, work, refs} ->
+        drain_checkpoints(%{state | work: work, timer_refs: refs})
+
+      {:root_work_done, ^worker, receipt} ->
+        drain_checkpoints(%{state | work: Enum.reject(state.work, &(&1.receipt == receipt))})
+
+      {:root_snapshot, ^worker, snapshot} ->
+        drain_checkpoints(%{state | snapshot: snapshot})
+    after
+      0 -> state
+    end
   end
 end
