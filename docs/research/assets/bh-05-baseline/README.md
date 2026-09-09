@@ -48,3 +48,5 @@ None.
 
 Index every artifact; preserve failed attempts, inherited deferrals and source
 bindings. No measurement or runtime result may claim Phase 1 pass credit.
+
+- [Root authority](root-authorization-v0.1.0.json) — Bounded Phase 6 authorization and inherited source hashes.

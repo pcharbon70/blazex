@@ -25,28 +25,28 @@ Back to milestone: [README](README.md)
   through abstract evaluator and commit ports rather than importing concrete
   UI-tree, renderer, host, or runtime implementations into Core.
 
-  - [ ] 6.1 Section - Authorize and freeze root lifecycle semantics.
+  - [x] 6.1 Section - Authorize and freeze root lifecycle semantics.
 
     Bind nested component state plus BH-03/BH-04 root and renderer contracts,
     then define process states and commit ownership before starting processes.
 
-    - [ ] 6.1.1 Task - Record bounded Phase 6 authority.
+    - [x] 6.1.1 Task - Record bounded Phase 6 authority.
 
       Establish provenance and keep full event/message/effect scheduling and
       retry policy outside this phase.
 
-      - [ ] 6.1.1.1 Subtask - Record synchronized base, branch, section commits, one PR, cleanup, Phase 5 completion, accepted BH-03/BH-04 contract identities, and explicit Phase 6 authorization.
-      - [ ] 6.1.1.2 Subtask - Bind local-view role, nested state, host/root lifecycle, renderer transaction/acknowledgement, semantic evaluator, diagnostics, and supervision assumptions by version and hash.
-      - [ ] 6.1.1.3 Subtask - Exclude general event backlog, user `handle_info`, timers, effect/command execution, context/registry, automatic retry, and support claims.
+      - [x] 6.1.1.1 Subtask - Record synchronized base, branch, section commits, one PR, cleanup, Phase 5 completion, accepted BH-03/BH-04 contract identities, and explicit Phase 6 authorization.
+      - [x] 6.1.1.2 Subtask - Bind local-view role, nested state, host/root lifecycle, renderer transaction/acknowledgement, semantic evaluator, diagnostics, and supervision assumptions by version and hash.
+      - [x] 6.1.1.3 Subtask - Exclude general event backlog, user `handle_info`, timers, effect/command execution, context/registry, automatic retry, and support claims.
 
-    - [ ] 6.1.2 Task - Freeze process, transition, and commit states.
+    - [x] 6.1.2 Task - Freeze process, transition, and commit states.
 
       Define legal root states and ensure candidate component state becomes
       final only after semantic and renderer acceptance.
 
-      - [ ] 6.1.2.1 Subtask - Define dormant, starting, mounting, evaluating, awaiting-commit, ready, updating, replacing, stopping, disposed, and failed states with legal transitions.
-      - [ ] 6.1.2.2 Subtask - Define root instance/generation/revision/sequence, accepted and candidate component tables, semantic output, renderer root/transaction correlation, and final-state digest ownership.
-      - [ ] 6.1.2.3 Subtask - Define process start/registration, one in-flight state transition, semantic reject, renderer reject/rollback, commit, host removal, shutdown, crash, and terminal acknowledgement behavior.
+      - [x] 6.1.2.1 Subtask - Define dormant, starting, mounting, evaluating, awaiting-commit, ready, updating, replacing, stopping, disposed, and failed states with legal transitions.
+      - [x] 6.1.2.2 Subtask - Define root instance/generation/revision/sequence, accepted and candidate component tables, semantic output, renderer root/transaction correlation, and final-state digest ownership.
+      - [x] 6.1.2.3 Subtask - Define process start/registration, one in-flight state transition, semantic reject, renderer reject/rollback, commit, host removal, shutdown, crash, and terminal acknowledgement behavior.
 
   - [ ] 6.2 Section - Define evaluator, renderer-commit, and host lifecycle ports.
 

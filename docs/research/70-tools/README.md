@@ -265,3 +265,5 @@ shared root discovery for new programs. Preserve the distinction between
 historical evidence and current checks. Run the full tooling sweep, verify
 migration negative tests and archive links, and inspect patch hygiene before
 reporting a tooling change complete.
+
+- [`generate_bh05_roots.py`](generate_bh05_roots.py) — Phase 6 root lifecycle authority generator and check.

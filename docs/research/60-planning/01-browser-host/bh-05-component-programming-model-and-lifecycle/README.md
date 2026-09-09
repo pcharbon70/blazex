@@ -237,3 +237,5 @@ acceptance ownership, deferred qualifications, package boundaries, and
 cross-runtime evidence synchronized. Never treat Phoenix familiarity as a
 license to import Phoenix semantics into the kernel or a browser result as
 proof of another host.
+
+- [Root lifecycle contract](root-lifecycle-contract.md) — Phase 6 state machine, commit ownership and supervision ports.
