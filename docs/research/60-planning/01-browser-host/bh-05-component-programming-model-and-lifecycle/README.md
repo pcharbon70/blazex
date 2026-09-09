@@ -201,6 +201,7 @@ Phoenix, browser, native-host, or release compatibility.
 
 ### Documents
 
+- [Prop and slot schema contract](schema-contract.md)
 - [Candidate authoring contract](authoring-contract.md)
 - [Phase 2 authoring implementation evidence](authoring-evidence.md)
 - [Phase 1 implementation evidence](activation-evidence.md)
