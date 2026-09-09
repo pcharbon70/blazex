@@ -178,6 +178,12 @@ defmodule BlazeX.NestedTest do
     assert {:ok, replaced_parent} = reconcile(before, parent, 1, [[]])
     assert length(replaced_parent.disposals) == 2
     assert Enum.count(replaced_parent.trace, &(&1.event == :init)) == 2
+
+    renamed_root = put_in(graph(), ["root", :public_id], "new-root-component")
+    assert {:error, %{code: :replacement_required}, ^before} = reconcile(before, renamed_root)
+    assert {:ok, renamed} = reconcile(before, renamed_root, 1, [[]])
+    assert length(renamed.disposals) == 2
+    assert Enum.count(renamed.trace, &(&1.event == :init)) == 2
   end
 
   test "generation replacement drops retained state and old events without crossing roots" do

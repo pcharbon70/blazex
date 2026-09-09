@@ -14,6 +14,12 @@ covers all seven semantic kinds, complete presentation intent and bindings;
 contextual slots and exact graph bounds have deterministic replay tests. This
 is ERTS/headless evidence only, not browser AtomVM execution parity.
 
+BH-05 Phase 5 [nested-state conformance](test/bh05_nested_test.exs) uses
+[public fixtures](../bh-05/nested-fixtures.exs) for retained state, local events,
+keyed permutations, parent-scope removal/insertion, disposal, overflow and an
+independent headless oracle. Repeated script and final-state digests are bound
+in the [nested inventory](../bh-05/nested-index-v0.1.0.json).
+
 During BH-02, the bounded `experiments/native_renderer_spike` participates in
 the same semantic traces as the headless and DOM renderers. Its presence in the
 matrix supplies portability evidence without turning the experiment into a

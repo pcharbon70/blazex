@@ -5,7 +5,7 @@ defmodule BlazeX.UITree.NestedCandidates do
   alias BlazeX.UITree.CompositionPlan, as: Guard
 
   def flatten(plan), do: [plan | Enum.flat_map(plan.children, &flatten/1)]
-  def fingerprint(plan), do: NestedTable.digest({plan.module, plan.metadata})
+  def fingerprint(plan), do: NestedTable.digest({plan.module, plan.public_id, plan.metadata})
 
   def invocation(plan),
     do:

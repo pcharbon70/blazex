@@ -42,4 +42,12 @@ Phase 4 adds [public pure composition fixtures](composition-fixtures.exs) and a
 pure controls and contextual slots and compares complete output with an
 independently authored headless oracle using public constructors. Runtime state,
 effects, renderer execution by components and Wasm parity remain out of scope.
-Current check: `python3 docs/research/70-tools/validate_bh05_composition.py --final`.
+Phase 4 check at its accepted snapshot: `python3 docs/research/70-tools/validate_bh05_composition.py --final`.
+
+Phase 5 adds [public nested fixtures](nested-fixtures.exs), a
+[state/trace inventory](nested-index-v0.1.0.json) and
+[nested conformance tests](../conformance/test/bh05_nested_test.exs). Keyed state,
+local event candidates, notification/disposal plans and complete semantic output
+reconcile atomically under one future root process/failure boundary. No process,
+external message, effect or renderer commit occurs. Current check:
+`python3 docs/research/70-tools/validate_bh05_nested.py --final`.

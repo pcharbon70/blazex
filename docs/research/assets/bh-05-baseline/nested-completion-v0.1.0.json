@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 5,
+  "decision": "nested-state-and-atomic-reconciliation-complete",
+  "phase6_eligible": true,
+  "phase6_authorized": false,
+  "bh06_eligible": false,
+  "support_state": "unsupported",
+  "retained_state": true,
+  "process_startup": false,
+  "effects_execution": false,
+  "runtime_parity": false,
+  "artifact_hashes": {
+    "docs/research/assets/bh-05-baseline/nested-authorization-v0.1.0.json": "4a741fe60dc877e6ed2b9a73b0f2e1ad8cf20dbf850dcfce6ff848621493dd1d",
+    "docs/research/assets/bh-05-baseline/nested-gates-v0.1.0.json": "f40ab82eeba4434b8a63e1fa6859ee994766aedd622a83971ba6bae927345f68",
+    "integration/bh-05/nested-index-v0.1.0.json": "1be5fc2239283ee0ba49e7730a13804b5a3c8205637addc82a2ad3d81bd6ad71"
+  },
+  "delivery": "Four verified section commits, one PR; merge then checkout main and sync origin before deleting feature branch. External delivery pending at record creation."
+}
