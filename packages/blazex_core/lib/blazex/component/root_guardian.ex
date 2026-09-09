@@ -1,20 +1,26 @@
 defmodule BlazeX.Component.RootGuardian do
   @moduledoc false
   use GenServer
-  alias BlazeX.Component.{RootPort, RootProcess, RootSchedule, SchedulingPort}
+  alias BlazeX.Component.{ActionRuntime, RootPort, RootProcess, RootSchedule, SchedulingPort}
 
   def start_link(input), do: GenServer.start_link(__MODULE__, input)
 
   @impl true
   def init({spec, ports}), do: init({spec, ports, nil})
 
-  def init({spec, ports, policy}) do
+  def init({spec, ports, policy}), do: init({spec, ports, policy, nil})
+
+  def init({spec, ports, policy, actions}) do
     with {:ok, spec} <- RootPort.normalize(spec),
          true <- RootPort.ports?(ports),
          {:ok, _} <- RootSchedule.new(policy),
-         true <- policy == nil or SchedulingPort.supported?(ports.evaluator) do
+         {:ok, _} <- ActionRuntime.new(actions),
+         true <- policy == nil or SchedulingPort.supported?(ports.evaluator),
+         true <-
+           actions == nil or
+             (policy != nil and function_exported?(elem(ports.evaluator, 0), :admit_action, 3)) do
       Process.flag(:trap_exit, true)
-      {:ok, worker} = RootProcess.start_link({self(), spec, ports, policy})
+      {:ok, worker} = RootProcess.start_link({self(), spec, ports, policy, actions})
 
       {:ok,
        %{
@@ -23,7 +29,8 @@ defmodule BlazeX.Component.RootGuardian do
          handle: RootPort.handle(spec),
          snapshot: nil,
          work: [],
-         timer_refs: []
+         timer_refs: [],
+         actions: nil
        }}
     else
       _ -> {:stop, :invalid_start}
@@ -62,6 +69,9 @@ defmodule BlazeX.Component.RootGuardian do
   end
 
   @impl true
+  def handle_info({:root_actions, worker, actions}, %{worker: worker} = state),
+    do: {:noreply, %{state | actions: actions}}
+
   def handle_info({:root_work, worker, work, refs}, %{worker: worker} = state),
     do: {:noreply, %{state | work: work, timer_refs: refs}}
 
@@ -80,6 +90,7 @@ defmodule BlazeX.Component.RootGuardian do
 
   @impl true
   def terminate(_, state) do
+    ActionRuntime.close(state.actions, :shutdown)
     Enum.each(state.timer_refs, &Process.cancel_timer/1)
     if is_pid(state.worker), do: :erlang.exit(state.worker, :shutdown)
     :ok
@@ -97,6 +108,7 @@ defmodule BlazeX.Component.RootGuardian do
 
   defp crashed(state) do
     state = drain_checkpoints(state)
+    actions = ActionRuntime.close(state.actions, :crashed)
     Enum.each(state.timer_refs, &Process.cancel_timer/1)
 
     snapshot =
@@ -112,6 +124,9 @@ defmodule BlazeX.Component.RootGuardian do
         }
 
     snapshot = %{snapshot | status: :failed, pending: nil, error: :crashed}
+
+    snapshot =
+      if actions, do: Map.put(snapshot, :actions, ActionRuntime.snapshot(actions)), else: snapshot
 
     snapshot =
       if Map.has_key?(snapshot, :scheduling) do
@@ -155,11 +170,14 @@ defmodule BlazeX.Component.RootGuardian do
 
     RootPort.call(state.ports.host, :notify, [Map.put(snapshot, :event, :crashed)])
     if is_pid(state.worker), do: :erlang.exit(state.worker, :kill)
-    %{state | snapshot: snapshot, worker: nil, work: [], timer_refs: []}
+    %{state | snapshot: snapshot, worker: nil, work: [], timer_refs: [], actions: actions}
   end
 
   defp drain_checkpoints(%{worker: worker} = state) do
     receive do
+      {:root_actions, ^worker, actions} ->
+        drain_checkpoints(%{state | actions: actions})
+
       {:root_work, ^worker, work, refs} ->
         drain_checkpoints(%{state | work: work, timer_refs: refs})
 

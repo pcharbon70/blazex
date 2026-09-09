@@ -72,6 +72,17 @@ candidate summaries. Its Evaluator, Renderer and Host behaviours are outward
 implementation seams; private tokens/configuration never reach components.
 General effect/command execution and support claims remain deferred.
 
+## Phase 8 explicit typed-action roots
+
+`ActionView.start/6` takes the ordinary root ports/scheduler policy plus a closed
+`ActionManifest` and runtime-private `ActionPort`. `Action.new/5` constructs closed
+portable records; action-enabled roots reject legacy generic tuples. `Action.result/4`
+constructs correlated provider outcomes for runtime delivery through `ActionView.result/3`.
+Requests submit only after renderer commit and reserve terminal-result capacity
+inside the existing 256-work bound. No concrete provider or server transport is
+part of Core. Static manifest metadata is available for future build/command
+registration; it grants no server authority.
+
 `BlazeX.Component.LocalView` starts independently supervised roots through
 `LocalView.Supervisor`, admits one candidate at a time, and exposes identity-only
 handles for update, replacement, acknowledgement, stop and redacted inspection.

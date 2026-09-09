@@ -224,7 +224,7 @@ defmodule BlazeX.UITree.NestedCandidates do
     do: {old, []}
 
   defp transition({:actions, value, actions}, name, _old, plan, _target, _sequence, :scheduled)
-       when name in [:update, :handle_event, :handle_info] do
+       when name in [:update, :handle_event, :handle_info, :effect_result] do
     Guard.require!(length(actions) <= 16, :intent_limit, plan.path)
     {{:present, value}, [%{source: Map.from_struct(plan.identity), actions: actions}]}
   end

@@ -22,3 +22,12 @@ BH-05 callbacks, facade, process or support claim. Package ownership and API
 migration decisions are recorded in `docs/research/assets/bh-05-baseline`.
 Runtime/host profiles consume neutral contracts; LiveView and LocalLiveView
 integration remain explicitly deferred.
+
+## BH-05 Phase 8 action bridge
+
+`ActionBridge` implements Core's abstract action port using declared bindings,
+deny-by-default `Negotiation`, and the existing neutral `Effect` contract. The
+runtime supplies provider configurations; they never enter component inputs.
+Command declarations remain untrusted intent for an explicit future adapter,
+not local authorization or an implemented server transport. No concrete browser,
+OS or network provider is introduced.

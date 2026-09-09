@@ -48,28 +48,28 @@ Back to milestone: [README](README.md)
       - [x] 8.1.2.2 Subtask - Define effect/command accepted, denied, completed, failed, timed-out, canceled, stale, and disconnected results plus resource acquired/transferred/released/lost states.
       - [x] 8.1.2.3 Subtask - Define ordering relative to semantic and renderer commit, idempotency/replay policy, root/component/generation ownership, payload bounds, redaction, and maximum 128 pending effects/512 leases.
 
-  - [ ] 8.2 Section - Implement typed action validation and effect scheduling.
+  - [x] 8.2 Section - Implement typed action validation and effect scheduling.
 
     Validate candidate actions before state/output commit and submit accepted
     post-commit work only to negotiated abstract providers.
 
-    - [ ] 8.2.1 Task - Implement action constructors and callback validation.
+    - [x] 8.2.1 Task - Implement action constructors and callback validation.
 
       Replace `[term()]` emissions with versioned records that cannot conceal
       browser objects, server work, PIDs, or arbitrary functions.
 
-      - [ ] 8.2.1.1 Subtask - Implement strict typed constructors, schemas, counts, payload bounds, owner/source correlation, capability/command IDs, timeout, cancellation, and fallback metadata.
-      - [ ] 8.2.1.2 Subtask - Validate all candidate actions together with state/output and reject unknown, malformed, excessive, wrong-owner, nonportable, unauthorized, or duplicate identities atomically.
-      - [ ] 8.2.1.3 Subtask - Preserve action metadata for BH-06 build reachability and BH-07 command registration without resolving arbitrary modules or transports at runtime.
+      - [x] 8.2.1.1 Subtask - Implement strict typed constructors, schemas, counts, payload bounds, owner/source correlation, capability/command IDs, timeout, cancellation, and fallback metadata.
+      - [x] 8.2.1.2 Subtask - Validate all candidate actions together with state/output and reject unknown, malformed, excessive, wrong-owner, nonportable, unauthorized, or duplicate identities atomically.
+      - [x] 8.2.1.3 Subtask - Preserve action metadata for BH-06 build reachability and BH-07 command registration without resolving arbitrary modules or transports at runtime.
 
-    - [ ] 8.2.2 Task - Integrate effect admission and result scheduling.
+    - [x] 8.2.2 Task - Integrate effect admission and result scheduling.
 
       Submit effects only after the accepted commit barrier and route bounded
       results back through the root scheduler.
 
-      - [ ] 8.2.2.1 Subtask - Negotiate declared capabilities deny-by-default, admit no more than 128 pending effects per root, and record provider/fallback selection without exposing provider handles.
-      - [ ] 8.2.2.2 Subtask - Schedule accepted results/timeouts/cancellations as typed generation-scoped work and reject duplicate, late, stale, wrong-owner, or post-disposal results before callbacks.
-      - [ ] 8.2.2.3 Subtask - Never automatically replay non-idempotent effects after renderer rejection, root crash/retry, runtime loss, or reconnect.
+      - [x] 8.2.2.1 Subtask - Negotiate declared capabilities deny-by-default, admit no more than 128 pending effects per root, and record provider/fallback selection without exposing provider handles.
+      - [x] 8.2.2.2 Subtask - Schedule accepted results/timeouts/cancellations as typed generation-scoped work and reject duplicate, late, stale, wrong-owner, or post-disposal results before callbacks.
+      - [x] 8.2.2.3 Subtask - Never automatically replay non-idempotent effects after renderer rejection, root crash/retry, runtime loss, or reconnect.
 
   - [ ] 8.3 Section - Implement resource and command-intent boundaries.
 
