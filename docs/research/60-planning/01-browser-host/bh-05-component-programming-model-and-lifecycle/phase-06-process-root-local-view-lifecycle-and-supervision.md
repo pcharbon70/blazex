@@ -48,28 +48,28 @@ Back to milestone: [README](README.md)
       - [x] 6.1.2.2 Subtask - Define root instance/generation/revision/sequence, accepted and candidate component tables, semantic output, renderer root/transaction correlation, and final-state digest ownership.
       - [x] 6.1.2.3 Subtask - Define process start/registration, one in-flight state transition, semantic reject, renderer reject/rollback, commit, host removal, shutdown, crash, and terminal acknowledgement behavior.
 
-  - [ ] 6.2 Section - Define evaluator, renderer-commit, and host lifecycle ports.
+  - [x] 6.2 Section - Define evaluator, renderer-commit, and host lifecycle ports.
 
     Preserve the inward package graph by defining narrow Core-facing contracts
     implemented by UI-tree, renderer/runtime, and host packages outwardly.
 
-    - [ ] 6.2.1 Task - Define the evaluator and commit interfaces.
+    - [x] 6.2.1 Task - Define the evaluator and commit interfaces.
 
       Pass immutable portable transition envelopes and receive validated,
       correlated results without concrete adapter types.
 
-      - [ ] 6.2.1.1 Subtask - Define evaluator requests/results for mount, parent-prop update, candidate render, replacement, and disposal planning over public Core records.
-      - [ ] 6.2.1.2 Subtask - Define semantic acceptance and renderer submission/acknowledgement interfaces with root/generation/revision/transaction correlation and stable failure classes.
-      - [ ] 6.2.1.3 Subtask - Prohibit callback modules from receiving port implementations, PIDs, renderer objects, DOM handles, host instances, or framework state.
+      - [x] 6.2.1.1 Subtask - Define evaluator requests/results for mount, parent-prop update, candidate render, replacement, and disposal planning over public Core records.
+      - [x] 6.2.1.2 Subtask - Define semantic acceptance and renderer submission/acknowledgement interfaces with root/generation/revision/transaction correlation and stable failure classes.
+      - [x] 6.2.1.3 Subtask - Prohibit callback modules from receiving port implementations, PIDs, renderer objects, DOM handles, host instances, or framework state.
 
-    - [ ] 6.2.2 Task - Define host and supervision interfaces.
+    - [x] 6.2.2 Task - Define host and supervision interfaces.
 
       Let runtime/host compositions start and stop roots while Core retains the
       portable lifecycle meaning.
 
-      - [ ] 6.2.2.1 Subtask - Define root start specification, validated bootstrap props, public component ID/module, root identity, fallback contract, capability summary, and owner correlation.
-      - [ ] 6.2.2.2 Subtask - Define root registration/readiness/removal/shutdown/crash notifications and supervisor child identity without binding to browser or Popcorn structures.
-      - [ ] 6.2.2.3 Subtask - Define monitoring/introspection records with bounded redacted state and prohibit public exposure of root PIDs as mutable component references.
+      - [x] 6.2.2.1 Subtask - Define root start specification, validated bootstrap props, public component ID/module, root identity, fallback contract, capability summary, and owner correlation.
+      - [x] 6.2.2.2 Subtask - Define root registration/readiness/removal/shutdown/crash notifications and supervisor child identity without binding to browser or Popcorn structures.
+      - [x] 6.2.2.3 Subtask - Define monitoring/introspection records with bounded redacted state and prohibit public exposure of root PIDs as mutable component references.
 
   - [ ] 6.3 Section - Implement the root process and basic supervised lifecycle.
 
