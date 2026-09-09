@@ -272,3 +272,5 @@ reporting a tooling change complete.
 - [`test_validate_bh05_roots.py`](test_validate_bh05_roots.py) — Isolated root authority and gate mutation tests.
 - [`check_bh05_root_subset.py`](check_bh05_root_subset.py) — Pinned Popcorn supervision patches and API subset analysis, not VM parity.
 - [`record_bh05_phase6.py`](record_bh05_phase6.py) — Source-frozen root lifecycle gates and guarded publication.
+
+- [`generate_bh05_scheduling.py`](generate_bh05_scheduling.py) — Phase 7 authority bound to accepted root/interaction contracts.

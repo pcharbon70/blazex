@@ -1,0 +1,68 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 7,
+  "base": "e373e96891207ea4b6c2fdfae9533181334b3cab",
+  "authorization": "Owner requested next BH-05 phase; Phase 7 only.",
+  "branch": "codex/bh05-phase7-scheduling",
+  "sections": [
+    "7.1",
+    "7.2",
+    "7.3",
+    "7.4"
+  ],
+  "delivery": [
+    "verified section commits",
+    "single PR",
+    "merge",
+    "checkout main",
+    "sync origin",
+    "delete feature branch"
+  ],
+  "contract": "0.1.0-bh05-scheduling",
+  "schema_contract": "0.2.0-bh05-schema-candidate",
+  "input_hashes": {
+    "docs/research/assets/bh-05-baseline/root-completion-v0.1.0.json": "71ac63f2665286a8873650bd50fb24be621898d3b38296757665bf53210a5975",
+    "docs/research/assets/bh-05-baseline/root-gates-v0.1.0.json": "09a62e002a82e875810f640f647d71e8ec1af563c1f7e0b4b5301448d6a7bd91",
+    "docs/research/60-planning/01-browser-host/bh-05-component-programming-model-and-lifecycle/root-lifecycle-contract.md": "693a625a864bd8f646ebabd1ce3e18dc4241858d942f882d282edea3b9e52d7f",
+    "docs/research/60-planning/01-browser-host/bh-05-component-programming-model-and-lifecycle/root-supervision-compatibility.md": "583c8220c41b3d5611ebd0f00167768c5fa083209cfebcd2cffdfaa221c2956f",
+    "packages/blazex_core/lib/blazex/component/local_view.ex": "b145788b2d5ec224a1a35d5d76504bfe78c1547bf6270feeaa264dab2bd40d8b",
+    "packages/blazex_core/lib/blazex/component/root_guardian.ex": "6a9d574681439bcf17d60d052b715ff038b2b5173bce285145e06494e6e4b7d1",
+    "packages/blazex_core/lib/blazex/component/root_process.ex": "cc10e0ef27520f6e115b501e091faad32ed6634dd8290d6f4a2101beb4caeb6e",
+    "packages/blazex_ui_tree/lib/blazex/ui_tree/root_evaluator.ex": "c69ffff44073ca49f597f9168ee84935e71369f3d7a145ff2fcc91a2d4eb046e",
+    "packages/blazex_ui_tree/lib/blazex/ui_tree/nested_candidates.ex": "3845b021e76a721419b5088c6710b3652abd8ef4a1351b99fca48d07add234fd",
+    "packages/blazex_core/lib/blazex/component/root_port.ex": "949d120f2d9e2446e7faa50be45dc1b9b3f1baf4dbdfd36eb342f86e695b9241",
+    "packages/blazex_core/lib/blazex/component/input.ex": "ffde05831a020e1727642f2711fa732535dddf65a83d661b3af64cdc200fe036",
+    "packages/blazex_core/lib/blazex/component/result.ex": "3261eaaf15b368cadfeaefba2dcb1aadd85616abfe6000bfa819e85c561a73ef",
+    "packages/blazex_core/lib/blazex/component/contract.ex": "8e8037755b83e0180823b1b10379db1e7f543b5da3861245e8c168eb64575853",
+    "packages/blazex_core/lib/blazex/component/schema.ex": "0c38aeaf182a5d813a9f1d416bcc10e27fc334de2752d336e2330b47fd0ce5d7",
+    "packages/blazex_core/lib/blazex/core/event.ex": "8ee5bfe1cdcfa974e75545c8de62a6d58009678fbb4ebc21e8acb11f30a6f221",
+    "js/blazex_runtime/src/interaction-stream.js": "277daac8b65a07fccd383fe46ef83615dec01195219703467b7e5be346d711b1",
+    "js/blazex_runtime/src/interaction-record.js": "9b059fbf7bae73e5617f887c2c666511eb272ecf80ae448f7b34b949a0991aa0",
+    "docs/research/assets/quality-acceptance/blazex-acceptance-registry-v0.1.0.json": "43025d17513f068eb1ac0838a381da4c132bf41b74aa602bffdc130e411368ed"
+  },
+  "reviewed_successor_changes": {
+    "packages/blazex_core/lib/blazex/component/local_view.ex": "Opt-in bounded scheduling and typed dispatch; Phase 6 defaults retained.",
+    "packages/blazex_core/lib/blazex/component/root_guardian.ex": "Opt-in bounded scheduling and typed dispatch; Phase 6 defaults retained.",
+    "packages/blazex_core/lib/blazex/component/root_process.ex": "Opt-in bounded scheduling and typed dispatch; Phase 6 defaults retained.",
+    "packages/blazex_ui_tree/lib/blazex/ui_tree/root_evaluator.ex": "Opt-in bounded scheduling and typed dispatch; Phase 6 defaults retained.",
+    "packages/blazex_ui_tree/lib/blazex/ui_tree/nested_candidates.ex": "Opt-in bounded scheduling and typed dispatch; Phase 6 defaults retained."
+  },
+  "limits": {
+    "total_work": 256,
+    "active_timers": 32,
+    "in_flight": 1,
+    "counter": 9007199254740991
+  },
+  "excluded": [
+    "effects/provider results",
+    "remote commands",
+    "unrestricted send",
+    "dynamic registry/context",
+    "restart policy",
+    "forms",
+    "LiveView",
+    "LocalLiveView",
+    "support claims"
+  ],
+  "support_state": "unsupported"
+}

@@ -24,28 +24,28 @@ Back to milestone: [README](README.md)
   Define deterministic ordering, admission, coalescing, stale rejection, and
   final-state behavior while bounding normalized event backlog at 256 or less.
 
-  - [ ] 7.1 Section - Authorize and freeze scheduling semantics.
+  - [x] 7.1 Section - Authorize and freeze scheduling semantics.
 
     Bind the process-root lifecycle and interaction transport, then define
     message classes, priorities, sequences, queue bounds, and cancellation.
 
-    - [ ] 7.1.1 Task - Record bounded Phase 7 authority.
+    - [x] 7.1.1 Task - Record bounded Phase 7 authority.
 
       Establish provenance and keep effects, commands, automatic retry, and
       general arbitrary mailbox handling outside the phase.
 
-      - [ ] 7.1.1.1 Subtask - Record synchronized base, branch, section commits, one PR, cleanup, Phase 6 completion identity, and explicit Phase 7 authorization.
-      - [ ] 7.1.1.2 Subtask - Bind semantic events, BH-04 interaction sequence/acknowledgement, root lifecycle, component callbacks, state commit rules, diagnostics, and event-backlog budget by version and hash.
-      - [ ] 7.1.1.3 Subtask - Exclude effect/provider results, remote command transport, unrestricted external `send`, dynamic registry/context, restart policy, forms, and support claims.
+      - [x] 7.1.1.1 Subtask - Record synchronized base, branch, section commits, one PR, cleanup, Phase 6 completion identity, and explicit Phase 7 authorization.
+      - [x] 7.1.1.2 Subtask - Bind semantic events, BH-04 interaction sequence/acknowledgement, root lifecycle, component callbacks, state commit rules, diagnostics, and event-backlog budget by version and hash.
+      - [x] 7.1.1.3 Subtask - Exclude effect/provider results, remote command transport, unrestricted external `send`, dynamic registry/context, restart policy, forms, and support claims.
 
-    - [ ] 7.1.2 Task - Freeze ingress and ordering policy.
+    - [x] 7.1.2 Task - Freeze ingress and ordering policy.
 
       Define one legal route for each work class and how concurrent arrivals
       are ordered around an in-flight render transaction.
 
-      - [ ] 7.1.2.1 Subtask - Define local event, parent update, component message, owned timer, renderer acknowledgement, lifecycle control, and internal cleanup envelope identities and sequences.
-      - [ ] 7.1.2.2 Subtask - Define deterministic priority/fairness, one in-flight transition, per-class and total bounds, event backlog maximum 256, admission, coalescing, rejection, and diagnostics.
-      - [ ] 7.1.2.3 Subtask - Define generation/revision/owner/source validation, stale/duplicate/replay rejection, timer cancellation, shutdown drain/drop policy, and sibling-root independence.
+      - [x] 7.1.2.1 Subtask - Define local event, parent update, component message, owned timer, renderer acknowledgement, lifecycle control, and internal cleanup envelope identities and sequences.
+      - [x] 7.1.2.2 Subtask - Define deterministic priority/fairness, one in-flight transition, per-class and total bounds, event backlog maximum 256, admission, coalescing, rejection, and diagnostics.
+      - [x] 7.1.2.3 Subtask - Define generation/revision/owner/source validation, stale/duplicate/replay rejection, timer cancellation, shutdown drain/drop policy, and sibling-root independence.
 
   - [ ] 7.2 Section - Implement root ingress and bounded scheduling.
 

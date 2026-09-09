@@ -244,3 +244,5 @@ proof of another host.
 
 - [Root lifecycle evidence](root-lifecycle-evidence.md) — Phase 6 implementation, failure cases and source-frozen gates.
 - [Root supervision compatibility](root-supervision-compatibility.md) — ERTS execution scope and pinned AtomVM/Popcorn limitations.
+
+- [Scheduling contract](scheduling-contract.md) — Phase 7 bounded ingress, ordering, typed messages and owned timers.
