@@ -84,7 +84,7 @@ defmodule BlazeX.Component.RootSchedule do
   def admit(schedule, envelope, accepted, spec) do
     with {:ok, item} <- normalize(schedule.policy, envelope, accepted, spec),
          true <- item.sequence == Map.get(schedule.producers, item.producer, 0) + 1,
-         true <- NestedTable.counter?(schedule.receipt + 1),
+         true <- NestedTable.counter?(schedule.receipt + 1 + length(schedule.reserved)),
          {:ok, next, superseded} <- insert(schedule, item) do
       item = %{item | receipt: schedule.receipt + 1}
 
@@ -101,10 +101,13 @@ defmodule BlazeX.Component.RootSchedule do
 
       {:ok, item, superseded, next}
     else
-      {:error, code} -> {:error, code, %{schedule | rejected: schedule.rejected + 1}}
-      _ -> {:error, :stale_sequence, %{schedule | rejected: schedule.rejected + 1}}
+      {:error, code} -> {:error, code, reject(schedule)}
+      _ -> {:error, :stale_sequence, reject(schedule)}
     end
   end
+
+  def reject(schedule),
+    do: %{schedule | rejected: min(schedule.rejected + 1, 9_007_199_254_740_991)}
 
   def normalize(policy, envelope, accepted, spec) do
     with true <- keys?(envelope, @keys) and Input.portable?(envelope),
@@ -190,7 +193,7 @@ defmodule BlazeX.Component.RootSchedule do
         admitted: schedule.admitted + 1
     }
 
-    if NestedTable.counter?(item.receipt) and within?(next),
+    if NestedTable.counter?(item.receipt + length(schedule.reserved)) and within?(next),
       do: {:ok, item, sample(next)},
       else: {:error, :overload}
   end

@@ -17,7 +17,7 @@ aliases:
 
 Back to milestone: [README](README.md)
 
-- [ ] 7 Phase - Event, Message, Timer, and Transition Scheduling.
+- [x] 7 Phase - Event, Message, Timer, and Transition Scheduling.
 
   Serialize local events, component messages, owned timers, parent updates,
   commit acknowledgements, and lifecycle control through one root scheduler.
@@ -94,28 +94,28 @@ Back to milestone: [README](README.md)
       - [x] 7.3.2.2 Subtask - Route accepted ticks through the same scheduler and reject late, duplicate, canceled, wrong-generation, or post-disposal ticks before callbacks.
       - [x] 7.3.2.3 Subtask - Cancel timers on owner removal/replacement, root failure/disposal, runtime loss, or explicit cancellation and account for every terminal state.
 
-  - [ ] 7.4 Section - Phase 7 Integration Tests and Completion Evidence.
+  - [x] 7.4 Section - Phase 7 Integration Tests and Completion Evidence.
 
     Drive concurrent local events, updates, messages, timers, and renderer
     acknowledgements through multiple roots under normal and overload load.
 
-    - [ ] 7.4.1 Task - Run scheduling and backlog integration tests.
+    - [x] 7.4.1 Task - Run scheduling and backlog integration tests.
 
       Verify exact callback/final-state order, bounded admission, stale
       rejection, and root isolation through public APIs.
 
-      - [ ] 7.4.1.1 Subtask - Test interleaved events, parent updates, self/child/parent messages, one-shot/repeating timers, commits/rejections, nested removal, root replacement, and disposal.
-      - [ ] 7.4.1.2 Subtask - Drive producer rate above consumer rate and prove normalized event backlog never exceeds 256 with explicit coalescing/rejection and retained ordering traces.
-      - [ ] 7.4.1.3 Subtask - Test stale/duplicate/replay, unknown/direct mailbox values, invalid target/payload, late ticks, acknowledgement races, shutdown, and multi-root fairness with no state mutation on rejection.
+      - [x] 7.4.1.1 Subtask - Test interleaved events, parent updates, self/child/parent messages, one-shot/repeating timers, commits/rejections, nested removal, root replacement, and disposal.
+      - [x] 7.4.1.2 Subtask - Drive producer rate above consumer rate and prove normalized event backlog never exceeds 256 with explicit coalescing/rejection and retained ordering traces.
+      - [x] 7.4.1.3 Subtask - Test stale/duplicate/replay, unknown/direct mailbox values, invalid target/payload, late ticks, acknowledgement races, shutdown, and multi-root fairness with no state mutation on rejection.
 
-    - [ ] 7.4.2 Task - Publish Phase 7 completion evidence.
+    - [x] 7.4.2 Task - Publish Phase 7 completion evidence.
 
       Record scheduling rules, raw backlog samples, transition traces, and
       unresolved effect/retry behavior.
 
-      - [ ] 7.4.2.1 Subtask - Run Core/UI-tree/renderer/test suites, scheduler and overload fixtures, ERTS stress tests, validators, dependency audits, archive/generated checks, JSON validation, and patch hygiene.
-      - [ ] 7.4.2.2 Subtask - Publish queue definitions, trace/sample hashes, exact commands/counts, maximum depths, coalescing/rejection outcomes, timer inventories, failures, and limitations.
-      - [ ] 7.4.2.3 Subtask - Mark Phase 7 complete only if work and final state are deterministically ordered and event backlog remains bounded; make Phase 8 eligible but unauthorized.
+      - [x] 7.4.2.1 Subtask - Run Core/UI-tree/renderer/test suites, scheduler and overload fixtures, ERTS stress tests, validators, dependency audits, archive/generated checks, JSON validation, and patch hygiene.
+      - [x] 7.4.2.2 Subtask - Publish queue definitions, trace/sample hashes, exact commands/counts, maximum depths, coalescing/rejection outcomes, timer inventories, failures, and limitations.
+      - [x] 7.4.2.3 Subtask - Mark Phase 7 complete only if work and final state are deterministically ordered and event backlog remains bounded; make Phase 8 eligible but unauthorized.
 
 ## Section delivery rule
 

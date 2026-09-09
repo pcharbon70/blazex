@@ -59,3 +59,12 @@ are introduced. Default Phase 4 pure-only composition remains unchanged.
 static graph with a root-role entry and pure/stateful descendants. It returns
 semantically accepted candidates without disposing prior state; cleanup is a
 separate post-renderer-commit operation. Phase 4/5 defaults remain unchanged.
+
+## Phase 7 scheduled evaluator
+
+The same evaluator implements the outward `SchedulingPort`: committed event
+bindings determine the nearest stateful owner, typed messages invoke only
+declared `handle_info/1` callbacks, and candidate actions remain inert data until
+Core validates and commits them. Removed instances are cleaned up only after
+renderer acceptance. No process, renderer, LiveView or LocalLiveView ownership
+is added to the evaluator.

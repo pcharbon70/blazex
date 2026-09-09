@@ -69,3 +69,4 @@ Versioned records:
   eligibility without authorization.
 
 - [BH-05 root lifecycle tests](test/bh05_root_test.exs) — Supervised final-state commit correlation, independent headless parity, rollback and cleanup failure.
+- [BH-05 scheduling tests](test/bh05_scheduling_test.exs) — Typed local messages/events, multi-root fairness, nested timer removal and retained 256-work overload traces.

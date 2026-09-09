@@ -118,7 +118,10 @@ next repeating wake-up; one-shot timers terminate once. Late, duplicate,
 canceled and wrong-generation wakes never invoke callbacks.
 
 Explicit cancellation, owner removal, generation replacement, root failure,
-disposal and runtime loss cancel timer resources and queued ticks. Stop drops
+disposal and runtime loss cancel timer resources and queued ticks. Explicit
+cancellation also removes earlier queued and candidate-only registrations for
+that owner/ID; a later separately admitted start may reuse the ID with a new
+epoch. Stop drops
 queued application work with cancellation outcomes rather than draining callbacks
 after admission closes. Internal timer/cleanup terminal accounting is bounded;
 there is no automatic replay or restart policy.

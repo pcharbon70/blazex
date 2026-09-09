@@ -60,11 +60,17 @@ evaluation admission. Process execution and runtime parity remain deferred.
 keeps semantic binding admission/evaluation outward. Default LocalView behavior
 remains unchanged; scheduled roots reject unsequenced legacy update calls.
 
+Typed callback messages and owned timers are commit-bound. Timer cancellation,
+replacement, shutdown and `ScheduledView.runtime_loss/2` bypass application work;
+late ticks and acknowledgements cannot restore canceled candidates. Inspection
+reports bounded queue metrics and a payload-free timer inventory. Effects,
+provider results and remote commands remain deferred to their later phase.
+
 `BlazeX.Component.RootPort` validates schema-normalized root start records,
 identity-only handles, complete renderer correlations and integrity-bound
 candidate summaries. Its Evaluator, Renderer and Host behaviours are outward
 implementation seams; private tokens/configuration never reach components.
-Root action execution and support claims remain deferred.
+General effect/command execution and support claims remain deferred.
 
 `BlazeX.Component.LocalView` starts independently supervised roots through
 `LocalView.Supervisor`, admits one candidate at a time, and exposes identity-only

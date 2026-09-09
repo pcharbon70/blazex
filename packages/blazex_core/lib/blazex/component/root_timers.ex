@@ -9,6 +9,12 @@ defmodule BlazeX.Component.RootTimers do
     do: timers.entries |> Map.values() |> Enum.map(& &1.reference) |> Enum.reject(&is_nil/1)
 
   def preflight(timers, intents) do
+    if NestedTable.counter?(timers.serial + Enum.count(intents, &(&1.kind == :timer_start))),
+      do: preflight_keys(timers, intents),
+      else: {:error, :timer_limit_or_duplicate}
+  end
+
+  defp preflight_keys(timers, intents) do
     Enum.reduce_while(intents, {:ok, Map.keys(timers.entries) |> MapSet.new()}, fn item,
                                                                                    {:ok, keys} ->
       cond do
@@ -59,7 +65,7 @@ defmodule BlazeX.Component.RootTimers do
 
       {entry, rest} ->
         if entry.reference, do: Process.cancel_timer(entry.reference)
-        %{timers | entries: rest, canceled: timers.canceled + 1}
+        %{timers | entries: rest, canceled: bump(timers.canceled)}
     end
   end
 
@@ -91,7 +97,7 @@ defmodule BlazeX.Component.RootTimers do
         end
 
       _ ->
-        {:error, %{timers | rejected: timers.rejected + 1}}
+        {:error, %{timers | rejected: bump(timers.rejected)}}
     end
   end
 
@@ -127,7 +133,7 @@ defmodule BlazeX.Component.RootTimers do
         %{
           timers
           | entries: Map.delete(timers.entries, key(item)),
-            completed: timers.completed + 1
+            completed: bump(timers.completed)
         }
       end
     else
@@ -136,6 +142,8 @@ defmodule BlazeX.Component.RootTimers do
   end
 
   def finish(timers, _), do: timers
+
+  defp bump(value), do: min(value + 1, 9_007_199_254_740_991)
 
   def inventory(timers) do
     %{

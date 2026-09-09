@@ -54,3 +54,9 @@ external message, effect or renderer commit occurs. Current check:
 
 - [Root lifecycle fixtures](root-fixtures.exs) — Public root and nested components with an independent semantic oracle.
 - [Root lifecycle index](root-index-v0.1.0.json) — Root API, source hashes, normalized trace/state digests and qualification limits.
+
+- [Scheduling fixtures](scheduling-fixtures.exs) — Typed root/child callbacks, test-owned graph snapshots and independent semantic oracle.
+- [Scheduling index](scheduling-index-v0.1.0.json) — Phase 7 queue bounds, source hashes, raw samples, outcome digests and limitations.
+
+Current Phase 7 check: `python3 docs/research/70-tools/validate_bh05_scheduling.py --final`.
+Earlier phase checks run at their accepted frozen snapshots.

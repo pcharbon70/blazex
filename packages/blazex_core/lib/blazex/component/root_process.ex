@@ -53,12 +53,24 @@ defmodule BlazeX.Component.RootProcess do
       case RootTimers.wake(state.timers, key, epoch, token, state.accepted) do
         {:ok, item, timers} ->
           case RootSchedule.internal(schedule, item) do
-            {:ok, _item, next_schedule} -> %{state | timers: timers, schedule: next_schedule}
-            {:error, _} -> %{state | timers: RootTimers.finish(timers, item)}
+            {:ok, _item, next_schedule} ->
+              %{state | timers: timers, schedule: next_schedule}
+
+            {:error, _} ->
+              next = %{
+                state
+                | timers: RootTimers.finish(timers, item),
+                  schedule: RootSchedule.reject(schedule)
+              }
+
+              notify(next, :timer_overload)
+              next
           end
 
         {:error, timers} ->
-          %{state | timers: timers}
+          next = %{state | timers: timers}
+          notify(next, :timer_rejected)
+          next
       end
 
     info_result(settle(next))
@@ -67,7 +79,7 @@ defmodule BlazeX.Component.RootProcess do
   def handle_info(_, %{schedule: nil} = state), do: {:noreply, state}
 
   def handle_info(_, state) do
-    next = %{state | schedule: %{state.schedule | rejected: state.schedule.rejected + 1}}
+    next = %{state | schedule: RootSchedule.reject(state.schedule)}
     notify(next, :unknown_mailbox)
     {:noreply, next}
   end
@@ -110,8 +122,7 @@ defmodule BlazeX.Component.RootProcess do
           send(self(), :drain)
           {{:ok, %{receipt: item.receipt, sequence: item.sequence}}, next}
         else
-          {{:error, :invalid_ingress},
-           %{state | schedule: %{schedule | rejected: schedule.rejected + 1}}}
+          {{:error, :invalid_ingress}, %{state | schedule: RootSchedule.reject(schedule)}}
         end
 
       {:error, code, next_schedule} ->
@@ -545,7 +556,28 @@ defmodule BlazeX.Component.RootProcess do
 
   defp cancel_owned(state, item) do
     key = RootTimers.key(item)
-    state = %{state | timers: RootTimers.cancel(state.timers, key)}
+
+    {removed, schedule} =
+      RootSchedule.drop(
+        state.schedule,
+        &(&1.kind in [:timer_start, :timer_tick] and RootTimers.key(&1) == key)
+      )
+
+    Enum.each(removed, &outcome(state, &1, :canceled, :timer_cancel))
+
+    intents =
+      Enum.reject(
+        state.candidate_intents,
+        &(&1.kind == :timer_start and RootTimers.key(&1) == key)
+      )
+
+    state = %{
+      state
+      | timers: RootTimers.cancel(state.timers, key),
+        schedule: schedule,
+        candidate_intents: intents
+    }
+
     active = state.schedule.active
 
     state =
@@ -597,7 +629,7 @@ defmodule BlazeX.Component.RootProcess do
         work: Map.take(item, [:receipt, :class, :producer, :sequence]),
         result: result,
         reason: reason,
-        correlation: state.active_correlation
+        correlation: work_correlation(state, item)
       })
 
     send(state.guardian, {:root_work_done, self(), item.receipt})
@@ -618,8 +650,20 @@ defmodule BlazeX.Component.RootProcess do
     work =
       state.schedule.queue ++ if(state.schedule.active, do: [state.schedule.active], else: [])
 
-    work = Enum.map(work, &Map.take(&1, [:receipt, :class, :producer, :sequence]))
+    work =
+      Enum.map(
+        work,
+        &(Map.take(&1, [:receipt, :class, :producer, :sequence])
+          |> Map.put(:correlation, work_correlation(state, &1)))
+      )
+
     send(state.guardian, {:root_work, self(), work, RootTimers.refs(state.timers)})
     :ok
+  end
+
+  defp work_correlation(state, item) do
+    if state.schedule.active != nil and state.schedule.active.receipt == item.receipt,
+      do: state.active_correlation,
+      else: nil
   end
 end

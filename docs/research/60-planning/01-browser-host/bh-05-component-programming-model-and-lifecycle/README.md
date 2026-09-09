@@ -49,13 +49,14 @@ Planning alone does not authorize implementation. The owner authorized Phase 1
 after the accepted BH-04 corrective handoff merged in PR #51 at
 `506c254ddd4a14dd8d1d4cbdba8fcf9556bd15cb`. Phase 1 activates governance only;
 every later phase still requires separate explicit implementation authorization.
-Phases 1–6 are complete: governance activation, candidate authoring, prop/slot
-schemas, pure composition, nested-state reconciliation and supervised root
-lifecycle have accepted, separately bound evidence. Phase 7 is eligible but
+Phases 1–7 are complete: governance activation, candidate authoring, prop/slot
+schemas, pure composition, nested-state reconciliation, supervised root
+lifecycle and bounded local scheduling have separately bound evidence. The owner
+authorized Phase 7 after the accepted Phase 6 merge. Phase 8 is eligible but
 unauthorized; BH-06 remains ineligible. The current
-[Phase 6 evidence](root-lifecycle-evidence.md) grants ERTS/headless process-root
-and commit-correlated final-state credit, without effects execution or Wasm
-parity. [Runtime compatibility limits](root-supervision-compatibility.md) remain
+[Phase 7 evidence](scheduling-evidence.md) grants ERTS/headless typed local
+event/message/timer and commit-correlated final-state credit, without effects
+execution or Wasm parity. [Runtime compatibility limits](root-supervision-compatibility.md) remain
 explicitly unqualified for Phase 11.
 
 ## What belongs here
@@ -246,3 +247,4 @@ proof of another host.
 - [Root supervision compatibility](root-supervision-compatibility.md) — ERTS execution scope and pinned AtomVM/Popcorn limitations.
 
 - [Scheduling contract](scheduling-contract.md) — Phase 7 bounded ingress, ordering, typed messages and owned timers.
+- [Scheduling evidence](scheduling-evidence.md) — Phase 7 typed callbacks, owned timers, backlog stress and source-frozen gate method.

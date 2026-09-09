@@ -467,6 +467,57 @@ defmodule BlazeX.ScheduledIntentsTest do
       assert snapshot.scheduling.depth == 0 and snapshot.timers.active == 0
     end
   end
+
+  test "cancellation also removes queued and candidate-only registrations before they can start" do
+    for mode <- [:none, :timer] do
+      {supervisor, handle, _} = start(mode)
+      {:ok, _} = ScheduledView.event(supervisor, handle, F.envelope())
+      assert_receive {:submitted, event}
+
+      next_sequence =
+        if mode == :none do
+          {:ok, %{receipt: 2}} =
+            ScheduledView.timer(
+              supervisor,
+              handle,
+              F.envelope(2, %{
+                class: :timer,
+                name: "tick",
+                timer: %{operation: :start, id: "clock", delay: 10, interval: nil}
+              })
+            )
+
+          3
+        else
+          2
+        end
+
+      {:ok, %{receipt: receipt}} =
+        ScheduledView.timer(
+          supervisor,
+          handle,
+          F.envelope(next_sequence, %{
+            class: :timer,
+            name: "tick",
+            timer: %{operation: :cancel, id: "clock"}
+          })
+        )
+
+      assert_receive {:observation,
+                      %{
+                        event: :work_outcome,
+                        work: %{receipt: ^receipt},
+                        result: :committed,
+                        correlation: nil
+                      }}
+
+      :ok = LocalView.acknowledge(supervisor, handle, %{correlation: event, result: :committed})
+      refute_receive {:dispatch, 2}, 30
+      refute_receive {:submitted, _}, 30
+      {:ok, final} = LocalView.inspect_root(supervisor, handle)
+      assert final.timers.active == 0 and final.scheduling.depth == 0
+    end
+  end
 end
 
 defmodule BlazeX.RootTimersTest do
@@ -589,6 +640,36 @@ defmodule BlazeX.RootTimersTest do
     assert RootSchedule.metrics(next).depth == 256
   end
 
+  test "safe counters reserve follow-up receipts and cannot wrap timer epochs or diagnostics" do
+    maximum = 9_007_199_254_740_991
+    {:ok, schedule} = RootSchedule.new(F.policy())
+
+    {:ok, message} =
+      RootSchedule.normalize(
+        F.policy(),
+        F.envelope(1, %{class: :message, name: "tick"}),
+        F.accepted(),
+        F.spec()
+      )
+
+    assert {:error, :overload} = RootSchedule.reserve(%{schedule | receipt: maximum}, [message])
+    {:ok, reserved} = RootSchedule.reserve(%{schedule | receipt: maximum - 1}, [message])
+
+    assert {:error, :stale_sequence, _} =
+             RootSchedule.admit(
+               reserved,
+               timer(1, %{timer: %{operation: :cancel, id: "clock"}}),
+               F.accepted(),
+               F.spec()
+             )
+
+    assert {:error, :overload} = RootSchedule.internal(reserved, message)
+    assert RootSchedule.reject(%{schedule | rejected: maximum}).rejected == maximum
+    {:ok, item} = RootSchedule.normalize(F.policy(), timer(), F.accepted(), F.spec())
+    assert {:error, _} = RootTimers.preflight(%RootTimers{serial: maximum}, [item])
+    assert {:error, _} = RootTimers.install(%RootTimers{serial: maximum}, item)
+  end
+
   test "explicit cancellation aborts an in-flight timer tick and rejects its late acknowledgement" do
     supervisor = start_supervised!(LocalView.Supervisor)
     ports = %{evaluator: {F.Ports, self()}, renderer: {F.Ports, self()}, host: {F.Ports, self()}}
@@ -622,5 +703,41 @@ defmodule BlazeX.RootTimersTest do
     assert snapshot.accepted.correlation == mount
     assert snapshot.timers.active == 0 and snapshot.scheduling.depth == 0
     refute_receive {:observation, %{event: :work_outcome}}
+  end
+
+  test "unknown mailbox input cannot invoke callbacks and coordinator crash accounts for queued work" do
+    supervisor = start_supervised!(LocalView.Supervisor)
+    ports = %{evaluator: {F.Ports, self()}, renderer: {F.Ports, self()}, host: {F.Ports, self()}}
+    {:ok, handle} = ScheduledView.start(supervisor, F.spec(), ports, F.policy())
+    assert_receive {:submitted, mount}
+    :ok = LocalView.acknowledge(supervisor, handle, %{correlation: mount, result: :committed})
+    [{_, guardian, _, _}] = Supervisor.which_children(supervisor)
+    worker = :sys.get_state(guardian).worker
+    send(worker, {:handle_info, %{private: "not_a_component_message"}})
+    assert_receive {:observation, %{event: :unknown_mailbox}}
+    refute_receive {:dispatch, _}, 30
+
+    {:ok, _} =
+      ScheduledView.timer(
+        supervisor,
+        handle,
+        timer(1, %{timer: %{operation: :start, id: "clock", delay: 60000, interval: nil}})
+      )
+
+    assert_receive {:observation,
+                    %{event: :work_outcome, work: %{receipt: 1}, result: :committed}}
+
+    {:ok, _} = ScheduledView.event(supervisor, handle, F.envelope(2))
+    assert_receive {:dispatch, 2}
+    assert_receive {:submitted, _}
+    {:ok, _} = ScheduledView.event(supervisor, handle, F.envelope(3))
+    :erlang.exit(worker, :kill)
+    assert_receive {:observation, %{event: :crashed}}, 1000
+    assert_receive {:observation, %{event: :work_outcome, work: %{receipt: 2}, result: :canceled}}
+    assert_receive {:observation, %{event: :work_outcome, work: %{receipt: 3}, result: :canceled}}
+    {:ok, final} = LocalView.inspect_root(supervisor, handle)
+    assert final.status == :failed and final.accepted.correlation == mount
+    assert final.timers.active == 0 and final.scheduling.depth == 0
+    refute_receive {:observation, %{event: :work_outcome}}, 30
   end
 end

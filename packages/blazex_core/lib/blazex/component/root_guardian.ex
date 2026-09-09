@@ -111,7 +111,6 @@ defmodule BlazeX.Component.RootGuardian do
           error: nil
         }
 
-    correlation = snapshot.pending
     snapshot = %{snapshot | status: :failed, pending: nil, error: :crashed}
 
     snapshot =
@@ -129,13 +128,20 @@ defmodule BlazeX.Component.RootGuardian do
           }
         end)
         |> Map.update!(:timers, fn timers ->
-          %{timers | active: 0, entries: [], canceled: timers.canceled + timers.active}
+          %{
+            timers
+            | active: 0,
+              entries: [],
+              canceled: min(timers.canceled + timers.active, 9_007_199_254_740_991)
+          }
         end)
       else
         snapshot
       end
 
     Enum.each(state.work, fn work ->
+      {correlation, work} = Map.pop(work, :correlation)
+
       RootPort.call(state.ports.host, :notify, [
         Map.merge(snapshot, %{
           event: :work_outcome,
