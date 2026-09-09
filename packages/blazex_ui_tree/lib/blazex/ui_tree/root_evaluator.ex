@@ -17,7 +17,7 @@ defmodule BlazeX.UITree.RootEvaluator do
   @impl true
   def prepare_scheduled(config, request, prior) do
     with :ok <- admit(config, request.work, prior),
-         true <- request.work.kind in [:event, :message, :timer_tick, :update] do
+         true <- request.work.kind in [:event, :message, :timer_tick, :update, :action_result] do
       prepare_candidate(config, request, prior, true)
     else
       _ -> {:error, :semantic_rejected}
@@ -30,7 +30,7 @@ defmodule BlazeX.UITree.RootEvaluator do
       validate_candidate(accepted)
       CompositionPlan.require!(RootSchedule.valid_dispatch?(work, accepted), :stale, [])
       target = Enum.find(accepted.token.records, &(Map.from_struct(&1.identity) == work.target))
-      callback = if work.kind == :event, do: :handle_event, else: :handle_info
+      callback = callback_name(work, target.role)
 
       if work.kind not in [:update, :timer_cancel],
         do:
@@ -61,6 +61,41 @@ defmodule BlazeX.UITree.RootEvaluator do
           :binding,
           []
         )
+      end
+
+      :ok
+    end)
+  end
+
+  def admit_action(_config, action, candidate) do
+    guarded(fn ->
+      validate_candidate(candidate)
+      target = Enum.find(candidate.token.records, &(Map.from_struct(&1.identity) == action.owner))
+
+      CompositionPlan.require!(
+        target != nil and target.role in [:root, :stateful],
+        :action_owner,
+        []
+      )
+
+      if action.kind in [:effect_request, :command] do
+        callback = if target.role == :root, do: :effect_result, else: :handle_info
+
+        CompositionPlan.require!(
+          function_exported?(target.module, callback, 1),
+          :missing_callback,
+          []
+        )
+
+        if action.kind == :effect_request do
+          declarations = target.module.__blazex_component__().declarations.capabilities
+
+          CompositionPlan.require!(
+            action.request.declaration.capability in declarations,
+            :capability,
+            []
+          )
+        end
       end
 
       :ok
@@ -210,6 +245,14 @@ defmodule BlazeX.UITree.RootEvaluator do
 
   defp dispatch_event(%{kind: :update}), do: nil
 
+  defp dispatch_event(%{kind: :action_result} = work) do
+    %{
+      target: struct(Identity, work.target),
+      callback: callback_name(work, if(work.target.path == [], do: :root, else: :stateful)),
+      payload: work.payload
+    }
+  end
+
   defp dispatch_event(work) do
     payload = %{name: work.name, data: work.payload, source: work.source}
 
@@ -224,6 +267,10 @@ defmodule BlazeX.UITree.RootEvaluator do
       payload: payload
     }
   end
+
+  defp callback_name(%{kind: :event}, _), do: :handle_event
+  defp callback_name(%{kind: :action_result}, :root), do: :effect_result
+  defp callback_name(_, _), do: :handle_info
 
   defp validate_prior(nil, %{operation: :mount, generation: 1, revision: 1}, :mount), do: :ok
 

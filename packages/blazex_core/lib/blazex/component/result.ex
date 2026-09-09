@@ -1,4 +1,7 @@
 defmodule BlazeX.Component.Result do
+  @doc "Construct a closed Phase 8 action through the portable authoring facade."
+  defdelegate action(kind, id, sequence, owner, body), to: BlazeX.Component.Action, as: :new
+
   @moduledoc """
   Closed candidate return algebra. Never executes actions or commits state.
   Output is a tagged, portable semantic candidate, not a validated UI document.
@@ -13,7 +16,7 @@ defmodule BlazeX.Component.Result do
           | :no_change
           | {:state, term()}
           | {:output, {:semantic, 1, map()}}
-          | {:actions, term(), [{atom(), binary(), term()}]}
+          | {:actions, term(), [BlazeX.Component.Action.t() | {atom(), binary(), term()}]}
           | {:stop, atom()}
           | {:retry_request, atom()}
           | {:rejected, atom()}
@@ -48,6 +51,9 @@ defmodule BlazeX.Component.Result do
   defp actions?(actions) do
     Input.portable?(actions) and is_list(actions) and length(actions) in 1..@max_actions and
       Enum.all?(actions, fn
+        %{version: 1} = action ->
+          BlazeX.Component.Action.valid?(action)
+
         {kind, id, payload} ->
           kind in @kinds and is_binary(id) and byte_size(id) in 1..128 and
             Input.portable?(payload)

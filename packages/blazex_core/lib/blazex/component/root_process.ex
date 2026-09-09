@@ -1,15 +1,18 @@
 defmodule BlazeX.Component.RootProcess do
   @moduledoc false
   use GenServer
-  alias BlazeX.Component.{RootPort, RootSchedule, RootTimers, SchedulingIntents}
+  alias BlazeX.Component.{ActionRuntime, RootPort, RootSchedule, RootTimers, SchedulingIntents}
 
   def start_link(input), do: GenServer.start_link(__MODULE__, input)
 
   @impl true
   def init({guardian, spec, ports}), do: init({guardian, spec, ports, nil})
 
-  def init({guardian, spec, ports, policy}) do
+  def init({guardian, spec, ports, policy}), do: init({guardian, spec, ports, policy, nil})
+
+  def init({guardian, spec, ports, policy, actions}) do
     {:ok, schedule} = RootSchedule.new(policy)
+    {:ok, actions} = ActionRuntime.new(actions)
     send(self(), :boot)
 
     {:ok,
@@ -25,7 +28,9 @@ defmodule BlazeX.Component.RootProcess do
        schedule: schedule,
        active_correlation: nil,
        timers: %RootTimers{},
-       candidate_intents: []
+       candidate_intents: [],
+       actions: actions,
+       action_plan: nil
      }}
   end
 
@@ -46,6 +51,14 @@ defmodule BlazeX.Component.RootProcess do
       do: info_result(run_next(state))
 
   def handle_info(:drain, state), do: {:noreply, state}
+
+  def handle_info({:action_timeout, correlation, token}, %{actions: actions} = state)
+      when actions != nil do
+    case ActionRuntime.timeout(actions, correlation, token, state.accepted) do
+      {:ok, actions, item} -> info_result(settle(action_result_ready(state, actions, [item])))
+      _ -> {:noreply, state}
+    end
+  end
 
   def handle_info({:owned_tick, key, epoch, token}, %{schedule: schedule} = state)
       when schedule != nil do
@@ -109,6 +122,16 @@ defmodule BlazeX.Component.RootProcess do
 
   defp dispatch(:snapshot, state), do: {{:ok, snapshot(state)}, state}
   defp dispatch({:ack, acknowledgement}, state), do: acknowledge(state, acknowledgement)
+
+  defp dispatch({:action_result, result}, %{actions: actions, status: status} = state)
+       when actions != nil and status in [:ready, :awaiting_commit] do
+    case ActionRuntime.complete(actions, result, state.accepted) do
+      {:ok, actions, item} -> {:ok, action_result_ready(state, actions, [item])}
+      _ -> {{:error, :invalid_or_stale_result}, state}
+    end
+  end
+
+  defp dispatch({:action_result, _}, state), do: {{:error, :invalid_or_stale_result}, state}
 
   defp dispatch({:enqueue, envelope}, %{schedule: schedule, status: status} = state)
        when schedule != nil and status in [:ready, :awaiting_commit] and state.accepted != nil do
@@ -212,8 +235,8 @@ defmodule BlazeX.Component.RootProcess do
         case RootPort.call(state.ports.evaluator, callback, [request, state.accepted]) do
           {:ok, candidate, groups} when work != nil ->
             with true <- RootPort.candidate?(candidate, correlation),
-                 {:ok, intents} <-
-                   SchedulingIntents.normalize(state.schedule.policy, groups, candidate, spec),
+                 {:ok, intents, reservations, action_plan} <-
+                   candidate_actions(state, groups, candidate, spec),
                  true <-
                    Enum.all?(
                      intents,
@@ -223,10 +246,15 @@ defmodule BlazeX.Component.RootProcess do
                  {:ok, schedule} <-
                    RootSchedule.reserve(
                      state.schedule,
-                     Enum.filter(intents, &(&1.kind == :message))
+                     reservations
                    ) do
               submit(
-                %{state | schedule: schedule, candidate_intents: intents},
+                %{
+                  state
+                  | schedule: schedule,
+                    candidate_intents: intents,
+                    action_plan: action_plan
+                },
                 spec,
                 correlation,
                 candidate,
@@ -417,6 +445,11 @@ defmodule BlazeX.Component.RootProcess do
       error: state.error
     }
 
+    value =
+      if state.actions,
+        do: Map.put(value, :actions, ActionRuntime.snapshot(state.actions)),
+        else: value
+
     if state.schedule,
       do:
         value
@@ -477,6 +510,7 @@ defmodule BlazeX.Component.RootProcess do
           state
           | schedule: RootSchedule.finish(state.schedule),
             active_correlation: nil,
+            actions: ActionRuntime.finish_result(state.actions, state.schedule.active, committed),
             timers: RootTimers.finish(state.timers, state.schedule.active)
         }
 
@@ -485,7 +519,19 @@ defmodule BlazeX.Component.RootProcess do
             do: apply_intents(next, state.candidate_intents),
             else: next
 
-        %{next | candidate_intents: []}
+        next =
+          if committed and state.status == :ready and state.action_plan != nil do
+            {actions, work} =
+              ActionRuntime.commit(next.actions, state.action_plan, state.accepted, fn actions ->
+                send(state.guardian, {:root_actions, self(), actions})
+              end)
+
+            action_result_ready(next, actions, work)
+          else
+            next
+          end
+
+        %{next | candidate_intents: [], action_plan: nil}
       else
         state
       end
@@ -502,7 +548,17 @@ defmodule BlazeX.Component.RootProcess do
           )
 
         Enum.each(removed, &outcome(state, &1, :canceled, :removed_target))
-        %{state | timers: timers, schedule: schedule}
+        actions = Enum.reduce(removed, state.actions, &ActionRuntime.finish_result(&2, &1, false))
+        %{state | timers: timers, schedule: schedule, actions: actions}
+      else
+        state
+      end
+
+    state =
+      if state.actions != nil and state.accepted != nil do
+        actions = ActionRuntime.prune(state.actions, state.accepted)
+        {:ok, schedule} = RootSchedule.results(state.schedule, ActionRuntime.pending(actions))
+        %{state | actions: actions, schedule: schedule}
       else
         state
       end
@@ -530,10 +586,12 @@ defmodule BlazeX.Component.RootProcess do
 
     %{
       state
-      | schedule: %{RootSchedule.finish(state.schedule) | queue: []},
+      | schedule: %{RootSchedule.finish(state.schedule) | queue: [], result_slots: 0},
         active_correlation: nil,
         candidate_intents: [],
-        timers: RootTimers.cancel_all(state.timers)
+        timers: RootTimers.cancel_all(state.timers),
+        actions: ActionRuntime.close(state.actions, reason),
+        action_plan: nil
     }
   end
 
@@ -588,7 +646,8 @@ defmodule BlazeX.Component.RootProcess do
           state
           | schedule: RootSchedule.finish(state.schedule),
             active_correlation: nil,
-            candidate_intents: []
+            candidate_intents: [],
+            action_plan: nil
         }
 
         if next.pending do
@@ -647,6 +706,8 @@ defmodule BlazeX.Component.RootProcess do
   defp checkpoint(%{schedule: nil}), do: :ok
 
   defp checkpoint(state) do
+    if state.actions != nil, do: send(state.guardian, {:root_actions, self(), state.actions})
+
     work =
       state.schedule.queue ++ if(state.schedule.active, do: [state.schedule.active], else: [])
 
@@ -665,5 +726,39 @@ defmodule BlazeX.Component.RootProcess do
     if state.schedule.active != nil and state.schedule.active.receipt == item.receipt,
       do: state.active_correlation,
       else: nil
+  end
+
+  defp candidate_actions(%{actions: nil} = state, groups, candidate, spec) do
+    with {:ok, intents} <-
+           SchedulingIntents.normalize(state.schedule.policy, groups, candidate, spec) do
+      {:ok, intents, Enum.filter(intents, &(&1.kind == :message)), nil}
+    end
+  end
+
+  defp candidate_actions(state, groups, candidate, spec) do
+    with {:ok, plan} <-
+           ActionRuntime.prepare(
+             state.actions,
+             groups,
+             candidate,
+             spec,
+             state.schedule.policy,
+             state.ports.evaluator
+           ) do
+      {:ok, plan.local, plan.reservations, plan}
+    end
+  end
+
+  defp action_result_ready(state, actions, work) do
+    send(state.guardian, {:root_actions, self(), actions})
+    {:ok, schedule} = RootSchedule.results(state.schedule, ActionRuntime.pending(actions))
+
+    schedule =
+      Enum.reduce(work, schedule, fn item, acc ->
+        {:ok, _item, next} = RootSchedule.internal(acc, item)
+        next
+      end)
+
+    %{state | actions: actions, schedule: schedule}
   end
 end

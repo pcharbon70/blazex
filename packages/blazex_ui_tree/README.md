@@ -68,3 +68,13 @@ declared `handle_info/1` callbacks, and candidate actions remain inert data unti
 Core validates and commits them. Removed instances are cleaned up only after
 renderer acceptance. No process, renderer, LiveView or LocalLiveView ownership
 is added to the evaluator.
+
+Phase 8 adds `admit_action/3`: effect requests must match the actual component's
+capability declarations and expose a declared result callback. Typed outcomes
+use root `effect_result/1` or nested `handle_info/1`; provider execution stays
+behind Core's outward action port and after renderer commit.
+
+Phase 8 action-enabled roots require an actual component capability declaration
+and a result callback: root `effect_result/1`, nested stateful `handle_info/1`.
+Public manifests cannot substitute for either. Typed actions validate with the
+whole candidate before provider submission; semantic and renderer commit remain separate.

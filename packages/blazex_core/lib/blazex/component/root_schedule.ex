@@ -29,6 +29,7 @@ defmodule BlazeX.Component.RootSchedule do
     queue: [],
     active: nil,
     reserved: [],
+    result_slots: 0,
     producers: %{},
     receipt: 0,
     admitted: 0,
@@ -84,7 +85,10 @@ defmodule BlazeX.Component.RootSchedule do
   def admit(schedule, envelope, accepted, spec) do
     with {:ok, item} <- normalize(schedule.policy, envelope, accepted, spec),
          true <- item.sequence == Map.get(schedule.producers, item.producer, 0) + 1,
-         true <- NestedTable.counter?(schedule.receipt + 1 + length(schedule.reserved)),
+         true <-
+           NestedTable.counter?(
+             schedule.receipt + 1 + length(schedule.reserved) + schedule.result_slots
+           ),
          {:ok, next, superseded} <- insert(schedule, item) do
       item = %{item | receipt: schedule.receipt + 1}
 
@@ -167,7 +171,8 @@ defmodule BlazeX.Component.RootSchedule do
   def reserve(schedule, items) do
     next = %{schedule | reserved: items}
 
-    if length(items) <= 16 and NestedTable.counter?(schedule.receipt + length(items)) and
+    if length(items) <= 16 and
+         NestedTable.counter?(schedule.receipt + length(items) + schedule.result_slots) and
          within?(next),
        do: {:ok, sample(next)},
        else: {:error, :overload}
@@ -193,14 +198,20 @@ defmodule BlazeX.Component.RootSchedule do
         admitted: schedule.admitted + 1
     }
 
-    if NestedTable.counter?(item.receipt + length(schedule.reserved)) and within?(next),
-      do: {:ok, item, sample(next)},
-      else: {:error, :overload}
+    if NestedTable.counter?(item.receipt + length(schedule.reserved) + schedule.result_slots) and
+         within?(next),
+       do: {:ok, item, sample(next)},
+       else: {:error, :overload}
   end
 
   def drop(schedule, predicate) do
     {removed, kept} = Enum.split_with(schedule.queue, predicate)
     {removed, %{schedule | queue: kept}}
+  end
+
+  def results(schedule, count) when count in 0..128 do
+    next = %{schedule | result_slots: count}
+    if within?(next), do: {:ok, sample(next)}, else: {:error, :overload}
   end
 
   def metrics(schedule) do
@@ -318,7 +329,10 @@ defmodule BlazeX.Component.RootSchedule do
 
   defp work(schedule),
     do:
-      schedule.queue ++ schedule.reserved ++ if(schedule.active, do: [schedule.active], else: [])
+      schedule.queue ++
+        schedule.reserved ++
+        List.duplicate(%{class: :message}, schedule.result_slots) ++
+        if(schedule.active, do: [schedule.active], else: [])
 
   defp depth(schedule), do: length(work(schedule))
 

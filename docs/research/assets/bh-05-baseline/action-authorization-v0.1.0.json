@@ -1,0 +1,78 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 8,
+  "base": "08dec098fde98b506d554bf8c3ff64bc65de6add",
+  "authorization": "Owner requested next BH-05 phase after Phase 7 completion; Phase 8 only.",
+  "branch": "codex/bh05-phase8-actions",
+  "sections": [
+    "8.1",
+    "8.2",
+    "8.3",
+    "8.4"
+  ],
+  "delivery": [
+    "verified section commits",
+    "single PR",
+    "merge",
+    "checkout main",
+    "sync origin",
+    "delete feature branch"
+  ],
+  "contract": "0.1.0-bh05-actions",
+  "schema_contract": "0.2.0-bh05-schema-candidate",
+  "input_hashes": {
+    "docs/research/assets/bh-05-baseline/scheduling-completion-v0.1.0.json": "7e79fb2107355d2cd90a0846fb5fe20d6126bf5467050fa3b5d84b4fa34219e0",
+    "docs/research/assets/bh-05-baseline/scheduling-gates-v0.1.0.json": "31c4ca240dcbfa1b1a17b6931bb5a8ef7be1459ff9a490c2bd9980cc99950fc5",
+    "docs/research/60-planning/01-browser-host/bh-05-component-programming-model-and-lifecycle/scheduling-contract.md": "5387d4ff130e6193f676b1722beb0f539ede48e75234cfdb7e150a0327dddeaa",
+    "docs/research/60-planning/01-browser-host/bh-05-component-programming-model-and-lifecycle/root-supervision-compatibility.md": "583c8220c41b3d5611ebd0f00167768c5fa083209cfebcd2cffdfaa221c2956f",
+    "packages/blazex_core/lib/blazex/component/local_view.ex": "7e1d5192799936bf095737160a46c2f1cf6db63d4de9c7fa805d882f93097adf",
+    "packages/blazex_core/lib/blazex/component/root_guardian.ex": "8563f25450c20c0a6f2402955f4dfbfde8c70f9fd2e3176608fbc6995e93c733",
+    "packages/blazex_core/lib/blazex/component/root_process.ex": "4fa863b4a86c038992a86daf55c6c6c2a6c36c820ffdadbef0d1e8432465868b",
+    "packages/blazex_core/lib/blazex/component/root_schedule.ex": "a64eb8d888a78dce9ba87d24897e537b9c564505cd62f321e83ea83960b50906",
+    "packages/blazex_core/lib/blazex/component/result.ex": "3261eaaf15b368cadfeaefba2dcb1aadd85616abfe6000bfa819e85c561a73ef",
+    "packages/blazex_ui_tree/lib/blazex/ui_tree/root_evaluator.ex": "dcb03d6cdf54d53dcc24d8b73d16876bd692d78633dcdf7cfb8a4627de3d0aec",
+    "packages/blazex_ui_tree/lib/blazex/ui_tree/nested_candidates.ex": "b2e32aab85114a9cb70f68ce5db4d1798baa7db1142e30ebb6f92116be179f0c",
+    "packages/blazex_core/lib/blazex/component/root_port.ex": "949d120f2d9e2446e7faa50be45dc1b9b3f1baf4dbdfd36eb342f86e695b9241",
+    "packages/blazex_core/lib/blazex/component/input.ex": "ffde05831a020e1727642f2711fa732535dddf65a83d661b3af64cdc200fe036",
+    "packages/blazex_core/lib/blazex/component/contract.ex": "8e8037755b83e0180823b1b10379db1e7f543b5da3861245e8c168eb64575853",
+    "packages/blazex_core/lib/blazex/component/schema.ex": "0c38aeaf182a5d813a9f1d416bcc10e27fc334de2752d336e2330b47fd0ce5d7",
+    "packages/blazex_effects/lib/blazex/effects/effect.ex": "2a4f2fb486f43b322d6288571436d35320c6b7d2bb7203f80a762424eb46d540",
+    "packages/blazex_effects/lib/blazex/effects/capability.ex": "d58310177169c26e19f6228d3df1bd4f52fa14737a7d03468e5550a739b9b76b",
+    "packages/blazex_effects/lib/blazex/effects/negotiation.ex": "3e1175bf2b663e8e8c286bc3110fc20763916ed8ff4c3dd0f8b3701fc691cb30",
+    "packages/blazex_effects/lib/blazex/effects/provider.ex": "85b9996fdac6282b15859bcb4ec11bd64c202a619bd5f1a22f925fea5b1a96fd",
+    "packages/blazex_effects/lib/blazex/effects/result.ex": "126a619658302a70c1c8f946ce0df820c9a6d79fc6db268b170f5f098af59816",
+    "packages/blazex_effects/lib/blazex/effects/resource.ex": "4b5045f402331ccfdb9c8ea1cb3c7aa3934d32fe1b842cfcfba9e25d4e4e9742",
+    "packages/blazex_effects/lib/blazex/effects/tracker.ex": "ae409d9ccc8eff0ccb7344689fd9d51b2b5a94bea22b047a91312dba7a29f869",
+    "docs/research/20-notes/architecture-decisions/adr-0005-server-adapter-and-trust-boundary.md": "5f2d34113308a36192d5d88bd36850d79d810a95b28d57d2e5a49c6c0f803766",
+    "docs/research/20-notes/architecture-decisions/adr-0003-host-neutral-effects-capabilities-and-resources.md": "2c99891c5f780afddbb85083d4300c2e1b5d453536c5198ff32a88037522df74",
+    "docs/research/assets/quality-acceptance/blazex-acceptance-registry-v0.1.0.json": "43025d17513f068eb1ac0838a381da4c132bf41b74aa602bffdc130e411368ed"
+  },
+  "reviewed_successor_changes": {
+    "packages/blazex_core/lib/blazex/component/local_view.ex": "Explicit action-enabled successor; Phase 6/7 defaults and normalized traces retained.",
+    "packages/blazex_core/lib/blazex/component/root_guardian.ex": "Explicit action-enabled successor; Phase 6/7 defaults and normalized traces retained.",
+    "packages/blazex_core/lib/blazex/component/root_process.ex": "Explicit action-enabled successor; Phase 6/7 defaults and normalized traces retained.",
+    "packages/blazex_core/lib/blazex/component/root_schedule.ex": "Explicit action-enabled successor; Phase 6/7 defaults and normalized traces retained.",
+    "packages/blazex_core/lib/blazex/component/result.ex": "Explicit action-enabled successor; Phase 6/7 defaults and normalized traces retained.",
+    "packages/blazex_ui_tree/lib/blazex/ui_tree/root_evaluator.ex": "Explicit action-enabled successor; Phase 6/7 defaults and normalized traces retained.",
+    "packages/blazex_ui_tree/lib/blazex/ui_tree/nested_candidates.ex": "Explicit action-enabled successor; Phase 6/7 defaults and normalized traces retained."
+  },
+  "limits": {
+    "total_work": 256,
+    "pending_requests": 128,
+    "leases": 512,
+    "candidate_actions": 16,
+    "counter": 9007199254740991
+  },
+  "excluded": [
+    "concrete Web API providers",
+    "Phoenix/Plug transport and server authorization",
+    "uploads",
+    "navigation",
+    "persistence",
+    "arbitrary tasks",
+    "LiveView",
+    "LocalLiveView",
+    "support claims"
+  ],
+  "support_state": "unsupported"
+}
