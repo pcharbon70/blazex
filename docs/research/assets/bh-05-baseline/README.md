@@ -21,6 +21,7 @@ Versioned authority, ownership, empty evidence, validation and completion record
 
 ### Files
 
+- [Phase 4 composition authority](composition-authorization-v0.1.0.json)
 - [Phase 3 schema authority](schema-authorization-v0.1.0.json)
 - [Phase 3 source-frozen gates](schema-gates-v0.1.0.json)
 - [Phase 3 schema/invocation completion](schema-completion-v0.1.0.json)

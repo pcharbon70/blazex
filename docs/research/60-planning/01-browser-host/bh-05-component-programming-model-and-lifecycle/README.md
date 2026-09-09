@@ -201,6 +201,7 @@ Phoenix, browser, native-host, or release compatibility.
 
 ### Documents
 
+- [Pure composition contract](composition-contract.md)
 - [Prop and slot schema contract](schema-contract.md)
 - [Phase 3 schema implementation evidence](schema-evidence.md)
 - [Candidate authoring contract](authoring-contract.md)
