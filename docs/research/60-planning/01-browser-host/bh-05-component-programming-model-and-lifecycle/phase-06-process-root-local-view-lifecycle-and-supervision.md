@@ -71,28 +71,28 @@ Back to milestone: [README](README.md)
       - [x] 6.2.2.2 Subtask - Define root registration/readiness/removal/shutdown/crash notifications and supervisor child identity without binding to browser or Popcorn structures.
       - [x] 6.2.2.3 Subtask - Define monitoring/introspection records with bounded redacted state and prohibit public exposure of root PIDs as mutable component references.
 
-  - [ ] 6.3 Section - Implement the root process and basic supervised lifecycle.
+  - [x] 6.3 Section - Implement the root process and basic supervised lifecycle.
 
     Start, mount, update, commit, replace, and stop one root through the abstract
     ports while preserving accepted state on failed candidates.
 
-    - [ ] 6.3.1 Task - Implement root startup and transition coordination.
+    - [x] 6.3.1 Task - Implement root startup and transition coordination.
 
       Own one immutable lifecycle state and execute callbacks only through the
       selected public component/evaluator contracts.
 
-      - [ ] 6.3.1.1 Subtask - Validate start input, initialize generation/revision, invoke mount evaluation, submit accepted semantic output, and publish readiness only after correlated renderer commit.
-      - [ ] 6.3.1.2 Subtask - Process validated parent-prop updates and explicit replacement as serialized candidate transitions with no state advance before commit.
-      - [ ] 6.3.1.3 Subtask - Handle semantic rejection, renderer rejection/rollback, stale/duplicate acknowledgement, host removal, and startup timeout without publishing false readiness or partial final state.
+      - [x] 6.3.1.1 Subtask - Validate start input, initialize generation/revision, invoke mount evaluation, submit accepted semantic output, and publish readiness only after correlated renderer commit.
+      - [x] 6.3.1.2 Subtask - Process validated parent-prop updates and explicit replacement as serialized candidate transitions with no state advance before commit.
+      - [x] 6.3.1.3 Subtask - Handle semantic rejection, renderer rejection/rollback, stale/duplicate acknowledgement, host removal, and startup timeout without publishing false readiness or partial final state.
 
-    - [ ] 6.3.2 Task - Implement supervision and deterministic stop.
+    - [x] 6.3.2 Task - Implement supervision and deterministic stop.
 
       Integrate with ERTS and AtomVM-supported supervision primitives while
       keeping policy and restart execution separately governed.
 
-      - [ ] 6.3.2.1 Subtask - Provide a deterministic child specification and runtime-facing start/stop interface for uniquely identified roots.
-      - [ ] 6.3.2.2 Subtask - On normal stop/replacement/removal, invalidate admission, reject new work, coordinate renderer disposal, run nested disposal planning, and terminate exactly once.
-      - [ ] 6.3.2.3 Subtask - On crash, preserve redacted crash/generation metadata for the supervisor and ensure sibling roots/processes remain alive without automatically replaying work.
+      - [x] 6.3.2.1 Subtask - Provide a deterministic child specification and runtime-facing start/stop interface for uniquely identified roots.
+      - [x] 6.3.2.2 Subtask - On normal stop/replacement/removal, invalidate admission, reject new work, coordinate renderer disposal, run nested disposal planning, and terminate exactly once.
+      - [x] 6.3.2.3 Subtask - On crash, preserve redacted crash/generation metadata for the supervisor and ensure sibling roots/processes remain alive without automatically replaying work.
 
   - [ ] 6.4 Section - Phase 6 Integration Tests and Completion Evidence.
 

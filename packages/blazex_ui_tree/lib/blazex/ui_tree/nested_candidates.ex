@@ -27,18 +27,18 @@ defmodule BlazeX.UITree.NestedCandidates do
 
   def evaluate(plan, old_index, revision, sequence, replaced \\ MapSet.new(), event \\ nil) do
     {candidate, records, trace, notifications} =
-      visit(plan, old_index, revision, sequence, replaced, event, nil)
+      visit(plan, old_index, revision, sequence, replaced, event, nil, role(plan) == :root)
 
     Guard.require!(length(notifications) <= 128, :notification_limit, [])
     {candidate, records, trace, notifications}
   end
 
-  defp visit(plan, old_index, revision, sequence, replaced, event, stateful_parent) do
+  defp visit(plan, old_index, revision, sequence, replaced, event, stateful_parent, strict) do
     previous = Map.get(old_index, plan.identity)
     fresh = previous == nil or MapSet.member?(replaced, plan.identity)
     compatible = previous == nil or previous.schema_digest == fingerprint(plan)
     Guard.require!(fresh or compatible, :replacement_required, plan.path)
-    stateful = role(plan) == :stateful
+    stateful = role(plan) in [:stateful, :root]
     old_state = if previous, do: previous.state, else: :absent
 
     input =
@@ -54,9 +54,10 @@ defmodule BlazeX.UITree.NestedCandidates do
           {:absent, [], []}
 
         fresh ->
-          result = callback(plan, :init, %{input | state: :absent, transition: :init})
-          {state, notices} = transition(result, :init, :absent, plan, target, sequence)
-          {state, [observe(:init, plan)], notices}
+          initial = if role(plan) == :root, do: :mount, else: :init
+          result = callback(plan, initial, %{input | state: :absent, transition: initial}, strict)
+          {state, notices} = transition(result, initial, :absent, plan, target, sequence)
+          {state, [observe(initial, plan)], notices}
 
         event != nil and event.target == plan.identity ->
           payload = %{
@@ -66,17 +67,22 @@ defmodule BlazeX.UITree.NestedCandidates do
           }
 
           result =
-            callback(plan, :handle_event, %{
-              input
-              | transition: :handle_event,
-                payload: {:present, payload}
-            })
+            callback(
+              plan,
+              :handle_event,
+              %{
+                input
+                | transition: :handle_event,
+                  payload: {:present, payload}
+              },
+              strict
+            )
 
           {state, notices} = transition(result, :handle_event, old_state, plan, target, sequence)
           {state, [observe(:local_event, plan)], notices}
 
         previous.invocation != invocation(plan) and function_exported?(plan.module, :update, 1) ->
-          result = callback(plan, :update, %{input | transition: :update})
+          result = callback(plan, :update, %{input | transition: :update}, strict)
           {state, notices} = transition(result, :update, old_state, plan, target, sequence)
 
           {state, [observe(if(result == :no_change, do: :no_change, else: :update), plan)],
@@ -90,7 +96,7 @@ defmodule BlazeX.UITree.NestedCandidates do
       if plan.data do
         plan.data
       else
-        result = callback(plan, :render, %{input | transition: :render, state: state})
+        result = callback(plan, :render, %{input | transition: :render, state: state}, strict)
 
         case result do
           {:output, {:semantic, 1, value}} -> value
@@ -127,7 +133,8 @@ defmodule BlazeX.UITree.NestedCandidates do
           sequence,
           replaced,
           event,
-          if(stateful, do: plan.identity, else: stateful_parent)
+          if(stateful, do: plan.identity, else: stateful_parent),
+          strict
         )
       )
 
@@ -162,8 +169,9 @@ defmodule BlazeX.UITree.NestedCandidates do
      notifications ++ Enum.flat_map(children, &elem(&1, 3))}
   end
 
-  def callback(plan, name, input) do
+  def callback(plan, name, input, strict \\ false) do
     Guard.require!(function_exported?(plan.module, name, 1), :missing_callback, plan.path)
+    if strict, do: Guard.require!(Input.validate(input) == :ok, :invalid_input, plan.path)
 
     result =
       try do
