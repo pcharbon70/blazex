@@ -2,6 +2,17 @@ defmodule BlazeX.Component.ScopedView do
   @moduledoc "Explicit scoped-root update ingress; registry/provider configuration stays runtime-owned."
   alias BlazeX.Component.{Action, LocalView, RootSchedule}
 
+  def select(supervisor, handle, generation, revision, registry_generation, selection),
+    do:
+      LocalView.enqueue(supervisor, handle, %{
+        scope_version: 1,
+        root: handle.root,
+        generation: generation,
+        revision: revision,
+        registry_generation: registry_generation,
+        selection: selection
+      })
+
   def change(supervisor, handle, generation, revision, providers),
     do:
       LocalView.enqueue(supervisor, handle, %{

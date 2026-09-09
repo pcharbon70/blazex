@@ -26,6 +26,9 @@ UI-tree performs lexical composition and evaluates declared modules. Providers
 and consumers explicitly declare names using existing component `context`
 metadata and static per-public-ID provide/consume grants. No compiler reflection
 or import-allowlist expansion is authorized.
+Context manifest identity is frozen within a root generation. Initial providers
+are runtime-owned templates rebound to the new generation only on explicit root
+replacement; host update records must always carry the current generation.
 
 ## Context records
 

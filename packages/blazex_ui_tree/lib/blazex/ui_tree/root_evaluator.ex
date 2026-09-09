@@ -139,10 +139,16 @@ defmodule BlazeX.UITree.RootEvaluator do
       {:ok, ^spec} = RootPort.normalize(spec)
       CompositionPlan.require!(RootPort.handle(spec) == RootPort.handle(correlation), :owner, [])
       validate_prior(prior, correlation, operation)
-      template = Map.fetch!(config.graph, config.reference)
+
+      {resolved_graph, registry} =
+        if Map.has_key?(config, :scope),
+          do: BlazeX.UITree.RegistryPlan.resolve(config, request, prior),
+          else: {config.graph, nil}
+
+      template = Map.fetch!(resolved_graph, config.reference)
 
       graph =
-        Map.put(config.graph, config.reference, %{
+        Map.put(resolved_graph, config.reference, %{
           template
           | module: spec.component,
             public_id: spec.public_id,
@@ -203,7 +209,7 @@ defmodule BlazeX.UITree.RootEvaluator do
         disposals: disposal_plan(records)
       }
 
-      token = if scope, do: Map.put(token, :scope, scope), else: token
+      token = if scope, do: Map.put(token, :scope, Map.merge(scope, registry)), else: token
 
       {:ok, accepted} =
         RootPort.candidate(correlation, state(records), NestedTable.digest(output), token)

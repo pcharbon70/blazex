@@ -71,28 +71,28 @@ Back to milestone: [README](README.md)
       - [x] 9.2.2.2 Subtask - Schedule tracked consumer updates in canonical tree order after provider commit while fixed context rejects later mutation by policy.
       - [x] 9.2.2.3 Subtask - Remove subscriptions on consumer/provider replacement/disposal and reject stale/cross-root update notifications before callbacks.
 
-  - [ ] 9.3 Section - Implement manifest-bounded dynamic component registration.
+  - [x] 9.3 Section - Implement manifest-bounded dynamic component registration.
 
     Map stable public IDs to declared modules and contract metadata without
     deriving modules from browser/server strings or scanning arbitrary code.
 
-    - [ ] 9.3.1 Task - Define and implement component registry records.
+    - [x] 9.3.1 Task - Define and implement component registry records.
 
       Make every dynamic target deterministic, versioned, inspectable, and
       usable as a later build reachability root.
 
-      - [ ] 9.3.1.1 Subtask - Define public component ID, module, role, contract/schema versions, supported runtime subset, declared capabilities/contexts/actions, package, visibility, and optional feature-bundle ID.
-      - [ ] 9.3.1.2 Subtask - Build deterministic compile/package/root registry composition with conflict, duplicate, unknown-version, incompatible-role, unavailable-capability, and missing-module diagnostics.
-      - [ ] 9.3.1.3 Subtask - Export stable registry metadata for BH-06 while prohibiting unrestricted reflection, `Module.concat` from input, dynamic atom creation, arbitrary `apply`, remote module names, and undeclared code loading.
+      - [x] 9.3.1.1 Subtask - Define public component ID, module, role, contract/schema versions, supported runtime subset, declared capabilities/contexts/actions, package, visibility, and optional feature-bundle ID.
+      - [x] 9.3.1.2 Subtask - Build deterministic compile/package/root registry composition with conflict, duplicate, unknown-version, incompatible-role, unavailable-capability, and missing-module diagnostics.
+      - [x] 9.3.1.3 Subtask - Export stable registry metadata for BH-06 while prohibiting unrestricted reflection, `Module.concat` from input, dynamic atom creation, arbitrary `apply`, remote module names, and undeclared code loading.
 
-    - [ ] 9.3.2 Task - Implement dynamic lookup and invocation.
+    - [x] 9.3.2 Task - Implement dynamic lookup and invocation.
 
       Resolve only registered IDs and pass the resulting target through the
       same prop/slot, identity, lifecycle, and reconciliation contracts.
 
-      - [ ] 9.3.2.1 Subtask - Validate requested public ID, expected role, schema/version, props/slots, capability/context requirements, and current registry generation before lookup.
-      - [ ] 9.3.2.2 Subtask - Invoke registered pure or nested-stateful targets with stable identity and define compatible same-ID updates versus explicit replacement when ID/contract changes.
-      - [ ] 9.3.2.3 Subtask - Reject unknown/unavailable/stale/unauthorized IDs before callback invocation and render the caller-declared semantic fallback or diagnostic without revealing module names.
+      - [x] 9.3.2.1 Subtask - Validate requested public ID, expected role, schema/version, props/slots, capability/context requirements, and current registry generation before lookup.
+      - [x] 9.3.2.2 Subtask - Invoke registered pure or nested-stateful targets with stable identity and define compatible same-ID updates versus explicit replacement when ID/contract changes.
+      - [x] 9.3.2.3 Subtask - Reject unknown/unavailable/stale/unauthorized IDs before callback invocation and render the caller-declared semantic fallback or diagnostic without revealing module names.
 
   - [ ] 9.4 Section - Phase 9 Integration Tests and Completion Evidence.
 

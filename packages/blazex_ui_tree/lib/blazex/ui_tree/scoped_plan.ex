@@ -26,9 +26,17 @@ defmodule BlazeX.UITree.ScopedPlan do
 
     values =
       cond do
-        change -> work.payload.providers
-        old -> ScopedContext.provider_values(old) |> Enum.filter(&(&1.owner in live))
-        true -> config.providers
+        change and Map.has_key?(work.payload, :providers) ->
+          work.payload.providers
+
+        old ->
+          ScopedContext.provider_values(old) |> Enum.filter(&(&1.owner in live))
+
+        true ->
+          Enum.map(config.providers, fn p ->
+            true = p.owner.root == request.correlation.root
+            %{p | owner: %{p.owner | generation: request.correlation.generation}}
+          end)
       end
 
     {:ok, context} =
@@ -54,6 +62,12 @@ defmodule BlazeX.UITree.ScopedPlan do
   end
 
   def validate_change!(config, payload, accepted) do
+    if Map.has_key?(payload, :selection),
+      do: BlazeX.UITree.RegistryPlan.validate_select!(config, payload, accepted),
+      else: validate_providers!(config, payload, accepted)
+  end
+
+  defp validate_providers!(config, payload, accepted) do
     true = Action.keys?(payload, [:scope_version, :root, :generation, :revision, :providers])
     true = payload.scope_version == 1 and payload.root == accepted.correlation.root
     true = payload.generation == accepted.correlation.generation

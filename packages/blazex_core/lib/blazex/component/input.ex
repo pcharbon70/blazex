@@ -33,6 +33,7 @@ defmodule BlazeX.Component.Input do
   defp valid?(%{contexts: contexts} = input) when map_size(input) == length(@keys) + 1 do
     is_map(contexts) and map_size(contexts) <= 16 and
       BlazeX.Component.Action.public?(contexts) and
+      Map.has_key?(input, :context_keys) and names?(input.context_keys) and
       Enum.all?(Map.keys(contexts), &(&1 in input.context_keys)) and
       valid?(Map.delete(input, :contexts))
   end

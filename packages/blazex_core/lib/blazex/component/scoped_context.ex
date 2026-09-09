@@ -59,6 +59,8 @@ defmodule BlazeX.Component.ScopedContext do
         consumer \\ nil
       ) do
     :ok = validate(manifest)
+    manifest_digest = NestedTable.digest(manifest)
+    true = old == nil or old.manifest_digest == manifest_digest
     true = is_list(components) and length(components) <= 128
     true = length(Enum.uniq_by(components, & &1.identity)) == length(components)
 
@@ -120,7 +122,9 @@ defmodule BlazeX.Component.ScopedContext do
             |> Enum.max_by(&length(&1.owner.path), fn -> nil end)
 
           {source, value} =
-            if provider, do: {provider.owner, provider.value}, else: {:default, default!(d)}
+            if provider,
+              do: {provider.owner, provider.value},
+              else: {:default, default!(d, correlation.root)}
 
           %{
             consumer: c.identity,
@@ -159,6 +163,7 @@ defmodule BlazeX.Component.ScopedContext do
     {:ok,
      %{
        root: correlation.root,
+       manifest_digest: manifest_digest,
        generation: correlation.generation,
        revision: revision,
        providers: providers,
@@ -209,12 +214,12 @@ defmodule BlazeX.Component.ScopedContext do
     end
   end
 
-  defp default!(%{default: {:present, value}} = d) do
-    {:ok, normalized} = normalize(d, value, "declaration")
+  defp default!(%{default: {:present, value}} = d, root) do
+    {:ok, normalized} = normalize(d, value, root)
     normalized
   end
 
-  defp default!(_), do: raise(ArgumentError)
+  defp default!(_, _), do: raise(ArgumentError)
 
   defp ancestor?(a, b),
     do:
