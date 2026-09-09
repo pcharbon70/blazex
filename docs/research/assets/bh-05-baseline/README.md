@@ -21,6 +21,7 @@ Versioned authority, ownership, empty evidence, validation and completion record
 
 ### Files
 
+- [Phase 2 authoring authority](authoring-authorization-v0.1.0.json)
 - [Phase 1 authorization](authorization-v0.1.0.json)
 - [Inherited entry and nine-condition ledger](entry-ledger-v0.1.0.json)
 - [Ownership, dependency graph and inherited API inventory](ownership-v0.1.0.json)

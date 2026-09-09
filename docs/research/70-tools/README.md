@@ -238,6 +238,8 @@ independent-review blockers, as intended.
 
 ## Maintaining this index
 
+- [`generate_bh05_authoring.py`](generate_bh05_authoring.py) — Phase 2 authority bound to accepted Phase 1.
+
 Index every direct child, update callers and current commands together, and use
 shared root discovery for new programs. Preserve the distinction between
 historical evidence and current checks. Run the full tooling sweep, verify
