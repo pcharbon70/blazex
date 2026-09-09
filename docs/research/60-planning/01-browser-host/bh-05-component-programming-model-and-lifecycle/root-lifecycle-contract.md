@@ -18,7 +18,7 @@ Unrelated README/demo edits are preserved separately. No later phase is authoriz
 
 ## Ownership and ports
 
-Core owns a independently supervised root coordinator and its final/candidate
+Core owns an independently supervised root coordinator and its final/candidate
 records. It imports no UI-tree, concrete renderer, host, browser or runtime
 adapter. Trusted composition supplies evaluator, commit and host port modules
 and private configuration. Component callbacks receive only validated Phase 2

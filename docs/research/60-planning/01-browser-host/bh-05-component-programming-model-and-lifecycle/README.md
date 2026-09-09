@@ -49,12 +49,14 @@ Planning alone does not authorize implementation. The owner authorized Phase 1
 after the accepted BH-04 corrective handoff merged in PR #51 at
 `506c254ddd4a14dd8d1d4cbdba8fcf9556bd15cb`. Phase 1 activates governance only;
 every later phase still requires separate explicit implementation authorization.
-Phases 1–5 are complete: governance activation, candidate authoring, prop/slot
-schemas, pure composition and in-memory nested-state reconciliation have
-accepted, separately bound evidence. Phase 6 is eligible but unauthorized;
-BH-06 remains ineligible. The current [Phase 5 evidence](nested-evidence.md)
-grants ERTS/headless nested-state credit only, without process startup, effects
-execution, renderer commit or Wasm parity.
+Phases 1–6 are complete: governance activation, candidate authoring, prop/slot
+schemas, pure composition, nested-state reconciliation and supervised root
+lifecycle have accepted, separately bound evidence. Phase 7 is eligible but
+unauthorized; BH-06 remains ineligible. The current
+[Phase 6 evidence](root-lifecycle-evidence.md) grants ERTS/headless process-root
+and commit-correlated final-state credit, without effects execution or Wasm
+parity. [Runtime compatibility limits](root-supervision-compatibility.md) remain
+explicitly unqualified for Phase 11.
 
 ## What belongs here
 
@@ -136,8 +138,8 @@ adapter modules are forbidden even when available in the monorepo.
 | [3 — Prop, Slot, and Host-Boundary Contracts](phase-03-prop-slot-and-host-boundary-contracts.md) | complete — schema normalization | Implement schema declarations, defaults, required/cardinality rules, contextual slots, local/host boundary validation, and diagnostics. | Phase 2 |
 | [4 — Pure Composition and Atomic Semantic Evaluation](phase-04-pure-composition-and-atomic-semantic-evaluation.md) | complete — bounded pure composition | Evaluate pure nested composition deterministically and accept output only after complete semantic validation. | Phase 3 |
 | [5 — Nested Stateful Identity and Update Reconciliation](phase-05-nested-stateful-identity-and-update-reconciliation.md) | complete — in-memory nested state | Retain keyed nested state, reconcile insert/move/update/remove/replace operations, and define controlled-prop versus local-state ownership. | Phase 4 |
-| [6 — Process-Root Local View Lifecycle and Supervision](phase-06-process-root-local-view-lifecycle-and-supervision.md) | eligible — unauthorized | Implement the independent local-view process, mount/update/render/commit/info/terminate lifecycle, root generation, and supervision boundary. | Phase 5 and accepted BH-03/BH-04 contracts |
-| [7 — Event, Message, Timer, and Transition Scheduling](phase-07-event-message-timer-and-transition-scheduling.md) | planned — unauthorized | Serialize root transitions, route local events and messages, bound backlogs, reject stale work, and make rendering/final-state ordering explicit. | Phase 6 |
+| [6 — Process-Root Local View Lifecycle and Supervision](phase-06-process-root-local-view-lifecycle-and-supervision.md) | complete — supervised ERTS roots | Independently supervised mount/update/render/commit/terminate lifecycle, root generation and correlated final state; user info/event scheduling remains Phase 7. | Phase 5 and accepted BH-03/BH-04 contracts |
+| [7 — Event, Message, Timer, and Transition Scheduling](phase-07-event-message-timer-and-transition-scheduling.md) | eligible — unauthorized | Serialize root transitions, route local events and messages, bound backlogs, reject stale work, and make rendering/final-state ordering explicit. | Phase 6 |
 | [8 — Effects, Resources, and Typed Command Intent](phase-08-effects-resources-and-typed-command-intent.md) | planned — unauthorized | Replace generic emissions with typed effects/resources/command intents and enforce authority, result, cancellation, timeout, and ownership boundaries. | Phases 6–7 |
 | [9 — Scoped Context and Manifest-Bounded Dynamic Components](phase-09-scoped-context-and-manifest-bounded-dynamic-components.md) | planned — unauthorized | Implement root-scoped named context and deterministic stable-ID component registries suitable for BH-06 reachability analysis. | Phases 3–8 |
 | [10 — Failure Containment, Retry, Replacement, and Disposal](phase-10-failure-containment-retry-replacement-and-disposal.md) | planned — unauthorized | Contain failures at honest process-root boundaries, render accessible fallback, bound retries, invalidate generations, and release all owned work. | Phases 5–9 |
@@ -239,3 +241,6 @@ license to import Phoenix semantics into the kernel or a browser result as
 proof of another host.
 
 - [Root lifecycle contract](root-lifecycle-contract.md) — Phase 6 state machine, commit ownership and supervision ports.
+
+- [Root lifecycle evidence](root-lifecycle-evidence.md) — Phase 6 implementation, failure cases and source-frozen gates.
+- [Root supervision compatibility](root-supervision-compatibility.md) — ERTS execution scope and pinned AtomVM/Popcorn limitations.

@@ -46,7 +46,11 @@ defmodule BlazeX.Component.RootProcess do
   end
 
   @impl true
-  def format_status(_status), do: %{state: :redacted_root_coordinator}
+  def format_status(status),
+    do:
+      Map.new(status, fn {key, _} ->
+        {key, if(key == :log, do: [], else: :redacted_root_coordinator)}
+      end)
 
   defp info_result(state) do
     if state.status in [:disposed, :failed], do: {:stop, :normal, state}, else: {:noreply, state}

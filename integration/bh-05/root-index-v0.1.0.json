@@ -1,0 +1,81 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 6,
+  "contract": "0.1.0-bh05-root-lifecycle",
+  "support_state": "unsupported",
+  "public": [
+    "BlazeX.Component.RootPort",
+    "BlazeX.Component.RootPort.Evaluator",
+    "BlazeX.Component.RootPort.Renderer",
+    "BlazeX.Component.RootPort.Host",
+    "BlazeX.Component.LocalView",
+    "BlazeX.Component.LocalView.Supervisor",
+    "BlazeX.UITree.RootEvaluator"
+  ],
+  "transitions": [
+    "validated-start",
+    "mount-candidate",
+    "parent-update",
+    "no-change",
+    "renderer-commit",
+    "confirmed-rollback",
+    "generation-replacement",
+    "host-removal",
+    "renderer-disposal",
+    "normal-stop",
+    "explicit-remount",
+    "terminal-crash"
+  ],
+  "coverage": [
+    "independent-headless-oracle",
+    "no-ready-before-commit",
+    "final-state-digest-ownership",
+    "one-in-flight",
+    "stale-duplicate-wrong-owner-ack",
+    "semantic-callback-rejection",
+    "renderer-rejection",
+    "acknowledgement-loss-before-and-after-renderer-commit",
+    "uncertain-rollback-fails-closed",
+    "cleanup-after-commit-only",
+    "idempotent-stop",
+    "crash-before-and-after-commit",
+    "sibling-isolation",
+    "redacted-observations",
+    "root-handle-not-pid",
+    "pinned-supervision-analysis"
+  ],
+  "normalized_digests": {
+    "ROOT_SCRIPT_SHA256": "4eacd556df14a281187e78ae51edb4a2312f4897aa0553aaacc2c150f85f9138",
+    "ROOT_TRACE_SHA256": "e062e88cee0a7866964aff1fa1695577bf70660cef031c139d262afd99c9c9e7",
+    "ROOT_FINAL_STATE_SHA256": "937d347b5a168a432c2a0a6eb45c1b2acaa5ae8440884617906445420aee400d"
+  },
+  "files": {
+    "integration/bh-05/root-fixtures.exs": "5bae9dc04af1fe1a1af54514c9b087971bf89c5b939414908c2362214d08f9f6",
+    "integration/conformance/test/bh05_root_test.exs": "d3efd28bb3676965c1c9ae51f199a7ff7e8c3d885fc8f0fcdae37adf82d15ce6",
+    "packages/blazex_core/lib/blazex/component/local_view.ex": "b145788b2d5ec224a1a35d5d76504bfe78c1547bf6270feeaa264dab2bd40d8b",
+    "packages/blazex_core/lib/blazex/component/root_guardian.ex": "6a9d574681439bcf17d60d052b715ff038b2b5173bce285145e06494e6e4b7d1",
+    "packages/blazex_core/lib/blazex/component/root_port.ex": "949d120f2d9e2446e7faa50be45dc1b9b3f1baf4dbdfd36eb342f86e695b9241",
+    "packages/blazex_core/lib/blazex/component/root_process.ex": "cc10e0ef27520f6e115b501e091faad32ed6634dd8290d6f4a2101beb4caeb6e",
+    "packages/blazex_core/test/blazex/local_view_test.exs": "7b212903ea723c974de74c0faf31d9fc8f35cc880e76af6ca01eb6e7e765b51b",
+    "packages/blazex_core/test/blazex/root_port_test.exs": "7b48c570a045807dabfe8e23228bb74b1994e8ff85b86b2755558b8c08ff7bc5",
+    "packages/blazex_ui_tree/lib/blazex/ui_tree/composition_plan.ex": "2b5d01aaaae06040c4517cdaae60c7b1a582151e0a791e2b65186812189e3cc0",
+    "packages/blazex_ui_tree/lib/blazex/ui_tree/nested_candidates.ex": "3845b021e76a721419b5088c6710b3652abd8ef4a1351b99fca48d07add234fd",
+    "packages/blazex_ui_tree/lib/blazex/ui_tree/root_evaluator.ex": "c69ffff44073ca49f597f9168ee84935e71369f3d7a145ff2fcc91a2d4eb046e",
+    "packages/blazex_ui_tree/test/blazex/root_evaluator_test.exs": "cd12403d4f71d9a73d41a892a37df361d0f8e512518b11a18e73b71b6ca7e1ce"
+  },
+  "process_startup": true,
+  "commit_correlated": true,
+  "effects_execution": false,
+  "runtime_parity": false,
+  "later_evidence": [],
+  "limitations": [
+    "trusted terminating callbacks/ports, not a sandbox",
+    "one static root-role graph per evaluator configuration",
+    "temporary guardian retains terminal metadata; no automatic replay",
+    "ERTS term digests are not authentication or cross-VM parity",
+    "no application events/messages/effects/timers/context/registry execution",
+    "standalone AtomVM 0.6.6 incompatible; Popcorn patches and upstream alpha APIs analyzed only",
+    "runtime profile owner must qualify Wasm execution and crash-log privacy in Phase 11",
+    "LiveView and LocalLiveView deferred"
+  ]
+}

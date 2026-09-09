@@ -60,12 +60,16 @@ defmodule BlazeX.Component.RootGuardian do
 
   @impl true
   def terminate(_, state) do
-    if is_pid(state.worker), do: Process.exit(state.worker, :shutdown)
+    if is_pid(state.worker), do: :erlang.exit(state.worker, :shutdown)
     :ok
   end
 
   @impl true
-  def format_status(_status), do: %{state: :redacted_root_guardian}
+  def format_status(status),
+    do:
+      Map.new(status, fn {key, _} ->
+        {key, if(key == :log, do: [], else: :redacted_root_guardian)}
+      end)
 
   defp terminal?(%{snapshot: %{status: status}}), do: status in [:disposed, :failed]
   defp terminal?(_), do: false
@@ -85,7 +89,7 @@ defmodule BlazeX.Component.RootGuardian do
 
     snapshot = %{snapshot | status: :failed, pending: nil, error: :crashed}
     RootPort.call(state.ports.host, :notify, [Map.put(snapshot, :event, :crashed)])
-    if is_pid(state.worker), do: Process.exit(state.worker, :kill)
+    if is_pid(state.worker), do: :erlang.exit(state.worker, :kill)
     %{state | snapshot: snapshot, worker: nil}
   end
 end

@@ -17,7 +17,7 @@ aliases:
 
 Back to milestone: [README](README.md)
 
-- [ ] 6 Phase - Process-Root Local View Lifecycle and Supervision.
+- [x] 6 Phase - Process-Root Local View Lifecycle and Supervision.
 
   Implement the independently supervised local-view root that owns one
   component tree, mailbox, generation, transition coordinator, renderer root,
@@ -94,28 +94,28 @@ Back to milestone: [README](README.md)
       - [x] 6.3.2.2 Subtask - On normal stop/replacement/removal, invalidate admission, reject new work, coordinate renderer disposal, run nested disposal planning, and terminate exactly once.
       - [x] 6.3.2.3 Subtask - On crash, preserve redacted crash/generation metadata for the supervisor and ensure sibling roots/processes remain alive without automatically replaying work.
 
-  - [ ] 6.4 Section - Phase 6 Integration Tests and Completion Evidence.
+  - [x] 6.4 Section - Phase 6 Integration Tests and Completion Evidence.
 
     Exercise basic supervised root lifecycle with deterministic evaluator and
     renderer doubles plus accepted BH-04 integration where available.
 
-    - [ ] 6.4.1 Task - Run local-view lifecycle integration tests.
+    - [x] 6.4.1 Task - Run local-view lifecycle integration tests.
 
       Cover success, rejection, stale acknowledgement, process crash, sibling
       isolation, and normal stop through public runtime-facing contracts.
 
-      - [ ] 6.4.1.1 Subtask - Test start/mount/commit/readiness, parent update/no-op/commit, replace/new generation, host removal, renderer disposal, stop, and remount.
-      - [ ] 6.4.1.2 Subtask - Test invalid bootstrap, mount/update/render failure, semantic rejection, renderer rejection/rollback, acknowledgement loss/duplicate/stale, startup timeout, and crash before/after commit.
-      - [ ] 6.4.1.3 Subtask - Prove accepted state/output/final digest advances only on commit, sibling roots survive, no public PID/adapter object leaks, and stop is idempotent.
+      - [x] 6.4.1.1 Subtask - Test start/mount/commit/readiness, parent update/no-op/commit, replace/new generation, host removal, renderer disposal, stop, and remount.
+      - [x] 6.4.1.2 Subtask - Test invalid bootstrap, mount/update/render failure, semantic rejection, renderer rejection/rollback, acknowledgement loss/duplicate/stale, startup timeout, and crash before/after commit.
+      - [x] 6.4.1.3 Subtask - Prove accepted state/output/final digest advances only on commit, sibling roots survive, no public PID/adapter object leaks, and stop is idempotent.
 
-    - [ ] 6.4.2 Task - Publish Phase 6 completion evidence.
+    - [x] 6.4.2 Task - Publish Phase 6 completion evidence.
 
       Record the lifecycle state machine, port contracts, supervision subset,
       and unresolved scheduling/retry/resource behavior.
 
-      - [ ] 6.4.2.1 Subtask - Run Core/UI-tree/renderer/headless/test and applicable BH-04 suites, lifecycle fixtures, dependency audits, validators, archive/generated checks, JSON validation, and patch hygiene.
-      - [ ] 6.4.2.2 Subtask - Publish transition tables, public contract inventories, trace hashes, exact commands/counts, crash/rejection outcomes, ERTS/AtomVM compatibility analysis, failures, and limitations.
-      - [ ] 6.4.2.3 Subtask - Mark Phase 6 complete only if final state and readiness are commit-correlated and roots are independently supervised; make Phase 7 eligible but unauthorized.
+      - [x] 6.4.2.1 Subtask - Run Core/UI-tree/renderer/headless/test and applicable BH-04 suites, lifecycle fixtures, dependency audits, validators, archive/generated checks, JSON validation, and patch hygiene.
+      - [x] 6.4.2.2 Subtask - Publish transition tables, public contract inventories, trace hashes, exact commands/counts, crash/rejection outcomes, ERTS/AtomVM compatibility analysis, failures, and limitations.
+      - [x] 6.4.2.3 Subtask - Mark Phase 6 complete only if final state and readiness are commit-correlated and roots are independently supervised; make Phase 7 eligible but unauthorized.
 
 ## Section delivery rule
 

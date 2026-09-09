@@ -234,4 +234,53 @@ defmodule BlazeX.LocalViewTest do
     assert {:error, :stale} = LocalView.update(context.supervisor, handle, 0, %{})
     assert length(Supervisor.which_children(context.supervisor)) == 1
   end
+
+  test "submission failure requires cancellation and preserves the accepted record", context do
+    {handle, first} = mounted(context)
+    Agent.update(context.settings, &Map.put(&1, :submit, {:error, :private}))
+    assert {:error, :renderer_rejected} = LocalView.update(context.supervisor, handle, 1, %{})
+    assert_receive {:cancel, %{operation: :update}}
+    assert snapshot(context, handle).accepted == RootPort.summary(first)
+    assert snapshot(context, handle).status == :ready
+  end
+
+  test "cleanup failure after replacement commit retains the committed candidate but is not ready",
+       context do
+    {handle, _} = mounted(context)
+    Agent.update(context.settings, &Map.put(&1, :cleanup, {:error, :private}))
+    {:ok, replace} = LocalView.replace(context.supervisor, handle, 1, context.spec)
+    assert_receive {:submit, ^replace, candidate}
+    assert {:error, :cleanup_failed} = ack(context, handle, replace)
+    assert snapshot(context, handle).accepted == RootPort.summary(candidate)
+    assert snapshot(context, handle).status == :failed
+    assert :ok = LocalView.stop(context.supervisor, handle)
+    assert_receive {:cleanup, :replace}
+    refute_receive {:cleanup, _}
+  end
+
+  test "disposal acknowledgement loss is terminal and cannot trigger callback replay", context do
+    {handle, _} = mounted(context, %{context.spec | timeout_ms: 100})
+    {:ok, dispose} = LocalView.stop(context.supervisor, handle)
+    assert_receive {:cancel, ^dispose}, 1000
+    assert_receive {:host, %{event: :failed, error: :timeout}}, 1000
+    assert snapshot(context, handle).status == :failed
+    refute_receive {:cleanup, _}
+    assert :ok = LocalView.stop(context.supervisor, handle)
+    refute_receive {:cleanup, _}
+  end
+
+  test "ERTS system status redacts candidate tokens and private port configuration", context do
+    {handle, _} = mounted(context)
+    {_, guardian, _, _} = hd(Supervisor.which_children(context.supervisor))
+    worker = :sys.get_state(guardian).worker
+
+    for pid <- [guardian, worker] do
+      status = inspect(:sys.get_status(pid), limit: :infinity)
+      refute status =~ "private_token"
+      refute status =~ "settings:"
+      assert status =~ "redacted_root"
+    end
+
+    assert snapshot(context, handle).status == :ready
+  end
 end
