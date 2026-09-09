@@ -34,4 +34,12 @@ Phase 3 adds the [schema inventory](schema-index-v0.1.0.json),
 [compiler-roundtrip comparison](schema-subset.exs). Earlier indexes remain
 historical. Props/slots normalize without component or slot body execution;
 host/local boundaries, redaction, ownership and atomic invalid updates are tested.
-Current completion check: `python3 docs/research/70-tools/validate_bh05_schema.py --final`.
+Phase 3 completion check at its accepted snapshot: `python3 docs/research/70-tools/validate_bh05_schema.py --final`.
+
+Phase 4 adds [public pure composition fixtures](composition-fixtures.exs) and a
+[source/digest inventory](composition-index-v0.1.0.json). The
+[conformance test](../conformance/test/bh05_composition_test.exs) executes nested
+pure controls and contextual slots and compares complete output with an
+independently authored headless oracle using public constructors. Runtime state,
+effects, renderer execution by components and Wasm parity remain out of scope.
+Current check: `python3 docs/research/70-tools/validate_bh05_composition.py --final`.

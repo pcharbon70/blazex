@@ -1,0 +1,78 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 4,
+  "contract": "0.1.0-bh05-pure-composition",
+  "support_state": "unsupported",
+  "public": [
+    "BlazeX.UITree.Composition.evaluate/6"
+  ],
+  "semantic_kinds": [
+    "surface",
+    "group",
+    "action",
+    "field",
+    "collection",
+    "selection",
+    "text"
+  ],
+  "coverage": [
+    "all-seven-kinds",
+    "independent-headless-oracle",
+    "root-owned-bindings",
+    "layout-accessibility-focus-selection",
+    "relationship-resolution",
+    "default-named-contextual-slots",
+    "lexical-props",
+    "explicit-and-ordinal-keys",
+    "host-inert-slots",
+    "repeated-calls",
+    "map-order",
+    "preflight-before-callback",
+    "invalid-props-slots",
+    "duplicate-identity",
+    "cycles-unreachable",
+    "exact-depth-node-invocation-bounds",
+    "wrong-root-relationship-target",
+    "exception-throw-exit-rejection-redaction",
+    "prohibited-state-actions-resources",
+    "compile-time-process-renderer-dynamic-call-rejection"
+  ],
+  "normalized_digests": {
+    "COMPOSITION_OUTPUT_SHA256": "823c14c695f520b5838396c4c048a30ecf5a09fb9c325d636dbe0a655a038abf",
+    "COMPOSITION_TRACE_SHA256": "91083cddff153acbfcadf2d08ff04b8bc6f34e20cbc70d6af8ad183bd478be49",
+    "COMPOSITION_HEADLESS_SHA256": "9acb0fd7f9463c01e00db4de48255a40c8127efaca9a0afcbe21be432620182c",
+    "COMPOSITION_SLOTS_OUTPUT_SHA256": "48f8b40c56de64d89a9910b4372c9763a7e4bdaa8d816aa292dd5e4edebffdf7",
+    "COMPOSITION_SLOTS_TRACE_SHA256": "10d32641658cf86456d1ad349257a36cc0dd413b04bd5a58badd941795c9a323"
+  },
+  "files": {
+    "integration/bh-05/composition-fixtures.exs": "c3e820eb9b086bda3525c6b30ab988c2b8238dc5d3e6f17fcb0c6c5cebb48d71",
+    "integration/conformance/test/bh05_composition_test.exs": "ce3b3595bd2a7c395fff4f9fb1616c3c1a9eef4587b0e7b8d00c4ad78f66399b",
+    "packages/blazex_ui_tree/lib/blazex/ui_tree/composition.ex": "70223fbdf4bc34bbf8f9271758f7c9329a1b28320f5bf059365f83aa511fa668",
+    "packages/blazex_ui_tree/lib/blazex/ui_tree/composition_plan.ex": "ba3ccabd9c0f7a9481b8c27f29bd4c654ab0428cfee342c30040c3c1a6d14b6e",
+    "packages/blazex_ui_tree/lib/blazex/ui_tree/pure_candidates.ex": "4425f5c71d5ef9222562a8c6a713852068c2bb3814663dc4a105a5ed1ad6fb2f",
+    "packages/blazex_ui_tree/lib/blazex/ui_tree/semantic_acceptance.ex": "afe0d81fadadd3c2dc059cd7ae505a3877d518560d7c12c8aeff201f16276219",
+    "packages/blazex_ui_tree/test/blazex/composition_plan_test.exs": "f86e97d22fc61a8d94b7ac6235d7d05cf72e37b97136bda77310f5baa50494e4",
+    "packages/blazex_ui_tree/test/blazex/composition_test.exs": "dd24edfcedb305752e58b569b7f7271a16069793c917ece1395cb81a9088e930"
+  },
+  "pure_execution": true,
+  "retained_state": false,
+  "effects_execution": false,
+  "runtime_parity": false,
+  "limits": {
+    "depth": 12,
+    "invocations": 128,
+    "nodes": 256
+  },
+  "later_evidence": [],
+  "limitations": [
+    "trusted static build-authored modules, not an adversarial Elixir sandbox",
+    "one node per invocation",
+    "bounded tree, no implicit memoization",
+    "host slots are inert semantic scalars",
+    "ERTS deterministic term encoding; Wasm execution parity deferred to Phase 11",
+    "headless oracle in tests only",
+    "no process isolation, timeout, side-effect rollback or independent child failure boundary",
+    "no state, messages, effects, renderer or DOM execution",
+    "LiveView and LocalLiveView deferred"
+  ]
+}

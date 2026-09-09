@@ -8,6 +8,12 @@ The headless implementation provides a deterministic oracle where appropriate;
 host-specific behavior is tested against explicit capability contracts rather
 than assumed equivalence.
 
+BH-05 Phase 4 adds [pure composition conformance](test/bh05_composition_test.exs),
+using [public fixtures](../bh-05/composition-fixtures.exs). Its independent oracle
+covers all seven semantic kinds, complete presentation intent and bindings;
+contextual slots and exact graph bounds have deterministic replay tests. This
+is ERTS/headless evidence only, not browser AtomVM execution parity.
+
 During BH-02, the bounded `experiments/native_renderer_spike` participates in
 the same semantic traces as the headless and DOM renderers. Its presence in the
 matrix supplies portability evidence without turning the experiment into a

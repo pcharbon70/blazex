@@ -238,6 +238,11 @@ independent-review blockers, as intended.
 
 ## Maintaining this index
 
+- [`generate_bh05_composition.py`](generate_bh05_composition.py) — Phase 4 authority and semantic input bindings.
+- [`validate_bh05_composition.py`](validate_bh05_composition.py) — Phase 4 immutable predecessor, ownership, fixture and source-frozen evidence checks.
+- [`test_validate_bh05_composition.py`](test_validate_bh05_composition.py) — Isolated composition evidence mutation tests.
+- [`record_bh05_phase4.py`](record_bh05_phase4.py) — Complete current and frozen historical gate recording and publication.
+
 - [`generate_bh05_schema.py`](generate_bh05_schema.py) — Phase 3 authority and accepted facade bindings.
 - [`check_bh05_schema_subset.py`](check_bh05_schema_subset.py) — Pinned schema compiler/analyzer roundtrip, preserving the Phase 2 runner unchanged.
 - [`validate_bh05_schema.py`](validate_bh05_schema.py) — Schema inventory, immutable predecessor and source-frozen gate checks.
