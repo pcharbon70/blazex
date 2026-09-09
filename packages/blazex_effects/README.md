@@ -31,3 +31,11 @@ runtime supplies provider configurations; they never enter component inputs.
 Command declarations remain untrusted intent for an explicit future adapter,
 not local authorization or an implemented server transport. No concrete browser,
 OS or network provider is introduced.
+
+## Phase 8 action bridge
+
+`BlazeX.Effects.ActionBridge` maps declared component requests to existing neutral
+capability/effect/resource records through runtime-private provider bindings.
+Capability selection denies by default. Command packets remain untrusted and list
+the future server's six independent validation/authority obligations. No browser
+provider or server transport is implemented here.

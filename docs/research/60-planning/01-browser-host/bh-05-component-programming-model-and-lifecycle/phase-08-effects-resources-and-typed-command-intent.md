@@ -17,7 +17,7 @@ aliases:
 
 Back to milestone: [README](README.md)
 
-- [ ] 8 Phase - Effects, Resources, and Typed Command Intent.
+- [x] 8 Phase - Effects, Resources, and Typed Command Intent.
 
   Replace generic component emissions with closed local-message, timer,
   capability-effect, resource, and remote-command intent records. Enforce
@@ -94,29 +94,29 @@ Back to milestone: [README](README.md)
       - [x] 8.3.2.2 Subtask - Mark every command intent as untrusted client input and require future server authentication, authorization, validation, idempotency, auditing, and result normalization.
       - [x] 8.3.2.3 Subtask - Reject arbitrary module/function targets, server PIDs/sockets, credentials/secrets, client authorization decisions, and direct transport selection in portable component code.
 
-  - [ ] 8.4 Section - Phase 8 Integration Tests and Completion Evidence.
+  - [x] 8.4 Section - Phase 8 Integration Tests and Completion Evidence.
 
     Exercise delayed/denied effects, lease-heavy components, command intents,
     stale results, bounds, and commit ordering through deterministic providers
     and server-adapter doubles.
 
-    - [ ] 8.4.1 Task - Run effects/resources/commands integration tests.
+    - [x] 8.4.1 Task - Run effects/resources/commands integration tests.
 
       Verify typed action traces and final state without invoking real
       privileged browser or server behavior.
 
-      - [ ] 8.4.1.1 Subtask - Test capability allow/deny/fallback, effect completion/failure/timeout/cancel, post-commit submission, delayed result, nested owner removal, resource acquire/transfer/release, and command-intent creation.
-      - [ ] 8.4.1.2 Subtask - Drive more than 128 pending effects and 512 leases and prove bounded rejection; test stale/duplicate/late/wrong-owner results and non-idempotent no-replay behavior.
-      - [ ] 8.4.1.3 Subtask - Prove command records remain untrusted declarative intent, contain no transport/server authority, and can be denied by a deterministic future-adapter double without corrupting local state.
+      - [x] 8.4.1.1 Subtask - Test capability allow/deny/fallback, effect completion/failure/timeout/cancel, post-commit submission, delayed result, nested owner removal, resource acquire/transfer/release, and command-intent creation.
+      - [x] 8.4.1.2 Subtask - Drive more than 128 pending effects and 512 leases and prove bounded rejection; test stale/duplicate/late/wrong-owner results and non-idempotent no-replay behavior.
+      - [x] 8.4.1.3 Subtask - Prove command records remain untrusted declarative intent, contain no transport/server authority, and can be denied by a deterministic future-adapter double without corrupting local state.
 
-    - [ ] 8.4.2 Task - Publish Phase 8 completion evidence.
+    - [x] 8.4.2 Task - Publish Phase 8 completion evidence.
 
       Record action schemas, pending/resource maxima, trust analysis, and
       unresolved concrete-provider/command work.
 
-      - [ ] 8.4.2.1 Subtask - Run Core/effects/UI-tree/renderer/test suites, delayed/denied/lease/command fixtures, validators, dependency/security audits, archive/generated checks, JSON validation, and patch hygiene.
-      - [ ] 8.4.2.2 Subtask - Publish action/result inventories, raw pending/resource traces, fixture hashes, exact commands/counts, denial/timeout/cancel outcomes, failures, and limitations.
-      - [ ] 8.4.2.3 Subtask - Mark Phase 8 complete only if all work is typed, bounded, generation-scoped, and authority-correct; make Phase 9 eligible but unauthorized.
+      - [x] 8.4.2.1 Subtask - Run Core/effects/UI-tree/renderer/test suites, delayed/denied/lease/command fixtures, validators, dependency/security audits, archive/generated checks, JSON validation, and patch hygiene.
+      - [x] 8.4.2.2 Subtask - Publish action/result inventories, raw pending/resource traces, fixture hashes, exact commands/counts, denial/timeout/cancel outcomes, failures, and limitations.
+      - [x] 8.4.2.3 Subtask - Mark Phase 8 complete only if all work is typed, bounded, generation-scoped, and authority-correct; make Phase 9 eligible but unauthorized.
 
 ## Section delivery rule
 

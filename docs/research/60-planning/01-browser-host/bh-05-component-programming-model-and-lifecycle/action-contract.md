@@ -98,6 +98,8 @@ IDs of the declared kind; they cannot introduce provider objects or authority.
 Each lease records current component owner, root generation, acquisition request,
 opaque ID, bounded transfer history and release/terminal state. Active opaque IDs
 are unique. Full acquisition correlation distinguishes reuse after release.
+Public diagnostics expose the complete live inventory in pages of at most 128
+leases, preserving the existing portable collection-size bound even at 512 leases.
 
 Acquisition occurs when a valid provider result arrives, because the external
 resource already exists. If its callback transition is rejected, newly acquired

@@ -87,3 +87,9 @@ registration; it grants no server authority.
 `LocalView.Supervisor`, admits one candidate at a time, and exposes identity-only
 handles for update, replacement, acknowledgement, stop and redacted inspection.
 Temporary guardians retain terminal metadata without replaying crashed work.
+
+Portable callback code constructs Phase 8 records through `BlazeX.Component.Result.action/5`,
+which delegates to `Action.new/5` without expanding the frozen compiler allowlist.
+Resource references contain only an opaque ID and acquisition correlation; provider
+objects remain private. Leases are limited to 512, requests to 128, and every command
+remains untrusted. Cleanup is bounded and must be idempotent across crash uncertainty.

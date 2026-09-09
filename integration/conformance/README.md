@@ -70,3 +70,7 @@ Versioned records:
 
 - [BH-05 root lifecycle tests](test/bh05_root_test.exs) — Supervised final-state commit correlation, independent headless parity, rollback and cleanup failure.
 - [BH-05 scheduling tests](test/bh05_scheduling_test.exs) — Typed local messages/events, multi-root fairness, nested timer removal and retained 256-work overload traces.
+
+- [BH-05 action integration](test/bh05_actions_test.exs) exercises real portable
+  callbacks, capability adapters and headless sessions, including 128 pending
+  requests, 512 leases, nested ownership, stale results and untrusted command denial.

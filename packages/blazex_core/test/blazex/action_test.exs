@@ -579,4 +579,43 @@ defmodule BlazeX.ActionTest do
     assert runtime.ledger.pending == %{} and accepted() == before
     refute_receive {:effect, _}, 20
   end
+
+  defmodule CrashPort do
+    def select(_, _), do: {:granted, "crash"}
+
+    def submit(pid, entry) do
+      send(pid, {:attempted, entry})
+      :erlang.exit(self(), :kill)
+    end
+
+    def cancel(pid, entry) do
+      send(pid, {:crash_cancel, entry})
+      :ok
+    end
+
+    def release(_, _), do: :released
+  end
+
+  test "guardian cancels the pre-submission checkpoint after coordinator death without replay" do
+    supervisor = start_supervised!(LocalView.Supervisor)
+    ports = %{evaluator: {Port, self()}, renderer: {Port, self()}, host: {Port, self()}}
+
+    {:ok, handle} =
+      ActionView.start(supervisor, spec(), ports, policy(), manifest(), {CrashPort, self()})
+
+    assert_receive {:renderer, mount, _}
+    :ok = LocalView.acknowledge(supervisor, handle, %{correlation: mount, result: :committed})
+    {:ok, _} = ScheduledView.event(supervisor, handle, envelope())
+    assert_receive {:renderer, event, _}
+
+    assert {:error, :crashed} =
+             LocalView.acknowledge(supervisor, handle, %{correlation: event, result: :committed})
+
+    assert_receive {:attempted, entry}
+    assert_receive {:crash_cancel, ^entry}
+    {:ok, snapshot} = LocalView.inspect_root(supervisor, handle)
+    assert snapshot.status == :failed and snapshot.actions.pending == 0
+    assert snapshot.actions.totals.canceled == 1
+    refute_receive {:attempted, _}, 20
+  end
 end

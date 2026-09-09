@@ -60,3 +60,9 @@ external message, effect or renderer commit occurs. Current check:
 
 Current Phase 7 check: `python3 docs/research/70-tools/validate_bh05_scheduling.py --final`.
 Earlier phase checks run at their accepted frozen snapshots.
+
+- [Action fixtures](action-fixtures.exs) — Portable typed-action components, deterministic abstract providers and independent semantic oracle.
+- [Action index](action-index-v0.1.0.json) — Phase 8 inventory, raw pending/lease samples, hashes and limits.
+
+Phase 8 successor check: `python3 docs/research/70-tools/validate_bh05_actions.py --final`.
+Phase 7 and earlier validators remain frozen and run at accepted snapshots.

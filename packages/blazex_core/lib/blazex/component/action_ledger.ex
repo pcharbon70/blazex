@@ -209,11 +209,12 @@ defmodule BlazeX.Component.ActionLedger do
       lease_depth: lease_depth(ledger),
       totals: ledger.totals,
       history: ledger.history,
-      inventory:
+      inventory_pages:
         ledger.leases
         |> Map.values()
         |> Enum.map(&Map.drop(&1, [:selection, :source_stamp]))
-        |> Enum.sort(),
+        |> Enum.sort()
+        |> Enum.chunk_every(128),
       requests:
         ledger.pending
         |> Map.values()

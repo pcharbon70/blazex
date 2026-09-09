@@ -1,4 +1,7 @@
 defmodule BlazeX.Component.Result do
+  @doc "Construct a closed Phase 8 action through the portable authoring facade."
+  defdelegate action(kind, id, sequence, owner, body), to: BlazeX.Component.Action, as: :new
+
   @moduledoc """
   Closed candidate return algebra. Never executes actions or commits state.
   Output is a tagged, portable semantic candidate, not a validated UI document.
