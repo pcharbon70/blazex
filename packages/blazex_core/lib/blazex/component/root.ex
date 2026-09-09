@@ -2,14 +2,14 @@ defmodule BlazeX.Component.Root do
   @moduledoc "Process-root contract only. Process startup is deferred to Phase 6."
   @callback mount(map()) :: {:state, term()} | {:rejected, atom()}
   @callback render(map()) :: {:output, term()} | {:rejected, atom()}
-  @callback update(map()) :: term()
-  @callback handle_event(map()) :: term()
-  @callback handle_info(map()) :: term()
-  @callback commit_ack(map()) :: term()
-  @callback effect_result(map()) :: term()
-  @callback failure(map()) :: term()
-  @callback retry(map()) :: term()
-  @callback replace(map()) :: term()
+  @callback update(map()) :: BlazeX.Component.Result.candidate()
+  @callback handle_event(map()) :: BlazeX.Component.Result.candidate()
+  @callback handle_info(map()) :: BlazeX.Component.Result.candidate()
+  @callback commit_ack(map()) :: BlazeX.Component.Result.candidate()
+  @callback effect_result(map()) :: BlazeX.Component.Result.candidate()
+  @callback failure(map()) :: BlazeX.Component.Result.candidate()
+  @callback retry(map()) :: BlazeX.Component.Result.candidate()
+  @callback replace(map()) :: BlazeX.Component.Result.candidate()
   @callback terminate(map()) :: :ok | {:rejected, atom()}
   @optional_callbacks update: 1,
                       handle_event: 1,

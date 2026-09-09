@@ -51,8 +51,6 @@ claims. Declarations and typed intent are not authority to execute effects.
 ERTS compilation and pinned Popcorn/AtomVM compiler/analyzer checks are not
 runtime execution parity; that gate remains Phase 11.
 
-## Delivery
-
 ## Roles and lifecycle ownership
 
 All callbacks are arity one. `Contract.callbacks/1` is the authoritative closed
@@ -82,6 +80,57 @@ part of any role. Phase 6 supplies root execution; Phases 7–10 supply scheduli
 effects, context and recovery semantics.
 
 ## Delivery status
+
+## Callback inputs and result algebra
+
+`Input.validate/1` checks an exact plain-map envelope: `role`, `transition`,
+`props`, `slots`, `state`, `payload`, `root`, `identity`, `generation`, `revision`,
+`sequence`, sorted unique `capabilities` and `context_keys`. Root and component
+identities are `{root, path, generation}` maps, never PIDs. Counters are safe
+nonnegative integers; generations are positive. Root paths are empty, nested
+stateful paths are not. Pure/init/mount state is `:absent`; other state is
+`{:present, prior_state}`, including explicit nil. Payload is `{:present, data}`
+only for event/info, acknowledgements, effect results, failure/retry and
+disposal/termination; otherwise `:absent`. This bounds portable shape, not
+prop/slot/event schema semantics. Context lookup and capability authority are
+not implemented. Callers must not put secrets in application data; the guard
+rejects reserved host/renderer/secret fields but cannot recognize secret content.
+
+`Result.validate/3` checks the following closed candidate forms:
+
+| Callback | Admitted returns (all also admit `{:rejected, reason}`) |
+| --- | --- |
+| render | `{:output, {:semantic, 1, portable_map}}` |
+| init, mount | `{:state, candidate_state}` |
+| dispose, terminate | `:ok` |
+| failure, retry (root only) | update forms plus `{:retry_request, reason}` |
+| other declared callbacks | `:no_change`, `{:state, state}`, `{:actions, state, actions}`, `{:stop, reason}` |
+
+The semantic tag identifies a candidate for version-1 UI-tree lowering; it is
+not itself an accepted `Node`/`Document`, and does not bypass their validators.
+The Core package cannot depend on UI-tree. Phase 4 owns candidate-to-tree
+composition/validation, so a Phase 2 output pass is not a renderable-tree claim.
+State and output never share a result tuple. Actions are 1–128 portable
+`{kind, id, payload}` tuples; kind is effect/command/message/timer/release and
+id is a nonempty bounded binary. This is closed typed intent, not provider,
+resource or command validation or execution. Phase 8 replaces inherited generic
+emissions in the executing evaluator. Retry/stop/rejection reasons are fixed
+atoms in `Result`, never raw exceptions, state, messages or opaque resources.
+Malformed results receive only `{code, contract}` diagnostics.
+
+Metadata exposes contract version, role, exact exported callbacks, required and
+optional sets, public-candidate/private-implementation status, and sorted unique
+names declaring props/slots/capabilities/registry/context. Names are references,
+not schemas or dynamic registrations. Unknown/duplicate options, missing or
+extra callbacks, wrong arities, private implementation imports and dynamic
+invocations fail compilation with fixed diagnostic codes. Build-only BEAM
+import/opcode inspection audits compiled callback dependencies, including
+aliases/imports. It is not an Elixir compile-time sandbox: trusted authors can
+run macros at build time. Pattern-match maps in callbacks (unguarded dotted
+access can emit Elixir dynamic remote-call helpers and is rejected). Pure
+determinism remains a caller contract; this phase does not prove termination.
+
+## Evidence status
 
 Sections 2.1–2.4 are separate commits. Completion and exact gate evidence will
 be indexed here after execution. Phase 3 remains unauthorized until requested.

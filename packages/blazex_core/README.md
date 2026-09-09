@@ -22,3 +22,13 @@ BH-05 callbacks, facade, process or support claim. Package ownership and API
 migration decisions are recorded in `docs/research/assets/bh-05-baseline`.
 Runtime/host profiles consume neutral contracts; LiveView and LocalLiveView
 integration remain explicitly deferred.
+
+## BH-05 Phase 2 candidate facade
+
+`use BlazeX.Component, role: :pure | :stateful | :root` declares a candidate
+behaviour and literal metadata. `BlazeX.Component.Input` and `.Result` validate
+closed portable envelopes without invoking callbacks or committing state.
+`BlazeX.Core.Authoring` is private build-time machinery; no new dependencies.
+The inherited evaluator is unchanged. Schema execution, state retention,
+processes, effects, context resolution, runtime parity and stable APIs remain
+deferred. See the authoring contract in the BH-05 planning directory.
