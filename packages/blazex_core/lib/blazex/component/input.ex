@@ -111,5 +111,8 @@ defmodule BlazeX.Component.Input do
   end
 
   @spec error(atom()) :: {:error, map()}
-  def error(code), do: {:error, %{code: code, contract: Contract.version()}}
+  def error(code) when code in [:invalid_input, :invalid_result],
+    do: {:error, %{code: code, contract: Contract.version()}}
+
+  def error(_code), do: error(:invalid_input)
 end

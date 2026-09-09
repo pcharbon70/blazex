@@ -77,6 +77,7 @@ defmodule BlazeX.Core.Authoring do
   defp allowed_import?({:erlang, name, _arity}) do
     name in [
       :get_module_info,
+      :integer_to_binary,
       :map_get,
       :is_map,
       :is_atom,
@@ -123,7 +124,17 @@ defmodule BlazeX.Core.Authoring do
     name not in [:apply, :binary_to_term, :to_atom, :to_existing_atom] and
       (module in [Enum, Map, List, Tuple, String, Integer, Float, Keyword] or
          module in [BlazeX.Component.Contract, BlazeX.Component.Input, BlazeX.Component.Result] or
-         String.starts_with?(Atom.to_string(module), "Elixir.BlazeX.UITree."))
+         module in [
+           BlazeX.UITree.Node,
+           BlazeX.UITree.Document,
+           BlazeX.UITree.Binding,
+           BlazeX.UITree.Accessibility,
+           BlazeX.UITree.Focus,
+           BlazeX.UITree.Selection,
+           BlazeX.UITree.Layout,
+           BlazeX.UITree.TokenRef,
+           BlazeX.UITree.Metric
+         ])
   end
 
   defp fail!(code), do: raise(CompileError, description: "BH-05 authoring: #{code}")

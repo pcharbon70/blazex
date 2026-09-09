@@ -1,6 +1,6 @@
 # BH-05 component-model evidence
 
-Phase 1 activates governance only. The versioned [index](index-v0.1.0.json)
+The retained Phase 1 record activates governance only. Its [index](index-v0.1.0.json)
 conforms to its closed [schema](index.schema.json); all fourteen evidence
 classes are empty. No callbacks, macros, processes, fixtures, measurements or
 passing component results are implemented here.
@@ -12,4 +12,18 @@ adapters are consumers, not component-model owners. LiveView/LocalLiveView
 remain deferred; server authority and BH-06 implementation remain out of scope.
 
 Run `python3 docs/research/70-tools/generate_bh05_boundary.py --check` from the
-repository root. Activation does not count as runtime conformance or support.
+accepted Phase 1 checkout. Activation does not count as runtime conformance or support.
+
+Phase 2 adds a separate [candidate authoring index](authoring-index-v0.1.0.json),
+preserving the empty historical record. Only facade contract evidence is active;
+schemas, processes, scheduling, effects, runtime parity and acceptance remain
+unimplemented here.
+
+- [Three valid declarations](authoring-fixtures.exs): all required/optional callbacks.
+- [Compile integration gate](authoring-check.exs): exact metadata, warning-free valid
+  fixtures and rejected host/private/server/compatibility declarations.
+- [Pinned subset gate](authoring-subset.exs): Core Erlang reader/analyzer and
+  compiler roundtrip using authenticated Popcorn 0.3.3 sources. No execution parity.
+
+Current command: `python3 docs/research/70-tools/validate_bh05_authoring.py --final`.
+The source-frozen runner and individual checks are indexed under research tools.
