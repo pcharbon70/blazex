@@ -53,5 +53,35 @@ runtime execution parity; that gate remains Phase 11.
 
 ## Delivery
 
+## Roles and lifecycle ownership
+
+All callbacks are arity one. `Contract.callbacks/1` is the authoritative closed
+inventory and records required versus optional callbacks. Pure requires only
+`render`; stateful requires `init` and `render`; root requires `mount` and
+`render`. There are no generated lifecycle defaults or arbitrary callback hooks.
+
+Pure evaluation is deterministic by contract, caller-owned, without retained
+state or mailbox; failures belong to the owning root. A nested stateful unit
+initializes, receives prop `update`, local `handle_event`/`handle_info`, renders,
+is replaced, and disposes under its root scheduler. Module declaration plus
+root/path/generation identifies an instance; keys preserve identity and
+replacement advances generation. The nested unit shares its root's process,
+transition, failure, effect/resource and renderer commit boundaries. It cannot
+hold a PID, mutable reference, independent supervision or renderer root.
+
+Only the root role declares an independent process/mailbox, root identity,
+generation, revision, admission sequence, scheduler, renderer ownership,
+fallback and supervised retry boundary. Its `mount`, host-prop `update`,
+`handle_event`, `handle_info`, `render`, `commit_ack`, `effect_result`, `failure`,
+`retry`, `replace` and `terminate` transitions are vocabulary, not execution.
+Generation/revision/sequence correlate portable lifecycle messages with host
+admission; no host object crosses this boundary. Resources and effects belong
+to that root generation. Root termination disposes the entire owned subtree.
+No transferred server process, nested render mode or direct browser access is
+part of any role. Phase 6 supplies root execution; Phases 7–10 supply scheduling,
+effects, context and recovery semantics.
+
+## Delivery status
+
 Sections 2.1–2.4 are separate commits. Completion and exact gate evidence will
 be indexed here after execution. Phase 3 remains unauthorized until requested.
