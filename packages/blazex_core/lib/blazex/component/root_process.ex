@@ -510,6 +510,7 @@ defmodule BlazeX.Component.RootProcess do
           state
           | schedule: RootSchedule.finish(state.schedule),
             active_correlation: nil,
+            actions: ActionRuntime.finish_result(state.actions, state.schedule.active, committed),
             timers: RootTimers.finish(state.timers, state.schedule.active)
         }
 
@@ -547,7 +548,8 @@ defmodule BlazeX.Component.RootProcess do
           )
 
         Enum.each(removed, &outcome(state, &1, :canceled, :removed_target))
-        %{state | timers: timers, schedule: schedule}
+        actions = Enum.reduce(removed, state.actions, &ActionRuntime.finish_result(&2, &1, false))
+        %{state | timers: timers, schedule: schedule, actions: actions}
       else
         state
       end
@@ -644,7 +646,8 @@ defmodule BlazeX.Component.RootProcess do
           state
           | schedule: RootSchedule.finish(state.schedule),
             active_correlation: nil,
-            candidate_intents: []
+            candidate_intents: [],
+            action_plan: nil
         }
 
         if next.pending do
@@ -747,6 +750,7 @@ defmodule BlazeX.Component.RootProcess do
   end
 
   defp action_result_ready(state, actions, work) do
+    send(state.guardian, {:root_actions, self(), actions})
     {:ok, schedule} = RootSchedule.results(state.schedule, ActionRuntime.pending(actions))
 
     schedule =

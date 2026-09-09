@@ -71,28 +71,28 @@ Back to milestone: [README](README.md)
       - [x] 8.2.2.2 Subtask - Schedule accepted results/timeouts/cancellations as typed generation-scoped work and reject duplicate, late, stale, wrong-owner, or post-disposal results before callbacks.
       - [x] 8.2.2.3 Subtask - Never automatically replay non-idempotent effects after renderer rejection, root crash/retry, runtime loss, or reconnect.
 
-  - [ ] 8.3 Section - Implement resource and command-intent boundaries.
+  - [x] 8.3 Section - Implement resource and command-intent boundaries.
 
     Track opaque resource leases and represent remote work as untrusted intent
     awaiting a future authenticated server adapter.
 
-    - [ ] 8.3.1 Task - Integrate resource leases with component ownership.
+    - [x] 8.3.1 Task - Integrate resource leases with component ownership.
 
       Give every resource one root generation and component owner with explicit
       transfer/release and terminal state.
 
-      - [ ] 8.3.1.1 Subtask - Admit at most 512 simultaneous leases per root and inventory kind, opaque ID, owner, generation, acquisition effect, transfer history, release request, and terminal outcome.
-      - [ ] 8.3.1.2 Subtask - Validate transfers within declared ownership rules and reject cross-root, stale-generation, duplicate, unknown, or post-disposal release/result operations.
-      - [ ] 8.3.1.3 Subtask - Queue release/cancellation on nested removal/replacement and root shutdown/failure for Phase 10 disposal coordination.
+      - [x] 8.3.1.1 Subtask - Admit at most 512 simultaneous leases per root and inventory kind, opaque ID, owner, generation, acquisition effect, transfer history, release request, and terminal outcome.
+      - [x] 8.3.1.2 Subtask - Validate transfers within declared ownership rules and reject cross-root, stale-generation, duplicate, unknown, or post-disposal release/result operations.
+      - [x] 8.3.1.3 Subtask - Queue release/cancellation on nested removal/replacement and root shutdown/failure for Phase 10 disposal coordination.
 
-    - [ ] 8.3.2 Task - Implement typed remote-command intent.
+    - [x] 8.3.2 Task - Implement typed remote-command intent.
 
       Define what a component may request without granting client state any
       server authority or implementing a transport.
 
-      - [ ] 8.3.2.1 Subtask - Define stable command ID, schema version, public payload, correlation/idempotency key, timeout, optimistic-state metadata, and expected public result/error schema.
-      - [ ] 8.3.2.2 Subtask - Mark every command intent as untrusted client input and require future server authentication, authorization, validation, idempotency, auditing, and result normalization.
-      - [ ] 8.3.2.3 Subtask - Reject arbitrary module/function targets, server PIDs/sockets, credentials/secrets, client authorization decisions, and direct transport selection in portable component code.
+      - [x] 8.3.2.1 Subtask - Define stable command ID, schema version, public payload, correlation/idempotency key, timeout, optimistic-state metadata, and expected public result/error schema.
+      - [x] 8.3.2.2 Subtask - Mark every command intent as untrusted client input and require future server authentication, authorization, validation, idempotency, auditing, and result normalization.
+      - [x] 8.3.2.3 Subtask - Reject arbitrary module/function targets, server PIDs/sockets, credentials/secrets, client authorization decisions, and direct transport selection in portable component code.
 
   - [ ] 8.4 Section - Phase 8 Integration Tests and Completion Evidence.
 

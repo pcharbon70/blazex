@@ -106,7 +106,8 @@ defmodule BlazeX.Component.Action do
   defp safe_fields?(value) when is_map(value),
     do:
       Enum.all?(value, fn {key, child} ->
-        to_string(key) not in @forbidden and safe_fields?(child)
+        (is_atom(key) or is_binary(key) or is_number(key)) and
+          to_string(key) not in @forbidden and safe_fields?(child)
       end)
 
   defp safe_fields?(value) when is_list(value), do: Enum.all?(value, &safe_fields?/1)

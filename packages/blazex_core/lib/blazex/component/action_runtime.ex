@@ -114,6 +114,12 @@ defmodule BlazeX.Component.ActionRuntime do
               {runtime, work ++ [item]}
           end
 
+        :resource_transfer ->
+          {%{runtime | ledger: ActionLedger.transfer(runtime.ledger, action, accepted)}, work}
+
+        :resource_release ->
+          {release(runtime, action.body.lease), work}
+
         _ ->
           {runtime, work}
       end
@@ -151,10 +157,53 @@ defmodule BlazeX.Component.ActionRuntime do
   def prune(runtime, accepted) do
     {ledger, removed} = ActionLedger.prune(runtime.ledger, accepted)
 
-    Enum.reduce(removed, %{runtime | ledger: ledger}, fn entry, acc ->
-      RootPort.call(acc.port, :cancel, [entry])
-      cancel_timeout(acc, entry.correlation)
-    end)
+    runtime =
+      Enum.reduce(removed, %{runtime | ledger: ledger}, fn entry, acc ->
+        result = RootPort.call(acc.port, :cancel, [entry])
+        acc = cancel_timeout(acc, entry.correlation)
+
+        if result == :ok,
+          do: acc,
+          else: %{acc | ledger: ActionLedger.record(acc.ledger, :disconnected, entry.correlation)}
+      end)
+
+    runtime =
+      Enum.reduce(runtime.ledger.leases, runtime, fn {_, lease}, acc ->
+        if ActionLedger.lease_live?(lease, accepted),
+          do: acc,
+          else: release(acc, ActionLedger.lease_ref(lease))
+      end)
+
+    sequences =
+      Map.filter(runtime.ledger.sequences, fn {owner, _} ->
+        owner.generation == accepted.correlation.generation
+      end)
+
+    %{runtime | ledger: %{runtime.ledger | sequences: sequences}}
+  end
+
+  def finish_result(nil, _, _), do: nil
+
+  def finish_result(runtime, %{kind: :action_result, payload: %{leases: leases}}, false),
+    do: Enum.reduce(leases, runtime, &release(&2, &1))
+
+  def finish_result(runtime, _, _), do: runtime
+
+  defp release(runtime, reference) do
+    case Map.get(runtime.ledger.leases, reference.id) do
+      %{acquisition: acquisition} = lease when acquisition == reference.acquisition ->
+        lease = %{lease | release_requested: true}
+
+        status =
+          if RootPort.call(runtime.port, :release, [lease]) == :released,
+            do: :released,
+            else: :lost
+
+        %{runtime | ledger: ActionLedger.released(runtime.ledger, lease, status)}
+
+      _ ->
+        runtime
+    end
   end
 
   def close(nil, _), do: nil
@@ -162,7 +211,7 @@ defmodule BlazeX.Component.ActionRuntime do
   def close(runtime, reason) do
     next =
       Enum.reduce(runtime.ledger.pending, runtime, fn {correlation, entry}, acc ->
-        RootPort.call(acc.port, :cancel, [entry])
+        canceled = RootPort.call(acc.port, :cancel, [entry])
         acc = cancel_timeout(acc, correlation)
 
         %{
@@ -170,13 +219,20 @@ defmodule BlazeX.Component.ActionRuntime do
           | ledger:
               ActionLedger.record(
                 acc.ledger,
-                if(reason == :runtime_loss, do: :disconnected, else: :canceled),
+                if(reason == :runtime_loss or canceled != :ok, do: :disconnected, else: :canceled),
                 correlation
               )
         }
       end)
 
-    %{next | ledger: %{next.ledger | pending: %{}, sequences: %{}}}
+    next =
+      Enum.reduce(next.ledger.leases, next, fn {_, lease}, acc ->
+        release(acc, ActionLedger.lease_ref(lease))
+      end)
+
+    # A rejected replacement still belongs to the old generation. Keep its
+    # watermarks until a new generation actually commits (prune/2).
+    %{next | ledger: %{next.ledger | pending: %{}}}
   end
 
   def snapshot(runtime), do: ActionLedger.snapshot(runtime.ledger)

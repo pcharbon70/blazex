@@ -59,6 +59,7 @@ defmodule BlazeX.Component.RootGuardian do
       true ->
         try do
           {reply, snapshot} = GenServer.call(state.worker, operation, 60_000)
+          state = drain_checkpoints(state)
           {:reply, reply, %{state | snapshot: snapshot}}
         catch
           :exit, _ ->

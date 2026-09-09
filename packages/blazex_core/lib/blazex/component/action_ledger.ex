@@ -15,6 +15,8 @@ defmodule BlazeX.Component.ActionLedger do
 
     true = length(actions) <= 16
     true = actions |> Enum.map(&{&1.owner, &1.id}) |> Enum.uniq() |> length() == length(actions)
+    controls = Enum.filter(actions, &(&1.kind in [:resource_transfer, :resource_release]))
+    true = length(Enum.uniq_by(controls, & &1.body.lease)) == length(controls)
 
     {actions, sequences} =
       Enum.map_reduce(actions, ledger.sequences, fn action, sequences ->
@@ -45,7 +47,7 @@ defmodule BlazeX.Component.ActionLedger do
 
             Map.put(normalized, :request, request)
           else
-            validate_control!(ledger, action)
+            validate_control!(ledger, action, candidate, manifest)
             action
           end
 
@@ -79,13 +81,72 @@ defmodule BlazeX.Component.ActionLedger do
          entry when is_map(entry) <- Map.get(ledger.pending, result.correlation),
          true <- live?(entry, accepted),
          :ok <- result_value(entry, result),
-         true <- result.leases == [] do
+         true <- length(result.leases) <= Map.get(entry.declaration, :lease_limit, 0),
+         true <- Enum.all?(result.leases, &(not Map.has_key?(ledger.leases, &1))) do
       next = %{ledger | pending: Map.delete(ledger.pending, result.correlation)}
-      {:ok, record(next, result.status, result.correlation), entry, []}
+
+      next =
+        Enum.reduce(result.leases, next, fn id, acc ->
+          lease = %{
+            id: id,
+            owner: entry.action.owner,
+            generation: entry.action.owner.generation,
+            kind: entry.declaration.lease_kind,
+            capability: entry.declaration.capability,
+            acquisition: entry.correlation,
+            selection: entry.selection,
+            source_stamp: entry.source_stamp,
+            transfer_history: [],
+            release_requested: false,
+            status: :acquired
+          }
+
+          record(%{acc | leases: Map.put(acc.leases, id, lease)}, :acquired, lease_ref(lease))
+        end)
+
+      {:ok, record(next, result.status, result.correlation), entry,
+       Enum.map(result.leases, &%{id: &1, acquisition: entry.correlation})}
     else
       _ -> {:error, :invalid_or_stale_result}
     end
   end
+
+  def lease_ref(lease), do: Map.take(lease, [:id, :acquisition])
+
+  def lease_live?(lease, accepted) do
+    live?(%{action: %{owner: lease.owner}, source_stamp: lease.source_stamp}, accepted)
+  end
+
+  def transfer(ledger, action, accepted) do
+    lease = Map.fetch!(ledger.leases, action.body.lease.id)
+    target = RootSchedule.component(accepted, action.body.target)
+
+    lease = %{
+      lease
+      | owner: action.body.target,
+        source_stamp: target.schema_digest,
+        status: :transferred,
+        transfer_history:
+          lease.transfer_history ++
+            [
+              %{
+                from: lease.owner,
+                to: action.body.target,
+                action: action.id,
+                sequence: action.sequence
+              }
+            ]
+    }
+
+    record(
+      %{ledger | leases: Map.put(ledger.leases, lease.id, lease)},
+      :transferred,
+      lease_ref(lease)
+    )
+  end
+
+  def released(ledger, lease, status) when status in [:released, :lost],
+    do: record(%{ledger | leases: Map.delete(ledger.leases, lease.id)}, status, lease_ref(lease))
 
   def result_work(entry, result, accepted, leases) do
     owner = entry.action.owner
@@ -148,6 +209,11 @@ defmodule BlazeX.Component.ActionLedger do
       lease_depth: lease_depth(ledger),
       totals: ledger.totals,
       history: ledger.history,
+      inventory:
+        ledger.leases
+        |> Map.values()
+        |> Enum.map(&Map.drop(&1, [:selection, :source_stamp]))
+        |> Enum.sort(),
       requests:
         ledger.pending
         |> Map.values()
@@ -171,16 +237,44 @@ defmodule BlazeX.Component.ActionLedger do
         history: Enum.take(ledger.history ++ [%{status: status, correlation: correlation}], -128)
     }
 
-  defp validate_control!(ledger, %{kind: :effect_cancel} = action) do
+  defp validate_control!(ledger, %{kind: :effect_cancel} = action, _, _) do
     entry = Map.fetch!(ledger.pending, action.body.correlation)
     true = entry.action.owner == action.owner
     :ok
   end
 
-  defp validate_control!(_, %{kind: kind}) when kind in [:message, :timer_start, :timer_cancel],
-    do: :ok
+  defp validate_control!(ledger, %{kind: kind} = action, candidate, manifest)
+       when kind in [:resource_transfer, :resource_release] do
+    lease = Map.fetch!(ledger.leases, action.body.lease.id)
+    true = lease_ref(lease) == action.body.lease and lease.owner == action.owner
+    true = lease_live?(lease, candidate)
 
-  defp validate_control!(_, _), do: raise(ArgumentError)
+    if kind == :resource_transfer do
+      target = RootSchedule.component(candidate, action.body.target)
+      source = RootSchedule.component(candidate, action.owner)
+      true = target != nil and target.role in [:root, :stateful]
+
+      true =
+        action.body.target.root == action.owner.root and
+          action.body.target.generation == action.owner.generation
+
+      true = length(lease.transfer_history) < 16
+
+      true =
+        Enum.any?(
+          manifest.owners[source.public_id].transfers,
+          &RootSchedule.route?(&1, action.owner, action.body.target, candidate)
+        )
+    end
+
+    :ok
+  end
+
+  defp validate_control!(_, %{kind: kind}, _, _)
+       when kind in [:message, :timer_start, :timer_cancel],
+       do: :ok
+
+  defp validate_control!(_, _, _, _), do: raise(ArgumentError)
 
   defp select(port, action, declaration) do
     descriptor = %{kind: action.kind, id: action.body.declaration, declaration: declaration}

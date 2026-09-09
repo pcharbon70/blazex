@@ -3,7 +3,7 @@ defmodule BlazeX.Effects.ActionBridge do
   @behaviour BlazeX.Component.ActionPort
   alias BlazeX.Component.RootPort
   alias BlazeX.Core.Identity
-  alias BlazeX.Effects.{Capability, Effect, Negotiation}
+  alias BlazeX.Effects.{Capability, Effect, Negotiation, Resource}
 
   @impl true
   def select(config, %{kind: :effect_request, id: id, declaration: declaration}) do
@@ -54,7 +54,16 @@ defmodule BlazeX.Effects.ActionBridge do
   @impl true
   def cancel(config, entry), do: invoke(config, entry.selection.name, :cancel, packet(entry))
   @impl true
-  def release(config, lease), do: invoke(config, lease.selection.name, :release, lease)
+  def release(config, lease) do
+    capability = Enum.find(Capability.names(), &(Atom.to_string(&1) == lease.capability))
+    {:ok, resource} = Resource.new(struct(Identity, lease.owner), capability, lease.id)
+
+    invoke(config, lease.selection.name, :release, %{
+      resource: resource,
+      acquisition: lease.acquisition,
+      kind: lease.kind
+    })
+  end
 
   def command_record(entry) do
     body = entry.action.body

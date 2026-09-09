@@ -161,7 +161,10 @@ defmodule BlazeX.ActionTest do
           :ok
         )
 
-    def release(_, _), do: :released
+    def release(pid, lease) do
+      send(pid, {:released, lease})
+      :released
+    end
 
     def notify(pid, record),
       do:
@@ -432,5 +435,148 @@ defmodule BlazeX.ActionTest do
     refute_receive {:effect, _}, 30
     {:ok, snapshot} = LocalView.inspect_root(supervisor, handle)
     assert snapshot.actions.pending == 0 and snapshot.scheduling.depth == 0
+  end
+
+  defp lease_manifest do
+    manifest()
+    |> put_in([:effects, "read", :lease_kind], "subscription")
+    |> put_in([:effects, "read", :lease_limit], 16)
+  end
+
+  defp action_plan(runtime, actions, candidate \\ accepted()) do
+    BlazeX.Component.ActionRuntime.prepare(
+      runtime,
+      [%{source: owner(), actions: actions}],
+      candidate,
+      spec(),
+      policy(),
+      {Port, self()}
+    )
+  end
+
+  test "512 leases include pending acquisition reservations and reject the 513th atomically" do
+    alias BlazeX.Component.ActionRuntime
+    {:ok, runtime} = ActionRuntime.new(%{manifest: lease_manifest(), port: {Port, self()}})
+
+    {runtime, samples} =
+      Enum.reduce(1..32, {runtime, []}, fn n, {runtime, samples} ->
+        {:ok, plan} = action_plan(runtime, [action(n)])
+        {runtime, []} = ActionRuntime.commit(runtime, plan, accepted())
+        ids = Enum.map(1..16, &"lease_#{n}_#{&1}")
+
+        {:ok, result} =
+          Action.result(Action.correlation(action(n), spec()), :completed, %{"value" => n}, ids)
+
+        {:ok, runtime, work} = ActionRuntime.complete(runtime, result, accepted())
+        assert length(work.payload.leases) == 16
+        {runtime, samples ++ [ActionLedger.lease_depth(runtime.ledger)]}
+      end)
+
+    assert samples == Enum.to_list(16..512//16)
+    assert map_size(runtime.ledger.leases) == 512
+    assert {:error, :invalid_action_batch} = action_plan(runtime, [action(33)])
+    closed = ActionRuntime.close(runtime, :shutdown)
+    assert closed.ledger.leases == %{} and closed.ledger.totals.released == 512
+    assert length(closed.ledger.history) == 128
+  end
+
+  test "leases transfer only on declared routes and stale acquisition references never release reused IDs" do
+    alias BlazeX.Component.ActionRuntime
+    {:ok, runtime} = ActionRuntime.new(%{manifest: lease_manifest(), port: {Port, self()}})
+    {:ok, plan} = action_plan(runtime, [action()])
+    {runtime, []} = ActionRuntime.commit(runtime, plan, accepted())
+
+    {:ok, result} =
+      Action.result(Action.correlation(action(), spec()), :completed, %{"value" => 1}, ["lease"])
+
+    {:ok, runtime, work} = ActionRuntime.complete(runtime, result, accepted())
+    [reference] = work.payload.leases
+
+    transfer = fn n, target ->
+      {:ok, a} =
+        Action.new(:resource_transfer, "transfer_#{n}", n, owner(), %{
+          lease: reference,
+          target: target
+        })
+
+      a
+    end
+
+    assert {:error, _} = action_plan(runtime, [transfer.(2, %{owner() | root: "other"})])
+    assert {:error, _} = action_plan(runtime, [transfer.(2, %{owner() | generation: 2})])
+    assert {:error, _} = action_plan(runtime, [transfer.(2, owner()), transfer.(3, owner())])
+    {:ok, plan} = action_plan(runtime, [transfer.(2, owner())])
+    {runtime, []} = ActionRuntime.commit(runtime, plan, accepted())
+    assert runtime.ledger.leases["lease"].status == :transferred
+    assert length(runtime.ledger.leases["lease"].transfer_history) == 1
+    {:ok, release} = Action.new(:resource_release, "release", 3, owner(), %{lease: reference})
+    {:ok, plan} = action_plan(runtime, [release])
+    {runtime, []} = ActionRuntime.commit(runtime, plan, accepted())
+    assert_receive {:released, %{id: "lease", release_requested: true}}
+    assert {:error, _} = action_plan(runtime, [%{release | sequence: 4}])
+    {:ok, plan} = action_plan(runtime, [action(4)])
+    {runtime, []} = ActionRuntime.commit(runtime, plan, accepted())
+
+    {:ok, result} =
+      Action.result(Action.correlation(action(4), spec()), :completed, %{"value" => 2}, ["lease"])
+
+    {:ok, runtime, _} = ActionRuntime.complete(runtime, result, accepted())
+    assert {:error, _} = action_plan(runtime, [%{release | sequence: 5}])
+    assert ActionRuntime.finish_result(runtime, work, false) == runtime
+    closed = ActionRuntime.close(runtime, :replace)
+    assert closed.ledger.sequences == runtime.ledger.sequences
+    assert {:error, _} = ActionRuntime.complete(closed, result, accepted())
+  end
+
+  test "rejected result callbacks and removed owners release newly acquired resources" do
+    alias BlazeX.Component.ActionRuntime
+    {:ok, runtime} = ActionRuntime.new(%{manifest: lease_manifest(), port: {Port, self()}})
+    {:ok, plan} = action_plan(runtime, [action()])
+    {runtime, []} = ActionRuntime.commit(runtime, plan, accepted())
+
+    {:ok, result} =
+      Action.result(Action.correlation(action(), spec()), :completed, %{"value" => 1}, ["lease"])
+
+    {:ok, runtime, work} = ActionRuntime.complete(runtime, result, accepted())
+    assert ActionRuntime.finish_result(runtime, work, true) == runtime
+    rejected = ActionRuntime.finish_result(runtime, work, false)
+    assert rejected.ledger.leases == %{} and rejected.ledger.totals.released == 1
+    removed = put_in(accepted(), [:state, :components], [])
+    assert ActionRuntime.prune(runtime, removed).ledger.leases == %{}
+  end
+
+  test "commands remain untrusted and a provider denial preserves the accepted state" do
+    alias BlazeX.Component.ActionRuntime
+
+    body = %{
+      declaration: "save",
+      payload: %{"value" => 1},
+      timeout_ms: 1000,
+      idempotency_key: "save_1",
+      optimistic_revision: 1,
+      trust: :untrusted_client
+    }
+
+    {:ok, command} = Action.new(:command, "save_1", 1, owner(), body)
+
+    for changes <- [
+          %{trust: :authorized},
+          %{transport: "server"},
+          %{payload: %{"authorization" => true}},
+          %{payload: %{"module" => "Server"}},
+          %{payload: self()}
+        ] do
+      assert {:error, _} = Action.new(:command, "save_1", 1, owner(), Map.merge(body, changes))
+    end
+
+    {:ok, runtime} =
+      ActionRuntime.new(%{manifest: manifest(), port: {SelectionPort, {self(), :deny}}})
+
+    before = accepted()
+    {:ok, plan} = action_plan(runtime, [command])
+    {runtime, [work]} = ActionRuntime.commit(runtime, plan, before)
+    assert work.payload.trust == :untrusted_client and work.payload.status == :denied
+    assert runtime.ledger.pending == %{} and accepted() == before
+    refute_receive {:effect, _}, 20
   end
 end

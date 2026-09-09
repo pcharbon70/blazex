@@ -86,6 +86,9 @@ after renderer rejection, crash/retry, reconnect or runtime loss. Idempotency
 keys are advisory correlation data for a future authoritative adapter, not
 permission for automatic retries. No unbounded seen-ID set is retained: bounded
 per-incarnation sequence watermarks and full request correlations reject replay.
+There are at most 128 owner watermarks per root generation, including removed
+owners. A new owner beyond that budget is rejected until a new generation
+commits. A rejected replacement cannot erase the old generation's watermarks.
 
 ## Leases and cleanup
 
@@ -110,6 +113,10 @@ deterministic cleanup port outcomes; Phase 10 owns expanded disposal coordinatio
 and recovery. Release failure is recorded as lost, never as successful cleanup.
 The guardian retains private bounded cleanup inventory for coordinator crashes.
 No automatic resource reacquisition or request replay follows cleanup.
+Cleanup ports must be idempotent: a crash between an external cleanup and its
+checkpoint can repeat cancellation/release. This is not an exactly-once external
+side-effect guarantee. A candidate may operate on a particular lease only once,
+avoiding ambiguous transfer/release ordering within the same batch.
 
 ## Remote command trust
 
