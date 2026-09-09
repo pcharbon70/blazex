@@ -78,6 +78,49 @@ defmodule BlazeX.RegistryEvaluatorTest do
     }
   end
 
+  test "ordinary scalar message payload is not interpreted as dynamic selection" do
+    supervisor = start_supervised!(LocalView.Supervisor)
+
+    ports = %{
+      evaluator: {ScopedEvaluator, config()},
+      renderer: {F.Port, self()},
+      host: {F.Port, self()}
+    }
+
+    policy = %{
+      F.policy()
+      | messages: %{"root" => %{"increment" => :integer}},
+        producers: %{
+          "ui" => %{component: "root", classes: [:message], routes: [:self], supersedable: []}
+        }
+    }
+
+    {:ok, handle} = ScheduledView.start(supervisor, F.spec(), ports, policy)
+    assert_receive {:submission, mount, _}
+    F.commit(supervisor, handle, mount)
+
+    assert {:ok, _} =
+             ScheduledView.enqueue(supervisor, handle, %{
+               class: :message,
+               producer: "ui",
+               sequence: 1,
+               generation: 1,
+               revision: 1,
+               source: F.owner(),
+               target: F.owner(),
+               route: :self,
+               name: "increment",
+               payload: 7,
+               supersedable: false,
+               timer: :none
+             })
+
+    assert_receive {:submission, update, candidate}
+    assert hd(candidate.state.components).state == {:present, 7}
+    assert candidate.token.scope.selection == %{"child" => "child"}
+    F.commit(supervisor, handle, update)
+  end
+
   test "registered stateful selection retains same-ID state and replaces identity on ID change" do
     supervisor = start_supervised!(LocalView.Supervisor)
 

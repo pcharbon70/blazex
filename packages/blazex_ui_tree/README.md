@@ -78,3 +78,13 @@ Phase 8 action-enabled roots require an actual component capability declaration
 and a result callback: root `effect_result/1`, nested stateful `handle_info/1`.
 Public manifests cannot substitute for either. Typed actions validate with the
 whole candidate before provider submission; semantic and renderer commit remain separate.
+
+Phase 9 is opt-in through `BlazeX.UITree.ScopedEvaluator` with a static `scope`
+manifest, initial provider templates, ingress boundary and optional registry/call
+sites. Inputs receive explicit `contexts`; contextual slot data remains a separate
+prop/slot boundary. `ScopedPlan` resolves dependencies before callbacks, and
+`RegistryPlan` selects only declared IDs or caller-declared registered fallbacks.
+Compatible same-ID targets retain state; changed IDs replace identity and remove
+old subscriptions. Contract/registry changes require explicit root replacement.
+Default evaluator roots retain their frozen Phase 1–8 behavior. No process,
+renderer, server adapter, LiveView or LocalLiveView ownership is introduced.

@@ -1,4 +1,4 @@
-"""Bind Phase 9 typed actions to accepted scheduling and effect authority."""
+"""Bind Phase 9 scoped context and registry to accepted component/runtime authority."""
 import argparse
 import hashlib
 import json
@@ -20,7 +20,7 @@ def record(root=REPO_ROOT):
             "delivery": ["verified section commits", "single PR", "merge", "checkout main", "sync origin", "delete feature branch"],
             "contract": "0.1.0-bh05-scopes", "schema_contract": "0.2.0-bh05-schema-candidate",
             "input_hashes": {p: hashlib.sha256(subprocess.check_output(["git", "show", BASE + ":" + p], cwd=root)).hexdigest() for p in INPUTS},
-            "reviewed_successor_changes": {p: "Explicit action-enabled successor; Phase 6/7 defaults and normalized traces retained." for p in CHANGES},
+            "reviewed_successor_changes": {p: "Explicit scoped-runtime successor; Phase 1–8 defaults and normalized traces retained." for p in CHANGES},
             "limits": {"total_work": 256, "contexts": 16, "providers": 32, "subscriptions": 128, "registry_entries": 128, "composition_depth": 12},
             "excluded": ["BH-06 bundles and lazy loading", "theme/form/auth product providers", "Phoenix sessions", "arbitrary plugins", "remote code loading", "LiveView", "LocalLiveView", "support claims"],
             "support_state": "unsupported"}

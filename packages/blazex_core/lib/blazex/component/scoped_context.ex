@@ -111,6 +111,7 @@ defmodule BlazeX.Component.ScopedContext do
     desired =
       Enum.flat_map(components, fn c ->
         grant = Map.get(manifest.owners, c.public_id, %{provide: [], consume: []})
+        true = Enum.all?(c.context_keys, &(&1 in grant.provide or &1 in grant.consume))
 
         Enum.map(Enum.sort(grant.consume), fn name ->
           true = name in c.context_keys

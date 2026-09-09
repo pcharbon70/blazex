@@ -12,7 +12,12 @@ defmodule BlazeX.UITree.RegistryPlan do
       true = previous == nil or previous.registry_generation == registry.generation
       initial = Map.new(config.scope.calls, fn {site, call} -> {site, call.initial} end)
       selection = if previous, do: previous.selection, else: initial
-      payload = if Map.has_key?(request, :work), do: request.work.payload, else: %{}
+
+      payload =
+        case Map.get(request, :work) do
+          %{kind: :scope_change, payload: payload} -> payload
+          _ -> %{}
+        end
 
       selection =
         if Map.has_key?(payload, :selection) do

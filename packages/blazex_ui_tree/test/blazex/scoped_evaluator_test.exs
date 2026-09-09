@@ -8,6 +8,9 @@ defmodule BlazeX.ScopedEvaluatorTest do
     def mount(_), do: {:state, 0}
     def update(%{state: {:present, n}}), do: {:state, n + 1}
 
+    def handle_info(%{state: {:present, n}, payload: {:present, %{data: delta}}}),
+      do: {:state, n + delta}
+
     def render(%{contexts: %{"locale" => value}}),
       do: {:output, {:semantic, 1, %{kind: :group, accessibility: %{role: :group, name: value}}}}
 
@@ -178,5 +181,64 @@ defmodule BlazeX.ScopedEvaluatorTest do
     refute_receive {:submission, _, _}, 20
     {:ok, snapshot} = LocalView.inspect_root(supervisor, handle)
     assert snapshot.accepted.correlation.revision == 1 and snapshot.scheduling.depth == 0
+  end
+
+  test "host ingress cannot change or remove local providers and notices bind revision and consumer" do
+    supervisor = start_supervised!(LocalView.Supervisor)
+
+    ports = %{
+      evaluator: {ScopedEvaluator, config()},
+      renderer: {Port, self()},
+      host: {Port, self()}
+    }
+
+    {:ok, handle} = ScheduledView.start(supervisor, spec(), ports, policy())
+    assert_receive {:submission, mount, accepted}
+    commit(supervisor, handle, mount)
+    local = put_in(config(), [:scope, :manifest, :definitions, "locale", :boundary], :local)
+
+    payload = %{
+      scope_version: 1,
+      root: "scoped",
+      generation: 1,
+      revision: 1,
+      providers: providers("new")
+    }
+
+    assert {:error, _} = ScopedEvaluator.scope_ingress(local, payload, accepted)
+
+    assert {:error, _} =
+             ScopedEvaluator.scope_ingress(local, %{payload | providers: []}, accepted)
+
+    assert is_map(
+             ScopedEvaluator.scope_ingress(
+               local,
+               %{payload | providers: providers("old")},
+               accepted
+             )
+           )
+
+    assert is_map(
+             ScopedEvaluator.scope_ingress(
+               put_in(local, [:scope, :boundary], :local),
+               payload,
+               accepted
+             )
+           )
+
+    {:ok, _} = ScopedView.change(supervisor, handle, 1, 1, providers("new"))
+    assert_receive {:submission, _, candidate}
+    [notice | _] = BlazeX.UITree.ScopedPlan.followups(candidate)
+    assert BlazeX.UITree.ScopedPlan.valid_notice?(candidate, notice.payload)
+
+    for invalid <- [
+          Map.put(notice.payload, :revision, 1),
+          Map.put(notice.payload, :generation, 2),
+          Map.put(notice.payload, :root, "other"),
+          Map.put(notice.payload, :digest, "forged"),
+          Map.put(notice.payload, :consumer, %{owner() | root: "other"})
+        ] do
+      refute BlazeX.UITree.ScopedPlan.valid_notice?(candidate, invalid)
+    end
   end
 end

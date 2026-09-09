@@ -285,3 +285,7 @@ reporting a tooling change complete.
 - [Action subset audit](check_bh05_action_subset.py) — Pinned runtime API analysis without Wasm execution credit.
 - [Phase 8 recorder](record_bh05_phase8.py) — Nineteen source-frozen gates and guarded completion publication.
 - [Scope authority generator](generate_bh05_scopes.py) — Phase 9 authorization and inherited context/registry contract bindings.
+- [Scope validator](validate_bh05_scopes.py) — Phase 9 immutable boundary, fixture inventory and source-frozen evidence.
+- [Scope validator tests](test_validate_bh05_scopes.py) — Isolated authority, inventory and gate tampering rejection.
+- [Scope subset audit](check_bh05_scope_subset.py) — Context/registry dependency and pinned runtime analysis, not Wasm execution.
+- [Phase 9 recorder](record_bh05_phase9.py) — Twenty source-frozen gates and exclusive-create publication.

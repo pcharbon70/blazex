@@ -106,4 +106,57 @@ defmodule BlazeX.ScopedContextTest do
     assert {:ok, same} = prepare([p(owner(), "value")], a, true)
     assert same.pending == [] and hd(same.providers).revision == 1
   end
+
+  test "valid same-root owners exercise the exact provider and subscription limits" do
+    nodes =
+      Enum.map(1..128, fn n ->
+        %{
+          identity: %{owner() | path: [{"child", "site", :child, "k#{n}"}]},
+          public_id: "child",
+          context_keys: ["locale"]
+        }
+      end)
+
+    values = Enum.map(Enum.take(nodes, 32), &p(&1.identity, "v"))
+    assert {:ok, at_limit} = ScopedContext.prepare(manifest(), values, nodes, owner())
+    assert length(at_limit.providers) == 32 and length(at_limit.bindings) == 128
+
+    assert {:error, _} =
+             ScopedContext.prepare(
+               manifest(),
+               values ++ [p(Enum.at(nodes, 32).identity, "v")],
+               nodes,
+               owner()
+             )
+
+    two = %{
+      manifest()
+      | definitions: Map.put(manifest().definitions, "second", manifest().definitions["locale"]),
+        owners: %{"child" => %{provide: ["locale"], consume: ["locale", "second"]}}
+    }
+
+    nodes = Enum.map(nodes, &%{&1 | context_keys: ["locale", "second"]})
+    assert {:ok, exact} = ScopedContext.prepare(two, [], Enum.take(nodes, 64), owner())
+    assert length(exact.bindings) == 128
+    assert {:error, _} = ScopedContext.prepare(two, [], Enum.take(nodes, 65), owner())
+  end
+
+  test "missing grants and unavailable default reject before consumer invocation" do
+    assert {:error, _} =
+             ScopedContext.prepare(%{manifest() | owners: %{}}, [], components(), owner())
+
+    assert {:error, _} =
+             ScopedContext.prepare(
+               put_in(manifest(), [:definitions, "locale", :default], :absent),
+               [],
+               components(),
+               owner()
+             )
+
+    {:ok, previous} = prepare([p(owner(), "provided")])
+    {:ok, removed} = prepare([], previous, true)
+    assert removed.pending == [owner(), child()]
+    {:ok, updated} = prepare([], removed, false, child())
+    assert ScopedContext.values(updated, child())["locale"] == "default"
+  end
 end

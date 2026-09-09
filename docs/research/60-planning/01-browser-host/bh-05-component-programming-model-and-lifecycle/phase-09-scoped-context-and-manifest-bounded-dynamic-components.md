@@ -17,7 +17,7 @@ aliases:
 
 Back to milestone: [README](README.md)
 
-- [ ] 9 Phase - Scoped Context and Manifest-Bounded Dynamic Components.
+- [x] 9 Phase - Scoped Context and Manifest-Bounded Dynamic Components.
 
   Implement small root-scoped named context for genuinely cross-cutting public
   values and a deterministic stable-ID component registry for bounded dynamic
@@ -94,29 +94,29 @@ Back to milestone: [README](README.md)
       - [x] 9.3.2.2 Subtask - Invoke registered pure or nested-stateful targets with stable identity and define compatible same-ID updates versus explicit replacement when ID/contract changes.
       - [x] 9.3.2.3 Subtask - Reject unknown/unavailable/stale/unauthorized IDs before callback invocation and render the caller-declared semantic fallback or diagnostic without revealing module names.
 
-  - [ ] 9.4 Section - Phase 9 Integration Tests and Completion Evidence.
+  - [x] 9.4 Section - Phase 9 Integration Tests and Completion Evidence.
 
     Exercise context propagation and dynamic selection through public fixtures,
     including adversarial host input, conflicts, updates, replacements, and
     disposal.
 
-    - [ ] 9.4.1 Task - Run context and registry integration tests.
+    - [x] 9.4.1 Task - Run context and registry integration tests.
 
       Cover nested providers/consumers, tracked/fixed updates, dynamic roles,
       scheduler interaction, and fail-closed lookup.
 
-      - [ ] 9.4.1.1 Subtask - Test default/nearest/nested/fixed/tracked context, contextual slots, provider update/removal/replacement, canonical consumer invalidation, and cleanup.
-      - [ ] 9.4.1.2 Subtask - Test registry composition, pure/stateful lookup, dynamic update/replacement, metadata export, capability/context requirements, unknown/conflicting IDs, stale registry, and declared fallback.
-      - [ ] 9.4.1.3 Subtask - Test forged host IDs, dynamic atom/module attempts, arbitrary apply/reflection, secret/advisory-auth misuse, cross-root context, subscription leaks, and deterministic replay.
+      - [x] 9.4.1.1 Subtask - Test default/nearest/nested/fixed/tracked context, contextual slots, provider update/removal/replacement, canonical consumer invalidation, and cleanup.
+      - [x] 9.4.1.2 Subtask - Test registry composition, pure/stateful lookup, dynamic update/replacement, metadata export, capability/context requirements, unknown/conflicting IDs, stale registry, and declared fallback.
+      - [x] 9.4.1.3 Subtask - Test forged host IDs, dynamic atom/module attempts, arbitrary apply/reflection, secret/advisory-auth misuse, cross-root context, subscription leaks, and deterministic replay.
 
-    - [ ] 9.4.2 Task - Publish Phase 9 completion evidence.
+    - [x] 9.4.2 Task - Publish Phase 9 completion evidence.
 
       Record the bounded public contracts and exact handoff metadata required
       by BH-06 without implementing bundles.
 
-      - [ ] 9.4.2.1 Subtask - Run Core/UI-tree/effects/test suites, context/registry fixtures, security and dependency audits, validators, archive/generated checks, JSON validation, and patch hygiene.
-      - [ ] 9.4.2.2 Subtask - Publish context/registry schemas, metadata and trace hashes, exact commands/counts, conflicts/rejections, subscription cleanup, failures, and limitations.
-      - [ ] 9.4.2.3 Subtask - Mark Phase 9 complete only if context is root-scoped and dynamic dispatch is manifest-bounded; make Phase 10 eligible but unauthorized.
+      - [x] 9.4.2.1 Subtask - Run Core/UI-tree/effects/test suites, context/registry fixtures, security and dependency audits, validators, archive/generated checks, JSON validation, and patch hygiene.
+      - [x] 9.4.2.2 Subtask - Publish context/registry schemas, metadata and trace hashes, exact commands/counts, conflicts/rejections, subscription cleanup, failures, and limitations.
+      - [x] 9.4.2.3 Subtask - Mark Phase 9 complete only if context is root-scoped and dynamic dispatch is manifest-bounded; make Phase 10 eligible but unauthorized.
 
 ## Section delivery rule
 

@@ -42,10 +42,10 @@
     "docs/research/20-notes/architecture-decisions/adr-0005-server-adapter-and-trust-boundary.md": "5f2d34113308a36192d5d88bd36850d79d810a95b28d57d2e5a49c6c0f803766"
   },
   "reviewed_successor_changes": {
-    "packages/blazex_core/lib/blazex/component/input.ex": "Explicit action-enabled successor; Phase 6/7 defaults and normalized traces retained.",
-    "packages/blazex_core/lib/blazex/component/root_process.ex": "Explicit action-enabled successor; Phase 6/7 defaults and normalized traces retained.",
-    "packages/blazex_ui_tree/lib/blazex/ui_tree/root_evaluator.ex": "Explicit action-enabled successor; Phase 6/7 defaults and normalized traces retained.",
-    "packages/blazex_ui_tree/lib/blazex/ui_tree/nested_candidates.ex": "Explicit action-enabled successor; Phase 6/7 defaults and normalized traces retained."
+    "packages/blazex_core/lib/blazex/component/input.ex": "Explicit scoped-runtime successor; Phase 1\u20138 defaults and normalized traces retained.",
+    "packages/blazex_core/lib/blazex/component/root_process.ex": "Explicit scoped-runtime successor; Phase 1\u20138 defaults and normalized traces retained.",
+    "packages/blazex_ui_tree/lib/blazex/ui_tree/root_evaluator.ex": "Explicit scoped-runtime successor; Phase 1\u20138 defaults and normalized traces retained.",
+    "packages/blazex_ui_tree/lib/blazex/ui_tree/nested_candidates.ex": "Explicit scoped-runtime successor; Phase 1\u20138 defaults and normalized traces retained."
   },
   "limits": {
     "total_work": 256,

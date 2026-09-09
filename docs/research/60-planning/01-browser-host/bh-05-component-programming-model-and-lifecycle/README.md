@@ -49,13 +49,14 @@ Planning alone does not authorize implementation. The owner authorized Phase 1
 after the accepted BH-04 corrective handoff merged in PR #51 at
 `506c254ddd4a14dd8d1d4cbdba8fcf9556bd15cb`. Phase 1 activates governance only;
 every later phase still requires separate explicit implementation authorization.
-Phases 1–8 are complete: governance activation, candidate authoring, prop/slot
+Phases 1–9 are complete: governance activation, candidate authoring, prop/slot
 schemas, pure composition, nested-state reconciliation, supervised root
-lifecycle, bounded local scheduling and typed action/resource/command boundaries
-have separately bound evidence. The owner authorized Phase 8 after the accepted
-Phase 7 merge. Phase 9 is eligible but unauthorized; BH-06 remains ineligible.
-The current [Phase 8 evidence](action-evidence.md) grants ERTS/headless typed
-action and abstract-provider credit, without concrete browser/server providers
+lifecycle, bounded local scheduling, typed action/resource/command boundaries,
+scoped context and manifest-bounded registry have separately bound evidence.
+The owner authorized Phase 9 after accepted Phase 8 PR #59. Phase 10 is eligible
+but unauthorized; BH-06 remains ineligible. The current
+[Phase 9 evidence](scope-evidence.md) grants ERTS/headless scoped-context and
+bounded dynamic-selection credit, without concrete browser/server providers
 or Wasm parity. [Runtime compatibility limits](root-supervision-compatibility.md) remain
 explicitly unqualified for Phase 11.
 
@@ -142,8 +143,8 @@ adapter modules are forbidden even when available in the monorepo.
 | [6 — Process-Root Local View Lifecycle and Supervision](phase-06-process-root-local-view-lifecycle-and-supervision.md) | complete — supervised ERTS roots | Independently supervised mount/update/render/commit/terminate lifecycle, root generation and correlated final state; user info/event scheduling remains Phase 7. | Phase 5 and accepted BH-03/BH-04 contracts |
 | [7 — Event, Message, Timer, and Transition Scheduling](phase-07-event-message-timer-and-transition-scheduling.md) | complete — bounded local scheduling | Serialize root transitions, route local events and messages, bound backlogs, reject stale work, and make rendering/final-state ordering explicit. | Phase 6 |
 | [8 — Effects, Resources, and Typed Command Intent](phase-08-effects-resources-and-typed-command-intent.md) | complete — typed actions and leases | Replace generic emissions with typed effects/resources/command intents and enforce authority, result, cancellation, timeout, and ownership boundaries. | Phases 6–7 |
-| [9 — Scoped Context and Manifest-Bounded Dynamic Components](phase-09-scoped-context-and-manifest-bounded-dynamic-components.md) | eligible — unauthorized | Implement root-scoped named context and deterministic stable-ID component registries suitable for BH-06 reachability analysis. | Phases 3–8 |
-| [10 — Failure Containment, Retry, Replacement, and Disposal](phase-10-failure-containment-retry-replacement-and-disposal.md) | planned — unauthorized | Contain failures at honest process-root boundaries, render accessible fallback, bound retries, invalidate generations, and release all owned work. | Phases 5–9 |
+| [9 — Scoped Context and Manifest-Bounded Dynamic Components](phase-09-scoped-context-and-manifest-bounded-dynamic-components.md) | complete — scoped context and registry | Implement root-scoped named context and deterministic stable-ID component registries suitable for BH-06 reachability analysis. | Phases 3–8 |
+| [10 — Failure Containment, Retry, Replacement, and Disposal](phase-10-failure-containment-retry-replacement-and-disposal.md) | eligible — unauthorized | Contain failures at honest process-root boundaries, render accessible fallback, bound retries, invalidate generations, and release all owned work. | Phases 5–9 |
 | [11 — ERTS, Browser-AtomVM, and Cross-Backend Conformance](phase-11-erts-browser-atomvm-and-cross-backend-conformance.md) | planned — unauthorized | Run matching public component scenarios under ERTS/headless and browser AtomVM/DOM, with retained native-spike portability checks. | Phases 2–10 and accepted BH-04 browser path |
 | [12 — Reliability Measurement, Review, and BH-05 Acceptance](phase-12-reliability-measurement-review-and-bh-05-acceptance.md) | planned — unauthorized | Measure six first-responsible budgets, close two failure gates, review the candidate, and accept, revise, or block BH-06 eligibility. | Phases 1–11 |
 
@@ -251,3 +252,4 @@ proof of another host.
 - [Action contract](action-contract.md) — Phase 8 typed actions, provider results, resource leases and untrusted command intent.
 - [Action evidence](action-evidence.md) — Phase 8 integration, pending/lease stress, authority analysis and source-frozen gate method.
 - [Scope contract](scope-contract.md) — Phase 9 context visibility, commit-gated invalidation and manifest-bounded registry.
+- [Scope evidence](scope-evidence.md) — Phase 9 context/registry fixtures, exact bounds, normalized hashes and frozen replay method.
