@@ -6,11 +6,68 @@ defmodule BlazeX.UITree.RootEvaluator do
   Opaque candidate tokens are not application or host-deserializable values.
   """
   @behaviour BlazeX.Component.RootPort.Evaluator
-  alias BlazeX.Component.{NestedTable, RootPort}
+  @behaviour BlazeX.Component.SchedulingPort
+  alias BlazeX.Component.{NestedTable, RootPort, RootSchedule}
+  alias BlazeX.Core.Identity
   alias BlazeX.UITree.{CompositionPlan, IntentSet, NestedCandidates, Node, SemanticAcceptance}
 
   @impl true
-  def prepare(config, request, prior) do
+  def prepare(config, request, prior), do: prepare_candidate(config, request, prior, false)
+
+  @impl true
+  def prepare_scheduled(config, request, prior) do
+    with :ok <- admit(config, request.work, prior),
+         true <- request.work.kind in [:event, :message, :timer_tick, :update] do
+      prepare_candidate(config, request, prior, true)
+    else
+      _ -> {:error, :semantic_rejected}
+    end
+  end
+
+  @impl true
+  def admit(_config, work, accepted) do
+    guarded(fn ->
+      validate_candidate(accepted)
+      CompositionPlan.require!(RootSchedule.valid_dispatch?(work, accepted), :stale, [])
+      target = Enum.find(accepted.token.records, &(Map.from_struct(&1.identity) == work.target))
+      callback = if work.kind == :event, do: :handle_event, else: :handle_info
+
+      if work.kind not in [:update, :timer_cancel],
+        do:
+          CompositionPlan.require!(
+            function_exported?(target.module, callback, 1),
+            :missing_callback,
+            []
+          )
+
+      if work.kind == :event do
+        source = struct(Identity, work.source)
+
+        bound =
+          Enum.any?(
+            accepted.token.output.document.bindings,
+            &(&1.source == source and &1.event == work.name)
+          )
+
+        receiver =
+          accepted.token.records
+          |> Enum.filter(
+            &(&1.role in [:root, :stateful] and Identity.contains?(&1.identity, source))
+          )
+          |> Enum.max_by(&length(&1.identity.path), fn -> nil end)
+
+        CompositionPlan.require!(
+          bound and receiver != nil and receiver.identity == target.identity,
+          :binding,
+          []
+        )
+      end
+
+      :ok
+    end)
+  end
+
+  defp prepare_candidate(config, request, prior, scheduled) do
     guarded(fn ->
       %{spec: spec, correlation: correlation, operation: operation} = request
       CompositionPlan.require!(operation in [:mount, :update, :replace], :operation, [])
@@ -51,9 +108,17 @@ defmodule BlazeX.UITree.RootEvaluator do
         if operation == :update, do: Map.new(prior.token.records, &{&1.identity, &1}), else: %{}
 
       {candidate, records, trace, notices} =
-        NestedCandidates.evaluate(plan, old_index, correlation.revision, correlation.sequence)
+        NestedCandidates.evaluate(
+          plan,
+          old_index,
+          correlation.revision,
+          correlation.sequence,
+          MapSet.new(),
+          if(scheduled, do: dispatch_event(request.work), else: nil),
+          scheduled
+        )
 
-      CompositionPlan.require!(notices == [], :deferred_actions, [])
+      CompositionPlan.require!(scheduled or notices == [], :deferred_actions, [])
       {output, semantic_trace} = SemanticAcceptance.accept(candidate)
       {:ok, nodes} = Node.preorder(output.document.root)
       nodes = Map.new(nodes, &{&1.identity, &1})
@@ -75,7 +140,10 @@ defmodule BlazeX.UITree.RootEvaluator do
         disposals: disposal_plan(records)
       }
 
-      RootPort.candidate(correlation, state(records), NestedTable.digest(output), token)
+      {:ok, accepted} =
+        RootPort.candidate(correlation, state(records), NestedTable.digest(output), token)
+
+      if scheduled, do: {:ok, accepted, notices}, else: {:ok, accepted}
     end)
   end
 
@@ -108,6 +176,54 @@ defmodule BlazeX.UITree.RootEvaluator do
   end
 
   def cleanup(_, _, _), do: {:error, :cleanup_failed}
+
+  @impl true
+  def cleanup_removed(_config, prior, next) do
+    guarded(fn ->
+      validate_candidate(prior)
+      validate_candidate(next)
+      retained = Map.new(next.token.records, &{&1.identity, &1.schema_digest})
+      plans = Map.new(NestedCandidates.flatten(prior.token.plan), &{&1.identity, &1})
+
+      Enum.each(prior.token.disposals, fn item ->
+        record = Enum.find(prior.token.records, &(&1.identity == item.identity))
+        plan = Map.fetch!(plans, item.identity)
+
+        if Map.get(retained, item.identity) != record.schema_digest and
+             function_exported?(plan.module, item.callback, 1) do
+          input = %{
+            plan.input
+            | transition: item.callback,
+              state: record.state,
+              payload: {:present, %{reason: :removal}},
+              revision: record.revision,
+              sequence: record.sequence
+          }
+
+          :ok = NestedCandidates.callback(plan, item.callback, input, true)
+        end
+      end)
+
+      :ok
+    end)
+  end
+
+  defp dispatch_event(%{kind: :update}), do: nil
+
+  defp dispatch_event(work) do
+    payload = %{name: work.name, data: work.payload, source: work.source}
+
+    payload =
+      if work.kind == :event,
+        do: payload,
+        else: Map.put(payload, :kind, if(work.kind == :timer_tick, do: :timer, else: :message))
+
+    %{
+      target: struct(Identity, work.target),
+      callback: if(work.kind == :event, do: :handle_event, else: :handle_info),
+      payload: payload
+    }
+  end
 
   defp validate_prior(nil, %{operation: :mount, generation: 1, revision: 1}, :mount), do: :ok
 

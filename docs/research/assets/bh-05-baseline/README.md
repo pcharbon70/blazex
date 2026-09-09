@@ -53,3 +53,7 @@ bindings. No measurement or runtime result may claim Phase 1 pass credit.
 
 - [Root gates](root-gates-v0.1.0.json) — Seventeen passing source-frozen gates, exact commands and test output.
 - [Root completion](root-completion-v0.1.0.json) — Supervised ERTS root completion; Phase 7 eligible, unauthorized.
+
+- [Scheduling authority](scheduling-authorization-v0.1.0.json) — Bounded Phase 7 authorization and inherited hashes.
+- [Scheduling gates](scheduling-gates-v0.1.0.json) — Eighteen passing frozen-source gates, raw backlog samples and exact outcome traces.
+- [Scheduling completion](scheduling-completion-v0.1.0.json) — Bounded ERTS local scheduling completion; Phase 8 eligible, unauthorized.

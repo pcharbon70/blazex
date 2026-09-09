@@ -4,13 +4,16 @@ defmodule BlazeX.Component.LocalView do
   composition; returned component handles contain root/instance/owner only.
   Terminal roots are retained for inspection until an explicit new instance.
   """
-  alias BlazeX.Component.{RootGuardian, RootPort}
+  alias BlazeX.Component.{RootGuardian, RootPort, RootSchedule, SchedulingPort}
 
-  def start(supervisor, spec, ports) do
+  def start(supervisor, spec, ports, policy \\ nil) do
     with {:ok, spec} <- RootPort.normalize(spec),
          true <- RootPort.ports?(ports),
+         {:ok, _} <- RootSchedule.new(policy),
+         true <- policy == nil or SchedulingPort.supported?(ports.evaluator),
          :ok <- vacant(supervisor, spec),
-         {:ok, _private_pid} <- Supervisor.start_child(supervisor, child_spec({spec, ports})) do
+         {:ok, _private_pid} <-
+           Supervisor.start_child(supervisor, child_spec({spec, ports, policy})) do
       {:ok, RootPort.handle(spec)}
     else
       {:error, code} when code in [:invalid_start, :already_started, :instance_reused] ->
@@ -24,10 +27,12 @@ defmodule BlazeX.Component.LocalView do
   end
 
   @doc "OTP runtime child specification, not a component reference."
-  def child_spec({spec, ports}) do
+  def child_spec({spec, ports}), do: child_spec({spec, ports, nil})
+
+  def child_spec({spec, ports, policy}) do
     %{
       id: {:blazex_root, spec.root},
-      start: {RootGuardian, :start_link, [{spec, ports}]},
+      start: {RootGuardian, :start_link, [{spec, ports, policy}]},
       restart: :temporary,
       shutdown: 5000,
       type: :worker
@@ -35,6 +40,10 @@ defmodule BlazeX.Component.LocalView do
   end
 
   def inspect_root(supervisor, handle), do: request(supervisor, handle, :snapshot)
+
+  def enqueue(supervisor, handle, envelope), do: request(supervisor, handle, {:enqueue, envelope})
+
+  def runtime_loss(supervisor, handle), do: request(supervisor, handle, :runtime_loss)
 
   def update(supervisor, handle, revision, props, slots \\ %{}),
     do: request(supervisor, handle, {:update, revision, props, slots})

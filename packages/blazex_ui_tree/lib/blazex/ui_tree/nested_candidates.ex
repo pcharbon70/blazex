@@ -25,9 +25,19 @@ defmodule BlazeX.UITree.NestedCandidates do
     plan
   end
 
-  def evaluate(plan, old_index, revision, sequence, replaced \\ MapSet.new(), event \\ nil) do
+  def evaluate(
+        plan,
+        old_index,
+        revision,
+        sequence,
+        replaced \\ MapSet.new(),
+        event \\ nil,
+        scheduled \\ false
+      ) do
+    strict = if scheduled, do: :scheduled, else: role(plan) == :root
+
     {candidate, records, trace, notifications} =
-      visit(plan, old_index, revision, sequence, replaced, event, nil, role(plan) == :root)
+      visit(plan, old_index, revision, sequence, replaced, event, nil, strict)
 
     Guard.require!(length(notifications) <= 128, :notification_limit, [])
     {candidate, records, trace, notifications}
@@ -56,34 +66,49 @@ defmodule BlazeX.UITree.NestedCandidates do
         fresh ->
           initial = if role(plan) == :root, do: :mount, else: :init
           result = callback(plan, initial, %{input | state: :absent, transition: initial}, strict)
-          {state, notices} = transition(result, initial, :absent, plan, target, sequence)
+          {state, notices} = transition(result, initial, :absent, plan, target, sequence, strict)
           {state, [observe(initial, plan)], notices}
 
         event != nil and event.target == plan.identity ->
-          payload = %{
-            name: event.value.name,
-            data: event.value.payload,
-            source: Map.from_struct(event.value.source)
-          }
+          callback_name = if strict == :scheduled, do: event.callback, else: :handle_event
+
+          payload =
+            if strict == :scheduled,
+              do: event.payload,
+              else: %{
+                name: event.value.name,
+                data: event.value.payload,
+                source: Map.from_struct(event.value.source)
+              }
 
           result =
             callback(
               plan,
-              :handle_event,
+              callback_name,
               %{
                 input
-                | transition: :handle_event,
+                | transition: callback_name,
                   payload: {:present, payload}
               },
               strict
             )
 
-          {state, notices} = transition(result, :handle_event, old_state, plan, target, sequence)
-          {state, [observe(:local_event, plan)], notices}
+          {state, notices} =
+            transition(result, callback_name, old_state, plan, target, sequence, strict)
+
+          {state,
+           [
+             observe(
+               if(callback_name == :handle_info, do: :typed_message, else: :local_event),
+               plan
+             )
+           ], notices}
 
         previous.invocation != invocation(plan) and function_exported?(plan.module, :update, 1) ->
           result = callback(plan, :update, %{input | transition: :update}, strict)
-          {state, notices} = transition(result, :update, old_state, plan, target, sequence)
+
+          {state, notices} =
+            transition(result, :update, old_state, plan, target, sequence, strict)
 
           {state, [observe(if(result == :no_change, do: :no_change, else: :update), plan)],
            notices}
@@ -151,7 +176,9 @@ defmodule BlazeX.UITree.NestedCandidates do
 
     action_trace =
       Enum.map(notifications, fn notice ->
-        Map.put(observe(:notification, plan), :name, notice.name)
+        if Map.has_key?(notice, :name),
+          do: Map.put(observe(:notification, plan), :name, notice.name),
+          else: Map.put(observe(:intents, plan), :count, length(notice.actions))
       end)
 
     disposition =
@@ -190,13 +217,19 @@ defmodule BlazeX.UITree.NestedCandidates do
     end
   end
 
-  defp transition({:state, value}, _name, _old, _plan, _target, _sequence),
+  defp transition({:state, value}, _name, _old, _plan, _target, _sequence, _strict),
     do: {{:present, value}, []}
 
-  defp transition(:no_change, name, old, _plan, _target, _sequence) when name != :init,
+  defp transition(:no_change, name, old, _plan, _target, _sequence, _strict) when name != :init,
     do: {old, []}
 
-  defp transition({:actions, value, actions}, name, _old, plan, target, sequence)
+  defp transition({:actions, value, actions}, name, _old, plan, _target, _sequence, :scheduled)
+       when name in [:update, :handle_event, :handle_info] do
+    Guard.require!(length(actions) <= 16, :intent_limit, plan.path)
+    {{:present, value}, [%{source: Map.from_struct(plan.identity), actions: actions}]}
+  end
+
+  defp transition({:actions, value, actions}, name, _old, plan, target, sequence, _strict)
        when name in [:update, :handle_event] do
     notices =
       Enum.map(actions, fn
@@ -222,7 +255,7 @@ defmodule BlazeX.UITree.NestedCandidates do
     {{:present, value}, notices}
   end
 
-  defp transition(_, _name, _old, plan, _target, _sequence),
+  defp transition(_, _name, _old, plan, _target, _sequence, _strict),
     do: Guard.fail(:invalid_transition, plan.path)
 
   defp ordinal?({_, _, _, {:ordinal, _}}), do: true
