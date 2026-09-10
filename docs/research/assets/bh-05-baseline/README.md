@@ -67,3 +67,4 @@ bindings. No measurement or runtime result may claim Phase 1 pass credit.
 
 - [Recovery gates](recovery-gates-v0.1.0.json) — Twenty-one source-frozen Phase 10 checks and raw evidence.
 - [Recovery completion](recovery-completion-v0.1.0.json) — Failure containment and bounded cleanup; Phase 11 eligible, unauthorized.
+- [Conformance authority](conformance-authorization-v0.1.0.json) — Phase 11 matrix, source bindings, normalization exclusions and deferrals.

@@ -256,3 +256,4 @@ proof of another host.
 - [Recovery contract](recovery-contract.md) — Phase 10 failure containment, fallback, retry and disposal authority.
 
 - [Recovery evidence](recovery-evidence.md) — Phase 10 failure injection, retry limits, cleanup timings and frozen gates.
+- [Conformance contract](conformance-contract.md) — Phase 11 active runtime/backend rows and exact portable equivalence policy.
