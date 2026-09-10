@@ -21,6 +21,12 @@ defmodule BlazeX.BH05.Conformance.Browser do
 
   defp handle({:wasm_call, %{"operation" => "run"}}), do: {:resolve, run(), :continue}
 
+  defp handle({:wasm_call, %{"operation" => "measure-counts"}}),
+    do: {:resolve, BlazeX.BH05.Acceptance.Counts.run(1), :continue}
+
+  defp handle({:wasm_call, %{"operation" => "measure-cleanup"}}),
+    do: {:resolve, BlazeX.BH05.Acceptance.Cleanup.run(1, 1), :continue}
+
   defp handle({:wasm_call, %{"operation" => "shutdown"}}),
     do: {:resolve, %{"result" => "disposed"}, :shutdown}
 

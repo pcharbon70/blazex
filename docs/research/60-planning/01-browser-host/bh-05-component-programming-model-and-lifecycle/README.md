@@ -54,8 +54,9 @@ schemas, pure composition, nested-state reconciliation, supervised root
 lifecycle, bounded local scheduling, typed action/resource/command boundaries,
 scoped context, manifest-bounded registry, root recovery and cross-runtime
 conformance have separately bound evidence. The owner authorized Phase 11 after
-accepted Phase 10 PR #61. Phase 12 is eligible but unauthorized; BH-06 remains
-ineligible. The current [Phase 11 evidence](conformance-evidence.md) grants the
+accepted Phase 10 PR #61 and authorized Phase 12 after accepted Phase 11 PR #62.
+Phase 12 has a source-bound **revise** candidate because Firefox retains an
+unresolved cleanup inventory; BH-06 remains ineligible. The current [Phase 11 evidence](conformance-evidence.md) grants the
 fixed public corpus exact ERTS/browser-AtomVM and DOM evidence plus GTK
 portability credit without general browser build or product-support claims.
 [Runtime compatibility limits](root-supervision-compatibility.md) remain explicit.
@@ -144,9 +145,9 @@ adapter modules are forbidden even when available in the monorepo.
 | [7 — Event, Message, Timer, and Transition Scheduling](phase-07-event-message-timer-and-transition-scheduling.md) | complete — bounded local scheduling | Serialize root transitions, route local events and messages, bound backlogs, reject stale work, and make rendering/final-state ordering explicit. | Phase 6 |
 | [8 — Effects, Resources, and Typed Command Intent](phase-08-effects-resources-and-typed-command-intent.md) | complete — typed actions and leases | Replace generic emissions with typed effects/resources/command intents and enforce authority, result, cancellation, timeout, and ownership boundaries. | Phases 6–7 |
 | [9 — Scoped Context and Manifest-Bounded Dynamic Components](phase-09-scoped-context-and-manifest-bounded-dynamic-components.md) | complete — scoped context and registry | Implement root-scoped named context and deterministic stable-ID component registries suitable for BH-06 reachability analysis. | Phases 3–8 |
-| [10 — Failure Containment, Retry, Replacement, and Disposal](phase-10-failure-containment-retry-replacement-and-disposal.md) | eligible — unauthorized | Contain failures at honest process-root boundaries, render accessible fallback, bound retries, invalidate generations, and release all owned work. | Phases 5–9 |
-| [11 — ERTS, Browser-AtomVM, and Cross-Backend Conformance](phase-11-erts-browser-atomvm-and-cross-backend-conformance.md) | planned — unauthorized | Run matching public component scenarios under ERTS/headless and browser AtomVM/DOM, with retained native-spike portability checks. | Phases 2–10 and accepted BH-04 browser path |
-| [12 — Reliability Measurement, Review, and BH-05 Acceptance](phase-12-reliability-measurement-review-and-bh-05-acceptance.md) | planned — unauthorized | Measure six first-responsible budgets, close two failure gates, review the candidate, and accept, revise, or block BH-06 eligibility. | Phases 1–11 |
+| [10 — Failure Containment, Retry, Replacement, and Disposal](phase-10-failure-containment-retry-replacement-and-disposal.md) | complete — bounded recovery | Contain failures at honest process-root boundaries, render accessible fallback, bound retries, invalidate generations, and release all owned work. | Phases 5–9 |
+| [11 — ERTS, Browser-AtomVM, and Cross-Backend Conformance](phase-11-erts-browser-atomvm-and-cross-backend-conformance.md) | complete — fixed-corpus conformance | Run matching public component scenarios under ERTS/headless and browser AtomVM/DOM, with retained native-spike portability checks. | Phases 2–10 and accepted BH-04 browser path |
+| [12 — Reliability Measurement, Review, and BH-05 Acceptance](phase-12-reliability-measurement-review-and-bh-05-acceptance.md) | complete — revise | Measure six first-responsible budgets, close two failure gates, review the candidate, and accept, revise, or block BH-06 eligibility. | Phases 1–11 |
 
 ## Acceptance ownership
 
@@ -258,3 +259,7 @@ proof of another host.
 - [Recovery evidence](recovery-evidence.md) — Phase 10 failure injection, retry limits, cleanup timings and frozen gates.
 - [Conformance contract](conformance-contract.md) — Phase 11 active runtime/backend rows and exact portable equivalence policy.
 - [Conformance evidence](conformance-evidence.md) — Phase 11 ERTS, AtomVM, DOM and GTK results, corrections and limitations.
+- [Acceptance contract](acceptance-contract.md) — Phase 12 frozen measurements, inventories, decisions and BH-06 handoff limits.
+- [Acceptance reconciliation](acceptance-reconciliation.md) — Nine-condition outcome, evidence-first review lenses and active re-entry blocker.
+- [Revision candidate and BH-06 handoff](release-and-bh06-handoff.md) — Deterministic release indexes and explicit BH-06 ineligibility.
+- [Phase 12 completion evidence](acceptance-evidence.md) — Final source-frozen gate, measurements, blocker, decision and re-entry conditions.

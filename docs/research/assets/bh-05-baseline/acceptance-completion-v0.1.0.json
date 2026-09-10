@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 12,
+  "decision": "revise",
+  "milestone_state": "revision-required",
+  "milestone_accepted": false,
+  "active_blocker": "BH05-ACTIVE-FIREFOX-CLEANUP-DIVERGENCE",
+  "bh06_eligible": false,
+  "bh06_authorized": false,
+  "support_state": "unsupported",
+  "artifact_hashes": {
+    "docs/research/assets/bh-05-baseline/acceptance-reconciliation-v0.1.0.json": "ef96bacce113b67bd1460532dd84871279b2ebf78c904b6171e98e41ebd2f41b",
+    "docs/research/assets/bh-05-baseline/bh-05-release-index-v0.1.0.json": "31c4ddcb21c9552cbe8b035389b424cc024220ce90210c56e43a00c218d7b7a9",
+    "docs/research/assets/bh-05-baseline/bh-05-acceptance-overlay-v0.1.0.json": "262b4007a745a36007873f7ce91376af4d42f489c9e1fdb59b503c40e3e9191c",
+    "docs/research/assets/bh-05-baseline/bh-06-entry-decision-v0.1.0.json": "4735070caf245cc621a792e5ae74b3242f88bd2b16f7d1d519ffa1c703316db0",
+    "integration/bh-05/acceptance-counts-v0.1.0.json": "309dd52d7888c1be873f29c3a90f8db9d3419b55eaa30bef435a950e033734a1",
+    "integration/bh-05/acceptance-cleanup-v0.1.0.json": "8c494b6788db7d5fa02f68d601606d2ceb8eabbb11746e99c00b740ec26d3328",
+    "docs/research/assets/bh-05-baseline/acceptance-gates-v0.1.0.json": "fabd17a5ee2ca9512ad981cfb1a277012c2d88e5a9ac710aed4c337cfa34fd1c"
+  }
+}

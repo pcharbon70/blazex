@@ -105,6 +105,7 @@ defmodule BlazeX.Component.RecoveryCleanup do
         deadline
       )
 
+    rows = Enum.reverse(rows)
     elapsed = now() - started
     prior = state.recovery.cleanup
     prior_unresolved = if prior, do: prior.unresolved, else: 0
@@ -238,7 +239,7 @@ defmodule BlazeX.Component.RecoveryCleanup do
         unresolved: unresolved
       }
 
-      {rows ++ [row], deadline}
+      {[row | rows], deadline}
     end)
   end
 

@@ -1,0 +1,1171 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 12,
+  "support_state": "unsupported",
+  "environment": {
+    "python": "3.12.12",
+    "elixir_image": "a2386c21edd5"
+  },
+  "commands": {
+    "erts": [
+      "docker",
+      "run",
+      "--rm",
+      "--network",
+      "none",
+      "--user",
+      "1000:1000",
+      "-v",
+      "/home/ducky/code/blazex:/workspace:ro",
+      "-e",
+      "MIX_BUILD_PATH=/tmp/bh05-phase12-cleanup",
+      "a2386c21edd5",
+      "sh",
+      "-c",
+      "cd /workspace/integration/conformance; mix run measure_phase12_cleanup.exs"
+    ],
+    "failure_gates": [
+      "docker",
+      "run",
+      "--rm",
+      "--network",
+      "none",
+      "--user",
+      "1000:1000",
+      "-v",
+      "/home/ducky/code/blazex:/workspace:ro",
+      "-e",
+      "MIX_BUILD_PATH=/tmp/bh05-phase12-cleanup",
+      "a2386c21edd5",
+      "sh",
+      "-c",
+      "cd /workspace/integration/conformance; mix test test/bh05_recovery_test.exs --trace"
+    ],
+    "browser_source": "/tmp/bh05-phase12-cleanup-browser/browser.json"
+  },
+  "erts": {
+    "stdout_sha256": "5094eb370a3b8ac3eb19a334a063406fffc7c3fb5ad2d27b2f5025dcb07aba66",
+    "cleanup": [
+      {
+        "sample": 1,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 2,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 3,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 4,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 5,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 6,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 7,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 8,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 9,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 10,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 11,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 12,
+        "elapsed_ms": 2,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 13,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 14,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 15,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 16,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 17,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 18,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 19,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 20,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 21,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 22,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 23,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 24,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 25,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 26,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 27,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 28,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 29,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 30,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 31,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 32,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 33,
+        "elapsed_ms": 2,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 34,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 35,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 36,
+        "elapsed_ms": 2,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 37,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 38,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 39,
+        "elapsed_ms": 2,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 40,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 41,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 42,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 43,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 44,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 45,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 46,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 47,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 48,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 49,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 50,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 51,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 52,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 53,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 54,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 55,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 56,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 57,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 58,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 59,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 60,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 61,
+        "elapsed_ms": 2,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 62,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 63,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 64,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 65,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 66,
+        "elapsed_ms": 2,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 67,
+        "elapsed_ms": 2,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 68,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 69,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 70,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 71,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 72,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 73,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 74,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 75,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 76,
+        "elapsed_ms": 2,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 77,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 78,
+        "elapsed_ms": 2,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 79,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 80,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 81,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 82,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 83,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 84,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 85,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 86,
+        "elapsed_ms": 2,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 87,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 88,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 89,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 90,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 91,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 92,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 93,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 94,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 95,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 96,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 97,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 98,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 99,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 100,
+        "elapsed_ms": 1,
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      }
+    ],
+    "process_growth": [
+      {
+        "sample": 1,
+        "cycles": 100,
+        "baseline": 0,
+        "terminal": 0,
+        "unexpected_growth": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 2,
+        "cycles": 100,
+        "baseline": 0,
+        "terminal": 0,
+        "unexpected_growth": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 3,
+        "cycles": 100,
+        "baseline": 0,
+        "terminal": 0,
+        "unexpected_growth": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 4,
+        "cycles": 100,
+        "baseline": 0,
+        "terminal": 0,
+        "unexpected_growth": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 5,
+        "cycles": 100,
+        "baseline": 0,
+        "terminal": 0,
+        "unexpected_growth": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 6,
+        "cycles": 100,
+        "baseline": 0,
+        "terminal": 0,
+        "unexpected_growth": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 7,
+        "cycles": 100,
+        "baseline": 0,
+        "terminal": 0,
+        "unexpected_growth": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 8,
+        "cycles": 100,
+        "baseline": 0,
+        "terminal": 0,
+        "unexpected_growth": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 9,
+        "cycles": 100,
+        "baseline": 0,
+        "terminal": 0,
+        "unexpected_growth": 0,
+        "late_results": 0
+      },
+      {
+        "sample": 10,
+        "cycles": 100,
+        "baseline": 0,
+        "terminal": 0,
+        "unexpected_growth": 0,
+        "late_results": 0
+      }
+    ]
+  },
+  "failure_gates": {
+    "stdout_sha256": "1d96a1e2544a1f5ba6fc78300ca8413714520d0fb31624b2499bb733fde126e9",
+    "values": {
+      "RECOVERY_RETRY_MS": "-576460749184,-576460749082,-576460748977,-576460748873",
+      "RECOVERY_RESTART_COUNTS": "0,1,2,3,3",
+      "RECOVERY_RESTART_SHA256": "1acb38164390f7ee47819983f8f9e33572bc694f2446d78c1b0728b666b1c367",
+      "RECOVERY_CLEANUP_MS": "1,101",
+      "RECOVERY_CLEANUP_SHA256": "4c04f817d1e53ba1a31fc3da3db5b8a8f54cb500b78d0477616d5efae1fba3fc",
+      "RECOVERY_CLEANUP_CASES": "removal,replacement,crash,runtime_loss,callback_error",
+      "RECOVERY_FAILURE_CASES": "17",
+      "RECOVERY_FAILURE_SHA256": "691a951f8b3e645543b53323feb84bd488c42043e9c217bcb523289aee304753"
+    }
+  },
+  "browser": {
+    "schema_version": "1.0.0",
+    "phase": 12,
+    "support_state": "unsupported",
+    "runtime": {
+      "atomvm_wasm_sha256": "d20c491e75936dc8189910c8d0740093b7813d8dcc1cf966a87c011799ade9d8",
+      "bundle_sha256": "9b1e8526f9539a78fd2329c315c8942e2cae25c042f3e085016ef2c82081b8d4"
+    },
+    "results": [
+      {
+        "browser": "chrome",
+        "version": "140.0.7339.80",
+        "executable": "/usr/bin/google-chrome",
+        "result": "passed",
+        "samples": null,
+        "cleanup": [
+          {
+            "elapsed_ms": 500,
+            "forced": 0,
+            "late_results": 0,
+            "requested": 513,
+            "sample": 1,
+            "terminal_leases": 0,
+            "unresolved": 0
+          }
+        ],
+        "process_growth": [
+          {
+            "baseline": 0,
+            "cycles": 100,
+            "late_results": 0,
+            "sample": 1,
+            "terminal": 0,
+            "unexpected_growth": 0
+          }
+        ],
+        "memory_pages": 256,
+        "page_errors": [],
+        "runtime_error": null,
+        "abort_reason": null,
+        "runtime_logs": []
+      },
+      {
+        "browser": "firefox",
+        "version": "153.0",
+        "executable": "/home/ducky/.cache/ms-playwright/firefox-1538/firefox/firefox",
+        "result": "passed",
+        "samples": null,
+        "cleanup": [
+          {
+            "elapsed_ms": 2652,
+            "forced": 0,
+            "late_results": 0,
+            "requested": 513,
+            "sample": 1,
+            "terminal_leases": 0,
+            "unresolved": 452
+          }
+        ],
+        "process_growth": [
+          {
+            "baseline": 0,
+            "cycles": 100,
+            "late_results": 0,
+            "sample": 1,
+            "terminal": 0,
+            "unexpected_growth": 0
+          }
+        ],
+        "memory_pages": 256,
+        "page_errors": [],
+        "runtime_error": null,
+        "abort_reason": null,
+        "runtime_logs": []
+      }
+    ],
+    "comparison": {
+      "state": "fail",
+      "sha256": "82ae51f869ccdcf304eee2d350fb1f857883b978ab130f495e98b0dc30d5a6a0"
+    }
+  },
+  "retained_failed_trials": [
+    {
+      "id": "terminal-guardian-growth-before-release-api",
+      "state": "failed",
+      "runtime": "ERTS",
+      "samples": 10,
+      "cycles_per_sample": 100,
+      "observed_unexpected_growth": 100,
+      "cause": "terminal LocalView guardians remained intentionally inspectable without an explicit release operation",
+      "correction": "LocalView.release_terminal/2 removes only a matching terminal guardian and is idempotent after absence"
+    },
+    {
+      "id": "browser-operation-forwarding-harness-failure",
+      "state": "failed",
+      "runtimes": [
+        "chrome",
+        "firefox"
+      ],
+      "cause": "the selected operation was not passed into page.evaluate",
+      "correction": "operation is now an explicit page.evaluate argument"
+    },
+    {
+      "id": "firefox-cleanup-before-linear-row-accumulation",
+      "state": "failed",
+      "runtime": "firefox",
+      "elapsed_ms": 2756,
+      "requested": 513,
+      "unresolved": 445,
+      "correction": "row accumulation changed from quadratic append to constant-time prepend plus one canonical reverse",
+      "disposition": "superseded by a fresh trial which remained failed; the optimization was not claimed as resolution"
+    }
+  ],
+  "active_blockers": [
+    {
+      "id": "BH05-ACTIVE-FIREFOX-CLEANUP-DIVERGENCE",
+      "owner": "BH-05",
+      "due": "BH-05 re-entry",
+      "blocks": [
+        "BH-05 acceptance",
+        "BH-06 eligibility"
+      ],
+      "condition": "Firefox must release the complete 513-request inventory within the frozen cleanup deadline and match Chrome terminal state"
+    }
+  ]
+}

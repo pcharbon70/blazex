@@ -1,0 +1,150 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 12,
+  "base": "23446e711d5791eb6eea0b23dd6fdcde3bebc62e",
+  "authorization": "Owner requested next BH-05 phase after merged Phase 11 PR 62; Phase 12 only.",
+  "branch": "codex/bh05-phase12-acceptance",
+  "sections": [
+    "12.1",
+    "12.2",
+    "12.3",
+    "12.4",
+    "12.5",
+    "12.6"
+  ],
+  "delivery": [
+    "verified section commits",
+    "single PR",
+    "merge",
+    "checkout main",
+    "sync origin",
+    "delete feature branch"
+  ],
+  "input_hashes": {
+    "docs/research/assets/bh-05-baseline/phase-01-completion-v0.1.0.json": "ba6a41d856510289306d0fd89f61ed078d7d3fb0f35cd04a1efb46d19497096b",
+    "docs/research/assets/bh-05-baseline/authoring-completion-v0.1.0.json": "8e028be5806127fe18f1a9fb0a2bc3239473e91df2c993e36021d335cac994e4",
+    "docs/research/assets/bh-05-baseline/schema-completion-v0.1.0.json": "b440ebb276ccd9776ebbb176497970f9520626df0e9b272f6d9075fa353e8eae",
+    "docs/research/assets/bh-05-baseline/composition-completion-v0.1.0.json": "f0ba2eb75591ca5df0e69a84b84ef593ccadcd8f2c861e924c1966014a70f12d",
+    "docs/research/assets/bh-05-baseline/nested-completion-v0.1.0.json": "460311d92bbea7d7d89f569cd961f0d9f43e6b245e4022e8d916bdac517b3883",
+    "docs/research/assets/bh-05-baseline/root-completion-v0.1.0.json": "71ac63f2665286a8873650bd50fb24be621898d3b38296757665bf53210a5975",
+    "docs/research/assets/bh-05-baseline/scheduling-completion-v0.1.0.json": "7e79fb2107355d2cd90a0846fb5fe20d6126bf5467050fa3b5d84b4fa34219e0",
+    "docs/research/assets/bh-05-baseline/action-completion-v0.1.0.json": "e1a6fbac8348ff8e2493a57f3a09baff836df9ebc148a3a4570295d4e9735726",
+    "docs/research/assets/bh-05-baseline/scope-completion-v0.1.0.json": "5e200871e66131e3a8d5d4d8ebe52b49fd867662dd51cf8b4e1e6edcbd01f661",
+    "docs/research/assets/bh-05-baseline/recovery-completion-v0.1.0.json": "f6de425b921ca19bcde203bb87f21daa816b9c09b78363369bd6d2b94a3b35c2",
+    "docs/research/assets/bh-05-baseline/conformance-completion-v0.1.0.json": "af92ff8646ea98305fc6a0bb2d63ebbdf519484b50dc573f573e8ee75739169f",
+    "docs/research/assets/bh-05-baseline/phase-01-gates-v0.1.0.json": "82491b77807ef48ed11515a2a7bf59a196b39a5e12136fda66ee31496c043763",
+    "docs/research/assets/bh-05-baseline/authoring-gates-v0.1.0.json": "e24b73337ef9b589b72dc8d3df2ec2a6ad705b620e875ac7f0a2bdaf7ddc5c30",
+    "docs/research/assets/bh-05-baseline/schema-gates-v0.1.0.json": "2383b49f0056d47945a92b181570cbbac5f35d3832c21561b62b3cc756d24efe",
+    "docs/research/assets/bh-05-baseline/composition-gates-v0.1.0.json": "e09203e71a63b13fe35dadbcb828d0aa7467a502e117ca3b5e32ac6e417606c7",
+    "docs/research/assets/bh-05-baseline/nested-gates-v0.1.0.json": "f40ab82eeba4434b8a63e1fa6859ee994766aedd622a83971ba6bae927345f68",
+    "docs/research/assets/bh-05-baseline/root-gates-v0.1.0.json": "09a62e002a82e875810f640f647d71e8ec1af563c1f7e0b4b5301448d6a7bd91",
+    "docs/research/assets/bh-05-baseline/scheduling-gates-v0.1.0.json": "31c4ca240dcbfa1b1a17b6931bb5a8ef7be1459ff9a490c2bd9980cc99950fc5",
+    "docs/research/assets/bh-05-baseline/action-gates-v0.1.0.json": "93dd75479e6938acc459285bfe730787704169cc3d2323c69b1c1dac1009c417",
+    "docs/research/assets/bh-05-baseline/scope-gates-v0.1.0.json": "e954dbbfbab46925806a3383dd4d42c8f3fa7c8f8644412c44a681e2d88afcd7",
+    "docs/research/assets/bh-05-baseline/recovery-gates-v0.1.0.json": "733734cbecf79c46bdb12fc369f4280c8616b0d82ec254a874a6418157b72be4",
+    "docs/research/assets/bh-05-baseline/conformance-gates-v0.1.0.json": "300b95fd88c5f4485d512eb78bb9f2e9fe164920c12ecb9517f333ade5d2512a",
+    "docs/research/assets/quality-acceptance/blazex-acceptance-registry-v0.1.0.json": "43025d17513f068eb1ac0838a381da4c132bf41b74aa602bffdc130e411368ed",
+    "docs/research/assets/quality-acceptance/blazex-quality-contract-v0.1.0.json": "21d69d966ed4888ca0f09b957f3a74edfda843af0de23ec4098237ef3d759326",
+    "docs/research/20-notes/browser-host-implementation-milestones.md": "57a77bae8e6f8bd76292c06c839d1c8716ebe53d41cb0fac7e475b0c404f36d2",
+    "docs/research/20-notes/blazex-acceptance-traceability-and-evidence-policy.md": "a009c39bfc4911364fc4c3247150926ce0543d95d7b1ad51fe33d6bc063d0554",
+    "docs/research/20-notes/blazex-quality-budget-and-measurement-policy.md": "7ac7f924f3bacc3985e5a68d3a1e7c3645d72eed828485a1a44d0f230bca1680",
+    "docs/research/20-notes/architecture-decisions/adr-0001-host-neutral-semantic-component-kernel.md": "b99fb71e09caad0f00f27b8d945f573eca749e2c2f336b21dd9f42de8742f329",
+    "docs/research/10-maps/blazex-repository-ownership-and-dependency-map.md": "ec4f93de41f2f7ba059771d5bd4c91ba4de9773a2e738c88e0d5ba833c8b1328",
+    "docs/research/60-planning/development-environment-and-deferred-qualification-policy.md": "124b924dcd53770e55f47d07288f132acab53bed2d16007bb96edc8835c0ea9a",
+    "docs/research/60-planning/liveview-integration-deferral.md": "3a2c3790c560191afd60f631576813760c7bbb4c05909a6f6a88058823e61e48",
+    "integration/bh-05/conformance-corpus-v0.1.0.json": "880f93adb19ac64a681e8a057e436335dea54f411b9bfde982d188bec4fcc83e",
+    "integration/bh-05/local-conformance-v0.1.0.json": "b8b0545d8ae4f1c9501c801d2cc5f0c649328948c2ee8e0f7b2dc7cab962d2b7",
+    "integration/bh-05/browser-conformance-v0.1.0.json": "e965a5d5480a77205e7db246c356f33206d680c6841e89a752bf7e83d7b0fcc0"
+  },
+  "acceptance_ids": [
+    "BX-ACC-BUDGET-BX-BUD-RELIABILITY-EVENT-BACKLOG-COUNT",
+    "BX-ACC-BUDGET-BX-BUD-RELIABILITY-PENDING-EFFECTS-COUNT",
+    "BX-ACC-BUDGET-BX-BUD-RELIABILITY-RESOURCE-COUNT",
+    "BX-ACC-BUDGET-BX-BUD-RELIABILITY-RESTART-INTENSITY",
+    "BX-ACC-BUDGET-BX-BUD-RESOURCE-CLEANUP-MS",
+    "BX-ACC-BUDGET-BX-BUD-RESOURCE-PROCESS-GROWTH-COUNT",
+    "BX-ACC-FAILURE-BX-FAIL-COMPONENT",
+    "BX-ACC-FAILURE-BX-FAIL-RESOURCE-CLEANUP",
+    "BX-ACC-ROADMAP-BH-05"
+  ],
+  "budgets": {
+    "BX-BUD-RELIABILITY-EVENT-BACKLOG-COUNT": {
+      "statistic": "maximum",
+      "direction": "at-most",
+      "threshold": 256,
+      "minimum_samples": 20
+    },
+    "BX-BUD-RELIABILITY-PENDING-EFFECTS-COUNT": {
+      "statistic": "maximum",
+      "direction": "at-most",
+      "threshold": 128,
+      "minimum_samples": 20
+    },
+    "BX-BUD-RELIABILITY-RESOURCE-COUNT": {
+      "statistic": "maximum",
+      "direction": "at-most",
+      "threshold": 512,
+      "minimum_samples": 20
+    },
+    "BX-BUD-RELIABILITY-RESTART-INTENSITY": {
+      "statistic": "maximum",
+      "direction": "at-most",
+      "threshold": 3,
+      "minimum_samples": 20
+    },
+    "BX-BUD-RESOURCE-CLEANUP-MS": {
+      "statistic": "p95-nearest-rank",
+      "direction": "at-most",
+      "threshold": 1000,
+      "minimum_samples": 100
+    },
+    "BX-BUD-RESOURCE-PROCESS-GROWTH-COUNT": {
+      "statistic": "maximum",
+      "direction": "exactly",
+      "threshold": 0,
+      "minimum_samples": 10
+    }
+  },
+  "active": [
+    "local ERTS/headless",
+    "Linux Chrome AtomVM/DOM",
+    "Linux Firefox development AtomVM/DOM",
+    "GTK portability"
+  ],
+  "measurement": {
+    "clock": "monotonic milliseconds",
+    "warmup": "one unmeasured fixture cycle before every measured series",
+    "negative_samples": "retain every failure, timeout, leak, divergence, and instrumentation error",
+    "process_baseline_exclusions": [
+      "measurement runner",
+      "LocalView.Supervisor",
+      "browser shared AtomVM/Popcorn service"
+    ]
+  },
+  "outcomes": [
+    "accept",
+    "accept-with-bounded-conditions",
+    "revise",
+    "block"
+  ],
+  "excluded": [
+    "BH-06 implementation",
+    "threshold reduction",
+    "sample deletion",
+    "hidden waiver",
+    "Plug profile fabrication",
+    "public or support promotion",
+    "deferred environment substitution",
+    "LiveView",
+    "LocalLiveView"
+  ],
+  "deferred_bh22": [
+    "Windows",
+    "macOS",
+    "Safari/WebKit product",
+    "Android/iOS devices",
+    "manual assistive-technology pairings"
+  ],
+  "support_state": "unsupported",
+  "bh06_authorized": false
+}

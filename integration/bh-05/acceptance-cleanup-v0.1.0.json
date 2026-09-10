@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 12,
+  "result": "failed",
+  "decision": "revise",
+  "support_state": "unsupported",
+  "raw_sha256": "d1e4d751194589dd6b55d433762c4afd7730a9ef8207c700f88c0a4a8f7d2949",
+  "budgets": {
+    "BX-BUD-RESOURCE-CLEANUP-MS": {
+      "statistic": "p95-nearest-rank",
+      "samples": 100,
+      "observed": 2,
+      "threshold": 1000,
+      "result": "passed"
+    },
+    "BX-BUD-RESOURCE-PROCESS-GROWTH-COUNT": {
+      "statistic": "maximum",
+      "samples": 10,
+      "cycles_per_sample": 100,
+      "observed": 0,
+      "threshold": 0,
+      "result": "passed"
+    }
+  },
+  "failure_gates": {
+    "BX-ACC-FAILURE-BX-FAIL-COMPONENT": {
+      "result": "passed",
+      "cases": 17
+    },
+    "BX-ACC-FAILURE-BX-FAIL-RESOURCE-CLEANUP": {
+      "result": "passed",
+      "cleanup_sha256": "4c04f817d1e53ba1a31fc3da3db5b8a8f54cb500b78d0477616d5efae1fba3fc"
+    }
+  },
+  "active_runtime_gate": {
+    "result": "failed",
+    "comparison": "fail",
+    "chrome": [
+      {
+        "requested": 513,
+        "unresolved": 0,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      }
+    ],
+    "firefox": [
+      {
+        "requested": 513,
+        "unresolved": 452,
+        "forced": 0,
+        "terminal_leases": 0,
+        "late_results": 0
+      }
+    ]
+  },
+  "retained_failed_trials": 3,
+  "active_blockers": [
+    {
+      "id": "BH05-ACTIVE-FIREFOX-CLEANUP-DIVERGENCE",
+      "owner": "BH-05",
+      "due": "BH-05 re-entry",
+      "blocks": [
+        "BH-05 acceptance",
+        "BH-06 eligibility"
+      ],
+      "condition": "Firefox must release the complete 513-request inventory within the frozen cleanup deadline and match Chrome terminal state"
+    }
+  ]
+}

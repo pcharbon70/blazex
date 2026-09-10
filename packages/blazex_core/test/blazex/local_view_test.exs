@@ -163,6 +163,17 @@ defmodule BlazeX.LocalViewTest do
     assert {:error, :terminal} = ack(context, handle, update)
   end
 
+  test "an inspected terminal guardian can be released without process growth", context do
+    {handle, _} = mounted(context)
+    assert {:error, :not_terminal} = LocalView.release_terminal(context.supervisor, handle)
+    assert {:ok, disposal} = LocalView.stop(context.supervisor, handle)
+    assert :ok = ack(context, handle, disposal)
+    assert snapshot(context, handle).status == :disposed
+    assert :ok = LocalView.release_terminal(context.supervisor, handle)
+    assert Supervisor.which_children(context.supervisor) == []
+    assert :ok = LocalView.release_terminal(context.supervisor, handle)
+  end
+
   test "lost mount acknowledgement times out without false readiness", context do
     {:ok, handle} =
       LocalView.start(context.supervisor, %{context.spec | timeout_ms: 20}, context.ports)

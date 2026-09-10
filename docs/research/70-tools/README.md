@@ -183,6 +183,15 @@ independent-review blockers, as intended.
 
 ### Shared helpers and runners
 
+- [`run_bh05_acceptance_cleanup.py`](run_bh05_acceptance_cleanup.py) — Capture and publish Phase 12 cleanup, process-growth and failure-gate evidence without suppressing active divergence.
+- [`validate_bh05_acceptance_cleanup.py`](validate_bh05_acceptance_cleanup.py) — Validate the retained Firefox blocker, ERTS budgets, failure gates and frozen thresholds.
+- [`generate_bh05_reconciliation.py`](generate_bh05_reconciliation.py) — Deterministically generate the Phase 12 nine-condition reconciliation and evidence-first review ledger.
+- [`validate_bh05_reconciliation.py`](validate_bh05_reconciliation.py) — Validate review coverage, exact generation, revise decision and BH-06 ineligibility.
+- [`generate_bh05_release.py`](generate_bh05_release.py) — Generate the revision index, acceptance overlay and negative BH-06 entry decision.
+- [`validate_bh05_release.py`](validate_bh05_release.py) — Validate exact regeneration, API/dependency inventory and absence of downstream authority.
+- [`validate_bh05_acceptance.py`](validate_bh05_acceptance.py) — Validate the complete source-bound Phase 12 revise decision and final evidence.
+- [`record_bh05_phase12.py`](record_bh05_phase12.py) — Run and publish the final Phase 12 meta-gates while retaining the active product blocker.
+
 - [`bh03_history.py`](bh03_history.py) — Narrow Phase 9 historical-source binding; never validates current implementation.
 - [`bh04_history.py`](bh04_history.py) — Explicit Phase 2 supersession: reproduce immutable Phase 1 on accepted Git.
 - [`bh04_phase10_history.py`](bh04_phase10_history.py) — Phase 10 reproduces the immutable Phase 9 gate on its accepted merge.
@@ -302,3 +311,6 @@ reporting a tooling change complete.
 - [Phase 11 validator](validate_bh05_conformance.py) — Cross-runtime ledger, portability corrections and frozen completion boundary.
 - [Phase 11 validator tests](test_validate_bh05_conformance.py) — Missing, failed, duplicate and stale gate rejection.
 - [Phase 11 recorder](record_bh05_phase11.py) — Fourteen source-frozen active/replay gates and exclusive-create publication.
+- [Phase 12 authority generator](generate_bh05_acceptance.py) — Freezes the final candidate, nine acceptance conditions, six budgets and decision rules.
+- [Phase 12 count runner](run_bh05_acceptance_counts.py) — Records ERTS and Chrome/Firefox backlog, effect, lease and restart measurements without dropping failed trials.
+- [Phase 12 count validator](validate_bh05_acceptance_counts.py) — Verifies raw/report hashes, sample cardinality, exact bounds, browser parity and retained failures.

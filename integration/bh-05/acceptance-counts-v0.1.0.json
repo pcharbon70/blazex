@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 12,
+  "result": "passed",
+  "support_state": "unsupported",
+  "raw_sha256": "ad04188fb9c921cecb1bdbeb206c1012d1a9b42aea81007c2c8b27a79bd528b6",
+  "erts_samples_per_budget": 20,
+  "browser_observations": {
+    "chrome": 1,
+    "firefox": 1,
+    "comparison": "exact-match",
+    "sha256": "5cf572fbe1c81cad9383e4beed7e0c78a9a3f080412354583b939cc941c5cabc"
+  },
+  "budgets": {
+    "BX-BUD-RELIABILITY-EVENT-BACKLOG-COUNT": {
+      "statistic": "maximum",
+      "observed": 256,
+      "threshold": 256,
+      "result": "passed"
+    },
+    "BX-BUD-RELIABILITY-PENDING-EFFECTS-COUNT": {
+      "statistic": "maximum",
+      "observed": 128,
+      "threshold": 128,
+      "result": "passed"
+    },
+    "BX-BUD-RELIABILITY-RESOURCE-COUNT": {
+      "statistic": "maximum",
+      "observed": 512,
+      "threshold": 512,
+      "terminal": 0,
+      "result": "passed"
+    },
+    "BX-BUD-RELIABILITY-RESTART-INTENSITY": {
+      "statistic": "maximum",
+      "observed": 3,
+      "threshold": 3,
+      "window_ms": 5000,
+      "replayed": 0,
+      "result": "passed"
+    }
+  },
+  "failed_trials_retained": 3,
+  "differences": []
+}

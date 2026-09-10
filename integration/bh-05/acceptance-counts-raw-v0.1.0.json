@@ -1,0 +1,812 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 12,
+  "support_state": "unsupported",
+  "environment": {
+    "python": "3.12.12",
+    "elixir_image": "a2386c21edd5",
+    "node": "v24.3.0"
+  },
+  "commands": {
+    "build": [
+      "docker",
+      "run",
+      "--rm",
+      "--network",
+      "none",
+      "--user",
+      "1000:1000",
+      "-v",
+      "/home/ducky/code/blazex:/workspace:ro",
+      "-v",
+      "/tmp/bh05-phase12-count-record-YaLCrQ:/output",
+      "-e",
+      "MIX_BUILD_PATH=/tmp/bh05-phase12",
+      "a2386c21edd5",
+      "sh",
+      "-c",
+      "cd /workspace/integration/bh-05/browser_conformance; MIX_ENV=prod mix format --check-formatted; MIX_ENV=prod mix bh05.browser_package --out-dir /output/bundle"
+    ],
+    "erts": [
+      "docker",
+      "run",
+      "--rm",
+      "--network",
+      "none",
+      "--user",
+      "1000:1000",
+      "-v",
+      "/home/ducky/code/blazex:/workspace:ro",
+      "-v",
+      "/tmp/bh05-phase12-count-record-YaLCrQ:/output",
+      "-e",
+      "MIX_BUILD_PATH=/tmp/bh05-phase12",
+      "a2386c21edd5",
+      "sh",
+      "-c",
+      "cd /workspace/integration/conformance; mix run measure_phase12_counts.exs"
+    ],
+    "browser": [
+      "node",
+      "integration/bh-05/browser_conformance/run-acceptance-counts.mjs",
+      "/tmp/bh05-phase12-count-record-YaLCrQ/browser.json",
+      "/tmp/bh05-phase12-count-record-YaLCrQ/bundle/bundle.avm"
+    ]
+  },
+  "erts": {
+    "stdout_sha256": "d6b25d7781eead8c9632c5885d4d4a9b5c72f471733a7521c8a8c8a9986c58ad",
+    "samples": [
+      {
+        "sample": 1,
+        "event_backlog": {
+          "maximum": 256,
+          "rejected": 1
+        },
+        "pending_effects": {
+          "maximum": 128,
+          "rejected": 1
+        },
+        "resource_leases": {
+          "maximum": 512,
+          "released": 512,
+          "terminal": 0
+        },
+        "restart_intensity": {
+          "maximum": 3,
+          "terminal": "restart_intensity",
+          "replayed": 0
+        }
+      },
+      {
+        "sample": 2,
+        "event_backlog": {
+          "maximum": 256,
+          "rejected": 1
+        },
+        "pending_effects": {
+          "maximum": 128,
+          "rejected": 1
+        },
+        "resource_leases": {
+          "maximum": 512,
+          "released": 512,
+          "terminal": 0
+        },
+        "restart_intensity": {
+          "maximum": 3,
+          "terminal": "restart_intensity",
+          "replayed": 0
+        }
+      },
+      {
+        "sample": 3,
+        "event_backlog": {
+          "maximum": 256,
+          "rejected": 1
+        },
+        "pending_effects": {
+          "maximum": 128,
+          "rejected": 1
+        },
+        "resource_leases": {
+          "maximum": 512,
+          "released": 512,
+          "terminal": 0
+        },
+        "restart_intensity": {
+          "maximum": 3,
+          "terminal": "restart_intensity",
+          "replayed": 0
+        }
+      },
+      {
+        "sample": 4,
+        "event_backlog": {
+          "maximum": 256,
+          "rejected": 1
+        },
+        "pending_effects": {
+          "maximum": 128,
+          "rejected": 1
+        },
+        "resource_leases": {
+          "maximum": 512,
+          "released": 512,
+          "terminal": 0
+        },
+        "restart_intensity": {
+          "maximum": 3,
+          "terminal": "restart_intensity",
+          "replayed": 0
+        }
+      },
+      {
+        "sample": 5,
+        "event_backlog": {
+          "maximum": 256,
+          "rejected": 1
+        },
+        "pending_effects": {
+          "maximum": 128,
+          "rejected": 1
+        },
+        "resource_leases": {
+          "maximum": 512,
+          "released": 512,
+          "terminal": 0
+        },
+        "restart_intensity": {
+          "maximum": 3,
+          "terminal": "restart_intensity",
+          "replayed": 0
+        }
+      },
+      {
+        "sample": 6,
+        "event_backlog": {
+          "maximum": 256,
+          "rejected": 1
+        },
+        "pending_effects": {
+          "maximum": 128,
+          "rejected": 1
+        },
+        "resource_leases": {
+          "maximum": 512,
+          "released": 512,
+          "terminal": 0
+        },
+        "restart_intensity": {
+          "maximum": 3,
+          "terminal": "restart_intensity",
+          "replayed": 0
+        }
+      },
+      {
+        "sample": 7,
+        "event_backlog": {
+          "maximum": 256,
+          "rejected": 1
+        },
+        "pending_effects": {
+          "maximum": 128,
+          "rejected": 1
+        },
+        "resource_leases": {
+          "maximum": 512,
+          "released": 512,
+          "terminal": 0
+        },
+        "restart_intensity": {
+          "maximum": 3,
+          "terminal": "restart_intensity",
+          "replayed": 0
+        }
+      },
+      {
+        "sample": 8,
+        "event_backlog": {
+          "maximum": 256,
+          "rejected": 1
+        },
+        "pending_effects": {
+          "maximum": 128,
+          "rejected": 1
+        },
+        "resource_leases": {
+          "maximum": 512,
+          "released": 512,
+          "terminal": 0
+        },
+        "restart_intensity": {
+          "maximum": 3,
+          "terminal": "restart_intensity",
+          "replayed": 0
+        }
+      },
+      {
+        "sample": 9,
+        "event_backlog": {
+          "maximum": 256,
+          "rejected": 1
+        },
+        "pending_effects": {
+          "maximum": 128,
+          "rejected": 1
+        },
+        "resource_leases": {
+          "maximum": 512,
+          "released": 512,
+          "terminal": 0
+        },
+        "restart_intensity": {
+          "maximum": 3,
+          "terminal": "restart_intensity",
+          "replayed": 0
+        }
+      },
+      {
+        "sample": 10,
+        "event_backlog": {
+          "maximum": 256,
+          "rejected": 1
+        },
+        "pending_effects": {
+          "maximum": 128,
+          "rejected": 1
+        },
+        "resource_leases": {
+          "maximum": 512,
+          "released": 512,
+          "terminal": 0
+        },
+        "restart_intensity": {
+          "maximum": 3,
+          "terminal": "restart_intensity",
+          "replayed": 0
+        }
+      },
+      {
+        "sample": 11,
+        "event_backlog": {
+          "maximum": 256,
+          "rejected": 1
+        },
+        "pending_effects": {
+          "maximum": 128,
+          "rejected": 1
+        },
+        "resource_leases": {
+          "maximum": 512,
+          "released": 512,
+          "terminal": 0
+        },
+        "restart_intensity": {
+          "maximum": 3,
+          "terminal": "restart_intensity",
+          "replayed": 0
+        }
+      },
+      {
+        "sample": 12,
+        "event_backlog": {
+          "maximum": 256,
+          "rejected": 1
+        },
+        "pending_effects": {
+          "maximum": 128,
+          "rejected": 1
+        },
+        "resource_leases": {
+          "maximum": 512,
+          "released": 512,
+          "terminal": 0
+        },
+        "restart_intensity": {
+          "maximum": 3,
+          "terminal": "restart_intensity",
+          "replayed": 0
+        }
+      },
+      {
+        "sample": 13,
+        "event_backlog": {
+          "maximum": 256,
+          "rejected": 1
+        },
+        "pending_effects": {
+          "maximum": 128,
+          "rejected": 1
+        },
+        "resource_leases": {
+          "maximum": 512,
+          "released": 512,
+          "terminal": 0
+        },
+        "restart_intensity": {
+          "maximum": 3,
+          "terminal": "restart_intensity",
+          "replayed": 0
+        }
+      },
+      {
+        "sample": 14,
+        "event_backlog": {
+          "maximum": 256,
+          "rejected": 1
+        },
+        "pending_effects": {
+          "maximum": 128,
+          "rejected": 1
+        },
+        "resource_leases": {
+          "maximum": 512,
+          "released": 512,
+          "terminal": 0
+        },
+        "restart_intensity": {
+          "maximum": 3,
+          "terminal": "restart_intensity",
+          "replayed": 0
+        }
+      },
+      {
+        "sample": 15,
+        "event_backlog": {
+          "maximum": 256,
+          "rejected": 1
+        },
+        "pending_effects": {
+          "maximum": 128,
+          "rejected": 1
+        },
+        "resource_leases": {
+          "maximum": 512,
+          "released": 512,
+          "terminal": 0
+        },
+        "restart_intensity": {
+          "maximum": 3,
+          "terminal": "restart_intensity",
+          "replayed": 0
+        }
+      },
+      {
+        "sample": 16,
+        "event_backlog": {
+          "maximum": 256,
+          "rejected": 1
+        },
+        "pending_effects": {
+          "maximum": 128,
+          "rejected": 1
+        },
+        "resource_leases": {
+          "maximum": 512,
+          "released": 512,
+          "terminal": 0
+        },
+        "restart_intensity": {
+          "maximum": 3,
+          "terminal": "restart_intensity",
+          "replayed": 0
+        }
+      },
+      {
+        "sample": 17,
+        "event_backlog": {
+          "maximum": 256,
+          "rejected": 1
+        },
+        "pending_effects": {
+          "maximum": 128,
+          "rejected": 1
+        },
+        "resource_leases": {
+          "maximum": 512,
+          "released": 512,
+          "terminal": 0
+        },
+        "restart_intensity": {
+          "maximum": 3,
+          "terminal": "restart_intensity",
+          "replayed": 0
+        }
+      },
+      {
+        "sample": 18,
+        "event_backlog": {
+          "maximum": 256,
+          "rejected": 1
+        },
+        "pending_effects": {
+          "maximum": 128,
+          "rejected": 1
+        },
+        "resource_leases": {
+          "maximum": 512,
+          "released": 512,
+          "terminal": 0
+        },
+        "restart_intensity": {
+          "maximum": 3,
+          "terminal": "restart_intensity",
+          "replayed": 0
+        }
+      },
+      {
+        "sample": 19,
+        "event_backlog": {
+          "maximum": 256,
+          "rejected": 1
+        },
+        "pending_effects": {
+          "maximum": 128,
+          "rejected": 1
+        },
+        "resource_leases": {
+          "maximum": 512,
+          "released": 512,
+          "terminal": 0
+        },
+        "restart_intensity": {
+          "maximum": 3,
+          "terminal": "restart_intensity",
+          "replayed": 0
+        }
+      },
+      {
+        "sample": 20,
+        "event_backlog": {
+          "maximum": 256,
+          "rejected": 1
+        },
+        "pending_effects": {
+          "maximum": 128,
+          "rejected": 1
+        },
+        "resource_leases": {
+          "maximum": 512,
+          "released": 512,
+          "terminal": 0
+        },
+        "restart_intensity": {
+          "maximum": 3,
+          "terminal": "restart_intensity",
+          "replayed": 0
+        }
+      }
+    ]
+  },
+  "browser": {
+    "schema_version": "1.0.0",
+    "phase": 12,
+    "support_state": "unsupported",
+    "runtime": {
+      "atomvm_wasm_sha256": "d20c491e75936dc8189910c8d0740093b7813d8dcc1cf966a87c011799ade9d8",
+      "bundle_sha256": "5dfa01b57a3d365c08c43fabe84f64090cd5b5792cb5a502a7f2783f809527bc"
+    },
+    "results": [
+      {
+        "browser": "chrome",
+        "version": "140.0.7339.80",
+        "executable": "/usr/bin/google-chrome",
+        "result": "passed",
+        "samples": [
+          {
+            "event_backlog": {
+              "admitted": 256,
+              "maximum": 256,
+              "ordered": true,
+              "rejected": 1,
+              "terminal_depth": 256
+            },
+            "pending_effects": {
+              "canceled": 0,
+              "completed": 0,
+              "failed": 0,
+              "maximum": 128,
+              "rejected": 1,
+              "timed_out": 0
+            },
+            "resource_leases": {
+              "maximum": 512,
+              "rejected": 1,
+              "released": 512,
+              "terminal": 0,
+              "transferred": 1
+            },
+            "restart_intensity": {
+              "decisions": [
+                "admitted",
+                "admitted",
+                "admitted",
+                "restart_intensity"
+              ],
+              "fallback": true,
+              "maximum": 3,
+              "replayed": 0,
+              "terminal": "restart_intensity",
+              "window_ms": 5000
+            },
+            "sample": 1
+          }
+        ],
+        "memory_pages": 256,
+        "page_errors": [],
+        "runtime_error": null,
+        "abort_reason": null,
+        "runtime_logs": [
+          "{bh05_phase12_counts,backlog}",
+          "{bh05_phase12_counts,pending}",
+          "{bh05_phase12_counts,leases}",
+          "{bh05_phase12_counts,restarts}"
+        ]
+      },
+      {
+        "browser": "firefox",
+        "version": "153.0",
+        "executable": "/home/ducky/.cache/ms-playwright/firefox-1538/firefox/firefox",
+        "result": "passed",
+        "samples": [
+          {
+            "event_backlog": {
+              "admitted": 256,
+              "maximum": 256,
+              "ordered": true,
+              "rejected": 1,
+              "terminal_depth": 256
+            },
+            "pending_effects": {
+              "canceled": 0,
+              "completed": 0,
+              "failed": 0,
+              "maximum": 128,
+              "rejected": 1,
+              "timed_out": 0
+            },
+            "resource_leases": {
+              "maximum": 512,
+              "rejected": 1,
+              "released": 512,
+              "terminal": 0,
+              "transferred": 1
+            },
+            "restart_intensity": {
+              "decisions": [
+                "admitted",
+                "admitted",
+                "admitted",
+                "restart_intensity"
+              ],
+              "fallback": true,
+              "maximum": 3,
+              "replayed": 0,
+              "terminal": "restart_intensity",
+              "window_ms": 5000
+            },
+            "sample": 1
+          }
+        ],
+        "memory_pages": 256,
+        "page_errors": [],
+        "runtime_error": null,
+        "abort_reason": null,
+        "runtime_logs": [
+          "{bh05_phase12_counts,backlog}",
+          "{bh05_phase12_counts,pending}",
+          "{bh05_phase12_counts,leases}",
+          "{bh05_phase12_counts,restarts}"
+        ]
+      }
+    ],
+    "comparison": {
+      "state": "exact-match",
+      "sha256": "5cf572fbe1c81cad9383e4beed7e0c78a9a3f080412354583b939cc941c5cabc"
+    }
+  },
+  "retained_failed_trials": [
+    {
+      "schema_version": "1.0.0",
+      "phase": 12,
+      "support_state": "unsupported",
+      "runtime": {
+        "atomvm_wasm_sha256": "d20c491e75936dc8189910c8d0740093b7813d8dcc1cf966a87c011799ade9d8",
+        "bundle_sha256": "aed316907f4634363f47a8e0de52069c4813aafb15359ee60c684b6e26c961cb"
+      },
+      "results": [
+        {
+          "browser": "chrome",
+          "version": "140.0.7339.80",
+          "executable": "/usr/bin/google-chrome",
+          "result": "failed",
+          "samples": null,
+          "memory_pages": null,
+          "page_errors": [],
+          "runtime_error": "Error: measurement-timeout",
+          "abort_reason": null,
+          "runtime_logs": []
+        },
+        {
+          "browser": "firefox",
+          "version": "153.0",
+          "executable": "/home/ducky/.cache/ms-playwright/firefox-1538/firefox/firefox",
+          "result": "failed",
+          "samples": null,
+          "memory_pages": null,
+          "page_errors": [],
+          "runtime_error": "Error: measurement-timeout",
+          "abort_reason": null,
+          "runtime_logs": []
+        }
+      ],
+      "comparison": {
+        "state": "fail",
+        "sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+      }
+    },
+    {
+      "schema_version": "1.0.0",
+      "phase": 12,
+      "support_state": "unsupported",
+      "runtime": {
+        "atomvm_wasm_sha256": "d20c491e75936dc8189910c8d0740093b7813d8dcc1cf966a87c011799ade9d8",
+        "bundle_sha256": "c8a3dd1db9b40ddc692ac822ce1edc8913a6b45f61f0221c786a1836f6dd45a7"
+      },
+      "results": [
+        {
+          "browser": "chrome",
+          "version": "140.0.7339.80",
+          "executable": "/usr/bin/google-chrome",
+          "result": "passed",
+          "samples": [
+            {
+              "event_backlog": {
+                "admitted": 256,
+                "maximum": 256,
+                "ordered": true,
+                "rejected": 1,
+                "terminal_depth": 256
+              },
+              "pending_effects": {
+                "canceled": 0,
+                "completed": 0,
+                "failed": 0,
+                "maximum": 128,
+                "rejected": 1,
+                "timed_out": 0
+              },
+              "resource_leases": {
+                "maximum": 512,
+                "rejected": 1,
+                "released": 512,
+                "terminal": 0,
+                "transferred": 1
+              },
+              "restart_intensity": {
+                "decisions": [
+                  "admitted",
+                  "admitted",
+                  "admitted",
+                  "restart_intensity"
+                ],
+                "fallback": true,
+                "maximum": 3,
+                "replayed": 0,
+                "terminal": "restart_intensity",
+                "window_ms": 5000
+              },
+              "sample": 1
+            }
+          ],
+          "memory_pages": 256,
+          "page_errors": [],
+          "runtime_error": null,
+          "abort_reason": null,
+          "runtime_logs": []
+        },
+        {
+          "browser": "firefox",
+          "version": "153.0",
+          "executable": "/home/ducky/.cache/ms-playwright/firefox-1538/firefox/firefox",
+          "result": "failed",
+          "samples": null,
+          "memory_pages": null,
+          "page_errors": [],
+          "runtime_error": "Error: measurement-timeout",
+          "abort_reason": null,
+          "runtime_logs": []
+        }
+      ],
+      "comparison": {
+        "state": "fail",
+        "sha256": "5cf572fbe1c81cad9383e4beed7e0c78a9a3f080412354583b939cc941c5cabc"
+      }
+    },
+    {
+      "schema_version": "1.0.0",
+      "phase": 12,
+      "support_state": "unsupported",
+      "runtime": {
+        "atomvm_wasm_sha256": "d20c491e75936dc8189910c8d0740093b7813d8dcc1cf966a87c011799ade9d8",
+        "bundle_sha256": "b200d10def5fa24d628944a8a8292d2e363b22421502e448449bd8c36c7bfb4a"
+      },
+      "results": [
+        {
+          "browser": "chrome",
+          "version": "140.0.7339.80",
+          "executable": "/usr/bin/google-chrome",
+          "result": "passed",
+          "samples": [
+            {
+              "event_backlog": {
+                "admitted": 256,
+                "maximum": 256,
+                "ordered": true,
+                "rejected": 1,
+                "terminal_depth": 256
+              },
+              "pending_effects": {
+                "canceled": 0,
+                "completed": 0,
+                "failed": 0,
+                "maximum": 128,
+                "rejected": 1,
+                "timed_out": 0
+              },
+              "resource_leases": {
+                "maximum": 512,
+                "rejected": 1,
+                "released": 512,
+                "terminal": 0,
+                "transferred": 1
+              },
+              "restart_intensity": {
+                "decisions": [
+                  "admitted",
+                  "admitted",
+                  "admitted",
+                  "restart_intensity"
+                ],
+                "fallback": true,
+                "maximum": 3,
+                "replayed": 0,
+                "terminal": "restart_intensity",
+                "window_ms": 5000
+              },
+              "sample": 1
+            }
+          ],
+          "memory_pages": 256,
+          "page_errors": [],
+          "runtime_error": null,
+          "abort_reason": null,
+          "runtime_logs": []
+        },
+        {
+          "browser": "firefox",
+          "version": "153.0",
+          "executable": "/home/ducky/.cache/ms-playwright/firefox-1538/firefox/firefox",
+          "result": "failed",
+          "samples": null,
+          "memory_pages": null,
+          "page_errors": [],
+          "runtime_error": "Error: measurement-timeout",
+          "abort_reason": null,
+          "runtime_logs": []
+        }
+      ],
+      "comparison": {
+        "state": "fail",
+        "sha256": "5cf572fbe1c81cad9383e4beed7e0c78a9a3f080412354583b939cc941c5cabc"
+      }
+    }
+  ],
+  "deferred_bh22": [
+    "Windows",
+    "macOS",
+    "Safari/WebKit product",
+    "Android/iOS devices",
+    "manual assistive-technology pairings"
+  ]
+}

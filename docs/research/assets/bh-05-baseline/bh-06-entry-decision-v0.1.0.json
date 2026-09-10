@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0.0",
+  "from": "BH-05",
+  "to": "BH-06",
+  "state": "ineligible",
+  "authorized": false,
+  "manifest_generated": false,
+  "reason": "BH-05 decision is revise because active Firefox cleanup terminal state diverges",
+  "reentry_requirements": [
+    "retain the frozen 1000 ms cleanup threshold and resource-heavy fixture",
+    "produce fresh zero-unresolved exact Chrome and Firefox terminal inventories",
+    "retain all existing and new failed samples",
+    "rerun all Phase 12 gates and publish a non-revise decision"
+  ],
+  "future_required_proofs": [
+    "general build and dynamic dependency reachability",
+    "component libraries forms and navigation",
+    "Phoenix/Plug transport",
+    "prerender and activation",
+    "separate BH-06 authorization"
+  ],
+  "prohibited_dependencies": [
+    "Phoenix",
+    "Plug",
+    ".NET",
+    "LiveView",
+    "LocalLiveView"
+  ],
+  "forbidden_inferences": [
+    "public 1.0 stability",
+    "browser support",
+    "platform qualification",
+    "release support"
+  ]
+}

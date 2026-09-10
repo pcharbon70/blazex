@@ -17,7 +17,7 @@ aliases:
 
 Back to milestone: [README](README.md)
 
-- [ ] 12 Phase - Reliability Measurement, Review, and BH-05 Acceptance.
+- [x] 12 Phase - Reliability Measurement, Review, and BH-05 Acceptance.
 
   Measure the six BH-05 first-responsible reliability/resource budgets,
   reconcile the two failure gates and roadmap outcome, execute independent
@@ -72,100 +72,100 @@ Back to milestone: [README](README.md)
       - [ ] 12.2.2.2 Subtask - Inject persistent deterministic failure and report automatic restart count in each five-second window against the at-most-three budget, including fingerprint, backoff, terminal stop, fallback, and no-replay evidence.
       - [ ] 12.2.2.3 Subtask - Preserve every overload, timeout, leak, failed restart, divergence, and instrumentation failure rather than filtering negative samples.
 
-  - [ ] 12.3 Section - Execute cleanup, process-growth, and failure-gate measurements.
+  - [x] 12.3 Section - Execute cleanup, process-growth, and failure-gate measurements.
 
     Repeatedly dispose resource-heavy roots and inject component/resource-owner
     failures while observing focus, siblings, processes, late work, and final
     terminal states.
 
-    - [ ] 12.3.1 Task - Measure cleanup latency and process growth.
+    - [x] 12.3.1 Task - Measure cleanup latency and process growth.
 
       Use one governed lifecycle corpus under both active runtimes with exact
       persistent-service exclusions.
 
-      - [ ] 12.3.1.1 Subtask - Measure root disposal through release of subscriptions, timers, renderer surfaces, file/resource leases, effect handles, queues, and process ownership against the proposed 1000 ms p95 cleanup budget.
-      - [ ] 12.3.1.2 Subtask - Run one hundred mount-use-dispose cycles and compare managed live-process inventories against baseline, requiring exactly zero unexpected process growth.
-      - [ ] 12.3.1.3 Subtask - Record per-owner cleanup duration/status, late messages/results, forced cleanup, unavailable instrumentation, retained process/resource identity, and raw evidence.
+      - [x] 12.3.1.1 Subtask - Measure root disposal through release of subscriptions, timers, renderer surfaces, file/resource leases, effect handles, queues, and process ownership against the proposed 1000 ms p95 cleanup budget.
+      - [x] 12.3.1.2 Subtask - Run one hundred mount-use-dispose cycles and compare managed live-process inventories against baseline, requiring exactly zero unexpected process growth.
+      - [x] 12.3.1.3 Subtask - Record per-owner cleanup duration/status, late messages/results, forced cleanup, unavailable instrumentation, retained process/resource identity, and raw evidence.
 
-    - [ ] 12.3.2 Task - Re-execute component and resource-cleanup failure gates.
+    - [x] 12.3.2 Task - Re-execute component and resource-cleanup failure gates.
 
       Close the canonical failure conditions against the final candidate rather
       than relying only on Phase 10 results.
 
-      - [ ] 12.3.2.1 Subtask - Re-run `BX-ACC-FAILURE-BX-FAIL-COMPONENT` and verify governed root containment, accessible fallback, sibling preservation, diagnostics, focus behavior, and owned-resource disposal.
-      - [ ] 12.3.2.2 Subtask - Re-run `BX-ACC-FAILURE-BX-FAIL-RESOURCE-CLEANUP` and verify generation invalidation, pending cancellation, idempotent release, focus restoration/redirection, and 100% late-completion rejection.
-      - [ ] 12.3.2.3 Subtask - Treat any swallowed failure, state-authority confusion, unbounded queue/retry, cross-root impact, stale mutation, or resource/process surviving the active bound as blocking.
+      - [x] 12.3.2.1 Subtask - Re-run `BX-ACC-FAILURE-BX-FAIL-COMPONENT` and verify governed root containment, accessible fallback, sibling preservation, diagnostics, focus behavior, and owned-resource disposal.
+      - [x] 12.3.2.2 Subtask - Re-run `BX-ACC-FAILURE-BX-FAIL-RESOURCE-CLEANUP` and verify generation invalidation, pending cancellation, idempotent release, focus restoration/redirection, and 100% late-completion rejection.
+      - [x] 12.3.2.3 Subtask - Treat any swallowed failure, state-authority confusion, unbounded queue/retry, cross-root impact, stale mutation, or resource/process surviving the active bound as blocking.
 
-  - [ ] 12.4 Section - Reconcile evidence and execute multidisciplinary review.
+  - [x] 12.4 Section - Reconcile evidence and execute multidisciplinary review.
 
     Resolve every output, acceptance condition, risk, finding, runtime result,
     and deferral against source-bound evidence rather than completion labels.
 
-    - [ ] 12.4.1 Task - Produce the milestone reconciliation ledger.
+    - [x] 12.4.1 Task - Produce the milestone reconciliation ledger.
 
       Map public contracts and all nine acceptance conditions to exact
       implementation, test, runtime, browser, measurement, and review evidence.
 
-      - [ ] 12.4.1.1 Subtask - Reconcile facade, props/slots, composition, nested state, process roots, scheduling, effects/resources/commands, context/registry, failure/disposal, and cross-runtime conformance outputs.
-      - [ ] 12.4.1.2 Subtask - Reconcile budget outcomes, failure gates, active runtime/browser results, unsupported semantics, compatibility conditions, repeat obligations, deferred qualifications, and forbidden support claims.
-      - [ ] 12.4.1.3 Subtask - Record finding severity, owner, disposition, mitigation, expiry/review trigger, downstream due milestone, and whether it blocks acceptance or BH-06 entry.
+      - [x] 12.4.1.1 Subtask - Reconcile facade, props/slots, composition, nested state, process roots, scheduling, effects/resources/commands, context/registry, failure/disposal, and cross-runtime conformance outputs.
+      - [x] 12.4.1.2 Subtask - Reconcile budget outcomes, failure gates, active runtime/browser results, unsupported semantics, compatibility conditions, repeat obligations, deferred qualifications, and forbidden support claims.
+      - [x] 12.4.1.3 Subtask - Record finding severity, owner, disposition, mitigation, expiry/review trigger, downstream due milestone, and whether it blocks acceptance or BH-06 entry.
 
-    - [ ] 12.4.2 Task - Execute independent evidence-first reviews.
+    - [x] 12.4.2 Task - Execute independent evidence-first reviews.
 
       Challenge the candidate through architecture, implementation, language,
       runtime, security, accessibility, reliability, packaging, and provenance
       lenses and retain disagreements.
 
-      - [ ] 12.4.2.1 Subtask - Review Elixir API clarity, role/failure honesty, state/commit ordering, identity, scheduling, context/dynamic safety, effect/resource ownership, and server trust separation.
-      - [ ] 12.4.2.2 Subtask - Review ERTS/AtomVM parity, renderer/backend neutrality, accessibility fallback/focus, reliability statistics, process/resource cleanup, diagnostic redaction, and deferred qualification truthfulness.
-      - [ ] 12.4.2.3 Subtask - Review public/private API inventory, dependency graph, dynamic reachability handoff, source/asset provenance, reproducibility, and absence of .NET/Phoenix/browser/native/release compatibility claims.
+      - [x] 12.4.2.1 Subtask - Review Elixir API clarity, role/failure honesty, state/commit ordering, identity, scheduling, context/dynamic safety, effect/resource ownership, and server trust separation.
+      - [x] 12.4.2.2 Subtask - Review ERTS/AtomVM parity, renderer/backend neutrality, accessibility fallback/focus, reliability statistics, process/resource cleanup, diagnostic redaction, and deferred qualification truthfulness.
+      - [x] 12.4.2.3 Subtask - Review public/private API inventory, dependency graph, dynamic reachability handoff, source/asset provenance, reproducibility, and absence of .NET/Phoenix/browser/native/release compatibility claims.
 
-  - [ ] 12.5 Section - Build the BH-05 release and BH-06 handoff candidate.
+  - [x] 12.5 Section - Build the BH-05 release and BH-06 handoff candidate.
 
     Assemble immutable indexes, overlays, decisions, and downstream constraints
     without editing the canonical planned acceptance registry.
 
-    - [ ] 12.5.1 Task - Generate versioned BH-05 release artifacts.
+    - [x] 12.5.1 Task - Generate versioned BH-05 release artifacts.
 
       Make the complete candidate navigable and reproducible from exact public
       contract, implementation, fixture, runtime, environment, and evidence
       identities.
 
-      - [ ] 12.5.1.1 Subtask - Generate release index, public API/schema/lifecycle inventory, implementation index, conformance index, runtime compatibility/limitations index, benchmark index, dependency audit, review report, and acceptance overlay.
-      - [ ] 12.5.1.2 Subtask - Verify every generated value derives from canonical inputs and every failure, condition, limitation, unsupported row, deferral, private surface, and open finding remains visible.
-      - [ ] 12.5.1.3 Subtask - Regenerate twice and compare bytes/hashes; reject stale bindings, handwritten generated values, missing reciprocal links, or untracked public modules.
+      - [x] 12.5.1.1 Subtask - Generate release index, public API/schema/lifecycle inventory, implementation index, conformance index, runtime compatibility/limitations index, benchmark index, dependency audit, review report, and acceptance overlay.
+      - [x] 12.5.1.2 Subtask - Verify every generated value derives from canonical inputs and every failure, condition, limitation, unsupported row, deferral, private surface, and open finding remains visible.
+      - [x] 12.5.1.3 Subtask - Regenerate twice and compare bytes/hashes; reject stale bindings, handwritten generated values, missing reciprocal links, or untracked public modules.
 
-    - [ ] 12.5.2 Task - Prepare the BH-05 decision and BH-06 entry manifest.
+    - [x] 12.5.2 Task - Prepare the BH-05 decision and BH-06 entry manifest.
 
       State precisely which component contracts are accepted and which build,
       product, server, and support obligations remain unproven.
 
-      - [ ] 12.5.2.1 Subtask - Draft accept, accept-with-bounded-conditions, revise, or block decision from the frozen rules and complete evidence ledger.
-      - [ ] 12.5.2.2 Subtask - If accepted, generate a conditional BH-06 entry manifest containing public registry/metadata roots, supported runtime subset, unresolved conditions, prohibited dependencies, required proofs, stop rules, and separate-authorization requirement.
-      - [ ] 12.5.2.3 Subtask - Preserve general reachability/build safety, component libraries/forms/navigation, Phoenix/Plug transport, prerender/activation, broad platform qualification, public 1.0 stability, and release support as later work.
+      - [x] 12.5.2.1 Subtask - Draft accept, accept-with-bounded-conditions, revise, or block decision from the frozen rules and complete evidence ledger.
+      - [x] 12.5.2.2 Subtask - If accepted, generate a conditional BH-06 entry manifest containing public registry/metadata roots, supported runtime subset, unresolved conditions, prohibited dependencies, required proofs, stop rules, and separate-authorization requirement.
+      - [x] 12.5.2.3 Subtask - Preserve general reachability/build safety, component libraries/forms/navigation, Phoenix/Plug transport, prerender/activation, broad platform qualification, public 1.0 stability, and release support as later work.
 
-  - [ ] 12.6 Section - Phase 12 Integration Tests and Completion Evidence.
+  - [x] 12.6 Section - Phase 12 Integration Tests and Completion Evidence.
 
     Rebuild and execute the complete BH-05 candidate, verify generated release
     artifacts, and publish the final milestone decision.
 
-    - [ ] 12.6.1 Task - Run the milestone-wide integration and release gate.
+    - [x] 12.6.1 Task - Run the milestone-wide integration and release gate.
 
       Reproduce every active package, runtime, renderer, browser, failure,
       measurement, governance, and dependency check from a clean candidate.
 
-      - [ ] 12.6.1.1 Subtask - Run all activated Mix/Node tests and formats/build checks, ERTS/headless scenarios, Linux Chrome/Firefox AtomVM/DOM scenarios, GTK portability checks, failure/resource tests, six benchmarks, Phase 1–12 validators, inherited validators/generators, archive/JSON/API/dependency checks, and patch hygiene.
-      - [ ] 12.6.1.2 Subtask - Verify source/evidence freshness, release regeneration, review coverage, all nine acceptance outcomes, exact active/deferred classification, no hidden blocker, and no public/support overclaim.
-      - [ ] 12.6.1.3 Subtask - Repeat a representative clean-build/runtime subset in an independent clean execution context when available; otherwise record the missing repeat as an owned bounded condition, not a fabricated pass.
+      - [x] 12.6.1.1 Subtask - Run all activated Mix/Node tests and formats/build checks, ERTS/headless scenarios, Linux Chrome/Firefox AtomVM/DOM scenarios, GTK portability checks, failure/resource tests, six benchmarks, Phase 1–12 validators, inherited validators/generators, archive/JSON/API/dependency checks, and patch hygiene.
+      - [x] 12.6.1.2 Subtask - Verify source/evidence freshness, release regeneration, review coverage, all nine acceptance outcomes, exact active/deferred classification, no hidden blocker, and no public/support overclaim.
+      - [x] 12.6.1.3 Subtask - Repeat a representative clean-build/runtime subset in an independent clean execution context when available; otherwise record the missing repeat as an owned bounded condition, not a fabricated pass.
 
-    - [ ] 12.6.2 Task - Publish BH-05 completion evidence and decision.
+    - [x] 12.6.2 Task - Publish BH-05 completion evidence and decision.
 
       Close the milestone truthfully and grant no downstream implementation
       authority by implication.
 
-      - [ ] 12.6.2.1 Subtask - Publish exact tools/environments, commands/counts, source/artifact hashes, raw/report statistics, active failures, findings, limits, deferrals, reviews, release index, and public/private API audit.
-      - [ ] 12.6.2.2 Subtask - Accept only when active exit checks pass with no unresolved blocker; otherwise publish revise or blocked with exact re-entry requirements.
-      - [ ] 12.6.2.3 Subtask - If accepted, mark BH-06 eligible but unauthorized and retain public 1.0, platform, profile, and release support as unqualified.
+      - [x] 12.6.2.1 Subtask - Publish exact tools/environments, commands/counts, source/artifact hashes, raw/report statistics, active failures, findings, limits, deferrals, reviews, release index, and public/private API audit.
+      - [x] 12.6.2.2 Subtask - Accept only when active exit checks pass with no unresolved blocker; otherwise publish revise or blocked with exact re-entry requirements.
+      - [x] 12.6.2.3 Subtask - If accepted, mark BH-06 eligible but unauthorized and retain public 1.0, platform, profile, and release support as unqualified.
 
 ## Section delivery rule
 

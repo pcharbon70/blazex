@@ -82,3 +82,8 @@ Current successor check: `python3 docs/research/70-tools/validate_bh05_recovery.
 - [Local conformance](local-conformance-v0.1.0.json) — Reproducible ERTS/headless, Chrome/Firefox DOM and GTK portability observations.
 - [Browser conformance](browser-conformance-v0.1.0.json) — Fixed AVM bundle results, exact Chrome/Firefox trace comparison and runtime identities.
 - [Fixed browser fixture](browser_conformance/README.md) — Phase 11-only packaging and browser host adapter; not a general build system.
+- [Phase 12 count measurement report](acceptance-counts-v0.1.0.json) — Backlog, pending-effect, lease and restart outcomes.
+- [Phase 12 raw count evidence](acceptance-counts-raw-v0.1.0.json) — ERTS samples, browser observations and retained failed trials.
+- [Phase 12 cleanup report](acceptance-cleanup-v0.1.0.json) — Passing ERTS cleanup/process budgets and failure gates, plus the active Firefox revise decision.
+- [Phase 12 raw cleanup evidence](acceptance-cleanup-raw-v0.1.0.json) — 100 cleanup samples, ten 100-cycle process samples, browser terminal inventories and retained failures.
+- [Phase 12 acceptance reconciliation](../../docs/research/assets/bh-05-baseline/acceptance-reconciliation-v0.1.0.json) — Nine outcomes and nine review lenses retaining the active Firefox blocker.
