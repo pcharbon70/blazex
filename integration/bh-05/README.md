@@ -78,3 +78,4 @@ Phase 7 and earlier validators remain frozen and run at accepted snapshots.
 - [Recovery index](recovery-index-v0.1.0.json) — Phase 10 source inventory, bounds and fifteen normalized digests.
 
 Current successor check: `python3 docs/research/70-tools/validate_bh05_recovery.py --final`.
+- [Conformance corpus](conformance-corpus-v0.1.0.json) — Phase 11 public application sources, scenario coverage and normalization model.

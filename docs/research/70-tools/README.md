@@ -296,3 +296,4 @@ reporting a tooling change complete.
 - [Recovery subset audit](check_bh05_recovery_subset.py) — Bounded helper primitives and dependency audit; no Wasm execution credit.
 - [Phase 10 recorder](record_bh05_phase10.py) — Twenty-one source-frozen gates and guarded publication.
 - [Phase 11 authority generator](generate_bh05_conformance.py) — Binds the active cross-runtime/backend matrix and normalization rules.
+- [Phase 11 corpus generator](generate_bh05_conformance_corpus.py) — Freezes public fixtures, scenario dimensions and deterministic trace fields.
