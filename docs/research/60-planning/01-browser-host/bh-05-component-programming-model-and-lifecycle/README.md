@@ -261,3 +261,4 @@ proof of another host.
 - [Conformance evidence](conformance-evidence.md) — Phase 11 ERTS, AtomVM, DOM and GTK results, corrections and limitations.
 - [Acceptance contract](acceptance-contract.md) — Phase 12 frozen measurements, inventories, decisions and BH-06 handoff limits.
 - [Acceptance reconciliation](acceptance-reconciliation.md) — Nine-condition outcome, evidence-first review lenses and active re-entry blocker.
+- [Revision candidate and BH-06 handoff](release-and-bh06-handoff.md) — Deterministic release indexes and explicit BH-06 ineligibility.

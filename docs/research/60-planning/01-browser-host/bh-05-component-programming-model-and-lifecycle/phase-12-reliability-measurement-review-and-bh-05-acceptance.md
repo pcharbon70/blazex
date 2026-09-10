@@ -120,29 +120,29 @@ Back to milestone: [README](README.md)
       - [x] 12.4.2.2 Subtask - Review ERTS/AtomVM parity, renderer/backend neutrality, accessibility fallback/focus, reliability statistics, process/resource cleanup, diagnostic redaction, and deferred qualification truthfulness.
       - [x] 12.4.2.3 Subtask - Review public/private API inventory, dependency graph, dynamic reachability handoff, source/asset provenance, reproducibility, and absence of .NET/Phoenix/browser/native/release compatibility claims.
 
-  - [ ] 12.5 Section - Build the BH-05 release and BH-06 handoff candidate.
+  - [x] 12.5 Section - Build the BH-05 release and BH-06 handoff candidate.
 
     Assemble immutable indexes, overlays, decisions, and downstream constraints
     without editing the canonical planned acceptance registry.
 
-    - [ ] 12.5.1 Task - Generate versioned BH-05 release artifacts.
+    - [x] 12.5.1 Task - Generate versioned BH-05 release artifacts.
 
       Make the complete candidate navigable and reproducible from exact public
       contract, implementation, fixture, runtime, environment, and evidence
       identities.
 
-      - [ ] 12.5.1.1 Subtask - Generate release index, public API/schema/lifecycle inventory, implementation index, conformance index, runtime compatibility/limitations index, benchmark index, dependency audit, review report, and acceptance overlay.
-      - [ ] 12.5.1.2 Subtask - Verify every generated value derives from canonical inputs and every failure, condition, limitation, unsupported row, deferral, private surface, and open finding remains visible.
-      - [ ] 12.5.1.3 Subtask - Regenerate twice and compare bytes/hashes; reject stale bindings, handwritten generated values, missing reciprocal links, or untracked public modules.
+      - [x] 12.5.1.1 Subtask - Generate release index, public API/schema/lifecycle inventory, implementation index, conformance index, runtime compatibility/limitations index, benchmark index, dependency audit, review report, and acceptance overlay.
+      - [x] 12.5.1.2 Subtask - Verify every generated value derives from canonical inputs and every failure, condition, limitation, unsupported row, deferral, private surface, and open finding remains visible.
+      - [x] 12.5.1.3 Subtask - Regenerate twice and compare bytes/hashes; reject stale bindings, handwritten generated values, missing reciprocal links, or untracked public modules.
 
-    - [ ] 12.5.2 Task - Prepare the BH-05 decision and BH-06 entry manifest.
+    - [x] 12.5.2 Task - Prepare the BH-05 decision and BH-06 entry manifest.
 
       State precisely which component contracts are accepted and which build,
       product, server, and support obligations remain unproven.
 
-      - [ ] 12.5.2.1 Subtask - Draft accept, accept-with-bounded-conditions, revise, or block decision from the frozen rules and complete evidence ledger.
-      - [ ] 12.5.2.2 Subtask - If accepted, generate a conditional BH-06 entry manifest containing public registry/metadata roots, supported runtime subset, unresolved conditions, prohibited dependencies, required proofs, stop rules, and separate-authorization requirement.
-      - [ ] 12.5.2.3 Subtask - Preserve general reachability/build safety, component libraries/forms/navigation, Phoenix/Plug transport, prerender/activation, broad platform qualification, public 1.0 stability, and release support as later work.
+      - [x] 12.5.2.1 Subtask - Draft accept, accept-with-bounded-conditions, revise, or block decision from the frozen rules and complete evidence ledger.
+      - [x] 12.5.2.2 Subtask - If accepted, generate a conditional BH-06 entry manifest containing public registry/metadata roots, supported runtime subset, unresolved conditions, prohibited dependencies, required proofs, stop rules, and separate-authorization requirement.
+      - [x] 12.5.2.3 Subtask - Preserve general reachability/build safety, component libraries/forms/navigation, Phoenix/Plug transport, prerender/activation, broad platform qualification, public 1.0 stability, and release support as later work.
 
   - [ ] 12.6 Section - Phase 12 Integration Tests and Completion Evidence.
 

@@ -1,0 +1,1040 @@
+{
+  "schema_version": "1.0.0",
+  "milestone": "BH-05",
+  "phase": 12,
+  "candidate_kind": "revision-candidate",
+  "decision": "revise",
+  "support_state": "unsupported",
+  "evidence_index": {
+    "docs/research/assets/bh-05-baseline/acceptance-authorization-v0.1.0.json": "2cd3ede50be87d0c27de387ad0780b2a3f1d0446067c99636a1fc45411d0de51",
+    "docs/research/assets/bh-05-baseline/acceptance-reconciliation-v0.1.0.json": "ef96bacce113b67bd1460532dd84871279b2ebf78c904b6171e98e41ebd2f41b",
+    "integration/bh-05/acceptance-counts-v0.1.0.json": "309dd52d7888c1be873f29c3a90f8db9d3419b55eaa30bef435a950e033734a1",
+    "integration/bh-05/acceptance-counts-raw-v0.1.0.json": "ad04188fb9c921cecb1bdbeb206c1012d1a9b42aea81007c2c8b27a79bd528b6",
+    "integration/bh-05/acceptance-cleanup-v0.1.0.json": "8c494b6788db7d5fa02f68d601606d2ceb8eabbb11746e99c00b740ec26d3328",
+    "integration/bh-05/acceptance-cleanup-raw-v0.1.0.json": "d1e4d751194589dd6b55d433762c4afd7730a9ef8207c700f88c0a4a8f7d2949",
+    "integration/bh-05/conformance-corpus-v0.1.0.json": "880f93adb19ac64a681e8a057e436335dea54f411b9bfde982d188bec4fcc83e",
+    "integration/bh-05/local-conformance-v0.1.0.json": "b8b0545d8ae4f1c9501c801d2cc5f0c649328948c2ee8e0f7b2dc7cab962d2b7",
+    "integration/bh-05/browser-conformance-v0.1.0.json": "e965a5d5480a77205e7db246c356f33206d680c6841e89a752bf7e83d7b0fcc0"
+  },
+  "implementation_inventory": [
+    {
+      "module": "BlazeX.Component.Action",
+      "path": "packages/blazex_core/lib/blazex/component/action.ex",
+      "sha256": "5d34791979f145fcf8ee081d137dea3700d609fdfb2d286e6bab9ec9d4cbb883",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Component.ActionLedger",
+      "path": "packages/blazex_core/lib/blazex/component/action_ledger.ex",
+      "sha256": "4b342cf203c57d11c4fe0a92182938014630325ccbe228d1e897cd4cd8aa64f4",
+      "surface": "private"
+    },
+    {
+      "module": "BlazeX.Component.ActionManifest",
+      "path": "packages/blazex_core/lib/blazex/component/action_manifest.ex",
+      "sha256": "fc2e996d6a85a13287e64955c4bf79583953a62713ea4f8d009fea763e51e90c",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Component.ActionRuntime",
+      "path": "packages/blazex_core/lib/blazex/component/action_runtime.ex",
+      "sha256": "0501e918bdb3e752ff52d1e43bac9b829eb4d965abc0c4380ee14fcc9884f9f6",
+      "surface": "private"
+    },
+    {
+      "module": "BlazeX.Component.ActionView",
+      "path": "packages/blazex_core/lib/blazex/component/action_view.ex",
+      "sha256": "0601a244556c2e66f32365a3da639f0b7297aa26626df0f1f93944e8ba453eb3",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Component.ComponentRegistry",
+      "path": "packages/blazex_core/lib/blazex/component/component_registry.ex",
+      "sha256": "d139453ac4df988014249f6d110c3c0b3589fd6af5f0621b1e1cf09f10f41908",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Component.Contract",
+      "path": "packages/blazex_core/lib/blazex/component/contract.ex",
+      "sha256": "8e8037755b83e0180823b1b10379db1e7f543b5da3861245e8c168eb64575853",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Component.Input",
+      "path": "packages/blazex_core/lib/blazex/component/input.ex",
+      "sha256": "3b6514bba255681356a3a46064634c09b4e0bee0992eee938cf1c04509b2afbe",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Component.Invocation",
+      "path": "packages/blazex_core/lib/blazex/component/invocation.ex",
+      "sha256": "627459e7501fcb1dfa6c359b22b022e23481b34d6c8ba0a57481e713fc8f018f",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Component.LocalView",
+      "path": "packages/blazex_core/lib/blazex/component/local_view.ex",
+      "sha256": "7f409b32f9bb1605bee5df2eaa250bffb9c7695592b574dd9fc1829e1607473d",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Component.NestedTable",
+      "path": "packages/blazex_core/lib/blazex/component/nested_table.ex",
+      "sha256": "f14dde3150606bba24a76fac92d4e079a6962d2dd4d1159b462799701d847495",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Component.Props",
+      "path": "packages/blazex_core/lib/blazex/component/props.ex",
+      "sha256": "6105997f07f66699872a9a12daa9b8962a3fd38f8ce020f36d94077693d499b4",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Component.Pure",
+      "path": "packages/blazex_core/lib/blazex/component/pure.ex",
+      "sha256": "bcb1b9f5587aeb24e0b7cac05608a46b035c14c3750b9ae9e5b74b4402b0266d",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Component.RecoveryCleanup",
+      "path": "packages/blazex_core/lib/blazex/component/recovery_cleanup.ex",
+      "sha256": "4f0a4251ec812026bb249cec650af79d55c16d554abf3da2b772668fadb73f02",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Component.RecoveryGuardian",
+      "path": "packages/blazex_core/lib/blazex/component/recovery_guardian.ex",
+      "sha256": "df53e461296b0ca5622e04b88a99734536e187fa5a2231c138e8d590903e2920",
+      "surface": "private"
+    },
+    {
+      "module": "BlazeX.Component.RecoveryPolicy",
+      "path": "packages/blazex_core/lib/blazex/component/recovery_policy.ex",
+      "sha256": "f4101571ba17bb4f89be6065a6714712ea1914460e99acce83d331dfcca1a46e",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Component.RecoveryPort",
+      "path": "packages/blazex_core/lib/blazex/component/recovery_port.ex",
+      "sha256": "a3218a313e3fb4af8e58a7cc37413ce148e2a5376b6fbb10c0425fc067b0186c",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Component.RecoveryRuntime",
+      "path": "packages/blazex_core/lib/blazex/component/recovery_runtime.ex",
+      "sha256": "b9d3acc5cac1f4594a953ca542c2042568176ee50606d5abdf55409cccefafa1",
+      "surface": "private"
+    },
+    {
+      "module": "BlazeX.Component.RecoveryView",
+      "path": "packages/blazex_core/lib/blazex/component/recovery_view.ex",
+      "sha256": "a0d1251c1d28ab3682a4fbc4a820149c94b2b8f374d3d3e674598cc59a36d8e4",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Component.Result",
+      "path": "packages/blazex_core/lib/blazex/component/result.ex",
+      "sha256": "7ba48240f1ff9cb364c81c80d1fb37f2ffff1c96f2e855ee2aa24d3beeeb61af",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Component.Root",
+      "path": "packages/blazex_core/lib/blazex/component/root.ex",
+      "sha256": "41e918ddf9a01190132cae34c10268b3bece0bf46218b48a93928ac96fd6e429",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Component.RootGuardian",
+      "path": "packages/blazex_core/lib/blazex/component/root_guardian.ex",
+      "sha256": "8dbf06b8cbb937ebef583cee7ca80649578201e55905c65cca37ea9fbab4eab8",
+      "surface": "private"
+    },
+    {
+      "module": "BlazeX.Component.RootPort",
+      "path": "packages/blazex_core/lib/blazex/component/root_port.ex",
+      "sha256": "3a637bfe779868796bd39cc71cafc7a7bd48da2b2da3955a0cfef3533c02b11b",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Component.RootProcess",
+      "path": "packages/blazex_core/lib/blazex/component/root_process.ex",
+      "sha256": "3db220d8fb829459d3e9e57a3b008a19e2885b33142adf23e41f87f14d1684b6",
+      "surface": "private"
+    },
+    {
+      "module": "BlazeX.Component.RootSchedule",
+      "path": "packages/blazex_core/lib/blazex/component/root_schedule.ex",
+      "sha256": "26fda646f5705ca6f5320d6efeccfbc4040933b9458b8c30728b22e37992242c",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Component.RootTimers",
+      "path": "packages/blazex_core/lib/blazex/component/root_timers.ex",
+      "sha256": "5ab7c44059b9e9e96c885bddeb525738a00732a65ec8eeb90c0311e7322d8eec",
+      "surface": "private"
+    },
+    {
+      "module": "BlazeX.Component.ScheduledView",
+      "path": "packages/blazex_core/lib/blazex/component/scheduled_view.ex",
+      "sha256": "6d053dfc68e297e10cbd41cc21795dde2537a9ad63a414108b2b587c7be52672",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Component.SchedulingIntents",
+      "path": "packages/blazex_core/lib/blazex/component/scheduling_intents.ex",
+      "sha256": "b8b57e5489b4b7e843a9c85ce20edc2d723508c7d317b96bf37a02950042fcb5",
+      "surface": "private"
+    },
+    {
+      "module": "BlazeX.Component.Schema",
+      "path": "packages/blazex_core/lib/blazex/component/schema.ex",
+      "sha256": "0c38aeaf182a5d813a9f1d416bcc10e27fc334de2752d336e2330b47fd0ce5d7",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Component.ScopedContext",
+      "path": "packages/blazex_core/lib/blazex/component/scoped_context.ex",
+      "sha256": "4d676c261f286e1d686acfd08207eaa0f639569e6e9ad93991dda183cb52faac",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Component.ScopedView",
+      "path": "packages/blazex_core/lib/blazex/component/scoped_view.ex",
+      "sha256": "b14298d3905bfaf73431d924b170ed027c9230bf64f12f648fcb4800bfeb17b2",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Component.Slots",
+      "path": "packages/blazex_core/lib/blazex/component/slots.ex",
+      "sha256": "a30195d55dfd0e979369459246a59312579d997d9fe6bafe502c6a72a02b2860",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Component.Stateful",
+      "path": "packages/blazex_core/lib/blazex/component/stateful.ex",
+      "sha256": "fe6139b07e264ea809433e5274983e6ba82e3e0442c45b4e2cfdcaa0ba4e1f76",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Component",
+      "path": "packages/blazex_core/lib/blazex/component.ex",
+      "sha256": "0cd48cbc4a1d3505e01579b38ce881d4a754bb7bd1010571b0425d061c9c2bd2",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Core.Authoring",
+      "path": "packages/blazex_core/lib/blazex/core/authoring.ex",
+      "sha256": "4456db9e5fd32538f5d97985a9323b4c466c54a90bc2f196cf9673f7279d9b8b",
+      "surface": "private"
+    },
+    {
+      "module": "BlazeX.Core.Component",
+      "path": "packages/blazex_core/lib/blazex/core/component.ex",
+      "sha256": "668682b943c4df1c590f3905d6d217a4efcdbfffded6e0c496272e2ddbbb8b7e",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Core.Context",
+      "path": "packages/blazex_core/lib/blazex/core/context.ex",
+      "sha256": "9a2ae58d583ed2dade930b7c7db7ef629e6e3ac68c28a467dab99808dd8b58a3",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Core.Diagnostic",
+      "path": "packages/blazex_core/lib/blazex/core/diagnostic.ex",
+      "sha256": "c1bdfe12a4b3491a7b07e395fd31fbe884f4be8b6cfddfab5a9e08ed4de3a071",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Core.Evaluation",
+      "path": "packages/blazex_core/lib/blazex/core/evaluation.ex",
+      "sha256": "3b0f3d8b1f2ba8805c710864074c387d7aba402a6fc080c13cdd088b4ac60b94",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Core.Evaluator",
+      "path": "packages/blazex_core/lib/blazex/core/evaluator.ex",
+      "sha256": "5ddc15afe7eb2888635c8c7086562fcc1389f6966afe6248b103e8b15ad77e18",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Core.Event",
+      "path": "packages/blazex_core/lib/blazex/core/event.ex",
+      "sha256": "8ee5bfe1cdcfa974e75545c8de62a6d58009678fbb4ebc21e8acb11f30a6f221",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Core.Identity",
+      "path": "packages/blazex_core/lib/blazex/core/identity.ex",
+      "sha256": "46d62a903ba4e3df049ecf94efc174009c4b2c5c54f29f8507a042d18356e8c4",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Core.Portable",
+      "path": "packages/blazex_core/lib/blazex/core/portable.ex",
+      "sha256": "ad04e12be48577a768d254d809a0fb5621bc795bf1ca0d3f034335852ed9f10b",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Core",
+      "path": "packages/blazex_core/lib/blazex/core.ex",
+      "sha256": "0de587fe28a3a79c1db2c09978868114a3cac88c47f0d2a56761d065e12be58c",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Effects.ActionBridge",
+      "path": "packages/blazex_effects/lib/blazex/effects/action_bridge.ex",
+      "sha256": "ac66bdd834fdaf09a6d43460ac8d4eba5ec8c243edb2f9ba4a487c2aea338164",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Effects.Capability",
+      "path": "packages/blazex_effects/lib/blazex/effects/capability.ex",
+      "sha256": "d58310177169c26e19f6228d3df1bd4f52fa14737a7d03468e5550a739b9b76b",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Effects.Effect",
+      "path": "packages/blazex_effects/lib/blazex/effects/effect.ex",
+      "sha256": "2a4f2fb486f43b322d6288571436d35320c6b7d2bb7203f80a762424eb46d540",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Effects.Error",
+      "path": "packages/blazex_effects/lib/blazex/effects/error.ex",
+      "sha256": "c597a1c76693fe1efba78685d10a387085afe6e0174a2a616a8d40861c965a0c",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Effects.Negotiation",
+      "path": "packages/blazex_effects/lib/blazex/effects/negotiation.ex",
+      "sha256": "3e1175bf2b663e8e8c286bc3110fc20763916ed8ff4c3dd0f8b3701fc691cb30",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Effects.Provider",
+      "path": "packages/blazex_effects/lib/blazex/effects/provider.ex",
+      "sha256": "85b9996fdac6282b15859bcb4ec11bd64c202a619bd5f1a22f925fea5b1a96fd",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Effects.Resource",
+      "path": "packages/blazex_effects/lib/blazex/effects/resource.ex",
+      "sha256": "4b5045f402331ccfdb9c8ea1cb3c7aa3934d32fe1b842cfcfba9e25d4e4e9742",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Effects.Result",
+      "path": "packages/blazex_effects/lib/blazex/effects/result.ex",
+      "sha256": "126a619658302a70c1c8f946ce0df820c9a6d79fc6db268b170f5f098af59816",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Effects.Tracker",
+      "path": "packages/blazex_effects/lib/blazex/effects/tracker.ex",
+      "sha256": "ae409d9ccc8eff0ccb7344689fd9d51b2b5a94bea22b047a91312dba7a29f869",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Effects",
+      "path": "packages/blazex_effects/lib/blazex/effects.ex",
+      "sha256": "bc599fe0013aa9577ca66b6b99a648078351c4099bc2bdd9eb9075d1f50ce849",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.UITree.Accessibility",
+      "path": "packages/blazex_ui_tree/lib/blazex/ui_tree/accessibility.ex",
+      "sha256": "33ef2d2cb5054180705f39f56568fc0285a2eea433b586c6195035978f64fc0f",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.UITree.Binding",
+      "path": "packages/blazex_ui_tree/lib/blazex/ui_tree/binding.ex",
+      "sha256": "b3e66072b18ea7bc03f4595271c5dd2f56cd419f470a29ea70bb6e7f24d5c145",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.UITree.ComponentEvaluator",
+      "path": "packages/blazex_ui_tree/lib/blazex/ui_tree/component_evaluator.ex",
+      "sha256": "23520fedb861b93279b10e15cacf406c28f5e23c7819fd53abc82c4cd4c8c968",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.UITree.Composition",
+      "path": "packages/blazex_ui_tree/lib/blazex/ui_tree/composition.ex",
+      "sha256": "202b27dbe0d2f7921cda5263675d76b87ab1e715f403fd4e39034780b645cd20",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.UITree.CompositionPlan",
+      "path": "packages/blazex_ui_tree/lib/blazex/ui_tree/composition_plan.ex",
+      "sha256": "2b5d01aaaae06040c4517cdaae60c7b1a582151e0a791e2b65186812189e3cc0",
+      "surface": "private"
+    },
+    {
+      "module": "BlazeX.UITree.Document",
+      "path": "packages/blazex_ui_tree/lib/blazex/ui_tree/document.ex",
+      "sha256": "d4d8b6958ebbdda201785caa2b2d3b49b1267b03897131e4cda3266323dea32f",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.UITree.Focus",
+      "path": "packages/blazex_ui_tree/lib/blazex/ui_tree/focus.ex",
+      "sha256": "c8094a4e1e60a145285a5a368a89608c1220f722fecacb3674dc65c5579c85fc",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.UITree.FormEvaluator",
+      "path": "packages/blazex_ui_tree/lib/blazex/ui_tree/form_evaluator.ex",
+      "sha256": "f215aabbb5acdbd0bfa1c6a453d7e8ae374453c4c4b7648d111778a6237f105d",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.UITree.FormOutput",
+      "path": "packages/blazex_ui_tree/lib/blazex/ui_tree/form_output.ex",
+      "sha256": "2ce936440fc43d2aa15182796f1fc2e2b2a99a6452204b674dc845b1850f0900",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.UITree.FormState",
+      "path": "packages/blazex_ui_tree/lib/blazex/ui_tree/form_state.ex",
+      "sha256": "11b26c467721fe5b0408a903166a2378dcf5f8c8d0b1433236032930a44b788d",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.UITree.IntentSet",
+      "path": "packages/blazex_ui_tree/lib/blazex/ui_tree/intent_set.ex",
+      "sha256": "109b9d4927b2ba8b810188092066794f8c2de29e531362f0b601a6cc4ba4642e",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.UITree.Layout",
+      "path": "packages/blazex_ui_tree/lib/blazex/ui_tree/layout.ex",
+      "sha256": "cb6859b81fa7ee91024ad4ae997dd50f43c02790c6a24183b159c0f922ae51fd",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.UITree.Metric",
+      "path": "packages/blazex_ui_tree/lib/blazex/ui_tree/metric.ex",
+      "sha256": "5c3c93f59e914772661e06218c06c37e6fa9f9b5976092b1c32d0b9d1fa06efc",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.UITree.Nested",
+      "path": "packages/blazex_ui_tree/lib/blazex/ui_tree/nested.ex",
+      "sha256": "98c809a7e8a11eec45774cec01e4d6b09772bca71af544451c015f9cf98134f3",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.UITree.NestedCandidates",
+      "path": "packages/blazex_ui_tree/lib/blazex/ui_tree/nested_candidates.ex",
+      "sha256": "b305776725417ca023b559c7c3148fc9f14b199336bd04ff2e81ef3f44fc0ad1",
+      "surface": "private"
+    },
+    {
+      "module": "BlazeX.UITree.Node",
+      "path": "packages/blazex_ui_tree/lib/blazex/ui_tree/node.ex",
+      "sha256": "e32bb3b37a01a1ed87a165380aceb00d2e34434f0c83fbb73006faa475e00ce0",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.UITree.PureCandidates",
+      "path": "packages/blazex_ui_tree/lib/blazex/ui_tree/pure_candidates.ex",
+      "sha256": "4425f5c71d5ef9222562a8c6a713852068c2bb3814663dc4a105a5ed1ad6fb2f",
+      "surface": "private"
+    },
+    {
+      "module": "BlazeX.UITree.RecoveryEvaluator",
+      "path": "packages/blazex_ui_tree/lib/blazex/ui_tree/recovery_evaluator.ex",
+      "sha256": "b1634a5f96241f6a38e2ceb4e50e75b69db4d650b938d9dbc7cdbb0ba820983e",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.UITree.RegistryPlan",
+      "path": "packages/blazex_ui_tree/lib/blazex/ui_tree/registry_plan.ex",
+      "sha256": "3eb580d2d86bc3c547b9ca1a5cef01730393c68938549706b672d9d2713e36f5",
+      "surface": "private"
+    },
+    {
+      "module": "BlazeX.UITree.RootEvaluator",
+      "path": "packages/blazex_ui_tree/lib/blazex/ui_tree/root_evaluator.ex",
+      "sha256": "b9c6a8c71bfd3ea6adb52ae1dce9ac301b95e06e2e9a87a5dad7a4b97b8b8633",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.UITree.ScopedEvaluator",
+      "path": "packages/blazex_ui_tree/lib/blazex/ui_tree/scoped_evaluator.ex",
+      "sha256": "84b36e2e4b2ffd513103e21ffe293356b37d462eae10813d406cf32314bb23a1",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.UITree.ScopedPlan",
+      "path": "packages/blazex_ui_tree/lib/blazex/ui_tree/scoped_plan.ex",
+      "sha256": "13f02a2a2caed69b6f5e1742b9fce9d4052f3afe682fb0bc350549d5879424b7",
+      "surface": "private"
+    },
+    {
+      "module": "BlazeX.UITree.Selection",
+      "path": "packages/blazex_ui_tree/lib/blazex/ui_tree/selection.ex",
+      "sha256": "7ace4514d24a45a044111d534a5d705b517b70a3b0bdc4e2574bc5f36e83a416",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.UITree.SemanticAcceptance",
+      "path": "packages/blazex_ui_tree/lib/blazex/ui_tree/semantic_acceptance.ex",
+      "sha256": "afe0d81fadadd3c2dc059cd7ae505a3877d518560d7c12c8aeff201f16276219",
+      "surface": "private"
+    },
+    {
+      "module": "BlazeX.UITree.TokenRef",
+      "path": "packages/blazex_ui_tree/lib/blazex/ui_tree/token_ref.ex",
+      "sha256": "76aa7aba2621c82c859a77a0d4efa81fc5f9218a44819a5aea9838b2bae26acc",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.UITree.ValidationError",
+      "path": "packages/blazex_ui_tree/lib/blazex/ui_tree/validation_error.ex",
+      "sha256": "f678b23cffb5303aadc309b72608f5bc8c80ee0e18052f059101b1c42d77d1c0",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.UITree",
+      "path": "packages/blazex_ui_tree/lib/blazex/ui_tree.ex",
+      "sha256": "0fb69ec2b552e45abe0125e61ea16209dd5746d2f283b066656305e1641239db",
+      "surface": "public-experimental"
+    }
+  ],
+  "public_api_inventory": [
+    {
+      "module": "BlazeX.Component.Action",
+      "path": "packages/blazex_core/lib/blazex/component/action.ex",
+      "sha256": "5d34791979f145fcf8ee081d137dea3700d609fdfb2d286e6bab9ec9d4cbb883",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Component.ActionManifest",
+      "path": "packages/blazex_core/lib/blazex/component/action_manifest.ex",
+      "sha256": "fc2e996d6a85a13287e64955c4bf79583953a62713ea4f8d009fea763e51e90c",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Component.ActionView",
+      "path": "packages/blazex_core/lib/blazex/component/action_view.ex",
+      "sha256": "0601a244556c2e66f32365a3da639f0b7297aa26626df0f1f93944e8ba453eb3",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Component.ComponentRegistry",
+      "path": "packages/blazex_core/lib/blazex/component/component_registry.ex",
+      "sha256": "d139453ac4df988014249f6d110c3c0b3589fd6af5f0621b1e1cf09f10f41908",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Component.Contract",
+      "path": "packages/blazex_core/lib/blazex/component/contract.ex",
+      "sha256": "8e8037755b83e0180823b1b10379db1e7f543b5da3861245e8c168eb64575853",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Component.Input",
+      "path": "packages/blazex_core/lib/blazex/component/input.ex",
+      "sha256": "3b6514bba255681356a3a46064634c09b4e0bee0992eee938cf1c04509b2afbe",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Component.Invocation",
+      "path": "packages/blazex_core/lib/blazex/component/invocation.ex",
+      "sha256": "627459e7501fcb1dfa6c359b22b022e23481b34d6c8ba0a57481e713fc8f018f",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Component.LocalView",
+      "path": "packages/blazex_core/lib/blazex/component/local_view.ex",
+      "sha256": "7f409b32f9bb1605bee5df2eaa250bffb9c7695592b574dd9fc1829e1607473d",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Component.NestedTable",
+      "path": "packages/blazex_core/lib/blazex/component/nested_table.ex",
+      "sha256": "f14dde3150606bba24a76fac92d4e079a6962d2dd4d1159b462799701d847495",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Component.Props",
+      "path": "packages/blazex_core/lib/blazex/component/props.ex",
+      "sha256": "6105997f07f66699872a9a12daa9b8962a3fd38f8ce020f36d94077693d499b4",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Component.Pure",
+      "path": "packages/blazex_core/lib/blazex/component/pure.ex",
+      "sha256": "bcb1b9f5587aeb24e0b7cac05608a46b035c14c3750b9ae9e5b74b4402b0266d",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Component.RecoveryCleanup",
+      "path": "packages/blazex_core/lib/blazex/component/recovery_cleanup.ex",
+      "sha256": "4f0a4251ec812026bb249cec650af79d55c16d554abf3da2b772668fadb73f02",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Component.RecoveryPolicy",
+      "path": "packages/blazex_core/lib/blazex/component/recovery_policy.ex",
+      "sha256": "f4101571ba17bb4f89be6065a6714712ea1914460e99acce83d331dfcca1a46e",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Component.RecoveryPort",
+      "path": "packages/blazex_core/lib/blazex/component/recovery_port.ex",
+      "sha256": "a3218a313e3fb4af8e58a7cc37413ce148e2a5376b6fbb10c0425fc067b0186c",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Component.RecoveryView",
+      "path": "packages/blazex_core/lib/blazex/component/recovery_view.ex",
+      "sha256": "a0d1251c1d28ab3682a4fbc4a820149c94b2b8f374d3d3e674598cc59a36d8e4",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Component.Result",
+      "path": "packages/blazex_core/lib/blazex/component/result.ex",
+      "sha256": "7ba48240f1ff9cb364c81c80d1fb37f2ffff1c96f2e855ee2aa24d3beeeb61af",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Component.Root",
+      "path": "packages/blazex_core/lib/blazex/component/root.ex",
+      "sha256": "41e918ddf9a01190132cae34c10268b3bece0bf46218b48a93928ac96fd6e429",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Component.RootPort",
+      "path": "packages/blazex_core/lib/blazex/component/root_port.ex",
+      "sha256": "3a637bfe779868796bd39cc71cafc7a7bd48da2b2da3955a0cfef3533c02b11b",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Component.RootSchedule",
+      "path": "packages/blazex_core/lib/blazex/component/root_schedule.ex",
+      "sha256": "26fda646f5705ca6f5320d6efeccfbc4040933b9458b8c30728b22e37992242c",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Component.ScheduledView",
+      "path": "packages/blazex_core/lib/blazex/component/scheduled_view.ex",
+      "sha256": "6d053dfc68e297e10cbd41cc21795dde2537a9ad63a414108b2b587c7be52672",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Component.Schema",
+      "path": "packages/blazex_core/lib/blazex/component/schema.ex",
+      "sha256": "0c38aeaf182a5d813a9f1d416bcc10e27fc334de2752d336e2330b47fd0ce5d7",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Component.ScopedContext",
+      "path": "packages/blazex_core/lib/blazex/component/scoped_context.ex",
+      "sha256": "4d676c261f286e1d686acfd08207eaa0f639569e6e9ad93991dda183cb52faac",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Component.ScopedView",
+      "path": "packages/blazex_core/lib/blazex/component/scoped_view.ex",
+      "sha256": "b14298d3905bfaf73431d924b170ed027c9230bf64f12f648fcb4800bfeb17b2",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Component.Slots",
+      "path": "packages/blazex_core/lib/blazex/component/slots.ex",
+      "sha256": "a30195d55dfd0e979369459246a59312579d997d9fe6bafe502c6a72a02b2860",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Component.Stateful",
+      "path": "packages/blazex_core/lib/blazex/component/stateful.ex",
+      "sha256": "fe6139b07e264ea809433e5274983e6ba82e3e0442c45b4e2cfdcaa0ba4e1f76",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Component",
+      "path": "packages/blazex_core/lib/blazex/component.ex",
+      "sha256": "0cd48cbc4a1d3505e01579b38ce881d4a754bb7bd1010571b0425d061c9c2bd2",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Core.Component",
+      "path": "packages/blazex_core/lib/blazex/core/component.ex",
+      "sha256": "668682b943c4df1c590f3905d6d217a4efcdbfffded6e0c496272e2ddbbb8b7e",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Core.Context",
+      "path": "packages/blazex_core/lib/blazex/core/context.ex",
+      "sha256": "9a2ae58d583ed2dade930b7c7db7ef629e6e3ac68c28a467dab99808dd8b58a3",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Core.Diagnostic",
+      "path": "packages/blazex_core/lib/blazex/core/diagnostic.ex",
+      "sha256": "c1bdfe12a4b3491a7b07e395fd31fbe884f4be8b6cfddfab5a9e08ed4de3a071",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Core.Evaluation",
+      "path": "packages/blazex_core/lib/blazex/core/evaluation.ex",
+      "sha256": "3b0f3d8b1f2ba8805c710864074c387d7aba402a6fc080c13cdd088b4ac60b94",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Core.Evaluator",
+      "path": "packages/blazex_core/lib/blazex/core/evaluator.ex",
+      "sha256": "5ddc15afe7eb2888635c8c7086562fcc1389f6966afe6248b103e8b15ad77e18",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Core.Event",
+      "path": "packages/blazex_core/lib/blazex/core/event.ex",
+      "sha256": "8ee5bfe1cdcfa974e75545c8de62a6d58009678fbb4ebc21e8acb11f30a6f221",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Core.Identity",
+      "path": "packages/blazex_core/lib/blazex/core/identity.ex",
+      "sha256": "46d62a903ba4e3df049ecf94efc174009c4b2c5c54f29f8507a042d18356e8c4",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Core.Portable",
+      "path": "packages/blazex_core/lib/blazex/core/portable.ex",
+      "sha256": "ad04e12be48577a768d254d809a0fb5621bc795bf1ca0d3f034335852ed9f10b",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Core",
+      "path": "packages/blazex_core/lib/blazex/core.ex",
+      "sha256": "0de587fe28a3a79c1db2c09978868114a3cac88c47f0d2a56761d065e12be58c",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Effects.ActionBridge",
+      "path": "packages/blazex_effects/lib/blazex/effects/action_bridge.ex",
+      "sha256": "ac66bdd834fdaf09a6d43460ac8d4eba5ec8c243edb2f9ba4a487c2aea338164",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Effects.Capability",
+      "path": "packages/blazex_effects/lib/blazex/effects/capability.ex",
+      "sha256": "d58310177169c26e19f6228d3df1bd4f52fa14737a7d03468e5550a739b9b76b",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Effects.Effect",
+      "path": "packages/blazex_effects/lib/blazex/effects/effect.ex",
+      "sha256": "2a4f2fb486f43b322d6288571436d35320c6b7d2bb7203f80a762424eb46d540",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Effects.Error",
+      "path": "packages/blazex_effects/lib/blazex/effects/error.ex",
+      "sha256": "c597a1c76693fe1efba78685d10a387085afe6e0174a2a616a8d40861c965a0c",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Effects.Negotiation",
+      "path": "packages/blazex_effects/lib/blazex/effects/negotiation.ex",
+      "sha256": "3e1175bf2b663e8e8c286bc3110fc20763916ed8ff4c3dd0f8b3701fc691cb30",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Effects.Provider",
+      "path": "packages/blazex_effects/lib/blazex/effects/provider.ex",
+      "sha256": "85b9996fdac6282b15859bcb4ec11bd64c202a619bd5f1a22f925fea5b1a96fd",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Effects.Resource",
+      "path": "packages/blazex_effects/lib/blazex/effects/resource.ex",
+      "sha256": "4b5045f402331ccfdb9c8ea1cb3c7aa3934d32fe1b842cfcfba9e25d4e4e9742",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Effects.Result",
+      "path": "packages/blazex_effects/lib/blazex/effects/result.ex",
+      "sha256": "126a619658302a70c1c8f946ce0df820c9a6d79fc6db268b170f5f098af59816",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Effects.Tracker",
+      "path": "packages/blazex_effects/lib/blazex/effects/tracker.ex",
+      "sha256": "ae409d9ccc8eff0ccb7344689fd9d51b2b5a94bea22b047a91312dba7a29f869",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.Effects",
+      "path": "packages/blazex_effects/lib/blazex/effects.ex",
+      "sha256": "bc599fe0013aa9577ca66b6b99a648078351c4099bc2bdd9eb9075d1f50ce849",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.UITree.Accessibility",
+      "path": "packages/blazex_ui_tree/lib/blazex/ui_tree/accessibility.ex",
+      "sha256": "33ef2d2cb5054180705f39f56568fc0285a2eea433b586c6195035978f64fc0f",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.UITree.Binding",
+      "path": "packages/blazex_ui_tree/lib/blazex/ui_tree/binding.ex",
+      "sha256": "b3e66072b18ea7bc03f4595271c5dd2f56cd419f470a29ea70bb6e7f24d5c145",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.UITree.ComponentEvaluator",
+      "path": "packages/blazex_ui_tree/lib/blazex/ui_tree/component_evaluator.ex",
+      "sha256": "23520fedb861b93279b10e15cacf406c28f5e23c7819fd53abc82c4cd4c8c968",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.UITree.Composition",
+      "path": "packages/blazex_ui_tree/lib/blazex/ui_tree/composition.ex",
+      "sha256": "202b27dbe0d2f7921cda5263675d76b87ab1e715f403fd4e39034780b645cd20",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.UITree.Document",
+      "path": "packages/blazex_ui_tree/lib/blazex/ui_tree/document.ex",
+      "sha256": "d4d8b6958ebbdda201785caa2b2d3b49b1267b03897131e4cda3266323dea32f",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.UITree.Focus",
+      "path": "packages/blazex_ui_tree/lib/blazex/ui_tree/focus.ex",
+      "sha256": "c8094a4e1e60a145285a5a368a89608c1220f722fecacb3674dc65c5579c85fc",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.UITree.FormEvaluator",
+      "path": "packages/blazex_ui_tree/lib/blazex/ui_tree/form_evaluator.ex",
+      "sha256": "f215aabbb5acdbd0bfa1c6a453d7e8ae374453c4c4b7648d111778a6237f105d",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.UITree.FormOutput",
+      "path": "packages/blazex_ui_tree/lib/blazex/ui_tree/form_output.ex",
+      "sha256": "2ce936440fc43d2aa15182796f1fc2e2b2a99a6452204b674dc845b1850f0900",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.UITree.FormState",
+      "path": "packages/blazex_ui_tree/lib/blazex/ui_tree/form_state.ex",
+      "sha256": "11b26c467721fe5b0408a903166a2378dcf5f8c8d0b1433236032930a44b788d",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.UITree.IntentSet",
+      "path": "packages/blazex_ui_tree/lib/blazex/ui_tree/intent_set.ex",
+      "sha256": "109b9d4927b2ba8b810188092066794f8c2de29e531362f0b601a6cc4ba4642e",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.UITree.Layout",
+      "path": "packages/blazex_ui_tree/lib/blazex/ui_tree/layout.ex",
+      "sha256": "cb6859b81fa7ee91024ad4ae997dd50f43c02790c6a24183b159c0f922ae51fd",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.UITree.Metric",
+      "path": "packages/blazex_ui_tree/lib/blazex/ui_tree/metric.ex",
+      "sha256": "5c3c93f59e914772661e06218c06c37e6fa9f9b5976092b1c32d0b9d1fa06efc",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.UITree.Nested",
+      "path": "packages/blazex_ui_tree/lib/blazex/ui_tree/nested.ex",
+      "sha256": "98c809a7e8a11eec45774cec01e4d6b09772bca71af544451c015f9cf98134f3",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.UITree.Node",
+      "path": "packages/blazex_ui_tree/lib/blazex/ui_tree/node.ex",
+      "sha256": "e32bb3b37a01a1ed87a165380aceb00d2e34434f0c83fbb73006faa475e00ce0",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.UITree.RecoveryEvaluator",
+      "path": "packages/blazex_ui_tree/lib/blazex/ui_tree/recovery_evaluator.ex",
+      "sha256": "b1634a5f96241f6a38e2ceb4e50e75b69db4d650b938d9dbc7cdbb0ba820983e",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.UITree.RootEvaluator",
+      "path": "packages/blazex_ui_tree/lib/blazex/ui_tree/root_evaluator.ex",
+      "sha256": "b9c6a8c71bfd3ea6adb52ae1dce9ac301b95e06e2e9a87a5dad7a4b97b8b8633",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.UITree.ScopedEvaluator",
+      "path": "packages/blazex_ui_tree/lib/blazex/ui_tree/scoped_evaluator.ex",
+      "sha256": "84b36e2e4b2ffd513103e21ffe293356b37d462eae10813d406cf32314bb23a1",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.UITree.Selection",
+      "path": "packages/blazex_ui_tree/lib/blazex/ui_tree/selection.ex",
+      "sha256": "7ace4514d24a45a044111d534a5d705b517b70a3b0bdc4e2574bc5f36e83a416",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.UITree.TokenRef",
+      "path": "packages/blazex_ui_tree/lib/blazex/ui_tree/token_ref.ex",
+      "sha256": "76aa7aba2621c82c859a77a0d4efa81fc5f9218a44819a5aea9838b2bae26acc",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.UITree.ValidationError",
+      "path": "packages/blazex_ui_tree/lib/blazex/ui_tree/validation_error.ex",
+      "sha256": "f678b23cffb5303aadc309b72608f5bc8c80ee0e18052f059101b1c42d77d1c0",
+      "surface": "public-experimental"
+    },
+    {
+      "module": "BlazeX.UITree",
+      "path": "packages/blazex_ui_tree/lib/blazex/ui_tree.ex",
+      "sha256": "0fb69ec2b552e45abe0125e61ea16209dd5746d2f283b066656305e1641239db",
+      "surface": "public-experimental"
+    }
+  ],
+  "private_api_inventory": [
+    {
+      "module": "BlazeX.Component.ActionLedger",
+      "path": "packages/blazex_core/lib/blazex/component/action_ledger.ex",
+      "sha256": "4b342cf203c57d11c4fe0a92182938014630325ccbe228d1e897cd4cd8aa64f4",
+      "surface": "private"
+    },
+    {
+      "module": "BlazeX.Component.ActionRuntime",
+      "path": "packages/blazex_core/lib/blazex/component/action_runtime.ex",
+      "sha256": "0501e918bdb3e752ff52d1e43bac9b829eb4d965abc0c4380ee14fcc9884f9f6",
+      "surface": "private"
+    },
+    {
+      "module": "BlazeX.Component.RecoveryGuardian",
+      "path": "packages/blazex_core/lib/blazex/component/recovery_guardian.ex",
+      "sha256": "df53e461296b0ca5622e04b88a99734536e187fa5a2231c138e8d590903e2920",
+      "surface": "private"
+    },
+    {
+      "module": "BlazeX.Component.RecoveryRuntime",
+      "path": "packages/blazex_core/lib/blazex/component/recovery_runtime.ex",
+      "sha256": "b9d3acc5cac1f4594a953ca542c2042568176ee50606d5abdf55409cccefafa1",
+      "surface": "private"
+    },
+    {
+      "module": "BlazeX.Component.RootGuardian",
+      "path": "packages/blazex_core/lib/blazex/component/root_guardian.ex",
+      "sha256": "8dbf06b8cbb937ebef583cee7ca80649578201e55905c65cca37ea9fbab4eab8",
+      "surface": "private"
+    },
+    {
+      "module": "BlazeX.Component.RootProcess",
+      "path": "packages/blazex_core/lib/blazex/component/root_process.ex",
+      "sha256": "3db220d8fb829459d3e9e57a3b008a19e2885b33142adf23e41f87f14d1684b6",
+      "surface": "private"
+    },
+    {
+      "module": "BlazeX.Component.RootTimers",
+      "path": "packages/blazex_core/lib/blazex/component/root_timers.ex",
+      "sha256": "5ab7c44059b9e9e96c885bddeb525738a00732a65ec8eeb90c0311e7322d8eec",
+      "surface": "private"
+    },
+    {
+      "module": "BlazeX.Component.SchedulingIntents",
+      "path": "packages/blazex_core/lib/blazex/component/scheduling_intents.ex",
+      "sha256": "b8b57e5489b4b7e843a9c85ce20edc2d723508c7d317b96bf37a02950042fcb5",
+      "surface": "private"
+    },
+    {
+      "module": "BlazeX.Core.Authoring",
+      "path": "packages/blazex_core/lib/blazex/core/authoring.ex",
+      "sha256": "4456db9e5fd32538f5d97985a9323b4c466c54a90bc2f196cf9673f7279d9b8b",
+      "surface": "private"
+    },
+    {
+      "module": "BlazeX.UITree.CompositionPlan",
+      "path": "packages/blazex_ui_tree/lib/blazex/ui_tree/composition_plan.ex",
+      "sha256": "2b5d01aaaae06040c4517cdaae60c7b1a582151e0a791e2b65186812189e3cc0",
+      "surface": "private"
+    },
+    {
+      "module": "BlazeX.UITree.NestedCandidates",
+      "path": "packages/blazex_ui_tree/lib/blazex/ui_tree/nested_candidates.ex",
+      "sha256": "b305776725417ca023b559c7c3148fc9f14b199336bd04ff2e81ef3f44fc0ad1",
+      "surface": "private"
+    },
+    {
+      "module": "BlazeX.UITree.PureCandidates",
+      "path": "packages/blazex_ui_tree/lib/blazex/ui_tree/pure_candidates.ex",
+      "sha256": "4425f5c71d5ef9222562a8c6a713852068c2bb3814663dc4a105a5ed1ad6fb2f",
+      "surface": "private"
+    },
+    {
+      "module": "BlazeX.UITree.RegistryPlan",
+      "path": "packages/blazex_ui_tree/lib/blazex/ui_tree/registry_plan.ex",
+      "sha256": "3eb580d2d86bc3c547b9ca1a5cef01730393c68938549706b672d9d2713e36f5",
+      "surface": "private"
+    },
+    {
+      "module": "BlazeX.UITree.ScopedPlan",
+      "path": "packages/blazex_ui_tree/lib/blazex/ui_tree/scoped_plan.ex",
+      "sha256": "13f02a2a2caed69b6f5e1742b9fce9d4052f3afe682fb0bc350549d5879424b7",
+      "surface": "private"
+    },
+    {
+      "module": "BlazeX.UITree.SemanticAcceptance",
+      "path": "packages/blazex_ui_tree/lib/blazex/ui_tree/semantic_acceptance.ex",
+      "sha256": "afe0d81fadadd3c2dc059cd7ae505a3877d518560d7c12c8aeff201f16276219",
+      "surface": "private"
+    }
+  ],
+  "schema_inventory": [
+    "packages/blazex_core/lib/blazex/component/schema.ex",
+    "packages/blazex_core/lib/blazex/component/props.ex",
+    "packages/blazex_core/lib/blazex/component/slots.ex",
+    "packages/blazex_core/lib/blazex/component/action.ex"
+  ],
+  "lifecycle_inventory": [
+    "packages/blazex_core/lib/blazex/component/local_view.ex",
+    "packages/blazex_core/lib/blazex/component/root_process.ex",
+    "packages/blazex_core/lib/blazex/component/recovery_cleanup.ex"
+  ],
+  "conformance_index": [
+    "integration/bh-05/conformance-corpus-v0.1.0.json",
+    "integration/bh-05/local-conformance-v0.1.0.json",
+    "integration/bh-05/browser-conformance-v0.1.0.json"
+  ],
+  "benchmark_index": [
+    "integration/bh-05/acceptance-counts-v0.1.0.json",
+    "integration/bh-05/acceptance-counts-raw-v0.1.0.json",
+    "integration/bh-05/acceptance-cleanup-v0.1.0.json",
+    "integration/bh-05/acceptance-cleanup-raw-v0.1.0.json"
+  ],
+  "dependency_audit": {
+    "mix_files": {
+      "packages/blazex_core/mix.exs": "c0f93a4b7f68ec6d282dec514c70d0ab02708278c65b08ddcf404bb7528a94dc",
+      "packages/blazex_effects/mix.exs": "bb8064d8458fc4f55f2a173a182fcf9f8299d92711bbee9ab1199dd69ddfcb29",
+      "packages/blazex_ui_tree/mix.exs": "45093474bb98d4f2e75928aedc1fea691f51d02b3606d63ce82df7b6c5226e37"
+    },
+    "forbidden_source_occurrences": {
+      "Phoenix": [],
+      "Plug": [],
+      ".NET": []
+    },
+    "dynamic_reachability": "unproven-deferred-to-bh06",
+    "general_build": "unproven-deferred-to-bh06"
+  },
+  "limitations": [
+    "active Firefox cleanup terminal-state divergence",
+    "fixed Phase 11 browser fixture is not a general build system",
+    "public surfaces are experimental and unsupported",
+    "LiveView and LocalLiveView are separately deferred",
+    "BH-22 platform and manual accessibility qualification is deferred"
+  ]
+}

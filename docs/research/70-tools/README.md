@@ -187,6 +187,8 @@ independent-review blockers, as intended.
 - [`validate_bh05_acceptance_cleanup.py`](validate_bh05_acceptance_cleanup.py) — Validate the retained Firefox blocker, ERTS budgets, failure gates and frozen thresholds.
 - [`generate_bh05_reconciliation.py`](generate_bh05_reconciliation.py) — Deterministically generate the Phase 12 nine-condition reconciliation and evidence-first review ledger.
 - [`validate_bh05_reconciliation.py`](validate_bh05_reconciliation.py) — Validate review coverage, exact generation, revise decision and BH-06 ineligibility.
+- [`generate_bh05_release.py`](generate_bh05_release.py) — Generate the revision index, acceptance overlay and negative BH-06 entry decision.
+- [`validate_bh05_release.py`](validate_bh05_release.py) — Validate exact regeneration, API/dependency inventory and absence of downstream authority.
 
 - [`bh03_history.py`](bh03_history.py) — Narrow Phase 9 historical-source binding; never validates current implementation.
 - [`bh04_history.py`](bh04_history.py) — Explicit Phase 2 supersession: reproduce immutable Phase 1 on accepted Git.

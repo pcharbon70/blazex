@@ -72,3 +72,6 @@ bindings. No measurement or runtime result may claim Phase 1 pass credit.
 - [Conformance completion](conformance-completion-v0.1.0.json) — Exact active Phase 11 conformance; Phase 12 eligible, unauthorized.
 - [Acceptance authority](acceptance-authorization-v0.1.0.json) — Bounded Phase 12 candidate, measurements, decisions, exclusions and deferrals.
 - [Acceptance reconciliation](acceptance-reconciliation-v0.1.0.json) — Nine-condition ledger, ten contract areas, nine review lenses and the retained revise blocker.
+- [BH-05 release index](bh-05-release-index-v0.1.0.json) — Revision-candidate evidence, implementation/API, conformance, benchmark and dependency inventory.
+- [BH-05 acceptance overlay](bh-05-acceptance-overlay-v0.1.0.json) — Versioned outcomes over the unchanged planned registry.
+- [BH-06 entry decision](bh-06-entry-decision-v0.1.0.json) — Ineligible and unauthorized while the active blocker remains.
