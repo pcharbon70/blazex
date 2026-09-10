@@ -8,10 +8,11 @@ defmodule BlazeX.Component.RecoveryCleanup do
 
   defp execute_root(state, reason, next, started) do
     deadline = started + @deadline_ms
+    runtime_before = runtime_metrics()
     {:ok, session} = RecoveryPort.open_session()
 
     try do
-      execute_root_with_session(state, reason, next, started, deadline, session)
+      execute_root_with_session(state, reason, next, started, deadline, session, runtime_before)
     after
       RecoveryPort.close_session(session)
     end
@@ -21,7 +22,9 @@ defmodule BlazeX.Component.RecoveryCleanup do
     _, _ -> failed(state, started)
   end
 
-  defp execute_root_with_session(state, reason, next, started, deadline, session) do
+  defp execute_root_with_session(state, reason, next, started, deadline, session, runtime_before) do
+    planning_started = now()
+
     retained =
       if next, do: Map.new(next.state.components, &{&1.identity, &1.schema_digest}), else: %{}
 
@@ -61,13 +64,20 @@ defmodule BlazeX.Component.RecoveryCleanup do
         end)
 
     cancellations = Enum.map(requests, &job(&1.action.owner, :request, actions.port, :cancel, &1))
+    planning_ms = now() - planning_started
+    cancellations_started = now()
     {rows, session} = execute(pending ++ cancellations, [], deadline, session)
+    cancellations_ms = now() - cancellations_started
+
+    owner_discovery_started = now()
 
     {owners, session} =
       if state.accepted &&
            state.recovery.cleaned_generation != state.accepted.correlation.generation,
          do: invoke(session, state.ports.evaluator, :cleanup_owners, [state.accepted], deadline),
          else: {[], session}
+
+    owner_discovery_ms = now() - owner_discovery_started
 
     component_jobs =
       if is_list(owners) and length(owners) <= 128 do
@@ -100,7 +110,9 @@ defmodule BlazeX.Component.RecoveryCleanup do
         ]
       end
 
+    component_started = now()
     {rows, session} = execute(component_jobs, rows, deadline, session)
+    component_ms = now() - component_started
     leases = if actions, do: Enum.sort_by(Map.values(actions.ledger.leases), & &1.id), else: []
     leases = Enum.filter(leases, &selected.(&1.owner))
 
@@ -111,10 +123,14 @@ defmodule BlazeX.Component.RecoveryCleanup do
       )
 
     lease_pages_before = session.pages_sent
+    lease_started = now()
     {rows, session} = execute(lease_jobs, rows, deadline, session)
+    lease_ms = now() - lease_started
     lease_pages_sent = session.pages_sent - lease_pages_before
 
     request = %{root: owner.root, generation: generation, reason: reason, restore_focus: true}
+
+    renderer_started = now()
 
     {rows, session} =
       execute(
@@ -124,37 +140,19 @@ defmodule BlazeX.Component.RecoveryCleanup do
         session
       )
 
+    renderer_ms = now() - renderer_started
+
     rows = Enum.reverse(rows)
     normal_stats = RecoveryPort.session_stats(session)
     RecoveryPort.close_session(session)
+    forced_started = now()
     {rows, forced_stats, forced_worker_starts} = force(rows, deadline)
+    forced_ms = now() - forced_started
     rows = Enum.map(rows, &Map.drop(&1, [:port, :force_reference]))
-    elapsed = now() - started
     prior = state.recovery.cleanup
     prior_unresolved = if prior, do: prior.unresolved, else: 0
     unresolved = max(Enum.count(rows, & &1.unresolved), prior_unresolved)
-
-    report = %{
-      status: if(unresolved == 0, do: :completed, else: :failed),
-      elapsed_ms: elapsed,
-      exceeded_deadline: elapsed > @deadline_ms,
-      unresolved: unresolved,
-      failed: Enum.count(rows, &(&1.status == :failed)),
-      timed_out: Enum.count(rows, &(&1.status == :timed_out)),
-      forced: Enum.count(rows, &(&1.force_status == :completed)),
-      callback_failures: Enum.count(rows, &(&1.kind == :component and &1.status != :completed)),
-      requested: length(rows),
-      pages: Enum.chunk_every(rows, 128),
-      amplification:
-        amplification(normal_stats, forced_stats, forced_worker_starts, lease_pages_sent)
-    }
-
-    # A later empty ledger cannot prove release of an earlier lost resource.
-    # Retain the first unresolved inventory without recursively growing reports.
-    report =
-      if prior_unresolved > 0,
-        do: Map.put(report, :unresolved_pages, Map.get(prior, :unresolved_pages, prior.pages)),
-        else: report
+    finalization_started = now()
 
     actions =
       if actions do
@@ -180,6 +178,44 @@ defmodule BlazeX.Component.RecoveryCleanup do
       else
         nil
       end
+
+    finalization_ms = now() - finalization_started
+    elapsed = now() - started
+    runtime_after = runtime_metrics()
+
+    report = %{
+      status: if(unresolved == 0, do: :completed, else: :failed),
+      elapsed_ms: elapsed,
+      exceeded_deadline: elapsed > @deadline_ms,
+      unresolved: unresolved,
+      failed: Enum.count(rows, &(&1.status == :failed)),
+      timed_out: Enum.count(rows, &(&1.status == :timed_out)),
+      forced: Enum.count(rows, &(&1.force_status == :completed)),
+      callback_failures: Enum.count(rows, &(&1.kind == :component and &1.status != :completed)),
+      requested: length(rows),
+      pages: Enum.chunk_every(rows, 128),
+      amplification:
+        amplification(normal_stats, forced_stats, forced_worker_starts, lease_pages_sent),
+      runtime_metrics: metric_observation(runtime_before, runtime_after),
+      stage_timings_ms: %{
+        planning: planning_ms,
+        cancellations: cancellations_ms,
+        owner_discovery: owner_discovery_ms,
+        component_cleanup: component_ms,
+        lease_release: lease_ms,
+        renderer_disposal: renderer_ms,
+        forced_cleanup: forced_ms,
+        ledger_finalization: finalization_ms,
+        total: elapsed
+      }
+    }
+
+    # A later empty ledger cannot prove release of an earlier lost resource.
+    # Retain the first unresolved inventory without recursively growing reports.
+    report =
+      if prior_unresolved > 0,
+        do: Map.put(report, :unresolved_pages, Map.get(prior, :unresolved_pages, prior.pages)),
+        else: report
 
     cleaned = if next, do: state.recovery.cleaned_generation, else: generation
 
@@ -353,7 +389,10 @@ defmodule BlazeX.Component.RecoveryCleanup do
       jobs_sent: 0,
       results_received: 0,
       messages_sent: 0,
-      messages_received: 0
+      messages_received: 0,
+      request_bytes: 0,
+      result_bytes: 0,
+      page_durations_ms: []
     }
 
   defp job(owner, kind, port, callback, reference),
@@ -371,6 +410,42 @@ defmodule BlazeX.Component.RecoveryCleanup do
   defp status(_), do: :failed
   defp now, do: System.monotonic_time(:millisecond)
 
+  defp runtime_metrics do
+    %{
+      process_count: safe_metric(fn -> :erlang.system_info(:process_count) end),
+      owner_memory_bytes:
+        safe_metric(fn ->
+          {:memory, bytes} = Process.info(self(), :memory)
+          bytes
+        end),
+      runtime_memory_bytes: safe_metric(fn -> :erlang.memory(:total) end)
+    }
+  end
+
+  defp safe_metric(fun) do
+    case fun.() do
+      value when is_integer(value) and value >= 0 -> value
+      _ -> :unavailable
+    end
+  rescue
+    _ -> :unavailable
+  catch
+    _, _ -> :unavailable
+  end
+
+  defp metric_observation(before, after_value) do
+    Map.new(before, fn {key, initial} ->
+      terminal = Map.fetch!(after_value, key)
+
+      delta =
+        if is_integer(initial) and is_integer(terminal),
+          do: terminal - initial,
+          else: :unavailable
+
+      {key, %{before: initial, after: terminal, delta: delta}}
+    end)
+  end
+
   defp failed(state, started) do
     %{
       state
@@ -387,7 +462,9 @@ defmodule BlazeX.Component.RecoveryCleanup do
               callback_failures: 1,
               requested: 0,
               pages: [],
-              amplification: amplification(empty_stats(), empty_stats(), 0, 0)
+              amplification: amplification(empty_stats(), empty_stats(), 0, 0),
+              runtime_metrics: %{instrumentation: :unavailable},
+              stage_timings_ms: %{total: now() - started}
             }
         }
     }

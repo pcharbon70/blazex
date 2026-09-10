@@ -115,38 +115,38 @@ Back to milestone: [README](README.md)
       - [x] 13.2.3.2 Subtask - Inject failure, exit, malformed result, duplicate result, missing result, delay, and hang at the first, middle, and last position of both the first and a later page.
       - [x] 13.2.3.3 Subtask - Verify timeout kills/demonitors the worker, forced cleanup sees only the unresolved remainder, repeated disposal is idempotent, and late replies or stale generations cannot mutate state.
 
-  - [ ] 13.3 Section - Add structural scaling observability and shape gates.
+  - [x] 13.3 Section - Add structural scaling observability and shape gates.
 
     Measure why work scales, not only whether the final duration happened to
     fit under a threshold.
 
-    - [ ] 13.3.1 Task - Instrument cleanup stages and amplification.
+    - [x] 13.3.1 Task - Instrument cleanup stages and amplification.
 
       Emit bounded diagnostic counters and timings that explain process,
       message, callback, payload, and retained-state growth.
 
-      - [ ] 13.3.1.1 Subtask - Record monotonic durations for inventory, ordering/planning, normal session startup, each page, callback execution, result collation, forced session, ledger finalization, renderer disposal, and total cleanup.
-      - [ ] 13.3.1.2 Subtask - Record leases presented, pages sent/received, callbacks attempted/completed, normal/forced worker starts, peak live cleanup workers, protocol messages, encoded page bytes, terminal outcomes, and unresolved identities.
-      - [ ] 13.3.1.3 Subtask - Enforce structural bounds: normal worker starts at most one, total worker starts at most two, peak live cleanup workers at most one, successful lease pages exactly `ceil(resource_count / 64)`, total pages bounded by `ceil(total_job_count / 64)` plus fixed owner-discovery exchanges, callbacks at most once per normal/forced pass, and protocol messages proportional to pages rather than resources.
-      - [ ] 13.3.1.4 Subtask - Measure ERTS heap/process deltas and browser-AtomVM memory pages or the closest available counter; when an engine cannot expose a metric, record explicit unavailable instrumentation while retaining the mandatory structural counters.
+      - [x] 13.3.1.1 Subtask - Record monotonic durations for inventory, ordering/planning, normal session startup, each page, callback execution, result collation, forced session, ledger finalization, renderer disposal, and total cleanup.
+      - [x] 13.3.1.2 Subtask - Record leases presented, pages sent/received, callbacks attempted/completed, normal/forced worker starts, peak live cleanup workers, protocol messages, encoded page bytes, terminal outcomes, and unresolved identities.
+      - [x] 13.3.1.3 Subtask - Enforce structural bounds: normal worker starts at most one, total worker starts at most two, peak live cleanup workers at most one, successful lease pages exactly `ceil(resource_count / 64)`, total pages bounded by `ceil(total_job_count / 64)` plus fixed owner-discovery exchanges, callbacks at most once per normal/forced pass, and protocol messages proportional to pages rather than resources.
+      - [x] 13.3.1.4 Subtask - Measure ERTS heap/process deltas and browser-AtomVM memory pages or the closest available counter; when an engine cannot expose a metric, record explicit unavailable instrumentation while retaining the mandatory structural counters.
 
-    - [ ] 13.3.2 Task - Build reusable scale-shape runners.
+    - [x] 13.3.2 Task - Build reusable scale-shape runners.
 
       Make boundary and payload matrices available to later milestones instead
       of embedding one-off assertions only in BH-05 acceptance code.
 
-      - [ ] 13.3.2.1 Subtask - Add a deterministic runner that executes the pre-registered count/payload matrix under ERTS, Chrome AtomVM, and Firefox AtomVM and emits one raw record per retained sample.
-      - [ ] 13.3.2.2 Subtask - Compute maxima, nearest-rank percentiles, medians, Theil-Sen slope/intercept, residual alarms, and structural amplification from raw records without discarding failures or outliers.
-      - [ ] 13.3.2.3 Subtask - Version the runner and schema for reuse by later queue, effect, resource, renderer, registry, and build-reachability budgets, with the workload dimension and structural counters supplied explicitly by each owner.
+      - [x] 13.3.2.1 Subtask - Add a deterministic runner that executes the pre-registered count/payload matrix under ERTS, Chrome AtomVM, and Firefox AtomVM and emits one raw record per retained sample.
+      - [x] 13.3.2.2 Subtask - Compute maxima, nearest-rank percentiles, medians, Theil-Sen slope/intercept, residual alarms, and structural amplification from raw records without discarding failures or outliers.
+      - [x] 13.3.2.3 Subtask - Version the runner and schema for reuse by later queue, effect, resource, renderer, registry, and build-reachability budgets, with the workload dimension and structural counters supplied explicitly by each owner.
 
-    - [ ] 13.3.3 Task - Exercise adverse distribution shapes.
+    - [x] 13.3.3 Task - Exercise adverse distribution shapes.
 
       Prevent a uniform happy-path fixture from hiding resource-size,
       position, or ownership cliffs.
 
-      - [ ] 13.3.3.1 Subtask - Run canonical, maximum-portable, and minimal payloads with one slow, failed, or hanging callback placed at page start, middle, and end and at the beginning, middle, and end of the total inventory.
-      - [ ] 13.3.3.2 Subtask - Run single-owner and maximally distributed-owner inventories while preserving the same total count, ordering rules, and deadline.
-      - [ ] 13.3.3.3 Subtask - Assert bounded failure blast radius, exact partial acknowledgements, exact forced remainder, no duplicate callbacks beyond the defined forced pass, zero stale mutations, and zero unexpected retained workers/messages.
+      - [x] 13.3.3.1 Subtask - Run canonical, maximum-portable, and minimal payloads with one slow, failed, or hanging callback placed at page start, middle, and end and at the beginning, middle, and end of the total inventory.
+      - [x] 13.3.3.2 Subtask - Run single-owner and maximally distributed-owner inventories while preserving the same total count, ordering rules, and deadline.
+      - [x] 13.3.3.3 Subtask - Assert bounded failure blast radius, exact partial acknowledgements, exact forced remainder, no duplicate callbacks beyond the defined forced pass, zero stale mutations, and zero unexpected retained workers/messages.
 
   - [ ] 13.4 Section - Make evidence semantics fail closed.
 

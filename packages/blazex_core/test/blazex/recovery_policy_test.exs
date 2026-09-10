@@ -67,14 +67,17 @@ defmodule BlazeX.RecoveryPolicyTest do
     assert {:ok, results, session} = RecoveryPort.page(session, jobs, 100)
     assert results == List.duplicate(:ok, 128)
 
-    assert RecoveryPort.session_stats(session) == %{
-             jobs_sent: 128,
-             messages_received: 1,
-             messages_sent: 1,
-             pages_received: 1,
-             pages_sent: 1,
-             results_received: 128
-           }
+    stats = RecoveryPort.session_stats(session)
+    assert stats.jobs_sent == 128
+    assert stats.messages_received == 1
+    assert stats.messages_sent == 1
+    assert stats.pages_received == 1
+    assert stats.pages_sent == 1
+    assert stats.results_received == 128
+    assert stats.request_bytes > 0
+    assert stats.result_bytes > 0
+    assert [duration] = stats.page_durations_ms
+    assert duration >= 0
 
     stopped = RecoveryPort.close_session(session)
     refute stopped.alive

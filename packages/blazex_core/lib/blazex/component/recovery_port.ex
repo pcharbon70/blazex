@@ -31,7 +31,10 @@ defmodule BlazeX.Component.RecoveryPort do
        jobs_sent: 0,
        results_received: 0,
        messages_sent: 0,
-       messages_received: 0
+       messages_received: 0,
+       request_bytes: 0,
+       result_bytes: 0,
+       page_durations_ms: []
      }}
   end
 
@@ -41,6 +44,7 @@ defmodule BlazeX.Component.RecoveryPort do
       when is_list(jobs) and length(jobs) <= @maximum_page_size and is_integer(timeout) and
              timeout > 0 do
     sequence = session.sequence + 1
+    started = System.monotonic_time(:millisecond)
     send(session.pid, {session.token, :page, sequence, jobs})
 
     sent = %{
@@ -48,7 +52,8 @@ defmodule BlazeX.Component.RecoveryPort do
       | sequence: sequence,
         pages_sent: session.pages_sent + 1,
         jobs_sent: session.jobs_sent + length(jobs),
-        messages_sent: session.messages_sent + 1
+        messages_sent: session.messages_sent + 1,
+        request_bytes: session.request_bytes + encoded_size(jobs)
     }
 
     receive do
@@ -58,7 +63,11 @@ defmodule BlazeX.Component.RecoveryPort do
             sent
             | pages_received: sent.pages_received + 1,
               results_received: sent.results_received + length(results),
-              messages_received: sent.messages_received + 1
+              messages_received: sent.messages_received + 1,
+              result_bytes: sent.result_bytes + encoded_size(results),
+              page_durations_ms: [
+                System.monotonic_time(:millisecond) - started | sent.page_durations_ms
+              ]
           }
 
           {:ok, Enum.map(results, &elem(&1, 1)), received}
@@ -146,7 +155,10 @@ defmodule BlazeX.Component.RecoveryPort do
       :jobs_sent,
       :results_received,
       :messages_sent,
-      :messages_received
+      :messages_received,
+      :request_bytes,
+      :result_bytes,
+      :page_durations_ms
     ])
   end
 
@@ -214,6 +226,14 @@ defmodule BlazeX.Component.RecoveryPort do
     after
       0 -> :ok
     end
+  end
+
+  defp encoded_size(value) do
+    value |> :erlang.term_to_binary() |> byte_size()
+  rescue
+    _ -> 0
+  catch
+    _, _ -> 0
   end
 
   defp session_loop(owner, token, owner_monitor) do
