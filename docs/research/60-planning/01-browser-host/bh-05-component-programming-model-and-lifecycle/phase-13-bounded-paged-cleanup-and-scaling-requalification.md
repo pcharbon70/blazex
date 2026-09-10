@@ -148,27 +148,27 @@ Back to milestone: [README](README.md)
       - [x] 13.3.3.2 Subtask - Run single-owner and maximally distributed-owner inventories while preserving the same total count, ordering rules, and deadline.
       - [x] 13.3.3.3 Subtask - Assert bounded failure blast radius, exact partial acknowledgements, exact forced remainder, no duplicate callbacks beyond the defined forced pass, zero stale mutations, and zero unexpected retained workers/messages.
 
-  - [ ] 13.4 Section - Make evidence semantics fail closed.
+  - [x] 13.4 Section - Make evidence semantics fail closed.
 
     Separate harness execution from semantic acceptance and make omissions or
     misleading summaries invalidate the evidence.
 
-    - [ ] 13.4.1 Task - Correct result and terminal-inventory reporting.
+    - [x] 13.4.1 Task - Correct result and terminal-inventory reporting.
 
       Eliminate ambiguous `passed` labels and zero-live-ledger summaries that
       can coexist with unresolved cleanup work.
 
-      - [ ] 13.4.1.1 Subtask - Report `execution_state` separately from `acceptance_state`; a completed browser harness may be `executed` while cleanup acceptance is `failed`, but it may never emit an unconditional top-level `result: passed` when a required invariant fails.
-      - [ ] 13.4.1.2 Subtask - Require each summary to include live terminal leases, unresolved identities, lost/closed identities, normal and forced outcomes, deadline state, structural counters, scale point, payload class, sample identity, and raw-record hash.
-      - [ ] 13.4.1.3 Subtask - Preserve every Phase 12 failure and every Phase 13 attempt in append-only evidence; reruns add records and may not replace, omit, or relabel earlier observations.
+      - [x] 13.4.1.1 Subtask - Report `execution_state` separately from `acceptance_state`; a completed browser harness may be `executed` while cleanup acceptance is `failed`, but it may never emit an unconditional top-level `result: passed` when a required invariant fails.
+      - [x] 13.4.1.2 Subtask - Require each summary to include live terminal leases, unresolved identities, lost/closed identities, normal and forced outcomes, deadline state, structural counters, scale point, payload class, sample identity, and raw-record hash.
+      - [x] 13.4.1.3 Subtask - Preserve every Phase 12 failure and every Phase 13 attempt in append-only evidence; reruns add records and may not replace, omit, or relabel earlier observations.
 
-    - [ ] 13.4.2 Task - Add adversarial evidence validation.
+    - [x] 13.4.2 Task - Add adversarial evidence validation.
 
       Prove that the gate rejects the same concealment mechanisms it forbids.
 
-      - [ ] 13.4.2.1 Subtask - Mutation-test deleted failures, missing scale points, reduced repetitions, changed deadline/page size, removed raw hashes, altered browser/runtime identity, and acceptance/execution-state substitution.
-      - [ ] 13.4.2.2 Subtask - Mutation-test unresolved-to-lost relabeling, zero-live-ledger-only claims, aggregate-page success masking one resource failure, omitted structural counters, and endpoint-only summaries.
-      - [ ] 13.4.2.3 Subtask - Require validators to recompute summaries and shape alarms from raw records, verify source/bundle/runtime identities, reject duplicate sample identities, and fail when required instrumentation is silently absent.
+      - [x] 13.4.2.1 Subtask - Mutation-test deleted failures, missing scale points, reduced repetitions, changed deadline/page size, removed raw hashes, altered browser/runtime identity, and acceptance/execution-state substitution.
+      - [x] 13.4.2.2 Subtask - Mutation-test unresolved-to-lost relabeling, zero-live-ledger-only claims, aggregate-page success masking one resource failure, omitted structural counters, and endpoint-only summaries.
+      - [x] 13.4.2.3 Subtask - Require validators to recompute summaries and shape alarms from raw records, verify source/bundle/runtime identities, reject duplicate sample identities, and fail when required instrumentation is silently absent.
 
   - [ ] 13.5 Section - Requalify active runtimes and reconcile BH-05.
 

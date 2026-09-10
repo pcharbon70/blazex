@@ -191,6 +191,7 @@ independent-review blockers, as intended.
 - [`validate_bh05_release.py`](validate_bh05_release.py) — Validate exact regeneration, API/dependency inventory and absence of downstream authority.
 - [`validate_bh05_acceptance.py`](validate_bh05_acceptance.py) — Validate the complete source-bound Phase 12 revise decision and final evidence.
 - [`record_bh05_phase12.py`](record_bh05_phase12.py) — Run and publish the final Phase 12 meta-gates while retaining the active product blocker.
+- [`validate_bh05_cleanup_scaling.py`](validate_bh05_cleanup_scaling.py) — Fail closed on Phase 13 scale-point/sample omissions, structural amplification, terminal-state relabelling, evidence hash drift and misleading execution/acceptance summaries.
 
 - [`bh03_history.py`](bh03_history.py) — Narrow Phase 9 historical-source binding; never validates current implementation.
 - [`bh04_history.py`](bh04_history.py) — Explicit Phase 2 supersession: reproduce immutable Phase 1 on accepted Git.
@@ -233,6 +234,7 @@ independent-review blockers, as intended.
 - [`test_validate_bh03_startup.py`](test_validate_bh03_startup.py) — Regression tests.
 - [`test_validate_bh04_acceptance.py`](test_validate_bh04_acceptance.py) — Regression tests.
 - [`test_validate_bh04_activation.py`](test_validate_bh04_activation.py) — Mutation tests for the immutable BH-04 Phase 1 activation candidate.
+- [`test_validate_bh05_cleanup_scaling.py`](test_validate_bh05_cleanup_scaling.py) — Mutation tests for Phase 13 deadline/page tuning, missing scale rows, unresolved/lost relabelling, omitted counters, failed-history deletion and endpoint-only evidence.
 - [`test_validate_bh04_conformance.py`](test_validate_bh04_conformance.py) — Regression tests.
 - [`test_validate_bh04_continuity.py`](test_validate_bh04_continuity.py) — Negative Phase 6 governance tests; never modify the user's source tree.
 - [`test_validate_bh04_dom_application.py`](test_validate_bh04_dom_application.py) — Negative Phase 4 governance tests; never modify the user's source tree.
