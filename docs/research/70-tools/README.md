@@ -303,3 +303,5 @@ reporting a tooling change complete.
 - [Phase 11 validator tests](test_validate_bh05_conformance.py) — Missing, failed, duplicate and stale gate rejection.
 - [Phase 11 recorder](record_bh05_phase11.py) — Fourteen source-frozen active/replay gates and exclusive-create publication.
 - [Phase 12 authority generator](generate_bh05_acceptance.py) — Freezes the final candidate, nine acceptance conditions, six budgets and decision rules.
+- [Phase 12 count runner](run_bh05_acceptance_counts.py) — Records ERTS and Chrome/Firefox backlog, effect, lease and restart measurements without dropping failed trials.
+- [Phase 12 count validator](validate_bh05_acceptance_counts.py) — Verifies raw/report hashes, sample cardinality, exact bounds, browser parity and retained failures.
