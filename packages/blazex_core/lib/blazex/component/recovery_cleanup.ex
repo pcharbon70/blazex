@@ -113,18 +113,18 @@ defmodule BlazeX.Component.RecoveryCleanup do
     component_started = now()
     {rows, session} = execute(component_jobs, rows, deadline, session)
     component_ms = now() - component_started
-    leases = if actions, do: Enum.sort_by(Map.values(actions.ledger.leases), & &1.id), else: []
+    lease_planning_started = now()
+    leases = if actions, do: ActionLedger.ordered_leases(actions.ledger), else: []
     leases = Enum.filter(leases, &selected.(&1.owner))
 
-    lease_jobs =
-      Enum.map(
-        leases,
-        &job(&1.owner, :lease, actions.port, :release, %{&1 | release_requested: true})
-      )
+    lease_planning_ms = now() - lease_planning_started
 
     lease_pages_before = session.pages_sent
     lease_started = now()
-    {rows, session} = execute(lease_jobs, rows, deadline, session)
+
+    {rows, session} =
+      execute_leases(leases, rows, if(actions, do: actions.port, else: nil), deadline, session)
+
     lease_ms = now() - lease_started
     lease_pages_sent = session.pages_sent - lease_pages_before
 
@@ -148,7 +148,6 @@ defmodule BlazeX.Component.RecoveryCleanup do
     forced_started = now()
     {rows, forced_stats, forced_worker_starts} = force(rows, deadline)
     forced_ms = now() - forced_started
-    rows = Enum.map(rows, &Map.drop(&1, [:port, :force_reference]))
     prior = state.recovery.cleanup
     prior_unresolved = if prior, do: prior.unresolved, else: 0
     unresolved = max(Enum.count(rows, & &1.unresolved), prior_unresolved)
@@ -161,16 +160,13 @@ defmodule BlazeX.Component.RecoveryCleanup do
             ActionLedger.record(acc, :canceled, entry.correlation)
           end)
 
-        ledger =
-          Enum.reduce(leases, ledger, fn lease, acc ->
-            row =
-              Enum.find(
-                rows,
-                &(&1.kind == :lease and &1.reference == ActionLedger.lease_ref(lease))
-              )
-
-            ActionLedger.released(acc, lease, if(row.unresolved, do: :lost, else: :released))
+        releases =
+          Enum.zip_with(leases, Enum.filter(rows, &(&1.kind == :lease)), fn lease, row ->
+            true = row.reference.id == lease.id
+            {lease, if(row.unresolved, do: :lost, else: :released)}
           end)
+
+        ledger = ActionLedger.released_many(ledger, releases)
 
         pending = Map.drop(ledger.pending, canceled)
         timers = if next, do: Map.drop(actions.timers, canceled), else: %{}
@@ -202,6 +198,7 @@ defmodule BlazeX.Component.RecoveryCleanup do
         cancellations: cancellations_ms,
         owner_discovery: owner_discovery_ms,
         component_cleanup: component_ms,
+        lease_planning: lease_planning_ms,
         lease_release: lease_ms,
         renderer_disposal: renderer_ms,
         forced_cleanup: forced_ms,
@@ -233,25 +230,78 @@ defmodule BlazeX.Component.RecoveryCleanup do
     next =
       Enum.reduce(records, rows, fn {job, result, elapsed}, acc ->
         reference = if job.kind == :lease, do: ActionLedger.lease_ref(job.reference), else: nil
+        status = status(result)
 
-        [
-          %{
-            owner: job.owner,
-            kind: job.kind,
-            reference: reference,
-            force_reference: job.reference,
-            port: job.port,
+        row = %{
+          owner: job.owner,
+          kind: job.kind,
+          reference: reference,
+          requested: true,
+          status: status,
+          force_status: :not_requested,
+          elapsed_ms: elapsed,
+          unresolved: false
+        }
+
+        row =
+          if job.kind != :component and status != :completed,
+            do: Map.merge(row, %{force_reference: job.reference, port: job.port}),
+            else: row
+
+        [row | acc]
+      end)
+
+    {next, session}
+  end
+
+  defp execute_leases(leases, rows, port, deadline, session) do
+    leases
+    |> Enum.chunk_every(RecoveryPort.page_size())
+    |> Enum.reduce({rows, session}, fn page, {records, current} ->
+      started = now()
+      timeout = min(port_timeout(port), deadline - started)
+
+      {results, next} =
+        if timeout > 0 do
+          {release_port, _} = unwrap_port(port)
+
+          requests =
+            Enum.map(page, fn lease ->
+              {release_port, :release, [%{lease | release_requested: true}]}
+            end)
+
+          case RecoveryPort.page(current, requests, timeout) do
+            {:ok, values, updated} -> {values, updated}
+            {:error, error, updated} -> {List.duplicate({:error, error}, length(page)), updated}
+          end
+        else
+          {List.duplicate({:error, :timed_out}, length(page)), current}
+        end
+
+      elapsed = now() - started
+
+      rows =
+        Enum.zip_with(page, results, fn lease, result ->
+          status = status(result)
+
+          row = %{
+            owner: lease.owner,
+            kind: :lease,
+            reference: ActionLedger.lease_ref(lease),
             requested: true,
-            status: status(result),
+            status: status,
             force_status: :not_requested,
             elapsed_ms: elapsed,
             unresolved: false
           }
-          | acc
-        ]
-      end)
 
-    {next, session}
+          if status == :completed,
+            do: row,
+            else: Map.merge(row, %{force_reference: lease, port: port})
+        end)
+
+      {Enum.reverse(rows, records), next}
+    end)
   end
 
   defp invoke(session, port, callback, arguments, deadline) do
@@ -300,7 +350,7 @@ defmodule BlazeX.Component.RecoveryCleanup do
 
     cond do
       candidates == [] ->
-        {Enum.map(rows, &Map.put(&1, :unresolved, false)), empty_stats(), 0}
+        {rows, empty_stats(), 0}
 
       deadline - now() <= 0 ->
         indexes = Map.new(candidates, fn {_, index} -> {index, :timed_out} end)
@@ -340,12 +390,13 @@ defmodule BlazeX.Component.RecoveryCleanup do
     |> Enum.map(fn {row, index} ->
       force_status = Map.get(indexes, index, :not_requested)
 
-      %{
-        row
-        | force_status: force_status,
-          unresolved:
-            row.kind != :component and row.status != :completed and force_status != :completed
-      }
+      row
+      |> Map.put(:force_status, force_status)
+      |> Map.put(
+        :unresolved,
+        row.kind != :component and row.status != :completed and force_status != :completed
+      )
+      |> Map.drop([:port, :force_reference])
     end)
   end
 

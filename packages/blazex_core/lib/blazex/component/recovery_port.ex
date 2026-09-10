@@ -32,8 +32,8 @@ defmodule BlazeX.Component.RecoveryPort do
        results_received: 0,
        messages_sent: 0,
        messages_received: 0,
-       request_bytes: 0,
-       result_bytes: 0,
+       request_bytes: byte_counter(),
+       result_bytes: byte_counter(),
        page_durations_ms: []
      }}
   end
@@ -53,7 +53,7 @@ defmodule BlazeX.Component.RecoveryPort do
         pages_sent: session.pages_sent + 1,
         jobs_sent: session.jobs_sent + length(jobs),
         messages_sent: session.messages_sent + 1,
-        request_bytes: session.request_bytes + encoded_size(jobs)
+        request_bytes: add_encoded_size(session.request_bytes, jobs)
     }
 
     receive do
@@ -64,7 +64,7 @@ defmodule BlazeX.Component.RecoveryPort do
             | pages_received: sent.pages_received + 1,
               results_received: sent.results_received + length(results),
               messages_received: sent.messages_received + 1,
-              result_bytes: sent.result_bytes + encoded_size(results),
+              result_bytes: add_encoded_size(sent.result_bytes, results),
               page_durations_ms: [
                 System.monotonic_time(:millisecond) - started | sent.page_durations_ms
               ]
@@ -228,13 +228,18 @@ defmodule BlazeX.Component.RecoveryPort do
     end
   end
 
-  defp encoded_size(value) do
-    value |> :erlang.term_to_binary() |> byte_size()
+  defp byte_counter do
+    if :erlang.system_info(:machine) == ~c"BEAM", do: 0, else: :unavailable
   rescue
-    _ -> 0
+    _ -> :unavailable
   catch
-    _, _ -> 0
+    _, _ -> :unavailable
   end
+
+  defp add_encoded_size(current, value) when is_integer(current),
+    do: current + :erlang.external_size(value)
+
+  defp add_encoded_size(_, _), do: :unavailable
 
   defp session_loop(owner, token, owner_monitor) do
     receive do
@@ -242,10 +247,9 @@ defmodule BlazeX.Component.RecoveryPort do
       when is_integer(sequence) and is_list(jobs) and length(jobs) <= @maximum_page_size ->
         results =
           jobs
+          |> RootPort.call_page()
           |> Enum.with_index()
-          |> Enum.map(fn {{port, callback, arguments}, index} ->
-            {index, RootPort.call(port, callback, arguments)}
-          end)
+          |> Enum.map(fn {result, index} -> {index, result} end)
 
         send(owner, {token, :page_result, sequence, results})
         session_loop(owner, token, owner_monitor)

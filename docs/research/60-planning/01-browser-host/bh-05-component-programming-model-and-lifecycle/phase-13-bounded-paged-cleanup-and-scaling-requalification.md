@@ -170,38 +170,38 @@ Back to milestone: [README](README.md)
       - [x] 13.4.2.2 Subtask - Mutation-test unresolved-to-lost relabeling, zero-live-ledger-only claims, aggregate-page success masking one resource failure, omitted structural counters, and endpoint-only summaries.
       - [x] 13.4.2.3 Subtask - Require validators to recompute summaries and shape alarms from raw records, verify source/bundle/runtime identities, reject duplicate sample identities, and fail when required instrumentation is silently absent.
 
-  - [ ] 13.5 Section - Requalify active runtimes and reconcile BH-05.
+  - [x] 13.5 Section - Requalify active runtimes and reconcile BH-05.
 
     Run the frozen correction against the original blocker and the expanded
     scale corpus before reconsidering BH-05 acceptance.
 
-    - [ ] 13.5.1 Task - Execute the active-runtime correction matrix.
+    - [x] 13.5.1 Task - Execute the active-runtime correction matrix.
 
       Generate source-frozen results for ERTS/headless and both active Linux
       browser engines.
 
-      - [ ] 13.5.1.1 Subtask - Build fresh browser artifacts and run all count, payload, owner-distribution, and adverse-position observations under local ERTS/headless, Linux Chrome AtomVM/DOM, and Linux Firefox AtomVM/DOM.
-      - [ ] 13.5.1.2 Subtask - Re-run the original 512-resource Phase 12 fixture unchanged and require exact zero-unresolved Chrome/Firefox terminal inventories under the unchanged deadline in every retained sample.
-      - [ ] 13.5.1.3 Subtask - Run the 100-cycle process-growth corpus and require zero unexpected worker, message, lease, renderer, timer, request, or component-process retention.
-      - [ ] 13.5.1.4 Subtask - Preserve runtime/browser versions, AtomVM and bundle identities, source revision, clocks, raw outputs, failures, variance, unavailable metrics, and repeat context.
+      - [x] 13.5.1.1 Subtask - Build fresh browser artifacts and run all count, payload, owner-distribution, and adverse-position observations under local ERTS/headless, Linux Chrome AtomVM/DOM, and Linux Firefox AtomVM/DOM.
+      - [x] 13.5.1.2 Subtask - Re-run the original 512-resource Phase 12 fixture unchanged and require exact zero-unresolved Chrome/Firefox terminal inventories under the unchanged deadline in every retained sample.
+      - [x] 13.5.1.3 Subtask - Run the 100-cycle process-growth corpus and require zero unexpected worker, message, lease, renderer, timer, request, or component-process retention.
+      - [x] 13.5.1.4 Subtask - Preserve runtime/browser versions, AtomVM and bundle identities, source revision, clocks, raw outputs, failures, variance, unavailable metrics, and repeat context.
 
-    - [ ] 13.5.2 Task - Review the correction and shared scaling guard.
+    - [x] 13.5.2 Task - Review the correction and shared scaling guard.
 
       Challenge correctness, portability, performance shape, security, and
       evidence integrity rather than accepting a faster endpoint alone.
 
-      - [ ] 13.5.2.1 Subtask - Review session ownership, link/monitor behavior, mailbox bounds, malformed-term handling, deadline arithmetic, partial-result reconciliation, forced cleanup, idempotency, and stale rejection on ERTS and AtomVM.
-      - [ ] 13.5.2.2 Subtask - Review process/message/payload amplification, boundary/payload coverage, regression method, raw-data retention, validator mutation tests, instrumentation limitations, and reuse requirements for later milestone budgets.
-      - [ ] 13.5.2.3 Subtask - Record every finding, disagreement, owner, severity, disposition, reproduction, and blocking effect; a passed 512-resource timing cannot close a structural, intermediate-size, or evidence-integrity finding.
+      - [x] 13.5.2.1 Subtask - Review session ownership, link/monitor behavior, mailbox bounds, malformed-term handling, deadline arithmetic, partial-result reconciliation, forced cleanup, idempotency, and stale rejection on ERTS and AtomVM.
+      - [x] 13.5.2.2 Subtask - Review process/message/payload amplification, boundary/payload coverage, regression method, raw-data retention, validator mutation tests, instrumentation limitations, and reuse requirements for later milestone budgets.
+      - [x] 13.5.2.3 Subtask - Record every finding, disagreement, owner, severity, disposition, reproduction, and blocking effect; a passed 512-resource timing cannot close a structural, intermediate-size, or evidence-integrity finding.
 
-    - [ ] 13.5.3 Task - Reconcile the Phase 12 decision.
+    - [x] 13.5.3 Task - Reconcile the Phase 12 decision.
 
       Publish a successor overlay while keeping the original decision and raw
       evidence immutable.
 
-      - [ ] 13.5.3.1 Subtask - Map the Firefox blocker and every Phase 12 re-entry condition to exact Phase 13 implementation, tests, active-runtime raw records, structural counters, reviews, and validators.
-      - [ ] 13.5.3.2 Subtask - Regenerate the BH-05 release/acceptance overlay and BH-06 entry state only from canonical source-bound inputs, preserving all earlier failures and support limitations.
-      - [ ] 13.5.3.3 Subtask - Mark BH-05 accepted and BH-06 eligible-but-unauthorized only if every original gate and every Phase 13 anti-concealment gate passes; otherwise publish `revise` or `block` with exact re-entry requirements.
+      - [x] 13.5.3.1 Subtask - Map the Firefox blocker and every Phase 12 re-entry condition to exact Phase 13 implementation, tests, active-runtime raw records, structural counters, reviews, and validators.
+      - [x] 13.5.3.2 Subtask - Regenerate the BH-05 release/acceptance overlay and BH-06 entry state only from canonical source-bound inputs, preserving all earlier failures and support limitations.
+      - [x] 13.5.3.3 Subtask - Mark BH-05 accepted and BH-06 eligible-but-unauthorized only if every original gate and every Phase 13 anti-concealment gate passes; otherwise publish `revise` or `block` with exact re-entry requirements.
 
   - [ ] 13.6 Section - Phase 13 integration tests and completion evidence.
 

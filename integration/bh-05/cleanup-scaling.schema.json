@@ -15,7 +15,10 @@
     "phase12_raw_sha256",
     "retained_failed_trials",
     "samples",
-    "shape"
+    "shape",
+    "phase12_fixture_repeat",
+    "commands",
+    "command_outputs"
   ],
   "properties": {
     "schema_version": {"const": "1.0.0"},
@@ -64,6 +67,9 @@
     "shape": {
       "type": "object",
       "required": ["method", "absolute_alarm_ms", "relative_alarm", "minimum_count", "alarms"]
-    }
+    },
+    "phase12_fixture_repeat": {"type": "object"},
+    "commands": {"type": "object"},
+    "command_outputs": {"type": "object"}
   }
 }

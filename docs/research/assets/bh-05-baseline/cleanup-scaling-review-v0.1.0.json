@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 13,
+  "decision": "revise",
+  "support_state": "unsupported",
+  "milestone_accepted": false,
+  "bh06_eligible": false,
+  "bh06_authorized": false,
+  "active_blocker": "BH05-P13-FIREFOX-DEADLINE",
+  "correction": {
+    "page_size": 64,
+    "maximum_page_size": 128,
+    "normal_worker_maximum": 1,
+    "forced_worker_maximum": 1,
+    "history_maximum": 128
+  },
+  "final_probe": {
+    "raw_sha256": "c91ed6b31356721d442b68b948ff6b47e3555a446ea8c25d4f5ee0bc95b90c2f",
+    "chrome": {
+      "elapsed_ms": 286,
+      "callbacks_completed": 513,
+      "lease_pages": 8,
+      "protocol_messages": 18,
+      "terminal_leases": 0,
+      "unresolved": 0,
+      "acceptance_state": "passed"
+    },
+    "firefox": {
+      "elapsed_ms": 3105,
+      "callbacks_completed": 448,
+      "lease_pages": 7,
+      "protocol_messages": 14,
+      "terminal_leases": 0,
+      "unresolved": 65,
+      "acceptance_state": "failed"
+    }
+  },
+  "phase12_repeat": {
+    "raw_sha256": "d8e67766a014c0932ffec3c2f5b5cfda39b20816840eefb5edcc7ac89a9c63cf",
+    "chrome_cleanup": "passed",
+    "firefox_cleanup": "failed",
+    "chrome_unexpected_growth": 0,
+    "firefox_unexpected_growth": 0
+  },
+  "findings": [
+    {
+      "id": "BH05-P13-FIREFOX-DEADLINE",
+      "severity": "blocking",
+      "owner": "browser-runtime-cleanup",
+      "disposition": "open",
+      "effect": "BH-05 revise; BH-06 ineligible and unauthorized"
+    },
+    {
+      "id": "BH05-P13-ATOMVM-BYTES",
+      "severity": "limitation",
+      "owner": "scaling-instrumentation",
+      "disposition": "explicit-unavailable",
+      "effect": "No support claim; structural counters remain mandatory"
+    }
+  ]
+}

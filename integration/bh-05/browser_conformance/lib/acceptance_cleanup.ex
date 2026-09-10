@@ -32,6 +32,7 @@ defmodule BlazeX.BH05.Acceptance.Cleanup do
     def dispose(_, _), do: :ok
     def force_cleanup(_, _), do: :ok
     def release(_, _), do: :released
+    def release_page(_, leases), do: List.duplicate(:released, length(leases))
   end
 
   def run(cleanup_count \\ 100, process_samples \\ 10) do

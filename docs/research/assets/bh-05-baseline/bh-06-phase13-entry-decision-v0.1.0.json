@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 13,
+  "from": "BH-05",
+  "to": "BH-06",
+  "predecessor": "docs/research/assets/bh-05-baseline/bh-06-entry-decision-v0.1.0.json",
+  "state": "ineligible",
+  "authorized": false,
+  "manifest_generated": false,
+  "reason": "Firefox retains 65 exact unresolved cleanup identities after the frozen 1000 ms deadline in the final Phase 13 probe.",
+  "reentry_requirements": [
+    "retain the 1000 ms deadline, 512-resource fixture, 64-resource page size, and all failed trials",
+    "publish the complete source-frozen ERTS, Chrome, and Firefox scaling matrix",
+    "produce zero unresolved identities and zero terminal leases in every required sample",
+    "rerun the unchanged Phase 12 fixture and 100-cycle growth corpus",
+    "publish a non-revise BH-05 acceptance decision"
+  ],
+  "deferred": ["LiveView", "LocalLiveView"],
+  "support_state": "unsupported"
+}

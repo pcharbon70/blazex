@@ -192,6 +192,7 @@ independent-review blockers, as intended.
 - [`validate_bh05_acceptance.py`](validate_bh05_acceptance.py) — Validate the complete source-bound Phase 12 revise decision and final evidence.
 - [`record_bh05_phase12.py`](record_bh05_phase12.py) — Run and publish the final Phase 12 meta-gates while retaining the active product blocker.
 - [`validate_bh05_cleanup_scaling.py`](validate_bh05_cleanup_scaling.py) — Fail closed on Phase 13 scale-point/sample omissions, structural amplification, terminal-state relabelling, evidence hash drift and misleading execution/acceptance summaries.
+- [`run_bh05_cleanup_scaling.py`](run_bh05_cleanup_scaling.py) — Build the fixed AtomVM bundle and retain the full Phase 13 ERTS/Chrome/Firefox boundary, payload, shape and unchanged-fixture requalification evidence.
 
 - [`bh03_history.py`](bh03_history.py) — Narrow Phase 9 historical-source binding; never validates current implementation.
 - [`bh04_history.py`](bh04_history.py) — Explicit Phase 2 supersession: reproduce immutable Phase 1 on accepted Git.

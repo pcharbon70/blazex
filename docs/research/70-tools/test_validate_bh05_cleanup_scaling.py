@@ -81,6 +81,11 @@ def valid_raw():
             {"id": "phase12-b", "state": "failed"},
             {"id": "phase12-c", "state": "failed"},
         ],
+        "phase12_fixture_repeat": {
+            "passed": True,
+            "erts": {"acceptance_state": "passed"},
+            "browser": {"comparison": {"state": "exact-match"}},
+        },
         "samples": samples,
         "shape": {"method": "theil-sen", "absolute_alarm_ms": 100, "relative_alarm": 0.5, "minimum_count": 64, "alarms": []},
     }

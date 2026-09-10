@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 13,
+  "predecessor": "docs/research/assets/bh-05-baseline/bh-05-acceptance-overlay-v0.1.0.json",
+  "decision": "revise",
+  "support_state": "unsupported",
+  "milestone_accepted": false,
+  "active_blockers": [
+    {
+      "id": "BH05-P13-FIREFOX-DEADLINE",
+      "state": "open",
+      "severity": "blocking",
+      "evidence": "docs/research/assets/bh-05-baseline/cleanup-scaling-review-v0.1.0.json",
+      "reentry": "Complete the unchanged Phase 12 fixture and pre-registered Phase 13 matrix on Firefox with no deadline violation and zero unresolved identities."
+    }
+  ],
+  "preserved_failures": "integration/bh-05/cleanup-scaling-attempts-v0.1.0.json",
+  "prohibited_inferences": [
+    "BH-05 acceptance",
+    "BH-06 eligibility or authorization",
+    "browser support",
+    "platform qualification",
+    "public 1.0 stability"
+  ]
+}

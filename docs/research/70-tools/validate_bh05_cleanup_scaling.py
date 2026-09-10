@@ -101,8 +101,18 @@ def structural_errors(sample):
             <= 2 * (amplification["normal_pages_sent"] + amplification["forced_pages_sent"]),
             "message amplification",
         ),
-        (amplification["request_bytes"] >= 0, "request byte count"),
-        (amplification["result_bytes"] >= 0, "result byte count"),
+        (
+            amplification["request_bytes"] == "unavailable"
+            or isinstance(amplification["request_bytes"], int)
+            and amplification["request_bytes"] >= 0,
+            "request byte count",
+        ),
+        (
+            amplification["result_bytes"] == "unavailable"
+            or isinstance(amplification["result_bytes"], int)
+            and amplification["result_bytes"] >= 0,
+            "result byte count",
+        ),
     ]
     errors.extend(message for valid, message in rules if not valid)
     return errors
@@ -114,6 +124,7 @@ def validate_raw(raw):
         "schema_version", "phase", "support_state", "execution_state",
         "acceptance_state", "contract", "phase12_raw_sha256",
         "retained_failed_trials", "samples", "shape", "environment",
+        "phase12_fixture_repeat",
     }
     if not required_top.issubset(raw):
         return ["raw evidence fields missing"]
@@ -138,6 +149,13 @@ def validate_raw(raw):
         errors.append("frozen fixture/page maximum drift")
     if raw["phase12_raw_sha256"] != PHASE12_RAW_SHA256:
         errors.append("Phase 12 raw evidence drift")
+    repeat = raw.get("phase12_fixture_repeat", {})
+    if repeat.get("passed") is not True:
+        errors.append("unchanged Phase 12 fixture repeat failed")
+    if repeat.get("erts", {}).get("acceptance_state") != "passed":
+        errors.append("ERTS lifecycle repeat failed")
+    if repeat.get("browser", {}).get("comparison", {}).get("state") != "exact-match":
+        errors.append("browser lifecycle repeat diverged")
     failures = raw.get("retained_failed_trials", [])
     if len(failures) < 3 or any(row.get("state") != "failed" for row in failures):
         errors.append("retained failures missing or relabelled")
@@ -189,7 +207,10 @@ def validate_raw(raw):
         errors.append("shape alarms were not recomputed from raw samples")
 
     samples_pass = all(row.get("acceptance_state") == "passed" for row in raw.get("samples", []))
-    expected_state = "passed" if samples_pass and alarms == [] and not errors else "failed"
+    expected_state = (
+        "passed" if samples_pass and alarms == [] and repeat.get("passed") is True and not errors
+        else "failed"
+    )
     if raw["acceptance_state"] != expected_state:
         errors.append("top-level acceptance state mismatch")
     return errors

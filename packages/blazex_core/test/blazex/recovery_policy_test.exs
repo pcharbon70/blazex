@@ -13,6 +13,11 @@ defmodule BlazeX.RecoveryPolicyTest do
     def call(:ok), do: :ok
     def call(:crash), do: raise("private")
     def call(:exit), do: exit(:private)
+
+    def release_page(observer, leases) do
+      send(observer, {:release_page, Enum.map(leases, & &1.id)})
+      Enum.map(leases, &if(&1.id == "lost", do: {:error, :lost}, else: :released))
+    end
   end
 
   test "three automatic restarts in five seconds then terminal regardless of fingerprint" do
@@ -83,6 +88,21 @@ defmodule BlazeX.RecoveryPolicyTest do
     refute stopped.alive
     refute_receive {:EXIT, _, _}, 10
     refute_receive {:DOWN, _, _, _, _}, 10
+  end
+
+  test "homogeneous release work uses one page callback and preserves result positions" do
+    {:ok, session} = RecoveryPort.open_session()
+
+    jobs =
+      Enum.map(["first", "lost", "last"], fn id ->
+        {{Ports, self()}, :release, [%{id: id}]}
+      end)
+
+    assert {:ok, [:released, {:error, :lost}, :released], session} =
+             RecoveryPort.page(session, jobs, 100)
+
+    assert_receive {:release_page, ["first", "lost", "last"]}
+    RecoveryPort.close_session(session)
   end
 
   test "session rejects oversized and malformed pages and remembers terminal failure" do
