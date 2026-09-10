@@ -6,7 +6,7 @@ import re
 from research_paths import REPO_ROOT
 
 TARGET = "integration/bh-05/conformance-corpus-v0.1.0.json"
-SOURCES = ["integration/bh-05/conformance-components.exs"]
+SOURCES = ["integration/bh-05/browser_conformance/lib/components.ex"]
 SCENARIOS = {
     "declaration-schema-slots": ["declaration", "required-default-local-host-props", "default-named-contextual-slots"],
     "composition-identity": ["pure", "nested-stateful", "process-root", "controlled-props", "keyed-insert-move-remove-replace"],

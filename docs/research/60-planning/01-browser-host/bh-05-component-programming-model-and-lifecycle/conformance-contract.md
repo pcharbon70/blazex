@@ -64,3 +64,8 @@ portability gate. Phase 12 remains separately authorized.
 
 - [Recovery contract](recovery-contract.md)
 - [Development qualification policy](../../development-environment-and-deferred-qualification-policy.md)
+Phase 1–10 evidence retains its ERTS `term_to_binary/2` digest identities.
+Phase 11 removes the unavailable Regex and deterministic-option NIF dependencies
+and establishes a new cross-runtime digest baseline using byte-level lowercase
+hex validation and portable external-term encoding. Old evidence is never rehashed;
+the successor ledger binds both identities and the reviewed transition.

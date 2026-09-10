@@ -17,8 +17,9 @@ defmodule BlazeX.UITree.Composition do
 
   No retained state, effects, renderer calls or process isolation. Components are
   trusted build code subject to dependency audit, not sandboxed arbitrary Elixir.
-  Digests use deterministic ERTS term encoding; Wasm parity is not claimed.
+  Digests use the portable canonical encoding shared by the component kernel.
   """
+  alias BlazeX.Component.NestedTable
   alias BlazeX.UITree.{CompositionPlan, PureCandidates, SemanticAcceptance}
   @contract "0.1.0-bh05-pure-composition"
 
@@ -56,8 +57,5 @@ defmodule BlazeX.UITree.Composition do
      %{contract: @contract, code: code, path: path, trace: trace, trace_digest: digest(trace)}}
   end
 
-  defp digest(value),
-    do:
-      :crypto.hash(:sha256, :erlang.term_to_binary(value, [:deterministic]))
-      |> Base.encode16(case: :lower)
+  defp digest(value), do: NestedTable.digest(value)
 end

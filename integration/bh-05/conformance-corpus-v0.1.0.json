@@ -4,7 +4,7 @@
   "support_state": "unsupported",
   "fixture_policy": "documented public BlazeX APIs and portable values only",
   "sources": {
-    "integration/bh-05/conformance-components.exs": "4abfab9425aef9a4bd41acdb9343d3c3898f6e16c77a255b468dc86de9cc3586"
+    "integration/bh-05/browser_conformance/lib/components.ex": "cc247b7fd00088ae19b949ffec5d62e5df244a090818e0d7a3cfa23e0f714899"
   },
   "scenarios": [
     {

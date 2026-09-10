@@ -1,6 +1,6 @@
 defmodule BlazeX.RootPortTest do
   use ExUnit.Case, async: true
-  alias BlazeX.Component.RootPort
+  alias BlazeX.Component.{NestedTable, RootPort}
 
   defmodule Root do
     use BlazeX.Component, role: :root, schema: [props: [], slots: []]
@@ -21,6 +21,13 @@ defmodule BlazeX.RootPortTest do
       fallback: :none,
       timeout_ms: 1000
     }
+  end
+
+  test "portable digests are independent of map construction order" do
+    left = Map.new([{:second, %{value: 2}}, {:first, [1, 2]}])
+    right = Map.new([{:first, [1, 2]}, {:second, %{value: 2}}])
+
+    assert NestedTable.digest(left) == NestedTable.digest(right)
   end
 
   test "start schema is normalized and infrastructure is not callback data" do
@@ -73,6 +80,12 @@ defmodule BlazeX.RootPortTest do
     assert RootPort.candidate?(value, correlation)
     refute RootPort.candidate?(%{value | state: %{count: 2}}, correlation)
     refute RootPort.candidate?(%{value | final_digest: digest}, correlation)
+
+    assert {:error, :semantic_rejected} =
+             RootPort.candidate(correlation, %{}, String.duplicate("A", 64), nil)
+
+    assert {:error, :semantic_rejected} =
+             RootPort.candidate(correlation, %{}, String.duplicate("g", 64), nil)
 
     assert Map.keys(RootPort.summary(value)) |> Enum.sort() == [
              :correlation,

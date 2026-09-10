@@ -156,7 +156,14 @@ defmodule BlazeX.Component.RootPort do
   defp fallback?(_), do: false
 
   defp hash?(value),
-    do: is_binary(value) and byte_size(value) == 64 and String.match?(value, ~r/\A[0-9a-f]+\z/)
+    do: is_binary(value) and byte_size(value) == 64 and lowercase_hex?(value)
+
+  defp lowercase_hex?(<<>>), do: true
+
+  defp lowercase_hex?(<<byte, rest::binary>>) when byte in ?0..?9 or byte in ?a..?f,
+    do: lowercase_hex?(rest)
+
+  defp lowercase_hex?(_), do: false
 
   defp port?({module, _config}, callbacks) when is_atom(module),
     do:

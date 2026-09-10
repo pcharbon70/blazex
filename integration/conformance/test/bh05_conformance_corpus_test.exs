@@ -1,4 +1,4 @@
-Code.require_file("../../bh-05/conformance-components.exs", __DIR__)
+Code.require_file("../../bh-05/browser_conformance/lib/components.ex", __DIR__)
 
 defmodule BlazeX.BH05ConformanceCorpusTest do
   use ExUnit.Case, async: true
