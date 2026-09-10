@@ -147,7 +147,7 @@ adapter modules are forbidden even when available in the monorepo.
 | [9 — Scoped Context and Manifest-Bounded Dynamic Components](phase-09-scoped-context-and-manifest-bounded-dynamic-components.md) | complete — scoped context and registry | Implement root-scoped named context and deterministic stable-ID component registries suitable for BH-06 reachability analysis. | Phases 3–8 |
 | [10 — Failure Containment, Retry, Replacement, and Disposal](phase-10-failure-containment-retry-replacement-and-disposal.md) | complete — bounded recovery | Contain failures at honest process-root boundaries, render accessible fallback, bound retries, invalidate generations, and release all owned work. | Phases 5–9 |
 | [11 — ERTS, Browser-AtomVM, and Cross-Backend Conformance](phase-11-erts-browser-atomvm-and-cross-backend-conformance.md) | complete — fixed-corpus conformance | Run matching public component scenarios under ERTS/headless and browser AtomVM/DOM, with retained native-spike portability checks. | Phases 2–10 and accepted BH-04 browser path |
-| [12 — Reliability Measurement, Review, and BH-05 Acceptance](phase-12-reliability-measurement-review-and-bh-05-acceptance.md) | authorized — revise candidate | Measure six first-responsible budgets, close two failure gates, review the candidate, and accept, revise, or block BH-06 eligibility. | Phases 1–11 |
+| [12 — Reliability Measurement, Review, and BH-05 Acceptance](phase-12-reliability-measurement-review-and-bh-05-acceptance.md) | complete — revise | Measure six first-responsible budgets, close two failure gates, review the candidate, and accept, revise, or block BH-06 eligibility. | Phases 1–11 |
 
 ## Acceptance ownership
 
@@ -262,3 +262,4 @@ proof of another host.
 - [Acceptance contract](acceptance-contract.md) — Phase 12 frozen measurements, inventories, decisions and BH-06 handoff limits.
 - [Acceptance reconciliation](acceptance-reconciliation.md) — Nine-condition outcome, evidence-first review lenses and active re-entry blocker.
 - [Revision candidate and BH-06 handoff](release-and-bh06-handoff.md) — Deterministic release indexes and explicit BH-06 ineligibility.
+- [Phase 12 completion evidence](acceptance-evidence.md) — Final source-frozen gate, measurements, blocker, decision and re-entry conditions.

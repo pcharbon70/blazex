@@ -1,4 +1,5 @@
 """Validate Phase 12 cleanup, process-growth, and failure-gate evidence."""
+import argparse
 import hashlib
 import json
 import sys
@@ -47,7 +48,31 @@ def validate(root=REPO_ROOT):
     return errors
 
 
+def validate_browser_observation(path):
+    errors = []
+    try:
+        value = json.loads(Path(path).read_text())
+        rows = value.get("results", [])
+        if [row.get("browser") for row in rows] != ["chrome", "firefox"]:
+            errors.append("repeat browser matrix drift")
+        elif any(row.get("result") != "passed" for row in rows):
+            errors.append("repeat browser harness failed")
+        elif rows[0]["cleanup"][0]["unresolved"] != 0 or rows[1]["cleanup"][0]["unresolved"] <= 0:
+            errors.append("repeat did not reproduce the active Firefox divergence")
+        elif any(row["process_growth"][0]["unexpected_growth"] != 0 for row in rows):
+            errors.append("repeat process growth regressed")
+        if value.get("comparison", {}).get("state") != "fail":
+            errors.append("repeat Firefox divergence was hidden")
+    except (OSError, ValueError, KeyError, TypeError, IndexError):
+        errors.append("missing/malformed browser repeat")
+    return errors
+
+
 if __name__ == "__main__":
-    problems = validate()
-    print("\n".join(problems) if problems else "BH-05 Phase 12 cleanup evidence: REVISE (validated)")
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--browser-observation", type=Path)
+    args = parser.parse_args()
+    problems = validate_browser_observation(args.browser_observation) if args.browser_observation else validate()
+    success = "BH-05 browser cleanup repeat: REVISE reproduced" if args.browser_observation else "BH-05 Phase 12 cleanup evidence: REVISE (validated)"
+    print("\n".join(problems) if problems else success)
     sys.exit(bool(problems))

@@ -75,3 +75,5 @@ bindings. No measurement or runtime result may claim Phase 1 pass credit.
 - [BH-05 release index](bh-05-release-index-v0.1.0.json) — Revision-candidate evidence, implementation/API, conformance, benchmark and dependency inventory.
 - [BH-05 acceptance overlay](bh-05-acceptance-overlay-v0.1.0.json) — Versioned outcomes over the unchanged planned registry.
 - [BH-06 entry decision](bh-06-entry-decision-v0.1.0.json) — Ineligible and unauthorized while the active blocker remains.
+- [Acceptance gates](acceptance-gates-v0.1.0.json) — Thirteen passing source-frozen meta-gates that reproduce the revise outcome.
+- [Acceptance completion](acceptance-completion-v0.1.0.json) — BH-05 revision-required decision and BH-06 ineligibility.

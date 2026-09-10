@@ -17,7 +17,7 @@ aliases:
 
 Back to milestone: [README](README.md)
 
-- [ ] 12 Phase - Reliability Measurement, Review, and BH-05 Acceptance.
+- [x] 12 Phase - Reliability Measurement, Review, and BH-05 Acceptance.
 
   Measure the six BH-05 first-responsible reliability/resource budgets,
   reconcile the two failure gates and roadmap outcome, execute independent
@@ -144,28 +144,28 @@ Back to milestone: [README](README.md)
       - [x] 12.5.2.2 Subtask - If accepted, generate a conditional BH-06 entry manifest containing public registry/metadata roots, supported runtime subset, unresolved conditions, prohibited dependencies, required proofs, stop rules, and separate-authorization requirement.
       - [x] 12.5.2.3 Subtask - Preserve general reachability/build safety, component libraries/forms/navigation, Phoenix/Plug transport, prerender/activation, broad platform qualification, public 1.0 stability, and release support as later work.
 
-  - [ ] 12.6 Section - Phase 12 Integration Tests and Completion Evidence.
+  - [x] 12.6 Section - Phase 12 Integration Tests and Completion Evidence.
 
     Rebuild and execute the complete BH-05 candidate, verify generated release
     artifacts, and publish the final milestone decision.
 
-    - [ ] 12.6.1 Task - Run the milestone-wide integration and release gate.
+    - [x] 12.6.1 Task - Run the milestone-wide integration and release gate.
 
       Reproduce every active package, runtime, renderer, browser, failure,
       measurement, governance, and dependency check from a clean candidate.
 
-      - [ ] 12.6.1.1 Subtask - Run all activated Mix/Node tests and formats/build checks, ERTS/headless scenarios, Linux Chrome/Firefox AtomVM/DOM scenarios, GTK portability checks, failure/resource tests, six benchmarks, Phase 1–12 validators, inherited validators/generators, archive/JSON/API/dependency checks, and patch hygiene.
-      - [ ] 12.6.1.2 Subtask - Verify source/evidence freshness, release regeneration, review coverage, all nine acceptance outcomes, exact active/deferred classification, no hidden blocker, and no public/support overclaim.
-      - [ ] 12.6.1.3 Subtask - Repeat a representative clean-build/runtime subset in an independent clean execution context when available; otherwise record the missing repeat as an owned bounded condition, not a fabricated pass.
+      - [x] 12.6.1.1 Subtask - Run all activated Mix/Node tests and formats/build checks, ERTS/headless scenarios, Linux Chrome/Firefox AtomVM/DOM scenarios, GTK portability checks, failure/resource tests, six benchmarks, Phase 1–12 validators, inherited validators/generators, archive/JSON/API/dependency checks, and patch hygiene.
+      - [x] 12.6.1.2 Subtask - Verify source/evidence freshness, release regeneration, review coverage, all nine acceptance outcomes, exact active/deferred classification, no hidden blocker, and no public/support overclaim.
+      - [x] 12.6.1.3 Subtask - Repeat a representative clean-build/runtime subset in an independent clean execution context when available; otherwise record the missing repeat as an owned bounded condition, not a fabricated pass.
 
-    - [ ] 12.6.2 Task - Publish BH-05 completion evidence and decision.
+    - [x] 12.6.2 Task - Publish BH-05 completion evidence and decision.
 
       Close the milestone truthfully and grant no downstream implementation
       authority by implication.
 
-      - [ ] 12.6.2.1 Subtask - Publish exact tools/environments, commands/counts, source/artifact hashes, raw/report statistics, active failures, findings, limits, deferrals, reviews, release index, and public/private API audit.
-      - [ ] 12.6.2.2 Subtask - Accept only when active exit checks pass with no unresolved blocker; otherwise publish revise or blocked with exact re-entry requirements.
-      - [ ] 12.6.2.3 Subtask - If accepted, mark BH-06 eligible but unauthorized and retain public 1.0, platform, profile, and release support as unqualified.
+      - [x] 12.6.2.1 Subtask - Publish exact tools/environments, commands/counts, source/artifact hashes, raw/report statistics, active failures, findings, limits, deferrals, reviews, release index, and public/private API audit.
+      - [x] 12.6.2.2 Subtask - Accept only when active exit checks pass with no unresolved blocker; otherwise publish revise or blocked with exact re-entry requirements.
+      - [x] 12.6.2.3 Subtask - If accepted, mark BH-06 eligible but unauthorized and retain public 1.0, platform, profile, and release support as unqualified.
 
 ## Section delivery rule
 

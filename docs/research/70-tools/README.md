@@ -189,6 +189,8 @@ independent-review blockers, as intended.
 - [`validate_bh05_reconciliation.py`](validate_bh05_reconciliation.py) — Validate review coverage, exact generation, revise decision and BH-06 ineligibility.
 - [`generate_bh05_release.py`](generate_bh05_release.py) — Generate the revision index, acceptance overlay and negative BH-06 entry decision.
 - [`validate_bh05_release.py`](validate_bh05_release.py) — Validate exact regeneration, API/dependency inventory and absence of downstream authority.
+- [`validate_bh05_acceptance.py`](validate_bh05_acceptance.py) — Validate the complete source-bound Phase 12 revise decision and final evidence.
+- [`record_bh05_phase12.py`](record_bh05_phase12.py) — Run and publish the final Phase 12 meta-gates while retaining the active product blocker.
 
 - [`bh03_history.py`](bh03_history.py) — Narrow Phase 9 historical-source binding; never validates current implementation.
 - [`bh04_history.py`](bh04_history.py) — Explicit Phase 2 supersession: reproduce immutable Phase 1 on accepted Git.
