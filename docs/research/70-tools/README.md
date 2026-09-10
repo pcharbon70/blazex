@@ -297,3 +297,4 @@ reporting a tooling change complete.
 - [Phase 10 recorder](record_bh05_phase10.py) — Twenty-one source-frozen gates and guarded publication.
 - [Phase 11 authority generator](generate_bh05_conformance.py) — Binds the active cross-runtime/backend matrix and normalization rules.
 - [Phase 11 corpus generator](generate_bh05_conformance_corpus.py) — Freezes public fixtures, scenario dimensions and deterministic trace fields.
+- [Phase 11 local runner](run_bh05_local_conformance.py) — Executes and normalizes ERTS, Chrome/Firefox DOM and direct GTK reference rows.
