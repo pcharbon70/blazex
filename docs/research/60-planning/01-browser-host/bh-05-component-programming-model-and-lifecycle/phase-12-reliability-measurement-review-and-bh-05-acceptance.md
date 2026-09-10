@@ -72,29 +72,29 @@ Back to milestone: [README](README.md)
       - [ ] 12.2.2.2 Subtask - Inject persistent deterministic failure and report automatic restart count in each five-second window against the at-most-three budget, including fingerprint, backoff, terminal stop, fallback, and no-replay evidence.
       - [ ] 12.2.2.3 Subtask - Preserve every overload, timeout, leak, failed restart, divergence, and instrumentation failure rather than filtering negative samples.
 
-  - [ ] 12.3 Section - Execute cleanup, process-growth, and failure-gate measurements.
+  - [x] 12.3 Section - Execute cleanup, process-growth, and failure-gate measurements.
 
     Repeatedly dispose resource-heavy roots and inject component/resource-owner
     failures while observing focus, siblings, processes, late work, and final
     terminal states.
 
-    - [ ] 12.3.1 Task - Measure cleanup latency and process growth.
+    - [x] 12.3.1 Task - Measure cleanup latency and process growth.
 
       Use one governed lifecycle corpus under both active runtimes with exact
       persistent-service exclusions.
 
-      - [ ] 12.3.1.1 Subtask - Measure root disposal through release of subscriptions, timers, renderer surfaces, file/resource leases, effect handles, queues, and process ownership against the proposed 1000 ms p95 cleanup budget.
-      - [ ] 12.3.1.2 Subtask - Run one hundred mount-use-dispose cycles and compare managed live-process inventories against baseline, requiring exactly zero unexpected process growth.
-      - [ ] 12.3.1.3 Subtask - Record per-owner cleanup duration/status, late messages/results, forced cleanup, unavailable instrumentation, retained process/resource identity, and raw evidence.
+      - [x] 12.3.1.1 Subtask - Measure root disposal through release of subscriptions, timers, renderer surfaces, file/resource leases, effect handles, queues, and process ownership against the proposed 1000 ms p95 cleanup budget.
+      - [x] 12.3.1.2 Subtask - Run one hundred mount-use-dispose cycles and compare managed live-process inventories against baseline, requiring exactly zero unexpected process growth.
+      - [x] 12.3.1.3 Subtask - Record per-owner cleanup duration/status, late messages/results, forced cleanup, unavailable instrumentation, retained process/resource identity, and raw evidence.
 
-    - [ ] 12.3.2 Task - Re-execute component and resource-cleanup failure gates.
+    - [x] 12.3.2 Task - Re-execute component and resource-cleanup failure gates.
 
       Close the canonical failure conditions against the final candidate rather
       than relying only on Phase 10 results.
 
-      - [ ] 12.3.2.1 Subtask - Re-run `BX-ACC-FAILURE-BX-FAIL-COMPONENT` and verify governed root containment, accessible fallback, sibling preservation, diagnostics, focus behavior, and owned-resource disposal.
-      - [ ] 12.3.2.2 Subtask - Re-run `BX-ACC-FAILURE-BX-FAIL-RESOURCE-CLEANUP` and verify generation invalidation, pending cancellation, idempotent release, focus restoration/redirection, and 100% late-completion rejection.
-      - [ ] 12.3.2.3 Subtask - Treat any swallowed failure, state-authority confusion, unbounded queue/retry, cross-root impact, stale mutation, or resource/process surviving the active bound as blocking.
+      - [x] 12.3.2.1 Subtask - Re-run `BX-ACC-FAILURE-BX-FAIL-COMPONENT` and verify governed root containment, accessible fallback, sibling preservation, diagnostics, focus behavior, and owned-resource disposal.
+      - [x] 12.3.2.2 Subtask - Re-run `BX-ACC-FAILURE-BX-FAIL-RESOURCE-CLEANUP` and verify generation invalidation, pending cancellation, idempotent release, focus restoration/redirection, and 100% late-completion rejection.
+      - [x] 12.3.2.3 Subtask - Treat any swallowed failure, state-authority confusion, unbounded queue/retry, cross-root impact, stale mutation, or resource/process surviving the active bound as blocking.
 
   - [ ] 12.4 Section - Reconcile evidence and execute multidisciplinary review.
 

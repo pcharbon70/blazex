@@ -47,7 +47,9 @@ supervisor reference; OTP child startup necessarily uses PIDs internally, never
 as component references. One temporary guardian per root monitors its linked
 coordinator, preserves redacted terminal metadata (including untrappable kill),
 and does not restart or replay it. Terminal handles remain inspectable until an
-explicit new instance replaces the terminal child. Sibling guardians survive.
+exact matching handle calls `LocalView.release_terminal/2` or an explicit new
+instance replaces the terminal child. Release rejects active and stale handles,
+removes only terminal guardians, and is idempotent after absence. Sibling guardians survive.
 Root IDs are unique within that supervisor; instance IDs must not be reused.
 
 ## State machine
@@ -110,4 +112,9 @@ Callbacks and ports are trusted, terminating code; this is not a preemptive
 sandbox or an external side-effect rollback guarantee. Digests are ERTS integrity
 observations, not authentication or AtomVM byte-for-byte parity. ERTS execution
 and a pinned AtomVM supervision compatibility analysis are distinct evidence;
-Wasm execution parity remains Phase 11. Support remains unsupported.
+Wasm execution parity remains Phase 11.
+
+Phase 12 repeated-lifecycle measurement found retained guardians caused growth
+of 100 processes per 100 cycles before explicit terminal release existed. Ten
+corrected ERTS samples and both active browser observations report zero
+unexpected growth. Support remains unsupported.

@@ -91,6 +91,13 @@ subtree isolation without processes, command replay and support claims are exclu
 LiveView and LocalLiveView remain explicitly deferred. Phase 11 becomes eligible
 only after passing Phase 10 evidence, and still needs authorization.
 
+Phase 12 measures the complete 513-request resource-heavy inventory. The ERTS
+reference passes 100 samples with a 2 ms nearest-rank p95, and Chrome releases
+the browser observation in 500 ms. Firefox records 452 unresolved releases at
+2652 ms under the same frozen 1000 ms deadline. The divergence is retained as
+an active BH-05 acceptance blocker; no deadline, fixture, or support claim is
+changed to manufacture a pass.
+
 ## Connections
 
 - [Milestone](README.md)

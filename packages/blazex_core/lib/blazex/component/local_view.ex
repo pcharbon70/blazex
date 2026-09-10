@@ -2,7 +2,8 @@ defmodule BlazeX.Component.LocalView do
   @moduledoc """
   Runtime-facing supervised root API. Supervisor references belong to runtime
   composition; returned component handles contain root/instance/owner only.
-  Terminal roots are retained for inspection until an explicit new instance.
+  Terminal roots are retained for inspection until `release_terminal/2` or an
+  explicit new instance removes the private guardian.
   """
   alias BlazeX.Component.{ActionRuntime, RootGuardian, RootPort, RootSchedule, SchedulingPort}
 
@@ -84,6 +85,31 @@ defmodule BlazeX.Component.LocalView do
   def stop(supervisor, handle, reason \\ :shutdown),
     do: request(supervisor, handle, {:stop, reason})
 
+  @doc "Release an inspected terminal guardian; repeated release is a no-op."
+  def release_terminal(supervisor, handle) do
+    if RootPort.handle?(handle) do
+      case locate(supervisor, handle.root) do
+        nil ->
+          :ok
+
+        pid ->
+          with {:ok, _snapshot} <- GenServer.call(pid, {handle, :snapshot}),
+               {true, _instance} <- GenServer.call(pid, :terminal),
+               :ok <- remove(supervisor, handle.root) do
+            :ok
+          else
+            {false, _instance} -> {:error, :not_terminal}
+            {:error, :stale} -> {:error, :stale}
+            _ -> {:error, :terminal_release_failed}
+          end
+      end
+    else
+      {:error, :invalid_request}
+    end
+  catch
+    :exit, _ -> {:error, :terminal_release_failed}
+  end
+
   defp request(supervisor, handle, operation) do
     if RootPort.handle?(handle) do
       case locate(supervisor, handle.root) do
@@ -105,13 +131,7 @@ defmodule BlazeX.Component.LocalView do
       pid ->
         case GenServer.call(pid, :terminal) do
           {true, instance} when instance != spec.instance ->
-            :ok = Supervisor.terminate_child(supervisor, {:blazex_root, spec.root})
-
-            case Supervisor.delete_child(supervisor, {:blazex_root, spec.root}) do
-              :ok -> :ok
-              {:error, :not_found} -> :ok
-              error -> error
-            end
+            remove(supervisor, spec.root)
 
           {true, _} ->
             {:error, :instance_reused}
@@ -127,6 +147,18 @@ defmodule BlazeX.Component.LocalView do
       {{:blazex_root, ^root}, pid, _, _} when is_pid(pid) -> pid
       _ -> nil
     end)
+  end
+
+  defp remove(supervisor, root) do
+    id = {:blazex_root, root}
+
+    with :ok <- Supervisor.terminate_child(supervisor, id) do
+      case Supervisor.delete_child(supervisor, id) do
+        :ok -> :ok
+        {:error, :not_found} -> :ok
+        error -> error
+      end
+    end
   end
 end
 

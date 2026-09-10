@@ -183,6 +183,9 @@ independent-review blockers, as intended.
 
 ### Shared helpers and runners
 
+- [`run_bh05_acceptance_cleanup.py`](run_bh05_acceptance_cleanup.py) — Capture and publish Phase 12 cleanup, process-growth and failure-gate evidence without suppressing active divergence.
+- [`validate_bh05_acceptance_cleanup.py`](validate_bh05_acceptance_cleanup.py) — Validate the retained Firefox blocker, ERTS budgets, failure gates and frozen thresholds.
+
 - [`bh03_history.py`](bh03_history.py) — Narrow Phase 9 historical-source binding; never validates current implementation.
 - [`bh04_history.py`](bh04_history.py) — Explicit Phase 2 supersession: reproduce immutable Phase 1 on accepted Git.
 - [`bh04_phase10_history.py`](bh04_phase10_history.py) — Phase 10 reproduces the immutable Phase 9 gate on its accepted merge.
