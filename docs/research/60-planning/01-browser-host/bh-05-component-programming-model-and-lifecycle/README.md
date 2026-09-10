@@ -258,3 +258,4 @@ proof of another host.
 - [Recovery evidence](recovery-evidence.md) — Phase 10 failure injection, retry limits, cleanup timings and frozen gates.
 - [Conformance contract](conformance-contract.md) — Phase 11 active runtime/backend rows and exact portable equivalence policy.
 - [Conformance evidence](conformance-evidence.md) — Phase 11 ERTS, AtomVM, DOM and GTK results, corrections and limitations.
+- [Acceptance contract](acceptance-contract.md) — Phase 12 frozen measurements, inventories, decisions and BH-06 handoff limits.

@@ -302,3 +302,4 @@ reporting a tooling change complete.
 - [Phase 11 validator](validate_bh05_conformance.py) — Cross-runtime ledger, portability corrections and frozen completion boundary.
 - [Phase 11 validator tests](test_validate_bh05_conformance.py) — Missing, failed, duplicate and stale gate rejection.
 - [Phase 11 recorder](record_bh05_phase11.py) — Fourteen source-frozen active/replay gates and exclusive-create publication.
+- [Phase 12 authority generator](generate_bh05_acceptance.py) — Freezes the final candidate, nine acceptance conditions, six budgets and decision rules.
