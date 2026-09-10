@@ -77,3 +77,4 @@ bindings. No measurement or runtime result may claim Phase 1 pass credit.
 - [BH-06 entry decision](bh-06-entry-decision-v0.1.0.json) — Ineligible and unauthorized while the active blocker remains.
 - [Acceptance gates](acceptance-gates-v0.1.0.json) — Thirteen passing source-frozen meta-gates that reproduce the revise outcome.
 - [Acceptance completion](acceptance-completion-v0.1.0.json) — BH-05 revision-required decision and BH-06 ineligibility.
+- [Cleanup scaling authority](cleanup-scaling-authorization-v0.1.0.json) — Phase 13 correction, immutable Phase 12 bindings, scaling matrix and anti-concealment rules.
