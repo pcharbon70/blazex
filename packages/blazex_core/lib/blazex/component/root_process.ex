@@ -210,7 +210,7 @@ defmodule BlazeX.Component.RootProcess do
          true <- RootPort.handle(spec) == RootPort.handle(state.spec) do
       next = BlazeX.Component.RecoveryCleanup.run(state, :replace)
 
-      if next.recovery.cleanup.unresolved == 0 do
+      if next.recovery.cleanup.unresolved == 0 and next.recovery.cleanup.callback_failures == 0 do
         next = %{
           next
           | recovery: %{next.recovery | generation: accepted.correlation.generation + 1}

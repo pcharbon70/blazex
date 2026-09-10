@@ -111,3 +111,15 @@ module names and retains declaration hashes for later BH-06 analysis. There is
 no dynamic atom creation, arbitrary module loading, global context, server auth,
 bundle generation or Wasm execution claim. See the
 [scope contract](../../docs/research/60-planning/01-browser-host/bh-05-component-programming-model-and-lifecycle/scope-contract.md).
+
+## Phase 10 opt-in recovery
+
+`BlazeX.Component.RecoveryView.start/5` (or `/6` with actions) adds root-owned
+failure containment; `retry/6` requires the failed generation, fingerprint,
+declared source and normalized fresh spec. Existing `LocalView` roots retain
+Phase 1–9 behavior. Recovery roots require a static fallback ID, an evaluator
+fallback port and idempotent renderer/provider cleanup ports. Automatic retries
+are opt-in, limited to three in five seconds, with no action replay. Cleanup
+has one 1000 ms deadline; unconfirmed releases remain visible and block retry,
+even after a later empty-ledger disposal. Runtime configuration is trusted.
+ERTS helper processes are not yet AtomVM/Wasm-qualified; Phase 11 owns that proof.

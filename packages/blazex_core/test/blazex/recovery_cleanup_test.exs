@@ -40,6 +40,11 @@ defmodule BlazeX.RecoveryCleanupTest do
     failed = RecoveryCleanup.run(state(:failed), :shutdown).recovery.cleanup
     assert failed.status == :failed and failed.unresolved == 1
     assert failed.failed == 1 and failed.forced == 0
+    failed_state = RecoveryCleanup.run(state(:failed), :failure)
+    later = RecoveryCleanup.run(%{failed_state | ports: state().ports}, :shutdown)
+    assert later.recovery.cleanup.status == :failed
+    assert later.recovery.cleanup.unresolved == 1
+    assert later.recovery.cleanup.unresolved_pages == failed_state.recovery.cleanup.pages
   end
 
   test "all 512 leases release within one deadline and inventory stays portable" do

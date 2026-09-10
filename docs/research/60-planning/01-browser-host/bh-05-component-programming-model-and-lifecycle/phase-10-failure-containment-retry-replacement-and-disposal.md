@@ -17,7 +17,7 @@ aliases:
 
 Back to milestone: [README](README.md)
 
-- [ ] 10 Phase - Failure Containment, Retry, Replacement, and Disposal.
+- [x] 10 Phase - Failure Containment, Retry, Replacement, and Disposal.
 
   Complete the honest process-root failure boundary. Component callback or
   contract failures must contain to the owning local-view root, preserve
@@ -94,28 +94,28 @@ Back to milestone: [README](README.md)
       - [x] 10.3.2.2 Subtask - Track requested/completed/failed/timed-out release for every owner and permit forced adapter cleanup without reviving disposed component callbacks.
       - [x] 10.3.2.3 Subtask - Make repeated disposal a no-op with the same terminal result, restore or redirect focus according to accepted intent, and diagnose any resource surviving 1000 ms.
 
-  - [ ] 10.4 Section - Phase 10 Integration Tests and Completion Evidence.
+  - [x] 10.4 Section - Phase 10 Integration Tests and Completion Evidence.
 
     Execute component and resource-cleanup failure gates plus restart/disposal
     stress across independent roots.
 
-    - [ ] 10.4.1 Task - Run failure, retry, and cleanup integration tests.
+    - [x] 10.4.1 Task - Run failure, retry, and cleanup integration tests.
 
       Inject failures at every callback and lifecycle boundary and inspect
       fallback, siblings, generations, final state, and owned-resource release.
 
-      - [ ] 10.4.1.1 Subtask - Execute `BX-ACC-FAILURE-BX-FAIL-COMPONENT` for callback raise/reject/invalid result/state/output and prove root containment, accessible fallback, sibling survival, diagnostics, and cleanup.
-      - [ ] 10.4.1.2 Subtask - Execute `BX-ACC-FAILURE-BX-FAIL-RESOURCE-CLEANUP` for removal/replacement/crash and prove generation invalidation, cancellation, idempotent release, focus restoration/redirection, and late-result rejection.
-      - [ ] 10.4.1.3 Subtask - Inject persistent identical failure and prove at most three automatic restarts in five seconds, terminal fallback, no non-idempotent replay, and no cross-root restart or disposal.
+      - [x] 10.4.1.1 Subtask - Execute `BX-ACC-FAILURE-BX-FAIL-COMPONENT` for callback raise/reject/invalid result/state/output and prove root containment, accessible fallback, sibling survival, diagnostics, and cleanup.
+      - [x] 10.4.1.2 Subtask - Execute `BX-ACC-FAILURE-BX-FAIL-RESOURCE-CLEANUP` for removal/replacement/crash and prove generation invalidation, cancellation, idempotent release, focus restoration/redirection, and late-result rejection.
+      - [x] 10.4.1.3 Subtask - Inject persistent identical failure and prove at most three automatic restarts in five seconds, terminal fallback, no non-idempotent replay, and no cross-root restart or disposal.
 
-    - [ ] 10.4.2 Task - Publish Phase 10 completion evidence.
+    - [x] 10.4.2 Task - Publish Phase 10 completion evidence.
 
       Preserve raw failure/retry/resource traces and all leaks or timeouts for
       cross-runtime and final measurement phases.
 
-      - [ ] 10.4.2.1 Subtask - Run Core/effects/UI-tree/renderer/test suites, failure injection and repeated lifecycle scenarios, validators, dependency/security audits, archive/generated checks, JSON validation, and patch hygiene.
-      - [ ] 10.4.2.2 Subtask - Publish taxonomy, fallback/retry/disposal contracts, raw trace hashes, commands/counts, restart maxima, cleanup timings, leaks/timeouts, failures, and limitations.
-      - [ ] 10.4.2.3 Subtask - Mark Phase 10 complete only if active failures contain, retry remains bounded, and cleanup has no unresolved active leak; make Phase 11 eligible but unauthorized.
+      - [x] 10.4.2.1 Subtask - Run Core/effects/UI-tree/renderer/test suites, failure injection and repeated lifecycle scenarios, validators, dependency/security audits, archive/generated checks, JSON validation, and patch hygiene.
+      - [x] 10.4.2.2 Subtask - Publish taxonomy, fallback/retry/disposal contracts, raw trace hashes, commands/counts, restart maxima, cleanup timings, leaks/timeouts, failures, and limitations.
+      - [x] 10.4.2.3 Subtask - Mark Phase 10 complete only if active failures contain, retry remains bounded, and cleanup has no unresolved active leak; make Phase 11 eligible but unauthorized.
 
 ## Section delivery rule
 

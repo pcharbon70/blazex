@@ -111,7 +111,8 @@ defmodule BlazeX.Component.RecoveryPolicy do
       cleanup: :requested,
       fallback: :requested,
       retry_visible: state.recovery.config.user,
-      reload_visible: true
+      reload_visible: true,
+      static_fallback: elem(state.spec.fallback, 1)
     }
   end
 end

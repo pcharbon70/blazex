@@ -17,6 +17,7 @@ defmodule BlazeX.Component.RecoveryGuardian do
   @impl true
   def init({spec, ports, policy, actions, config}) do
     true = RecoveryPolicy.validate(config)
+    true = match?({:static, _}, spec.fallback)
     true = function_exported?(elem(ports.evaluator, 0), :fallback, 3)
 
     true =
@@ -81,6 +82,9 @@ defmodule BlazeX.Component.RecoveryGuardian do
       match?({:retry, _}, operation) ->
         {reply, next} = retry(state, elem(operation, 1))
         {:reply, reply, next}
+
+      match?({:stop, _}, operation) and elem(operation, 1) not in [:shutdown, :removal] ->
+        {:reply, {:error, :invalid_request}, state}
 
       operation == :snapshot and terminal?(state) ->
         {:reply, {:ok, decorate(state.snapshot, state)}, state}

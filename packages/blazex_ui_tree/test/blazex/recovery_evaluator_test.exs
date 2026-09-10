@@ -29,6 +29,8 @@ defmodule BlazeX.RecoveryEvaluatorTest do
     def force_cleanup(_, _), do: :ok
   end
 
+  def spec, do: %{F.spec() | fallback: {:static, "recovery"}}
+
   def config,
     do: %{
       automatic: false,
@@ -52,7 +54,7 @@ defmodule BlazeX.RecoveryEvaluatorTest do
     {:ok, handle} =
       RecoveryView.start(
         supervisor,
-        %{F.spec() | component: Broken},
+        %{spec() | component: Broken},
         ports(),
         F.policy(),
         config()
@@ -86,7 +88,7 @@ defmodule BlazeX.RecoveryEvaluatorTest do
     {:ok, sibling} =
       RecoveryView.start(
         supervisor,
-        %{F.spec() | root: "sibling", instance: "sibling"},
+        %{spec() | root: "sibling", instance: "sibling"},
         sibling_ports,
         F.policy(),
         config()
@@ -113,7 +115,7 @@ defmodule BlazeX.RecoveryEvaluatorTest do
     {:ok, handle} =
       RecoveryView.start(
         supervisor,
-        %{F.spec() | component: Broken},
+        %{spec() | component: Broken},
         ports(),
         F.policy(),
         config()
@@ -129,11 +131,11 @@ defmodule BlazeX.RecoveryEvaluatorTest do
           {1, fingerprint, :automatic}
         ] do
       assert {:error, _} =
-               RecoveryView.retry(supervisor, handle, generation, digest, source, F.spec())
+               RecoveryView.retry(supervisor, handle, generation, digest, source, spec())
     end
 
     assert {:ok, %{generation: 2}} =
-             RecoveryView.retry(supervisor, handle, 1, fingerprint, :user, F.spec())
+             RecoveryView.retry(supervisor, handle, 1, fingerprint, :user, spec())
 
     assert_receive {:submission, mount, fresh}, 1000
     assert mount.generation == 2 and mount.operation == :mount
@@ -152,7 +154,7 @@ defmodule BlazeX.RecoveryEvaluatorTest do
     {:ok, handle} =
       RecoveryView.start(
         supervisor,
-        %{F.spec() | component: Broken},
+        %{spec() | component: Broken},
         ports({Unavailable, nil}),
         F.policy(),
         config()
@@ -164,11 +166,42 @@ defmodule BlazeX.RecoveryEvaluatorTest do
     assert snapshot.attempt <= 2
   end
 
+  test "renderer rejection and commit deadline converge on failure then static fallback" do
+    supervisor = start_supervised!(LocalView.Supervisor)
+
+    for {instance, outcome} <- [{"reject", :rejected}, {"timeout", :timeout}] do
+      {:ok, handle} =
+        RecoveryView.start(
+          supervisor,
+          %{spec() | instance: instance, timeout_ms: 100},
+          ports(),
+          F.policy(),
+          config()
+        )
+
+      assert_receive {:submission, mount, _}, 1000
+
+      if outcome == :rejected do
+        LocalView.acknowledge(supervisor, handle, %{correlation: mount, result: :rejected})
+      end
+
+      assert_receive {:submission, failure, _}, 1000
+      assert failure.operation == :failure
+      Process.sleep(150)
+      {:ok, snapshot} = LocalView.inspect_root(supervisor, handle)
+      assert snapshot.status == :failed
+      assert snapshot.recovery.failure.fallback == :static
+      assert snapshot.recovery.failure.static_fallback == "recovery"
+      assert snapshot.recovery.cleanup.unresolved == 0
+      assert :ok = LocalView.stop(supervisor, handle)
+    end
+  end
+
   test "persistent failure has exactly three automatic fresh-generation restarts then terminal fallback" do
     supervisor = start_supervised!(LocalView.Supervisor)
 
     {:ok, handle} =
-      RecoveryView.start(supervisor, %{F.spec() | component: Broken}, ports(), F.policy(), %{
+      RecoveryView.start(supervisor, %{spec() | component: Broken}, ports(), F.policy(), %{
         config()
         | automatic: true
       })
@@ -203,7 +236,7 @@ defmodule BlazeX.RecoveryEvaluatorTest do
 
   test "hard worker crash contains one root and cleanup releases its accepted owners" do
     supervisor = start_supervised!(LocalView.Supervisor)
-    {:ok, handle} = RecoveryView.start(supervisor, F.spec(), ports(), F.policy(), config())
+    {:ok, handle} = RecoveryView.start(supervisor, spec(), ports(), F.policy(), config())
     assert_receive {:submission, mount, _}, 1000
     :ok = LocalView.acknowledge(supervisor, handle, %{correlation: mount, result: :committed})
     [{_, guardian, _, _}] = Supervisor.which_children(supervisor)
@@ -219,10 +252,10 @@ defmodule BlazeX.RecoveryEvaluatorTest do
 
   test "replacement and repeated shutdown clean each generation and reject old scope work" do
     supervisor = start_supervised!(LocalView.Supervisor)
-    {:ok, handle} = RecoveryView.start(supervisor, F.spec(), ports(), F.policy(), config())
+    {:ok, handle} = RecoveryView.start(supervisor, spec(), ports(), F.policy(), config())
     assert_receive {:submission, mount, _}, 1000
     :ok = LocalView.acknowledge(supervisor, handle, %{correlation: mount, result: :committed})
-    assert {:ok, replace} = LocalView.replace(supervisor, handle, 1, F.spec())
+    assert {:ok, replace} = LocalView.replace(supervisor, handle, 1, spec())
     assert_receive {:submission, ^replace, candidate}, 1000
     assert replace.generation == 2
     assert Enum.all?(candidate.token.scope.context.bindings, &(&1.consumer.generation == 2))

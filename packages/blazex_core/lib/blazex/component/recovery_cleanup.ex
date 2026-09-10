@@ -106,7 +106,9 @@ defmodule BlazeX.Component.RecoveryCleanup do
       )
 
     elapsed = now() - started
-    unresolved = Enum.count(rows, & &1.unresolved)
+    prior = state.recovery.cleanup
+    prior_unresolved = if prior, do: prior.unresolved, else: 0
+    unresolved = max(Enum.count(rows, & &1.unresolved), prior_unresolved)
 
     report = %{
       status: if(unresolved == 0, do: :completed, else: :failed),
@@ -116,9 +118,17 @@ defmodule BlazeX.Component.RecoveryCleanup do
       failed: Enum.count(rows, &(&1.status == :failed)),
       timed_out: Enum.count(rows, &(&1.status == :timed_out)),
       forced: Enum.count(rows, &(&1.force_status == :completed)),
+      callback_failures: Enum.count(rows, &(&1.kind == :component and &1.status != :completed)),
       requested: length(rows),
       pages: Enum.chunk_every(rows, 128)
     }
+
+    # A later empty ledger cannot prove release of an earlier lost resource.
+    # Retain the first unresolved inventory without recursively growing reports.
+    report =
+      if prior_unresolved > 0,
+        do: Map.put(report, :unresolved_pages, Map.get(prior, :unresolved_pages, prior.pages)),
+        else: report
 
     actions =
       if actions do
@@ -167,6 +177,7 @@ defmodule BlazeX.Component.RecoveryCleanup do
                 failed: 1,
                 timed_out: 0,
                 forced: 0,
+                callback_failures: 1,
                 requested: 0,
                 pages: []
               }
@@ -186,6 +197,7 @@ defmodule BlazeX.Component.RecoveryCleanup do
                 failed: 1,
                 timed_out: 0,
                 forced: 0,
+                callback_failures: 1,
                 requested: 0,
                 pages: []
               }

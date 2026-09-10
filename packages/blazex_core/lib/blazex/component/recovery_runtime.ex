@@ -10,6 +10,13 @@ defmodule BlazeX.Component.RecoveryRuntime do
   def fail(state, code) do
     failure = RecoveryPolicy.failure(state, code)
 
+    failure =
+      Map.put(
+        failure,
+        :cleanup_errors,
+        if(code == :cleanup_failed, do: state.recovery.cleanup, else: nil)
+      )
+
     state = RecoveryCleanup.run(state, :failure)
     cleanup = state.recovery.cleanup
     failure = %{failure | cleanup: cleanup.status}
@@ -39,7 +46,12 @@ defmodule BlazeX.Component.RecoveryRuntime do
 
   def stop(state, reason) do
     next = RecoveryCleanup.run(state, reason)
-    error = if next.recovery.cleanup.unresolved == 0, do: nil, else: :cleanup_failed
+
+    error =
+      if next.recovery.cleanup.unresolved == 0 and next.recovery.cleanup.callback_failures == 0,
+        do: nil,
+        else: :cleanup_failed
+
     next = %{next | status: :disposed, pending: nil, accepted: nil, error: error}
     RootProcess.recovery_notify(next, :disposed)
     {if(error, do: {:error, error}, else: :ok), next}
@@ -53,6 +65,16 @@ defmodule BlazeX.Component.RecoveryRuntime do
       | fallback: fallback,
         cleanup: state.recovery.cleanup.status
     }
+
+    failure =
+      Map.put(
+        failure,
+        :fallback_digest,
+        if(fallback == :committed and state.pending,
+          do: state.pending.candidate.final_digest,
+          else: nil
+        )
+      )
 
     next = %{
       state

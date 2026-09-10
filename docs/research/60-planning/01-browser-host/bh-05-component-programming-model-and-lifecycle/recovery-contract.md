@@ -50,6 +50,8 @@ submits minimal semantic alert/status text and a focus target through the ordina
 renderer submit/commit path. Retry is a declared runtime action, not an arbitrary
 application event. The host retains static fallback and reload presentation if
 the renderer cannot commit; no browser support credit is implied.
+Recovery roots require an explicit static fallback ID in the root specification;
+diagnostics carry that ID and the committed fallback digest when available.
 
 Retry sources are declared user, host, changed-input/build and automatic policy.
 Requests bind the failed generation and fingerprint. Every admitted retry starts
