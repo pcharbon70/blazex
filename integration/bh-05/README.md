@@ -73,3 +73,8 @@ Phase 9 successor check: `python3 docs/research/70-tools/validate_bh05_scopes.py
 Earlier phase validators replay their frozen accepted revisions; they do not
 grant current-source evidence for authorized successor changes.
 Phase 7 and earlier validators remain frozen and run at accepted snapshots.
+
+- [Recovery fixtures](recovery-fixtures.exs) — Public failure injection, independent headless fallback and provider cleanup.
+- [Recovery index](recovery-index-v0.1.0.json) — Phase 10 source inventory, bounds and fifteen normalized digests.
+
+Current successor check: `python3 docs/research/70-tools/validate_bh05_recovery.py --final`.

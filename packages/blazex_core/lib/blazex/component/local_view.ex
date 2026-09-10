@@ -6,18 +6,25 @@ defmodule BlazeX.Component.LocalView do
   """
   alias BlazeX.Component.{ActionRuntime, RootGuardian, RootPort, RootSchedule, SchedulingPort}
 
-  def start(supervisor, spec, ports, policy \\ nil, actions \\ nil) do
+  def start(supervisor, spec, ports, policy \\ nil, actions \\ nil, recovery \\ nil) do
     with {:ok, spec} <- RootPort.normalize(spec),
          true <- RootPort.ports?(ports),
          {:ok, _} <- RootSchedule.new(policy),
          {:ok, _} <- ActionRuntime.new(actions),
+         true <- recovery == nil or BlazeX.Component.RecoveryPolicy.validate(recovery),
          true <- policy == nil or SchedulingPort.supported?(ports.evaluator),
          true <-
            actions == nil or
              (policy != nil and function_exported?(elem(ports.evaluator, 0), :admit_action, 3)),
          :ok <- vacant(supervisor, spec),
          {:ok, _private_pid} <-
-           Supervisor.start_child(supervisor, child_spec({spec, ports, policy, actions})) do
+           Supervisor.start_child(
+             supervisor,
+             if(recovery == nil,
+               do: child_spec({spec, ports, policy, actions}),
+               else: child_spec({spec, ports, policy, actions, recovery})
+             )
+           ) do
       {:ok, RootPort.handle(spec)}
     else
       {:error, code} when code in [:invalid_start, :already_started, :instance_reused] ->
@@ -44,6 +51,17 @@ defmodule BlazeX.Component.LocalView do
       type: :worker
     }
   end
+
+  def child_spec({spec, ports, policy, actions, recovery}) do
+    %{
+      child_spec({spec, ports, policy, actions})
+      | start:
+          {BlazeX.Component.RecoveryGuardian, :start_link,
+           [{spec, ports, policy, actions, recovery}]}
+    }
+  end
+
+  def retry(supervisor, handle, request), do: request(supervisor, handle, {:retry, request})
 
   def inspect_root(supervisor, handle), do: request(supervisor, handle, :snapshot)
 

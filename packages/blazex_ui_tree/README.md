@@ -88,3 +88,9 @@ Compatible same-ID targets retain state; changed IDs replace identity and remove
 old subscriptions. Contract/registry changes require explicit root replacement.
 Default evaluator roots retain their frozen Phase 1–8 behavior. No process,
 renderer, server adapter, LiveView or LocalLiveView ownership is introduced.
+
+Phase 10 `BlazeX.UITree.RecoveryEvaluator` wraps an evaluator port and timeout.
+It creates a callback-independent status/action/focus fallback and exposes
+owner-ordered disposal. Core retains process and retry authority; the outward
+adapter owns semantic output. Renderer-unavailable roots identify a host-owned
+static fallback; browser wiring and runtime parity remain Phase 11 work.

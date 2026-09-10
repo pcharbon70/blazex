@@ -49,14 +49,14 @@ Planning alone does not authorize implementation. The owner authorized Phase 1
 after the accepted BH-04 corrective handoff merged in PR #51 at
 `506c254ddd4a14dd8d1d4cbdba8fcf9556bd15cb`. Phase 1 activates governance only;
 every later phase still requires separate explicit implementation authorization.
-Phases 1–9 are complete: governance activation, candidate authoring, prop/slot
+Phases 1–10 are complete: governance activation, candidate authoring, prop/slot
 schemas, pure composition, nested-state reconciliation, supervised root
 lifecycle, bounded local scheduling, typed action/resource/command boundaries,
-scoped context and manifest-bounded registry have separately bound evidence.
-The owner authorized Phase 9 after accepted Phase 8 PR #59. Phase 10 is eligible
+scoped context, manifest-bounded registry and root recovery have separately bound evidence.
+The owner authorized Phase 10 after accepted Phase 9 PR #60. Phase 11 is eligible
 but unauthorized; BH-06 remains ineligible. The current
-[Phase 9 evidence](scope-evidence.md) grants ERTS/headless scoped-context and
-bounded dynamic-selection credit, without concrete browser/server providers
+[Phase 10 evidence](recovery-evidence.md) grants ERTS/headless failure containment,
+bounded retry and cleanup credit, without concrete browser/server providers
 or Wasm parity. [Runtime compatibility limits](root-supervision-compatibility.md) remain
 explicitly unqualified for Phase 11.
 
@@ -253,3 +253,6 @@ proof of another host.
 - [Action evidence](action-evidence.md) — Phase 8 integration, pending/lease stress, authority analysis and source-frozen gate method.
 - [Scope contract](scope-contract.md) — Phase 9 context visibility, commit-gated invalidation and manifest-bounded registry.
 - [Scope evidence](scope-evidence.md) — Phase 9 context/registry fixtures, exact bounds, normalized hashes and frozen replay method.
+- [Recovery contract](recovery-contract.md) — Phase 10 failure containment, fallback, retry and disposal authority.
+
+- [Recovery evidence](recovery-evidence.md) — Phase 10 failure injection, retry limits, cleanup timings and frozen gates.

@@ -1,0 +1,71 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 10,
+  "base": "77bf199bebb680b24efef0130b19d93ef181f4d5",
+  "authorization": "Owner requested next BH-05 phase after accepted Phase 9 PR 60; Phase 10 only.",
+  "branch": "codex/bh05-phase10-recovery",
+  "sections": [
+    "10.1",
+    "10.2",
+    "10.3",
+    "10.4"
+  ],
+  "delivery": [
+    "verified section commits",
+    "single PR",
+    "merge",
+    "checkout main",
+    "sync origin",
+    "delete feature branch"
+  ],
+  "contract": "0.1.0-bh05-recovery",
+  "input_hashes": {
+    "docs/research/assets/bh-05-baseline/scope-completion-v0.1.0.json": "5e200871e66131e3a8d5d4d8ebe52b49fd867662dd51cf8b4e1e6edcbd01f661",
+    "docs/research/assets/bh-05-baseline/scope-gates-v0.1.0.json": "e954dbbfbab46925806a3383dd4d42c8f3fa7c8f8644412c44a681e2d88afcd7",
+    "docs/research/60-planning/01-browser-host/bh-05-component-programming-model-and-lifecycle/scope-contract.md": "47d8cee99996e690dcab26de24afae258a105792a377eefaf12ebb61e09d327b",
+    "docs/research/60-planning/01-browser-host/bh-05-component-programming-model-and-lifecycle/action-contract.md": "fa51100322c9f73e15f5985a61735239c606a67282c5b66ccaf0474ae6d416de",
+    "docs/research/60-planning/01-browser-host/bh-05-component-programming-model-and-lifecycle/scheduling-contract.md": "5387d4ff130e6193f676b1722beb0f539ede48e75234cfdb7e150a0327dddeaa",
+    "docs/research/60-planning/01-browser-host/bh-05-component-programming-model-and-lifecycle/root-supervision-compatibility.md": "583c8220c41b3d5611ebd0f00167768c5fa083209cfebcd2cffdfaa221c2956f",
+    "packages/blazex_core/lib/blazex/component/local_view.ex": "cf793488981d982cbfca5bd8f26e70919d59fa49cfe9ca59f8c63beb9613c21e",
+    "packages/blazex_core/lib/blazex/component/root_process.ex": "3a86ad4e6c0d2e5533544d13c0b168d274a5ce409fc376369c5471cf3f76b6f0",
+    "packages/blazex_core/lib/blazex/component/root_port.ex": "949d120f2d9e2446e7faa50be45dc1b9b3f1baf4dbdfd36eb342f86e695b9241",
+    "packages/blazex_ui_tree/lib/blazex/ui_tree/root_evaluator.ex": "88536e58263456d7138eca4e532515d3491c32aab27ab8121e99397e12658a6a",
+    "packages/blazex_core/lib/blazex/component/root_guardian.ex": "8dbf06b8cbb937ebef583cee7ca80649578201e55905c65cca37ea9fbab4eab8",
+    "packages/blazex_core/lib/blazex/component/root_schedule.ex": "26fda646f5705ca6f5320d6efeccfbc4040933b9458b8c30728b22e37992242c",
+    "packages/blazex_core/lib/blazex/component/root_timers.ex": "5ab7c44059b9e9e96c885bddeb525738a00732a65ec8eeb90c0311e7322d8eec",
+    "packages/blazex_core/lib/blazex/component/action_runtime.ex": "0501e918bdb3e752ff52d1e43bac9b829eb4d965abc0c4380ee14fcc9884f9f6",
+    "packages/blazex_core/lib/blazex/component/action_ledger.ex": "4b342cf203c57d11c4fe0a92182938014630325ccbe228d1e897cd4cd8aa64f4",
+    "packages/blazex_core/lib/blazex/component/scoped_context.ex": "4d676c261f286e1d686acfd08207eaa0f639569e6e9ad93991dda183cb52faac",
+    "packages/blazex_core/lib/blazex/component/component_registry.ex": "d139453ac4df988014249f6d110c3c0b3589fd6af5f0621b1e1cf09f10f41908",
+    "packages/blazex_ui_tree/lib/blazex/ui_tree/accessibility.ex": "33ef2d2cb5054180705f39f56568fc0285a2eea433b586c6195035978f64fc0f",
+    "packages/blazex_ui_tree/lib/blazex/ui_tree/focus.ex": "c8094a4e1e60a145285a5a368a89608c1220f722fecacb3674dc65c5579c85fc",
+    "docs/research/assets/quality-acceptance/blazex-acceptance-registry-v0.1.0.json": "43025d17513f068eb1ac0838a381da4c132bf41b74aa602bffdc130e411368ed",
+    "docs/research/assets/bh-03-baseline/blazex-bh-03-phase-09-acceptance-v0.1.0.json": "59b5af334c46e0e53afd6e3e5e10b6c73107825b2b47a252e47af078f0ef8402",
+    "docs/research/assets/bh-04-baseline/blazex-bh-04-phase-10-acceptance-overlay-v0.1.0.json": "81a4e142f9937c35691684e6b9b2a493cc6c47eac9eec977d2c572d680e7d1f1"
+  },
+  "reviewed_successor_changes": {
+    "packages/blazex_core/lib/blazex/component/local_view.ex": "Opt-in root recovery; default Phase 1\u20139 behavior and normalized traces retained.",
+    "packages/blazex_core/lib/blazex/component/root_process.ex": "Opt-in root recovery; default Phase 1\u20139 behavior and normalized traces retained.",
+    "packages/blazex_core/lib/blazex/component/root_port.ex": "Opt-in root recovery; default Phase 1\u20139 behavior and normalized traces retained.",
+    "packages/blazex_ui_tree/lib/blazex/ui_tree/root_evaluator.ex": "Opt-in root recovery; default Phase 1\u20139 behavior and normalized traces retained."
+  },
+  "limits": {
+    "automatic_restarts": 3,
+    "window_ms": 5000,
+    "cleanup_ms": 1000,
+    "owners": 128,
+    "pending_requests": 128,
+    "leases": 512
+  },
+  "excluded": [
+    "BH-15 offline recovery",
+    "whole-VM restart",
+    "non-idempotent replay",
+    "production reporting",
+    "nested process-free isolation",
+    "LiveView",
+    "LocalLiveView",
+    "support claims"
+  ],
+  "support_state": "unsupported"
+}

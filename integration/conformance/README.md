@@ -74,3 +74,7 @@ Versioned records:
 - [BH-05 action integration](test/bh05_actions_test.exs) exercises real portable
   callbacks, capability adapters and headless sessions, including 128 pending
   requests, 512 leases, nested ownership, stale results and untrusted command denial.
+
+BH-05 Phase 10 adds `test/bh05_recovery_test.exs`: 17 callback failure cases,
+independent semantic fallback, sibling isolation, resource cancellation/release,
+forced timeout cleanup, fresh generations and three-in-five-second retry limits.

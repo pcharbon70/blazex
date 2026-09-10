@@ -104,7 +104,7 @@ defmodule BlazeX.Component.RootPort do
         [value.generation, value.revision, value.sequence],
         &(NestedTable.counter?(&1) and &1 > 0)
       ) and
-      value.operation in [:mount, :update, :replace, :dispose] and
+      value.operation in [:mount, :update, :replace, :dispose, :failure] and
       value.transaction == value.instance <> ":" <> Integer.to_string(value.sequence)
   end
 

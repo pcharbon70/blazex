@@ -63,3 +63,7 @@ bindings. No measurement or runtime result may claim Phase 1 pass credit.
 - [Scope authority](scope-authorization-v0.1.0.json) — Phase 9 bounded authorization and accepted Phase 8 inputs.
 - [Scope gates](scope-gates-v0.1.0.json) — Twenty passing frozen-source gates, raw context/registry traces and exact test counts.
 - [Scope completion](scope-completion-v0.1.0.json) — Root-scoped context and bounded registry completion; Phase 10 eligible, unauthorized.
+- [Recovery authority](recovery-authorization-v0.1.0.json) — Phase 10 authorization, failure policy and inherited source hashes.
+
+- [Recovery gates](recovery-gates-v0.1.0.json) — Twenty-one source-frozen Phase 10 checks and raw evidence.
+- [Recovery completion](recovery-completion-v0.1.0.json) — Failure containment and bounded cleanup; Phase 11 eligible, unauthorized.

@@ -1,0 +1,87 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 10,
+  "contract": "0.1.0-bh05-recovery",
+  "support_state": "unsupported",
+  "public": [
+    "BlazeX.Component.RecoveryView",
+    "BlazeX.Component.RecoveryPolicy",
+    "BlazeX.Component.RecoveryCleanup",
+    "BlazeX.UITree.RecoveryEvaluator"
+  ],
+  "coverage": [
+    "callback-failure-matrix",
+    "sibling-root-isolation",
+    "callback-independent-semantic-fallback",
+    "static-fallback",
+    "redacted-diagnostics",
+    "generation-bound-retry",
+    "three-restarts-five-seconds",
+    "no-action-replay",
+    "deepest-first-disposal",
+    "512-lease-cleanup",
+    "forced-timeout-cleanup",
+    "unresolved-leak-detection",
+    "late-work-rejection"
+  ],
+  "normalized_digests": {
+    "RECOVERY_FAILURE_SHA256": "409705856eb8c7c2b582d97aa929f08ea9a00340885c546e7d97003042459823",
+    "RECOVERY_CLEANUP_SHA256": "fa6b0448de866fb9f62c8687e69f3e23a4e3df2a1937efeac3a09667b9f3ff27",
+    "RECOVERY_RESTART_SHA256": "119b730d4bd88005672d994ef736ebd314b9c561cdbf39f79f5ebfbf6f3f20cc",
+    "SCOPE_TRACE_SHA256": "f81d105271527cdefe53c1400a24ccd02dbea897f9b3db617a45e13f7c1aeefc",
+    "SCOPE_FINAL_STATE_SHA256": "efbe66ec3d3e5506c78a4f92da60f79db23e8d9922b8149b0ef16ef61a81e026",
+    "SCOPE_REGISTRY_SHA256": "e9aecaf638f74a9995fde721a25f6eb295926efe6d6de908dd436778498b3302",
+    "ACTION_FINAL_STATE_SHA256": "61fe1070e22766c9eb2e002d5c8593d77aa0ebaec012c4e23bae83f98d0808ee",
+    "ACTION_PENDING_SHA256": "14c87a8ba3714c21136dd57d6645d637ab410aa26ddf23d82efbe0f81fa1446b",
+    "ACTION_LEASE_SHA256": "94809597b6e80115851b6bd5951dbaaf2bcea6ab7c39aaaa3a5349f599d4cdba",
+    "ROOT_SCRIPT_SHA256": "4eacd556df14a281187e78ae51edb4a2312f4897aa0553aaacc2c150f85f9138",
+    "ROOT_TRACE_SHA256": "e062e88cee0a7866964aff1fa1695577bf70660cef031c139d262afd99c9c9e7",
+    "ROOT_FINAL_STATE_SHA256": "937d347b5a168a432c2a0a6eb45c1b2acaa5ae8440884617906445420aee400d",
+    "SCHEDULING_SAMPLE_SHA256": "384aec1f071fbfd8e24382f908b98ea87400dcd0ca3764ea78b692f888027764",
+    "SCHEDULING_TRACE_SHA256": "35cb4e2c103c987180e5a1af4949a169f194faf2efe93b4e565eb12d90b93b74",
+    "SCHEDULING_FINAL_STATE_SHA256": "3b2d037102c2f2cc0924d679ed166e850eab0370808e16a2c1817a351eae78f4"
+  },
+  "files": {
+    "integration/bh-05/recovery-fixtures.exs": "07b5c4b5c76e724b830d9c492770e812e59a29e6dc5f5ca3ab62fc5722b7eb04",
+    "integration/conformance/test/bh05_recovery_test.exs": "b3159abc55bc3463a1930f587f549bb3c42e899371cc64ad8f5c14d7e696cb88",
+    "packages/blazex_core/lib/blazex/component/local_view.ex": "1929a4009630eee30d6084b57806089012f9744e87757da70ef3ad10844361e2",
+    "packages/blazex_core/lib/blazex/component/recovery_cleanup.ex": "25247f469b6a6984b650f209c5be849bf3fea51a84b9079a419c893ef2ce03b8",
+    "packages/blazex_core/lib/blazex/component/recovery_guardian.ex": "df53e461296b0ca5622e04b88a99734536e187fa5a2231c138e8d590903e2920",
+    "packages/blazex_core/lib/blazex/component/recovery_policy.ex": "f4101571ba17bb4f89be6065a6714712ea1914460e99acce83d331dfcca1a46e",
+    "packages/blazex_core/lib/blazex/component/recovery_port.ex": "a3218a313e3fb4af8e58a7cc37413ce148e2a5376b6fbb10c0425fc067b0186c",
+    "packages/blazex_core/lib/blazex/component/recovery_runtime.ex": "b9d3acc5cac1f4594a953ca542c2042568176ee50606d5abdf55409cccefafa1",
+    "packages/blazex_core/lib/blazex/component/recovery_view.ex": "a0d1251c1d28ab3682a4fbc4a820149c94b2b8f374d3d3e674598cc59a36d8e4",
+    "packages/blazex_core/lib/blazex/component/root_port.ex": "5eaefacaf50ec4bbb4a26a5bb1045680dc2d0b8ac607026193fc71807d55d02e",
+    "packages/blazex_core/lib/blazex/component/root_process.ex": "3db220d8fb829459d3e9e57a3b008a19e2885b33142adf23e41f87f14d1684b6",
+    "packages/blazex_core/test/blazex/recovery_cleanup_test.exs": "2de89f584d0babb2f02cd6526a914e9885dbc76ca9fe5057d67b9bc705811448",
+    "packages/blazex_core/test/blazex/recovery_policy_test.exs": "759c21d0014db0238ac7da44bb828d24c1ceea45f60982c6a736ff5eaed4e840",
+    "packages/blazex_ui_tree/lib/blazex/ui_tree/recovery_evaluator.ex": "b1634a5f96241f6a38e2ceb4e50e75b69db4d650b938d9dbc7cdbb0ba820983e",
+    "packages/blazex_ui_tree/lib/blazex/ui_tree/root_evaluator.ex": "b9c6a8c71bfd3ea6adb52ae1dce9ac301b95e06e2e9a87a5dad7a4b97b8b8633",
+    "packages/blazex_ui_tree/test/blazex/recovery_evaluator_test.exs": "14655b740381b3111f275ff3dd215c46de441ca6825d126d57b140849abe9341"
+  },
+  "bounds": {
+    "automatic_restarts": 3,
+    "window_ms": 5000,
+    "backoff_min_ms": 100,
+    "cleanup_ms": 1000,
+    "owners": 128,
+    "pending_requests": 128,
+    "leases": 512,
+    "diagnostic_page_size": 128
+  },
+  "failure_acceptance": [
+    "BX-ACC-FAILURE-BX-FAIL-COMPONENT",
+    "BX-ACC-FAILURE-BX-FAIL-RESOURCE-CLEANUP"
+  ],
+  "process_startup": true,
+  "commit_correlated": true,
+  "runtime_parity": false,
+  "later_evidence": [],
+  "limitations": [
+    "ERTS/headless execution; AtomVM/Wasm and cross-backend qualification remain Phase 11",
+    "trusted runtime configuration and declared idempotent cleanup ports",
+    "whole-VM recovery, offline persistence and command replay excluded",
+    "failed forced cleanup remains an unresolved leak, never a support claim",
+    "LiveView and LocalLiveView deferred"
+  ]
+}

@@ -309,7 +309,9 @@ defmodule BlazeX.UITree.RootEvaluator do
   defp callback_name(%{kind: :action_result}, :root), do: :effect_result
   defp callback_name(_, _), do: :handle_info
 
-  defp validate_prior(nil, %{operation: :mount, generation: 1, revision: 1}, :mount), do: :ok
+  defp validate_prior(nil, %{operation: :mount, generation: generation, revision: 1}, :mount)
+       when is_integer(generation) and generation > 0,
+       do: :ok
 
   defp validate_prior(prior, correlation, operation) when operation in [:update, :replace] do
     validate_candidate(prior)
