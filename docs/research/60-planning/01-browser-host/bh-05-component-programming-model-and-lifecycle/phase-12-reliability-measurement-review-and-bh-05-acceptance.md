@@ -96,29 +96,29 @@ Back to milestone: [README](README.md)
       - [x] 12.3.2.2 Subtask - Re-run `BX-ACC-FAILURE-BX-FAIL-RESOURCE-CLEANUP` and verify generation invalidation, pending cancellation, idempotent release, focus restoration/redirection, and 100% late-completion rejection.
       - [x] 12.3.2.3 Subtask - Treat any swallowed failure, state-authority confusion, unbounded queue/retry, cross-root impact, stale mutation, or resource/process surviving the active bound as blocking.
 
-  - [ ] 12.4 Section - Reconcile evidence and execute multidisciplinary review.
+  - [x] 12.4 Section - Reconcile evidence and execute multidisciplinary review.
 
     Resolve every output, acceptance condition, risk, finding, runtime result,
     and deferral against source-bound evidence rather than completion labels.
 
-    - [ ] 12.4.1 Task - Produce the milestone reconciliation ledger.
+    - [x] 12.4.1 Task - Produce the milestone reconciliation ledger.
 
       Map public contracts and all nine acceptance conditions to exact
       implementation, test, runtime, browser, measurement, and review evidence.
 
-      - [ ] 12.4.1.1 Subtask - Reconcile facade, props/slots, composition, nested state, process roots, scheduling, effects/resources/commands, context/registry, failure/disposal, and cross-runtime conformance outputs.
-      - [ ] 12.4.1.2 Subtask - Reconcile budget outcomes, failure gates, active runtime/browser results, unsupported semantics, compatibility conditions, repeat obligations, deferred qualifications, and forbidden support claims.
-      - [ ] 12.4.1.3 Subtask - Record finding severity, owner, disposition, mitigation, expiry/review trigger, downstream due milestone, and whether it blocks acceptance or BH-06 entry.
+      - [x] 12.4.1.1 Subtask - Reconcile facade, props/slots, composition, nested state, process roots, scheduling, effects/resources/commands, context/registry, failure/disposal, and cross-runtime conformance outputs.
+      - [x] 12.4.1.2 Subtask - Reconcile budget outcomes, failure gates, active runtime/browser results, unsupported semantics, compatibility conditions, repeat obligations, deferred qualifications, and forbidden support claims.
+      - [x] 12.4.1.3 Subtask - Record finding severity, owner, disposition, mitigation, expiry/review trigger, downstream due milestone, and whether it blocks acceptance or BH-06 entry.
 
-    - [ ] 12.4.2 Task - Execute independent evidence-first reviews.
+    - [x] 12.4.2 Task - Execute independent evidence-first reviews.
 
       Challenge the candidate through architecture, implementation, language,
       runtime, security, accessibility, reliability, packaging, and provenance
       lenses and retain disagreements.
 
-      - [ ] 12.4.2.1 Subtask - Review Elixir API clarity, role/failure honesty, state/commit ordering, identity, scheduling, context/dynamic safety, effect/resource ownership, and server trust separation.
-      - [ ] 12.4.2.2 Subtask - Review ERTS/AtomVM parity, renderer/backend neutrality, accessibility fallback/focus, reliability statistics, process/resource cleanup, diagnostic redaction, and deferred qualification truthfulness.
-      - [ ] 12.4.2.3 Subtask - Review public/private API inventory, dependency graph, dynamic reachability handoff, source/asset provenance, reproducibility, and absence of .NET/Phoenix/browser/native/release compatibility claims.
+      - [x] 12.4.2.1 Subtask - Review Elixir API clarity, role/failure honesty, state/commit ordering, identity, scheduling, context/dynamic safety, effect/resource ownership, and server trust separation.
+      - [x] 12.4.2.2 Subtask - Review ERTS/AtomVM parity, renderer/backend neutrality, accessibility fallback/focus, reliability statistics, process/resource cleanup, diagnostic redaction, and deferred qualification truthfulness.
+      - [x] 12.4.2.3 Subtask - Review public/private API inventory, dependency graph, dynamic reachability handoff, source/asset provenance, reproducibility, and absence of .NET/Phoenix/browser/native/release compatibility claims.
 
   - [ ] 12.5 Section - Build the BH-05 release and BH-06 handoff candidate.
 

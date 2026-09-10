@@ -1,0 +1,291 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 12,
+  "decision": "revise",
+  "support_state": "unsupported",
+  "input_hashes": {
+    "docs/research/assets/bh-05-baseline/acceptance-authorization-v0.1.0.json": "2cd3ede50be87d0c27de387ad0780b2a3f1d0446067c99636a1fc45411d0de51",
+    "integration/bh-05/acceptance-counts-v0.1.0.json": "309dd52d7888c1be873f29c3a90f8db9d3419b55eaa30bef435a950e033734a1",
+    "integration/bh-05/acceptance-counts-raw-v0.1.0.json": "ad04188fb9c921cecb1bdbeb206c1012d1a9b42aea81007c2c8b27a79bd528b6",
+    "integration/bh-05/acceptance-cleanup-v0.1.0.json": "8c494b6788db7d5fa02f68d601606d2ceb8eabbb11746e99c00b740ec26d3328",
+    "integration/bh-05/acceptance-cleanup-raw-v0.1.0.json": "d1e4d751194589dd6b55d433762c4afd7730a9ef8207c700f88c0a4a8f7d2949",
+    "docs/research/60-planning/01-browser-host/bh-05-component-programming-model-and-lifecycle/acceptance-contract.md": "c6eedcd59bbdb713d1662c926f88b6f101b74d67056d4a74c8634af59da48c5c"
+  },
+  "acceptance_outcomes": [
+    {
+      "acceptance_id": "BX-ACC-BUDGET-BX-BUD-RELIABILITY-EVENT-BACKLOG-COUNT",
+      "result": "passed",
+      "evidence": "integration/bh-05/acceptance-counts-v0.1.0.json",
+      "detail": {
+        "statistic": "maximum",
+        "observed": 256,
+        "threshold": 256,
+        "result": "passed"
+      }
+    },
+    {
+      "acceptance_id": "BX-ACC-BUDGET-BX-BUD-RELIABILITY-PENDING-EFFECTS-COUNT",
+      "result": "passed",
+      "evidence": "integration/bh-05/acceptance-counts-v0.1.0.json",
+      "detail": {
+        "statistic": "maximum",
+        "observed": 128,
+        "threshold": 128,
+        "result": "passed"
+      }
+    },
+    {
+      "acceptance_id": "BX-ACC-BUDGET-BX-BUD-RELIABILITY-RESOURCE-COUNT",
+      "result": "passed",
+      "evidence": "integration/bh-05/acceptance-counts-v0.1.0.json",
+      "detail": {
+        "statistic": "maximum",
+        "observed": 512,
+        "threshold": 512,
+        "terminal": 0,
+        "result": "passed"
+      }
+    },
+    {
+      "acceptance_id": "BX-ACC-BUDGET-BX-BUD-RELIABILITY-RESTART-INTENSITY",
+      "result": "passed",
+      "evidence": "integration/bh-05/acceptance-counts-v0.1.0.json",
+      "detail": {
+        "statistic": "maximum",
+        "observed": 3,
+        "threshold": 3,
+        "window_ms": 5000,
+        "replayed": 0,
+        "result": "passed"
+      }
+    },
+    {
+      "acceptance_id": "BX-ACC-BUDGET-BX-BUD-RESOURCE-CLEANUP-MS",
+      "result": "passed",
+      "evidence": "integration/bh-05/acceptance-cleanup-v0.1.0.json",
+      "detail": {
+        "statistic": "p95-nearest-rank",
+        "samples": 100,
+        "observed": 2,
+        "threshold": 1000,
+        "result": "passed"
+      }
+    },
+    {
+      "acceptance_id": "BX-ACC-BUDGET-BX-BUD-RESOURCE-PROCESS-GROWTH-COUNT",
+      "result": "passed",
+      "evidence": "integration/bh-05/acceptance-cleanup-v0.1.0.json",
+      "detail": {
+        "statistic": "maximum",
+        "samples": 10,
+        "cycles_per_sample": 100,
+        "observed": 0,
+        "threshold": 0,
+        "result": "passed"
+      }
+    },
+    {
+      "acceptance_id": "BX-ACC-FAILURE-BX-FAIL-COMPONENT",
+      "result": "passed",
+      "evidence": "integration/bh-05/acceptance-cleanup-v0.1.0.json",
+      "detail": {
+        "result": "passed",
+        "cases": 17
+      }
+    },
+    {
+      "acceptance_id": "BX-ACC-FAILURE-BX-FAIL-RESOURCE-CLEANUP",
+      "result": "passed",
+      "evidence": "integration/bh-05/acceptance-cleanup-v0.1.0.json",
+      "detail": {
+        "result": "passed",
+        "cleanup_sha256": "4c04f817d1e53ba1a31fc3da3db5b8a8f54cb500b78d0477616d5efae1fba3fc"
+      }
+    },
+    {
+      "acceptance_id": "BX-ACC-ROADMAP-BH-05",
+      "result": "revise",
+      "evidence": "integration/bh-05/acceptance-cleanup-v0.1.0.json",
+      "detail": {
+        "active_blocker": "BH05-ACTIVE-FIREFOX-CLEANUP-DIVERGENCE"
+      }
+    }
+  ],
+  "contract_reconciliation": [
+    {
+      "area": "facade and authoring",
+      "state": "implemented",
+      "evidence": "Phase 1-11 source-bound completion records"
+    },
+    {
+      "area": "props and slots",
+      "state": "implemented",
+      "evidence": "Phase 1-11 source-bound completion records"
+    },
+    {
+      "area": "composition",
+      "state": "implemented",
+      "evidence": "Phase 1-11 source-bound completion records"
+    },
+    {
+      "area": "nested state",
+      "state": "implemented",
+      "evidence": "Phase 1-11 source-bound completion records"
+    },
+    {
+      "area": "process roots",
+      "state": "implemented",
+      "evidence": "Phase 1-11 source-bound completion records"
+    },
+    {
+      "area": "scheduling",
+      "state": "implemented",
+      "evidence": "Phase 1-11 source-bound completion records"
+    },
+    {
+      "area": "effects resources and commands",
+      "state": "implemented",
+      "evidence": "Phase 1-11 source-bound completion records"
+    },
+    {
+      "area": "context and registry",
+      "state": "implemented",
+      "evidence": "Phase 1-11 source-bound completion records"
+    },
+    {
+      "area": "failure and disposal",
+      "state": "implemented",
+      "evidence": "Phase 1-11 source-bound completion records"
+    },
+    {
+      "area": "cross-runtime conformance",
+      "state": "implemented",
+      "evidence": "Phase 1-11 source-bound completion records"
+    }
+  ],
+  "findings": [
+    {
+      "id": "BH05-FIND-TERMINAL-GUARDIAN-GROWTH",
+      "severity": "high",
+      "state": "fixed",
+      "owner": "BH-05",
+      "mitigation": "LocalView.release_terminal/2 plus ten zero-growth samples",
+      "review_trigger": "terminal lifecycle API change",
+      "due": "Phase 12",
+      "blocks_acceptance": false,
+      "blocks_bh06": false
+    },
+    {
+      "id": "BH05-ACTIVE-FIREFOX-CLEANUP-DIVERGENCE",
+      "severity": "blocking",
+      "state": "open",
+      "owner": "BH-05",
+      "mitigation": "redesign or otherwise prove bounded complete cleanup without changing the frozen threshold",
+      "review_trigger": "fresh Chrome/Firefox exact terminal inventory",
+      "due": "BH-05 re-entry",
+      "blocks_acceptance": true,
+      "blocks_bh06": true
+    },
+    {
+      "id": "BH05-COND-FIXED-BROWSER-FIXTURE",
+      "severity": "bounded",
+      "state": "open",
+      "owner": "BH-06",
+      "mitigation": "prove general build and dynamic dependency reachability",
+      "review_trigger": "BH-06 authorization",
+      "due": "BH-06",
+      "blocks_acceptance": false,
+      "blocks_bh06": false
+    },
+    {
+      "id": "BH05-COND-PLATFORM-QUALIFICATION",
+      "severity": "deferred",
+      "state": "open",
+      "owner": "BH-22",
+      "mitigation": "qualify deferred operating systems, WebKit, devices and manual AT",
+      "review_trigger": "BH-22 authorization",
+      "due": "BH-22",
+      "blocks_acceptance": false,
+      "blocks_bh06": false
+    }
+  ],
+  "reviews": [
+    {
+      "lens": "architecture",
+      "verdict": "revise",
+      "finding": "The host-neutral ownership model holds, but active runtime terminal-state parity does not.",
+      "method": "separate evidence-first pass over frozen inputs; not an independent human attestation"
+    },
+    {
+      "lens": "implementation",
+      "verdict": "revise",
+      "finding": "Terminal guardian growth is fixed and tested; Firefox bounded cleanup remains unresolved.",
+      "method": "separate evidence-first pass over frozen inputs; not an independent human attestation"
+    },
+    {
+      "lens": "elixir-language",
+      "verdict": "passed",
+      "finding": "Public handles remain portable; terminal release validates handle, state and idempotence.",
+      "method": "separate evidence-first pass over frozen inputs; not an independent human attestation"
+    },
+    {
+      "lens": "runtime",
+      "verdict": "blocked",
+      "finding": "Chrome resolves 513 requests while Firefox leaves 452 unresolved under the same bound.",
+      "method": "separate evidence-first pass over frozen inputs; not an independent human attestation"
+    },
+    {
+      "lens": "security",
+      "verdict": "passed",
+      "finding": "No server trust, raw exception, provider object or new dependency crosses the public boundary.",
+      "method": "separate evidence-first pass over frozen inputs; not an independent human attestation"
+    },
+    {
+      "lens": "accessibility",
+      "verdict": "bounded",
+      "finding": "Semantic fallback and focus gates pass; manual assistive-technology qualification remains BH-22.",
+      "method": "separate evidence-first pass over frozen inputs; not an independent human attestation"
+    },
+    {
+      "lens": "reliability",
+      "verdict": "blocked",
+      "finding": "Six quantitative budgets pass, but an active runtime retains an unresolved cleanup inventory.",
+      "method": "separate evidence-first pass over frozen inputs; not an independent human attestation"
+    },
+    {
+      "lens": "packaging",
+      "verdict": "bounded",
+      "finding": "The fixed AtomVM fixture is reproducible evidence, not a general BH-06 build system.",
+      "method": "separate evidence-first pass over frozen inputs; not an independent human attestation"
+    },
+    {
+      "lens": "provenance",
+      "verdict": "passed",
+      "finding": "Frozen inputs, raw failures, hashes, commands and unsupported/deferred labels remain visible.",
+      "method": "separate evidence-first pass over frozen inputs; not an independent human attestation"
+    }
+  ],
+  "disagreements": [
+    {
+      "question": "Is the Firefox result only diagnostic timing variation?",
+      "positions": [
+        "wall-clock duration is diagnostic",
+        "unresolved terminal inventory is semantic state"
+      ],
+      "resolution": "The terminal-state mismatch is an active semantic blocker under the frozen decision rule."
+    }
+  ],
+  "deferred_bh22": [
+    "Windows",
+    "macOS",
+    "Safari/WebKit product",
+    "Android/iOS devices",
+    "manual assistive-technology pairings"
+  ],
+  "separately_deferred": [
+    "LiveView",
+    "LocalLiveView"
+  ],
+  "bh06_eligible": false,
+  "bh06_authorized": false
+}

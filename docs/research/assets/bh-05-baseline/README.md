@@ -71,3 +71,4 @@ bindings. No measurement or runtime result may claim Phase 1 pass credit.
 - [Conformance gates](conformance-gates-v0.1.0.json) — Fourteen passing source-frozen cross-runtime, backend and replay gates.
 - [Conformance completion](conformance-completion-v0.1.0.json) — Exact active Phase 11 conformance; Phase 12 eligible, unauthorized.
 - [Acceptance authority](acceptance-authorization-v0.1.0.json) — Bounded Phase 12 candidate, measurements, decisions, exclusions and deferrals.
+- [Acceptance reconciliation](acceptance-reconciliation-v0.1.0.json) — Nine-condition ledger, ten contract areas, nine review lenses and the retained revise blocker.
