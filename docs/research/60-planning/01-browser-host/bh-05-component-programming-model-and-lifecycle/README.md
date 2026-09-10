@@ -49,16 +49,16 @@ Planning alone does not authorize implementation. The owner authorized Phase 1
 after the accepted BH-04 corrective handoff merged in PR #51 at
 `506c254ddd4a14dd8d1d4cbdba8fcf9556bd15cb`. Phase 1 activates governance only;
 every later phase still requires separate explicit implementation authorization.
-Phases 1–10 are complete: governance activation, candidate authoring, prop/slot
+Phases 1–11 are complete: governance activation, candidate authoring, prop/slot
 schemas, pure composition, nested-state reconciliation, supervised root
 lifecycle, bounded local scheduling, typed action/resource/command boundaries,
-scoped context, manifest-bounded registry and root recovery have separately bound evidence.
-The owner authorized Phase 10 after accepted Phase 9 PR #60. Phase 11 is eligible
-but unauthorized; BH-06 remains ineligible. The current
-[Phase 10 evidence](recovery-evidence.md) grants ERTS/headless failure containment,
-bounded retry and cleanup credit, without concrete browser/server providers
-or Wasm parity. [Runtime compatibility limits](root-supervision-compatibility.md) remain
-explicitly unqualified for Phase 11.
+scoped context, manifest-bounded registry, root recovery and cross-runtime
+conformance have separately bound evidence. The owner authorized Phase 11 after
+accepted Phase 10 PR #61. Phase 12 is eligible but unauthorized; BH-06 remains
+ineligible. The current [Phase 11 evidence](conformance-evidence.md) grants the
+fixed public corpus exact ERTS/browser-AtomVM and DOM evidence plus GTK
+portability credit without general browser build or product-support claims.
+[Runtime compatibility limits](root-supervision-compatibility.md) remain explicit.
 
 ## What belongs here
 
@@ -257,3 +257,4 @@ proof of another host.
 
 - [Recovery evidence](recovery-evidence.md) — Phase 10 failure injection, retry limits, cleanup timings and frozen gates.
 - [Conformance contract](conformance-contract.md) — Phase 11 active runtime/backend rows and exact portable equivalence policy.
+- [Conformance evidence](conformance-evidence.md) — Phase 11 ERTS, AtomVM, DOM and GTK results, corrections and limitations.
