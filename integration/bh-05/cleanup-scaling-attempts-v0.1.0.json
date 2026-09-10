@@ -103,6 +103,31 @@
       "firefox_unresolved": 65,
       "raw_sha256": "c91ed6b31356721d442b68b948ff6b47e3555a446ea8c25d4f5ee0bc95b90c2f",
       "observation": "Direct page-to-report collation passed Chrome with substantial margin; Firefox still exhausted the deadline after seven lease pages, so Phase 13 remains revise."
+    },
+    {
+      "attempt": "second-clean-build-direct-page-collation",
+      "state": "executed",
+      "result": "failed",
+      "chrome_elapsed_ms": 285,
+      "firefox_elapsed_ms": 3219,
+      "firefox_unresolved": 65,
+      "atomvm_wasm_sha256": "d20c491e75936dc8189910c8d0740093b7813d8dcc1cf966a87c011799ade9d8",
+      "bundle_sha256": "1efab5f4a9d3477711fa041f7b37b5bb0e281471501f3665b94b71ea20c8b825",
+      "raw_sha256": "66244740bd671b8336787e03864e90ecfc03b20bd1709191324daa83b7a271ee",
+      "observation": "A second clean pinned build reproduced the semantic result: Chrome completed 513 callbacks in eight lease pages with zero unresolved; Firefox completed 448 callbacks in seven lease pages and retained 65 unresolved identities."
+    },
+    {
+      "attempt": "second-clean-build-representative-subset",
+      "state": "executed",
+      "result": "failed",
+      "counts": [64, 65, 256, 512],
+      "raw_sha256": "88fd2d736bf8b99f286cdf2e10f07c809fc41ed7e172533127715c0525e1f5b6",
+      "atomvm_wasm_sha256": "d20c491e75936dc8189910c8d0740093b7813d8dcc1cf966a87c011799ade9d8",
+      "bundle_sha256": "b66384a75be7732966ccbe5e338a7d16823230845e1dfce6385b5c80f84c45df",
+      "chrome_elapsed_ms": [16, 11, 88, 267],
+      "firefox_elapsed_ms": [69, 69, 581, 3121],
+      "firefox_unresolved": [0, 0, 0, 65],
+      "observation": "Both engines pass 64, 65, and 256 resources with exact terminal state. Chrome passes 512; Firefox stops after seven pages and retains 65 unresolved identities."
     }
   ]
 }

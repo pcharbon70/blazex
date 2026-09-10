@@ -57,7 +57,9 @@ conformance have separately bound evidence. The owner authorized Phase 11 after
 accepted Phase 10 PR #61 and authorized Phase 12 after accepted Phase 11 PR #62.
 Phase 12 has a source-bound **revise** candidate because Firefox retains an
 unresolved cleanup inventory. [Corrective Phase 13](phase-13-bounded-paged-cleanup-and-scaling-requalification.md)
-is planned but unauthorized; BH-06 remains ineligible. The current [Phase 11 evidence](conformance-evidence.md) grants the
+is complete with a truthful **revise** outcome: constant-worker paging passes
+Chrome but the unchanged Firefox deadline still leaves exact unresolved
+identities. BH-06 remains ineligible and unauthorized. The current [Phase 11 evidence](conformance-evidence.md) grants the
 fixed public corpus exact ERTS/browser-AtomVM and DOM evidence plus GTK
 portability credit without general browser build or product-support claims.
 [Runtime compatibility limits](root-supervision-compatibility.md) remain explicit.
@@ -149,7 +151,7 @@ adapter modules are forbidden even when available in the monorepo.
 | [10 — Failure Containment, Retry, Replacement, and Disposal](phase-10-failure-containment-retry-replacement-and-disposal.md) | complete — bounded recovery | Contain failures at honest process-root boundaries, render accessible fallback, bound retries, invalidate generations, and release all owned work. | Phases 5–9 |
 | [11 — ERTS, Browser-AtomVM, and Cross-Backend Conformance](phase-11-erts-browser-atomvm-and-cross-backend-conformance.md) | complete — fixed-corpus conformance | Run matching public component scenarios under ERTS/headless and browser AtomVM/DOM, with retained native-spike portability checks. | Phases 2–10 and accepted BH-04 browser path |
 | [12 — Reliability Measurement, Review, and BH-05 Acceptance](phase-12-reliability-measurement-review-and-bh-05-acceptance.md) | complete — revise | Measure six first-responsible budgets, close two failure gates, review the candidate, and accept, revise, or block BH-06 eligibility. | Phases 1–11 |
-| [13 — Bounded Paged Cleanup and Scaling Requalification](phase-13-bounded-paged-cleanup-and-scaling-requalification.md) | planned — unauthorized | Replace per-resource helper-process cleanup with a constant-worker paged session, add structural and timing-shape gates, and requalify the Phase 12 blocker without weakening its contract. | Phase 12 `revise` and explicit authorization |
+| [13 — Bounded Paged Cleanup and Scaling Requalification](phase-13-bounded-paged-cleanup-and-scaling-requalification.md) | complete — revise | Replace per-resource helper-process cleanup with a constant-worker paged session, add structural and timing-shape gates, and retain the Firefox deadline blocker without weakening its contract. | Phase 12 `revise` and explicit authorization |
 
 ## Acceptance ownership
 
@@ -237,6 +239,8 @@ Phoenix, browser, native-host, or release compatibility.
 - [Phase 12 — Reliability Measurement, Review, and BH-05 Acceptance](phase-12-reliability-measurement-review-and-bh-05-acceptance.md)
 - [Phase 13 — Bounded Paged Cleanup and Scaling Requalification](phase-13-bounded-paged-cleanup-and-scaling-requalification.md)
 - [Cleanup session and scaling requalification contract](cleanup-scaling-contract.md)
+- [Phase 13 cleanup scaling review and reconciliation](phase-13-review-and-reconciliation.md)
+- [Phase 13 completion evidence](phase-13-completion.md)
 
 ## Maintaining this index
 

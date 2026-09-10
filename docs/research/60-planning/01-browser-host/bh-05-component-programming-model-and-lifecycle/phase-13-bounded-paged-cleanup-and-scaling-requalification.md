@@ -203,28 +203,28 @@ Back to milestone: [README](README.md)
       - [x] 13.5.3.2 Subtask - Regenerate the BH-05 release/acceptance overlay and BH-06 entry state only from canonical source-bound inputs, preserving all earlier failures and support limitations.
       - [x] 13.5.3.3 Subtask - Mark BH-05 accepted and BH-06 eligible-but-unauthorized only if every original gate and every Phase 13 anti-concealment gate passes; otherwise publish `revise` or `block` with exact re-entry requirements.
 
-  - [ ] 13.6 Section - Phase 13 integration tests and completion evidence.
+  - [x] 13.6 Section - Phase 13 integration tests and completion evidence.
 
     Rebuild and verify the entire BH-05 candidate plus the reusable scaling
     guard from a clean source-frozen state.
 
-    - [ ] 13.6.1 Task - Run the complete correction gate.
+    - [x] 13.6.1 Task - Run the complete correction gate.
 
       Exercise implementation, regression, measurement, provenance, and
       archive checks as one reproducible decision pipeline.
 
-      - [ ] 13.6.1.1 Subtask - Run all activated Mix/Node tests and formatting/build checks, ERTS/headless and active Chrome/Firefox AtomVM/DOM suites, cleanup unit/failure cases, full boundary/payload matrices, the unchanged Phase 12 fixture, 100-cycle growth runs, and historical Phase 1–12 validators.
-      - [ ] 13.6.1.2 Subtask - Run structural-bound, timing-shape, raw-evidence, schema, mutation, source/bundle freshness, public/private API, dependency, archive, JSON, reciprocal-link, and patch-hygiene validators.
-      - [ ] 13.6.1.3 Subtask - Repeat the unchanged 512-resource fixture and a representative `64, 65, 256, 512` scaling subset from a second clean build/execution context; any mismatch remains a failure or explicit `revise`, never a discarded outlier.
+      - [x] 13.6.1.1 Subtask - Run all activated Mix/Node tests and formatting/build checks, ERTS/headless and active Chrome/Firefox AtomVM/DOM suites, cleanup unit/failure cases, full boundary/payload matrices, the unchanged Phase 12 fixture, 100-cycle growth runs, and historical Phase 1–12 validators.
+      - [x] 13.6.1.2 Subtask - Run structural-bound, timing-shape, raw-evidence, schema, mutation, source/bundle freshness, public/private API, dependency, archive, JSON, reciprocal-link, and patch-hygiene validators.
+      - [x] 13.6.1.3 Subtask - Repeat the unchanged 512-resource fixture and a representative `64, 65, 256, 512` scaling subset from a second clean build/execution context; any mismatch remains a failure or explicit `revise`, never a discarded outlier.
 
-    - [ ] 13.6.2 Task - Publish completion evidence and decision.
+    - [x] 13.6.2 Task - Publish completion evidence and decision.
 
       Record enough detail to reproduce the result and understand its scaling
       behavior without relying on a green summary label.
 
-      - [ ] 13.6.2.1 Subtask - Publish commands, tools/environments, source/artifact hashes, sample counts, raw records, stage timings, structural counters, shape models/alarms, terminal inventories, failures, findings, limitations, reviews, and exact gate outcomes.
-      - [ ] 13.6.2.2 Subtask - Verify every direct file is indexed, all generated artifacts reproduce byte-for-byte, every failed attempt remains linked, and the completion record binds the final source revision rather than an earlier measurement tree.
-      - [ ] 13.6.2.3 Subtask - Open one pull request only after the gate records a truthful outcome; after an authorized merge, synchronize `main` with `origin/main` before deleting the local and remote feature branch.
+      - [x] 13.6.2.1 Subtask - Publish commands, tools/environments, source/artifact hashes, sample counts, raw records, stage timings, structural counters, shape models/alarms, terminal inventories, failures, findings, limitations, reviews, and exact gate outcomes.
+      - [x] 13.6.2.2 Subtask - Verify every direct file is indexed, all generated artifacts reproduce byte-for-byte, every failed attempt remains linked, and the completion record binds the final source revision rather than an earlier measurement tree.
+      - [x] 13.6.2.3 Subtask - Open one pull request only after the gate records a truthful outcome; after an authorized merge, synchronize `main` with `origin/main` before deleting the local and remote feature branch.
 
 ## Section delivery rule
 

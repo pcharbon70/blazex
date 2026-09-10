@@ -44,6 +44,19 @@ defmodule BlazeX.BH05.CleanupScaling do
     }
   end
 
+  def run_subset do
+    samples = Enum.map([64, 65, 256, 512], &observe(:canonical, &1, 1))
+    passed = Enum.all?(samples, &(&1["acceptance_state"] == "passed"))
+
+    %{
+      "schema_version" => "1.0.0",
+      "execution_state" => "executed",
+      "acceptance_state" => if(passed, do: "passed", else: "failed"),
+      "result" => if(passed, do: "passed", else: "failed"),
+      "samples" => samples
+    }
+  end
+
   def workloads(runtime) do
     Enum.map(@counts, &{:canonical, &1})
     |> Kernel.++(Enum.map(@maximum_counts, &{:maximum, &1}))

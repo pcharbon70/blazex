@@ -33,6 +33,9 @@ defmodule BlazeX.BH05.Conformance.Browser do
   defp handle({:wasm_call, %{"operation" => "measure-cleanup-probe"}}),
     do: {:resolve, BlazeX.BH05.CleanupScaling.run_probe(), :continue}
 
+  defp handle({:wasm_call, %{"operation" => "measure-cleanup-subset"}}),
+    do: {:resolve, BlazeX.BH05.CleanupScaling.run_subset(), :continue}
+
   defp handle({:wasm_call, %{"operation" => "shutdown"}}),
     do: {:resolve, %{"result" => "disposed"}, :shutdown}
 

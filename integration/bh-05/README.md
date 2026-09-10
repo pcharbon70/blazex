@@ -88,3 +88,4 @@ Current successor check: `python3 docs/research/70-tools/validate_bh05_recovery.
 - [Phase 12 raw cleanup evidence](acceptance-cleanup-raw-v0.1.0.json) — 100 cleanup samples, ten 100-cycle process samples, browser terminal inventories and retained failures.
 - [Phase 12 acceptance reconciliation](../../docs/research/assets/bh-05-baseline/acceptance-reconciliation-v0.1.0.json) — Nine outcomes and nine review lenses retaining the active Firefox blocker.
 - [Phase 13 cleanup scaling schema](cleanup-scaling.schema.json) — Closed execution/acceptance, terminal-identity, amplification, timing, runtime and raw-hash evidence shape.
+- [Phase 13 append-only attempt ledger](cleanup-scaling-attempts-v0.1.0.json) — Every aborted, failed, and passing corrective probe retained without relabeling or deletion.
