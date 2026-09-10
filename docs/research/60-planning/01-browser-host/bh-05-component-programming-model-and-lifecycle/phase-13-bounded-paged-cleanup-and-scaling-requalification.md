@@ -81,39 +81,39 @@ Back to milestone: [README](README.md)
       - [x] 13.1.4.4 Subtask - Require zero unresolved identities in every retained active-runtime sample, the existing controlled ERTS p95 at or below 1000 ms, exact structural bounds, and no unexplained timing knee under the predeclared robust linear-residual rule.
       - [x] 13.1.4.5 Subtask - Define the timing-shape alarm before execution: for counts at least 64, fit retained per-runtime medians with a Theil-Sen line; any point above the prediction by more than the greater of 100 ms or 50% is a blocking scaling finding unless an independently reproduced bounded runtime discontinuity is recorded and the phase is revised rather than passed.
 
-  - [ ] 13.2 Section - Implement bounded paged cleanup sessions.
+  - [x] 13.2 Section - Implement bounded paged cleanup sessions.
 
     Introduce the internal cleanup protocol and migrate recovery execution
     without expanding public component, renderer, effect, or adapter APIs.
 
-    - [ ] 13.2.1 Task - Implement the runtime-owned session protocol.
+    - [x] 13.2.1 Task - Implement the runtime-owned session protocol.
 
       Use one monitored worker and bounded messages rather than one monitored
       process and structured message exchange per resource.
 
-      - [ ] 13.2.1.1 Subtask - Add private request, page, result-vector, terminal-summary, cancellation, and malformed-reply forms with root, generation, sequence, page, and resource correlation.
-      - [ ] 13.2.1.2 Subtask - Stream at most 64 jobs into the worker and at most 64 correlated results back per message, reject duplicate/missing/out-of-order pages, and cap all decoded collections before allocation or callback execution.
-      - [ ] 13.2.1.3 Subtask - Reuse the existing per-resource release callback inside the worker so host adapters need no batch API and cannot infer that a whole page succeeded from a partial result.
-      - [ ] 13.2.1.4 Subtask - Bound session mailbox, reply count, retained result vectors, diagnostic bytes, and shutdown behavior under success, callback error, callback exit, malformed data, owner exit, and timeout.
+      - [x] 13.2.1.1 Subtask - Add private request, page, result-vector, terminal-summary, cancellation, and malformed-reply forms with root, generation, sequence, page, and resource correlation.
+      - [x] 13.2.1.2 Subtask - Stream at most 64 jobs into the worker and at most 64 correlated results back per message, reject duplicate/missing/out-of-order pages, and cap all decoded collections before allocation or callback execution.
+      - [x] 13.2.1.3 Subtask - Reuse the existing per-resource release callback inside the worker so host adapters need no batch API and cannot infer that a whole page succeeded from a partial result.
+      - [x] 13.2.1.4 Subtask - Bound session mailbox, reply count, retained result vectors, diagnostic bytes, and shutdown behavior under success, callback error, callback exit, malformed data, owner exit, and timeout.
 
-    - [ ] 13.2.2 Task - Integrate the session with recovery cleanup.
+    - [x] 13.2.2 Task - Integrate the session with recovery cleanup.
 
       Preserve the current recovery state machine while eliminating its
       process-per-resource amplification.
 
-      - [ ] 13.2.2.1 Subtask - Replace individual recovery-port calls across owner discovery, cancellation, component cleanup, lease release, and renderer disposal with one reusable normal session and ordered page dispatch under the single remaining-deadline value; merge page vectors into the existing per-resource cleanup report.
-      - [ ] 13.2.2.2 Subtask - Preserve acknowledged results across a failed page, compute the exact unacknowledged remainder once, and invoke one forced session without re-releasing already terminal resources.
-      - [ ] 13.2.2.3 Subtask - Finalize the ledger, renderer surface, focus outcome, generation, and root only after normal/forced result reconciliation; reject late session replies before any state or host mutation.
-      - [ ] 13.2.2.4 Subtask - Keep the internal change absent from public API manifests and prove application fixtures still import only documented BlazeX contracts.
+      - [x] 13.2.2.1 Subtask - Replace individual recovery-port calls across owner discovery, cancellation, component cleanup, lease release, and renderer disposal with one reusable normal session and ordered page dispatch under the single remaining-deadline value; merge page vectors into the existing per-resource cleanup report.
+      - [x] 13.2.2.2 Subtask - Preserve acknowledged results across a failed page, compute the exact unacknowledged remainder once, and invoke one forced session without re-releasing already terminal resources.
+      - [x] 13.2.2.3 Subtask - Finalize the ledger, renderer surface, focus outcome, generation, and root only after normal/forced result reconciliation; reject late session replies before any state or host mutation.
+      - [x] 13.2.2.4 Subtask - Keep the internal change absent from public API manifests and prove application fixtures still import only documented BlazeX contracts.
 
-    - [ ] 13.2.3 Task - Unit-test protocol and recovery edge cases.
+    - [x] 13.2.3 Task - Unit-test protocol and recovery edge cases.
 
       Exercise page boundaries, partial progress, and termination before
       relying on browser timing.
 
-      - [ ] 13.2.3.1 Subtask - Test empty, single, exact-page, page-plus-one, multi-page, and 512-resource success with exact callback order, result identity, page count, and worker count.
-      - [ ] 13.2.3.2 Subtask - Inject failure, exit, malformed result, duplicate result, missing result, delay, and hang at the first, middle, and last position of both the first and a later page.
-      - [ ] 13.2.3.3 Subtask - Verify timeout kills/demonitors the worker, forced cleanup sees only the unresolved remainder, repeated disposal is idempotent, and late replies or stale generations cannot mutate state.
+      - [x] 13.2.3.1 Subtask - Test empty, single, exact-page, page-plus-one, multi-page, and 512-resource success with exact callback order, result identity, page count, and worker count.
+      - [x] 13.2.3.2 Subtask - Inject failure, exit, malformed result, duplicate result, missing result, delay, and hang at the first, middle, and last position of both the first and a later page.
+      - [x] 13.2.3.3 Subtask - Verify timeout kills/demonitors the worker, forced cleanup sees only the unresolved remainder, repeated disposal is idempotent, and late replies or stale generations cannot mutate state.
 
   - [ ] 13.3 Section - Add structural scaling observability and shape gates.
 

@@ -7,7 +7,18 @@ defmodule BlazeX.RecoveryCleanupTest do
     def dispose(%{mode: :failed}, _), do: {:error, :unavailable}
     def dispose(_, _), do: :ok
     def force_cleanup(%{mode: :failed}, _), do: {:error, :unavailable}
+
+    def force_cleanup(%{observer: observer}, %{reference: %{id: id}}) do
+      send(observer, {:forced, id})
+      :ok
+    end
+
     def force_cleanup(_, _), do: :ok
+
+    def release(%{fail_id: id, observer: observer}, %{id: id}) do
+      send(observer, {:release_failed, id})
+      {:error, :unavailable}
+    end
 
     def release(config, lease) do
       send(config.observer, {:released, lease.id})
@@ -63,6 +74,15 @@ defmodule BlazeX.RecoveryCleanupTest do
     assert cleaned.recovery.cleanup.unresolved == 0
     assert cleaned.recovery.cleanup.requested == 513
     assert cleaned.recovery.cleanup.elapsed_ms < 1000
+    assert cleaned.recovery.cleanup.amplification.normal_worker_starts == 1
+    assert cleaned.recovery.cleanup.amplification.forced_worker_starts == 0
+    assert cleaned.recovery.cleanup.amplification.total_worker_starts == 1
+    assert cleaned.recovery.cleanup.amplification.peak_live_cleanup_workers == 1
+    assert cleaned.recovery.cleanup.amplification.lease_pages_sent == 8
+    assert cleaned.recovery.cleanup.amplification.normal.pages_sent == 9
+    assert cleaned.recovery.cleanup.amplification.normal.pages_received == 9
+    assert cleaned.recovery.cleanup.amplification.normal.jobs_sent == 513
+    assert cleaned.recovery.cleanup.amplification.normal.results_received == 513
     assert cleaned.actions.ledger.leases == %{}
     assert Input.portable?(cleaned.recovery.cleanup)
     for _ <- 1..512, do: assert_receive({:released, _})
@@ -79,5 +99,34 @@ defmodule BlazeX.RecoveryCleanupTest do
     assert cleaned.actions.ledger.pending == %{}
     assert_receive {:canceled, %{sequence: 1}}
     assert cleaned.recovery.cleanup.unresolved == 0
+  end
+
+  test "a failed resource keeps its own result and only that identity is force cleaned" do
+    leases =
+      Map.new(1..65, fn n ->
+        id = "lease-#{n}"
+        {id, %{id: id, owner: owner(), acquisition: %{sequence: n}, release_requested: false}}
+      end)
+
+    runtime = %ActionRuntime{
+      ledger: %ActionLedger{leases: leases},
+      port: {Port, %{observer: self(), fail_id: "lease-64"}}
+    }
+
+    cleaned = RecoveryCleanup.run(%{state() | actions: runtime}, :replace)
+    report = cleaned.recovery.cleanup
+    assert report.status == :completed
+    assert report.failed == 1
+    assert report.forced == 1
+    assert report.unresolved == 0
+    assert report.amplification.lease_pages_sent == 2
+    assert report.amplification.normal_worker_starts == 1
+    assert report.amplification.forced_worker_starts == 1
+    assert report.amplification.total_worker_starts == 2
+    assert report.amplification.peak_live_cleanup_workers == 1
+    assert_receive {:release_failed, "lease-64"}
+    assert_receive {:forced, "lease-64"}
+    refute_receive {:forced, _}, 10
+    assert cleaned.actions.ledger.leases == %{}
   end
 end
