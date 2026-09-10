@@ -1,0 +1,74 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 11,
+  "base": "c1c453c4dc84c351695953cde0c72a839d783778",
+  "authorization": "Owner requested next BH-05 phase after merged Phase 10 PR 61; Phase 11 only.",
+  "branch": "codex/bh05-phase11-conformance",
+  "sections": [
+    "11.1",
+    "11.2",
+    "11.3",
+    "11.4",
+    "11.5"
+  ],
+  "delivery": [
+    "verified section commits",
+    "single PR",
+    "merge",
+    "checkout main",
+    "sync origin",
+    "delete feature branch"
+  ],
+  "input_hashes": {
+    "docs/research/assets/bh-05-baseline/recovery-completion-v0.1.0.json": "f6de425b921ca19bcde203bb87f21daa816b9c09b78363369bd6d2b94a3b35c2",
+    "docs/research/assets/bh-05-baseline/recovery-gates-v0.1.0.json": "733734cbecf79c46bdb12fc369f4280c8616b0d82ec254a874a6418157b72be4",
+    "docs/research/60-planning/01-browser-host/bh-05-component-programming-model-and-lifecycle/authoring-contract.md": "11532372039e0d19f128eea407faa074fb4ad346efb0d977ff2e4279a425365f",
+    "docs/research/60-planning/01-browser-host/bh-05-component-programming-model-and-lifecycle/schema-contract.md": "23de858cae93530fcbdb8078719287fea2fe7064db1cf3bb8ce5ad15c6324b5f",
+    "docs/research/60-planning/01-browser-host/bh-05-component-programming-model-and-lifecycle/composition-contract.md": "cff46e40b4520e08f5e90650cb5c7e9a323de644e34609e8ece8b3a49f647d24",
+    "docs/research/60-planning/01-browser-host/bh-05-component-programming-model-and-lifecycle/nested-contract.md": "079ff2f465a597e221709e0f8f3fe5a428380b61b75aef16a2a26f54ec6724ac",
+    "docs/research/60-planning/01-browser-host/bh-05-component-programming-model-and-lifecycle/root-lifecycle-contract.md": "693a625a864bd8f646ebabd1ce3e18dc4241858d942f882d282edea3b9e52d7f",
+    "docs/research/60-planning/01-browser-host/bh-05-component-programming-model-and-lifecycle/scheduling-contract.md": "5387d4ff130e6193f676b1722beb0f539ede48e75234cfdb7e150a0327dddeaa",
+    "docs/research/60-planning/01-browser-host/bh-05-component-programming-model-and-lifecycle/action-contract.md": "fa51100322c9f73e15f5985a61735239c606a67282c5b66ccaf0474ae6d416de",
+    "docs/research/60-planning/01-browser-host/bh-05-component-programming-model-and-lifecycle/scope-contract.md": "47d8cee99996e690dcab26de24afae258a105792a377eefaf12ebb61e09d327b",
+    "docs/research/60-planning/01-browser-host/bh-05-component-programming-model-and-lifecycle/recovery-contract.md": "84f2ce3ba74c5ec6f233d4982cd2abe51e8ac48b6c1b18954d4a5b4bfc860b94",
+    "docs/research/60-planning/01-browser-host/bh-05-component-programming-model-and-lifecycle/root-supervision-compatibility.md": "583c8220c41b3d5611ebd0f00167768c5fa083209cfebcd2cffdfaa221c2956f",
+    "integration/conformance/dom-browser-matrix-v0.1.0.json": "610e744e2931745201aca645b6299c9ebefebdc3a79c5484d890d56ba745497a",
+    "experiments/native_renderer_spike/experiment-index-v0.2.0.json": "8ec4f7922c4ab4825b0edd1a06ef9c759c0de4696700dc3de22bfae71332e575",
+    "profiles/browser_phoenix/toolchain/browser.lock.json": "b4f7a2997ec1b31e596dea0498bfde41fe69c1e25ec5ebeecdbc723366188c01",
+    "profiles/browser_phoenix/toolchain/runtime.lock.json": "23aec7018a4c47c372dc1be4727cda14558bae9054fc8940e759926b520a1129",
+    "packages/blazex_runtime_popcorn/runtime/runtime-binary-manifest.json": "8db2038a7eb98aeaa772460101776b6b60c9114a88701c9cb1067ca3609b6c11"
+  },
+  "active": [
+    "local ERTS/headless",
+    "Linux Chrome AtomVM/DOM",
+    "Linux Firefox development AtomVM/DOM",
+    "direct GTK portability slice"
+  ],
+  "deferred_bh22": [
+    "Windows",
+    "macOS",
+    "Safari/WebKit product",
+    "Android/iOS devices",
+    "manual assistive-technology pairings"
+  ],
+  "normalization_excludes": [
+    "pid",
+    "reference",
+    "clock-origin",
+    "scheduler-reductions",
+    "stack-trace",
+    "adapter-transaction",
+    "browser-generated-id",
+    "private-module"
+  ],
+  "states": [
+    "exact-match",
+    "allowed-runtime-variation",
+    "fail",
+    "blocked",
+    "not-applicable",
+    "deferred"
+  ],
+  "support_state": "unsupported",
+  "phase12_authorized": false
+}

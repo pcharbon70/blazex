@@ -1,0 +1,155 @@
+{
+  "deferred": [
+    {
+      "reactivation": "BH-22",
+      "row": "Windows direct renderer"
+    },
+    {
+      "reactivation": "BH-22",
+      "row": "macOS direct renderer"
+    },
+    {
+      "reactivation": "BH-22",
+      "row": "manual assistive-technology pairing"
+    }
+  ],
+  "differences": [],
+  "dom": {
+    "rows": [
+      {
+        "browser": "chrome",
+        "checks": [
+          "mount",
+          "semantic-accessibility",
+          "autofocus-selection",
+          "event-normalization",
+          "focus-restoration",
+          "atomic-stale-rejection",
+          "dispose"
+        ],
+        "result": "passed",
+        "version": "Google Chrome 140.0.7339.80"
+      },
+      {
+        "browser": "firefox",
+        "checks": [
+          "mount",
+          "semantic-accessibility",
+          "autofocus-selection",
+          "event-normalization",
+          "focus-restoration",
+          "atomic-stale-rejection",
+          "dispose"
+        ],
+        "result": "passed",
+        "version": "Mozilla Firefox 134.0"
+      }
+    ],
+    "state": "exact-match"
+  },
+  "erts": {
+    "digests": {
+      "ACTION_FINAL_STATE_SHA256": "e7a64d8ccc29e02127108ad380846c01171415893fb5c0f5328ebaa473069e6d",
+      "ACTION_LEASE_SHA256": "d9ab331ebf910dc2dee8e01b98d9f7553783d8fac0b288d0a156700bf753c129",
+      "ACTION_PENDING_SHA256": "14c2ab3d1f3467fd56a79d8db400cb135bcb7404a4da8cd90af985588d750376",
+      "COMPOSITION_HEADLESS_SHA256": "9acb0fd7f9463c01e00db4de48255a40c8127efaca9a0afcbe21be432620182c",
+      "COMPOSITION_OUTPUT_SHA256": "c51413d1852ca33f23590f223fdc5e56dfa2fa2288dbf7be9216c609f66c00d1",
+      "COMPOSITION_SLOTS_OUTPUT_SHA256": "f558918821b2dea2ab60f71a009720f2121c908047c4f083197127e14f1a726b",
+      "COMPOSITION_SLOTS_TRACE_SHA256": "0eda97649ccdaff4efbebe50dcb7d1762f5bc26d362a88aa9e5784cc0226b77e",
+      "COMPOSITION_TRACE_SHA256": "870767b7ab2e8861c2e77f2bceb569f3f21d12c0de11a102d0b6c39ba497ba5a",
+      "NESTED_FINAL_STATE_SHA256": "f2fe66311059aec4be35d91e3e5334e56f67b84d330298776672978cf35e4a5e",
+      "NESTED_HEADLESS_SHA256": "eb84eeea87022cbd137d2d069a4ed22de537832caf1d56710bb35d6209eb7962",
+      "NESTED_SCRIPT_SHA256": "5d1c0b82b6a5c880dd307909040414023aac5451178f99b39ce37a4410ce665f",
+      "RECOVERY_CLEANUP_SHA256": "4c04f817d1e53ba1a31fc3da3db5b8a8f54cb500b78d0477616d5efae1fba3fc",
+      "RECOVERY_FAILURE_SHA256": "691a951f8b3e645543b53323feb84bd488c42043e9c217bcb523289aee304753",
+      "RECOVERY_RESTART_SHA256": "1acb38164390f7ee47819983f8f9e33572bc694f2446d78c1b0728b666b1c367",
+      "ROOT_FINAL_STATE_SHA256": "681263a1f1f7e8d8ac4550fc5e598362b9e77869399921b8bbfca17599897194",
+      "ROOT_SCRIPT_SHA256": "065ea6de8290092613cf860abf80f20a7484259681c46ba279ffc1e36c7fb68f",
+      "ROOT_TRACE_SHA256": "c2d1d8f06738ff10b6102b1351043f2c736d4e98a8fde0ef7c9366e992bd7aa5",
+      "SCHEDULING_FINAL_STATE_SHA256": "1a2061bab0f9df6a290698e1630bb04483acd533b05c445f4c4f314e3e156b5e",
+      "SCHEDULING_SAMPLE_SHA256": "9c1429ac440ab273f5f0770ec7fb3e989093063f98d17d915e46ad8897b82423",
+      "SCHEDULING_TRACE_SHA256": "0ca2eab57b9989a5cbd152e2f6f93f4efc95204c21bdc8dc6ec08a0baea825bb",
+      "SCOPE_FINAL_STATE_SHA256": "7cba918ef7d708ea9a9412f248719d150bb10c0797ca009cbf5e2f3147f29854",
+      "SCOPE_REGISTRY_SHA256": "f2b029f1614a946a26568f25f7049c3cba05764e4811bc10f2ec5223b96dfb87",
+      "SCOPE_TRACE_SHA256": "0a2da1f74058bee40c16e37f71e8f498dd49de795f63a67ada84f461019e7025"
+    },
+    "elixir": "1.17.3",
+    "image": "a2386c21edd5",
+    "otp": "26.0.2",
+    "tests": 93
+  },
+  "gtk": {
+    "controls": [
+      {
+        "accessible_role": "GTK_ACCESSIBLE_ROLE_APPLICATION",
+        "native_type": "GtkWindow",
+        "semantic_kind": "surface"
+      },
+      {
+        "accessible_role": "GTK_ACCESSIBLE_ROLE_GENERIC",
+        "native_type": "GtkBox",
+        "semantic_kind": "group"
+      },
+      {
+        "accessible_role": "GTK_ACCESSIBLE_ROLE_LABEL",
+        "native_type": "GtkLabel",
+        "semantic_kind": "text"
+      },
+      {
+        "accessible_role": "GTK_ACCESSIBLE_ROLE_BUTTON",
+        "native_type": "GtkButton",
+        "semantic_kind": "action"
+      },
+      {
+        "accessible_role": "GTK_ACCESSIBLE_ROLE_TEXT_BOX",
+        "native_type": "GtkEntry",
+        "semantic_kind": "field"
+      },
+      {
+        "accessible_role": "GTK_ACCESSIBLE_ROLE_CHECKBOX",
+        "native_type": "GtkCheckButton",
+        "semantic_kind": "selection"
+      },
+      {
+        "accessible_role": "GTK_ACCESSIBLE_ROLE_LIST",
+        "native_type": "GtkListBox",
+        "semantic_kind": "collection"
+      },
+      {
+        "accessible_role": "GTK_ACCESSIBLE_ROLE_LABEL",
+        "native_type": "GtkLabel",
+        "semantic_kind": "selection"
+      },
+      {
+        "accessible_role": "GTK_ACCESSIBLE_ROLE_LABEL",
+        "native_type": "GtkLabel",
+        "semantic_kind": "selection"
+      },
+      {
+        "accessible_role": "GTK_ACCESSIBLE_ROLE_LABEL",
+        "native_type": "GtkLabel",
+        "semantic_kind": "text"
+      }
+    ],
+    "environment": {
+      "architecture": "x86_64",
+      "compiler": "cc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0",
+      "display": "xvfb-run -a",
+      "glib_runtime_package": "2.80.0-6ubuntu3.7",
+      "gtk_runtime_package": "4.14.5+ds-0ubuntu0.5",
+      "kernel": "6.8.0-51-generic"
+    },
+    "observation": "RESULT\tpassed\tcontrols=10\taction=1\tchange=1\tselection_events=3\ttext_selection=1:0:3\tcheck=1\tlist=1\tfocus=1\tstale_rejected=1\tdisposals=1",
+    "services": [
+      {
+        "intent": "file-choice",
+        "native_type": "GtkFileDialog"
+      }
+    ],
+    "state": "exact-match-portability-only"
+  },
+  "phase": 11,
+  "result": "passed",
+  "schema_version": "1.0.0",
+  "support_state": "unsupported"
+}

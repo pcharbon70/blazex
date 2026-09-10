@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 11,
+  "decision": "active-cross-runtime-conformance-complete",
+  "phase12_eligible": true,
+  "phase12_authorized": false,
+  "bh06_eligible": false,
+  "support_state": "unsupported",
+  "artifact_hashes": {
+    "docs/research/assets/bh-05-baseline/conformance-authorization-v0.1.0.json": "4c5ab7e9e55f3c4dd8af8a4c241cb721a3cd20ec6851585a5fec16d0df4d97ac",
+    "integration/bh-05/conformance-corpus-v0.1.0.json": "880f93adb19ac64a681e8a057e436335dea54f411b9bfde982d188bec4fcc83e",
+    "integration/bh-05/local-conformance-v0.1.0.json": "b8b0545d8ae4f1c9501c801d2cc5f0c649328948c2ee8e0f7b2dc7cab962d2b7",
+    "integration/bh-05/browser-conformance-v0.1.0.json": "e965a5d5480a77205e7db246c356f33206d680c6841e89a752bf7e83d7b0fcc0",
+    "docs/research/assets/bh-05-baseline/conformance-gates-v0.1.0.json": "300b95fd88c5f4485d512eb78bb9f2e9fe164920c12ecb9517f333ade5d2512a"
+  }
+}

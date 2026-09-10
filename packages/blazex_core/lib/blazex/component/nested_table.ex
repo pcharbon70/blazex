@@ -1,7 +1,8 @@
 defmodule BlazeX.Component.NestedTable do
   @moduledoc """
   Immutable root-owned accepted nested records. Contains no process or renderer.
-  Digests are deterministic ERTS integrity observations, not authentication.
+  Digests use a portable canonical term encoding for integrity observations;
+  they are not authentication.
   """
   alias BlazeX.Component.{Input, Schema}
   alias BlazeX.Core.Identity
@@ -53,8 +54,25 @@ defmodule BlazeX.Component.NestedTable do
 
   def digest(value),
     do:
-      :crypto.hash(:sha256, :erlang.term_to_binary(value, [:deterministic]))
+      :crypto.hash(:sha256, :erlang.term_to_binary(canonical(value)))
       |> Base.encode16(case: :lower)
+
+  defp canonical(value) when is_map(value) do
+    entries =
+      value
+      |> Map.to_list()
+      |> Enum.map(fn {key, item} -> {canonical(key), canonical(item)} end)
+      |> Enum.sort_by(fn {key, _item} -> :erlang.term_to_binary(key) end)
+
+    {:map, entries}
+  end
+
+  defp canonical(value) when is_list(value), do: {:list, Enum.map(value, &canonical/1)}
+
+  defp canonical(value) when is_tuple(value),
+    do: {:tuple, value |> Tuple.to_list() |> Enum.map(&canonical/1)}
+
+  defp canonical(value), do: {:scalar, value}
 
   defp valid_parts?(root, revision, sequence, records) do
     Identity.valid?(root) and root.path == [] and root.generation <= @max and
@@ -97,5 +115,12 @@ defmodule BlazeX.Component.NestedTable do
   defp state?(_), do: false
 
   defp hash?(value),
-    do: is_binary(value) and byte_size(value) == 64 and String.match?(value, ~r/\A[0-9a-f]+\z/)
+    do: is_binary(value) and byte_size(value) == 64 and lowercase_hex?(value)
+
+  defp lowercase_hex?(<<>>), do: true
+
+  defp lowercase_hex?(<<byte, rest::binary>>) when byte in ?0..?9 or byte in ?a..?f,
+    do: lowercase_hex?(rest)
+
+  defp lowercase_hex?(_), do: false
 end

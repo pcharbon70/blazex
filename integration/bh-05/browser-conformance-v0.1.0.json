@@ -1,0 +1,261 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 11,
+  "support_state": "unsupported",
+  "runtime": {
+    "atomvm_wasm_sha256": "d20c491e75936dc8189910c8d0740093b7813d8dcc1cf966a87c011799ade9d8",
+    "bundle_sha256": "ef43f0bab514223ae77b0b54e40d52ad399c61bd3f7977de865ddf52df4022ef"
+  },
+  "results": [
+    {
+      "browser": "chrome",
+      "version": "140.0.7339.80",
+      "executable": "/usr/bin/google-chrome",
+      "result": "passed",
+      "trace": [
+        {
+          "generation": 1,
+          "revision": 1,
+          "state": 0,
+          "step": "mount"
+        },
+        {
+          "generation": 1,
+          "output": {
+            "semantic": 1,
+            "value": {
+              "accessibility": {
+                "name": "Conformance",
+                "role": "group"
+              },
+              "bindings": [
+                "activate"
+              ],
+              "children": [
+                {
+                  "content": "0",
+                  "kind": "text"
+                }
+              ],
+              "kind": "group"
+            }
+          },
+          "revision": 1,
+          "step": "render"
+        },
+        {
+          "generation": 1,
+          "revision": 2,
+          "state": 1,
+          "step": "event"
+        },
+        {
+          "generation": 1,
+          "output": {
+            "semantic": 1,
+            "value": {
+              "accessibility": {
+                "name": "Conformance",
+                "role": "group"
+              },
+              "bindings": [
+                "activate"
+              ],
+              "children": [
+                {
+                  "content": "1",
+                  "kind": "text"
+                }
+              ],
+              "kind": "group"
+            }
+          },
+          "revision": 2,
+          "step": "render"
+        },
+        {
+          "component": "item",
+          "state": 1,
+          "step": "nested-state"
+        },
+        {
+          "code": "injected",
+          "fallback": "static",
+          "step": "failure"
+        },
+        {
+          "exit": true,
+          "monitor": true,
+          "monotonic": true,
+          "spawn_opt": true,
+          "step": "runtime-primitives",
+          "unlink": true
+        },
+        {
+          "disposed": true,
+          "event": 1,
+          "mount": 0,
+          "step": "process-root"
+        },
+        {
+          "fallback": "committed",
+          "status": "failed",
+          "step": "recovery"
+        },
+        {
+          "result": "completed",
+          "step": "dispose"
+        }
+      ],
+      "final_state": {
+        "item": 1,
+        "resources": 0,
+        "root": 1
+      },
+      "dom": {
+        "text": "Conformance: 1",
+        "role": "status"
+      },
+      "memory_pages": 256,
+      "page_errors": [],
+      "runtime_error": null,
+      "abort_reason": null,
+      "runtime_logs": [
+        "{bh05_phase11,supervisor_start}",
+        "{bh05_phase11,supervisor_ready}",
+        "{bh05_phase11,root_started}",
+        "{bh05_phase11,mount_submitted}",
+        "{bh05_phase11,dispose_started}",
+        "{bh05_phase11,recovery_started}",
+        "{bh05_phase11,recovery_disposed}"
+      ]
+    },
+    {
+      "browser": "firefox",
+      "version": "153.0",
+      "executable": "/home/ducky/.cache/ms-playwright/firefox-1538/firefox/firefox",
+      "result": "passed",
+      "trace": [
+        {
+          "generation": 1,
+          "revision": 1,
+          "state": 0,
+          "step": "mount"
+        },
+        {
+          "generation": 1,
+          "output": {
+            "semantic": 1,
+            "value": {
+              "accessibility": {
+                "name": "Conformance",
+                "role": "group"
+              },
+              "bindings": [
+                "activate"
+              ],
+              "children": [
+                {
+                  "content": "0",
+                  "kind": "text"
+                }
+              ],
+              "kind": "group"
+            }
+          },
+          "revision": 1,
+          "step": "render"
+        },
+        {
+          "generation": 1,
+          "revision": 2,
+          "state": 1,
+          "step": "event"
+        },
+        {
+          "generation": 1,
+          "output": {
+            "semantic": 1,
+            "value": {
+              "accessibility": {
+                "name": "Conformance",
+                "role": "group"
+              },
+              "bindings": [
+                "activate"
+              ],
+              "children": [
+                {
+                  "content": "1",
+                  "kind": "text"
+                }
+              ],
+              "kind": "group"
+            }
+          },
+          "revision": 2,
+          "step": "render"
+        },
+        {
+          "component": "item",
+          "state": 1,
+          "step": "nested-state"
+        },
+        {
+          "code": "injected",
+          "fallback": "static",
+          "step": "failure"
+        },
+        {
+          "exit": true,
+          "monitor": true,
+          "monotonic": true,
+          "spawn_opt": true,
+          "step": "runtime-primitives",
+          "unlink": true
+        },
+        {
+          "disposed": true,
+          "event": 1,
+          "mount": 0,
+          "step": "process-root"
+        },
+        {
+          "fallback": "committed",
+          "status": "failed",
+          "step": "recovery"
+        },
+        {
+          "result": "completed",
+          "step": "dispose"
+        }
+      ],
+      "final_state": {
+        "item": 1,
+        "resources": 0,
+        "root": 1
+      },
+      "dom": {
+        "text": "Conformance: 1",
+        "role": "status"
+      },
+      "memory_pages": 256,
+      "page_errors": [],
+      "runtime_error": null,
+      "abort_reason": null,
+      "runtime_logs": [
+        "{bh05_phase11,supervisor_start}",
+        "{bh05_phase11,supervisor_ready}",
+        "{bh05_phase11,root_started}",
+        "{bh05_phase11,mount_submitted}",
+        "{bh05_phase11,dispose_started}",
+        "{bh05_phase11,recovery_started}",
+        "{bh05_phase11,recovery_disposed}"
+      ]
+    }
+  ],
+  "comparison": {
+    "state": "exact-match",
+    "sha256": "06755c7f4dc215dcc2f0e2d5cee7541edc625562dd7a0a514f7098be70d9ffdd"
+  }
+}

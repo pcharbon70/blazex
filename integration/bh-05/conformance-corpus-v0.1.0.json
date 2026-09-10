@@ -1,0 +1,119 @@
+{
+  "schema_version": "1.0.0",
+  "contract": "blazex.bh05-conformance/0.1",
+  "support_state": "unsupported",
+  "fixture_policy": "documented public BlazeX APIs and portable values only",
+  "sources": {
+    "integration/bh-05/browser_conformance/lib/components.ex": "cc247b7fd00088ae19b949ffec5d62e5df244a090818e0d7a3cfa23e0f714899"
+  },
+  "scenarios": [
+    {
+      "id": "declaration-schema-slots",
+      "contract_version": 1,
+      "dimensions": [
+        "declaration",
+        "required-default-local-host-props",
+        "default-named-contextual-slots"
+      ]
+    },
+    {
+      "id": "composition-identity",
+      "contract_version": 1,
+      "dimensions": [
+        "pure",
+        "nested-stateful",
+        "process-root",
+        "controlled-props",
+        "keyed-insert-move-remove-replace"
+      ]
+    },
+    {
+      "id": "interaction-actions",
+      "contract_version": 1,
+      "dimensions": [
+        "event",
+        "self-child-parent-message",
+        "timer",
+        "delayed-denied-effect",
+        "lease-transfer-release",
+        "command-intent"
+      ]
+    },
+    {
+      "id": "scope-registry-roots",
+      "contract_version": 1,
+      "dimensions": [
+        "tracked-fixed-context",
+        "dynamic-registry",
+        "multi-root"
+      ]
+    },
+    {
+      "id": "failure-recovery-disposal",
+      "contract_version": 1,
+      "dimensions": [
+        "callback-schema-output-failure",
+        "renderer-reject",
+        "persistent-retry",
+        "stale-work-result",
+        "root-crash",
+        "fallback",
+        "removal-replacement-remount-disposal"
+      ]
+    },
+    {
+      "id": "semantic-backends",
+      "contract_version": 1,
+      "dimensions": [
+        "layout",
+        "action",
+        "field",
+        "selection",
+        "keyed-list",
+        "surface",
+        "focus",
+        "file-choice",
+        "accessibility",
+        "disposal"
+      ]
+    }
+  ],
+  "steps": [
+    "setup",
+    "bootstrap",
+    "register-root",
+    "inject-input",
+    "checkpoint",
+    "inject-result-or-failure",
+    "capture-final",
+    "dispose",
+    "verify-clean"
+  ],
+  "normalized_fields": [
+    "scenario",
+    "step",
+    "root",
+    "component",
+    "generation",
+    "revision",
+    "callback",
+    "identity",
+    "state",
+    "semantic-output",
+    "action",
+    "failure",
+    "cleanup",
+    "final-state"
+  ],
+  "excluded_fields": [
+    "pid",
+    "reference",
+    "clock-origin",
+    "reductions",
+    "stack-trace",
+    "adapter-transaction",
+    "browser-generated-id",
+    "private-module"
+  ],
+  "conditional_semantics": false
+}

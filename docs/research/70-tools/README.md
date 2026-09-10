@@ -295,3 +295,10 @@ reporting a tooling change complete.
 - [Recovery validator tests](test_validate_bh05_recovery.py) — Negative authority, inventory and timing-evidence tests.
 - [Recovery subset audit](check_bh05_recovery_subset.py) — Bounded helper primitives and dependency audit; no Wasm execution credit.
 - [Phase 10 recorder](record_bh05_phase10.py) — Twenty-one source-frozen gates and guarded publication.
+- [Phase 11 authority generator](generate_bh05_conformance.py) — Binds the active cross-runtime/backend matrix and normalization rules.
+- [Phase 11 corpus generator](generate_bh05_conformance_corpus.py) — Freezes public fixtures, scenario dimensions and deterministic trace fields.
+- [Phase 11 local runner](run_bh05_local_conformance.py) — Executes and normalizes ERTS, Chrome/Firefox DOM and direct GTK reference rows.
+- [Phase 11 browser validator](validate_bh05_browser_conformance.py) — Requires exact Chrome/Firefox AtomVM traces and clean portable fixture imports.
+- [Phase 11 validator](validate_bh05_conformance.py) — Cross-runtime ledger, portability corrections and frozen completion boundary.
+- [Phase 11 validator tests](test_validate_bh05_conformance.py) — Missing, failed, duplicate and stale gate rejection.
+- [Phase 11 recorder](record_bh05_phase11.py) — Fourteen source-frozen active/replay gates and exclusive-create publication.
