@@ -1,6 +1,6 @@
 defmodule BlazeX.Component.RecoveryPort do
   @moduledoc "Runtime-owned bounded port invocation for opt-in recovery roots."
-  alias BlazeX.Component.RootPort
+  alias BlazeX.Component.{ActionLedger, RootPort}
 
   @page_size 64
   @maximum_page_size 128
@@ -14,7 +14,10 @@ defmodule BlazeX.Component.RecoveryPort do
 
     {pid, monitor} =
       :erlang.spawn_opt(
-        fn -> session_loop(owner, token, Process.monitor(owner), %{}) end,
+        fn ->
+          inventory = %{active: [], retained: [], count: 0}
+          session_loop(owner, token, Process.monitor(owner), inventory)
+        end,
         [:link, :monitor]
       )
 
@@ -464,13 +467,19 @@ defmodule BlazeX.Component.RecoveryPort do
              is_list(items) and items != [] and length(items) <= @maximum_page_size ->
         case update_inventory(inventory, operation, items) do
           {:ok, next_inventory} ->
-            send(owner, {token, :inventory_result, sequence, :ok, map_size(next_inventory)})
-            session_loop(owner, token, owner_monitor, next_inventory)
+            finish_inventory_update(
+              owner,
+              token,
+              owner_monitor,
+              next_inventory,
+              sequence,
+              next_inventory.count
+            )
 
           :error ->
             send(
               owner,
-              {token, :inventory_result, sequence, :invalid_inventory, map_size(inventory)}
+              {token, :inventory_result, sequence, :invalid_inventory, inventory.count}
             )
 
             session_loop(owner, token, owner_monitor, inventory)
@@ -479,26 +488,41 @@ defmodule BlazeX.Component.RecoveryPort do
       {^token, :release_owned_page, sequence, port, identities}
       when is_integer(sequence) and is_list(identities) and identities != [] and
              length(identities) <= @page_size ->
-        if valid_identity_page?(identities) and
-             Enum.all?(identities, &Map.has_key?(inventory, &1)) do
-          leases = Enum.map(identities, &Map.fetch!(inventory, &1))
-          results = RootPort.release_page(port, leases)
+        case take_owned_page(inventory, identities) do
+          {:ok, encoded_leases, remaining} ->
+            leases =
+              Enum.map(encoded_leases, fn {_id, encoded} -> :erlang.binary_to_term(encoded) end)
 
-          completed =
-            identities
-            |> Enum.zip(results)
-            |> Enum.flat_map(fn
-              {identity, :released} -> [identity]
-              _ -> []
-            end)
+            results = RootPort.release_prepared_page(port, leases)
 
-          next_inventory = Map.drop(inventory, completed)
-          send(owner, {token, :release_owned_result, sequence, results, map_size(next_inventory)})
-          session_loop(owner, token, owner_monitor, next_inventory)
-        else
-          results = List.duplicate({:error, :inventory_mismatch}, length(identities))
-          send(owner, {token, :release_owned_result, sequence, results, map_size(inventory)})
-          session_loop(owner, token, owner_monitor, inventory)
+            retained =
+              encoded_leases
+              |> Enum.zip(results)
+              |> Enum.flat_map(fn
+                {_encoded, :released} -> []
+                {encoded, _} -> [encoded]
+              end)
+
+            completed_count =
+              identities
+              |> Enum.zip(results)
+              |> Enum.count(fn {_identity, result} -> result == :released end)
+
+            next_inventory = %{
+              inventory
+              | active: remaining,
+                retained: inventory.retained ++ retained,
+                count: inventory.count - completed_count
+            }
+
+            next_count = next_inventory.count
+            send(owner, {token, :release_owned_result, sequence, results, next_count})
+            session_loop(owner, token, owner_monitor, next_inventory)
+
+          :error ->
+            results = List.duplicate({:error, :inventory_mismatch}, length(identities))
+            send(owner, {token, :release_owned_result, sequence, results, inventory.count})
+            session_loop(owner, token, owner_monitor, inventory)
         end
 
       {^token, :stop} ->
@@ -513,35 +537,76 @@ defmodule BlazeX.Component.RecoveryPort do
   end
 
   defp update_inventory(inventory, :register, leases) do
-    if valid_lease_page?(leases) and map_size(inventory) + length(leases) <= 512 and
-         Enum.all?(leases, &(not Map.has_key?(inventory, &1.id))) do
-      {:ok, Enum.reduce(leases, inventory, &Map.put(&2, &1.id, &1))}
+    ids = inventory_ids(inventory)
+
+    if valid_lease_page?(leases) and inventory.count + length(leases) <= 512 and
+         Enum.all?(leases, &(&1.id not in ids)) do
+      prepared = Enum.map(leases, &prepare_lease/1)
+
+      {:ok,
+       %{
+         inventory
+         | active: inventory.active ++ prepared,
+           count: inventory.count + length(leases)
+       }}
     else
       :error
     end
   end
 
   defp update_inventory(inventory, :replace, leases) do
-    if valid_lease_page?(leases) and Enum.all?(leases, &Map.has_key?(inventory, &1.id)) do
-      {:ok, Enum.reduce(leases, inventory, &Map.put(&2, &1.id, &1))}
+    ids = inventory_ids(inventory)
+
+    if valid_lease_page?(leases) and Enum.all?(leases, &(&1.id in ids)) do
+      replacements = Map.new(leases, &{&1.id, prepare_lease(&1)})
+
+      {:ok,
+       %{
+         inventory
+         | active: Enum.map(inventory.active, &Map.get(replacements, elem(&1, 0), &1)),
+           retained: Enum.map(inventory.retained, &Map.get(replacements, elem(&1, 0), &1))
+       }}
     else
       :error
     end
   end
 
   defp update_inventory(inventory, :drop, identities) do
-    if valid_identity_page?(identities) and Enum.all?(identities, &Map.has_key?(inventory, &1)) do
-      {:ok, Map.drop(inventory, identities)}
+    ids = inventory_ids(inventory)
+
+    if valid_identity_page?(identities) and Enum.all?(identities, &(&1 in ids)) do
+      {:ok,
+       %{
+         inventory
+         | active: Enum.reject(inventory.active, &(elem(&1, 0) in identities)),
+           retained: Enum.reject(inventory.retained, &(elem(&1, 0) in identities)),
+           count: inventory.count - length(identities)
+       }}
     else
       :error
     end
   end
 
+  defp finish_inventory_update(
+         owner,
+         token,
+         owner_monitor,
+         inventory,
+         sequence,
+         inventory_count
+       ) do
+    :erlang.garbage_collect()
+    send(owner, {token, :inventory_result, sequence, :ok, inventory_count})
+    session_loop(owner, token, owner_monitor, inventory)
+  end
+
   defp valid_lease_page?(leases) do
     identities = Enum.map(leases, &Map.get(&1, :id))
 
-    Enum.all?(leases, &(is_map(&1) and is_binary(Map.get(&1, :id)))) and
-      valid_identity_page?(identities)
+    Enum.all?(leases, fn lease ->
+      is_map(lease) and is_binary(Map.get(lease, :id)) and
+        is_map(Map.get(lease, :acquisition))
+    end) and valid_identity_page?(identities)
   rescue
     _ -> false
   end
@@ -549,6 +614,31 @@ defmodule BlazeX.Component.RecoveryPort do
   defp valid_identity_page?(identities),
     do:
       Enum.all?(identities, &is_binary/1) and length(Enum.uniq(identities)) == length(identities)
+
+  defp prepare_lease(lease) do
+    prepared =
+      lease
+      |> Map.take([:id, :owner, :generation, :kind, :capability, :selection, :acquisition])
+      |> Map.update(:acquisition, nil, &ActionLedger.compact_acquisition/1)
+      |> Map.put(:release_requested, true)
+
+    {lease.id, :erlang.term_to_binary(prepared)}
+  end
+
+  defp inventory_ids(inventory),
+    do: Enum.map(inventory.active ++ inventory.retained, &elem(&1, 0))
+
+  defp take_owned_page(inventory, identities) do
+    if valid_identity_page?(identities) do
+      {leases, remaining} = Enum.split(inventory.active, length(identities))
+
+      if Enum.map(leases, &elem(&1, 0)) == identities,
+        do: {:ok, leases, remaining},
+        else: :error
+    else
+      :error
+    end
+  end
 
   defp valid_results?(results, count) when is_list(results),
     do: length(results) == count and indexed_results?(results, 0)

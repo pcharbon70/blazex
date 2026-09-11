@@ -32,8 +32,12 @@ callbacks, forced recovery, reconciliation, renderer disposal, and finalization.
 ## Ownership and bounds
 
 Each configured action runtime owns exactly one monitored cleanup session. The
-session stores at most 512 release descriptors, keyed by the same stable lease
-identity as the authoritative root ledger. A completed acquisition registers
+session stores at most 512 release descriptors in its private runtime table,
+keyed by the same stable lease identity as the authoritative root ledger. The
+table prevents unrelated root-ledger and diagnostic state from becoming the
+cleanup worker's live process heap. It retains the exact adapter fields and
+the complete closed action-correlation shape; unknown acquisition metadata is
+root-ledger evidence rather than provider release data. A completed acquisition registers
 the descriptor before its result work can be observed. An accepted transfer
 atomically replaces that descriptor. An explicitly terminal release drops it.
 Missing, duplicate, malformed, stale, oversized, and mismatched operations
@@ -49,7 +53,7 @@ manifests. The provider port and its release callbacks remain unchanged.
 
 Normal disposal reuses the already-live session, resets cleanup counters but
 not inventory, and sends ordered pages of at most 64 compact identities. The
-session resolves each identity locally, invokes the existing provider page
+session resolves each bounded page locally, invokes the existing provider page
 release, and returns one ordered terminal result per identity. A successful
 reply removes exactly the terminal entries. Acquisition metadata, selection
 records, source stamps, transfer history, and full lease maps never cross the
@@ -85,4 +89,3 @@ unchanged 512 maximum-payload case. LiveView and LocalLiveView remain
 - [Action contract](action-contract.md)
 - [Recovery contract](recovery-contract.md)
 - [Cleanup scaling contract](cleanup-scaling-contract.md)
-

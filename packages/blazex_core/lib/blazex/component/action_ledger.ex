@@ -97,7 +97,7 @@ defmodule BlazeX.Component.ActionLedger do
             generation: entry.action.owner.generation,
             kind: entry.declaration.lease_kind,
             capability: entry.declaration.capability,
-            acquisition: entry.correlation,
+            acquisition: compact_acquisition(entry.correlation),
             selection: entry.selection,
             source_stamp: entry.source_stamp,
             transfer_history: [],
@@ -116,6 +116,18 @@ defmodule BlazeX.Component.ActionLedger do
   end
 
   def lease_ref(lease), do: Map.take(lease, [:id, :acquisition])
+
+  def compact_inventory(ledger) do
+    leases =
+      Map.new(ledger.leases, fn {id, lease} ->
+        {id, %{lease | acquisition: compact_acquisition(lease.acquisition)}}
+      end)
+
+    %{ledger | leases: leases}
+  end
+
+  def compact_acquisition(acquisition) when is_map(acquisition),
+    do: Map.take(acquisition, [:version, :handle, :owner, :id, :sequence])
 
   def lease_live?(lease, accepted) do
     live?(%{action: %{owner: lease.owner}, source_stamp: lease.source_stamp}, accepted)

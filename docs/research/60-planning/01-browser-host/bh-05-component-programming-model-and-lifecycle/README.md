@@ -252,6 +252,7 @@ Phoenix, browser, native-host, or release compatibility.
 - [Phase 14 completion evidence](phase-14-completion.md)
 - [Phase 15 — Runtime-Owned Resource Inventory and Maximum-Payload Requalification](phase-15-runtime-owned-resource-inventory-and-maximum-payload-requalification.md)
 - [Runtime-owned resource inventory contract](runtime-owned-resource-inventory-contract.md)
+- [Phase 15 runtime-owned inventory review and reconciliation](phase-15-review-and-reconciliation.md)
 
 ## Maintaining this index
 

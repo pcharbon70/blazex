@@ -92,3 +92,4 @@ Current successor check: `python3 docs/research/70-tools/validate_bh05_recovery.
 - [Phase 14 compact cleanup schema](compact-cleanup.schema.json) — Closed page-proportional outcome-summary shape with exact identity count and zero timed-path diagnostic expansion.
 - [Phase 14 append-only attempt ledger](compact-cleanup-attempts-v0.1.0.json) — Canonical corrections, bounded full-matrix stall, and isolated maximum-payload results without relabelling Phase 13 evidence.
 - [Phase 15 runtime-owned resource inventory schema](resource-inventory.schema.json) — Bounded acquisition-time registration, compact disposal requests, inventory convergence, and explicit byte-instrumentation availability.
+- [Phase 15 append-only attempt ledger](runtime-owned-inventory-attempts-v0.1.0.json) — Failed architecture probes, current canonical/maximum boundary results, artifact identities, and truthful revise decision.

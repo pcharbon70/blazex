@@ -268,7 +268,11 @@ defmodule BlazeX.Component.ActionRuntime do
       |> Enum.chunk_every(RecoveryPort.maximum_page_size())
       |> Enum.reduce(session, fn page, current -> register_page(current, page) end)
 
-    %{runtime | cleanup_session: session}
+    finish_inventory_transfer(%{
+      runtime
+      | cleanup_session: session,
+        ledger: ActionLedger.compact_inventory(runtime.ledger)
+    })
   end
 
   def reset_cleanup_session(%__MODULE__{cleanup_session: %{alive: true}} = runtime),
@@ -334,6 +338,11 @@ defmodule BlazeX.Component.ActionRuntime do
 
   defp close_session(nil), do: nil
   defp close_session(session), do: RecoveryPort.close_session(session)
+
+  defp finish_inventory_transfer(runtime) do
+    :erlang.garbage_collect()
+    runtime
+  end
 
   defp local_tuple(%{kind: :message, body: body}),
     do: {:message, Atom.to_string(body.route), Map.take(body, [:target, :name, :payload])}

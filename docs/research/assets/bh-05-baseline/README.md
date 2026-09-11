@@ -83,6 +83,7 @@ bindings. No measurement or runtime result may claim Phase 1 pass credit.
 - [Phase 13 BH-06 entry decision](bh-06-phase13-entry-decision-v0.1.0.json) — BH-06 remains ineligible and unauthorized.
 - [Cleanup scaling completion](cleanup-scaling-completion-v0.1.0.json) — Source-bound Phase 13 test, repeat, limitation, and completion record.
 - [Compact cleanup review](compact-cleanup-review-v0.1.0.json) — Phase 14 canonical correction, maximum-payload blocker, source and bundle identities.
+- [Runtime-owned inventory review](runtime-owned-inventory-review-v0.1.0.json) — Phase 15 ownership correction, active-runtime measurements, narrowed transfer diagnosis, and successor blocker.
 - [Phase 14 BH-05 acceptance overlay](bh-05-phase14-acceptance-overlay-v0.1.0.json) — Revision-required successor closing the canonical blocker while retaining the payload-transfer failure.
 - [Phase 14 BH-06 entry decision](bh-06-phase14-entry-decision-v0.1.0.json) — BH-06 remains ineligible and unauthorized.
 - [Compact cleanup completion](compact-cleanup-completion-v0.1.0.json) — Source-bound Phase 14 tests, two clean browser contexts, exact blocker, and revise decision.

@@ -153,7 +153,11 @@ defmodule BlazeX.RecoveryPolicyTest do
     assert session.request_bytes < registration.inventory_request_bytes
 
     assert {:ok, session} =
-             RecoveryPort.replace_page(session, [%{Enum.at(leases, 1) | acquisition: :new}], 100)
+             RecoveryPort.replace_page(
+               session,
+               [%{Enum.at(leases, 1) | acquisition: %{sequence: :new}}],
+               100
+             )
 
     assert {:ok, session} = RecoveryPort.drop_page(session, ["lost"], 100)
     assert session.inventory_count == 0
@@ -162,7 +166,7 @@ defmodule BlazeX.RecoveryPolicyTest do
 
   test "inventory mutations are atomic and bounded" do
     {:ok, session} = RecoveryPort.open_session()
-    first = %{id: "first", acquisition: :one}
+    first = %{id: "first", acquisition: %{sequence: 1}}
 
     assert {:ok, session} = RecoveryPort.register_page(session, [first], 100)
 

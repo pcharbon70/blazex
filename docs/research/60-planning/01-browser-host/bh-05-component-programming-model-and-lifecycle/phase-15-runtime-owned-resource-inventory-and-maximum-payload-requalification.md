@@ -76,15 +76,15 @@ Back to milestone: [README](README.md)
       - [x] 15.4.2.2 Subtask - Recompute terminal inventories, summaries, and request-size bounds from raw records.
       - [x] 15.4.2.3 Subtask - Preserve Phase 12-14 failures and distinguish lifecycle registration cost from timed cleanup cost.
 
-  - [ ] 15.5 Section - Requalify active runtimes and reconcile BH-05.
-    - [ ] 15.5.1 Task - Execute the source-frozen correction matrix.
-      - [ ] 15.5.1.1 Subtask - Run ERTS/headless and Linux Chrome/Firefox AtomVM/DOM matrices, maximum payloads, adverse cases, and growth cases.
-      - [ ] 15.5.1.2 Subtask - Require every retained active sample within 1000 ms with zero live and unresolved leases and exact inventory convergence.
-      - [ ] 15.5.1.3 Subtask - Preserve source/bundle/runtime identities, raw failures, variance, counters, and unavailable metrics.
-    - [ ] 15.5.2 Task - Review and reconcile the successor decision.
-      - [ ] 15.5.2.1 Subtask - Review correctness, ownership, portability, performance, malformed input, evidence, security, and compatibility.
-      - [ ] 15.5.2.2 Subtask - Map every Phase 14 re-entry condition and new ownership finding to evidence.
-      - [ ] 15.5.2.3 Subtask - Accept only when all frozen gates pass; otherwise record revise or block.
+  - [x] 15.5 Section - Requalify active runtimes and reconcile BH-05.
+    - [x] 15.5.1 Task - Execute the source-frozen correction matrix.
+      - [x] 15.5.1.1 Subtask - Run ERTS/headless and Linux Chrome/Firefox AtomVM/DOM matrices, maximum payloads, adverse cases, and growth cases.
+      - [x] 15.5.1.2 Subtask - Require every retained active sample within 1000 ms with zero live and unresolved leases and exact inventory convergence.
+      - [x] 15.5.1.3 Subtask - Preserve source/bundle/runtime identities, raw failures, variance, counters, and unavailable metrics.
+    - [x] 15.5.2 Task - Review and reconcile the successor decision.
+      - [x] 15.5.2.1 Subtask - Review correctness, ownership, portability, performance, malformed input, evidence, security, and compatibility.
+      - [x] 15.5.2.2 Subtask - Map every Phase 14 re-entry condition and new ownership finding to evidence.
+      - [x] 15.5.2.3 Subtask - Accept only when all frozen gates pass; otherwise record revise or block.
 
   - [ ] 15.6 Section - Run the full integration gate and publish completion.
     - [ ] 15.6.1 Task - Rebuild and verify the complete candidate.
@@ -119,6 +119,7 @@ unchanged deadline, and the complete source-frozen BH-05 gate reproduces.
 ## Connections
 
 - [Runtime-owned resource inventory contract](runtime-owned-resource-inventory-contract.md)
+- [Phase 15 review and reconciliation](phase-15-review-and-reconciliation.md)
 - [Phase 14 review](phase-14-review-and-reconciliation.md)
 - [Phase 14 completion](phase-14-completion.md)
 - [Cleanup scaling contract](cleanup-scaling-contract.md)
