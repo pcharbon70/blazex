@@ -22,6 +22,16 @@ defmodule BlazeX.ActionBridgeTest do
       send(pid, {:released, packet})
       :released
     end
+
+    def prepare_release(pid, packet) do
+      send(pid, {:prepared_release, packet})
+      {:ok, %{handle: packet.resource.id}}
+    end
+
+    def release_prepared(pid, token) do
+      send(pid, {:released_prepared, token})
+      :released
+    end
   end
 
   defp config,
@@ -138,5 +148,29 @@ defmodule BlazeX.ActionBridgeTest do
     assert_receive {:released, released}
     assert BlazeX.Effects.Resource.valid?(released.resource)
     assert released.acquisition == entry.correlation
+
+    assert {:ok, prepared} = ActionBridge.prepare_release(config, lease)
+    assert prepared == %{provider: "primary", token: %{handle: "lease"}}
+    assert_receive {:prepared_release, prepared_packet}
+    assert prepared_packet == released
+
+    assert {:ok, ticket} =
+             BlazeX.Component.ReleaseTicket.new(prepared.provider, lease.id, prepared.token)
+
+    assert :released = ActionBridge.release_ticket(config, ticket)
+    assert_receive {:released_prepared, %{handle: "lease"}}
+  end
+
+  test "release tickets reject authority-bearing, oversized, and wrong-provider data" do
+    alias BlazeX.Component.ReleaseTicket
+
+    assert {:error, :invalid_release_ticket} =
+             ReleaseTicket.new("primary", "lease", %{owner: %{path: ["child"]}})
+
+    assert {:error, :invalid_release_ticket} =
+             ReleaseTicket.new("primary", "lease", String.duplicate("x", 4096))
+
+    ticket = %{version: 1, provider: "missing", id: "lease", token: %{handle: "lease"}}
+    assert {:error, :unavailable} = ActionBridge.release_ticket(config(), ticket)
   end
 end

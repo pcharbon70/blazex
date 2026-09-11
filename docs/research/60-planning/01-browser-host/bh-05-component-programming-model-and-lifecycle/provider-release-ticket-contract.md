@@ -43,3 +43,14 @@ providers that do not implement preparation remain usable for immediate work
 but cannot claim the bounded normal-disposal qualification. Tickets never
 enter component results, semantic trees, snapshots, diagnostics, conformance
 traces, or public manifests. LiveView and LocalLiveView remain **[DEFERRED]**.
+
+## Provider migration
+
+An action port implements `prepare_release/2` and either `release_ticket/2` or
+`release_ticket_page/2`. The Effects bridge translates those calls to provider
+`prepare_release/2` and `release_prepared/2` callbacks. Preparation receives
+the same neutral `Resource`, acquisition correlation, and kind used by the
+existing immediate release callback; its returned token must be portable and
+must not repeat authority-bearing fields. A missing callback, provider-route
+mismatch, or invalid token returns `invalid_release_ticket`, so runtime
+inventory cannot claim ownership that it cannot later release.

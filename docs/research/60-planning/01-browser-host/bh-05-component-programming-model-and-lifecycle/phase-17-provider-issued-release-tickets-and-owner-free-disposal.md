@@ -39,15 +39,15 @@ Back to milestone: [README](README.md)
       - [x] 17.1.2.2 Subtask - Limit tickets to bounded portable opaque provider data correlated to one lease ID without owner paths, capabilities, selections, or acquisition payloads.
       - [x] 17.1.2.3 Subtask - Permit normal ticket release exactly once; retain full ledger descriptors only for fail-closed forced recovery.
 
-  - [ ] 17.2 Section - Add the provider release-ticket protocol.
-    - [ ] 17.2.1 Task - Extend the internal action port and Effects bridge.
-      - [ ] 17.2.1.1 Subtask - Add prepare-release and release-ticket callbacks with bounded tickets and declared-provider routing.
-      - [ ] 17.2.1.2 Subtask - Make Effects providers issue opaque tokens from full validated resource packets at acquisition time.
-      - [ ] 17.2.1.3 Subtask - Reject missing, malformed, oversized, nonportable, mismatched, or wrong-provider tickets.
-    - [ ] 17.2.2 Task - Preserve compatibility boundaries.
-      - [ ] 17.2.2.1 Subtask - Keep explicit immediate release behavior and provider resource identity unchanged.
-      - [ ] 17.2.2.2 Subtask - Keep tickets private to runtime inventory and exclude them from component work, snapshots, diagnostics, and public manifests.
-      - [ ] 17.2.2.3 Subtask - Document provider migration and fail closed when preparation is unavailable.
+  - [x] 17.2 Section - Add the provider release-ticket protocol.
+    - [x] 17.2.1 Task - Extend the internal action port and Effects bridge.
+      - [x] 17.2.1.1 Subtask - Add prepare-release and release-ticket callbacks with bounded tickets and declared-provider routing.
+      - [x] 17.2.1.2 Subtask - Make Effects providers issue opaque tokens from full validated resource packets at acquisition time.
+      - [x] 17.2.1.3 Subtask - Reject missing, malformed, oversized, nonportable, mismatched, or wrong-provider tickets.
+    - [x] 17.2.2 Task - Preserve compatibility boundaries.
+      - [x] 17.2.2.1 Subtask - Keep explicit immediate release behavior and provider resource identity unchanged.
+      - [x] 17.2.2.2 Subtask - Keep tickets private to runtime inventory and exclude them from component work, snapshots, diagnostics, and public manifests.
+      - [x] 17.2.2.3 Subtask - Document provider migration and fail closed when preparation is unavailable.
 
   - [ ] 17.3 Section - Integrate tickets with owned inventory and disposal.
     - [ ] 17.3.1 Task - Register and replace tickets at lifecycle boundaries.

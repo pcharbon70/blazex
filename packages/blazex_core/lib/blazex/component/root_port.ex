@@ -4,7 +4,7 @@ defmodule BlazeX.Component.RootPort do
   and candidate tokens are runtime-owned and must never enter callback inputs.
   Correlation is integrity checking inside a trusted runtime, not authentication.
   """
-  alias BlazeX.Component.{Input, Invocation, NestedTable, Schema}
+  alias BlazeX.Component.{Input, Invocation, NestedTable, ReleaseTicket, Schema}
 
   @keys [
     :root,
@@ -208,6 +208,71 @@ defmodule BlazeX.Component.RootPort do
   catch
     _, _ -> List.duplicate({:error, :port_failed}, length(leases))
   end
+
+  def prepare_release({module, config}, lease) when is_map(lease) do
+    with true <- function_exported?(module, :prepare_release, 2),
+         %{id: id, selection: %{name: provider}} <- lease,
+         {:ok, %{provider: ^provider, token: token}} <- module.prepare_release(config, lease),
+         {:ok, ticket} <- ReleaseTicket.new(provider, id, token) do
+      {:ok, ticket}
+    else
+      _ -> {:error, :invalid_release_ticket}
+    end
+  rescue
+    _ -> {:error, :invalid_release_ticket}
+  catch
+    _, _ -> {:error, :invalid_release_ticket}
+  end
+
+  def prepare_release(_, _), do: {:error, :invalid_release_ticket}
+
+  def prepare_release_page(port, leases)
+      when is_list(leases) and leases != [] and length(leases) <= 128 do
+    Enum.reduce_while(leases, {:ok, []}, fn lease, {:ok, tickets} ->
+      case prepare_release(port, lease) do
+        {:ok, ticket} -> {:cont, {:ok, [ticket | tickets]}}
+        _ -> {:halt, {:error, :invalid_release_ticket}}
+      end
+    end)
+    |> case do
+      {:ok, tickets} -> {:ok, Enum.reverse(tickets)}
+      error -> error
+    end
+  end
+
+  def prepare_release_page(_, _), do: {:error, :invalid_release_ticket}
+
+  def release_ticket_page({module, config} = port, tickets)
+      when is_list(tickets) and tickets != [] and length(tickets) <= 64 do
+    if ReleaseTicket.page?(tickets, 64) do
+      cond do
+        function_exported?(module, :release_ticket_page, 2) ->
+          normalize_ticket_results(module.release_ticket_page(config, tickets), length(tickets))
+
+        function_exported?(module, :release_ticket, 2) ->
+          Enum.map(tickets, &call(port, :release_ticket, [&1]))
+
+        true ->
+          List.duplicate({:error, :port_failed}, length(tickets))
+      end
+    else
+      List.duplicate({:error, :invalid_release_ticket}, length(tickets))
+    end
+  rescue
+    _ -> List.duplicate({:error, :port_failed}, length(tickets))
+  catch
+    _, _ -> List.duplicate({:error, :port_failed}, length(tickets))
+  end
+
+  def release_ticket_page(_, tickets) when is_list(tickets),
+    do: List.duplicate({:error, :invalid_release_ticket}, length(tickets))
+
+  defp normalize_ticket_results(results, count)
+       when is_list(results) and length(results) == count,
+       do: results
+
+  defp normalize_ticket_results(_, count),
+    do: List.duplicate({:error, :port_failed}, count)
 
   defp keys?(value, keys),
     do: is_map(value) and not is_struct(value) and Enum.sort(Map.keys(value)) == Enum.sort(keys)

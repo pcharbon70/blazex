@@ -175,6 +175,13 @@ defmodule BlazeX.Component.ActionPort do
   @callback submit(term(), map()) :: :accepted | :denied | :disconnected | {:error, atom()}
   @callback cancel(term(), map()) :: :ok | {:error, atom()}
   @callback release(term(), map()) :: :released | :lost
+  @callback prepare_release(term(), map()) ::
+              {:ok, %{provider: binary(), token: term()}} | {:error, atom()}
+  @callback release_ticket(term(), map()) :: :released | :lost | {:error, atom()}
+  @callback release_ticket_page(term(), [map()]) ::
+              [:released | :lost | {:error, atom()}]
+  @optional_callbacks prepare_release: 2, release_ticket: 2, release_ticket_page: 2
+
   def valid?({module, _}) when is_atom(module),
     do:
       Code.ensure_loaded?(module) and
