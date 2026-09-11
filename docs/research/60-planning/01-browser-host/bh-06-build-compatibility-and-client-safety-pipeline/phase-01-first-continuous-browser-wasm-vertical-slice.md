@@ -30,11 +30,11 @@ Back to the [milestone](README.md).
     - [x] Freeze the required lifecycle: mount, semantic render, browser event,
       Elixir state transition, DOM commit, disposal; reject JS-only substitutes.
 
-  - [ ] 1.2 Section - Implement deterministic candidate build primitives.
-    - [ ] Activate `packages/blazex_build` as an independent Mix project.
-    - [ ] Validate one explicit entrypoint and assemble content-addressed runtime,
+  - [x] 1.2 Section - Implement deterministic candidate build primitives.
+    - [x] Activate `packages/blazex_build` as an independent Mix project.
+    - [x] Validate one explicit entrypoint and assemble content-addressed runtime,
       application bundle, host, HTML, and versioned manifest records.
-    - [ ] Reject duplicate paths, missing artifacts, path escape, mutable output,
+    - [x] Reject duplicate paths, missing artifacts, path escape, mutable output,
       malformed metadata, and integrity drift with actionable diagnostics.
 
   - [ ] 1.3 Section - Package and execute the continuous browser-Wasm slice.
