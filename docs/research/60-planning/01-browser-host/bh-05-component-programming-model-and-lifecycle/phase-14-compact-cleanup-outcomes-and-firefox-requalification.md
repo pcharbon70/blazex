@@ -64,15 +64,15 @@ Back to milestone: [README](README.md)
       - [x] 14.3.2.2 Subtask - Keep encoding and reconciliation inside the original deadline interval.
       - [x] 14.3.2.3 Subtask - Prove idempotency, stale rejection, callback order, and unresolved retention.
 
-  - [ ] 14.4 Section - Extend structural and anti-concealment gates.
-    - [ ] 14.4.1 Task - Measure outcome representation scaling.
-      - [ ] 14.4.1.1 Subtask - Record page count, encoded bytes, identities, vectors, and expanded rows.
-      - [ ] 14.4.1.2 Subtask - Require page-proportional maps and zero timed-path row expansion.
-      - [ ] 14.4.1.3 Subtask - Retain Phase 13 callback, worker, message, payload, shape, and availability counters.
-    - [ ] 14.4.2 Task - Make compact evidence fail closed.
-      - [ ] 14.4.2.1 Subtask - Mutation-test missing/reordered identities, vector length, scalar substitution, and masked failure.
-      - [ ] 14.4.2.2 Subtask - Recompute terminal inventories and summaries from compact pages.
-      - [ ] 14.4.2.3 Subtask - Preserve Phase 12 and 13 failures in the append-only ledger.
+  - [x] 14.4 Section - Extend structural and anti-concealment gates.
+    - [x] 14.4.1 Task - Measure outcome representation scaling.
+      - [x] 14.4.1.1 Subtask - Record page count, encoded bytes, identities, vectors, and expanded rows.
+      - [x] 14.4.1.2 Subtask - Require page-proportional maps and zero timed-path row expansion.
+      - [x] 14.4.1.3 Subtask - Retain Phase 13 callback, worker, message, payload, shape, and availability counters.
+    - [x] 14.4.2 Task - Make compact evidence fail closed.
+      - [x] 14.4.2.1 Subtask - Mutation-test missing/reordered identities, vector length, scalar substitution, and masked failure.
+      - [x] 14.4.2.2 Subtask - Recompute terminal inventories and summaries from compact pages.
+      - [x] 14.4.2.3 Subtask - Preserve Phase 12 and 13 failures in the append-only ledger.
 
   - [ ] 14.5 Section - Requalify active runtimes and reconcile BH-05.
     - [ ] 14.5.1 Task - Execute the source-frozen correction matrix.

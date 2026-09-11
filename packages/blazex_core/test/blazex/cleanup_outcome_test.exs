@@ -46,5 +46,8 @@ defmodule BlazeX.CleanupOutcomeTest do
     refute CleanupOutcome.valid_page?(%{page | status: []})
     refute CleanupOutcome.valid_page?(%{page | version: 2})
     refute CleanupOutcome.valid_page?(%{page | identities: List.duplicate({owner(), "x"}, 65)})
+
+    mixed = CleanupOutcome.lease_page([lease("one"), lease("two")], [:completed, :failed], 0)
+    refute CleanupOutcome.valid_page?(%{mixed | identities: tl(mixed.identities)})
   end
 end

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://blazex.dev/schemas/bh-05/compact-cleanup-v1.json",
+  "title": "BH-05 compact cleanup outcome structural summary",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "outcome_pages",
+    "identities",
+    "vectors",
+    "expanded_rows",
+    "encoded_bytes"
+  ],
+  "properties": {
+    "version": {"const": 1},
+    "outcome_pages": {"type": "integer", "minimum": 0, "maximum": 8},
+    "identities": {"type": "integer", "minimum": 0, "maximum": 512},
+    "vectors": {"type": "integer", "minimum": 0, "maximum": 24},
+    "expanded_rows": {"const": 0},
+    "encoded_bytes": {
+      "oneOf": [
+        {"type": "integer", "minimum": 0},
+        {"const": "unavailable"}
+      ]
+    }
+  }
+}
