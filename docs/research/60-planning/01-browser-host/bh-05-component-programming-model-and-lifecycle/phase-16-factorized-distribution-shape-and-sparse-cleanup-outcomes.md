@@ -59,15 +59,15 @@ Back to milestone: [README](README.md)
       - [x] 16.3.2.2 Subtask - Prove completed deep/distributed owners do not survive in terminal pages.
       - [x] 16.3.2.3 Subtask - Keep unresolved owners exact and portable through repeated reporting.
 
-  - [ ] 16.4 Section - Extend structural, lifecycle, and anti-concealment gates.
-    - [ ] 16.4.1 Task - Verify sparse representation invariants.
-      - [ ] 16.4.1.1 Subtask - Test uniform, mixed, forced, malformed-index, maximum-ID, and deep-owner pages.
-      - [ ] 16.4.1.2 Subtask - Test counts, folds, exact matching, terminal summaries, and history bounds.
-      - [ ] 16.4.1.3 Subtask - Test cleanup-session convergence, portable snapshots, and zero normal worker starts.
-    - [ ] 16.4.2 Task - Detect hidden scaling regressions.
-      - [ ] 16.4.2.1 Subtask - Mutation-test owner retention, factor omission, deadline drift, count reduction, and masked unresolved rows.
-      - [ ] 16.4.2.2 Subtask - Bound successful outcome size by identifiers rather than owner depth or acquisition payload.
-      - [ ] 16.4.2.3 Subtask - Retain Phase 13-15 process, message, inventory, outcome, and timing-shape checks.
+  - [x] 16.4 Section - Extend structural, lifecycle, and anti-concealment gates.
+    - [x] 16.4.1 Task - Verify sparse representation invariants.
+      - [x] 16.4.1.1 Subtask - Test uniform, mixed, forced, malformed-index, maximum-ID, and deep-owner pages.
+      - [x] 16.4.1.2 Subtask - Test counts, folds, exact matching, terminal summaries, and history bounds.
+      - [x] 16.4.1.3 Subtask - Test cleanup-session convergence, portable snapshots, and zero normal worker starts.
+    - [x] 16.4.2 Task - Detect hidden scaling regressions.
+      - [x] 16.4.2.1 Subtask - Mutation-test owner retention, factor omission, deadline drift, count reduction, and masked unresolved rows.
+      - [x] 16.4.2.2 Subtask - Bound successful outcome size by identifiers rather than owner depth or acquisition payload.
+      - [x] 16.4.2.3 Subtask - Retain Phase 13-15 process, message, inventory, outcome, and timing-shape checks.
 
   - [ ] 16.5 Section - Requalify active runtimes and reconcile BH-05.
     - [ ] 16.5.1 Task - Execute the source-frozen factor and correction matrices.

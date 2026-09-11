@@ -12,7 +12,7 @@ defmodule BlazeX.Component.CleanupOutcome do
     true = Enum.all?(statuses, &(&1 in @statuses))
 
     page = %{
-      version: 1,
+      version: 2,
       kind: :lease,
       identities: Enum.map(leases, & &1.id),
       status: compact(statuses),
@@ -176,7 +176,7 @@ defmodule BlazeX.Component.CleanupOutcome do
     lease_pages = Enum.filter(pages, &(&1.kind == :lease))
 
     %{
-      version: 1,
+      version: 2,
       outcome_pages: length(lease_pages),
       identities: Enum.sum(Enum.map(lease_pages, &length(&1.identities))),
       vectors:
@@ -197,7 +197,7 @@ defmodule BlazeX.Component.CleanupOutcome do
   end
 
   def valid_page?(%{
-        version: 1,
+        version: 2,
         kind: :lease,
         identities: identities,
         status: status,

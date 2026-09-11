@@ -59,7 +59,7 @@ defmodule BlazeX.CleanupOutcomeTest do
   test "malformed and oversized pages fail closed" do
     page = CleanupOutcome.lease_page([lease("one")], [:completed], 0)
     refute CleanupOutcome.valid_page?(%{page | status: []})
-    refute CleanupOutcome.valid_page?(%{page | version: 2})
+    refute CleanupOutcome.valid_page?(%{page | version: 3})
     refute CleanupOutcome.valid_page?(%{page | identities: List.duplicate("x", 65)})
 
     mixed = CleanupOutcome.lease_page([lease("one"), lease("two")], [:completed, :failed], 0)

@@ -3,11 +3,13 @@
   "$id": "https://blazex.dev/schemas/bh-05/cleanup-factor-v1.json",
   "title": "BH-05 factorized cleanup observation",
   "type": "object",
-  "required": ["schema_version", "execution_state", "acceptance_state", "factor_profiles", "samples"],
+  "additionalProperties": false,
+  "required": ["schema_version", "execution_state", "acceptance_state", "result", "factor_profiles", "samples"],
   "properties": {
     "schema_version": {"const": "1.0.0"},
     "execution_state": {"const": "executed"},
     "acceptance_state": {"enum": ["passed", "failed"]},
+    "result": {"enum": ["passed", "failed"]},
     "factor_profiles": {
       "type": "array",
       "minItems": 7,
@@ -35,7 +37,15 @@
           "unresolved_identities": {"type": "array"},
           "outcome_format": {
             "type": "object",
-            "required": ["retained_outcome_bytes", "retained_owner_records"]
+            "required": ["version", "owner_records", "retained_outcome_bytes", "retained_owner_records"],
+            "properties": {
+              "version": {"const": 2},
+              "owner_records": {"const": 0},
+              "retained_owner_records": {"const": 0},
+              "retained_outcome_bytes": {
+                "oneOf": [{"type": "integer", "minimum": 0}, {"const": "unavailable"}]
+              }
+            }
           }
         }
       }
