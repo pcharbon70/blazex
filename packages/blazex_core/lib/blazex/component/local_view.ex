@@ -11,7 +11,7 @@ defmodule BlazeX.Component.LocalView do
     with {:ok, spec} <- RootPort.normalize(spec),
          true <- RootPort.ports?(ports),
          {:ok, _} <- RootSchedule.new(policy),
-         {:ok, _} <- ActionRuntime.new(actions),
+         :ok <- ActionRuntime.validate(actions),
          true <- recovery == nil or BlazeX.Component.RecoveryPolicy.validate(recovery),
          true <- policy == nil or SchedulingPort.supported?(ports.evaluator),
          true <-

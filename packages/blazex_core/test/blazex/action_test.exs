@@ -474,10 +474,13 @@ defmodule BlazeX.ActionTest do
 
     assert samples == Enum.to_list(16..512//16)
     assert map_size(runtime.ledger.leases) == 512
+    assert runtime.cleanup_session.inventory_count == 512
+    refute Map.has_key?(ActionRuntime.snapshot(runtime), :cleanup_session)
     assert {:error, :invalid_action_batch} = action_plan(runtime, [action(33)])
     closed = ActionRuntime.close(runtime, :shutdown)
     assert closed.ledger.leases == %{} and closed.ledger.totals.released == 512
     assert length(closed.ledger.history) == 128
+    refute closed.cleanup_session.alive
   end
 
   test "leases transfer only on declared routes and stale acquisition references never release reused IDs" do
@@ -509,10 +512,12 @@ defmodule BlazeX.ActionTest do
     {runtime, []} = ActionRuntime.commit(runtime, plan, accepted())
     assert runtime.ledger.leases["lease"].status == :transferred
     assert length(runtime.ledger.leases["lease"].transfer_history) == 1
+    assert runtime.cleanup_session.inventory_count == 1
     {:ok, release} = Action.new(:resource_release, "release", 3, owner(), %{lease: reference})
     {:ok, plan} = action_plan(runtime, [release])
     {runtime, []} = ActionRuntime.commit(runtime, plan, accepted())
     assert_receive {:released, %{id: "lease", release_requested: true}}
+    assert runtime.cleanup_session.inventory_count == 0
     assert {:error, _} = action_plan(runtime, [%{release | sequence: 4}])
     {:ok, plan} = action_plan(runtime, [action(4)])
     {runtime, []} = ActionRuntime.commit(runtime, plan, accepted())

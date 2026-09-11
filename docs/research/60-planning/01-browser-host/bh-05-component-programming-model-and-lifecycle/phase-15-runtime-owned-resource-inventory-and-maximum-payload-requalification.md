@@ -56,15 +56,15 @@ Back to milestone: [README](README.md)
       - [x] 15.2.2.2 Subtask - Measure registration separately from timed cleanup and reset only cleanup counters while retaining owned descriptors.
       - [x] 15.2.2.3 Subtask - Keep the protocol inside Core and the existing adapter release contract unchanged.
 
-  - [ ] 15.3 Section - Integrate acquisition, transfer, release, and recovery.
-    - [ ] 15.3.1 Task - Attach the owner to action-runtime lifecycle transitions.
-      - [ ] 15.3.1.1 Subtask - Create the session with valid action runtime configuration and close it on rejected initialization or terminal shutdown.
-      - [ ] 15.3.1.2 Subtask - Register newly acquired leases, replace transferred descriptors, and drop explicitly released leases only after the matching ledger transition succeeds.
-      - [ ] 15.3.1.3 Subtask - Preserve portable snapshots, stale rejection, idempotency, pruning, and timeout behavior.
-    - [ ] 15.3.2 Task - Use compact identities during normal disposal.
-      - [ ] 15.3.2.1 Subtask - Reuse the already-live session and dispatch ordered identity pages under the original deadline.
-      - [ ] 15.3.2.2 Subtask - Reconcile exact compact outcomes and retain root-ledger descriptors for only the exact forced remainder.
-      - [ ] 15.3.2.3 Subtask - Fall back fail-closed when the session is absent, dead, divergent, or malformed without manufacturing completion.
+  - [x] 15.3 Section - Integrate acquisition, transfer, release, and recovery.
+    - [x] 15.3.1 Task - Attach the owner to action-runtime lifecycle transitions.
+      - [x] 15.3.1.1 Subtask - Create the session with valid action runtime configuration and close it on rejected initialization or terminal shutdown.
+      - [x] 15.3.1.2 Subtask - Register newly acquired leases, replace transferred descriptors, and drop explicitly released leases only after the matching ledger transition succeeds.
+      - [x] 15.3.1.3 Subtask - Preserve portable snapshots, stale rejection, idempotency, pruning, and timeout behavior.
+    - [x] 15.3.2 Task - Use compact identities during normal disposal.
+      - [x] 15.3.2.1 Subtask - Reuse the already-live session and dispatch ordered identity pages under the original deadline.
+      - [x] 15.3.2.2 Subtask - Reconcile exact compact outcomes and retain root-ledger descriptors for only the exact forced remainder.
+      - [x] 15.3.2.3 Subtask - Fall back fail-closed when the session is absent, dead, divergent, or malformed without manufacturing completion.
 
   - [ ] 15.4 Section - Extend structural and anti-concealment gates.
     - [ ] 15.4.1 Task - Measure ownership-transfer and disposal amplification.

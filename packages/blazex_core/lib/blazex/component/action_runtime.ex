@@ -5,23 +5,38 @@ defmodule BlazeX.Component.ActionRuntime do
     ActionLedger,
     ActionManifest,
     ActionPort,
+    RecoveryPort,
     RootPort,
     SchedulingIntents
   }
 
-  defstruct [:manifest, :port, ledger: %ActionLedger{}, timers: %{}]
+  @inventory_timeout 1000
+
+  defstruct [:manifest, :port, :cleanup_session, ledger: %ActionLedger{}, timers: %{}]
 
   def new(nil), do: {:ok, nil}
 
   def new(%{manifest: manifest, port: port} = config) when map_size(config) == 2 do
-    with :ok <- ActionManifest.validate(manifest), true <- ActionPort.valid?(port) do
-      {:ok, %__MODULE__{manifest: manifest, port: port}}
+    with :ok <- validate(config), {:ok, session} <- RecoveryPort.open_session() do
+      {:ok, %__MODULE__{manifest: manifest, port: port, cleanup_session: session}}
     else
       _ -> {:error, :invalid_actions}
     end
   end
 
   def new(_), do: {:error, :invalid_actions}
+
+  def validate(nil), do: :ok
+
+  def validate(%{manifest: manifest, port: port} = config) when map_size(config) == 2 do
+    with :ok <- ActionManifest.validate(manifest), true <- ActionPort.valid?(port) do
+      :ok
+    else
+      _ -> {:error, :invalid_actions}
+    end
+  end
+
+  def validate(_), do: {:error, :invalid_actions}
 
   def prepare(runtime, groups, candidate, spec, policy, evaluator) do
     with {:ok, plan} <-
@@ -115,7 +130,10 @@ defmodule BlazeX.Component.ActionRuntime do
           end
 
         :resource_transfer ->
-          {%{runtime | ledger: ActionLedger.transfer(runtime.ledger, action, accepted)}, work}
+          ledger = ActionLedger.transfer(runtime.ledger, action, accepted)
+          runtime = %{runtime | ledger: ledger}
+          lease = Map.fetch!(ledger.leases, action.body.lease.id)
+          {%{runtime | cleanup_session: replace(runtime.cleanup_session, [lease])}, work}
 
         :resource_release ->
           {release(runtime, action.body.lease), work}
@@ -130,9 +148,10 @@ defmodule BlazeX.Component.ActionRuntime do
     case ActionLedger.complete(runtime.ledger, result, accepted) do
       {:ok, ledger, entry, leases} ->
         runtime = cancel_timeout(runtime, result.correlation)
+        runtime = %{runtime | ledger: ledger}
+        runtime = register(runtime, Enum.map(result.leases, &Map.fetch!(ledger.leases, &1)))
 
-        {:ok, %{runtime | ledger: ledger},
-         ActionLedger.result_work(entry, result, accepted, leases)}
+        {:ok, runtime, ActionLedger.result_work(entry, result, accepted, leases)}
 
       error ->
         error
@@ -199,7 +218,8 @@ defmodule BlazeX.Component.ActionRuntime do
             do: :released,
             else: :lost
 
-        %{runtime | ledger: ActionLedger.released(runtime.ledger, lease, status)}
+        runtime = %{runtime | ledger: ActionLedger.released(runtime.ledger, lease, status)}
+        %{runtime | cleanup_session: drop(runtime.cleanup_session, [lease.id])}
 
       _ ->
         runtime
@@ -232,11 +252,35 @@ defmodule BlazeX.Component.ActionRuntime do
 
     # A rejected replacement still belongs to the old generation. Keep its
     # watermarks until a new generation actually commits (prune/2).
-    %{next | ledger: %{next.ledger | pending: %{}}}
+    next = %{next | ledger: %{next.ledger | pending: %{}}}
+    %{next | cleanup_session: close_session(next.cleanup_session)}
   end
 
   def snapshot(runtime), do: ActionLedger.snapshot(runtime.ledger)
   def pending(runtime), do: map_size(runtime.ledger.pending)
+
+  def seed_inventory(%__MODULE__{} = runtime) do
+    session = runtime.cleanup_session || new_session()
+
+    session =
+      runtime.ledger
+      |> ActionLedger.ordered_leases()
+      |> Enum.chunk_every(RecoveryPort.maximum_page_size())
+      |> Enum.reduce(session, fn page, current -> register_page(current, page) end)
+
+    %{runtime | cleanup_session: session}
+  end
+
+  def reset_cleanup_session(%__MODULE__{cleanup_session: %{alive: true}} = runtime),
+    do: %{runtime | cleanup_session: RecoveryPort.reset_cleanup_stats(runtime.cleanup_session)}
+
+  def reset_cleanup_session(runtime), do: runtime
+
+  def put_cleanup_session(%__MODULE__{} = runtime, session),
+    do: %{runtime | cleanup_session: session}
+
+  def close_cleanup_session(%__MODULE__{} = runtime),
+    do: %{runtime | cleanup_session: close_session(runtime.cleanup_session)}
 
   defp cancel_timeout(runtime, correlation) do
     case Map.pop(runtime.timers, correlation) do
@@ -248,6 +292,48 @@ defmodule BlazeX.Component.ActionRuntime do
         %{runtime | timers: timers}
     end
   end
+
+  defp register(runtime, []), do: runtime
+
+  defp register(runtime, leases) do
+    session = runtime.cleanup_session || new_session()
+    %{runtime | cleanup_session: register_page(session, leases)}
+  end
+
+  defp register_page(%{alive: true} = session, leases) do
+    case RecoveryPort.register_page(session, leases, @inventory_timeout) do
+      {:ok, updated} -> updated
+      {:error, _, updated} -> updated
+    end
+  end
+
+  defp register_page(session, _leases), do: session
+
+  defp replace(%{alive: true} = session, leases) do
+    case RecoveryPort.replace_page(session, leases, @inventory_timeout) do
+      {:ok, updated} -> updated
+      {:error, _, updated} -> updated
+    end
+  end
+
+  defp replace(session, _leases), do: session
+
+  defp drop(%{alive: true} = session, identities) do
+    case RecoveryPort.drop_page(session, identities, @inventory_timeout) do
+      {:ok, updated} -> updated
+      {:error, _, updated} -> updated
+    end
+  end
+
+  defp drop(session, _identities), do: session
+
+  defp new_session do
+    {:ok, session} = RecoveryPort.open_session()
+    session
+  end
+
+  defp close_session(nil), do: nil
+  defp close_session(session), do: RecoveryPort.close_session(session)
 
   defp local_tuple(%{kind: :message, body: body}),
     do: {:message, Atom.to_string(body.route), Map.take(body, [:target, :name, :payload])}

@@ -152,7 +152,9 @@ defmodule BlazeX.BH05.Acceptance.Cleanup do
          %{id: id, owner: owner, acquisition: %{sequence: sequence}, release_requested: false}}
       end)
 
-    actions = %ActionRuntime{ledger: %ActionLedger{leases: leases}, port: {Port, nil}}
+    actions =
+      %ActionRuntime{ledger: %ActionLedger{leases: leases}, port: {Port, nil}}
+      |> ActionRuntime.seed_inventory()
 
     %{
       spec: %{root: owner.root},

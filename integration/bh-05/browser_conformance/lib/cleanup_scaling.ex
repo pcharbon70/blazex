@@ -137,10 +137,12 @@ defmodule BlazeX.BH05.CleanupScaling do
     root = "scale-#{payload_class}-#{count}-#{sample}"
     owner = %{root: root, generation: 1, path: []}
 
-    actions = %ActionRuntime{
-      ledger: ledger(payload_class, count, owner),
-      port: {Port, nil}
-    }
+    actions =
+      %ActionRuntime{
+        ledger: ledger(payload_class, count, owner),
+        port: {Port, nil}
+      }
+      |> ActionRuntime.seed_inventory()
 
     %{
       spec: %{root: root},
