@@ -271,7 +271,7 @@ defmodule BlazeX.Component.RootPort do
       when is_list(tickets) and tickets != [] and length(tickets) <= 64 do
     cond do
       function_exported?(module, :release_prepared_ticket_page, 2) ->
-        normalize_ticket_results(
+        normalize_prepared_ticket_results(
           module.release_prepared_ticket_page(config, tickets),
           length(tickets)
         )
@@ -306,6 +306,11 @@ defmodule BlazeX.Component.RootPort do
 
   defp normalize_ticket_results(_, count),
     do: List.duplicate({:error, :port_failed}, count)
+
+  defp normalize_prepared_ticket_results(:released, _count), do: :released
+
+  defp normalize_prepared_ticket_results(results, count),
+    do: normalize_ticket_results(results, count)
 
   defp keys?(value, keys),
     do: is_map(value) and not is_struct(value) and Enum.sort(Map.keys(value)) == Enum.sort(keys)

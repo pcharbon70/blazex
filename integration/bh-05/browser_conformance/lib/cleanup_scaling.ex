@@ -24,7 +24,7 @@ defmodule BlazeX.BH05.CleanupScaling do
     def prepare_release(_, lease),
       do: {:ok, %{provider: lease.selection.name, token: lease.acquisition.sequence}}
 
-    def release_prepared_ticket_page(_, tickets), do: List.duplicate(:released, length(tickets))
+    def release_prepared_ticket_page(_, _tickets), do: :released
   end
 
   def run(runtime \\ :browser) do
@@ -192,6 +192,9 @@ defmodule BlazeX.BH05.CleanupScaling do
       "protocol_messages" => value.protocol_messages,
       "normal_pages_sent" => value.normal.pages_sent,
       "forced_pages_sent" => value.forced.pages_sent,
+      "compact_ack_pages" => value.normal.compact_ack_pages,
+      "compact_ack_items" => value.normal.compact_ack_items,
+      "positional_result_items" => value.normal.positional_result_items,
       "callbacks_attempted" => value.callbacks_attempted,
       "callbacks_completed" => value.callbacks_completed,
       "request_bytes" => metric_sum(value.normal.request_bytes, value.forced.request_bytes),

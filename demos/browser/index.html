@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Experimental BlazeX component gallery">
+    <title>BlazeX component demo</title>
+    <link rel="stylesheet" href="/demos/browser/styles.css">
+  </head>
+  <body>
+    <header class="masthead">
+      <a class="brand" href="/" aria-label="BlazeX component demo home">
+        <span class="brand-mark" aria-hidden="true">BX</span>
+        <span>
+          <strong>BlazeX</strong>
+          <small>Component demo</small>
+        </span>
+      </a>
+      <span class="release-badge">Experimental · Phase 6</span>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="page-title">
+        <p class="eyebrow">Browser control gallery</p>
+        <h1 id="page-title">One place to exercise every BlazeX control.</h1>
+        <p class="hero-copy">These first controls run through the standalone DOM driver. Type in the field, activate the button, and inspect the normalized semantic events beside each example.</p>
+      </section>
+
+      <section class="catalog-toolbar" aria-label="Demo filters">
+        <label for="catalog-search">Filter controls</label>
+        <div class="search-row">
+          <input id="catalog-search" type="search" placeholder="Search by name, category, or phase" autocomplete="off">
+          <output id="catalog-count" for="catalog-search" aria-live="polite"></output>
+        </div>
+      </section>
+
+      <section id="catalog" class="catalog" aria-label="Control demonstrations"></section>
+      <p id="empty-state" class="empty-state" hidden>No controls match that filter.</p>
+    </main>
+
+    <template id="demo-card-template">
+      <article class="demo-card">
+        <header class="demo-header">
+          <div>
+            <p class="demo-category"></p>
+            <h2 class="demo-title"></h2>
+          </div>
+          <span class="demo-status"></span>
+        </header>
+        <p class="demo-description"></p>
+        <div class="demo-grid">
+          <section class="demo-pane" aria-label="Rendered control">
+            <p class="pane-label">Rendered control</p>
+            <div class="demo-target"></div>
+          </section>
+          <section class="event-pane" aria-label="Semantic event output">
+            <p class="pane-label">Latest semantic event</p>
+            <pre class="event-output" tabindex="0">Interact with the control to emit an event.</pre>
+          </section>
+        </div>
+        <footer class="demo-footer"></footer>
+      </article>
+    </template>
+
+    <noscript>This gallery requires JavaScript to run the BlazeX DOM driver.</noscript>
+    <script type="module" src="/demos/browser/src/app.js"></script>
+  </body>
+</html>

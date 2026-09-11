@@ -37,7 +37,7 @@ defmodule BlazeX.BH05.Acceptance.Cleanup do
     def prepare_release(_, lease),
       do: {:ok, %{provider: lease.selection.name, token: lease.acquisition.sequence}}
 
-    def release_prepared_ticket_page(_, tickets), do: List.duplicate(:released, length(tickets))
+    def release_prepared_ticket_page(_, _tickets), do: :released
   end
 
   def run(cleanup_count \\ 100, process_samples \\ 10) do

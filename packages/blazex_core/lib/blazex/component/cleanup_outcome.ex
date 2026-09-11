@@ -6,6 +6,25 @@ defmodule BlazeX.Component.CleanupOutcome do
   @statuses [:completed, :failed, :timed_out]
   @force_statuses [:not_requested | @statuses]
 
+  def released_lease_page(leases, elapsed_ms)
+      when is_list(leases) and is_integer(elapsed_ms) and elapsed_ms >= 0 do
+    true = leases != [] and length(leases) <= @page_size
+
+    page = %{
+      version: 2,
+      kind: :lease,
+      identities: Enum.map(leases, & &1.id),
+      status: :completed,
+      force_status: :not_requested,
+      unresolved: false,
+      unresolved_owners: [],
+      elapsed_ms: elapsed_ms
+    }
+
+    true = valid_page?(page)
+    page
+  end
+
   def lease_page(leases, statuses, elapsed_ms)
       when is_list(leases) and is_list(statuses) and is_integer(elapsed_ms) and elapsed_ms >= 0 do
     true = leases != [] and length(leases) <= @page_size and length(leases) == length(statuses)

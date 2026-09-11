@@ -35,6 +35,13 @@ batch provider ticket releases. A missing or invalid preparation, route
 mismatch, malformed result, timeout, or dead owner fails closed into exact
 forced cleanup using the authoritative root-ledger descriptor.
 
+Phase 18 permits the internal `release_prepared_ticket_page/2` callback to
+return the scalar `:released` only when every ticket in that validated ordered
+page completed successfully. Any mixed, failed, partial, or malformed result
+must remain an exact positional vector and cannot be collapsed. Public
+`release_ticket_page/2` callbacks continue to receive validated envelope maps;
+the compact tuple form remains runtime-private.
+
 ## Compatibility
 
 The existing immediate `release/2` action-port callback and Effects `Resource`

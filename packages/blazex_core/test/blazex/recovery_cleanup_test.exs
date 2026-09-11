@@ -40,6 +40,17 @@ defmodule BlazeX.RecoveryCleanupTest do
 
     def release_ticket_page(config, tickets), do: Enum.map(tickets, &release_ticket(config, &1))
 
+    def release_prepared_ticket_page(%{fail_id: fail_id} = config, tickets) do
+      Enum.map(tickets, fn {id, _provider, _token} ->
+        if id == fail_id, do: release_ticket(config, %{id: id}), else: :released
+      end)
+    end
+
+    def release_prepared_ticket_page(config, tickets) do
+      Enum.each(tickets, fn {id, _provider, _token} -> send(config.observer, {:released, id}) end)
+      :released
+    end
+
     def cancel(config, packet) do
       send(config.observer, {:canceled, packet.correlation})
       :ok
@@ -119,6 +130,9 @@ defmodule BlazeX.RecoveryCleanupTest do
     assert cleaned.recovery.cleanup.amplification.normal.pages_received == 9
     assert cleaned.recovery.cleanup.amplification.normal.jobs_sent == 513
     assert cleaned.recovery.cleanup.amplification.normal.results_received == 513
+    assert cleaned.recovery.cleanup.amplification.normal.compact_ack_pages == 8
+    assert cleaned.recovery.cleanup.amplification.normal.compact_ack_items == 512
+    assert cleaned.recovery.cleanup.amplification.normal.positional_result_items == 0
     assert cleaned.recovery.cleanup.amplification.normal.request_bytes > 0
     assert cleaned.recovery.cleanup.amplification.normal.result_bytes > 0
     assert cleaned.recovery.cleanup.amplification.protocol_messages == 18

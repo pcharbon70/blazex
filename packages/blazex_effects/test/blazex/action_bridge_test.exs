@@ -205,4 +205,17 @@ defmodule BlazeX.ActionBridgeTest do
     assert :lost = ActionBridge.release_ticket(config, forged)
     refute_receive {:routed_release, "other", _}, 10
   end
+
+  test "prepared pages collapse only unanimous provider success" do
+    tickets = [{"one", "primary", %{handle: "one"}}, {"two", "primary", %{handle: "two"}}]
+
+    assert :released = ActionBridge.release_prepared_ticket_page(config(), tickets)
+    assert_receive {:released_prepared, %{handle: "one"}}
+    assert_receive {:released_prepared, %{handle: "two"}}
+
+    mixed = [{"one", "primary", %{handle: "one"}}, {"two", "missing", %{handle: "two"}}]
+
+    assert [:released, {:error, :unavailable}] =
+             ActionBridge.release_prepared_ticket_page(config(), mixed)
+  end
 end

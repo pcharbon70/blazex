@@ -1,0 +1,89 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 18,
+  "support_state": "unsupported",
+  "source_revision": "47f3e61e06cbafd83d6c4e7fccfe387d0f8fc7a4",
+  "contract": {
+    "deadline_ms": 1000,
+    "page_size": 64,
+    "maximum_count": 512,
+    "active_browsers": ["chrome", "firefox"],
+    "compact_success": "provider-authorized-page-only",
+    "failure_results": "exact-positional-vector"
+  },
+  "runtime": {
+    "build_image_sha256": "a2386c21edd5c612b4ed6e2731daba806177dba55baf977ee456c6e194f60d9f",
+    "atomvm_wasm_sha256": "d20c491e75936dc8189910c8d0740093b7813d8dcc1cf966a87c011799ade9d8",
+    "bundle_sha256": "7108ca99ad9e481467b5f3a1fe6ece75542390160b8d05922f673dd33f434b83"
+  },
+  "attempts": [
+    {
+      "id": "provider-authorized-scalar-success",
+      "state": "accepted",
+      "observation": "RootPort preserves scalar success only from the private prepared-page provider callback; every malformed scalar and partial vector expands to an exact fail-closed positional vector."
+    },
+    {
+      "id": "deadline-safe-inventory-and-outcome-reconciliation",
+      "state": "accepted",
+      "observation": "RecoveryPort reconciles a scalar acknowledgement by authoritative page count and CleanupOutcome constructs the version-2 uniform page without success, owner, unresolved, or candidate vectors."
+    }
+  ],
+  "retained_candidate": {
+    "erts": {
+      "factor_elapsed_ms_range": [0, 1],
+      "canonical_elapsed_ms": [0, 0, 1, 0],
+      "maximum_512_ms": 0,
+      "unresolved": 0,
+      "inventory_after": 0,
+      "compact_ack_items_512": 512,
+      "positional_result_items": 0,
+      "summary_sha256": "856dac20cce91fa693996c36ad0aa2f49979512f91dca95c183fea4e3bcc532f"
+    },
+    "chrome": {
+      "version": "140.0.7339.80",
+      "factor_256_ms": [24, 27, 27, 29, 35, 33, 33],
+      "factor_512_ms": [95, 86, 80, 81, 90, 84, 87],
+      "canonical_ms": [6, 5, 73, 83],
+      "maximum_512_ms": 77,
+      "unresolved": 0,
+      "inventory_after": 0,
+      "compact_ack_items_512": 512,
+      "positional_result_items": 0
+    },
+    "firefox": {
+      "version": "153.0",
+      "factor_256_ms": [172, 193, 179, 170, 186, 191, 206],
+      "factor_512_ms": [504, 527, 526, 544, 537, 564, 558],
+      "canonical_ms": [31, 27, 165, 560],
+      "maximum_512_ms": 515,
+      "unresolved": 0,
+      "inventory_after": 0,
+      "compact_ack_items_512": 512,
+      "positional_result_items": 0
+    },
+    "artifacts": {
+      "factor_sha256": "2ac45714bccc83ecce7339dad6995e69c05c8eb6b1e010bdddc09ea590432185",
+      "canonical_sha256": "2ad49d9a94b3a84120112859aa69495f0131a182624f54078cbefa65d79ab52a",
+      "maximum_512_sha256": "00c1b0b732a08ee3ab68ab4d26a6dc5aa358e41b49abb3d6497352a726fa8a97",
+      "adverse_growth_sha256": "741d931e673c635ba0ad8277911372a0832c9adabc62d4e8600f67bf0744fb53",
+      "factor_cross_browser_shape": "exact-match",
+      "canonical_cross_browser_shape": "exact-match",
+      "maximum_cross_browser_shape": "exact-match",
+      "adverse_growth_cross_browser_shape": "exact-match"
+    },
+    "second_clean_repeat": {
+      "bundle_byte_identical": true,
+      "bundle_sha256": "7108ca99ad9e481467b5f3a1fe6ece75542390160b8d05922f673dd33f434b83",
+      "canonical_sha256": "c43bf87dd3d4f3865ad83fc25c2e6b8ab506649d45854eb428862a19f023c349",
+      "maximum_512_sha256": "ad05740727810321a2540686b7c6ac6f2efa8aebd2a68143ad3b0d573907933e",
+      "chrome_canonical_ms": [6, 6, 30, 82],
+      "firefox_canonical_ms": [28, 32, 187, 534],
+      "chrome_maximum_512_ms": 76,
+      "firefox_maximum_512_ms": 563,
+      "unresolved": 0,
+      "inventory_after": 0
+    }
+  },
+  "closed_finding": "BH05-P17-FIREFOX-TICKET-SESSION-DEADLINE",
+  "decision": "accept"
+}

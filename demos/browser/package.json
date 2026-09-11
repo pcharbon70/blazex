@@ -1,0 +1,12 @@
+{
+  "name": "@blazex/component-demo",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Dependency-free browser gallery for experimental BlazeX controls",
+  "scripts": {
+    "start": "node server.js",
+    "check": "node --check server.js && node --check src/app.js && node --check src/catalog.js && node --check src/dom-demo.js && node --check src/demos/action-button.js && node --check src/demos/text-field.js",
+    "test": "node --test"
+  }
+}

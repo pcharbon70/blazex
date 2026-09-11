@@ -38,6 +38,9 @@ defmodule BlazeX.Component.RecoveryPort do
        request_bytes: byte_counter(),
        result_bytes: byte_counter(),
        page_durations_ms: [],
+       compact_ack_pages: 0,
+       compact_ack_items: 0,
+       positional_result_items: 0,
        inventory_count: 0,
        inventory_peak: 0,
        inventory_pages_sent: 0,
@@ -94,7 +97,10 @@ defmodule BlazeX.Component.RecoveryPort do
       messages_received: 0,
       request_bytes: byte_counter(),
       result_bytes: byte_counter(),
-      page_durations_ms: []
+      page_durations_ms: [],
+      compact_ack_pages: 0,
+      compact_ack_items: 0,
+      positional_result_items: 0
     })
   end
 
@@ -225,14 +231,21 @@ defmodule BlazeX.Component.RecoveryPort do
     receive do
       {token, :release_owned_result, ^sequence, results, inventory_count}
       when token == session.token ->
-        if is_list(results) and length(results) == length(identities) and
+        if valid_release_results?(results, length(identities)) and
              is_integer(inventory_count) and inventory_count in 0..512 do
           received = %{
             sent
             | pages_received: sent.pages_received + 1,
-              results_received: sent.results_received + length(results),
+              results_received: sent.results_received + length(identities),
               messages_received: sent.messages_received + 1,
               result_bytes: add_encoded_size(sent.result_bytes, results),
+              compact_ack_pages:
+                sent.compact_ack_pages + if(results == :released, do: 1, else: 0),
+              compact_ack_items:
+                sent.compact_ack_items + if(results == :released, do: length(identities), else: 0),
+              positional_result_items:
+                sent.positional_result_items +
+                  if(is_list(results), do: length(identities), else: 0),
               page_durations_ms: [
                 System.monotonic_time(:millisecond) - started | sent.page_durations_ms
               ],
@@ -275,7 +288,7 @@ defmodule BlazeX.Component.RecoveryPort do
     receive do
       {token, :release_next_result, ^sequence, results, inventory_count}
       when token == session.token ->
-        if is_list(results) and length(results) == count and is_integer(inventory_count) and
+        if valid_release_results?(results, count) and is_integer(inventory_count) and
              inventory_count in 0..512 do
           received = %{
             sent
@@ -283,6 +296,12 @@ defmodule BlazeX.Component.RecoveryPort do
               results_received: sent.results_received + count,
               messages_received: sent.messages_received + 1,
               result_bytes: add_encoded_size(sent.result_bytes, results),
+              compact_ack_pages:
+                sent.compact_ack_pages + if(results == :released, do: 1, else: 0),
+              compact_ack_items:
+                sent.compact_ack_items + if(results == :released, do: count, else: 0),
+              positional_result_items:
+                sent.positional_result_items + if(is_list(results), do: count, else: 0),
               page_durations_ms: [
                 System.monotonic_time(:millisecond) - started | sent.page_durations_ms
               ],
@@ -366,7 +385,10 @@ defmodule BlazeX.Component.RecoveryPort do
       :messages_received,
       :request_bytes,
       :result_bytes,
-      :page_durations_ms
+      :page_durations_ms,
+      :compact_ack_pages,
+      :compact_ack_items,
+      :positional_result_items
     ])
   end
 
@@ -574,25 +596,7 @@ defmodule BlazeX.Component.RecoveryPort do
 
             results = RootPort.release_prepared_ticket_page(port, tickets)
 
-            retained =
-              owned_tickets
-              |> Enum.zip(results)
-              |> Enum.flat_map(fn
-                {_encoded, :released} -> []
-                {encoded, _} -> [encoded]
-              end)
-
-            completed_count =
-              identities
-              |> Enum.zip(results)
-              |> Enum.count(fn {_identity, result} -> result == :released end)
-
-            next_inventory = %{
-              inventory
-              | active: remaining,
-                retained: inventory.retained ++ retained,
-                count: inventory.count - completed_count
-            }
+            next_inventory = reconcile_release(inventory, owned_tickets, remaining, results)
 
             next_count = next_inventory.count
             send(owner, {token, :release_owned_result, sequence, results, next_count})
@@ -611,22 +615,7 @@ defmodule BlazeX.Component.RecoveryPort do
             tickets = Enum.map(owned_tickets, &elem(&1, 1))
             results = RootPort.release_prepared_ticket_page(port, tickets)
 
-            retained =
-              owned_tickets
-              |> Enum.zip(results)
-              |> Enum.flat_map(fn
-                {_ticket, :released} -> []
-                {ticket, _} -> [ticket]
-              end)
-
-            completed_count = Enum.count(results, &(&1 == :released))
-
-            next_inventory = %{
-              inventory
-              | active: remaining,
-                retained: inventory.retained ++ retained,
-                count: inventory.count - completed_count
-            }
+            next_inventory = reconcile_release(inventory, owned_tickets, remaining, results)
 
             send(owner, {token, :release_next_result, sequence, results, next_inventory.count})
             session_loop(owner, token, owner_monitor, next_inventory)
@@ -646,6 +635,36 @@ defmodule BlazeX.Component.RecoveryPort do
       _ ->
         session_loop(owner, token, owner_monitor, inventory)
     end
+  end
+
+  defp valid_release_results?(:released, _count), do: true
+
+  defp valid_release_results?(results, count),
+    do: is_list(results) and length(results) == count
+
+  defp reconcile_release(inventory, owned_tickets, remaining, :released) do
+    %{
+      inventory
+      | active: remaining,
+        count: inventory.count - length(owned_tickets)
+    }
+  end
+
+  defp reconcile_release(inventory, owned_tickets, remaining, results) do
+    retained =
+      owned_tickets
+      |> Enum.zip(results)
+      |> Enum.flat_map(fn
+        {_ticket, :released} -> []
+        {ticket, _} -> [ticket]
+      end)
+
+    %{
+      inventory
+      | active: remaining,
+        retained: inventory.retained ++ retained,
+        count: inventory.count - Enum.count(results, &(&1 == :released))
+    }
   end
 
   defp update_inventory(inventory, :register, tickets) do
