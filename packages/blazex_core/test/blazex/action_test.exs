@@ -641,4 +641,29 @@ defmodule BlazeX.ActionTest do
     assert hd(ledger.history).correlation.id == "lease-385"
     assert List.last(ledger.history).correlation.id == "lease-512"
   end
+
+  test "ordered release reconciles atomically without lease-status pairs" do
+    ordered =
+      Enum.map(1..129, fn sequence ->
+        %{id: "ordered-#{sequence}", acquisition: %{sequence: sequence}}
+      end)
+
+    leases = Map.new(ordered, &{&1.id, &1})
+
+    statuses =
+      Enum.map(ordered, &if(rem(&1.acquisition.sequence, 2) == 0, do: :released, else: :lost))
+
+    ledger = ActionLedger.released_ordered(%ActionLedger{leases: leases}, ordered, statuses)
+
+    assert ledger.leases == %{}
+    assert ledger.lease_order == []
+    assert ledger.totals == %{lost: 65, released: 64}
+    assert length(ledger.history) == 128
+    assert hd(ledger.history).correlation.id == "ordered-2"
+    assert List.last(ledger.history).correlation.id == "ordered-129"
+
+    assert_raise MatchError, fn ->
+      ActionLedger.released_ordered(%ActionLedger{leases: leases}, ordered, [:released])
+    end
+  end
 end

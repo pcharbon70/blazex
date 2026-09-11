@@ -86,6 +86,10 @@ defmodule BlazeX.RecoveryCleanupTest do
     assert cleaned.recovery.cleanup.amplification.normal.request_bytes > 0
     assert cleaned.recovery.cleanup.amplification.normal.result_bytes > 0
     assert cleaned.recovery.cleanup.amplification.protocol_messages == 18
+    assert cleaned.recovery.cleanup.outcome_format.outcome_pages == 8
+    assert cleaned.recovery.cleanup.outcome_format.identities == 512
+    assert cleaned.recovery.cleanup.outcome_format.expanded_rows == 0
+    assert cleaned.recovery.cleanup.outcome_format.vectors == 0
 
     assert cleaned.recovery.cleanup.stage_timings_ms.total ==
              cleaned.recovery.cleanup.elapsed_ms

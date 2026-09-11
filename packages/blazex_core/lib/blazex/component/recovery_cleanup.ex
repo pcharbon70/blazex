@@ -1,6 +1,6 @@
 defmodule BlazeX.Component.RecoveryCleanup do
   @moduledoc "Deadline-bound owner cleanup; failed release is never silently counted as success."
-  alias BlazeX.Component.{ActionLedger, RecoveryPort, RootProcess}
+  alias BlazeX.Component.{ActionLedger, CleanupOutcome, RecoveryPort, RootProcess}
 
   @deadline_ms 1000
 
@@ -122,8 +122,10 @@ defmodule BlazeX.Component.RecoveryCleanup do
     lease_pages_before = session.pages_sent
     lease_started = now()
 
-    {rows, session} =
-      execute_leases(leases, rows, if(actions, do: actions.port, else: nil), deadline, session)
+    prefix_pages = rows |> Enum.reverse() |> CleanupOutcome.operation_pages()
+
+    {lease_pages, lease_candidates, session} =
+      execute_leases(leases, if(actions, do: actions.port, else: nil), deadline, session)
 
     lease_ms = now() - lease_started
     lease_pages_sent = session.pages_sent - lease_pages_before
@@ -132,25 +134,31 @@ defmodule BlazeX.Component.RecoveryCleanup do
 
     renderer_started = now()
 
-    {rows, session} =
+    {suffix_rows, session} =
       execute(
         if(next, do: [], else: [job(owner, :renderer, state.ports.renderer, :dispose, request)]),
-        rows,
+        [],
         deadline,
         session
       )
 
     renderer_ms = now() - renderer_started
 
-    rows = Enum.reverse(rows)
+    suffix_rows = Enum.reverse(suffix_rows)
     normal_stats = RecoveryPort.session_stats(session)
     RecoveryPort.close_session(session)
     forced_started = now()
-    {rows, forced_stats, forced_worker_starts} = force(rows, deadline)
+
+    {suffix_rows, lease_pages, forced_stats, forced_worker_starts} =
+      force(suffix_rows, lease_pages, lease_candidates, deadline)
+
     forced_ms = now() - forced_started
+    pages = prefix_pages ++ lease_pages ++ CleanupOutcome.operation_pages(suffix_rows)
+    counts = CleanupOutcome.counts(pages)
+    outcome_format = CleanupOutcome.representation(pages)
     prior = state.recovery.cleanup
     prior_unresolved = if prior, do: prior.unresolved, else: 0
-    unresolved = max(Enum.count(rows, & &1.unresolved), prior_unresolved)
+    unresolved = max(counts.unresolved, prior_unresolved)
     finalization_started = now()
 
     actions =
@@ -160,13 +168,11 @@ defmodule BlazeX.Component.RecoveryCleanup do
             ActionLedger.record(acc, :canceled, entry.correlation)
           end)
 
-        releases =
-          Enum.zip_with(leases, Enum.filter(rows, &(&1.kind == :lease)), fn lease, row ->
-            true = row.reference.id == lease.id
-            {lease, if(row.unresolved, do: :lost, else: :released)}
-          end)
-
-        ledger = ActionLedger.released_many(ledger, releases)
+        ledger =
+          ActionLedger.released_summary(
+            ledger,
+            CleanupOutcome.terminal_summary(lease_pages, leases)
+          )
 
         pending = Map.drop(ledger.pending, canceled)
         timers = if next, do: Map.drop(actions.timers, canceled), else: %{}
@@ -184,12 +190,13 @@ defmodule BlazeX.Component.RecoveryCleanup do
       elapsed_ms: elapsed,
       exceeded_deadline: elapsed > @deadline_ms,
       unresolved: unresolved,
-      failed: Enum.count(rows, &(&1.status == :failed)),
-      timed_out: Enum.count(rows, &(&1.status == :timed_out)),
-      forced: Enum.count(rows, &(&1.force_status == :completed)),
-      callback_failures: Enum.count(rows, &(&1.kind == :component and &1.status != :completed)),
-      requested: length(rows),
-      pages: Enum.chunk_every(rows, 128),
+      failed: counts.failed,
+      timed_out: counts.timed_out,
+      forced: counts.forced,
+      callback_failures: CleanupOutcome.callback_failures(pages),
+      requested: counts.requested,
+      pages: pages,
+      outcome_format: outcome_format,
       amplification:
         amplification(normal_stats, forced_stats, forced_worker_starts, lease_pages_sent),
       runtime_metrics: metric_observation(runtime_before, runtime_after),
@@ -254,10 +261,11 @@ defmodule BlazeX.Component.RecoveryCleanup do
     {next, session}
   end
 
-  defp execute_leases(leases, rows, port, deadline, session) do
+  defp execute_leases(leases, port, deadline, session) do
     leases
     |> Enum.chunk_every(RecoveryPort.page_size())
-    |> Enum.reduce({rows, session}, fn page, {records, current} ->
+    |> Enum.with_index()
+    |> Enum.reduce({[], [], session}, fn {page, page_index}, {pages, candidates, current} ->
       started = now()
       timeout = min(port_timeout(port), deadline - started)
 
@@ -265,12 +273,7 @@ defmodule BlazeX.Component.RecoveryCleanup do
         if timeout > 0 do
           {release_port, _} = unwrap_port(port)
 
-          requests =
-            Enum.map(page, fn lease ->
-              {release_port, :release, [%{lease | release_requested: true}]}
-            end)
-
-          case RecoveryPort.page(current, requests, timeout) do
+          case RecoveryPort.release_page(current, release_port, page, timeout) do
             {:ok, values, updated} -> {values, updated}
             {:error, error, updated} -> {List.duplicate({:error, error}, length(page)), updated}
           end
@@ -280,27 +283,31 @@ defmodule BlazeX.Component.RecoveryCleanup do
 
       elapsed = now() - started
 
-      rows =
-        Enum.zip_with(page, results, fn lease, result ->
-          status = status(result)
+      statuses = Enum.map(results, &status/1)
+      outcome = CleanupOutcome.lease_page(page, statuses, elapsed)
 
-          row = %{
-            owner: lease.owner,
-            kind: :lease,
-            reference: ActionLedger.lease_ref(lease),
-            requested: true,
-            status: status,
-            force_status: :not_requested,
-            elapsed_ms: elapsed,
-            unresolved: false
-          }
+      next_candidates =
+        page
+        |> Enum.zip(statuses)
+        |> Enum.with_index()
+        |> Enum.reduce(candidates, fn
+          {{_lease, :completed}, _item_index}, acc ->
+            acc
 
-          if status == :completed,
-            do: row,
-            else: Map.merge(row, %{force_reference: lease, port: port})
+          {{lease, _status}, item_index}, acc ->
+            [
+              %{
+                target: {:lease, page_index, item_index},
+                owner: lease.owner,
+                kind: :lease,
+                port: port,
+                reference: lease
+              }
+              | acc
+            ]
         end)
 
-      {Enum.reverse(rows, records), next}
+      {pages ++ [outcome], next_candidates, next}
     end)
   end
 
@@ -342,49 +349,95 @@ defmodule BlazeX.Component.RecoveryCleanup do
     end)
   end
 
-  defp force(rows, deadline) do
-    candidates =
+  defp force(rows, lease_pages, lease_candidates, deadline) do
+    row_candidates =
       rows
       |> Enum.with_index()
-      |> Enum.filter(fn {row, _} -> row.kind != :component and row.status != :completed end)
+      |> Enum.flat_map(fn
+        {row, index} when row.kind != :component and row.status != :completed ->
+          [
+            %{
+              target: {:row, index},
+              owner: row.owner,
+              kind: row.kind,
+              port: row.port,
+              reference: row.force_reference
+            }
+          ]
+
+        _ ->
+          []
+      end)
+
+    candidates = Enum.reverse(lease_candidates) ++ row_candidates
 
     cond do
       candidates == [] ->
-        {rows, empty_stats(), 0}
+        {apply_force_rows(rows, %{}), lease_pages, empty_stats(), 0}
 
       deadline - now() <= 0 ->
-        indexes = Map.new(candidates, fn {_, index} -> {index, :timed_out} end)
-        {apply_force(rows, indexes), empty_stats(), 0}
+        updates = Map.new(candidates, &{&1.target, :timed_out})
+        apply_force_updates(rows, lease_pages, updates, empty_stats(), 0)
 
       true ->
         {:ok, session} = RecoveryPort.open_session()
 
         jobs =
-          Enum.map(candidates, fn {row, index} ->
+          Enum.map(candidates, fn candidate ->
             %{
-              owner: row.owner,
+              owner: candidate.owner,
               kind: :force,
-              port: row.port,
+              port: candidate.port,
               callback: :force_cleanup,
               arguments: [
-                %{kind: row.kind, owner: row.owner, reference: row.force_reference}
+                %{
+                  kind: candidate.kind,
+                  owner: candidate.owner,
+                  reference: candidate.reference
+                }
               ],
-              reference: index
+              reference: candidate.target
             }
           end)
 
         try do
           {records, updated} = call_jobs(jobs, deadline, session)
           stats = RecoveryPort.session_stats(updated)
-          indexes = Map.new(records, fn {job, result, _} -> {job.reference, status(result)} end)
-          {apply_force(rows, indexes), stats, 1}
+          updates = Map.new(records, fn {job, result, _} -> {job.reference, status(result)} end)
+          apply_force_updates(rows, lease_pages, updates, stats, 1)
         after
           RecoveryPort.close_session(session)
         end
     end
   end
 
-  defp apply_force(rows, indexes) do
+  defp apply_force_updates(rows, lease_pages, updates, stats, worker_starts) do
+    lease_updates =
+      Enum.reduce(updates, %{}, fn
+        {{:lease, page_index, item_index}, value}, acc ->
+          Map.update(acc, page_index, %{item_index => value}, &Map.put(&1, item_index, value))
+
+        _, acc ->
+          acc
+      end)
+
+    pages =
+      lease_pages
+      |> Enum.with_index()
+      |> Enum.map(fn {page, index} ->
+        CleanupOutcome.apply_force(page, Map.get(lease_updates, index, %{}))
+      end)
+
+    row_updates =
+      Map.new(updates, fn
+        {{:row, index}, value} -> {index, value}
+        {other, value} -> {other, value}
+      end)
+
+    {apply_force_rows(rows, row_updates), pages, stats, worker_starts}
+  end
+
+  defp apply_force_rows(rows, indexes) do
     rows
     |> Enum.with_index()
     |> Enum.map(fn {row, index} ->

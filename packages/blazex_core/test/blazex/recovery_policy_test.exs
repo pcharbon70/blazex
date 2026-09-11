@@ -105,6 +105,19 @@ defmodule BlazeX.RecoveryPolicyTest do
     RecoveryPort.close_session(session)
   end
 
+  test "compact release pages carry one port and preserve per-resource results" do
+    {:ok, session} = RecoveryPort.open_session()
+    leases = Enum.map(["first", "lost", "last"], &%{id: &1, release_requested: false})
+
+    assert {:ok, [:released, {:error, :lost}, :released], session} =
+             RecoveryPort.release_page(session, {Ports, self()}, leases, 100)
+
+    assert_receive {:release_page, ["first", "lost", "last"]}
+    assert session.jobs_sent == 3 and session.results_received == 3
+    assert session.pages_sent == 1 and session.pages_received == 1
+    RecoveryPort.close_session(session)
+  end
+
   test "session rejects oversized and malformed pages and remembers terminal failure" do
     {:ok, oversized} = RecoveryPort.open_session()
     jobs = List.duplicate({{Ports, :ok}, :call, []}, 129)

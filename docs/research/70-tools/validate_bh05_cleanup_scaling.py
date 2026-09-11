@@ -1,4 +1,4 @@
-"""Fail-closed validation for BH-05 Phase 13 cleanup scaling evidence."""
+"""Fail-closed validation for BH-05 cleanup scaling evidence."""
 import hashlib
 import json
 import math
@@ -115,7 +115,33 @@ def structural_errors(sample):
         ),
     ]
     errors.extend(message for valid, message in rules if not valid)
+    if "outcome_format" in sample:
+        errors.extend(outcome_errors(sample["outcome_format"], count))
     return errors
+
+
+def outcome_errors(outcome, count):
+    if not isinstance(outcome, dict):
+        return ["compact outcome instrumentation missing"]
+    required = {
+        "version", "outcome_pages", "identities", "vectors",
+        "expanded_rows", "encoded_bytes",
+    }
+    if set(outcome) != required:
+        return ["compact outcome fields missing"]
+    expected_pages = math.ceil(count / 64)
+    rules = [
+        (outcome["version"] == 1, "compact outcome version drift"),
+        (outcome["outcome_pages"] == expected_pages, "outcome page amplification"),
+        (outcome["identities"] == count, "outcome identity mismatch"),
+        (isinstance(outcome["vectors"], int) and 0 <= outcome["vectors"] <= 3 * expected_pages,
+         "outcome vector amplification"),
+        (outcome["expanded_rows"] == 0, "timed-path diagnostic row expansion"),
+        (outcome["encoded_bytes"] == "unavailable"
+         or isinstance(outcome["encoded_bytes"], int) and outcome["encoded_bytes"] >= 0,
+         "outcome byte count"),
+    ]
+    return [message for valid, message in rules if not valid]
 
 
 def validate_raw(raw):

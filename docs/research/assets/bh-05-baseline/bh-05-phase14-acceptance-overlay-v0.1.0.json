@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 14,
+  "decision": "revise",
+  "milestone_state": "revision-required",
+  "milestone_accepted": false,
+  "support_state": "unsupported",
+  "closed_finding": "BH05-P13-FIREFOX-DEADLINE",
+  "active_blocker": "BH05-P14-MAXIMUM-PAYLOAD-TRANSFER",
+  "canonical_512_active_browsers": "passed",
+  "maximum_payload_512_firefox": "failed",
+  "complete_matrix": "aborted-on-bounded-stall",
+  "bh06_eligible": false,
+  "bh06_authorized": false
+}

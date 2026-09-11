@@ -1,6 +1,6 @@
 defmodule BlazeX.BH05.CleanupScaling do
   @moduledoc false
-  alias BlazeX.Component.{ActionLedger, ActionRuntime, RecoveryCleanup}
+  alias BlazeX.Component.{ActionLedger, ActionRuntime, CleanupOutcome, RecoveryCleanup}
 
   @counts [0, 1, 63, 64, 65, 127, 128, 129, 255, 256, 257, 511, 512]
   @maximum_counts [64, 65, 256, 512]
@@ -57,6 +57,20 @@ defmodule BlazeX.BH05.CleanupScaling do
     }
   end
 
+  def run_point(payload_class, count)
+      when payload_class in [:canonical, :maximum, :minimal] and
+             count in [0, 1, 63, 64, 65, 127, 128, 129, 255, 256, 257, 511, 512] do
+    sample = observe(payload_class, count, 1)
+
+    %{
+      "schema_version" => "1.0.0",
+      "execution_state" => "executed",
+      "acceptance_state" => sample["acceptance_state"],
+      "result" => sample["acceptance_state"],
+      "samples" => [sample]
+    }
+  end
+
   def workloads(runtime) do
     Enum.map(@counts, &{:canonical, &1})
     |> Kernel.++(Enum.map(@maximum_counts, &{:maximum, &1}))
@@ -72,7 +86,7 @@ defmodule BlazeX.BH05.CleanupScaling do
   defp observe(payload_class, count, sample) do
     cleaned = RecoveryCleanup.run(cleanup_state(payload_class, count, sample), :shutdown)
     report = cleaned.recovery.cleanup
-    unresolved = unresolved_identities(report.pages)
+    unresolved = Enum.map(CleanupOutcome.unresolved_identities(report.pages), &elem(&1, 1))
 
     accepted =
       report.unresolved == 0 and unresolved == [] and
@@ -92,7 +106,8 @@ defmodule BlazeX.BH05.CleanupScaling do
       "lost_closed_identities" => unresolved,
       "amplification" => flatten(report.amplification),
       "runtime_metrics" => report.runtime_metrics,
-      "stage_timings_ms" => report.stage_timings_ms
+      "stage_timings_ms" => report.stage_timings_ms,
+      "outcome_format" => report.outcome_format
     }
   end
 
@@ -117,18 +132,6 @@ defmodule BlazeX.BH05.CleanupScaling do
 
   defp metric_sum(left, right) when is_integer(left) and is_integer(right), do: left + right
   defp metric_sum(_, _), do: "unavailable"
-
-  defp unresolved_identities(pages) do
-    pages
-    |> Enum.flat_map(& &1)
-    |> Enum.filter(& &1.unresolved)
-    |> Enum.map(fn row ->
-      case row.reference do
-        %{id: id} -> id
-        _ -> inspect(row.reference)
-      end
-    end)
-  end
 
   defp cleanup_state(payload_class, count, sample) do
     root = "scale-#{payload_class}-#{count}-#{sample}"

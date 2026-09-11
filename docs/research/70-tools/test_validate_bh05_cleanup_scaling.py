@@ -10,6 +10,7 @@ from validate_bh05_cleanup_scaling import (
     PHASE12_RAW_SHA256,
     digest,
     retained_repetitions,
+    outcome_errors,
     validate_raw,
     validate_report,
 )
@@ -92,6 +93,31 @@ def valid_raw():
 
 
 class CleanupScalingEvidenceTest(unittest.TestCase):
+    def test_compact_outcome_structure_is_page_proportional_and_unexpanded(self):
+        valid = {
+            "version": 1,
+            "outcome_pages": 8,
+            "identities": 512,
+            "vectors": 0,
+            "expanded_rows": 0,
+            "encoded_bytes": 4096,
+        }
+        self.assertEqual([], outcome_errors(valid, 512))
+
+        for key, value in [
+            ("outcome_pages", 512),
+            ("identities", 511),
+            ("vectors", 25),
+            ("expanded_rows", 512),
+        ]:
+            mutated = dict(valid)
+            mutated[key] = value
+            self.assertTrue(outcome_errors(mutated, 512))
+
+        missing = dict(valid)
+        missing.pop("identities")
+        self.assertIn("compact outcome fields missing", outcome_errors(missing, 512))
+
     def test_complete_evidence_and_derived_report_pass(self):
         raw = valid_raw()
         self.assertEqual([], validate_raw(raw))
