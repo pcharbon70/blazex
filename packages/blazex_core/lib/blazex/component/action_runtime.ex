@@ -12,7 +12,14 @@ defmodule BlazeX.Component.ActionRuntime do
 
   @inventory_timeout 1000
 
-  defstruct [:manifest, :port, :cleanup_session, ledger: %ActionLedger{}, timers: %{}]
+  defstruct [
+    :manifest,
+    :port,
+    :cleanup_session,
+    ledger: %ActionLedger{},
+    timers: %{},
+    recovery_inventory: %{}
+  ]
 
   def new(nil), do: {:ok, nil}
 
@@ -133,7 +140,7 @@ defmodule BlazeX.Component.ActionRuntime do
           ledger = ActionLedger.transfer(runtime.ledger, action, accepted)
           runtime = %{runtime | ledger: ledger}
           lease = Map.fetch!(ledger.leases, action.body.lease.id)
-          {%{runtime | cleanup_session: replace(runtime.cleanup_session, [lease])}, work}
+          {replace(runtime, [lease]), work}
 
         :resource_release ->
           {release(runtime, action.body.lease), work}
@@ -211,7 +218,7 @@ defmodule BlazeX.Component.ActionRuntime do
   defp release(runtime, reference) do
     case Map.get(runtime.ledger.leases, reference.id) do
       %{acquisition: acquisition} = lease when acquisition == reference.acquisition ->
-        lease = %{lease | release_requested: true}
+        lease = lease |> ActionLedger.expand_lease_owner() |> Map.put(:release_requested, true)
 
         status =
           if RootPort.call(runtime.port, :release, [lease]) == :released,
@@ -219,7 +226,12 @@ defmodule BlazeX.Component.ActionRuntime do
             else: :lost
 
         runtime = %{runtime | ledger: ActionLedger.released(runtime.ledger, lease, status)}
-        %{runtime | cleanup_session: drop(runtime.cleanup_session, [lease.id])}
+
+        %{
+          runtime
+          | cleanup_session: drop(runtime.cleanup_session, [lease.id]),
+            recovery_inventory: Map.delete(runtime.recovery_inventory, lease.id)
+        }
 
       _ ->
         runtime
@@ -261,17 +273,18 @@ defmodule BlazeX.Component.ActionRuntime do
 
   def seed_inventory(%__MODULE__{} = runtime) do
     session = runtime.cleanup_session || new_session()
+    ordered = ActionLedger.ordered_leases(runtime.ledger)
 
     session =
-      runtime.ledger
-      |> ActionLedger.ordered_leases()
+      ordered
       |> Enum.chunk_every(RecoveryPort.maximum_page_size())
-      |> Enum.reduce(session, fn page, current -> register_page(current, page) end)
+      |> Enum.reduce(session, fn page, current -> register_page(current, runtime.port, page) end)
 
     finish_inventory_transfer(%{
       runtime
       | cleanup_session: session,
-        ledger: ActionLedger.compact_inventory(runtime.ledger)
+        ledger: ActionLedger.compact_inventory(runtime.ledger),
+        recovery_inventory: encode_recoveries(runtime.recovery_inventory, ordered)
     })
   end
 
@@ -301,26 +314,62 @@ defmodule BlazeX.Component.ActionRuntime do
 
   defp register(runtime, leases) do
     session = runtime.cleanup_session || new_session()
-    %{runtime | cleanup_session: register_page(session, leases)}
+    cleanup_session = register_page(session, runtime.port, leases)
+    recovery_inventory = encode_recoveries(runtime.recovery_inventory, leases)
+
+    %{
+      runtime
+      | cleanup_session: cleanup_session,
+        recovery_inventory: recovery_inventory,
+        ledger: ActionLedger.compact_lease_owners(runtime.ledger, Enum.map(leases, & &1.id))
+    }
   end
 
-  defp register_page(%{alive: true} = session, leases) do
-    case RecoveryPort.register_page(session, leases, @inventory_timeout) do
-      {:ok, updated} -> updated
-      {:error, _, updated} -> updated
+  defp register_page(%{alive: true} = session, port, leases) do
+    case RootPort.prepare_release_page(port, leases) do
+      {:ok, tickets} ->
+        session = RecoveryPort.note_ticket_preparation(session, tickets, :ok)
+
+        case RecoveryPort.register_page(session, tickets, @inventory_timeout) do
+          {:ok, updated} -> updated
+          {:error, _, updated} -> updated
+        end
+
+      _ ->
+        RecoveryPort.note_ticket_preparation(session, length(leases), :error)
     end
   end
 
-  defp register_page(session, _leases), do: session
+  defp register_page(session, _port, _leases), do: session
 
-  defp replace(%{alive: true} = session, leases) do
-    case RecoveryPort.replace_page(session, leases, @inventory_timeout) do
-      {:ok, updated} -> updated
-      {:error, _, updated} -> updated
+  defp replace(%{cleanup_session: %{alive: true} = session} = runtime, leases) do
+    case RootPort.prepare_release_page(runtime.port, leases) do
+      {:ok, tickets} ->
+        session = RecoveryPort.note_ticket_preparation(session, tickets, :ok)
+
+        recovery_inventory = encode_recoveries(runtime.recovery_inventory, leases)
+
+        case RecoveryPort.replace_page(session, tickets, @inventory_timeout) do
+          {:ok, updated} ->
+            %{
+              runtime
+              | cleanup_session: updated,
+                recovery_inventory: recovery_inventory,
+                ledger:
+                  ActionLedger.compact_lease_owners(runtime.ledger, Enum.map(leases, & &1.id))
+            }
+
+          {:error, _, updated} ->
+            %{runtime | cleanup_session: updated}
+        end
+
+      _ ->
+        updated = RecoveryPort.note_ticket_preparation(session, length(leases), :error)
+        %{runtime | cleanup_session: updated}
     end
   end
 
-  defp replace(session, _leases), do: session
+  defp replace(runtime, _leases), do: runtime
 
   defp drop(%{alive: true} = session, identities) do
     case RecoveryPort.drop_page(session, identities, @inventory_timeout) do
@@ -342,6 +391,20 @@ defmodule BlazeX.Component.ActionRuntime do
   defp finish_inventory_transfer(runtime) do
     :erlang.garbage_collect()
     runtime
+  end
+
+  defp encode_recoveries(inventory, leases) do
+    Enum.reduce(leases, inventory, fn lease, acc ->
+      lease = ActionLedger.expand_lease_owner(lease)
+
+      descriptor =
+        lease
+        |> Map.take([:id, :owner, :generation, :kind, :capability, :selection, :acquisition])
+        |> Map.update(:acquisition, nil, &ActionLedger.compact_acquisition/1)
+        |> Map.put(:release_requested, true)
+
+      Map.put(acc, lease.id, :erlang.term_to_binary(descriptor))
+    end)
   end
 
   defp local_tuple(%{kind: :message, body: body}),

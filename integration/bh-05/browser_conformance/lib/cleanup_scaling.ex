@@ -20,6 +20,11 @@ defmodule BlazeX.BH05.CleanupScaling do
     def force_cleanup(_, _), do: :ok
     def release(_, _), do: :released
     def release_page(_, leases), do: List.duplicate(:released, length(leases))
+
+    def prepare_release(_, lease),
+      do: {:ok, %{provider: lease.selection.name, token: lease.acquisition.sequence}}
+
+    def release_prepared_ticket_page(_, tickets), do: List.duplicate(:released, length(tickets))
   end
 
   def run(runtime \\ :browser) do
@@ -177,6 +182,12 @@ defmodule BlazeX.BH05.CleanupScaling do
         value.inventory.inventory_messages_sent + value.inventory.inventory_messages_received,
       "inventory_request_bytes" => value.inventory.inventory_request_bytes,
       "inventory_result_bytes" => value.inventory.inventory_result_bytes,
+      "ticket_preparations" => value.inventory.ticket_preparations,
+      "tickets_prepared" => value.inventory.tickets_prepared,
+      "ticket_preparation_failures" => value.inventory.ticket_preparation_failures,
+      "ticket_preparation_pages" => value.inventory.ticket_preparation_pages,
+      "ticket_bytes" => value.inventory.ticket_bytes,
+      "ticket_owner_fields" => value.inventory.ticket_owner_fields,
       "lease_pages_sent" => value.lease_pages_sent,
       "protocol_messages" => value.protocol_messages,
       "normal_pages_sent" => value.normal.pages_sent,
@@ -230,6 +241,7 @@ defmodule BlazeX.BH05.CleanupScaling do
        %{
          id: id,
          owner: lease_owner,
+         selection: %{name: "fixture"},
          acquisition: acquisition(payload_class, sequence),
          release_requested: false
        }}

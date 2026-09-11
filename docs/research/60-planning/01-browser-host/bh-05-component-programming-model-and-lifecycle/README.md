@@ -21,7 +21,7 @@ aliases:
 
 LiveView and LocalLiveView integration are **[DEFERRED]** under the
 [planning deferral](../../liveview-integration-deferral.md). None of this
-milestone's fourteen phases requires their APIs, rendering, lifecycle, transport,
+milestone's seventeen phases requires their APIs, rendering, lifecycle, transport,
 or compatibility tests. A BlazeX “local view” means a BlazeX process-root
 component, not a LocalLiveView component. BH-05 still requires accepted BH-04
 Phases 1–7, 9 and 10 plus the retained Phase 8 deferral, not Phase 8 implementation.
@@ -62,7 +62,12 @@ Chrome but the unchanged Firefox deadline still leaves exact unresolved
 identities. [Corrective Phase 14](phase-14-compact-cleanup-outcomes-and-firefox-requalification.md)
 is complete with a truthful **revise** outcome: canonical Firefox cleanup now
 passes, while the frozen maximum-payload 512 row exposes a distinct transfer
-blocker. BH-06 remains ineligible and unauthorized. The current [Phase 11 evidence](conformance-evidence.md) grants the
+blocker. Phases 15 and 16 successively move release inventory into runtime
+ownership and isolate owner-path cost. [Corrective Phase 17](phase-17-provider-issued-release-tickets-and-owner-free-disposal.md)
+is complete with a truthful **revise** outcome: provider tickets remove owner
+paths from normal disposal and flatten Chrome scaling, while Firefox AtomVM
+still cannot return the 512-ticket session within the frozen deadline. BH-06
+remains ineligible and unauthorized. The current [Phase 11 evidence](conformance-evidence.md) grants the
 fixed public corpus exact ERTS/browser-AtomVM and DOM evidence plus GTK
 portability credit without general browser build or product-support claims.
 [Runtime compatibility limits](root-supervision-compatibility.md) remain explicit.
@@ -158,6 +163,7 @@ adapter modules are forbidden even when available in the monorepo.
 | [14 — Compact Cleanup Outcomes and Firefox Requalification](phase-14-compact-cleanup-outcomes-and-firefox-requalification.md) | complete — revise | Remove duplicate per-resource map materialization from the timed path, close the canonical Firefox blocker, and retain the maximum-payload transfer blocker. | Phase 13 `revise` and explicit authorization |
 | [15 — Runtime-Owned Resource Inventory and Maximum-Payload Requalification](phase-15-runtime-owned-resource-inventory-and-maximum-payload-requalification.md) | complete — revise | Move complete release descriptors into a bounded runtime owner at acquisition time, prove compact disposal transport, and retain the independently reproduced combined-maximum Firefox blocker. | Phase 14 `revise` and explicit authorization |
 | [16 — Factorized Distribution Shape and Sparse Cleanup Outcomes](phase-16-factorized-distribution-shape-and-sparse-cleanup-outcomes.md) | complete — revise | Isolate the causal owner-path axes, remove completed owner graphs from retained outcome pages, and preserve the exact deep-owner Firefox blocker. | Phase 15 `revise` and explicit authorization |
+| [17 — Provider-Issued Release Tickets and Owner-Free Disposal](phase-17-provider-issued-release-tickets-and-owner-free-disposal.md) | complete — revise | Prepare bounded provider tickets at acquisition time so normal disposal preserves authority without transporting owner paths, while retaining the Firefox ticket-session deadline blocker. | Phase 16 `revise` and explicit authorization |
 
 ## Acceptance ownership
 
@@ -259,6 +265,10 @@ Phoenix, browser, native-host, or release compatibility.
 - [Sparse cleanup outcome contract](sparse-cleanup-outcome-contract.md)
 - [Phase 16 factorized cleanup review and reconciliation](phase-16-review-and-reconciliation.md)
 - [Phase 16 completion evidence](phase-16-completion.md)
+- [Phase 17 — Provider-Issued Release Tickets and Owner-Free Disposal](phase-17-provider-issued-release-tickets-and-owner-free-disposal.md)
+- [Provider release-ticket contract](provider-release-ticket-contract.md)
+- [Phase 17 release-ticket review and reconciliation](phase-17-review-and-reconciliation.md)
+- [Phase 17 completion evidence](phase-17-completion.md)
 
 ## Maintaining this index
 

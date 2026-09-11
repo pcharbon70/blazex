@@ -51,6 +51,15 @@ defmodule BlazeX.BH05.Conformance.Browser do
   defp handle({:wasm_call, %{"operation" => "measure-cleanup-factors"}}),
     do: {:resolve, BlazeX.BH05.CleanupScaling.run_factor_matrix(), :continue}
 
+  defp handle({:wasm_call, %{"operation" => "measure-release-ticket-factors"}}),
+    do: {:resolve, BlazeX.BH05.CleanupScaling.run_factor_matrix(), :continue}
+
+  defp handle({:wasm_call, %{"operation" => "measure-release-ticket-subset"}}),
+    do: {:resolve, BlazeX.BH05.CleanupScaling.run_subset(), :continue}
+
+  defp handle({:wasm_call, %{"operation" => "measure-release-ticket-maximum-512"}}),
+    do: {:resolve, BlazeX.BH05.CleanupScaling.run_point(:maximum, 512), :continue}
+
   defp handle({:wasm_call, %{"operation" => "shutdown"}}),
     do: {:resolve, %{"result" => "disposed"}, :shutdown}
 

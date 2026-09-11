@@ -166,6 +166,14 @@ defmodule BlazeX.ActionTest do
       :released
     end
 
+    def prepare_release(_, lease),
+      do: {:ok, %{provider: lease.selection.name, token: %{handle: lease.id}}}
+
+    def release_ticket(pid, ticket) do
+      send(pid, {:released_ticket, ticket})
+      :released
+    end
+
     def notify(pid, record),
       do:
         (

@@ -46,6 +46,18 @@
                 "oneOf": [{"type": "integer", "minimum": 0}, {"const": "unavailable"}]
               }
             }
+          },
+          "amplification": {
+            "type": "object",
+            "required": ["ticket_preparations", "tickets_prepared", "ticket_preparation_failures", "ticket_preparation_pages", "ticket_bytes", "ticket_owner_fields"],
+            "properties": {
+              "ticket_preparations": {"type": "integer", "minimum": 0},
+              "tickets_prepared": {"type": "integer", "minimum": 0},
+              "ticket_preparation_failures": {"const": 0},
+              "ticket_preparation_pages": {"type": "integer", "minimum": 0},
+              "ticket_bytes": {"oneOf": [{"type": "integer", "minimum": 0}, {"const": "unavailable"}]},
+              "ticket_owner_fields": {"const": 0}
+            }
           }
         }
       }

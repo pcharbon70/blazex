@@ -18,6 +18,12 @@ defmodule BlazeX.RecoveryPolicyTest do
       send(observer, {:release_page, Enum.map(leases, & &1.id)})
       Enum.map(leases, &if(&1.id == "lost", do: {:error, :lost}, else: :released))
     end
+
+    def release_prepared_ticket_page(observer, tickets) do
+      ids = Enum.map(tickets, &elem(&1, 0))
+      send(observer, {:release_page, ids})
+      Enum.map(ids, &if(&1 == "lost", do: {:error, :lost}, else: :released))
+    end
   end
 
   test "three automatic restarts in five seconds then terminal regardless of fingerprint" do
@@ -121,12 +127,12 @@ defmodule BlazeX.RecoveryPolicyTest do
   test "session owns bounded release descriptors before compact disposal" do
     {:ok, session} = RecoveryPort.open_session()
 
-    leases =
+    tickets =
       Enum.map(["first", "lost", "last"], fn id ->
-        %{id: id, acquisition: %{payload: String.duplicate(id, 64)}, release_requested: false}
+        ticket(id, %{handle: id})
       end)
 
-    assert {:ok, session} = RecoveryPort.register_page(session, leases, 100)
+    assert {:ok, session} = RecoveryPort.register_page(session, tickets, 100)
     assert session.inventory_count == 3 and session.inventory_peak == 3
     assert RecoveryPort.session_stats(session).pages_sent == 0
 
@@ -155,7 +161,7 @@ defmodule BlazeX.RecoveryPolicyTest do
     assert {:ok, session} =
              RecoveryPort.replace_page(
                session,
-               [%{Enum.at(leases, 1) | acquisition: %{sequence: :new}}],
+               [ticket("lost", %{handle: "replacement"})],
                100
              )
 
@@ -166,7 +172,7 @@ defmodule BlazeX.RecoveryPolicyTest do
 
   test "inventory mutations are atomic and bounded" do
     {:ok, session} = RecoveryPort.open_session()
-    first = %{id: "first", acquisition: %{sequence: 1}}
+    first = ticket("first", %{handle: "first"})
 
     assert {:ok, session} = RecoveryPort.register_page(session, [first], 100)
 
@@ -195,6 +201,9 @@ defmodule BlazeX.RecoveryPolicyTest do
     refute_receive {:release_page, _}, 10
     RecoveryPort.close_session(session)
   end
+
+  defp ticket(id, token),
+    do: %{version: 1, provider: "test", id: id, token: token}
 
   test "session rejects oversized and malformed pages and remembers terminal failure" do
     {:ok, oversized} = RecoveryPort.open_session()

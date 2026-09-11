@@ -1,7 +1,7 @@
 defmodule BlazeX.Effects.ActionBridge do
   @moduledoc "Outward adapter from typed component requests to declared capability contracts and future command doubles. No concrete host or server transport."
   @behaviour BlazeX.Component.ActionPort
-  alias BlazeX.Component.RootPort
+  alias BlazeX.Component.{ReleaseTicket, RootPort}
   alias BlazeX.Core.Identity
   alias BlazeX.Effects.{Capability, Effect, Negotiation, Resource}
 
@@ -55,14 +55,44 @@ defmodule BlazeX.Effects.ActionBridge do
   def cancel(config, entry), do: invoke(config, entry.selection.name, :cancel, packet(entry))
   @impl true
   def release(config, lease) do
+    invoke(config, lease.selection.name, :release, release_packet(lease))
+  end
+
+  @impl true
+  def prepare_release(config, lease) do
+    provider = lease.selection.name
+
+    case invoke(config, provider, :prepare_release, release_packet(lease)) do
+      {:ok, token} -> {:ok, %{provider: provider, token: token}}
+      _ -> {:error, :unavailable}
+    end
+  end
+
+  @impl true
+  def release_ticket(config, ticket) do
+    if ReleaseTicket.valid?(ticket),
+      do: invoke(config, ticket.provider, :release_prepared, ticket.token),
+      else: {:error, :invalid_release_ticket}
+  end
+
+  @impl true
+  def release_ticket_page(config, tickets), do: Enum.map(tickets, &release_ticket(config, &1))
+
+  def release_prepared_ticket_page(config, tickets),
+    do:
+      Enum.map(tickets, fn
+        {_id, provider, token} -> invoke(config, provider, :release_prepared, token)
+      end)
+
+  defp release_packet(lease) do
     capability = Enum.find(Capability.names(), &(Atom.to_string(&1) == lease.capability))
     {:ok, resource} = Resource.new(struct(Identity, lease.owner), capability, lease.id)
 
-    invoke(config, lease.selection.name, :release, %{
+    %{
       resource: resource,
       acquisition: lease.acquisition,
       kind: lease.kind
-    })
+    }
   end
 
   def release_page(config, leases), do: Enum.map(leases, &release(config, &1))

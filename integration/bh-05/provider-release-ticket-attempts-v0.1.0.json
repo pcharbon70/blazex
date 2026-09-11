@@ -1,0 +1,181 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 17,
+  "support_state": "unsupported",
+  "contract": {
+    "deadline_ms": 1000,
+    "page_size": 64,
+    "maximum_page_size": 128,
+    "maximum_ticket_bytes": 4096,
+    "counts": [256, 512],
+    "active_browsers": ["chrome", "firefox"]
+  },
+  "source_revision": "25868d12a8f8d48557b1366a00384a804db04f62",
+  "atomvm_wasm_sha256": "d20c491e75936dc8189910c8d0740093b7813d8dcc1cf966a87c011799ade9d8",
+  "attempts": [
+    {
+      "id": "validated-ticket-map-per-release",
+      "state": "failed",
+      "bundle_sha256": "480e4f0be11f0e9d7fdc6dd68d16e4d510bcd6e62c9e1de9adc5d0261c18beae",
+      "artifact_sha256": "a6fa0ee2fedb54766b3c6bb2fb146dd10cdff9f76ba7725a8eaab4d29971d937",
+      "chrome_512_ms": [445, 677, 1197, 875, 707, 863, 2599],
+      "firefox": "measurement-timeout",
+      "observation": "Repeated full ticket validation and decoding remained nonlinear; identifier width alone breached the deadline."
+    },
+    {
+      "id": "compact-token-without-timed-revalidation",
+      "state": "failed",
+      "bundle_sha256": "8f8e20972938410e03989b874fb67b3811d7e665da940d3fa3751ca2cf5f7f55",
+      "artifact_sha256": "e6101609d694c4df90bbcb11a17b556725a9393dc0048aac0ad16124d16bbcc7",
+      "maximum_512": {
+        "chrome": {"elapsed_ms": 358, "unresolved": 0},
+        "firefox": {"elapsed_ms": 9488, "unresolved": 321}
+      },
+      "observation": "Removing redundant validation was insufficient while ticket binaries were still decoded during each release."
+    },
+    {
+      "id": "validated-ticket-terms-in-inventory",
+      "state": "failed",
+      "bundle_sha256": "c73fc4c022449038cb2b5153d0255c86e1d3f82b91fd28715e4e11176ba5c067",
+      "artifact_sha256": "32431ec6a8db66450e40c2b90251ac0ab3d8caa35ff5c6f60b71e0f35f747c47",
+      "maximum_512": {
+        "chrome": {"elapsed_ms": 356, "unresolved": 0},
+        "firefox": {"elapsed_ms": 11217, "unresolved": 385}
+      },
+      "observation": "Retaining complete validated maps removed binary decoding but kept excessive copying."
+    },
+    {
+      "id": "shallow-owner-causal-probe",
+      "state": "reverted",
+      "bundle_sha256": "c2c71e5d0239c97ccd56b76eaa71dc0788e4dfafe7a4e7e64f938296442122f9",
+      "artifact_sha256": "7eaf7037ec3c48cedf3563e15bbbbea1b5aa2202b9af5390c6fbd15a8415e6b8",
+      "maximum_512": {
+        "chrome": {"elapsed_ms": 180, "unresolved": 0},
+        "firefox": {"elapsed_ms": 2652, "unresolved": 65}
+      },
+      "observation": "The temporary probe confirmed that live owner graphs still contributed materially and was not retained."
+    },
+    {
+      "id": "single-release-owned-command",
+      "state": "failed",
+      "bundle_sha256": "d0ac890c8368d52923b2e3f29ba702750fc1ae967747160dd7d819407d2cd4c1",
+      "artifact_sha256": "c98d6166d7f568977b376bf373057ba1fc8028e4856c7612fc8dbcbec0a173a8",
+      "maximum_512": {
+        "chrome": {"elapsed_ms": 436, "unresolved": 0},
+        "firefox": {"elapsed_ms": 4456, "unresolved": 1}
+      },
+      "observation": "All 512 ticket callbacks completed, but one large identity-bearing command still exceeded the outer deadline."
+    },
+    {
+      "id": "raw-recovery-inventory",
+      "state": "aborted",
+      "bundle_sha256": "b0ff8f0245ac9715f7b7df40f802c0dedb93ef3aeaba965883426b200baf7d74",
+      "observation": "Storing full recovery terms directly made acquisition setup unbounded enough to stop the probe; it was reverted."
+    },
+    {
+      "id": "bounded-descriptor-and-cleanup-compaction",
+      "state": "failed",
+      "bundle_sha256": "b20d4635330ef09d4be129c4433a6319c843ccd0ceb09f246206a249777d08ff",
+      "artifact_sha256": "187b060be4ae13c144b547fd232b195dab66288a601487d87c05d30bc3c86fc4",
+      "maximum_512": {
+        "chrome": {"elapsed_ms": 401, "unresolved": 0},
+        "firefox": {"elapsed_ms": 3518, "unresolved": 1}
+      },
+      "observation": "Preparation and execution were exposed separately; explicit timed compaction and collection increased total time."
+    },
+    {
+      "id": "encoded-active-owner",
+      "state": "failed",
+      "bundle_sha256": "411121e84c58ab92380012fe4f641671c3ca0c3736656ef3160bf732649adade",
+      "artifact_sha256": "720f3fea6b6d17bdd07166734a61bb53bb68b179bb40b8081b13cc1b01a0ec0e",
+      "maximum_512": {
+        "chrome": {"elapsed_ms": 362, "unresolved": 0},
+        "firefox": {"elapsed_ms": 2657, "unresolved": 1}
+      },
+      "observation": "Encoding the active owner reduced Firefox cost substantially but did not satisfy the deadline."
+    },
+    {
+      "id": "compact-internal-ticket-tuples",
+      "state": "failed",
+      "bundle_sha256": "d4c659128aa5a2945da619ea852426a7a824d7695b28397a47ec55d9e98ced36",
+      "artifact_sha256": "11f075f6e930a485fc731ae5e39ef46ecb3d096445935ca65ce88e12b8b57e85",
+      "maximum_512": {
+        "chrome": {"elapsed_ms": 295, "unresolved": 0},
+        "firefox": {"elapsed_ms": 2643, "unresolved": 1}
+      },
+      "observation": "Compact validated tuples became the retained internal representation; one oversized release command did not."
+    },
+    {
+      "id": "paged-global-deadline-and-ordered-cursor",
+      "state": "failed",
+      "bundle_sha256": [
+        "843d4663ca85780963d538fc1cddc8e88e0b7b740eae5f4190d432d206066589",
+        "963f432a4d27b788a41e0739fed88c7cce15fafd21f3a762f257b3c17a968da8",
+        "c6c8d99cb6b1b1613b79dee88f6d4f808fe81f228f0f6ff9bd353515a81acffa"
+      ],
+      "maximum_artifact_sha256": [
+        "979b9a90cd445dfae6a104b0807036d4637c8fa64edb229a67669de1c6f0b53c",
+        "396b47f34d430c18b8411ac47e61d045dd029b719d2926395a70b5e532a607fc",
+        "661d5f03b3578a70c6a3d68e68ad7ff2cf7f7dd2a26829c592e823cb2211f4e9"
+      ],
+      "canonical_artifact_sha256": "f0aef7d50b6c821b132bc6cd48d35cd0a5bc3130eab31ae5d4bb1cc92f33593c",
+      "maximum_512": {
+        "chrome": {"elapsed_ms": 201, "unresolved": 0},
+        "firefox": {"runtime_error": "noproc"}
+      },
+      "observation": "The ordered cursor removed identity-page copying and preserved the deadline; Firefox now terminates the timed session instead of returning a partial page."
+    },
+    {
+      "id": "diagnostic-deadline-relaxation",
+      "state": "diagnostic-only-reverted",
+      "bundle_sha256": "9d6db6266b9b2288d4caff85c8279a737756d76329fe93e24e82de6533376661",
+      "artifact_sha256": [
+        "246488158fa4c9f560da03bedd09e516c97161c6c129a75cd512868afa5f3696",
+        "7af6c41a7c4865fbec6613ebabc0a5972d88a7f2ac81f75826a7e35c0571e559"
+      ],
+      "firefox_maximum_512_ms": [2062, 2006],
+      "tickets_released": 512,
+      "unresolved_leases": 0,
+      "observation": "A temporary 5000 ms internal wait proved complete release and stable roughly 2 second cost. It never qualified, was not retained, and the 1000 ms deadline was restored."
+    }
+  ],
+  "retained_candidate": {
+    "bundle_sha256": "a7475fed8e240a6cc50e252f7cccd8e8ba9635b73833a6d6d00b1df6d1cbb1fc",
+    "factor_artifact_sha256": "5a5a9988d0895dcd614f380c162848f9c4898e980209e9ea868a1a24c2b67158",
+    "canonical_artifact_sha256": "a0f729b252b49a08d233a28e2519b188f3b66cf603ca3f73a8c571309dd70589",
+    "maximum_512_artifact_sha256": "b20d1f2c1f7e0bc827882fbb311ff4aa5d63e7157c91fe1c229fb45cf2683c84",
+    "erts": {
+      "factor_elapsed_ms_range": [0, 1],
+      "canonical_elapsed_ms": [0, 1, 0, 1],
+      "maximum_512_ms": 1,
+      "unresolved": 0,
+      "ticket_owner_fields": 0
+    },
+    "chrome": {
+      "factor_256_ms": [52, 59, 65, 95, 77, 74, 70],
+      "factor_512_ms": [251, 230, 240, 250, 237, 222, 243],
+      "canonical_ms": [8, 10, 150, 225],
+      "maximum_512_ms": 200,
+      "unresolved": 0,
+      "ticket_owner_fields": 0
+    },
+    "firefox": {
+      "factor": {"execution_state": "failed", "runtime_error": "noproc"},
+      "canonical": {"execution_state": "failed", "runtime_error": "noproc"},
+      "maximum_512": {"execution_state": "failed", "runtime_error": "noproc"}
+    },
+    "second_clean_repeat": {
+      "bundle_byte_identical": true,
+      "bundle_sha256": "a7475fed8e240a6cc50e252f7cccd8e8ba9635b73833a6d6d00b1df6d1cbb1fc",
+      "canonical_artifact_sha256": "618c5836123d9221c4c2b7d71ea8bc5f3a95a34840165578487df7ef22797344",
+      "maximum_512_artifact_sha256": "58b0c6d405d4b12441fa371dd149044c950d33bbfe434687edf2aa6d49baedd6",
+      "chrome_canonical_ms": [9, 8, 129, 215],
+      "chrome_maximum_512_ms": 228,
+      "chrome_unresolved": 0,
+      "firefox": {"execution_state": "failed", "runtime_error": "noproc"}
+    }
+  },
+  "closed_finding": "BH05-P16-DEEP-OWNER-RELEASE-DESCRIPTOR",
+  "blocking_finding": "BH05-P17-FIREFOX-TICKET-SESSION-DEADLINE",
+  "decision": "revise"
+}

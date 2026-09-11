@@ -33,6 +33,11 @@ defmodule BlazeX.BH05.Acceptance.Cleanup do
     def force_cleanup(_, _), do: :ok
     def release(_, _), do: :released
     def release_page(_, leases), do: List.duplicate(:released, length(leases))
+
+    def prepare_release(_, lease),
+      do: {:ok, %{provider: lease.selection.name, token: lease.acquisition.sequence}}
+
+    def release_prepared_ticket_page(_, tickets), do: List.duplicate(:released, length(tickets))
   end
 
   def run(cleanup_count \\ 100, process_samples \\ 10) do
@@ -149,7 +154,13 @@ defmodule BlazeX.BH05.Acceptance.Cleanup do
         id = "lease_#{sample}_#{sequence}"
 
         {id,
-         %{id: id, owner: owner, acquisition: %{sequence: sequence}, release_requested: false}}
+         %{
+           id: id,
+           owner: owner,
+           selection: %{name: "fixture"},
+           acquisition: %{sequence: sequence},
+           release_requested: false
+         }}
       end)
 
     actions =
