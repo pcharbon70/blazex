@@ -14,10 +14,18 @@ defmodule BlazeX.Component.CleanupOutcome do
     page = %{
       version: 1,
       kind: :lease,
-      identities: Enum.map(leases, &{&1.owner, &1.id}),
+      identities: Enum.map(leases, & &1.id),
       status: compact(statuses),
       force_status: :not_requested,
       unresolved: compact(Enum.map(statuses, &(&1 != :completed))),
+      unresolved_owners:
+        leases
+        |> Enum.zip(statuses)
+        |> Enum.with_index()
+        |> Enum.flat_map(fn
+          {{_lease, :completed}, _index} -> []
+          {{lease, _status}, index} -> [{index, lease.owner}]
+        end),
       elapsed_ms: elapsed_ms
     }
 
@@ -48,7 +56,15 @@ defmodule BlazeX.Component.CleanupOutcome do
           Enum.at(force_statuses, index) != :completed
       end)
 
-    %{page | force_status: compact(force_statuses), unresolved: compact(unresolved)}
+    unresolved_owners =
+      Enum.filter(page.unresolved_owners, fn {index, _owner} -> Enum.at(unresolved, index) end)
+
+    %{
+      page
+      | force_status: compact(force_statuses),
+        unresolved: compact(unresolved),
+        unresolved_owners: unresolved_owners
+    }
   end
 
   def fold(pages, initial, fun) when is_list(pages) and is_function(fun, 2) do
@@ -69,12 +85,10 @@ defmodule BlazeX.Component.CleanupOutcome do
   def unresolved_identities(pages) do
     Enum.reduce(pages, [], fn
       %{kind: :lease} = page, acc ->
-        count = length(page.identities)
+        true = valid_page?(page)
 
-        page.identities
-        |> Enum.with_index()
-        |> Enum.reduce(acc, fn {identity, index}, inner ->
-          if value(page.unresolved, index, count), do: [identity | inner], else: inner
+        Enum.reduce(page.unresolved_owners, acc, fn {index, owner}, inner ->
+          [{owner, Enum.fetch!(page.identities, index)} | inner]
         end)
 
       %{kind: :operations, rows: rows}, acc ->
@@ -129,13 +143,18 @@ defmodule BlazeX.Component.CleanupOutcome do
   def matches_leases?(pages, leases) when is_list(pages) and is_list(leases) do
     identities =
       Enum.flat_map(pages, fn
-        %{kind: :lease, identities: values} -> values
-        _ -> []
+        %{kind: :lease} = page ->
+          true = valid_page?(page)
+          owners = Map.new(page.unresolved_owners)
+          Enum.with_index(page.identities, fn id, index -> {id, Map.get(owners, index)} end)
+
+        _ ->
+          []
       end)
 
     length(identities) == length(leases) and
-      Enum.zip_reduce(identities, leases, true, fn {owner, id}, lease, acc ->
-        acc and lease.id == id and lease.owner == owner
+      Enum.zip_reduce(identities, leases, true, fn {id, owner}, lease, acc ->
+        acc and lease.id == id and (owner == nil or lease.owner == owner)
       end)
   end
 
@@ -166,6 +185,7 @@ defmodule BlazeX.Component.CleanupOutcome do
             Enum.count([page.status, page.force_status, page.unresolved], &is_list/1)
           end)
         ),
+      owner_records: Enum.sum(Enum.map(lease_pages, &length(&1.unresolved_owners))),
       expanded_rows: 0,
       encoded_bytes: safe_bytes(lease_pages)
     }
@@ -183,26 +203,29 @@ defmodule BlazeX.Component.CleanupOutcome do
         status: status,
         force_status: force_status,
         unresolved: unresolved,
+        unresolved_owners: unresolved_owners,
         elapsed_ms: elapsed_ms
       }) do
     count = if is_list(identities), do: length(identities), else: 0
 
     count in 1..@page_size and is_integer(elapsed_ms) and elapsed_ms >= 0 and
       Enum.all?(identities, &identity?/1) and field?(status, count, @statuses) and
-      field?(force_status, count, @force_statuses) and field?(unresolved, count, [true, false])
+      field?(force_status, count, @force_statuses) and field?(unresolved, count, [true, false]) and
+      sparse_owners?(unresolved_owners, unresolved, count)
   end
 
   def valid_page?(_), do: false
 
   defp fold_lease_page(page, initial, fun) do
     count = length(page.identities)
+    owners = Map.new(page.unresolved_owners)
 
     page.identities
     |> Enum.with_index()
-    |> Enum.reduce(initial, fn {{owner, id}, index}, acc ->
+    |> Enum.reduce(initial, fn {id, index}, acc ->
       fun.(
         %{
-          owner: owner,
+          owner: Map.get(owners, index),
           kind: :lease,
           reference: %{id: id},
           requested: true,
@@ -232,8 +255,22 @@ defmodule BlazeX.Component.CleanupOutcome do
 
   defp field?(value, _count, allowed), do: value in allowed
 
-  defp identity?({owner, id}), do: is_map(owner) and is_binary(id) and byte_size(id) in 1..64
+  defp identity?(id) when is_binary(id), do: byte_size(id) in 1..64
   defp identity?(_), do: false
+
+  defp sparse_owners?(owners, unresolved, count) when is_list(owners) do
+    expected = Enum.filter(0..(count - 1), &value(unresolved, &1, count))
+
+    Enum.map(owners, &elem(&1, 0)) == expected and
+      Enum.all?(owners, fn
+        {index, owner} -> is_integer(index) and index in 0..(count - 1) and is_map(owner)
+        _ -> false
+      end)
+  rescue
+    _ -> false
+  end
+
+  defp sparse_owners?(_, _, _), do: false
 
   defp operation_row?(row) do
     is_map(row) and row.kind != :lease and row.status in @statuses and
@@ -290,6 +327,7 @@ defmodule BlazeX.Component.CleanupOutcome do
       page.identities,
       leases,
       page.unresolved,
+      Map.new(page.unresolved_owners),
       count,
       0,
       released,
@@ -304,6 +342,7 @@ defmodule BlazeX.Component.CleanupOutcome do
          [],
          leases,
          _unresolved,
+         _owners,
          _count,
          _index,
          released,
@@ -315,9 +354,10 @@ defmodule BlazeX.Component.CleanupOutcome do
        do: {leases, released, lost, history, position}
 
   defp summarize_identities(
-         [{owner, id} | identities],
+         [id | identities],
          [lease | leases],
          unresolved,
+         owners,
          count,
          index,
          released,
@@ -326,8 +366,9 @@ defmodule BlazeX.Component.CleanupOutcome do
          position,
          total
        ) do
-    true = lease.id == id and lease.owner == owner
+    true = lease.id == id
     status = if value(unresolved, index, count), do: :lost, else: :released
+    true = status == :released or Map.fetch!(owners, index) == lease.owner
 
     history =
       if position >= total - 128 do
@@ -346,6 +387,7 @@ defmodule BlazeX.Component.CleanupOutcome do
       identities,
       leases,
       unresolved,
+      owners,
       count,
       index + 1,
       released,

@@ -153,7 +153,7 @@ defmodule BlazeX.BH05.CleanupScaling do
         |> Map.put("retained_outcome_bytes", report.outcome_format.encoded_bytes)
         |> Map.put(
           "retained_owner_records",
-          Map.get(report.outcome_format, :owner_records, count)
+          report.outcome_format.owner_records
         )
     }
   end

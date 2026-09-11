@@ -49,15 +49,15 @@ Back to milestone: [README](README.md)
       - [x] 16.2.2.2 Subtask - Reject missing axes, combined-only claims, altered bounds, and unavailable mandatory structural fields.
       - [x] 16.2.2.3 Subtask - Preserve source, runtime, bundle, browser, and clean-context identities.
 
-  - [ ] 16.3 Section - Implement sparse terminal cleanup outcomes.
-    - [ ] 16.3.1 Task - Remove completed owner graphs from retained pages.
-      - [ ] 16.3.1.1 Subtask - Encode ordered lease IDs and sparse unresolved owner entries per page.
-      - [ ] 16.3.1.2 Subtask - Reconstruct exact unresolved identities and validate sparse indexes atomically.
-      - [ ] 16.3.1.3 Subtask - Preserve terminal ledger summaries, forced updates, counts, and compatibility expansion.
-    - [ ] 16.3.2 Task - Bound outcome storage independently of owner depth.
-      - [ ] 16.3.2.1 Subtask - Report retained outcome bytes and sparse owner counts.
-      - [ ] 16.3.2.2 Subtask - Prove completed deep/distributed owners do not survive in terminal pages.
-      - [ ] 16.3.2.3 Subtask - Keep unresolved owners exact and portable through repeated reporting.
+  - [x] 16.3 Section - Implement sparse terminal cleanup outcomes.
+    - [x] 16.3.1 Task - Remove completed owner graphs from retained pages.
+      - [x] 16.3.1.1 Subtask - Encode ordered lease IDs and sparse unresolved owner entries per page.
+      - [x] 16.3.1.2 Subtask - Reconstruct exact unresolved identities and validate sparse indexes atomically.
+      - [x] 16.3.1.3 Subtask - Preserve terminal ledger summaries, forced updates, counts, and compatibility expansion.
+    - [x] 16.3.2 Task - Bound outcome storage independently of owner depth.
+      - [x] 16.3.2.1 Subtask - Report retained outcome bytes and sparse owner counts.
+      - [x] 16.3.2.2 Subtask - Prove completed deep/distributed owners do not survive in terminal pages.
+      - [x] 16.3.2.3 Subtask - Keep unresolved owners exact and portable through repeated reporting.
 
   - [ ] 16.4 Section - Extend structural, lifecycle, and anti-concealment gates.
     - [ ] 16.4.1 Task - Verify sparse representation invariants.
