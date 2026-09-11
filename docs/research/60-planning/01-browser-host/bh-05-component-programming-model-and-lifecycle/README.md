@@ -164,6 +164,7 @@ adapter modules are forbidden even when available in the monorepo.
 | [15 — Runtime-Owned Resource Inventory and Maximum-Payload Requalification](phase-15-runtime-owned-resource-inventory-and-maximum-payload-requalification.md) | complete — revise | Move complete release descriptors into a bounded runtime owner at acquisition time, prove compact disposal transport, and retain the independently reproduced combined-maximum Firefox blocker. | Phase 14 `revise` and explicit authorization |
 | [16 — Factorized Distribution Shape and Sparse Cleanup Outcomes](phase-16-factorized-distribution-shape-and-sparse-cleanup-outcomes.md) | complete — revise | Isolate the causal owner-path axes, remove completed owner graphs from retained outcome pages, and preserve the exact deep-owner Firefox blocker. | Phase 15 `revise` and explicit authorization |
 | [17 — Provider-Issued Release Tickets and Owner-Free Disposal](phase-17-provider-issued-release-tickets-and-owner-free-disposal.md) | complete — revise | Prepare bounded provider tickets at acquisition time so normal disposal preserves authority without transporting owner paths, while retaining the Firefox ticket-session deadline blocker. | Phase 16 `revise` and explicit authorization |
+| [18 — Compact Ticket Acknowledgements and Deadline-Safe Reconciliation](phase-18-compact-ticket-acknowledgements-and-deadline-safe-reconciliation.md) | active | Preserve exact failure results while carrying provider-authorized uniform page success without per-ticket result expansion. | Phase 17 `revise` and explicit authorization |
 
 ## Acceptance ownership
 
@@ -269,6 +270,7 @@ Phoenix, browser, native-host, or release compatibility.
 - [Provider release-ticket contract](provider-release-ticket-contract.md)
 - [Phase 17 release-ticket review and reconciliation](phase-17-review-and-reconciliation.md)
 - [Phase 17 completion evidence](phase-17-completion.md)
+- [Phase 18 — Compact Ticket Acknowledgements and Deadline-Safe Reconciliation](phase-18-compact-ticket-acknowledgements-and-deadline-safe-reconciliation.md)
 
 ## Maintaining this index
 
