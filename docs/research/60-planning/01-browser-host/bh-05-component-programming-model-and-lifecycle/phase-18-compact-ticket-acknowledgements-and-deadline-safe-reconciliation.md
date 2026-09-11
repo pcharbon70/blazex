@@ -68,15 +68,15 @@ Back to milestone: [README](README.md)
       - [x] 18.4.2.2 Subtask - Mutation-test expansion, omitted callbacks, masked failure, deadline drift, and count reduction.
       - [x] 18.4.2.3 Subtask - Retain Phase 13-17 process, ticket, inventory, factor, outcome, and growth gates.
 
-  - [ ] 18.5 Section - Requalify active runtimes and reconcile BH-05.
-    - [ ] 18.5.1 Task - Execute the source-frozen correction matrix.
-      - [ ] 18.5.1.1 Subtask - Run ERTS and Linux Chrome/Firefox factor, canonical, maximum, adverse, and growth cases.
-      - [ ] 18.5.1.2 Subtask - Require every retained sample within 1000 ms with zero unresolved identities and exact inventory convergence.
-      - [ ] 18.5.1.3 Subtask - Preserve source, runtime, bundle, browser, raw failure, timing, acknowledgement, and unavailable-metric evidence.
-    - [ ] 18.5.2 Task - Review and reconcile the successor decision.
-      - [ ] 18.5.2.1 Subtask - Review correctness, authority, portability, performance, migration, security, and compatibility.
-      - [ ] 18.5.2.2 Subtask - Map the Phase 17 re-entry condition and every new finding to evidence.
-      - [ ] 18.5.2.3 Subtask - Accept only when all frozen gates pass; otherwise record revise or block.
+  - [x] 18.5 Section - Requalify active runtimes and reconcile BH-05.
+    - [x] 18.5.1 Task - Execute the source-frozen correction matrix.
+      - [x] 18.5.1.1 Subtask - Run ERTS and Linux Chrome/Firefox factor, canonical, maximum, adverse, and growth cases.
+      - [x] 18.5.1.2 Subtask - Require every retained sample within 1000 ms with zero unresolved identities and exact inventory convergence.
+      - [x] 18.5.1.3 Subtask - Preserve source, runtime, bundle, browser, raw failure, timing, acknowledgement, and unavailable-metric evidence.
+    - [x] 18.5.2 Task - Review and reconcile the successor decision.
+      - [x] 18.5.2.1 Subtask - Review correctness, authority, portability, performance, migration, security, and compatibility.
+      - [x] 18.5.2.2 Subtask - Map the Phase 17 re-entry condition and every new finding to evidence.
+      - [x] 18.5.2.3 Subtask - Accept only when all frozen gates pass; otherwise record revise or block.
 
   - [ ] 18.6 Section - Run the full integration gate and publish completion.
     - [ ] 18.6.1 Task - Rebuild and verify the complete candidate.
