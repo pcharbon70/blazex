@@ -1,0 +1,89 @@
+{
+  "authorization": {
+    "authorized": true,
+    "date": "2026-09-10",
+    "scope": "BH-05 Phase 13 only",
+    "source": "repository owner request"
+  },
+  "candidate": {
+    "base_revision": "3d8485ef90ed579dde5d5e425545efba7a309ccf",
+    "branch": "codex/bh05-phase13-cleanup-scaling",
+    "phase": 13,
+    "workflow": {
+      "commits": "one coherent commit per section",
+      "pull_requests": 1,
+      "merge": "not authorized by this request",
+      "post_merge_cleanup": "pending separate merge authority"
+    }
+  },
+  "correction": {
+    "cleanup_deadline_ms": 1000,
+    "default_page_size": 64,
+    "maximum_page_size": 128,
+    "maximum_live_cleanup_workers": 1,
+    "maximum_normal_worker_starts": 1,
+    "maximum_total_worker_starts": 2,
+    "resource_fixture_count": 512,
+    "timer_origin": "disposal_request"
+  },
+  "forbidden": [
+    "deadline increase",
+    "fixture reduction",
+    "browser exclusion",
+    "failed sample deletion or relabeling",
+    "moving work outside the cleanup clock",
+    "post-hoc page-size tuning",
+    "endpoint-only acceptance",
+    "support promotion"
+  ],
+  "immutable_inputs": [
+    {
+      "path": "docs/research/assets/bh-05-baseline/acceptance-authorization-v0.1.0.json",
+      "sha256": "2cd3ede50be87d0c27de387ad0780b2a3f1d0446067c99636a1fc45411d0de51"
+    },
+    {
+      "path": "docs/research/assets/bh-05-baseline/acceptance-gates-v0.1.0.json",
+      "sha256": "fabd17a5ee2ca9512ad981cfb1a277012c2d88e5a9ac710aed4c337cfa34fd1c"
+    },
+    {
+      "path": "docs/research/assets/bh-05-baseline/acceptance-completion-v0.1.0.json",
+      "sha256": "4769d0aa7d74da4aeab8fe13dbe3924666361a3a4c71a8af66fba902ad69774e"
+    },
+    {
+      "path": "integration/bh-05/acceptance-cleanup-raw-v0.1.0.json",
+      "sha256": "d1e4d751194589dd6b55d433762c4afd7730a9ef8207c700f88c0a4a8f7d2949"
+    },
+    {
+      "path": "integration/bh-05/acceptance-cleanup-v0.1.0.json",
+      "sha256": "8c494b6788db7d5fa02f68d601606d2ceb8eabbb11746e99c00b740ec26d3328"
+    },
+    {
+      "path": "docs/research/60-planning/01-browser-host/bh-05-component-programming-model-and-lifecycle/phase-12-reliability-measurement-review-and-bh-05-acceptance.md",
+      "sha256": "4be8e5d3e5dc156cd3aac9b6012eda8fd4c81fee7b9efb3d99a99586de872de6"
+    },
+    {
+      "path": "docs/research/60-planning/01-browser-host/bh-05-component-programming-model-and-lifecycle/acceptance-contract.md",
+      "sha256": "c6eedcd59bbdb713d1662c926f88b6f101b74d67056d4a74c8634af59da48c5c"
+    },
+    {
+      "path": "docs/research/60-planning/01-browser-host/bh-05-component-programming-model-and-lifecycle/acceptance-evidence.md",
+      "sha256": "4a91441b69eb9e1324aca0ff01fe2bc4abe9fba32f7581c65501b37705054be8"
+    },
+    {
+      "path": "docs/research/60-planning/01-browser-host/bh-05-component-programming-model-and-lifecycle/acceptance-reconciliation.md",
+      "sha256": "6cae11212c22b4dd9e0c83603d62bc0f90b8e70b20ea165d37ee957c3b33d46c"
+    },
+    {
+      "path": "docs/research/60-planning/01-browser-host/bh-05-component-programming-model-and-lifecycle/release-and-bh06-handoff.md",
+      "sha256": "b1fb1a6636eb17dab3bc7cd0efd3fd93067c1d352d70e42fe58846d12f3a7090"
+    },
+    {
+      "path": "docs/research/60-planning/01-browser-host/bh-05-component-programming-model-and-lifecycle/recovery-contract.md",
+      "sha256": "bb1d18f97c0a64c1216e957961ec293588576314c63937da525c30f16dbd11a5"
+    }
+  ],
+  "liveview": "deferred",
+  "phase12_decision": "revise",
+  "schema_version": "1.0.0",
+  "support_state": "unsupported"
+}

@@ -32,14 +32,27 @@ defmodule BlazeX.BH05.Acceptance.Cleanup do
     def dispose(_, _), do: :ok
     def force_cleanup(_, _), do: :ok
     def release(_, _), do: :released
+    def release_page(_, leases), do: List.duplicate(:released, length(leases))
   end
 
   def run(cleanup_count \\ 100, process_samples \\ 10) do
+    cleanup = cleanup_samples(cleanup_count)
+    process_growth = lifecycle_samples(process_samples, 100)
+
+    accepted =
+      Enum.all?(cleanup, fn sample ->
+        sample["unresolved"] == 0 and sample["terminal_leases"] == 0 and
+          not sample["exceeded_deadline"]
+      end) and
+        Enum.all?(process_growth, &(&1["unexpected_growth"] == 0))
+
     %{
       "schema_version" => "1.0.0",
-      "result" => "passed",
-      "cleanup" => cleanup_samples(cleanup_count),
-      "process_growth" => lifecycle_samples(process_samples, 100)
+      "execution_state" => "executed",
+      "acceptance_state" => if(accepted, do: "passed", else: "failed"),
+      "result" => if(accepted, do: "passed", else: "failed"),
+      "cleanup" => cleanup,
+      "process_growth" => process_growth
     }
   end
 
@@ -51,11 +64,16 @@ defmodule BlazeX.BH05.Acceptance.Cleanup do
       %{
         "sample" => sample,
         "elapsed_ms" => report.elapsed_ms,
+        "exceeded_deadline" => report.exceeded_deadline,
         "requested" => report.requested,
         "unresolved" => report.unresolved,
+        "unresolved_identities" => unresolved_identities(report.pages),
         "forced" => report.forced,
         "terminal_leases" => map_size(cleaned.actions.ledger.leases),
-        "late_results" => 0
+        "late_results" => 0,
+        "amplification" => report.amplification,
+        "stage_timings_ms" => report.stage_timings_ms,
+        "runtime_metrics" => report.runtime_metrics
       }
     end)
   end
@@ -99,6 +117,13 @@ defmodule BlazeX.BH05.Acceptance.Cleanup do
     supervisor
     |> Supervisor.which_children()
     |> Enum.count(fn {_, pid, _, _} -> is_pid(pid) and Process.alive?(pid) end)
+  end
+
+  defp unresolved_identities(pages) do
+    pages
+    |> Enum.flat_map(& &1)
+    |> Enum.filter(& &1.unresolved)
+    |> Enum.map(& &1.reference)
   end
 
   defp submission do

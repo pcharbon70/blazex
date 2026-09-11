@@ -618,4 +618,27 @@ defmodule BlazeX.ActionTest do
     assert snapshot.actions.totals.canceled == 1
     refute_receive {:attempted, _}, 20
   end
+
+  test "batch release preserves bounded history and exact per-resource terminal states" do
+    leases =
+      Map.new(1..512, fn sequence ->
+        id = "lease-#{sequence}"
+        {id, %{id: id, acquisition: %{sequence: sequence}}}
+      end)
+
+    releases =
+      leases
+      |> Map.values()
+      |> Enum.sort_by(& &1.acquisition.sequence)
+      |> Enum.map(fn lease ->
+        {lease, if(rem(lease.acquisition.sequence, 2) == 0, do: :released, else: :lost)}
+      end)
+
+    ledger = ActionLedger.released_many(%ActionLedger{leases: leases}, releases)
+    assert ledger.leases == %{}
+    assert ledger.totals == %{lost: 256, released: 256}
+    assert length(ledger.history) == 128
+    assert hd(ledger.history).correlation.id == "lease-385"
+    assert List.last(ledger.history).correlation.id == "lease-512"
+  end
 end

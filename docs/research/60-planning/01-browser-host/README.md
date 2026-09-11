@@ -87,8 +87,9 @@ defect and accepted BH-03 with bounded conditions on 2026-09-07.
 The repository owner approved the BH-04 ten-phase decomposition on 2026-09-06.
 BH-04 Phases 1 through 7 are complete; Phase 8 is [DEFERRED]. Phase 9 conformance
 is complete and Phase 10's corrective successor is accepted for development.
-The twelve-phase BH-05 plan is approved; Phase 1 may now reconcile the accepted
-handoff under the owner's separate request. Later behavior remains unauthorized.
+BH-05 Phase 12 completed with a truthful `revise` decision because Firefox did
+not reach an exact terminal cleanup inventory under the frozen deadline.
+Corrective Phase 13 is planned but unauthorized; BH-06 remains ineligible.
 
 ## Index
 
@@ -100,7 +101,7 @@ handoff under the owner's separate request. Later behavior remains unauthorized.
 - [BH-01 — Reproducible Browser Feasibility Baseline](bh-01-reproducible-browser-feasibility-baseline/README.md) — completed need-driven plan with a proceed-with-bounded-conditions decision; external browser qualification remains deferred, and its immutable entry artifact records the pre-authorization BH-02 state.
 - [BH-02 — Host-Neutral Semantic Kernel Gate](bh-02-host-neutral-semantic-kernel-gate/README.md) — completed eight-phase contract and cross-renderer proof plan accepted for internal experimental use.
 - [BH-03 — Browser Execution-Host and Runtime Boot Lifecycle](bh-03-browser-execution-host-and-runtime-boot-lifecycle/README.md) — accepted with bounded conditions; BH-04's corrective handoff is now accepted for development.
-- [BH-05 — Component Programming Model and Lifecycle](bh-05-component-programming-model-and-lifecycle/README.md) — Phase 1 governance activation complete; Phase 2 eligible but unauthorized. No component behavior or support promotion is claimed.
+- [BH-05 — Component Programming Model and Lifecycle](bh-05-component-programming-model-and-lifecycle/README.md) — Phase 12 completed with `revise`; corrective Phase 13 is planned but unauthorized, and BH-06 remains ineligible. No support promotion is claimed.
 
 ### Documents
 

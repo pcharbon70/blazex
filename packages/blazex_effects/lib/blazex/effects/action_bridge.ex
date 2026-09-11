@@ -65,6 +65,8 @@ defmodule BlazeX.Effects.ActionBridge do
     })
   end
 
+  def release_page(config, leases), do: Enum.map(leases, &release(config, &1))
+
   def command_record(entry) do
     body = entry.action.body
 

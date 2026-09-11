@@ -11,6 +11,12 @@ aliases: []
 
 Back to [milestone](README.md), [Phase 12](phase-12-reliability-measurement-review-and-bh-05-acceptance.md), and the generated [ledger](../../../assets/bh-05-baseline/acceptance-reconciliation-v0.1.0.json).
 
+Phase 13 preserves this decision and adds a successor
+[cleanup-scaling reconciliation](phase-13-review-and-reconciliation.md). The
+bounded page/session correction passes Chrome but still misses the unchanged
+deadline with exact unresolved identities on Firefox, so this historical
+Phase 12 record remains immutable and BH-05 remains `revise`.
+
 ## Decision
 
 The evidence requires **revise**. All six controlled quantitative budgets and

@@ -175,7 +175,7 @@ defmodule BlazeX.Conformance.RecoveryTest do
         assert s.actions.pending == 0 and s.actions.leases == 0
 
         if mode == :slow,
-          do: assert(s.recovery.cleanup.forced == 1 and s.recovery.cleanup.timed_out == 1)
+          do: assert(s.recovery.cleanup.forced == 2 and s.recovery.cleanup.timed_out == 2)
 
         assert {:ok, %{generation: 2}} =
                  RecoveryView.retry(c.supervisor, c.handle, 1, f.fingerprint, :host, c.spec)

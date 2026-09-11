@@ -1,0 +1,133 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 13,
+  "support_state": "unsupported",
+  "attempts": [
+    {
+      "attempt": "initial-full-matrix",
+      "state": "aborted",
+      "result": "failed",
+      "observation": "The first full matrix was stopped after the original per-resource cleanup implementation made the 512-resource browser boundary non-viable; no raw output was published."
+    },
+    {
+      "attempt": "chrome-512-original-finalization",
+      "state": "executed",
+      "result": "failed",
+      "elapsed_ms": 68869,
+      "unresolved": 0,
+      "raw_sha256": "0bd458e1a9d5fe7c47b122496dea1de30605543d2b578d2d0d2dfd1627e40ff9",
+      "observation": "Callbacks completed in approximately 242 ms, but repeated ledger searches and mutation consumed approximately 67.6 seconds."
+    },
+    {
+      "attempt": "chrome-512-first-batch",
+      "state": "executed",
+      "result": "failed",
+      "elapsed_ms": 47477,
+      "unresolved": 0,
+      "raw_sha256": "78b74d1baea110dda1db273dbfee6c3d51fa099e2c53a59625109b28bcbcd148",
+      "observation": "A single batch release removed repeated searches but still rebuilt oversized maps and history."
+    },
+    {
+      "attempt": "chrome-512-bounded-ledger",
+      "state": "executed",
+      "result": "failed",
+      "elapsed_ms": 1433,
+      "unresolved": 0,
+      "raw_sha256": "e4ce41e5158ee36ca6d691efb7423e41967e24d1f6c84e1d27d93c7036f55a89",
+      "observation": "Bounded ledger history exposed successful-row sanitization as the next scaling cost."
+    },
+    {
+      "attempt": "chrome-512-ordered-inventory",
+      "state": "executed",
+      "result": "failed",
+      "elapsed_ms": 1512,
+      "unresolved": 0,
+      "raw_sha256": "7defedf5ba1fac4ad20bf806f9d05fc7161b3d23039ae74fa8120432f787161b",
+      "observation": "Ordering accounted for 97 ms and did not explain the remaining amplification."
+    },
+    {
+      "attempt": "chrome-512-success-row-correction",
+      "state": "executed",
+      "result": "passed",
+      "elapsed_ms": 527,
+      "unresolved": 0,
+      "raw_sha256": "5af59d7770824075b1b005acbdc28e5608c23e0a2a709e64b46700fd4b4ad5aa",
+      "observation": "Successful rows stopped carrying force-only fields and the Chrome boundary passed."
+    },
+    {
+      "attempt": "first-frozen-full-matrix",
+      "state": "executed",
+      "result": "failed",
+      "raw_sha256": "d540eb585ba117fd78bf5626fec8dc03eb55a15a2723200536df9281deb248df",
+      "observation": "Chrome retained 220 samples with 22 deadline failures, including all maximum-payload 512 samples; Firefox reached the 600-second harness timeout before returning its sample vector."
+    },
+    {
+      "attempt": "firefox-512-success-row-correction",
+      "state": "executed",
+      "result": "failed",
+      "elapsed_ms": 4655,
+      "unresolved": 65,
+      "raw_sha256": "b8db943920318279376daa29583da2efabb93dc6ac055528dba4f8e0488655e6",
+      "observation": "Firefox completed only 448 lease callbacks before the deadline."
+    },
+    {
+      "attempt": "atomvm-external-size-probe",
+      "state": "aborted",
+      "result": "failed",
+      "observation": "The external-size primitive itself stalled the AtomVM measurement; the probe was interrupted and byte instrumentation was changed to explicit unavailable on AtomVM."
+    },
+    {
+      "attempt": "firefox-512-no-byte-observer",
+      "state": "executed",
+      "result": "failed",
+      "elapsed_ms": 3833,
+      "unresolved": 1,
+      "raw_sha256": "e9a3ac2f489d77cd79e5f514f4c0b73b312ce8cefdc886244290b468c34fad9c",
+      "observation": "Removing byte instrumentation reduced observer effect but did not satisfy the deadline."
+    },
+    {
+      "attempt": "paged-provider-release",
+      "state": "executed",
+      "result": "failed",
+      "chrome_elapsed_ms": 473,
+      "firefox_elapsed_ms": 3308,
+      "raw_sha256": "5c111b8d96401e20474367c0edf6c90293722c2c1f4d171bd6f82bc1f9e40010",
+      "observation": "One provider call per page passed Chrome but showed that Firefox time was dominated by duplicate result materialization rather than provider callbacks."
+    },
+    {
+      "attempt": "direct-page-collation",
+      "state": "executed",
+      "result": "failed",
+      "chrome_elapsed_ms": 286,
+      "firefox_elapsed_ms": 3105,
+      "firefox_unresolved": 65,
+      "raw_sha256": "c91ed6b31356721d442b68b948ff6b47e3555a446ea8c25d4f5ee0bc95b90c2f",
+      "observation": "Direct page-to-report collation passed Chrome with substantial margin; Firefox still exhausted the deadline after seven lease pages, so Phase 13 remains revise."
+    },
+    {
+      "attempt": "second-clean-build-direct-page-collation",
+      "state": "executed",
+      "result": "failed",
+      "chrome_elapsed_ms": 285,
+      "firefox_elapsed_ms": 3219,
+      "firefox_unresolved": 65,
+      "atomvm_wasm_sha256": "d20c491e75936dc8189910c8d0740093b7813d8dcc1cf966a87c011799ade9d8",
+      "bundle_sha256": "1efab5f4a9d3477711fa041f7b37b5bb0e281471501f3665b94b71ea20c8b825",
+      "raw_sha256": "66244740bd671b8336787e03864e90ecfc03b20bd1709191324daa83b7a271ee",
+      "observation": "A second clean pinned build reproduced the semantic result: Chrome completed 513 callbacks in eight lease pages with zero unresolved; Firefox completed 448 callbacks in seven lease pages and retained 65 unresolved identities."
+    },
+    {
+      "attempt": "second-clean-build-representative-subset",
+      "state": "executed",
+      "result": "failed",
+      "counts": [64, 65, 256, 512],
+      "raw_sha256": "88fd2d736bf8b99f286cdf2e10f07c809fc41ed7e172533127715c0525e1f5b6",
+      "atomvm_wasm_sha256": "d20c491e75936dc8189910c8d0740093b7813d8dcc1cf966a87c011799ade9d8",
+      "bundle_sha256": "b66384a75be7732966ccbe5e338a7d16823230845e1dfce6385b5c80f84c45df",
+      "chrome_elapsed_ms": [16, 11, 88, 267],
+      "firefox_elapsed_ms": [69, 69, 581, 3121],
+      "firefox_unresolved": [0, 0, 0, 65],
+      "observation": "Both engines pass 64, 65, and 256 resources with exact terminal state. Chrome passes 512; Firefox stops after seven pages and retains 65 unresolved identities."
+    }
+  ]
+}

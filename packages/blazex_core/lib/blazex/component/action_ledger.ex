@@ -1,7 +1,7 @@
 defmodule BlazeX.Component.ActionLedger do
   @moduledoc false
   alias BlazeX.Component.{Action, ActionManifest, RootPort, RootSchedule, Schema}
-  defstruct pending: %{}, leases: %{}, sequences: %{}, history: [], totals: %{}
+  defstruct pending: %{}, leases: %{}, lease_order: [], sequences: %{}, history: [], totals: %{}
 
   def prepare(ledger, groups, candidate, spec, manifest, port) do
     true = is_list(groups) and length(groups) <= 128 and Action.size?(groups, 65_536)
@@ -83,7 +83,11 @@ defmodule BlazeX.Component.ActionLedger do
          :ok <- result_value(entry, result),
          true <- length(result.leases) <= Map.get(entry.declaration, :lease_limit, 0),
          true <- Enum.all?(result.leases, &(not Map.has_key?(ledger.leases, &1))) do
-      next = %{ledger | pending: Map.delete(ledger.pending, result.correlation)}
+      next = %{
+        ledger
+        | pending: Map.delete(ledger.pending, result.correlation),
+          lease_order: ledger.lease_order ++ result.leases
+      }
 
       next =
         Enum.reduce(result.leases, next, fn id, acc ->
@@ -146,7 +150,58 @@ defmodule BlazeX.Component.ActionLedger do
   end
 
   def released(ledger, lease, status) when status in [:released, :lost],
-    do: record(%{ledger | leases: Map.delete(ledger.leases, lease.id)}, status, lease_ref(lease))
+    do:
+      record(
+        %{
+          ledger
+          | leases: Map.delete(ledger.leases, lease.id),
+            lease_order: List.delete(ledger.lease_order, lease.id)
+        },
+        status,
+        lease_ref(lease)
+      )
+
+  def released_many(ledger, releases) when is_list(releases) and length(releases) <= 512 do
+    true =
+      Enum.all?(releases, fn {lease, status} -> is_map(lease) and status in [:released, :lost] end)
+
+    {released, lost} =
+      Enum.reduce(releases, {0, 0}, fn
+        {_, :released}, {released, lost} -> {released + 1, lost}
+        {_, :lost}, {released, lost} -> {released, lost + 1}
+      end)
+
+    totals = ledger.totals |> add_total(:released, released) |> add_total(:lost, lost)
+
+    history =
+      releases
+      |> Enum.take(-128)
+      |> Enum.map(fn {lease, status} ->
+        %{status: status, correlation: lease_ref(lease)}
+      end)
+
+    {leases, lease_order} =
+      if length(releases) == map_size(ledger.leases) do
+        {%{}, []}
+      else
+        ids = MapSet.new(releases, fn {lease, _} -> lease.id end)
+
+        {Map.drop(ledger.leases, MapSet.to_list(ids)),
+         Enum.reject(ledger.lease_order, &(&1 in ids))}
+      end
+
+    %{
+      ledger
+      | leases: leases,
+        lease_order: lease_order,
+        totals: totals,
+        history:
+          if(length(releases) >= 128,
+            do: history,
+            else: Enum.take(ledger.history ++ history, -128)
+          )
+    }
+  end
 
   def result_work(entry, result, accepted, leases) do
     owner = entry.action.owner
@@ -210,10 +265,9 @@ defmodule BlazeX.Component.ActionLedger do
       totals: ledger.totals,
       history: ledger.history,
       inventory_pages:
-        ledger.leases
-        |> Map.values()
+        ledger
+        |> ordered_leases()
         |> Enum.map(&Map.drop(&1, [:selection, :source_stamp]))
-        |> Enum.sort()
         |> Enum.chunk_every(128),
       requests:
         ledger.pending
@@ -221,6 +275,14 @@ defmodule BlazeX.Component.ActionLedger do
         |> Enum.map(&Map.take(&1, [:correlation, :selection, :status]))
         |> Enum.sort()
     }
+
+  def ordered_leases(ledger) do
+    if length(ledger.lease_order) == map_size(ledger.leases) do
+      Enum.map(ledger.lease_order, &Map.fetch!(ledger.leases, &1))
+    else
+      Enum.sort_by(Map.values(ledger.leases), & &1.id)
+    end
+  end
 
   def lease_depth(ledger),
     do:
@@ -237,6 +299,11 @@ defmodule BlazeX.Component.ActionLedger do
       | totals: Map.update(ledger.totals, status, 1, &min(&1 + 1, 9_007_199_254_740_991)),
         history: Enum.take(ledger.history ++ [%{status: status, correlation: correlation}], -128)
     }
+
+  defp add_total(totals, _status, 0), do: totals
+
+  defp add_total(totals, status, count),
+    do: Map.update(totals, status, count, &min(&1 + count, 9_007_199_254_740_991))
 
   defp validate_control!(ledger, %{kind: :effect_cancel} = action, _, _) do
     entry = Map.fetch!(ledger.pending, action.body.correlation)

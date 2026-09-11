@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 13,
+  "decision": "revise",
+  "milestone_state": "revision-required",
+  "milestone_accepted": false,
+  "active_blocker": "BH05-P13-FIREFOX-DEADLINE",
+  "bh06_eligible": false,
+  "bh06_authorized": false,
+  "support_state": "unsupported",
+  "implementation_revision": "d27abac63cdda5937b38f1dd6f97589be9e29718",
+  "source_tree_sha256": "ae0dbbeb5bd6243da642814bcb3eaabd177f4d5b4aabdbd1b7238d4f64600ec0",
+  "tests": {
+    "blazex_core": {"tests": 103, "failures": 0},
+    "blazex_effects": {"tests": 12, "failures": 0},
+    "blazex_ui_tree": {"tests": 68, "failures": 0},
+    "blazex_test": {"tests": 7, "failures": 0},
+    "integration_conformance": {"tests": 93, "failures": 0},
+    "validator_mutations": {"tests": 5, "failures": 0}
+  },
+  "second_clean_build": {
+    "counts": [64, 65, 256, 512],
+    "raw_sha256": "88fd2d736bf8b99f286cdf2e10f07c809fc41ed7e172533127715c0525e1f5b6",
+    "atomvm_wasm_sha256": "d20c491e75936dc8189910c8d0740093b7813d8dcc1cf966a87c011799ade9d8",
+    "bundle_sha256": "b66384a75be7732966ccbe5e338a7d16823230845e1dfce6385b5c80f84c45df",
+    "chrome": {"version": "140.0.7339.80", "elapsed_ms": [16, 11, 88, 267], "callbacks_completed_at_512": 513, "lease_pages_at_512": 8, "unresolved": [0, 0, 0, 0], "result": "passed"},
+    "firefox": {"version": "153.0", "elapsed_ms": [69, 69, 581, 3121], "callbacks_completed_at_512": 448, "lease_pages_at_512": 7, "unresolved": [0, 0, 0, 65], "result": "failed"}
+  },
+  "historical_validators": {
+    "validated": ["acceptance-cleanup", "acceptance-counts", "browser-conformance", "conformance", "reconciliation"],
+    "source_freeze_drift_retained": ["acceptance", "actions", "activation", "authoring", "composition", "nested", "recovery", "release", "roots", "scheduling", "schema", "scopes"]
+  },
+  "limitations": [
+    "AtomVM request/result byte sizes are explicitly unavailable because measurement distorted or stalled cleanup.",
+    "The complete final Firefox matrix is not publishable while a required 512-resource boundary already fails and the earlier full attempt reaches the harness timeout.",
+    "Review is implementation-agent evidence, not independent human attestation."
+  ],
+  "attempts": "integration/bh-05/cleanup-scaling-attempts-v0.1.0.json",
+  "review": "docs/research/assets/bh-05-baseline/cleanup-scaling-review-v0.1.0.json"
+}

@@ -77,3 +77,8 @@ bindings. No measurement or runtime result may claim Phase 1 pass credit.
 - [BH-06 entry decision](bh-06-entry-decision-v0.1.0.json) — Ineligible and unauthorized while the active blocker remains.
 - [Acceptance gates](acceptance-gates-v0.1.0.json) — Thirteen passing source-frozen meta-gates that reproduce the revise outcome.
 - [Acceptance completion](acceptance-completion-v0.1.0.json) — BH-05 revision-required decision and BH-06 ineligibility.
+- [Cleanup scaling authority](cleanup-scaling-authorization-v0.1.0.json) — Phase 13 correction, immutable Phase 12 bindings, scaling matrix and anti-concealment rules.
+- [Cleanup scaling review](cleanup-scaling-review-v0.1.0.json) — Phase 13 runtime results, open findings, and truthful revise decision.
+- [Phase 13 BH-05 acceptance overlay](bh-05-phase13-acceptance-overlay-v0.1.0.json) — Successor overlay retaining the Firefox deadline blocker.
+- [Phase 13 BH-06 entry decision](bh-06-phase13-entry-decision-v0.1.0.json) — BH-06 remains ineligible and unauthorized.
+- [Cleanup scaling completion](cleanup-scaling-completion-v0.1.0.json) — Source-bound Phase 13 test, repeat, limitation, and completion record.
