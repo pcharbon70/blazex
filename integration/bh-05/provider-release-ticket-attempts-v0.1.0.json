@@ -163,6 +163,16 @@
       "factor": {"execution_state": "failed", "runtime_error": "noproc"},
       "canonical": {"execution_state": "failed", "runtime_error": "noproc"},
       "maximum_512": {"execution_state": "failed", "runtime_error": "noproc"}
+    },
+    "second_clean_repeat": {
+      "bundle_byte_identical": true,
+      "bundle_sha256": "a7475fed8e240a6cc50e252f7cccd8e8ba9635b73833a6d6d00b1df6d1cbb1fc",
+      "canonical_artifact_sha256": "618c5836123d9221c4c2b7d71ea8bc5f3a95a34840165578487df7ef22797344",
+      "maximum_512_artifact_sha256": "58b0c6d405d4b12441fa371dd149044c950d33bbfe434687edf2aa6d49baedd6",
+      "chrome_canonical_ms": [9, 8, 129, 215],
+      "chrome_maximum_512_ms": 228,
+      "chrome_unresolved": 0,
+      "firefox": {"execution_state": "failed", "runtime_error": "noproc"}
     }
   },
   "closed_finding": "BH05-P16-DEEP-OWNER-RELEASE-DESCRIPTOR",

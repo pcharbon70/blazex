@@ -11,7 +11,7 @@ aliases: ["BH-05 phase 17", "BH-05 provider release tickets"]
 
 Back to milestone: [README](README.md)
 
-- [ ] 17 Phase - Provider-Issued Release Tickets and Owner-Free Disposal.
+- [x] 17 Phase - Provider-Issued Release Tickets and Owner-Free Disposal.
 
   Correct `BH05-P16-DEEP-OWNER-RELEASE-DESCRIPTOR` by having the selected
   provider prepare a bounded opaque release ticket when a lease is acquired or
@@ -79,15 +79,15 @@ Back to milestone: [README](README.md)
       - [x] 17.5.2.2 Subtask - Map every Phase 16 re-entry condition and new finding to evidence.
       - [x] 17.5.2.3 Subtask - Accept only when all frozen gates pass; otherwise record revise or block.
 
-  - [ ] 17.6 Section - Run the full integration gate and publish completion.
-    - [ ] 17.6.1 Task - Rebuild and verify the complete candidate.
-      - [ ] 17.6.1.1 Subtask - Run package, conformance, browser, formatting, archive, provenance, dependency, and hygiene gates.
-      - [ ] 17.6.1.2 Subtask - Repeat maximum 512 and canonical `64, 65, 256, 512` from a second clean context.
-      - [ ] 17.6.1.3 Subtask - Verify indexing, source binding, public facade stability, and historical immutability.
-    - [ ] 17.6.2 Task - Publish and deliver one successor pull request.
-      - [ ] 17.6.2.1 Subtask - Publish commands, hashes, samples, timings, ticket counters, findings, limitations, and decision.
-      - [ ] 17.6.2.2 Subtask - Open and merge one PR only after recording a truthful decision.
-      - [ ] 17.6.2.3 Subtask - After merge, sync `main`, then delete local and remote feature branches.
+  - [x] 17.6 Section - Run the full integration gate and publish completion.
+    - [x] 17.6.1 Task - Rebuild and verify the complete candidate.
+      - [x] 17.6.1.1 Subtask - Run package, conformance, browser, formatting, archive, provenance, dependency, and hygiene gates.
+      - [x] 17.6.1.2 Subtask - Repeat maximum 512 and canonical `64, 65, 256, 512` from a second clean context.
+      - [x] 17.6.1.3 Subtask - Verify indexing, source binding, public facade stability, and historical immutability.
+    - [x] 17.6.2 Task - Publish and deliver one successor pull request.
+      - [x] 17.6.2.1 Subtask - Publish commands, hashes, samples, timings, ticket counters, findings, limitations, and decision.
+      - [x] 17.6.2.2 Subtask - Open and merge one PR only after recording a truthful decision.
+      - [x] 17.6.2.3 Subtask - After merge, sync `main`, then delete local and remote feature branches.
 
 ## Exit gate
 
