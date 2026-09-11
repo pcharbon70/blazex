@@ -96,6 +96,45 @@ security, accessibility, tests, documentation, and performance measurement
 begin in the earliest milestones even though later milestones provide their
 full product-wide release gates.
 
+## Continuous browser-Wasm vertical-slice gate
+
+BH-05 Phase 11 has removed the foundational uncertainty that the BlazeX
+component model might not execute in the selected browser runtime at all. Its
+fixed public Elixir component corpus executed under the pinned AtomVM/Popcorn
+WebAssembly path in active Linux Chrome and Firefox, drove the standalone DOM
+renderer, and matched the normalized ERTS result. That evidence is bounded to
+the fixed corpus and does not establish general application builds, broad
+component coverage, browser support, or release readiness. BH-05 remains in a
+`revise` state because the separate Firefox cleanup inventory gate failed.
+
+The project must not defer the next browser-runtime discovery until the end of
+a milestone. BH-06 and every later browser milestone that introduces or
+changes executable component behavior must begin implementation with a small
+end-to-end slice before expanding its surface. The slice must use documented
+public Elixir component APIs and the current production-candidate assembly
+path to exercise, at minimum:
+
+- component packaging into the AtomVM application bundle loaded by the Wasm
+  runtime;
+- component mount and semantic rendering;
+- one real browser interaction delivered to an Elixir callback;
+- an Elixir-owned state transition followed by an acknowledged DOM update;
+- root/component disposal with terminal ownership accounting; and
+- execution in both active Linux Chrome and Firefox with retained raw evidence.
+
+A JavaScript-only fixture, mocked runtime, static DOM sample, source/API
+inspection, ERTS-only test, or successful bundle generation is not sufficient.
+Failure in either active browser blocks broad implementation in that milestone
+until corrected or a truthful stop/revise decision is recorded. Environments
+that are unavailable under the development-environment policy remain
+`[DEFERRED]`; this early gate grants no browser or product support claim.
+
+The early slice complements rather than replaces each milestone's complete
+integration, conformance, reliability, security, accessibility, and acceptance
+gates. Component-family milestones must retain the slice as a smoke scenario
+and extend it with the first representative member of each materially different
+runtime/capability class before implementing the rest of that class.
+
 ## Horizon 0 — Direction and proof
 
 ### BH-00 — Product boundary, catalog, and acceptance contract
@@ -272,6 +311,11 @@ code and assets are present and prevent server-only modules, native
 dependencies, secret-bearing configuration, or undeclared dynamic dispatch
 from silently reaching the client.
 
+Before broad build-pipeline implementation, reproduce the continuous
+browser-Wasm vertical slice through the first candidate entrypoint, manifest,
+bundle, and asset pipeline. This is BH-06's earliest executable gate, not an
+end-of-milestone packaging demonstration.
+
 **Repository ownership.** Build analysis and manifests belong to
 `packages/blazex_build`. Runtime-specific compatibility evidence is supplied by
 `packages/blazex_runtime_popcorn`; executable artifact checks run through
@@ -322,6 +366,10 @@ focus and keyboard primitives, icon and asset strategy, provider/context
 boundaries, and visual-profile policy. Produce a reference gallery and
 BlazeX-owned visual baselines.
 
+Before expanding the foundation, run one interactive themed component through
+the continuous browser-Wasm vertical slice using the BH-06 build pipeline and
+retain it as the foundation smoke scenario.
+
 **Repository ownership.** Semantic layout, tokens, and accessibility vocabulary
 belong to `packages/blazex_ui_tree`; portable effects belong to
 `packages/blazex_effects`; the design foundation and general components belong
@@ -344,6 +392,11 @@ toolbar, card, button, icon-action, alert, avatar, badge, chip, progress,
 simple list, link, and basic table experiences selected by the catalog. Define
 states, variants, composition, disabled and busy behavior, accessibility, and
 static fallback for each family.
+
+Begin with one stateful action component that passes the continuous
+browser-Wasm vertical slice before implementing the broader family inventory.
+Add a representative slice whenever a family introduces a materially different
+runtime, renderer, effect, resource, focus, or browser-capability path.
 
 **Repository ownership.** Components and their shared design primitives belong
 to `packages/blazex_ui`. Renderer snapshots and cross-profile cases belong in
