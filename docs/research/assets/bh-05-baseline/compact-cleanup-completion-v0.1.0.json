@@ -1,0 +1,64 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 14,
+  "decision": "revise",
+  "milestone_state": "revision-required",
+  "milestone_accepted": false,
+  "active_blocker": "BH05-P14-MAXIMUM-PAYLOAD-TRANSFER",
+  "bh06_eligible": false,
+  "bh06_authorized": false,
+  "support_state": "unsupported",
+  "implementation_revision": "9d465ddb5cbf9078be782441ccee3b5d7817c0b6",
+  "source_tree_sha256": "951118a7685ee713bbdff4c83cbb5f7b6b5e8199e2c06baf4390640d2ca66193",
+  "atomvm_wasm_sha256": "d20c491e75936dc8189910c8d0740093b7813d8dcc1cf966a87c011799ade9d8",
+  "tests": {
+    "blazex_core": {"tests": 109, "failures": 0},
+    "blazex_effects": {"tests": 12, "failures": 0},
+    "blazex_ui_tree": {"tests": 68, "failures": 0},
+    "blazex_test": {"tests": 7, "failures": 0},
+    "integration_conformance": {"tests": 93, "failures": 0},
+    "archive_and_scaling_mutations": {"tests": 15, "failures": 0}
+  },
+  "erts": {
+    "scaling": "passed",
+    "phase12_fixture_repeat": "passed",
+    "growth_samples": 10,
+    "cycles_per_sample": 100,
+    "unexpected_growth": 0
+  },
+  "first_clean_build": {
+    "bundle_sha256": "bae3e532128e36c3fad6c16cf0ce21d446b60ef356af7ee585490053e3b38fcb",
+    "canonical_raw_sha256": "4a5f6b0ad4b3853d185b516cd187259a196b6e6aec7b602348a88c4d2b4db51b",
+    "canonical_chrome_ms": [12, 9, 46, 174],
+    "canonical_firefox_ms": [31, 32, 311, 931],
+    "maximum_512_raw_sha256": "e296d2276adacafb98f5d411cf48182b6d8243e53be3ed5ce97171e1f5e247b3",
+    "maximum_512_chrome_ms": 326,
+    "maximum_512_firefox_ms": 7010,
+    "maximum_512_firefox_unresolved": 321
+  },
+  "second_clean_build": {
+    "bundle_sha256": "bae3e532128e36c3fad6c16cf0ce21d446b60ef356af7ee585490053e3b38fcb",
+    "canonical_raw_sha256": "a8d2a54be65a51640e10e813c5cf605b3d52376148d3c696be414f68a8b320f2",
+    "canonical_chrome_ms": [12, 7, 42, 159],
+    "canonical_firefox_ms": [33, 34, 278, 914],
+    "maximum_512_raw_sha256": "d36f8762b837685468b892449de8706f25db8b5d0f40e9d5ab1a6e77cb463de4",
+    "maximum_512_chrome_ms": 304,
+    "maximum_512_firefox_ms": 6823,
+    "maximum_512_firefox_unresolved": 321
+  },
+  "historical_validators": {
+    "validated": [
+      "acceptance-cleanup-revise",
+      "acceptance-counts",
+      "browser-conformance",
+      "cross-runtime-conformance",
+      "reconciliation-revise"
+    ],
+    "expected_successor_drift": ["release-generation"]
+  },
+  "limitations": [
+    "The complete repeated browser matrix cannot finish while maximum-payload Firefox cleanup stalls beyond the outer bound.",
+    "AtomVM byte sizes remain explicitly unavailable because measurement distorts the deadline path.",
+    "Review is implementation-agent evidence, not independent human attestation."
+  ]
+}

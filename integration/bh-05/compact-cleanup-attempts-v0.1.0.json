@@ -72,6 +72,19 @@
       "firefox_elapsed_ms": [71, 68, 611, 7010],
       "firefox_unresolved": [0, 0, 0, 321],
       "observation": "Maximum payload passes through 256 resources in both engines. At 512 Firefox spends 3,182 ms in release transport and retains 321 exact unresolved identities; Chrome passes."
+    },
+    {
+      "attempt": "second-clean-build-reproduction",
+      "result": "failed",
+      "bundle_sha256": "bae3e532128e36c3fad6c16cf0ce21d446b60ef356af7ee585490053e3b38fcb",
+      "canonical_raw_sha256": "a8d2a54be65a51640e10e813c5cf605b3d52376148d3c696be414f68a8b320f2",
+      "maximum_512_raw_sha256": "d36f8762b837685468b892449de8706f25db8b5d0f40e9d5ab1a6e77cb463de4",
+      "canonical_chrome_elapsed_ms": [12, 7, 42, 159],
+      "canonical_firefox_elapsed_ms": [33, 34, 278, 914],
+      "maximum_512_chrome_ms": 304,
+      "maximum_512_firefox_ms": 6823,
+      "maximum_512_firefox_unresolved": 321,
+      "observation": "A second byte-identical clean bundle reproduced canonical success and the exact maximum-payload Firefox blocker."
     }
   ]
 }

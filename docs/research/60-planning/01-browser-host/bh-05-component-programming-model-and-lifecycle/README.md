@@ -60,8 +60,9 @@ unresolved cleanup inventory. [Corrective Phase 13](phase-13-bounded-paged-clean
 is complete with a truthful **revise** outcome: constant-worker paging passes
 Chrome but the unchanged Firefox deadline still leaves exact unresolved
 identities. [Corrective Phase 14](phase-14-compact-cleanup-outcomes-and-firefox-requalification.md)
-is authorized and freezes compact exact cleanup outcomes plus active-runtime
-requalification. BH-06 remains ineligible and unauthorized. The current [Phase 11 evidence](conformance-evidence.md) grants the
+is complete with a truthful **revise** outcome: canonical Firefox cleanup now
+passes, while the frozen maximum-payload 512 row exposes a distinct transfer
+blocker. BH-06 remains ineligible and unauthorized. The current [Phase 11 evidence](conformance-evidence.md) grants the
 fixed public corpus exact ERTS/browser-AtomVM and DOM evidence plus GTK
 portability credit without general browser build or product-support claims.
 [Runtime compatibility limits](root-supervision-compatibility.md) remain explicit.
@@ -154,7 +155,7 @@ adapter modules are forbidden even when available in the monorepo.
 | [11 — ERTS, Browser-AtomVM, and Cross-Backend Conformance](phase-11-erts-browser-atomvm-and-cross-backend-conformance.md) | complete — fixed-corpus conformance | Run matching public component scenarios under ERTS/headless and browser AtomVM/DOM, with retained native-spike portability checks. | Phases 2–10 and accepted BH-04 browser path |
 | [12 — Reliability Measurement, Review, and BH-05 Acceptance](phase-12-reliability-measurement-review-and-bh-05-acceptance.md) | complete — revise | Measure six first-responsible budgets, close two failure gates, review the candidate, and accept, revise, or block BH-06 eligibility. | Phases 1–11 |
 | [13 — Bounded Paged Cleanup and Scaling Requalification](phase-13-bounded-paged-cleanup-and-scaling-requalification.md) | complete — revise | Replace per-resource helper-process cleanup with a constant-worker paged session, add structural and timing-shape gates, and retain the Firefox deadline blocker without weakening its contract. | Phase 12 `revise` and explicit authorization |
-| [14 — Compact Cleanup Outcomes and Firefox Requalification](phase-14-compact-cleanup-outcomes-and-firefox-requalification.md) | active — authorized | Remove duplicate per-resource map materialization from the timed path while preserving exact outcomes, then re-run the unchanged active-runtime gates. | Phase 13 `revise` and explicit authorization |
+| [14 — Compact Cleanup Outcomes and Firefox Requalification](phase-14-compact-cleanup-outcomes-and-firefox-requalification.md) | complete — revise | Remove duplicate per-resource map materialization from the timed path, close the canonical Firefox blocker, and retain the maximum-payload transfer blocker. | Phase 13 `revise` and explicit authorization |
 
 ## Acceptance ownership
 
@@ -247,6 +248,7 @@ Phoenix, browser, native-host, or release compatibility.
 - [Phase 14 — Compact Cleanup Outcomes and Firefox Requalification](phase-14-compact-cleanup-outcomes-and-firefox-requalification.md)
 - [Compact cleanup outcome contract](compact-cleanup-outcome-contract.md)
 - [Phase 14 compact cleanup review and reconciliation](phase-14-review-and-reconciliation.md)
+- [Phase 14 completion evidence](phase-14-completion.md)
 
 ## Maintaining this index
 

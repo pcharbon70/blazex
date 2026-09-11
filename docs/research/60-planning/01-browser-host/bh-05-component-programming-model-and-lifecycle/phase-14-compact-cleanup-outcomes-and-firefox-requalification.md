@@ -19,7 +19,7 @@ aliases:
 
 Back to milestone: [README](README.md)
 
-- [ ] 14 Phase - Compact Cleanup Outcomes and Firefox Requalification.
+- [x] 14 Phase - Compact Cleanup Outcomes and Firefox Requalification.
 
   Correct the Phase 13 Firefox deadline failure by removing per-resource
   public-map materialization and duplicate ledger collation from the cleanup
@@ -84,15 +84,15 @@ Back to milestone: [README](README.md)
       - [x] 14.5.2.2 Subtask - Publish findings and map every Phase 13 re-entry condition to evidence.
       - [x] 14.5.2.3 Subtask - Accept only when all frozen gates pass; otherwise record revise or block.
 
-  - [ ] 14.6 Section - Run the full integration gate and publish completion.
-    - [ ] 14.6.1 Task - Rebuild and verify the complete candidate.
-      - [ ] 14.6.1.1 Subtask - Run package, conformance, browser, formatting, archive, provenance, dependency, and hygiene gates.
-      - [ ] 14.6.1.2 Subtask - Repeat 512 and `64, 65, 256, 512` from a second clean context.
-      - [ ] 14.6.1.3 Subtask - Verify indexing and source binding without historical rewrites.
-    - [ ] 14.6.2 Task - Publish and deliver one successor pull request.
-      - [ ] 14.6.2.1 Subtask - Publish commands, environments, hashes, samples, timings, inventories, findings, limitations, and outcomes.
-      - [ ] 14.6.2.2 Subtask - Open one PR only after recording a truthful decision.
-      - [ ] 14.6.2.3 Subtask - After merge, sync `main`, then delete local and remote feature branches.
+  - [x] 14.6 Section - Run the full integration gate and publish completion.
+    - [x] 14.6.1 Task - Rebuild and verify the complete candidate.
+      - [x] 14.6.1.1 Subtask - Run package, conformance, browser, formatting, archive, provenance, dependency, and hygiene gates.
+      - [x] 14.6.1.2 Subtask - Repeat 512 and `64, 65, 256, 512` from a second clean context.
+      - [x] 14.6.1.3 Subtask - Verify indexing and source binding without historical rewrites.
+    - [x] 14.6.2 Task - Publish and deliver one successor pull request.
+      - [x] 14.6.2.1 Subtask - Publish commands, environments, hashes, samples, timings, inventories, findings, limitations, and outcomes.
+      - [x] 14.6.2.2 Subtask - Open one PR only after recording a truthful decision.
+      - [x] 14.6.2.3 Subtask - After merge, sync `main`, then delete local and remote feature branches.
 
 ## Exit gate
 
