@@ -209,7 +209,7 @@ defmodule BlazeX.Component.ActionLedger do
     true = count == map_size(ledger.leases)
     true = length(ordered) == count
     true = Enum.all?(statuses, &(&1 in [:released, :lost]))
-    true = Enum.all?(ordered, &(Map.fetch!(ledger.leases, &1.id) == &1))
+    true = Enum.all?(ordered, &Map.has_key?(ledger.leases, &1.id))
 
     {released, lost, history} =
       ordered
@@ -230,6 +230,32 @@ defmodule BlazeX.Component.ActionLedger do
 
     totals = ledger.totals |> add_total(:released, released) |> add_total(:lost, lost)
     history = Enum.reverse(history)
+
+    %{
+      ledger
+      | leases: %{},
+        lease_order: [],
+        totals: totals,
+        history:
+          if(count >= 128,
+            do: history,
+            else: Enum.take(ledger.history ++ history, -128)
+          )
+    }
+  end
+
+  def released_summary(ledger, %{count: count, released: released, lost: lost, history: history})
+      when is_integer(count) and count in 0..512 and is_integer(released) and
+             is_integer(lost) and is_list(history) and length(history) <= 128 do
+    true = count == map_size(ledger.leases) and released + lost == count
+
+    true =
+      Enum.all?(history, fn
+        {status, id, _acquisition} -> status in [:released, :lost] and is_binary(id)
+        _ -> false
+      end)
+
+    totals = ledger.totals |> add_total(:released, released) |> add_total(:lost, lost)
 
     %{
       ledger
@@ -304,7 +330,7 @@ defmodule BlazeX.Component.ActionLedger do
       leases: map_size(ledger.leases),
       lease_depth: lease_depth(ledger),
       totals: ledger.totals,
-      history: ledger.history,
+      history: Enum.map(ledger.history, &expand_history/1),
       inventory_pages:
         ledger
         |> ordered_leases()
@@ -340,6 +366,11 @@ defmodule BlazeX.Component.ActionLedger do
       | totals: Map.update(ledger.totals, status, 1, &min(&1 + 1, 9_007_199_254_740_991)),
         history: Enum.take(ledger.history ++ [%{status: status, correlation: correlation}], -128)
     }
+
+  defp expand_history({status, id, acquisition}),
+    do: %{status: status, correlation: %{id: id, acquisition: acquisition}}
+
+  defp expand_history(entry), do: entry
 
   defp add_total(totals, _status, 0), do: totals
 

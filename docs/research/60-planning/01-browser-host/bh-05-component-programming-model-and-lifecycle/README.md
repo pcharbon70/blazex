@@ -246,6 +246,7 @@ Phoenix, browser, native-host, or release compatibility.
 - [Phase 13 completion evidence](phase-13-completion.md)
 - [Phase 14 — Compact Cleanup Outcomes and Firefox Requalification](phase-14-compact-cleanup-outcomes-and-firefox-requalification.md)
 - [Compact cleanup outcome contract](compact-cleanup-outcome-contract.md)
+- [Phase 14 compact cleanup review and reconciliation](phase-14-review-and-reconciliation.md)
 
 ## Maintaining this index
 

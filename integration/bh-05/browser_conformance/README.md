@@ -15,3 +15,7 @@ fields. Cleanup rows retain exact unresolved identities, deadline state,
 structural amplification, stage timing and available runtime metrics; the
 compatibility `result` field is derived from acceptance and is never an
 unconditional harness-success label.
+
+Phase 14 adds exact compact-outcome structural counters and bounded individual
+maximum-payload probes. The point probes let a stalled payload row be retained
+without concealing or preventing evidence from the other frozen scale points.

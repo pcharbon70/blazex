@@ -74,15 +74,15 @@ Back to milestone: [README](README.md)
       - [x] 14.4.2.2 Subtask - Recompute terminal inventories and summaries from compact pages.
       - [x] 14.4.2.3 Subtask - Preserve Phase 12 and 13 failures in the append-only ledger.
 
-  - [ ] 14.5 Section - Requalify active runtimes and reconcile BH-05.
-    - [ ] 14.5.1 Task - Execute the source-frozen correction matrix.
-      - [ ] 14.5.1.1 Subtask - Run ERTS/headless and Linux Chrome/Firefox AtomVM/DOM matrices and growth cases.
-      - [ ] 14.5.1.2 Subtask - Require every retained active sample within 1000 ms with zero live and unresolved leases.
-      - [ ] 14.5.1.3 Subtask - Preserve identities, hashes, raw failures, variance, counters, and unavailable metrics.
-    - [ ] 14.5.2 Task - Review and reconcile the successor decision.
-      - [ ] 14.5.2.1 Subtask - Review correctness, portability, performance, malformed input, evidence, and compatibility.
-      - [ ] 14.5.2.2 Subtask - Publish findings and map every Phase 13 re-entry condition to evidence.
-      - [ ] 14.5.2.3 Subtask - Accept only when all frozen gates pass; otherwise record revise or block.
+  - [x] 14.5 Section - Requalify active runtimes and reconcile BH-05.
+    - [x] 14.5.1 Task - Execute the source-frozen correction matrix.
+      - [x] 14.5.1.1 Subtask - Run ERTS/headless and Linux Chrome/Firefox AtomVM/DOM matrices and growth cases.
+      - [x] 14.5.1.2 Subtask - Require every retained active sample within 1000 ms with zero live and unresolved leases.
+      - [x] 14.5.1.3 Subtask - Preserve identities, hashes, raw failures, variance, counters, and unavailable metrics.
+    - [x] 14.5.2 Task - Review and reconcile the successor decision.
+      - [x] 14.5.2.1 Subtask - Review correctness, portability, performance, malformed input, evidence, and compatibility.
+      - [x] 14.5.2.2 Subtask - Publish findings and map every Phase 13 re-entry condition to evidence.
+      - [x] 14.5.2.3 Subtask - Accept only when all frozen gates pass; otherwise record revise or block.
 
   - [ ] 14.6 Section - Run the full integration gate and publish completion.
     - [ ] 14.6.1 Task - Rebuild and verify the complete candidate.

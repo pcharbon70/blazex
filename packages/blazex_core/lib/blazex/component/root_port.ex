@@ -173,6 +173,24 @@ defmodule BlazeX.Component.RootPort do
   def call_page(calls) when is_list(calls),
     do: Enum.map(calls, fn {port, callback, arguments} -> call(port, callback, arguments) end)
 
+  def release_page({module, config} = port, leases)
+      when is_list(leases) and length(leases) <= 128 do
+    requested = Enum.map(leases, &Map.put(&1, :release_requested, true))
+
+    if function_exported?(module, :release_page, 2) do
+      case apply(module, :release_page, [config, requested]) do
+        results when is_list(results) and length(results) == length(leases) -> results
+        _ -> List.duplicate({:error, :port_failed}, length(leases))
+      end
+    else
+      Enum.map(requested, &call(port, :release, [&1]))
+    end
+  rescue
+    _ -> List.duplicate({:error, :port_failed}, length(leases))
+  catch
+    _, _ -> List.duplicate({:error, :port_failed}, length(leases))
+  end
+
   defp keys?(value, keys),
     do: is_map(value) and not is_struct(value) and Enum.sort(Map.keys(value)) == Enum.sort(keys)
 

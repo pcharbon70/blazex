@@ -168,13 +168,10 @@ defmodule BlazeX.Component.RecoveryCleanup do
             ActionLedger.record(acc, :canceled, entry.correlation)
           end)
 
-        true = CleanupOutcome.matches_leases?(lease_pages, leases)
-
         ledger =
-          ActionLedger.released_ordered(
+          ActionLedger.released_summary(
             ledger,
-            leases,
-            CleanupOutcome.terminal_statuses(lease_pages)
+            CleanupOutcome.terminal_summary(lease_pages, leases)
           )
 
         pending = Map.drop(ledger.pending, canceled)
@@ -276,12 +273,7 @@ defmodule BlazeX.Component.RecoveryCleanup do
         if timeout > 0 do
           {release_port, _} = unwrap_port(port)
 
-          requests =
-            Enum.map(page, fn lease ->
-              {release_port, :release, [%{lease | release_requested: true}]}
-            end)
-
-          case RecoveryPort.page(current, requests, timeout) do
+          case RecoveryPort.release_page(current, release_port, page, timeout) do
             {:ok, values, updated} -> {values, updated}
             {:error, error, updated} -> {List.duplicate({:error, error}, length(page)), updated}
           end

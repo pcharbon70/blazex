@@ -101,10 +101,19 @@ defmodule BlazeX.Component.CleanupOutcome do
   end
 
   def counts(pages) do
-    Enum.reduce(pages, empty_counts(), fn
-      %{kind: :lease} = page, acc -> count_lease_page(page, acc)
-      %{kind: :operations, rows: rows}, acc -> Enum.reduce(rows, acc, &count_row/2)
-    end)
+    {requested, failed, timed_out, forced, unresolved} =
+      Enum.reduce(pages, {0, 0, 0, 0, 0}, fn
+        %{kind: :lease} = page, acc -> count_lease_page(page, acc)
+        %{kind: :operations, rows: rows}, acc -> Enum.reduce(rows, acc, &count_row/2)
+      end)
+
+    %{
+      requested: requested,
+      failed: failed,
+      timed_out: timed_out,
+      forced: forced,
+      unresolved: unresolved
+    }
   end
 
   def callback_failures(pages) do
@@ -128,6 +137,20 @@ defmodule BlazeX.Component.CleanupOutcome do
       Enum.zip_reduce(identities, leases, true, fn {owner, id}, lease, acc ->
         acc and lease.id == id and lease.owner == owner
       end)
+  end
+
+  def terminal_summary(pages, leases) when is_list(pages) and is_list(leases) do
+    total = length(leases)
+
+    {remaining, released, lost, history, count} =
+      Enum.reduce(pages, {leases, 0, 0, [], 0}, fn
+        %{kind: :lease} = page, acc -> summarize_page(page, acc, total)
+        _, acc -> acc
+      end)
+
+    true = remaining == [] and count == total
+
+    %{count: count, released: released, lost: lost, history: Enum.reverse(history)}
   end
 
   def representation(pages) do
@@ -232,9 +255,6 @@ defmodule BlazeX.Component.CleanupOutcome do
   defp truth(true), do: 1
   defp truth(false), do: 0
 
-  defp empty_counts,
-    do: %{requested: 0, failed: 0, timed_out: 0, forced: 0, unresolved: 0}
-
   defp count_lease_page(page, acc) do
     count = length(page.identities)
 
@@ -252,17 +272,94 @@ defmodule BlazeX.Component.CleanupOutcome do
     do: count_values(acc, row.status, row.force_status, row.unresolved)
 
   defp count_values(acc, status, force_status, unresolved) do
-    %{
-      requested: acc.requested + 1,
-      failed: acc.failed + truth(status == :failed),
-      timed_out: acc.timed_out + truth(status == :timed_out),
-      forced: acc.forced + truth(force_status == :completed),
-      unresolved: acc.unresolved + truth(unresolved)
+    {requested, failed, timed_out, forced, unresolved_count} = acc
+
+    {
+      requested + 1,
+      failed + truth(status == :failed),
+      timed_out + truth(status == :timed_out),
+      forced + truth(force_status == :completed),
+      unresolved_count + truth(unresolved)
     }
   end
 
+  defp summarize_page(page, {leases, released, lost, history, offset}, total) do
+    count = length(page.identities)
+
+    summarize_identities(
+      page.identities,
+      leases,
+      page.unresolved,
+      count,
+      0,
+      released,
+      lost,
+      history,
+      offset,
+      total
+    )
+  end
+
+  defp summarize_identities(
+         [],
+         leases,
+         _unresolved,
+         _count,
+         _index,
+         released,
+         lost,
+         history,
+         position,
+         _total
+       ),
+       do: {leases, released, lost, history, position}
+
+  defp summarize_identities(
+         [{owner, id} | identities],
+         [lease | leases],
+         unresolved,
+         count,
+         index,
+         released,
+         lost,
+         history,
+         position,
+         total
+       ) do
+    true = lease.id == id and lease.owner == owner
+    status = if value(unresolved, index, count), do: :lost, else: :released
+
+    history =
+      if position >= total - 128 do
+        [{status, lease.id, lease.acquisition} | history]
+      else
+        history
+      end
+
+    {released, lost} =
+      case status do
+        :released -> {released + 1, lost}
+        :lost -> {released, lost + 1}
+      end
+
+    summarize_identities(
+      identities,
+      leases,
+      unresolved,
+      count,
+      index + 1,
+      released,
+      lost,
+      history,
+      position + 1,
+      total
+    )
+  end
+
   defp safe_bytes(value) do
-    byte_size(:erlang.term_to_binary(value))
+    if :erlang.system_info(:machine) == ~c"BEAM",
+      do: byte_size(:erlang.term_to_binary(value)),
+      else: :unavailable
   rescue
     _ -> :unavailable
   catch

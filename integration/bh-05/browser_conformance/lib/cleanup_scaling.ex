@@ -57,6 +57,20 @@ defmodule BlazeX.BH05.CleanupScaling do
     }
   end
 
+  def run_point(payload_class, count)
+      when payload_class in [:canonical, :maximum, :minimal] and
+             count in [0, 1, 63, 64, 65, 127, 128, 129, 255, 256, 257, 511, 512] do
+    sample = observe(payload_class, count, 1)
+
+    %{
+      "schema_version" => "1.0.0",
+      "execution_state" => "executed",
+      "acceptance_state" => sample["acceptance_state"],
+      "result" => sample["acceptance_state"],
+      "samples" => [sample]
+    }
+  end
+
   def workloads(runtime) do
     Enum.map(@counts, &{:canonical, &1})
     |> Kernel.++(Enum.map(@maximum_counts, &{:maximum, &1}))

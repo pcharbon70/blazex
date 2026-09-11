@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 14,
+  "milestone": "BH-06",
+  "eligible": false,
+  "authorized": false,
+  "support_state": "unsupported",
+  "reason": "BH-05 maximum-payload cleanup still exceeds the fixed Firefox deadline and the complete retained matrix cannot pass.",
+  "blocker": "BH05-P14-MAXIMUM-PAYLOAD-TRANSFER"
+}

@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 14,
+  "decision": "revise",
+  "support_state": "unsupported",
+  "milestone_accepted": false,
+  "bh06_eligible": false,
+  "bh06_authorized": false,
+  "source_tree_sha256": "951118a7685ee713bbdff4c83cbb5f7b6b5e8199e2c06baf4390640d2ca66193",
+  "atomvm_wasm_sha256": "d20c491e75936dc8189910c8d0740093b7813d8dcc1cf966a87c011799ade9d8",
+  "bundle_sha256": "bae3e532128e36c3fad6c16cf0ce21d446b60ef356af7ee585490053e3b38fcb",
+  "canonical_subset": {
+    "counts": [64, 65, 256, 512],
+    "chrome_elapsed_ms": [12, 9, 46, 174],
+    "firefox_elapsed_ms": [31, 32, 311, 931],
+    "unresolved": 0,
+    "result": "passed"
+  },
+  "maximum_payload": {
+    "counts": [64, 65, 256, 512],
+    "chrome_elapsed_ms": [11, 12, 86, 326],
+    "firefox_elapsed_ms": [71, 68, 611, 7010],
+    "firefox_unresolved_at_512": 321,
+    "result": "failed"
+  },
+  "findings": [
+    {
+      "id": "BH05-P13-FIREFOX-DEADLINE",
+      "severity": "blocking",
+      "disposition": "closed-for-canonical-fixture",
+      "evidence": "Both active browsers pass canonical 512 with zero unresolved identities."
+    },
+    {
+      "id": "BH05-P14-MAXIMUM-PAYLOAD-TRANSFER",
+      "severity": "blocking",
+      "disposition": "open",
+      "owner": "resource-runtime-ownership",
+      "effect": "BH-05 remains revision-required and BH-06 remains ineligible."
+    },
+    {
+      "id": "BH05-P13-ATOMVM-BYTES",
+      "severity": "limitation",
+      "disposition": "explicit-unavailable",
+      "effect": "No support claim; structural counters remain mandatory."
+    }
+  ]
+}

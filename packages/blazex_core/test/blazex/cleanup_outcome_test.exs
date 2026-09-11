@@ -16,6 +16,16 @@ defmodule BlazeX.CleanupOutcomeTest do
     assert CleanupOutcome.terminal_statuses([page]) == [:released, :released]
     assert CleanupOutcome.matches_leases?([page], [lease("one"), lease("two")])
     refute CleanupOutcome.matches_leases?([page], [lease("two"), lease("one")])
+
+    assert CleanupOutcome.terminal_summary([page], [lease("one"), lease("two")]) == %{
+             count: 2,
+             released: 2,
+             lost: 0,
+             history: [
+               {:released, "one", lease("one").acquisition},
+               {:released, "two", lease("two").acquisition}
+             ]
+           }
   end
 
   test "mixed and forced outcomes preserve the exact failed position" do

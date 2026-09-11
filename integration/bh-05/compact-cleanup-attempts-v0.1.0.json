@@ -1,0 +1,77 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 14,
+  "support_state": "unsupported",
+  "predecessor": {
+    "path": "integration/bh-05/cleanup-scaling-attempts-v0.1.0.json",
+    "sha256": "c45e35e02af3a5c727184a23c1cd9c802c379b8c32a760c955f3953923863b47"
+  },
+  "attempts": [
+    {
+      "attempt": "compact-outcome-pages",
+      "result": "failed",
+      "chrome_512_ms": 292,
+      "firefox_512_ms": 1708,
+      "firefox_unresolved": 0,
+      "raw_sha256": "504da7ed81ca6af7b44b609637d379ad697cce8eb7b262266619cf29fad5a043",
+      "observation": "Exact compact pages removed acquisition payload from the report, but Firefox still exceeded the deadline during release transport and ledger finalization."
+    },
+    {
+      "attempt": "single-port-release-pages",
+      "result": "failed",
+      "chrome_512_ms": 375,
+      "firefox_512_ms": 1554,
+      "firefox_unresolved": 0,
+      "raw_sha256": "b782a920ef0a33957b124c5862fa32e1967b587bca2c1db602b46ef3b665a12f",
+      "observation": "One port envelope per page preserved the result vector but did not provide enough Firefox margin."
+    },
+    {
+      "attempt": "streaming-terminal-summary",
+      "result": "failed",
+      "chrome_512_ms": 197,
+      "firefox_512_ms": 1169,
+      "firefox_unresolved": 0,
+      "raw_sha256": "2379ac627ade8d977aab89cc20e9aba7a9982dda93c8a15e16ac4af9c386cdbb",
+      "observation": "Removing duplicate status and identity vectors exposed a quadratic page-identity lookup in finalization."
+    },
+    {
+      "attempt": "linear-terminal-summary",
+      "result": "failed",
+      "chrome_512_ms": 188,
+      "firefox_512_ms": 1035,
+      "firefox_unresolved": 0,
+      "raw_sha256": "870e5132c0eff55bd16f4f9884d46c11ad1662fae7053f33adb758b83f1c15fb",
+      "observation": "Linear traversal nearly met the gate; per-resource ledger-history map expansion remained inside the deadline."
+    },
+    {
+      "attempt": "deferred-ledger-history-expansion",
+      "result": "passed",
+      "counts": [64, 65, 256, 512],
+      "chrome_elapsed_ms": [12, 9, 46, 174],
+      "firefox_elapsed_ms": [31, 32, 311, 931],
+      "unresolved": [0, 0, 0, 0],
+      "raw_sha256": "4a5f6b0ad4b3853d185b516cd187259a196b6e6aec7b602348a88c4d2b4db51b",
+      "observation": "The canonical representative subset passed both active browsers with exact compact outcomes and zero timed-path diagnostic expansion."
+    },
+    {
+      "attempt": "complete-retained-matrix",
+      "result": "aborted",
+      "observation": "The unchanged full matrix was terminated after its ten-minute outer bound because repeated maximum-payload rows stalled progress; no partial result was published or relabelled."
+    },
+    {
+      "attempt": "isolated-maximum-payload-points",
+      "result": "failed",
+      "counts": [64, 65, 256, 512],
+      "raw_sha256": {
+        "64": "12dc99a45c04fe6638a2cac13a7dfddc23aafbb6932030e639da85bb8a30afd0",
+        "65": "5521afdbd4253fcb906ebe3053205836b096c41388c5f54f4f9f31fd4e724e82",
+        "256": "d11a294be2fece9f183f76fbe2e0a4884b1fafbc6673c44c1ca6e354b6b2fe10",
+        "512": "e296d2276adacafb98f5d411cf48182b6d8243e53be3ed5ce97171e1f5e247b3"
+      },
+      "chrome_elapsed_ms": [11, 12, 86, 326],
+      "firefox_elapsed_ms": [71, 68, 611, 7010],
+      "firefox_unresolved": [0, 0, 0, 321],
+      "observation": "Maximum payload passes through 256 resources in both engines. At 512 Firefox spends 3,182 ms in release transport and retains 321 exact unresolved identities; Chrome passes."
+    }
+  ]
+}

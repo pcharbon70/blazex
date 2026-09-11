@@ -98,6 +98,54 @@ defmodule BlazeX.Component.RecoveryPort do
   def page(session, _jobs, _timeout),
     do: {:error, Map.get(session, :failure) || :port_failed, session}
 
+  def release_page(%{alive: true} = session, port, leases, timeout)
+      when is_list(leases) and leases != [] and length(leases) <= @page_size and
+             is_integer(timeout) and timeout > 0 do
+    sequence = session.sequence + 1
+    started = System.monotonic_time(:millisecond)
+    send(session.pid, {session.token, :release_page, sequence, port, leases})
+
+    sent = %{
+      session
+      | sequence: sequence,
+        pages_sent: session.pages_sent + 1,
+        jobs_sent: session.jobs_sent + length(leases),
+        messages_sent: session.messages_sent + 1,
+        request_bytes: add_encoded_size(session.request_bytes, {port, leases})
+    }
+
+    receive do
+      {token, :release_result, ^sequence, results} when token == session.token ->
+        if is_list(results) and length(results) == length(leases) do
+          received = %{
+            sent
+            | pages_received: sent.pages_received + 1,
+              results_received: sent.results_received + length(results),
+              messages_received: sent.messages_received + 1,
+              result_bytes: add_encoded_size(sent.result_bytes, results),
+              page_durations_ms: [
+                System.monotonic_time(:millisecond) - started | sent.page_durations_ms
+              ]
+          }
+
+          {:ok, results, received}
+        else
+          {:error, :malformed_reply, terminate_session(%{sent | failure: :malformed_reply})}
+        end
+
+      {:DOWN, monitor, :process, pid, _}
+      when monitor == session.monitor and pid == session.pid ->
+        flush_exit(session.pid)
+        {:error, :port_failed, %{sent | alive: false, failure: :port_failed}}
+    after
+      timeout ->
+        {:error, :timed_out, terminate_session(%{sent | failure: :timed_out})}
+    end
+  end
+
+  def release_page(session, _port, _leases, _timeout),
+    do: {:error, Map.get(session, :failure) || :invalid_page, session}
+
   def close_session(%{alive: false} = session), do: session
 
   def close_session(session) do
@@ -252,6 +300,13 @@ defmodule BlazeX.Component.RecoveryPort do
           |> Enum.map(fn {result, index} -> {index, result} end)
 
         send(owner, {token, :page_result, sequence, results})
+        session_loop(owner, token, owner_monitor)
+
+      {^token, :release_page, sequence, port, leases}
+      when is_integer(sequence) and is_list(leases) and leases != [] and
+             length(leases) <= @page_size ->
+        results = RootPort.release_page(port, leases)
+        send(owner, {token, :release_result, sequence, results})
         session_loop(owner, token, owner_monitor)
 
       {^token, :stop} ->
