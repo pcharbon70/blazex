@@ -49,16 +49,20 @@ defmodule BlazeX.Component.RecoveryPort do
        inventory_result_bytes: byte_counter(),
        ticket_preparations: 0,
        tickets_prepared: 0,
-       ticket_preparation_failures: 0
+       ticket_preparation_failures: 0,
+       ticket_preparation_pages: 0,
+       ticket_bytes: byte_counter(),
+       ticket_owner_fields: 0
      }}
   end
 
-  def note_ticket_preparation(session, requested, :ok)
-      when is_integer(requested) and requested > 0 do
+  def note_ticket_preparation(session, tickets, :ok) when is_list(tickets) and tickets != [] do
     %{
       session
-      | ticket_preparations: session.ticket_preparations + requested,
-        tickets_prepared: session.tickets_prepared + requested
+      | ticket_preparations: session.ticket_preparations + length(tickets),
+        tickets_prepared: session.tickets_prepared + length(tickets),
+        ticket_preparation_pages: session.ticket_preparation_pages + 1,
+        ticket_bytes: add_encoded_size(session.ticket_bytes, tickets)
     }
   end
 
@@ -330,7 +334,10 @@ defmodule BlazeX.Component.RecoveryPort do
       :inventory_result_bytes,
       :ticket_preparations,
       :tickets_prepared,
-      :ticket_preparation_failures
+      :ticket_preparation_failures,
+      :ticket_preparation_pages,
+      :ticket_bytes,
+      :ticket_owner_fields
     ])
   end
 

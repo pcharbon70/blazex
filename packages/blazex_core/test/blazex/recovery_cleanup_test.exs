@@ -108,6 +108,12 @@ defmodule BlazeX.RecoveryCleanupTest do
     assert cleaned.recovery.cleanup.amplification.inventory_after == 0
     assert cleaned.recovery.cleanup.amplification.inventory.inventory_items_sent == 512
     assert cleaned.recovery.cleanup.amplification.inventory.inventory_pages_sent == 4
+    assert cleaned.recovery.cleanup.amplification.inventory.ticket_preparations == 512
+    assert cleaned.recovery.cleanup.amplification.inventory.tickets_prepared == 512
+    assert cleaned.recovery.cleanup.amplification.inventory.ticket_preparation_failures == 0
+    assert cleaned.recovery.cleanup.amplification.inventory.ticket_preparation_pages == 4
+    assert cleaned.recovery.cleanup.amplification.inventory.ticket_bytes > 0
+    assert cleaned.recovery.cleanup.amplification.inventory.ticket_owner_fields == 0
     assert cleaned.recovery.cleanup.amplification.lease_pages_sent == 8
     assert cleaned.recovery.cleanup.amplification.normal.pages_sent == 9
     assert cleaned.recovery.cleanup.amplification.normal.pages_received == 9

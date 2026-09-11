@@ -59,15 +59,15 @@ Back to milestone: [README](README.md)
       - [x] 17.3.2.2 Subtask - Reconcile sparse terminal outcomes by lease order and preserve exact forced candidates from the root ledger.
       - [x] 17.3.2.3 Subtask - Report ticket preparation separately from disposal and prove zero normal owner records.
 
-  - [ ] 17.4 Section - Add lifecycle, security, and scaling gates.
-    - [ ] 17.4.1 Task - Test ticket correctness and recovery.
-      - [ ] 17.4.1.1 Subtask - Cover acquisition, transfer, explicit release, replacement, shutdown, provider denial, malformed tokens, timeout, and partial ticket failure.
-      - [ ] 17.4.1.2 Subtask - Prove stale/wrong-provider tickets cannot release another lease and failed preparation cannot manufacture inventory convergence.
-      - [ ] 17.4.1.3 Subtask - Preserve exact unresolved owners, forced recovery, idempotency, portable snapshots, and bounded history.
-    - [ ] 17.4.2 Task - Detect ticket scaling concealment.
-      - [ ] 17.4.2.1 Subtask - Record ticket bytes, pages, messages, owner fields, callback counts, inventory convergence, and stage timing.
-      - [ ] 17.4.2.2 Subtask - Mutation-test owner-path reintroduction, ticket omission, oversized tokens, deadline drift, count reduction, and masked unresolved rows.
-      - [ ] 17.4.2.3 Subtask - Retain Phase 13-16 process, inventory, outcome, factor, and growth gates.
+  - [x] 17.4 Section - Add lifecycle, security, and scaling gates.
+    - [x] 17.4.1 Task - Test ticket correctness and recovery.
+      - [x] 17.4.1.1 Subtask - Cover acquisition, transfer, explicit release, replacement, shutdown, provider denial, malformed tokens, timeout, and partial ticket failure.
+      - [x] 17.4.1.2 Subtask - Prove stale/wrong-provider tickets cannot release another lease and failed preparation cannot manufacture inventory convergence.
+      - [x] 17.4.1.3 Subtask - Preserve exact unresolved owners, forced recovery, idempotency, portable snapshots, and bounded history.
+    - [x] 17.4.2 Task - Detect ticket scaling concealment.
+      - [x] 17.4.2.1 Subtask - Record ticket bytes, pages, messages, owner fields, callback counts, inventory convergence, and stage timing.
+      - [x] 17.4.2.2 Subtask - Mutation-test owner-path reintroduction, ticket omission, oversized tokens, deadline drift, count reduction, and masked unresolved rows.
+      - [x] 17.4.2.3 Subtask - Retain Phase 13-16 process, inventory, outcome, factor, and growth gates.
 
   - [ ] 17.5 Section - Requalify active runtimes and reconcile BH-05.
     - [ ] 17.5.1 Task - Execute the source-frozen ticket correction matrix.

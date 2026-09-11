@@ -23,3 +23,8 @@ without concealing or preventing evidence from the other frozen scale points.
 Phase 16 adds a factorized 256/512 matrix separating acquisition payload,
 identifier width, owner depth, owner distribution, inventory count, and
 retained outcome shape from the unchanged combined-maximum control.
+
+Phase 17 replaces normal-disposal lease descriptors with provider-issued,
+owner-free release tickets and records ticket preparation counts, encoded
+bytes, page counts, failures, and owner-field count alongside the retained
+Phase 13-16 scaling controls.

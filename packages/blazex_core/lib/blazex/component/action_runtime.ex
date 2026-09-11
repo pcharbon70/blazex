@@ -307,7 +307,7 @@ defmodule BlazeX.Component.ActionRuntime do
   defp register_page(%{alive: true} = session, port, leases) do
     case RootPort.prepare_release_page(port, leases) do
       {:ok, tickets} ->
-        session = RecoveryPort.note_ticket_preparation(session, length(leases), :ok)
+        session = RecoveryPort.note_ticket_preparation(session, tickets, :ok)
 
         case RecoveryPort.register_page(session, tickets, @inventory_timeout) do
           {:ok, updated} -> updated
@@ -324,7 +324,7 @@ defmodule BlazeX.Component.ActionRuntime do
   defp replace(%{cleanup_session: %{alive: true} = session} = runtime, leases) do
     case RootPort.prepare_release_page(runtime.port, leases) do
       {:ok, tickets} ->
-        session = RecoveryPort.note_ticket_preparation(session, length(leases), :ok)
+        session = RecoveryPort.note_ticket_preparation(session, tickets, :ok)
 
         case RecoveryPort.replace_page(session, tickets, @inventory_timeout) do
           {:ok, updated} -> %{runtime | cleanup_session: updated}

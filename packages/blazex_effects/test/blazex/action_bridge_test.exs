@@ -34,6 +34,15 @@ defmodule BlazeX.ActionBridgeTest do
     end
   end
 
+  defmodule RoutedProvider do
+    def release_prepared({observer, provider}, %{provider: provider, handle: handle}) do
+      send(observer, {:routed_release, provider, handle})
+      :released
+    end
+
+    def release_prepared(_, _), do: :lost
+  end
+
   defp config,
     do: %{
       grants: [:"ui.storage"],
@@ -172,5 +181,28 @@ defmodule BlazeX.ActionBridgeTest do
 
     ticket = %{version: 1, provider: "missing", id: "lease", token: %{handle: "lease"}}
     assert {:error, :unavailable} = ActionBridge.release_ticket(config(), ticket)
+  end
+
+  test "a provider-scoped token cannot release through another provider route" do
+    config = %{
+      config()
+      | providers: %{
+          "primary" => {RoutedProvider, {self(), "primary"}},
+          "other" => {RoutedProvider, {self(), "other"}}
+        }
+    }
+
+    {:ok, ticket} =
+      BlazeX.Component.ReleaseTicket.new("primary", "lease", %{
+        provider: "primary",
+        handle: "lease"
+      })
+
+    assert :released = ActionBridge.release_ticket(config, ticket)
+    assert_receive {:routed_release, "primary", "lease"}
+
+    forged = %{ticket | provider: "other"}
+    assert :lost = ActionBridge.release_ticket(config, forged)
+    refute_receive {:routed_release, "other", _}, 10
   end
 end

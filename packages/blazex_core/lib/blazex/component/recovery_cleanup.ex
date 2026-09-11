@@ -684,6 +684,12 @@ defmodule BlazeX.Component.RecoveryCleanup do
       inventory_messages_sent: 0,
       inventory_messages_received: 0,
       inventory_request_bytes: 0,
-      inventory_result_bytes: 0
+      inventory_result_bytes: 0,
+      ticket_preparations: 0,
+      tickets_prepared: 0,
+      ticket_preparation_failures: 0,
+      ticket_preparation_pages: 0,
+      ticket_bytes: 0,
+      ticket_owner_fields: 0
     }
 end

@@ -17,6 +17,13 @@ defmodule BlazeX.ReleaseTicketTest do
       do: {:ok, %{provider: "other", token: %{handle: lease.id}}}
   end
 
+  defmodule MalformedPort do
+    def prepare_release(_, lease),
+      do: {:ok, %{provider: lease.selection.name, token: %{handle: lease.id}}}
+
+    def release_ticket_page(_, _), do: [:released, :released]
+  end
+
   defp lease,
     do: %{
       id: "lease",
@@ -59,5 +66,24 @@ defmodule BlazeX.ReleaseTicketTest do
     assert stats.tickets_prepared == 0
     assert stats.ticket_preparation_failures == 1
     assert Map.has_key?(runtime.ledger.leases, bad.id)
+  end
+
+  test "malformed page results cannot manufacture convergence" do
+    {:ok, ticket} = RootPort.prepare_release({MalformedPort, nil}, lease())
+
+    assert [{:error, :port_failed}] =
+             RootPort.release_ticket_page({MalformedPort, nil}, [ticket])
+  end
+
+  test "ticket pages retain frozen count and size bounds" do
+    tickets =
+      Enum.map(1..64, fn n ->
+        {:ok, ticket} = ReleaseTicket.new("primary", "lease-#{n}", %{handle: n})
+        ticket
+      end)
+
+    assert ReleaseTicket.page?(tickets, 64)
+    refute ReleaseTicket.page?(tickets ++ [hd(tickets)], 64)
+    assert ReleaseTicket.maximum_bytes() == 4096
   end
 end
