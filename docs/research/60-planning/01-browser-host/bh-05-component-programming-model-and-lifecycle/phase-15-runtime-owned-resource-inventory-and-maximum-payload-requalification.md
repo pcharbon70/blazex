@@ -46,15 +46,15 @@ Back to milestone: [README](README.md)
       - [x] 15.1.2.2 Subtask - Keep root-ledger truth and provider-release data correlated by stable lease identity without exposing the internal owner through snapshots or public APIs.
       - [x] 15.1.2.3 Subtask - Require compact identity-only normal release pages, exact acknowledgements, bounded capacity, and full-descriptor forced recovery only for the unresolved remainder.
 
-  - [ ] 15.2 Section - Implement the bounded owned-inventory protocol.
-    - [ ] 15.2.1 Task - Extend the recovery session with inventory commands.
-      - [ ] 15.2.1.1 Subtask - Add bounded register, replace, drop, inventory-count, and identity-release commands with correlated acknowledgements.
-      - [ ] 15.2.1.2 Subtask - Validate identities/descriptors before mutation and reject missing, duplicate, malformed, oversized, or out-of-order requests atomically.
-      - [ ] 15.2.1.3 Subtask - Retain at most 512 descriptors and clear acknowledged terminal entries without returning acquisition payloads.
-    - [ ] 15.2.2 Task - Prove protocol lifecycle and isolation.
-      - [ ] 15.2.2.1 Subtask - Test owner exit, explicit close, timeout, malformed replies, inventory mismatch, exact release ordering, and no leaked process or mailbox state.
-      - [ ] 15.2.2.2 Subtask - Measure registration separately from timed cleanup and reset only cleanup counters while retaining owned descriptors.
-      - [ ] 15.2.2.3 Subtask - Keep the protocol inside Core and the existing adapter release contract unchanged.
+  - [x] 15.2 Section - Implement the bounded owned-inventory protocol.
+    - [x] 15.2.1 Task - Extend the recovery session with inventory commands.
+      - [x] 15.2.1.1 Subtask - Add bounded register, replace, drop, inventory-count, and identity-release commands with correlated acknowledgements.
+      - [x] 15.2.1.2 Subtask - Validate identities/descriptors before mutation and reject missing, duplicate, malformed, oversized, or out-of-order requests atomically.
+      - [x] 15.2.1.3 Subtask - Retain at most 512 descriptors and clear acknowledged terminal entries without returning acquisition payloads.
+    - [x] 15.2.2 Task - Prove protocol lifecycle and isolation.
+      - [x] 15.2.2.1 Subtask - Test owner exit, explicit close, timeout, malformed replies, inventory mismatch, exact release ordering, and no leaked process or mailbox state.
+      - [x] 15.2.2.2 Subtask - Measure registration separately from timed cleanup and reset only cleanup counters while retaining owned descriptors.
+      - [x] 15.2.2.3 Subtask - Keep the protocol inside Core and the existing adapter release contract unchanged.
 
   - [ ] 15.3 Section - Integrate acquisition, transfer, release, and recovery.
     - [ ] 15.3.1 Task - Attach the owner to action-runtime lifecycle transitions.
@@ -124,4 +124,3 @@ unchanged deadline, and the complete source-frozen BH-05 gate reproduces.
 - [Cleanup scaling contract](cleanup-scaling-contract.md)
 - [Recovery contract](recovery-contract.md)
 - [Development and deferred qualification policy](../../development-environment-and-deferred-qualification-policy.md)
-
