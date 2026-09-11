@@ -3,7 +3,7 @@
   "milestone": "BH-06",
   "phase": 1,
   "support_state": "unsupported-development-evidence",
-  "manifest_sha256": "73edb2955f9907e4afd49315892c954114d98739caa9325ff6052412e89df5bc",
+  "manifest_sha256": "c7ce6a4c1fdb84debfa8adeef5c867479f5cf0fd2d83338fbebe76933db06ba1",
   "results": [
     {
       "browser": "chrome",

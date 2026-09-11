@@ -14,4 +14,3 @@
   "forbidden_dependencies": ["phoenix", "plug", "live_view", "local_live_view", "popcorn", "atomvm", "blazex_renderer_dom", "qt", "wxwidgets"],
   "public_api_state": "experimental-not-stable"
 }
-

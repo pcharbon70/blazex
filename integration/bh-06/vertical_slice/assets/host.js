@@ -47,7 +47,7 @@ async function startRuntime(moduleItem, wasmItem, bundleItem) {
     wasmBinary,
     wasmMemory: memory,
     preRun: [(module) => module.FS.writeFile("/application.avm", applicationBundle)],
-    print: (value) => { (result.runtime_logs ??= []).push(String(value)); },
+    print: () => {},
     printErr: (value) => { (result.runtime_logs ??= []).push(String(value)); },
     onRuntimeInitialized: () => {
       options.serialize = JSON.stringify;

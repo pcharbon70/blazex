@@ -16,4 +16,3 @@ From this directory, build and run with:
 mix bh06.package --out-dir /tmp/bh06-build
 node run-browser.mjs /tmp/bh06-build /tmp/bh06-browser.json
 ```
-

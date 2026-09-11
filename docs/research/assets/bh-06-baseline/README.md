@@ -22,6 +22,7 @@ and completion decisions for the active phase.
 ### Files
 
 - [Phase 1 authorization](phase-01-authorization-v0.1.0.json)
+- [Phase 1 completion](phase-01-completion-v0.1.0.json)
 
 ### Subdirectories
 
@@ -31,4 +32,3 @@ None.
 
 Index every direct artifact, preserve failed attempts, and do not claim
 production release or browser support from development evidence.
-

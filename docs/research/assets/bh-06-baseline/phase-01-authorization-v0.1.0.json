@@ -17,4 +17,3 @@
   "required_slice": ["public-elixir-entrypoint", "atomvm-wasm-runtime", "versioned-manifest", "content-addressed-assets", "mount", "semantic-render", "browser-interaction", "state-transition", "dom-commit", "disposal", "linux-chrome", "linux-firefox"],
   "excluded": ["general-reachability-analysis", "production-release", "support-promotion", "bh-07", "liveview", "local-liveview"]
 }
-

@@ -319,3 +319,5 @@ reporting a tooling change complete.
 - [Phase 12 authority generator](generate_bh05_acceptance.py) — Freezes the final candidate, nine acceptance conditions, six budgets and decision rules.
 - [Phase 12 count runner](run_bh05_acceptance_counts.py) — Records ERTS and Chrome/Firefox backlog, effect, lease and restart measurements without dropping failed trials.
 - [Phase 12 count validator](validate_bh05_acceptance_counts.py) — Verifies raw/report hashes, sample cardinality, exact bounds, browser parity and retained failures.
+- [BH-06 Phase 1 validator](validate_bh06_vertical_slice.py) — Verifies authority, content addressing, manifest binding, actual AtomVM/Wasm lifecycle evidence, active-browser parity, and portable component isolation.
+- [BH-06 Phase 1 validator tests](test_validate_bh06_vertical_slice.py) — Rejects failed browsers, manifest drift, JavaScript-only substitution, and private component imports.

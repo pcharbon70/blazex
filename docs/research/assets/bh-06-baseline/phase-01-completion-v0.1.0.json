@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0.0",
+  "milestone": "BH-06",
+  "phase": 1,
+  "decision": "accept",
+  "section_3_revision": "da912fa16b9da3ba534d09e5ed7acfde401e1fbb",
+  "manifest_sha256": "c7ce6a4c1fdb84debfa8adeef5c867479f5cf0fd2d83338fbebe76933db06ba1",
+  "browser_evidence_sha256": "b2dfecfbe1a09c3607892acd3e108d18084d539aab1cb9a69602547d7371e246",
+  "repeat": {"build_trees": "byte-identical", "browser_reports": "byte-identical", "browser_report_sha256": "bbce545c8e86d75867e5bb59b553e889c05ea092262f1bec096a6cb95891ab2b"},
+  "active_browsers": ["chrome", "firefox"],
+  "checks": ["manifest-integrity", "atomvm-ready", "mount", "semantic-render", "dom-commit", "browser-interaction", "elixir-state-transition", "updated-dom-commit", "dispose"],
+  "support_state": "unsupported-development-evidence",
+  "next_phase": {"state": "requires-separate-planning-and-authorization"},
+  "deferred": ["liveview", "local-liveview", "other-operating-systems", "safari", "mobile-and-physical-devices", "manual-assistive-technology"]
+}

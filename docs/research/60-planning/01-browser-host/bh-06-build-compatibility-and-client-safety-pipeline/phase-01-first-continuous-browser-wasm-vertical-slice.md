@@ -11,7 +11,7 @@ aliases: ["BH-06 phase 1"]
 
 Back to the [milestone](README.md).
 
-- [ ] 1 Phase - First Continuous Browser-Wasm Vertical Slice.
+- [x] 1 Phase - First Continuous Browser-Wasm Vertical Slice.
 
   Establish the earliest executable BH-06 gate before broad build-pipeline
   implementation. Package one public Elixir component through AtomVM-in-Wasm
@@ -44,12 +44,12 @@ Back to the [milestone](README.md).
     - [x] Retain exact mount/render/event/state/DOM/disposal evidence and prove
       that a broken digest, missing asset, or JS-only result fails closed.
 
-  - [ ] 1.4 Section - Reproduce, reconcile, and publish Phase 1 completion.
-    - [ ] Run package, fixture, browser, archive, JSON, dependency, formatting,
+  - [x] 1.4 Section - Reproduce, reconcile, and publish Phase 1 completion.
+    - [x] Run package, fixture, browser, archive, JSON, dependency, formatting,
       deterministic rebuild, historical, and patch-hygiene gates.
-    - [ ] Publish commands, versions, hashes, sizes, browser observations,
+    - [x] Publish commands, versions, hashes, sizes, browser observations,
       negative cases, limitations, and deferred qualifications.
-    - [ ] Mark Phase 1 complete only if both active browsers pass; leave broader
+    - [x] Mark Phase 1 complete only if both active browsers pass; leave broader
       BH-06 work and BH-07 unauthorized.
 
 ## Exit gate
@@ -59,6 +59,8 @@ and Firefox must run the actual AtomVM WebAssembly runtime and the same packaged
 Elixir component through mount, semantic render, interaction, state transition,
 DOM commit, and disposal. Any JS-only component, integrity mismatch, missing
 asset, private application import, or active-browser failure blocks completion.
+
+Completion evidence: [Phase 1 completion](phase-01-completion.md).
 
 ## Connections
 
