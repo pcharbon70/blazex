@@ -117,6 +117,59 @@ def structural_errors(sample):
     errors.extend(message for valid, message in rules if not valid)
     if "outcome_format" in sample:
         errors.extend(outcome_errors(sample["outcome_format"], count))
+    if "runtime_owned_inventory" in amplification:
+        errors.extend(resource_inventory_errors(amplification, count))
+    return errors
+
+
+def resource_inventory_errors(amplification, count):
+    required = {
+        "runtime_owned_inventory", "inventory_before", "inventory_after",
+        "inventory_peak", "inventory_pages_sent", "inventory_pages_received",
+        "inventory_items_sent", "inventory_messages", "inventory_request_bytes",
+        "inventory_result_bytes",
+    }
+    if not required.issubset(amplification):
+        return ["resource inventory instrumentation missing"]
+    registration_pages = math.ceil(count / 128)
+    rules = [
+        (amplification["runtime_owned_inventory"] is True, "runtime ownership missing"),
+        (amplification["normal_worker_starts"] == 0, "disposal started a normal worker"),
+        (amplification["inventory_before"] == count, "initial inventory mismatch"),
+        (amplification["inventory_after"] == 0, "terminal inventory mismatch"),
+        (amplification["inventory_peak"] == count, "inventory peak mismatch"),
+        (amplification["inventory_pages_sent"] == registration_pages,
+         "registration page mismatch"),
+        (amplification["inventory_pages_received"] == registration_pages,
+         "registration acknowledgement mismatch"),
+        (amplification["inventory_items_sent"] == count, "registration item mismatch"),
+        (amplification["inventory_messages"] == 2 * registration_pages,
+         "registration message amplification"),
+    ]
+    for key in ["inventory_request_bytes", "inventory_result_bytes"]:
+        value = amplification[key]
+        rules.append((value == "unavailable" or isinstance(value, int) and value >= 0,
+                      key.replace("_", " ") + " invalid"))
+    return [message for valid, message in rules if not valid]
+
+
+def ownership_matrix_errors(samples):
+    errors = []
+    indexed = {
+        (row.get("runtime"), row.get("count"), row.get("sample"), row.get("payload_class")): row
+        for row in samples
+    }
+    for runtime in RUNTIMES:
+        for count in [64, 65, 256, 512]:
+            for number in range(1, retained_repetitions(runtime, count) + 1):
+                canonical = indexed.get((runtime, count, number, "canonical"))
+                maximum = indexed.get((runtime, count, number, "maximum"))
+                if not canonical or not maximum:
+                    continue
+                left = canonical.get("amplification", {}).get("request_bytes")
+                right = maximum.get("amplification", {}).get("request_bytes")
+                if isinstance(left, int) and isinstance(right, int) and right > left * 3 + 1024:
+                    errors.append("acquisition payload reintroduced into disposal request")
     return errors
 
 

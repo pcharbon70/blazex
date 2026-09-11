@@ -11,6 +11,8 @@ from validate_bh05_cleanup_scaling import (
     digest,
     retained_repetitions,
     outcome_errors,
+    ownership_matrix_errors,
+    resource_inventory_errors,
     validate_raw,
     validate_report,
 )
@@ -93,6 +95,44 @@ def valid_raw():
 
 
 class CleanupScalingEvidenceTest(unittest.TestCase):
+    def test_runtime_owned_inventory_rejects_drift_and_payload_reintroduction(self):
+        amplification = sample("erts", "maximum", 512, 1)["amplification"]
+        amplification.update({
+            "runtime_owned_inventory": True,
+            "normal_worker_starts": 0,
+            "inventory_before": 512,
+            "inventory_after": 0,
+            "inventory_peak": 512,
+            "inventory_pages_sent": 4,
+            "inventory_pages_received": 4,
+            "inventory_items_sent": 512,
+            "inventory_messages": 8,
+            "inventory_request_bytes": 4_300_000,
+            "inventory_result_bytes": 64,
+        })
+        self.assertEqual([], resource_inventory_errors(amplification, 512))
+
+        for key, value in [
+            ("runtime_owned_inventory", False),
+            ("normal_worker_starts", 1),
+            ("inventory_before", 511),
+            ("inventory_after", 1),
+            ("inventory_pages_sent", 512),
+            ("inventory_items_sent", 511),
+        ]:
+            mutated = dict(amplification)
+            mutated[key] = value
+            self.assertTrue(resource_inventory_errors(mutated, 512))
+
+        canonical = sample("erts", "canonical", 512, 1)
+        maximum = sample("erts", "maximum", 512, 1)
+        canonical["amplification"]["request_bytes"] = 10_000
+        maximum["amplification"]["request_bytes"] = 4_000_000
+        self.assertIn(
+            "acquisition payload reintroduced into disposal request",
+            ownership_matrix_errors([canonical, maximum]),
+        )
+
     def test_compact_outcome_structure_is_page_proportional_and_unexpanded(self):
         valid = {
             "version": 1,

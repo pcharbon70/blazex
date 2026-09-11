@@ -66,15 +66,15 @@ Back to milestone: [README](README.md)
       - [x] 15.3.2.2 Subtask - Reconcile exact compact outcomes and retain root-ledger descriptors for only the exact forced remainder.
       - [x] 15.3.2.3 Subtask - Fall back fail-closed when the session is absent, dead, divergent, or malformed without manufacturing completion.
 
-  - [ ] 15.4 Section - Extend structural and anti-concealment gates.
-    - [ ] 15.4.1 Task - Measure ownership-transfer and disposal amplification.
-      - [ ] 15.4.1.1 Subtask - Record registration messages/bytes, compact release request bytes, inventory counts, descriptor bytes unavailable states, pages, callbacks, and workers.
-      - [ ] 15.4.1.2 Subtask - Require disposal request bytes to scale with identities rather than acquisition payload size and normal worker starts during disposal to remain zero for configured runtimes.
-      - [ ] 15.4.1.3 Subtask - Retain Phase 13/14 outcome, timing, process, message, payload, growth, and shape counters.
-    - [ ] 15.4.2 Task - Make ownership evidence fail closed.
-      - [ ] 15.4.2.1 Subtask - Mutation-test missing registration, inventory drift, payload reintroduction, count mismatch, masked failure, and disposal-time preload.
-      - [ ] 15.4.2.2 Subtask - Recompute terminal inventories, summaries, and request-size bounds from raw records.
-      - [ ] 15.4.2.3 Subtask - Preserve Phase 12-14 failures and distinguish lifecycle registration cost from timed cleanup cost.
+  - [x] 15.4 Section - Extend structural and anti-concealment gates.
+    - [x] 15.4.1 Task - Measure ownership-transfer and disposal amplification.
+      - [x] 15.4.1.1 Subtask - Record registration messages/bytes, compact release request bytes, inventory counts, descriptor bytes unavailable states, pages, callbacks, and workers.
+      - [x] 15.4.1.2 Subtask - Require disposal request bytes to scale with identities rather than acquisition payload size and normal worker starts during disposal to remain zero for configured runtimes.
+      - [x] 15.4.1.3 Subtask - Retain Phase 13/14 outcome, timing, process, message, payload, growth, and shape counters.
+    - [x] 15.4.2 Task - Make ownership evidence fail closed.
+      - [x] 15.4.2.1 Subtask - Mutation-test missing registration, inventory drift, payload reintroduction, count mismatch, masked failure, and disposal-time preload.
+      - [x] 15.4.2.2 Subtask - Recompute terminal inventories, summaries, and request-size bounds from raw records.
+      - [x] 15.4.2.3 Subtask - Preserve Phase 12-14 failures and distinguish lifecycle registration cost from timed cleanup cost.
 
   - [ ] 15.5 Section - Requalify active runtimes and reconcile BH-05.
     - [ ] 15.5.1 Task - Execute the source-frozen correction matrix.

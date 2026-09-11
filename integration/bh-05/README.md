@@ -91,3 +91,4 @@ Current successor check: `python3 docs/research/70-tools/validate_bh05_recovery.
 - [Phase 13 append-only attempt ledger](cleanup-scaling-attempts-v0.1.0.json) — Every aborted, failed, and passing corrective probe retained without relabeling or deletion.
 - [Phase 14 compact cleanup schema](compact-cleanup.schema.json) — Closed page-proportional outcome-summary shape with exact identity count and zero timed-path diagnostic expansion.
 - [Phase 14 append-only attempt ledger](compact-cleanup-attempts-v0.1.0.json) — Canonical corrections, bounded full-matrix stall, and isolated maximum-payload results without relabelling Phase 13 evidence.
+- [Phase 15 runtime-owned resource inventory schema](resource-inventory.schema.json) — Bounded acquisition-time registration, compact disposal requests, inventory convergence, and explicit byte-instrumentation availability.
