@@ -140,6 +140,7 @@ independent-review blockers, as intended.
 ### Validators
 
 - [`validate_archive.py`](validate_archive.py) — Validate the BlazeX Research archive's structural invariants.
+- [`validate_bh05_cleanup_factors.py`](validate_bh05_cleanup_factors.py) — Validate the complete Phase 16 factor matrix, sparse outcomes, unchanged deadline, and exact inventory convergence.
 - [`validate_bh00_governance.py`](validate_bh00_governance.py) — Validate the source-bound BlazeX BH-00 governance and release contract.
 - [`validate_bh01_activation.py`](validate_bh01_activation.py) — Validate BH-01 authorization, inherited truth, governance, and activation.
 - [`validate_bh02_acceptance.py`](validate_bh02_acceptance.py) — Fail-closed validation for the BH-02 Phase 8 acceptance candidate.
@@ -236,6 +237,7 @@ independent-review blockers, as intended.
 - [`test_validate_bh04_acceptance.py`](test_validate_bh04_acceptance.py) — Regression tests.
 - [`test_validate_bh04_activation.py`](test_validate_bh04_activation.py) — Mutation tests for the immutable BH-04 Phase 1 activation candidate.
 - [`test_validate_bh05_cleanup_scaling.py`](test_validate_bh05_cleanup_scaling.py) — Mutation tests for Phase 13 deadline/page tuning and Phase 14 outcome-page, identity, vector and expansion bounds, plus missing rows, relabelling, omitted counters, history deletion and endpoint-only evidence.
+- [`test_validate_bh05_cleanup_factors.py`](test_validate_bh05_cleanup_factors.py) — Mutation tests for missing factor axes, owner retention, nonlinear outcome size, deadline drift, unresolved concealment, inventory divergence, and browser removal.
 - [`test_validate_bh04_conformance.py`](test_validate_bh04_conformance.py) — Regression tests.
 - [`test_validate_bh04_continuity.py`](test_validate_bh04_continuity.py) — Negative Phase 6 governance tests; never modify the user's source tree.
 - [`test_validate_bh04_dom_application.py`](test_validate_bh04_dom_application.py) — Negative Phase 4 governance tests; never modify the user's source tree.

@@ -157,6 +157,7 @@ adapter modules are forbidden even when available in the monorepo.
 | [13 — Bounded Paged Cleanup and Scaling Requalification](phase-13-bounded-paged-cleanup-and-scaling-requalification.md) | complete — revise | Replace per-resource helper-process cleanup with a constant-worker paged session, add structural and timing-shape gates, and retain the Firefox deadline blocker without weakening its contract. | Phase 12 `revise` and explicit authorization |
 | [14 — Compact Cleanup Outcomes and Firefox Requalification](phase-14-compact-cleanup-outcomes-and-firefox-requalification.md) | complete — revise | Remove duplicate per-resource map materialization from the timed path, close the canonical Firefox blocker, and retain the maximum-payload transfer blocker. | Phase 13 `revise` and explicit authorization |
 | [15 — Runtime-Owned Resource Inventory and Maximum-Payload Requalification](phase-15-runtime-owned-resource-inventory-and-maximum-payload-requalification.md) | complete — revise | Move complete release descriptors into a bounded runtime owner at acquisition time, prove compact disposal transport, and retain the independently reproduced combined-maximum Firefox blocker. | Phase 14 `revise` and explicit authorization |
+| [16 — Factorized Distribution Shape and Sparse Cleanup Outcomes](phase-16-factorized-distribution-shape-and-sparse-cleanup-outcomes.md) | complete — revise | Isolate the causal owner-path axes, remove completed owner graphs from retained outcome pages, and preserve the exact deep-owner Firefox blocker. | Phase 15 `revise` and explicit authorization |
 
 ## Acceptance ownership
 
@@ -254,6 +255,10 @@ Phoenix, browser, native-host, or release compatibility.
 - [Runtime-owned resource inventory contract](runtime-owned-resource-inventory-contract.md)
 - [Phase 15 runtime-owned inventory review and reconciliation](phase-15-review-and-reconciliation.md)
 - [Phase 15 completion evidence](phase-15-completion.md)
+- [Phase 16 — Factorized Distribution Shape and Sparse Cleanup Outcomes](phase-16-factorized-distribution-shape-and-sparse-cleanup-outcomes.md)
+- [Sparse cleanup outcome contract](sparse-cleanup-outcome-contract.md)
+- [Phase 16 factorized cleanup review and reconciliation](phase-16-review-and-reconciliation.md)
+- [Phase 16 completion evidence](phase-16-completion.md)
 
 ## Maintaining this index
 

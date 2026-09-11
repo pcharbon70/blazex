@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 16,
+  "decision": "revise",
+  "support_state": "unsupported",
+  "closed_finding": "BH05-P15-MAXIMUM-DISTRIBUTION-SHAPE",
+  "blocking_finding": "BH05-P16-DEEP-OWNER-RELEASE-DESCRIPTOR",
+  "causal_result": {
+    "payload_only_512": "passed",
+    "identifier_only_512": "passed",
+    "inventory_only_512": "passed",
+    "owner_depth_only_512": "failed",
+    "distribution_only_512": "failed",
+    "successful_owner_records": 0
+  },
+  "bh05_accepted": false,
+  "bh06_eligible": false,
+  "bh06_authorized": false,
+  "liveview": "deferred",
+  "local_liveview": "deferred"
+}

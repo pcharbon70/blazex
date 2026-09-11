@@ -19,3 +19,7 @@ unconditional harness-success label.
 Phase 14 adds exact compact-outcome structural counters and bounded individual
 maximum-payload probes. The point probes let a stalled payload row be retained
 without concealing or preventing evidence from the other frozen scale points.
+
+Phase 16 adds a factorized 256/512 matrix separating acquisition payload,
+identifier width, owner depth, owner distribution, inventory count, and
+retained outcome shape from the unchanged combined-maximum control.
