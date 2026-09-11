@@ -8,6 +8,17 @@ defmodule BlazeX.RootPortTest do
     def render(_input), do: {:output, {:semantic, 1, %{kind: :group}}}
   end
 
+  defmodule PreparedPagePort do
+    def release_prepared_ticket_page(result, _tickets), do: result
+  end
+
+  defmodule EnvelopePagePort do
+    def release_ticket_page(observer, tickets) do
+      send(observer, {:release_envelopes, tickets})
+      List.duplicate(:released, length(tickets))
+    end
+  end
+
   def spec do
     %{
       root: "r",
@@ -96,5 +107,35 @@ defmodule BlazeX.RootPortTest do
 
     assert {:error, :semantic_rejected} = RootPort.candidate(correlation, self(), digest, nil)
     assert RootPort.failure({:private, "secret"}) == :port_failed
+  end
+
+  test "prepared ticket pages preserve only provider-authorized scalar success" do
+    tickets = [{"one", "provider", 1}, {"two", "provider", 2}]
+
+    assert :released =
+             RootPort.release_prepared_ticket_page({PreparedPagePort, :released}, tickets)
+
+    assert [:released, {:error, :lost}] =
+             RootPort.release_prepared_ticket_page(
+               {PreparedPagePort, [:released, {:error, :lost}]},
+               tickets
+             )
+
+    for malformed <- [:lost, {:error, :lost}, [:released]] do
+      assert [{:error, :port_failed}, {:error, :port_failed}] =
+               RootPort.release_prepared_ticket_page({PreparedPagePort, malformed}, tickets)
+    end
+  end
+
+  test "public ticket page compatibility receives envelope maps" do
+    tickets = [{"one", "provider", 1}, {"two", "provider", 2}]
+
+    assert [:released, :released] =
+             RootPort.release_prepared_ticket_page({EnvelopePagePort, self()}, tickets)
+
+    assert_receive {:release_envelopes, envelopes}
+    assert Enum.all?(envelopes, &is_map/1)
+    assert Enum.map(envelopes, & &1.id) == ["one", "two"]
+    assert Enum.all?(envelopes, &(&1.version == 1 and &1.provider == "provider"))
   end
 end

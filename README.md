@@ -10,14 +10,15 @@ runtime, a DOM renderer, and optional Phoenix or Plug integration. The
 architecture deliberately leaves room for future native-control, WebView, and
 standalone WebAssembly hosts without making browser concepts part of the core.
 
-This repository is currently an architecture and research scaffold. The
-directories below are tracked with responsibility and dependency-boundary
-documents; they are not Mix or JavaScript projects yet.
+This repository contains an early experimental semantic kernel, renderers,
+conformance suites, and the architecture/research corpus that governs them.
+The implemented projects remain unsupported and their APIs are not stable.
 
 ## Repository structure
 
 ```text
 blazex/
+├── demos/          Host-specific demonstrations (browser gallery in browser/)
 ├── packages/       Reusable Elixir libraries and host adapters
 ├── js/             Browser-side JavaScript runtime packages
 ├── profiles/       Executable compositions of packages
@@ -76,3 +77,9 @@ The evidence base, architecture maps, design notes, and planning scaffold live
 under [`docs/research`](docs/research/README.md). The current package, profile,
 integration, and experiment ownership rules are collected in the
 [`BlazeX repository ownership and dependency map`](docs/research/10-maps/blazex-repository-ownership-and-dependency-map.md).
+
+## Component demo
+
+The dependency-free [browser component gallery](demos/browser/README.md) is the
+durable home for interactive examples of implemented BlazeX controls. Start it
+with `npm start` from `demos/browser/`, then open <http://127.0.0.1:4100/>.

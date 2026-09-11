@@ -635,7 +635,10 @@ defmodule BlazeX.Component.RecoveryCleanup do
       messages_received: 0,
       request_bytes: 0,
       result_bytes: 0,
-      page_durations_ms: []
+      page_durations_ms: [],
+      compact_ack_pages: 0,
+      compact_ack_items: 0,
+      positional_result_items: 0
     }
 
   defp job(owner, kind, port, callback, reference),

@@ -38,6 +38,9 @@ defmodule BlazeX.Component.RecoveryPort do
        request_bytes: byte_counter(),
        result_bytes: byte_counter(),
        page_durations_ms: [],
+       compact_ack_pages: 0,
+       compact_ack_items: 0,
+       positional_result_items: 0,
        inventory_count: 0,
        inventory_peak: 0,
        inventory_pages_sent: 0,
@@ -94,7 +97,10 @@ defmodule BlazeX.Component.RecoveryPort do
       messages_received: 0,
       request_bytes: byte_counter(),
       result_bytes: byte_counter(),
-      page_durations_ms: []
+      page_durations_ms: [],
+      compact_ack_pages: 0,
+      compact_ack_items: 0,
+      positional_result_items: 0
     })
   end
 
@@ -230,9 +236,16 @@ defmodule BlazeX.Component.RecoveryPort do
           received = %{
             sent
             | pages_received: sent.pages_received + 1,
-              results_received: sent.results_received + length(results),
+              results_received: sent.results_received + length(identities),
               messages_received: sent.messages_received + 1,
               result_bytes: add_encoded_size(sent.result_bytes, results),
+              compact_ack_pages:
+                sent.compact_ack_pages + if(results == :released, do: 1, else: 0),
+              compact_ack_items:
+                sent.compact_ack_items + if(results == :released, do: length(identities), else: 0),
+              positional_result_items:
+                sent.positional_result_items +
+                  if(is_list(results), do: length(identities), else: 0),
               page_durations_ms: [
                 System.monotonic_time(:millisecond) - started | sent.page_durations_ms
               ],
@@ -283,6 +296,12 @@ defmodule BlazeX.Component.RecoveryPort do
               results_received: sent.results_received + count,
               messages_received: sent.messages_received + 1,
               result_bytes: add_encoded_size(sent.result_bytes, results),
+              compact_ack_pages:
+                sent.compact_ack_pages + if(results == :released, do: 1, else: 0),
+              compact_ack_items:
+                sent.compact_ack_items + if(results == :released, do: count, else: 0),
+              positional_result_items:
+                sent.positional_result_items + if(is_list(results), do: count, else: 0),
               page_durations_ms: [
                 System.monotonic_time(:millisecond) - started | sent.page_durations_ms
               ],
@@ -366,7 +385,10 @@ defmodule BlazeX.Component.RecoveryPort do
       :messages_received,
       :request_bytes,
       :result_bytes,
-      :page_durations_ms
+      :page_durations_ms,
+      :compact_ack_pages,
+      :compact_ack_items,
+      :positional_result_items
     ])
   end
 

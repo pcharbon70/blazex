@@ -58,15 +58,15 @@ Back to milestone: [README](README.md)
       - [x] 18.3.2.2 Subtask - Avoid success status, unresolved, owner, and candidate vectors.
       - [x] 18.3.2.3 Subtask - Preserve exact forced recovery and public version 2 outcome shape.
 
-  - [ ] 18.4 Section - Add correctness and anti-concealment gates.
-    - [ ] 18.4.1 Task - Test the compact result algebra.
-      - [ ] 18.4.1.1 Subtask - Cover scalar success, vector success, mixed failure, malformed scalar, partial vector, timeout, and provider denial.
-      - [ ] 18.4.1.2 Subtask - Prove scalar success cannot hide a failed ticket or manufacture inventory convergence.
-      - [ ] 18.4.1.3 Subtask - Prove public callbacks retain map envelopes and compatibility.
-    - [ ] 18.4.2 Task - Extend scaling observability.
-      - [ ] 18.4.2.1 Subtask - Record compact acknowledgement pages/items and positional result items.
-      - [ ] 18.4.2.2 Subtask - Mutation-test expansion, omitted callbacks, masked failure, deadline drift, and count reduction.
-      - [ ] 18.4.2.3 Subtask - Retain Phase 13-17 process, ticket, inventory, factor, outcome, and growth gates.
+  - [x] 18.4 Section - Add correctness and anti-concealment gates.
+    - [x] 18.4.1 Task - Test the compact result algebra.
+      - [x] 18.4.1.1 Subtask - Cover scalar success, vector success, mixed failure, malformed scalar, partial vector, timeout, and provider denial.
+      - [x] 18.4.1.2 Subtask - Prove scalar success cannot hide a failed ticket or manufacture inventory convergence.
+      - [x] 18.4.1.3 Subtask - Prove public callbacks retain map envelopes and compatibility.
+    - [x] 18.4.2 Task - Extend scaling observability.
+      - [x] 18.4.2.1 Subtask - Record compact acknowledgement pages/items and positional result items.
+      - [x] 18.4.2.2 Subtask - Mutation-test expansion, omitted callbacks, masked failure, deadline drift, and count reduction.
+      - [x] 18.4.2.3 Subtask - Retain Phase 13-17 process, ticket, inventory, factor, outcome, and growth gates.
 
   - [ ] 18.5 Section - Requalify active runtimes and reconcile BH-05.
     - [ ] 18.5.1 Task - Execute the source-frozen correction matrix.

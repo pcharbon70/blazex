@@ -30,6 +30,16 @@ defmodule BlazeX.CleanupOutcomeTest do
            }
   end
 
+  test "provider-authorized success constructs the compact outcome directly" do
+    page = CleanupOutcome.released_lease_page([lease("one"), lease("two")], 2)
+    assert page.status == :completed
+    assert page.unresolved == false
+    assert page.unresolved_owners == []
+    assert page.identities == ["one", "two"]
+    assert CleanupOutcome.counts([page]).unresolved == 0
+    assert CleanupOutcome.representation([page]).vectors == 0
+  end
+
   test "mixed and forced outcomes preserve the exact failed position" do
     page = CleanupOutcome.lease_page([lease("one"), lease("two")], [:completed, :failed], 3)
     assert page.unresolved_owners == [{1, owner()}]

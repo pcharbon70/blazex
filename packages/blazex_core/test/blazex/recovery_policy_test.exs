@@ -26,6 +26,17 @@ defmodule BlazeX.RecoveryPolicyTest do
     end
   end
 
+  defmodule CompactPort do
+    def release_prepared_ticket_page(observer, tickets) do
+      send(observer, {:compact_release_page, Enum.map(tickets, &elem(&1, 0))})
+      :released
+    end
+  end
+
+  defmodule InvalidCompactPort do
+    def release_prepared_ticket_page(_, _), do: :lost
+  end
+
   test "three automatic restarts in five seconds then terminal regardless of fingerprint" do
     ledger =
       Enum.reduce(1..3, RecoveryPolicy.ledger(), fn n, ledger ->
@@ -167,6 +178,38 @@ defmodule BlazeX.RecoveryPolicyTest do
 
     assert {:ok, session} = RecoveryPort.drop_page(session, ["lost"], 100)
     assert session.inventory_count == 0
+    RecoveryPort.close_session(session)
+  end
+
+  test "compact page acknowledgement converges inventory without a result vector" do
+    {:ok, session} = RecoveryPort.open_session()
+    tickets = Enum.map(["first", "second"], &ticket(&1, %{handle: &1}))
+    assert {:ok, session} = RecoveryPort.register_page(session, tickets, 100)
+
+    assert {:ok, :released, session} =
+             RecoveryPort.release_next_page(session, {CompactPort, self()}, 2, 100)
+
+    assert_receive {:compact_release_page, ["first", "second"]}
+    assert session.inventory_count == 0
+    assert session.compact_ack_pages == 1
+    assert session.compact_ack_items == 2
+    assert session.positional_result_items == 0
+    assert session.results_received == 2
+    RecoveryPort.close_session(session)
+  end
+
+  test "invalid scalar acknowledgement retains every ticket as a positional failure" do
+    {:ok, session} = RecoveryPort.open_session()
+    tickets = Enum.map(["first", "second"], &ticket(&1, %{handle: &1}))
+    assert {:ok, session} = RecoveryPort.register_page(session, tickets, 100)
+
+    assert {:ok, [{:error, :port_failed}, {:error, :port_failed}], session} =
+             RecoveryPort.release_next_page(session, {InvalidCompactPort, nil}, 2, 100)
+
+    assert session.inventory_count == 2
+    assert session.compact_ack_pages == 0
+    assert session.compact_ack_items == 0
+    assert session.positional_result_items == 2
     RecoveryPort.close_session(session)
   end
 
