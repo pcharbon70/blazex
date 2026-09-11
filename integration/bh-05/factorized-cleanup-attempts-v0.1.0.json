@@ -58,6 +58,15 @@
       "chrome": {"elapsed_ms": 324, "unresolved": 0},
       "firefox": {"elapsed_ms": 9105, "unresolved": 321}
     },
+    "second_clean_repeat": {
+      "bundle_byte_identical": true,
+      "canonical_artifact_sha256": "824fc8dfb4569776fa0d60e86bc34d8ceb347b98fc8f56fa28b774a368758652",
+      "maximum_512_artifact_sha256": "d0592533db8516b86778277f9e227f34c9bd3a55ecf432049fdba4fc6094ce62",
+      "canonical_chrome_elapsed_ms": [7, 8, 45, 138],
+      "canonical_firefox_elapsed_ms": [36, 42, 275, 954],
+      "maximum_512_chrome": {"elapsed_ms": 334, "unresolved": 0},
+      "maximum_512_firefox": {"elapsed_ms": 9321, "unresolved": 321}
+    },
     "successful_owner_records": 0,
     "outcome_version": 2
   },

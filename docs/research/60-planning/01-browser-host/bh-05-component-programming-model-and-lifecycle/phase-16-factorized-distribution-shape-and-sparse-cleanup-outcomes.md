@@ -11,7 +11,7 @@ aliases: ["BH-05 phase 16", "BH-05 sparse cleanup outcomes"]
 
 Back to milestone: [README](README.md)
 
-- [ ] 16 Phase - Factorized Distribution Shape and Sparse Cleanup Outcomes.
+- [x] 16 Phase - Factorized Distribution Shape and Sparse Cleanup Outcomes.
 
   Correct `BH05-P15-MAXIMUM-DISTRIBUTION-SHAPE` by varying payload size,
   lease-identifier size, owner-path depth/distribution, inventory size, and
@@ -79,15 +79,15 @@ Back to milestone: [README](README.md)
       - [x] 16.5.2.2 Subtask - Map every Phase 15 re-entry condition and new finding to evidence.
       - [x] 16.5.2.3 Subtask - Accept only when all frozen gates pass; otherwise record revise or block.
 
-  - [ ] 16.6 Section - Run the full integration gate and publish completion.
-    - [ ] 16.6.1 Task - Rebuild and verify the complete candidate.
-      - [ ] 16.6.1.1 Subtask - Run package, conformance, browser, formatting, archive, provenance, dependency, and hygiene gates.
-      - [ ] 16.6.1.2 Subtask - Repeat maximum 512 and canonical `64, 65, 256, 512` from a second clean context.
-      - [ ] 16.6.1.3 Subtask - Verify indexing, source binding, public API stability, and historical immutability.
-    - [ ] 16.6.2 Task - Publish and deliver one successor pull request.
-      - [ ] 16.6.2.1 Subtask - Publish commands, environments, hashes, samples, timings, factor findings, limitations, and decision.
-      - [ ] 16.6.2.2 Subtask - Open and merge one PR only after recording a truthful decision.
-      - [ ] 16.6.2.3 Subtask - After merge, sync `main`, then delete local and remote feature branches.
+  - [x] 16.6 Section - Run the full integration gate and publish completion.
+    - [x] 16.6.1 Task - Rebuild and verify the complete candidate.
+      - [x] 16.6.1.1 Subtask - Run package, conformance, browser, formatting, archive, provenance, dependency, and hygiene gates.
+      - [x] 16.6.1.2 Subtask - Repeat maximum 512 and canonical `64, 65, 256, 512` from a second clean context.
+      - [x] 16.6.1.3 Subtask - Verify indexing, source binding, public API stability, and historical immutability.
+    - [x] 16.6.2 Task - Publish and deliver one successor pull request.
+      - [x] 16.6.2.1 Subtask - Publish commands, environments, hashes, samples, timings, factor findings, limitations, and decision.
+      - [x] 16.6.2.2 Subtask - Open and merge one PR only after recording a truthful decision.
+      - [x] 16.6.2.3 Subtask - After merge, sync `main`, then delete local and remote feature branches.
 
 ## Exit gate
 
@@ -111,6 +111,7 @@ unresolved identities within 1000 ms, and the complete BH-05 gate reproduces.
 
 - [Sparse cleanup outcome contract](sparse-cleanup-outcome-contract.md)
 - [Phase 16 review and reconciliation](phase-16-review-and-reconciliation.md)
+- [Phase 16 completion evidence](phase-16-completion.md)
 - [Phase 15 review](phase-15-review-and-reconciliation.md)
 - [Phase 15 completion](phase-15-completion.md)
 - [Runtime-owned resource inventory contract](runtime-owned-resource-inventory-contract.md)

@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 16,
+  "status": "complete",
+  "decision": "revise",
+  "support_state": "unsupported",
+  "bh05_accepted": false,
+  "bh06_eligible": false,
+  "bh06_authorized": false,
+  "tests": {
+    "blazex_core": 113,
+    "blazex_effects": 12,
+    "blazex_ui_tree": 68,
+    "blazex_test": 7,
+    "conformance": 93,
+    "scaling_and_factor_mutations": 12,
+    "failures": 0
+  },
+  "browser": {
+    "atomvm_wasm_sha256": "d20c491e75936dc8189910c8d0740093b7813d8dcc1cf966a87c011799ade9d8",
+    "bundle_sha256": "c821941761c3e3eb7ff03b3c27926fc1ddc15fe1471bfd4cda3d0773801b3392",
+    "clean_builds_byte_identical": true,
+    "canonical_first": {
+      "chrome_elapsed_ms": [9, 9, 43, 145],
+      "firefox_elapsed_ms": [37, 45, 337, 973]
+    },
+    "canonical_second": {
+      "chrome_elapsed_ms": [7, 8, 45, 138],
+      "firefox_elapsed_ms": [36, 42, 275, 954]
+    },
+    "maximum_512_first": {
+      "chrome_elapsed_ms": 324,
+      "chrome_unresolved": 0,
+      "firefox_elapsed_ms": 9105,
+      "firefox_unresolved": 321
+    },
+    "maximum_512_second": {
+      "chrome_elapsed_ms": 334,
+      "chrome_unresolved": 0,
+      "firefox_elapsed_ms": 9321,
+      "firefox_unresolved": 321
+    }
+  },
+  "factor_result": {
+    "noncausal_512": ["inventory_only", "payload_only", "identifier_only"],
+    "causal_512": ["owner_depth_only", "distribution_only"],
+    "successful_owner_records": 0,
+    "outcome_version": 2
+  },
+  "blocking_finding": "BH05-P16-DEEP-OWNER-RELEASE-DESCRIPTOR",
+  "liveview": "deferred",
+  "local_liveview": "deferred"
+}
