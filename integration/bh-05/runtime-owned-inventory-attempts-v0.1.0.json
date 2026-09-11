@@ -66,6 +66,15 @@
         "maximum_512_inventory_before": 512,
         "chrome_inventory_after": 0,
         "firefox_inventory_after": 320
+      },
+      "second_clean_repeat": {
+        "bundle_byte_identical": true,
+        "canonical_artifact_sha256": "76be62e7acdfed99197b35f75e1e0b939e7329e6fd6f93e1810efe001b95bb8f",
+        "maximum_512_artifact_sha256": "d2cdbcbda5eea64156ab05c9be32fc757d946ffc1232e035e3469401cbc5e79c",
+        "canonical_chrome_elapsed_ms": [7, 9, 43, 157],
+        "canonical_firefox_elapsed_ms": [37, 43, 295, 945],
+        "maximum_512_chrome": {"elapsed_ms": 296, "unresolved": 0},
+        "maximum_512_firefox": {"elapsed_ms": 6659, "unresolved": 321}
       }
     }
   ],

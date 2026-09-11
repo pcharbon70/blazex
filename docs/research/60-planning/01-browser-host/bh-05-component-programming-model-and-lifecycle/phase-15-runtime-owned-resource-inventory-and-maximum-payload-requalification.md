@@ -19,7 +19,7 @@ aliases:
 
 Back to milestone: [README](README.md)
 
-- [ ] 15 Phase - Runtime-Owned Resource Inventory and Maximum-Payload Requalification.
+- [x] 15 Phase - Runtime-Owned Resource Inventory and Maximum-Payload Requalification.
 
   Correct `BH05-P14-MAXIMUM-PAYLOAD-TRANSFER` by transferring each complete
   release descriptor to one bounded runtime-owned cleanup session when the
@@ -86,15 +86,15 @@ Back to milestone: [README](README.md)
       - [x] 15.5.2.2 Subtask - Map every Phase 14 re-entry condition and new ownership finding to evidence.
       - [x] 15.5.2.3 Subtask - Accept only when all frozen gates pass; otherwise record revise or block.
 
-  - [ ] 15.6 Section - Run the full integration gate and publish completion.
-    - [ ] 15.6.1 Task - Rebuild and verify the complete candidate.
-      - [ ] 15.6.1.1 Subtask - Run package, conformance, browser, formatting, archive, provenance, dependency, and hygiene gates.
-      - [ ] 15.6.1.2 Subtask - Repeat maximum-payload 512 and `64, 65, 256, 512` from a second clean context.
-      - [ ] 15.6.1.3 Subtask - Verify indexing, source binding, public API stability, and historical immutability.
-    - [ ] 15.6.2 Task - Publish and deliver one successor pull request.
-      - [ ] 15.6.2.1 Subtask - Publish commands, environments, hashes, samples, timings, inventories, findings, limitations, and decision.
-      - [ ] 15.6.2.2 Subtask - Open one PR only after recording a truthful decision.
-      - [ ] 15.6.2.3 Subtask - After merge, sync `main`, then delete local and remote feature branches.
+  - [x] 15.6 Section - Run the full integration gate and publish completion.
+    - [x] 15.6.1 Task - Rebuild and verify the complete candidate.
+      - [x] 15.6.1.1 Subtask - Run package, conformance, browser, formatting, archive, provenance, dependency, and hygiene gates.
+      - [x] 15.6.1.2 Subtask - Repeat maximum-payload 512 and `64, 65, 256, 512` from a second clean context.
+      - [x] 15.6.1.3 Subtask - Verify indexing, source binding, public API stability, and historical immutability.
+    - [x] 15.6.2 Task - Publish and deliver one successor pull request.
+      - [x] 15.6.2.1 Subtask - Publish commands, environments, hashes, samples, timings, inventories, findings, limitations, and decision.
+      - [x] 15.6.2.2 Subtask - Open one PR only after recording a truthful decision.
+      - [x] 15.6.2.3 Subtask - After merge, sync `main`, then delete local and remote feature branches.
 
 ## Exit gate
 
@@ -120,6 +120,7 @@ unchanged deadline, and the complete source-frozen BH-05 gate reproduces.
 
 - [Runtime-owned resource inventory contract](runtime-owned-resource-inventory-contract.md)
 - [Phase 15 review and reconciliation](phase-15-review-and-reconciliation.md)
+- [Phase 15 completion evidence](phase-15-completion.md)
 - [Phase 14 review](phase-14-review-and-reconciliation.md)
 - [Phase 14 completion](phase-14-completion.md)
 - [Cleanup scaling contract](cleanup-scaling-contract.md)

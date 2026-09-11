@@ -26,6 +26,11 @@ unresolved identities and exact comparison. Maximum-payload counts 64, 65, and
 256 also pass both browsers. The unchanged 512 maximum case passes Chrome at
 338 ms but fails Firefox at 6,915 ms with 321 exact unresolved identities.
 
+A second clean, byte-identical bundle reproduces the distinction: Chrome
+records `7, 9, 43, 157` ms and Firefox `37, 43, 295, 945` ms for the canonical
+subset; maximum 512 records 296 ms in Chrome and 6,659 ms with the same 321
+unresolved identities in Firefox.
+
 ## Review findings
 
 `BH05-P14-MAXIMUM-PAYLOAD-TRANSFER` is narrowed, not closed. Phase 15 removes
@@ -59,4 +64,3 @@ ineligible and unauthorized.
 - [Phase 14 review](phase-14-review-and-reconciliation.md)
 - [Runtime-owned resource inventory contract](runtime-owned-resource-inventory-contract.md)
 - [Phase 15 attempt ledger](../../../../../integration/bh-05/runtime-owned-inventory-attempts-v0.1.0.json)
-

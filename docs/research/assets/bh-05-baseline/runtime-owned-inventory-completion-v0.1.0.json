@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 15,
+  "status": "complete",
+  "decision": "revise",
+  "support_state": "unsupported",
+  "milestone_accepted": false,
+  "bh06_eligible": false,
+  "bh06_authorized": false,
+  "tests": {
+    "blazex_core": 112,
+    "blazex_effects": 12,
+    "blazex_ui_tree": 68,
+    "blazex_test": 7,
+    "conformance": 93,
+    "evidence_mutations": 7,
+    "failures": 0
+  },
+  "erts": {
+    "scaling": "passed",
+    "phase12_fixture_repeat": "passed",
+    "process_growth_samples": 10,
+    "unexpected_growth": 0
+  },
+  "browser": {
+    "atomvm_wasm_sha256": "d20c491e75936dc8189910c8d0740093b7813d8dcc1cf966a87c011799ade9d8",
+    "bundle_sha256": "a97b20ac8728934f61c51b233504c11a7177d3b375ff97a5b5e7e2fab57b4f3c",
+    "clean_builds_byte_identical": true,
+    "canonical_first": {
+      "chrome_elapsed_ms": [9, 9, 44, 154],
+      "firefox_elapsed_ms": [35, 55, 284, 929]
+    },
+    "canonical_second": {
+      "chrome_elapsed_ms": [7, 9, 43, 157],
+      "firefox_elapsed_ms": [37, 43, 295, 945]
+    },
+    "maximum_512_first": {
+      "chrome_elapsed_ms": 338,
+      "chrome_unresolved": 0,
+      "firefox_elapsed_ms": 6915,
+      "firefox_unresolved": 321
+    },
+    "maximum_512_second": {
+      "chrome_elapsed_ms": 296,
+      "chrome_unresolved": 0,
+      "firefox_elapsed_ms": 6659,
+      "firefox_unresolved": 321
+    }
+  },
+  "blocking_finding": "BH05-P15-MAXIMUM-DISTRIBUTION-SHAPE",
+  "liveview": "deferred",
+  "local_liveview": "deferred"
+}

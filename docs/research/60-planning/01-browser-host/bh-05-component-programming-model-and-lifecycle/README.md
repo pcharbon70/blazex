@@ -156,7 +156,7 @@ adapter modules are forbidden even when available in the monorepo.
 | [12 — Reliability Measurement, Review, and BH-05 Acceptance](phase-12-reliability-measurement-review-and-bh-05-acceptance.md) | complete — revise | Measure six first-responsible budgets, close two failure gates, review the candidate, and accept, revise, or block BH-06 eligibility. | Phases 1–11 |
 | [13 — Bounded Paged Cleanup and Scaling Requalification](phase-13-bounded-paged-cleanup-and-scaling-requalification.md) | complete — revise | Replace per-resource helper-process cleanup with a constant-worker paged session, add structural and timing-shape gates, and retain the Firefox deadline blocker without weakening its contract. | Phase 12 `revise` and explicit authorization |
 | [14 — Compact Cleanup Outcomes and Firefox Requalification](phase-14-compact-cleanup-outcomes-and-firefox-requalification.md) | complete — revise | Remove duplicate per-resource map materialization from the timed path, close the canonical Firefox blocker, and retain the maximum-payload transfer blocker. | Phase 13 `revise` and explicit authorization |
-| [15 — Runtime-Owned Resource Inventory and Maximum-Payload Requalification](phase-15-runtime-owned-resource-inventory-and-maximum-payload-requalification.md) | active | Move complete release descriptors into a bounded runtime owner at acquisition time and requalify the unchanged maximum-payload cleanup matrix with compact disposal messages. | Phase 14 `revise` and explicit authorization |
+| [15 — Runtime-Owned Resource Inventory and Maximum-Payload Requalification](phase-15-runtime-owned-resource-inventory-and-maximum-payload-requalification.md) | complete — revise | Move complete release descriptors into a bounded runtime owner at acquisition time, prove compact disposal transport, and retain the independently reproduced combined-maximum Firefox blocker. | Phase 14 `revise` and explicit authorization |
 
 ## Acceptance ownership
 
@@ -253,6 +253,7 @@ Phoenix, browser, native-host, or release compatibility.
 - [Phase 15 — Runtime-Owned Resource Inventory and Maximum-Payload Requalification](phase-15-runtime-owned-resource-inventory-and-maximum-payload-requalification.md)
 - [Runtime-owned resource inventory contract](runtime-owned-resource-inventory-contract.md)
 - [Phase 15 runtime-owned inventory review and reconciliation](phase-15-review-and-reconciliation.md)
+- [Phase 15 completion evidence](phase-15-completion.md)
 
 ## Maintaining this index
 

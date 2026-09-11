@@ -32,14 +32,16 @@ callbacks, forced recovery, reconciliation, renderer disposal, and finalization.
 ## Ownership and bounds
 
 Each configured action runtime owns exactly one monitored cleanup session. The
-session stores at most 512 release descriptors in its private runtime table,
-keyed by the same stable lease identity as the authoritative root ledger. The
-table prevents unrelated root-ledger and diagnostic state from becoming the
-cleanup worker's live process heap. It retains the exact adapter fields and
-the complete closed action-correlation shape; unknown acquisition metadata is
-root-ledger evidence rather than provider release data. A completed acquisition registers
-the descriptor before its result work can be observed. An accepted transfer
-atomically replaces that descriptor. An explicitly terminal release drops it.
+session stores at most 512 compact, encoded release descriptors in a bounded
+private ordered inventory, keyed by the same stable lease identity as the
+authoritative root ledger. Encoding severs unrelated root-ledger and diagnostic
+graphs from the cleanup worker's live process heap, while the ordered inventory
+keeps selection work proportional to the page size. It retains the exact adapter
+fields and the complete closed action-correlation shape; unknown acquisition
+metadata is root-ledger evidence rather than provider release data. A completed
+acquisition registers the descriptor before its result work can be observed. An
+accepted transfer atomically replaces that descriptor. An explicitly terminal
+release drops it.
 Missing, duplicate, malformed, stale, oversized, and mismatched operations
 fail without partial inventory mutation.
 
