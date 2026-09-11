@@ -155,6 +155,7 @@ defmodule BlazeX.Component.RecoveryCleanup do
     forced_ms = now() - forced_started
     pages = prefix_pages ++ lease_pages ++ CleanupOutcome.operation_pages(suffix_rows)
     counts = CleanupOutcome.counts(pages)
+    outcome_format = CleanupOutcome.representation(pages)
     prior = state.recovery.cleanup
     prior_unresolved = if prior, do: prior.unresolved, else: 0
     unresolved = max(counts.unresolved, prior_unresolved)
@@ -167,9 +168,14 @@ defmodule BlazeX.Component.RecoveryCleanup do
             ActionLedger.record(acc, :canceled, entry.correlation)
           end)
 
-        releases = Enum.zip(leases, CleanupOutcome.terminal_statuses(lease_pages))
+        true = CleanupOutcome.matches_leases?(lease_pages, leases)
 
-        ledger = ActionLedger.released_many(ledger, releases)
+        ledger =
+          ActionLedger.released_ordered(
+            ledger,
+            leases,
+            CleanupOutcome.terminal_statuses(lease_pages)
+          )
 
         pending = Map.drop(ledger.pending, canceled)
         timers = if next, do: Map.drop(actions.timers, canceled), else: %{}
@@ -190,13 +196,10 @@ defmodule BlazeX.Component.RecoveryCleanup do
       failed: counts.failed,
       timed_out: counts.timed_out,
       forced: counts.forced,
-      callback_failures:
-        CleanupOutcome.fold(pages, 0, fn row, count ->
-          count + if(row.kind == :component and row.status != :completed, do: 1, else: 0)
-        end),
+      callback_failures: CleanupOutcome.callback_failures(pages),
       requested: counts.requested,
       pages: pages,
-      outcome_format: CleanupOutcome.representation(pages),
+      outcome_format: outcome_format,
       amplification:
         amplification(normal_stats, forced_stats, forced_worker_starts, lease_pages_sent),
       runtime_metrics: metric_observation(runtime_before, runtime_after),

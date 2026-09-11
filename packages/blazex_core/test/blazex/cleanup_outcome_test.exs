@@ -14,6 +14,8 @@ defmodule BlazeX.CleanupOutcomeTest do
     refute inspect(page) =~ "large"
     assert CleanupOutcome.valid_page?(page)
     assert CleanupOutcome.terminal_statuses([page]) == [:released, :released]
+    assert CleanupOutcome.matches_leases?([page], [lease("one"), lease("two")])
+    refute CleanupOutcome.matches_leases?([page], [lease("two"), lease("one")])
   end
 
   test "mixed and forced outcomes preserve the exact failed position" do

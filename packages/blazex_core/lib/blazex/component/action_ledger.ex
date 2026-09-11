@@ -203,6 +203,47 @@ defmodule BlazeX.Component.ActionLedger do
     }
   end
 
+  def released_ordered(ledger, ordered, statuses)
+      when is_list(ordered) and is_list(statuses) and length(statuses) <= 512 do
+    count = length(statuses)
+    true = count == map_size(ledger.leases)
+    true = length(ordered) == count
+    true = Enum.all?(statuses, &(&1 in [:released, :lost]))
+    true = Enum.all?(ordered, &(Map.fetch!(ledger.leases, &1.id) == &1))
+
+    {released, lost, history} =
+      ordered
+      |> Enum.with_index()
+      |> Enum.zip_reduce(statuses, {0, 0, []}, fn {lease, index},
+                                                  status,
+                                                  {released, lost, history} ->
+        history =
+          if index >= count - 128,
+            do: [%{status: status, correlation: lease_ref(lease)} | history],
+            else: history
+
+        case status do
+          :released -> {released + 1, lost, history}
+          :lost -> {released, lost + 1, history}
+        end
+      end)
+
+    totals = ledger.totals |> add_total(:released, released) |> add_total(:lost, lost)
+    history = Enum.reverse(history)
+
+    %{
+      ledger
+      | leases: %{},
+        lease_order: [],
+        totals: totals,
+        history:
+          if(count >= 128,
+            do: history,
+            else: Enum.take(ledger.history ++ history, -128)
+          )
+    }
+  end
+
   def result_work(entry, result, accepted, leases) do
     owner = entry.action.owner
 

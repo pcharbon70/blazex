@@ -54,15 +54,15 @@ Back to milestone: [README](README.md)
       - [x] 14.2.2.2 Subtask - Apply forced results by stable page/item position and retain exact failures.
       - [x] 14.2.2.3 Subtask - Keep non-lease rows bounded and preserve historical unresolved inventories.
 
-  - [ ] 14.3 Section - Reconcile the ledger atomically from outcome vectors.
-    - [ ] 14.3.1 Task - Add ordered bounded terminal reconciliation.
-      - [ ] 14.3.1.1 Subtask - Consume one terminal status per ordered lease without constructing `{lease, status}` pairs.
-      - [ ] 14.3.1.2 Subtask - Clear exact leases, update totals, and retain the bounded history tail.
-      - [ ] 14.3.1.3 Subtask - Reject count or identity mismatch without manufacturing success.
-    - [ ] 14.3.2 Task - Integrate recovery totals and deadline accounting.
-      - [ ] 14.3.2.1 Subtask - Derive all counts by bounded page folds.
-      - [ ] 14.3.2.2 Subtask - Keep encoding and reconciliation inside the original deadline interval.
-      - [ ] 14.3.2.3 Subtask - Prove idempotency, stale rejection, callback order, and unresolved retention.
+  - [x] 14.3 Section - Reconcile the ledger atomically from outcome vectors.
+    - [x] 14.3.1 Task - Add ordered bounded terminal reconciliation.
+      - [x] 14.3.1.1 Subtask - Consume one terminal status per ordered lease without constructing `{lease, status}` pairs.
+      - [x] 14.3.1.2 Subtask - Clear exact leases, update totals, and retain the bounded history tail.
+      - [x] 14.3.1.3 Subtask - Reject count or identity mismatch without manufacturing success.
+    - [x] 14.3.2 Task - Integrate recovery totals and deadline accounting.
+      - [x] 14.3.2.1 Subtask - Derive all counts by bounded page folds.
+      - [x] 14.3.2.2 Subtask - Keep encoding and reconciliation inside the original deadline interval.
+      - [x] 14.3.2.3 Subtask - Prove idempotency, stale rejection, callback order, and unresolved retention.
 
   - [ ] 14.4 Section - Extend structural and anti-concealment gates.
     - [ ] 14.4.1 Task - Measure outcome representation scaling.

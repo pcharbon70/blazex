@@ -67,26 +67,32 @@ defmodule BlazeX.Component.CleanupOutcome do
   def rows(pages), do: fold(pages, [], fn row, acc -> [row | acc] end) |> Enum.reverse()
 
   def unresolved_identities(pages) do
-    fold(pages, [], fn row, acc ->
-      if row.unresolved do
-        identity =
-          case row.reference do
-            %{id: id} -> {row.owner, id}
-            reference -> {row.owner, reference}
-          end
+    Enum.reduce(pages, [], fn
+      %{kind: :lease} = page, acc ->
+        count = length(page.identities)
 
-        [identity | acc]
-      else
-        acc
-      end
+        page.identities
+        |> Enum.with_index()
+        |> Enum.reduce(acc, fn {identity, index}, inner ->
+          if value(page.unresolved, index, count), do: [identity | inner], else: inner
+        end)
+
+      %{kind: :operations, rows: rows}, acc ->
+        Enum.reduce(rows, acc, fn row, inner ->
+          if row.unresolved, do: [{row.owner, row.reference} | inner], else: inner
+        end)
     end)
     |> Enum.reverse()
   end
 
   def terminal_statuses(pages) do
-    fold(pages, [], fn
-      %{kind: :lease, unresolved: unresolved}, acc ->
-        [if(unresolved, do: :lost, else: :released) | acc]
+    Enum.reduce(pages, [], fn
+      %{kind: :lease} = page, acc ->
+        count = length(page.identities)
+
+        Enum.reduce(0..(count - 1), acc, fn index, inner ->
+          [if(value(page.unresolved, index, count), do: :lost, else: :released) | inner]
+        end)
 
       _, acc ->
         acc
@@ -95,15 +101,33 @@ defmodule BlazeX.Component.CleanupOutcome do
   end
 
   def counts(pages) do
-    fold(pages, %{requested: 0, failed: 0, timed_out: 0, forced: 0, unresolved: 0}, fn row, acc ->
-      %{
-        requested: acc.requested + 1,
-        failed: acc.failed + truth(row.status == :failed),
-        timed_out: acc.timed_out + truth(row.status == :timed_out),
-        forced: acc.forced + truth(row.force_status == :completed),
-        unresolved: acc.unresolved + truth(row.unresolved)
-      }
+    Enum.reduce(pages, empty_counts(), fn
+      %{kind: :lease} = page, acc -> count_lease_page(page, acc)
+      %{kind: :operations, rows: rows}, acc -> Enum.reduce(rows, acc, &count_row/2)
     end)
+  end
+
+  def callback_failures(pages) do
+    Enum.reduce(pages, 0, fn
+      %{kind: :operations, rows: rows}, acc ->
+        acc + Enum.count(rows, &(&1.kind == :component and &1.status != :completed))
+
+      _, acc ->
+        acc
+    end)
+  end
+
+  def matches_leases?(pages, leases) when is_list(pages) and is_list(leases) do
+    identities =
+      Enum.flat_map(pages, fn
+        %{kind: :lease, identities: values} -> values
+        _ -> []
+      end)
+
+    length(identities) == length(leases) and
+      Enum.zip_reduce(identities, leases, true, fn {owner, id}, lease, acc ->
+        acc and lease.id == id and lease.owner == owner
+      end)
   end
 
   def representation(pages) do
@@ -207,6 +231,35 @@ defmodule BlazeX.Component.CleanupOutcome do
 
   defp truth(true), do: 1
   defp truth(false), do: 0
+
+  defp empty_counts,
+    do: %{requested: 0, failed: 0, timed_out: 0, forced: 0, unresolved: 0}
+
+  defp count_lease_page(page, acc) do
+    count = length(page.identities)
+
+    Enum.reduce(0..(count - 1), acc, fn index, current ->
+      count_values(
+        current,
+        value(page.status, index, count),
+        value(page.force_status, index, count),
+        value(page.unresolved, index, count)
+      )
+    end)
+  end
+
+  defp count_row(row, acc),
+    do: count_values(acc, row.status, row.force_status, row.unresolved)
+
+  defp count_values(acc, status, force_status, unresolved) do
+    %{
+      requested: acc.requested + 1,
+      failed: acc.failed + truth(status == :failed),
+      timed_out: acc.timed_out + truth(status == :timed_out),
+      forced: acc.forced + truth(force_status == :completed),
+      unresolved: acc.unresolved + truth(unresolved)
+    }
+  end
 
   defp safe_bytes(value) do
     byte_size(:erlang.term_to_binary(value))
