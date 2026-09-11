@@ -96,3 +96,4 @@ Current successor check: `python3 docs/research/70-tools/validate_bh05_recovery.
 - [Phase 16 cleanup factor schema](cleanup-factor.schema.json) — Requires independent 256/512 observations for every combined-maximum axis and retained-outcome metrics.
 - [Phase 16 factorized cleanup attempt ledger](factorized-cleanup-attempts-v0.1.0.json) — Preserves causal browser results, sparse-outcome controls, the reverted owner-decoding attempt, and the truthful revise decision.
 - [Phase 17 provider release-ticket schema](release-ticket.schema.json) — Freezes the 1000 ms deadline, 64-ticket pages, 4096-byte ticket ceiling, zero owner fields, exact preparation counts, and zero unresolved identities.
+- [Phase 17 append-only release-ticket attempt ledger](provider-release-ticket-attempts-v0.1.0.json) — Retains every architecture probe, the nonqualifying diagnostic deadline relaxation, active-runtime results, artifact identities, and the truthful revise decision.

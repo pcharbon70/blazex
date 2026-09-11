@@ -69,15 +69,15 @@ Back to milestone: [README](README.md)
       - [x] 17.4.2.2 Subtask - Mutation-test owner-path reintroduction, ticket omission, oversized tokens, deadline drift, count reduction, and masked unresolved rows.
       - [x] 17.4.2.3 Subtask - Retain Phase 13-16 process, inventory, outcome, factor, and growth gates.
 
-  - [ ] 17.5 Section - Requalify active runtimes and reconcile BH-05.
-    - [ ] 17.5.1 Task - Execute the source-frozen ticket correction matrix.
-      - [ ] 17.5.1.1 Subtask - Run ERTS and Linux Chrome/Firefox factor, canonical, maximum, adverse, and growth cases.
-      - [ ] 17.5.1.2 Subtask - Require every retained sample within 1000 ms with zero unresolved identities and exact inventory convergence.
-      - [ ] 17.5.1.3 Subtask - Preserve source, runtime, bundle, browser, ticket, raw failure, timing, and unavailable-metric evidence.
-    - [ ] 17.5.2 Task - Review and reconcile the successor decision.
-      - [ ] 17.5.2.1 Subtask - Review correctness, authority, portability, performance, provider migration, evidence, security, and compatibility.
-      - [ ] 17.5.2.2 Subtask - Map every Phase 16 re-entry condition and new finding to evidence.
-      - [ ] 17.5.2.3 Subtask - Accept only when all frozen gates pass; otherwise record revise or block.
+  - [x] 17.5 Section - Requalify active runtimes and reconcile BH-05.
+    - [x] 17.5.1 Task - Execute the source-frozen ticket correction matrix.
+      - [x] 17.5.1.1 Subtask - Run ERTS and Linux Chrome/Firefox factor, canonical, maximum, adverse, and growth cases.
+      - [x] 17.5.1.2 Subtask - Require every retained sample within 1000 ms with zero unresolved identities and exact inventory convergence.
+      - [x] 17.5.1.3 Subtask - Preserve source, runtime, bundle, browser, ticket, raw failure, timing, and unavailable-metric evidence.
+    - [x] 17.5.2 Task - Review and reconcile the successor decision.
+      - [x] 17.5.2.1 Subtask - Review correctness, authority, portability, performance, provider migration, evidence, security, and compatibility.
+      - [x] 17.5.2.2 Subtask - Map every Phase 16 re-entry condition and new finding to evidence.
+      - [x] 17.5.2.3 Subtask - Accept only when all frozen gates pass; otherwise record revise or block.
 
   - [ ] 17.6 Section - Run the full integration gate and publish completion.
     - [ ] 17.6.1 Task - Rebuild and verify the complete candidate.

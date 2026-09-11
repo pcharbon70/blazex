@@ -4,7 +4,27 @@ defmodule BlazeX.Component.RecoveryCleanup do
 
   @deadline_ms 1000
 
-  def run(state, reason, next \\ nil), do: execute_root(state, reason, next, now())
+  def run(state, reason, next \\ nil) do
+    preparation_started = now()
+    state = prepare_cleanup_state(state, next)
+    preparation_ms = now() - preparation_started
+    cleaned = execute_root(state, reason, next, now())
+    execution_ms = cleaned.recovery.cleanup.elapsed_ms
+    elapsed_ms = preparation_ms + execution_ms
+
+    report = %{
+      cleaned.recovery.cleanup
+      | elapsed_ms: elapsed_ms,
+        exceeded_deadline: elapsed_ms > @deadline_ms,
+        stage_timings_ms:
+          cleaned.recovery.cleanup.stage_timings_ms
+          |> Map.put(:cleanup_preparation, preparation_ms)
+          |> Map.put(:cleanup_execution, execution_ms)
+          |> Map.put(:total, elapsed_ms)
+    }
+
+    put_in(cleaned, [:recovery, :cleanup], report)
+  end
 
   defp execute_root(state, reason, next, started) do
     deadline = started + @deadline_ms
@@ -141,7 +161,9 @@ defmodule BlazeX.Component.RecoveryCleanup do
     component_ms = now() - component_started
     lease_planning_started = now()
     leases = if actions, do: ActionLedger.ordered_leases(actions.ledger), else: []
-    leases = Enum.filter(leases, &selected.(&1.owner))
+
+    leases =
+      if next, do: Enum.filter(leases, &selected.(ActionLedger.lease_owner(&1))), else: leases
 
     lease_planning_ms = now() - lease_planning_started
 
@@ -156,7 +178,8 @@ defmodule BlazeX.Component.RecoveryCleanup do
         if(actions, do: actions.port, else: nil),
         deadline,
         session,
-        inventory_owned
+        inventory_owned,
+        if(actions, do: actions.recovery_inventory, else: %{})
       )
 
     lease_ms = now() - lease_started
@@ -209,6 +232,10 @@ defmodule BlazeX.Component.RecoveryCleanup do
         pending = Map.drop(ledger.pending, canceled)
         timers = if next, do: Map.drop(actions.timers, canceled), else: %{}
         actions = %{actions | ledger: %{ledger | pending: pending}, timers: timers}
+
+        actions =
+          if counts.unresolved == 0, do: %{actions | recovery_inventory: %{}}, else: actions
+
         actions = ActionRuntime.put_cleanup_session(actions, session)
 
         if next,
@@ -308,13 +335,13 @@ defmodule BlazeX.Component.RecoveryCleanup do
     {next, session}
   end
 
-  defp execute_leases(leases, port, deadline, session, inventory_owned) do
+  defp execute_leases(leases, port, deadline, session, inventory_owned, recovery_inventory) do
     leases
     |> Enum.chunk_every(RecoveryPort.page_size())
     |> Enum.with_index()
     |> Enum.reduce({[], [], session}, fn {page, page_index}, {pages, candidates, current} ->
       started = now()
-      timeout = min(port_timeout(port), deadline - started)
+      timeout = deadline - started
 
       {results, next} =
         if timeout > 0 do
@@ -323,10 +350,10 @@ defmodule BlazeX.Component.RecoveryCleanup do
           release =
             if inventory_owned,
               do:
-                RecoveryPort.release_owned_page(
+                RecoveryPort.release_next_page(
                   current,
                   release_port,
-                  Enum.map(page, & &1.id),
+                  length(page),
                   timeout
                 ),
               else: {:error, :inventory_mismatch, current}
@@ -340,8 +367,8 @@ defmodule BlazeX.Component.RecoveryCleanup do
         end
 
       elapsed = now() - started
-
       statuses = Enum.map(results, &status/1)
+      page = hydrate_failed_leases(page, statuses, recovery_inventory)
       outcome = CleanupOutcome.lease_page(page, statuses, elapsed)
 
       next_candidates =
@@ -366,6 +393,19 @@ defmodule BlazeX.Component.RecoveryCleanup do
         end)
 
       {pages ++ [outcome], next_candidates, next}
+    end)
+  end
+
+  defp hydrate_failed_leases(leases, statuses, recovery_inventory) do
+    Enum.zip_with(leases, statuses, fn lease, status ->
+      if status == :completed do
+        lease
+      else
+        case Map.get(recovery_inventory, lease.id) do
+          encoded when is_binary(encoded) -> :erlang.binary_to_term(encoded)
+          _ -> ActionLedger.expand_lease_owner(lease)
+        end
+      end
     end)
   end
 
@@ -575,6 +615,8 @@ defmodule BlazeX.Component.RecoveryCleanup do
     {:ok, session} = RecoveryPort.open_session()
     {state, session, false, 0, 1}
   end
+
+  defp prepare_cleanup_state(state, _next), do: state
 
   defp empty_stats,
     do: %{

@@ -120,21 +120,42 @@ defmodule BlazeX.Component.ActionLedger do
   def compact_inventory(ledger) do
     leases =
       Map.new(ledger.leases, fn {id, lease} ->
-        {id, %{lease | acquisition: compact_acquisition(lease.acquisition)}}
+        {id,
+         lease
+         |> Map.put(:acquisition, compact_acquisition(lease.acquisition))
+         |> compact_lease_owner()}
       end)
 
     %{ledger | leases: leases}
   end
 
+  def compact_lease_owners(ledger, identities) do
+    leases =
+      Enum.reduce(identities, ledger.leases, fn id, leases ->
+        Map.update!(leases, id, &compact_lease_owner/1)
+      end)
+
+    %{ledger | leases: leases}
+  end
+
+  def lease_owner(%{owner: {:encoded_owner, encoded}}), do: :erlang.binary_to_term(encoded)
+  def lease_owner(%{owner: owner}), do: owner
+
+  def expand_lease_owner(%{owner: {:encoded_owner, _}} = lease),
+    do: %{lease | owner: lease_owner(lease)}
+
+  def expand_lease_owner(lease), do: lease
+
   def compact_acquisition(acquisition) when is_map(acquisition),
     do: Map.take(acquisition, [:version, :handle, :owner, :id, :sequence])
 
   def lease_live?(lease, accepted) do
-    live?(%{action: %{owner: lease.owner}, source_stamp: lease.source_stamp}, accepted)
+    live?(%{action: %{owner: lease_owner(lease)}, source_stamp: lease.source_stamp}, accepted)
   end
 
   def transfer(ledger, action, accepted) do
     lease = Map.fetch!(ledger.leases, action.body.lease.id)
+    prior_owner = lease_owner(lease)
     target = RootSchedule.component(accepted, action.body.target)
 
     lease = %{
@@ -146,7 +167,7 @@ defmodule BlazeX.Component.ActionLedger do
           lease.transfer_history ++
             [
               %{
-                from: lease.owner,
+                from: prior_owner,
                 to: action.body.target,
                 action: action.id,
                 sequence: action.sequence
@@ -346,6 +367,7 @@ defmodule BlazeX.Component.ActionLedger do
       inventory_pages:
         ledger
         |> ordered_leases()
+        |> Enum.map(&expand_lease_owner/1)
         |> Enum.map(&Map.drop(&1, [:selection, :source_stamp]))
         |> Enum.chunk_every(128),
       requests:
@@ -398,7 +420,7 @@ defmodule BlazeX.Component.ActionLedger do
   defp validate_control!(ledger, %{kind: kind} = action, candidate, manifest)
        when kind in [:resource_transfer, :resource_release] do
     lease = Map.fetch!(ledger.leases, action.body.lease.id)
-    true = lease_ref(lease) == action.body.lease and lease.owner == action.owner
+    true = lease_ref(lease) == action.body.lease and lease_owner(lease) == action.owner
     true = lease_live?(lease, candidate)
 
     if kind == :resource_transfer do
@@ -465,4 +487,9 @@ defmodule BlazeX.Component.ActionLedger do
       end
     end
   end
+
+  defp compact_lease_owner(%{owner: {:encoded_owner, _}} = lease), do: lease
+
+  defp compact_lease_owner(%{owner: owner} = lease),
+    do: %{lease | owner: {:encoded_owner, :erlang.term_to_binary(owner)}}
 end

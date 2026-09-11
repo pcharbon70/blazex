@@ -78,6 +78,12 @@ defmodule BlazeX.Effects.ActionBridge do
   @impl true
   def release_ticket_page(config, tickets), do: Enum.map(tickets, &release_ticket(config, &1))
 
+  def release_prepared_ticket_page(config, tickets),
+    do:
+      Enum.map(tickets, fn
+        {_id, provider, token} -> invoke(config, provider, :release_prepared, token)
+      end)
+
   defp release_packet(lease) do
     capability = Enum.find(Capability.names(), &(Atom.to_string(&1) == lease.capability))
     {:ok, resource} = Resource.new(struct(Identity, lease.owner), capability, lease.id)

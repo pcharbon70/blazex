@@ -19,7 +19,11 @@ defmodule BlazeX.RecoveryPolicyTest do
       Enum.map(leases, &if(&1.id == "lost", do: {:error, :lost}, else: :released))
     end
 
-    def release_ticket_page(observer, tickets), do: release_page(observer, tickets)
+    def release_prepared_ticket_page(observer, tickets) do
+      ids = Enum.map(tickets, &elem(&1, 0))
+      send(observer, {:release_page, ids})
+      Enum.map(ids, &if(&1 == "lost", do: {:error, :lost}, else: :released))
+    end
   end
 
   test "three automatic restarts in five seconds then terminal regardless of fingerprint" do

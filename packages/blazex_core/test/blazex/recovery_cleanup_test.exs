@@ -33,8 +33,8 @@ defmodule BlazeX.RecoveryCleanupTest do
       {:error, :unavailable}
     end
 
-    def release_ticket(config, ticket) do
-      send(config.observer, {:released, ticket.id})
+    def release_ticket(config, %{id: id}) do
+      send(config.observer, {:released, id})
       :released
     end
 

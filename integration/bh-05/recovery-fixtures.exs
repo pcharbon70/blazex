@@ -166,9 +166,9 @@ defmodule BlazeX.BH05.RecoveryProvider do
 
   def release_ticket(%{mode: :slow}, _), do: {:error, :timed_out}
 
-  def release_ticket(config, ticket) do
-    Agent.update(config.resources, &Map.delete(&1, ticket.id))
-    send(config.observer, {:recovery_release, ticket.id})
+  def release_ticket(config, %{id: id}) do
+    Agent.update(config.resources, &Map.delete(&1, id))
+    send(config.observer, {:recovery_release, id})
     :released
   end
 

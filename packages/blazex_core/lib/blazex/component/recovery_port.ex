@@ -257,6 +257,55 @@ defmodule BlazeX.Component.RecoveryPort do
   def release_owned_page(session, _port, _identities, _timeout),
     do: {:error, Map.get(session, :failure) || :invalid_page, session}
 
+  def release_next_page(%{alive: true} = session, port, count, timeout)
+      when is_integer(count) and count in 1..@page_size and is_integer(timeout) and timeout > 0 do
+    sequence = session.sequence + 1
+    started = System.monotonic_time(:millisecond)
+    send(session.pid, {session.token, :release_next_page, sequence, port, count})
+
+    sent = %{
+      session
+      | sequence: sequence,
+        pages_sent: session.pages_sent + 1,
+        jobs_sent: session.jobs_sent + count,
+        messages_sent: session.messages_sent + 1,
+        request_bytes: add_encoded_size(session.request_bytes, {port, count})
+    }
+
+    receive do
+      {token, :release_next_result, ^sequence, results, inventory_count}
+      when token == session.token ->
+        if is_list(results) and length(results) == count and is_integer(inventory_count) and
+             inventory_count in 0..512 do
+          received = %{
+            sent
+            | pages_received: sent.pages_received + 1,
+              results_received: sent.results_received + count,
+              messages_received: sent.messages_received + 1,
+              result_bytes: add_encoded_size(sent.result_bytes, results),
+              page_durations_ms: [
+                System.monotonic_time(:millisecond) - started | sent.page_durations_ms
+              ],
+              inventory_count: inventory_count
+          }
+
+          {:ok, results, received}
+        else
+          {:error, :malformed_reply, terminate_session(%{sent | failure: :malformed_reply})}
+        end
+
+      {:DOWN, monitor, :process, pid, _}
+      when monitor == session.monitor and pid == session.pid ->
+        flush_exit(session.pid)
+        {:error, :port_failed, %{sent | alive: false, failure: :port_failed}}
+    after
+      timeout -> {:error, :timed_out, terminate_session(%{sent | failure: :timed_out})}
+    end
+  end
+
+  def release_next_page(session, _port, _count, _timeout),
+    do: {:error, Map.get(session, :failure) || :invalid_page, session}
+
   def close_session(%{alive: false} = session), do: session
 
   def close_session(session) do
@@ -520,14 +569,13 @@ defmodule BlazeX.Component.RecoveryPort do
       when is_integer(sequence) and is_list(identities) and identities != [] and
              length(identities) <= @page_size ->
         case take_owned_page(inventory, identities) do
-          {:ok, encoded_tickets, remaining} ->
-            tickets =
-              Enum.map(encoded_tickets, fn {_id, encoded} -> :erlang.binary_to_term(encoded) end)
+          {:ok, owned_tickets, remaining} ->
+            tickets = Enum.map(owned_tickets, &elem(&1, 1))
 
-            results = RootPort.release_ticket_page(port, tickets)
+            results = RootPort.release_prepared_ticket_page(port, tickets)
 
             retained =
-              encoded_tickets
+              owned_tickets
               |> Enum.zip(results)
               |> Enum.flat_map(fn
                 {_encoded, :released} -> []
@@ -553,6 +601,39 @@ defmodule BlazeX.Component.RecoveryPort do
           :error ->
             results = List.duplicate({:error, :inventory_mismatch}, length(identities))
             send(owner, {token, :release_owned_result, sequence, results, inventory.count})
+            session_loop(owner, token, owner_monitor, inventory)
+        end
+
+      {^token, :release_next_page, sequence, port, count}
+      when is_integer(sequence) and is_integer(count) and count in 1..@page_size ->
+        case take_next_page(inventory, count) do
+          {:ok, owned_tickets, remaining} ->
+            tickets = Enum.map(owned_tickets, &elem(&1, 1))
+            results = RootPort.release_prepared_ticket_page(port, tickets)
+
+            retained =
+              owned_tickets
+              |> Enum.zip(results)
+              |> Enum.flat_map(fn
+                {_ticket, :released} -> []
+                {ticket, _} -> [ticket]
+              end)
+
+            completed_count = Enum.count(results, &(&1 == :released))
+
+            next_inventory = %{
+              inventory
+              | active: remaining,
+                retained: inventory.retained ++ retained,
+                count: inventory.count - completed_count
+            }
+
+            send(owner, {token, :release_next_result, sequence, results, next_inventory.count})
+            session_loop(owner, token, owner_monitor, next_inventory)
+
+          :error ->
+            results = List.duplicate({:error, :inventory_mismatch}, count)
+            send(owner, {token, :release_next_result, sequence, results, inventory.count})
             session_loop(owner, token, owner_monitor, inventory)
         end
 
@@ -636,7 +717,7 @@ defmodule BlazeX.Component.RecoveryPort do
     do:
       Enum.all?(identities, &is_binary/1) and length(Enum.uniq(identities)) == length(identities)
 
-  defp prepare_ticket(ticket), do: {ticket.id, :erlang.term_to_binary(ticket)}
+  defp prepare_ticket(ticket), do: {ticket.id, {ticket.id, ticket.provider, ticket.token}}
 
   defp inventory_ids(inventory),
     do: Enum.map(inventory.active ++ inventory.retained, &elem(&1, 0))
@@ -652,6 +733,13 @@ defmodule BlazeX.Component.RecoveryPort do
       :error
     end
   end
+
+  defp take_next_page(inventory, count) when length(inventory.active) >= count do
+    {tickets, remaining} = Enum.split(inventory.active, count)
+    {:ok, tickets, remaining}
+  end
+
+  defp take_next_page(_, _), do: :error
 
   defp valid_results?(results, count) when is_list(results),
     do: length(results) == count and indexed_results?(results, 0)

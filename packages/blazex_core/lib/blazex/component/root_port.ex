@@ -267,6 +267,39 @@ defmodule BlazeX.Component.RootPort do
   def release_ticket_page(_, tickets) when is_list(tickets),
     do: List.duplicate({:error, :invalid_release_ticket}, length(tickets))
 
+  def release_prepared_ticket_page({module, config} = port, tickets)
+      when is_list(tickets) and tickets != [] and length(tickets) <= 64 do
+    cond do
+      function_exported?(module, :release_prepared_ticket_page, 2) ->
+        normalize_ticket_results(
+          module.release_prepared_ticket_page(config, tickets),
+          length(tickets)
+        )
+
+      function_exported?(module, :release_ticket_page, 2) ->
+        envelopes = Enum.map(tickets, &prepared_ticket_envelope/1)
+        normalize_ticket_results(module.release_ticket_page(config, envelopes), length(tickets))
+
+      function_exported?(module, :release_ticket, 2) ->
+        Enum.map(tickets, fn {id, provider, token} ->
+          call(port, :release_ticket, [%{version: 1, id: id, provider: provider, token: token}])
+        end)
+
+      true ->
+        List.duplicate({:error, :port_failed}, length(tickets))
+    end
+  rescue
+    _ -> List.duplicate({:error, :port_failed}, length(tickets))
+  catch
+    _, _ -> List.duplicate({:error, :port_failed}, length(tickets))
+  end
+
+  def release_prepared_ticket_page(_, tickets) when is_list(tickets),
+    do: List.duplicate({:error, :invalid_release_ticket}, length(tickets))
+
+  defp prepared_ticket_envelope({id, provider, token}),
+    do: %{version: 1, id: id, provider: provider, token: token}
+
   defp normalize_ticket_results(results, count)
        when is_list(results) and length(results) == count,
        do: results
