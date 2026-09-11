@@ -367,32 +367,39 @@ defmodule BlazeX.Component.RecoveryCleanup do
         end
 
       elapsed = now() - started
-      statuses = Enum.map(results, &status/1)
-      page = hydrate_failed_leases(page, statuses, recovery_inventory)
-      outcome = CleanupOutcome.lease_page(page, statuses, elapsed)
 
-      next_candidates =
-        page
-        |> Enum.zip(statuses)
-        |> Enum.with_index()
-        |> Enum.reduce(candidates, fn
-          {{_lease, :completed}, _item_index}, acc ->
-            acc
+      case results do
+        :released ->
+          {pages ++ [CleanupOutcome.released_lease_page(page, elapsed)], candidates, next}
 
-          {{lease, _status}, item_index}, acc ->
-            [
-              %{
-                target: {:lease, page_index, item_index},
-                owner: lease.owner,
-                kind: :lease,
-                port: port,
-                reference: lease
-              }
-              | acc
-            ]
-        end)
+        results ->
+          statuses = Enum.map(results, &status/1)
+          page = hydrate_failed_leases(page, statuses, recovery_inventory)
+          outcome = CleanupOutcome.lease_page(page, statuses, elapsed)
 
-      {pages ++ [outcome], next_candidates, next}
+          next_candidates =
+            page
+            |> Enum.zip(statuses)
+            |> Enum.with_index()
+            |> Enum.reduce(candidates, fn
+              {{_lease, :completed}, _item_index}, acc ->
+                acc
+
+              {{lease, _status}, item_index}, acc ->
+                [
+                  %{
+                    target: {:lease, page_index, item_index},
+                    owner: lease.owner,
+                    kind: :lease,
+                    port: port,
+                    reference: lease
+                  }
+                  | acc
+                ]
+            end)
+
+          {pages ++ [outcome], next_candidates, next}
+      end
     end)
   end
 

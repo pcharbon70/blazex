@@ -48,15 +48,15 @@ Back to milestone: [README](README.md)
       - [x] 18.2.2.2 Subtask - Permit the built-in bridge to collapse only unanimous released results.
       - [x] 18.2.2.3 Subtask - Document provider migration and fail-closed fallback.
 
-  - [ ] 18.3 Section - Carry compact success through disposal and outcomes.
-    - [ ] 18.3.1 Task - Update RecoveryPort inventory release.
-      - [ ] 18.3.1.1 Subtask - Reconcile scalar success by the requested page count without ticket/result zips.
-      - [ ] 18.3.1.2 Subtask - Retain exact tickets and positions for vector failures.
-      - [ ] 18.3.1.3 Subtask - Preserve counts, page telemetry, timeouts, teardown, and bounded messages.
-    - [ ] 18.3.2 Task - Update cleanup outcome construction.
-      - [ ] 18.3.2.1 Subtask - Construct uniform completed pages directly from authoritative ordered identities.
-      - [ ] 18.3.2.2 Subtask - Avoid success status, unresolved, owner, and candidate vectors.
-      - [ ] 18.3.2.3 Subtask - Preserve exact forced recovery and public version 2 outcome shape.
+  - [x] 18.3 Section - Carry compact success through disposal and outcomes.
+    - [x] 18.3.1 Task - Update RecoveryPort inventory release.
+      - [x] 18.3.1.1 Subtask - Reconcile scalar success by the requested page count without ticket/result zips.
+      - [x] 18.3.1.2 Subtask - Retain exact tickets and positions for vector failures.
+      - [x] 18.3.1.3 Subtask - Preserve counts, page telemetry, timeouts, teardown, and bounded messages.
+    - [x] 18.3.2 Task - Update cleanup outcome construction.
+      - [x] 18.3.2.1 Subtask - Construct uniform completed pages directly from authoritative ordered identities.
+      - [x] 18.3.2.2 Subtask - Avoid success status, unresolved, owner, and candidate vectors.
+      - [x] 18.3.2.3 Subtask - Preserve exact forced recovery and public version 2 outcome shape.
 
   - [ ] 18.4 Section - Add correctness and anti-concealment gates.
     - [ ] 18.4.1 Task - Test the compact result algebra.

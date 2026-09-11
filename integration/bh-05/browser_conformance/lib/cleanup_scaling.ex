@@ -24,7 +24,7 @@ defmodule BlazeX.BH05.CleanupScaling do
     def prepare_release(_, lease),
       do: {:ok, %{provider: lease.selection.name, token: lease.acquisition.sequence}}
 
-    def release_prepared_ticket_page(_, tickets), do: List.duplicate(:released, length(tickets))
+    def release_prepared_ticket_page(_, _tickets), do: :released
   end
 
   def run(runtime \\ :browser) do
