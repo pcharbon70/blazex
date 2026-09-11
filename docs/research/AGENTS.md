@@ -174,6 +174,18 @@ completion-evidence checklist. A research conclusion, stub, compilation
 result, or happy-path demonstration is not completed implementation evidence
 unless it satisfies the phase's stated gate.
 
+For BH-06 and every later browser milestone that adds or changes executable
+component behavior, include an early browser-Wasm vertical-slice gate before
+broad implementation. The slice must package at least one public Elixir
+component through the current AtomVM/Popcorn path and exercise mount, semantic
+render, browser interaction, state transition, DOM commit, and disposal in the
+active Linux Chrome and Firefox matrix. Mock runtimes, JavaScript-only fixture
+components, source/API inspection, and ERTS-only execution do not satisfy this
+gate. A failure in either active browser blocks expansion of the affected
+milestone; unavailable external environments remain governed deferrals. Keep
+the milestone's final conformance and reliability gate as a separate,
+comprehensive obligation.
+
 Apply the [development environment and deferred qualification
 policy](60-planning/development-environment-and-deferred-qualification-policy.md)
 to every new or revised plan. Linux Chrome and Firefox are the active browser
