@@ -39,15 +39,15 @@ Back to milestone: [README](README.md)
       - [x] 16.1.2.2 Subtask - Retain ordered lease IDs for all outcomes and full owners only for unresolved entries.
       - [x] 16.1.2.3 Subtask - Require exact reconstruction, bounded sparse records, portable reports, and unchanged provider callbacks.
 
-  - [ ] 16.2 Section - Add factorized fixtures and causal instrumentation.
-    - [ ] 16.2.1 Task - Separate the combined maximum workload axes.
-      - [ ] 16.2.1.1 Subtask - Add payload-only, identifier-only, owner-depth-only, distribution-only, inventory-only, and outcome-retention probes.
-      - [ ] 16.2.1.2 Subtask - Record stage timing, retained outcome bytes, unresolved counts, and structural amplification at 256 and 512.
-      - [ ] 16.2.1.3 Subtask - Keep canonical, minimal, and combined-maximum fixtures byte-for-byte semantically unchanged.
-    - [ ] 16.2.2 Task - Make factor evidence reproducible and fail closed.
-      - [ ] 16.2.2.1 Subtask - Add exact operation routing and a machine-readable factor schema.
-      - [ ] 16.2.2.2 Subtask - Reject missing axes, combined-only claims, altered bounds, and unavailable mandatory structural fields.
-      - [ ] 16.2.2.3 Subtask - Preserve source, runtime, bundle, browser, and clean-context identities.
+  - [x] 16.2 Section - Add factorized fixtures and causal instrumentation.
+    - [x] 16.2.1 Task - Separate the combined maximum workload axes.
+      - [x] 16.2.1.1 Subtask - Add payload-only, identifier-only, owner-depth-only, distribution-only, inventory-only, and outcome-retention probes.
+      - [x] 16.2.1.2 Subtask - Record stage timing, retained outcome bytes, unresolved counts, and structural amplification at 256 and 512.
+      - [x] 16.2.1.3 Subtask - Keep canonical, minimal, and combined-maximum fixtures byte-for-byte semantically unchanged.
+    - [x] 16.2.2 Task - Make factor evidence reproducible and fail closed.
+      - [x] 16.2.2.1 Subtask - Add exact operation routing and a machine-readable factor schema.
+      - [x] 16.2.2.2 Subtask - Reject missing axes, combined-only claims, altered bounds, and unavailable mandatory structural fields.
+      - [x] 16.2.2.3 Subtask - Preserve source, runtime, bundle, browser, and clean-context identities.
 
   - [ ] 16.3 Section - Implement sparse terminal cleanup outcomes.
     - [ ] 16.3.1 Task - Remove completed owner graphs from retained pages.

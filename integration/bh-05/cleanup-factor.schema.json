@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://blazex.dev/schemas/bh-05/cleanup-factor-v1.json",
+  "title": "BH-05 factorized cleanup observation",
+  "type": "object",
+  "required": ["schema_version", "execution_state", "acceptance_state", "factor_profiles", "samples"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "execution_state": {"const": "executed"},
+    "acceptance_state": {"enum": ["passed", "failed"]},
+    "factor_profiles": {
+      "type": "array",
+      "minItems": 7,
+      "uniqueItems": true,
+      "allOf": [
+        {"contains": {"const": "inventory_only"}},
+        {"contains": {"const": "payload_only"}},
+        {"contains": {"const": "identifier_only"}},
+        {"contains": {"const": "owner_depth_only"}},
+        {"contains": {"const": "distribution_only"}},
+        {"contains": {"const": "outcome_retention"}},
+        {"contains": {"const": "maximum"}}
+      ]
+    },
+    "samples": {
+      "type": "array",
+      "minItems": 14,
+      "maxItems": 14,
+      "items": {
+        "type": "object",
+        "required": ["payload_class", "count", "elapsed_ms", "unresolved_identities", "amplification", "outcome_format"],
+        "properties": {
+          "count": {"enum": [256, 512]},
+          "elapsed_ms": {"type": "integer", "minimum": 0},
+          "unresolved_identities": {"type": "array"},
+          "outcome_format": {
+            "type": "object",
+            "required": ["retained_outcome_bytes", "retained_owner_records"]
+          }
+        }
+      }
+    }
+  }
+}

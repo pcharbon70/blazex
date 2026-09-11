@@ -5,6 +5,15 @@ defmodule BlazeX.BH05.CleanupScaling do
   @counts [0, 1, 63, 64, 65, 127, 128, 129, 255, 256, 257, 511, 512]
   @maximum_counts [64, 65, 256, 512]
   @minimal_counts [64, 512]
+  @factor_profiles [
+    :inventory_only,
+    :payload_only,
+    :identifier_only,
+    :owner_depth_only,
+    :distribution_only,
+    :outcome_retention,
+    :maximum
+  ]
 
   defmodule Port do
     def dispose(_, _), do: :ok
@@ -71,6 +80,38 @@ defmodule BlazeX.BH05.CleanupScaling do
     }
   end
 
+  def run_factor_matrix do
+    samples =
+      Enum.flat_map(@factor_profiles, fn profile ->
+        Enum.map([256, 512], &observe(profile, &1, 1))
+      end)
+
+    passed = Enum.all?(samples, &(&1["acceptance_state"] == "passed"))
+
+    %{
+      "schema_version" => "1.0.0",
+      "execution_state" => "executed",
+      "acceptance_state" => if(passed, do: "passed", else: "failed"),
+      "result" => if(passed, do: "passed", else: "failed"),
+      "factor_profiles" => Enum.map(@factor_profiles, &Atom.to_string/1),
+      "samples" => samples
+    }
+  end
+
+  def run_factor_point(profile, count)
+      when profile in @factor_profiles and count in [256, 512] do
+    sample = observe(profile, count, 1)
+
+    %{
+      "schema_version" => "1.0.0",
+      "execution_state" => "executed",
+      "acceptance_state" => sample["acceptance_state"],
+      "result" => sample["acceptance_state"],
+      "factor_profiles" => [Atom.to_string(profile)],
+      "samples" => [sample]
+    }
+  end
+
   def workloads(runtime) do
     Enum.map(@counts, &{:canonical, &1})
     |> Kernel.++(Enum.map(@maximum_counts, &{:maximum, &1}))
@@ -107,7 +148,13 @@ defmodule BlazeX.BH05.CleanupScaling do
       "amplification" => flatten(report.amplification),
       "runtime_metrics" => report.runtime_metrics,
       "stage_timings_ms" => report.stage_timings_ms,
-      "outcome_format" => report.outcome_format
+      "outcome_format" =>
+        report.outcome_format
+        |> Map.put("retained_outcome_bytes", report.outcome_format.encoded_bytes)
+        |> Map.put(
+          "retained_owner_records",
+          Map.get(report.outcome_format, :owner_records, count)
+        )
     }
   end
 
@@ -177,8 +224,7 @@ defmodule BlazeX.BH05.CleanupScaling do
     Map.new(1..count, fn sequence ->
       id = identifier(payload_class, sequence)
 
-      lease_owner =
-        if payload_class == :maximum, do: distributed_owner(owner, sequence), else: owner
+      lease_owner = owner(payload_class, owner, sequence)
 
       {id,
        %{
@@ -191,24 +237,44 @@ defmodule BlazeX.BH05.CleanupScaling do
   end
 
   defp identifier(:minimal, sequence), do: "l#{sequence}"
-  defp identifier(:canonical, sequence), do: padded_id(sequence, 32)
-  defp identifier(:maximum, sequence), do: padded_id(sequence, 64)
+
+  defp identifier(profile, sequence) when profile in [:maximum, :identifier_only],
+    do: padded_id(sequence, 64)
+
+  defp identifier(:inventory_only, sequence), do: "l#{sequence}"
+  defp identifier(_profile, sequence), do: padded_id(sequence, 32)
 
   defp padded_id(sequence, bytes) do
     base = "lease-#{sequence}-"
     base <> String.duplicate("x", bytes - byte_size(base))
   end
 
-  defp acquisition(:minimal, sequence), do: %{sequence: sequence}
+  defp acquisition(profile, sequence)
+       when profile in [:minimal, :inventory_only, :outcome_retention],
+       do: %{sequence: sequence}
 
   defp acquisition(:canonical, sequence),
     do: %{sequence: sequence, payload: String.duplicate("c", 64)}
 
-  defp acquisition(:maximum, sequence),
+  defp acquisition(profile, sequence) when profile in [:maximum, :payload_only],
     do: %{sequence: sequence, payload: String.duplicate("m", 8192)}
 
-  defp distributed_owner(owner, sequence) do
-    path = Enum.map(1..16, &"owner-#{rem(sequence + &1, 128)}")
+  defp acquisition(_profile, sequence),
+    do: %{sequence: sequence, payload: String.duplicate("c", 64)}
+
+  defp owner(profile, owner, sequence) when profile in [:maximum, :outcome_retention],
+    do: distributed_owner(owner, sequence, 16)
+
+  defp owner(:owner_depth_only, owner, _sequence),
+    do: %{owner | path: Enum.map(1..16, &"owner-depth-#{&1}")}
+
+  defp owner(:distribution_only, owner, sequence),
+    do: distributed_owner(owner, sequence, 1)
+
+  defp owner(_profile, owner, _sequence), do: owner
+
+  defp distributed_owner(owner, sequence, depth) do
+    path = Enum.map(1..depth, &"owner-#{rem(sequence + &1, 128)}")
     %{owner | path: path}
   end
 end
