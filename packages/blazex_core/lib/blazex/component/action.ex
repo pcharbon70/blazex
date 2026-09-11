@@ -180,7 +180,12 @@ defmodule BlazeX.Component.ActionPort do
   @callback release_ticket(term(), map()) :: :released | :lost | {:error, atom()}
   @callback release_ticket_page(term(), [map()]) ::
               [:released | :lost | {:error, atom()}]
-  @optional_callbacks prepare_release: 2, release_ticket: 2, release_ticket_page: 2
+  @callback release_prepared_ticket_page(term(), [{binary(), binary(), term()}]) ::
+              :released | [:released | :lost | {:error, atom()}]
+  @optional_callbacks prepare_release: 2,
+                      release_ticket: 2,
+                      release_ticket_page: 2,
+                      release_prepared_ticket_page: 2
 
   def valid?({module, _}) when is_atom(module),
     do:

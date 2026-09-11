@@ -38,15 +38,15 @@ Back to milestone: [README](README.md)
       - [x] 18.1.2.2 Subtask - Require exact positional vectors for every mixed, failed, malformed, or partial result.
       - [x] 18.1.2.3 Subtask - Preserve public ticket envelopes and provider isolation.
 
-  - [ ] 18.2 Section - Add provider-authorized compact page acknowledgements.
-    - [ ] 18.2.1 Task - Extend RootPort and the Effects bridge.
-      - [ ] 18.2.1.1 Subtask - Normalize scalar page success without expanding it into one result per ticket.
-      - [ ] 18.2.1.2 Subtask - Keep public action ports on validated ticket envelopes and compact internal callbacks on validated tuples.
-      - [ ] 18.2.1.3 Subtask - Reject scalar failure, partial vectors, invalid values, and wrong-provider routing.
-    - [ ] 18.2.2 Task - Preserve provider compatibility.
-      - [ ] 18.2.2.1 Subtask - Retain individual release callbacks and positional page vectors.
-      - [ ] 18.2.2.2 Subtask - Permit the built-in bridge to collapse only unanimous released results.
-      - [ ] 18.2.2.3 Subtask - Document provider migration and fail-closed fallback.
+  - [x] 18.2 Section - Add provider-authorized compact page acknowledgements.
+    - [x] 18.2.1 Task - Extend RootPort and the Effects bridge.
+      - [x] 18.2.1.1 Subtask - Normalize scalar page success without expanding it into one result per ticket.
+      - [x] 18.2.1.2 Subtask - Keep public action ports on validated ticket envelopes and compact internal callbacks on validated tuples.
+      - [x] 18.2.1.3 Subtask - Reject scalar failure, partial vectors, invalid values, and wrong-provider routing.
+    - [x] 18.2.2 Task - Preserve provider compatibility.
+      - [x] 18.2.2.1 Subtask - Retain individual release callbacks and positional page vectors.
+      - [x] 18.2.2.2 Subtask - Permit the built-in bridge to collapse only unanimous released results.
+      - [x] 18.2.2.3 Subtask - Document provider migration and fail-closed fallback.
 
   - [ ] 18.3 Section - Carry compact success through disposal and outcomes.
     - [ ] 18.3.1 Task - Update RecoveryPort inventory release.
