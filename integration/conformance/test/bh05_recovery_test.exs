@@ -189,7 +189,7 @@ defmodule BlazeX.Conformance.RecoveryTest do
 
         {s.recovery.cleanup.elapsed_ms,
          Enum.map(
-           List.flatten(s.recovery.cleanup.pages),
+           BlazeX.Component.CleanupOutcome.rows(s.recovery.cleanup.pages),
            &Map.take(&1, [:owner, :kind, :status, :force_status, :unresolved])
          )}
       end

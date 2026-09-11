@@ -245,7 +245,7 @@ defmodule BlazeX.RecoveryEvaluatorTest do
     assert candidate.state.failure.code == :crashed
     :ok = LocalView.acknowledge(supervisor, handle, %{correlation: failure, result: :committed})
     {:ok, snapshot} = LocalView.inspect_root(supervisor, handle)
-    rows = List.flatten(snapshot.recovery.cleanup.pages)
+    rows = BlazeX.Component.CleanupOutcome.rows(snapshot.recovery.cleanup.pages)
     assert Enum.map(Enum.filter(rows, &(&1.kind == :component)), &length(&1.owner.path)) == [1, 0]
     assert snapshot.recovery.cleanup.unresolved == 0
   end
@@ -261,7 +261,10 @@ defmodule BlazeX.RecoveryEvaluatorTest do
     assert Enum.all?(candidate.token.scope.context.bindings, &(&1.consumer.generation == 2))
     {:ok, pending} = LocalView.inspect_root(supervisor, handle)
 
-    assert Enum.map(List.flatten(pending.recovery.cleanup.pages), & &1.kind) == [
+    assert Enum.map(
+             BlazeX.Component.CleanupOutcome.rows(pending.recovery.cleanup.pages),
+             & &1.kind
+           ) == [
              :component,
              :component,
              :renderer

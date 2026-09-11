@@ -44,15 +44,15 @@ Back to milestone: [README](README.md)
       - [x] 14.1.2.2 Subtask - Preserve exact owner, lease ID, normal status, forced status, unresolved flag, and page elapsed time per item.
       - [x] 14.1.2.3 Subtask - Provide bounded validation, folding, extraction, and diagnostic expansion outside the timed path.
 
-  - [ ] 14.2 Section - Implement compact exact cleanup outcomes.
-    - [ ] 14.2.1 Task - Add the internal versioned outcome-page codec.
-      - [ ] 14.2.1.1 Subtask - Encode homogeneous values once and heterogeneous values as bounded vectors.
-      - [ ] 14.2.1.2 Subtask - Reject malformed versions, lengths, identities, statuses, and oversized pages.
-      - [ ] 14.2.1.3 Subtask - Test success, partial failure, forced recovery, extraction, expansion, and malformed pages.
-    - [ ] 14.2.2 Task - Replace lease-row construction in recovery cleanup.
-      - [ ] 14.2.2.1 Subtask - Retain normal results as compact pages without acquisition metadata.
-      - [ ] 14.2.2.2 Subtask - Apply forced results by stable page/item position and retain exact failures.
-      - [ ] 14.2.2.3 Subtask - Keep non-lease rows bounded and preserve historical unresolved inventories.
+  - [x] 14.2 Section - Implement compact exact cleanup outcomes.
+    - [x] 14.2.1 Task - Add the internal versioned outcome-page codec.
+      - [x] 14.2.1.1 Subtask - Encode homogeneous values once and heterogeneous values as bounded vectors.
+      - [x] 14.2.1.2 Subtask - Reject malformed versions, lengths, identities, statuses, and oversized pages.
+      - [x] 14.2.1.3 Subtask - Test success, partial failure, forced recovery, extraction, expansion, and malformed pages.
+    - [x] 14.2.2 Task - Replace lease-row construction in recovery cleanup.
+      - [x] 14.2.2.1 Subtask - Retain normal results as compact pages without acquisition metadata.
+      - [x] 14.2.2.2 Subtask - Apply forced results by stable page/item position and retain exact failures.
+      - [x] 14.2.2.3 Subtask - Keep non-lease rows bounded and preserve historical unresolved inventories.
 
   - [ ] 14.3 Section - Reconcile the ledger atomically from outcome vectors.
     - [ ] 14.3.1 Task - Add ordered bounded terminal reconciliation.

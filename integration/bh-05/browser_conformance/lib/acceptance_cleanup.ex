@@ -1,6 +1,6 @@
 defmodule BlazeX.BH05.Acceptance.Cleanup do
   @moduledoc false
-  alias BlazeX.Component.{ActionLedger, ActionRuntime, LocalView, RecoveryCleanup}
+  alias BlazeX.Component.{ActionLedger, ActionRuntime, CleanupOutcome, LocalView, RecoveryCleanup}
 
   defmodule Root do
     use BlazeX.Component, role: :root, schema: [props: [], slots: []]
@@ -67,7 +67,7 @@ defmodule BlazeX.BH05.Acceptance.Cleanup do
         "exceeded_deadline" => report.exceeded_deadline,
         "requested" => report.requested,
         "unresolved" => report.unresolved,
-        "unresolved_identities" => unresolved_identities(report.pages),
+        "unresolved_identities" => CleanupOutcome.unresolved_identities(report.pages),
         "forced" => report.forced,
         "terminal_leases" => map_size(cleaned.actions.ledger.leases),
         "late_results" => 0,
@@ -117,13 +117,6 @@ defmodule BlazeX.BH05.Acceptance.Cleanup do
     supervisor
     |> Supervisor.which_children()
     |> Enum.count(fn {_, pid, _, _} -> is_pid(pid) and Process.alive?(pid) end)
-  end
-
-  defp unresolved_identities(pages) do
-    pages
-    |> Enum.flat_map(& &1)
-    |> Enum.filter(& &1.unresolved)
-    |> Enum.map(& &1.reference)
   end
 
   defp submission do
