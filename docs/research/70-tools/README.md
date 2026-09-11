@@ -237,6 +237,7 @@ independent-review blockers, as intended.
 - [`test_validate_bh04_acceptance.py`](test_validate_bh04_acceptance.py) — Regression tests.
 - [`test_validate_bh04_activation.py`](test_validate_bh04_activation.py) — Mutation tests for the immutable BH-04 Phase 1 activation candidate.
 - [`test_validate_bh05_cleanup_scaling.py`](test_validate_bh05_cleanup_scaling.py) — Mutation tests for Phase 13 deadline/page tuning and Phase 14 outcome-page, identity, vector and expansion bounds, plus missing rows, relabelling, omitted counters, history deletion and endpoint-only evidence.
+- [`test_validate_bh05_cleanup_factors.py`](test_validate_bh05_cleanup_factors.py) — Mutation tests for missing factor axes, owner retention, nonlinear outcome size, deadline drift, unresolved concealment, inventory divergence, and browser removal.
 - [`test_validate_bh04_conformance.py`](test_validate_bh04_conformance.py) — Regression tests.
 - [`test_validate_bh04_continuity.py`](test_validate_bh04_continuity.py) — Negative Phase 6 governance tests; never modify the user's source tree.
 - [`test_validate_bh04_dom_application.py`](test_validate_bh04_dom_application.py) — Negative Phase 4 governance tests; never modify the user's source tree.

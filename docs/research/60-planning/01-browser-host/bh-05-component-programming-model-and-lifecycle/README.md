@@ -257,6 +257,7 @@ Phoenix, browser, native-host, or release compatibility.
 - [Phase 15 completion evidence](phase-15-completion.md)
 - [Phase 16 — Factorized Distribution Shape and Sparse Cleanup Outcomes](phase-16-factorized-distribution-shape-and-sparse-cleanup-outcomes.md)
 - [Sparse cleanup outcome contract](sparse-cleanup-outcome-contract.md)
+- [Phase 16 factorized cleanup review and reconciliation](phase-16-review-and-reconciliation.md)
 
 ## Maintaining this index
 

@@ -69,15 +69,15 @@ Back to milestone: [README](README.md)
       - [x] 16.4.2.2 Subtask - Bound successful outcome size by identifiers rather than owner depth or acquisition payload.
       - [x] 16.4.2.3 Subtask - Retain Phase 13-15 process, message, inventory, outcome, and timing-shape checks.
 
-  - [ ] 16.5 Section - Requalify active runtimes and reconcile BH-05.
-    - [ ] 16.5.1 Task - Execute the source-frozen factor and correction matrices.
-      - [ ] 16.5.1.1 Subtask - Run ERTS and Linux Chrome/Firefox factor probes, canonical counts, maximum counts, adverse cases, and growth cases.
-      - [ ] 16.5.1.2 Subtask - Require every retained active correction sample within 1000 ms with zero unresolved identities and exact inventory convergence.
-      - [ ] 16.5.1.3 Subtask - Preserve all raw failures, timings, variance, counters, unavailable metrics, and artifact hashes.
-    - [ ] 16.5.2 Task - Review and reconcile the successor decision.
-      - [ ] 16.5.2.1 Subtask - Review correctness, portability, performance, malformed input, evidence, security, and compatibility.
-      - [ ] 16.5.2.2 Subtask - Map every Phase 15 re-entry condition and new finding to evidence.
-      - [ ] 16.5.2.3 Subtask - Accept only when all frozen gates pass; otherwise record revise or block.
+  - [x] 16.5 Section - Requalify active runtimes and reconcile BH-05.
+    - [x] 16.5.1 Task - Execute the source-frozen factor and correction matrices.
+      - [x] 16.5.1.1 Subtask - Run ERTS and Linux Chrome/Firefox factor probes, canonical counts, maximum counts, adverse cases, and growth cases.
+      - [x] 16.5.1.2 Subtask - Require every retained active correction sample within 1000 ms with zero unresolved identities and exact inventory convergence.
+      - [x] 16.5.1.3 Subtask - Preserve all raw failures, timings, variance, counters, unavailable metrics, and artifact hashes.
+    - [x] 16.5.2 Task - Review and reconcile the successor decision.
+      - [x] 16.5.2.1 Subtask - Review correctness, portability, performance, malformed input, evidence, security, and compatibility.
+      - [x] 16.5.2.2 Subtask - Map every Phase 15 re-entry condition and new finding to evidence.
+      - [x] 16.5.2.3 Subtask - Accept only when all frozen gates pass; otherwise record revise or block.
 
   - [ ] 16.6 Section - Run the full integration gate and publish completion.
     - [ ] 16.6.1 Task - Rebuild and verify the complete candidate.
@@ -110,6 +110,7 @@ unresolved identities within 1000 ms, and the complete BH-05 gate reproduces.
 ## Connections
 
 - [Sparse cleanup outcome contract](sparse-cleanup-outcome-contract.md)
+- [Phase 16 review and reconciliation](phase-16-review-and-reconciliation.md)
 - [Phase 15 review](phase-15-review-and-reconciliation.md)
 - [Phase 15 completion](phase-15-completion.md)
 - [Runtime-owned resource inventory contract](runtime-owned-resource-inventory-contract.md)

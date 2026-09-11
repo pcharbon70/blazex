@@ -1,0 +1,66 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 16,
+  "support_state": "unsupported",
+  "contract": {
+    "deadline_ms": 1000,
+    "page_size": 64,
+    "maximum_page_size": 128,
+    "counts": [256, 512],
+    "active_browsers": ["chrome", "firefox"]
+  },
+  "source_revision": "732717820deb512dd619b1a6c67c74d1ead04aa0",
+  "atomvm_wasm_sha256": "d20c491e75936dc8189910c8d0740093b7813d8dcc1cf966a87c011799ade9d8",
+  "attempts": [
+    {
+      "id": "phase16-sparse-success-outcomes",
+      "state": "failed",
+      "bundle_sha256": "c821941761c3e3eb7ff03b3c27926fc1ddc15fe1471bfd4cda3d0773801b3392",
+      "factor_artifact_sha256": "947f539ddeca5cd51f16d534fd10b044a95e17c3ab30c2cca603c4b888217195",
+      "factors": {
+        "chrome_256_ms": [48, 46, 47, 114, 60, 106, 104],
+        "chrome_512_ms": [123, 142, 158, 355, 181, 351, 358],
+        "firefox_256_ms": [247, 280, 303, 755, 407, 779, 845],
+        "firefox_512_ms": [817, 918, 931, 9569, 2235, 9431, 11761],
+        "profile_order": [
+          "inventory_only",
+          "payload_only",
+          "identifier_only",
+          "owner_depth_only",
+          "distribution_only",
+          "outcome_retention",
+          "maximum"
+        ]
+      },
+      "firefox_512_unresolved": [0, 0, 0, 321, 65, 321, 385],
+      "observation": "Payload-only, identifier-only, and inventory-only profiles pass; owner depth alone reproduces the nonlinear boundary and one-segment owner distribution also exceeds it."
+    },
+    {
+      "id": "phase16-owner-outside-encoded-provider-descriptor",
+      "state": "failed",
+      "bundle_sha256": "da46a094bb13705ed210d67afad7d0fc6d6ad4e44d1c801c88012312fdeee54b",
+      "maximum_512_artifact_sha256": "c01c5f9428678b057bfab354ca778372dca9273deb724f44e6dbbdd0135117a4",
+      "chrome": {"elapsed_ms": 406, "unresolved": 0},
+      "firefox": {"elapsed_ms": 13361, "unresolved": 513},
+      "observation": "Keeping the owner term beside the encoded provider descriptor increased Firefox time and was reverted before commit."
+    }
+  ],
+  "retained_candidate": {
+    "bundle_sha256": "c821941761c3e3eb7ff03b3c27926fc1ddc15fe1471bfd4cda3d0773801b3392",
+    "canonical_artifact_sha256": "76949b5f25f2e3af484407d4cd3c906b778d251a1ecf2e640ab94e7768f11271",
+    "maximum_512_artifact_sha256": "c1770baebb9fee967027aeddd19a64b42974dd0dbadaa681f19e2a13153ab145",
+    "canonical": {
+      "chrome_elapsed_ms": [9, 9, 43, 145],
+      "firefox_elapsed_ms": [37, 45, 337, 973],
+      "unresolved": 0
+    },
+    "maximum_512": {
+      "chrome": {"elapsed_ms": 324, "unresolved": 0},
+      "firefox": {"elapsed_ms": 9105, "unresolved": 321}
+    },
+    "successful_owner_records": 0,
+    "outcome_version": 2
+  },
+  "blocking_finding": "BH05-P16-DEEP-OWNER-RELEASE-DESCRIPTOR",
+  "decision": "revise"
+}

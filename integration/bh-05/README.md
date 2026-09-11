@@ -94,3 +94,4 @@ Current successor check: `python3 docs/research/70-tools/validate_bh05_recovery.
 - [Phase 15 runtime-owned resource inventory schema](resource-inventory.schema.json) — Bounded acquisition-time registration, compact disposal requests, inventory convergence, and explicit byte-instrumentation availability.
 - [Phase 15 append-only attempt ledger](runtime-owned-inventory-attempts-v0.1.0.json) — Failed architecture probes, current canonical/maximum boundary results, artifact identities, and truthful revise decision.
 - [Phase 16 cleanup factor schema](cleanup-factor.schema.json) — Requires independent 256/512 observations for every combined-maximum axis and retained-outcome metrics.
+- [Phase 16 factorized cleanup attempt ledger](factorized-cleanup-attempts-v0.1.0.json) — Preserves causal browser results, sparse-outcome controls, the reverted owner-decoding attempt, and the truthful revise decision.
