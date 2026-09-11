@@ -1,6 +1,6 @@
 defmodule BlazeX.ReleaseTicketTest do
   use ExUnit.Case, async: true
-  alias BlazeX.Component.{ReleaseTicket, RootPort}
+  alias BlazeX.Component.{ActionLedger, ActionRuntime, RecoveryPort, ReleaseTicket, RootPort}
 
   defmodule Port do
     def prepare_release(_, lease),
@@ -41,5 +41,23 @@ defmodule BlazeX.ReleaseTicketTest do
     assert {:error, :invalid_release_ticket} = RootPort.prepare_release({WrongPort, nil}, lease())
     assert {:error, :invalid_release_ticket} = ReleaseTicket.new("primary", "lease", %{path: []})
     refute ReleaseTicket.valid?(%{version: 1, provider: "primary", id: "lease", token: self()})
+  end
+
+  test "failed preparation cannot manufacture owned inventory" do
+    bad = %{lease() | selection: %{name: "primary"}}
+
+    runtime =
+      %ActionRuntime{
+        ledger: %ActionLedger{leases: %{bad.id => bad}, lease_order: [bad.id]},
+        port: {WrongPort, nil}
+      }
+      |> ActionRuntime.seed_inventory()
+
+    stats = RecoveryPort.inventory_stats(runtime.cleanup_session)
+    assert stats.inventory_count == 0
+    assert stats.ticket_preparations == 1
+    assert stats.tickets_prepared == 0
+    assert stats.ticket_preparation_failures == 1
+    assert Map.has_key?(runtime.ledger.leases, bad.id)
   end
 end

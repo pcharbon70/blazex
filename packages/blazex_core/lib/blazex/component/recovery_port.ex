@@ -1,6 +1,6 @@
 defmodule BlazeX.Component.RecoveryPort do
   @moduledoc "Runtime-owned bounded port invocation for opt-in recovery roots."
-  alias BlazeX.Component.{ActionLedger, RootPort}
+  alias BlazeX.Component.{ReleaseTicket, RootPort}
 
   @page_size 64
   @maximum_page_size 128
@@ -46,15 +46,36 @@ defmodule BlazeX.Component.RecoveryPort do
        inventory_messages_sent: 0,
        inventory_messages_received: 0,
        inventory_request_bytes: byte_counter(),
-       inventory_result_bytes: byte_counter()
+       inventory_result_bytes: byte_counter(),
+       ticket_preparations: 0,
+       tickets_prepared: 0,
+       ticket_preparation_failures: 0
      }}
   end
 
-  def register_page(session, leases, timeout),
-    do: inventory_command(session, :register, leases, timeout)
+  def note_ticket_preparation(session, requested, :ok)
+      when is_integer(requested) and requested > 0 do
+    %{
+      session
+      | ticket_preparations: session.ticket_preparations + requested,
+        tickets_prepared: session.tickets_prepared + requested
+    }
+  end
 
-  def replace_page(session, leases, timeout),
-    do: inventory_command(session, :replace, leases, timeout)
+  def note_ticket_preparation(session, requested, :error)
+      when is_integer(requested) and requested > 0 do
+    %{
+      session
+      | ticket_preparations: session.ticket_preparations + requested,
+        ticket_preparation_failures: session.ticket_preparation_failures + requested
+    }
+  end
+
+  def register_page(session, tickets, timeout),
+    do: inventory_command(session, :register, tickets, timeout)
+
+  def replace_page(session, tickets, timeout),
+    do: inventory_command(session, :replace, tickets, timeout)
 
   def drop_page(session, identities, timeout),
     do: inventory_command(session, :drop, identities, timeout)
@@ -306,7 +327,10 @@ defmodule BlazeX.Component.RecoveryPort do
       :inventory_messages_sent,
       :inventory_messages_received,
       :inventory_request_bytes,
-      :inventory_result_bytes
+      :inventory_result_bytes,
+      :ticket_preparations,
+      :tickets_prepared,
+      :ticket_preparation_failures
     ])
   end
 
@@ -489,14 +513,14 @@ defmodule BlazeX.Component.RecoveryPort do
       when is_integer(sequence) and is_list(identities) and identities != [] and
              length(identities) <= @page_size ->
         case take_owned_page(inventory, identities) do
-          {:ok, encoded_leases, remaining} ->
-            leases =
-              Enum.map(encoded_leases, fn {_id, encoded} -> :erlang.binary_to_term(encoded) end)
+          {:ok, encoded_tickets, remaining} ->
+            tickets =
+              Enum.map(encoded_tickets, fn {_id, encoded} -> :erlang.binary_to_term(encoded) end)
 
-            results = RootPort.release_prepared_page(port, leases)
+            results = RootPort.release_ticket_page(port, tickets)
 
             retained =
-              encoded_leases
+              encoded_tickets
               |> Enum.zip(results)
               |> Enum.flat_map(fn
                 {_encoded, :released} -> []
@@ -536,29 +560,30 @@ defmodule BlazeX.Component.RecoveryPort do
     end
   end
 
-  defp update_inventory(inventory, :register, leases) do
+  defp update_inventory(inventory, :register, tickets) do
     ids = inventory_ids(inventory)
 
-    if valid_lease_page?(leases) and inventory.count + length(leases) <= 512 and
-         Enum.all?(leases, &(&1.id not in ids)) do
-      prepared = Enum.map(leases, &prepare_lease/1)
+    if ReleaseTicket.page?(tickets, @maximum_page_size) and
+         inventory.count + length(tickets) <= 512 and
+         Enum.all?(tickets, &(&1.id not in ids)) do
+      prepared = Enum.map(tickets, &prepare_ticket/1)
 
       {:ok,
        %{
          inventory
          | active: inventory.active ++ prepared,
-           count: inventory.count + length(leases)
+           count: inventory.count + length(tickets)
        }}
     else
       :error
     end
   end
 
-  defp update_inventory(inventory, :replace, leases) do
+  defp update_inventory(inventory, :replace, tickets) do
     ids = inventory_ids(inventory)
 
-    if valid_lease_page?(leases) and Enum.all?(leases, &(&1.id in ids)) do
-      replacements = Map.new(leases, &{&1.id, prepare_lease(&1)})
+    if ReleaseTicket.page?(tickets, @maximum_page_size) and Enum.all?(tickets, &(&1.id in ids)) do
+      replacements = Map.new(tickets, &{&1.id, prepare_ticket(&1)})
 
       {:ok,
        %{
@@ -600,40 +625,21 @@ defmodule BlazeX.Component.RecoveryPort do
     session_loop(owner, token, owner_monitor, inventory)
   end
 
-  defp valid_lease_page?(leases) do
-    identities = Enum.map(leases, &Map.get(&1, :id))
-
-    Enum.all?(leases, fn lease ->
-      is_map(lease) and is_binary(Map.get(lease, :id)) and
-        is_map(Map.get(lease, :acquisition))
-    end) and valid_identity_page?(identities)
-  rescue
-    _ -> false
-  end
-
   defp valid_identity_page?(identities),
     do:
       Enum.all?(identities, &is_binary/1) and length(Enum.uniq(identities)) == length(identities)
 
-  defp prepare_lease(lease) do
-    prepared =
-      lease
-      |> Map.take([:id, :owner, :generation, :kind, :capability, :selection, :acquisition])
-      |> Map.update(:acquisition, nil, &ActionLedger.compact_acquisition/1)
-      |> Map.put(:release_requested, true)
-
-    {lease.id, :erlang.term_to_binary(prepared)}
-  end
+  defp prepare_ticket(ticket), do: {ticket.id, :erlang.term_to_binary(ticket)}
 
   defp inventory_ids(inventory),
     do: Enum.map(inventory.active ++ inventory.retained, &elem(&1, 0))
 
   defp take_owned_page(inventory, identities) do
     if valid_identity_page?(identities) do
-      {leases, remaining} = Enum.split(inventory.active, length(identities))
+      {tickets, remaining} = Enum.split(inventory.active, length(identities))
 
-      if Enum.map(leases, &elem(&1, 0)) == identities,
-        do: {:ok, leases, remaining},
+      if Enum.map(tickets, &elem(&1, 0)) == identities,
+        do: {:ok, tickets, remaining},
         else: :error
     else
       :error
@@ -656,7 +662,10 @@ defmodule BlazeX.Component.RecoveryPort do
         notify: 1,
         dispose: 1,
         force_cleanup: 1,
-        release: 1
+        release: 1,
+        prepare_release: 1,
+        release_ticket: 1,
+        release_ticket_page: 1
       ] do
     args = Macro.generate_arguments(arity, __MODULE__)
 

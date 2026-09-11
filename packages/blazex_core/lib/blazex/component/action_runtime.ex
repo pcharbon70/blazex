@@ -133,7 +133,7 @@ defmodule BlazeX.Component.ActionRuntime do
           ledger = ActionLedger.transfer(runtime.ledger, action, accepted)
           runtime = %{runtime | ledger: ledger}
           lease = Map.fetch!(ledger.leases, action.body.lease.id)
-          {%{runtime | cleanup_session: replace(runtime.cleanup_session, [lease])}, work}
+          {replace(runtime, [lease]), work}
 
         :resource_release ->
           {release(runtime, action.body.lease), work}
@@ -266,7 +266,7 @@ defmodule BlazeX.Component.ActionRuntime do
       runtime.ledger
       |> ActionLedger.ordered_leases()
       |> Enum.chunk_every(RecoveryPort.maximum_page_size())
-      |> Enum.reduce(session, fn page, current -> register_page(current, page) end)
+      |> Enum.reduce(session, fn page, current -> register_page(current, runtime.port, page) end)
 
     finish_inventory_transfer(%{
       runtime
@@ -301,26 +301,43 @@ defmodule BlazeX.Component.ActionRuntime do
 
   defp register(runtime, leases) do
     session = runtime.cleanup_session || new_session()
-    %{runtime | cleanup_session: register_page(session, leases)}
+    %{runtime | cleanup_session: register_page(session, runtime.port, leases)}
   end
 
-  defp register_page(%{alive: true} = session, leases) do
-    case RecoveryPort.register_page(session, leases, @inventory_timeout) do
-      {:ok, updated} -> updated
-      {:error, _, updated} -> updated
+  defp register_page(%{alive: true} = session, port, leases) do
+    case RootPort.prepare_release_page(port, leases) do
+      {:ok, tickets} ->
+        session = RecoveryPort.note_ticket_preparation(session, length(leases), :ok)
+
+        case RecoveryPort.register_page(session, tickets, @inventory_timeout) do
+          {:ok, updated} -> updated
+          {:error, _, updated} -> updated
+        end
+
+      _ ->
+        RecoveryPort.note_ticket_preparation(session, length(leases), :error)
     end
   end
 
-  defp register_page(session, _leases), do: session
+  defp register_page(session, _port, _leases), do: session
 
-  defp replace(%{alive: true} = session, leases) do
-    case RecoveryPort.replace_page(session, leases, @inventory_timeout) do
-      {:ok, updated} -> updated
-      {:error, _, updated} -> updated
+  defp replace(%{cleanup_session: %{alive: true} = session} = runtime, leases) do
+    case RootPort.prepare_release_page(runtime.port, leases) do
+      {:ok, tickets} ->
+        session = RecoveryPort.note_ticket_preparation(session, length(leases), :ok)
+
+        case RecoveryPort.replace_page(session, tickets, @inventory_timeout) do
+          {:ok, updated} -> %{runtime | cleanup_session: updated}
+          {:error, _, updated} -> %{runtime | cleanup_session: updated}
+        end
+
+      _ ->
+        updated = RecoveryPort.note_ticket_preparation(session, length(leases), :error)
+        %{runtime | cleanup_session: updated}
     end
   end
 
-  defp replace(session, _leases), do: session
+  defp replace(runtime, _leases), do: runtime
 
   defp drop(%{alive: true} = session, identities) do
     case RecoveryPort.drop_page(session, identities, @inventory_timeout) do

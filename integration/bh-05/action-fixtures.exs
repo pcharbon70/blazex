@@ -233,6 +233,16 @@ defmodule BlazeX.BH05.ActionProvider do
     send(config.observer, {:action_release, packet})
     if config.mode == :lost, do: :lost, else: :released
   end
+
+  def prepare_release(config, packet) do
+    send(config.observer, {:action_release_prepared, packet})
+    {:ok, %{handle: packet.resource.id}}
+  end
+
+  def release_prepared(config, token) do
+    send(config.observer, {:action_ticket_release, token})
+    if config.mode == :lost, do: :lost, else: :released
+  end
 end
 
 defmodule BlazeX.BH05.ActionFixtures do

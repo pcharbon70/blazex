@@ -25,6 +25,21 @@ defmodule BlazeX.RecoveryCleanupTest do
       :released
     end
 
+    def prepare_release(_, lease),
+      do: {:ok, %{provider: "test", token: %{handle: lease.id}}}
+
+    def release_ticket(%{fail_id: id, observer: observer}, %{id: id}) do
+      send(observer, {:release_failed, id})
+      {:error, :unavailable}
+    end
+
+    def release_ticket(config, ticket) do
+      send(config.observer, {:released, ticket.id})
+      :released
+    end
+
+    def release_ticket_page(config, tickets), do: Enum.map(tickets, &release_ticket(config, &1))
+
     def cancel(config, packet) do
       send(config.observer, {:canceled, packet.correlation})
       :ok
@@ -62,7 +77,15 @@ defmodule BlazeX.RecoveryCleanupTest do
     leases =
       Map.new(1..512, fn n ->
         id = "lease-#{n}"
-        {id, %{id: id, owner: owner(), acquisition: %{sequence: n}, release_requested: false}}
+
+        {id,
+         %{
+           id: id,
+           owner: owner(),
+           selection: %{name: "test"},
+           acquisition: %{sequence: n},
+           release_requested: false
+         }}
       end)
 
     runtime =
@@ -127,7 +150,15 @@ defmodule BlazeX.RecoveryCleanupTest do
     leases =
       Map.new(1..65, fn n ->
         id = "lease-#{n}"
-        {id, %{id: id, owner: owner(), acquisition: %{sequence: n}, release_requested: false}}
+
+        {id,
+         %{
+           id: id,
+           owner: owner(),
+           selection: %{name: "test"},
+           acquisition: %{sequence: n},
+           release_requested: false
+         }}
       end)
 
     runtime =
@@ -158,6 +189,7 @@ defmodule BlazeX.RecoveryCleanupTest do
     lease = %{
       id: "lease-missing-owner",
       owner: owner(),
+      selection: %{name: "test"},
       acquisition: %{sequence: 1, payload: String.duplicate("x", 8192)},
       release_requested: false
     }
@@ -215,6 +247,7 @@ defmodule BlazeX.RecoveryCleanupTest do
          %{
            id: id,
            owner: owner_fun.(n),
+           selection: %{name: "test"},
            acquisition: acquisition_fun.(n),
            release_requested: false
          }}

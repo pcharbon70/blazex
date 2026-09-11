@@ -161,6 +161,19 @@ defmodule BlazeX.BH05.RecoveryProvider do
     :released
   end
 
+  def prepare_release(_, lease),
+    do: {:ok, %{provider: lease.selection.name, token: %{handle: lease.id}}}
+
+  def release_ticket(%{mode: :slow}, _), do: {:error, :timed_out}
+
+  def release_ticket(config, ticket) do
+    Agent.update(config.resources, &Map.delete(&1, ticket.id))
+    send(config.observer, {:recovery_release, ticket.id})
+    :released
+  end
+
+  def release_ticket_page(config, tickets), do: Enum.map(tickets, &release_ticket(config, &1))
+
   def force_cleanup(config, %{reference: %{id: id}}) do
     Agent.update(config.resources, &Map.delete(&1, id))
     send(config.observer, {:recovery_forced, id})

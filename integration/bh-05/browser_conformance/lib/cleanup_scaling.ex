@@ -20,6 +20,11 @@ defmodule BlazeX.BH05.CleanupScaling do
     def force_cleanup(_, _), do: :ok
     def release(_, _), do: :released
     def release_page(_, leases), do: List.duplicate(:released, length(leases))
+
+    def prepare_release(_, lease),
+      do: {:ok, %{provider: lease.selection.name, token: %{handle: lease.id}}}
+
+    def release_ticket_page(_, tickets), do: List.duplicate(:released, length(tickets))
   end
 
   def run(runtime \\ :browser) do
@@ -230,6 +235,7 @@ defmodule BlazeX.BH05.CleanupScaling do
        %{
          id: id,
          owner: lease_owner,
+         selection: %{name: "fixture"},
          acquisition: acquisition(payload_class, sequence),
          release_requested: false
        }}

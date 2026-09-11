@@ -49,15 +49,15 @@ Back to milestone: [README](README.md)
       - [x] 17.2.2.2 Subtask - Keep tickets private to runtime inventory and exclude them from component work, snapshots, diagnostics, and public manifests.
       - [x] 17.2.2.3 Subtask - Document provider migration and fail closed when preparation is unavailable.
 
-  - [ ] 17.3 Section - Integrate tickets with owned inventory and disposal.
-    - [ ] 17.3.1 Task - Register and replace tickets at lifecycle boundaries.
-      - [ ] 17.3.1.1 Subtask - Prepare and register tickets for completed acquisitions before result work is returned.
-      - [ ] 17.3.1.2 Subtask - Replace tickets after accepted transfer and drop them after explicit terminal release.
-      - [ ] 17.3.1.3 Subtask - Preserve atomic inventory counts, ordering, capacity, process ownership, and teardown.
-    - [ ] 17.3.2 Task - Execute owner-free normal disposal.
-      - [ ] 17.3.2.1 Subtask - Decode only bounded ticket data and invoke ticket pages inside the existing deadline.
-      - [ ] 17.3.2.2 Subtask - Reconcile sparse terminal outcomes by lease order and preserve exact forced candidates from the root ledger.
-      - [ ] 17.3.2.3 Subtask - Report ticket preparation separately from disposal and prove zero normal owner records.
+  - [x] 17.3 Section - Integrate tickets with owned inventory and disposal.
+    - [x] 17.3.1 Task - Register and replace tickets at lifecycle boundaries.
+      - [x] 17.3.1.1 Subtask - Prepare and register tickets for completed acquisitions before result work is returned.
+      - [x] 17.3.1.2 Subtask - Replace tickets after accepted transfer and drop them after explicit terminal release.
+      - [x] 17.3.1.3 Subtask - Preserve atomic inventory counts, ordering, capacity, process ownership, and teardown.
+    - [x] 17.3.2 Task - Execute owner-free normal disposal.
+      - [x] 17.3.2.1 Subtask - Decode only bounded ticket data and invoke ticket pages inside the existing deadline.
+      - [x] 17.3.2.2 Subtask - Reconcile sparse terminal outcomes by lease order and preserve exact forced candidates from the root ledger.
+      - [x] 17.3.2.3 Subtask - Report ticket preparation separately from disposal and prove zero normal owner records.
 
   - [ ] 17.4 Section - Add lifecycle, security, and scaling gates.
     - [ ] 17.4.1 Task - Test ticket correctness and recovery.
