@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://blazex.dev/schemas/bh-05/resource-inventory-v1.json",
+  "title": "BH-05 runtime-owned resource inventory structural summary",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "runtime_owned_inventory",
+    "inventory_before",
+    "inventory_after",
+    "inventory_peak",
+    "inventory_pages_sent",
+    "inventory_pages_received",
+    "inventory_items_sent",
+    "inventory_messages",
+    "inventory_request_bytes",
+    "inventory_result_bytes"
+  ],
+  "properties": {
+    "runtime_owned_inventory": {"const": true},
+    "inventory_before": {"type": "integer", "minimum": 0, "maximum": 512},
+    "inventory_after": {"const": 0},
+    "inventory_peak": {"type": "integer", "minimum": 0, "maximum": 512},
+    "inventory_pages_sent": {"type": "integer", "minimum": 0, "maximum": 4},
+    "inventory_pages_received": {"type": "integer", "minimum": 0, "maximum": 4},
+    "inventory_items_sent": {"type": "integer", "minimum": 0, "maximum": 512},
+    "inventory_messages": {"type": "integer", "minimum": 0, "maximum": 8},
+    "inventory_request_bytes": {
+      "oneOf": [{"type": "integer", "minimum": 0}, {"const": "unavailable"}]
+    },
+    "inventory_result_bytes": {
+      "oneOf": [{"type": "integer", "minimum": 0}, {"const": "unavailable"}]
+    }
+  }
+}

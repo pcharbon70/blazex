@@ -1,0 +1,82 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 15,
+  "support_state": "unsupported",
+  "contract": {
+    "deadline_ms": 1000,
+    "page_size": 64,
+    "maximum_page_size": 128,
+    "fixture_count": 512,
+    "active_browsers": ["chrome", "firefox"]
+  },
+  "source_tree_sha256": "6b15d8854d0f85f4b7592ae02b07239d171b20b084eb3350558f74440c6dac96",
+  "atomvm_wasm_sha256": "d20c491e75936dc8189910c8d0740093b7813d8dcc1cf966a87c011799ade9d8",
+  "attempts": [
+    {
+      "id": "phase15-runtime-owner-full-descriptors",
+      "state": "failed",
+      "artifact_sha256": "25d9b93d2faa9add81342cf72c0e16fe5cb787f6d6ac2db9e683201acf4acd28",
+      "firefox_maximum_512": {"elapsed_ms": 8934, "unresolved": 513},
+      "observation": "Compact identity dispatch alone did not prevent the full descriptor graph from remaining on the worker heap."
+    },
+    {
+      "id": "phase15-prepared-release-descriptors",
+      "state": "failed",
+      "artifact_sha256": "b1fedf7fad41e0d0f56e6db2e7817bbf744655f6d122e4924315a75cfcb2e067",
+      "firefox_maximum_512": {"elapsed_ms": 10670, "unresolved": 513},
+      "observation": "Preparing release_requested before disposal removed a map rewrite but not the scaling failure."
+    },
+    {
+      "id": "phase15-private-table-and-closed-correlation",
+      "state": "failed",
+      "artifact_sha256": "7b51730e26dd1db2cf2e91f349a4960b7adfbb40bf2520750baefff1b7d1989c",
+      "chrome_maximum_512": {"elapsed_ms": 287, "unresolved": 0},
+      "firefox_maximum_512": {"elapsed_ms": 6403, "unresolved": 321},
+      "observation": "Moving descriptor storage off the worker map and closing acquisition correlation did not remove the Firefox nonlinear boundary."
+    },
+    {
+      "id": "phase15-ordered-encoded-owner-candidate",
+      "state": "failed",
+      "bundle_sha256": "a97b20ac8728934f61c51b233504c11a7177d3b375ff97a5b5e7e2fab57b4f3c",
+      "canonical_subset_artifact_sha256": "ef2e58c93c131625a5fcbe6c57bc3e1ca4406dd2a9960e9a9fbb17b5db4a0668",
+      "maximum_artifact_sha256": {
+        "64": "6ecbc7dce799c33ff9767b35c840d324a81b0207a127adcd7bf97f489eb4cf54",
+        "65": "20f8a3df9a2e94bd27d4f19443f578a0a245d2eb8e336a3c96d9d47793d5b230",
+        "256": "df4c03bde132d02c4b28b7be956e20648f721d1069e7bb0fea0976815acfaa2c",
+        "512": "d488b8849bbd0b116ed2dd37af820b74827eb35751d9e46b09e1fe91ca4ebe56"
+      },
+      "canonical_subset": {
+        "counts": [64, 65, 256, 512],
+        "chrome_elapsed_ms": [9, 9, 44, 154],
+        "firefox_elapsed_ms": [35, 55, 284, 929],
+        "unresolved": 0,
+        "state": "passed"
+      },
+      "maximum_payload": {
+        "counts": [64, 65, 256, 512],
+        "chrome_elapsed_ms": [13, 20, 125, 338],
+        "firefox_elapsed_ms": [70, 81, 688, 6915],
+        "firefox_unresolved": [0, 0, 0, 321],
+        "state": "failed"
+      },
+      "structural": {
+        "runtime_owned_inventory": true,
+        "normal_worker_starts_during_disposal": 0,
+        "maximum_512_lease_pages": 8,
+        "maximum_512_inventory_before": 512,
+        "chrome_inventory_after": 0,
+        "firefox_inventory_after": 320
+      },
+      "second_clean_repeat": {
+        "bundle_byte_identical": true,
+        "canonical_artifact_sha256": "76be62e7acdfed99197b35f75e1e0b939e7329e6fd6f93e1810efe001b95bb8f",
+        "maximum_512_artifact_sha256": "d2cdbcbda5eea64156ab05c9be32fc757d946ffc1232e035e3469401cbc5e79c",
+        "canonical_chrome_elapsed_ms": [7, 9, 43, 157],
+        "canonical_firefox_elapsed_ms": [37, 43, 295, 945],
+        "maximum_512_chrome": {"elapsed_ms": 296, "unresolved": 0},
+        "maximum_512_firefox": {"elapsed_ms": 6659, "unresolved": 321}
+      }
+    }
+  ],
+  "decision": "revise"
+}

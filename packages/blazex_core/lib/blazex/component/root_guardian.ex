@@ -14,7 +14,7 @@ defmodule BlazeX.Component.RootGuardian do
     with {:ok, spec} <- RootPort.normalize(spec),
          true <- RootPort.ports?(ports),
          {:ok, _} <- RootSchedule.new(policy),
-         {:ok, _} <- ActionRuntime.new(actions),
+         :ok <- ActionRuntime.validate(actions),
          true <- policy == nil or SchedulingPort.supported?(ports.evaluator),
          true <-
            actions == nil or

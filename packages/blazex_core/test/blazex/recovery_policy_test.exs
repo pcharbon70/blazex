@@ -118,6 +118,84 @@ defmodule BlazeX.RecoveryPolicyTest do
     RecoveryPort.close_session(session)
   end
 
+  test "session owns bounded release descriptors before compact disposal" do
+    {:ok, session} = RecoveryPort.open_session()
+
+    leases =
+      Enum.map(["first", "lost", "last"], fn id ->
+        %{id: id, acquisition: %{payload: String.duplicate(id, 64)}, release_requested: false}
+      end)
+
+    assert {:ok, session} = RecoveryPort.register_page(session, leases, 100)
+    assert session.inventory_count == 3 and session.inventory_peak == 3
+    assert RecoveryPort.session_stats(session).pages_sent == 0
+
+    registration = RecoveryPort.inventory_stats(session)
+    assert registration.inventory_items_sent == 3
+    assert registration.inventory_pages_sent == 1
+    assert registration.inventory_pages_received == 1
+    assert registration.inventory_request_bytes > 0
+
+    reset = RecoveryPort.reset_cleanup_stats(session)
+    assert reset.inventory_count == 3
+    assert reset.inventory_request_bytes == registration.inventory_request_bytes
+
+    assert {:ok, [:released, {:error, :lost}, :released], session} =
+             RecoveryPort.release_owned_page(
+               reset,
+               {Ports, self()},
+               ["first", "lost", "last"],
+               100
+             )
+
+    assert_receive {:release_page, ["first", "lost", "last"]}
+    assert session.inventory_count == 1
+    assert session.request_bytes < registration.inventory_request_bytes
+
+    assert {:ok, session} =
+             RecoveryPort.replace_page(
+               session,
+               [%{Enum.at(leases, 1) | acquisition: %{sequence: :new}}],
+               100
+             )
+
+    assert {:ok, session} = RecoveryPort.drop_page(session, ["lost"], 100)
+    assert session.inventory_count == 0
+    RecoveryPort.close_session(session)
+  end
+
+  test "inventory mutations are atomic and bounded" do
+    {:ok, session} = RecoveryPort.open_session()
+    first = %{id: "first", acquisition: %{sequence: 1}}
+
+    assert {:ok, session} = RecoveryPort.register_page(session, [first], 100)
+
+    assert {:error, :invalid_inventory, session} =
+             RecoveryPort.register_page(session, [first], 100)
+
+    assert session.inventory_count == 1
+
+    assert {:error, :invalid_inventory, session} =
+             RecoveryPort.replace_page(session, [%{id: "missing"}], 100)
+
+    assert {:error, :invalid_inventory, session} =
+             RecoveryPort.drop_page(session, ["missing"], 100)
+
+    assert session.inventory_count == 1
+
+    oversized = Enum.map(1..129, &%{id: "lease-#{&1}"})
+
+    assert {:error, :invalid_inventory, ^session} =
+             RecoveryPort.register_page(session, oversized, 100)
+
+    assert {:ok, [{:error, :inventory_mismatch}], session} =
+             RecoveryPort.release_owned_page(session, {Ports, self()}, ["missing"], 100)
+
+    assert session.inventory_count == 1
+    refute_receive {:release_page, _}, 10
+    RecoveryPort.close_session(session)
+  end
+
   test "session rejects oversized and malformed pages and remembers terminal failure" do
     {:ok, oversized} = RecoveryPort.open_session()
     jobs = List.duplicate({{Ports, :ok}, :call, []}, 129)

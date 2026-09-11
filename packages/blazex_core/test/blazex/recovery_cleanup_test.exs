@@ -65,19 +65,26 @@ defmodule BlazeX.RecoveryCleanupTest do
         {id, %{id: id, owner: owner(), acquisition: %{sequence: n}, release_requested: false}}
       end)
 
-    runtime = %ActionRuntime{
-      ledger: %ActionLedger{leases: leases},
-      port: {Port, %{observer: self()}}
-    }
+    runtime =
+      %ActionRuntime{
+        ledger: %ActionLedger{leases: leases},
+        port: {Port, %{observer: self()}}
+      }
+      |> ActionRuntime.seed_inventory()
 
     cleaned = RecoveryCleanup.run(%{state() | actions: runtime}, :replace)
     assert cleaned.recovery.cleanup.unresolved == 0
     assert cleaned.recovery.cleanup.requested == 513
     assert cleaned.recovery.cleanup.elapsed_ms < 1000
-    assert cleaned.recovery.cleanup.amplification.normal_worker_starts == 1
+    assert cleaned.recovery.cleanup.amplification.normal_worker_starts == 0
     assert cleaned.recovery.cleanup.amplification.forced_worker_starts == 0
-    assert cleaned.recovery.cleanup.amplification.total_worker_starts == 1
+    assert cleaned.recovery.cleanup.amplification.total_worker_starts == 0
     assert cleaned.recovery.cleanup.amplification.peak_live_cleanup_workers == 1
+    assert cleaned.recovery.cleanup.amplification.runtime_owned_inventory
+    assert cleaned.recovery.cleanup.amplification.inventory_before == 512
+    assert cleaned.recovery.cleanup.amplification.inventory_after == 0
+    assert cleaned.recovery.cleanup.amplification.inventory.inventory_items_sent == 512
+    assert cleaned.recovery.cleanup.amplification.inventory.inventory_pages_sent == 4
     assert cleaned.recovery.cleanup.amplification.lease_pages_sent == 8
     assert cleaned.recovery.cleanup.amplification.normal.pages_sent == 9
     assert cleaned.recovery.cleanup.amplification.normal.pages_received == 9
@@ -123,10 +130,12 @@ defmodule BlazeX.RecoveryCleanupTest do
         {id, %{id: id, owner: owner(), acquisition: %{sequence: n}, release_requested: false}}
       end)
 
-    runtime = %ActionRuntime{
-      ledger: %ActionLedger{leases: leases},
-      port: {Port, %{observer: self(), fail_id: "lease-64"}}
-    }
+    runtime =
+      %ActionRuntime{
+        ledger: %ActionLedger{leases: leases},
+        port: {Port, %{observer: self(), fail_id: "lease-64"}}
+      }
+      |> ActionRuntime.seed_inventory()
 
     cleaned = RecoveryCleanup.run(%{state() | actions: runtime}, :replace)
     report = cleaned.recovery.cleanup
@@ -135,14 +144,38 @@ defmodule BlazeX.RecoveryCleanupTest do
     assert report.forced == 1
     assert report.unresolved == 0
     assert report.amplification.lease_pages_sent == 2
-    assert report.amplification.normal_worker_starts == 1
+    assert report.amplification.normal_worker_starts == 0
     assert report.amplification.forced_worker_starts == 1
-    assert report.amplification.total_worker_starts == 2
+    assert report.amplification.total_worker_starts == 1
     assert report.amplification.peak_live_cleanup_workers == 1
     assert_receive {:release_failed, "lease-64"}
     assert_receive {:forced, "lease-64"}
     refute_receive {:forced, _}, 10
     assert cleaned.actions.ledger.leases == %{}
+  end
+
+  test "a missing owned inventory fails closed into exact forced recovery" do
+    lease = %{
+      id: "lease-missing-owner",
+      owner: owner(),
+      acquisition: %{sequence: 1, payload: String.duplicate("x", 8192)},
+      release_requested: false
+    }
+
+    runtime = %ActionRuntime{
+      ledger: %ActionLedger{leases: %{lease.id => lease}},
+      port: {Port, %{observer: self()}}
+    }
+
+    cleaned = RecoveryCleanup.run(%{state() | actions: runtime}, :replace)
+    report = cleaned.recovery.cleanup
+    assert report.status == :completed and report.unresolved == 0
+    refute report.amplification.runtime_owned_inventory
+    assert report.amplification.normal_worker_starts == 1
+    assert report.amplification.lease_pages_sent == 0
+    assert report.amplification.forced_worker_starts == 1
+    assert_receive {:forced, "lease-missing-owner"}
+    refute_receive {:released, "lease-missing-owner"}, 10
   end
 
   test "page boundaries stay structural across payload and owner distributions" do
@@ -160,14 +193,17 @@ defmodule BlazeX.RecoveryCleanupTest do
       assert report.status == :completed
       assert report.unresolved == 0
       assert report.amplification.lease_pages_sent == 3
-      assert report.amplification.normal_worker_starts == 1
-      assert report.amplification.total_worker_starts == 1
+      assert report.amplification.normal_worker_starts == 0
+      assert report.amplification.total_worker_starts == 0
       assert report.amplification.peak_live_cleanup_workers == 1
       assert report.amplification.protocol_messages == 8
     end
 
-    assert maximum.recovery.cleanup.amplification.normal.request_bytes >
+    assert maximum.recovery.cleanup.amplification.normal.request_bytes ==
              canonical.recovery.cleanup.amplification.normal.request_bytes
+
+    assert maximum.recovery.cleanup.amplification.normal.request_bytes <
+             maximum.recovery.cleanup.amplification.inventory.inventory_request_bytes
   end
 
   defp cleanup_with(count, owner_fun, acquisition_fun) do
@@ -184,10 +220,12 @@ defmodule BlazeX.RecoveryCleanupTest do
          }}
       end)
 
-    runtime = %ActionRuntime{
-      ledger: %ActionLedger{leases: leases},
-      port: {Port, %{observer: self()}}
-    }
+    runtime =
+      %ActionRuntime{
+        ledger: %ActionLedger{leases: leases},
+        port: {Port, %{observer: self()}}
+      }
+      |> ActionRuntime.seed_inventory()
 
     cleaned = RecoveryCleanup.run(%{state() | actions: runtime}, :replace)
     for _ <- 1..count, do: assert_receive({:released, _})

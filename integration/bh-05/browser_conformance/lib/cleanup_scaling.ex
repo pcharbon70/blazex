@@ -119,6 +119,17 @@ defmodule BlazeX.BH05.CleanupScaling do
       "forced_worker_starts" => value.forced_worker_starts,
       "total_worker_starts" => value.total_worker_starts,
       "peak_live_cleanup_workers" => value.peak_live_cleanup_workers,
+      "runtime_owned_inventory" => value.runtime_owned_inventory,
+      "inventory_before" => value.inventory_before,
+      "inventory_after" => value.inventory_after,
+      "inventory_peak" => value.inventory.inventory_peak,
+      "inventory_pages_sent" => value.inventory.inventory_pages_sent,
+      "inventory_pages_received" => value.inventory.inventory_pages_received,
+      "inventory_items_sent" => value.inventory.inventory_items_sent,
+      "inventory_messages" =>
+        value.inventory.inventory_messages_sent + value.inventory.inventory_messages_received,
+      "inventory_request_bytes" => value.inventory.inventory_request_bytes,
+      "inventory_result_bytes" => value.inventory.inventory_result_bytes,
       "lease_pages_sent" => value.lease_pages_sent,
       "protocol_messages" => value.protocol_messages,
       "normal_pages_sent" => value.normal.pages_sent,
@@ -137,10 +148,12 @@ defmodule BlazeX.BH05.CleanupScaling do
     root = "scale-#{payload_class}-#{count}-#{sample}"
     owner = %{root: root, generation: 1, path: []}
 
-    actions = %ActionRuntime{
-      ledger: ledger(payload_class, count, owner),
-      port: {Port, nil}
-    }
+    actions =
+      %ActionRuntime{
+        ledger: ledger(payload_class, count, owner),
+        port: {Port, nil}
+      }
+      |> ActionRuntime.seed_inventory()
 
     %{
       spec: %{root: root},

@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 15,
+  "decision": "revise",
+  "support_state": "unsupported",
+  "milestone_accepted": false,
+  "bh06_eligible": false,
+  "bh06_authorized": false,
+  "source_tree_sha256": "6b15d8854d0f85f4b7592ae02b07239d171b20b084eb3350558f74440c6dac96",
+  "atomvm_wasm_sha256": "d20c491e75936dc8189910c8d0740093b7813d8dcc1cf966a87c011799ade9d8",
+  "bundle_sha256": "a97b20ac8728934f61c51b233504c11a7177d3b375ff97a5b5e7e2fab57b4f3c",
+  "findings": [
+    {
+      "id": "BH05-P14-MAXIMUM-PAYLOAD-TRANSFER",
+      "severity": "blocking",
+      "disposition": "narrowed",
+      "evidence": "Normal disposal starts zero workers, sends compact identity pages, and retains no acquisition payload in the root ledger, but Firefox maximum 512 still fails."
+    },
+    {
+      "id": "BH05-P15-MAXIMUM-DISTRIBUTION-SHAPE",
+      "severity": "blocking",
+      "disposition": "open",
+      "owner": "resource-runtime-ownership",
+      "evidence": "Firefox passes maximum counts 64, 65, and 256 at 70, 81, and 688 ms, then reaches 6915 ms with 321 unresolved identities at 512; the combined maximum fixture also changes ID and owner-path distribution, so acquisition payload alone is no longer a sufficient causal explanation."
+    },
+    {
+      "id": "BH05-P13-ATOMVM-BYTES",
+      "severity": "limitation",
+      "disposition": "explicit-unavailable",
+      "effect": "AtomVM byte counters remain unavailable; structural, identity, timing, page, callback, and inventory counters remain mandatory."
+    }
+  ]
+}

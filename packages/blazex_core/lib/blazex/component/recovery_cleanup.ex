@@ -1,6 +1,6 @@
 defmodule BlazeX.Component.RecoveryCleanup do
   @moduledoc "Deadline-bound owner cleanup; failed release is never silently counted as success."
-  alias BlazeX.Component.{ActionLedger, CleanupOutcome, RecoveryPort, RootProcess}
+  alias BlazeX.Component.{ActionLedger, ActionRuntime, CleanupOutcome, RecoveryPort, RootProcess}
 
   @deadline_ms 1000
 
@@ -9,20 +9,46 @@ defmodule BlazeX.Component.RecoveryCleanup do
   defp execute_root(state, reason, next, started) do
     deadline = started + @deadline_ms
     runtime_before = runtime_metrics()
-    {:ok, session} = RecoveryPort.open_session()
+
+    {state, session, inventory_owned, inventory_before, normal_worker_starts} =
+      cleanup_session(state)
 
     try do
-      execute_root_with_session(state, reason, next, started, deadline, session, runtime_before)
-    after
-      RecoveryPort.close_session(session)
+      execute_root_with_session(
+        state,
+        reason,
+        next,
+        started,
+        deadline,
+        session,
+        inventory_owned,
+        inventory_before,
+        normal_worker_starts,
+        runtime_before
+      )
+    rescue
+      _ ->
+        RecoveryPort.close_session(session)
+        failed(state, started)
+    catch
+      _, _ ->
+        RecoveryPort.close_session(session)
+        failed(state, started)
     end
-  rescue
-    _ -> failed(state, started)
-  catch
-    _, _ -> failed(state, started)
   end
 
-  defp execute_root_with_session(state, reason, next, started, deadline, session, runtime_before) do
+  defp execute_root_with_session(
+         state,
+         reason,
+         next,
+         started,
+         deadline,
+         session,
+         inventory_owned,
+         inventory_before,
+         normal_worker_starts,
+         runtime_before
+       ) do
     planning_started = now()
 
     retained =
@@ -125,7 +151,13 @@ defmodule BlazeX.Component.RecoveryCleanup do
     prefix_pages = rows |> Enum.reverse() |> CleanupOutcome.operation_pages()
 
     {lease_pages, lease_candidates, session} =
-      execute_leases(leases, if(actions, do: actions.port, else: nil), deadline, session)
+      execute_leases(
+        leases,
+        if(actions, do: actions.port, else: nil),
+        deadline,
+        session,
+        inventory_owned
+      )
 
     lease_ms = now() - lease_started
     lease_pages_sent = session.pages_sent - lease_pages_before
@@ -146,7 +178,7 @@ defmodule BlazeX.Component.RecoveryCleanup do
 
     suffix_rows = Enum.reverse(suffix_rows)
     normal_stats = RecoveryPort.session_stats(session)
-    RecoveryPort.close_session(session)
+    inventory_stats = RecoveryPort.inventory_stats(session)
     forced_started = now()
 
     {suffix_rows, lease_pages, forced_stats, forced_worker_starts} =
@@ -176,8 +208,14 @@ defmodule BlazeX.Component.RecoveryCleanup do
 
         pending = Map.drop(ledger.pending, canceled)
         timers = if next, do: Map.drop(actions.timers, canceled), else: %{}
-        %{actions | ledger: %{ledger | pending: pending}, timers: timers}
+        actions = %{actions | ledger: %{ledger | pending: pending}, timers: timers}
+        actions = ActionRuntime.put_cleanup_session(actions, session)
+
+        if next,
+          do: actions,
+          else: ActionRuntime.close_cleanup_session(actions)
       else
+        RecoveryPort.close_session(session)
         nil
       end
 
@@ -198,7 +236,16 @@ defmodule BlazeX.Component.RecoveryCleanup do
       pages: pages,
       outcome_format: outcome_format,
       amplification:
-        amplification(normal_stats, forced_stats, forced_worker_starts, lease_pages_sent),
+        amplification(
+          normal_stats,
+          forced_stats,
+          inventory_stats,
+          inventory_before,
+          normal_worker_starts,
+          forced_worker_starts,
+          lease_pages_sent,
+          inventory_owned
+        ),
       runtime_metrics: metric_observation(runtime_before, runtime_after),
       stage_timings_ms: %{
         planning: planning_ms,
@@ -261,7 +308,7 @@ defmodule BlazeX.Component.RecoveryCleanup do
     {next, session}
   end
 
-  defp execute_leases(leases, port, deadline, session) do
+  defp execute_leases(leases, port, deadline, session, inventory_owned) do
     leases
     |> Enum.chunk_every(RecoveryPort.page_size())
     |> Enum.with_index()
@@ -273,7 +320,18 @@ defmodule BlazeX.Component.RecoveryCleanup do
         if timeout > 0 do
           {release_port, _} = unwrap_port(port)
 
-          case RecoveryPort.release_page(current, release_port, page, timeout) do
+          release =
+            if inventory_owned,
+              do:
+                RecoveryPort.release_owned_page(
+                  current,
+                  release_port,
+                  Enum.map(page, & &1.id),
+                  timeout
+                ),
+              else: {:error, :inventory_mismatch, current}
+
+          case release do
             {:ok, values, updated} -> {values, updated}
             {:error, error, updated} -> {List.duplicate({:error, error}, length(page)), updated}
           end
@@ -453,14 +511,27 @@ defmodule BlazeX.Component.RecoveryCleanup do
     end)
   end
 
-  defp amplification(normal, forced, forced_worker_starts, lease_pages_sent) do
+  defp amplification(
+         normal,
+         forced,
+         inventory,
+         inventory_before,
+         normal_worker_starts,
+         forced_worker_starts,
+         lease_pages_sent,
+         inventory_owned
+       ) do
     %{
       page_size: RecoveryPort.page_size(),
       maximum_page_size: RecoveryPort.maximum_page_size(),
-      normal_worker_starts: 1,
+      normal_worker_starts: normal_worker_starts,
       forced_worker_starts: forced_worker_starts,
-      total_worker_starts: 1 + forced_worker_starts,
+      total_worker_starts: normal_worker_starts + forced_worker_starts,
       peak_live_cleanup_workers: 1,
+      runtime_owned_inventory: inventory_owned,
+      inventory_before: inventory_before,
+      inventory_after: inventory.inventory_count,
+      inventory: inventory,
       lease_pages_sent: lease_pages_sent,
       normal: normal,
       forced: forced,
@@ -485,6 +556,25 @@ defmodule BlazeX.Component.RecoveryCleanup do
   defp port_timeout(port), do: elem(unwrap_port(port), 1)
   defp unwrap_port({RecoveryPort, {port, timeout}}), do: {port, timeout}
   defp unwrap_port(port), do: {port, 100}
+
+  defp cleanup_session(%{actions: %ActionRuntime{} = actions} = state) do
+    session = actions.cleanup_session
+    expected = map_size(actions.ledger.leases)
+
+    if is_map(session) and Map.get(session, :alive) == true and
+         Map.get(session, :inventory_count) == expected and Process.alive?(session.pid) do
+      actions = ActionRuntime.reset_cleanup_session(actions)
+      {%{state | actions: actions}, actions.cleanup_session, true, expected, 0}
+    else
+      {:ok, session} = RecoveryPort.open_session()
+      {state, session, false, 0, 1}
+    end
+  end
+
+  defp cleanup_session(state) do
+    {:ok, session} = RecoveryPort.open_session()
+    {state, session, false, 0, 1}
+  end
 
   defp empty_stats,
     do: %{
@@ -566,11 +656,34 @@ defmodule BlazeX.Component.RecoveryCleanup do
               callback_failures: 1,
               requested: 0,
               pages: [],
-              amplification: amplification(empty_stats(), empty_stats(), 0, 0),
+              amplification:
+                amplification(
+                  empty_stats(),
+                  empty_stats(),
+                  empty_inventory_stats(),
+                  0,
+                  1,
+                  0,
+                  0,
+                  false
+                ),
               runtime_metrics: %{instrumentation: :unavailable},
               stage_timings_ms: %{total: now() - started}
             }
         }
     }
   end
+
+  defp empty_inventory_stats,
+    do: %{
+      inventory_count: 0,
+      inventory_peak: 0,
+      inventory_pages_sent: 0,
+      inventory_pages_received: 0,
+      inventory_items_sent: 0,
+      inventory_messages_sent: 0,
+      inventory_messages_received: 0,
+      inventory_request_bytes: 0,
+      inventory_result_bytes: 0
+    }
 end
