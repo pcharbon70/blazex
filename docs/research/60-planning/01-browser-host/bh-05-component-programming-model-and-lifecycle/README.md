@@ -21,7 +21,7 @@ aliases:
 
 LiveView and LocalLiveView integration are **[DEFERRED]** under the
 [planning deferral](../../liveview-integration-deferral.md). None of this
-milestone's seventeen phases requires their APIs, rendering, lifecycle, transport,
+milestone's eighteen phases requires their APIs, rendering, lifecycle, transport,
 or compatibility tests. A BlazeX “local view” means a BlazeX process-root
 component, not a LocalLiveView component. BH-05 still requires accepted BH-04
 Phases 1–7, 9 and 10 plus the retained Phase 8 deferral, not Phase 8 implementation.
@@ -67,7 +67,11 @@ ownership and isolate owner-path cost. [Corrective Phase 17](phase-17-provider-i
 is complete with a truthful **revise** outcome: provider tickets remove owner
 paths from normal disposal and flatten Chrome scaling, while Firefox AtomVM
 still cannot return the 512-ticket session within the frozen deadline. BH-06
-remains ineligible and unauthorized. The current [Phase 11 evidence](conformance-evidence.md) grants the
+was requalified by [corrective Phase 18](phase-18-compact-ticket-acknowledgements-and-deadline-safe-reconciliation.md):
+provider-authorized compact page success closes the Firefox deadline blocker
+without weakening exact failure results. BH-05 is accepted for bounded
+development; BH-06 is eligible but remains separately unauthorized. The current
+[Phase 11 evidence](conformance-evidence.md) grants the
 fixed public corpus exact ERTS/browser-AtomVM and DOM evidence plus GTK
 portability credit without general browser build or product-support claims.
 [Runtime compatibility limits](root-supervision-compatibility.md) remain explicit.
@@ -164,7 +168,7 @@ adapter modules are forbidden even when available in the monorepo.
 | [15 — Runtime-Owned Resource Inventory and Maximum-Payload Requalification](phase-15-runtime-owned-resource-inventory-and-maximum-payload-requalification.md) | complete — revise | Move complete release descriptors into a bounded runtime owner at acquisition time, prove compact disposal transport, and retain the independently reproduced combined-maximum Firefox blocker. | Phase 14 `revise` and explicit authorization |
 | [16 — Factorized Distribution Shape and Sparse Cleanup Outcomes](phase-16-factorized-distribution-shape-and-sparse-cleanup-outcomes.md) | complete — revise | Isolate the causal owner-path axes, remove completed owner graphs from retained outcome pages, and preserve the exact deep-owner Firefox blocker. | Phase 15 `revise` and explicit authorization |
 | [17 — Provider-Issued Release Tickets and Owner-Free Disposal](phase-17-provider-issued-release-tickets-and-owner-free-disposal.md) | complete — revise | Prepare bounded provider tickets at acquisition time so normal disposal preserves authority without transporting owner paths, while retaining the Firefox ticket-session deadline blocker. | Phase 16 `revise` and explicit authorization |
-| [18 — Compact Ticket Acknowledgements and Deadline-Safe Reconciliation](phase-18-compact-ticket-acknowledgements-and-deadline-safe-reconciliation.md) | active | Preserve exact failure results while carrying provider-authorized uniform page success without per-ticket result expansion. | Phase 17 `revise` and explicit authorization |
+| [18 — Compact Ticket Acknowledgements and Deadline-Safe Reconciliation](phase-18-compact-ticket-acknowledgements-and-deadline-safe-reconciliation.md) | complete — accept | Preserve exact failure results while carrying provider-authorized uniform page success without per-ticket result expansion. | Phase 17 `revise` and explicit authorization |
 
 ## Acceptance ownership
 
@@ -271,6 +275,8 @@ Phoenix, browser, native-host, or release compatibility.
 - [Phase 17 release-ticket review and reconciliation](phase-17-review-and-reconciliation.md)
 - [Phase 17 completion evidence](phase-17-completion.md)
 - [Phase 18 — Compact Ticket Acknowledgements and Deadline-Safe Reconciliation](phase-18-compact-ticket-acknowledgements-and-deadline-safe-reconciliation.md)
+- [Phase 18 compact-ticket review and reconciliation](phase-18-review-and-reconciliation.md)
+- [Phase 18 completion evidence](phase-18-completion.md)
 
 ## Maintaining this index
 

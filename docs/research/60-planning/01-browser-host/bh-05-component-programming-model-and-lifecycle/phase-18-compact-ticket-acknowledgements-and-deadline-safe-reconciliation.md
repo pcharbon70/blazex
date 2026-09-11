@@ -11,7 +11,7 @@ aliases: ["BH-05 phase 18", "BH-05 compact ticket acknowledgements"]
 
 Back to milestone: [README](README.md)
 
-- [ ] 18 Phase - Compact Ticket Acknowledgements and Deadline-Safe Reconciliation.
+- [x] 18 Phase - Compact Ticket Acknowledgements and Deadline-Safe Reconciliation.
 
   Correct `BH05-P17-FIREFOX-TICKET-SESSION-DEADLINE` without weakening the
   provider-issued ticket authority established by Phase 17. A provider may
@@ -78,15 +78,17 @@ Back to milestone: [README](README.md)
       - [x] 18.5.2.2 Subtask - Map the Phase 17 re-entry condition and every new finding to evidence.
       - [x] 18.5.2.3 Subtask - Accept only when all frozen gates pass; otherwise record revise or block.
 
-  - [ ] 18.6 Section - Run the full integration gate and publish completion.
-    - [ ] 18.6.1 Task - Rebuild and verify the complete candidate.
-      - [ ] 18.6.1.1 Subtask - Run package, conformance, browser, formatting, archive, provenance, dependency, and hygiene gates.
-      - [ ] 18.6.1.2 Subtask - Repeat maximum 512 and canonical `64, 65, 256, 512` from a second clean context.
-      - [ ] 18.6.1.3 Subtask - Verify indexing, source binding, public facade stability, and historical immutability.
-    - [ ] 18.6.2 Task - Publish and deliver one successor pull request.
-      - [ ] 18.6.2.1 Subtask - Publish commands, hashes, samples, timings, counters, findings, limitations, and decision.
-      - [ ] 18.6.2.2 Subtask - Open and merge one PR only after recording a truthful decision.
-      - [ ] 18.6.2.3 Subtask - After merge, sync `main`, then delete local and remote feature branches.
+  - [x] 18.6 Section - Run the full integration gate and publish completion.
+    - [x] 18.6.1 Task - Rebuild and verify the complete candidate.
+      - [x] 18.6.1.1 Subtask - Run package, conformance, browser, formatting, archive, provenance, dependency, and hygiene gates.
+      - [x] 18.6.1.2 Subtask - Repeat maximum 512 and canonical `64, 65, 256, 512` from a second clean context.
+      - [x] 18.6.1.3 Subtask - Verify indexing, source binding, public facade stability, and historical immutability.
+    - [x] 18.6.2 Task - Publish and deliver one successor pull request.
+      - [x] 18.6.2.1 Subtask - Publish commands, hashes, samples, timings, counters, findings, limitations, and decision.
+      - [x] 18.6.2.2 Subtask - Open and merge one PR only after recording a truthful decision.
+      - [x] 18.6.2.3 Subtask - After merge, sync `main`, then delete local and remote feature branches.
+
+Completion evidence: [Phase 18 completion](phase-18-completion.md).
 
 ## Exit gate
 

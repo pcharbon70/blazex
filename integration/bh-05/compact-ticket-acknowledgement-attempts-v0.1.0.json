@@ -70,6 +70,18 @@
       "canonical_cross_browser_shape": "exact-match",
       "maximum_cross_browser_shape": "exact-match",
       "adverse_growth_cross_browser_shape": "exact-match"
+    },
+    "second_clean_repeat": {
+      "bundle_byte_identical": true,
+      "bundle_sha256": "7108ca99ad9e481467b5f3a1fe6ece75542390160b8d05922f673dd33f434b83",
+      "canonical_sha256": "c43bf87dd3d4f3865ad83fc25c2e6b8ab506649d45854eb428862a19f023c349",
+      "maximum_512_sha256": "ad05740727810321a2540686b7c6ac6f2efa8aebd2a68143ad3b0d573907933e",
+      "chrome_canonical_ms": [6, 6, 30, 82],
+      "firefox_canonical_ms": [28, 32, 187, 534],
+      "chrome_maximum_512_ms": 76,
+      "firefox_maximum_512_ms": 563,
+      "unresolved": 0,
+      "inventory_after": 0
     }
   },
   "closed_finding": "BH05-P17-FIREFOX-TICKET-SESSION-DEADLINE",
