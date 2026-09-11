@@ -3,5 +3,8 @@
   "milestone": "BH-06",
   "phase": 1,
   "status": "active",
-  "evidence": []
+  "evidence": [
+    "candidate-build-manifest-v0.1.0.json",
+    "browser-slice-v0.1.0.json"
+  ]
 }

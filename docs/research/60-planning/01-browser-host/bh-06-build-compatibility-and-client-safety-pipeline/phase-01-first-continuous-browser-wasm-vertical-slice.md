@@ -37,11 +37,11 @@ Back to the [milestone](README.md).
     - [x] Reject duplicate paths, missing artifacts, path escape, mutable output,
       malformed metadata, and integrity drift with actionable diagnostics.
 
-  - [ ] 1.3 Section - Package and execute the continuous browser-Wasm slice.
-    - [ ] Package a public Elixir root component without private host/renderer imports.
-    - [ ] Load only manifest-declared assets, verify SHA-256 before startup, and
+  - [x] 1.3 Section - Package and execute the continuous browser-Wasm slice.
+    - [x] Package a public Elixir root component without private host/renderer imports.
+    - [x] Load only manifest-declared assets, verify SHA-256 before startup, and
       execute the same AtomVM bundle in Linux Chrome and Firefox.
-    - [ ] Retain exact mount/render/event/state/DOM/disposal evidence and prove
+    - [x] Retain exact mount/render/event/state/DOM/disposal evidence and prove
       that a broken digest, missing asset, or JS-only result fails closed.
 
   - [ ] 1.4 Section - Reproduce, reconcile, and publish Phase 1 completion.
