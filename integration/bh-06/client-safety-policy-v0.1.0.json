@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0.0",
+  "policy_id": "blazex.bh06.client-safety/1",
+  "applications": [
+    {"id": "blazex_bh06_vertical_slice", "classification": "client-safe", "reason": "bounded public component fixture"}
+  ],
+  "module_overrides": [],
+  "external_modules": [
+    {"id": "erlang", "classification": "runtime-safe", "reason": "AtomVM runtime primitives used by the bounded component"}
+  ],
+  "forbidden_imports": [
+    {"module": "erlang", "function": "load_nif", "arities": [2], "classification": "native", "reason": "loads a native library"},
+    {"module": "erlang", "function": "open_port", "arities": [2], "classification": "native", "reason": "opens an operating-system port"},
+    {"module": "erlang", "function": "port_command", "arities": [2, 3], "classification": "native", "reason": "controls an operating-system port"},
+    {"module": "erlang", "function": "port_connect", "arities": [2], "classification": "native", "reason": "connects an operating-system port"},
+    {"module": "erlang", "function": "port_control", "arities": [3], "classification": "native", "reason": "invokes a native port driver"}
+  ]
+}

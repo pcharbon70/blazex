@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "policy_id", "applications", "module_overrides", "external_modules", "forbidden_imports"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "policy_id": {"type": "string", "pattern": "^[a-z][a-z0-9._/-]{0,127}$"},
+    "applications": {"type": "array"},
+    "module_overrides": {"type": "array"},
+    "external_modules": {"type": "array"},
+    "forbidden_imports": {"type": "array"}
+  }
+}

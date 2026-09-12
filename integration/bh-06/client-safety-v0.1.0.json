@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.0.0",
+  "phase": 3,
+  "status": "active",
+  "policy_id": "blazex.bh06.client-safety/1",
+  "modules": [],
+  "external_modules": [],
+  "violations": [],
+  "summary": {}
+}

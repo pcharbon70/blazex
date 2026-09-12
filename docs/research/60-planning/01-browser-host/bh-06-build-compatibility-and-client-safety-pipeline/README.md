@@ -30,6 +30,7 @@ entrypoints, compatibility targets, or completion gates for this milestone.
 | --- | --- | --- | --- |
 | [1 — First Continuous Browser-Wasm Vertical Slice](phase-01-first-continuous-browser-wasm-vertical-slice.md) | complete — accept | Package one public Elixir component through a candidate entrypoint, deterministic manifest/bundle/assets, then prove mount, semantic render, interaction, state transition, DOM commit, and disposal in Chrome and Firefox. | Accepted BH-05 and explicit authorization |
 | [2 — Explicit Entrypoints and Deterministic Reachability](phase-02-explicit-entrypoints-and-deterministic-reachability.md) | complete — accept | Inventory supplied BEAMs, traverse static imports from explicit client roots, retain reason chains/external references/unused modules, and reject ambiguous dispatch. | Phase 1 and explicit authorization |
+| [3 — Server and Native Client-Safety Gate](phase-03-server-native-client-safety-gate.md) | active | Classify every reachable and external dependency exactly, then reject server-only, native, unknown, and forbidden runtime primitives before bundle assembly. | Phase 2 and explicit authorization |
 
 Later phase decomposition remains a separate planning decision. Phases 1 and 2
 do not authorize server/native safety policy, compatibility profiles, licenses,
@@ -46,6 +47,8 @@ production releases, support promotion, or BH-07.
 - [Entrypoint and reachability contract](entrypoint-and-reachability-contract.md)
 - [Phase 2 review and reconciliation](phase-02-review-and-reconciliation.md)
 - [Phase 2 completion evidence](phase-02-completion.md)
+- [Phase 3 — Server and Native Client-Safety Gate](phase-03-server-native-client-safety-gate.md)
+- [Client-safety policy contract](client-safety-policy-contract.md)
 
 ### Subdirectories
 

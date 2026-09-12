@@ -16,3 +16,7 @@ explicit, deterministic entrypoint-rooted BEAM inventory to that candidate build
   entrypoint-rooted module inventory, external references, and deliberately
   excluded unused sentinel; its schema is
   [`reachability.schema.json`](reachability.schema.json).
+- [`client-safety-policy-v0.1.0.json`](client-safety-policy-v0.1.0.json)
+  activates the exact Phase 3 classifications and forbidden-import rules.
+- [`client-safety-v0.1.0.json`](client-safety-v0.1.0.json) is the active Phase 3
+  result surface; it cannot claim completion before executable enforcement.
