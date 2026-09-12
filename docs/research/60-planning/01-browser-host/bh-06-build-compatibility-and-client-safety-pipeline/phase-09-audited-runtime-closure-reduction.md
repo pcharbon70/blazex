@@ -29,12 +29,14 @@ Back to the [milestone](README.md).
       tool identity, scaling limits, diagnostics, and fail-closed rules.
     - [x] Activate policy and report schemas without assuming budget success.
 
-  - [ ] 9.2 Section - Implement audited closure reduction.
-    - [ ] Validate declarations without creating atoms and reject unknown,
+  - [x] 9.2 Section - Implement audited closure reduction.
+    - [x] Validate declarations without creating atoms and reject unknown,
       duplicate, overlapping, missing, or over-limit entries.
-    - [ ] Run the pinned function-level reducer over the authorized base only;
-      preserve the feature archive and emit stable module/function deltas.
-    - [ ] Reject output additions, identity drift, missing roots, empty output,
+    - [x] Run deterministic import-graph reduction over the whole base and the
+      pinned function reducer over compiler-metadata-bearing BEAMs; carry every
+      reachable opaque BEAM byte-for-byte and report it explicitly.
+    - [x] Preserve the feature archive boundary and emit stable module/function
+      deltas; reject output additions, identity drift, missing roots, empty output,
       non-subset results, and nondeterministic reports.
 
   - [ ] 9.3 Section - Package and replay the reduced candidate.

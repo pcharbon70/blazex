@@ -17,8 +17,12 @@ policy loading may not create atoms.
 
 The generated report retains path-free module identities, input and output
 hashes and sizes, removed modules, removed functions, totals, and policy/tool
-identities. Output must be non-empty, contain no additions, retain every root,
-and be reproducible. A removed module or function absent from the report, an
+identities. Because distributed Elixir/OTP BEAMs may omit compiler metadata,
+the report also names every opaque module carried through byte-for-byte. The
+whole base is reduced through its import graph; the pinned function reducer is
+then applied only to analyzable BEAMs while reachable opaque BEAMs are explicitly
+left and ignored. Output must be non-empty, contain no additions, retain every root,
+and be reproducible. An opaque module changed in transit, a removed module or function absent from the report, an
 unknown declaration, or overlap between incompatible policy sets rejects.
 
 Reduction is not success by itself. The unchanged Phase 8 payload policy must
