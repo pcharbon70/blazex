@@ -27,11 +27,11 @@ Back to the [milestone](README.md).
       primitive, diagnostic, determinism, and fail-closed rules.
     - [x] Activate versioned policy and result schemas without claiming a pass.
 
-  - [ ] 3.2 Section - Implement deterministic dependency classification.
-    - [ ] Validate bounded policy records without creating atoms from input.
-    - [ ] Classify every reachable module by exact module override or explicit
+  - [x] 3.2 Section - Implement deterministic dependency classification.
+    - [x] Validate bounded policy records without creating atoms from input.
+    - [x] Classify every reachable module by exact module override or explicit
       application ownership and every external module by exact policy.
-    - [ ] Reject unknown, server-only, native, contradictory, unused, and
+    - [x] Reject unknown, server-only, native, contradictory, unused, and
       forbidden-primitive declarations with stable diagnostics.
 
   - [ ] 3.3 Section - Enforce safety before candidate bundle assembly.

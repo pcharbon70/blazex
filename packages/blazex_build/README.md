@@ -28,4 +28,9 @@ selects stable shortest reason chains, retains external references and unused
 inventory, and rejects undeclared `apply/2,3`. The candidate pipeline can bind
 the canonical report as another content-addressed manifest asset.
 
+BH-06 Phase 3 adds exact-match `ClientSafetyPolicy` records and
+`ClientSafety.analyze!/3`. Every reachable module and external module must be
+classified; server-only, native, unknown, forbidden NIF/port primitives, and
+unused candidate-specific declarations fail with deterministic diagnostics.
+
 Run `mix format --check-formatted && mix test` from this directory.
