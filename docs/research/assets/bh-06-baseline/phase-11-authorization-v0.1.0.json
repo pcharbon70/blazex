@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0.0",
+  "milestone": "BH-06",
+  "phase": 11,
+  "authorized": true,
+  "authorized_at": "2026-09-12",
+  "base_revision": "f7767ebed717d442b3d2857ead22c7e6ebcdee7e",
+  "branch": "codex/bh06-phase11-entrypoint-attestation",
+  "delivery": {
+    "section_commits": 4,
+    "pull_requests": 1,
+    "merge": true,
+    "return_to_synced_main": true,
+    "delete_feature_branch": true
+  },
+  "bound_inputs": {
+    "docs/research/assets/bh-06-baseline/phase-10-completion-v0.1.0.json": "c24586be5a49d7b46a006ac6588462952e112e290a4ca40a0084db2fb5b442f6",
+    "integration/bh-06/phase-10-build-manifest-v0.1.0.json": "14ec54a73165ba897f9a1d2aa9f84fd788718c9357828a8980b0954994d63b45",
+    "integration/bh-06/phase-10-payload-report-v0.1.0.json": "4002a675bd0771615d38edac8bfdfc13785f03192f5030eec11bdd3bbe4667ba",
+    "packages/blazex_build/lib/blazex/build/pipeline.ex": "308ddd924f750cbe76b63ac54da94731faf73a3975ae5559f0c8c5fd7a06a9ed",
+    "integration/bh-06/vertical_slice/lib/mix/tasks/bh06.package.ex": "d5df4ea44ab45992e1c74e984a58e3347a450c54165dbe223a26d97f29420558"
+  },
+  "scope": "entrypoint-accounting-and-milestone-handoff",
+  "deferred": ["production-serving", "production-releases", "phoenix", "command-transport", "routing", "predictive-prefetch", "support-promotion", "liveview", "local-liveview", "BH-07", "BH-19"]
+}

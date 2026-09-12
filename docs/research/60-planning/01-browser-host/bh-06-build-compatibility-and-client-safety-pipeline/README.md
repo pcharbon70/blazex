@@ -38,8 +38,9 @@ entrypoints, compatibility targets, or completion gates for this milestone.
 | [8 — Payload Budgets and Public Artifact Accounting](phase-08-payload-budgets-and-public-artifact-accounting.md) | complete — revision-required | Classify public payload versus private build evidence, measure deterministic Brotli/decoded bytes, enforce budgets and zero public source maps, and prove local negotiation; runtime Brotli exceeds its frozen limit. | Phase 7 and explicit authorization |
 | [9 — Audited Runtime Closure Reduction](phase-09-audited-runtime-closure-reduction.md) | complete — accept | Apply graph and pinned function reduction with explicit dynamic and opaque bridge roots, audit every removal, and pass the unchanged payload thresholds and browser gates. | Phase 8 revision-required decision and explicit authorization |
 | [10 — Delivery Integrity Metadata](phase-10-delivery-integrity-metadata.md) | complete — accept | Attach verified SHA-384 SRI and exact Cache-Control metadata to every artifact under a closed, versioned role policy. | Phase 9 and explicit authorization |
+| [11 — Entrypoint Accounting and Milestone Handoff](phase-11-entrypoint-accounting-and-milestone-handoff.md) | active | Produce a deterministic per-entrypoint attestation across artifacts, safety, compatibility, licenses, payload, closure, and integrity, then reconcile BH-06 completion. | Phase 10 and explicit authorization |
 
-Later phase decomposition remains a separate planning decision. Phases 1-10 do
+Later phase decomposition remains a separate planning decision. Phases 1-11 do
 not authorize reachability optimization, route orchestration, predictive
 prefetch, production releases, support promotion, or BH-07.
 
@@ -86,6 +87,8 @@ prefetch, production releases, support promotion, or BH-07.
 - [Delivery-integrity contract](delivery-integrity-contract.md)
 - [Phase 10 review and reconciliation](phase-10-review-and-reconciliation.md)
 - [Phase 10 completion evidence](phase-10-completion.md)
+- [Phase 11 — Entrypoint Accounting and Milestone Handoff](phase-11-entrypoint-accounting-and-milestone-handoff.md)
+- [Entrypoint-accounting contract](entrypoint-accounting-contract.md)
 
 ### Subdirectories
 
