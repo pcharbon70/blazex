@@ -18,11 +18,10 @@ defmodule BlazeXBrowserPhoenix.ControlPlugTest do
     assert health.status == 200
     health_body = Jason.decode!(health.resp_body)
     assert health_body["phase"] == 6
-    assert health_body["liveview_adapter"]["status"] == "eligible"
 
-    assert health_body["liveview_adapter"]["versions"] == %{
-             "phoenix_live_view" => "1.2.11",
-             "local_live_view" => "0.1.0"
+    assert health_body["liveview_adapter"] == %{
+             "status" => "deferred",
+             "scope" => "outside-current-host-implementation"
            }
 
     denied = request(:post, "/bh01/test/session", [], ~s({"identity_id":"operator"}))

@@ -1,6 +1,7 @@
 defmodule BlazeXBrowserPhoenix.AssetPlug do
   @moduledoc false
   import Plug.Conn
+  alias BlazeX.Phoenix.StaticDelivery
 
   @content_types %{
     ".html" => "text/html; charset=utf-8",
@@ -13,6 +14,33 @@ defmodule BlazeXBrowserPhoenix.AssetPlug do
   }
 
   def init(options), do: options
+
+  def call(%Plug.Conn{method: method, request_path: "/bh07"} = conn, _options)
+      when method in ["GET", "HEAD"] do
+    conn
+    |> put_resp_header("location", "/bh07/")
+    |> put_resp_header("cache-control", "no-store")
+    |> send_resp(308, "")
+    |> halt()
+  end
+
+  def call(%Plug.Conn{method: method, path_info: ["bh07" | segments]} = conn, _options) do
+    relative = if segments == [], do: "index.html", else: Enum.join(segments, "/")
+
+    with {:ok, delivery} <- bh07_delivery(),
+         {:ok, artifact} <- StaticDelivery.resolve(delivery, method, relative) do
+      serve_attested(conn, artifact)
+    else
+      {:error, :method_not_allowed} ->
+        conn
+        |> put_resp_header("allow", "GET, HEAD")
+        |> send_resp(405, "")
+        |> halt()
+
+      _ ->
+        conn
+    end
+  end
 
   def call(%Plug.Conn{method: method, request_path: path} = conn, _options)
       when path in ["/bh01", "/bh03"] and method in ["GET", "HEAD"] do
@@ -42,6 +70,48 @@ defmodule BlazeXBrowserPhoenix.AssetPlug do
   end
 
   def call(conn, _options), do: conn
+
+  defp bh07_delivery do
+    root = static_root("bh07")
+    manifest_path = Path.join(root, "build-manifest.json")
+
+    attestation_path =
+      Application.get_env(
+        :blazex_browser_phoenix,
+        :bh07_attestation_path,
+        Path.join(root, "entrypoint-attestation.json")
+      )
+
+    with {:ok, manifest_bytes} <- File.read(manifest_path),
+         {:ok, attestation_bytes} <- File.read(attestation_path),
+         {:ok, manifest} <- Jason.decode(manifest_bytes),
+         {:ok, attestation} <- Jason.decode(attestation_bytes) do
+      {:ok, StaticDelivery.new!(root, manifest, attestation, manifest_bytes)}
+    end
+  rescue
+    ArgumentError -> {:error, :attestation_invalid}
+  end
+
+  defp serve_attested(conn, artifact) do
+    conn =
+      conn
+      |> put_resp_header("content-type", artifact.media_type)
+      |> put_resp_header("content-length", Integer.to_string(artifact.bytes))
+      |> put_resp_header("etag", artifact.etag)
+      |> put_resp_header("cache-control", artifact.cache_control)
+      |> put_resp_header("x-content-type-options", "nosniff")
+
+    cond do
+      artifact.etag in get_req_header(conn, "if-none-match") ->
+        conn |> delete_resp_header("content-length") |> send_resp(304, "") |> halt()
+
+      conn.method == "HEAD" ->
+        conn |> send_resp(200, "") |> halt()
+
+      true ->
+        conn |> send_resp(200, artifact.body) |> halt()
+    end
+  end
 
   defp serve(conn, path, relative, size) do
     digest = :crypto.hash(:sha256, File.read!(path)) |> Base.encode16(case: :lower)
@@ -154,6 +224,15 @@ defmodule BlazeXBrowserPhoenix.AssetPlug do
       :blazex_browser_phoenix,
       :bh03_static_root,
       Application.app_dir(:blazex_browser_phoenix, "priv/static/bh03")
+    )
+    |> Path.expand()
+  end
+
+  defp static_root("bh07") do
+    Application.get_env(
+      :blazex_browser_phoenix,
+      :bh07_static_root,
+      Application.app_dir(:blazex_browser_phoenix, "priv/static/bh07")
     )
     |> Path.expand()
   end

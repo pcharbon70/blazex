@@ -4,8 +4,8 @@
   "path": "profiles/browser_phoenix",
   "kind": "executable-profile",
   "activation_phase": "BH-01 Phase 1",
-  "status": "experimental-bh03-phase7-measurements",
-  "current_phase": "BH-03 Phase 7",
+  "status": "experimental-bh07-phase1-static-delivery",
+  "current_phase": "BH-07 Phase 1",
   "bh03_role": "executable-composition-only",
   "owner_role": "browser-profile-owner",
   "module_roots": [
@@ -20,7 +20,6 @@
     "blazex_runtime_popcorn",
     "blazex_host_browser",
     "blazex_renderer_dom",
-    "blazex_renderer_dom_liveview",
     "blazex_phoenix",
     "js/blazex_runtime"
   ],
@@ -44,5 +43,11 @@
     "phase": 1,
     "state": "governance-only",
     "behavior_implemented": false
+  },
+  "bh07_activation": {
+    "phase": 1,
+    "state": "attested-static-delivery",
+    "route": "/bh07/",
+    "deferred": ["sessions", "commands", "pushes", "reconnect", "liveview", "local-liveview"]
   }
 }

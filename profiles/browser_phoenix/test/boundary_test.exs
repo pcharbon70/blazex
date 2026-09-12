@@ -10,18 +10,17 @@ defmodule BlazeXBrowserPhoenix.BoundaryTest do
     assert Code.ensure_loaded?(BlazeXBrowserPhoenix.AssetPlug)
     assert Code.ensure_loaded?(BlazeXBrowserPhoenix.ControlPlug)
     assert Code.ensure_loaded?(BlazeX.Phoenix.BH01.FixtureAuthority)
-    assert Code.ensure_loaded?(BlazeX.Renderer.DOM.LiveView)
+    assert Code.ensure_loaded?(BlazeX.Phoenix.StaticDelivery)
   end
 
-  test "optional LiveView adapter activates only for the exact compatibility descriptor" do
-    descriptor = BlazeX.Renderer.DOM.LiveView.Compatibility.expected_descriptor()
+  test "active profile excludes deferred LiveView and LocalLiveView dependencies" do
+    dependencies =
+      Mix.Project.config()
+      |> Keyword.fetch!(:deps)
+      |> Enum.map(&elem(&1, 0))
 
-    assert {:ok, state} = BlazeX.Renderer.DOM.LiveView.activate(descriptor)
-    assert BlazeX.Renderer.DOM.LiveView.snapshot(state)["status"] == "active"
-
-    assert {:disabled, %{"fallback" => "standalone-dom", "reason" => "version-mismatch"}} =
-             descriptor
-             |> put_in(["versions", "local_live_view"], "0.2.0")
-             |> BlazeX.Renderer.DOM.LiveView.activate()
+    refute :blazex_renderer_dom_liveview in dependencies
+    refute :phoenix_live_view in dependencies
+    refute :local_live_view in dependencies
   end
 end
