@@ -67,6 +67,21 @@ defmodule BlazeX.Build.PipelineTest do
     end
   end
 
+  test "binds a content-addressed client-safety report", %{root: root, spec: spec} do
+    output = Path.join(root, "client-safety")
+    report = %{"schema_version" => "1.0.0", "policy_id" => "test.policy/1"}
+    manifest = Pipeline.build!(spec, output, client_safety: report)
+    asset = Enum.find(manifest["artifacts"], &(&1["role"] == "client-safety-report"))
+    assert String.contains?(asset["path"], asset["sha256"])
+
+    assert File.read!(Path.join(output, asset["path"])) ==
+             BlazeX.Build.JSON.encode!(report) <> "\n"
+
+    assert :ok = Pipeline.verify!(output)
+    File.write!(Path.join(output, asset["path"]), "{}\n")
+    assert_raise ArgumentError, ~r/integrity mismatch/, fn -> Pipeline.verify!(output) end
+  end
+
   test "rejects changed assets and mutable output", %{root: root, spec: spec} do
     output = Path.join(root, "output")
     manifest = Pipeline.build!(spec, output)

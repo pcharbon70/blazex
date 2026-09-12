@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "phase", "status", "policy_id", "policy_sha256", "modules", "external_modules", "violations", "summary"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "phase": {"const": 3},
+    "status": {"enum": ["active", "complete", "blocked"]},
+    "policy_id": {"type": "string"},
+    "policy_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "modules": {"type": "array"},
+    "external_modules": {"type": "array"},
+    "violations": {"type": "array"},
+    "summary": {"type": "object"}
+  }
+}

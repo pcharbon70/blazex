@@ -3,9 +3,10 @@
 This private fixture packages `BlazeX.BH06.VerticalSlice.Counter`, authored
 through the public experimental `BlazeX.Component` facade, into an AVM bundle.
 The BH-06 build package combines it with the governed AtomVM WebAssembly runtime,
-a content-addressed Phase 2 reachability report, and browser assets. The report
-roots the counter explicitly and proves the inventoried `Unused` sentinel is not
-silently bundled. Chrome and Firefox then execute mount,
+content-addressed reachability and client-safety reports, and browser assets.
+The reports root the counter explicitly, prove the inventoried `Unused` sentinel
+is not silently bundled, and classify every bounded reachable/external dependency
+before AVM assembly. Chrome and Firefox then execute mount,
 semantic render, browser click, Elixir state transition, DOM update, and disposal.
 
 It is an early executable build gate, not a supported component or release.

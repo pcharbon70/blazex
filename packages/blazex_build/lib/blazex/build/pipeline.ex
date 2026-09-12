@@ -17,7 +17,11 @@ defmodule BlazeX.Build.Pipeline do
     immutable = Enum.map(@assets, &copy_asset!(spec, output, &1))
     host = Enum.find(immutable, &(&1["role"] == "browser-host"))
     document = build_document!(spec.document, output, host["path"])
-    artifacts = [document | immutable] ++ reachability_artifact!(options, output)
+
+    artifacts =
+      [document | immutable] ++
+        report_artifact!(options, output, :reachability, "reachability-report") ++
+        report_artifact!(options, output, :client_safety, "client-safety-report")
 
     manifest = %{
       "schema_version" => "1.0.0",
@@ -81,21 +85,21 @@ defmodule BlazeX.Build.Pipeline do
     record("index.html", "document", "text/html", digest(target), byte_size(body), "no-store")
   end
 
-  defp reachability_artifact!(options, output) do
-    case Keyword.get(options, :reachability) do
+  defp report_artifact!(options, output, option, role) do
+    case Keyword.get(options, option) do
       nil ->
         []
 
       report when is_map(report) ->
         body = JSON.encode!(report) <> "\n"
         hash = digest_bytes(body)
-        relative = "assets/reachability-report-#{hash}.json"
+        relative = "assets/#{role}-#{hash}.json"
         File.write!(Path.join(output, relative), body, [:exclusive])
 
         [
           record(
             relative,
-            "reachability-report",
+            role,
             "application/json",
             hash,
             byte_size(body),
@@ -104,7 +108,7 @@ defmodule BlazeX.Build.Pipeline do
         ]
 
       _ ->
-        raise ArgumentError, "reachability report must be a map"
+        raise ArgumentError, "#{String.replace(role, "-", " ")} must be a map"
     end
   end
 
