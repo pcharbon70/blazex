@@ -40,6 +40,19 @@ defmodule BlazeX.Build.LicenseInventory do
   def analyze!(_, _, _),
     do: raise(ArgumentError, "license inventory inputs, policy, or repository root are invalid")
 
+  def assert_matches_secret_audit!(%{"inputs" => inventory}, %{"inputs" => audit})
+      when is_list(inventory) and is_list(audit) do
+    identity = fn row -> {row["label"], row["bytes"], row["sha256"]} end
+
+    unless Enum.map(inventory, identity) == Enum.map(audit, identity),
+      do: raise(ArgumentError, "license inventory does not match secret-audited inputs")
+
+    :ok
+  end
+
+  def assert_matches_secret_audit!(_, _),
+    do: raise(ArgumentError, "license inventory or secret audit report is malformed")
+
   defp inputs!(inputs, limits, components) do
     if length(inputs) > limits["max_inputs"],
       do: raise(ArgumentError, "license inventory input count exceeds explicit limit")

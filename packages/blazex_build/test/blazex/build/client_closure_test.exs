@@ -8,6 +8,7 @@ defmodule BlazeX.Build.ClientClosureTest do
     CompatibilityError,
     CompatibilityProfile,
     CompatibilityRequirements,
+    LicensePolicy,
     SecretAuditError,
     SecretPolicy
   }
@@ -98,6 +99,31 @@ defmodule BlazeX.Build.ClientClosureTest do
     refute_received :assembled
   end
 
+  test "does not invoke assembly when license ownership is unknown" do
+    caller = self()
+    bytes = [%{"label" => "candidate.beam", "bytes" => "clean"}]
+    licenses = [%{"label" => "candidate.beam", "bytes" => "clean", "component_id" => "missing"}]
+
+    assert_raise ArgumentError, ~r/unknown or not shipped/, fn ->
+      ClientClosure.authorize!(
+        @reachability,
+        @inventory,
+        policy("client-safe"),
+        profile(),
+        requirements(),
+        secret_policy(),
+        bytes,
+        %{},
+        license_policy(),
+        licenses,
+        System.tmp_dir!(),
+        fn _ -> send(caller, :assembled) end
+      )
+    end
+
+    refute_received :assembled
+  end
+
   defp policy(classification) do
     ClientSafetyPolicy.new!(%{
       "schema_version" => "1.0.0",
@@ -143,6 +169,33 @@ defmodule BlazeX.Build.ClientClosureTest do
         "max_total_bytes" => 100,
         "max_findings" => 10
       }
+    })
+  end
+
+  defp license_policy do
+    LicensePolicy.new!(%{
+      "schema_version" => "1.0.0",
+      "policy_id" => "test.license/1",
+      "limits" => %{"max_inputs" => 10, "max_input_bytes" => 100, "max_total_bytes" => 100},
+      "license_records" => [
+        %{
+          "id" => "PRIVATE",
+          "license" => "NOASSERTION",
+          "disposition" => "private-development-only",
+          "notice_path" => nil,
+          "notice_sha256" => nil
+        }
+      ],
+      "components" => [
+        %{
+          "id" => "app",
+          "name" => "App",
+          "source" => "workspace",
+          "version" => "dev",
+          "scope" => "shipped",
+          "license_record_ids" => ["PRIVATE"]
+        }
+      ]
     })
   end
 end

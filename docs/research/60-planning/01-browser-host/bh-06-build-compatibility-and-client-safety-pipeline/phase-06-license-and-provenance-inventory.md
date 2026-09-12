@@ -35,12 +35,12 @@ Back to the [milestone](README.md).
     - [x] Reject unknown fields, duplicates, unknown components/licenses,
       malformed values, missing notices, digest drift, and overflow.
 
-  - [ ] 6.3 Section - Enforce provenance before candidate bundle assembly.
-    - [ ] Compose safety, compatibility, secret exclusion, and inventory in one
+  - [x] 6.3 Section - Enforce provenance before candidate bundle assembly.
+    - [x] Compose safety, compatibility, secret exclusion, and inventory in one
       ordered pre-assembly gate.
-    - [ ] Bind a content-addressed inventory report into the manifest and prove
+    - [x] Bind a content-addressed inventory report into the manifest and prove
       exact parity with the Phase 5 audited input set.
-    - [ ] Prove clean success plus missing, duplicate, unknown, notice-drift,
+    - [x] Prove clean success plus missing, duplicate, unknown, notice-drift,
       mutation, determinism, and pre-assembly rejection cases.
 
   - [ ] 6.4 Section - Reproduce, review, and publish completion.

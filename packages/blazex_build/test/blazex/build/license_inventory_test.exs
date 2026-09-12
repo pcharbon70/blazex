@@ -68,6 +68,25 @@ defmodule BlazeX.Build.LicenseInventoryTest do
     end
   end
 
+  test "requires exact parity with the preceding secret audit", %{test: test} do
+    root = temporary(test)
+    File.write!(Path.join(root, "NOTICE"), "notice")
+    report = LicenseInventory.analyze!([input("one", "1", "app")], policy(root), root)
+
+    audit = %{
+      "inputs" => [
+        %{"label" => "one", "bytes" => 1, "sha256" => hd(report["inputs"])["sha256"]}
+      ]
+    }
+
+    assert :ok = LicenseInventory.assert_matches_secret_audit!(report, audit)
+
+    assert_raise ArgumentError, fn ->
+      changed = put_in(audit, ["inputs", Access.at(0), "bytes"], 2)
+      LicenseInventory.assert_matches_secret_audit!(report, changed)
+    end
+  end
+
   defp policy(root) do
     sha =
       :crypto.hash(:sha256, File.read!(Path.join(root, "NOTICE"))) |> Base.encode16(case: :lower)

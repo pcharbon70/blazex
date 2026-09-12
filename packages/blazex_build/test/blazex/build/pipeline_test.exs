@@ -135,6 +135,17 @@ defmodule BlazeX.Build.PipelineTest do
              BlazeX.Build.JSON.encode!(report) <> "\n"
   end
 
+  test "binds a content-addressed complete license inventory", %{root: root, spec: spec} do
+    report = %{"schema_version" => "1.0.0", "complete" => true, "policy_id" => "test/1"}
+    output = Path.join(root, "license-inventory")
+    manifest = Pipeline.build!(spec, output, license_inventory: report)
+    asset = Enum.find(manifest["artifacts"], &(&1["role"] == "license-inventory-report"))
+    assert String.contains?(asset["path"], asset["sha256"])
+
+    assert File.read!(Path.join(output, asset["path"])) ==
+             BlazeX.Build.JSON.encode!(report) <> "\n"
+  end
+
   test "rejects malformed entrypoints and document templates", %{spec: spec} do
     assert_raise ArgumentError, ~r/lowercase/, fn -> EntryPoint.new!(%{spec | id: "Bad ID"}) end
     path = Path.join(Path.dirname(spec.document), "bad.html")
