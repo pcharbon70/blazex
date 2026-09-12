@@ -1,0 +1,13 @@
+{
+  "schema_version":"1.0.0","milestone":"BH-06","phase":9,"status":"complete","decision":"accept","completed_on":"2026-09-12",
+  "closure_evidence_sha256":"98cb99ead3012096b28ac696238ba4e90b838a11919a18fa91ee5a049a904bed",
+  "payload_evidence_sha256":"a641e7a3dbb36db52516aa75652039ea1e9fcae58018303c0002a974b6c6286a",
+  "manifest_sha256":"c115777a23bead3963cef9341d0cd6df797ea6f607bae19080acbb21535338d3",
+  "browser_evidence_sha256":"4462360f45f267419bd3e43bbf96894952a75e86dd02f76cef7d0e478c52f3ed",
+  "canonical_closure_policy_sha256":"dc8715365d8def50dd07dcb7201fc8d6a01230e768a7f7fa585e3daa49a13da7",
+  "canonical_payload_policy_sha256":"a18e4d2213f862ff3ebdfd2be4a681983d2e6967fa63a0167bc73283bcd00481",
+  "closure":{"before_modules":692,"after_modules":423,"removed_modules":269,"removed_functions":1035,"before_bytes":19536608,"after_bytes":7683472,"removed_bytes":11853136,"opaque_modules":57,"opaque_dependency_modules":121},
+  "runtime_brotli":{"observed":1570291,"threshold":1638400,"margin":68109},
+  "browsers":["chrome","firefox"],"deterministic_repeat":true,
+  "deferred":["production-serving","production-release","liveview","local-liveview","bh-07","bh-19"]
+}

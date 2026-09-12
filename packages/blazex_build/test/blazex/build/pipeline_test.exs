@@ -179,6 +179,24 @@ defmodule BlazeX.Build.PipelineTest do
     end
   end
 
+  test "binds the runtime-closure report as private evidence", %{root: root, spec: spec} do
+    report = %{
+      "schema_version" => "1.0.0",
+      "complete" => true,
+      "policy_id" => "test.runtime-closure/1"
+    }
+
+    output = Path.join(root, "runtime-closure")
+    manifest = Pipeline.build!(spec, output, runtime_closure: report)
+    asset = Enum.find(manifest["artifacts"], &(&1["role"] == "runtime-closure-report"))
+
+    assert asset["exposure"] == "private-build-evidence"
+    assert String.starts_with?(asset["path"], "evidence/runtime-closure-report-")
+
+    assert File.read!(Path.join(output, asset["path"])) ==
+             BlazeX.Build.JSON.encode!(report) <> "\n"
+  end
+
   test "rejects malformed entrypoints and document templates", %{spec: spec} do
     assert_raise ArgumentError, ~r/lowercase/, fn -> EntryPoint.new!(%{spec | id: "Bad ID"}) end
     path = Path.join(Path.dirname(spec.document), "bad.html")

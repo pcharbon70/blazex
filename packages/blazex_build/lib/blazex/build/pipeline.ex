@@ -28,7 +28,8 @@ defmodule BlazeX.Build.Pipeline do
         report_artifact!(options, output, :compatibility, "compatibility-report") ++
         report_artifact!(options, output, :secret_audit, "secret-audit-report") ++
         report_artifact!(options, output, :license_inventory, "license-inventory-report") ++
-        report_artifact!(options, output, :bundle_plan, "bundle-plan-report")
+        report_artifact!(options, output, :bundle_plan, "bundle-plan-report") ++
+        report_artifact!(options, output, :runtime_closure, "runtime-closure-report")
 
     manifest = %{
       "schema_version" => "1.0.0",

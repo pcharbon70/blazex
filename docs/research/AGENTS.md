@@ -306,6 +306,11 @@ measurement, source-map exclusion, package promotion, evidence serving, or
 Phase 8 evidence changes, also run `python3 70-tools/validate_bh06_payload_budgets.py`
 and `python3 -m unittest discover -s 70-tools -p 'test_validate_bh06_payload_budgets.py'`.
 
+When BH-06 Phase 9 authorization, runtime-closure policy or reports, opaque
+bridge roots, reduced archive assembly, accepted payload evidence, or Phase 9
+browser evidence changes, also run `python3 70-tools/validate_bh06_runtime_closure.py`
+and `python3 -m unittest discover -s 70-tools -p 'test_validate_bh06_runtime_closure.py'`.
+
 Do not commit, push, publish, or open a pull request unless the user asks.
 
 ## Research tooling

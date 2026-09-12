@@ -9,6 +9,25 @@ defmodule BlazeX.Build.PayloadPolicyTest do
     assert policy.roles["feature-bundle"]["owner"] == "application"
   end
 
+  test "allows only the Phase 9 private runtime-closure evidence extension" do
+    extended =
+      put_in(policy(), ["roles", "runtime-closure-report"], %{
+        "owner" => "build-evidence",
+        "exposure" => "private-build-evidence"
+      })
+
+    assert PayloadPolicy.new!(extended).roles["runtime-closure-report"]["exposure"] ==
+             "private-build-evidence"
+
+    assert_raise ArgumentError, fn ->
+      put_in(extended, ["roles", "unknown-report"], %{
+        "owner" => "build-evidence",
+        "exposure" => "private-build-evidence"
+      })
+      |> PayloadPolicy.new!()
+    end
+  end
+
   test "rejects incomplete roles, duplicate budgets, and unsafe compression" do
     assert_raise ArgumentError, fn -> PayloadPolicy.new!(put_in(policy(), ["roles"], %{})) end
     duplicate = update_in(policy(), ["budgets"], &(&1 ++ &1))

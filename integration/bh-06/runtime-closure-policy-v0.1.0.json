@@ -1,0 +1,11 @@
+{
+  "schema_version":"1.0.0","policy_id":"blazex.bh06.runtime-closure/1",
+  "tool":{"id":"popcorn-treeshake","version":"0.3.3","lock_sha256":"22269a9764b2b7ec4a93aaa007040313f4a924b3031e91c72494dd19f9084c98"},
+  "expected_input":{"modules":692,"set_sha256":"a66847531a1a30c45edc15bed0113b719b7a9d83513312d7d2cadf29043c0f1f"},
+  "keep_modules":["Elixir.Jason","atomvm_logger_manager","elixir_config"],
+  "keep_functions":[{"module":"Elixir.BlazeX.BH06.VerticalSlice.Browser","function":"start","arity":0}],
+  "leave_modules":["Elixir.BlazeX.BH06.VerticalSlice.Boot","application_controller","kernel"],
+  "ignore_modules":["Elixir.BlazeX.BH06.VerticalSlice.Boot","application_controller","prim_eval"],
+  "drop_modules":["Elixir.Code.Formatter","elixir_parser","elixir_tokenizer","erl_lint","erl_parse","erl_eval","prim_inet","qlc","qlc_pt","dets_v9","dets","sofs","erl_tar","file_sorter","global","disk_log","disk_log_1","net_kernel","zip","inet_db","shell","edlin","edlin_expand","edlin_type_suggestion","edlin_context","dets_utils","gen_tcp_socket","socket","prim_socket","eval_bits","inet_dns","net","rpc","gen_udp_socket","dist_util","win32reg"],
+  "limits":{"max_inputs":1024,"max_outputs":1024,"max_removed_functions":65536,"max_name_length":128}
+}

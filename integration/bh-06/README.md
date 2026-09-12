@@ -80,3 +80,22 @@ explicit, deterministic entrypoint-rooted BEAM inventory to that candidate build
 - The `phase-08-{reachability,client-safety,compatibility,secret-audit,
   license-inventory,bundle-plan}-v0.1.0.json` files retain every private report
   bound by that manifest for independent validation.
+- [`runtime-closure-policy-v0.1.0.json`](runtime-closure-policy-v0.1.0.json)
+  freezes Phase 9's pinned reducer identity, exact 692-module client-only base
+  input, explicit dynamic roots, adjustment sets, and scaling bounds; the
+  build-only Mix task is deliberately excluded before runtime accounting.
+- [`runtime-closure-report.schema.json`](runtime-closure-report.schema.json)
+  freezes path-free before/after, opaque bridge, and removed-module/function
+  evidence without presuming that the reduced candidate passes the payload gate.
+- [`payload-policy-v0.1.1.json`](payload-policy-v0.1.1.json) adds only the private
+  runtime-closure evidence classification to Phase 8's roles; every public
+  owner, metric, compression setting, and numeric threshold remains unchanged.
+- [`phase-09-runtime-closure-v0.1.0.json`](phase-09-runtime-closure-v0.1.0.json)
+  records the exact 692-to-423-module reduction, 1,035 removed functions, 57
+  byte-identical opaque modules, and 121 retained opaque bridge dependencies.
+- [`phase-09-payload-report-v0.1.0.json`](phase-09-payload-report-v0.1.0.json),
+  [`phase-09-build-manifest-v0.1.0.json`](phase-09-build-manifest-v0.1.0.json),
+  and [`phase-09-browser-replay-v0.1.0.json`](phase-09-browser-replay-v0.1.0.json)
+  bind the accepted thresholds, thirteen manifest assets, and matching complete
+  Chrome/Firefox replay. The remaining `phase-09-*-v0.1.0.json` files retain
+  every private predecessor report referenced by the manifest.
