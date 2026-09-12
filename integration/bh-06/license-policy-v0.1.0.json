@@ -1,0 +1,99 @@
+{
+  "schema_version": "1.0.0",
+  "policy_id": "blazex.bh06.license-provenance/1",
+  "limits": {
+    "max_inputs": 10000,
+    "max_input_bytes": 134217728,
+    "max_total_bytes": 536870912
+  },
+  "license_records": [
+    {
+      "id": "BX-BH06-LICENSE-BLAZEX",
+      "license": "NOASSERTION",
+      "disposition": "private-development-only",
+      "notice_path": null,
+      "notice_sha256": null
+    },
+    {
+      "id": "BX-BH06-LICENSE-ELIXIR",
+      "license": "Apache-2.0",
+      "disposition": "known-retention-required",
+      "notice_path": "integration/bh-06/THIRD_PARTY_NOTICES.md",
+      "notice_sha256": "c8b096fa792510c1d81f7d9254b9e5c8d0ef514927ecf3e1b644e0dcb01f340c"
+    },
+    {
+      "id": "BX-BH06-LICENSE-ERLANG-OTP",
+      "license": "Apache-2.0",
+      "disposition": "known-retention-required",
+      "notice_path": "integration/bh-06/THIRD_PARTY_NOTICES.md",
+      "notice_sha256": "c8b096fa792510c1d81f7d9254b9e5c8d0ef514927ecf3e1b644e0dcb01f340c"
+    },
+    {
+      "id": "BX-BH01-LICENSE-FISSIONVM",
+      "license": "Apache-2.0 selected from Apache-2.0 OR LGPL-2.1-or-later",
+      "disposition": "known-retention-required",
+      "notice_path": "packages/blazex_runtime_popcorn/runtime/THIRD_PARTY_NOTICES.md",
+      "notice_sha256": "6ed3c145c74707df469e91f120bea1201476852f7f48976ca92954e65100f898"
+    },
+    {
+      "id": "BX-BH01-LICENSE-MBEDTLS",
+      "license": "Apache-2.0",
+      "disposition": "known-retention-required",
+      "notice_path": "packages/blazex_runtime_popcorn/runtime/THIRD_PARTY_NOTICES.md",
+      "notice_sha256": "6ed3c145c74707df469e91f120bea1201476852f7f48976ca92954e65100f898"
+    },
+    {
+      "id": "BX-BH01-LICENSE-EMSCRIPTEN",
+      "license": "MIT plus bundled LLVM/Binaryen notices",
+      "disposition": "known-retention-required",
+      "notice_path": "packages/blazex_runtime_popcorn/runtime/THIRD_PARTY_NOTICES.md",
+      "notice_sha256": "6ed3c145c74707df469e91f120bea1201476852f7f48976ca92954e65100f898"
+    },
+    {
+      "id": "BX-BH01-LICENSE-ZLIB",
+      "license": "Zlib",
+      "disposition": "known-retention-required",
+      "notice_path": "packages/blazex_runtime_popcorn/runtime/THIRD_PARTY_NOTICES.md",
+      "notice_sha256": "6ed3c145c74707df469e91f120bea1201476852f7f48976ca92954e65100f898"
+    },
+    {
+      "id": "BX-BH01-LICENSE-POPCORN",
+      "license": "Apache-2.0",
+      "disposition": "known-retention-required",
+      "notice_path": "packages/blazex_runtime_popcorn/runtime/THIRD_PARTY_NOTICES.md",
+      "notice_sha256": "6ed3c145c74707df469e91f120bea1201476852f7f48976ca92954e65100f898"
+    },
+    {
+      "id": "BX-BH01-LICENSE-JASON",
+      "license": "Apache-2.0",
+      "disposition": "known-retention-required",
+      "notice_path": "packages/blazex_runtime_popcorn/runtime/THIRD_PARTY_NOTICES.md",
+      "notice_sha256": "6ed3c145c74707df469e91f120bea1201476852f7f48976ca92954e65100f898"
+    },
+    {
+      "id": "BX-BH01-LICENSE-NINJA",
+      "license": "Apache-2.0",
+      "disposition": "known-retention-required",
+      "notice_path": "packages/blazex_runtime_popcorn/runtime/THIRD_PARTY_NOTICES.md",
+      "notice_sha256": "6ed3c145c74707df469e91f120bea1201476852f7f48976ca92954e65100f898"
+    },
+    {
+      "id": "BX-BH01-LICENSE-GPERF",
+      "license": "GPL-3.0-or-later",
+      "disposition": "known-retention-required",
+      "notice_path": "packages/blazex_runtime_popcorn/runtime/THIRD_PARTY_NOTICES.md",
+      "notice_sha256": "6ed3c145c74707df469e91f120bea1201476852f7f48976ca92954e65100f898"
+    }
+  ],
+  "components": [
+    {"id": "blazex", "name": "BlazeX", "source": "workspace", "version": "development", "scope": "shipped", "license_record_ids": ["BX-BH06-LICENSE-BLAZEX"]},
+    {"id": "elixir", "name": "Elixir", "source": "elixir-lang/elixir", "version": "1.18.4", "scope": "shipped", "license_record_ids": ["BX-BH06-LICENSE-ELIXIR"]},
+    {"id": "erlang-otp", "name": "Erlang/OTP", "source": "erlang/otp", "version": "27 (ERTS 15.2.3)", "scope": "shipped", "license_record_ids": ["BX-BH06-LICENSE-ERLANG-OTP"]},
+    {"id": "popcorn", "name": "Popcorn", "source": "hex.pm/packages/popcorn", "version": "0.3.3", "scope": "shipped", "license_record_ids": ["BX-BH01-LICENSE-POPCORN"]},
+    {"id": "jason", "name": "Jason", "source": "hex.pm/packages/jason", "version": "1.4.5", "scope": "shipped", "license_record_ids": ["BX-BH01-LICENSE-JASON"]},
+    {"id": "fissionvm-patches", "name": "Popcorn AtomVM patches", "source": "popcorn/popcorn_patches", "version": "0.3.3 + FissionVM 6c3208c", "scope": "shipped", "license_record_ids": ["BX-BH01-LICENSE-FISSIONVM", "BX-BH01-LICENSE-POPCORN"]},
+    {"id": "atomvm-runtime", "name": "FissionVM browser runtime", "source": "software-mansion-labs/FissionVM", "version": "6c3208c7b3dbc7dacc35a19f8de1fa80b358ac73", "scope": "shipped", "license_record_ids": ["BX-BH01-LICENSE-EMSCRIPTEN", "BX-BH01-LICENSE-FISSIONVM", "BX-BH01-LICENSE-MBEDTLS", "BX-BH01-LICENSE-ZLIB"]},
+    {"id": "ninja", "name": "Ninja", "source": "ninja-build/ninja", "version": "1.12.1", "scope": "build-only", "license_record_ids": ["BX-BH01-LICENSE-NINJA"]},
+    {"id": "gperf", "name": "GNU gperf", "source": "gnu.org/software/gperf", "version": "3.1-1build1", "scope": "build-only", "license_record_ids": ["BX-BH01-LICENSE-GPERF"]}
+  ]
+}

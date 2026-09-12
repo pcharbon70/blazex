@@ -37,3 +37,10 @@ explicit, deterministic entrypoint-rooted BEAM inventory to that candidate build
 - [`phase-05-build-manifest-v0.1.0.json`](phase-05-build-manifest-v0.1.0.json)
   and [`phase-05-browser-replay-v0.1.0.json`](phase-05-browser-replay-v0.1.0.json)
   bind the secret-gated package and deterministic Chrome/Firefox replay.
+- [`license-policy-v0.1.0.json`](license-policy-v0.1.0.json) freezes the Phase 6
+  component, license-record, notice-integrity, lineage, and scaling authority;
+  its schema is [`license-policy.schema.json`](license-policy.schema.json).
+- [`license-inventory.schema.json`](license-inventory.schema.json) freezes the
+  normalized input-accounting result contract before Phase 6 claims a pass.
+- [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) summarizes the candidate's
+  shipped and build-only third-party lineage without granting BlazeX rights.

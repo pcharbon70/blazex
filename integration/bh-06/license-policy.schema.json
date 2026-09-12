@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "policy_id", "limits", "license_records", "components"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "policy_id": {"type": "string", "pattern": "^[a-z][a-z0-9._/-]{0,127}$"},
+    "limits": {"type": "object", "additionalProperties": false, "required": ["max_inputs", "max_input_bytes", "max_total_bytes"], "properties": {"max_inputs": {"type": "integer", "minimum": 1}, "max_input_bytes": {"type": "integer", "minimum": 1}, "max_total_bytes": {"type": "integer", "minimum": 1}}},
+    "license_records": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["id", "license", "disposition", "notice_path", "notice_sha256"], "properties": {"id": {"type": "string"}, "license": {"type": "string"}, "disposition": {"enum": ["known-retention-required", "private-development-only"]}, "notice_path": {"type": ["string", "null"]}, "notice_sha256": {"type": ["string", "null"]}}}},
+    "components": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["id", "name", "source", "version", "scope", "license_record_ids"], "properties": {"id": {"type": "string"}, "name": {"type": "string"}, "source": {"type": "string"}, "version": {"type": "string"}, "scope": {"enum": ["shipped", "build-only"]}, "license_record_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}}}}}
+  }
+}
