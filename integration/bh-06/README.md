@@ -30,3 +30,10 @@ explicit, deterministic entrypoint-rooted BEAM inventory to that candidate build
 - [`phase-04-build-manifest-v0.1.0.json`](phase-04-build-manifest-v0.1.0.json)
   and [`phase-04-browser-replay-v0.1.0.json`](phase-04-browser-replay-v0.1.0.json)
   bind the compatibility-gated package and deterministic Chrome/Firefox replay.
+- [`secret-policy-v0.1.0.json`](secret-policy-v0.1.0.json) freezes fixed
+  signatures, public-config key fragments, and explicit scaling limits.
+- [`secret-audit-v0.1.0.json`](secret-audit-v0.1.0.json) accounts for every
+  Phase 5 bundle/browser input by path-free label, size, and digest with no findings.
+- [`phase-05-build-manifest-v0.1.0.json`](phase-05-build-manifest-v0.1.0.json)
+  and [`phase-05-browser-replay-v0.1.0.json`](phase-05-browser-replay-v0.1.0.json)
+  bind the secret-gated package and deterministic Chrome/Firefox replay.

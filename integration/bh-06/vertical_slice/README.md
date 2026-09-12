@@ -4,7 +4,7 @@ This private fixture packages `BlazeX.BH06.VerticalSlice.Counter`, authored
 through the public experimental `BlazeX.Component` facade, into an AVM bundle.
 The BH-06 build package combines it with the governed AtomVM WebAssembly runtime,
 content-addressed reachability, client-safety, and exact compatibility reports,
-and browser assets.
+plus a redacted secret audit and browser assets.
 The reports root the counter explicitly, prove the inventoried `Unused` sentinel
 is not silently bundled, and classify every bounded reachable/external dependency
 before AVM assembly. The runtime identity, AVM ABI, protocol versions, and

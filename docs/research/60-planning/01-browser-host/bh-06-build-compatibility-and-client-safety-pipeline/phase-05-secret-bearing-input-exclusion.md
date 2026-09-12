@@ -35,11 +35,11 @@ Back to the [milestone](README.md).
     - [x] Reject unknown fields, duplicates, malformed values, overflow, and any
       finding with stable, value-free diagnostics.
 
-  - [ ] 5.3 Section - Enforce exclusion before candidate bundle assembly.
-    - [ ] Compose safety, compatibility, and secret exclusion in one ordered gate.
-    - [ ] Bind a content-addressed secret audit into the manifest and account for
+  - [x] 5.3 Section - Enforce exclusion before candidate bundle assembly.
+    - [x] Compose safety, compatibility, and secret exclusion in one ordered gate.
+    - [x] Bind a content-addressed secret audit into the manifest and account for
       the exact bundle, document, and host inputs.
-    - [ ] Prove clean success plus literal, config-key, duplicate, overflow,
+    - [x] Prove clean success plus literal, config-key, duplicate, overflow,
       mutation, determinism, redaction, and pre-assembly rejection cases.
 
   - [ ] 5.4 Section - Reproduce, review, and publish completion.

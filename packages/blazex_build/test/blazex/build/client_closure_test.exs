@@ -7,7 +7,9 @@ defmodule BlazeX.Build.ClientClosureTest do
     ClientSafetyPolicy,
     CompatibilityError,
     CompatibilityProfile,
-    CompatibilityRequirements
+    CompatibilityRequirements,
+    SecretAuditError,
+    SecretPolicy
   }
 
   @reachability %{"modules" => [%{"module" => "Elixir.App.Root"}], "external_references" => []}
@@ -76,6 +78,26 @@ defmodule BlazeX.Build.ClientClosureTest do
     refute_received :assembled
   end
 
+  test "does not invoke assembly after a redacted secret finding" do
+    caller = self()
+
+    assert_raise SecretAuditError, fn ->
+      ClientClosure.authorize!(
+        @reachability,
+        @inventory,
+        policy("client-safe"),
+        profile(),
+        requirements(),
+        secret_policy(),
+        [%{"label" => "candidate.beam", "bytes" => "ghp_example"}],
+        %{},
+        fn _ -> send(caller, :assembled) end
+      )
+    end
+
+    refute_received :assembled
+  end
+
   defp policy(classification) do
     ClientSafetyPolicy.new!(%{
       "schema_version" => "1.0.0",
@@ -106,6 +128,21 @@ defmodule BlazeX.Build.ClientClosureTest do
       "runtime" => %{"id" => "runtime", "version" => version, "abi" => "avm/1"},
       "protocols" => [],
       "features" => []
+    })
+  end
+
+  defp secret_policy do
+    SecretPolicy.new!(%{
+      "schema_version" => "1.0.0",
+      "policy_id" => "test.secret/1",
+      "key_fragments" => [],
+      "literal_rules" => [%{"id" => "github", "literal" => "ghp_", "reason" => "token"}],
+      "limits" => %{
+        "max_inputs" => 10,
+        "max_input_bytes" => 100,
+        "max_total_bytes" => 100,
+        "max_findings" => 10
+      }
     })
   end
 end
