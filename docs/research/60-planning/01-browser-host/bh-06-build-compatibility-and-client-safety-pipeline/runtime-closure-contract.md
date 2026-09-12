@@ -21,7 +21,9 @@ identities. Because distributed Elixir/OTP BEAMs may omit compiler metadata,
 the report also names every opaque module carried through byte-for-byte. The
 whole base is reduced through its import graph; the pinned function reducer is
 then applied only to analyzable BEAMs while reachable opaque BEAMs are explicitly
-left and ignored. Output must be non-empty, contain no additions, retain every root,
+left and ignored. Every analyzable module imported directly by those opaque
+BEAMs becomes a reported whole-module bridge root, so calls hidden from the
+function graph cannot be pruned. Output must be non-empty, contain no additions, retain every root,
 and be reproducible. An opaque module changed in transit, a removed module or function absent from the report, an
 unknown declaration, or overlap between incompatible policy sets rejects.
 

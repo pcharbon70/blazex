@@ -37,6 +37,7 @@ defmodule Mix.Tasks.Bh06.Package do
       secret_policy = secret_policy!(root)
       license_policy = license_policy!(root)
       bundle_policy = bundle_policy!(root)
+      runtime_closure_policy = runtime_closure_policy!(root)
       payload_policy = payload_policy!(root)
       boot = boot!(temporary)
       inputs = bundle_inputs(boot, fixture_build, reachability)
@@ -60,7 +61,12 @@ defmodule Mix.Tasks.Bh06.Package do
           bundle_policy,
           bundle_declarations,
           fn authorization ->
-            package_bundles!(temporary, inputs, authorization["bundle_plan"])
+            package_bundles!(
+              temporary,
+              inputs,
+              authorization["bundle_plan"],
+              runtime_closure_policy
+            )
           end
         )
 
@@ -69,6 +75,9 @@ defmodule Mix.Tasks.Bh06.Package do
       secret_audit = Map.merge(secret_audit, %{"phase" => 5, "status" => "complete"})
       license_inventory = Map.merge(license_inventory, %{"phase" => 6, "status" => "complete"})
       bundle_plan = Map.merge(bundle_plan, %{"phase" => 7, "status" => "complete"})
+
+      runtime_closure =
+        Map.merge(archives.runtime_closure, %{"phase" => 9, "status" => "complete"})
 
       spec =
         BlazeX.Build.EntryPoint.new!(%{
@@ -102,6 +111,7 @@ defmodule Mix.Tasks.Bh06.Package do
           secret_audit: secret_audit,
           license_inventory: license_inventory,
           bundle_plan: bundle_plan,
+          runtime_closure: runtime_closure,
           feature_bundles: archives.features
         )
 
@@ -112,13 +122,13 @@ defmodule Mix.Tasks.Bh06.Package do
           payload_policy,
           &BlazeX.Build.PayloadBudget.node_brotli_samples!/2
         )
-        |> Map.merge(%{"phase" => 8, "status" => "complete"})
+        |> Map.merge(%{"phase" => 9, "status" => "complete"})
 
       File.mkdir_p!(Path.dirname(payload_output))
       File.write!(payload_output, BlazeX.Build.JSON.encode!(payload) <> "\n", [:exclusive])
 
       if payload["decision"] == "reject" and not retain_rejected do
-        Mix.raise("BH-06 Phase 8 payload gate rejected candidate; no output was promoted")
+        Mix.raise("BH-06 Phase 9 payload gate rejected candidate; no output was promoted")
       end
 
       case File.ls(output) do
@@ -130,7 +140,7 @@ defmodule Mix.Tasks.Bh06.Package do
       File.cp_r!(candidate, output)
 
       Mix.shell().info(
-        "BH-06 Phase 8 package: #{String.upcase(payload["decision"])} " <>
+        "BH-06 Phase 9 package: #{String.upcase(payload["decision"])} " <>
           "(#{length(manifest["artifacts"])} manifest assets; " <>
           "#{payload["summary"]["public_brotli_bytes"]} Brotli bytes)"
       )
@@ -211,10 +221,18 @@ defmodule Mix.Tasks.Bh06.Package do
 
   defp payload_policy!(root) do
     root
-    |> Path.join("integration/bh-06/payload-policy-v0.1.0.json")
+    |> Path.join("integration/bh-06/payload-policy-v0.1.1.json")
     |> File.read!()
     |> Jason.decode!()
     |> BlazeX.Build.PayloadPolicy.new!()
+  end
+
+  defp runtime_closure_policy!(root) do
+    root
+    |> Path.join("integration/bh-06/runtime-closure-policy-v0.1.0.json")
+    |> File.read!()
+    |> Jason.decode!()
+    |> BlazeX.Build.RuntimeClosurePolicy.new!()
   end
 
   defp bundle_declarations!(inputs) do
@@ -272,7 +290,7 @@ defmodule Mix.Tasks.Bh06.Package do
   defp component_id!("bundle/" <> _), do: "erlang-otp"
   defp component_id!(label), do: Mix.raise("unaccounted license inventory input: #{label}")
 
-  defp package_bundles!(temporary, inputs, plan) do
+  defp package_bundles!(temporary, inputs, plan, runtime_closure_policy) do
     ownership = Map.new(plan["inputs"], &{&1["label"], &1["bundle_id"]})
 
     grouped =
@@ -280,10 +298,17 @@ defmodule Mix.Tasks.Bh06.Package do
         Map.fetch!(ownership, "bundle/#{Path.basename(path)}")
       end)
 
+    reduction =
+      BlazeX.Build.RuntimeClosure.reduce!(
+        Map.fetch!(grouped, "base"),
+        Path.join(temporary, "reduced-base"),
+        runtime_closure_policy
+      )
+
     base =
       package_archive!(
         Path.join(temporary, "base.avm"),
-        Map.fetch!(grouped, "base"),
+        reduction.output_paths,
         @start_module
       )
 
@@ -296,7 +321,7 @@ defmodule Mix.Tasks.Bh06.Package do
         %{"id" => bundle["id"], "path" => path}
       end)
 
-    %{base: base, features: features}
+    %{base: base, features: features, runtime_closure: reduction.report}
   end
 
   defp package_archive!(target, inputs, start_module) do
@@ -377,7 +402,8 @@ defmodule Mix.Tasks.Bh06.Package do
       |> Enum.reject(&(&1 in [:kernel, :stdlib, :elixir, :blazex_build]))
       |> Enum.flat_map(fn app -> Application.app_dir(app, "ebin/*.beam") |> Path.wildcard() end)
       |> Enum.reject(fn path ->
-        MapSet.member?(unused, Path.basename(path, ".beam"))
+        module = Path.basename(path, ".beam")
+        MapSet.member?(unused, module) or String.starts_with?(module, "Elixir.Mix.Tasks.")
       end)
 
     popcorn =

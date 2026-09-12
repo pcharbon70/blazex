@@ -42,7 +42,7 @@ const server = http.createServer((request, response) => {
 });
 
 await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
-const report = { schema_version: "1.0.0", milestone: "BH-06", phase: 8, support_state: "unsupported-development-evidence", payload_decision: payload.decision, failed_budgets: payload.budgets.filter((item) => item.result === "failed"), results: [], negative_integrity: null, negative_feature_integrity: null, negative_private_evidence: null };
+const report = { schema_version: "1.0.0", milestone: "BH-06", phase: 9, support_state: "unsupported-development-evidence", payload_decision: payload.decision, failed_budgets: payload.budgets.filter((item) => item.result === "failed"), results: [], negative_integrity: null, negative_feature_integrity: null, negative_private_evidence: null };
 
 try {
   for (const [name, launcher, executablePath] of [["chrome", chromium, "/usr/bin/google-chrome"], ["firefox", firefox, "/home/ducky/.cache/ms-playwright/firefox-1538/firefox/firefox"]]) {
@@ -50,11 +50,15 @@ try {
     try {
       const page = await browser.newPage();
       const pageErrors = [];
+      const consoleMessages = [];
       page.on("pageerror", (error) => pageErrors.push(String(error)));
+      page.on("console", (message) => {
+        if (consoleMessages.length < 200) consoleMessages.push({ type: message.type(), text: message.text() });
+      });
       await page.goto(`http://127.0.0.1:${server.address().port}/`);
       await page.waitForFunction(() => window.__BH06_RESULT !== null, null, { timeout: 20000 });
       const observed = await page.evaluate(() => window.__BH06_RESULT);
-      report.results.push({ browser: name, version: browser.version(), executable: executablePath, ...observed, page_errors: pageErrors });
+      report.results.push({ browser: name, version: browser.version(), executable: executablePath, ...observed, page_errors: pageErrors, console_messages: consoleMessages });
       if (observed.result !== "passed" || pageErrors.length || !observed.checks.includes("brotli-negotiation")) process.exitCode = 1;
       if (name === "chrome") {
         const privatePath = JSON.parse(fs.readFileSync(path.join(build, "build-manifest.json"))).artifacts.find((item) => item.exposure === "private-build-evidence").path;

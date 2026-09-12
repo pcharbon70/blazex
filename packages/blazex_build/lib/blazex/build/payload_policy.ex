@@ -7,6 +7,7 @@ defmodule BlazeX.Build.PayloadPolicy do
   @directions ~w(at-most exactly)
   @exposures ~w(public private-build-evidence)
   @required_roles ~w(build-manifest document runtime-module runtime-wasm application-bundle browser-host feature-bundle reachability-report client-safety-report compatibility-report secret-audit-report license-inventory-report bundle-plan-report)
+  @optional_roles ~w(runtime-closure-report)
 
   defstruct [:id, :compression, :roles, :budgets, :limits, :canonical]
 
@@ -58,7 +59,10 @@ defmodule BlazeX.Build.PayloadPolicy do
   defp limits!(_), do: invalid!()
 
   defp roles!(roles, limits) when is_map(roles) do
-    if Map.keys(roles) |> Enum.sort() != Enum.sort(@required_roles) or
+    keys = Map.keys(roles)
+
+    if not MapSet.subset?(MapSet.new(@required_roles), MapSet.new(keys)) or
+         not MapSet.subset?(MapSet.new(keys), MapSet.new(@required_roles ++ @optional_roles)) or
          map_size(roles) > limits["max_artifacts"],
        do: invalid!()
 

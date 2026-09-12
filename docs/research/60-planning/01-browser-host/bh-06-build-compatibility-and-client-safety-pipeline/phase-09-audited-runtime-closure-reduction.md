@@ -39,11 +39,13 @@ Back to the [milestone](README.md).
       deltas; reject output additions, identity drift, missing roots, empty output,
       non-subset results, and nondeterministic reports.
 
-  - [ ] 9.3 Section - Package and replay the reduced candidate.
-    - [ ] Feed only the audited reduced base to archive assembly and bind the
+  - [x] 9.3 Section - Package and replay the reduced candidate.
+    - [x] Feed only the audited reduced base to archive assembly and bind the
       closure report as private evidence before payload evaluation.
-    - [ ] Re-run the unchanged Phase 8 thresholds and normal promotion path.
-    - [ ] Prove feature absence/load, interaction, disposal, Brotli negotiation,
+    - [x] Extend the closed role policy only for that private report, then re-run
+      the unchanged Phase 8 owners, metrics, compression, thresholds, and normal
+      promotion path.
+    - [x] Prove feature absence/load, interaction, disposal, Brotli negotiation,
       private-evidence denial, integrity negatives, and Chrome/Firefox parity.
 
   - [ ] 9.4 Section - Reproduce, review, and publish completion.

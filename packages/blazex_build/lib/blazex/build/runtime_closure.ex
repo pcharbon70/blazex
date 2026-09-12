@@ -6,7 +6,6 @@ defmodule BlazeX.Build.RuntimeClosure do
   @input_keys ~w(bytes module)
   @removed_keys ~w(arity function module)
   @module ~r/^[A-Za-z][A-Za-z0-9_.]*$/
-  @function ~r/^[A-Za-z_][A-Za-z0-9_!?@]*$/
 
   def reduce!(input_paths, output_dir, %RuntimeClosurePolicy{} = policy)
       when is_list(input_paths) and is_binary(output_dir) do
@@ -48,7 +47,8 @@ defmodule BlazeX.Build.RuntimeClosure do
       |> Enum.map(& &1["module"])
       |> MapSet.new()
 
-    reachable = module_reachability!(inputs, policy)
+    imports = module_imports!(inputs)
+    reachable = module_reachability!(imports, policy)
 
     reducer_paths =
       inputs
@@ -66,6 +66,13 @@ defmodule BlazeX.Build.RuntimeClosure do
       |> MapSet.difference(MapSet.new(policy.drop_modules))
       |> Enum.sort()
 
+    opaque_dependencies =
+      carried_opaque
+      |> Enum.flat_map(&Map.fetch!(imports, &1))
+      |> Enum.uniq()
+      |> Enum.reject(&(&1 in carried_opaque or &1 in policy.drop_modules))
+      |> Enum.sort()
+
     unless Enum.all?(carried_opaque, &Map.has_key?(path_by_module, &1)),
       do: invalid!("opaque-module classification escaped the authorized input")
 
@@ -73,7 +80,7 @@ defmodule BlazeX.Build.RuntimeClosure do
       ebin_files: reducer_paths,
       output_dir: output_dir,
       keep:
-        Enum.map(policy.keep_modules, &existing_atom!/1) ++
+        Enum.map(Enum.uniq(policy.keep_modules ++ opaque_dependencies), &existing_atom!/1) ++
           Enum.map(policy.keep_functions, fn row ->
             {existing_atom!(row["module"]), existing_atom!(row["function"]), row["arity"]}
           end),
@@ -96,7 +103,16 @@ defmodule BlazeX.Build.RuntimeClosure do
 
     removed_functions = normalize_removed_functions!(stats)
     audit_inputs = Enum.map(inputs, &Map.take(&1, ~w(bytes module)))
-    report = audit!(audit_inputs, output_paths, removed_functions, carried_opaque, policy)
+
+    report =
+      audit!(
+        audit_inputs,
+        output_paths,
+        removed_functions,
+        carried_opaque,
+        opaque_dependencies,
+        policy
+      )
 
     %{output_paths: output_paths, removed_functions: removed_functions, report: report}
   end
@@ -119,6 +135,21 @@ defmodule BlazeX.Build.RuntimeClosure do
       )
       when is_list(inputs) and is_list(output_paths) and is_list(removed_functions) and
              is_list(opaque_modules) do
+    audit!(inputs, output_paths, removed_functions, opaque_modules, [], policy)
+  end
+
+  def audit!(_, _, _, _, _), do: invalid!("arguments are malformed")
+
+  def audit!(
+        inputs,
+        output_paths,
+        removed_functions,
+        opaque_modules,
+        opaque_dependencies,
+        %RuntimeClosurePolicy{} = policy
+      )
+      when is_list(inputs) and is_list(output_paths) and is_list(removed_functions) and
+             is_list(opaque_modules) and is_list(opaque_dependencies) do
     inputs = inputs!(inputs, policy)
     outputs = outputs!(output_paths, policy)
     input_names = MapSet.new(inputs, & &1["module"])
@@ -139,6 +170,10 @@ defmodule BlazeX.Build.RuntimeClosure do
 
     removed_functions = removed_functions!(removed_functions, input_names, output_names, policy)
     opaque_modules = opaque_modules!(opaque_modules, inputs, outputs)
+
+    opaque_dependencies =
+      retained_modules!(opaque_dependencies, output_names, "opaque dependency")
+
     removed_modules = input_names |> MapSet.difference(output_names) |> Enum.sort()
     before_bytes = Enum.sum(Enum.map(inputs, & &1["bytes"]))
     after_bytes = Enum.sum(Enum.map(outputs, & &1["bytes"]))
@@ -155,6 +190,7 @@ defmodule BlazeX.Build.RuntimeClosure do
       "inputs" => inputs,
       "outputs" => outputs,
       "opaque_modules" => opaque_modules,
+      "opaque_dependency_modules" => opaque_dependencies,
       "removed_modules" => removed_modules,
       "removed_functions" => removed_functions,
       "summary" => %{
@@ -165,13 +201,14 @@ defmodule BlazeX.Build.RuntimeClosure do
         "after_bytes" => after_bytes,
         "removed_bytes" => before_bytes - after_bytes,
         "removed_functions" => length(removed_functions),
-        "opaque_modules" => length(opaque_modules)
+        "opaque_modules" => length(opaque_modules),
+        "opaque_dependency_modules" => length(opaque_dependencies)
       },
       "complete" => true
     }
   end
 
-  def audit!(_, _, _, _, _), do: invalid!("arguments are malformed")
+  def audit!(_, _, _, _, _, _), do: invalid!("arguments are malformed")
 
   def input_set_sha256(inputs) when is_list(inputs) do
     records =
@@ -228,26 +265,27 @@ defmodule BlazeX.Build.RuntimeClosure do
     end
   end
 
-  defp module_reachability!(inputs, policy) do
+  defp module_imports!(inputs) do
     inventory = MapSet.new(inputs, & &1["module"])
 
-    imports =
-      Map.new(inputs, fn input ->
-        imported =
-          case :beam_lib.chunks(String.to_charlist(input["path"]), [:imports]) do
-            {:ok, {_module, [imports: rows]}} ->
-              rows
-              |> Enum.map(fn {module, _function, _arity} -> Atom.to_string(module) end)
-              |> Enum.filter(&MapSet.member?(inventory, &1))
-              |> MapSet.new()
+    Map.new(inputs, fn input ->
+      imported =
+        case :beam_lib.chunks(String.to_charlist(input["path"]), [:imports]) do
+          {:ok, {_module, [imports: rows]}} ->
+            rows
+            |> Enum.map(fn {module, _function, _arity} -> Atom.to_string(module) end)
+            |> Enum.filter(&MapSet.member?(inventory, &1))
+            |> MapSet.new()
 
-            _ ->
-              invalid!("could not read imports from #{input["module"]}")
-          end
+          _ ->
+            invalid!("could not read imports from #{input["module"]}")
+        end
 
-        {input["module"], imported}
-      end)
+      {input["module"], imported}
+    end)
+  end
 
+  defp module_reachability!(imports, policy) do
     roots =
       policy.keep_modules ++
         policy.leave_modules ++ Enum.map(policy.keep_functions, & &1["module"])
@@ -324,8 +362,14 @@ defmodule BlazeX.Build.RuntimeClosure do
         input
       end)
 
-    unless input_set_sha256(material) == policy.expected_input["set_sha256"],
-      do: invalid!("input set does not match the authorized closure")
+    observed_input = input_set_sha256(material)
+
+    unless observed_input == policy.expected_input["set_sha256"],
+      do:
+        invalid!(
+          "input set does not match the authorized closure " <>
+            "(expected #{policy.expected_input["set_sha256"]}, observed #{observed_input})"
+        )
 
     rows =
       material
@@ -369,7 +413,7 @@ defmodule BlazeX.Build.RuntimeClosure do
       Enum.map(rows, fn row ->
         unless is_map(row) and Map.keys(row) |> Enum.sort() == @removed_keys and
                  valid_name?(row["module"], @module, policy) and
-                 valid_name?(row["function"], @function, policy) and
+                 valid_function_evidence?(row["function"], policy) and
                  is_integer(row["arity"]) and row["arity"] in 0..255 and
                  MapSet.member?(inputs, row["module"]) and MapSet.member?(outputs, row["module"]),
                do: invalid!("removed function row is malformed or has invalid ownership")
@@ -401,6 +445,14 @@ defmodule BlazeX.Build.RuntimeClosure do
     modules
   end
 
+  defp retained_modules!(modules, outputs, label) do
+    if modules != Enum.sort(modules) or length(modules) != length(Enum.uniq(modules)) or
+         not Enum.all?(modules, &MapSet.member?(outputs, &1)),
+       do: invalid!("#{label} list is not sorted, unique, and retained")
+
+    modules
+  end
+
   defp record(module, bytes),
     do: %{"module" => module, "bytes" => byte_size(bytes), "sha256" => digest_bytes(bytes)}
 
@@ -415,6 +467,11 @@ defmodule BlazeX.Build.RuntimeClosure do
     do:
       is_binary(value) and byte_size(value) <= policy.limits["max_name_length"] and
         Regex.match?(regex, value)
+
+  defp valid_function_evidence?(value, policy),
+    do:
+      is_binary(value) and byte_size(value) in 1..policy.limits["max_name_length"] and
+        String.printable?(value)
 
   defp digest_bytes(bytes), do: digest(bytes)
   defp digest(bytes), do: :crypto.hash(:sha256, bytes) |> Base.encode16(case: :lower)
