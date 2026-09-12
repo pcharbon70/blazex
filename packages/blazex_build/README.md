@@ -54,4 +54,10 @@ recomputed SHA-384 SRI token and exact Cache-Control value, while the manifest
 binds the canonical policy digest. This is metadata for a future delivery
 adapter; it is not a production server or support claim.
 
+BH-06 Phase 11 adds atom-safe `EntryPointAccountingPolicy` validation and
+deterministic `EntryPointAttestation` generation. An attestation binds one
+declared browser entrypoint to its complete artifact, safety, compatibility,
+license, bundle, runtime-closure, payload, and delivery-integrity evidence and
+rejects incomplete or extra attestation sets.
+
 Run `mix format --check-formatted && mix test` from this directory.

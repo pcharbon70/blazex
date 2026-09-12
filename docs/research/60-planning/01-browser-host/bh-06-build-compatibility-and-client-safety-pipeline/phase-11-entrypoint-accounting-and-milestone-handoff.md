@@ -28,12 +28,12 @@ Back to the [milestone](README.md).
       evidence categories, deterministic identities, limits, and stop rules.
     - [x] Activate policy/report schemas, planning, baseline, and evidence indexes.
 
-  - [ ] 11.2 Section - Implement deterministic entrypoint attestation.
-    - [ ] Validate the policy without atom creation and reject duplicate,
+  - [x] 11.2 Section - Implement deterministic entrypoint attestation.
+    - [x] Validate the policy without atom creation and reject duplicate,
       unknown, missing, unused, over-limit, or malformed declarations.
-    - [ ] Build a path-independent attestation from the manifest and exact
+    - [x] Build a path-independent attestation from the manifest and exact
       safety, compatibility, license, closure, payload, and integrity evidence.
-    - [ ] Verify all identities, totals, decisions, ownership, and role coverage
+    - [x] Verify all identities, totals, decisions, ownership, and role coverage
       with focused positive, deterministic-repeat, and mutation tests.
 
   - [ ] 11.3 Section - Integrate, package, and replay the attested candidate.
