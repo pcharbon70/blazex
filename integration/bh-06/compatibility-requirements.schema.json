@@ -7,8 +7,22 @@
   "properties": {
     "schema_version": {"const": "1.0.0"},
     "requirement_id": {"type": "string", "pattern": "^[a-z][a-z0-9._/-]{0,127}$"},
-    "runtime": {"$ref": "compatibility-profile.schema.json#/$defs/runtime"},
-    "protocols": {"type": "array", "items": {"$ref": "compatibility-profile.schema.json#/$defs/protocol"}},
-    "features": {"type": "array", "items": {"$ref": "compatibility-profile.schema.json#/$defs/identifier"}}
+    "runtime": {"$ref": "#/$defs/runtime"},
+    "protocols": {"type": "array", "items": {"$ref": "#/$defs/protocol"}},
+    "features": {"type": "array", "items": {"$ref": "#/$defs/identifier"}}
+  },
+  "$defs": {
+    "identifier": {"type": "string", "pattern": "^[a-z][a-z0-9._/-]{0,127}$"},
+    "version": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._+-]{0,63}$"},
+    "runtime": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "version", "abi"],
+      "properties": {"id": {"$ref": "#/$defs/identifier"}, "version": {"$ref": "#/$defs/version"}, "abi": {"$ref": "#/$defs/identifier"}}
+    },
+    "protocol": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "version"],
+      "properties": {"id": {"$ref": "#/$defs/identifier"}, "version": {"$ref": "#/$defs/version"}}
+    }
   }
 }

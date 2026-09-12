@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0.0",
+  "profile_id": "blazex.atomvm-wasm.browser/1",
+  "runtime": {
+    "id": "atomvm-wasm",
+    "version": "0.6.6-dev",
+    "abi": "atomvm.avm/1"
+  },
+  "protocols": [
+    {"id": "blazex.browser-host", "version": "1"},
+    {"id": "blazex.component", "version": "0.1-experimental"},
+    {"id": "blazex.semantic-tree", "version": "1"}
+  ],
+  "features": [
+    {"id": "atomvm-bundle", "state": "supported", "reason": "loads one content-addressed AVM application bundle"},
+    {"id": "browser-dom-bridge", "state": "supported", "reason": "supports correlated semantic DOM projection commits"},
+    {"id": "browser-worker", "state": "unsupported", "reason": "worker execution is not qualified by the current profile"}
+  ]
+}

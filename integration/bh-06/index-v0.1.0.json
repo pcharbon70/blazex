@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
   "milestone": "BH-06",
-  "phase": 3,
+  "phase": 4,
   "status": "complete",
   "evidence": [
     "candidate-build-manifest-v0.1.0.json",
@@ -12,6 +12,10 @@
     "client-safety-policy-v0.1.0.json",
     "client-safety-v0.1.0.json",
     "phase-03-build-manifest-v0.1.0.json",
-    "phase-03-browser-replay-v0.1.0.json"
+    "phase-03-browser-replay-v0.1.0.json",
+    "compatibility-requirements-v0.1.0.json",
+    "compatibility-v0.1.0.json",
+    "phase-04-build-manifest-v0.1.0.json",
+    "phase-04-browser-replay-v0.1.0.json"
   ]
 }

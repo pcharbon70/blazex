@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0.0",
+  "milestone": "BH-06",
+  "phase": 4,
+  "support_state": "unsupported-development-evidence",
+  "results": [
+    {
+      "browser": "chrome",
+      "version": "140.0.7339.80",
+      "executable": "/usr/bin/google-chrome",
+      "result": "passed",
+      "runtime": "atomvm-wasm",
+      "checks": ["manifest-integrity", "atomvm-ready", "mount", "semantic-render", "dom-commit", "browser-interaction", "elixir-state-transition", "updated-dom-commit", "dispose"],
+      "trace": [{"semantic": 1, "state": 0, "step": "mount"}, {"name": "activate", "state": 1, "step": "event"}, {"resources": 0, "state": 1, "step": "dispose"}],
+      "dom": {"text": "Wasm counter: 1", "role": "Wasm counter"},
+      "manifest_id": "blazex.bh06.browser-slice/1",
+      "entrypoint": {"id": "counter", "module": "Elixir.BlazeX.BH06.VerticalSlice.Counter"},
+      "page_errors": []
+    },
+    {
+      "browser": "firefox",
+      "version": "153.0",
+      "executable": "/home/ducky/.cache/ms-playwright/firefox-1538/firefox/firefox",
+      "result": "passed",
+      "runtime": "atomvm-wasm",
+      "checks": ["manifest-integrity", "atomvm-ready", "mount", "semantic-render", "dom-commit", "browser-interaction", "elixir-state-transition", "updated-dom-commit", "dispose"],
+      "trace": [{"semantic": 1, "state": 0, "step": "mount"}, {"name": "activate", "state": 1, "step": "event"}, {"resources": 0, "state": 1, "step": "dispose"}],
+      "dom": {"text": "Wasm counter: 1", "role": "Wasm counter"},
+      "manifest_id": "blazex.bh06.browser-slice/1",
+      "entrypoint": {"id": "counter", "module": "Elixir.BlazeX.BH06.VerticalSlice.Counter"},
+      "page_errors": []
+    }
+  ],
+  "negative_integrity": {
+    "result": "failed",
+    "runtime": "atomvm-wasm",
+    "checks": [],
+    "trace": [],
+    "dom": null,
+    "manifest_id": "blazex.bh06.browser-slice/1",
+    "entrypoint": {"id": "counter", "module": "Elixir.BlazeX.BH06.VerticalSlice.Counter"},
+    "error": "Error: integrity mismatch for application-bundle"
+  },
+  "comparison": {"state": "exact-match"}
+}

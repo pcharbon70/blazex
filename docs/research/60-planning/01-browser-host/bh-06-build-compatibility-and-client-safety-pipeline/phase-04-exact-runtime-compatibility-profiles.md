@@ -36,11 +36,11 @@ Back to the [milestone](README.md).
     - [x] Reject unknown, duplicate, malformed, unsupported, missing, and unused
       candidate-specific declarations with stable diagnostics.
 
-  - [ ] 4.3 Section - Enforce compatibility before candidate bundle assembly.
-    - [ ] Compose client safety and compatibility into one ordered candidate gate.
-    - [ ] Bind a content-addressed compatibility report and exact profile identity
+  - [x] 4.3 Section - Enforce compatibility before candidate bundle assembly.
+    - [x] Compose client safety and compatibility into one ordered candidate gate.
+    - [x] Bind a content-addressed compatibility report and exact profile identity
       into the candidate manifest.
-    - [ ] Prove compatible success plus runtime, ABI, protocol, feature, mutation,
+    - [x] Prove compatible success plus runtime, ABI, protocol, feature, mutation,
       determinism, and pre-assembly rejection cases.
 
   - [ ] 4.4 Section - Reproduce, review, and publish completion.
