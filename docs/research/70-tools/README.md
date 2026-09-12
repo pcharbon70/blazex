@@ -327,3 +327,5 @@ reporting a tooling change complete.
 - [BH-06 Phase 3 validator tests](test_validate_bh06_client_safety.py) — Rejects unsafe classification, policy/report/summary/manifest mutation, and assembly-gate bypass.
 - [BH-06 Phase 4 compatibility validator](validate_bh06_compatibility.py) — Verifies exact runtime, ABI, protocol, and feature decisions, ordered pre-assembly enforcement, manifest identities, and browser replay.
 - [BH-06 Phase 4 validator tests](test_validate_bh06_compatibility.py) — Rejects profile, requirement, decision, summary, manifest, browser, and assembly-gate mutations.
+- [BH-06 Phase 5 secret-exclusion validator](validate_bh06_secret_exclusion.py) — Verifies policy, path-free input accounting, redaction, ordered pre-assembly enforcement, manifest binding, and browser replay.
+- [BH-06 Phase 5 validator tests](test_validate_bh06_secret_exclusion.py) — Rejects policy, finding, path, summary, manifest, and gate mutations.

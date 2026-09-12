@@ -23,19 +23,27 @@ defmodule Mix.Tasks.Bh06.Package do
       policy = client_safety_policy!(root)
       profile = compatibility_profile!(root)
       requirements = compatibility_requirements!(root)
+      secret_policy = secret_policy!(root)
+      boot = boot!(temporary)
+      inputs = bundle_inputs(boot, fixture_build, reachability)
+      secret_inputs = secret_inputs!(root, inputs)
 
-      {safety, compatibility, bundle} =
+      {safety, compatibility, secret_audit, bundle} =
         BlazeX.Build.ClientClosure.authorize!(
           reachability,
           inventory,
           policy,
           profile,
           requirements,
-          fn _ -> package_bundle!(fixture_build, temporary, reachability) end
+          secret_policy,
+          secret_inputs,
+          %{},
+          fn _ -> package_bundle!(temporary, inputs) end
         )
 
       safety = Map.merge(safety, %{"phase" => 3, "status" => "complete"})
       compatibility = Map.merge(compatibility, %{"phase" => 4, "status" => "complete"})
+      secret_audit = Map.merge(secret_audit, %{"phase" => 5, "status" => "complete"})
 
       spec =
         BlazeX.Build.EntryPoint.new!(%{
@@ -65,10 +73,11 @@ defmodule Mix.Tasks.Bh06.Package do
         BlazeX.Build.Pipeline.build!(spec, output,
           reachability: reachability,
           client_safety: safety,
-          compatibility: compatibility
+          compatibility: compatibility,
+          secret_audit: secret_audit
         )
 
-      Mix.shell().info("BH-06 Phase 4 package: PASS (#{length(manifest["artifacts"])} assets)")
+      Mix.shell().info("BH-06 Phase 5 package: PASS (#{length(manifest["artifacts"])} assets)")
     after
       File.rm_rf!(temporary)
     end
@@ -120,10 +129,11 @@ defmodule Mix.Tasks.Bh06.Package do
     |> BlazeX.Build.CompatibilityRequirements.new!()
   end
 
-  defp package_bundle!(fixture_build, temporary, report) do
-    boot = boot!(temporary)
-    inputs = bundle_inputs(boot, fixture_build, report)
+  defp secret_policy!(root) do
+    root |> Path.join("integration/bh-06/secret-policy-v0.1.0.json") |> File.read!() |> Jason.decode!() |> BlazeX.Build.SecretPolicy.new!()
+  end
 
+  defp package_bundle!(temporary, inputs) do
     duplicates =
       inputs
       |> Enum.group_by(&Path.basename/1)
@@ -139,6 +149,17 @@ defmodule Mix.Tasks.Bh06.Package do
       })
 
     target
+  end
+
+  defp secret_inputs!(root, inputs) do
+    bundle = Enum.map(inputs, fn path -> %{"label" => "bundle/#{Path.basename(path)}", "bytes" => File.read!(path)} end)
+    fixed = [
+      {"browser/host.js", "integration/bh-06/vertical_slice/assets/host.js"},
+      {"browser/index.html", "integration/bh-06/vertical_slice/assets/index.html"},
+      {"runtime/AtomVM.mjs", "packages/blazex_runtime_popcorn/runtime/generated/release-web/artifacts/AtomVM.mjs"},
+      {"runtime/AtomVM.wasm", "packages/blazex_runtime_popcorn/runtime/generated/release-web/artifacts/AtomVM.wasm"}
+    ]
+    bundle ++ Enum.map(fixed, fn {label, relative} -> %{"label" => label, "bytes" => File.read!(Path.join(root, relative))} end)
   end
 
   defp boot!(temporary) do

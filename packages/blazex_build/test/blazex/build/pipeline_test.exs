@@ -124,6 +124,17 @@ defmodule BlazeX.Build.PipelineTest do
     assert_raise ArgumentError, ~r/absent or empty/, fn -> Pipeline.build!(spec, output) end
   end
 
+  test "binds a content-addressed clean secret audit", %{root: root, spec: spec} do
+    report = %{"schema_version" => "1.0.0", "clean" => true, "policy_id" => "test/1"}
+    output = Path.join(root, "secret-audit")
+    manifest = Pipeline.build!(spec, output, secret_audit: report)
+    asset = Enum.find(manifest["artifacts"], &(&1["role"] == "secret-audit-report"))
+    assert String.contains?(asset["path"], asset["sha256"])
+
+    assert File.read!(Path.join(output, asset["path"])) ==
+             BlazeX.Build.JSON.encode!(report) <> "\n"
+  end
+
   test "rejects malformed entrypoints and document templates", %{spec: spec} do
     assert_raise ArgumentError, ~r/lowercase/, fn -> EntryPoint.new!(%{spec | id: "Bad ID"}) end
     path = Path.join(Path.dirname(spec.document), "bad.html")
