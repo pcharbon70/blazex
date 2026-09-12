@@ -51,3 +51,16 @@ explicit, deterministic entrypoint-rooted BEAM inventory to that candidate build
   bind the inventory-gated package and exact Chrome/Firefox Wasm replay.
 - [`phase-06-secret-audit-v0.1.0.json`](phase-06-secret-audit-v0.1.0.json)
   binds the exact predecessor input identities used by the inventory parity gate.
+- [`bundle-policy-v0.1.0.json`](bundle-policy-v0.1.0.json) freezes Phase 7 base,
+  startup, feature membership, and scaling authority; its schema is
+  [`bundle-policy.schema.json`](bundle-policy.schema.json).
+- [`bundle-plan.schema.json`](bundle-plan.schema.json) freezes the normalized,
+  path-free ownership result before Phase 7 claims a pass.
+- [`bundle-plan-v0.1.0.json`](bundle-plan-v0.1.0.json) assigns all 694 BEAM
+  inputs to the base or counter feature with exact reason and digest records.
+- [`phase-07-build-manifest-v0.1.0.json`](phase-07-build-manifest-v0.1.0.json)
+  and [`phase-07-browser-replay-v0.1.0.json`](phase-07-browser-replay-v0.1.0.json)
+  bind separately addressed base/counter AVMs and their Chrome/Firefox dynamic load.
+- [`phase-07-secret-audit-v0.1.0.json`](phase-07-secret-audit-v0.1.0.json)
+  and [`phase-07-license-inventory-v0.1.0.json`](phase-07-license-inventory-v0.1.0.json)
+  retain the exact predecessor input identities for Phase 7.

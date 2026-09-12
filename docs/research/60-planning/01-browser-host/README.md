@@ -94,9 +94,9 @@ Phase 14 completed with `revise`: canonical Firefox cleanup passes, while the
 maximum-payload 512 row retained a transfer blocker. Phases 15–17 narrowed that
 blocker to Firefox ticket-session reconciliation. Corrective Phase 18 closes
 it with provider-authorized compact page success; BH-05 is accepted for
-bounded development. BH-06 Phases 1–6 complete the continuous browser-Wasm
+bounded development. BH-06 Phases 1–7 complete the continuous browser-Wasm
 slice, reachability, client-safety, exact compatibility, secret-exclusion, and
-license/provenance inventory gates; later build-pipeline work remains separately
+license/provenance inventory, and real feature-bundle loading gates; later build-pipeline work remains separately
 unauthorized.
 
 ## Index
@@ -110,7 +110,7 @@ unauthorized.
 - [BH-02 — Host-Neutral Semantic Kernel Gate](bh-02-host-neutral-semantic-kernel-gate/README.md) — completed eight-phase contract and cross-renderer proof plan accepted for internal experimental use.
 - [BH-03 — Browser Execution-Host and Runtime Boot Lifecycle](bh-03-browser-execution-host-and-runtime-boot-lifecycle/README.md) — accepted with bounded conditions; BH-04's corrective handoff is now accepted for development.
 - [BH-05 — Component Programming Model and Lifecycle](bh-05-component-programming-model-and-lifecycle/README.md) — accepted for bounded development through corrective Phase 18. No support promotion is claimed.
-- [BH-06 — Build, Compatibility, and Client-Safety Pipeline](bh-06-build-compatibility-and-client-safety-pipeline/README.md) — Phases 1–6 accepted through exact license/provenance inventory; no release or support promotion.
+- [BH-06 — Build, Compatibility, and Client-Safety Pipeline](bh-06-build-compatibility-and-client-safety-pipeline/README.md) — Phases 1–7 accepted through deterministic feature bundles; no release or support promotion.
 
 ### Documents
 

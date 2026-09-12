@@ -34,9 +34,10 @@ entrypoints, compatibility targets, or completion gates for this milestone.
 | [4 — Exact Runtime Compatibility Profiles](phase-04-exact-runtime-compatibility-profiles.md) | complete — accept | Match runtime identity/version/ABI, protocol versions, and required features exactly, then reject incompatibility before bundle assembly. | Phase 3 and explicit authorization |
 | [5 — Secret-Bearing Input Exclusion](phase-05-secret-bearing-input-exclusion.md) | complete — accept | Account for and scan candidate bundle/browser inputs and explicit public configuration, then reject redacted findings before AVM assembly. | Phase 4 and explicit authorization |
 | [6 — License and Provenance Inventory](phase-06-license-and-provenance-inventory.md) | complete — accept | Bind every Phase 5 input to one declared component and exact license/provenance records, verify notices, and reject gaps before AVM assembly. | Phase 5 and explicit authorization |
+| [7 — Deterministic Feature Bundles](phase-07-deterministic-feature-bundles.md) | complete — accept | Assign every BEAM to base or exact feature ownership, then verify and dynamically load the counter feature AVM into the existing browser AtomVM. | Phase 6 and explicit authorization |
 
-Later phase decomposition remains a separate planning decision. Phases 1-6 do
-not authorize feature-bundle decomposition, payload
+Later phase decomposition remains a separate planning decision. Phases 1-7 do
+not authorize route orchestration, predictive prefetch, payload
 budgets, production releases, support promotion, or BH-07.
 
 ## Index
@@ -66,6 +67,10 @@ budgets, production releases, support promotion, or BH-07.
 - [License and provenance contract](license-and-provenance-contract.md)
 - [Phase 6 review and reconciliation](phase-06-review-and-reconciliation.md)
 - [Phase 6 completion evidence](phase-06-completion.md)
+- [Phase 7 — Deterministic Feature Bundles](phase-07-deterministic-feature-bundles.md)
+- [Feature-bundle contract](feature-bundle-contract.md)
+- [Phase 7 review and reconciliation](phase-07-review-and-reconciliation.md)
+- [Phase 7 completion evidence](phase-07-completion.md)
 
 ### Subdirectories
 

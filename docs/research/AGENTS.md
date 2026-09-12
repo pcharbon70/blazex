@@ -296,6 +296,11 @@ integrity, build-only lineage, input parity, package enforcement, or Phase 6
 evidence changes, also run `python3 70-tools/validate_bh06_license_provenance.py`
 and `python3 -m unittest discover -s 70-tools -p 'test_validate_bh06_license_provenance.py'`.
 
+When BH-06 Phase 7 authorization, feature-bundle policy or plans, archive
+decomposition, dynamic AVM loading, package enforcement, or Phase 7 evidence
+changes, also run `python3 70-tools/validate_bh06_feature_bundles.py` and
+`python3 -m unittest discover -s 70-tools -p 'test_validate_bh06_feature_bundles.py'`.
+
 Do not commit, push, publish, or open a pull request unless the user asks.
 
 ## Research tooling

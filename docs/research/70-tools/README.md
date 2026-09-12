@@ -331,3 +331,5 @@ reporting a tooling change complete.
 - [BH-06 Phase 5 validator tests](test_validate_bh06_secret_exclusion.py) — Rejects policy, finding, path, summary, manifest, and gate mutations.
 - [BH-06 Phase 6 license/provenance validator](validate_bh06_license_provenance.py) — Verifies exact input parity, component/license ownership, notice integrity, build-only lineage, ordered enforcement, manifest binding, and browser replay.
 - [BH-06 Phase 6 validator tests](test_validate_bh06_license_provenance.py) — Rejects policy, notice, ownership, audit-parity, manifest, and gate mutations.
+- [BH-06 Phase 7 feature-bundle validator](validate_bh06_feature_bundles.py) — Verifies exact BEAM ownership, base/feature archives, real dynamic load, manifest binding, and browser replay.
+- [BH-06 Phase 7 validator tests](test_validate_bh06_feature_bundles.py) — Rejects policy, membership, audit, manifest, browser, gate, and runtime-loader mutations.

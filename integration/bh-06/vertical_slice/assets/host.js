@@ -7,6 +7,12 @@ function artifact(manifest, role) {
   return rows[0];
 }
 
+function featureArtifact(manifest, id) {
+  const rows = manifest.artifacts.filter((item) => item.role === "feature-bundle" && item.feature_id === id);
+  if (rows.length !== 1) throw new Error(`expected exactly one feature bundle ${id}`);
+  return rows[0];
+}
+
 async function verifiedBytes(item) {
   const response = await fetch(`/${item.path}`, { cache: "no-store" });
   if (!response.ok) throw new Error(`missing ${item.role} artifact`);
@@ -75,7 +81,19 @@ async function main() {
     if (manifest.schema_version !== "1.0.0" || manifest.entrypoint.module !== "Elixir.BlazeX.BH06.VerticalSlice.Counter") throw new Error("invalid entrypoint manifest");
     result.manifest_id = manifest.manifest_id;
     result.entrypoint = manifest.entrypoint;
+    const featureBytes = await verifiedBytes(featureArtifact(manifest, "counter"));
+    result.checks.push("feature-integrity");
     const runtime = await startRuntime(artifact(manifest, "runtime-module"), artifact(manifest, "runtime-wasm"), artifact(manifest, "application-bundle"));
+    const before = runtime.deserialize(await runtime.call("main", { operation: "feature_status" }));
+    if (before.loaded !== false) throw new Error("feature present before dynamic load");
+    result.checks.push("feature-absent-before-load");
+    const encoded = btoa(String.fromCharCode(...featureBytes));
+    const loaded = runtime.deserialize(await runtime.call("main", { operation: "load_feature", id: "counter", bytes: encoded }));
+    if (loaded.result !== "feature-loaded") throw new Error("feature dynamic load failed");
+    result.checks.push("feature-dynamic-load");
+    const duplicate = runtime.deserialize(await runtime.call("main", { operation: "load_feature", id: "counter", bytes: encoded }));
+    if (duplicate.result !== "rejected" || duplicate.reason !== "already-loaded") throw new Error("duplicate feature load accepted");
+    result.checks.push("duplicate-load-rejection");
     const mount = runtime.deserialize(await runtime.call("main", { operation: "mount" }));
     const button = applyProjection(mount.projection);
     result.checks.push("mount", "semantic-render", "dom-commit");

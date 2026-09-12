@@ -15,16 +15,19 @@ defmodule BlazeX.Build.Pipeline do
     ensure_empty!(output)
     File.mkdir_p!(Path.join(output, "assets"))
     immutable = Enum.map(@assets, &copy_asset!(spec, output, &1))
+    features = feature_artifacts!(options, output)
     host = Enum.find(immutable, &(&1["role"] == "browser-host"))
     document = build_document!(spec.document, output, host["path"])
 
     artifacts =
       [document | immutable] ++
+        features ++
         report_artifact!(options, output, :reachability, "reachability-report") ++
         report_artifact!(options, output, :client_safety, "client-safety-report") ++
         report_artifact!(options, output, :compatibility, "compatibility-report") ++
         report_artifact!(options, output, :secret_audit, "secret-audit-report") ++
-        report_artifact!(options, output, :license_inventory, "license-inventory-report")
+        report_artifact!(options, output, :license_inventory, "license-inventory-report") ++
+        report_artifact!(options, output, :bundle_plan, "bundle-plan-report")
 
     manifest = %{
       "schema_version" => "1.0.0",
@@ -74,6 +77,45 @@ defmodule BlazeX.Build.Pipeline do
     relative = "assets/#{role}-#{hash}#{extension}"
     File.cp!(source, Path.join(output, relative))
     record(relative, role, media_type, hash, File.stat!(source).size, "immutable")
+  end
+
+  defp feature_artifacts!(options, output) do
+    case Keyword.get(options, :feature_bundles, []) do
+      rows when is_list(rows) ->
+        rows
+        |> Enum.map(fn
+          %{"id" => id, "path" => source} when is_binary(id) and is_binary(source) ->
+            unless Regex.match?(~r/^[a-z][a-z0-9._\/-]{0,127}$/, id) and File.regular?(source),
+              do: raise(ArgumentError, "feature bundle is invalid")
+
+            hash = digest(source)
+            relative = "assets/feature-#{id}-#{hash}.avm"
+            File.cp!(source, Path.join(output, relative))
+
+            record(
+              relative,
+              "feature-bundle",
+              "application/vnd.atomvm.avm",
+              hash,
+              File.stat!(source).size,
+              "immutable"
+            )
+            |> Map.put("feature_id", id)
+
+          _ ->
+            raise ArgumentError, "feature bundle is malformed"
+        end)
+        |> Enum.sort_by(& &1["feature_id"])
+        |> tap(fn artifacts ->
+          ids = Enum.map(artifacts, & &1["feature_id"])
+
+          if length(ids) != length(Enum.uniq(ids)),
+            do: raise(ArgumentError, "duplicate feature bundle id")
+        end)
+
+      _ ->
+        raise ArgumentError, "feature bundles must be a list"
+    end
   end
 
   defp build_document!(source, output, host_path) do

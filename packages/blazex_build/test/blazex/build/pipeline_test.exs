@@ -146,6 +146,33 @@ defmodule BlazeX.Build.PipelineTest do
              BlazeX.Build.JSON.encode!(report) <> "\n"
   end
 
+  test "binds ordered content-addressed feature bundles and plan", %{root: root, spec: spec} do
+    counter = Path.join(root, "counter.avm")
+    File.write!(counter, "feature")
+    plan = %{"schema_version" => "1.0.0", "complete" => true}
+
+    manifest =
+      Pipeline.build!(spec, Path.join(root, "features"),
+        bundle_plan: plan,
+        feature_bundles: [%{"id" => "counter", "path" => counter}]
+      )
+
+    assert %{"feature_id" => "counter", "role" => "feature-bundle", "path" => path} =
+             Enum.find(manifest["artifacts"], &(&1["role"] == "feature-bundle"))
+
+    assert String.starts_with?(path, "assets/feature-counter-")
+    assert Enum.any?(manifest["artifacts"], &(&1["role"] == "bundle-plan-report"))
+
+    assert_raise ArgumentError, ~r/duplicate feature/, fn ->
+      Pipeline.build!(spec, Path.join(root, "duplicate-features"),
+        feature_bundles: [
+          %{"id" => "counter", "path" => counter},
+          %{"id" => "counter", "path" => counter}
+        ]
+      )
+    end
+  end
+
   test "rejects malformed entrypoints and document templates", %{spec: spec} do
     assert_raise ArgumentError, ~r/lowercase/, fn -> EntryPoint.new!(%{spec | id: "Bad ID"}) end
     path = Path.join(Path.dirname(spec.document), "bad.html")
