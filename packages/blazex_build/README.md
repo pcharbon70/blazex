@@ -18,4 +18,14 @@ This phase is not general reachability analysis or a production release tool.
 The package has no dependency on a host, renderer, Phoenix, Plug, LiveView,
 LocalLiveView, Popcorn, or AtomVM implementation package.
 
+BH-06 Phase 2 adds atom-safe `ClientEntryPoint` declarations and
+`BeamInventory.scan!/1`. Inventory output is ordered, path-independent, and
+limited to module names, content hashes, static imports/exports, and attribute
+names. Malformed files and duplicate module definitions fail closed.
+
+`Reachability.analyze!/3` follows known imports from validated client roots,
+selects stable shortest reason chains, retains external references and unused
+inventory, and rejects undeclared `apply/2,3`. The candidate pipeline can bind
+the canonical report as another content-addressed manifest asset.
+
 Run `mix format --check-formatted && mix test` from this directory.

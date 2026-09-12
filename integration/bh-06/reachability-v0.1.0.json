@@ -1,0 +1,37 @@
+{
+  "dynamic_allowances": [],
+  "entrypoints": [
+    {
+      "id": "counter",
+      "module": "Elixir.BlazeX.BH06.VerticalSlice.Counter"
+    }
+  ],
+  "external_references": [
+    {"arity": 2, "from": "Elixir.BlazeX.BH06.VerticalSlice.Counter", "function": "+", "module": "erlang"},
+    {"arity": 1, "from": "Elixir.BlazeX.BH06.VerticalSlice.Counter", "function": "get_module_info", "module": "erlang"},
+    {"arity": 2, "from": "Elixir.BlazeX.BH06.VerticalSlice.Counter", "function": "get_module_info", "module": "erlang"},
+    {"arity": 1, "from": "Elixir.BlazeX.BH06.VerticalSlice.Counter", "function": "integer_to_binary", "module": "erlang"}
+  ],
+  "modules": [
+    {
+      "entrypoint": "counter",
+      "known_imports": [],
+      "module": "Elixir.BlazeX.BH06.VerticalSlice.Counter",
+      "reason_chain": ["Elixir.BlazeX.BH06.VerticalSlice.Counter"],
+      "sha256": "d7742b7b80e64d218e5f63cdbd236e3f53b82884302d49a20e7e84b2d81aa199"
+    }
+  ],
+  "phase": 2,
+  "schema_version": "1.0.0",
+  "status": "complete",
+  "summary": {
+    "dynamic_allowances": 0,
+    "entrypoints": 1,
+    "external_references": 4,
+    "inventory_modules": 2,
+    "known_edges": 0,
+    "reachable_modules": 1,
+    "unused_modules": 1
+  },
+  "unused_modules": ["Elixir.BlazeX.BH06.VerticalSlice.Unused"]
+}

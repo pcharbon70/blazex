@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0.0",
+  "milestone": "BH-06",
+  "phase": 2,
+  "authorized": true,
+  "authorized_on": "2026-09-12",
+  "base_revision": "8246bcae50642347dcfa56ba7a93630b244b6456",
+  "branch": "codex/bh06-phase2-entrypoints-reachability",
+  "delivery": {"section_commits": 4, "pull_requests": 1, "merge_required": true, "return_to_synchronized_main": true, "delete_local_and_remote_branch": true},
+  "bound_inputs": {
+    "docs/research/60-planning/01-browser-host/bh-06-build-compatibility-and-client-safety-pipeline/phase-01-completion.md": "90b4b5312184206994bb747890ac1eb04bcce8a620937131cc246404c5b342ed",
+    "docs/research/60-planning/01-browser-host/bh-06-build-compatibility-and-client-safety-pipeline/phase-01-review-and-reconciliation.md": "fd99045963585c0c2ae3fe306ba4736031dc087c4ff9a76c96fbba3bde2b3fb2",
+    "docs/research/assets/bh-06-baseline/phase-01-completion-v0.1.0.json": "2f1034e8e641fa7e4226157e6f8bfa694d6edcd46d4a08bd31e74919862907cc",
+    "integration/bh-06/candidate-build-manifest-v0.1.0.json": "c7ce6a4c1fdb84debfa8adeef5c867479f5cf0fd2d83338fbebe76933db06ba1",
+    "integration/bh-06/browser-slice-v0.1.0.json": "b2dfecfbe1a09c3607892acd3e108d18084d539aab1cb9a69602547d7371e246",
+    "packages/blazex_build/lib/blazex/build/pipeline.ex": "de4ebf41ad9a0831109ecb02f2ab5f93a7d34c54980ec56ec366c5240b015a16"
+  },
+  "scope": ["explicit-entrypoints", "beam-inventory", "static-import-edges", "reason-chains", "external-references", "dynamic-dispatch-gate", "manifest-binding"],
+  "excluded": ["server-native-dependency-policy", "secret-scanning", "compatibility-profiles", "license-inventory", "production-release", "liveview", "local-liveview", "bh-07"]
+}

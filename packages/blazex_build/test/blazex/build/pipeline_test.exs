@@ -49,6 +49,24 @@ defmodule BlazeX.Build.PipelineTest do
     assert :ok = Pipeline.verify!(one)
   end
 
+  test "binds a content-addressed reachability report", %{root: root, spec: spec} do
+    output = Path.join(root, "reachability")
+    report = %{"schema_version" => "1.0.0", "modules" => [%{"module" => spec.module}]}
+    manifest = Pipeline.build!(spec, output, reachability: report)
+    asset = Enum.find(manifest["artifacts"], &(&1["role"] == "reachability-report"))
+    assert String.contains?(asset["path"], asset["sha256"])
+
+    assert File.read!(Path.join(output, asset["path"])) ==
+             BlazeX.Build.JSON.encode!(report) <> "\n"
+
+    assert :ok = Pipeline.verify!(output)
+    File.write!(Path.join(output, asset["path"]), "{}\n")
+
+    assert_raise ArgumentError, ~r/integrity mismatch/, fn ->
+      Pipeline.verify!(output)
+    end
+  end
+
   test "rejects changed assets and mutable output", %{root: root, spec: spec} do
     output = Path.join(root, "output")
     manifest = Pipeline.build!(spec, output)
