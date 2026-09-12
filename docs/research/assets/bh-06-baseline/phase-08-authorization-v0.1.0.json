@@ -1,0 +1,16 @@
+{
+  "schema_version":"1.0.0","milestone":"BH-06","phase":8,"authorized":true,"authorized_on":"2026-09-12",
+  "base_revision":"61cbd364c8c4bf115c9c737e0279621eb056661c","branch":"codex/bh06-phase8-payload-budgets",
+  "delivery":{"section_commits":4,"pull_requests":1,"merge_required":true,"return_to_synchronized_main":true,"delete_local_and_remote_branch":true},
+  "bound_inputs":{
+    "docs/research/60-planning/01-browser-host/bh-06-build-compatibility-and-client-safety-pipeline/phase-07-completion.md":"3863ea68d092d303f6f8f8ad2afa05ae59af6308795b73fe050656dbf0f0c147",
+    "docs/research/60-planning/01-browser-host/bh-06-build-compatibility-and-client-safety-pipeline/phase-07-review-and-reconciliation.md":"0e9e4824bad72b2e72568619a8a890a39df96658d91b1aaf33873b19710cc134",
+    "docs/research/assets/bh-06-baseline/phase-07-completion-v0.1.0.json":"1092b1be7319da0952bda4ca7016fe450a15e3640ba995f0b0ffa84c679c43ab",
+    "integration/bh-06/bundle-plan-v0.1.0.json":"9ea6df54ee478259245d94d9b44efff7f7f228ae2197c73819d03cec3c9dc1f7",
+    "integration/bh-06/phase-07-build-manifest-v0.1.0.json":"be90b0beb56a5412d356a63d512aad183c06b2c85c805f476fd7c4a1aa53ecaf",
+    "integration/bh-06/phase-07-browser-replay-v0.1.0.json":"123c6c63f3e8d2d5cd42db2aecbf2353d14d84589d7fc8dcc2f1491fd155aec4",
+    "packages/blazex_build/lib/blazex/build/pipeline.ex":"9fe3158d5b12b2c5e8e8b1552bbb605e0263a087220c8eedc3119dcc18ca773b"
+  },
+  "scope":["artifact-exposure","decoded-accounting","brotli-accounting","payload-budgets","public-source-map-exclusion","precompressed-sidecars","local-negotiation"],
+  "excluded":["reachability-optimization","route-orchestration","predictive-prefetch","production-cache-cdn","production-release","liveview","local-liveview","bh-07","bh-19"]
+}

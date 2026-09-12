@@ -1,0 +1,12 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "type":"object","additionalProperties":false,
+  "required":["schema_version","policy_id","policy_sha256","complete","decision","compression","artifacts","totals","budgets","summary"],
+  "properties":{
+    "schema_version":{"const":"1.0.0"},"policy_id":{"type":"string"},"policy_sha256":{"type":"string","pattern":"^[0-9a-f]{64}$"},"complete":{"const":true},"decision":{"enum":["accept","reject"]},
+    "compression":{"type":"object"},
+    "artifacts":{"type":"array","items":{"type":"object","additionalProperties":false,"required":["path","role","owner","exposure","decoded_bytes","source_sha256","brotli_bytes","brotli_sha256"],"properties":{"path":{"type":"string"},"role":{"type":"string"},"owner":{"type":"string"},"exposure":{"const":"public"},"decoded_bytes":{"type":"integer","minimum":0},"source_sha256":{"type":"string","pattern":"^[0-9a-f]{64}$"},"brotli_bytes":{"type":"integer","minimum":0},"brotli_sha256":{"type":"string","pattern":"^[0-9a-f]{64}$"}}}},
+    "totals":{"type":"object"},"budgets":{"type":"array"},
+    "summary":{"type":"object","additionalProperties":false,"required":["manifest_artifacts","public_artifacts","private_artifacts","public_decoded_bytes","public_brotli_bytes","public_source_maps","failed_budgets"],"properties":{"manifest_artifacts":{"type":"integer","minimum":0},"public_artifacts":{"type":"integer","minimum":0},"private_artifacts":{"type":"integer","minimum":0},"public_decoded_bytes":{"type":"integer","minimum":0},"public_brotli_bytes":{"type":"integer","minimum":0},"public_source_maps":{"type":"integer","minimum":0},"failed_budgets":{"type":"integer","minimum":0}}}
+  }
+}

@@ -64,3 +64,8 @@ explicit, deterministic entrypoint-rooted BEAM inventory to that candidate build
 - [`phase-07-secret-audit-v0.1.0.json`](phase-07-secret-audit-v0.1.0.json)
   and [`phase-07-license-inventory-v0.1.0.json`](phase-07-license-inventory-v0.1.0.json)
   retain the exact predecessor input identities for Phase 7.
+- [`payload-policy-v0.1.0.json`](payload-policy-v0.1.0.json) freezes Phase 8
+  public/private ownership, Brotli settings, exact thresholds, source-map rule,
+  and scaling limits without presuming that the current candidate passes.
+- [`payload-report.schema.json`](payload-report.schema.json) freezes the complete
+  measured accept/reject result before Phase 8 produces evidence.
