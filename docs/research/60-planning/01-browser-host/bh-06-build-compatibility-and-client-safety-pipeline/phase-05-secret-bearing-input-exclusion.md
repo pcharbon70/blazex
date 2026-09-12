@@ -27,12 +27,12 @@ Back to the [milestone](README.md).
       scale-bound, diagnostic, normalization, and pre-assembly rules.
     - [x] Activate versioned policy and result schemas without claiming a pass.
 
-  - [ ] 5.2 Section - Implement deterministic redacted scanning.
-    - [ ] Validate bounded policies, inputs, and JSON-safe public configuration
+  - [x] 5.2 Section - Implement deterministic redacted scanning.
+    - [x] Validate bounded policies, inputs, and JSON-safe public configuration
       without creating atoms or retaining filesystem paths.
-    - [ ] Scan all occurrences of fixed byte signatures and normalized config keys,
+    - [x] Scan all occurrences of fixed byte signatures and normalized config keys,
       recording only rule identity, logical subject, offset, digest, and counts.
-    - [ ] Reject unknown fields, duplicates, malformed values, overflow, and any
+    - [x] Reject unknown fields, duplicates, malformed values, overflow, and any
       finding with stable, value-free diagnostics.
 
   - [ ] 5.3 Section - Enforce exclusion before candidate bundle assembly.

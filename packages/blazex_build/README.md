@@ -39,4 +39,9 @@ evaluation. Runtime identity, version, ABI, required protocols, and required
 features must match explicitly; no range inference or implicit feature support
 is permitted. Extra provider capabilities remain visible in the report.
 
+BH-06 Phase 5 adds `SecretPolicy` and `SecretAudit`. Candidate inputs are
+accounted for with path-free labels, sizes, and SHA-256 digests. Fixed literal
+signatures and explicit public-config key fragments reject with value-redacted
+diagnostics under bounded input and finding limits.
+
 Run `mix format --check-formatted && mix test` from this directory.
