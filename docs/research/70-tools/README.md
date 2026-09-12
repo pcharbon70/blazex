@@ -329,3 +329,5 @@ reporting a tooling change complete.
 - [BH-06 Phase 4 validator tests](test_validate_bh06_compatibility.py) — Rejects profile, requirement, decision, summary, manifest, browser, and assembly-gate mutations.
 - [BH-06 Phase 5 secret-exclusion validator](validate_bh06_secret_exclusion.py) — Verifies policy, path-free input accounting, redaction, ordered pre-assembly enforcement, manifest binding, and browser replay.
 - [BH-06 Phase 5 validator tests](test_validate_bh06_secret_exclusion.py) — Rejects policy, finding, path, summary, manifest, and gate mutations.
+- [BH-06 Phase 6 license/provenance validator](validate_bh06_license_provenance.py) — Verifies exact input parity, component/license ownership, notice integrity, build-only lineage, ordered enforcement, manifest binding, and browser replay.
+- [BH-06 Phase 6 validator tests](test_validate_bh06_license_provenance.py) — Rejects policy, notice, ownership, audit-parity, manifest, and gate mutations.

@@ -11,7 +11,7 @@ aliases: ["BH-06 phase 6"]
 
 Back to the [milestone](README.md).
 
-- [ ] 6 Phase - License and Provenance Inventory.
+- [x] 6 Phase - License and Provenance Inventory.
   - Need: Phase 5 identifies every candidate byte input, but a digest does not
     explain ownership, origin, license obligations, or redistribution status.
   - Outcome: every Phase 5 input is bound to one declared component and one or
@@ -43,11 +43,11 @@ Back to the [milestone](README.md).
     - [x] Prove clean success plus missing, duplicate, unknown, notice-drift,
       mutation, determinism, and pre-assembly rejection cases.
 
-  - [ ] 6.4 Section - Reproduce, review, and publish completion.
-    - [ ] Run package, browser-Wasm, validator, mutation, deterministic-repeat,
+  - [x] 6.4 Section - Reproduce, review, and publish completion.
+    - [x] Run package, browser-Wasm, validator, mutation, deterministic-repeat,
       archive, runtime, JavaScript, demo, syntax, and patch-hygiene gates.
-    - [ ] Publish exact counts, hashes, commands, failures, limitations, and deferrals.
-    - [ ] Accept only if every audited input has one component disposition,
+    - [x] Publish exact counts, hashes, commands, failures, limitations, and deferrals.
+    - [x] Accept only if every audited input has one component disposition,
       required notices verify, and unaccounted candidates cannot create an AVM.
 
 ## Exit gate

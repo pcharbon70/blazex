@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema_version", "policy_id", "policy_sha256", "inputs", "components", "license_records", "build_lineage", "notices", "summary", "complete"],
+  "required": ["schema_version", "policy_id", "policy_sha256", "inputs", "components", "license_records", "build_lineage", "notices", "summary", "complete", "phase", "status"],
   "properties": {
     "schema_version": {"const": "1.0.0"},
     "policy_id": {"type": "string"},
@@ -13,6 +13,8 @@
     "build_lineage": {"type": "array"},
     "notices": {"type": "array"},
     "summary": {"type": "object"},
-    "complete": {"const": true}
+    "complete": {"const": true},
+    "phase": {"const": 6},
+    "status": {"const": "complete"}
   }
 }

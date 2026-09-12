@@ -49,3 +49,5 @@ explicit, deterministic entrypoint-rooted BEAM inventory to that candidate build
 - [`phase-06-build-manifest-v0.1.0.json`](phase-06-build-manifest-v0.1.0.json)
   and [`phase-06-browser-replay-v0.1.0.json`](phase-06-browser-replay-v0.1.0.json)
   bind the inventory-gated package and exact Chrome/Firefox Wasm replay.
+- [`phase-06-secret-audit-v0.1.0.json`](phase-06-secret-audit-v0.1.0.json)
+  binds the exact predecessor input identities used by the inventory parity gate.

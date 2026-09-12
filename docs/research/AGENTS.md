@@ -291,6 +291,11 @@ or lifecycle, generation acknowledgement, Phase 4 fixtures, or Phase 4 evidence
 changes, also run `python3 70-tools/validate_bh03_roots.py` and
 `python3 -m unittest discover -s 70-tools -p 'test_validate_bh03_roots.py'`.
 
+When BH-06 Phase 6 authorization, component/license inventory, notice
+integrity, build-only lineage, input parity, package enforcement, or Phase 6
+evidence changes, also run `python3 70-tools/validate_bh06_license_provenance.py`
+and `python3 -m unittest discover -s 70-tools -p 'test_validate_bh06_license_provenance.py'`.
+
 Do not commit, push, publish, or open a pull request unless the user asks.
 
 ## Research tooling

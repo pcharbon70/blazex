@@ -1,0 +1,7 @@
+{
+  "schema_version":"1.0.0","milestone":"BH-06","phase":6,"decision":"accept","section_6_revision":"664fe06d65c20532ed5bfffb6ca2809f1088f297",
+  "policy_evidence_sha256":"2be11a8f5183a1cbb42e8ecf9494c109e830dc5214dbb16aac929e83befa080f","inventory_evidence_sha256":"0a2cbd6dfb370f11fdeb31587331498763d3df668867fe65c6afdf4f3866eb4f","audit_evidence_sha256":"b2b38951d20caeb33ad99038a832cda7163253504aa510324e38fb6dd483b634","manifest_sha256":"75bb1e707702660950eda147bcf6870c4322a62bf7c4ecf9ac97a57b7dc8d992","browser_evidence_sha256":"023d7560c20ad9696185cbd24a667c5b4b22a71d07dd7aa9ee040ab2a5afabdd","normalized_policy_sha256":"2becee961e75e51853277827e85fcaa7a155b977bde4b276c6e24a896b7b08c3","canonical_inventory_sha256":"0a2cbd6dfb370f11fdeb31587331498763d3df668867fe65c6afdf4f3866eb4f",
+  "repeat":{"build_trees":"byte-identical","browser_reports":"byte-identical","browser_report_sha256":"023d7560c20ad9696185cbd24a667c5b4b22a71d07dd7aa9ee040ab2a5afabdd"},
+  "summary":{"inputs":698,"input_bytes":20712482,"shipped_components":7,"build_only_components":2,"license_records":11,"verified_notices":2},"active_browsers":["chrome","firefox"],"support_state":"unsupported-development-evidence","blazex_disposition":"private-development-only","next_phase":{"state":"requires-separate-planning-and-authorization"},"deferred":["feature-bundle-decomposition","payload-budgets","production-release","liveview","local-liveview","bh-07"]
+}
+

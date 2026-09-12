@@ -33,7 +33,7 @@ entrypoints, compatibility targets, or completion gates for this milestone.
 | [3 — Server and Native Client-Safety Gate](phase-03-server-native-client-safety-gate.md) | complete — accept | Classify every reachable and external dependency exactly, then reject server-only, native, unknown, and forbidden runtime primitives before bundle assembly. | Phase 2 and explicit authorization |
 | [4 — Exact Runtime Compatibility Profiles](phase-04-exact-runtime-compatibility-profiles.md) | complete — accept | Match runtime identity/version/ABI, protocol versions, and required features exactly, then reject incompatibility before bundle assembly. | Phase 3 and explicit authorization |
 | [5 — Secret-Bearing Input Exclusion](phase-05-secret-bearing-input-exclusion.md) | complete — accept | Account for and scan candidate bundle/browser inputs and explicit public configuration, then reject redacted findings before AVM assembly. | Phase 4 and explicit authorization |
-| [6 — License and Provenance Inventory](phase-06-license-and-provenance-inventory.md) | active — authorized | Bind every Phase 5 input to one declared component and exact license/provenance records, verify notices, and reject gaps before AVM assembly. | Phase 5 and explicit authorization |
+| [6 — License and Provenance Inventory](phase-06-license-and-provenance-inventory.md) | complete — accept | Bind every Phase 5 input to one declared component and exact license/provenance records, verify notices, and reject gaps before AVM assembly. | Phase 5 and explicit authorization |
 
 Later phase decomposition remains a separate planning decision. Phases 1-6 do
 not authorize feature-bundle decomposition, payload
@@ -64,6 +64,8 @@ budgets, production releases, support promotion, or BH-07.
 - [Phase 5 completion evidence](phase-05-completion.md)
 - [Phase 6 — License and Provenance Inventory](phase-06-license-and-provenance-inventory.md)
 - [License and provenance contract](license-and-provenance-contract.md)
+- [Phase 6 review and reconciliation](phase-06-review-and-reconciliation.md)
+- [Phase 6 completion evidence](phase-06-completion.md)
 
 ### Subdirectories
 
