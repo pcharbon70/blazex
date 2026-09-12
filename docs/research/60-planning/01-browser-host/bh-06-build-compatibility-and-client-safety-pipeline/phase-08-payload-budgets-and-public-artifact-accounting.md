@@ -11,7 +11,7 @@ aliases: ["BH-06 phase 8"]
 
 Back to the [milestone](README.md).
 
-- [ ] 8 Phase - Payload Budgets and Public Artifact Accounting.
+- [x] 8 Phase - Payload Budgets and Public Artifact Accounting.
   - Need: Phase 7 identifies base and feature archives, but the candidate still
     has no enforced decoded/Brotli budgets, public/private artifact boundary, or
     executable zero-public-source-map gate.
@@ -43,11 +43,11 @@ Back to the [milestone](README.md).
     - [x] Prove Chrome/Firefox parity, negotiation, tamper rejection, and truthful
       rejection of any exceeded budget before candidate promotion.
 
-  - [ ] 8.4 Section - Reproduce, review, and publish completion.
-    - [ ] Run package, browser-Wasm, validator, mutation, deterministic-repeat,
+  - [x] 8.4 Section - Reproduce, review, and publish completion.
+    - [x] Run package, browser-Wasm, validator, mutation, deterministic-repeat,
       archive, runtime, JavaScript, demo, syntax, and patch-hygiene gates.
-    - [ ] Publish exact counts, bytes, hashes, commands, failures, limitations, and deferrals.
-    - [ ] Accept only if every required budget passes; otherwise close the phase
+    - [x] Publish exact counts, bytes, hashes, commands, failures, limitations, and deferrals.
+    - [x] Accept only if every required budget passes; otherwise close the phase
       as measured revision-required evidence without weakening thresholds.
 
 ## Exit gate
