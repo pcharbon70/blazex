@@ -14,8 +14,9 @@ experimental projects. BH-02 Phase 1 additionally activates `blazex_core`,
 `blazex_effects`, `blazex_ui_tree`, `blazex_renderer`,
 `blazex_renderer_headless`, and `blazex_test` as inward-only experimental
 skeletons. Their module roots and path dependencies prove ownership and graph
-direction, not component or renderer behavior or stable APIs. BH-06 Phase 1
-activates `blazex_build` for a bounded entrypoint-to-browser-Wasm slice;
+direction, not component or renderer behavior or stable APIs. BH-06 activates
+`blazex_build` for the bounded entrypoint-to-browser-Wasm pipeline, now accepted
+through Phase 10 delivery-integrity metadata;
 component-family and Plug packages remain inactive.
 
 ## Host-neutral foundation

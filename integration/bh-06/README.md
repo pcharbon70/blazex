@@ -99,3 +99,13 @@ explicit, deterministic entrypoint-rooted BEAM inventory to that candidate build
   bind the accepted thresholds, thirteen manifest assets, and matching complete
   Chrome/Firefox replay. The remaining `phase-09-*-v0.1.0.json` files retain
   every private predecessor report referenced by the manifest.
+- [`delivery-integrity-policy-v0.1.0.json`](delivery-integrity-policy-v0.1.0.json)
+  freezes Phase 10's SHA-384 algorithm, exact role-to-Cache-Control mapping,
+  cardinality, and scaling limits; its schema is
+  [`delivery-integrity-policy.schema.json`](delivery-integrity-policy.schema.json).
+- [`phase-10-build-manifest-v0.1.0.json`](phase-10-build-manifest-v0.1.0.json)
+  covers all thirteen artifacts with SRI and cache metadata and binds the
+  canonical policy. [`phase-10-browser-replay-v0.1.0.json`](phase-10-browser-replay-v0.1.0.json)
+  records matching Chrome/Firefox verification plus four fail-closed mutations.
+  The payload and private Phase 10 files retain the accepted budget result and
+  every exact evidence object referenced by the manifest.

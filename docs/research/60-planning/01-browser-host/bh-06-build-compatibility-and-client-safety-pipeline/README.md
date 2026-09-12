@@ -37,7 +37,7 @@ entrypoints, compatibility targets, or completion gates for this milestone.
 | [7 — Deterministic Feature Bundles](phase-07-deterministic-feature-bundles.md) | complete — accept | Assign every BEAM to base or exact feature ownership, then verify and dynamically load the counter feature AVM into the existing browser AtomVM. | Phase 6 and explicit authorization |
 | [8 — Payload Budgets and Public Artifact Accounting](phase-08-payload-budgets-and-public-artifact-accounting.md) | complete — revision-required | Classify public payload versus private build evidence, measure deterministic Brotli/decoded bytes, enforce budgets and zero public source maps, and prove local negotiation; runtime Brotli exceeds its frozen limit. | Phase 7 and explicit authorization |
 | [9 — Audited Runtime Closure Reduction](phase-09-audited-runtime-closure-reduction.md) | complete — accept | Apply graph and pinned function reduction with explicit dynamic and opaque bridge roots, audit every removal, and pass the unchanged payload thresholds and browser gates. | Phase 8 revision-required decision and explicit authorization |
-| [10 — Delivery Integrity Metadata](phase-10-delivery-integrity-metadata.md) | active | Attach verified SHA-384 SRI and exact Cache-Control metadata to every artifact under a closed, versioned role policy. | Phase 9 and explicit authorization |
+| [10 — Delivery Integrity Metadata](phase-10-delivery-integrity-metadata.md) | complete — accept | Attach verified SHA-384 SRI and exact Cache-Control metadata to every artifact under a closed, versioned role policy. | Phase 9 and explicit authorization |
 
 Later phase decomposition remains a separate planning decision. Phases 1-10 do
 not authorize reachability optimization, route orchestration, predictive
@@ -84,6 +84,8 @@ prefetch, production releases, support promotion, or BH-07.
 - [Phase 9 completion evidence](phase-09-completion.md)
 - [Phase 10 — Delivery Integrity Metadata](phase-10-delivery-integrity-metadata.md)
 - [Delivery-integrity contract](delivery-integrity-contract.md)
+- [Phase 10 review and reconciliation](phase-10-review-and-reconciliation.md)
+- [Phase 10 completion evidence](phase-10-completion.md)
 
 ### Subdirectories
 

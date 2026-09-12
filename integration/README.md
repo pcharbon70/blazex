@@ -8,7 +8,8 @@ contracts.
 - [BH-05](bh-05/README.md) activates fourteen empty, schema-bound component-model
   evidence classes. Phase 1 is governance-only, not component conformance.
 - [BH-06](bh-06/README.md) owns the first entrypoint-to-browser-Wasm build slice
-  and its manifest, integrity, lifecycle, and active-browser evidence.
+  and its manifest, integrity, lifecycle, payload, delivery-metadata, and
+  active-browser evidence through accepted Phase 10.
 
 - `fixtures` contains deterministic shared applications, trees, events, and
   expected outcomes.

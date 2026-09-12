@@ -1,6 +1,6 @@
 ---
 title: "BH-06 Delivery Integrity Contract"
-kind: contract
+kind: note
 created: "2026-09-12"
 maturity: developing
 tags: [bh-06, cache, integrity, manifest, sri]
@@ -8,6 +8,8 @@ aliases: []
 ---
 
 # BH-06 Delivery Integrity Contract
+
+Back to the [milestone](README.md) and [Phase 10 plan](phase-10-delivery-integrity-metadata.md).
 
 The application owns a versioned, closed role policy. The build package
 validates it without converting external names to atoms. Every manifest

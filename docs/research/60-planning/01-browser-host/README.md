@@ -97,9 +97,10 @@ it with provider-authorized compact page success; BH-05 is accepted for
 bounded development. BH-06 Phases 1–7 complete the continuous browser-Wasm
 slice, reachability, client-safety, exact compatibility, secret-exclusion,
 license/provenance, and real feature-bundle loading gates. Phase 8 closes as
-revision-required: public accounting and Brotli negotiation work, but the
-runtime payload exceeds its frozen limit. Corrective work remains separately
-unauthorized.
+revision-required. Corrective Phase 9 reduces the audited runtime closure and
+passes every unchanged payload threshold. Phase 10 binds verified SHA-384 SRI
+and exact Cache-Control metadata for every manifest artifact; both phases are
+accepted without production-serving or support-promotion claims.
 
 ## Index
 
@@ -112,7 +113,7 @@ unauthorized.
 - [BH-02 — Host-Neutral Semantic Kernel Gate](bh-02-host-neutral-semantic-kernel-gate/README.md) — completed eight-phase contract and cross-renderer proof plan accepted for internal experimental use.
 - [BH-03 — Browser Execution-Host and Runtime Boot Lifecycle](bh-03-browser-execution-host-and-runtime-boot-lifecycle/README.md) — accepted with bounded conditions; BH-04's corrective handoff is now accepted for development.
 - [BH-05 — Component Programming Model and Lifecycle](bh-05-component-programming-model-and-lifecycle/README.md) — accepted for bounded development through corrective Phase 18. No support promotion is claimed.
-- [BH-06 — Build, Compatibility, and Client-Safety Pipeline](bh-06-build-compatibility-and-client-safety-pipeline/README.md) — Phases 1–7 accepted; Phase 8 payload enforcement is complete with a revision-required runtime overage and no release promotion.
+- [BH-06 — Build, Compatibility, and Client-Safety Pipeline](bh-06-build-compatibility-and-client-safety-pipeline/README.md) — accepted through Phase 10 delivery-integrity metadata; production serving and support promotion remain outside the milestone evidence.
 
 ### Documents
 

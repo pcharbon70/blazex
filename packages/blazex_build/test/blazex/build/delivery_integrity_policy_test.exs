@@ -1,5 +1,6 @@
 defmodule BlazeX.Build.DeliveryIntegrityPolicyTest do
-  use ExUnit.Case, async: true
+  # Atom-count assertions must run after the async suite has quiesced.
+  use ExUnit.Case, async: false
 
   alias BlazeX.Build.DeliveryIntegrityPolicy
 

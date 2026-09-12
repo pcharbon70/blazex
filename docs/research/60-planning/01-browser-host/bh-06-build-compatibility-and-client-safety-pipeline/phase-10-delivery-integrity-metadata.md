@@ -11,7 +11,7 @@ aliases: ["BH-06 phase 10"]
 
 Back to the [milestone](README.md).
 
-- [ ] 10 Phase - Delivery Integrity Metadata.
+- [x] 10 Phase - Delivery Integrity Metadata.
   - Need: content-addressed filenames and internal SHA-256 verification exist,
     but the candidate manifest does not yet provide browser-standard integrity
     tokens or a closed cache-header contract for a delivery adapter.
@@ -39,12 +39,12 @@ Back to the [milestone](README.md).
     - [x] Serve exact declared Cache-Control headers and verify SHA-384 before startup.
     - [x] Prove Chrome/Firefox parity plus tampered integrity and header negatives.
 
-  - [ ] 10.4 Section - Reproduce, review, and publish completion.
-    - [ ] Run package, browser-Wasm, schema, validator, mutation, deterministic-repeat,
+  - [x] 10.4 Section - Reproduce, review, and publish completion.
+    - [x] Run package, browser-Wasm, schema, validator, mutation, deterministic-repeat,
       JavaScript, scoped Mix, historical BH-06, and patch-hygiene gates.
-    - [ ] Publish exact policy/manifest/browser identities, observations,
+    - [x] Publish exact policy/manifest/browser identities, observations,
       limitations, deferrals, and the honest completion decision.
-    - [ ] Accept only when every artifact is covered and both active browsers pass.
+    - [x] Accept only when every artifact is covered and both active browsers pass.
 
 ## Exit gate
 
