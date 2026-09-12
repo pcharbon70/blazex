@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0.0",
+  "policy_id": "blazex.bh06.delivery-integrity/1",
+  "integrity_algorithm": "sha384",
+  "roles": {
+    "document": {"cache_control": "no-store", "cardinality": "exactly-one"},
+    "runtime-module": {"cache_control": "public, max-age=31536000, immutable", "cardinality": "exactly-one"},
+    "runtime-wasm": {"cache_control": "public, max-age=31536000, immutable", "cardinality": "exactly-one"},
+    "application-bundle": {"cache_control": "public, max-age=31536000, immutable", "cardinality": "exactly-one"},
+    "browser-host": {"cache_control": "public, max-age=31536000, immutable", "cardinality": "exactly-one"},
+    "feature-bundle": {"cache_control": "public, max-age=31536000, immutable", "cardinality": "one-or-more"},
+    "reachability-report": {"cache_control": "no-store", "cardinality": "exactly-one"},
+    "client-safety-report": {"cache_control": "no-store", "cardinality": "exactly-one"},
+    "compatibility-report": {"cache_control": "no-store", "cardinality": "exactly-one"},
+    "secret-audit-report": {"cache_control": "no-store", "cardinality": "exactly-one"},
+    "license-inventory-report": {"cache_control": "no-store", "cardinality": "exactly-one"},
+    "bundle-plan-report": {"cache_control": "no-store", "cardinality": "exactly-one"},
+    "runtime-closure-report": {"cache_control": "no-store", "cardinality": "exactly-one"}
+  },
+  "limits": {
+    "max_artifacts": 64,
+    "max_total_bytes": 20000000,
+    "max_role_length": 128
+  }
+}

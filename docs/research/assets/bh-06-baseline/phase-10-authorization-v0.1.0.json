@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0.0",
+  "milestone": "BH-06",
+  "phase": 10,
+  "authorized": true,
+  "authorized_at": "2026-09-12",
+  "base_revision": "a66bfaeade1c1526ee384f3e3949b4d69a9c5711",
+  "branch": "codex/bh06-phase10-delivery-integrity",
+  "delivery": {
+    "section_commits": 4,
+    "pull_requests": 1,
+    "merge": true,
+    "return_to_synced_main": true,
+    "delete_feature_branch": true
+  },
+  "bound_inputs": {
+    "docs/research/assets/bh-06-baseline/phase-09-completion-v0.1.0.json": "59be1b9fed300df1f7474c23ea73818bd7b82d9a89db0745497125a5018e85ff",
+    "integration/bh-06/phase-09-build-manifest-v0.1.0.json": "c115777a23bead3963cef9341d0cd6df797ea6f607bae19080acbb21535338d3",
+    "packages/blazex_build/lib/blazex/build/pipeline.ex": "f0e49e0774df2fc480127678089381cedbdd917bcb3663894c50ee1947d30267",
+    "integration/bh-06/vertical_slice/lib/mix/tasks/bh06.package.ex": "69003bb86e68a537e76a0cd77037e3f4700d51a13fbe78953e1241c6ae506e7a"
+  },
+  "scope": "delivery-integrity-metadata",
+  "deferred": [
+    "production-serving",
+    "phoenix",
+    "route-orchestration",
+    "predictive-prefetch",
+    "support-promotion",
+    "liveview",
+    "local-liveview",
+    "BH-07",
+    "BH-19"
+  ]
+}
