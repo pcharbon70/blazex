@@ -27,12 +27,12 @@ Back to the [milestone](README.md).
       build-only, input-accounting, diagnostic, and pre-assembly rules.
     - [x] Activate versioned policy and result schemas without claiming a pass.
 
-  - [ ] 6.2 Section - Implement deterministic inventory validation.
-    - [ ] Validate bounded policies, components, license records, notice digests,
+  - [x] 6.2 Section - Implement deterministic inventory validation.
+    - [x] Validate bounded policies, components, license records, notice digests,
       and input declarations without creating atoms or retaining source paths.
-    - [ ] Bind every input label, byte count, and digest to exactly one component
+    - [x] Bind every input label, byte count, and digest to exactly one component
       and its non-empty shipment license set.
-    - [ ] Reject unknown fields, duplicates, unknown components/licenses,
+    - [x] Reject unknown fields, duplicates, unknown components/licenses,
       malformed values, missing notices, digest drift, and overflow.
 
   - [ ] 6.3 Section - Enforce provenance before candidate bundle assembly.
