@@ -11,7 +11,7 @@ aliases: ["BH-06 phase 4"]
 
 Back to the [milestone](README.md).
 
-- [ ] 4 Phase - Exact Runtime Compatibility Profiles.
+- [x] 4 Phase - Exact Runtime Compatibility Profiles.
   - Need: Phase 3 proves that the reachable closure is client-safe, but the
     manifest still carries unverified compatibility strings and assembly can
     silently pair a candidate with the wrong runtime or protocol surface.
@@ -43,12 +43,12 @@ Back to the [milestone](README.md).
     - [x] Prove compatible success plus runtime, ABI, protocol, feature, mutation,
       determinism, and pre-assembly rejection cases.
 
-  - [ ] 4.4 Section - Reproduce, review, and publish completion.
-    - [ ] Run package, browser-Wasm, validator, mutation, deterministic-repeat,
+  - [x] 4.4 Section - Reproduce, review, and publish completion.
+    - [x] Run package, browser-Wasm, validator, mutation, deterministic-repeat,
       archive, JSON, syntax, dependency, and patch-hygiene gates.
-    - [ ] Publish decisions, exact counts, hashes, commands, failures,
+    - [x] Publish decisions, exact counts, hashes, commands, failures,
       limitations, and deferred qualifications.
-    - [ ] Accept only if every requirement is explained and every incompatible
+    - [x] Accept only if every requirement is explained and every incompatible
       candidate fails before AVM creation.
 
 ## Exit gate

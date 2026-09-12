@@ -325,3 +325,5 @@ reporting a tooling change complete.
 - [BH-06 Phase 2 validator tests](test_validate_bh06_reachability.py) — Rejects module, reason-chain, unused-set, summary, and manifest-binding mutations.
 - [BH-06 Phase 3 client-safety validator](validate_bh06_client_safety.py) — Verifies exact server/native policy coverage, forbidden NIF/port primitives, pre-assembly enforcement, manifest binding, and browser replay.
 - [BH-06 Phase 3 validator tests](test_validate_bh06_client_safety.py) — Rejects unsafe classification, policy/report/summary/manifest mutation, and assembly-gate bypass.
+- [BH-06 Phase 4 compatibility validator](validate_bh06_compatibility.py) — Verifies exact runtime, ABI, protocol, and feature decisions, ordered pre-assembly enforcement, manifest identities, and browser replay.
+- [BH-06 Phase 4 validator tests](test_validate_bh06_compatibility.py) — Rejects profile, requirement, decision, summary, manifest, browser, and assembly-gate mutations.
