@@ -82,6 +82,39 @@ defmodule BlazeX.Build.PipelineTest do
     assert_raise ArgumentError, ~r/integrity mismatch/, fn -> Pipeline.verify!(output) end
   end
 
+  test "binds only a passing compatibility report and its exact identities", %{
+    root: root,
+    spec: spec
+  } do
+    output = Path.join(root, "compatibility")
+
+    report = %{
+      "schema_version" => "1.0.0",
+      "compatible" => true,
+      "profile_id" => "test.profile/1",
+      "profile_sha256" => String.duplicate("a", 64),
+      "requirement_id" => "test.requirements/1",
+      "requirements_sha256" => String.duplicate("b", 64)
+    }
+
+    manifest = Pipeline.build!(spec, output, compatibility: report)
+    asset = Enum.find(manifest["artifacts"], &(&1["role"] == "compatibility-report"))
+    assert String.contains?(asset["path"], asset["sha256"])
+
+    assert manifest["compatibility"] == %{
+             "profile_id" => "test.profile/1",
+             "profile_sha256" => String.duplicate("a", 64),
+             "requirement_id" => "test.requirements/1",
+             "requirements_sha256" => String.duplicate("b", 64)
+           }
+
+    assert_raise ArgumentError, ~r/passing bound report/, fn ->
+      Pipeline.build!(spec, Path.join(root, "rejected"),
+        compatibility: %{report | "compatible" => false}
+      )
+    end
+  end
+
   test "rejects changed assets and mutable output", %{root: root, spec: spec} do
     output = Path.join(root, "output")
     manifest = Pipeline.build!(spec, output)

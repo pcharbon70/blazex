@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://blazex.dev/schemas/bh-06/compatibility-report-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "phase", "status", "profile_id", "profile_sha256", "requirement_id", "requirements_sha256", "runtime", "protocols", "features", "unused_profile", "violations", "summary", "compatible"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "phase": {"const": 4},
+    "status": {"const": "complete"},
+    "profile_id": {"type": "string"},
+    "profile_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "requirement_id": {"type": "string"},
+    "requirements_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "runtime": {"type": "array"},
+    "protocols": {"type": "array"},
+    "features": {"type": "array"},
+    "unused_profile": {"type": "object"},
+    "violations": {"type": "array"},
+    "summary": {"type": "object"},
+    "compatible": {"type": "boolean"}
+  }
+}

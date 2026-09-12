@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0.0",
+  "milestone": "BH-06",
+  "phase": 4,
+  "decision": "accept",
+  "section_4_revision": "7593f69aadb5cca9b1deb2b8bb187e7d680229fb",
+  "profile_evidence_sha256": "b5a454c692138f95f828a49bd75bb090ae5fd74c18429885977903121e7e5497",
+  "requirements_evidence_sha256": "3feb9a4675e1c66cdd38a268e1f67f9b1e3ee35e058aaa753fa9f5d7e81cc2e6",
+  "compatibility_evidence_sha256": "ab3c6c67c9a74bef59588c6c7e4796e3c4df98a91c6f6369a0a2d1ac1648ab7e",
+  "manifest_sha256": "658c864fb30f3eb09504fe0d542accb3d21c09501414f2c2583f8722c0168762",
+  "browser_evidence_sha256": "12e72bd5fff5e84a8cc28f22f8b88b0bf212fcd85ca01c55a28c6ebd12a890cf",
+  "canonical_profile_sha256": "64dd2a93b260a28c5734bc34fafc8802b0ee938f696404d9baae8c07734112a7",
+  "canonical_requirements_sha256": "1c29c1badc04bde71ddab09831dcbec67496185600d23eb70c2a2f93c1f42d16",
+  "canonical_compatibility_sha256": "ab3c6c67c9a74bef59588c6c7e4796e3c4df98a91c6f6369a0a2d1ac1648ab7e",
+  "repeat": {
+    "build_trees": "byte-identical",
+    "browser_reports": "byte-identical",
+    "browser_report_sha256": "8acec066ef5c7bad724cea4e3602809e81a47de8a1b073810a8ebf9754f3feea"
+  },
+  "summary": {
+    "runtime_requirements": 3,
+    "protocol_requirements": 3,
+    "feature_requirements": 2,
+    "matched": 8,
+    "violations": 0
+  },
+  "active_browsers": ["chrome", "firefox"],
+  "support_state": "unsupported-development-evidence",
+  "next_phase": {"state": "requires-separate-planning-and-authorization"},
+  "deferred": ["secret-scanning", "license-inventory", "payload-budgets", "production-release", "liveview", "local-liveview", "bh-07"]
+}

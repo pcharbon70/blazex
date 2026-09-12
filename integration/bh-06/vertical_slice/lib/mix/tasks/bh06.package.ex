@@ -21,13 +21,21 @@ defmodule Mix.Tasks.Bh06.Package do
     try do
       {inventory, reachability} = reachability_report!()
       policy = client_safety_policy!(root)
+      profile = compatibility_profile!(root)
+      requirements = compatibility_requirements!(root)
 
-      {safety, bundle} =
-        BlazeX.Build.ClientClosure.authorize!(reachability, inventory, policy, fn _ ->
-          package_bundle!(fixture_build, temporary, reachability)
-        end)
+      {safety, compatibility, bundle} =
+        BlazeX.Build.ClientClosure.authorize!(
+          reachability,
+          inventory,
+          policy,
+          profile,
+          requirements,
+          fn _ -> package_bundle!(fixture_build, temporary, reachability) end
+        )
 
       safety = Map.merge(safety, %{"phase" => 3, "status" => "complete"})
+      compatibility = Map.merge(compatibility, %{"phase" => 4, "status" => "complete"})
 
       spec =
         BlazeX.Build.EntryPoint.new!(%{
@@ -56,10 +64,11 @@ defmodule Mix.Tasks.Bh06.Package do
       manifest =
         BlazeX.Build.Pipeline.build!(spec, output,
           reachability: reachability,
-          client_safety: safety
+          client_safety: safety,
+          compatibility: compatibility
         )
 
-      Mix.shell().info("BH-06 Phase 3 package: PASS (#{length(manifest["artifacts"])} assets)")
+      Mix.shell().info("BH-06 Phase 4 package: PASS (#{length(manifest["artifacts"])} assets)")
     after
       File.rm_rf!(temporary)
     end
@@ -93,6 +102,22 @@ defmodule Mix.Tasks.Bh06.Package do
     |> File.read!()
     |> Jason.decode!()
     |> BlazeX.Build.ClientSafetyPolicy.new!()
+  end
+
+  defp compatibility_profile!(root) do
+    root
+    |> Path.join("packages/blazex_runtime_popcorn/compatibility-profile-v0.1.0.json")
+    |> File.read!()
+    |> Jason.decode!()
+    |> BlazeX.Build.CompatibilityProfile.new!()
+  end
+
+  defp compatibility_requirements!(root) do
+    root
+    |> Path.join("integration/bh-06/compatibility-requirements-v0.1.0.json")
+    |> File.read!()
+    |> Jason.decode!()
+    |> BlazeX.Build.CompatibilityRequirements.new!()
   end
 
   defp package_bundle!(fixture_build, temporary, report) do

@@ -21,14 +21,15 @@ defmodule BlazeX.Build.Pipeline do
     artifacts =
       [document | immutable] ++
         report_artifact!(options, output, :reachability, "reachability-report") ++
-        report_artifact!(options, output, :client_safety, "client-safety-report")
+        report_artifact!(options, output, :client_safety, "client-safety-report") ++
+        report_artifact!(options, output, :compatibility, "compatibility-report")
 
     manifest = %{
       "schema_version" => "1.0.0",
       "manifest_id" => "blazex.bh06.browser-slice/1",
       "support_state" => "unsupported-development-evidence",
       "entrypoint" => %{"id" => spec.id, "module" => spec.module},
-      "compatibility" => spec.compatibility,
+      "compatibility" => compatibility!(spec.compatibility, options),
       "artifacts" => artifacts
     }
 
@@ -109,6 +110,33 @@ defmodule BlazeX.Build.Pipeline do
 
       _ ->
         raise ArgumentError, "#{String.replace(role, "-", " ")} must be a map"
+    end
+  end
+
+  defp compatibility!(fallback, options) do
+    case Keyword.get(options, :compatibility) do
+      nil ->
+        fallback
+
+      %{
+        "compatible" => true,
+        "profile_id" => profile_id,
+        "profile_sha256" => profile_sha256,
+        "requirement_id" => requirement_id,
+        "requirements_sha256" => requirements_sha256
+      } ->
+        %{
+          "profile_id" => profile_id,
+          "profile_sha256" => profile_sha256,
+          "requirement_id" => requirement_id,
+          "requirements_sha256" => requirements_sha256
+        }
+
+      %{} ->
+        raise ArgumentError, "compatibility report must be a passing bound report"
+
+      _ ->
+        raise ArgumentError, "compatibility report must be a map"
     end
   end
 

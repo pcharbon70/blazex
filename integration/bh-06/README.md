@@ -23,3 +23,10 @@ explicit, deterministic entrypoint-rooted BEAM inventory to that candidate build
 - [`phase-03-build-manifest-v0.1.0.json`](phase-03-build-manifest-v0.1.0.json)
   and [`phase-03-browser-replay-v0.1.0.json`](phase-03-browser-replay-v0.1.0.json)
   bind the exact safety-gated package and Chrome/Firefox replay.
+- [`compatibility-requirements-v0.1.0.json`](compatibility-requirements-v0.1.0.json)
+  declares the exact runtime, ABI, protocols, and features required by the slice.
+- [`compatibility-v0.1.0.json`](compatibility-v0.1.0.json) records the exact
+  Phase 4 match against the runtime-owned profile.
+- [`phase-04-build-manifest-v0.1.0.json`](phase-04-build-manifest-v0.1.0.json)
+  and [`phase-04-browser-replay-v0.1.0.json`](phase-04-browser-replay-v0.1.0.json)
+  bind the compatibility-gated package and deterministic Chrome/Firefox replay.

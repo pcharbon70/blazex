@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0.0",
+  "requirement_id": "blazex.bh06.counter/1",
+  "runtime": {
+    "id": "atomvm-wasm",
+    "version": "0.6.6-dev",
+    "abi": "atomvm.avm/1"
+  },
+  "protocols": [
+    {"id": "blazex.browser-host", "version": "1"},
+    {"id": "blazex.component", "version": "0.1-experimental"},
+    {"id": "blazex.semantic-tree", "version": "1"}
+  ],
+  "features": ["atomvm-bundle", "browser-dom-bridge"]
+}

@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://blazex.dev/schemas/bh-06/compatibility-profile-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "profile_id", "runtime", "protocols", "features"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "profile_id": {"type": "string", "pattern": "^[a-z][a-z0-9._/-]{0,127}$"},
+    "runtime": {"$ref": "#/$defs/runtime"},
+    "protocols": {"type": "array", "items": {"$ref": "#/$defs/protocol"}},
+    "features": {"type": "array", "items": {"$ref": "#/$defs/feature"}}
+  },
+  "$defs": {
+    "identifier": {"type": "string", "pattern": "^[a-z][a-z0-9._/-]{0,127}$"},
+    "version": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._+-]{0,63}$"},
+    "reason": {"type": "string", "minLength": 1, "maxLength": 256, "pattern": "^[^\\r\\n]+$"},
+    "runtime": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "version", "abi"],
+      "properties": {"id": {"$ref": "#/$defs/identifier"}, "version": {"$ref": "#/$defs/version"}, "abi": {"$ref": "#/$defs/identifier"}}
+    },
+    "protocol": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "version"],
+      "properties": {"id": {"$ref": "#/$defs/identifier"}, "version": {"$ref": "#/$defs/version"}}
+    },
+    "feature": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "state", "reason"],
+      "properties": {"id": {"$ref": "#/$defs/identifier"}, "state": {"enum": ["supported", "unsupported"]}, "reason": {"$ref": "#/$defs/reason"}}
+    }
+  }
+}

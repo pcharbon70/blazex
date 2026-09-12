@@ -133,7 +133,7 @@ def validate(root=REPO_ROOT):
     required_evidence = {
         Path(POLICY).name, Path(REPORT).name, Path(MANIFEST).name, Path(BROWSER).name,
     }
-    if index.get("phase") != 3 or index.get("status") != "complete" or not required_evidence.issubset(index.get("evidence", [])):
+    if index.get("phase", 0) < 3 or index.get("status") != "complete" or not required_evidence.issubset(index.get("evidence", [])):
         errors.append("BH-06 Phase 3 evidence index is incomplete")
     expected_completion = {
         "decision": "accept",
