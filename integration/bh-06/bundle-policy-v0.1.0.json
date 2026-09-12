@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.0.0",
+  "policy_id": "blazex.bh06.feature-bundles/1",
+  "base_bundle_id": "base",
+  "startup_modules": ["Elixir.BlazeX.BH06.VerticalSlice.Boot", "Elixir.BlazeX.BH06.VerticalSlice.Browser"],
+  "features": [{"id": "counter", "entrypoint_ids": ["counter"], "modules": ["Elixir.BlazeX.BH06.VerticalSlice.Counter"]}],
+  "limits": {"max_bundles": 32, "max_inputs": 10000, "max_input_bytes": 134217728, "max_total_bytes": 536870912}
+}
+
