@@ -80,3 +80,9 @@ explicit, deterministic entrypoint-rooted BEAM inventory to that candidate build
 - The `phase-08-{reachability,client-safety,compatibility,secret-audit,
   license-inventory,bundle-plan}-v0.1.0.json` files retain every private report
   bound by that manifest for independent validation.
+- [`runtime-closure-policy-v0.1.0.json`](runtime-closure-policy-v0.1.0.json)
+  freezes Phase 9's pinned reducer identity, exact 693-module base input,
+  explicit dynamic roots, adjustment sets, and scaling bounds.
+- [`runtime-closure-report.schema.json`](runtime-closure-report.schema.json)
+  freezes path-free before/after and removed-module/function evidence without
+  presuming that the reduced candidate passes the unchanged payload gate.

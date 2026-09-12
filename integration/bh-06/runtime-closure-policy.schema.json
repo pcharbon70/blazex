@@ -1,0 +1,5 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema","type":"object","additionalProperties":false,
+  "required":["schema_version","policy_id","tool","expected_input","keep_modules","keep_functions","leave_modules","ignore_modules","drop_modules","limits"],
+  "properties":{"schema_version":{"const":"1.0.0"},"policy_id":{"type":"string"},"tool":{"type":"object"},"expected_input":{"type":"object"},"keep_modules":{"type":"array","uniqueItems":true,"items":{"type":"string"}},"keep_functions":{"type":"array","uniqueItems":true,"items":{"type":"object"}},"leave_modules":{"type":"array","uniqueItems":true,"items":{"type":"string"}},"ignore_modules":{"type":"array","uniqueItems":true,"items":{"type":"string"}},"drop_modules":{"type":"array","uniqueItems":true,"items":{"type":"string"}},"limits":{"type":"object"}}
+}
