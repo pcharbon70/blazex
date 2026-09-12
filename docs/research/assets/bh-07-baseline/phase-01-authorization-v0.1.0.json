@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0.0",
+  "milestone": "BH-07",
+  "phase": 1,
+  "authorized": true,
+  "authorized_at": "2026-09-12",
+  "base_revision": "ed9e86fa75c2d49c294deb06bfb26bbfad3ccc7b",
+  "branch": "codex/bh07-phase1-static-delivery-boundary",
+  "delivery": {"section_commits": 4, "pull_requests": 1, "merge": true, "return_to_synced_main": true, "delete_feature_branch": true},
+  "bound_inputs": {
+    "docs/research/assets/bh-06-baseline/bh-07-entry-decision-v0.1.0.json": "8fccce556e441bef2d9fe6581b9d087d4bc78898dbbb315a951b6220f628582a",
+    "docs/research/assets/bh-06-baseline/phase-11-completion-v0.1.0.json": "a501d08c2cefdca80881f67efd5389586cc536c74f0d3012f839235dcc444ece",
+    "integration/bh-06/phase-11-entrypoint-attestation-v0.1.0.json": "e6077007f90b4a42e1482afdc884d220b58551b419acb49866b870e73db509ed",
+    "profiles/browser_phoenix/mix.exs": "325f4ff935747f81ffa9755f2078abd44ae45b77471732a4d26880469326b593",
+    "profiles/browser_phoenix/lib/blazex_browser_phoenix/asset_plug.ex": "2068e49af2a842d21f3df1092b4236e02cf3a98e9fbddccc0f22e35bd7a91e03"
+  },
+  "deferred": ["sessions", "bootstrap-state", "commands", "pushes", "reconnect", "routing-ownership", "deployment-coordination", "production-support", "liveview", "local-liveview", "BH-08"]
+}

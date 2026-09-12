@@ -20,3 +20,10 @@ The disposable counter command contract is recorded in
 `fixtures/server-command-contract.json`. Authentication, authorization,
 current-state validation, idempotency, mutation, and redacted audit remain
 server-owned.
+
+BH-07 Phase 1 adds `BlazeX.Phoenix.StaticDelivery`, a framework-independent,
+fail-closed boundary for serving an accepted BH-06 artifact set. It verifies
+the manifest attestation and every declared file before resolving only public
+artifacts with their attested media type, cache policy, integrity, and strong
+ETag. Session bootstrap, commands, pushes, routing policy, deployment, LiveView,
+and LocalLiveView remain deferred.

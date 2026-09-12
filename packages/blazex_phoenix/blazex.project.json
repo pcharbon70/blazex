@@ -10,7 +10,7 @@
   "manifest": "mix.exs",
   "test_entrypoints": ["test"],
   "dependencies": [],
-  "planned_dependencies": ["blazex_renderer_dom_liveview"],
+  "planned_dependencies": [],
   "must_not_own": ["portable-component-semantics", "standalone-dom-core", "client-presentation-authority"],
   "forbidden_dependencies": ["blazex_core", "blazex_effects", "blazex_ui_tree", "integration/fixtures"],
   "public_api_state": "experimental-not-stable"

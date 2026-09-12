@@ -5,7 +5,7 @@ defmodule BlazeXBrowserPhoenix.MixProject do
     [
       app: :blazex_browser_phoenix,
       version: "0.0.0-bh01",
-      elixir: "== 1.17.3",
+      elixir: ">= 1.17.3 and < 1.19.0",
       elixirc_paths: ["lib"],
       deps: deps()
     ]
@@ -21,12 +21,9 @@ defmodule BlazeXBrowserPhoenix.MixProject do
   defp deps do
     [
       {:blazex_phoenix, path: "../../packages/blazex_phoenix"},
-      {:blazex_renderer_dom_liveview, path: "../../packages/blazex_renderer_dom_liveview"},
       {:phoenix, "== 1.8.13"},
-      {:phoenix_live_view, "== 1.2.11"},
-      {:local_live_view, "== 0.1.0"},
       {:bandit, "== 1.12.5"},
-      {:igniter, "== 0.7.9", runtime: false, override: true}
+      {:jason, "== 1.4.5"}
     ]
   end
 end

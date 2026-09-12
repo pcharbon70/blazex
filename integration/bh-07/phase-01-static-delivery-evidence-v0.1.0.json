@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0.0",
+  "milestone": "BH-07",
+  "phase": 1,
+  "decision": "accept",
+  "support_state": "unsupported-development-evidence",
+  "source_bindings": {
+    "packages/blazex_phoenix/lib/blazex/phoenix/static_delivery.ex": "e9f4413b3540c3a550f2d00ed124fb0267b06f1da5faae6d3ea1e793ddf9ccc8",
+    "profiles/browser_phoenix/lib/blazex_browser_phoenix/asset_plug.ex": "41a9263e89f68996157de4a7d820c8cd7ec8d9bd3946ee2a38fbd737be97e47c",
+    "profiles/browser_phoenix/lib/blazex_browser_phoenix/static_delivery_cache.ex": "7d78a8671ca3d0686eac43a5309b4b759eff2292816807c08f91f0ddb98e60a9",
+    "profiles/browser_phoenix/mix.exs": "f6fb598244cfcb38cd0299e5b6ffa2b38156386af520bf22c955d3c0b08d8c19",
+    "profiles/browser_phoenix/mix.lock": "870585f232a7fbdd5438bb5e9522da4ce1b07bba5c2d7ae6244a37ef2ce5befd"
+  },
+  "route": {
+    "prefix": "/bh07/",
+    "methods": ["GET", "HEAD"],
+    "redirect": {"from": "/bh07", "status": 308},
+    "public_only": true,
+    "manifest_public": true,
+    "private_evidence_denied": true,
+    "conditional_etag": true,
+    "requested_artifact_reverified": true
+  },
+  "scaling": {
+    "manifest_and_attestation_bytes_read_per_request": true,
+    "full_inventory_validations_per_identity": 1,
+    "retained_identity_results": 1,
+    "requested_artifacts_hashed_per_response": 1,
+    "historical_identity_growth": 0,
+    "repeated_invalid_identity_full_rescans": 0
+  },
+  "tests": [
+    {"gate": "blazex-phoenix-package", "tests": 16, "failures": 0, "result": "passed"},
+    {"gate": "browser-phoenix-profile", "tests": 18, "failures": 0, "result": "passed"},
+    {"gate": "static-delivery-mutations", "tests": 6, "failures": 0, "result": "passed"},
+    {"gate": "research-archive", "result": "passed"},
+    {"gate": "patch-hygiene", "result": "passed"}
+  ],
+  "deferred": [
+    "sessions",
+    "bootstrap-state",
+    "commands",
+    "pushes",
+    "reconnect",
+    "routing-ownership",
+    "deployment-coordination",
+    "production-support",
+    "liveview",
+    "local-liveview",
+    "BH-08"
+  ],
+  "limitations": [
+    "The configured accepted BH-06 build output is external and is not copied into the repository.",
+    "Manifest and attestation files are read and hashed on each request; only full inventory scans are identity-cached.",
+    "No production deployment, traffic benchmark, browser support, or stable API claim is made."
+  ]
+}

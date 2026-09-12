@@ -184,6 +184,8 @@ independent-review blockers, as intended.
 
 ### Shared helpers and runners
 
+- [`validate_bh07_static_delivery.py`](validate_bh07_static_delivery.py) — Validate the BH-07 Phase 1 attested route, bounded identity cache, evidence bindings, and deferred LiveView boundary.
+
 - [`run_bh05_acceptance_cleanup.py`](run_bh05_acceptance_cleanup.py) — Capture and publish Phase 12 cleanup, process-growth and failure-gate evidence without suppressing active divergence.
 - [`validate_bh05_acceptance_cleanup.py`](validate_bh05_acceptance_cleanup.py) — Validate the retained Firefox blocker, ERTS budgets, failure gates and frozen thresholds.
 - [`generate_bh05_reconciliation.py`](generate_bh05_reconciliation.py) — Deterministically generate the Phase 12 nine-condition reconciliation and evidence-first review ledger.
@@ -210,6 +212,8 @@ independent-review blockers, as intended.
 - [`tooling_migration.py`](tooling_migration.py) — Explicit relocation bridge for immutable, pre-70-tools source bindings.
 
 ### Tests
+
+- [`test_validate_bh07_static_delivery.py`](test_validate_bh07_static_delivery.py) — Mutation tests for delivery decisions, source binding, bounded cache behavior, deferred dependencies, lockfile state, and checklist completeness.
 
 - [`test_bh03_history.py`](test_bh03_history.py) — Regression tests.
 - [`test_planning_policy.py`](test_planning_policy.py) — Regression checks for exact, prospective planning amendments.

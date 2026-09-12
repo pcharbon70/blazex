@@ -2,7 +2,7 @@
 
 This is the canonical first executable BlazeX profile. It will assemble the core
 and component packages, Popcorn/AtomVM runtime, browser host, DOM renderer,
-optional LiveView DOM adapter, Phoenix server adapter, and JavaScript runtime
+Phoenix server adapter, and JavaScript runtime
 into a reference application.
 
 The profile will eventually provide the component gallery, integration test
@@ -75,3 +75,16 @@ BH-05 callbacks, facade, process or support claim. Package ownership and API
 migration decisions are recorded in `docs/research/assets/bh-05-baseline`.
 Runtime/host profiles consume neutral contracts; LiveView and LocalLiveView
 integration remain explicitly deferred.
+
+## BH-07 Phase 1 activation
+
+The `/bh07/` route serves only public artifacts from an accepted BH-06 build
+manifest and matching entrypoint attestation. The profile verifies the entire
+inventory before delivery, preserves declared content types and cache policy,
+and provides strong SHA-256 ETags with GET/HEAD/conditional-request parity.
+Private evidence, undeclared paths, changed files, and invalid attestations fail
+closed. Configure `:bh07_static_root` and `:bh07_attestation_path` to the accepted
+build output and attestation. This phase does not add session bootstrap,
+commands, pushes, reconnect, deployment qualification, or support claims.
+LiveView and LocalLiveView are explicitly deferred and are absent from the
+active profile dependency graph.
