@@ -1,0 +1,6 @@
+{
+  "schema_version":"1.0.0","milestone":"BH-06","phase":5,"decision":"accept","section_5_revision":"de029fa0bbc4efd752fad3eb67cf637e32339486",
+  "policy_evidence_sha256":"55be6b23130a9358f320620cdd4b4099fc23589fe32f6a99f676924a7bb22553","audit_evidence_sha256":"2e7bbb1cfb224af3063bd8d3b87aaab0169e446df90205b2e5c11f79335428df","manifest_sha256":"6ae3c233ccd64bdcdf4132952815e943a478b44b63a039ba7da6d0f4c5056b15","browser_evidence_sha256":"bc0ed499deb0e4b127d617f765cb9ee92430522935a3ab53ca5b9ad5dabd7c65","canonical_policy_sha256":"3e397e7eca10e44ec8eb7d8ee0bc3c4425817819eaf526b1b77d6ccdbaa3c1bc","canonical_audit_sha256":"2e7bbb1cfb224af3063bd8d3b87aaab0169e446df90205b2e5c11f79335428df",
+  "repeat":{"build_trees":"byte-identical","browser_reports":"byte-identical","browser_report_sha256":"bc0ed499deb0e4b127d617f765cb9ee92430522935a3ab53ca5b9ad5dabd7c65"},
+  "summary":{"inputs":698,"input_bytes":20709170,"literal_rules":4,"key_fragments":6,"findings":0},"active_browsers":["chrome","firefox"],"support_state":"unsupported-development-evidence","next_phase":{"state":"requires-separate-planning-and-authorization"},"deferred":["license-inventory","feature-bundle-decomposition","payload-budgets","production-release","liveview","local-liveview","bh-07"]
+}

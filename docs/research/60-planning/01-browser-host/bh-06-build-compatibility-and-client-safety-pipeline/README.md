@@ -32,7 +32,7 @@ entrypoints, compatibility targets, or completion gates for this milestone.
 | [2 — Explicit Entrypoints and Deterministic Reachability](phase-02-explicit-entrypoints-and-deterministic-reachability.md) | complete — accept | Inventory supplied BEAMs, traverse static imports from explicit client roots, retain reason chains/external references/unused modules, and reject ambiguous dispatch. | Phase 1 and explicit authorization |
 | [3 — Server and Native Client-Safety Gate](phase-03-server-native-client-safety-gate.md) | complete — accept | Classify every reachable and external dependency exactly, then reject server-only, native, unknown, and forbidden runtime primitives before bundle assembly. | Phase 2 and explicit authorization |
 | [4 — Exact Runtime Compatibility Profiles](phase-04-exact-runtime-compatibility-profiles.md) | complete — accept | Match runtime identity/version/ABI, protocol versions, and required features exactly, then reject incompatibility before bundle assembly. | Phase 3 and explicit authorization |
-| [5 — Secret-Bearing Input Exclusion](phase-05-secret-bearing-input-exclusion.md) | active | Account for and scan candidate bundle/browser inputs and explicit public configuration, then reject redacted findings before AVM assembly. | Phase 4 and explicit authorization |
+| [5 — Secret-Bearing Input Exclusion](phase-05-secret-bearing-input-exclusion.md) | complete — accept | Account for and scan candidate bundle/browser inputs and explicit public configuration, then reject redacted findings before AVM assembly. | Phase 4 and explicit authorization |
 
 Later phase decomposition remains a separate planning decision. Phases 1-5 do
 not authorize licenses, feature-bundle decomposition, payload
@@ -59,6 +59,8 @@ budgets, production releases, support promotion, or BH-07.
 - [Phase 4 completion evidence](phase-04-completion.md)
 - [Phase 5 — Secret-Bearing Input Exclusion](phase-05-secret-bearing-input-exclusion.md)
 - [Secret-exclusion contract](secret-exclusion-contract.md)
+- [Phase 5 review and reconciliation](phase-05-review-and-reconciliation.md)
+- [Phase 5 completion evidence](phase-05-completion.md)
 
 ### Subdirectories
 

@@ -11,7 +11,7 @@ aliases: ["BH-06 phase 5"]
 
 Back to the [milestone](README.md).
 
-- [ ] 5 Phase - Secret-Bearing Input Exclusion.
+- [x] 5 Phase - Secret-Bearing Input Exclusion.
   - Need: Phase 4 rejects incompatible candidates, but reachable BEAMs, host
     assets, and public configuration can still carry credentials into the browser.
   - Outcome: every byte source assembled for the application bundle and every
@@ -42,11 +42,11 @@ Back to the [milestone](README.md).
     - [x] Prove clean success plus literal, config-key, duplicate, overflow,
       mutation, determinism, redaction, and pre-assembly rejection cases.
 
-  - [ ] 5.4 Section - Reproduce, review, and publish completion.
-    - [ ] Run package, browser-Wasm, validator, mutation, deterministic-repeat,
+  - [x] 5.4 Section - Reproduce, review, and publish completion.
+    - [x] Run package, browser-Wasm, validator, mutation, deterministic-repeat,
       archive, runtime, JavaScript, demo, syntax, and patch-hygiene gates.
-    - [ ] Publish exact counts, hashes, commands, failures, limitations, and deferrals.
-    - [ ] Accept only if every assembled input is accounted for, clean candidates
+    - [x] Publish exact counts, hashes, commands, failures, limitations, and deferrals.
+    - [x] Accept only if every assembled input is accounted for, clean candidates
       pass, findings are redacted, and secret-bearing candidates cannot create an AVM.
 
 ## Exit gate
