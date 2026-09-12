@@ -11,7 +11,7 @@ aliases: ["BH-07 phase 1"]
 
 Back to the [milestone](README.md).
 
-- [ ] 1 Phase - Attested Static Delivery Boundary.
+- [x] 1 Phase - Attested Static Delivery Boundary.
   - Need: BH-06 produces an accepted attested browser artifact set, but the
     Phoenix profile does not yet expose that set as a current governed route;
     it also retains historical LiveView/LocalLiveView dependencies contrary to
@@ -28,24 +28,24 @@ Back to the [milestone](README.md).
       path, method, scaling, and failure semantics.
     - [x] Activate BH-07 planning, baseline, integration, and evidence indexes.
 
-  - [ ] 1.2 Section - Implement reusable attested-delivery validation.
-    - [ ] Validate the BH-06 manifest/attestation pair without Phoenix or atom creation.
-    - [ ] Resolve only declared public paths and return exact content type,
+  - [x] 1.2 Section - Implement reusable attested-delivery validation.
+    - [x] Validate the BH-06 manifest/attestation pair without Phoenix or atom creation.
+    - [x] Resolve only declared public paths and return exact content type,
       Cache-Control, ETag, byte count, and integrity metadata.
-    - [ ] Reject private, missing, escaping, stale, malformed, duplicate, or over-limit input.
+    - [x] Reject private, missing, escaping, stale, malformed, duplicate, or over-limit input.
 
-  - [ ] 1.3 Section - Integrate the Phoenix route and remove deferred coupling.
-    - [ ] Add `/bh07/` GET/HEAD delivery backed by validated output and deny private evidence.
-    - [ ] Remove LiveView, LocalLiveView, and renderer-LiveView dependencies and
+  - [x] 1.3 Section - Integrate the Phoenix route and remove deferred coupling.
+    - [x] Add `/bh07/` GET/HEAD delivery backed by validated output and deny private evidence.
+    - [x] Remove LiveView, LocalLiveView, and renderer-LiveView dependencies and
       current health capability coupling while preserving historical evidence files.
-    - [ ] Prove redirects, public delivery, headers, conditional/HEAD behavior,
+    - [x] Prove redirects, public delivery, headers, conditional/HEAD behavior,
       denial, traversal, unsupported methods, and package/profile boundaries.
 
-  - [ ] 1.4 Section - Reproduce, review, and publish completion.
-    - [ ] Run package/profile tests, schemas, validator mutations, archive,
+  - [x] 1.4 Section - Reproduce, review, and publish completion.
+    - [x] Run package/profile tests, schemas, validator mutations, archive,
       dependency, formatting, and patch-hygiene gates.
-    - [ ] Publish evidence, limitations, inherited corpus status, and decision.
-    - [ ] Accept only when the attested artifact is served and all deferred
+    - [x] Publish evidence, limitations, inherited corpus status, and decision.
+    - [x] Accept only when the attested artifact is served and all deferred
       LiveView/LocalLiveView coupling is absent from the active profile.
 
 ## Exit gate

@@ -2,6 +2,7 @@ defmodule BlazeXBrowserPhoenix.AssetPlug do
   @moduledoc false
   import Plug.Conn
   alias BlazeX.Phoenix.StaticDelivery
+  alias BlazeXBrowserPhoenix.StaticDeliveryCache
 
   @content_types %{
     ".html" => "text/html; charset=utf-8",
@@ -73,7 +74,6 @@ defmodule BlazeXBrowserPhoenix.AssetPlug do
 
   defp bh07_delivery do
     root = static_root("bh07")
-    manifest_path = Path.join(root, "build-manifest.json")
 
     attestation_path =
       Application.get_env(
@@ -82,14 +82,7 @@ defmodule BlazeXBrowserPhoenix.AssetPlug do
         Path.join(root, "entrypoint-attestation.json")
       )
 
-    with {:ok, manifest_bytes} <- File.read(manifest_path),
-         {:ok, attestation_bytes} <- File.read(attestation_path),
-         {:ok, manifest} <- Jason.decode(manifest_bytes),
-         {:ok, attestation} <- Jason.decode(attestation_bytes) do
-      {:ok, StaticDelivery.new!(root, manifest, attestation, manifest_bytes)}
-    end
-  rescue
-    ArgumentError -> {:error, :attestation_invalid}
+    StaticDeliveryCache.fetch(root, attestation_path)
   end
 
   defp serve_attested(conn, artifact) do

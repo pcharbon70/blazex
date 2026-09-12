@@ -131,6 +131,20 @@ defmodule BlazeX.Phoenix.StaticDeliveryTest do
       StaticDelivery.new!(context.root, duplicate, duplicate_attestation, duplicate_bytes)
     end
 
+    duplicate_attestation = %{
+      context.attestation
+      | "artifacts" => [hd(context.attestation["artifacts"]) | context.attestation["artifacts"]]
+    }
+
+    assert_raise ArgumentError, "attested-artifact-path-duplicate", fn ->
+      StaticDelivery.new!(
+        context.root,
+        context.manifest,
+        duplicate_attestation,
+        context.manifest_bytes
+      )
+    end
+
     [public, private] = context.manifest["artifacts"]
     wrong_cache = %{public | "cache_control" => "no-store"}
     changed = %{context.manifest | "artifacts" => [wrong_cache, private]}
@@ -151,6 +165,23 @@ defmodule BlazeX.Phoenix.StaticDeliveryTest do
 
     assert {:error, :artifact_changed} =
              StaticDelivery.resolve(delivery, "GET", "assets/app-deadbeef.js")
+  end
+
+  test "rejects missing files and symlink indirection", context do
+    File.rm!(Path.join(context.root, "assets/app-deadbeef.js"))
+
+    assert_raise ArgumentError, "artifact-unavailable", fn ->
+      delivery(context)
+    end
+
+    File.ln_s!(
+      Path.join(context.root, "evidence/private.json"),
+      Path.join(context.root, "assets/app-deadbeef.js")
+    )
+
+    assert_raise ArgumentError, "artifact-path-invalid", fn ->
+      delivery(context)
+    end
   end
 
   defp delivery(context) do

@@ -24,5 +24,13 @@ media type, strong SHA-256 ETag, content length, GET/HEAD parity, and conditiona
 requests are preserved. This is development delivery evidence, not production
 deployment or support qualification.
 
+The profile caches at most one fully validated delivery identity. Requests read
+and hash the bounded manifest and attestation to select that identity, then
+rehash only the requested artifact before delivery. A changed identity triggers
+one serialized full validation. The last result, including an invalid result,
+is retained so repeated hostile identities fail without repeated full scans.
+Validation work and retained state therefore do not grow with request count or
+historical identities.
+
 LiveView and LocalLiveView are **[DEFERRED]**. Neither is an active dependency,
 capability, route, renderer, or test target in this contract.

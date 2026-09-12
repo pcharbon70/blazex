@@ -6,6 +6,8 @@ defmodule BlazeXBrowserPhoenix.StaticDeliveryTest do
   @endpoint BlazeXBrowserPhoenix.Endpoint
 
   setup do
+    :ok = BlazeXBrowserPhoenix.StaticDeliveryCache.reset()
+
     root =
       Path.join(System.tmp_dir!(), "blazex-bh07-profile-#{System.unique_integer([:positive])}")
 
@@ -88,6 +90,8 @@ defmodule BlazeXBrowserPhoenix.StaticDeliveryTest do
     assert manifest.status == 200
     assert manifest.resp_body == context.manifest_bytes
     assert get_resp_header(manifest, "content-type") == ["application/json"]
+
+    assert BlazeXBrowserPhoenix.StaticDeliveryCache.snapshot() == %{validations: 1, hits: 3}
   end
 
   test "redirects the route root and rejects private, undeclared, and unsupported requests" do
@@ -103,6 +107,19 @@ defmodule BlazeXBrowserPhoenix.StaticDeliveryTest do
   test "fails closed when an artifact changes after attestation", context do
     File.write!(Path.join(context.root, "index.html"), "changed\n")
     assert request(:get, "/bh07/").status == 404
+  end
+
+  test "revalidates once when the manifest identity changes", context do
+    assert request(:get, "/bh07/").status == 200
+    assert %{validations: 1} = BlazeXBrowserPhoenix.StaticDeliveryCache.snapshot()
+
+    bytes =
+      String.replace(context.manifest_bytes, "Elixir.BlazeX.Counter", "Elixir.BlazeX.Counter2")
+
+    File.write!(Path.join(context.root, "build-manifest.json"), bytes)
+    assert request(:get, "/bh07/").status == 404
+    assert request(:get, "/bh07/").status == 404
+    assert %{validations: 2, hits: 1} = BlazeXBrowserPhoenix.StaticDeliveryCache.snapshot()
   end
 
   defp request(method, path, headers \\ []) do

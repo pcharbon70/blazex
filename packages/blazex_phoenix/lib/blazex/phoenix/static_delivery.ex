@@ -48,10 +48,14 @@ defmodule BlazeX.Phoenix.StaticDelivery do
       raise ArgumentError, "artifact-path-duplicate"
     end
 
-    attested_by_path =
-      attestation
-      |> require_list!("artifacts")
-      |> Map.new(fn artifact -> {require_string!(artifact, "path"), artifact} end)
+    attested_artifacts = require_list!(attestation, "artifacts")
+    attested_paths = Enum.map(attested_artifacts, &require_string!(&1, "path"))
+
+    if length(attested_paths) != MapSet.size(MapSet.new(attested_paths)) do
+      raise ArgumentError, "attested-artifact-path-duplicate"
+    end
+
+    attested_by_path = Map.new(attested_artifacts, &{&1["path"], &1})
 
     if MapSet.new(paths) != MapSet.new(Map.keys(attested_by_path)) do
       raise ArgumentError, "attested-inventory-mismatch"
@@ -89,8 +93,7 @@ defmodule BlazeX.Phoenix.StaticDelivery do
          :ok <- verify_body(body, artifact) do
       {:ok,
        %{
-         path:
-           if(normalized == @manifest_path, do: nil, else: safe_join!(delivery.root, normalized)),
+         path: normalized,
          body: body,
          bytes: artifact["bytes"],
          media_type: artifact["media_type"],
@@ -132,7 +135,7 @@ defmodule BlazeX.Phoenix.StaticDelivery do
 
   defp validate_artifact!(root, artifact, attested) when is_map(artifact) and is_map(attested) do
     path = require_string!(artifact, "path")
-    absolute = safe_join!(root, path)
+    safe_join!(root, path)
     exposure = require_string!(artifact, "exposure")
 
     unless exposure in ["public", "private-build-evidence"] do
@@ -177,7 +180,7 @@ defmodule BlazeX.Phoenix.StaticDelivery do
 
     if cache_control != expected_cache, do: raise(ArgumentError, "artifact-cache-invalid")
 
-    body = File.read!(absolute)
+    body = read_artifact!(root, path)
     verify_body!(body, artifact)
     path
   end
@@ -204,10 +207,34 @@ defmodule BlazeX.Phoenix.StaticDelivery do
   defp read(%__MODULE__{manifest_bytes: bytes}, @manifest_path), do: {:ok, bytes}
 
   defp read(%__MODULE__{root: root}, path) do
-    case File.read(safe_join!(root, path)) do
+    case read_artifact(root, path) do
       {:ok, body} -> {:ok, body}
       {:error, _} -> {:error, :artifact_unavailable}
     end
+  end
+
+  defp read_artifact!(root, path) do
+    case read_artifact(root, path) do
+      {:ok, body} -> body
+      {:error, _} -> raise ArgumentError, "artifact-unavailable"
+    end
+  end
+
+  defp read_artifact(root, path) do
+    with {:ok, absolute} <- reject_symlinks(root, path), do: File.read(absolute)
+  end
+
+  defp reject_symlinks(root, path) do
+    Path.split(path)
+    |> Enum.reduce_while({:ok, root}, fn segment, {:ok, parent} ->
+      candidate = Path.join(parent, segment)
+
+      case File.lstat(candidate) do
+        {:ok, %{type: :symlink}} -> {:halt, {:error, :symlink}}
+        {:ok, _stat} -> {:cont, {:ok, candidate}}
+        {:error, reason} -> {:halt, {:error, reason}}
+      end
+    end)
   end
 
   defp normalize_request_path(path) do
