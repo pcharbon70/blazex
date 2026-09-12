@@ -36,7 +36,7 @@ entrypoints, compatibility targets, or completion gates for this milestone.
 | [6 — License and Provenance Inventory](phase-06-license-and-provenance-inventory.md) | complete — accept | Bind every Phase 5 input to one declared component and exact license/provenance records, verify notices, and reject gaps before AVM assembly. | Phase 5 and explicit authorization |
 | [7 — Deterministic Feature Bundles](phase-07-deterministic-feature-bundles.md) | complete — accept | Assign every BEAM to base or exact feature ownership, then verify and dynamically load the counter feature AVM into the existing browser AtomVM. | Phase 6 and explicit authorization |
 | [8 — Payload Budgets and Public Artifact Accounting](phase-08-payload-budgets-and-public-artifact-accounting.md) | complete — revision-required | Classify public payload versus private build evidence, measure deterministic Brotli/decoded bytes, enforce budgets and zero public source maps, and prove local negotiation; runtime Brotli exceeds its frozen limit. | Phase 7 and explicit authorization |
-| [9 — Audited Runtime Closure Reduction](phase-09-audited-runtime-closure-reduction.md) | active | Apply a pinned function-level reducer with explicit dynamic roots, audit every removal, and re-run the unchanged payload and browser gates. | Phase 8 revision-required decision and explicit authorization |
+| [9 — Audited Runtime Closure Reduction](phase-09-audited-runtime-closure-reduction.md) | complete — accept | Apply graph and pinned function reduction with explicit dynamic and opaque bridge roots, audit every removal, and pass the unchanged payload thresholds and browser gates. | Phase 8 revision-required decision and explicit authorization |
 
 Later phase decomposition remains a separate planning decision. Phases 1-9 do
 not authorize reachability optimization, route orchestration, predictive
@@ -79,6 +79,8 @@ prefetch, production releases, support promotion, or BH-07.
 - [Phase 8 completion evidence](phase-08-completion.md)
 - [Phase 9 — Audited Runtime Closure Reduction](phase-09-audited-runtime-closure-reduction.md)
 - [Runtime-closure reduction contract](runtime-closure-contract.md)
+- [Phase 9 review and reconciliation](phase-09-review-and-reconciliation.md)
+- [Phase 9 completion evidence](phase-09-completion.md)
 
 ### Subdirectories
 

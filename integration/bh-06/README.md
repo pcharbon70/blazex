@@ -90,3 +90,12 @@ explicit, deterministic entrypoint-rooted BEAM inventory to that candidate build
 - [`payload-policy-v0.1.1.json`](payload-policy-v0.1.1.json) adds only the private
   runtime-closure evidence classification to Phase 8's roles; every public
   owner, metric, compression setting, and numeric threshold remains unchanged.
+- [`phase-09-runtime-closure-v0.1.0.json`](phase-09-runtime-closure-v0.1.0.json)
+  records the exact 692-to-423-module reduction, 1,035 removed functions, 57
+  byte-identical opaque modules, and 121 retained opaque bridge dependencies.
+- [`phase-09-payload-report-v0.1.0.json`](phase-09-payload-report-v0.1.0.json),
+  [`phase-09-build-manifest-v0.1.0.json`](phase-09-build-manifest-v0.1.0.json),
+  and [`phase-09-browser-replay-v0.1.0.json`](phase-09-browser-replay-v0.1.0.json)
+  bind the accepted thresholds, thirteen manifest assets, and matching complete
+  Chrome/Firefox replay. The remaining `phase-09-*-v0.1.0.json` files retain
+  every private predecessor report referenced by the manifest.

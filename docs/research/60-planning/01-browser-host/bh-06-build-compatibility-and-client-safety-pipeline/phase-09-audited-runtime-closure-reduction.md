@@ -11,7 +11,7 @@ aliases: ["BH-06 phase 9"]
 
 Back to the [milestone](README.md).
 
-- [ ] 9 Phase - Audited Runtime Closure Reduction.
+- [x] 9 Phase - Audited Runtime Closure Reduction.
   - Need: Phase 8 correctly rejects 2,689,798 runtime Brotli bytes against the
     frozen 1,638,400-byte limit. Module-only packbeam pruning still measures
     1,861,444 bytes, so the base needs explicit function-level reduction.
@@ -48,12 +48,12 @@ Back to the [milestone](README.md).
     - [x] Prove feature absence/load, interaction, disposal, Brotli negotiation,
       private-evidence denial, integrity negatives, and Chrome/Firefox parity.
 
-  - [ ] 9.4 Section - Reproduce, review, and publish completion.
-    - [ ] Run package, browser-Wasm, validator, mutation, deterministic-repeat,
+  - [x] 9.4 Section - Reproduce, review, and publish completion.
+    - [x] Run package, browser-Wasm, validator, mutation, deterministic-repeat,
       archive, runtime, JavaScript, demo, syntax, and patch-hygiene gates.
-    - [ ] Publish exact before/after modules, functions, bytes, hashes, budgets,
+    - [x] Publish exact before/after modules, functions, bytes, hashes, budgets,
       failures, limitations, and deferrals.
-    - [ ] Accept only when the unchanged runtime threshold passes and both active
+    - [x] Accept only when the unchanged runtime threshold passes and both active
       browsers execute the reduced archive without missing-code failures.
 
 ## Exit gate
