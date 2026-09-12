@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0.0",
+  "milestone": "BH-06",
+  "phase": 11,
+  "decision": "accept",
+  "milestone_decision": "complete-for-bounded-development",
+  "completed_at": "2026-09-12",
+  "policy_evidence_sha256": "4d40090b0be0e85c4b0a3856d1cda5a367ec2970b5ab685140d9c759b5fea538",
+  "canonical_policy_sha256": "97ef00810d75dd436ef24dcd498bc1116e35aff7b526c7135ff30d1c8f454d7f",
+  "attestation_sha256": "e6077007f90b4a42e1482afdc884d220b58551b419acb49866b870e73db509ed",
+  "manifest_sha256": "e34f342923d2b1ba86d758fec47a50c2df6cddaa2dbe1432f9041fd61b4b8c03",
+  "browser_evidence_sha256": "20f7e5c5d41acbf53dc6374522fb9bec3722210f62fe9a5e57eaab5d2f9414cd",
+  "payload_evidence_sha256": "3805e22b319d2e2b795f6465164da10423b473aeff345283f803ace54bedc70d",
+  "entrypoints": ["counter"],
+  "active_browsers": ["chrome", "firefox"],
+  "support_state": "unsupported-development-evidence"
+}

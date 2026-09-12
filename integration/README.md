@@ -9,7 +9,8 @@ contracts.
   evidence classes. Phase 1 is governance-only, not component conformance.
 - [BH-06](bh-06/README.md) owns the first entrypoint-to-browser-Wasm build slice
   and its manifest, integrity, lifecycle, payload, delivery-metadata, and
-  active-browser evidence through accepted Phase 10.
+  active-browser evidence through accepted Phase 11 and the final declared
+  entrypoint attestation.
 
 - `fixtures` contains deterministic shared applications, trees, events, and
   expected outcomes.

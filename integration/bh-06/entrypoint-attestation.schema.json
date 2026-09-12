@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "attestation_id", "policy_id", "policy_sha256", "entrypoint", "manifest", "artifacts", "evidence", "summary", "decision"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"}, "attestation_id": {"type": "string"}, "policy_id": {"type": "string"}, "policy_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "entrypoint": {"type": "object"}, "manifest": {"type": "object"}, "artifacts": {"type": "array"}, "evidence": {"type": "object"}, "summary": {"type": "object"}, "decision": {"const": "accept"}
+  }
+}

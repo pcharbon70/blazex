@@ -14,13 +14,16 @@ This repository contains an early experimental semantic kernel, renderers,
 conformance suites, and the architecture/research corpus that governs them.
 The implemented projects remain unsupported and their APIs are not stable.
 
-BH-06 Phase 10 provides the current continuous browser-WebAssembly proof: a
+BH-06 Phase 11 provides the current continuous browser-WebAssembly proof: a
 public Elixir component is packaged into an AVM bundle, executed by AtomVM in
 WebAssembly, interacted with in Chrome and Firefox, committed to the DOM, and
 disposed. Its audited runtime closure passes the unchanged Phase 8 Brotli
 ceiling while retaining private reduction evidence. Its manifest now carries
 verified SHA-384 SRI and exact Cache-Control metadata for every artifact under
-a closed delivery policy. See the
+a closed delivery policy. Its final entrypoint attestation accounts for the
+runtime, application, assets, licenses, payload, safety, compatibility, and
+integrity of the complete declared browser entrypoint set. BH-06 is complete
+for bounded development. See the
 [vertical-slice fixture](integration/bh-06/vertical_slice/README.md).
 
 ## Repository structure

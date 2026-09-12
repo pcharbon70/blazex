@@ -83,6 +83,11 @@ async function main() {
   try {
     const manifestResponse = await fetch("/build-manifest.json", { cache: "no-store" });
     if (!manifestResponse.ok) throw new Error("missing build manifest");
+    const attestationBootstrap = window.__BH06_ATTESTATION;
+    if (!attestationBootstrap || attestationBootstrap.sha256 !== manifestResponse.headers.get("x-blazex-entrypoint-attestation")) throw new Error("attestation binding mismatch");
+    if (attestationBootstrap.attestation?.decision !== "accept" || attestationBootstrap.attestation?.entrypoint?.id !== "counter") throw new Error("invalid entrypoint attestation");
+    result.attestation_id = attestationBootstrap.attestation.attestation_id;
+    result.checks.push("entrypoint-attestation");
     result.content_encodings["build-manifest"] = manifestResponse.headers.get("content-encoding") ?? "identity";
     result.cache_controls["build-manifest"] = manifestResponse.headers.get("cache-control");
     if (result.cache_controls["build-manifest"] !== "no-store") throw new Error("cache policy mismatch for build-manifest");

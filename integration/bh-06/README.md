@@ -109,3 +109,10 @@ explicit, deterministic entrypoint-rooted BEAM inventory to that candidate build
   records matching Chrome/Firefox verification plus four fail-closed mutations.
   The payload and private Phase 10 files retain the accepted budget result and
   every exact evidence object referenced by the manifest.
+- [`entrypoint-accounting-policy-v0.1.0.json`](entrypoint-accounting-policy-v0.1.0.json)
+  declares the complete Phase 11 browser entrypoint, artifact-role, evidence,
+  and scaling boundary; its schemas freeze both policy and attestation shapes.
+- [`phase-11-entrypoint-attestation-v0.1.0.json`](phase-11-entrypoint-attestation-v0.1.0.json)
+  accounts for the counter entrypoint across thirteen artifacts and nine review
+  categories. The Phase 11 manifest, payload, private reports, and browser
+  replay retain every source identity and the exact active-browser binding.

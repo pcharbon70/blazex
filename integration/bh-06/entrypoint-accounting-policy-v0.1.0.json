@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.0.0",
+  "policy_id": "blazex.bh06.entrypoint-accounting/1",
+  "entrypoints": [{"id": "counter", "module": "Elixir.BlazeX.BH06.VerticalSlice.Counter"}],
+  "required_public_roles": ["application-bundle", "browser-host", "document", "feature-bundle", "runtime-module", "runtime-wasm"],
+  "required_private_roles": ["bundle-plan-report", "client-safety-report", "compatibility-report", "license-inventory-report", "reachability-report", "runtime-closure-report", "secret-audit-report"],
+  "required_evidence": ["bundle_plan", "client_safety", "compatibility", "delivery_integrity", "license_inventory", "payload", "reachability", "runtime_closure", "secret_audit"],
+  "limits": {"max_entrypoints": 16, "max_artifacts": 64, "max_evidence_categories": 16}
+}

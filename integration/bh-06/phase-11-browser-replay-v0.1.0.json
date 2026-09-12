@@ -1,0 +1,320 @@
+{
+  "schema_version": "1.0.0",
+  "milestone": "BH-06",
+  "phase": 11,
+  "support_state": "unsupported-development-evidence",
+  "payload_decision": "accept",
+  "attestation_id": "blazex.bh06.entrypoint-accounting/1/counter",
+  "attestation_sha256": "e6077007f90b4a42e1482afdc884d220b58551b419acb49866b870e73db509ed",
+  "failed_budgets": [],
+  "results": [
+    {
+      "browser": "chrome",
+      "version": "140.0.7339.80",
+      "executable": "/usr/bin/google-chrome",
+      "result": "passed",
+      "runtime": "atomvm-wasm",
+      "checks": [
+        "entrypoint-attestation",
+        "delivery-policy-binding",
+        "feature-integrity",
+        "sha384-sri",
+        "cache-control",
+        "manifest-integrity",
+        "atomvm-ready",
+        "brotli-negotiation",
+        "feature-absent-before-load",
+        "feature-dynamic-load",
+        "duplicate-load-rejection",
+        "mount",
+        "semantic-render",
+        "dom-commit",
+        "browser-interaction",
+        "elixir-state-transition",
+        "updated-dom-commit",
+        "dispose"
+      ],
+      "trace": [
+        {
+          "id": "counter",
+          "loaded": true,
+          "step": "feature-load"
+        },
+        {
+          "semantic": 1,
+          "state": 0,
+          "step": "mount"
+        },
+        {
+          "name": "activate",
+          "state": 1,
+          "step": "event"
+        },
+        {
+          "resources": 0,
+          "state": 1,
+          "step": "dispose"
+        }
+      ],
+      "dom": {
+        "text": "Wasm counter: 1",
+        "role": "Wasm counter"
+      },
+      "content_encodings": {
+        "build-manifest": "br",
+        "feature-bundle": "br",
+        "runtime-module": "br",
+        "runtime-wasm": "br",
+        "application-bundle": "br"
+      },
+      "cache_controls": {
+        "build-manifest": "no-store",
+        "feature-bundle": "public, max-age=31536000, immutable",
+        "runtime-module": "public, max-age=31536000, immutable",
+        "runtime-wasm": "public, max-age=31536000, immutable",
+        "application-bundle": "public, max-age=31536000, immutable"
+      },
+      "attestation_id": "blazex.bh06.entrypoint-accounting/1/counter",
+      "manifest_id": "blazex.bh06.browser-slice/1",
+      "entrypoint": {
+        "id": "counter",
+        "module": "Elixir.BlazeX.BH06.VerticalSlice.Counter"
+      },
+      "runtime_logs": [
+        "Return value: ok"
+      ],
+      "page_errors": [],
+      "console_messages": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+        }
+      ]
+    },
+    {
+      "browser": "firefox",
+      "version": "153.0",
+      "executable": "/home/ducky/.cache/ms-playwright/firefox-1538/firefox/firefox",
+      "result": "passed",
+      "runtime": "atomvm-wasm",
+      "checks": [
+        "entrypoint-attestation",
+        "delivery-policy-binding",
+        "feature-integrity",
+        "sha384-sri",
+        "cache-control",
+        "manifest-integrity",
+        "atomvm-ready",
+        "brotli-negotiation",
+        "feature-absent-before-load",
+        "feature-dynamic-load",
+        "duplicate-load-rejection",
+        "mount",
+        "semantic-render",
+        "dom-commit",
+        "browser-interaction",
+        "elixir-state-transition",
+        "updated-dom-commit",
+        "dispose"
+      ],
+      "trace": [
+        {
+          "id": "counter",
+          "loaded": true,
+          "step": "feature-load"
+        },
+        {
+          "semantic": 1,
+          "state": 0,
+          "step": "mount"
+        },
+        {
+          "name": "activate",
+          "state": 1,
+          "step": "event"
+        },
+        {
+          "resources": 0,
+          "state": 1,
+          "step": "dispose"
+        }
+      ],
+      "dom": {
+        "text": "Wasm counter: 1",
+        "role": "Wasm counter"
+      },
+      "content_encodings": {
+        "build-manifest": "br",
+        "feature-bundle": "br",
+        "runtime-module": "br",
+        "runtime-wasm": "br",
+        "application-bundle": "br"
+      },
+      "cache_controls": {
+        "build-manifest": "no-store",
+        "feature-bundle": "public, max-age=31536000, immutable",
+        "runtime-module": "public, max-age=31536000, immutable",
+        "runtime-wasm": "public, max-age=31536000, immutable",
+        "application-bundle": "public, max-age=31536000, immutable"
+      },
+      "attestation_id": "blazex.bh06.entrypoint-accounting/1/counter",
+      "manifest_id": "blazex.bh06.browser-slice/1",
+      "entrypoint": {
+        "id": "counter",
+        "module": "Elixir.BlazeX.BH06.VerticalSlice.Counter"
+      },
+      "runtime_logs": [
+        "Return value: ok"
+      ],
+      "page_errors": [],
+      "console_messages": []
+    }
+  ],
+  "negative_integrity": {
+    "result": "failed",
+    "runtime": "atomvm-wasm",
+    "checks": [
+      "entrypoint-attestation",
+      "delivery-policy-binding",
+      "feature-integrity",
+      "sha384-sri",
+      "cache-control"
+    ],
+    "trace": [],
+    "dom": null,
+    "content_encodings": {
+      "build-manifest": "identity",
+      "feature-bundle": "br",
+      "runtime-module": "br",
+      "runtime-wasm": "br",
+      "application-bundle": "br"
+    },
+    "cache_controls": {
+      "build-manifest": "no-store",
+      "feature-bundle": "public, max-age=31536000, immutable",
+      "runtime-module": "public, max-age=31536000, immutable",
+      "runtime-wasm": "public, max-age=31536000, immutable",
+      "application-bundle": "public, max-age=31536000, immutable"
+    },
+    "attestation_id": "blazex.bh06.entrypoint-accounting/1/counter",
+    "manifest_id": "blazex.bh06.browser-slice/1",
+    "entrypoint": {
+      "id": "counter",
+      "module": "Elixir.BlazeX.BH06.VerticalSlice.Counter"
+    },
+    "error": "Error: integrity mismatch for application-bundle"
+  },
+  "negative_feature_integrity": {
+    "result": "failed",
+    "runtime": "atomvm-wasm",
+    "checks": [
+      "entrypoint-attestation",
+      "delivery-policy-binding"
+    ],
+    "trace": [],
+    "dom": null,
+    "content_encodings": {
+      "build-manifest": "identity",
+      "feature-bundle": "br"
+    },
+    "cache_controls": {
+      "build-manifest": "no-store",
+      "feature-bundle": "public, max-age=31536000, immutable"
+    },
+    "attestation_id": "blazex.bh06.entrypoint-accounting/1/counter",
+    "manifest_id": "blazex.bh06.browser-slice/1",
+    "entrypoint": {
+      "id": "counter",
+      "module": "Elixir.BlazeX.BH06.VerticalSlice.Counter"
+    },
+    "error": "Error: integrity mismatch for feature-bundle"
+  },
+  "negative_sri": {
+    "result": "failed",
+    "runtime": "atomvm-wasm",
+    "checks": [
+      "entrypoint-attestation",
+      "delivery-policy-binding",
+      "feature-integrity",
+      "sha384-sri",
+      "cache-control"
+    ],
+    "trace": [],
+    "dom": null,
+    "content_encodings": {
+      "build-manifest": "identity",
+      "feature-bundle": "br",
+      "runtime-module": "br",
+      "runtime-wasm": "br",
+      "application-bundle": "br"
+    },
+    "cache_controls": {
+      "build-manifest": "no-store",
+      "feature-bundle": "public, max-age=31536000, immutable",
+      "runtime-module": "public, max-age=31536000, immutable",
+      "runtime-wasm": "public, max-age=31536000, immutable",
+      "application-bundle": "public, max-age=31536000, immutable"
+    },
+    "attestation_id": "blazex.bh06.entrypoint-accounting/1/counter",
+    "manifest_id": "blazex.bh06.browser-slice/1",
+    "entrypoint": {
+      "id": "counter",
+      "module": "Elixir.BlazeX.BH06.VerticalSlice.Counter"
+    },
+    "error": "Error: SRI mismatch for runtime-wasm"
+  },
+  "negative_cache_control": {
+    "result": "failed",
+    "runtime": "atomvm-wasm",
+    "checks": [
+      "entrypoint-attestation",
+      "delivery-policy-binding",
+      "feature-integrity",
+      "sha384-sri",
+      "cache-control"
+    ],
+    "trace": [],
+    "dom": null,
+    "content_encodings": {
+      "build-manifest": "br",
+      "feature-bundle": "br",
+      "runtime-module": "br",
+      "runtime-wasm": "br",
+      "application-bundle": "br"
+    },
+    "cache_controls": {
+      "build-manifest": "no-store",
+      "feature-bundle": "public, max-age=31536000, immutable",
+      "runtime-module": "public, max-age=31536000, immutable",
+      "runtime-wasm": "no-store",
+      "application-bundle": "public, max-age=31536000, immutable"
+    },
+    "attestation_id": "blazex.bh06.entrypoint-accounting/1/counter",
+    "manifest_id": "blazex.bh06.browser-slice/1",
+    "entrypoint": {
+      "id": "counter",
+      "module": "Elixir.BlazeX.BH06.VerticalSlice.Counter"
+    },
+    "error": "Error: cache policy mismatch for runtime-wasm"
+  },
+  "negative_attestation_binding": {
+    "result": "failed",
+    "runtime": "atomvm-wasm",
+    "checks": [],
+    "trace": [],
+    "dom": null,
+    "content_encodings": {},
+    "cache_controls": {},
+    "error": "Error: attestation binding mismatch"
+  },
+  "negative_private_evidence": {
+    "status": 404
+  },
+  "comparison": {
+    "state": "exact-match"
+  }
+}

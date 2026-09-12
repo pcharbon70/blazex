@@ -26,6 +26,8 @@ semantic render, browser click, Elixir state transition, DOM update, and disposa
 Phase 10 binds a closed delivery policy, verifies SHA-384 SRI before runtime
 startup, and proves exact no-store/immutable Cache-Control responses. This is
 adapter-consumable metadata rather than a production serving claim.
+Phase 11 emits one deterministic attestation that accounts for the complete
+declared browser entrypoint set and binds it into both active-browser replays.
 
 It is an early executable build gate, not a supported component or release.
 LiveView, LocalLiveView, Phoenix transport, production cache/CDN qualification,
@@ -35,7 +37,7 @@ From this directory, build and run with:
 
 ```bash
 # Expected to accept and promote /tmp/bh06-build:
-mix bh06.package --out-dir /tmp/bh06-build --payload-report /tmp/bh06-payload.json
+mix bh06.package --out-dir /tmp/bh06-build --payload-report /tmp/bh06-payload.json --attestation-report /tmp/bh06-attestation.json
 
-node run-browser.mjs /tmp/bh06-build /tmp/bh06-browser.json /tmp/bh06-payload.json
+node run-browser.mjs /tmp/bh06-build /tmp/bh06-browser.json /tmp/bh06-payload.json /tmp/bh06-attestation.json
 ```
