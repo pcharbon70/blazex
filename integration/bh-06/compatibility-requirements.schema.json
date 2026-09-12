@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://blazex.dev/schemas/bh-06/compatibility-requirements-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "requirement_id", "runtime", "protocols", "features"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "requirement_id": {"type": "string", "pattern": "^[a-z][a-z0-9._/-]{0,127}$"},
+    "runtime": {"$ref": "compatibility-profile.schema.json#/$defs/runtime"},
+    "protocols": {"type": "array", "items": {"$ref": "compatibility-profile.schema.json#/$defs/protocol"}},
+    "features": {"type": "array", "items": {"$ref": "compatibility-profile.schema.json#/$defs/identifier"}}
+  }
+}
