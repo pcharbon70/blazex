@@ -15,16 +15,23 @@ Every audited input must then resolve to one shipped component, exact license
 records, and verified notice content before the AVM can be created.
 Every BEAM also has exactly one base/feature owner, and the startup bridge proves
 the counter is absent before its one permitted dynamic load.
+Phase 8 marks reports as private build evidence, Brotli-compresses every public
+artifact three times, applies the frozen decoded/compressed budgets, and refuses
+normal promotion because the current runtime payload exceeds its threshold.
 Chrome and Firefox then execute mount,
 semantic render, browser click, Elixir state transition, DOM update, and disposal.
 
 It is an early executable build gate, not a supported component or release.
-LiveView, LocalLiveView, Phoenix transport, server/native safety classification,
+LiveView, LocalLiveView, Phoenix transport, production cache/CDN qualification,
 and production deployment remain outside this slice.
 
 From this directory, build and run with:
 
 ```bash
-mix bh06.package --out-dir /tmp/bh06-build
-node run-browser.mjs /tmp/bh06-build /tmp/bh06-browser.json
+# Expected to reject without promoting /tmp/bh06-build:
+mix bh06.package --out-dir /tmp/bh06-build --payload-report /tmp/bh06-payload.json
+
+# Explicitly retain the rejected candidate for evidence replay only:
+mix bh06.package --out-dir /tmp/bh06-evidence --payload-report /tmp/bh06-payload.json --retain-rejected
+node run-browser.mjs /tmp/bh06-evidence /tmp/bh06-browser.json /tmp/bh06-payload.json
 ```

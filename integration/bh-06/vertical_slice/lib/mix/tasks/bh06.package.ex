@@ -12,9 +12,20 @@ defmodule Mix.Tasks.Bh06.Package do
     fixture_build = Path.expand("../../../../../fixtures/browser_host/_build/dev/lib", __DIR__)
     Code.prepend_path(Path.join(fixture_build, "popcorn/ebin"))
     Code.prepend_path(Path.join(fixture_build, "jason/ebin"))
-    {options, []} = OptionParser.parse!(args, strict: [out_dir: :string])
+
+    {options, []} =
+      OptionParser.parse!(args,
+        strict: [out_dir: :string, payload_report: :string, retain_rejected: :boolean]
+      )
+
     output = Keyword.fetch!(options, :out_dir) |> Path.expand()
+
+    payload_output =
+      Keyword.get(options, :payload_report, output <> ".payload.json") |> Path.expand()
+
+    retain_rejected = Keyword.get(options, :retain_rejected, false)
     temporary = Path.join(System.tmp_dir!(), "bh06-package-#{System.unique_integer([:positive])}")
+    candidate = Path.join(temporary, "candidate")
     root = Path.expand("../../../../../..", __DIR__)
     File.mkdir_p!(temporary)
 
@@ -26,6 +37,7 @@ defmodule Mix.Tasks.Bh06.Package do
       secret_policy = secret_policy!(root)
       license_policy = license_policy!(root)
       bundle_policy = bundle_policy!(root)
+      payload_policy = payload_policy!(root)
       boot = boot!(temporary)
       inputs = bundle_inputs(boot, fixture_build, reachability)
       secret_inputs = secret_inputs!(root, inputs)
@@ -83,7 +95,7 @@ defmodule Mix.Tasks.Bh06.Package do
         })
 
       manifest =
-        BlazeX.Build.Pipeline.build!(spec, output,
+        BlazeX.Build.Pipeline.build!(spec, candidate,
           reachability: reachability,
           client_safety: safety,
           compatibility: compatibility,
@@ -93,7 +105,35 @@ defmodule Mix.Tasks.Bh06.Package do
           feature_bundles: archives.features
         )
 
-      Mix.shell().info("BH-06 Phase 7 package: PASS (#{length(manifest["artifacts"])} assets)")
+      payload =
+        BlazeX.Build.PayloadBudget.measure!(
+          manifest,
+          candidate,
+          payload_policy,
+          &BlazeX.Build.PayloadBudget.node_brotli_samples!/2
+        )
+        |> Map.merge(%{"phase" => 8, "status" => "complete"})
+
+      File.mkdir_p!(Path.dirname(payload_output))
+      File.write!(payload_output, BlazeX.Build.JSON.encode!(payload) <> "\n", [:exclusive])
+
+      if payload["decision"] == "reject" and not retain_rejected do
+        Mix.raise("BH-06 Phase 8 payload gate rejected candidate; no output was promoted")
+      end
+
+      case File.ls(output) do
+        {:error, :enoent} -> :ok
+        {:ok, []} -> :ok
+        _ -> Mix.raise("output must be absent or empty before promotion")
+      end
+
+      File.cp_r!(candidate, output)
+
+      Mix.shell().info(
+        "BH-06 Phase 8 package: #{String.upcase(payload["decision"])} " <>
+          "(#{length(manifest["artifacts"])} manifest assets; " <>
+          "#{payload["summary"]["public_brotli_bytes"]} Brotli bytes)"
+      )
     after
       File.rm_rf!(temporary)
     end
@@ -167,6 +207,14 @@ defmodule Mix.Tasks.Bh06.Package do
     |> File.read!()
     |> Jason.decode!()
     |> BlazeX.Build.BundlePolicy.new!()
+  end
+
+  defp payload_policy!(root) do
+    root
+    |> Path.join("integration/bh-06/payload-policy-v0.1.0.json")
+    |> File.read!()
+    |> Jason.decode!()
+    |> BlazeX.Build.PayloadPolicy.new!()
   end
 
   defp bundle_declarations!(inputs) do

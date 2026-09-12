@@ -36,11 +36,11 @@ Back to the [milestone](README.md).
     - [x] Enforce decoded/compressed budgets and exact zero public source maps
       with stable, machine-readable failures.
 
-  - [ ] 8.3 Section - Apply the gate to the browser-Wasm candidate.
-    - [ ] Mark diagnostic reports private and prevent the evidence server from serving them.
-    - [ ] Generate a bound payload report and precompressed public artifacts,
+  - [x] 8.3 Section - Apply the gate to the browser-Wasm candidate.
+    - [x] Mark diagnostic reports private and prevent the evidence server from serving them.
+    - [x] Generate a bound payload report and precompressed public artifacts,
       negotiate Brotli in the active browser server, and retain decoded integrity.
-    - [ ] Prove Chrome/Firefox parity, negotiation, tamper rejection, and truthful
+    - [x] Prove Chrome/Firefox parity, negotiation, tamper rejection, and truthful
       rejection of any exceeded budget before candidate promotion.
 
   - [ ] 8.4 Section - Reproduce, review, and publish completion.

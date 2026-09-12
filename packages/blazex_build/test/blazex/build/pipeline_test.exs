@@ -55,6 +55,8 @@ defmodule BlazeX.Build.PipelineTest do
     manifest = Pipeline.build!(spec, output, reachability: report)
     asset = Enum.find(manifest["artifacts"], &(&1["role"] == "reachability-report"))
     assert String.contains?(asset["path"], asset["sha256"])
+    assert String.starts_with?(asset["path"], "evidence/")
+    assert asset["exposure"] == "private-build-evidence"
 
     assert File.read!(Path.join(output, asset["path"])) ==
              BlazeX.Build.JSON.encode!(report) <> "\n"
@@ -161,6 +163,10 @@ defmodule BlazeX.Build.PipelineTest do
              Enum.find(manifest["artifacts"], &(&1["role"] == "feature-bundle"))
 
     assert String.starts_with?(path, "assets/feature-counter-")
+
+    assert Enum.find(manifest["artifacts"], &(&1["role"] == "feature-bundle"))["exposure"] ==
+             "public"
+
     assert Enum.any?(manifest["artifacts"], &(&1["role"] == "bundle-plan-report"))
 
     assert_raise ArgumentError, ~r/duplicate feature/, fn ->
