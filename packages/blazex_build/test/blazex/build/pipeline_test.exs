@@ -1,6 +1,6 @@
 defmodule BlazeX.Build.PipelineTest do
   use ExUnit.Case, async: true
-  alias BlazeX.Build.{EntryPoint, Pipeline}
+  alias BlazeX.Build.{DeliveryIntegrityPolicy, EntryPoint, Pipeline}
 
   setup do
     root = Path.join(System.tmp_dir!(), "blazex-build-#{System.unique_integer([:positive])}")
@@ -205,6 +205,40 @@ defmodule BlazeX.Build.PipelineTest do
 
     assert_raise ArgumentError, ~r/HOST_ASSET/, fn ->
       Pipeline.build!(%{spec | document: path}, output)
+    end
+  end
+
+  test "publishes and independently verifies delivery metadata", %{root: root, spec: spec} do
+    roles =
+      for role <- ~w(document runtime-module runtime-wasm application-bundle browser-host),
+          into: %{} do
+        cache = if role == "document", do: "no-store", else: "public, max-age=31536000, immutable"
+        {role, %{"cache_control" => cache, "cardinality" => "exactly-one"}}
+      end
+
+    policy =
+      DeliveryIntegrityPolicy.new!(%{
+        "schema_version" => "1.0.0",
+        "policy_id" => "test.delivery/1",
+        "integrity_algorithm" => "sha384",
+        "roles" => roles,
+        "limits" => %{
+          "max_artifacts" => 8,
+          "max_total_bytes" => 1024,
+          "max_role_length" => 32
+        }
+      })
+
+    output = Path.join(root, "delivery")
+    manifest = Pipeline.build!(spec, output, delivery_integrity: policy)
+    assert :ok = Pipeline.verify!(output)
+    assert Enum.all?(manifest["artifacts"], &String.starts_with?(&1["integrity"], "sha384-"))
+
+    asset = Enum.find(manifest["artifacts"], &(&1["role"] == "runtime-wasm"))
+    File.write!(Path.join(output, asset["path"]), "changed")
+
+    assert_raise ArgumentError, ~r/integrity mismatch|SRI mismatch/, fn ->
+      Pipeline.verify!(output)
     end
   end
 

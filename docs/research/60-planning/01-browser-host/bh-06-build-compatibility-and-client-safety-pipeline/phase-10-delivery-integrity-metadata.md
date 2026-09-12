@@ -28,11 +28,11 @@ Back to the [milestone](README.md).
       deterministic ordering, and fail-closed diagnostics without creating atoms.
     - [x] Activate schemas, candidate policy, planning, baseline, and evidence indexes.
 
-  - [ ] 10.2 Section - Implement and test integrity metadata generation.
-    - [ ] Validate the closed policy and decorate every artifact from its bytes.
-    - [ ] Bind the canonical policy digest and reject unknown/missing roles,
+  - [x] 10.2 Section - Implement and test integrity metadata generation.
+    - [x] Validate the closed policy and decorate every artifact from its bytes.
+    - [x] Bind the canonical policy digest and reject unknown/missing roles,
       duplicate paths, unsupported algorithms, input drift, and metadata drift.
-    - [ ] Cover deterministic output and focused negative mutations in package tests.
+    - [x] Cover deterministic output and focused negative mutations in package tests.
 
   - [ ] 10.3 Section - Integrate and replay the browser-Wasm candidate.
     - [ ] Apply delivery metadata before manifest publication and payload accounting.
