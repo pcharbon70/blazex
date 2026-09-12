@@ -64,3 +64,19 @@ explicit, deterministic entrypoint-rooted BEAM inventory to that candidate build
 - [`phase-07-secret-audit-v0.1.0.json`](phase-07-secret-audit-v0.1.0.json)
   and [`phase-07-license-inventory-v0.1.0.json`](phase-07-license-inventory-v0.1.0.json)
   retain the exact predecessor input identities for Phase 7.
+- [`payload-policy-v0.1.0.json`](payload-policy-v0.1.0.json) freezes Phase 8
+  public/private ownership, Brotli settings, exact thresholds, source-map rule,
+  and scaling limits without presuming that the current candidate passes.
+- [`payload-report.schema.json`](payload-report.schema.json) freezes the complete
+  measured accept/reject result before Phase 8 produces evidence.
+- [`phase-08-payload-report-v0.1.0.json`](phase-08-payload-report-v0.1.0.json)
+  records seven public artifacts, zero public source maps, four passing budgets,
+  and the truthful runtime-payload rejection.
+- [`phase-08-build-manifest-v0.1.0.json`](phase-08-build-manifest-v0.1.0.json)
+  classifies six public manifest artifacts and six private evidence reports.
+- [`phase-08-browser-replay-v0.1.0.json`](phase-08-browser-replay-v0.1.0.json)
+  proves Brotli negotiation, decoded-content integrity, private-report denial,
+  and exact Chrome/Firefox behavior for the retained rejected candidate.
+- The `phase-08-{reachability,client-safety,compatibility,secret-audit,
+  license-inventory,bundle-plan}-v0.1.0.json` files retain every private report
+  bound by that manifest for independent validation.

@@ -1,4 +1,4 @@
-const result = { result: "failed", runtime: "atomvm-wasm", checks: [], trace: [], dom: null };
+const result = { result: "failed", runtime: "atomvm-wasm", checks: [], trace: [], dom: null, content_encodings: {} };
 window.__BH06_RESULT = null;
 
 function artifact(manifest, role) {
@@ -16,6 +16,7 @@ function featureArtifact(manifest, id) {
 async function verifiedBytes(item) {
   const response = await fetch(`/${item.path}`, { cache: "no-store" });
   if (!response.ok) throw new Error(`missing ${item.role} artifact`);
+  result.content_encodings[item.role] = response.headers.get("content-encoding") ?? "identity";
   const bytes = new Uint8Array(await response.arrayBuffer());
   const digest = [...new Uint8Array(await crypto.subtle.digest("SHA-256", bytes))]
     .map((value) => value.toString(16).padStart(2, "0")).join("");
@@ -77,6 +78,7 @@ async function main() {
   try {
     const manifestResponse = await fetch("/build-manifest.json", { cache: "no-store" });
     if (!manifestResponse.ok) throw new Error("missing build manifest");
+    result.content_encodings["build-manifest"] = manifestResponse.headers.get("content-encoding") ?? "identity";
     const manifest = await manifestResponse.json();
     if (manifest.schema_version !== "1.0.0" || manifest.entrypoint.module !== "Elixir.BlazeX.BH06.VerticalSlice.Counter") throw new Error("invalid entrypoint manifest");
     result.manifest_id = manifest.manifest_id;
@@ -84,6 +86,9 @@ async function main() {
     const featureBytes = await verifiedBytes(featureArtifact(manifest, "counter"));
     result.checks.push("feature-integrity");
     const runtime = await startRuntime(artifact(manifest, "runtime-module"), artifact(manifest, "runtime-wasm"), artifact(manifest, "application-bundle"));
+    const compressedRoles = ["build-manifest", "feature-bundle", "runtime-module", "runtime-wasm", "application-bundle"];
+    if (!compressedRoles.every((role) => result.content_encodings[role] === "br")) throw new Error("Brotli negotiation failed");
+    result.checks.push("brotli-negotiation");
     const before = runtime.deserialize(await runtime.call("main", { operation: "feature_status" }));
     if (before.loaded !== false) throw new Error("feature present before dynamic load");
     result.checks.push("feature-absent-before-load");

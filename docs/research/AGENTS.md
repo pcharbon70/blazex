@@ -301,6 +301,11 @@ decomposition, dynamic AVM loading, package enforcement, or Phase 7 evidence
 changes, also run `python3 70-tools/validate_bh06_feature_bundles.py` and
 `python3 -m unittest discover -s 70-tools -p 'test_validate_bh06_feature_bundles.py'`.
 
+When BH-06 Phase 8 authorization, payload policy, artifact exposure, Brotli
+measurement, source-map exclusion, package promotion, evidence serving, or
+Phase 8 evidence changes, also run `python3 70-tools/validate_bh06_payload_budgets.py`
+and `python3 -m unittest discover -s 70-tools -p 'test_validate_bh06_payload_budgets.py'`.
+
 Do not commit, push, publish, or open a pull request unless the user asks.
 
 ## Research tooling

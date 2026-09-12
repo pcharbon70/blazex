@@ -1,0 +1,9 @@
+{
+  "schema_version":"1.0.0","milestone":"BH-06","phase":8,"decision":"revision-required","section_8_revision":"e33eb283b5cb102168cb97b88c45bd1ae6836a01",
+  "policy_evidence_sha256":"ba6ebb35eb3bd8ea0107eabd816659748c4bf3e7c4042a8f6c966d4d8b1e40a6","payload_evidence_sha256":"78daf2dcd3b1cae3c2a8385fa469dd8fdc9893f3c150c2b322179385d72a72d1","manifest_sha256":"11c393b9ebc03bed2e118c680d712e9de6c69f1fadc0799e377a853c2ebaca58","browser_evidence_sha256":"78311019097b285cf03d8b613d6663b03e8f2a4cad51416d5377f80ea3ead53f","canonical_policy_sha256":"b55df04e35907ca53316fe249512609cc90aed16923dac3813f4f45ed8e3e253",
+  "summary":{"manifest_artifacts":12,"public_artifacts":7,"private_artifacts":6,"public_decoded_bytes":8504727,"public_brotli_bytes":2725253,"public_source_maps":0,"passed_budgets":4,"failed_budgets":1},
+  "failed_gate":{"id":"runtime-brotli","observed_bytes":2689798,"threshold_bytes":1638400,"over_by_bytes":1051398,"required_action":"reduce the base/runtime closure without weakening the budget"},
+  "repeat":{"build_trees":"byte-identical","payload_reports":"byte-identical","browser_reports":"byte-identical"},
+  "active_browsers":["chrome","firefox"],"support_state":"unsupported-development-evidence","next_phase":{"state":"requires-separate-planning-and-authorization"},
+  "deferred":["reachability-optimization","route-orchestration","predictive-prefetch","production-cache-cdn","production-release","liveview","local-liveview","bh-07","bh-19"]
+}

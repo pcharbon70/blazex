@@ -14,6 +14,7 @@ defmodule BlazeX.Build.Pipeline do
     output = Path.expand(output)
     ensure_empty!(output)
     File.mkdir_p!(Path.join(output, "assets"))
+    File.mkdir_p!(Path.join(output, "evidence"))
     immutable = Enum.map(@assets, &copy_asset!(spec, output, &1))
     features = feature_artifacts!(options, output)
     host = Enum.find(immutable, &(&1["role"] == "browser-host"))
@@ -138,7 +139,7 @@ defmodule BlazeX.Build.Pipeline do
       report when is_map(report) ->
         body = JSON.encode!(report) <> "\n"
         hash = digest_bytes(body)
-        relative = "assets/#{role}-#{hash}.json"
+        relative = "evidence/#{role}-#{hash}.json"
         File.write!(Path.join(output, relative), body, [:exclusive])
 
         [
@@ -148,7 +149,8 @@ defmodule BlazeX.Build.Pipeline do
             "application/json",
             hash,
             byte_size(body),
-            "immutable"
+            "private",
+            "private-build-evidence"
           )
         ]
 
@@ -184,14 +186,15 @@ defmodule BlazeX.Build.Pipeline do
     end
   end
 
-  defp record(path, role, media_type, hash, bytes, cache),
+  defp record(path, role, media_type, hash, bytes, cache, exposure \\ "public"),
     do: %{
       "path" => path,
       "role" => role,
       "media_type" => media_type,
       "sha256" => hash,
       "bytes" => bytes,
-      "cache" => cache
+      "cache" => cache,
+      "exposure" => exposure
     }
 
   defp ensure_empty!(output) do
