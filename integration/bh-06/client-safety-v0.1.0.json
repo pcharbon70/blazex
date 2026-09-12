@@ -1,10 +1,28 @@
 {
-  "schema_version": "1.0.0",
+  "external_modules": [
+    {"classification": "runtime-safe", "module": "erlang", "reason": "AtomVM runtime primitives used by the bounded component"}
+  ],
+  "modules": [
+    {
+      "application": "blazex_bh06_vertical_slice",
+      "classification": "client-safe",
+      "module": "Elixir.BlazeX.BH06.VerticalSlice.Counter",
+      "reason": "bounded public component fixture",
+      "rule": {"id": "blazex_bh06_vertical_slice", "kind": "application"}
+    }
+  ],
   "phase": 3,
-  "status": "active",
   "policy_id": "blazex.bh06.client-safety/1",
-  "modules": [],
-  "external_modules": [],
-  "violations": [],
-  "summary": {}
+  "policy_sha256": "84c41a120c7aff18a0062aee84dbc9266f3a3bc87ea89efea8be50f29187f428",
+  "schema_version": "1.0.0",
+  "status": "complete",
+  "summary": {
+    "client_safe_modules": 1,
+    "external_modules": 1,
+    "forbidden_primitives_checked": 6,
+    "reachable_modules": 1,
+    "runtime_safe_externals": 1,
+    "violations": 0
+  },
+  "violations": []
 }

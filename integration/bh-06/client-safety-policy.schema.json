@@ -6,9 +6,43 @@
   "properties": {
     "schema_version": {"const": "1.0.0"},
     "policy_id": {"type": "string", "pattern": "^[a-z][a-z0-9._/-]{0,127}$"},
-    "applications": {"type": "array"},
-    "module_overrides": {"type": "array"},
-    "external_modules": {"type": "array"},
-    "forbidden_imports": {"type": "array"}
+    "applications": {"type": "array", "items": {"$ref": "#/$defs/reachable_rule"}, "uniqueItems": true},
+    "module_overrides": {"type": "array", "items": {"$ref": "#/$defs/reachable_rule"}, "uniqueItems": true},
+    "external_modules": {"type": "array", "items": {"$ref": "#/$defs/external_rule"}, "uniqueItems": true},
+    "forbidden_imports": {"type": "array", "items": {"$ref": "#/$defs/forbidden_import"}, "uniqueItems": true}
+  },
+  "$defs": {
+    "reachable_rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "classification", "reason"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1, "maxLength": 255},
+        "classification": {"enum": ["client-safe", "server-only", "native"]},
+        "reason": {"type": "string", "minLength": 1, "maxLength": 256}
+      }
+    },
+    "external_rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "classification", "reason"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1, "maxLength": 255},
+        "classification": {"enum": ["runtime-safe", "server-only", "native"]},
+        "reason": {"type": "string", "minLength": 1, "maxLength": 256}
+      }
+    },
+    "forbidden_import": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["module", "function", "arities", "classification", "reason"],
+      "properties": {
+        "module": {"type": "string", "minLength": 1, "maxLength": 255},
+        "function": {"type": "string", "minLength": 1, "maxLength": 255},
+        "arities": {"type": "array", "minItems": 1, "items": {"type": "integer", "minimum": 0, "maximum": 255}, "uniqueItems": true},
+        "classification": {"enum": ["server-only", "native"]},
+        "reason": {"type": "string", "minLength": 1, "maxLength": 256}
+      }
+    }
   }
 }

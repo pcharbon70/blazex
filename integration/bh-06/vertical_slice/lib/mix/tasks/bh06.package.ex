@@ -1,6 +1,6 @@
 defmodule Mix.Tasks.Bh06.Package do
   use Mix.Task
-  @compile {:no_warn_undefined, :packbeam_api}
+  @compile {:no_warn_undefined, [:packbeam_api, Jason]}
   @requirements ["compile"]
   @start_module BlazeX.BH06.VerticalSlice.Boot
   @component_modules [
@@ -15,12 +15,19 @@ defmodule Mix.Tasks.Bh06.Package do
     {options, []} = OptionParser.parse!(args, strict: [out_dir: :string])
     output = Keyword.fetch!(options, :out_dir) |> Path.expand()
     temporary = Path.join(System.tmp_dir!(), "bh06-package-#{System.unique_integer([:positive])}")
+    root = Path.expand("../../../../../..", __DIR__)
     File.mkdir_p!(temporary)
 
     try do
-      report = reachability_report!()
-      bundle = package_bundle!(fixture_build, temporary, report)
-      root = Path.expand("../../../../../..", __DIR__)
+      {inventory, reachability} = reachability_report!()
+      policy = client_safety_policy!(root)
+
+      {safety, bundle} =
+        BlazeX.Build.ClientClosure.authorize!(reachability, inventory, policy, fn _ ->
+          package_bundle!(fixture_build, temporary, reachability)
+        end)
+
+      safety = Map.merge(safety, %{"phase" => 3, "status" => "complete"})
 
       spec =
         BlazeX.Build.EntryPoint.new!(%{
@@ -46,17 +53,23 @@ defmodule Mix.Tasks.Bh06.Package do
           }
         })
 
-      manifest = BlazeX.Build.Pipeline.build!(spec, output, reachability: report)
-      Mix.shell().info("BH-06 Phase 2 package: PASS (#{length(manifest["artifacts"])} assets)")
+      manifest =
+        BlazeX.Build.Pipeline.build!(spec, output,
+          reachability: reachability,
+          client_safety: safety
+        )
+
+      Mix.shell().info("BH-06 Phase 3 package: PASS (#{length(manifest["artifacts"])} assets)")
     after
       File.rm_rf!(temporary)
     end
   end
 
   defp reachability_report! do
-    beams =
+    owned_beams =
       Enum.map(@component_modules, fn module ->
-        Application.app_dir(:blazex_bh06_vertical_slice, "ebin/#{module}.beam")
+        {Application.app_dir(:blazex_bh06_vertical_slice, "ebin/#{module}.beam"),
+         "blazex_bh06_vertical_slice"}
       end)
 
     entrypoint =
@@ -65,8 +78,21 @@ defmodule Mix.Tasks.Bh06.Package do
         module: "BlazeX.BH06.VerticalSlice.Counter"
       })
 
-    BlazeX.Build.Reachability.analyze!([entrypoint], BlazeX.Build.BeamInventory.scan!(beams))
-    |> Map.merge(%{"phase" => 2, "status" => "complete"})
+    inventory = BlazeX.Build.BeamInventory.scan_owned!(owned_beams)
+
+    report =
+      BlazeX.Build.Reachability.analyze!([entrypoint], inventory)
+      |> Map.merge(%{"phase" => 2, "status" => "complete"})
+
+    {inventory, report}
+  end
+
+  defp client_safety_policy!(root) do
+    root
+    |> Path.join("integration/bh-06/client-safety-policy-v0.1.0.json")
+    |> File.read!()
+    |> Jason.decode!()
+    |> BlazeX.Build.ClientSafetyPolicy.new!()
   end
 
   defp package_bundle!(fixture_build, temporary, report) do

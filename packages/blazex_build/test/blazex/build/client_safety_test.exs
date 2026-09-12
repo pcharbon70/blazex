@@ -22,6 +22,9 @@ defmodule BlazeX.Build.ClientSafetyTest do
     assert one == two
     assert one["policy_sha256"] == policy.sha256
 
+    refute policy(applications: [rule("app", "client-safe", "changed reason")]).sha256 ==
+             policy.sha256
+
     assert one["modules"] == [
              %{
                "module" => "Elixir.App.Root",

@@ -34,10 +34,10 @@ Back to the [milestone](README.md).
     - [x] Reject unknown, server-only, native, contradictory, unused, and
       forbidden-primitive declarations with stable diagnostics.
 
-  - [ ] 3.3 Section - Enforce safety before candidate bundle assembly.
-    - [ ] Carry trusted application ownership into path-free BEAM inventory.
-    - [ ] Bind a content-addressed client-safety report into the candidate manifest.
-    - [ ] Prove safe success plus server, NIF, port, unknown, policy-mutation,
+  - [x] 3.3 Section - Enforce safety before candidate bundle assembly.
+    - [x] Carry trusted application ownership into path-free BEAM inventory.
+    - [x] Bind a content-addressed client-safety report into the candidate manifest.
+    - [x] Prove safe success plus server, NIF, port, unknown, policy-mutation,
       report-mutation, and pre-assembly rejection cases.
 
   - [ ] 3.4 Section - Reproduce, review, and publish completion.

@@ -70,4 +70,14 @@ defmodule BlazeX.Build.BeamInventoryTest do
     File.write!(malformed, "not a BEAM")
     assert_raise ArgumentError, ~r/malformed BEAM/, fn -> BeamInventory.scan!([malformed]) end
   end
+
+  test "binds trusted application ownership without leaking paths", %{paths: [first | _]} do
+    [record] = BeamInventory.scan_owned!([{first, "fixture_app"}])
+    assert record["application"] == "fixture_app"
+    refute inspect(record) =~ Path.dirname(first)
+
+    assert_raise ArgumentError, ~r/application ownership/, fn ->
+      BeamInventory.scan_owned!([{first, "Bad App"}])
+    end
+  end
 end
