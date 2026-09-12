@@ -11,7 +11,7 @@ aliases: ["BH-06 phase 7"]
 
 Back to the [milestone](README.md).
 
-- [ ] 7 Phase - Deterministic Feature Bundles.
+- [x] 7 Phase - Deterministic Feature Bundles.
   - Need: Phase 6 inventories one monolithic application AVM, so feature code
     cannot be acquired, verified, or loaded independently of shared startup code.
   - Outcome: a versioned bundle policy assigns every BEAM input exactly once to
@@ -44,11 +44,11 @@ Back to the [milestone](README.md).
     - [x] Prove absent-before-load, real AtomVM dynamic load, mount, interaction,
       disposal, duplicate-load rejection, tamper rejection, and browser parity.
 
-  - [ ] 7.4 Section - Reproduce, review, and publish completion.
-    - [ ] Run package, browser-Wasm, validator, mutation, deterministic-repeat,
+  - [x] 7.4 Section - Reproduce, review, and publish completion.
+    - [x] Run package, browser-Wasm, validator, mutation, deterministic-repeat,
       archive, runtime, JavaScript, demo, syntax, and patch-hygiene gates.
-    - [ ] Publish exact counts, hashes, commands, failures, limitations, and deferrals.
-    - [ ] Accept only if every BEAM has one bundle owner and the separately
+    - [x] Publish exact counts, hashes, commands, failures, limitations, and deferrals.
+    - [x] Accept only if every BEAM has one bundle owner and the separately
       verified feature executes in both active browsers through one shared VM.
 
 ## Exit gate

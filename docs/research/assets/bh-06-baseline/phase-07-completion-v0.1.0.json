@@ -1,0 +1,6 @@
+{
+  "schema_version":"1.0.0","milestone":"BH-06","phase":7,"decision":"accept","section_7_revision":"f9eef1394114cd65fb1d99e016f0bd90172a970e",
+  "policy_evidence_sha256":"f608c131c9cdedc362c89edc643e4ad1cefe805cc3d0a9d6b6e3f6fd385dad10","plan_evidence_sha256":"9ea6df54ee478259245d94d9b44efff7f7f228ae2197c73819d03cec3c9dc1f7","manifest_sha256":"be90b0beb56a5412d356a63d512aad183c06b2c85c805f476fd7c4a1aa53ecaf","browser_evidence_sha256":"123c6c63f3e8d2d5cd42db2aecbf2353d14d84589d7fc8dcc2f1491fd155aec4","canonical_policy_sha256":"fd4bfd39f5eba113ecbbde66dbfb15e8f923f1c25469d5e0ac36e261c716d799","canonical_plan_sha256":"9ea6df54ee478259245d94d9b44efff7f7f228ae2197c73819d03cec3c9dc1f7",
+  "repeat":{"build_trees":"byte-identical","browser_reports":"byte-identical","browser_report_sha256":"123c6c63f3e8d2d5cd42db2aecbf2353d14d84589d7fc8dcc2f1491fd155aec4"},
+  "summary":{"bundles":2,"features":1,"inputs":694,"input_bytes":19567924,"base_inputs":693,"feature_inputs":1,"base_archive_bytes":7346084,"feature_archive_bytes":2124},"active_browsers":["chrome","firefox"],"support_state":"unsupported-development-evidence","next_phase":{"state":"requires-separate-planning-and-authorization"},"deferred":["route-orchestration","predictive-prefetch","payload-budgets","production-release","liveview","local-liveview","bh-07","bh-19"]
+}

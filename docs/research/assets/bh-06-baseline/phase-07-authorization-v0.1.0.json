@@ -1,0 +1,8 @@
+{
+  "schema_version":"1.0.0","milestone":"BH-06","phase":7,"authorized":true,"authorized_on":"2026-09-12","base_revision":"e3f11ba68e97e4b250730786887de03cffdc84cd","branch":"codex/bh06-phase7-feature-bundles",
+  "delivery":{"section_commits":4,"pull_requests":1,"merge_required":true,"return_to_synchronized_main":true,"delete_local_and_remote_branch":true},
+  "bound_inputs":{"docs/research/60-planning/01-browser-host/bh-06-build-compatibility-and-client-safety-pipeline/phase-06-completion.md":"b766f7848fcdc01902df0fd1f0d54db7ad9cb0c420d10e324c61457082f27778","docs/research/60-planning/01-browser-host/bh-06-build-compatibility-and-client-safety-pipeline/phase-06-review-and-reconciliation.md":"44746e5392093eeb5c38972f6f52f0ea5a3b289fcbbc4545ae81403a4e34754b","docs/research/assets/bh-06-baseline/phase-06-completion-v0.1.0.json":"0289f6663380308d26eb414fcc007ba1cdd4323cced27c491eb43dd6a105faab","integration/bh-06/phase-06-build-manifest-v0.1.0.json":"75bb1e707702660950eda147bcf6870c4322a62bf7c4ecf9ac97a57b7dc8d992","integration/bh-06/phase-06-browser-replay-v0.1.0.json":"023d7560c20ad9696185cbd24a667c5b4b22a71d07dd7aa9ee040ab2a5afabdd","integration/bh-06/license-inventory-v0.1.0.json":"0a2cbd6dfb370f11fdeb31587331498763d3df668867fe65c6afdf4f3866eb4f","packages/blazex_build/lib/blazex/build/client_closure.ex":"6753181e316331d2d56d5fa4fbdca4c8e559f74fece38a2a2bd4603c1acd8062"},
+  "scope":["bundle-policy","exclusive-module-ownership","startup-base","feature-archives","content-addressing","verified-acquisition","dynamic-load","duplicate-rejection"],
+  "excluded":["route-orchestration","predictive-prefetch","payload-budgets","production-release","liveview","local-liveview","bh-07","bh-19"]
+}
+

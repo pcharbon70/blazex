@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
   "milestone": "BH-06",
-  "phase": 6,
+  "phase": 7,
   "status": "complete",
   "evidence": [
     "candidate-build-manifest-v0.1.0.json",
@@ -26,6 +26,12 @@
     "license-inventory-v0.1.0.json",
     "phase-06-secret-audit-v0.1.0.json",
     "phase-06-build-manifest-v0.1.0.json",
-    "phase-06-browser-replay-v0.1.0.json"
+    "phase-06-browser-replay-v0.1.0.json",
+    "bundle-policy-v0.1.0.json",
+    "bundle-plan-v0.1.0.json",
+    "phase-07-secret-audit-v0.1.0.json",
+    "phase-07-license-inventory-v0.1.0.json",
+    "phase-07-build-manifest-v0.1.0.json",
+    "phase-07-browser-replay-v0.1.0.json"
   ]
 }
