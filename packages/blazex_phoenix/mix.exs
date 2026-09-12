@@ -5,7 +5,7 @@ defmodule BlazeXPhoenix.MixProject do
     [
       app: :blazex_phoenix,
       version: "0.0.0-bh01",
-      elixir: "== 1.17.3",
+      elixir: ">= 1.17.3 and < 1.19.0",
       deps: deps()
     ]
   end
