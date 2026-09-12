@@ -14,6 +14,11 @@ This repository contains an early experimental semantic kernel, renderers,
 conformance suites, and the architecture/research corpus that governs them.
 The implemented projects remain unsupported and their APIs are not stable.
 
+BH-06 Phase 1 provides the first continuous browser-WebAssembly proof: a
+public Elixir component is packaged into an AVM bundle, executed by AtomVM in
+WebAssembly, interacted with in Chrome and Firefox, committed to the DOM, and
+disposed. See the [vertical-slice fixture](integration/bh-06/vertical_slice/README.md).
+
 ## Repository structure
 
 ```text
@@ -83,3 +88,8 @@ integration, and experiment ownership rules are collected in the
 The dependency-free [browser component gallery](demos/browser/README.md) is the
 durable home for interactive examples of implemented BlazeX controls. Start it
 with `npm start` from `demos/browser/`, then open <http://127.0.0.1:4100/>.
+
+The gallery still uses representative DOM projections. The separately governed
+[BH-06 browser-Wasm proof](integration/bh-06/vertical_slice/README.md) is the
+current evidence that an Elixir-authored component can traverse the real
+AtomVM/Wasm lifecycle; integrating that pipeline into the gallery is later work.

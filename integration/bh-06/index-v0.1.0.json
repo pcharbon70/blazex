@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.0.0",
+  "milestone": "BH-06",
+  "phase": 1,
+  "status": "complete",
+  "evidence": [
+    "candidate-build-manifest-v0.1.0.json",
+    "browser-slice-v0.1.0.json"
+  ]
+}

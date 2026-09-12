@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0.0",
+  "id": "blazex_build",
+  "path": "packages/blazex_build",
+  "kind": "elixir-package",
+  "activation_phase": "BH-06 Phase 1",
+  "status": "implemented-experimental-bh06-candidate",
+  "owner_role": "build-owner",
+  "module_roots": ["BlazeX.Build"],
+  "manifest": "mix.exs",
+  "test_entrypoints": ["test"],
+  "dependencies": [],
+  "must_not_own": ["runtime-behavior", "renderer-behavior", "server-authority"],
+  "forbidden_dependencies": ["phoenix", "plug", "live_view", "local_live_view", "popcorn", "atomvm", "blazex_renderer_dom", "qt", "wxwidgets"],
+  "public_api_state": "experimental-not-stable"
+}

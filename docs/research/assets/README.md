@@ -25,6 +25,9 @@ insufficient. Record source, creator, license, provenance, and use.
 
 ### Subdirectories
 
+- [BH-06 build baseline](bh-06-baseline/README.md) — Phase 1 authority and
+  source-frozen evidence for the first continuous browser-Wasm vertical slice.
+
 - [BH-05 activation baseline](bh-05-baseline/README.md) — governance-only entry,
   inherited obligations and nine planned acceptance conditions.
 

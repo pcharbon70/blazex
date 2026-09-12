@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0.0",
+  "milestone": "BH-06",
+  "phase": 1,
+  "authorized": true,
+  "authorized_on": "2026-09-11",
+  "base_revision": "aa2a4d8860f05b189a49ca3315d0d3f4a1957826",
+  "branch": "codex/bh06-phase1-browser-wasm-vertical-slice",
+  "delivery": {"section_commits": 4, "pull_requests": 1, "merge_required": true, "return_to_synchronized_main": true, "delete_local_and_remote_branch": true},
+  "bound_inputs": {
+    "docs/research/60-planning/01-browser-host/bh-05-component-programming-model-and-lifecycle/phase-18-completion.md": "b1103fd9e0e3fabf0ec288ec1f0b97c41197ff8d6bfea1a316ac1694a8ec41a0",
+    "docs/research/60-planning/01-browser-host/bh-05-component-programming-model-and-lifecycle/phase-18-review-and-reconciliation.md": "394877373408f5eb63f7deee34f3ddf48df94d69fe7d80ed95003f1821ced1df",
+    "integration/bh-05/compact-ticket-acknowledgement-attempts-v0.1.0.json": "840b5d0ec1ec45f51baf05ecf14daf51b7abb374b55ed7620032674f22e0945e",
+    "docs/research/20-notes/browser-host-implementation-milestones.md": "ad021159b9eea4e9fb726a408296140fb79f909f5157b3ccf8fed1a3da43523d",
+    "docs/research/60-planning/development-environment-and-deferred-qualification-policy.md": "124b924dcd53770e55f47d07288f132acab53bed2d16007bb96edc8835c0ea9a"
+  },
+  "required_slice": ["public-elixir-entrypoint", "atomvm-wasm-runtime", "versioned-manifest", "content-addressed-assets", "mount", "semantic-render", "browser-interaction", "state-transition", "dom-commit", "disposal", "linux-chrome", "linux-firefox"],
+  "excluded": ["general-reachability-analysis", "production-release", "support-promotion", "bh-07", "liveview", "local-liveview"]
+}

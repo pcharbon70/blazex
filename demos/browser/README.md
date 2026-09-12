@@ -32,9 +32,11 @@ npm test
 ```
 
 The demo uses representative versioned DOM batches in the browser because the
-Elixir-to-browser runtime path is not connected yet. It is an experimental
-development gallery, not product, visual-conformance, accessibility-support,
-or browser-support evidence.
+Elixir-to-browser runtime path is not connected to the gallery yet. The
+[BH-06 Phase 1 vertical slice](../../integration/bh-06/vertical_slice/README.md)
+now proves that path separately with an actual Elixir component in AtomVM/Wasm.
+This remains an experimental development gallery, not product,
+visual-conformance, accessibility-support, or browser-support evidence.
 
 ## Adding a control
 
