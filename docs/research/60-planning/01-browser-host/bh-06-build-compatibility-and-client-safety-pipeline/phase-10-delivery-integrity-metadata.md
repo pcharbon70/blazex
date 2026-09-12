@@ -34,10 +34,10 @@ Back to the [milestone](README.md).
       duplicate paths, unsupported algorithms, input drift, and metadata drift.
     - [x] Cover deterministic output and focused negative mutations in package tests.
 
-  - [ ] 10.3 Section - Integrate and replay the browser-Wasm candidate.
-    - [ ] Apply delivery metadata before manifest publication and payload accounting.
-    - [ ] Serve exact declared Cache-Control headers and verify SHA-384 before startup.
-    - [ ] Prove Chrome/Firefox parity plus tampered integrity and header negatives.
+  - [x] 10.3 Section - Integrate and replay the browser-Wasm candidate.
+    - [x] Apply delivery metadata before manifest publication and payload accounting.
+    - [x] Serve exact declared Cache-Control headers and verify SHA-384 before startup.
+    - [x] Prove Chrome/Firefox parity plus tampered integrity and header negatives.
 
   - [ ] 10.4 Section - Reproduce, review, and publish completion.
     - [ ] Run package, browser-Wasm, schema, validator, mutation, deterministic-repeat,

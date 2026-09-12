@@ -1,4 +1,4 @@
-const result = { result: "failed", runtime: "atomvm-wasm", checks: [], trace: [], dom: null, content_encodings: {} };
+const result = { result: "failed", runtime: "atomvm-wasm", checks: [], trace: [], dom: null, content_encodings: {}, cache_controls: {} };
 window.__BH06_RESULT = null;
 
 function artifact(manifest, role) {
@@ -17,10 +17,15 @@ async function verifiedBytes(item) {
   const response = await fetch(`/${item.path}`, { cache: "no-store" });
   if (!response.ok) throw new Error(`missing ${item.role} artifact`);
   result.content_encodings[item.role] = response.headers.get("content-encoding") ?? "identity";
+  result.cache_controls[item.role] = response.headers.get("cache-control");
+  if (result.cache_controls[item.role] !== item.cache_control) throw new Error(`cache policy mismatch for ${item.role}`);
   const bytes = new Uint8Array(await response.arrayBuffer());
   const digest = [...new Uint8Array(await crypto.subtle.digest("SHA-256", bytes))]
     .map((value) => value.toString(16).padStart(2, "0")).join("");
   if (digest !== item.sha256 || bytes.byteLength !== item.bytes) throw new Error(`integrity mismatch for ${item.role}`);
+  const sriBytes = new Uint8Array(await crypto.subtle.digest("SHA-384", bytes));
+  const sri = `sha384-${btoa(String.fromCharCode(...sriBytes))}`;
+  if (sri !== item.integrity) throw new Error(`SRI mismatch for ${item.role}`);
   return bytes;
 }
 
@@ -79,12 +84,16 @@ async function main() {
     const manifestResponse = await fetch("/build-manifest.json", { cache: "no-store" });
     if (!manifestResponse.ok) throw new Error("missing build manifest");
     result.content_encodings["build-manifest"] = manifestResponse.headers.get("content-encoding") ?? "identity";
+    result.cache_controls["build-manifest"] = manifestResponse.headers.get("cache-control");
+    if (result.cache_controls["build-manifest"] !== "no-store") throw new Error("cache policy mismatch for build-manifest");
     const manifest = await manifestResponse.json();
     if (manifest.schema_version !== "1.0.0" || manifest.entrypoint.module !== "Elixir.BlazeX.BH06.VerticalSlice.Counter") throw new Error("invalid entrypoint manifest");
+    if (manifest.delivery_integrity?.algorithm !== "sha384" || manifest.delivery_integrity?.manifest_cache_control !== "no-store") throw new Error("invalid delivery integrity metadata");
+    result.checks.push("delivery-policy-binding");
     result.manifest_id = manifest.manifest_id;
     result.entrypoint = manifest.entrypoint;
     const featureBytes = await verifiedBytes(featureArtifact(manifest, "counter"));
-    result.checks.push("feature-integrity");
+    result.checks.push("feature-integrity", "sha384-sri", "cache-control");
     const runtime = await startRuntime(artifact(manifest, "runtime-module"), artifact(manifest, "runtime-wasm"), artifact(manifest, "application-bundle"));
     const compressedRoles = ["build-manifest", "feature-bundle", "runtime-module", "runtime-wasm", "application-bundle"];
     if (!compressedRoles.every((role) => result.content_encodings[role] === "br")) throw new Error("Brotli negotiation failed");

@@ -23,6 +23,9 @@ and records opaque-to-analyzable bridge roots before normal promotion. The
 unchanged Phase 8 numeric budgets now accept the reduced candidate. Chrome and
 Firefox then execute mount,
 semantic render, browser click, Elixir state transition, DOM update, and disposal.
+Phase 10 binds a closed delivery policy, verifies SHA-384 SRI before runtime
+startup, and proves exact no-store/immutable Cache-Control responses. This is
+adapter-consumable metadata rather than a production serving claim.
 
 It is an early executable build gate, not a supported component or release.
 LiveView, LocalLiveView, Phoenix transport, production cache/CDN qualification,
