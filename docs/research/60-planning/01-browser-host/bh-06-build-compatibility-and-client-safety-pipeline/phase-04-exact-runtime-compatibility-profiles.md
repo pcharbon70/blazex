@@ -29,11 +29,11 @@ Back to the [milestone](README.md).
     - [x] Activate versioned profile, requirement, and result schemas without
       claiming a compatibility pass.
 
-  - [ ] 4.2 Section - Implement deterministic compatibility evaluation.
-    - [ ] Validate bounded profiles and requirements without creating atoms from input.
-    - [ ] Match the runtime identity/version/ABI, required protocol versions,
+  - [x] 4.2 Section - Implement deterministic compatibility evaluation.
+    - [x] Validate bounded profiles and requirements without creating atoms from input.
+    - [x] Match the runtime identity/version/ABI, required protocol versions,
       and required supported feature states exactly.
-    - [ ] Reject unknown, duplicate, malformed, unsupported, missing, and unused
+    - [x] Reject unknown, duplicate, malformed, unsupported, missing, and unused
       candidate-specific declarations with stable diagnostics.
 
   - [ ] 4.3 Section - Enforce compatibility before candidate bundle assembly.

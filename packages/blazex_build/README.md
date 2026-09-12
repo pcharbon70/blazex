@@ -33,4 +33,10 @@ BH-06 Phase 3 adds exact-match `ClientSafetyPolicy` records and
 classified; server-only, native, unknown, forbidden NIF/port primitives, and
 unused candidate-specific declarations fail with deterministic diagnostics.
 
+BH-06 Phase 4 adds runtime-owned `CompatibilityProfile` records,
+application-owned `CompatibilityRequirements`, and exact deterministic
+evaluation. Runtime identity, version, ABI, required protocols, and required
+features must match explicitly; no range inference or implicit feature support
+is permitted. Extra provider capabilities remain visible in the report.
+
 Run `mix format --check-formatted && mix test` from this directory.
