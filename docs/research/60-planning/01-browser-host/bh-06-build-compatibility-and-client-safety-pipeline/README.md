@@ -29,6 +29,7 @@ entrypoints, compatibility targets, or completion gates for this milestone.
 | Phase | Status | Delivery | Dependency |
 | --- | --- | --- | --- |
 | [1 — First Continuous Browser-Wasm Vertical Slice](phase-01-first-continuous-browser-wasm-vertical-slice.md) | complete — accept | Package one public Elixir component through a candidate entrypoint, deterministic manifest/bundle/assets, then prove mount, semantic render, interaction, state transition, DOM commit, and disposal in Chrome and Firefox. | Accepted BH-05 and explicit authorization |
+| [2 — Explicit Entrypoints and Deterministic Reachability](phase-02-explicit-entrypoints-and-deterministic-reachability.md) | active | Inventory supplied BEAMs, traverse static imports from explicit client roots, retain reason chains/external references/unused modules, and reject ambiguous dispatch. | Phase 1 and explicit authorization |
 
 Later phase decomposition remains a separate planning decision. Phase 1 does
 not authorize general reachability, production releases, support, or BH-07.
@@ -40,6 +41,8 @@ not authorize general reachability, production releases, support, or BH-07.
 - [Phase 1 — First Continuous Browser-Wasm Vertical Slice](phase-01-first-continuous-browser-wasm-vertical-slice.md)
 - [Phase 1 review and reconciliation](phase-01-review-and-reconciliation.md)
 - [Phase 1 completion evidence](phase-01-completion.md)
+- [Phase 2 — Explicit Entrypoints and Deterministic Reachability](phase-02-explicit-entrypoints-and-deterministic-reachability.md)
+- [Entrypoint and reachability contract](entrypoint-and-reachability-contract.md)
 
 ### Subdirectories
 

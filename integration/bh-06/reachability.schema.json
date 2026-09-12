@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "phase", "status", "entrypoints", "modules", "external_references", "unused_modules", "summary"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "phase": {"const": 2},
+    "status": {"enum": ["active", "complete", "blocked"]},
+    "entrypoints": {"type": "array"},
+    "modules": {"type": "array"},
+    "external_references": {"type": "array"},
+    "unused_modules": {"type": "array"},
+    "summary": {"type": "object"}
+  }
+}
+

@@ -10,3 +10,6 @@ the same packaged Elixir component completes the lifecycle in Chrome and Firefox
   records five governed outputs and their exact content identities.
 - [`browser-slice-v0.1.0.json`](browser-slice-v0.1.0.json) records matching
   Chrome/Firefox lifecycle results and the fail-closed integrity case.
+- [`reachability-v0.1.0.json`](reachability-v0.1.0.json) is the Phase 2
+  entrypoint-rooted module inventory; its schema is
+  [`reachability.schema.json`](reachability.schema.json).
