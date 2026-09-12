@@ -10,14 +10,14 @@ defmodule BlazeX.Build.Pipeline do
     {:host, "browser-host", ".js", "text/javascript"}
   ]
 
-  def build!(%EntryPoint{} = spec, output) when is_binary(output) do
+  def build!(%EntryPoint{} = spec, output, options \\ []) when is_binary(output) do
     output = Path.expand(output)
     ensure_empty!(output)
     File.mkdir_p!(Path.join(output, "assets"))
     immutable = Enum.map(@assets, &copy_asset!(spec, output, &1))
     host = Enum.find(immutable, &(&1["role"] == "browser-host"))
     document = build_document!(spec.document, output, host["path"])
-    artifacts = [document | immutable]
+    artifacts = [document | immutable] ++ reachability_artifact!(options, output)
 
     manifest = %{
       "schema_version" => "1.0.0",
@@ -81,6 +81,33 @@ defmodule BlazeX.Build.Pipeline do
     record("index.html", "document", "text/html", digest(target), byte_size(body), "no-store")
   end
 
+  defp reachability_artifact!(options, output) do
+    case Keyword.get(options, :reachability) do
+      nil ->
+        []
+
+      report when is_map(report) ->
+        body = JSON.encode!(report) <> "\n"
+        hash = digest_bytes(body)
+        relative = "assets/reachability-report-#{hash}.json"
+        File.write!(Path.join(output, relative), body, [:exclusive])
+
+        [
+          record(
+            relative,
+            "reachability-report",
+            "application/json",
+            hash,
+            byte_size(body),
+            "immutable"
+          )
+        ]
+
+      _ ->
+        raise ArgumentError, "reachability report must be a map"
+    end
+  end
+
   defp record(path, role, media_type, hash, bytes, cache),
     do: %{
       "path" => path,
@@ -107,4 +134,5 @@ defmodule BlazeX.Build.Pipeline do
   end
 
   defp digest(path), do: :crypto.hash(:sha256, File.read!(path)) |> Base.encode16(case: :lower)
+  defp digest_bytes(bytes), do: :crypto.hash(:sha256, bytes) |> Base.encode16(case: :lower)
 end

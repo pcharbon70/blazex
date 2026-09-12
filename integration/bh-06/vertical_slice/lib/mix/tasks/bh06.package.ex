@@ -3,6 +3,10 @@ defmodule Mix.Tasks.Bh06.Package do
   @compile {:no_warn_undefined, :packbeam_api}
   @requirements ["compile"]
   @start_module BlazeX.BH06.VerticalSlice.Boot
+  @component_modules [
+    BlazeX.BH06.VerticalSlice.Counter,
+    BlazeX.BH06.VerticalSlice.Unused
+  ]
 
   def run(args) do
     fixture_build = Path.expand("../../../../../fixtures/browser_host/_build/dev/lib", __DIR__)
@@ -14,7 +18,8 @@ defmodule Mix.Tasks.Bh06.Package do
     File.mkdir_p!(temporary)
 
     try do
-      bundle = package_bundle!(fixture_build, temporary)
+      report = reachability_report!()
+      bundle = package_bundle!(fixture_build, temporary, report)
       root = Path.expand("../../../../../..", __DIR__)
 
       spec =
@@ -41,16 +46,32 @@ defmodule Mix.Tasks.Bh06.Package do
           }
         })
 
-      manifest = BlazeX.Build.Pipeline.build!(spec, output)
-      Mix.shell().info("BH-06 Phase 1 package: PASS (#{length(manifest["artifacts"])} assets)")
+      manifest = BlazeX.Build.Pipeline.build!(spec, output, reachability: report)
+      Mix.shell().info("BH-06 Phase 2 package: PASS (#{length(manifest["artifacts"])} assets)")
     after
       File.rm_rf!(temporary)
     end
   end
 
-  defp package_bundle!(fixture_build, temporary) do
+  defp reachability_report! do
+    beams =
+      Enum.map(@component_modules, fn module ->
+        Application.app_dir(:blazex_bh06_vertical_slice, "ebin/#{module}.beam")
+      end)
+
+    entrypoint =
+      BlazeX.Build.ClientEntryPoint.new!(%{
+        id: "counter",
+        module: "BlazeX.BH06.VerticalSlice.Counter"
+      })
+
+    BlazeX.Build.Reachability.analyze!([entrypoint], BlazeX.Build.BeamInventory.scan!(beams))
+    |> Map.merge(%{"phase" => 2, "status" => "complete"})
+  end
+
+  defp package_bundle!(fixture_build, temporary, report) do
     boot = boot!(temporary)
-    inputs = bundle_inputs(boot, fixture_build)
+    inputs = bundle_inputs(boot, fixture_build, report)
 
     duplicates =
       inputs
@@ -100,12 +121,17 @@ defmodule Mix.Tasks.Bh06.Package do
     path
   end
 
-  defp bundle_inputs(boot, fixture_build) do
+  defp bundle_inputs(boot, fixture_build, report) do
+    unused = MapSet.new(report["unused_modules"])
+
     app_beams =
       specs([:kernel, :stdlib, Mix.Project.config()[:app]], %{})
       |> Map.keys()
       |> Enum.reject(&(&1 in [:kernel, :stdlib, :elixir, :blazex_build]))
       |> Enum.flat_map(fn app -> Application.app_dir(app, "ebin/*.beam") |> Path.wildcard() end)
+      |> Enum.reject(fn path ->
+        MapSet.member?(unused, Path.basename(path, ".beam"))
+      end)
 
     popcorn =
       Path.wildcard(Path.join(fixture_build, "popcorn/ebin/*.beam")) ++

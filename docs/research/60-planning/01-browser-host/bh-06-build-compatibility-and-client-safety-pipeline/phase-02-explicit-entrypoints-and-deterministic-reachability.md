@@ -38,11 +38,11 @@ Back to the [milestone](README.md).
     - [x] Produce deterministic inventory records independent of input order,
       absolute paths, timestamps, or compiler chunk order.
 
-  - [ ] 2.3 Section - Implement reachability traversal and build integration.
-    - [ ] Traverse known module edges from each root with shortest stable reason chains.
-    - [ ] Separate external references, reject undeclared dynamic dispatch, and
+  - [x] 2.3 Section - Implement reachability traversal and build integration.
+    - [x] Traverse known module edges from each root with shortest stable reason chains.
+    - [x] Separate external references, reject undeclared dynamic dispatch, and
       expose unused inventory without silently bundling it.
-    - [ ] Bind the reachability report into the candidate build manifest and
+    - [x] Bind the reachability report into the candidate build manifest and
       exercise multi-root, cycle, missing-root, duplicate, and mutation cases.
 
   - [ ] 2.4 Section - Reproduce, review, and publish completion.

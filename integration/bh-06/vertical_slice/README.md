@@ -1,14 +1,16 @@
-# BH-06 Phase 1 browser-Wasm vertical slice
+# BH-06 browser-Wasm vertical slice
 
 This private fixture packages `BlazeX.BH06.VerticalSlice.Counter`, authored
 through the public experimental `BlazeX.Component` facade, into an AVM bundle.
-The BH-06 build package combines it with the governed AtomVM WebAssembly runtime
-and content-addressed browser assets. Chrome and Firefox then execute mount,
+The BH-06 build package combines it with the governed AtomVM WebAssembly runtime,
+a content-addressed Phase 2 reachability report, and browser assets. The report
+roots the counter explicitly and proves the inventoried `Unused` sentinel is not
+silently bundled. Chrome and Firefox then execute mount,
 semantic render, browser click, Elixir state transition, DOM update, and disposal.
 
 It is an early executable build gate, not a supported component or release.
-LiveView, LocalLiveView, Phoenix transport, general reachability, and production
-deployment are outside Phase 1.
+LiveView, LocalLiveView, Phoenix transport, server/native safety classification,
+and production deployment remain outside this slice.
 
 From this directory, build and run with:
 
