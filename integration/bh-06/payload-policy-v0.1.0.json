@@ -3,6 +3,7 @@
   "policy_id":"blazex.bh06.payload/1",
   "compression":{"algorithm":"brotli","implementation":"node-zlib","quality":11,"repetitions":3},
   "roles":{
+    "build-manifest":{"owner":"loader-bootstrap","exposure":"public"},
     "document":{"owner":"loader-bootstrap","exposure":"public"},
     "runtime-module":{"owner":"loader-bootstrap","exposure":"public"},
     "browser-host":{"owner":"loader-bootstrap","exposure":"public"},
@@ -17,11 +18,11 @@
     "bundle-plan-report":{"owner":"build-evidence","exposure":"private-build-evidence"}
   },
   "budgets":[
-    {"id":"loader-brotli","owner":"loader-bootstrap","metric":"brotli_bytes","direction":"at-most","threshold":35840},
-    {"id":"runtime-brotli","owner":"runtime","metric":"brotli_bytes","direction":"at-most","threshold":1638400},
     {"id":"application-brotli","owner":"application","metric":"brotli_bytes","direction":"at-most","threshold":256000},
     {"id":"application-decoded","owner":"application","metric":"decoded_bytes","direction":"at-most","threshold":716800},
-    {"id":"public-source-maps","owner":"public","metric":"source_map_bytes","direction":"exactly","threshold":0}
+    {"id":"loader-brotli","owner":"loader-bootstrap","metric":"brotli_bytes","direction":"at-most","threshold":35840},
+    {"id":"public-source-maps","owner":"public","metric":"source_map_bytes","direction":"exactly","threshold":0},
+    {"id":"runtime-brotli","owner":"runtime","metric":"brotli_bytes","direction":"at-most","threshold":1638400}
   ],
   "limits":{"max_artifacts":64,"max_public_bytes":33554432,"max_role_length":64,"max_owner_length":64}
 }

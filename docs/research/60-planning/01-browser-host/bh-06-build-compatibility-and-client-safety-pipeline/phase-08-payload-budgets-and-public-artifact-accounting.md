@@ -29,11 +29,11 @@ Back to the [milestone](README.md).
       thresholds, source-map exclusion, ordering, and diagnostics.
     - [x] Activate versioned policy and report schemas without presuming a pass.
 
-  - [ ] 8.2 Section - Implement deterministic payload measurement and gates.
-    - [ ] Validate the policy without creating atoms or accepting unknown roles.
-    - [ ] Brotli-compress each public artifact three times at quality 11 and
+  - [x] 8.2 Section - Implement deterministic payload measurement and gates.
+    - [x] Validate the policy without creating atoms or accepting unknown roles.
+    - [x] Brotli-compress each public artifact three times at quality 11 and
       reject nondeterministic output, missing/extra ownership, or identity drift.
-    - [ ] Enforce decoded/compressed budgets and exact zero public source maps
+    - [x] Enforce decoded/compressed budgets and exact zero public source maps
       with stable, machine-readable failures.
 
   - [ ] 8.3 Section - Apply the gate to the browser-Wasm candidate.
