@@ -31,11 +31,11 @@ Back to the [milestone](README.md).
       external-reference, dynamic-dispatch, determinism, and bound rules.
     - [x] Activate versioned Phase 2 integration evidence without claiming a result.
 
-  - [ ] 2.2 Section - Implement explicit entrypoint and BEAM inventory contracts.
-    - [ ] Validate bounded entrypoint declarations without creating atoms from input.
-    - [ ] Read module/import/export/attribute facts from regular BEAM files,
+  - [x] 2.2 Section - Implement explicit entrypoint and BEAM inventory contracts.
+    - [x] Validate bounded entrypoint declarations without creating atoms from input.
+    - [x] Read module/import/export/attribute facts from regular BEAM files,
       reject duplicates and malformed files, and normalize stable module names.
-    - [ ] Produce deterministic inventory records independent of input order,
+    - [x] Produce deterministic inventory records independent of input order,
       absolute paths, timestamps, or compiler chunk order.
 
   - [ ] 2.3 Section - Implement reachability traversal and build integration.
