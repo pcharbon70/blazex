@@ -323,3 +323,5 @@ reporting a tooling change complete.
 - [BH-06 Phase 1 validator tests](test_validate_bh06_vertical_slice.py) — Rejects failed browsers, manifest drift, JavaScript-only substitution, and private component imports.
 - [BH-06 Phase 2 reachability validator](validate_bh06_reachability.py) — Verifies explicit roots, complete reason chains, external/unused accounting, canonical manifest binding, and exact Chrome/Firefox replay.
 - [BH-06 Phase 2 validator tests](test_validate_bh06_reachability.py) — Rejects module, reason-chain, unused-set, summary, and manifest-binding mutations.
+- [BH-06 Phase 3 client-safety validator](validate_bh06_client_safety.py) — Verifies exact server/native policy coverage, forbidden NIF/port primitives, pre-assembly enforcement, manifest binding, and browser replay.
+- [BH-06 Phase 3 validator tests](test_validate_bh06_client_safety.py) — Rejects unsafe classification, policy/report/summary/manifest mutation, and assembly-gate bypass.

@@ -11,7 +11,7 @@ aliases: ["BH-06 phase 3"]
 
 Back to the [milestone](README.md).
 
-- [ ] 3 Phase - Server and Native Client-Safety Gate.
+- [x] 3 Phase - Server and Native Client-Safety Gate.
   - Need: Phase 2 exposes the reachable closure and external references but
     deliberately does not decide whether those dependencies are browser-safe.
   - Outcome: every reachable module and external module has one explicit,
@@ -40,12 +40,12 @@ Back to the [milestone](README.md).
     - [x] Prove safe success plus server, NIF, port, unknown, policy-mutation,
       report-mutation, and pre-assembly rejection cases.
 
-  - [ ] 3.4 Section - Reproduce, review, and publish completion.
-    - [ ] Run package, browser-Wasm, validator, mutation, deterministic-repeat,
+  - [x] 3.4 Section - Reproduce, review, and publish completion.
+    - [x] Run package, browser-Wasm, validator, mutation, deterministic-repeat,
       archive, JSON, syntax, dependency, and patch-hygiene gates.
-    - [ ] Publish classifications, exact counts, hashes, commands, failures,
+    - [x] Publish classifications, exact counts, hashes, commands, failures,
       limitations, and deferred qualifications.
-    - [ ] Accept only if all reachable and external dependencies are explained
+    - [x] Accept only if all reachable and external dependencies are explained
       and unsafe candidates fail before AVM creation.
 
 ## Exit gate

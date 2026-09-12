@@ -130,7 +130,7 @@ def validate(root=REPO_ROOT):
         "candidate-build-manifest-v0.1.0.json", "browser-slice-v0.1.0.json",
         Path(MANIFEST).name, Path(BROWSER).name, Path(REPORT).name,
     }
-    if index.get("phase") != 2 or index.get("status") != "complete" or set(index.get("evidence", [])) != expected_evidence:
+    if index.get("phase", 0) < 2 or index.get("status") != "complete" or not expected_evidence.issubset(index.get("evidence", [])):
         errors.append("BH-06 Phase 2 evidence index is incomplete")
     expected_completion = {
         "decision": "accept",

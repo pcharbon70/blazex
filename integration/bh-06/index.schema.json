@@ -6,7 +6,7 @@
   "properties": {
     "schema_version": {"const": "1.0.0"},
     "milestone": {"const": "BH-06"},
-    "phase": {"enum": [1, 2]},
+    "phase": {"enum": [1, 2, 3]},
     "status": {"enum": ["active", "complete", "blocked"]},
     "evidence": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
   }

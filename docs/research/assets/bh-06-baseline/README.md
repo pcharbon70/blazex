@@ -26,6 +26,7 @@ and completion decisions for the active phase.
 - [Phase 2 authorization](phase-02-authorization-v0.1.0.json)
 - [Phase 2 completion](phase-02-completion-v0.1.0.json)
 - [Phase 3 authorization](phase-03-authorization-v0.1.0.json)
+- [Phase 3 completion](phase-03-completion-v0.1.0.json)
 
 ### Subdirectories
 

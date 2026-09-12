@@ -1,13 +1,17 @@
 {
   "schema_version": "1.0.0",
   "milestone": "BH-06",
-  "phase": 2,
+  "phase": 3,
   "status": "complete",
   "evidence": [
     "candidate-build-manifest-v0.1.0.json",
     "browser-slice-v0.1.0.json",
     "phase-02-build-manifest-v0.1.0.json",
     "phase-02-browser-replay-v0.1.0.json",
-    "reachability-v0.1.0.json"
+    "reachability-v0.1.0.json",
+    "client-safety-policy-v0.1.0.json",
+    "client-safety-v0.1.0.json",
+    "phase-03-build-manifest-v0.1.0.json",
+    "phase-03-browser-replay-v0.1.0.json"
   ]
 }

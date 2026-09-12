@@ -26,7 +26,7 @@ const server = http.createServer((request, response) => {
 });
 
 await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
-const report = { schema_version: "1.0.0", milestone: "BH-06", phase: 2, support_state: "unsupported-development-evidence", results: [], negative_integrity: null };
+const report = { schema_version: "1.0.0", milestone: "BH-06", phase: 3, support_state: "unsupported-development-evidence", results: [], negative_integrity: null };
 
 try {
   for (const [name, launcher, executablePath] of [["chrome", chromium, "/usr/bin/google-chrome"], ["firefox", firefox, "/home/ducky/.cache/ms-playwright/firefox-1538/firefox/firefox"]]) {

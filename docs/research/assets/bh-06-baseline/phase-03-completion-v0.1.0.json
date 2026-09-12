@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0.0",
+  "milestone": "BH-06",
+  "phase": 3,
+  "decision": "accept",
+  "section_3_revision": "b0989974e1250755a2c5ce8628e737745233bbf5",
+  "manifest_sha256": "4a23f01f76b7a44e16405bda5e855b319b026b5ce5ec4e635e6c33c9d3e2ff14",
+  "policy_evidence_sha256": "9570e080b377103607218050e469ce44e285fef4795683b39f7926caa1973ade",
+  "safety_evidence_sha256": "9785ca745749495b1a486f48acbe525544e68322b718423172113491281ceaa8",
+  "canonical_policy_sha256": "84c41a120c7aff18a0062aee84dbc9266f3a3bc87ea89efea8be50f29187f428",
+  "canonical_safety_sha256": "4f79b17eaa8b7bccdcd66d25962756a275b632d075ad6560213ff44ca36b36af",
+  "browser_evidence_sha256": "9b3acc29b8000162b98c235b43969a28c42ad004b283beeacf0407b0f14483e3",
+  "repeat": {"build_trees": "byte-identical", "browser_reports": "byte-identical", "browser_report_sha256": "f4932488befa84b596090121576045f098e7ed4c483eb6b1f3e63d513392ab8e"},
+  "summary": {"reachable_modules": 1, "external_modules": 1, "client_safe_modules": 1, "runtime_safe_externals": 1, "forbidden_primitives_checked": 6, "violations": 0},
+  "active_browsers": ["chrome", "firefox"],
+  "support_state": "unsupported-development-evidence",
+  "next_phase": {"state": "requires-separate-planning-and-authorization"},
+  "deferred": ["secret-scanning", "compatibility-profiles", "license-inventory", "payload-budgets", "production-release", "liveview", "local-liveview", "bh-07"]
+}

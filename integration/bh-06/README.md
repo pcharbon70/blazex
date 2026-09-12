@@ -20,3 +20,6 @@ explicit, deterministic entrypoint-rooted BEAM inventory to that candidate build
   activates the exact Phase 3 classifications and forbidden-import rules.
 - [`client-safety-v0.1.0.json`](client-safety-v0.1.0.json) records the passing
   Phase 3 classification result and its exact normalized policy identity.
+- [`phase-03-build-manifest-v0.1.0.json`](phase-03-build-manifest-v0.1.0.json)
+  and [`phase-03-browser-replay-v0.1.0.json`](phase-03-browser-replay-v0.1.0.json)
+  bind the exact safety-gated package and Chrome/Firefox replay.
