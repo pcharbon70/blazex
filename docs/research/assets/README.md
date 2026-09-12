@@ -25,6 +25,9 @@ insufficient. Record source, creator, license, provenance, and use.
 
 ### Subdirectories
 
+- [BH-07 baseline](bh-07-baseline/README.md) — Phase 1 authorization and
+  attested Phoenix static-delivery evidence.
+
 - [BH-06 build baseline](bh-06-baseline/README.md) — Phase 1 authority and
   source-frozen evidence for the first continuous browser-Wasm vertical slice.
 

@@ -116,6 +116,7 @@ serving/support are not claimed.
 - [BH-03 — Browser Execution-Host and Runtime Boot Lifecycle](bh-03-browser-execution-host-and-runtime-boot-lifecycle/README.md) — accepted with bounded conditions; BH-04's corrective handoff is now accepted for development.
 - [BH-05 — Component Programming Model and Lifecycle](bh-05-component-programming-model-and-lifecycle/README.md) — accepted for bounded development through corrective Phase 18. No support promotion is claimed.
 - [BH-06 — Build, Compatibility, and Client-Safety Pipeline](bh-06-build-compatibility-and-client-safety-pipeline/README.md) — complete for bounded development through Phase 11 entrypoint attestation; BH-07 requires separate authorization.
+- [BH-07 — Phoenix Integration and Trusted Command Boundary](bh-07-phoenix-integration-and-trusted-command-boundary/README.md) — Phase 1 active for attested static delivery; LiveView and LocalLiveView remain deferred.
 
 ### Documents
 
