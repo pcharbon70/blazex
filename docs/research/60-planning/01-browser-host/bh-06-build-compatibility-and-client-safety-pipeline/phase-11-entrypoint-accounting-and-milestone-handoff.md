@@ -36,12 +36,12 @@ Back to the [milestone](README.md).
     - [x] Verify all identities, totals, decisions, ownership, and role coverage
       with focused positive, deterministic-repeat, and mutation tests.
 
-  - [ ] 11.3 Section - Integrate, package, and replay the attested candidate.
-    - [ ] Emit the attestation only after all existing gates accept and bind it
+  - [x] 11.3 Section - Integrate, package, and replay the attested candidate.
+    - [x] Emit the attestation only after all existing gates accept and bind it
       into the active-browser replay without changing public payload accounting.
-    - [ ] Prove the attested counter entrypoint through the existing AtomVM
+    - [x] Prove the attested counter entrypoint through the existing AtomVM
       lifecycle in Chrome and Firefox with exact parity.
-    - [ ] Reject stale manifest, missing license/payload category, undeclared
+    - [x] Reject stale manifest, missing license/payload category, undeclared
       entrypoint, false decision, and browser attestation-binding mutations.
 
   - [ ] 11.4 Section - Reproduce, reconcile, and close BH-06.

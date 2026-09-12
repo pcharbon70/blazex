@@ -15,13 +15,21 @@ defmodule Mix.Tasks.Bh06.Package do
 
     {options, []} =
       OptionParser.parse!(args,
-        strict: [out_dir: :string, payload_report: :string, retain_rejected: :boolean]
+        strict: [
+          out_dir: :string,
+          payload_report: :string,
+          attestation_report: :string,
+          retain_rejected: :boolean
+        ]
       )
 
     output = Keyword.fetch!(options, :out_dir) |> Path.expand()
 
     payload_output =
       Keyword.get(options, :payload_report, output <> ".payload.json") |> Path.expand()
+
+    attestation_output =
+      Keyword.get(options, :attestation_report, output <> ".attestation.json") |> Path.expand()
 
     retain_rejected = Keyword.get(options, :retain_rejected, false)
     temporary = Path.join(System.tmp_dir!(), "bh06-package-#{System.unique_integer([:positive])}")
@@ -40,6 +48,7 @@ defmodule Mix.Tasks.Bh06.Package do
       runtime_closure_policy = runtime_closure_policy!(root)
       payload_policy = payload_policy!(root)
       delivery_integrity_policy = delivery_integrity_policy!(root)
+      accounting_policy = entrypoint_accounting_policy!(root)
       boot = boot!(temporary)
       inputs = bundle_inputs(boot, fixture_build, reachability)
       secret_inputs = secret_inputs!(root, inputs)
@@ -124,14 +133,40 @@ defmodule Mix.Tasks.Bh06.Package do
           payload_policy,
           &BlazeX.Build.PayloadBudget.node_brotli_samples!/2
         )
-        |> Map.merge(%{"phase" => 10, "status" => "complete"})
+        |> Map.merge(%{"phase" => 11, "status" => "complete"})
 
       File.mkdir_p!(Path.dirname(payload_output))
       File.write!(payload_output, BlazeX.Build.JSON.encode!(payload) <> "\n", [:exclusive])
 
       if payload["decision"] == "reject" and not retain_rejected do
-        Mix.raise("BH-06 Phase 9 payload gate rejected candidate; no output was promoted")
+        Mix.raise("BH-06 Phase 11 payload gate rejected candidate; no output was promoted")
       end
+
+      reports = %{
+        "reachability" => reachability,
+        "client_safety" => safety,
+        "compatibility" => compatibility,
+        "secret_audit" => secret_audit,
+        "license_inventory" => license_inventory,
+        "bundle_plan" => bundle_plan,
+        "runtime_closure" => runtime_closure,
+        "payload" => payload,
+        "delivery_integrity" => manifest["delivery_integrity"]
+      }
+
+      attestation =
+        BlazeX.Build.EntryPointAttestation.build!(manifest, reports, accounting_policy)
+
+      :ok =
+        BlazeX.Build.EntryPointAttestation.assert_complete_set!([attestation], accounting_policy)
+
+      File.mkdir_p!(Path.dirname(attestation_output))
+
+      File.write!(
+        attestation_output,
+        BlazeX.Build.JSON.encode!(attestation) <> "\n",
+        [:exclusive]
+      )
 
       case File.ls(output) do
         {:error, :enoent} -> :ok
@@ -142,7 +177,7 @@ defmodule Mix.Tasks.Bh06.Package do
       File.cp_r!(candidate, output)
 
       Mix.shell().info(
-        "BH-06 Phase 10 package: #{String.upcase(payload["decision"])} " <>
+        "BH-06 Phase 11 package: #{String.upcase(payload["decision"])} " <>
           "(#{length(manifest["artifacts"])} manifest assets; " <>
           "#{payload["summary"]["public_brotli_bytes"]} Brotli bytes)"
       )
@@ -243,6 +278,14 @@ defmodule Mix.Tasks.Bh06.Package do
     |> File.read!()
     |> Jason.decode!()
     |> BlazeX.Build.DeliveryIntegrityPolicy.new!()
+  end
+
+  defp entrypoint_accounting_policy!(root) do
+    root
+    |> Path.join("integration/bh-06/entrypoint-accounting-policy-v0.1.0.json")
+    |> File.read!()
+    |> Jason.decode!()
+    |> BlazeX.Build.EntryPointAccountingPolicy.new!()
   end
 
   defp bundle_declarations!(inputs) do

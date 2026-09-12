@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
   "milestone": "BH-06",
-  "phase": 10,
+  "phase": 11,
   "status": "complete",
   "evidence": [
     "candidate-build-manifest-v0.1.0.json",
@@ -65,6 +65,18 @@
     "phase-10-compatibility-v0.1.0.json",
     "phase-10-secret-audit-v0.1.0.json",
     "phase-10-license-inventory-v0.1.0.json",
-    "phase-10-bundle-plan-v0.1.0.json"
+    "phase-10-bundle-plan-v0.1.0.json",
+    "entrypoint-accounting-policy-v0.1.0.json",
+    "phase-11-entrypoint-attestation-v0.1.0.json",
+    "phase-11-runtime-closure-v0.1.0.json",
+    "phase-11-payload-report-v0.1.0.json",
+    "phase-11-build-manifest-v0.1.0.json",
+    "phase-11-browser-replay-v0.1.0.json",
+    "phase-11-reachability-v0.1.0.json",
+    "phase-11-client-safety-v0.1.0.json",
+    "phase-11-compatibility-v0.1.0.json",
+    "phase-11-secret-audit-v0.1.0.json",
+    "phase-11-license-inventory-v0.1.0.json",
+    "phase-11-bundle-plan-v0.1.0.json"
   ]
 }
