@@ -1,6 +1,5 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema", "type": "object", "additionalProperties": false,
-  "required": ["schema_version", "policy_id", "policy_sha256", "bundles", "inputs", "summary", "complete"],
-  "properties": {"schema_version": {"const": "1.0.0"}, "policy_id": {"type": "string"}, "policy_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}, "bundles": {"type": "array"}, "inputs": {"type": "array"}, "summary": {"type": "object"}, "complete": {"const": true}}
+  "required": ["schema_version", "policy_id", "policy_sha256", "bundles", "inputs", "summary", "complete", "phase", "status"],
+  "properties": {"schema_version": {"const": "1.0.0"}, "policy_id": {"type": "string"}, "policy_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}, "bundles": {"type": "array"}, "inputs": {"type": "array"}, "summary": {"type": "object"}, "complete": {"const": true}, "phase": {"const": 7}, "status": {"const": "complete"}}
 }
-

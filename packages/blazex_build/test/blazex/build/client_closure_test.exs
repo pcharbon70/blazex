@@ -2,6 +2,7 @@ defmodule BlazeX.Build.ClientClosureTest do
   use ExUnit.Case, async: true
 
   alias BlazeX.Build.{
+    BundlePolicy,
     ClientClosure,
     ClientSafetyError,
     ClientSafetyPolicy,
@@ -124,6 +125,45 @@ defmodule BlazeX.Build.ClientClosureTest do
     refute_received :assembled
   end
 
+  test "does not invoke assembly when feature membership is incomplete" do
+    caller = self()
+    secret_inputs = [%{"label" => "bundle/Elixir.App.Boot.beam", "bytes" => "boot"}]
+
+    license_inputs = [
+      %{"label" => "bundle/Elixir.App.Boot.beam", "bytes" => "boot", "component_id" => "app"}
+    ]
+
+    bundle_inputs = [
+      %{
+        "label" => "bundle/Elixir.App.Boot.beam",
+        "module" => "Elixir.App.Boot",
+        "bundle_id" => "base",
+        "bytes" => "boot"
+      }
+    ]
+
+    assert_raise ArgumentError, ~r/module set/, fn ->
+      ClientClosure.authorize!(
+        @reachability,
+        @inventory,
+        policy("client-safe"),
+        profile(),
+        requirements(),
+        secret_policy(),
+        secret_inputs,
+        %{},
+        license_policy(),
+        license_inputs,
+        System.tmp_dir!(),
+        bundle_policy(),
+        bundle_inputs,
+        fn _ -> send(caller, :assembled) end
+      )
+    end
+
+    refute_received :assembled
+  end
+
   defp policy(classification) do
     ClientSafetyPolicy.new!(%{
       "schema_version" => "1.0.0",
@@ -196,6 +236,28 @@ defmodule BlazeX.Build.ClientClosureTest do
           "license_record_ids" => ["PRIVATE"]
         }
       ]
+    })
+  end
+
+  defp bundle_policy do
+    BundlePolicy.new!(%{
+      "schema_version" => "1.0.0",
+      "policy_id" => "test.bundles/1",
+      "base_bundle_id" => "base",
+      "startup_modules" => ["Elixir.App.Boot"],
+      "features" => [
+        %{
+          "id" => "counter",
+          "entrypoint_ids" => ["counter"],
+          "modules" => ["Elixir.App.Counter"]
+        }
+      ],
+      "limits" => %{
+        "max_bundles" => 4,
+        "max_inputs" => 10,
+        "max_input_bytes" => 100,
+        "max_total_bytes" => 100
+      }
     })
   end
 end

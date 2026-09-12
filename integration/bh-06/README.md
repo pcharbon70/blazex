@@ -56,3 +56,11 @@ explicit, deterministic entrypoint-rooted BEAM inventory to that candidate build
   [`bundle-policy.schema.json`](bundle-policy.schema.json).
 - [`bundle-plan.schema.json`](bundle-plan.schema.json) freezes the normalized,
   path-free ownership result before Phase 7 claims a pass.
+- [`bundle-plan-v0.1.0.json`](bundle-plan-v0.1.0.json) assigns all 694 BEAM
+  inputs to the base or counter feature with exact reason and digest records.
+- [`phase-07-build-manifest-v0.1.0.json`](phase-07-build-manifest-v0.1.0.json)
+  and [`phase-07-browser-replay-v0.1.0.json`](phase-07-browser-replay-v0.1.0.json)
+  bind separately addressed base/counter AVMs and their Chrome/Firefox dynamic load.
+- [`phase-07-secret-audit-v0.1.0.json`](phase-07-secret-audit-v0.1.0.json)
+  and [`phase-07-license-inventory-v0.1.0.json`](phase-07-license-inventory-v0.1.0.json)
+  retain the exact predecessor input identities for Phase 7.

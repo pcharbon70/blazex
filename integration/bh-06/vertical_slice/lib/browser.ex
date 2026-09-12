@@ -1,29 +1,34 @@
 defmodule BlazeX.BH06.VerticalSlice.Browser do
   @moduledoc false
-  @compile {:no_warn_undefined, Popcorn.Wasm}
+  @compile {:no_warn_undefined, [:atomvm, Popcorn.Wasm]}
 
   alias BlazeX.BH06.VerticalSlice.Counter
 
   def start do
     :ok = Popcorn.Wasm.ready(:main)
-    loop(:unmounted, [])
+    loop(:unmounted, [], false)
   end
 
-  defp loop(state, trace) do
+  defp loop(state, trace, loaded) do
     receive do
       message ->
         next = self()
 
         outcome =
           Popcorn.Wasm.handle_message!(message, fn request ->
-            {reply, new_state, new_trace, action} = handle(request, state, trace)
-            send(next, {:bh06_next, new_state, new_trace, action})
+            {reply, new_state, new_trace, new_loaded, action} =
+              handle(request, state, trace, loaded)
+
+            send(next, {:bh06_next, new_state, new_trace, new_loaded, action})
             {:resolve, reply, :continue}
           end)
 
         receive do
-          {:bh06_next, new_state, new_trace, :continue} -> loop(new_state, new_trace)
-          {:bh06_next, _, _, :shutdown} -> :ok
+          {:bh06_next, new_state, new_trace, new_loaded, :continue} ->
+            loop(new_state, new_trace, new_loaded)
+
+          {:bh06_next, _, _, _, :shutdown} ->
+            :ok
         after
           1_000 -> :erlang.error({:missing_transition, outcome})
         end
@@ -32,31 +37,68 @@ defmodule BlazeX.BH06.VerticalSlice.Browser do
     end
   end
 
-  defp handle({:wasm_call, %{"operation" => "mount"}}, :unmounted, trace) do
+  defp handle({:wasm_call, %{"operation" => "feature_status"}}, state, trace, loaded) do
+    {%{"result" => "feature-status", "id" => "counter", "loaded" => loaded}, state, trace, loaded,
+     :continue}
+  end
+
+  defp handle(
+         {:wasm_call, %{"operation" => "load_feature", "id" => "counter", "bytes" => encoded}},
+         state,
+         trace,
+         false
+       )
+       when is_binary(encoded) do
+    false = :erlang.function_exported(Counter, :mount, 1)
+    {:ok, binary} = Base.decode64(encoded)
+    :ok = :atomvm.add_avm_pack_binary(binary, name: :counter)
+    true = :erlang.function_exported(Counter, :mount, 1)
+    step = %{"step" => "feature-load", "id" => "counter", "loaded" => true}
+    {%{"result" => "feature-loaded", "id" => "counter"}, state, trace ++ [step], true, :continue}
+  end
+
+  defp handle(
+         {:wasm_call, %{"operation" => "load_feature", "id" => "counter"}},
+         state,
+         trace,
+         true
+       ) do
+    {%{"result" => "rejected", "reason" => "already-loaded", "id" => "counter"}, state, trace,
+     true, :continue}
+  end
+
+  defp handle({:wasm_call, %{"operation" => "mount"}}, :unmounted, trace, true) do
     input = %{props: %{"label" => "Wasm counter"}, slots: %{}, state: :none}
     {:state, count} = Counter.mount(input)
     projection = render(count)
     step = %{"step" => "mount", "state" => count, "semantic" => 1}
-    {response("mounted", count, projection, trace ++ [step]), count, trace ++ [step], :continue}
+
+    {response("mounted", count, projection, trace ++ [step]), count, trace ++ [step], true,
+     :continue}
   end
 
-  defp handle({:wasm_call, %{"operation" => "event", "name" => "activate"}}, count, trace)
+  defp handle({:wasm_call, %{"operation" => "event", "name" => "activate"}}, count, trace, true)
        when is_integer(count) do
     {:state, next} = Counter.handle_event(%{state: {:present, count}})
     projection = render(next)
     step = %{"step" => "event", "name" => "activate", "state" => next}
-    {response("updated", next, projection, trace ++ [step]), next, trace ++ [step], :continue}
+
+    {response("updated", next, projection, trace ++ [step]), next, trace ++ [step], true,
+     :continue}
   end
 
-  defp handle({:wasm_call, %{"operation" => "dispose"}}, count, trace)
+  defp handle({:wasm_call, %{"operation" => "dispose"}}, count, trace, true)
        when is_integer(count) do
     :ok = Counter.terminate(%{state: {:present, count}})
     final = trace ++ [%{"step" => "dispose", "state" => count, "resources" => 0}]
-    {%{"result" => "disposed", "state" => count, "trace" => final}, :disposed, final, :shutdown}
+
+    {%{"result" => "disposed", "state" => count, "trace" => final}, :disposed, final, true,
+     :shutdown}
   end
 
-  defp handle(_, state, trace),
-    do: {%{"result" => "rejected", "state" => encode_state(state)}, state, trace, :continue}
+  defp handle(_, state, trace, loaded),
+    do:
+      {%{"result" => "rejected", "state" => encode_state(state)}, state, trace, loaded, :continue}
 
   defp render(count) do
     {:output, {:semantic, 1, node}} =

@@ -25,12 +25,14 @@ defmodule Mix.Tasks.Bh06.Package do
       requirements = compatibility_requirements!(root)
       secret_policy = secret_policy!(root)
       license_policy = license_policy!(root)
+      bundle_policy = bundle_policy!(root)
       boot = boot!(temporary)
       inputs = bundle_inputs(boot, fixture_build, reachability)
       secret_inputs = secret_inputs!(root, inputs)
       license_inputs = license_inputs!(secret_inputs)
+      bundle_declarations = bundle_declarations!(inputs)
 
-      {safety, compatibility, secret_audit, license_inventory, bundle} =
+      {safety, compatibility, secret_audit, license_inventory, bundle_plan, archives} =
         BlazeX.Build.ClientClosure.authorize!(
           reachability,
           inventory,
@@ -43,19 +45,24 @@ defmodule Mix.Tasks.Bh06.Package do
           license_policy,
           license_inputs,
           root,
-          fn _ -> package_bundle!(temporary, inputs) end
+          bundle_policy,
+          bundle_declarations,
+          fn authorization ->
+            package_bundles!(temporary, inputs, authorization["bundle_plan"])
+          end
         )
 
       safety = Map.merge(safety, %{"phase" => 3, "status" => "complete"})
       compatibility = Map.merge(compatibility, %{"phase" => 4, "status" => "complete"})
       secret_audit = Map.merge(secret_audit, %{"phase" => 5, "status" => "complete"})
       license_inventory = Map.merge(license_inventory, %{"phase" => 6, "status" => "complete"})
+      bundle_plan = Map.merge(bundle_plan, %{"phase" => 7, "status" => "complete"})
 
       spec =
         BlazeX.Build.EntryPoint.new!(%{
           id: "counter",
           module: "Elixir.BlazeX.BH06.VerticalSlice.Counter",
-          bundle: bundle,
+          bundle: archives.base,
           runtime_module:
             Path.join(
               root,
@@ -81,10 +88,12 @@ defmodule Mix.Tasks.Bh06.Package do
           client_safety: safety,
           compatibility: compatibility,
           secret_audit: secret_audit,
-          license_inventory: license_inventory
+          license_inventory: license_inventory,
+          bundle_plan: bundle_plan,
+          feature_bundles: archives.features
         )
 
-      Mix.shell().info("BH-06 Phase 6 package: PASS (#{length(manifest["artifacts"])} assets)")
+      Mix.shell().info("BH-06 Phase 7 package: PASS (#{length(manifest["artifacts"])} assets)")
     after
       File.rm_rf!(temporary)
     end
@@ -152,6 +161,28 @@ defmodule Mix.Tasks.Bh06.Package do
     |> BlazeX.Build.LicensePolicy.new!()
   end
 
+  defp bundle_policy!(root) do
+    root
+    |> Path.join("integration/bh-06/bundle-policy-v0.1.0.json")
+    |> File.read!()
+    |> Jason.decode!()
+    |> BlazeX.Build.BundlePolicy.new!()
+  end
+
+  defp bundle_declarations!(inputs) do
+    Enum.map(inputs, fn path ->
+      module = Path.basename(path, ".beam")
+
+      %{
+        "label" => "bundle/#{module}.beam",
+        "module" => module,
+        "bundle_id" =>
+          if(module == "Elixir.BlazeX.BH06.VerticalSlice.Counter", do: "counter", else: "base"),
+        "bytes" => File.read!(path)
+      }
+    end)
+  end
+
   defp license_inputs!(secret_inputs) do
     Enum.map(secret_inputs, fn input ->
       %{
@@ -193,18 +224,44 @@ defmodule Mix.Tasks.Bh06.Package do
   defp component_id!("bundle/" <> _), do: "erlang-otp"
   defp component_id!(label), do: Mix.raise("unaccounted license inventory input: #{label}")
 
-  defp package_bundle!(temporary, inputs) do
+  defp package_bundles!(temporary, inputs, plan) do
+    ownership = Map.new(plan["inputs"], &{&1["label"], &1["bundle_id"]})
+
+    grouped =
+      Enum.group_by(inputs, fn path ->
+        Map.fetch!(ownership, "bundle/#{Path.basename(path)}")
+      end)
+
+    base =
+      package_archive!(
+        Path.join(temporary, "base.avm"),
+        Map.fetch!(grouped, "base"),
+        @start_module
+      )
+
+    features =
+      plan["bundles"]
+      |> Enum.filter(&(&1["kind"] == "feature"))
+      |> Enum.map(fn bundle ->
+        path = Path.join(temporary, "feature-#{bundle["id"]}.avm")
+        package_archive!(path, Map.fetch!(grouped, bundle["id"]), nil)
+        %{"id" => bundle["id"], "path" => path}
+      end)
+
+    %{base: base, features: features}
+  end
+
+  defp package_archive!(target, inputs, start_module) do
     duplicates =
       inputs
       |> Enum.group_by(&Path.basename/1)
       |> Enum.filter(fn {_, rows} -> length(rows) > 1 end)
 
     if duplicates != [], do: Mix.raise("duplicate bundle module names")
-    target = Path.join(temporary, "application.avm")
 
     :ok =
       :packbeam_api.create(String.to_charlist(target), Enum.map(inputs, &String.to_charlist/1), %{
-        start_module: @start_module,
+        start_module: start_module || :undefined,
         include_lines: false
       })
 

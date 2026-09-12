@@ -20,13 +20,17 @@ const server = http.createServer((request, response) => {
     const manifest = JSON.parse(body);
     manifest.artifacts.find((item) => item.role === "application-bundle").sha256 = "0".repeat(64);
     body = Buffer.from(JSON.stringify(manifest));
+  } else if (relative === "build-manifest.json" && request.headers.referer?.includes("tamper=feature")) {
+    const manifest = JSON.parse(body);
+    manifest.artifacts.find((item) => item.role === "feature-bundle" && item.feature_id === "counter").sha256 = "0".repeat(64);
+    body = Buffer.from(JSON.stringify(manifest));
   }
   response.setHeader("Content-Type", types.get(path.extname(target)) ?? "application/octet-stream");
   response.end(body);
 });
 
 await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
-const report = { schema_version: "1.0.0", milestone: "BH-06", phase: 6, support_state: "unsupported-development-evidence", results: [], negative_integrity: null };
+const report = { schema_version: "1.0.0", milestone: "BH-06", phase: 7, support_state: "unsupported-development-evidence", results: [], negative_integrity: null, negative_feature_integrity: null };
 
 try {
   for (const [name, launcher, executablePath] of [["chrome", chromium, "/usr/bin/google-chrome"], ["firefox", firefox, "/home/ducky/.cache/ms-playwright/firefox-1538/firefox/firefox"]]) {
@@ -47,6 +51,12 @@ try {
         report.negative_integrity = await negative.evaluate(() => window.__BH06_RESULT);
         if (report.negative_integrity.result !== "failed" || !report.negative_integrity.error.includes("integrity mismatch")) process.exitCode = 1;
         await negative.close();
+        const featureNegative = await browser.newPage();
+        await featureNegative.goto(`http://127.0.0.1:${server.address().port}/?tamper=feature`);
+        await featureNegative.waitForFunction(() => window.__BH06_RESULT !== null, null, { timeout: 10000 });
+        report.negative_feature_integrity = await featureNegative.evaluate(() => window.__BH06_RESULT);
+        if (report.negative_feature_integrity.result !== "failed" || !report.negative_feature_integrity.error.includes("integrity mismatch for feature-bundle")) process.exitCode = 1;
+        await featureNegative.close();
       }
     } finally { await browser.close(); }
   }

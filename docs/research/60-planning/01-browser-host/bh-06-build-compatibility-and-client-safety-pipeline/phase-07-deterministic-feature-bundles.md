@@ -36,12 +36,12 @@ Back to the [milestone](README.md).
     - [x] Reject missing, duplicate, unknown, overlapping, malformed, or
       overflowed declarations with deterministic diagnostics.
 
-  - [ ] 7.3 Section - Package and dynamically load the first feature AVM.
-    - [ ] Run safety, compatibility, secret, license, and bundle gates before
+  - [x] 7.3 Section - Package and dynamically load the first feature AVM.
+    - [x] Run safety, compatibility, secret, license, and bundle gates before
       creating separate base and counter archives.
-    - [ ] Bind the plan and each archive by content identity in the manifest;
+    - [x] Bind the plan and each archive by content identity in the manifest;
       verify the counter archive in the browser before loading it once.
-    - [ ] Prove absent-before-load, real AtomVM dynamic load, mount, interaction,
+    - [x] Prove absent-before-load, real AtomVM dynamic load, mount, interaction,
       disposal, duplicate-load rejection, tamper rejection, and browser parity.
 
   - [ ] 7.4 Section - Reproduce, review, and publish completion.
