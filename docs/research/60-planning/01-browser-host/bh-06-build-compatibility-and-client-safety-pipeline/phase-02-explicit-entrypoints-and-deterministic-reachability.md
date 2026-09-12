@@ -11,7 +11,7 @@ aliases: ["BH-06 phase 2"]
 
 Back to the [milestone](README.md).
 
-- [ ] 2 Phase - Explicit Entrypoints and Deterministic Reachability.
+- [x] 2 Phase - Explicit Entrypoints and Deterministic Reachability.
 
   Replace Phase 1's manually assembled fixed closure with a bounded,
   deterministic explanation of which BEAM modules are reachable from each
@@ -45,12 +45,12 @@ Back to the [milestone](README.md).
     - [x] Bind the reachability report into the candidate build manifest and
       exercise multi-root, cycle, missing-root, duplicate, and mutation cases.
 
-  - [ ] 2.4 Section - Reproduce, review, and publish completion.
-    - [ ] Run package, fixture, browser-Wasm replay, archive, JSON, mutation,
+  - [x] 2.4 Section - Reproduce, review, and publish completion.
+    - [x] Run package, fixture, browser-Wasm replay, archive, JSON, mutation,
       deterministic-repeat, dependency, and patch-hygiene gates.
-    - [ ] Publish exact module/edge/external/unused counts, reason chains,
+    - [x] Publish exact module/edge/external/unused counts, reason chains,
       hashes, commands, failures, limitations, and deferred qualifications.
-    - [ ] Accept only if reports are byte-stable and every included module has
+    - [x] Accept only if reports are byte-stable and every included module has
       an entrypoint-rooted reason; leave later safety policy separately unauthorized.
 
 ## Exit gate

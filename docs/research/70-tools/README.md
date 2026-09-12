@@ -321,3 +321,5 @@ reporting a tooling change complete.
 - [Phase 12 count validator](validate_bh05_acceptance_counts.py) — Verifies raw/report hashes, sample cardinality, exact bounds, browser parity and retained failures.
 - [BH-06 Phase 1 validator](validate_bh06_vertical_slice.py) — Verifies authority, content addressing, manifest binding, actual AtomVM/Wasm lifecycle evidence, active-browser parity, and portable component isolation.
 - [BH-06 Phase 1 validator tests](test_validate_bh06_vertical_slice.py) — Rejects failed browsers, manifest drift, JavaScript-only substitution, and private component imports.
+- [BH-06 Phase 2 reachability validator](validate_bh06_reachability.py) — Verifies explicit roots, complete reason chains, external/unused accounting, canonical manifest binding, and exact Chrome/Firefox replay.
+- [BH-06 Phase 2 validator tests](test_validate_bh06_reachability.py) — Rejects module, reason-chain, unused-set, summary, and manifest-binding mutations.

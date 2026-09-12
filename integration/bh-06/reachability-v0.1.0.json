@@ -18,7 +18,7 @@
       "known_imports": [],
       "module": "Elixir.BlazeX.BH06.VerticalSlice.Counter",
       "reason_chain": ["Elixir.BlazeX.BH06.VerticalSlice.Counter"],
-      "sha256": "84a8231273ad4e1c29874444003e322148351e36319b616913291965e287df7f"
+      "sha256": "d7742b7b80e64d218e5f63cdbd236e3f53b82884302d49a20e7e84b2d81aa199"
     }
   ],
   "phase": 2,

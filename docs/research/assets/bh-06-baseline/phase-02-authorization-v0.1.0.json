@@ -18,4 +18,3 @@
   "scope": ["explicit-entrypoints", "beam-inventory", "static-import-edges", "reason-chains", "external-references", "dynamic-dispatch-gate", "manifest-binding"],
   "excluded": ["server-native-dependency-policy", "secret-scanning", "compatibility-profiles", "license-inventory", "production-release", "liveview", "local-liveview", "bh-07"]
 }
-

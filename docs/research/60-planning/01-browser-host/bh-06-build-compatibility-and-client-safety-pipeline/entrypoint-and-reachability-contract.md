@@ -36,4 +36,3 @@ configuration, compatibility profiles, licenses, and production support.
 
 LiveView and LocalLiveView remain **[DEFERRED]** and are not entrypoints,
 analyzer dependencies, or completion gates.
-

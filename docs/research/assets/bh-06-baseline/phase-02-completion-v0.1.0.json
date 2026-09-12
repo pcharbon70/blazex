@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0.0",
+  "milestone": "BH-06",
+  "phase": 2,
+  "decision": "accept",
+  "section_3_revision": "32fabd71a98b01a0443c5baba7e836778236f97a",
+  "manifest_sha256": "700dd4c1fc69182872050335d8454dd48073e79a5c3d8f6a47b3c26bf63cd515",
+  "reachability_evidence_sha256": "ff5e1a42d18c9f538d748590f7ed1e6bab3fe1233b3e23fc727ad270d7dd24d0",
+  "canonical_reachability_sha256": "6e68b90b14157d8358bb8b097bd224b3b9e7de0709e4b8cd9837ea5579f051be",
+  "browser_evidence_sha256": "73954b543acdf182b92cbde8f7a08bcba9b3f5a5a09725f636732307b5d795e6",
+  "repeat": {"build_trees": "byte-identical", "browser_reports": "byte-identical", "browser_report_sha256": "34346868bd10be6daabad9b66cd1c9495bd994b29a1fd4fcd1f057c8c238e597"},
+  "summary": {"entrypoints": 1, "inventory_modules": 2, "reachable_modules": 1, "known_edges": 0, "external_references": 4, "unused_modules": 1, "dynamic_allowances": 0},
+  "active_browsers": ["chrome", "firefox"],
+  "support_state": "unsupported-development-evidence",
+  "next_phase": {"state": "requires-separate-planning-and-authorization"},
+  "deferred": ["server-native-dependency-policy", "secret-scanning", "compatibility-profiles", "license-inventory", "production-release", "liveview", "local-liveview", "bh-07"]
+}

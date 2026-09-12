@@ -88,9 +88,9 @@ def validate(root=REPO_ROOT):
         errors.append("build package ownership or dependency boundary drifted")
     if FORBIDDEN.search((root / COUNTER).read_text(encoding="utf-8")):
         errors.append("public component imports host, runtime, renderer, or server surface")
-    if index.get("status") != "complete" or set(index.get("evidence", [])) != {
+    if index.get("status") != "complete" or not {
         "candidate-build-manifest-v0.1.0.json", "browser-slice-v0.1.0.json"
-    }:
+    }.issubset(index.get("evidence", [])):
         errors.append("BH-06 evidence index is incomplete")
     plan = (root / PLAN).read_text(encoding="utf-8")
     if "- [ ]" in plan or "support_state\": \"supported" in plan:
