@@ -24,11 +24,13 @@ defmodule Mix.Tasks.Bh06.Package do
       profile = compatibility_profile!(root)
       requirements = compatibility_requirements!(root)
       secret_policy = secret_policy!(root)
+      license_policy = license_policy!(root)
       boot = boot!(temporary)
       inputs = bundle_inputs(boot, fixture_build, reachability)
       secret_inputs = secret_inputs!(root, inputs)
+      license_inputs = license_inputs!(secret_inputs)
 
-      {safety, compatibility, secret_audit, bundle} =
+      {safety, compatibility, secret_audit, license_inventory, bundle} =
         BlazeX.Build.ClientClosure.authorize!(
           reachability,
           inventory,
@@ -38,12 +40,16 @@ defmodule Mix.Tasks.Bh06.Package do
           secret_policy,
           secret_inputs,
           %{},
+          license_policy,
+          license_inputs,
+          root,
           fn _ -> package_bundle!(temporary, inputs) end
         )
 
       safety = Map.merge(safety, %{"phase" => 3, "status" => "complete"})
       compatibility = Map.merge(compatibility, %{"phase" => 4, "status" => "complete"})
       secret_audit = Map.merge(secret_audit, %{"phase" => 5, "status" => "complete"})
+      license_inventory = Map.merge(license_inventory, %{"phase" => 6, "status" => "complete"})
 
       spec =
         BlazeX.Build.EntryPoint.new!(%{
@@ -74,10 +80,11 @@ defmodule Mix.Tasks.Bh06.Package do
           reachability: reachability,
           client_safety: safety,
           compatibility: compatibility,
-          secret_audit: secret_audit
+          secret_audit: secret_audit,
+          license_inventory: license_inventory
         )
 
-      Mix.shell().info("BH-06 Phase 5 package: PASS (#{length(manifest["artifacts"])} assets)")
+      Mix.shell().info("BH-06 Phase 6 package: PASS (#{length(manifest["artifacts"])} assets)")
     after
       File.rm_rf!(temporary)
     end
@@ -130,8 +137,61 @@ defmodule Mix.Tasks.Bh06.Package do
   end
 
   defp secret_policy!(root) do
-    root |> Path.join("integration/bh-06/secret-policy-v0.1.0.json") |> File.read!() |> Jason.decode!() |> BlazeX.Build.SecretPolicy.new!()
+    root
+    |> Path.join("integration/bh-06/secret-policy-v0.1.0.json")
+    |> File.read!()
+    |> Jason.decode!()
+    |> BlazeX.Build.SecretPolicy.new!()
   end
+
+  defp license_policy!(root) do
+    root
+    |> Path.join("integration/bh-06/license-policy-v0.1.0.json")
+    |> File.read!()
+    |> Jason.decode!()
+    |> BlazeX.Build.LicensePolicy.new!()
+  end
+
+  defp license_inputs!(secret_inputs) do
+    Enum.map(secret_inputs, fn input ->
+      %{
+        "label" => input["label"],
+        "bytes" => input["bytes"],
+        "component_id" => component_id!(input["label"])
+      }
+    end)
+  end
+
+  defp component_id!("browser/" <> _), do: "blazex"
+  defp component_id!("runtime/" <> _), do: "atomvm-runtime"
+  defp component_id!("bundle/Elixir.BlazeX." <> _), do: "blazex"
+  defp component_id!("bundle/Elixir.Mix.Tasks.Bh06." <> _), do: "blazex"
+  defp component_id!("bundle/Elixir.Jason.Encoder.Popcorn." <> _), do: "popcorn"
+  defp component_id!("bundle/Elixir.Popcorn." <> _), do: "popcorn"
+  defp component_id!("bundle/Elixir.Mix.Tasks.Popcorn." <> _), do: "popcorn"
+  defp component_id!("bundle/Elixir.Treeshake" <> _), do: "popcorn"
+  defp component_id!("bundle/treeshake_helper.beam"), do: "popcorn"
+  defp component_id!("bundle/packbeam_api.beam"), do: "popcorn"
+  defp component_id!("bundle/Elixir.Jason" <> _), do: "jason"
+  defp component_id!("bundle/Elixir.Enumerable.Jason." <> _), do: "jason"
+  defp component_id!("bundle/Elixir.AVMPort.beam"), do: "fissionvm-patches"
+
+  defp component_id!("bundle/" <> patch)
+       when patch in [
+              "atomvm.beam",
+              "atomvm_logger_manager.beam",
+              "avm_pubsub.beam",
+              "console.beam",
+              "emscripten.beam",
+              "network.beam"
+            ],
+       do: "fissionvm-patches"
+
+  defp component_id!("bundle/Elixir." <> _), do: "elixir"
+  defp component_id!("bundle/elixir" <> _), do: "elixir"
+  defp component_id!("bundle/iex.beam"), do: "elixir"
+  defp component_id!("bundle/" <> _), do: "erlang-otp"
+  defp component_id!(label), do: Mix.raise("unaccounted license inventory input: #{label}")
 
   defp package_bundle!(temporary, inputs) do
     duplicates =
@@ -152,14 +212,24 @@ defmodule Mix.Tasks.Bh06.Package do
   end
 
   defp secret_inputs!(root, inputs) do
-    bundle = Enum.map(inputs, fn path -> %{"label" => "bundle/#{Path.basename(path)}", "bytes" => File.read!(path)} end)
+    bundle =
+      Enum.map(inputs, fn path ->
+        %{"label" => "bundle/#{Path.basename(path)}", "bytes" => File.read!(path)}
+      end)
+
     fixed = [
       {"browser/host.js", "integration/bh-06/vertical_slice/assets/host.js"},
       {"browser/index.html", "integration/bh-06/vertical_slice/assets/index.html"},
-      {"runtime/AtomVM.mjs", "packages/blazex_runtime_popcorn/runtime/generated/release-web/artifacts/AtomVM.mjs"},
-      {"runtime/AtomVM.wasm", "packages/blazex_runtime_popcorn/runtime/generated/release-web/artifacts/AtomVM.wasm"}
+      {"runtime/AtomVM.mjs",
+       "packages/blazex_runtime_popcorn/runtime/generated/release-web/artifacts/AtomVM.mjs"},
+      {"runtime/AtomVM.wasm",
+       "packages/blazex_runtime_popcorn/runtime/generated/release-web/artifacts/AtomVM.wasm"}
     ]
-    bundle ++ Enum.map(fixed, fn {label, relative} -> %{"label" => label, "bytes" => File.read!(Path.join(root, relative))} end)
+
+    bundle ++
+      Enum.map(fixed, fn {label, relative} ->
+        %{"label" => label, "bytes" => File.read!(Path.join(root, relative))}
+      end)
   end
 
   defp boot!(temporary) do
