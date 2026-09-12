@@ -339,3 +339,5 @@ reporting a tooling change complete.
 - [BH-06 Phase 9 validator tests](test_validate_bh06_runtime_closure.py) — Rejects concealed removals, opaque mutation, threshold waiver, false payload/browser decisions, and reducer bypass.
 - [BH-06 Phase 10 delivery-integrity validator](validate_bh06_delivery_integrity.py) — Recomputes policy bindings, private-evidence SRI, role/cache coverage, payload acceptance, browser parity, and negative cases.
 - [BH-06 Phase 10 validator tests](test_validate_bh06_delivery_integrity.py) — Rejects policy, SRI, cache, browser, negative-proof, and integration-bypass mutations.
+- [BH-06 Phase 11 entrypoint-attestation validator](validate_bh06_entrypoint_attestation.py) — Recomputes declared entrypoint, artifact/evidence, manifest, payload, browser, completion, and BH-07 handoff bindings.
+- [BH-06 Phase 11 validator tests](test_validate_bh06_entrypoint_attestation.py) — Rejects extra roots, stale manifests, missing categories, false payloads, browser drift, and set-check bypass.

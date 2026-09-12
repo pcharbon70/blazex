@@ -11,7 +11,7 @@ aliases: ["BH-06 phase 11"]
 
 Back to the [milestone](README.md).
 
-- [ ] 11 Phase - Entrypoint Accounting and Milestone Handoff.
+- [x] 11 Phase - Entrypoint Accounting and Milestone Handoff.
   - Need: Phases 1–10 implement every named roadmap capability, but reviewers
     still have to correlate separate manifest, safety, compatibility, license,
     payload, closure, and integrity reports manually for each browser entrypoint.
@@ -44,12 +44,12 @@ Back to the [milestone](README.md).
     - [x] Reject stale manifest, missing license/payload category, undeclared
       entrypoint, false decision, and browser attestation-binding mutations.
 
-  - [ ] 11.4 Section - Reproduce, reconcile, and close BH-06.
-    - [ ] Run package, browser-Wasm, schemas, validator mutations, independent
+  - [x] 11.4 Section - Reproduce, reconcile, and close BH-06.
+    - [x] Run package, browser-Wasm, schemas, validator mutations, independent
       rebuild, scoped Mix, historical BH-06, archive, and patch-hygiene gates.
-    - [ ] Publish identities, accounting summary, limitations, inherited corpus
+    - [x] Publish identities, accounting summary, limitations, inherited corpus
       failures, review, completion decision, and explicit BH-07 handoff boundary.
-    - [ ] Accept BH-06 only if every declared browser entrypoint is accounted,
+    - [x] Accept BH-06 only if every declared browser entrypoint is accounted,
       every unchanged gate passes, and both active browsers bind the attestation.
 
 ## Exit gate

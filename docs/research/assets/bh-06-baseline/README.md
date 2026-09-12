@@ -42,6 +42,8 @@ and completion decisions for the active phase.
 - [Phase 10 authorization](phase-10-authorization-v0.1.0.json)
 - [Phase 10 completion](phase-10-completion-v0.1.0.json)
 - [Phase 11 authorization](phase-11-authorization-v0.1.0.json)
+- [Phase 11 completion](phase-11-completion-v0.1.0.json)
+- [BH-07 entry decision](bh-07-entry-decision-v0.1.0.json)
 
 ### Subdirectories
 

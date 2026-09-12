@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0.0",
+  "source_milestone": "BH-06",
+  "target_milestone": "BH-07",
+  "decision": "ready-for-separate-authorization",
+  "authorized": false,
+  "bh06_completion_sha256": "a501d08c2cefdca80881f67efd5389586cc536c74f0d3012f839235dcc444ece",
+  "boundary": "Phoenix integration and trusted command boundary",
+  "deferred": ["liveview", "local-liveview"],
+  "support_promotion": false
+}

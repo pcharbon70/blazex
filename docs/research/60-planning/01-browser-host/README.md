@@ -100,7 +100,9 @@ license/provenance, and real feature-bundle loading gates. Phase 8 closes as
 revision-required. Corrective Phase 9 reduces the audited runtime closure and
 passes every unchanged payload threshold. Phase 10 binds verified SHA-384 SRI
 and exact Cache-Control metadata for every manifest artifact; both phases are
-accepted without production-serving or support-promotion claims.
+accepted. Phase 11 closes BH-06 for bounded development with exact per-entrypoint
+accounting; BH-07 remains subject to separate authorization and production
+serving/support are not claimed.
 
 ## Index
 
@@ -113,7 +115,7 @@ accepted without production-serving or support-promotion claims.
 - [BH-02 — Host-Neutral Semantic Kernel Gate](bh-02-host-neutral-semantic-kernel-gate/README.md) — completed eight-phase contract and cross-renderer proof plan accepted for internal experimental use.
 - [BH-03 — Browser Execution-Host and Runtime Boot Lifecycle](bh-03-browser-execution-host-and-runtime-boot-lifecycle/README.md) — accepted with bounded conditions; BH-04's corrective handoff is now accepted for development.
 - [BH-05 — Component Programming Model and Lifecycle](bh-05-component-programming-model-and-lifecycle/README.md) — accepted for bounded development through corrective Phase 18. No support promotion is claimed.
-- [BH-06 — Build, Compatibility, and Client-Safety Pipeline](bh-06-build-compatibility-and-client-safety-pipeline/README.md) — accepted through Phase 10 delivery-integrity metadata; production serving and support promotion remain outside the milestone evidence.
+- [BH-06 — Build, Compatibility, and Client-Safety Pipeline](bh-06-build-compatibility-and-client-safety-pipeline/README.md) — complete for bounded development through Phase 11 entrypoint attestation; BH-07 requires separate authorization.
 
 ### Documents
 
