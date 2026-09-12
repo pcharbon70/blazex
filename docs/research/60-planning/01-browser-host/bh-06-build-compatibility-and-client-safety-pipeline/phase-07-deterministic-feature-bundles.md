@@ -28,12 +28,12 @@ Back to the [milestone](README.md).
       limits, ordering, diagnostics, acquisition, integrity, and load rules.
     - [x] Activate versioned policy and plan schemas without claiming a pass.
 
-  - [ ] 7.2 Section - Implement deterministic bundle planning.
-    - [ ] Validate bounded policies and path-free module declarations without
+  - [x] 7.2 Section - Implement deterministic bundle planning.
+    - [x] Validate bounded policies and path-free module declarations without
       creating atoms or retaining filesystem paths.
-    - [ ] Assign every candidate BEAM exactly once, require exact feature module
+    - [x] Assign every candidate BEAM exactly once, require exact feature module
       sets and base-owned startup modules, and emit stable reason records.
-    - [ ] Reject missing, duplicate, unknown, overlapping, malformed, or
+    - [x] Reject missing, duplicate, unknown, overlapping, malformed, or
       overflowed declarations with deterministic diagnostics.
 
   - [ ] 7.3 Section - Package and dynamically load the first feature AVM.
@@ -65,4 +65,3 @@ tampered inputs and any active-browser regression block completion.
 - [Phase 6 completion](phase-06-completion.md)
 - [Feature-bundle contract](feature-bundle-contract.md)
 - [Framework packaging synthesis](../../../20-notes/elixir-webassembly-component-framework-for-phoenix-and-plug.md)
-
