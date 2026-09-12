@@ -337,3 +337,5 @@ reporting a tooling change complete.
 - [BH-06 Phase 8 validator tests](test_validate_bh06_payload_budgets.py) — Rejects threshold, decision, total, exposure, evidence, encoding, and promotion-gate mutations.
 - [BH-06 Phase 9 runtime-closure validator](validate_bh06_runtime_closure.py) — Recomputes subset/removal/opaque-bridge evidence, unchanged public payload authority, accepted budgets, manifest bindings, and browser replay.
 - [BH-06 Phase 9 validator tests](test_validate_bh06_runtime_closure.py) — Rejects concealed removals, opaque mutation, threshold waiver, false payload/browser decisions, and reducer bypass.
+- [BH-06 Phase 10 delivery-integrity validator](validate_bh06_delivery_integrity.py) — Recomputes policy bindings, private-evidence SRI, role/cache coverage, payload acceptance, browser parity, and negative cases.
+- [BH-06 Phase 10 validator tests](test_validate_bh06_delivery_integrity.py) — Rejects policy, SRI, cache, browser, negative-proof, and integration-bypass mutations.

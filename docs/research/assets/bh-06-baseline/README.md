@@ -39,6 +39,8 @@ and completion decisions for the active phase.
 - [Phase 8 completion](phase-08-completion-v0.1.0.json)
 - [Phase 9 authorization](phase-09-authorization-v0.1.0.json)
 - [Phase 9 completion](phase-09-completion-v0.1.0.json)
+- [Phase 10 authorization](phase-10-authorization-v0.1.0.json)
+- [Phase 10 completion](phase-10-completion-v0.1.0.json)
 
 ### Subdirectories
 

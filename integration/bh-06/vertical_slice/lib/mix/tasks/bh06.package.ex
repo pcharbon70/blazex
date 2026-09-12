@@ -39,6 +39,7 @@ defmodule Mix.Tasks.Bh06.Package do
       bundle_policy = bundle_policy!(root)
       runtime_closure_policy = runtime_closure_policy!(root)
       payload_policy = payload_policy!(root)
+      delivery_integrity_policy = delivery_integrity_policy!(root)
       boot = boot!(temporary)
       inputs = bundle_inputs(boot, fixture_build, reachability)
       secret_inputs = secret_inputs!(root, inputs)
@@ -112,7 +113,8 @@ defmodule Mix.Tasks.Bh06.Package do
           license_inventory: license_inventory,
           bundle_plan: bundle_plan,
           runtime_closure: runtime_closure,
-          feature_bundles: archives.features
+          feature_bundles: archives.features,
+          delivery_integrity: delivery_integrity_policy
         )
 
       payload =
@@ -122,7 +124,7 @@ defmodule Mix.Tasks.Bh06.Package do
           payload_policy,
           &BlazeX.Build.PayloadBudget.node_brotli_samples!/2
         )
-        |> Map.merge(%{"phase" => 9, "status" => "complete"})
+        |> Map.merge(%{"phase" => 10, "status" => "complete"})
 
       File.mkdir_p!(Path.dirname(payload_output))
       File.write!(payload_output, BlazeX.Build.JSON.encode!(payload) <> "\n", [:exclusive])
@@ -140,7 +142,7 @@ defmodule Mix.Tasks.Bh06.Package do
       File.cp_r!(candidate, output)
 
       Mix.shell().info(
-        "BH-06 Phase 9 package: #{String.upcase(payload["decision"])} " <>
+        "BH-06 Phase 10 package: #{String.upcase(payload["decision"])} " <>
           "(#{length(manifest["artifacts"])} manifest assets; " <>
           "#{payload["summary"]["public_brotli_bytes"]} Brotli bytes)"
       )
@@ -233,6 +235,14 @@ defmodule Mix.Tasks.Bh06.Package do
     |> File.read!()
     |> Jason.decode!()
     |> BlazeX.Build.RuntimeClosurePolicy.new!()
+  end
+
+  defp delivery_integrity_policy!(root) do
+    root
+    |> Path.join("integration/bh-06/delivery-integrity-policy-v0.1.0.json")
+    |> File.read!()
+    |> Jason.decode!()
+    |> BlazeX.Build.DeliveryIntegrityPolicy.new!()
   end
 
   defp bundle_declarations!(inputs) do

@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0.0",
+  "milestone": "BH-06",
+  "phase": 10,
+  "decision": "accept",
+  "completed_at": "2026-09-12",
+  "policy_evidence_sha256": "b213c58322db85428bfff4f541b374c02ca797cee5171c34eb67777ffaa7225d",
+  "canonical_policy_sha256": "dede5ecd9f2c2d212f2af21efa10045fa6a1782bd9ceea3122943a50ad55d41a",
+  "manifest_sha256": "14ec54a73165ba897f9a1d2aa9f84fd788718c9357828a8980b0954994d63b45",
+  "browser_evidence_sha256": "b7385d64a4c9d65ee8b42300810838634a501ec9e03a04cc1498722539a17aa8",
+  "payload_evidence_sha256": "4002a675bd0771615d38edac8bfdfc13785f03192f5030eec11bdd3bbe4667ba",
+  "active_browsers": ["chrome", "firefox"],
+  "support_state": "unsupported-development-evidence"
+}

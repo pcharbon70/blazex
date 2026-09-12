@@ -311,6 +311,11 @@ bridge roots, reduced archive assembly, accepted payload evidence, or Phase 9
 browser evidence changes, also run `python3 70-tools/validate_bh06_runtime_closure.py`
 and `python3 -m unittest discover -s 70-tools -p 'test_validate_bh06_runtime_closure.py'`.
 
+When BH-06 Phase 10 authorization, delivery-integrity policy, manifest SRI or
+cache metadata, browser header evidence, or Phase 10 evidence changes, also run
+`python3 70-tools/validate_bh06_delivery_integrity.py` and
+`python3 -m unittest discover -s 70-tools -p 'test_validate_bh06_delivery_integrity.py'`.
+
 Do not commit, push, publish, or open a pull request unless the user asks.
 
 ## Research tooling

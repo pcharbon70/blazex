@@ -44,4 +44,14 @@ accounted for with path-free labels, sizes, and SHA-256 digests. Fixed literal
 signatures and explicit public-config key fragments reject with value-redacted
 diagnostics under bounded input and finding limits.
 
+BH-06 Phases 6 through 9 add closed license/provenance inventory, deterministic
+feature ownership, public/private payload accounting, and audited runtime
+closure reduction. Their reports remain content-addressed private build evidence.
+
+BH-06 Phase 10 adds atom-safe `DeliveryIntegrityPolicy` validation and
+`DeliveryIntegrity` manifest decoration. Every governed artifact receives a
+recomputed SHA-384 SRI token and exact Cache-Control value, while the manifest
+binds the canonical policy digest. This is metadata for a future delivery
+adapter; it is not a production server or support claim.
+
 Run `mix format --check-formatted && mix test` from this directory.

@@ -1,7 +1,7 @@
 defmodule BlazeX.Build.Pipeline do
   @moduledoc "Deterministic, content-addressed BH-06 candidate asset assembly."
 
-  alias BlazeX.Build.{EntryPoint, JSON}
+  alias BlazeX.Build.{DeliveryIntegrity, EntryPoint, JSON}
   @manifest "build-manifest.json"
   @assets [
     {:runtime_module, "runtime-module", ".mjs", "text/javascript"},
@@ -40,8 +40,16 @@ defmodule BlazeX.Build.Pipeline do
       "artifacts" => artifacts
     }
 
+    delivery_policy = Keyword.get(options, :delivery_integrity)
+
+    manifest =
+      if delivery_policy,
+        do: DeliveryIntegrity.apply!(manifest, output, delivery_policy),
+        else: manifest
+
     File.write!(Path.join(output, @manifest), JSON.encode!(manifest) <> "\n", [:exclusive])
     verify!(output)
+    if delivery_policy, do: DeliveryIntegrity.verify!(manifest, output, delivery_policy)
     manifest
   end
 
@@ -70,7 +78,32 @@ defmodule BlazeX.Build.Pipeline do
         do: raise(ArgumentError, "manifest integrity mismatch: #{relative}")
     end)
 
+    verify_sri!(output, manifest, paths)
+
     :ok
+  end
+
+  defp verify_sri!(output, manifest, paths) do
+    if String.contains?(manifest, "\"delivery_integrity\"") do
+      integrity =
+        Regex.scan(~r/"integrity":"(sha384-[A-Za-z0-9+\/]+={0,2})"/, manifest,
+          capture: :all_but_first
+        )
+        |> List.flatten()
+
+      unless length(integrity) == length(paths),
+        do: raise(ArgumentError, "manifest delivery integrity records are malformed")
+
+      Enum.zip(paths, integrity)
+      |> Enum.each(fn {relative, expected} ->
+        observed =
+          "sha384-" <>
+            (:crypto.hash(:sha384, File.read!(Path.join(output, relative))) |> Base.encode64())
+
+        unless observed == expected,
+          do: raise(ArgumentError, "manifest SRI mismatch: #{relative}")
+      end)
+    end
   end
 
   defp copy_asset!(spec, output, {field, role, extension, media_type}) do
