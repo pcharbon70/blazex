@@ -28,12 +28,12 @@ Back to the [milestone](README.md).
       cookie, response, redaction, and failure semantics.
     - [x] Activate Phase 4 planning, baseline, integration, and evidence indexes.
 
-  - [ ] 4.2 Section - Implement reusable CSRF and origin primitives.
-    - [ ] Bind one 32-byte random anti-CSRF token to each opaque session while
+  - [x] 4.2 Section - Implement reusable CSRF and origin primitives.
+    - [x] Bind one 32-byte random anti-CSRF token to each opaque session while
       retaining only its digest in server authority.
-    - [ ] Verify proofs in constant time and rotate atomically without extending
+    - [x] Verify proofs in constant time and rotate atomically without extending
       session expiry or reviving an invalid session.
-    - [ ] Canonicalize exact HTTP/HTTPS origins and reject absent, duplicate,
+    - [x] Canonicalize exact HTTP/HTTPS origins and reject absent, duplicate,
       malformed, user-info, path, query, fragment, or cross-origin input.
 
   - [ ] 4.3 Section - Integrate the Phoenix security transport.

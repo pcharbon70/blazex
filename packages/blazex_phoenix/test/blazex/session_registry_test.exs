@@ -15,6 +15,7 @@ defmodule BlazeX.Phoenix.SessionRegistryTest do
              SessionRegistry.issue("subject-1", "Ada", server: server, now_ms: 1_000, ttl_ms: 500)
 
     assert byte_size(issued["session_id"]) == 43
+    assert byte_size(issued["csrf_token"]) == 43
     refute issued["projection"] |> Map.has_key?("session_id")
     refute inspect(issued["projection"]) =~ "role"
     refute inspect(issued["projection"]) =~ "permission"
@@ -28,6 +29,19 @@ defmodule BlazeX.Phoenix.SessionRegistryTest do
             }} = SessionRegistry.lookup(issued["session_id"], server: server, now_ms: 1_499)
 
     refute inspect(SessionRegistry.snapshot(server)) =~ issued["session_id"]
+    refute inspect(SessionRegistry.snapshot(server)) =~ issued["csrf_token"]
+
+    assert {:ok, _projection} =
+             SessionRegistry.authenticate(issued["session_id"], issued["csrf_token"],
+               server: server,
+               now_ms: 1_499
+             )
+
+    assert {:error, "csrf-invalid"} =
+             SessionRegistry.authenticate(issued["session_id"], String.duplicate("x", 43),
+               server: server,
+               now_ms: 1_499
+             )
   end
 
   test "expires and prunes before enforcing capacity", %{server: server} do
@@ -49,12 +63,57 @@ defmodule BlazeX.Phoenix.SessionRegistryTest do
     assert {:ok, rotated} = SessionRegistry.rotate(old, server: server, now_ms: 1_100)
     refute rotated["session_id"] == old
     assert rotated["projection"]["expires_at_ms"] == 1_500
+    assert byte_size(rotated["csrf_token"]) == 43
 
     assert {:error, "session-invalid"} =
              SessionRegistry.lookup(old, server: server, now_ms: 1_100)
 
     assert {:ok, _projection} =
              SessionRegistry.lookup(rotated["session_id"], server: server, now_ms: 1_100)
+
+    assert SessionRegistry.snapshot(server)["active_sessions"] == 1
+  end
+
+  test "CSRF rotation atomically rejects the old proof without extending expiry", %{
+    server: server
+  } do
+    assert {:ok, issued} =
+             SessionRegistry.issue("subject-csrf", "Subject CSRF",
+               server: server,
+               now_ms: 1_000,
+               ttl_ms: 500
+             )
+
+    assert {:ok, rotated} =
+             SessionRegistry.rotate_csrf(issued["session_id"], issued["csrf_token"],
+               server: server,
+               now_ms: 1_100
+             )
+
+    assert rotated["projection"]["expires_at_ms"] == 1_500
+    refute rotated["csrf_token"] == issued["csrf_token"]
+
+    assert {:error, "csrf-invalid"} =
+             SessionRegistry.authenticate(issued["session_id"], issued["csrf_token"],
+               server: server,
+               now_ms: 1_100
+             )
+
+    assert {:ok, _projection} =
+             SessionRegistry.authenticate(issued["session_id"], rotated["csrf_token"],
+               server: server,
+               now_ms: 1_100
+             )
+  end
+
+  test "malformed CSRF proofs fail without registry calls", %{server: server} do
+    session_id = issue(server, "csrf-malformed")
+
+    assert {:error, "csrf-invalid"} =
+             SessionRegistry.authenticate(session_id, nil, server: server)
+
+    assert {:error, "csrf-invalid"} =
+             SessionRegistry.rotate_csrf(session_id, "short", server: server)
 
     assert SessionRegistry.snapshot(server)["active_sessions"] == 1
   end

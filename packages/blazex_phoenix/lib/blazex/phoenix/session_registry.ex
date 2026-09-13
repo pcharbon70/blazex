@@ -34,6 +34,17 @@ defmodule BlazeX.Phoenix.SessionRegistry do
     end
   end
 
+  def authenticate(session_id, csrf_token, options \\ []) do
+    server = Keyword.get(options, :server, __MODULE__)
+    now_ms = Keyword.get(options, :now_ms, System.system_time(:millisecond))
+
+    if valid_session_id?(session_id) and valid_csrf_token?(csrf_token) and is_integer(now_ms) do
+      GenServer.call(server, {:authenticate, session_id, csrf_token, now_ms})
+    else
+      {:error, "csrf-invalid"}
+    end
+  end
+
   def rotate(session_id, options \\ []) do
     server = Keyword.get(options, :server, __MODULE__)
     now_ms = Keyword.get(options, :now_ms, System.system_time(:millisecond))
@@ -42,6 +53,17 @@ defmodule BlazeX.Phoenix.SessionRegistry do
       GenServer.call(server, {:rotate, session_id, now_ms})
     else
       {:error, "session-invalid"}
+    end
+  end
+
+  def rotate_csrf(session_id, csrf_token, options \\ []) do
+    server = Keyword.get(options, :server, __MODULE__)
+    now_ms = Keyword.get(options, :now_ms, System.system_time(:millisecond))
+
+    if valid_session_id?(session_id) and valid_csrf_token?(csrf_token) and is_integer(now_ms) do
+      GenServer.call(server, {:rotate_csrf, session_id, csrf_token, now_ms})
+    else
+      {:error, "csrf-invalid"}
     end
   end
 
@@ -67,11 +89,11 @@ defmodule BlazeX.Phoenix.SessionRegistry do
     if map_size(state.sessions) >= state.max_sessions do
       {:reply, {:error, "session-capacity"}, state}
     else
-      {session_id, sessions} =
+      {session_id, csrf_token, sessions} =
         put_new_session(state.sessions, subject_id, display_label, now_ms + ttl_ms)
 
       record = Map.fetch!(sessions, session_id)
-      {:reply, {:ok, issued(session_id, record)}, %{state | sessions: sessions}}
+      {:reply, {:ok, issued(session_id, csrf_token, record)}, %{state | sessions: sessions}}
     end
   end
 
@@ -84,6 +106,22 @@ defmodule BlazeX.Phoenix.SessionRegistry do
     end
   end
 
+  def handle_call({:authenticate, session_id, csrf_token, now_ms}, _from, state) do
+    state = prune(state, now_ms)
+
+    case Map.fetch(state.sessions, session_id) do
+      {:ok, record} ->
+        if csrf_matches?(record, csrf_token) do
+          {:reply, {:ok, projection(record)}, state}
+        else
+          {:reply, {:error, "csrf-invalid"}, state}
+        end
+
+      :error ->
+        {:reply, {:error, "session-invalid"}, state}
+    end
+  end
+
   def handle_call({:rotate, session_id, now_ms}, _from, state) do
     state = prune(state, now_ms)
 
@@ -92,10 +130,32 @@ defmodule BlazeX.Phoenix.SessionRegistry do
         {:reply, {:error, "session-invalid"}, state}
 
       {record, sessions} ->
-        {new_id, sessions} =
+        {new_id, csrf_token, sessions} =
           put_new_session(sessions, record.subject_id, record.display_label, record.expires_at_ms)
 
-        {:reply, {:ok, issued(new_id, record)}, %{state | sessions: sessions}}
+        new_record = Map.fetch!(sessions, new_id)
+        {:reply, {:ok, issued(new_id, csrf_token, new_record)}, %{state | sessions: sessions}}
+    end
+  end
+
+  def handle_call({:rotate_csrf, session_id, csrf_token, now_ms}, _from, state) do
+    state = prune(state, now_ms)
+
+    case Map.fetch(state.sessions, session_id) do
+      {:ok, record} ->
+        if csrf_matches?(record, csrf_token) do
+          replacement = random_token()
+          record = %{record | csrf_digest: csrf_digest(replacement)}
+          sessions = Map.put(state.sessions, session_id, record)
+
+          {:reply, {:ok, %{"csrf_token" => replacement, "projection" => projection(record)}},
+           %{state | sessions: sessions}}
+        else
+          {:reply, {:error, "csrf-invalid"}, state}
+        end
+
+      :error ->
+        {:reply, {:error, "session-invalid"}, state}
     end
   end
 
@@ -110,8 +170,9 @@ defmodule BlazeX.Phoenix.SessionRegistry do
     {:reply, public_snapshot(next), next}
   end
 
-  defp issued(session_id, record),
-    do: %{"session_id" => session_id, "projection" => projection(record)}
+  defp issued(session_id, csrf_token, record) do
+    %{"session_id" => session_id, "csrf_token" => csrf_token, "projection" => projection(record)}
+  end
 
   defp projection(record) do
     %{
@@ -136,20 +197,30 @@ defmodule BlazeX.Phoenix.SessionRegistry do
   end
 
   defp put_new_session(sessions, subject_id, display_label, expires_at_ms) do
-    session_id = :crypto.strong_rand_bytes(32) |> Base.url_encode64(padding: false)
+    session_id = random_token()
 
     if Map.has_key?(sessions, session_id) do
       put_new_session(sessions, subject_id, display_label, expires_at_ms)
     else
+      csrf_token = random_token()
+
       record = %{
         subject_id: subject_id,
         display_label: display_label,
-        expires_at_ms: expires_at_ms
+        expires_at_ms: expires_at_ms,
+        csrf_digest: csrf_digest(csrf_token)
       }
 
-      {session_id, Map.put(sessions, session_id, record)}
+      {session_id, csrf_token, Map.put(sessions, session_id, record)}
     end
   end
+
+  defp csrf_matches?(record, csrf_token) do
+    :crypto.hash_equals(record.csrf_digest, csrf_digest(csrf_token))
+  end
+
+  defp csrf_digest(csrf_token), do: :crypto.hash(:sha256, csrf_token)
+  defp random_token, do: :crypto.strong_rand_bytes(32) |> Base.url_encode64(padding: false)
 
   defp validate_subject(subject_id, display_label)
        when is_binary(subject_id) and is_binary(display_label) do
@@ -171,4 +242,5 @@ defmodule BlazeX.Phoenix.SessionRegistry do
   defp validate_time(_now_ms, _ttl_ms), do: {:error, "session-ttl-invalid"}
 
   defp valid_session_id?(value), do: is_binary(value) and byte_size(value) == 43
+  defp valid_csrf_token?(value), do: is_binary(value) and byte_size(value) == 43
 end
