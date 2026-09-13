@@ -16,3 +16,8 @@ Phase 3 is complete for bounded opaque sessions and a redacted authentication
 projection under the unsupported development boundary.
 
 - [Phase 3 session-boundary evidence](phase-03-session-boundary-evidence-v0.1.0.json)
+
+Phase 4 is complete for rotating session-bound anti-CSRF proofs and canonical
+same-origin transport enforcement under the unsupported development boundary.
+
+- [Phase 4 CSRF/origin evidence](phase-04-csrf-origin-evidence-v0.1.0.json)

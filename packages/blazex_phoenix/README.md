@@ -27,3 +27,11 @@ the manifest attestation and every declared file before resolving only public
 artifacts with their attested media type, cache policy, integrity, and strong
 ETag. Session bootstrap, commands, pushes, routing policy, deployment, LiveView,
 and LocalLiveView remain deferred.
+
+BH-07 Phases 2–4 add the bounded public bootstrap, server-owned opaque-session
+registry, and reusable origin/CSRF primitives. Each session receives independent
+32-byte identifiers and anti-CSRF proof material; only a SHA-256 proof digest is
+retained in registry state. Proof validation is constant-time, proof rotation is
+atomic, and canonical origin checks are independent of Plug and Phoenix.
+Credentials, roles, permissions, commands, effects, pushes, production support,
+LiveView, and LocalLiveView remain deferred.

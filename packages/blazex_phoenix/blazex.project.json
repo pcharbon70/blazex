@@ -4,7 +4,7 @@
   "path": "packages/blazex_phoenix",
   "kind": "elixir-package",
   "activation_phase": "BH-01 Phase 1",
-  "status": "experimental-phase6-authority-fixture",
+  "status": "experimental-bh07-phase4-security-primitives",
   "owner_role": "server-adapter-owner",
   "module_roots": ["BlazeX.Phoenix"],
   "manifest": "mix.exs",
@@ -13,5 +13,10 @@
   "planned_dependencies": [],
   "must_not_own": ["portable-component-semantics", "standalone-dom-core", "client-presentation-authority"],
   "forbidden_dependencies": ["blazex_core", "blazex_effects", "blazex_ui_tree", "integration/fixtures"],
-  "public_api_state": "experimental-not-stable"
+  "public_api_state": "experimental-not-stable",
+  "bh07_activation": {
+    "phase": 4,
+    "state": "csrf-origin-security-primitives",
+    "deferred": ["credentials", "roles", "permissions", "commands", "effects", "pushes", "liveview", "local-liveview"]
+  }
 }

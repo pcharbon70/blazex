@@ -43,6 +43,7 @@ defmodule BlazeX.Phoenix.PublicBootstrap do
       "capabilities" => %{
         "authentication_projection" => true,
         "browser_local_execution" => true,
+        "csrf_protection" => true,
         "pushes" => false,
         "remote_commands" => false,
         "server_mutation" => false,

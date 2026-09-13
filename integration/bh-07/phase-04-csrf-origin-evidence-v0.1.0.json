@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0.0",
+  "milestone": "BH-07",
+  "phase": 4,
+  "decision": "accept",
+  "support_state": "unsupported-development-evidence",
+  "source_bindings": {
+    "packages/blazex_phoenix/lib/blazex/phoenix/session_registry.ex": "f434719f8272b7d06bad4d20d44da174d62e9ed3ede30713fde2152865d5497a",
+    "packages/blazex_phoenix/lib/blazex/phoenix/origin_policy.ex": "beeb41a23818029aa67679de8ae9b957a2a016e0ddc2d7e47216b8556e609a43",
+    "packages/blazex_phoenix/lib/blazex/phoenix/public_bootstrap.ex": "7584a617e01faa05865e9002e66ffbf91b08e3e4ad903d30a1c7d623ca941c74",
+    "packages/blazex_phoenix/blazex.project.json": "b5a72e2a7991ca5057b21bcb639f4400d6dd80151ba4ef64173ef2db25d0fef5",
+    "profiles/browser_phoenix/lib/blazex_browser_phoenix/session_plug.ex": "f7f75f7017c62b27d1a39377997c5bac99fa49c95cf43620d29f34f0a2020023",
+    "profiles/browser_phoenix/lib/blazex_browser_phoenix/control_plug.ex": "cc15411ec47dca065482527bd893be3889b0149570a55ce9ce8da6497e5f3718",
+    "profiles/browser_phoenix/lib/blazex_browser_phoenix/endpoint.ex": "2bdcc4f0a280c35cfadbebcfb90ec615bc535875d7ce01c395033cd33c215271",
+    "profiles/browser_phoenix/blazex.project.json": "d2aa5d77d337ecb6a4eaf61a24ce4c2699d67f159f224475b3517636d4387f0a",
+    "profiles/browser_phoenix/mix.exs": "f6fb598244cfcb38cd0299e5b6ffa2b38156386af520bf22c955d3c0b08d8c19",
+    "profiles/browser_phoenix/mix.lock": "870585f232a7fbdd5438bb5e9522da4ce1b07bba5c2d7ae6244a37ef2ce5befd"
+  },
+  "csrf": {
+    "random_bytes": 32,
+    "server_retention": "sha256-digest-only",
+    "constant_time_compare": true,
+    "session_bound": true,
+    "rotation_atomic": true,
+    "rotation_preserves_expiry": true,
+    "old_proof_rejected": true,
+    "session_invalidation_cascades": true,
+    "header": "x-blazex-csrf"
+  },
+  "origin": {
+    "schemes": ["http", "https"],
+    "cardinality": 1,
+    "canonical_fields": ["scheme", "host", "effective_port"],
+    "host_case_insensitive": true,
+    "rejects": ["absent", "duplicate", "cross-origin", "null", "userinfo", "path", "query", "fragment", "malformed"]
+  },
+  "transport": {
+    "session_path": "/bh07/session",
+    "rotation_path": "/bh07/csrf/rotate",
+    "authenticated_projection_fields": ["csrf_token", "expires_at_ms", "protocol", "state", "subject"],
+    "rotation_method": "POST",
+    "logout_method": "DELETE",
+    "cache_control": "no-store",
+    "cookie": {"encrypted": true, "signed": true, "http_only": true, "same_site": "Strict"},
+    "legacy_cookie_isolation": true
+  },
+  "capabilities": {"sessions": true, "authentication_projection": true, "csrf_protection": true, "remote_commands": false, "pushes": false, "server_mutation": false},
+  "tests": [
+    {"gate": "blazex-phoenix-package", "tests": 36, "failures": 0, "result": "passed"},
+    {"gate": "browser-phoenix-profile", "tests": 29, "failures": 0, "result": "passed"},
+    {"gate": "csrf-origin-validator-mutations", "tests": 8, "failures": 0, "result": "passed"},
+    {"gate": "research-archive", "result": "passed"},
+    {"gate": "dependency-boundary", "result": "passed"},
+    {"gate": "patch-hygiene", "result": "passed"}
+  ],
+  "deferred": ["credentials", "login-provider", "production-identity", "roles", "permissions", "commands", "effects", "pushes", "reconnect", "deployment-coordination", "production-support", "liveview", "local-liveview", "BH-08"],
+  "limitations": [
+    "The qualified origin is derived from the direct request endpoint; production proxy and allowed-origin configuration remain deferred.",
+    "The raw CSRF proof is browser-visible by design and is not authorization or command authority.",
+    "The development cookie omits Secure on localhost HTTP; production TLS, cookie, and proxy policy remain deferred.",
+    "No credential verifier, production identity provider, role, permission, trusted command, effect, push, browser-process, traffic, production-support, LiveView, or LocalLiveView claim is made."
+  ]
+}

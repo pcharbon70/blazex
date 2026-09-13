@@ -77,6 +77,7 @@ defmodule BlazeX.Phoenix.PublicBootstrapTest do
     assert capabilities["browser_local_execution"]
     assert capabilities["sessions"]
     assert capabilities["authentication_projection"]
+    assert capabilities["csrf_protection"]
     refute capabilities["remote_commands"]
     refute capabilities["pushes"]
     refute capabilities["server_mutation"]

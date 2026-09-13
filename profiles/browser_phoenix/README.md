@@ -116,3 +116,16 @@ The projection never includes the opaque identifier, credentials, roles,
 permissions, allowed actions, CSRF material, or mutation authority. Credentials,
 a login provider, CSRF, commands, effects, pushes, reconnect, production
 support, LiveView, and LocalLiveView remain deferred.
+
+## BH-07 Phase 4 activation
+
+Authenticated BH-07 sessions now carry a 32-byte anti-CSRF proof inside the
+encrypted host cookie and expose it only through their no-store authentication
+projection. The server registry retains only its digest, verifies it in
+constant time, and rotates it atomically at `POST /bh07/csrf/rotate` without
+extending the session. Authenticated logout and rotation require one canonical
+same-origin header and the exact `x-blazex-csrf` proof.
+
+Credentials, production identity, roles, permissions, commands, effects,
+pushes, reconnect, production deployment/support, LiveView, and LocalLiveView
+remain deferred.
