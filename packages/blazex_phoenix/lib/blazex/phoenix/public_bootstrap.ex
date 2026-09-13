@@ -17,7 +17,8 @@ defmodule BlazeX.Phoenix.PublicBootstrap do
   @max_document_bytes 4_096
   @max_safe_integer 9_007_199_254_740_991
   @key_pattern ~r/\A[a-z][a-z0-9_.-]{0,63}\z/
-  @forbidden_key ~r/(?:secret|token|password|passwd|credential|cookie|session|csrf|role|permission|authori[sz]ation|allowed.?action|command|idempotency|private.?key)/i
+  @asset_base_pattern ~r{\A/(?:[a-z0-9][a-z0-9_-]*/)+\z}
+  @forbidden_key ~r/(?:secret|token|password|passwd|credential|cookie|session|csrf|role|permission|authori[sz]ation|authentication|authenticated|identity|principal|user.?id|account.?id|allowed.?action|command|idempotency|private.?key)/i
 
   @enforce_keys [:document, :body, :bytes, :etag]
   defstruct [:document, :body, :bytes, :etag]
@@ -94,13 +95,7 @@ defmodule BlazeX.Phoenix.PublicBootstrap do
       byte_size(value) > 128 ->
         raise ArgumentError, "bootstrap-asset-base-invalid"
 
-      not String.starts_with?(value, "/") ->
-        raise ArgumentError, "bootstrap-asset-base-invalid"
-
-      not String.ends_with?(value, "/") ->
-        raise ArgumentError, "bootstrap-asset-base-invalid"
-
-      String.contains?(value, ["..", "?", "#", "\\", "\0"]) ->
+      not Regex.match?(@asset_base_pattern, value) ->
         raise ArgumentError, "bootstrap-asset-base-invalid"
 
       true ->

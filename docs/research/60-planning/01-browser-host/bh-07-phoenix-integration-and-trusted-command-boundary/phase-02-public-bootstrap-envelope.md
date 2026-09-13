@@ -11,7 +11,7 @@ aliases: ["BH-07 phase 2"]
 
 Back to the [milestone](README.md).
 
-- [ ] 2 Phase - Public Bootstrap Envelope.
+- [x] 2 Phase - Public Bootstrap Envelope.
   - Need: Phase 1 delivers an attested browser artifact set, but the browser
     has no bounded server-owned document describing which accepted manifest,
     entrypoint, route, capabilities, and explicitly public initial values apply.
@@ -28,25 +28,25 @@ Back to the [milestone](README.md).
       caching, method, conditional-request, and failure semantics.
     - [x] Activate Phase 2 planning, baseline, integration, and evidence indexes.
 
-  - [ ] 2.2 Section - Implement the reusable public-bootstrap contract.
-    - [ ] Bind bootstrap output to the accepted manifest and entrypoint attestation.
-    - [ ] Normalize only bounded JSON-compatible public values without atom creation.
-    - [ ] Reject secret-like keys, authority claims, invalid shapes, excess depth,
+  - [x] 2.2 Section - Implement the reusable public-bootstrap contract.
+    - [x] Bind bootstrap output to the accepted manifest and entrypoint attestation.
+    - [x] Normalize only bounded JSON-compatible public values without atom creation.
+    - [x] Reject secret-like keys, authority claims, invalid shapes, excess depth,
       excess counts, oversized output, and stale delivery identities.
 
-  - [ ] 2.3 Section - Integrate the Phoenix bootstrap route.
-    - [ ] Add public GET/HEAD `/bh07/bootstrap.json` delivery with `no-store`,
+  - [x] 2.3 Section - Integrate the Phoenix bootstrap route.
+    - [x] Add public GET/HEAD `/bh07/bootstrap.json` delivery with `no-store`,
       strong ETag, exact length, `nosniff`, and conditional response behavior.
-    - [ ] Source only explicitly configured public values and reuse the Phase 1
+    - [x] Source only explicitly configured public values and reuse the Phase 1
       validated-delivery cache without adding per-request retained state.
-    - [ ] Prove accepted output, binding, HEAD/conditional behavior, unsupported
+    - [x] Prove accepted output, binding, HEAD/conditional behavior, unsupported
       methods, secret rejection, invalid configuration, and unchanged deferrals.
 
-  - [ ] 2.4 Section - Reproduce, review, and publish completion.
-    - [ ] Run package/profile tests, validator mutations, archive, dependency,
+  - [x] 2.4 Section - Reproduce, review, and publish completion.
+    - [x] Run package/profile tests, validator mutations, archive, dependency,
       JSON, formatting, and patch-hygiene gates.
-    - [ ] Publish evidence, limitations, inherited corpus status, and decision.
-    - [ ] Accept only when bootstrap is bounded, public-only, delivery-bound,
+    - [x] Publish evidence, limitations, inherited corpus status, and decision.
+    - [x] Accept only when bootstrap is bounded, public-only, delivery-bound,
       non-authoritative, and independent of LiveView and LocalLiveView.
 
 ## Exit gate

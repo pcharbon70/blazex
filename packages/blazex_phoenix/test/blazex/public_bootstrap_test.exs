@@ -91,6 +91,10 @@ defmodule BlazeX.Phoenix.PublicBootstrapTest do
           "user_role",
           "permissions",
           "authorization",
+          "authenticated",
+          "identity",
+          "principal",
+          "user_id",
           "allowed_actions",
           "command_url",
           "idempotency_key",
@@ -134,7 +138,14 @@ defmodule BlazeX.Phoenix.PublicBootstrapTest do
   end
 
   test "rejects invalid asset bases and stale attestation identity", context do
-    for base <- ["bh07/", "/bh07", "/bh07/../private/", "/bh07/?query"] do
+    for base <- [
+          "bh07/",
+          "/bh07",
+          "//attacker.invalid/",
+          "https://attacker.invalid/",
+          "/bh07/../private/",
+          "/bh07/?query"
+        ] do
       assert_raise ArgumentError, "bootstrap-asset-base-invalid", fn ->
         PublicBootstrap.build!(context.delivery, %{}, base)
       end

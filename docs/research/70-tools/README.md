@@ -185,6 +185,8 @@ independent-review blockers, as intended.
 ### Shared helpers and runners
 
 - [`validate_bh07_static_delivery.py`](validate_bh07_static_delivery.py) — Validate the BH-07 Phase 1 attested route, bounded identity cache, evidence bindings, and deferred LiveView boundary.
+- [`validate_bh07_public_bootstrap.py`](validate_bh07_public_bootstrap.py) — Validate the BH-07 Phase 2 delivery-bound public bootstrap, fixed limits, non-authority capabilities, and deferred boundary.
+- [`validate_bh07_public_bootstrap.py`](validate_bh07_public_bootstrap.py) — Validate the BH-07 Phase 2 public envelope, delivery identity, trust denial, transport, fixed limits, and deferrals.
 
 - [`run_bh05_acceptance_cleanup.py`](run_bh05_acceptance_cleanup.py) — Capture and publish Phase 12 cleanup, process-growth and failure-gate evidence without suppressing active divergence.
 - [`validate_bh05_acceptance_cleanup.py`](validate_bh05_acceptance_cleanup.py) — Validate the retained Firefox blocker, ERTS budgets, failure gates and frozen thresholds.
@@ -214,6 +216,8 @@ independent-review blockers, as intended.
 ### Tests
 
 - [`test_validate_bh07_static_delivery.py`](test_validate_bh07_static_delivery.py) — Mutation tests for delivery decisions, source binding, bounded cache behavior, deferred dependencies, lockfile state, and checklist completeness.
+- [`test_validate_bh07_public_bootstrap.py`](test_validate_bh07_public_bootstrap.py) — Mutation tests for bootstrap decisions, source binding, limits, capabilities, route presence, deferred dependencies, and checklist completeness.
+- [`test_validate_bh07_public_bootstrap.py`](test_validate_bh07_public_bootstrap.py) — Mutation tests for bootstrap decisions, source and limit bindings, capability authority, route presence, deferred dependencies, and checklist completeness.
 
 - [`test_bh03_history.py`](test_bh03_history.py) — Regression tests.
 - [`test_planning_policy.py`](test_planning_policy.py) — Regression checks for exact, prospective planning amendments.
