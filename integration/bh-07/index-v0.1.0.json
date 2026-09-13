@@ -1,1 +1,1 @@
-{"schema_version":"1.0.0","milestone":"BH-07","phase":4,"status":"active","evidence":["phase-01-static-delivery-evidence-v0.1.0.json","phase-02-public-bootstrap-evidence-v0.1.0.json","phase-03-session-boundary-evidence-v0.1.0.json"]}
+{"schema_version":"1.0.0","milestone":"BH-07","phase":4,"status":"complete","evidence":["phase-01-static-delivery-evidence-v0.1.0.json","phase-02-public-bootstrap-evidence-v0.1.0.json","phase-03-session-boundary-evidence-v0.1.0.json","phase-04-csrf-origin-evidence-v0.1.0.json"]}

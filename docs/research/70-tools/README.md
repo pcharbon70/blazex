@@ -351,3 +351,5 @@ reporting a tooling change complete.
 - [BH-06 Phase 11 validator tests](test_validate_bh06_entrypoint_attestation.py) — Rejects extra roots, stale manifests, missing categories, false payloads, browser drift, and set-check bypass.
 - [BH-07 Phase 3 session-boundary validator](validate_bh07_session_boundary.py) — Verifies authorization, bounded opaque storage, redacted projection, strict encrypted cookie composition, acceptance gates, and deferred dependencies.
 - [BH-07 Phase 3 validator tests](test_validate_bh07_session_boundary.py) — Rejects decision, capacity, source, projection, cookie, dependency, and completion-checklist mutations.
+- [BH-07 Phase 4 CSRF/origin validator](validate_bh07_csrf_origin.py) — Verifies session-bound digest-only proof authority, canonical origin enforcement, secure transport composition, evidence bindings, and deferrals.
+- [BH-07 Phase 4 validator tests](test_validate_bh07_csrf_origin.py) — Rejects decision, entropy, source, origin, projection, cookie, dependency, and completion-checklist mutations.

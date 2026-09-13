@@ -11,7 +11,7 @@ aliases: ["BH-07 phase 4"]
 
 Back to the [milestone](README.md).
 
-- [ ] 4 Phase - CSRF and Origin Security Envelope.
+- [x] 4 Phase - CSRF and Origin Security Envelope.
   - Need: Phase 3 established authenticated sessions but deliberately exposed no
     anti-CSRF material. A future state-changing command boundary needs one
     reusable, session-bound proof and one exact origin policy first.
@@ -44,12 +44,12 @@ Back to the [milestone](README.md).
     - [x] Preserve gated test issuance/reset, bounded responses, explicit method
       handling, capability truth, and zero command/effect authority.
 
-  - [ ] 4.4 Section - Reproduce, review, and publish completion.
-    - [ ] Run package/profile tests, mutation validator, archive, dependency,
+  - [x] 4.4 Section - Reproduce, review, and publish completion.
+    - [x] Run package/profile tests, mutation validator, archive, dependency,
       JSON, formatting, and patch-hygiene gates.
-    - [ ] Publish source-bound evidence, limitations, inherited status, and the
+    - [x] Publish source-bound evidence, limitations, inherited status, and the
       acceptance decision.
-    - [ ] Accept only with session-bound CSRF proofs, exact origin policy, no
+    - [x] Accept only with session-bound CSRF proofs, exact origin policy, no
       command execution, and unchanged LiveView/LocalLiveView deferral.
 
 ## Exit gate
