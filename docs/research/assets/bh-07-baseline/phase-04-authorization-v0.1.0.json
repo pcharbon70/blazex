@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0.0",
+  "milestone": "BH-07",
+  "phase": 4,
+  "authorized": true,
+  "authorized_at": "2026-09-12",
+  "base_revision": "619ae72dc0f8810f4f89b1621321463e0bdb9771",
+  "branch": "codex/bh07-phase4-csrf-origin-boundary",
+  "delivery": {"section_commits": 4, "pull_requests": 1, "merge": true, "return_to_synced_main": true, "delete_feature_branch": true},
+  "bound_inputs": {
+    "docs/research/assets/bh-07-baseline/phase-03-completion-v0.1.0.json": "e322909c8472f9bc12e4a879b7d4aaa9d5638544c783bc0031a4163704597da2",
+    "integration/bh-07/phase-03-session-boundary-evidence-v0.1.0.json": "e40b5ad7bcb1667caeeb6bc1b8bb01a1f61939db316421c46d544614b6e7333c",
+    "packages/blazex_phoenix/lib/blazex/phoenix/session_registry.ex": "6a725b34766f5b575af345e3b01efc03ceea7f59d8170f0be2bc447b2d00250c",
+    "profiles/browser_phoenix/lib/blazex_browser_phoenix/session_plug.ex": "cd9dbca3f31f8922f57e642f65f1130bdb2b0022b3019da736e2d27072a900cb",
+    "profiles/browser_phoenix/lib/blazex_browser_phoenix/endpoint.ex": "2bdcc4f0a280c35cfadbebcfb90ec615bc535875d7ce01c395033cd33c215271",
+    "docs/research/60-planning/liveview-integration-deferral.md": "3a2c3790c560191afd60f631576813760c7bbb4c05909a6f6a88058823e61e48"
+  },
+  "deferred": ["credentials", "login-provider", "production-identity", "roles", "permissions", "commands", "effects", "pushes", "reconnect", "deployment-coordination", "production-support", "liveview", "local-liveview", "BH-08"]
+}
