@@ -6,6 +6,7 @@ defmodule BlazeXBrowserPhoenix.Application do
   def start(_type, _args) do
     children = [
       BlazeX.Phoenix.BH01.FixtureAuthority,
+      BlazeX.Phoenix.SessionRegistry,
       BlazeXBrowserPhoenix.StaticDeliveryCache,
       BlazeXBrowserPhoenix.Endpoint
     ]

@@ -138,6 +138,8 @@ defmodule BlazeXBrowserPhoenix.StaticDeliveryTest do
     assert document["trust"] == "public-untrusted-no-server-authority"
     assert document["manifest"]["url"] == "/bh07/build-manifest.json"
     assert document["attestation"]["id"] == "blazex.bh06.entrypoint-accounting/1/counter"
+    assert document["capabilities"]["sessions"]
+    assert document["capabilities"]["authentication_projection"]
 
     assert document["public_state"] == %{
              "locale" => "en-CA",

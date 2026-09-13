@@ -40,7 +40,7 @@ defmodule BlazeXBrowserPhoenix.ControlPlugTest do
     assert body["identity_id"] == "operator"
     assert is_binary(body["csrf_token"])
     refute session.resp_body =~ "allowed_actions"
-    assert get_resp_header(session, "set-cookie") |> hd() =~ "_blazex_bh01_phase6="
+    assert get_resp_header(session, "set-cookie") |> hd() =~ "_blazex_browser_phoenix="
     assert get_resp_header(session, "set-cookie") |> hd() =~ "HttpOnly"
     assert get_resp_header(session, "set-cookie") |> hd() =~ "SameSite=Strict"
   end
