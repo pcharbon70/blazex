@@ -45,6 +45,17 @@ defmodule BlazeX.Phoenix.SessionRegistry do
     end
   end
 
+  def authority_context(session_id, csrf_token, options \\ []) do
+    server = Keyword.get(options, :server, __MODULE__)
+    now_ms = Keyword.get(options, :now_ms, System.system_time(:millisecond))
+
+    if valid_session_id?(session_id) and valid_csrf_token?(csrf_token) and is_integer(now_ms) do
+      GenServer.call(server, {:authority_context, session_id, csrf_token, now_ms})
+    else
+      {:error, "csrf-invalid"}
+    end
+  end
+
   def rotate(session_id, options \\ []) do
     server = Keyword.get(options, :server, __MODULE__)
     now_ms = Keyword.get(options, :now_ms, System.system_time(:millisecond))
@@ -113,6 +124,28 @@ defmodule BlazeX.Phoenix.SessionRegistry do
       {:ok, record} ->
         if csrf_matches?(record, csrf_token) do
           {:reply, {:ok, projection(record)}, state}
+        else
+          {:reply, {:error, "csrf-invalid"}, state}
+        end
+
+      :error ->
+        {:reply, {:error, "session-invalid"}, state}
+    end
+  end
+
+  def handle_call({:authority_context, session_id, csrf_token, now_ms}, _from, state) do
+    state = prune(state, now_ms)
+
+    case Map.fetch(state.sessions, session_id) do
+      {:ok, record} ->
+        if csrf_matches?(record, csrf_token) do
+          context = %{
+            session_id: session_id,
+            subject_id: record.subject_id,
+            expires_at_ms: record.expires_at_ms
+          }
+
+          {:reply, {:ok, context}, state}
         else
           {:reply, {:error, "csrf-invalid"}, state}
         end

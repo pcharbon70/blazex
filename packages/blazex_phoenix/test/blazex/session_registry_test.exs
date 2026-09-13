@@ -37,6 +37,16 @@ defmodule BlazeX.Phoenix.SessionRegistryTest do
                now_ms: 1_499
              )
 
+    assert {:ok, context} =
+             SessionRegistry.authority_context(issued["session_id"], issued["csrf_token"],
+               server: server,
+               now_ms: 1_499
+             )
+
+    assert context.subject_id == "subject-1"
+    assert context.expires_at_ms == 1_500
+    refute Map.has_key?(context, :csrf_token)
+
     assert {:error, "csrf-invalid"} =
              SessionRegistry.authenticate(issued["session_id"], String.duplicate("x", 43),
                server: server,

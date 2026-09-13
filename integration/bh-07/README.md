@@ -21,3 +21,8 @@ Phase 4 is complete for rotating session-bound anti-CSRF proofs and canonical
 same-origin transport enforcement under the unsupported development boundary.
 
 - [Phase 4 CSRF/origin evidence](phase-04-csrf-origin-evidence-v0.1.0.json)
+
+Phase 5 is complete for typed, authorized, bounded, non-executing command
+admission under the unsupported development boundary.
+
+- [Phase 5 command-admission evidence](phase-05-command-admission-evidence-v0.1.0.json)

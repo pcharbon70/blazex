@@ -353,3 +353,5 @@ reporting a tooling change complete.
 - [BH-07 Phase 3 validator tests](test_validate_bh07_session_boundary.py) — Rejects decision, capacity, source, projection, cookie, dependency, and completion-checklist mutations.
 - [BH-07 Phase 4 CSRF/origin validator](validate_bh07_csrf_origin.py) — Verifies session-bound digest-only proof authority, canonical origin enforcement, secure transport composition, evidence bindings, and deferrals.
 - [BH-07 Phase 4 validator tests](test_validate_bh07_csrf_origin.py) — Rejects decision, entropy, source, origin, projection, cookie, dependency, and completion-checklist mutations.
+- [BH-07 Phase 5 command-admission validator](validate_bh07_command_admission.py) — Verifies closed schemas, private subject grants, bounded idempotency, secure transport, non-execution, source bindings, and deferrals.
+- [BH-07 Phase 5 validator tests](test_validate_bh07_command_admission.py) — Rejects decision, bounds, source, execution, authorization, transport, capability, dependency, and checklist mutations.

@@ -1,0 +1,77 @@
+{
+  "schema_version": "1.0.0",
+  "milestone": "BH-07",
+  "phase": 5,
+  "decision": "accept",
+  "support_state": "unsupported-development-evidence",
+  "source_bindings": {
+    "packages/blazex_phoenix/lib/blazex/phoenix/session_registry.ex": "ceb6c731db607d2d7cc243f13185d9544e4d71eae690b2374ba41af6c5b1b196",
+    "packages/blazex_phoenix/lib/blazex/phoenix/command_admission.ex": "34843d81751980c250d57aa0aa5f3e50fa8e4ab6156ea4e88f5d4cd82cbfc61f",
+    "packages/blazex_phoenix/lib/blazex/phoenix/origin_policy.ex": "beeb41a23818029aa67679de8ae9b957a2a016e0ddc2d7e47216b8556e609a43",
+    "packages/blazex_phoenix/lib/blazex/phoenix/public_bootstrap.ex": "819f98b47895635bdb604bedb9955cd4bbb1484b41b3cae28d4e99db149b02ec",
+    "packages/blazex_phoenix/blazex.project.json": "1a968b8f1df3a709599685a2df0cee013663e7b6ee7a6f5d3c7cd1ab13130713",
+    "profiles/browser_phoenix/lib/blazex_browser_phoenix/admission_plug.ex": "882eb3302a954a4d23c1d7933d04e0d848183a6de7bd1cca8700e75d6c373b9a",
+    "profiles/browser_phoenix/lib/blazex_browser_phoenix/session_plug.ex": "56e2589be32426a832476baa1399857e2f07663e7b72dc9293cdf512bfa090c3",
+    "profiles/browser_phoenix/lib/blazex_browser_phoenix/application.ex": "313b4b5cd3d7be5b5758497a9536842d66fe8e596c74f262133c9f80c59ee018",
+    "profiles/browser_phoenix/lib/blazex_browser_phoenix/endpoint.ex": "6f115e8f334ff0b2ef2ceb0f7413c04482228517e3847dbe37ecfae0e0ea4ffc",
+    "profiles/browser_phoenix/blazex.project.json": "c4243f9f73865827e29f8255415ea8807a6cd6c1cf1c2f93c823828c1062c830",
+    "profiles/browser_phoenix/mix.exs": "f6fb598244cfcb38cd0299e5b6ffa2b38156386af520bf22c955d3c0b08d8c19",
+    "profiles/browser_phoenix/mix.lock": "870585f232a7fbdd5438bb5e9522da4ce1b07bba5c2d7ae6244a37ef2ce5befd"
+  },
+  "admission": {
+    "protocol": "blazex.bh07.command-intent/1",
+    "exact_fields": ["command", "correlation_id", "expected_revision", "idempotency_key", "payload", "protocol", "schema"],
+    "max_body_bytes": 2048,
+    "max_admissions": 256,
+    "max_per_session": 32,
+    "max_declarations": 32,
+    "max_subjects": 64,
+    "max_payload_fields": 16,
+    "payload_types": ["boolean", "integer", "string"],
+    "dynamic_handler_resolution": false,
+    "command_execution": false,
+    "server_mutation": false
+  },
+  "authorization": {
+    "session_context_server_owned": true,
+    "csrf_reauthenticated": true,
+    "subject_grants_server_owned": true,
+    "unknown_subject_denied": true,
+    "client_authority_hints_rejected": true,
+    "generalized_roles_or_permissions": false
+  },
+  "idempotency": {
+    "scope": ["opaque_session", "idempotency_key"],
+    "retention": "sha256-fingerprint-and-bounded-receipt-only",
+    "exact_replay": "original-receipt-replayed-true",
+    "changed_replay": "idempotency-conflict",
+    "concurrent_exact_replay_single_record": true,
+    "session_cleanup": true
+  },
+  "transport": {
+    "path": "/bh07/commands/admit",
+    "method": "POST",
+    "status": 202,
+    "requires": ["canonical-same-origin", "application-json", "encrypted-session", "current-csrf"],
+    "cache_control": "no-store",
+    "nosniff": true,
+    "receipt_fields": ["correlation_id", "protocol", "receipt", "status"],
+    "receipt_executed": false
+  },
+  "capabilities": {"sessions": true, "csrf_protection": true, "command_admission": true, "remote_commands": false, "pushes": false, "server_mutation": false},
+  "tests": [
+    {"gate": "blazex-phoenix-package", "tests": 46, "failures": 0, "result": "passed"},
+    {"gate": "browser-phoenix-profile", "tests": 38, "failures": 0, "result": "passed"},
+    {"gate": "command-admission-validator-mutations", "tests": 9, "failures": 0, "result": "passed"},
+    {"gate": "research-archive", "result": "passed"},
+    {"gate": "dependency-boundary", "result": "passed"},
+    {"gate": "patch-hygiene", "result": "passed"}
+  ],
+  "deferred": ["command-execution", "effects", "resource-mutation", "dynamic-handler-resolution", "credentials", "login-provider", "production-identity", "generalized-roles", "generalized-permissions", "pushes", "reconnect", "deployment-coordination", "production-support", "liveview", "local-liveview", "BH-08"],
+  "limitations": [
+    "Admission receipts are not execution acknowledgements and cannot change application state.",
+    "The profile uses two deterministic test subjects and one static counter declaration; no production identity or policy store exists.",
+    "Admission records are memory-only and bounded; persistence and distributed idempotency remain deferred.",
+    "No handler, effect, resource mutation, browser-process, traffic, production-support, LiveView, or LocalLiveView claim is made."
+  ]
+}

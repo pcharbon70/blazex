@@ -23,10 +23,12 @@ not dependencies, inputs, or completion gates for current BH-07 work.
 | [2 — Public Bootstrap Envelope](phase-02-public-bootstrap-envelope.md) | complete | Publish a bounded, deterministic, public-only bootstrap envelope tied to the accepted delivery identity without projecting server authority. | Accepted Phase 1 and explicit authorization |
 | [3 — Opaque Session and Authentication Projection](phase-03-opaque-session-and-authentication-projection.md) | complete | Add bounded server-owned opaque sessions and a minimal redacted authentication projection without commands or CSRF authority. | Accepted Phase 2 and explicit authorization |
 | [4 — CSRF and Origin Security Envelope](phase-04-csrf-and-origin-security-envelope.md) | complete | Bind rotating anti-CSRF proofs to opaque sessions and enforce canonical same-origin transport without command authority. | Accepted Phase 3 and explicit authorization |
+| [5 — Typed Command Admission and Authorization](phase-05-typed-command-admission-and-authorization.md) | complete | Admit bounded typed command intents against static declarations and private subject grants without executing handlers or effects. | Accepted Phase 4, BH-05 action contract, and explicit authorization |
 
-Later phase decomposition remains a separate planning decision. Phase 4 did
-not authorize credentials, a login provider, production identity, roles,
-permissions, commands, effects, pushes, reconnect, deployment coordination, support
+Later phase decomposition remains a separate planning decision. Phase 5 did
+not authorize credentials, a login provider, production identity, generalized
+roles/permissions, command execution, effects, resource mutation, pushes,
+reconnect, deployment coordination, support
 promotion, LiveView, LocalLiveView, or BH-08.
 
 ## Index
@@ -49,6 +51,10 @@ promotion, LiveView, LocalLiveView, or BH-08.
 - [CSRF and origin security contract](csrf-origin-contract.md)
 - [Phase 4 completion evidence](phase-04-completion.md)
 - [Phase 4 review and reconciliation](phase-04-review-and-reconciliation.md)
+- [Phase 5 — Typed Command Admission and Authorization](phase-05-typed-command-admission-and-authorization.md)
+- [Typed command admission contract](command-admission-contract.md)
+- [Phase 5 completion evidence](phase-05-completion.md)
+- [Phase 5 review and reconciliation](phase-05-review-and-reconciliation.md)
 
 ### Subdirectories
 
