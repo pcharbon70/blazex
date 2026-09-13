@@ -43,12 +43,12 @@ Back to the [milestone](README.md).
       records on cleanup, and expose no credentials, tokens, command body, or
       raw idempotency key.
 
-  - [ ] 6.3 Section - Integrate the Phoenix execution transport.
-    - [ ] Add POST `/bh07/commands/execute` behind the Phase 4 origin, JSON,
+  - [x] 6.3 Section - Integrate the Phoenix execution transport.
+    - [x] Add POST `/bh07/commands/execute` behind the Phase 4 origin, JSON,
       bounded-body, encrypted-session, and current-CSRF controls.
-    - [ ] Return bounded no-store results/errors with explicit status mapping
+    - [x] Return bounded no-store results/errors with explicit status mapping
       and no browser-supplied authority, handler, effect, or resource target.
-    - [ ] Extend test reset/session cleanup and publish only the truthful,
+    - [x] Extend test reset/session cleanup and publish only the truthful,
       narrow trusted-execution capability.
 
   - [ ] 6.4 Section - Reproduce, review, and publish completion.

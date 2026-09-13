@@ -142,3 +142,16 @@ No handler, arbitrary module/function resolution, application resource mutation,
 or effect is available. Credentials, generalized roles/permissions, pushes,
 reconnect, production deployment/support, LiveView, and LocalLiveView remain
 deferred.
+
+## BH-07 Phase 6 activation
+
+`POST /bh07/commands/execute` performs the one closed
+`counter.increment` development operation after repeating current origin,
+encrypted-session, CSRF, schema, and private-grant checks. The package owns the
+serialized in-memory resource revision, exact success/stale replay records, and
+bounded redacted audit. The browser supplies only the Phase 5 typed intent.
+
+This is not a general command handler or browser effect system. Persistence,
+distributed idempotency, dynamic resolution, external resource mutation,
+credentials, generalized roles/permissions, pushes/reconnect, production
+deployment/support, LiveView, and LocalLiveView remain deferred.
