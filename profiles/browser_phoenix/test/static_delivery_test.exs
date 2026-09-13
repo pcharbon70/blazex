@@ -40,6 +40,7 @@ defmodule BlazeXBrowserPhoenix.StaticDeliveryTest do
 
     attestation = %{
       "artifacts" => Enum.map(artifacts, &attested_artifact/1),
+      "attestation_id" => "blazex.bh06.entrypoint-accounting/1/counter",
       "decision" => "accept",
       "entrypoint" => manifest["entrypoint"],
       "manifest" => %{
