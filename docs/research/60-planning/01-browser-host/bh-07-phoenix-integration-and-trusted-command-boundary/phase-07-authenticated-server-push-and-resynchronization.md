@@ -11,7 +11,7 @@ aliases: ["BH-07 phase 7"]
 
 Back to the [milestone](README.md).
 
-- [ ] 7 Phase - Authenticated Server Push and Resynchronization.
+- [x] 7 Phase - Authenticated Server Push and Resynchronization.
   - Need: Phase 6 returns an authoritative command result to its caller but
     cannot notify another authenticated browser or reconcile a reconnecting
     observer with server-owned counter state.
@@ -46,12 +46,12 @@ Back to the [milestone](README.md).
     - [x] Prove cross-session push, reconnect replay/snapshot, forged/expired
       denial, capacity/backpressure behavior, and deterministic teardown.
 
-  - [ ] 7.4 Section - Reproduce, review, and publish completion.
-    - [ ] Run package/profile tests, mutation validator, archive, dependency,
+  - [x] 7.4 Section - Reproduce, review, and publish completion.
+    - [x] Run package/profile tests, mutation validator, archive, dependency,
       JSON, formatting, and patch-hygiene gates.
-    - [ ] Publish source-bound evidence, limitations, inherited unsupported
+    - [x] Publish source-bound evidence, limitations, inherited unsupported
       status, and the acceptance decision.
-    - [ ] Accept only with bounded authenticated push, loss-detecting cursor
+    - [x] Accept only with bounded authenticated push, loss-detecting cursor
       resynchronization, no socket command authority, and unchanged deferrals.
 
 ## Exit gate

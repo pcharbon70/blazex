@@ -31,3 +31,8 @@ Phase 6 is complete for one atomic, authorized, idempotent, in-memory counter
 mutation with bounded redacted audit under the unsupported development boundary.
 
 - [Phase 6 trusted-execution evidence](phase-06-trusted-execution-evidence-v0.1.0.json)
+
+Phase 7 is complete for authenticated, bounded counter push with deterministic
+replay-or-snapshot resynchronization and no socket command authority.
+
+- [Phase 7 authenticated-push evidence](phase-07-authenticated-push-evidence-v0.1.0.json)
