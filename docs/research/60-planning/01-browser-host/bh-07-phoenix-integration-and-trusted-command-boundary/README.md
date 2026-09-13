@@ -25,12 +25,13 @@ not dependencies, inputs, or completion gates for current BH-07 work.
 | [4 — CSRF and Origin Security Envelope](phase-04-csrf-and-origin-security-envelope.md) | complete | Bind rotating anti-CSRF proofs to opaque sessions and enforce canonical same-origin transport without command authority. | Accepted Phase 3 and explicit authorization |
 | [5 — Typed Command Admission and Authorization](phase-05-typed-command-admission-and-authorization.md) | complete | Admit bounded typed command intents against static declarations and private subject grants without executing handlers or effects. | Accepted Phase 4, BH-05 action contract, and explicit authorization |
 | [6 — Atomic Trusted Command Execution](phase-06-atomic-trusted-command-execution.md) | complete | Execute one closed counter mutation against server-owned revision state with exact replay and bounded redacted audit. | Accepted Phase 5 and explicit authorization |
+| [7 — Authenticated Server Push and Resynchronization](phase-07-authenticated-server-push-and-resynchronization.md) | active | Push redacted counter updates to authenticated Phoenix Channels with bounded replay-or-snapshot cursor recovery and no socket command authority. | Accepted Phase 6 and explicit authorization |
 
-Later phase decomposition remains a separate planning decision. Phase 6
-authorizes only one closed in-memory counter mutation; it does not authorize
-credentials, production identity, generalized handlers/roles/permissions,
-arbitrary effects, external resources, persistence, pushes, reconnect,
-deployment coordination, support promotion, LiveView, LocalLiveView, or BH-08.
+Later phase decomposition remains a separate planning decision. Phase 7
+authorizes only one authenticated counter-update topic and server-side cursor
+resynchronization; it does not authorize socket commands, arbitrary topics,
+durable history, browser-managed reconnect, routing/deployment coordination,
+effects, production support, LiveView, LocalLiveView, or BH-08.
 
 ## Index
 
@@ -60,6 +61,8 @@ deployment coordination, support promotion, LiveView, LocalLiveView, or BH-08.
 - [Trusted execution contract](trusted-execution-contract.md)
 - [Phase 6 completion evidence](phase-06-completion.md)
 - [Phase 6 review and reconciliation](phase-06-review-and-reconciliation.md)
+- [Phase 7 — Authenticated Server Push and Resynchronization](phase-07-authenticated-server-push-and-resynchronization.md)
+- [Authenticated server push contract](server-push-contract.md)
 
 ### Subdirectories
 

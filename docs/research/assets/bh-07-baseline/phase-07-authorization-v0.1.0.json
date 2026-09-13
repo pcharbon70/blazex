@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0.0",
+  "milestone": "BH-07",
+  "phase": 7,
+  "authorized": true,
+  "authorized_at": "2026-09-13",
+  "base_revision": "18786d3506f1269812ad541ca38e10d48a7929ec",
+  "branch": "codex/bh07-phase7-authenticated-server-push",
+  "delivery": {"section_commits": 4, "pull_requests": 1, "merge": true, "return_to_synced_main": true, "delete_feature_branch": true},
+  "bound_inputs": {
+    "docs/research/assets/bh-07-baseline/phase-06-completion-v0.1.0.json": "31a48c74b41dc89b7c0c338c53222364123a059a754690c659c9170c9aec27f5",
+    "integration/bh-07/phase-06-trusted-execution-evidence-v0.1.0.json": "2fe2fe704e7409d92d9ef0d74da8bfd7da2dec7204b6d74c5190498fece45135",
+    "packages/blazex_phoenix/lib/blazex/phoenix/command_execution.ex": "672022c5ece963f54aed5621bd6665c3ef4aa661e39814bc8a5056e523d50123",
+    "packages/blazex_phoenix/lib/blazex/phoenix/session_registry.ex": "ceb6c731db607d2d7cc243f13185d9544e4d71eae690b2374ba41af6c5b1b196",
+    "profiles/browser_phoenix/lib/blazex_browser_phoenix/endpoint.ex": "cfc7effc75c2d0db9aca0175af5f973a68e1e144a038eec5b070724b0afea769",
+    "profiles/browser_phoenix/lib/blazex_browser_phoenix/session_plug.ex": "9a46093295c2cdca0966abd222bc95e349f00c1e5f7a0191816e215d599bb66a",
+    "docs/research/20-notes/architecture-decisions/adr-0005-server-adapter-and-trust-boundary.md": "5f2d34113308a36192d5d88bd36850d79d810a95b28d57d2e5a49c6c0f803766",
+    "docs/research/60-planning/liveview-integration-deferral.md": "3a2c3790c560191afd60f631576813760c7bbb4c05909a6f6a88058823e61e48"
+  },
+  "deferred": ["arbitrary-topics", "client-socket-commands", "protected-application-data", "pubsub-cluster-guarantees", "durable-event-log", "offline-command-queue", "browser-automatic-reconnect", "routing-coordination", "deployment-version-coordination", "browser-effects", "credentials", "generalized-roles", "generalized-permissions", "production-support", "liveview", "local-liveview", "BH-08"]
+}
