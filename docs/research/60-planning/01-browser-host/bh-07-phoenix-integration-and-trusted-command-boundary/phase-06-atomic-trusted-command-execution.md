@@ -11,7 +11,7 @@ aliases: ["BH-07 phase 6"]
 
 Back to the [milestone](README.md).
 
-- [ ] 6 Phase - Atomic Trusted Command Execution.
+- [x] 6 Phase - Atomic Trusted Command Execution.
   - Need: Phase 5 can validate and admit a trusted command intent, but it
     deliberately cannot compare authoritative state, apply a mutation, retain
     an execution result, or audit the outcome.
@@ -51,12 +51,12 @@ Back to the [milestone](README.md).
     - [x] Extend test reset/session cleanup and publish only the truthful,
       narrow trusted-execution capability.
 
-  - [ ] 6.4 Section - Reproduce, review, and publish completion.
-    - [ ] Run package/profile tests, mutation validator, archive, dependency,
+  - [x] 6.4 Section - Reproduce, review, and publish completion.
+    - [x] Run package/profile tests, mutation validator, archive, dependency,
       JSON, formatting, and patch-hygiene gates.
-    - [ ] Publish source-bound evidence, limitations, inherited unsupported
+    - [x] Publish source-bound evidence, limitations, inherited unsupported
       status, and the acceptance decision.
-    - [ ] Accept only with one atomic authorized mutation, exact replay without
+    - [x] Accept only with one atomic authorized mutation, exact replay without
       duplicate mutation, bounded redacted audit, and unchanged deferrals.
 
 ## Exit gate

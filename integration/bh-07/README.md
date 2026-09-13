@@ -26,3 +26,8 @@ Phase 5 is complete for typed, authorized, bounded, non-executing command
 admission under the unsupported development boundary.
 
 - [Phase 5 command-admission evidence](phase-05-command-admission-evidence-v0.1.0.json)
+
+Phase 6 is complete for one atomic, authorized, idempotent, in-memory counter
+mutation with bounded redacted audit under the unsupported development boundary.
+
+- [Phase 6 trusted-execution evidence](phase-06-trusted-execution-evidence-v0.1.0.json)

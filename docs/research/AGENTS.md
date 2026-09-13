@@ -321,6 +321,12 @@ milestone completion, browser attestation binding, or BH-07 entry decision
 changes, also run `python3 70-tools/validate_bh06_entrypoint_attestation.py` and
 `python3 -m unittest discover -s 70-tools -p 'test_validate_bh06_entrypoint_attestation.py'`.
 
+When BH-07 Phase 6 authorization, trusted command execution, authoritative
+revision state, execution idempotency/audit, Phoenix execution transport, or
+Phase 6 evidence changes, also run
+`python3 70-tools/validate_bh07_trusted_execution.py` and
+`python3 -m unittest discover -s 70-tools -p 'test_validate_bh07_trusted_execution.py'`.
+
 Do not commit, push, publish, or open a pull request unless the user asks.
 
 ## Research tooling

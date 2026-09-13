@@ -48,7 +48,7 @@ execution records. Explicit test reset restores counter value/revision to zero
 and advances a generation. Process or application restart loses all in-memory
 state; persistence and distributed exact-once behavior are not claimed.
 
-## Deferrals
+## **[DEFERRED]** scope
 
 General handlers, dynamic resolution, arbitrary effects, external resources,
 transactions/databases, credentials/login providers, generalized roles and
