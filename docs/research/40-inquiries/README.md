@@ -32,6 +32,7 @@ resolution criteria here. Promote durable conclusions into notes.
 - [Can Elixir WebAssembly components integrate with Phoenix and Plug?](can-elixir-webassembly-components-integrate-with-phoenix-and-plug.md) — defines
   compatibility, rendering, security, payload, hosting, and production-readiness
   criteria for the proposed framework.
+- [Can BlazeX build and own an ERTS WebAssembly runtime stack?](can-blazex-build-and-own-an-erts-webassembly-runtime-stack.md) — defines falsifiable upstream-port, minimal OTP boot, Worker/thread, host-capability, lifecycle, security, reproducibility, and product-budget gates for a first-party runtime.
 - [Can one BlazeX component model target DOM and native controls?](can-one-blazex-component-model-target-dom-and-native-controls.md) — defines the
   semantic, cross-renderer, accessibility, resource, and native-control proof
   required before F0 API stability.

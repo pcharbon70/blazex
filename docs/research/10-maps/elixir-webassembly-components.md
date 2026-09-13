@@ -47,6 +47,11 @@ source creates a .NET compatibility objective.
 - [The main synthesis](../20-notes/elixir-webassembly-component-framework-for-phoenix-and-plug.md)
   develops the complete comparison, recommended architecture, risks, and
   staged implementation plan.
+- [The first-party ERTS-in-Wasm
+  synthesis](../20-notes/first-party-erlang-otp-erts-webassembly-runtime-stack.md)
+  independently evaluates an upstream ERTS browser port, pinned matching OTP
+  boot, candidate Worker/thread architectures, capability security, and staged proof
+  without changing the current runtime selection.
 - [The host-neutral architecture
   amendment](../20-notes/host-neutral-blazex-architecture-and-native-control-backends.md)
   makes browser Popcorn/AtomVM the first profile rather than the component ABI
@@ -134,6 +139,33 @@ source creates a .NET compatibility objective.
   JavaScript, and security contracts used by the design matrix.
 - [Plug 1.20 documentation](../30-sources/elixir-plug-team-2026-plug-1-20-documentation.md)
   defines the minimal host contract available without Phoenix.
+
+### First-party ERTS-in-Wasm research
+
+- [ERTS WebAssembly runtime stack map](erts-webassembly-runtime-stack.md)
+  provides the complete clean trail through upstream ERTS internals, OTP boot,
+  Emscripten, browser standards, scientific papers, security, and the
+  executable decision gate.
+- [First-party ERTS-in-Wasm
+  inquiry](../40-inquiries/can-blazex-build-and-own-an-erts-webassembly-runtime-stack.md)
+  defines the boot, semantics, capability, teardown, supply-chain, and budget
+  evidence required before adoption.
+- [The BEAM Book](../30-sources/stenman-2025-beam-book.md) and the [pinned OTP
+  29.0.6 source audit](../30-sources/erlang-otp-project-2026-erts-build-runtime-and-source.md)
+  establish what must be preserved and why one scheduler is not a threadless
+  ERTS build.
+- [OTP boot and browser
+  compatibility](../30-sources/erlang-otp-project-2026-otp-boot-security-and-compatibility.md)
+  explains why official matching `kernel` and `stdlib` BEAM modules should
+  boot inside ERTS rather than be rewritten.
+- [Emscripten](../30-sources/emscripten-project-2026-browser-porting-runtime.md)
+  and [browser Wasm standards](../30-sources/webassembly-standards-2026-browser-security-and-threads.md)
+  establish the off-UI-thread, directly supervised pthread/shared-memory,
+  cross-origin-isolation, event-loop, and narrow-import constraints while
+  leaving the final Worker topology to experiment.
+- [The research journal](../50-journal/2026-09-13-first-party-erts-webassembly-runtime-deep-dive.md)
+  records source inspection and explicitly reports that no ERTS/Wasm build was
+  attempted because `emcc` was not found on `PATH`.
 
 ### The existing Elixir-in-Wasm path
 

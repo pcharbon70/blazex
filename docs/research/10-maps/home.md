@@ -32,6 +32,11 @@ provider, and remote adapter.
 
 ## Active inquiry
 
+- [Can BlazeX build and own an ERTS WebAssembly runtime
+  stack?](../40-inquiries/can-blazex-build-and-own-an-erts-webassembly-runtime-stack.md) —
+  defines the upstream-port, pinned matching OTP boot, browser-thread, host
+  capability, security, lifecycle, reproducibility, and product-budget proof
+  needed before a first-party runtime can be adopted.
 - [Can one BlazeX component model target DOM and native
   controls?](../40-inquiries/can-one-blazex-component-model-target-dom-and-native-controls.md) —
   defines the cross-renderer vertical slice and proof required before F0 API
@@ -51,6 +56,10 @@ provider, and remote adapter.
 
 ## Topic map
 
+- [ERTS WebAssembly runtime stack](erts-webassembly-runtime-stack.md) — routes
+  through ERTS internals, minimal OTP boot, Emscripten and browser constraints,
+  security literature, performance evidence, and the staged executable gate
+  for a BlazeX-owned runtime.
 - [BlazeX repository ownership and dependency
   map](blazex-repository-ownership-and-dependency-map.md) — enumerates all
   current monorepo owners, allowed dependency directions, profile
@@ -139,6 +148,12 @@ provider, and remote adapter.
   the complete runtime and server-integration report. It concludes that
   Popcorn/AtomVM and LocalLiveView are the shortest browser path while the
   public component model remains renderer-neutral.
+- [First-party Erlang/OTP ERTS WebAssembly runtime
+  stack](../20-notes/first-party-erlang-otp-erts-webassembly-runtime-stack.md) —
+  the independent upstream-ERTS browser-port study: interpreter-only Wasm,
+  mandatory pthread Workers, immutable `kernel`/`stdlib`, capability brokering,
+  security from first boot, OTP tiers, and a measured go/no-go program. It is a
+  candidate architecture, not a current support or implementation claim.
 - [Blazor framework semantics beneath
   BlazeX](../20-notes/blazor-framework-semantics-beneath-blazex.md) — the
   lower-level component/runtime matrix for identity, forms, lifecycle,
@@ -146,6 +161,11 @@ provider, and remote adapter.
 
 ## Research record
 
+- [2026-09-13 first-party ERTS WebAssembly runtime deep
+  dive](../50-journal/2026-09-13-first-party-erts-webassembly-runtime-deep-dive.md) —
+  records the OTP 29.0.6 source pin, browser/Wasm and research-paper lanes,
+  mandatory-thread correction, negative findings, and the lack of executable
+  ERTS/Wasm build evidence.
 - [2026-09-04 direct native-control host
   revision](../50-journal/2026-09-04-direct-native-control-host-revision.md) —
   replaces the active wrapper-toolkit recommendation with direct Win32,
@@ -174,6 +194,11 @@ provider, and remote adapter.
 
 ## Unsettled threads
 
+- Whether a small, upstreamable ERTS browser platform layer can boot a pinned,
+  matching minimal OTP release under Emscripten pthreads in Chrome and Firefox,
+  then achieve operational teardown with no live owned resources, unreachable
+  generation buffers, and stable repeated-cycle memory/Worker slopes—without
+  broad POSIX emulation or an unmaintainable fork.
 - Which semantic authoring syntax can preserve Phoenix ergonomics without
   making HTML canonical?
 - How thin direct Win32/AppKit/GTK adapters can share protocol bindings,

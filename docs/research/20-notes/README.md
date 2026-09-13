@@ -58,6 +58,7 @@ Source summaries belong in `30-sources`; unresolved workbenches belong in
 - [Elixir WebAssembly component framework for Phoenix and Plug](elixir-webassembly-component-framework-for-phoenix-and-plug.md) — provides the
   full Blazor and Phoenix architecture study, evaluates current Elixir/Wasm
   paths, and develops the recommended BlazeX architecture and roadmap.
+- [First-party Erlang/OTP ERTS WebAssembly runtime stack](first-party-erlang-otp-erts-webassembly-runtime-stack.md) — evaluates an upstream ERTS browser port, pinned matching OTP boot, candidate Emscripten pthread/Worker topologies, capability security, compatibility tiers, and staged go/no-go proof without claiming a working build.
 - [Host-neutral BlazeX architecture and native control backends](host-neutral-blazex-architecture-and-native-control-backends.md) — separates runtime,
   execution host, renderer, capabilities, and remote adapters; defines the
   semantic UI ABI and preserves fully native controls as an early design goal.

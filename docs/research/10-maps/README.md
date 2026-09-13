@@ -37,6 +37,10 @@ should explain why its links belong together rather than merely list files.
 - [Elixir WebAssembly components](elixir-webassembly-components.md) — routes
   through the Blazor, Phoenix, LiveView, WebAssembly, Popcorn, and alternative
   runtime evidence behind the proposed framework.
+- [ERTS WebAssembly runtime stack](erts-webassembly-runtime-stack.md) — routes
+  through the first-party upstream ERTS port, minimal OTP boot, Emscripten
+  browser substrate, security boundary, scientific literature, and executable
+  decision gates.
 - [Host-neutral and native-renderer architecture](host-neutral-and-native-renderer-architecture.md) — routes through non-web hosts, semantic UI,
   renderer/capability protocols, desktop webview packaging, fully native
   controls, and the cross-renderer proof gate.
