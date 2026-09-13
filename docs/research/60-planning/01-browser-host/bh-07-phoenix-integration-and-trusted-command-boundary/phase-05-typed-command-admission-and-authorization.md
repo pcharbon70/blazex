@@ -30,12 +30,12 @@ Back to the [milestone](README.md).
       idempotency, capacity, receipt, redaction, and failure semantics.
     - [x] Activate Phase 5 planning, baseline, integration, and evidence indexes.
 
-  - [ ] 5.2 Section - Implement reusable typed admission authority.
-    - [ ] Validate exact command envelopes and closed declarative payload schemas
+  - [x] 5.2 Section - Implement reusable typed admission authority.
+    - [x] Validate exact command envelopes and closed declarative payload schemas
       without atom creation or dynamic handler resolution.
-    - [ ] Re-authenticate server-owned session context and apply exact subject
+    - [x] Re-authenticate server-owned session context and apply exact subject
       grants rather than accepting client authority hints.
-    - [ ] Serialize bounded per-session/global admission and exact replay/conflict
+    - [x] Serialize bounded per-session/global admission and exact replay/conflict
       decisions while retaining only one-way request fingerprints.
 
   - [ ] 5.3 Section - Integrate the Phoenix admission transport.
