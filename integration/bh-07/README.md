@@ -11,3 +11,8 @@ Phase 2 is complete for a public-only bootstrap envelope under the unsupported
 development boundary.
 
 - [Phase 2 public-bootstrap evidence](phase-02-public-bootstrap-evidence-v0.1.0.json)
+
+Phase 3 is complete for bounded opaque sessions and a redacted authentication
+projection under the unsupported development boundary.
+
+- [Phase 3 session-boundary evidence](phase-03-session-boundary-evidence-v0.1.0.json)

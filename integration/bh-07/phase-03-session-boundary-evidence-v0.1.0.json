@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0.0",
+  "milestone": "BH-07",
+  "phase": 3,
+  "decision": "accept",
+  "support_state": "unsupported-development-evidence",
+  "source_bindings": {
+    "packages/blazex_phoenix/lib/blazex/phoenix/session_registry.ex": "6a725b34766f5b575af345e3b01efc03ceea7f59d8170f0be2bc447b2d00250c",
+    "packages/blazex_phoenix/lib/blazex/phoenix/public_bootstrap.ex": "d008720d1933d3430848f502c39621bc8a7d3f652029e5b3e5d00b6a0e93c496",
+    "profiles/browser_phoenix/lib/blazex_browser_phoenix/session_plug.ex": "cd9dbca3f31f8922f57e642f65f1130bdb2b0022b3019da736e2d27072a900cb",
+    "profiles/browser_phoenix/lib/blazex_browser_phoenix/endpoint.ex": "2bdcc4f0a280c35cfadbebcfb90ec615bc535875d7ce01c395033cd33c215271",
+    "profiles/browser_phoenix/mix.exs": "f6fb598244cfcb38cd0299e5b6ffa2b38156386af520bf22c955d3c0b08d8c19",
+    "profiles/browser_phoenix/mix.lock": "870585f232a7fbdd5438bb5e9522da4ce1b07bba5c2d7ae6244a37ef2ce5befd"
+  },
+  "registry": {
+    "opaque_random_bytes": 32,
+    "max_sessions": 256,
+    "default_ttl_ms": 900000,
+    "max_ttl_ms": 3600000,
+    "prune_before_capacity": true,
+    "rotation_preserves_expiry": true,
+    "revocation_idempotent": true,
+    "restart_invalidates_all": true,
+    "concurrent_capacity_exact": true,
+    "snapshot_redacted": true
+  },
+  "projection": {
+    "path": "/bh07/session",
+    "protocol": "blazex.bh07.session/1",
+    "states": ["anonymous", "authenticated"],
+    "authenticated_fields": ["expires_at_ms", "protocol", "state", "subject"],
+    "forbidden_fields": ["session_id", "credential", "role", "permission", "allowed_action", "csrf", "mutation_authority"],
+    "cache_control": "no-store",
+    "cookie": {"encrypted": true, "signed": true, "http_only": true, "same_site": "Strict", "renew_on_issue": true},
+    "test_control": {"mode": "test", "loopback": true, "same_origin": true, "header": "x-bh07-test-control"}
+  },
+  "capabilities": {"sessions": true, "authentication_projection": true, "remote_commands": false, "pushes": false, "server_mutation": false},
+  "tests": [
+    {"gate": "blazex-phoenix-package", "tests": 30, "failures": 0, "result": "passed"},
+    {"gate": "browser-phoenix-profile", "tests": 26, "failures": 0, "result": "passed"},
+    {"gate": "session-validator-mutations", "tests": 7, "failures": 0, "result": "passed"},
+    {"gate": "research-archive", "result": "passed"},
+    {"gate": "dependency-boundary", "result": "passed"},
+    {"gate": "patch-hygiene", "result": "passed"}
+  ],
+  "deferred": ["credentials", "login-provider", "roles", "permissions", "csrf", "commands", "effects", "pushes", "reconnect", "deployment-coordination", "production-support", "liveview", "local-liveview", "BH-08"],
+  "limitations": [
+    "Only deterministic test identities are integrated; no credential verifier or production login provider exists.",
+    "The development cookie does not set Secure because the qualified endpoint is localhost HTTP; production cookie and proxy policy remain deferred.",
+    "No CSRF token, trusted command, effect, push, browser-process, traffic, production support, LiveView, or LocalLiveView claim is made."
+  ]
+}

@@ -21,9 +21,9 @@ not dependencies, inputs, or completion gates for current BH-07 work.
 | --- | --- | --- | --- |
 | [1 — Attested Static Delivery Boundary](phase-01-attested-static-delivery-boundary.md) | complete | Serve the accepted BH-06 artifact set through Phoenix under exact manifest cache, integrity, and private-evidence rules while removing LiveView/LocalLiveView from the active profile. | Accepted BH-06 and explicit authorization |
 | [2 — Public Bootstrap Envelope](phase-02-public-bootstrap-envelope.md) | complete | Publish a bounded, deterministic, public-only bootstrap envelope tied to the accepted delivery identity without projecting server authority. | Accepted Phase 1 and explicit authorization |
-| [3 — Opaque Session and Authentication Projection](phase-03-opaque-session-and-authentication-projection.md) | active | Add bounded server-owned opaque sessions and a minimal redacted authentication projection without commands or CSRF authority. | Accepted Phase 2 and explicit authorization |
+| [3 — Opaque Session and Authentication Projection](phase-03-opaque-session-and-authentication-projection.md) | complete | Add bounded server-owned opaque sessions and a minimal redacted authentication projection without commands or CSRF authority. | Accepted Phase 2 and explicit authorization |
 
-Later phase decomposition remains a separate planning decision. Phase 3 does
+Later phase decomposition remains a separate planning decision. Phase 3 did
 not authorize credentials, a login provider, roles, permissions, CSRF,
 commands, effects, pushes, reconnect, deployment coordination, support
 promotion, LiveView, LocalLiveView, or BH-08.
@@ -42,6 +42,8 @@ promotion, LiveView, LocalLiveView, or BH-08.
 - [Phase 2 review and reconciliation](phase-02-review-and-reconciliation.md)
 - [Phase 3 — Opaque Session and Authentication Projection](phase-03-opaque-session-and-authentication-projection.md)
 - [Opaque-session boundary contract](session-boundary-contract.md)
+- [Phase 3 completion evidence](phase-03-completion.md)
+- [Phase 3 review and reconciliation](phase-03-review-and-reconciliation.md)
 
 ### Subdirectories
 

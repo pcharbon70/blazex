@@ -11,7 +11,7 @@ aliases: ["BH-07 phase 3"]
 
 Back to the [milestone](README.md).
 
-- [ ] 3 Phase - Opaque Session and Authentication Projection.
+- [x] 3 Phase - Opaque Session and Authentication Projection.
   - Need: Phase 2 exposes only anonymous public bootstrap data. The Phoenix
     adapter next needs a bounded server-owned session lifecycle and a minimal
     non-authoritative browser projection before command or CSRF work begins.
@@ -27,25 +27,25 @@ Back to the [milestone](README.md).
       projection, cookie, test-control, redaction, and failure semantics.
     - [x] Activate Phase 3 planning, baseline, integration, and evidence indexes.
 
-  - [ ] 3.2 Section - Implement the reusable bounded session registry.
-    - [ ] Issue server-generated opaque identifiers for trusted subject inputs.
-    - [ ] Enforce TTL/capacity, prune expiry, rotate atomically, revoke idempotently,
+  - [x] 3.2 Section - Implement the reusable bounded session registry.
+    - [x] Issue server-generated opaque identifiers for trusted subject inputs.
+    - [x] Enforce TTL/capacity, prune expiry, rotate atomically, revoke idempotently,
       and return only minimal authentication projections.
-    - [ ] Prove concurrency, expiry, capacity recovery, rotation, revocation,
+    - [x] Prove concurrency, expiry, capacity recovery, rotation, revocation,
       invalid input, restart invalidation, and snapshot redaction.
 
-  - [ ] 3.3 Section - Integrate Phoenix session projection and test controls.
-    - [ ] Add GET `/bh07/session` with anonymous/authenticated redacted output.
-    - [ ] Add loopback, same-origin, test-only issuance/reset controls and
+  - [x] 3.3 Section - Integrate Phoenix session projection and test controls.
+    - [x] Add GET `/bh07/session` with anonymous/authenticated redacted output.
+    - [x] Add loopback, same-origin, test-only issuance/reset controls and
       same-origin logout using the encrypted, signed, strict-site host cookie.
-    - [ ] Update bootstrap capabilities, preserve no-store and bounded responses,
+    - [x] Update bootstrap capabilities, preserve no-store and bounded responses,
       and prove no identifiers, credentials, roles, or permissions escape.
 
-  - [ ] 3.4 Section - Reproduce, review, and publish completion.
-    - [ ] Run package/profile tests, mutation validator, archive, dependency,
+  - [x] 3.4 Section - Reproduce, review, and publish completion.
+    - [x] Run package/profile tests, mutation validator, archive, dependency,
       JSON, formatting, and patch-hygiene gates.
-    - [ ] Publish evidence, limitations, inherited status, and decision.
-    - [ ] Accept only with bounded server-owned sessions, redacted projection,
+    - [x] Publish evidence, limitations, inherited status, and decision.
+    - [x] Accept only with bounded server-owned sessions, redacted projection,
       and unchanged LiveView/LocalLiveView deferral.
 
 ## Exit gate
