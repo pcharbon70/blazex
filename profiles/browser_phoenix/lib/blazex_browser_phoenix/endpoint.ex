@@ -12,6 +12,15 @@ defmodule BlazeXBrowserPhoenix.Endpoint do
     secure: false
   ]
 
+  socket("/bh07/socket", BlazeXBrowserPhoenix.Socket,
+    websocket: [
+      connect_info: [session: @session_options],
+      check_csrf: false,
+      max_frame_size: 2_048
+    ],
+    longpoll: false
+  )
+
   plug(BlazeXBrowserPhoenix.DeploymentHeaders)
   plug(Plug.Session, @session_options)
   plug(BlazeXBrowserPhoenix.SessionPlug)

@@ -38,12 +38,12 @@ Back to the [milestone](README.md).
     - [x] Bound subscribers, monitor owner processes, prune expired authority,
       and remove session-owned subscriptions and records on revocation/reset.
 
-  - [ ] 7.3 Section - Integrate the Phoenix socket and channel.
-    - [ ] Mount `/bh07/socket` with encrypted-session connect info and canonical
+  - [x] 7.3 Section - Integrate the Phoenix socket and channel.
+    - [x] Mount `/bh07/socket` with encrypted-session connect info and canonical
       Phoenix origin checks; require the current CSRF proof at connect/join.
-    - [ ] Join only `bh07:counter`, return bounded sync state, forward only the
+    - [x] Join only `bh07:counter`, return bounded sync state, forward only the
       fixed counter event, and reject every client channel event.
-    - [ ] Prove cross-session push, reconnect replay/snapshot, forged/expired
+    - [x] Prove cross-session push, reconnect replay/snapshot, forged/expired
       denial, capacity/backpressure behavior, and deterministic teardown.
 
   - [ ] 7.4 Section - Reproduce, review, and publish completion.

@@ -8,6 +8,7 @@ config :blazex_browser_phoenix,
 config :blazex_browser_phoenix, BlazeXBrowserPhoenix.Endpoint,
   adapter: Bandit.PhoenixAdapter,
   http: [ip: {127, 0, 0, 1}, port: 4101],
+  pubsub_server: BlazeXBrowserPhoenix.PubSub,
   server: false,
   secret_key_base: "bh01-feasibility-only-secret-key-base-not-for-production-000000000000"
 
