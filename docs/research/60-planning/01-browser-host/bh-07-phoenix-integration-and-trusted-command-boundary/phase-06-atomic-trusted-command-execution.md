@@ -33,13 +33,13 @@ Back to the [milestone](README.md).
       semantics.
     - [x] Activate Phase 6 planning and baseline indexes.
 
-  - [ ] 6.2 Section - Implement the reusable execution authority.
-    - [ ] Re-authenticate the opaque session and reuse exact Phase 5 admission
+  - [x] 6.2 Section - Implement the reusable execution authority.
+    - [x] Re-authenticate the opaque session and reuse exact Phase 5 admission
       before entering the serialized mutation boundary.
-    - [ ] Apply only `counter.increment`, compare the server-owned revision,
+    - [x] Apply only `counter.increment`, compare the server-owned revision,
       retain the first result by session/key/fingerprint, and reject changed
       reuse or stale state without mutation.
-    - [ ] Bound execution records and redacted audit, revoke session-owned
+    - [x] Bound execution records and redacted audit, revoke session-owned
       records on cleanup, and expose no credentials, tokens, command body, or
       raw idempotency key.
 

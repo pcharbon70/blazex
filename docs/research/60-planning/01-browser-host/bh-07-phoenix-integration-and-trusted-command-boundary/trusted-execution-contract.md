@@ -25,12 +25,15 @@ Execution repeats current session/CSRF authentication and exact Phase 5
 admission. Inside one serialized authority it then checks execution replay,
 changed-key conflict, global/per-session capacity, the authoritative revision,
 and the closed operation before applying one mutation. Exact replay precedes
-capacity and revision checks and returns the retained first result.
+capacity and revision checks and returns the retained first result. Successful
+and stale post-admission outcomes are retained, so a future-revision request
+cannot become executable merely because authoritative state later advances.
 
 The key is the opaque session plus idempotency key; the retained fingerprint is
 one-way. A changed request using the same key is an idempotency conflict. A new
 request with a stale `expected_revision` is rejected without mutation. No
-failed request consumes execution-record capacity.
+request rejected before admission or for exhausted execution capacity consumes
+execution-record capacity.
 
 ## Bounds and redaction
 
