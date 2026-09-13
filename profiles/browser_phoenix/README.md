@@ -102,3 +102,17 @@ The route supports GET, HEAD, and conditional ETags with `no-store`; other
 methods return 405. Sessions, authentication projection, CSRF, commands,
 pushes, reconnect, production support, LiveView, and LocalLiveView remain
 deferred.
+
+## BH-07 Phase 3 activation
+
+`/bh07/session` exposes only an anonymous or minimal authenticated projection
+backed by a bounded server-owned opaque-session registry. The encrypted and
+signed host cookie is HTTP-only and `SameSite=Strict`; rotation and replacement
+renew the cookie, expiry and restart invalidate server state, and logout is
+same-origin and idempotent. Test-only issuance/reset routes require loopback,
+same-origin, test mode, and the explicit `x-bh07-test-control: enabled` header.
+
+The projection never includes the opaque identifier, credentials, roles,
+permissions, allowed actions, CSRF material, or mutation authority. Credentials,
+a login provider, CSRF, commands, effects, pushes, reconnect, production
+support, LiveView, and LocalLiveView remain deferred.

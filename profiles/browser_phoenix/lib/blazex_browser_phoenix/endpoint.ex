@@ -4,9 +4,9 @@ defmodule BlazeXBrowserPhoenix.Endpoint do
 
   @session_options [
     store: :cookie,
-    key: "_blazex_bh01_phase6",
-    signing_salt: "bh01-phase6-signing",
-    encryption_salt: "bh01-phase6-encryption",
+    key: "_blazex_browser_phoenix",
+    signing_salt: "browser-phoenix-signing",
+    encryption_salt: "browser-phoenix-encryption",
     same_site: "Strict",
     http_only: true,
     secure: false
@@ -14,6 +14,7 @@ defmodule BlazeXBrowserPhoenix.Endpoint do
 
   plug(BlazeXBrowserPhoenix.DeploymentHeaders)
   plug(Plug.Session, @session_options)
+  plug(BlazeXBrowserPhoenix.SessionPlug)
   plug(BlazeXBrowserPhoenix.ControlPlug)
   plug(BlazeXBrowserPhoenix.CommandPlug)
   plug(BlazeXBrowserPhoenix.BootstrapPlug)

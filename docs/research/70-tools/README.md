@@ -349,3 +349,5 @@ reporting a tooling change complete.
 - [BH-06 Phase 10 validator tests](test_validate_bh06_delivery_integrity.py) — Rejects policy, SRI, cache, browser, negative-proof, and integration-bypass mutations.
 - [BH-06 Phase 11 entrypoint-attestation validator](validate_bh06_entrypoint_attestation.py) — Recomputes declared entrypoint, artifact/evidence, manifest, payload, browser, completion, and BH-07 handoff bindings.
 - [BH-06 Phase 11 validator tests](test_validate_bh06_entrypoint_attestation.py) — Rejects extra roots, stale manifests, missing categories, false payloads, browser drift, and set-check bypass.
+- [BH-07 Phase 3 session-boundary validator](validate_bh07_session_boundary.py) — Verifies authorization, bounded opaque storage, redacted projection, strict encrypted cookie composition, acceptance gates, and deferred dependencies.
+- [BH-07 Phase 3 validator tests](test_validate_bh07_session_boundary.py) — Rejects decision, capacity, source, projection, cookie, dependency, and completion-checklist mutations.

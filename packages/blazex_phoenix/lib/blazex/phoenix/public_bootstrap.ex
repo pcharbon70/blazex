@@ -41,11 +41,12 @@ defmodule BlazeX.Phoenix.PublicBootstrap do
       "asset_base" => asset_base,
       "attestation" => %{"id" => delivery.attestation["attestation_id"]},
       "capabilities" => %{
+        "authentication_projection" => true,
         "browser_local_execution" => true,
         "pushes" => false,
         "remote_commands" => false,
         "server_mutation" => false,
-        "sessions" => false,
+        "sessions" => true,
         "static_delivery" => true
       },
       "entrypoint" => delivery.manifest["entrypoint"],
