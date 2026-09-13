@@ -2,7 +2,7 @@ defmodule BlazeXBrowserPhoenix.SessionPlug do
   @moduledoc false
   import Plug.Conn
 
-  alias BlazeX.Phoenix.{CommandAdmission, OriginPolicy, SessionRegistry}
+  alias BlazeX.Phoenix.{CommandAdmission, CommandExecution, OriginPolicy, SessionRegistry}
 
   @session_path "/bh07/session"
   @csrf_path "/bh07/csrf/rotate"
@@ -118,6 +118,7 @@ defmodule BlazeXBrowserPhoenix.SessionPlug do
     if test_control?(conn) and same_origin(conn) == :ok do
       SessionRegistry.reset()
       CommandAdmission.reset()
+      CommandExecution.reset()
 
       conn
       |> fetch_session()
@@ -153,6 +154,7 @@ defmodule BlazeXBrowserPhoenix.SessionPlug do
     case get_session(conn, :bh07_session_id) do
       session_id when is_binary(session_id) ->
         CommandAdmission.revoke_session(session_id)
+        CommandExecution.revoke_session(session_id)
         SessionRegistry.revoke(session_id)
 
       _ ->
@@ -164,6 +166,7 @@ defmodule BlazeXBrowserPhoenix.SessionPlug do
 
   defp invalidate(conn, session_id) do
     CommandAdmission.revoke_session(session_id)
+    CommandExecution.revoke_session(session_id)
     SessionRegistry.revoke(session_id)
     clear_bh07_session(conn)
   end

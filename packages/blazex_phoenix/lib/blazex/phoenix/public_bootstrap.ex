@@ -44,10 +44,11 @@ defmodule BlazeX.Phoenix.PublicBootstrap do
         "authentication_projection" => true,
         "browser_local_execution" => true,
         "command_admission" => true,
+        "trusted_command_execution" => true,
         "csrf_protection" => true,
         "pushes" => false,
-        "remote_commands" => false,
-        "server_mutation" => false,
+        "remote_commands" => true,
+        "server_mutation" => true,
         "sessions" => true,
         "static_delivery" => true
       },

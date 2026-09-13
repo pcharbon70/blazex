@@ -76,12 +76,13 @@ defmodule BlazeX.Phoenix.PublicBootstrapTest do
     assert capabilities["static_delivery"]
     assert capabilities["browser_local_execution"]
     assert capabilities["command_admission"]
+    assert capabilities["trusted_command_execution"]
     assert capabilities["sessions"]
     assert capabilities["authentication_projection"]
     assert capabilities["csrf_protection"]
-    refute capabilities["remote_commands"]
+    assert capabilities["remote_commands"]
     refute capabilities["pushes"]
-    refute capabilities["server_mutation"]
+    assert capabilities["server_mutation"]
   end
 
   test "rejects secret-like and authority-bearing keys at every depth", context do

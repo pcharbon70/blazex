@@ -4,8 +4,8 @@
   "path": "profiles/browser_phoenix",
   "kind": "executable-profile",
   "activation_phase": "BH-01 Phase 1",
-  "status": "experimental-bh07-phase5-command-admission",
-  "current_phase": "BH-07 Phase 5",
+  "status": "experimental-bh07-phase6-trusted-execution",
+  "current_phase": "BH-07 Phase 6",
   "bh03_role": "executable-composition-only",
   "owner_role": "browser-profile-owner",
   "module_roots": [
@@ -45,13 +45,14 @@
     "behavior_implemented": false
   },
   "bh07_activation": {
-    "phase": 5,
-    "state": "typed-command-admission",
+    "phase": 6,
+    "state": "closed-trusted-command-execution",
     "route": "/bh07/",
     "bootstrap_route": "/bh07/bootstrap.json",
     "session_route": "/bh07/session",
     "csrf_rotation_route": "/bh07/csrf/rotate",
     "command_admission_route": "/bh07/commands/admit",
-    "deferred": ["credentials", "generalized-roles", "generalized-permissions", "command-execution", "effects", "pushes", "reconnect", "liveview", "local-liveview"]
+    "command_execution_route": "/bh07/commands/execute",
+    "deferred": ["credentials", "generalized-roles", "generalized-permissions", "general-command-handlers", "arbitrary-effects", "persistence", "pushes", "reconnect", "liveview", "local-liveview"]
   }
 }

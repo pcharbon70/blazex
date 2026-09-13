@@ -41,3 +41,10 @@ deny-by-default gate for exact command envelopes, static declarative payload
 schemas, private per-subject grants, bounded idempotency, and redacted receipts.
 It exposes no handler registration or execution API and records every receipt
 with `executed: false`; application mutation remains separately authorized work.
+
+BH-07 Phase 6 adds `BlazeX.Phoenix.CommandExecution`, a closed, serialized
+authority for one disposable `counter.increment` operation. It reuses Phase 5
+admission, compares server-owned revision state, retains exact success/stale
+outcomes, applies one idempotent in-memory mutation, and emits bounded redacted
+audit. It is not a general handler, effect, persistence, transaction, or
+production command API. LiveView and LocalLiveView remain deferred.
