@@ -140,6 +140,17 @@ defmodule BlazeX.Phoenix.CommandAdmissionTest do
     assert %{"admissions" => 0, "generation" => 2} = CommandAdmission.reset(context.admissions)
   end
 
+  test "session revocation releases only that session's bounded records", context do
+    first = session(context.sessions, "operator")
+    second = session(context.sessions, "operator")
+    assert {:ok, _} = admit(context, first, command("first", "first"))
+    assert {:ok, _} = admit(context, second, command("second", "second"))
+    assert :ok = CommandAdmission.revoke_session(first["session_id"], context.admissions)
+    assert :ok = CommandAdmission.revoke_session(first["session_id"], context.admissions)
+    assert CommandAdmission.snapshot(context.admissions)["admissions"] == 1
+    assert CommandAdmission.snapshot(context.admissions)["tracked_sessions"] == 1
+  end
+
   test "hostile public keys remain strings and cannot select runtime handlers", context do
     session = session(context.sessions, "operator")
     marker = "phase5_never_intern_#{System.unique_integer([:positive])}"

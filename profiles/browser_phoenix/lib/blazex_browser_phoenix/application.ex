@@ -7,6 +7,14 @@ defmodule BlazeXBrowserPhoenix.Application do
     children = [
       BlazeX.Phoenix.BH01.FixtureAuthority,
       BlazeX.Phoenix.SessionRegistry,
+      {BlazeX.Phoenix.CommandAdmission,
+       declarations: %{
+         "counter.increment" => %{
+           schema: "counter.increment",
+           payload: %{"amount" => {:integer, 1, 10}}
+         }
+       },
+       grants: %{"operator" => ["counter.increment"], "viewer" => []}},
       BlazeXBrowserPhoenix.StaticDeliveryCache,
       BlazeXBrowserPhoenix.Endpoint
     ]

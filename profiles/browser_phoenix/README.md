@@ -129,3 +129,16 @@ same-origin header and the exact `x-blazex-csrf` proof.
 Credentials, production identity, roles, permissions, commands, effects,
 pushes, reconnect, production deployment/support, LiveView, and LocalLiveView
 remain deferred.
+
+## BH-07 Phase 5 activation
+
+`POST /bh07/commands/admit` accepts only one bounded, exact JSON command intent
+behind the Phase 4 origin, encrypted-session, and CSRF checks. The reusable
+authority repeats authentication, resolves a static declaration, validates its
+closed payload schema, applies a private subject grant, and returns a bounded
+idempotent admission receipt. Receipts explicitly report `executed: false`.
+
+No handler, arbitrary module/function resolution, application resource mutation,
+or effect is available. Credentials, generalized roles/permissions, pushes,
+reconnect, production deployment/support, LiveView, and LocalLiveView remain
+deferred.

@@ -75,6 +75,7 @@ defmodule BlazeX.Phoenix.PublicBootstrapTest do
     capabilities = PublicBootstrap.build!(context.delivery).document["capabilities"]
     assert capabilities["static_delivery"]
     assert capabilities["browser_local_execution"]
+    assert capabilities["command_admission"]
     assert capabilities["sessions"]
     assert capabilities["authentication_projection"]
     assert capabilities["csrf_protection"]

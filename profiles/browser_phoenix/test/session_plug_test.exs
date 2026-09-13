@@ -3,7 +3,7 @@ defmodule BlazeXBrowserPhoenix.SessionPlugTest do
   import Plug.Conn
   import Plug.Test
 
-  alias BlazeX.Phoenix.SessionRegistry
+  alias BlazeX.Phoenix.{CommandAdmission, SessionRegistry}
 
   @endpoint BlazeXBrowserPhoenix.Endpoint
   @control {"x-bh07-test-control", "enabled"}
@@ -11,6 +11,7 @@ defmodule BlazeXBrowserPhoenix.SessionPlugTest do
 
   setup do
     SessionRegistry.reset()
+    CommandAdmission.reset()
     :ok
   end
 

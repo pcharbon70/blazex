@@ -11,11 +11,13 @@ defmodule BlazeXBrowserPhoenix.BoundaryTest do
     assert Code.ensure_loaded?(BlazeXBrowserPhoenix.BootstrapPlug)
     assert Code.ensure_loaded?(BlazeXBrowserPhoenix.DeliveryConfig)
     assert Code.ensure_loaded?(BlazeXBrowserPhoenix.SessionPlug)
+    assert Code.ensure_loaded?(BlazeXBrowserPhoenix.AdmissionPlug)
     assert Code.ensure_loaded?(BlazeXBrowserPhoenix.ControlPlug)
     assert Code.ensure_loaded?(BlazeX.Phoenix.BH01.FixtureAuthority)
     assert Code.ensure_loaded?(BlazeX.Phoenix.StaticDelivery)
     assert Code.ensure_loaded?(BlazeX.Phoenix.PublicBootstrap)
     assert Code.ensure_loaded?(BlazeX.Phoenix.SessionRegistry)
+    assert Code.ensure_loaded?(BlazeX.Phoenix.CommandAdmission)
   end
 
   test "active profile excludes deferred LiveView and LocalLiveView dependencies" do

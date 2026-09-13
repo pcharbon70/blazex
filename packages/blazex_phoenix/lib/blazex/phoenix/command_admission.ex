@@ -37,6 +37,10 @@ defmodule BlazeX.Phoenix.CommandAdmission do
   def snapshot(server \\ __MODULE__), do: GenServer.call(server, :snapshot)
   def reset(server \\ __MODULE__), do: GenServer.call(server, :reset)
 
+  def revoke_session(session_id, server \\ __MODULE__) do
+    if is_binary(session_id), do: GenServer.call(server, {:revoke_session, session_id}), else: :ok
+  end
+
   @impl true
   def init(options) do
     declarations = Keyword.get(options, :declarations, %{})
@@ -78,6 +82,21 @@ defmodule BlazeX.Phoenix.CommandAdmission do
   end
 
   def handle_call(:snapshot, _from, state), do: {:reply, public_snapshot(state), state}
+
+  def handle_call({:revoke_session, session_id}, _from, state) do
+    admissions =
+      Map.reject(state.admissions, fn {{stored_session_id, _key}, _record} ->
+        stored_session_id == session_id
+      end)
+
+    next = %{
+      state
+      | admissions: admissions,
+        session_counts: Map.delete(state.session_counts, session_id)
+    }
+
+    {:reply, :ok, next}
+  end
 
   def handle_call(:reset, _from, state) do
     next = %{state | admissions: %{}, session_counts: %{}, generation: state.generation + 1}

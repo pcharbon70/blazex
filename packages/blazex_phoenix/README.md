@@ -35,3 +35,9 @@ retained in registry state. Proof validation is constant-time, proof rotation is
 atomic, and canonical origin checks are independent of Plug and Phoenix.
 Credentials, roles, permissions, commands, effects, pushes, production support,
 LiveView, and LocalLiveView remain deferred.
+
+BH-07 Phase 5 adds `BlazeX.Phoenix.CommandAdmission`, a serialized,
+deny-by-default gate for exact command envelopes, static declarative payload
+schemas, private per-subject grants, bounded idempotency, and redacted receipts.
+It exposes no handler registration or execution API and records every receipt
+with `executed: false`; application mutation remains separately authorized work.

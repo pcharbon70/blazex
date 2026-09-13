@@ -38,12 +38,12 @@ Back to the [milestone](README.md).
     - [x] Serialize bounded per-session/global admission and exact replay/conflict
       decisions while retaining only one-way request fingerprints.
 
-  - [ ] 5.3 Section - Integrate the Phoenix admission transport.
-    - [ ] Add POST `/bh07/commands/admit` behind canonical origin, JSON, bounded
+  - [x] 5.3 Section - Integrate the Phoenix admission transport.
+    - [x] Add POST `/bh07/commands/admit` behind canonical origin, JSON, bounded
       body, encrypted session cookie, and current CSRF proof checks.
-    - [ ] Return bounded no-store receipts/errors with explicit status mapping,
+    - [x] Return bounded no-store receipts/errors with explicit status mapping,
       method handling, and no secret or server-policy projection.
-    - [ ] Preserve test-only identity/reset controls, publish truthful admission
+    - [x] Preserve test-only identity/reset controls, publish truthful admission
       capability, and prove zero handler/effect/resource mutation.
 
   - [ ] 5.4 Section - Reproduce, review, and publish completion.
