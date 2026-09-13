@@ -42,7 +42,7 @@ defmodule BlazeXBrowserPhoenix.ControlPlug do
     if test_control?(conn) and same_origin?(conn) do
       conn
       |> fetch_session()
-      |> clear_session()
+      |> delete_session(:bh01_session_id)
       |> respond(200, %{"status" => "cleared"})
     else
       respond(conn, 404, error("not-found"))

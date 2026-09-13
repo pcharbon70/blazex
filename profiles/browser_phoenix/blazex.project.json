@@ -4,8 +4,8 @@
   "path": "profiles/browser_phoenix",
   "kind": "executable-profile",
   "activation_phase": "BH-01 Phase 1",
-  "status": "experimental-bh07-phase3-opaque-sessions",
-  "current_phase": "BH-07 Phase 3",
+  "status": "experimental-bh07-phase4-csrf-origin",
+  "current_phase": "BH-07 Phase 4",
   "bh03_role": "executable-composition-only",
   "owner_role": "browser-profile-owner",
   "module_roots": [
@@ -45,11 +45,12 @@
     "behavior_implemented": false
   },
   "bh07_activation": {
-    "phase": 3,
-    "state": "opaque-session-boundary",
+    "phase": 4,
+    "state": "csrf-origin-security-envelope",
     "route": "/bh07/",
     "bootstrap_route": "/bh07/bootstrap.json",
     "session_route": "/bh07/session",
-    "deferred": ["credentials", "roles", "permissions", "csrf", "commands", "effects", "pushes", "reconnect", "liveview", "local-liveview"]
+    "csrf_rotation_route": "/bh07/csrf/rotate",
+    "deferred": ["credentials", "roles", "permissions", "commands", "effects", "pushes", "reconnect", "liveview", "local-liveview"]
   }
 }

@@ -36,12 +36,12 @@ Back to the [milestone](README.md).
     - [x] Canonicalize exact HTTP/HTTPS origins and reject absent, duplicate,
       malformed, user-info, path, query, fragment, or cross-origin input.
 
-  - [ ] 4.3 Section - Integrate the Phoenix security transport.
-    - [ ] Return the session proof only in authenticated no-store projections and
+  - [x] 4.3 Section - Integrate the Phoenix security transport.
+    - [x] Return the session proof only in authenticated no-store projections and
       retain it in the encrypted, signed, HTTP-only session cookie.
-    - [ ] Add same-origin, proof-authenticated rotation and require the proof for
+    - [x] Add same-origin, proof-authenticated rotation and require the proof for
       authenticated logout before any server-owned state changes.
-    - [ ] Preserve gated test issuance/reset, bounded responses, explicit method
+    - [x] Preserve gated test issuance/reset, bounded responses, explicit method
       handling, capability truth, and zero command/effect authority.
 
   - [ ] 4.4 Section - Reproduce, review, and publish completion.
