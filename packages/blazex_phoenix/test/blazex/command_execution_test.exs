@@ -150,6 +150,138 @@ defmodule BlazeX.Phoenix.CommandExecutionTest do
              CommandExecution.reset(context.executions)
   end
 
+  test "fresh execution pushes once while exact replay and failures stay silent", context do
+    session = session(context, "operator")
+
+    assert {:ok, %{"mode" => "replay", "cursor" => 0, "events" => []}} =
+             subscribe(context, session, 0)
+
+    request = command("push", "push-key", 0, 2)
+    assert {:ok, _result} = execute(context, session, request)
+
+    assert_receive {:blazex_counter_update,
+                    %{
+                      "protocol" => "blazex.bh07.counter-update/1",
+                      "sequence" => 1,
+                      "resource" => %{"value" => 2, "revision" => 1}
+                    }}
+
+    assert {:ok, _replay} = execute(context, session, request)
+    refute_receive {:blazex_counter_update, _event}
+
+    assert {:error, _stale} =
+             execute(context, session, command("stale", "stale-key", 9, 1))
+
+    refute_receive {:blazex_counter_update, _event}
+    assert CommandExecution.snapshot(context.executions)["event_sequence"] == 1
+  end
+
+  test "cursor returns retained replay or current snapshot and rejects future", context do
+    executions = Module.concat(__MODULE__, "Events#{System.unique_integer([:positive])}")
+    start_unlinked_execution(executions, max_events: 2)
+    context = %{context | executions: executions}
+    session = session(context, "operator")
+
+    for index <- 0..2 do
+      assert {:ok, _result} =
+               execute(
+                 context,
+                 session,
+                 command("event-#{index}", "event-key-#{index}", index, 1)
+               )
+    end
+
+    assert {:ok, %{"mode" => "replay", "cursor" => 3, "events" => events}} =
+             subscribe(context, session, 1)
+
+    assert Enum.map(events, & &1["sequence"]) == [2, 3]
+
+    assert {:ok, %{"mode" => "snapshot", "cursor" => 3, "resource" => resource}} =
+             subscribe(context, session, 0)
+
+    assert resource == %{"id" => "counter", "value" => 3, "revision" => 3}
+    assert {:error, "push-cursor-invalid"} = subscribe(context, session, 4)
+  end
+
+  test "subscriber capacity, replacement, process monitoring, and unsubscribe are bounded",
+       context do
+    executions = Module.concat(__MODULE__, "Subscribers#{System.unique_integer([:positive])}")
+    start_unlinked_execution(executions, max_subscribers: 1)
+    context = %{context | executions: executions}
+    session = session(context, "operator")
+
+    owner = spawn(fn -> Process.sleep(:infinity) end)
+    second = spawn(fn -> Process.sleep(:infinity) end)
+    on_exit(fn -> Process.exit(second, :kill) end)
+
+    assert {:ok, _sync} =
+             CommandExecution.subscribe(session["session_id"], session["csrf_token"], 0, owner,
+               server: executions,
+               session_server: context.sessions
+             )
+
+    assert {:ok, _replacement} =
+             CommandExecution.subscribe(session["session_id"], session["csrf_token"], 0, owner,
+               server: executions,
+               session_server: context.sessions
+             )
+
+    assert {:error, "push-capacity"} =
+             CommandExecution.subscribe(session["session_id"], session["csrf_token"], 0, second,
+               server: executions,
+               session_server: context.sessions
+             )
+
+    Process.exit(owner, :kill)
+    await(fn -> CommandExecution.snapshot(executions)["subscribers"] == 0 end)
+
+    assert {:ok, _sync} =
+             CommandExecution.subscribe(session["session_id"], session["csrf_token"], 0, self(),
+               server: executions,
+               session_server: context.sessions
+             )
+
+    assert :ok = CommandExecution.unsubscribe(self(), executions)
+    assert CommandExecution.snapshot(executions)["subscribers"] == 0
+  end
+
+  test "expired and revoked subscribers are removed before later push", context do
+    expiring = session(context, "operator", now_ms: 1_000, ttl_ms: 100)
+
+    assert {:ok, _sync} =
+             CommandExecution.subscribe(
+               expiring["session_id"],
+               expiring["csrf_token"],
+               0,
+               self(),
+               server: context.executions,
+               session_server: context.sessions,
+               now_ms: 1_050
+             )
+
+    fresh = session(context, "operator", now_ms: 1_050, ttl_ms: 1_000)
+
+    assert {:ok, _result} =
+             execute(context, fresh, command("expiry", "expiry-key", 0, 1), now_ms: 1_100)
+
+    refute_receive {:blazex_counter_update, _event}
+    assert CommandExecution.snapshot(context.executions)["subscribers"] == 0
+
+    assert {:ok, _sync} =
+             CommandExecution.subscribe(
+               fresh["session_id"],
+               fresh["csrf_token"],
+               1,
+               self(),
+               server: context.executions,
+               session_server: context.sessions,
+               now_ms: 1_100
+             )
+
+    assert :ok = CommandExecution.revoke_session(fresh["session_id"], context.executions)
+    assert CommandExecution.snapshot(context.executions)["subscribers"] == 0
+  end
+
   test "invalid limits fail startup" do
     assert {:error, :invalid_command_execution_config} =
              GenServer.start(CommandExecution, max_audit: 0)
@@ -171,19 +303,56 @@ defmodule BlazeX.Phoenix.CommandExecutionTest do
     ]
   end
 
-  defp session(context, subject) do
+  defp session(context, subject, options \\ []) do
     assert {:ok, value} =
-             SessionRegistry.issue(subject, String.capitalize(subject), server: context.sessions)
+             SessionRegistry.issue(
+               subject,
+               String.capitalize(subject),
+               Keyword.put(options, :server, context.sessions)
+             )
 
     value
   end
 
-  defp execute(context, session, command) do
+  defp execute(context, session, command, options \\ []) do
     CommandExecution.execute(session["session_id"], session["csrf_token"], command,
       server: context.executions,
       admission_server: context.admissions,
+      session_server: context.sessions,
+      now_ms: Keyword.get(options, :now_ms, System.system_time(:millisecond))
+    )
+  end
+
+  defp subscribe(context, session, after_sequence) do
+    CommandExecution.subscribe(
+      session["session_id"],
+      session["csrf_token"],
+      after_sequence,
+      self(),
+      server: context.executions,
       session_server: context.sessions
     )
+  end
+
+  defp start_unlinked_execution(name, options) do
+    suffix = System.unique_integer([:positive])
+
+    start_supervised!(%{
+      id: {:stream_execution, suffix},
+      start: {CommandExecution, :start_link, [[name: name] ++ options]}
+    })
+  end
+
+  defp await(predicate, attempts \\ 20)
+  defp await(predicate, 0), do: assert(predicate.())
+
+  defp await(predicate, attempts) do
+    if predicate.() do
+      :ok
+    else
+      Process.sleep(5)
+      await(predicate, attempts - 1)
+    end
   end
 
   defp command(correlation_id, idempotency_key, expected_revision, amount) do

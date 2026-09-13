@@ -30,12 +30,12 @@ Back to the [milestone](README.md).
       replay/snapshot choice, capacity, expiry, monitoring, and cleanup.
     - [x] Activate Phase 7 planning and baseline indexes.
 
-  - [ ] 7.2 Section - Implement reusable bounded event streaming.
-    - [ ] Add authenticated subscription and unsubscription to the serialized
+  - [x] 7.2 Section - Implement reusable bounded event streaming.
+    - [x] Add authenticated subscription and unsubscription to the serialized
       command authority without introducing Phoenix into the package.
-    - [ ] Publish one redacted event per successful fresh mutation; retain a
+    - [x] Publish one redacted event per successful fresh mutation; retain a
       bounded event history and choose replay or current snapshot by cursor.
-    - [ ] Bound subscribers, monitor owner processes, prune expired authority,
+    - [x] Bound subscribers, monitor owner processes, prune expired authority,
       and remove session-owned subscriptions and records on revocation/reset.
 
   - [ ] 7.3 Section - Integrate the Phoenix socket and channel.
