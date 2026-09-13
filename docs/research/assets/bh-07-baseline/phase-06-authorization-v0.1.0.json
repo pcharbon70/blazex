@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0.0",
+  "milestone": "BH-07",
+  "phase": 6,
+  "authorized": true,
+  "authorized_at": "2026-09-13",
+  "base_revision": "20509210dc2a6672f2ae3ea5e3746a5c29d576e2",
+  "branch": "codex/bh07-phase6-trusted-command-execution",
+  "delivery": {"section_commits": 4, "pull_requests": 1, "merge": true, "return_to_synced_main": true, "delete_feature_branch": true},
+  "bound_inputs": {
+    "docs/research/assets/bh-07-baseline/phase-05-completion-v0.1.0.json": "416d386e72d1adf0e6f02a42858ecd9c640c2e63ead35a9057429b8943c89f69",
+    "integration/bh-07/phase-05-command-admission-evidence-v0.1.0.json": "aa66296aca2b32587b45eb46a267ce5ffb4769fc02d6484834e1a007b0052bac",
+    "packages/blazex_phoenix/lib/blazex/phoenix/command_admission.ex": "34843d81751980c250d57aa0aa5f3e50fa8e4ab6156ea4e88f5d4cd82cbfc61f",
+    "packages/blazex_phoenix/lib/blazex/phoenix/session_registry.ex": "ceb6c731db607d2d7cc243f13185d9544e4d71eae690b2374ba41af6c5b1b196",
+    "profiles/browser_phoenix/lib/blazex_browser_phoenix/admission_plug.ex": "882eb3302a954a4d23c1d7933d04e0d848183a6de7bd1cca8700e75d6c373b9a",
+    "profiles/browser_phoenix/lib/blazex_browser_phoenix/endpoint.ex": "6f115e8f334ff0b2ef2ceb0f7413c04482228517e3847dbe37ecfae0e0ea4ffc",
+    "docs/research/60-planning/01-browser-host/bh-05-component-programming-model-and-lifecycle/action-contract.md": "fa51100322c9f73e15f5985a61735239c606a67282c5b66ccaf0474ae6d416de",
+    "docs/research/60-planning/liveview-integration-deferral.md": "3a2c3790c560191afd60f631576813760c7bbb4c05909a6f6a88058823e61e48"
+  },
+  "deferred": ["general-command-handlers", "dynamic-handler-resolution", "arbitrary-effects", "external-resource-mutation", "transactions", "persistence", "distributed-idempotency", "credentials", "login-provider", "production-identity", "generalized-roles", "generalized-permissions", "pushes", "reconnect", "deployment-coordination", "production-support", "liveview", "local-liveview", "BH-08"]
+}

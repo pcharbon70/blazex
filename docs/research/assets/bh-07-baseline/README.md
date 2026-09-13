@@ -27,6 +27,7 @@ phase without copying mutable implementation or integration evidence.
 - [Phase 4 completion](phase-04-completion-v0.1.0.json)
 - [Phase 5 authorization](phase-05-authorization-v0.1.0.json)
 - [Phase 5 completion](phase-05-completion-v0.1.0.json)
+- [Phase 6 authorization](phase-06-authorization-v0.1.0.json)
 
 ### Subdirectories
 
