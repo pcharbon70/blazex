@@ -11,7 +11,7 @@ aliases: ["BH-07 phase 5"]
 
 Back to the [milestone](README.md).
 
-- [ ] 5 Phase - Typed Command Admission and Authorization.
+- [x] 5 Phase - Typed Command Admission and Authorization.
   - Need: Phase 4 provides authenticated, same-origin, CSRF-protected transport,
     but no closed command envelope, server registration, authorization, or
     replay boundary exists for a later executor.
@@ -46,12 +46,12 @@ Back to the [milestone](README.md).
     - [x] Preserve test-only identity/reset controls, publish truthful admission
       capability, and prove zero handler/effect/resource mutation.
 
-  - [ ] 5.4 Section - Reproduce, review, and publish completion.
-    - [ ] Run package/profile tests, mutation validator, archive, dependency,
+  - [x] 5.4 Section - Reproduce, review, and publish completion.
+    - [x] Run package/profile tests, mutation validator, archive, dependency,
       JSON, formatting, and patch-hygiene gates.
-    - [ ] Publish source-bound evidence, limitations, inherited status, and the
+    - [x] Publish source-bound evidence, limitations, inherited status, and the
       acceptance decision.
-    - [ ] Accept only with deny-by-default typed admission, bounded replay state,
+    - [x] Accept only with deny-by-default typed admission, bounded replay state,
       zero execution, and unchanged LiveView/LocalLiveView deferral.
 
 ## Exit gate

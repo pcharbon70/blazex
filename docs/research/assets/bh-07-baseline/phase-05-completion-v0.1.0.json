@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0.0",
+  "milestone": "BH-07",
+  "phase": 5,
+  "decision": "accept",
+  "completed_at": "2026-09-12",
+  "authorization_sha256": "f581245597df8fd168c4e63afae07c28154cc5556f268648aa12fe91e990dd32",
+  "evidence_sha256": "aa66296aca2b32587b45eb46a267ce5ffb4769fc02d6484834e1a007b0052bac",
+  "route": "/bh07/commands/admit",
+  "support_state": "unsupported-development-evidence",
+  "next_phase_authorized": false
+}
