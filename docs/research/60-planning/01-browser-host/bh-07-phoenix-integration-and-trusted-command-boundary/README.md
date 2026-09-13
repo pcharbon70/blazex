@@ -20,10 +20,12 @@ not dependencies, inputs, or completion gates for current BH-07 work.
 | Phase | Status | Delivery | Dependency |
 | --- | --- | --- | --- |
 | [1 — Attested Static Delivery Boundary](phase-01-attested-static-delivery-boundary.md) | complete | Serve the accepted BH-06 artifact set through Phoenix under exact manifest cache, integrity, and private-evidence rules while removing LiveView/LocalLiveView from the active profile. | Accepted BH-06 and explicit authorization |
+| [2 — Public Bootstrap Envelope](phase-02-public-bootstrap-envelope.md) | active | Publish a bounded, deterministic, public-only bootstrap envelope tied to the accepted delivery identity without projecting server authority. | Accepted Phase 1 and explicit authorization |
 
-Later phase decomposition remains a separate planning decision. Phase 1 does
-not authorize sessions, bootstrap state, commands, pushes, reconnect, routing,
-deployment coordination, support promotion, LiveView, LocalLiveView, or BH-08.
+Later phase decomposition remains a separate planning decision. Phase 2 does
+not authorize sessions, authentication projection, CSRF, commands, pushes,
+reconnect, routing, deployment coordination, support promotion, LiveView,
+LocalLiveView, or BH-08.
 
 ## Index
 
@@ -33,6 +35,8 @@ deployment coordination, support promotion, LiveView, LocalLiveView, or BH-08.
 - [Static-delivery contract](static-delivery-contract.md)
 - [Phase 1 completion evidence](phase-01-completion.md)
 - [Phase 1 review and reconciliation](phase-01-review-and-reconciliation.md)
+- [Phase 2 — Public Bootstrap Envelope](phase-02-public-bootstrap-envelope.md)
+- [Public-bootstrap contract](public-bootstrap-contract.md)
 
 ### Subdirectories
 
