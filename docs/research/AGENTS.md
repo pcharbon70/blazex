@@ -327,6 +327,12 @@ Phase 6 evidence changes, also run
 `python3 70-tools/validate_bh07_trusted_execution.py` and
 `python3 -m unittest discover -s 70-tools -p 'test_validate_bh07_trusted_execution.py'`.
 
+When BH-07 Phase 7 authorization, authenticated server push, subscriber
+lifecycle, cursor resynchronization, Phoenix Channel transport, or Phase 7
+evidence changes, also run
+`python3 70-tools/validate_bh07_authenticated_push.py` and
+`python3 -m unittest discover -s 70-tools -p 'test_validate_bh07_authenticated_push.py'`.
+
 Do not commit, push, publish, or open a pull request unless the user asks.
 
 ## Research tooling

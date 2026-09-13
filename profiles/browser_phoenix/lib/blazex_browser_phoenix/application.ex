@@ -16,6 +16,7 @@ defmodule BlazeXBrowserPhoenix.Application do
        },
        grants: %{"operator" => ["counter.increment"], "viewer" => []}},
       BlazeX.Phoenix.CommandExecution,
+      {Phoenix.PubSub, name: BlazeXBrowserPhoenix.PubSub},
       BlazeXBrowserPhoenix.StaticDeliveryCache,
       BlazeXBrowserPhoenix.Endpoint
     ]

@@ -11,6 +11,9 @@ contracts.
   and its manifest, integrity, lifecycle, payload, delivery-metadata, and
   active-browser evidence through accepted Phase 11 and the final declared
   entrypoint attestation.
+- [BH-07](bh-07/README.md) owns Phoenix delivery and trusted-boundary evidence,
+  through authenticated bounded server push and cursor resynchronization in
+  accepted Phase 7.
 
 - `fixtures` contains deterministic shared applications, trees, events, and
   expected outcomes.

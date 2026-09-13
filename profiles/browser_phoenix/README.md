@@ -155,3 +155,17 @@ This is not a general command handler or browser effect system. Persistence,
 distributed idempotency, dynamic resolution, external resource mutation,
 credentials, generalized roles/permissions, pushes/reconnect, production
 deployment/support, LiveView, and LocalLiveView remain deferred.
+
+## BH-07 Phase 7 activation
+
+`/bh07/socket` authenticates the encrypted BH-07 session and current CSRF proof
+before allowing the sole `bh07:counter` Phoenix Channel. Each fresh successful
+counter mutation pushes one redacted update. Reconnect joins use an explicit
+cursor and receive either ordered retained events or the current resource
+snapshot when history has been evicted. Every client channel event is rejected.
+
+The reusable event history/subscriber authority remains Phoenix-independent;
+the profile owns only socket/channel composition. Arbitrary topics, protected
+data, client socket commands, durable/clustered event history, browser-managed
+automatic reconnect, routing/deployment coordination, browser effects,
+production support, LiveView, and LocalLiveView remain deferred.

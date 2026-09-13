@@ -13,6 +13,8 @@ defmodule BlazeXBrowserPhoenix.BoundaryTest do
     assert Code.ensure_loaded?(BlazeXBrowserPhoenix.SessionPlug)
     assert Code.ensure_loaded?(BlazeXBrowserPhoenix.AdmissionPlug)
     assert Code.ensure_loaded?(BlazeXBrowserPhoenix.ExecutionPlug)
+    assert Code.ensure_loaded?(BlazeXBrowserPhoenix.Socket)
+    assert Code.ensure_loaded?(BlazeXBrowserPhoenix.CounterChannel)
     assert Code.ensure_loaded?(BlazeXBrowserPhoenix.ControlPlug)
     assert Code.ensure_loaded?(BlazeX.Phoenix.BH01.FixtureAuthority)
     assert Code.ensure_loaded?(BlazeX.Phoenix.StaticDelivery)

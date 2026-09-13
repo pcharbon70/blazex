@@ -4,7 +4,7 @@
   "path": "packages/blazex_phoenix",
   "kind": "elixir-package",
   "activation_phase": "BH-01 Phase 1",
-  "status": "experimental-bh07-phase6-trusted-execution",
+  "status": "experimental-bh07-phase7-authenticated-push",
   "owner_role": "server-adapter-owner",
   "module_roots": ["BlazeX.Phoenix"],
   "manifest": "mix.exs",
@@ -15,8 +15,8 @@
   "forbidden_dependencies": ["blazex_core", "blazex_effects", "blazex_ui_tree", "integration/fixtures"],
   "public_api_state": "experimental-not-stable",
   "bh07_activation": {
-    "phase": 6,
-    "state": "closed-trusted-command-execution",
-    "deferred": ["credentials", "generalized-roles", "generalized-permissions", "general-command-handlers", "arbitrary-effects", "persistence", "pushes", "liveview", "local-liveview"]
+    "phase": 7,
+    "state": "bounded-authenticated-server-push",
+    "deferred": ["credentials", "generalized-roles", "generalized-permissions", "general-command-handlers", "arbitrary-topics", "client-socket-commands", "browser-effects", "persistence", "pubsub-cluster-guarantees", "liveview", "local-liveview"]
   }
 }

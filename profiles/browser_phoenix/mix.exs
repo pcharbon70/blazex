@@ -22,6 +22,7 @@ defmodule BlazeXBrowserPhoenix.MixProject do
     [
       {:blazex_phoenix, path: "../../packages/blazex_phoenix"},
       {:phoenix, "== 1.8.13"},
+      {:phoenix_pubsub, "== 2.3.0"},
       {:bandit, "== 1.12.5"},
       {:jason, "== 1.4.5"}
     ]

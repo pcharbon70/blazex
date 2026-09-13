@@ -48,3 +48,9 @@ admission, compares server-owned revision state, retains exact success/stale
 outcomes, applies one idempotent in-memory mutation, and emits bounded redacted
 audit. It is not a general handler, effect, persistence, transaction, or
 production command API. LiveView and LocalLiveView remain deferred.
+
+BH-07 Phase 7 extends the closed execution authority with a Phoenix-independent,
+bounded counter-event history and monitored authenticated subscriptions. Fresh
+mutations emit one redacted event; reconnecting adapters receive retained replay
+or a current snapshot by cursor. Client socket commands, arbitrary topics,
+durable history, cluster guarantees, LiveView, and LocalLiveView remain deferred.

@@ -1,0 +1,82 @@
+{
+  "schema_version": "1.0.0",
+  "milestone": "BH-07",
+  "phase": 7,
+  "decision": "accept",
+  "support_state": "unsupported-development-evidence",
+  "source_bindings": {
+    "packages/blazex_phoenix/lib/blazex/phoenix/command_execution.ex": "c07368d52c39a10cab8ed3e94587ce07fa0f7792ff9e0c927107ce9d7f04a9ce",
+    "packages/blazex_phoenix/lib/blazex/phoenix/session_registry.ex": "ceb6c731db607d2d7cc243f13185d9544e4d71eae690b2374ba41af6c5b1b196",
+    "packages/blazex_phoenix/lib/blazex/phoenix/public_bootstrap.ex": "09dbb4112404427de9dee42bc9d582cf3fb795a0961476c5e750285bdf573fff",
+    "packages/blazex_phoenix/blazex.project.json": "01bf61cea00f95b5d23e4498842f3dbffc2c196dd8d20fed2c09ab5008151b7d",
+    "profiles/browser_phoenix/lib/blazex_browser_phoenix/socket.ex": "9cd9f66ed50f09c7671f4864c24dbf0c9c3104bbae254148f17dd51e7bf27acd",
+    "profiles/browser_phoenix/lib/blazex_browser_phoenix/counter_channel.ex": "a2ce39434c7066e775e5a84e4122c83ec60a2b9c229be7b83ae3c6b43a251a00",
+    "profiles/browser_phoenix/lib/blazex_browser_phoenix/session_plug.ex": "9a46093295c2cdca0966abd222bc95e349f00c1e5f7a0191816e215d599bb66a",
+    "profiles/browser_phoenix/lib/blazex_browser_phoenix/application.ex": "830dc78626b18b1f590e6618de9f08fc40b7f146269a3c23d1023f83fe480feb",
+    "profiles/browser_phoenix/lib/blazex_browser_phoenix/endpoint.ex": "aabc6ed8434574596c1ed6729ad27d79edb85e1cd97adf27f26e1e8e6a438447",
+    "profiles/browser_phoenix/config/config.exs": "0998dc35cb8389a19486ad212f85c485292186c0ab419e07dec12521524539a0",
+    "profiles/browser_phoenix/blazex.project.json": "daedbd0cd07c1b1fe8fe6320f6b05ba926d24c94e91f353c44089736300bf050",
+    "profiles/browser_phoenix/mix.exs": "129aa632115d8e4517850b4154186488cc7f4e7fa6537916ef463db39f186029",
+    "profiles/browser_phoenix/mix.lock": "870585f232a7fbdd5438bb5e9522da4ce1b07bba5c2d7ae6244a37ef2ce5befd"
+  },
+  "stream": {
+    "event_protocol": "blazex.bh07.counter-update/1",
+    "sync_protocol": "blazex.bh07.push-sync/1",
+    "max_events": 64,
+    "max_subscribers": 64,
+    "monotonic_sequence": true,
+    "fresh_success_emits_once": true,
+    "exact_command_replay_emits": false,
+    "failed_command_emits": false,
+    "subscriber_process_monitored": true,
+    "expired_before_broadcast_pruned": true,
+    "session_revocation_cleanup": true
+  },
+  "resynchronization": {
+    "cursor_field": "after_sequence",
+    "retained_cursor": "ordered-missing-event-replay",
+    "current_cursor": "empty-replay",
+    "evicted_cursor": "current-resource-snapshot",
+    "future_cursor": "push-cursor-invalid",
+    "durable_history": false,
+    "offline_command_queue": false
+  },
+  "transport": {
+    "socket_path": "/bh07/socket",
+    "topic": "bh07:counter",
+    "connect_protocol": "blazex.bh07.push-connect/1",
+    "join_protocol": "blazex.bh07.push-join/1",
+    "push_event": "counter",
+    "max_frame_bytes": 2048,
+    "phoenix_origin_check": true,
+    "encrypted_session_connect_info": true,
+    "blazex_current_csrf_required": true,
+    "client_channel_events": "deny-all",
+    "arbitrary_topics": false
+  },
+  "redaction": {
+    "public_event_fields": ["protocol", "resource", "sequence"],
+    "public_resource_fields": ["id", "revision", "value"],
+    "opaque_session_id": false,
+    "csrf_proof": false,
+    "subject_grants": false,
+    "command_body": false,
+    "idempotency_key": false
+  },
+  "capabilities": {"sessions": true, "csrf_protection": true, "command_admission": true, "trusted_command_execution": true, "remote_commands": true, "server_push": true, "pushes": true, "server_mutation": true},
+  "tests": [
+    {"gate": "blazex-phoenix-package", "tests": 59, "failures": 0, "result": "passed"},
+    {"gate": "browser-phoenix-profile", "tests": 50, "failures": 0, "result": "passed"},
+    {"gate": "authenticated-push-validator-mutations", "tests": 10, "failures": 0, "result": "passed"},
+    {"gate": "research-archive", "result": "passed"},
+    {"gate": "dependency-boundary", "result": "passed"},
+    {"gate": "patch-hygiene", "result": "passed"}
+  ],
+  "deferred": ["arbitrary-topics", "client-socket-commands", "protected-application-data", "pubsub-cluster-guarantees", "durable-event-log", "offline-command-queue", "browser-automatic-reconnect", "routing-coordination", "deployment-version-coordination", "browser-effects", "credentials", "generalized-roles", "generalized-permissions", "production-support", "liveview", "local-liveview", "BH-08"],
+  "limitations": [
+    "The sole event is an in-memory disposable counter update on one fixed topic.",
+    "Reconnect resynchronization is server-side replay-or-snapshot only; the browser runtime does not yet own automatic reconnect policy.",
+    "Phoenix PubSub is local profile transport composition; cluster delivery, durable history, and delivery acknowledgements are not claimed.",
+    "No client socket commands, protected data, routing/deployment coordination, browser effects, production support, LiveView, or LocalLiveView claim is made."
+  ]
+}

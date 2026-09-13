@@ -357,3 +357,5 @@ reporting a tooling change complete.
 - [BH-07 Phase 5 validator tests](test_validate_bh07_command_admission.py) — Rejects decision, bounds, source, execution, authorization, transport, capability, dependency, and checklist mutations.
 - [BH-07 Phase 6 trusted-execution validator](validate_bh07_trusted_execution.py) — Verifies the closed counter operation, atomic revision state, bounded replay/audit, secure transport, source bindings, and deferrals.
 - [BH-07 Phase 6 validator tests](test_validate_bh07_trusted_execution.py) — Rejects decision, operation, source, replay, stale-retention, audit, transport, capability, dependency, and checklist mutations.
+- [BH-07 Phase 7 authenticated-push validator](validate_bh07_authenticated_push.py) — Verifies bounded fresh-only events, authenticated subscriber lifecycle, replay-or-snapshot cursors, secure Phoenix transport, source bindings, and deferrals.
+- [BH-07 Phase 7 validator tests](test_validate_bh07_authenticated_push.py) — Rejects decision, bounds, source, emission, cursor, origin, client-event, redaction, dependency, and checklist mutations.
