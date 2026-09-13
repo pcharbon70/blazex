@@ -88,3 +88,17 @@ build output and attestation. This phase does not add session bootstrap,
 commands, pushes, reconnect, deployment qualification, or support claims.
 LiveView and LocalLiveView are explicitly deferred and are absent from the
 active profile dependency graph.
+
+## BH-07 Phase 2 activation
+
+`/bh07/bootstrap.json` publishes a deterministic public-only envelope bound to
+the accepted manifest and entrypoint attestation. Optional public values come
+only from `:bh07_public_bootstrap` and are recursively constrained by key,
+type, depth, width, node, string, integer, and final-byte limits. Secret- and
+authority-like keys fail closed. The response is untrusted browser input and
+cannot grant a session, role, permission, command, or server mutation.
+
+The route supports GET, HEAD, and conditional ETags with `no-store`; other
+methods return 405. Sessions, authentication projection, CSRF, commands,
+pushes, reconnect, production support, LiveView, and LocalLiveView remain
+deferred.

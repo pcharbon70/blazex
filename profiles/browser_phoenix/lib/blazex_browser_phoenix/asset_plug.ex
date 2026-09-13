@@ -2,6 +2,7 @@ defmodule BlazeXBrowserPhoenix.AssetPlug do
   @moduledoc false
   import Plug.Conn
   alias BlazeX.Phoenix.StaticDelivery
+  alias BlazeXBrowserPhoenix.DeliveryConfig
   alias BlazeXBrowserPhoenix.StaticDeliveryCache
 
   @content_types %{
@@ -73,16 +74,8 @@ defmodule BlazeXBrowserPhoenix.AssetPlug do
   def call(conn, _options), do: conn
 
   defp bh07_delivery do
-    root = static_root("bh07")
-
-    attestation_path =
-      Application.get_env(
-        :blazex_browser_phoenix,
-        :bh07_attestation_path,
-        Path.join(root, "entrypoint-attestation.json")
-      )
-
-    StaticDeliveryCache.fetch(root, attestation_path)
+    root = DeliveryConfig.root()
+    StaticDeliveryCache.fetch(root, DeliveryConfig.attestation_path(root))
   end
 
   defp serve_attested(conn, artifact) do
@@ -217,15 +210,6 @@ defmodule BlazeXBrowserPhoenix.AssetPlug do
       :blazex_browser_phoenix,
       :bh03_static_root,
       Application.app_dir(:blazex_browser_phoenix, "priv/static/bh03")
-    )
-    |> Path.expand()
-  end
-
-  defp static_root("bh07") do
-    Application.get_env(
-      :blazex_browser_phoenix,
-      :bh07_static_root,
-      Application.app_dir(:blazex_browser_phoenix, "priv/static/bh07")
     )
     |> Path.expand()
   end

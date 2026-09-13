@@ -56,12 +56,19 @@ defmodule BlazeXBrowserPhoenix.StaticDeliveryTest do
     File.write!(attestation_path, Jason.encode!(attestation))
     previous_root = Application.get_env(:blazex_browser_phoenix, :bh07_static_root)
     previous_attestation = Application.get_env(:blazex_browser_phoenix, :bh07_attestation_path)
+    previous_bootstrap = Application.get_env(:blazex_browser_phoenix, :bh07_public_bootstrap)
     Application.put_env(:blazex_browser_phoenix, :bh07_static_root, root)
     Application.put_env(:blazex_browser_phoenix, :bh07_attestation_path, attestation_path)
+
+    Application.put_env(:blazex_browser_phoenix, :bh07_public_bootstrap, %{
+      "locale" => "en-CA",
+      "theme" => %{"density" => "comfortable"}
+    })
 
     on_exit(fn ->
       restore_env(:bh07_static_root, previous_root)
       restore_env(:bh07_attestation_path, previous_attestation)
+      restore_env(:bh07_public_bootstrap, previous_bootstrap)
       File.rm_rf!(root)
     end)
 
@@ -121,6 +128,63 @@ defmodule BlazeXBrowserPhoenix.StaticDeliveryTest do
     assert request(:get, "/bh07/").status == 404
     assert request(:get, "/bh07/").status == 404
     assert %{validations: 2, hits: 1} = BlazeXBrowserPhoenix.StaticDeliveryCache.snapshot()
+  end
+
+  test "serves a delivery-bound public bootstrap with GET, HEAD, and conditional parity" do
+    response = request(:get, "/bh07/bootstrap.json")
+    assert response.status == 200
+    document = Jason.decode!(response.resp_body)
+    assert document["protocol"] == "blazex.bh07.bootstrap/1"
+    assert document["trust"] == "public-untrusted-no-server-authority"
+    assert document["manifest"]["url"] == "/bh07/build-manifest.json"
+    assert document["attestation"]["id"] == "blazex.bh06.entrypoint-accounting/1/counter"
+
+    assert document["public_state"] == %{
+             "locale" => "en-CA",
+             "theme" => %{"density" => "comfortable"}
+           }
+
+    refute response.resp_body =~ "session_id"
+    refute response.resp_body =~ "csrf_token"
+    refute response.resp_body =~ "authorization"
+    assert get_resp_header(response, "cache-control") == ["no-store"]
+    assert get_resp_header(response, "content-type") == ["application/json"]
+    [etag] = get_resp_header(response, "etag")
+
+    head = request(:head, "/bh07/bootstrap.json")
+    assert head.status == 200
+    assert head.resp_body == ""
+    assert get_resp_header(head, "etag") == [etag]
+
+    assert get_resp_header(head, "content-length") == [
+             Integer.to_string(byte_size(response.resp_body))
+           ]
+
+    unchanged = request(:get, "/bh07/bootstrap.json", [{"if-none-match", etag}])
+    assert unchanged.status == 304
+    assert unchanged.resp_body == ""
+  end
+
+  test "bootstrap rejects unsupported methods and invalid public configuration" do
+    assert request(:post, "/bh07/bootstrap.json").status == 405
+
+    Application.put_env(:blazex_browser_phoenix, :bh07_public_bootstrap, %{
+      "safe" => %{"session_token" => "must-not-escape"}
+    })
+
+    response = request(:get, "/bh07/bootstrap.json")
+    assert response.status == 404
+    refute response.resp_body =~ "must-not-escape"
+  end
+
+  test "bootstrap rebuilds from current public configuration without retained identity growth" do
+    first = request(:get, "/bh07/bootstrap.json")
+    assert Jason.decode!(first.resp_body)["public_state"]["locale"] == "en-CA"
+
+    Application.put_env(:blazex_browser_phoenix, :bh07_public_bootstrap, %{"locale" => "fr-CA"})
+    second = request(:get, "/bh07/bootstrap.json")
+    assert Jason.decode!(second.resp_body)["public_state"] == %{"locale" => "fr-CA"}
+    assert %{validations: 1, hits: 1} = BlazeXBrowserPhoenix.StaticDeliveryCache.snapshot()
   end
 
   defp request(method, path, headers \\ []) do

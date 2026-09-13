@@ -16,6 +16,7 @@ defmodule BlazeXBrowserPhoenix.Endpoint do
   plug(Plug.Session, @session_options)
   plug(BlazeXBrowserPhoenix.ControlPlug)
   plug(BlazeXBrowserPhoenix.CommandPlug)
+  plug(BlazeXBrowserPhoenix.BootstrapPlug)
   plug(BlazeXBrowserPhoenix.AssetPlug)
   plug(BlazeXBrowserPhoenix.NotFoundPlug)
 end
