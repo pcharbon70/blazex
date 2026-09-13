@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0.0",
+  "milestone": "BH-07",
+  "phase": 2,
+  "decision": "accept",
+  "support_state": "unsupported-development-evidence",
+  "source_bindings": {
+    "packages/blazex_phoenix/lib/blazex/phoenix/public_bootstrap.ex": "1fd7e940ce1a4deab52ee6468940cc42f5403503ce5db381ed26996639baa9bc",
+    "packages/blazex_phoenix/lib/blazex/phoenix/static_delivery.ex": "6ca922bbbc1f7838d1c91ecd057451220011d2bb436d5e36485a7d8c4ed0b633",
+    "profiles/browser_phoenix/lib/blazex_browser_phoenix/bootstrap_plug.ex": "58268b7dc951a14769a2b6db27aa971ce2657fb1e8b970defda02a98981fa54a",
+    "profiles/browser_phoenix/lib/blazex_browser_phoenix/delivery_config.ex": "b7fd9b5cf1b1d9e5b57323d2144d196061e4d172677e0a0bbf711e57ac8315fb",
+    "profiles/browser_phoenix/lib/blazex_browser_phoenix/endpoint.ex": "8514b8f1c8212f14294c4756e9490ebdb3834407150359f15fcfd19097f09927",
+    "profiles/browser_phoenix/mix.exs": "f6fb598244cfcb38cd0299e5b6ffa2b38156386af520bf22c955d3c0b08d8c19",
+    "profiles/browser_phoenix/mix.lock": "870585f232a7fbdd5438bb5e9522da4ce1b07bba5c2d7ae6244a37ef2ce5befd"
+  },
+  "bootstrap": {
+    "path": "/bh07/bootstrap.json",
+    "methods": ["GET", "HEAD"],
+    "protocol": "blazex.bh07.bootstrap/1",
+    "trust": "public-untrusted-no-server-authority",
+    "manifest_bound": true,
+    "attestation_bound": true,
+    "canonical_json": true,
+    "cache_control": "no-store",
+    "conditional_etag": true,
+    "max_document_bytes": 4096,
+    "max_depth": 4,
+    "max_collection_items": 32,
+    "max_nodes": 256,
+    "max_key_bytes": 64,
+    "max_string_bytes": 256,
+    "max_safe_integer": 9007199254740991,
+    "retained_bootstrap_results": 0
+  },
+  "capabilities": {
+    "static_delivery": true,
+    "browser_local_execution": true,
+    "sessions": false,
+    "remote_commands": false,
+    "pushes": false,
+    "server_mutation": false
+  },
+  "tests": [
+    {"gate": "blazex-phoenix-package", "tests": 23, "failures": 0, "result": "passed"},
+    {"gate": "browser-phoenix-profile", "tests": 21, "failures": 0, "result": "passed"},
+    {"gate": "bootstrap-validator-mutations", "tests": 7, "failures": 0, "result": "passed"},
+    {"gate": "research-archive", "result": "passed"},
+    {"gate": "dependency-boundary", "result": "passed"},
+    {"gate": "patch-hygiene", "result": "passed"}
+  ],
+  "deferred": ["sessions", "authentication-projection", "csrf", "commands", "pushes", "reconnect", "routing-ownership", "deployment-coordination", "production-support", "liveview", "local-liveview", "BH-08"],
+  "limitations": [
+    "The route is covered through Phoenix endpoint integration tests, not a browser process or traffic benchmark.",
+    "Public configuration remains an operator responsibility; conservative key denial cannot recognize a secret placed under a misleading safe key.",
+    "No session, authentication, command, push, deployment, production support, LiveView, or LocalLiveView claim is made."
+  ]
+}

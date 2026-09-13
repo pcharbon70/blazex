@@ -6,3 +6,8 @@ and LocalLiveView explicitly deferred.
 ## Evidence
 
 - [Phase 1 static-delivery evidence](phase-01-static-delivery-evidence-v0.1.0.json)
+
+Phase 2 is complete for a public-only bootstrap envelope under the unsupported
+development boundary.
+
+- [Phase 2 public-bootstrap evidence](phase-02-public-bootstrap-evidence-v0.1.0.json)

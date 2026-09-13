@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0.0",
+  "milestone": "BH-07",
+  "phase": 2,
+  "authorized": true,
+  "authorized_at": "2026-09-12",
+  "base_revision": "220b4c1c843957e8201cd801c2929109c3aceb8a",
+  "branch": "codex/bh07-phase2-public-bootstrap-envelope",
+  "delivery": {"section_commits": 4, "pull_requests": 1, "merge": true, "return_to_synced_main": true, "delete_feature_branch": true},
+  "bound_inputs": {
+    "docs/research/assets/bh-07-baseline/phase-01-completion-v0.1.0.json": "c6678a214585a0436f72b6b434cf4f4c8598f1c81108752a1e7c9a4220cc6e87",
+    "integration/bh-07/phase-01-static-delivery-evidence-v0.1.0.json": "c9137664b67842e532c14b62dce622458859c00be9304f34568067ef56378a57",
+    "packages/blazex_phoenix/lib/blazex/phoenix/static_delivery.ex": "e9f4413b3540c3a550f2d00ed124fb0267b06f1da5faae6d3ea1e793ddf9ccc8",
+    "profiles/browser_phoenix/lib/blazex_browser_phoenix/asset_plug.ex": "41a9263e89f68996157de4a7d820c8cd7ec8d9bd3946ee2a38fbd737be97e47c",
+    "docs/research/60-planning/liveview-integration-deferral.md": "3a2c3790c560191afd60f631576813760c7bbb4c05909a6f6a88058823e61e48"
+  },
+  "deferred": ["sessions", "authentication-projection", "csrf", "commands", "pushes", "reconnect", "routing-ownership", "deployment-coordination", "production-support", "liveview", "local-liveview", "BH-08"]
+}

@@ -16,14 +16,15 @@ defmodule BlazeX.Phoenix.StaticDelivery do
   @hex64 ~r/\A[0-9a-f]{64}\z/
   @sri384 ~r/\Asha384-[A-Za-z0-9+\/]+={0,2}\z/
 
-  @enforce_keys [:root, :manifest, :manifest_bytes, :public]
-  defstruct [:root, :manifest, :manifest_bytes, :public]
+  @enforce_keys [:root, :manifest, :manifest_bytes, :attestation, :public]
+  defstruct [:root, :manifest, :manifest_bytes, :attestation, :public]
 
   @type artifact :: %{required(String.t()) => term()}
   @type t :: %__MODULE__{
           root: String.t(),
           manifest: map(),
           manifest_bytes: binary(),
+          attestation: map(),
           public: %{required(String.t()) => artifact()}
         }
 
@@ -69,7 +70,13 @@ defmodule BlazeX.Phoenix.StaticDelivery do
       |> Map.reject(fn {_path, artifact} -> artifact["exposure"] != "public" end)
       |> Map.put(@manifest_path, manifest_artifact(manifest_bytes))
 
-    %__MODULE__{root: root, manifest: manifest, manifest_bytes: manifest_bytes, public: public}
+    %__MODULE__{
+      root: root,
+      manifest: manifest,
+      manifest_bytes: manifest_bytes,
+      attestation: attestation,
+      public: public
+    }
   end
 
   @spec resolve(t(), String.t(), String.t()) ::
@@ -123,12 +130,21 @@ defmodule BlazeX.Phoenix.StaticDelivery do
     require_equal!(attestation, "decision", "accept")
     require_equal!(attestation, "policy_id", "blazex.bh06.entrypoint-accounting/1")
 
+    entrypoint = require_map!(manifest, "entrypoint")
+    entrypoint_id = require_string!(entrypoint, "id")
+
+    require_equal!(
+      attestation,
+      "attestation_id",
+      "blazex.bh06.entrypoint-accounting/1/#{entrypoint_id}"
+    )
+
     binding = require_map!(attestation, "manifest")
     require_equal!(binding, "id", manifest["manifest_id"])
     require_equal!(binding, "support_state", manifest["support_state"])
     require_equal!(binding, "sha256", sha256(manifest_bytes))
 
-    if attestation["entrypoint"] != manifest["entrypoint"] do
+    if attestation["entrypoint"] != entrypoint do
       raise ArgumentError, "entrypoint-mismatch"
     end
   end

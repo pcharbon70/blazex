@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0.0",
+  "milestone": "BH-07",
+  "phase": 2,
+  "decision": "accept",
+  "completed_at": "2026-09-12",
+  "authorization_sha256": "0076efbf475af1a849ada3408562e023bd470b86f200a0728a8ed5cb5d91d213",
+  "evidence_sha256": "17f92e07a78eab98c96d7ac968d03655ac468f126e07c630505779badf20bd84",
+  "route": "/bh07/bootstrap.json",
+  "support_state": "unsupported-development-evidence",
+  "next_phase_authorized": false
+}
